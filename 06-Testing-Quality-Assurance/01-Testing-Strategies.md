@@ -1,0 +1,273 @@
+# 🔹 Testing Strategies
+
+> **Comprehensive coverage of advanced testing strategies: Property-based testing, Mutation testing, and Visual regression testing**
+
+<link rel="stylesheet" href="../common-styles.css">
+
+---
+
+## 📚 Table of Contents
+
+- [Testing Strategies Overview](#testing-strategies-overview)
+- [Property-Based Testing](#property-based-testing)
+- [Mutation Testing](#mutation-testing)
+- [Visual Regression Testing](#visual-regression-testing)
+- [Detailed Examples](#detailed-examples)
+- [Common Interview Questions](#common-interview-questions)
+- [Practice Exercises](#practice-exercises)
+- [Additional Resources](#additional-resources)
+
+---
+
+## 🎯 Testing Strategies Overview
+
+**Testing Strategies** involve systematic approaches to ensure code quality, reliability, and maintainability through various testing methodologies and techniques.
+
+### Why Testing Strategies Matter:
+- **Code Quality**: Ensure reliable and bug-free code
+- **Maintainability**: Make code easier to modify and extend
+- **Confidence**: Build trust in code changes and deployments
+- **Documentation**: Tests serve as living documentation
+- **Professional Standards**: Industry best practices and expectations
+
+---
+
+## 🔍 Property-Based Testing
+
+**Property-Based Testing** involves testing code against properties that should always hold true, using automatically generated test data to find edge cases and unexpected behaviors.
+
+### Why Property-Based Testing Matters:
+- **Edge Case Discovery**: Find bugs in unexpected scenarios
+- **Comprehensive Coverage**: Test a wide range of inputs automatically
+- **Property Validation**: Ensure code maintains expected invariants
+- **Regression Prevention**: Catch breaking changes automatically
+- **Mathematical Rigor**: Apply formal verification concepts
+
+### ASCII Diagram: Property-Based Testing Flow
+```
+PROPERTY-BASED TESTING FLOW
+┌─────────────────────────────────┐
+│        PROPERTY DEFINITION      │
+│  ┌─────────────────────────────┐ │
+│  │ For all inputs x, y, z      │ │
+│  │ Property P(x, y, z) holds   │ │
+│  │                             │ │
+│  │ Example:                    │ │
+│  │ reverse(reverse(x)) === x   │ │
+│  └─────────────────────────────┘ │
+└─────────────────────────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  GENERATOR    │
+        │               │
+        │  Random       │
+        │  Inputs       │
+        │  Edge Cases   │
+        │  Boundary     │
+        └───────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  PROPERTY     │
+        │  VERIFICATION │
+        │               │
+        │  Test Inputs  │
+        │  Against      │
+        │  Properties   │
+        └───────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  SHRINKING    │
+        │               │
+        │  Minimize     │
+        │  Failing     │
+        │  Test Cases   │
+        │  For Debug   │
+        └───────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  REPORT       │
+        │               │
+        │  Pass/Fail    │
+        │  Counter-     │
+        │  Examples     │
+        │  Statistics   │
+        └───────────────┘
+```
+
+### Property Types:
+- **Invariants**: Properties that never change
+- **Idempotence**: Operations that don't change result on repetition
+- **Commutativity**: Order-independent operations
+- **Associativity**: Grouping-independent operations
+- **Distributivity**: Operations that distribute over each other
+
+---
+
+## 🧬 Mutation Testing
+
+**Mutation Testing** involves automatically modifying code to create "mutants" and then running tests to see if they can detect these changes, measuring test quality and coverage.
+
+### Why Mutation Testing Matters:
+- **Test Quality**: Measure how well tests detect code changes
+- **Coverage Gaps**: Identify areas where tests are insufficient
+- **Bug Detection**: Ensure tests catch real programming errors
+- **Test Maintenance**: Keep tests relevant and effective
+- **Quality Assurance**: Validate testing strategy effectiveness
+
+### ASCII Diagram: Mutation Testing Process
+```
+MUTATION TESTING PROCESS
+┌─────────────────────────────────┐
+│        ORIGINAL CODE            │
+│  ┌─────────────────────────────┐ │
+│  │ function add(a, b) {        │ │
+│  │   return a + b;             │ │
+│  │ }                           │ │
+│  └─────────────────────────────┘ │
+└─────────────────────────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  MUTATION     │
+        │  OPERATORS    │
+        │               │
+        │  + → -        │
+        │  + → *        │
+        │  + → /        │
+        │  a → b        │
+        │  b → a        │
+        └───────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  MUTANT       │
+        │  GENERATION   │
+        │               │
+        │  function add(a, b) {   │
+        │    return a - b;        │
+        │  }                      │
+        └───────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  TEST         │
+        │  EXECUTION    │
+        │               │
+        │  Run Tests    │
+        │  Against      │
+        │  Mutants      │
+        └───────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  MUTATION     │
+        │  SCORE        │
+        │               │
+        │  Killed: 3    │
+        │  Survived: 1  │
+        │  Score: 75%   │
+        └───────────────┘
+```
+
+### Mutation Operators:
+- **Arithmetic Operators**: + → -, * → /, etc.
+- **Relational Operators**: > → <, == → !=, etc.
+- **Logical Operators**: && → ||, ! removal, etc.
+- **Variable Mutations**: Variable replacement, constant changes
+- **Statement Mutations**: Statement deletion, insertion
+
+---
+
+## 🎨 Visual Regression Testing
+
+**Visual Regression Testing** involves comparing visual outputs of applications to detect unintended visual changes, ensuring UI consistency across deployments.
+
+### Why Visual Regression Testing Matters:
+- **UI Consistency**: Maintain visual design integrity
+- **Cross-Browser**: Ensure consistent appearance across browsers
+- **Responsive Design**: Validate mobile and desktop layouts
+- **Design System**: Maintain component library consistency
+- **User Experience**: Prevent visual bugs from reaching users
+
+### ASCII Diagram: Visual Regression Testing
+```
+VISUAL REGRESSION TESTING
+┌─────────────────────────────────┐
+│        BASELINE IMAGE           │
+│  ┌─────────────────────────────┐ │
+│  │ [Reference Screenshot]      │ │
+│  │                             │ │
+│  │  Header: 100px height       │ │
+│  │  Button: Blue, 16px font    │ │
+│  │  Layout: 1200px width       │ │
+│  └─────────────────────────────┘ │
+└─────────────────────────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  CURRENT      │
+        │  SCREENSHOT   │
+        │               │
+        │  [New Screenshot]       │
+        │  After Code Changes     │
+        │  Same Page/Component    │
+        └───────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  IMAGE        │
+        │  COMPARISON   │
+        │               │
+        │  Pixel-by-pixel│
+        │  Difference   │
+        │  Analysis     │
+        └───────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  DIFFERENCE   │
+        │  DETECTION    │
+        │               │
+        │  Threshold: 5%│
+        │  Changes: 2%  │
+        │  Result: PASS │
+        └───────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  REPORT       │
+        │               │
+        │  Visual       │
+        │  Differences  │
+        │  Screenshots  │
+        │  Metrics      │
+        └───────────────┘
+```
+
+### Testing Areas:
+- **Component Testing**: Individual UI components
+- **Page Testing**: Full page layouts and interactions
+- **Responsive Testing**: Different screen sizes and orientations
+- **Cross-Browser Testing**: Multiple browser compatibility
+- **Animation Testing**: Motion and transition consistency
+
+---
+
+## 📋 Copy Code Functionality
+
+<script src="../common-scripts.js"></script>
+
+---
+
+## 🧭 Navigation
+
+<div class="navigation">
+    <a href="../05-Performance-Optimization/03-Advanced-Optimization.md" class="nav-link prev">← Previous: Advanced Optimization</a>
+    <a href="02-Code-Quality.md" class="nav-link next">Next: Code Quality →</a>
+</div>
+
+*Last updated: December 2024*
