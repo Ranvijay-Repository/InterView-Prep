@@ -98,6 +98,11 @@ Replace the old script tag with:
 - [x] `02-Functional-Programming-Patterns.md` ✅ (Fully populated with Railway Oriented Programming, Either/Maybe monads, Lens pattern)
 - [x] `03-Architecture-Patterns.md` ✅ (Fully populated with Micro-frontends, Event Sourcing, CQRS pattern)
 
+### Performance & Optimization - NEW SECTION (COMPLETED!) 🆕
+- [x] `01-JavaScript-Performance.md` ✅ (Fully populated with V8 optimization techniques, Hidden classes & inline caching, Garbage collection optimization)
+- [x] `02-Browser-Performance.md` ✅ (Fully populated with Critical rendering path optimization, Resource hints, Service Worker caching strategies)
+- [x] `03-Advanced-Optimization.md` ✅ (Fully populated with Memory management, Algorithm optimization, Performance monitoring)
+
 ## 🚀 Quick Script to Check All Files
 
 You can run this command to see which files still have duplicate CSS/JS:
