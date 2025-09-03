@@ -82,6 +82,12 @@ Replace the old script tag with:
 - [x] `03a-Advanced-Asynchronous-JavaScript.md` ✅ (Fully populated with AbortController, Top-level await, Promise.withResolvers)
 - [x] `04a-Advanced-Modules.md` ✅ (Fully populated with Dynamic imports, Code splitting, Module Federation)
 
+### Modern JavaScript Features - NEW SECTION (COMPLETED!) 🆕
+- [x] `05-ES2020-Features.md` ✅ (Fully populated with Optional Chaining, Nullish Coalescing, BigInt, Top-level await, Array.prototype.at)
+- [x] `06-ES2021-Features.md` ✅ (Fully populated with Promise.any(), Logical Assignment, WeakRef, FinalizationRegistry)
+- [x] `07-ES2022-Features.md` ✅ (Fully populated with Class fields & private methods, Top-level await in modules, Error.cause)
+- [x] `08-ES2023-Features.md` ✅ (Fully populated with Array grouping methods, Hashbang syntax, Symbol as WeakMap keys)
+
 ## 🚀 Quick Script to Check All Files
 
 You can run this command to see which files still have duplicate CSS/JS:

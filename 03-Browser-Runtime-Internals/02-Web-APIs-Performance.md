@@ -1,0 +1,1162 @@
+# 🔹 Web APIs & Performance
+
+> **Comprehensive coverage of modern Web APIs: Intersection Observer API, Resize Observer API, Performance API & User Timing, and Web Animations API**
+
+<link rel="stylesheet" href="../common-styles.css">
+
+---
+
+## 📚 Table of Contents
+
+- [Web APIs & Performance Overview](#web-apis--performance-overview)
+- [Intersection Observer API](#intersection-observer-api)
+- [Resize Observer API](#resize-observer-api)
+- [Performance API & User Timing](#performance-api--user-timing)
+- [Web Animations API](#web-animations-api)
+- [Detailed Examples](#detailed-examples)
+- [Common Interview Questions](#common-interview-questions)
+- [Practice Exercises](#practice-exercises)
+- [Additional Resources](#additional-resources)
+
+---
+
+## 🎯 Web APIs & Performance Overview
+
+**Modern Web APIs** provide powerful tools for building performant, responsive web applications with advanced capabilities for monitoring, animation, and user interaction.
+
+### Why Web APIs & Performance Matter:
+- **Performance Monitoring**: Measure and optimize application performance
+- **User Experience**: Create smooth, responsive interactions
+- **Resource Efficiency**: Optimize resource usage and loading
+- **Modern Development**: Use cutting-edge browser capabilities
+- **Competitive Advantage**: Build applications that outperform competitors
+
+---
+
+## 👁️ Intersection Observer API
+
+**Intersection Observer API** allows you to efficiently observe when elements enter or leave the viewport, enabling lazy loading, infinite scrolling, and performance optimizations.
+
+### Why Intersection Observer Matters:
+- **Lazy Loading**: Load content only when needed
+- **Performance**: Avoid unnecessary calculations and operations
+- **User Experience**: Smooth scrolling and loading
+- **Resource Management**: Optimize memory and network usage
+- **Infinite Scrolling**: Efficiently handle large lists
+
+### ASCII Diagram: Intersection Observer Flow
+```
+INTERSECTION OBSERVER FLOW
+┌─────────────────────────────────┐
+│        VIEWPORT                 │
+│  ┌─────────────────────────────┐ │
+│  │                             │ │
+│  │  ┌─────────────────────┐   │ │
+│  │  │   Target Element    │   │ │
+│  │  │                     │   │ │
+│  │  │  (Intersecting)     │   │ │
+│  │  └─────────────────────┘   │ │
+│  │                             │ │
+│  └─────────────────────────────┘ │
+└─────────────────────────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  OBSERVER     │
+        │  Detects      │
+        │  Intersection │
+        └───────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  CALLBACK     │
+        │  Executed     │
+        │  With Data    │
+        └───────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  ACTION       │
+        │  Lazy Load    │
+        │  Animate      │
+        │  Track        │
+        └───────────────┘
+```
+
+### Use Cases:
+- **Lazy Loading Images**: Load images when they're about to enter viewport
+- **Infinite Scrolling**: Load more content when user reaches bottom
+- **Performance Tracking**: Monitor when elements become visible
+- **Animation Triggers**: Start animations when elements enter viewport
+- **Ad Visibility**: Track ad viewability for analytics
+
+---
+
+## 📏 Resize Observer API
+
+**Resize Observer API** allows you to observe size changes of elements, enabling responsive layouts and dynamic content adjustments.
+
+### Why Resize Observer Matters:
+- **Responsive Design**: Adapt layouts to size changes
+- **Dynamic Content**: Adjust content based on container size
+- **Performance**: Efficient size change detection
+- **User Experience**: Smooth layout transitions
+- **Component Adaptation**: Make components size-aware
+
+### ASCII Diagram: Resize Observer Flow
+```
+RESIZE OBSERVER FLOW
+┌─────────────────────────────────┐
+│        ELEMENT RESIZING         │
+│  ┌─────────────────────────────┐ │
+│  │                             │ │
+│  │  ┌─────────────────────┐   │ │
+│  │  │   Target Element    │   │ │
+│  │  │                     │   │ │
+│  │  │  (Size Changed)     │   │ │
+│  │  └─────────────────────┘   │ │
+│  │                             │ │
+│  └─────────────────────────────┘ │
+└─────────────────────────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  OBSERVER     │
+        │  Detects      │
+        │  Size Change  │
+        └───────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  CALLBACK     │
+        │  Executed     │
+        │  With New     │
+        │  Dimensions   │
+        └───────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  LAYOUT       │
+        │  ADJUSTMENT   │
+        │  Content      │
+        │  Adaptation   │
+        └───────────────┘
+```
+
+### Use Cases:
+- **Responsive Layouts**: Adjust layouts based on container size
+- **Dynamic Grids**: Resize grid items based on available space
+- **Component Adaptation**: Make components responsive to size changes
+- **Canvas Resizing**: Adjust canvas dimensions for optimal rendering
+- **Media Queries**: Programmatic responsive design
+
+---
+
+## ⚡ Performance API & User Timing
+
+**Performance API** provides tools to measure and analyze application performance, while **User Timing** allows you to create custom performance marks and measures.
+
+### Why Performance API Matters:
+- **Performance Monitoring**: Measure real user experience
+- **Optimization**: Identify performance bottlenecks
+- **User Experience**: Ensure fast, responsive applications
+- **Analytics**: Track performance metrics for users
+- **Debugging**: Diagnose performance issues in production
+
+### ASCII Diagram: Performance Measurement Flow
+```
+PERFORMANCE MEASUREMENT FLOW
+┌─────────────────────────────────┐
+│        PERFORMANCE MARKING      │
+│  ┌─────────────────────────────┐ │
+│  │ performance.mark('start')   │ │
+│  │                             │ │
+│  │ // Operation to measure     │ │
+│  │                             │ │
+│  │ performance.mark('end')     │ │
+│  └─────────────────────────────┘ │
+└─────────────────────────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  MEASURE      │
+        │  Creation     │
+        │  performance.measure() │
+        └───────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  TIMING       │
+        │  Data         │
+        │  Collection   │
+        └───────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  ANALYSIS     │
+        │  Performance  │
+        │  Metrics      │
+        └───────────────┘
+```
+
+### Available APIs:
+- **Performance.now()**: High-resolution timestamp
+- **Performance.mark()**: Create custom performance marks
+- **Performance.measure()**: Measure time between marks
+- **Performance.getEntries()**: Get performance entries
+- **PerformanceObserver**: Observe performance events
+
+---
+
+## 🎬 Web Animations API
+
+**Web Animations API** provides a unified way to create and control animations, offering better performance and more control than CSS animations.
+
+### Why Web Animations API Matters:
+- **Performance**: Hardware-accelerated animations
+- **Control**: Fine-grained animation control
+- **Synchronization**: Coordinate multiple animations
+- **Interactivity**: Respond to user input during animations
+- **Composability**: Build complex animation sequences
+
+### ASCII Diagram: Web Animations Flow
+```
+WEB ANIMATIONS FLOW
+┌─────────────────────────────────┐
+│        ANIMATION CREATION        │
+│  ┌─────────────────────────────┐ │
+│  │ element.animate(keyframes,  │ │
+│  │   options)                   │ │
+│  │                             │ │
+│  │ keyframes: [{...}, {...}]   │ │
+│  │ options: {duration, easing} │ │
+│  └─────────────────────────────┘ │
+└─────────────────────────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  ANIMATION    │
+        │  OBJECT       │
+        │  Created      │
+        └───────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  CONTROL      │
+        │  Play, Pause, │
+        │  Reverse, etc. │
+        └───────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  EVENTS       │
+        │  Start, End,  │
+        │  Cancel       │
+        └───────────────┘
+```
+
+### Animation Features:
+- **Keyframe Animation**: Define animation states
+- **Timing Control**: Duration, easing, delays
+- **Playback Control**: Play, pause, reverse, seek
+- **Event Handling**: Animation lifecycle events
+- **Performance**: Hardware acceleration
+
+---
+
+## 💻 Detailed Examples
+
+### Example 1: Advanced Intersection Observer Implementation
+<div style="position: relative;">
+<button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+<pre><code>// Advanced Intersection Observer with lazy loading and performance tracking
+class AdvancedIntersectionObserver {
+    constructor(options = {}) {
+        this.options = {
+            root: options.root || null,
+            rootMargin: options.rootMargin || '0px',
+            threshold: options.threshold || 0.1,
+            ...options
+        };
+        
+        this.observers = new Map();
+        this.performanceMetrics = new Map();
+        this.setupPerformanceObserver();
+    }
+    
+    // Setup performance observer for intersection events
+    setupPerformanceObserver() {
+        if ('PerformanceObserver' in window) {
+            const observer = new PerformanceObserver((list) => {
+                for (const entry of list.getEntries()) {
+                    if (entry.entryType === 'measure') {
+                        this.performanceMetrics.set(entry.name, entry.duration);
+                    }
+                }
+            });
+            observer.observe({ entryTypes: ['measure'] });
+        }
+    }
+    
+    // Create intersection observer for lazy loading
+    createLazyLoadingObserver(callback, options = {}) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    performance.mark(`lazy-load-start-${entry.target.dataset.id}`);
+                    
+                    // Execute callback
+                    callback(entry.target, entry);
+                    
+                    performance.mark(`lazy-load-end-${entry.target.dataset.id}`);
+                    performance.measure(
+                        `lazy-load-${entry.target.dataset.id}`,
+                        `lazy-load-start-${entry.target.dataset.id}`,
+                        `lazy-load-end-${entry.target.dataset.id}`
+                    );
+                    
+                    // Unobserve after loading
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { ...this.options, ...options });
+        
+        return observer;
+    }
+    
+    // Create infinite scroll observer
+    createInfiniteScrollObserver(container, loadMoreCallback, options = {}) {
+        const sentinel = document.createElement('div');
+        sentinel.style.height = '1px';
+        sentinel.style.visibility = 'hidden';
+        container.appendChild(sentinel);
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    performance.mark('infinite-scroll-start');
+                    
+                    // Load more content
+                    loadMoreCallback().then(() => {
+                        performance.mark('infinite-scroll-end');
+                        performance.measure('infinite-scroll', 'infinite-scroll-start', 'infinite-scroll-end');
+                    });
+                }
+            });
+        }, { ...this.options, ...options });
+        
+        observer.observe(sentinel);
+        return { observer, sentinel };
+    }
+    
+    // Create animation trigger observer
+    createAnimationObserver(animationClass, options = {}) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add(animationClass);
+                    
+                    // Track animation performance
+                    performance.mark(`animation-start-${entry.target.dataset.id}`);
+                    
+                    // Listen for animation end
+                    entry.target.addEventListener('animationend', () => {
+                        performance.mark(`animation-end-${entry.target.dataset.id}`);
+                        performance.measure(
+                            `animation-${entry.target.dataset.id}`,
+                            `animation-start-${entry.target.dataset.id}`,
+                            `animation-end-${entry.target.dataset.id}`
+                        );
+                    }, { once: true });
+                }
+            });
+        }, { ...this.options, ...options });
+        
+        return observer;
+    }
+    
+    // Create visibility tracking observer
+    createVisibilityObserver(callback, options = {}) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                const visibilityData = {
+                    isVisible: entry.isIntersecting,
+                    intersectionRatio: entry.intersectionRatio,
+                    boundingRect: entry.boundingClientRect,
+                    timestamp: Date.now()
+                };
+                
+                callback(entry.target, visibilityData);
+            });
+        }, { ...this.options, ...options });
+        
+        return observer;
+    }
+    
+    // Get performance metrics
+    getPerformanceMetrics() {
+        return Object.fromEntries(this.performanceMetrics);
+    }
+    
+    // Clear performance metrics
+    clearPerformanceMetrics() {
+        this.performanceMetrics.clear();
+    }
+}
+
+// Usage example: Lazy loading image gallery
+class LazyImageGallery {
+    constructor(containerSelector) {
+        this.container = document.querySelector(containerSelector);
+        this.intersectionObserver = new AdvancedIntersectionObserver({
+            rootMargin: '50px 0px',
+            threshold: 0.1
+        });
+        
+        this.setupGallery();
+    }
+    
+    setupGallery() {
+        // Create lazy loading observer
+        const lazyObserver = this.intersectionObserver.createLazyLoadingObserver(
+            this.loadImage.bind(this),
+            { threshold: 0.1 }
+        );
+        
+        // Create animation observer
+        const animationObserver = this.intersectionObserver.createAnimationObserver(
+            'fade-in',
+            { threshold: 0.5 }
+        );
+        
+        // Add images to gallery
+        this.addImages(20);
+        
+        // Observe all images
+        const images = this.container.querySelectorAll('img[data-src]');
+        images.forEach(img => {
+            lazyObserver.observe(img);
+            animationObserver.observe(img);
+        });
+    }
+    
+    addImages(count) {
+        for (let i = 1; i <= count; i++) {
+            const imageContainer = document.createElement('div');
+            imageContainer.className = 'image-container';
+            imageContainer.style.cssText = `
+                width: 300px;
+                height: 200px;
+                margin: 10px;
+                background: #f0f0f0;
+                display: inline-block;
+                vertical-align: top;
+                opacity: 0;
+                transition: opacity 0.5s ease-in-out;
+            `;
+            
+            const img = document.createElement('img');
+            img.dataset.id = i;
+            img.dataset.src = `https://picsum.photos/300/200?random=${i}`;
+            img.style.cssText = `
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            `;
+            
+            imageContainer.appendChild(img);
+            this.container.appendChild(imageContainer);
+        }
+    }
+    
+    loadImage(img) {
+        return new Promise((resolve) => {
+            const imageContainer = img.parentElement;
+            
+            // Show loading state
+            imageContainer.style.background = '#e0e0e0';
+            
+            // Load image
+            img.src = img.dataset.src;
+            img.onload = () => {
+                // Remove loading state
+                imageContainer.style.background = 'transparent';
+                
+                // Show image with fade-in effect
+                imageContainer.style.opacity = '1';
+                
+                resolve();
+            };
+            
+            img.onerror = () => {
+                // Handle error
+                imageContainer.style.background = '#ffebee';
+                imageContainer.innerHTML = '<div style="text-align: center; padding: 20px; color: #c62828;">Failed to load image</div>';
+                resolve();
+            };
+        });
+    }
+    
+    // Get performance metrics
+    getMetrics() {
+        return this.intersectionObserver.getPerformanceMetrics();
+    }
+}
+
+// Usage
+const gallery = new LazyImageGallery('#image-gallery');
+
+// Get performance metrics after some time
+setTimeout(() => {
+    console.log('Performance metrics:', gallery.getMetrics());
+}, 10000);
+</code></pre>
+</div>
+
+### Example 2: Resize Observer with Responsive Layout System
+<div style="position: relative;">
+<button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+<pre><code>// Advanced Resize Observer with responsive layout system
+class ResponsiveLayoutSystem {
+    constructor() {
+        this.observers = new Map();
+        this.layouts = new Map();
+        this.breakpoints = {
+            mobile: 768,
+            tablet: 1024,
+            desktop: 1200,
+            large: 1440
+        };
+        
+        this.setupGlobalResizeObserver();
+    }
+    
+    // Setup global resize observer for window
+    setupGlobalResizeObserver() {
+        if ('ResizeObserver' in window) {
+            const globalObserver = new ResizeObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.target === document.body) {
+                        this.handleGlobalResize(entry);
+                    }
+                });
+            });
+            
+            globalObserver.observe(document.body);
+        }
+    }
+    
+    // Handle global resize events
+    handleGlobalResize(entry) {
+        const width = entry.contentRect.width;
+        const newBreakpoint = this.getBreakpoint(width);
+        
+        // Dispatch breakpoint change event
+        if (this.currentBreakpoint !== newBreakpoint) {
+            this.currentBreakpoint = newBreakpoint;
+            this.dispatchBreakpointChange(newBreakpoint, width);
+        }
+    }
+    
+    // Get current breakpoint
+    getBreakpoint(width) {
+        if (width < this.breakpoints.mobile) return 'mobile';
+        if (width < this.breakpoints.tablet) return 'tablet';
+        if (width < this.breakpoints.desktop) return 'desktop';
+        return 'large';
+    }
+    
+    // Dispatch breakpoint change event
+    dispatchBreakpointChange(breakpoint, width) {
+        const event = new CustomEvent('breakpointChange', {
+            detail: { breakpoint, width, previous: this.currentBreakpoint }
+        });
+        document.dispatchEvent(event);
+    }
+    
+    // Create resize observer for specific element
+    createElementObserver(element, callback, options = {}) {
+        if (!('ResizeObserver' in window)) {
+            console.warn('ResizeObserver not supported');
+            return null;
+        }
+        
+        const observer = new ResizeObserver((entries) => {
+            entries.forEach(entry => {
+                const resizeData = {
+                    contentRect: entry.contentRect,
+                    borderBoxSize: entry.borderBoxSize,
+                    devicePixelContentRect: entry.devicePixelContentRect,
+                    timestamp: Date.now()
+                };
+                
+                callback(element, resizeData);
+            });
+        });
+        
+        observer.observe(element);
+        this.observers.set(element, observer);
+        
+        return observer;
+    }
+    
+    // Create responsive grid
+    createResponsiveGrid(container, options = {}) {
+        const grid = new ResponsiveGrid(container, options);
+        this.layouts.set(container, grid);
+        
+        // Observe container for size changes
+        this.createElementObserver(container, (element, resizeData) => {
+            grid.handleResize(resizeData);
+        });
+        
+        return grid;
+    }
+    
+    // Create responsive component
+    createResponsiveComponent(element, breakpointConfigs) {
+        const component = new ResponsiveComponent(element, breakpointConfigs);
+        
+        // Observe component for size changes
+        this.createElementObserver(element, (element, resizeData) => {
+            component.handleResize(resizeData);
+        });
+        
+        return component;
+    }
+    
+    // Cleanup observers
+    cleanup() {
+        this.observers.forEach(observer => observer.disconnect());
+        this.observers.clear();
+        this.layouts.clear();
+    }
+}
+
+// Responsive Grid implementation
+class ResponsiveGrid {
+    constructor(container, options = {}) {
+        this.container = container;
+        this.options = {
+            columns: { mobile: 1, tablet: 2, desktop: 3, large: 4 },
+            gap: { mobile: 10, tablet: 15, desktop: 20, large: 25 },
+            ...options
+        };
+        
+        this.currentLayout = 'mobile';
+        this.setupGrid();
+    }
+    
+    setupGrid() {
+        this.container.style.display = 'grid';
+        this.updateGridLayout(this.currentLayout);
+    }
+    
+    updateGridLayout(breakpoint) {
+        const columns = this.options.columns[breakpoint] || 1;
+        const gap = this.options.gap[breakpoint] || 10;
+        
+        this.container.style.gridTemplateColumns = `repeat(${columns}, 1fr)`;
+        this.container.style.gap = `${gap}px`;
+        this.currentLayout = breakpoint;
+        
+        // Dispatch layout change event
+        this.container.dispatchEvent(new CustomEvent('gridLayoutChange', {
+            detail: { breakpoint, columns, gap }
+        }));
+    }
+    
+    handleResize(resizeData) {
+        const width = resizeData.contentRect.width;
+        const newBreakpoint = this.getBreakpoint(width);
+        
+        if (newBreakpoint !== this.currentLayout) {
+            this.updateGridLayout(newBreakpoint);
+        }
+    }
+    
+    getBreakpoint(width) {
+        if (width < 768) return 'mobile';
+        if (width < 1024) return 'tablet';
+        if (width < 1200) return 'desktop';
+        return 'large';
+    }
+    
+    // Add grid items
+    addGridItem(content) {
+        const item = document.createElement('div');
+        item.className = 'grid-item';
+        item.style.cssText = `
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            padding: 20px;
+            text-align: center;
+        `;
+        item.innerHTML = content;
+        
+        this.container.appendChild(item);
+        return item;
+    }
+}
+
+// Responsive Component implementation
+class ResponsiveComponent {
+    constructor(element, breakpointConfigs) {
+        this.element = element;
+        this.configs = breakpointConfigs;
+        this.currentBreakpoint = 'mobile';
+        
+        this.setupComponent();
+    }
+    
+    setupComponent() {
+        this.updateComponentLayout(this.currentBreakpoint);
+    }
+    
+    updateComponentLayout(breakpoint) {
+        const config = this.configs[breakpoint];
+        if (!config) return;
+        
+        // Apply styles
+        Object.assign(this.element.style, config.styles);
+        
+        // Apply classes
+        if (config.classes) {
+            this.element.className = config.classes;
+        }
+        
+        // Apply content
+        if (config.content) {
+            this.element.innerHTML = config.content;
+        }
+        
+        this.currentBreakpoint = breakpoint;
+        
+        // Dispatch layout change event
+        this.element.dispatchEvent(new CustomEvent('componentLayoutChange', {
+            detail: { breakpoint, config }
+        }));
+    }
+    
+    handleResize(resizeData) {
+        const width = resizeData.contentRect.width;
+        const newBreakpoint = this.getBreakpoint(width);
+        
+        if (newBreakpoint !== this.currentBreakpoint) {
+            this.updateComponentLayout(newBreakpoint);
+        }
+    }
+    
+    getBreakpoint(width) {
+        if (width < 768) return 'mobile';
+        if (width < 1024) return 'tablet';
+        if (width < 1200) return 'desktop';
+        return 'large';
+    }
+}
+
+// Usage example
+const layoutSystem = new ResponsiveLayoutSystem();
+
+// Create responsive grid
+const gridContainer = document.getElementById('grid-container');
+const grid = layoutSystem.createResponsiveGrid(gridContainer, {
+    columns: { mobile: 1, tablet: 2, desktop: 3, large: 4 },
+    gap: { mobile: 10, tablet: 15, desktop: 20, large: 25 }
+});
+
+// Add some grid items
+for (let i = 1; i <= 12; i++) {
+    grid.addGridItem(`Grid Item ${i}`);
+}
+
+// Create responsive component
+const componentElement = document.getElementById('responsive-component');
+const responsiveComponent = layoutSystem.createResponsiveComponent(componentElement, {
+    mobile: {
+        styles: { fontSize: '14px', padding: '10px' },
+        classes: 'mobile-layout',
+        content: 'Mobile Layout Content'
+    },
+    tablet: {
+        styles: { fontSize: '16px', padding: '15px' },
+        classes: 'tablet-layout',
+        content: 'Tablet Layout Content'
+    },
+    desktop: {
+        styles: { fontSize: '18px', padding: '20px' },
+        classes: 'desktop-layout',
+        content: 'Desktop Layout Content'
+    },
+    large: {
+        styles: { fontSize: '20px', padding: '25px' },
+        classes: 'large-layout',
+        content: 'Large Layout Content'
+    }
+});
+
+// Listen for breakpoint changes
+document.addEventListener('breakpointChange', (event) => {
+    console.log('Breakpoint changed:', event.detail);
+});
+
+// Listen for grid layout changes
+gridContainer.addEventListener('gridLayoutChange', (event) => {
+    console.log('Grid layout changed:', event.detail);
+});
+
+// Listen for component layout changes
+componentElement.addEventListener('componentLayoutChange', (event) => {
+    console.log('Component layout changed:', event.detail);
+});
+</code></pre>
+</div>
+
+### Example 3: Performance API & Web Animations Integration
+<div style="position: relative;">
+<button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+<pre><code>// Performance API with Web Animations integration
+class PerformanceAnimationSystem {
+    constructor() {
+        this.animations = new Map();
+        this.performanceMetrics = new Map();
+        this.setupPerformanceObserver();
+    }
+    
+    // Setup performance observer
+    setupPerformanceObserver() {
+        if ('PerformanceObserver' in window) {
+            const observer = new PerformanceObserver((list) => {
+                for (const entry of list.getEntries()) {
+                    if (entry.entryType === 'measure') {
+                        this.performanceMetrics.set(entry.name, {
+                            duration: entry.duration,
+                            startTime: entry.startTime,
+                            timestamp: Date.now()
+                        });
+                    }
+                }
+            });
+            observer.observe({ entryTypes: ['measure'] });
+        }
+    }
+    
+    // Create performance-tracked animation
+    createTrackedAnimation(element, keyframes, options = {}) {
+        performance.mark(`animation-start-${element.dataset.id || Date.now()}`);
+        
+        const animation = element.animate(keyframes, {
+            duration: 1000,
+            easing: 'ease-in-out',
+            ...options
+        });
+        
+        // Track animation performance
+        animation.onfinish = () => {
+            performance.mark(`animation-end-${element.dataset.id || Date.now()}`);
+            performance.measure(
+                `animation-${element.dataset.id || Date.now()}`,
+                `animation-start-${element.dataset.id || Date.now()}`,
+                `animation-end-${element.dataset.id || Date.now()}`
+            );
+        };
+        
+        // Store animation reference
+        this.animations.set(element, animation);
+        
+        return animation;
+    }
+    
+    // Create complex animation sequence
+    createAnimationSequence(element, sequence, options = {}) {
+        const animations = [];
+        let currentTime = 0;
+        
+        sequence.forEach((step, index) => {
+            const animation = element.animate(step.keyframes, {
+                duration: step.duration || 1000,
+                easing: step.easing || 'ease-in-out',
+                delay: currentTime,
+                ...options
+            });
+            
+            animations.push(animation);
+            currentTime += step.duration || 1000;
+            
+            // Track each step
+            performance.mark(`sequence-step-${index}-start`);
+            animation.onfinish = () => {
+                performance.mark(`sequence-step-${index}-end`);
+                performance.measure(
+                    `sequence-step-${index}`,
+                    `sequence-step-${index}-start`,
+                    `sequence-step-${index}-end`
+                );
+            };
+        });
+        
+        return animations;
+    }
+    
+    // Create responsive animation based on performance
+    createResponsiveAnimation(element, keyframes, options = {}) {
+        // Check device performance
+        const performanceLevel = this.getDevicePerformanceLevel();
+        
+        // Adjust animation based on performance
+        const adjustedOptions = this.adjustAnimationForPerformance(options, performanceLevel);
+        
+        return this.createTrackedAnimation(element, keyframes, adjustedOptions);
+    }
+    
+    // Get device performance level
+    getDevicePerformanceLevel() {
+        // Simple performance detection
+        const start = performance.now();
+        let sum = 0;
+        for (let i = 0; i < 1000000; i++) {
+            sum += Math.random();
+        }
+        const end = performance.now();
+        const duration = end - start;
+        
+        if (duration < 10) return 'high';
+        if (duration < 50) return 'medium';
+        return 'low';
+    }
+    
+    // Adjust animation for performance
+    adjustAnimationForPerformance(options, performanceLevel) {
+        const adjusted = { ...options };
+        
+        switch (performanceLevel) {
+            case 'low':
+                adjusted.duration = (options.duration || 1000) * 1.5;
+                adjusted.easing = 'linear'; // Simpler easing
+                break;
+            case 'medium':
+                adjusted.duration = (options.duration || 1000) * 1.2;
+                break;
+            case 'high':
+            default:
+                // Use original options
+                break;
+        }
+        
+        return adjusted;
+    }
+    
+    // Create staggered animations
+    createStaggeredAnimations(elements, keyframes, options = {}) {
+        const animations = [];
+        const staggerDelay = options.staggerDelay || 100;
+        
+        elements.forEach((element, index) => {
+            const animation = element.animate(keyframes, {
+                ...options,
+                delay: (options.delay || 0) + (index * staggerDelay)
+            });
+            
+            animations.push(animation);
+            
+            // Track staggered animation
+            performance.mark(`staggered-${index}-start`);
+            animation.onfinish = () => {
+                performance.mark(`staggered-${index}-end`);
+                performance.measure(
+                    `staggered-${index}`,
+                    `staggered-${index}-start`,
+                    `staggered-${index}-end`
+                );
+            };
+        });
+        
+        return animations;
+    }
+    
+    // Create scroll-triggered animations
+    createScrollAnimation(element, keyframes, options = {}) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    performance.mark(`scroll-animation-start-${element.dataset.id}`);
+                    
+                    const animation = element.animate(keyframes, options);
+                    
+                    animation.onfinish = () => {
+                        performance.mark(`scroll-animation-end-${element.dataset.id}`);
+                        performance.measure(
+                            `scroll-animation-${element.dataset.id}`,
+                            `scroll-animation-start-${element.dataset.id}`,
+                            `scroll-animation-end-${element.dataset.id}`
+                        );
+                    };
+                    
+                    // Unobserve after animation
+                    observer.unobserve(element);
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        observer.observe(element);
+        return observer;
+    }
+    
+    // Get performance metrics
+    getPerformanceMetrics() {
+        return Object.fromEntries(this.performanceMetrics);
+    }
+    
+    // Get animation statistics
+    getAnimationStats() {
+        const stats = {
+            totalAnimations: this.animations.size,
+            performanceLevel: this.getDevicePerformanceLevel(),
+            metrics: this.getPerformanceMetrics()
+        };
+        
+        return stats;
+    }
+    
+    // Cleanup animations
+    cleanup() {
+        this.animations.forEach(animation => {
+            if (animation.playState !== 'finished') {
+                animation.cancel();
+            }
+        });
+        this.animations.clear();
+    }
+}
+
+// Usage example
+const animationSystem = new PerformanceAnimationSystem();
+
+// Create performance-tracked animation
+const animatedElement = document.getElementById('animated-element');
+const animation = animationSystem.createTrackedAnimation(animatedElement, [
+    { transform: 'translateX(0px)', opacity: 0 },
+    { transform: 'translateX(100px)', opacity: 1 },
+    { transform: 'translateX(200px)', opacity: 0.8 }
+], {
+    duration: 2000,
+    easing: 'ease-in-out'
+});
+
+// Create animation sequence
+const sequenceElement = document.getElementById('sequence-element');
+const sequence = animationSystem.createAnimationSequence(sequenceElement, [
+    {
+        keyframes: [
+            { transform: 'scale(1)', opacity: 0 },
+            { transform: 'scale(1.2)', opacity: 1 }
+        ],
+        duration: 500
+    },
+    {
+        keyframes: [
+            { transform: 'scale(1.2)', opacity: 1 },
+            { transform: 'scale(1)', opacity: 0.8 }
+        ],
+        duration: 500
+    }
+]);
+
+// Create staggered animations
+const staggeredElements = document.querySelectorAll('.staggered-item');
+const staggeredAnimations = animationSystem.createStaggeredAnimations(
+    staggeredElements,
+    [
+        { transform: 'translateY(20px)', opacity: 0 },
+        { transform: 'translateY(0px)', opacity: 1 }
+    ],
+    {
+        duration: 800,
+        easing: 'ease-out',
+        staggerDelay: 150
+    }
+);
+
+// Create scroll-triggered animation
+const scrollElement = document.getElementById('scroll-element');
+scrollElement.dataset.id = 'scroll-1';
+animationSystem.createScrollAnimation(scrollElement, [
+    { transform: 'translateY(50px)', opacity: 0 },
+    { transform: 'translateY(0px)', opacity: 1 }
+], {
+    duration: 1000,
+    easing: 'ease-out'
+});
+
+// Get performance metrics
+setTimeout(() => {
+    const stats = animationSystem.getAnimationStats();
+    console.log('Animation performance stats:', stats);
+}, 5000);
+
+// Listen for animation events
+document.addEventListener('animationend', (event) => {
+    console.log('Animation ended:', event.target);
+});
+</code></pre>
+</div>
+
+---
+
+## ❓ Common Interview Questions
+
+### Q1: How does Intersection Observer API improve performance compared to scroll event listeners?
+**A:** Intersection Observer API is more performant because it runs off the main thread and only triggers callbacks when elements actually intersect with the viewport, rather than on every scroll event. It eliminates the need for continuous calculations and provides better battery life on mobile devices.
+
+### Q2: What are the benefits of using Resize Observer over window resize events?
+**A:** Resize Observer provides more granular control by observing specific elements rather than the entire window, offers better performance by avoiding continuous event firing, and provides more detailed information about size changes including content and border box dimensions.
+
+### Q3: How can you use Performance API to identify performance bottlenecks in a web application?
+**A:** Performance API allows you to create custom marks and measures to track specific operations, use PerformanceObserver to monitor performance events, and analyze timing data to identify slow operations. You can measure user interactions, API calls, and custom operations to pinpoint bottlenecks.
+
+### Q4: What advantages does Web Animations API provide over CSS animations?
+**A:** Web Animations API offers programmatic control over animations (play, pause, reverse, seek), better synchronization between multiple animations, the ability to respond to user input during animations, and more complex animation sequences that would be difficult to achieve with CSS alone.
+
+### Q5: How would you implement lazy loading using Intersection Observer API?
+**A:** Create an Intersection Observer that watches for elements entering the viewport, use a threshold to start loading before elements are fully visible, load content (images, data) when intersection occurs, and unobserve elements after loading to improve performance.
+
+---
+
+## 🏋️ Practice Exercises
+
+### Exercise 1: Build a Performance Monitoring Dashboard
+Create a comprehensive performance monitoring system using Performance API that tracks various metrics, provides real-time visualization, and alerts when performance thresholds are exceeded.
+
+### Exercise 2: Implement a Responsive Animation System
+Build an animation system that automatically adjusts animation complexity based on device performance, using both Web Animations API and Performance API to create optimal user experiences.
+
+### Exercise 3: Create an Infinite Scroll with Performance Optimization
+Implement an infinite scroll system using Intersection Observer API with performance monitoring, lazy loading, and automatic cleanup to maintain smooth scrolling performance.
+
+---
+
+## 📚 Additional Resources
+
+- **Intersection Observer**: [MDN Intersection Observer](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API)
+- **Resize Observer**: [MDN Resize Observer](https://developer.mozilla.org/en-US/docs/Web/API/Resize_Observer_API)
+- **Performance API**: [MDN Performance API](https://developer.mozilla.org/en-US/docs/Web/API/Performance)
+- **Web Animations API**: [MDN Web Animations API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API)
+- **Performance Best Practices**: [Web.dev Performance](https://web.dev/performance/)
+
+---
+
+## 📋 Copy Code Functionality
+
+<script src="../common-scripts.js"></script>
+
+---
+
+## 🧭 Navigation
+
+<div class="navigation">
+    <a href="01-DOM-Events-Advanced.md" class="nav-link prev">← Previous: Advanced DOM & Events</a>
+    <a href="03-Advanced-Browser-Features.md" class="nav-link next">Next: Advanced Browser Features →</a>
+</div>
+
+*Last updated: December 2024*
