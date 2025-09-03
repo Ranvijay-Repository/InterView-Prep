@@ -88,6 +88,16 @@ Replace the old script tag with:
 - [x] `07-ES2022-Features.md` ✅ (Fully populated with Class fields & private methods, Top-level await in modules, Error.cause)
 - [x] `08-ES2023-Features.md` ✅ (Fully populated with Array grouping methods, Hashbang syntax, Symbol as WeakMap keys)
 
+### Browser & Runtime Internals - NEW SECTION (COMPLETED!) 🆕
+- [x] `01-DOM-Events-Advanced.md` ✅ (Fully populated with Event Propagation, Event Delegation patterns, Custom Events & EventTarget)
+- [x] `02-Web-APIs-Performance.md` ✅ (Fully populated with Intersection Observer API, Resize Observer API, Performance API & User Timing, Web Animations API)
+- [x] `03-Advanced-Browser-Features.md` ✅ (Fully populated with WebAssembly basics, WebGL & Canvas optimization, IndexedDB & advanced storage)
+
+### Advanced Patterns & Architecture - NEW SECTION (COMPLETED!) 🆕
+- [x] `01-Design-Patterns-Advanced.md` ✅ (Fully populated with Revealing Module Pattern, Factory Pattern variations, Command Pattern, Chain of Responsibility)
+- [x] `02-Functional-Programming-Patterns.md` ✅ (Fully populated with Railway Oriented Programming, Either/Maybe monads, Lens pattern)
+- [x] `03-Architecture-Patterns.md` ✅ (Fully populated with Micro-frontends, Event Sourcing, CQRS pattern)
+
 ## 🚀 Quick Script to Check All Files
 
 You can run this command to see which files still have duplicate CSS/JS:
