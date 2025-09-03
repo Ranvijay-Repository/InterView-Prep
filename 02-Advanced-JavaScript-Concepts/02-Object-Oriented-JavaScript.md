@@ -1,0 +1,3048 @@
+# 🏗️ Object-Oriented JavaScript
+
+> **Mastering OOP concepts, classes, prototypes, and design patterns in JavaScript**
+
+<link rel="stylesheet" href="../common-styles.css">
+
+---
+
+## 📋 Table of Contents
+
+- [What is Object-Oriented Programming?](#what-is-object-oriented-programming)
+- [Objects in JavaScript](#objects-in-javascript)
+- [Constructor Functions](#constructor-functions)
+- [Prototypes & Prototypal Inheritance](#prototypes--prototypal-inheritance)
+- [ES6 Classes](#es6-classes)
+- [Encapsulation](#encapsulation)
+- [Inheritance](#inheritance)
+- [Polymorphism](#polymorphism)
+- [Abstraction](#abstraction)
+- [Design Patterns](#design-patterns)
+- [Detailed Examples](#detailed-examples)
+- [Common Pitfalls](#common-pitfalls)
+- [Best Practices](#best-practices)
+- [Key Points](#key-points)
+- [Common Interview Questions](#common-interview-questions)
+- [Practice Exercises](#practice-exercises)
+- [Additional Resources](#additional-resources)
+
+---
+
+## 🎯 What is Object-Oriented Programming?
+
+**Object-Oriented Programming (OOP)** is a programming paradigm that organizes code into objects that contain data and code. In JavaScript, OOP is built on prototypes rather than traditional classes, though ES6 introduced class syntax as syntactic sugar.
+
+### Why OOP Matters in JavaScript:
+- **Code Organization**: Better structure for complex applications
+- **Reusability**: Objects can be reused across different parts of the application
+- **Maintainability**: Easier to maintain and modify code
+- **Team Development**: Clear interfaces and contracts between components
+- **Real-world Modeling**: Objects represent real-world entities naturally
+
+### Core OOP Principles:
+1. **Encapsulation**: Bundling data and methods that operate on that data
+2. **Inheritance**: Creating new objects based on existing ones
+3. **Polymorphism**: Objects can take multiple forms
+4. **Abstraction**: Hiding complex implementation details
+
+---
+
+## 🔧 Objects in JavaScript
+
+**Objects** are the fundamental building blocks of OOP in JavaScript. They are collections of key-value pairs where values can be data or functions (methods).
+
+### Object Creation Methods:
+
+#### 1. **Object Literals**
+```javascript
+// Simple object literal
+const person = {
+    name: "John Doe",
+    age: 30,
+    greet() {
+        return `Hello, I'm ${this.name}`;
+    }
+};
+
+console.log(person.name);        // "John Doe"
+console.log(person.greet());     // "Hello, I'm John Doe"
+```
+
+#### 2. **Object Constructor**
+```javascript
+// Using Object constructor
+const car = new Object();
+car.brand = "Toyota";
+car.model = "Camry";
+car.year = 2020;
+car.start = function() {
+    return `${this.brand} ${this.model} is starting...`;
+};
+```
+
+#### 3. **Object.create()**
+```javascript
+// Create object with specific prototype
+const animal = {
+    makeSound() {
+        return "Some sound";
+    }
+};
+
+const dog = Object.create(animal);
+dog.name = "Buddy";
+dog.makeSound = function() {
+    return "Woof!";
+};
+```
+
+### ASCII Diagram: Object Structure
+```
+JAVASCRIPT OBJECT STRUCTURE
+┌─────────────────────────────────┐
+│ Object: person                  │
+├─────────────────────────────────┤
+│ Properties:                     │
+│ ├─ name: "John Doe"            │
+│ ├─ age: 30                     │
+│ └─ email: "john@example.com"   │
+├─────────────────────────────────┤
+│ Methods:                        │
+│ ├─ greet() → "Hello, I'm..."   │
+│ ├─ haveBirthday() → age++      │
+│ └─ getInfo() → return object   │
+├─────────────────────────────────┤
+│ Prototype: Object.prototype     │
+│ __proto__ → Object.prototype    │
+└─────────────────────────────────┘
+```
+
+### Object Property Descriptors:
+```javascript
+const user = {};
+
+Object.defineProperty(user, 'name', {
+    value: 'John',
+    writable: false,        // Cannot be changed
+    enumerable: true,       // Shows in for...in loop
+    configurable: false     // Cannot be deleted or reconfigured
+});
+
+// Get property descriptor
+const descriptor = Object.getOwnPropertyDescriptor(user, 'name');
+console.log(descriptor);
+// { value: 'John', writable: false, enumerable: true, configurable: false }
+```
+
+---
+
+## 🏗️ Constructor Functions
+
+**Constructor Functions** are special functions used to create objects. They follow a naming convention of starting with a capital letter and use the `new` keyword.
+
+### Basic Constructor Function:
+```javascript
+function Person(name, age, email) {
+    this.name = name;
+    this.age = age;
+    this.email = email;
+    
+    this.greet = function() {
+        return `Hello, I'm ${this.name}`;
+    };
+    
+    this.haveBirthday = function() {
+        this.age++;
+        return `${this.name} is now ${this.age} years old!`;
+    };
+}
+
+// Creating instances
+const person1 = new Person("Alice", 25, "alice@example.com");
+const person2 = new Person("Bob", 30, "bob@example.com");
+
+console.log(person1.greet());        // "Hello, I'm Alice"
+console.log(person2.haveBirthday()); // "Bob is now 31 years old!"
+```
+
+### ASCII Diagram: Constructor Function Flow
+```
+CONSTRUCTOR FUNCTION EXECUTION
+┌─────────────────────────────────┐
+│ new Person("Alice", 25)        │
+│ ↓                              │
+│ 1. Creates empty object {}     │
+│ 2. Sets this = {}              │
+│ 3. Executes Person() function  │
+│ 4. Adds properties to this     │
+│ 5. Sets __proto__ to Person.prototype │
+│ 6. Returns the object          │
+└─────────────────────────────────┘
+
+RESULT:
+┌─────────────────────────────────┐
+│ person1 = {                     │
+│   name: "Alice",               │
+│   age: 25,                     │
+│   email: "alice@example.com",  │
+│   greet: function(),           │
+│   haveBirthday: function(),    │
+│   __proto__: Person.prototype  │
+│ }                              │
+└─────────────────────────────────┘
+```
+
+### Constructor Function Best Practices:
+```javascript
+function Car(brand, model, year) {
+    // Validate parameters
+    if (!brand || !model || !year) {
+        throw new Error("All parameters are required");
+    }
+    
+    if (typeof year !== 'number' || year < 1885) {
+        throw new Error("Year must be a valid number");
+    }
+    
+    // Public properties
+    this.brand = brand;
+    this.model = model;
+    this.year = year;
+    
+    // Private variables (closure)
+    let mileage = 0;
+    
+    // Public methods
+    this.getMileage = function() {
+        return mileage;
+    };
+    
+    this.drive = function(miles) {
+        if (miles > 0) {
+            mileage += miles;
+            return `Drove ${miles} miles. Total: ${mileage}`;
+        }
+        throw new Error("Miles must be positive");
+    };
+    
+    this.getInfo = function() {
+        return `${this.year} ${this.brand} ${this.model} - ${mileage} miles`;
+    };
+}
+
+// Usage
+try {
+    const myCar = new Car("Toyota", "Camry", 2020);
+    console.log(myCar.drive(100));    // "Drove 100 miles. Total: 100"
+    console.log(myCar.getInfo());     // "2020 Toyota Camry - 100 miles"
+    console.log(myCar.mileage);       // undefined (private)
+} catch (error) {
+    console.error("Error:", error.message);
+}
+```
+
+---
+
+## 🔗 Prototypes & Prototypal Inheritance
+
+**Prototypes** are the mechanism by which JavaScript objects inherit features from one another. Every JavaScript object has a prototype, and objects inherit properties and methods from their prototype chain.
+
+### Understanding Prototypes:
+
+#### 1. **Prototype Chain**
+```javascript
+function Animal(name) {
+    this.name = name;
+}
+
+Animal.prototype.makeSound = function() {
+    return "Some sound";
+};
+
+Animal.prototype.eat = function() {
+    return `${this.name} is eating`;
+};
+
+function Dog(name, breed) {
+    Animal.call(this, name);  // Call parent constructor
+    this.breed = breed;
+}
+
+// Set up inheritance
+Dog.prototype = Object.create(Animal.prototype);
+Dog.prototype.constructor = Dog;  // Fix constructor reference
+
+// Add Dog-specific methods
+Dog.prototype.makeSound = function() {
+    return "Woof!";
+};
+
+Dog.prototype.fetch = function() {
+    return `${this.name} is fetching the ball`;
+};
+
+// Create instances
+const myDog = new Dog("Buddy", "Golden Retriever");
+console.log(myDog.name);           // "Buddy"
+console.log(myDog.makeSound());    // "Woof!"
+console.log(myDog.eat());          // "Buddy is eating"
+console.log(myDog.fetch());        // "Buddy is fetching the ball"
+```
+
+### ASCII Diagram: Prototype Chain
+```
+PROTOTYPE CHAIN STRUCTURE
+┌─────────────────────────────────┐
+│ myDog (instance)                │
+│ ├─ name: "Buddy"               │
+│ ├─ breed: "Golden Retriever"   │
+│ └─ __proto__ → Dog.prototype   │
+│     ├─ makeSound() → "Woof!"   │
+│     ├─ fetch() → "fetching..." │
+│     └─ __proto__ → Animal.prototype │
+│         ├─ makeSound() → "Some sound" │
+│         ├─ eat() → "is eating" │
+│         └─ __proto__ → Object.prototype │
+│             ├─ toString()       │
+│             ├─ hasOwnProperty() │
+│             └─ ...              │
+└─────────────────────────────────┘
+
+PROPERTY LOOKUP:
+myDog.makeSound() → Dog.prototype.makeSound() ✅
+myDog.eat() → Animal.prototype.eat() ✅
+myDog.toString() → Object.prototype.toString() ✅
+```
+
+#### 2. **Prototype Methods vs Instance Methods**
+```javascript
+function Calculator() {
+    // Instance method - each instance gets its own copy
+    this.add = function(a, b) {
+        return a + b;
+    };
+}
+
+// Prototype method - shared across all instances
+Calculator.prototype.multiply = function(a, b) {
+    return a * b;
+};
+
+// Static method - belongs to the constructor function
+Calculator.divide = function(a, b) {
+    return a / b;
+};
+
+const calc1 = new Calculator();
+const calc2 = new Calculator();
+
+console.log(calc1.add === calc2.add);           // false (different functions)
+console.log(calc1.multiply === calc2.multiply); // true (same function)
+console.log(Calculator.divide(10, 2));          // 5 (static method)
+```
+
+#### 3. **Object.create() for Prototype Inheritance**
+```javascript
+// Base object
+const vehicle = {
+    start() {
+        return `${this.type} is starting...`;
+    },
+    
+    stop() {
+        return `${this.type} is stopping...`;
+    }
+};
+
+// Create car object inheriting from vehicle
+const car = Object.create(vehicle, {
+    type: {
+        value: 'Car',
+        writable: true,
+        enumerable: true
+    },
+    
+    brand: {
+        value: 'Toyota',
+        writable: true,
+        enumerable: true
+    },
+    
+    // Override method
+    start() {
+        return `${this.brand} ${this.type} is starting with a roar!`;
+    }
+});
+
+// Create motorcycle object
+const motorcycle = Object.create(vehicle, {
+    type: {
+        value: 'Motorcycle',
+        writable: true,
+        enumerable: true
+    },
+    
+    brand: {
+        value: 'Honda',
+        writable: true,
+        enumerable: true
+    }
+});
+
+console.log(car.start());      // "Toyota Car is starting with a roar!"
+console.log(car.stop());       // "Car is stopping..."
+console.log(motorcycle.start()); // "Motorcycle is starting..."
+```
+
+### Checking Prototype Relationships:
+```javascript
+// Check if object is prototype of another
+console.log(vehicle.isPrototypeOf(car));        // true
+console.log(vehicle.isPrototypeOf(motorcycle)); // true
+
+// Check prototype of an object
+console.log(Object.getPrototypeOf(car) === vehicle); // true
+
+// Check if property exists on object or its prototype
+console.log(car.hasOwnProperty('type'));        // true
+console.log(car.hasOwnProperty('start'));       // false (inherited)
+
+// Get all properties including inherited ones
+console.log(Object.getOwnPropertyNames(car));   // ['type', 'brand']
+console.log(Object.getOwnPropertyNames(Object.getPrototypeOf(car))); // ['start', 'stop']
+```
+
+---
+
+## 🎓 ES6 Classes
+
+**ES6 Classes** are syntactic sugar over JavaScript's existing prototype-based inheritance. They provide a cleaner, more familiar syntax for creating objects and implementing inheritance.
+
+### Basic Class Syntax:
+```javascript
+class Person {
+    // Constructor method
+    constructor(name, age, email) {
+        this.name = name;
+        this.age = age;
+        this.email = email;
+    }
+    
+    // Instance methods
+    greet() {
+        return `Hello, I'm ${this.name}`;
+    }
+    
+    haveBirthday() {
+        this.age++;
+        return `${this.name} is now ${this.age} years old!`;
+    }
+    
+    getInfo() {
+        return {
+            name: this.name,
+            age: this.age,
+            email: this.email
+        };
+    }
+    
+    // Static method
+    static createAdult(name, email) {
+        return new Person(name, 18, email);
+    }
+    
+    // Getter
+    get isAdult() {
+        return this.age >= 18;
+    }
+    
+    // Setter
+    set age(newAge) {
+        if (newAge < 0) {
+            throw new Error("Age cannot be negative");
+        }
+        this._age = newAge;
+    }
+    
+    get age() {
+        return this._age;
+    }
+}
+
+// Creating instances
+const person1 = new Person("Alice", 25, "alice@example.com");
+const person2 = Person.createAdult("Bob", "bob@example.com");
+
+console.log(person1.greet());        // "Hello, I'm Alice"
+console.log(person1.isAdult);       // true
+console.log(person2.age);           // 18
+```
+
+### Class Inheritance with `extends`:
+```javascript
+class Animal {
+    constructor(name) {
+        this.name = name;
+    }
+    
+    makeSound() {
+        return "Some sound";
+    }
+    
+    eat() {
+        return `${this.name} is eating`;
+    }
+    
+    sleep() {
+        return `${this.name} is sleeping`;
+    }
+}
+
+class Dog extends Animal {
+    constructor(name, breed) {
+        super(name);  // Call parent constructor
+        this.breed = breed;
+    }
+    
+    // Override parent method
+    makeSound() {
+        return "Woof!";
+    }
+    
+    // Add new method
+    fetch() {
+        return `${this.name} is fetching the ball`;
+    }
+    
+    // Override with additional functionality
+    sleep() {
+        return `${super.sleep()} and dreaming of treats`;
+    }
+}
+
+// Usage
+const myDog = new Dog("Buddy", "Golden Retriever");
+console.log(myDog.makeSound());    // "Woof!"
+console.log(myDog.fetch());        // "Buddy is fetching the ball"
+console.log(myDog.sleep());        // "Buddy is sleeping and dreaming of treats"
+```
+
+---
+
+## 🔒 Encapsulation
+
+**Encapsulation** is the bundling of data and methods that operate on that data within a single unit (object) and restricting access to some of the object's components.
+
+### Implementing Encapsulation:
+
+#### 1. **Closure-based Encapsulation**
+```javascript
+function createCounter() {
+    // Private variable
+    let count = 0;
+    
+    // Private function
+    function validateIncrement(value) {
+        return value > 0 && value <= 10;
+    }
+    
+    // Public interface
+    return {
+        increment(value = 1) {
+            if (validateIncrement(value)) {
+                count += value;
+                return `Count increased by ${value}. New count: ${count}`;
+            }
+            throw new Error("Invalid increment value");
+        },
+        
+        decrement(value = 1) {
+            if (value > 0 && value <= count) {
+                count -= value;
+                return `Count decreased by ${value}. New count: ${count}`;
+            }
+            throw new Error("Invalid decrement value");
+        },
+        
+        getCount() {
+            return count;
+        },
+        
+        reset() {
+            count = 0;
+            return "Counter reset to 0";
+        }
+    };
+}
+
+// Usage
+const counter = createCounter();
+
+try {
+    console.log(counter.increment(5));    // "Count increased by 5. New count: 5"
+    console.log(counter.increment(3));    // "Count increased by 3. New count: 8"
+    console.log(counter.decrement(2));    // "Count decreased by 2. New count: 6"
+    console.log(counter.getCount());      // 6
+    console.log(counter.reset());         // "Counter reset to 0"
+    
+    // Private variables are not accessible
+    // console.log(counter.count);        // undefined
+    // counter.validateIncrement(5);      // TypeError
+} catch (error) {
+    console.error("Error:", error.message);
+}
+```
+
+#### 2. **Class-based Encapsulation with Private Fields**
+```javascript
+class BankAccount {
+    // Private fields
+    #accountNumber;
+    #balance;
+    #pin;
+    #transactions;
+    
+    constructor(accountNumber, initialBalance, pin) {
+        this.#accountNumber = accountNumber;
+        this.#balance = initialBalance;
+        this.#pin = pin;
+        this.#transactions = [];
+        this.#addTransaction('Account opened', initialBalance);
+    }
+    
+    // Private method
+    #addTransaction(description, amount) {
+        this.#transactions.push({
+            id: Date.now(),
+            description,
+            amount,
+            timestamp: new Date(),
+            balance: this.#balance
+        });
+    }
+    
+    // Private method for PIN validation
+    #validatePin(inputPin) {
+        return this.#pin === inputPin;
+    }
+    
+    // Public methods
+    deposit(amount, pin) {
+        if (!this.#validatePin(pin)) {
+            throw new Error("Invalid PIN");
+        }
+        
+        if (amount <= 0) {
+            throw new Error("Deposit amount must be positive");
+        }
+        
+        this.#balance += amount;
+        this.#addTransaction('Deposit', amount);
+        return `Deposited $${amount}. New balance: $${this.#balance}`;
+    }
+    
+    withdraw(amount, pin) {
+        if (!this.#validatePin(pin)) {
+            throw new Error("Invalid PIN");
+        }
+        
+        if (amount <= 0) {
+            throw new Error("Withdrawal amount must be positive");
+        }
+        
+        if (amount > this.#balance) {
+            throw new Error("Insufficient funds");
+        }
+        
+        this.#balance -= amount;
+        this.#addTransaction('Withdrawal', -amount);
+        return `Withdrew $${amount}. New balance: $${this.#balance}`;
+    }
+    
+    getBalance(pin) {
+        if (!this.#validatePin(pin)) {
+            throw new Error("Invalid PIN");
+        }
+        return this.#balance;
+    }
+    
+    getTransactionHistory(pin) {
+        if (!this.#validatePin(pin)) {
+            throw new Error("Invalid PIN");
+        }
+        return [...this.#transactions]; // Return copy
+    }
+    
+    changePin(oldPin, newPin) {
+        if (!this.#validatePin(oldPin)) {
+            throw new Error("Invalid current PIN");
+        }
+        
+        if (newPin.length !== 4 || !/^\d{4}$/.test(newPin)) {
+            throw new Error("PIN must be 4 digits");
+        }
+        
+        this.#pin = newPin;
+        this.#addTransaction('PIN changed', 0);
+        return "PIN changed successfully";
+    }
+}
+
+// Usage
+const account = new BankAccount("12345", 1000, "1234");
+
+try {
+    console.log(account.deposit(500, "1234"));     // "Deposited $500. New balance: $1500"
+    console.log(account.withdraw(200, "1234"));    // "Withdrew $200. New balance: $1300"
+    console.log(account.getBalance("1234"));       // 1300
+    
+    // Try to access private fields
+    // console.log(account.#balance);               // SyntaxError
+    // console.log(account.#pin);                   // SyntaxError
+    
+    // Try with wrong PIN
+    console.log(account.getBalance("0000"));       // Error: Invalid PIN
+    
+    // Change PIN
+    console.log(account.changePin("1234", "5678")); // "PIN changed successfully"
+    console.log(account.getBalance("5678"));       // 1300
+    
+} catch (error) {
+    console.error("Error:", error.message);
+}
+```
+
+---
+
+## 🔄 Inheritance
+
+**Inheritance** is a mechanism that allows a class to inherit properties and methods from another class, promoting code reuse and establishing a hierarchical relationship.
+
+### Types of Inheritance:
+
+#### 1. **Single Inheritance**
+```javascript
+class Animal {
+    constructor(name, species) {
+        this.name = name;
+        this.species = species;
+    }
+    
+    eat() {
+        return `${this.name} is eating`;
+    }
+    
+    sleep() {
+        return `${this.name} is sleeping`;
+    }
+    
+    makeSound() {
+        return "Some sound";
+    }
+}
+
+class Dog extends Animal {
+    constructor(name, breed) {
+        super(name, "Canis familiaris");
+        this.breed = breed;
+    }
+    
+    makeSound() {
+        return "Woof!";
+    }
+    
+    fetch() {
+        return `${this.name} is fetching the ball`;
+    }
+}
+
+class Cat extends Animal {
+    constructor(name, color) {
+        super(name, "Felis catus");
+        this.color = color;
+    }
+    
+    makeSound() {
+        return "Meow!";
+    }
+    
+    purr() {
+        return `${this.name} is purring`;
+    }
+}
+
+// Usage
+const myDog = new Dog("Buddy", "Golden Retriever");
+const myCat = new Cat("Whiskers", "Orange");
+
+console.log(myDog.eat());        // "Buddy is eating"
+console.log(myDog.makeSound());  // "Woof!"
+console.log(myDog.fetch());      // "Buddy is fetching the ball"
+
+console.log(myCat.sleep());      // "Whiskers is sleeping"
+console.log(myCat.makeSound());  // "Meow!"
+console.log(myCat.purr());       // "Whiskers is purring"
+```
+
+#### 2. **Multi-level Inheritance**
+```javascript
+class Vehicle {
+    constructor(make, model, year) {
+        this.make = make;
+        this.model = model;
+        this.year = year;
+    }
+    
+    start() {
+        return `${this.make} ${this.model} is starting...`;
+    }
+    
+    stop() {
+        return `${this.make} ${this.model} is stopping...`;
+    }
+    
+    getInfo() {
+        return `${this.year} ${this.make} ${this.model}`;
+    }
+}
+
+class Car extends Vehicle {
+    constructor(make, model, year, doors) {
+        super(make, model, year);
+        this.doors = doors;
+    }
+    
+    openTrunk() {
+        return `${this.make} ${this.model} trunk is opening`;
+    }
+}
+
+class ElectricCar extends Car {
+    constructor(make, model, year, doors, batteryCapacity) {
+        super(make, model, year, doors);
+        this.batteryCapacity = batteryCapacity;
+        this.batteryLevel = 100;
+    }
+    
+    charge() {
+        this.batteryLevel = 100;
+        return `${this.make} ${this.model} is fully charged`;
+    }
+    
+    getBatteryStatus() {
+        return `Battery level: ${this.batteryLevel}%`;
+    }
+    
+    start() {
+        if (this.batteryLevel > 10) {
+            return `${this.make} ${this.model} is starting silently...`;
+        } else {
+            return "Low battery! Please charge first.";
+        }
+    }
+}
+
+// Usage
+const tesla = new ElectricCar("Tesla", "Model 3", 2023, 4, 75);
+
+console.log(tesla.getInfo());           // "2023 Tesla Model 3"
+console.log(tesla.start());             // "Tesla Model 3 is starting silently..."
+console.log(tesla.openTrunk());         // "Tesla Model 3 trunk is opening"
+console.log(tesla.getBatteryStatus());  // "Battery level: 100%"
+console.log(tesla.charge());            // "Tesla Model 3 is fully charged"
+```
+
+#### 3. **Composition over Inheritance**
+```javascript
+// Instead of deep inheritance, use composition
+class Engine {
+    constructor(type, horsepower) {
+        this.type = type;
+        this.horsepower = horsepower;
+        this.isRunning = false;
+    }
+    
+    start() {
+        this.isRunning = true;
+        return `${this.type} engine started`;
+    }
+    
+    stop() {
+        this.isRunning = false;
+        return `${this.type} engine stopped`;
+    }
+    
+    getStatus() {
+        return `${this.type} engine: ${this.isRunning ? 'Running' : 'Stopped'}`;
+    }
+}
+
+class Transmission {
+    constructor(type, gears) {
+        this.type = type;
+        this.gears = gears;
+        this.currentGear = 0;
+    }
+    
+    shiftGear(gear) {
+        if (gear >= 0 && gear <= this.gears) {
+            this.currentGear = gear;
+            return `Shifted to gear ${gear}`;
+        }
+        throw new Error("Invalid gear");
+    }
+    
+    getCurrentGear() {
+        return this.currentGear;
+    }
+}
+
+class Car {
+    constructor(make, model, year) {
+        this.make = make;
+        this.model = model;
+        this.year = year;
+        this.engine = new Engine("V6", 300);
+        this.transmission = new Transmission("Automatic", 6);
+    }
+    
+    start() {
+        const engineStart = this.engine.start();
+        return `${this.make} ${this.model}: ${engineStart}`;
+    }
+    
+    stop() {
+        const engineStop = this.engine.stop();
+        return `${this.make} ${this.model}: ${engineStop}`;
+    }
+    
+    accelerate() {
+        if (this.engine.isRunning) {
+            const gearShift = this.transmission.shiftGear(this.transmission.currentGear + 1);
+            return `${this.make} ${this.model} accelerating: ${gearShift}`;
+        }
+        return "Start the engine first";
+    }
+    
+    getStatus() {
+        return {
+            car: `${this.year} ${this.make} ${this.model}`,
+            engine: this.engine.getStatus(),
+            transmission: `Current gear: ${this.transmission.getCurrentGear()}`
+        };
+    }
+}
+
+// Usage
+const myCar = new Car("Toyota", "Camry", 2023);
+
+console.log(myCar.start());      // "Toyota Camry: V6 engine started"
+console.log(myCar.accelerate()); // "Toyota Camry accelerating: Shifted to gear 1"
+console.log(myCar.getStatus());  // Object with car, engine, and transmission status
+```
+
+---
+
+## 🎭 Polymorphism
+
+**Polymorphism** allows objects to take multiple forms and behave differently based on their type or context.
+
+### Types of Polymorphism:
+
+#### 1. **Method Overriding**
+```javascript
+class Animal {
+    makeSound() {
+        return "Some sound";
+    }
+    
+    move() {
+        return "Moving";
+    }
+}
+
+class Dog extends Animal {
+    makeSound() {
+        return "Woof!";
+    }
+    
+    move() {
+        return "Running on four legs";
+    }
+}
+
+class Bird extends Animal {
+    makeSound() {
+        return "Chirp!";
+    }
+    
+    move() {
+        return "Flying";
+    }
+}
+
+class Fish extends Animal {
+    makeSound() {
+        return "Blub blub";
+    }
+    
+    move() {
+        return "Swimming";
+    }
+}
+
+// Polymorphic behavior
+function animalSounds(animals) {
+    return animals.map(animal => animal.makeSound());
+}
+
+function animalMovements(animals) {
+    return animals.map(animal => animal.move());
+}
+
+const animals = [
+    new Dog("Buddy"),
+    new Bird("Tweety"),
+    new Fish("Nemo")
+];
+
+console.log(animalSounds(animals));     // ["Woof!", "Chirp!", "Blub blub"]
+console.log(animalMovements(animals));  // ["Running on four legs", "Flying", "Swimming"]
+```
+
+#### 2. **Method Overloading (Simulated)**
+```javascript
+class Calculator {
+    add(a, b, c) {
+        if (c !== undefined) {
+            return a + b + c;
+        }
+        return a + b;
+    }
+    
+    multiply(a, b, c) {
+        if (c !== undefined) {
+            return a * b * c;
+        }
+        return a * b;
+    }
+    
+    // Alternative approach using different method names
+    addTwo(a, b) {
+        return a + b;
+    }
+    
+    addThree(a, b, c) {
+        return a + b + c;
+    }
+    
+    addMany(...numbers) {
+        return numbers.reduce((sum, num) => sum + num, 0);
+    }
+}
+
+const calc = new Calculator();
+
+console.log(calc.add(2, 3));        // 5
+console.log(calc.add(2, 3, 4));    // 9
+console.log(calc.addTwo(2, 3));    // 5
+console.log(calc.addThree(2, 3, 4)); // 9
+console.log(calc.addMany(1, 2, 3, 4, 5)); // 15
+```
+
+#### 3. **Interface-like Polymorphism**
+```javascript
+// Define "interfaces" through common method names
+class Database {
+    connect() {
+        throw new Error("connect method must be implemented");
+    }
+    
+    query(sql) {
+        throw new Error("query method must be implemented");
+    }
+    
+    disconnect() {
+        throw new Error("disconnect method must be implemented");
+    }
+}
+
+class MySQLDatabase extends Database {
+    connect() {
+        return "Connected to MySQL database";
+    }
+    
+    query(sql) {
+        return `Executing MySQL query: ${sql}`;
+    }
+    
+    disconnect() {
+        return "Disconnected from MySQL database";
+    }
+}
+
+class PostgreSQLDatabase extends Database {
+    connect() {
+        return "Connected to PostgreSQL database";
+    }
+    
+    query(sql) {
+        return `Executing PostgreSQL query: ${sql}`;
+    }
+    
+    disconnect() {
+        return "Disconnected from PostgreSQL database";
+    }
+}
+
+class MongoDBDatabase extends Database {
+    connect() {
+        return "Connected to MongoDB database";
+    }
+    
+    query(query) {
+        return `Executing MongoDB query: ${JSON.stringify(query)}`;
+    }
+    
+    disconnect() {
+        return "Disconnected from MongoDB database";
+    }
+}
+
+// Polymorphic database operations
+function executeDatabaseOperation(database, operation) {
+    try {
+        console.log(database.connect());
+        const result = database.query(operation);
+        console.log(result);
+        console.log(database.disconnect());
+        return result;
+    } catch (error) {
+        console.error("Database operation failed:", error.message);
+        throw error;
+    }
+}
+
+// Usage with different database types
+const mysql = new MySQLDatabase();
+const postgres = new PostgreSQLDatabase();
+const mongo = new MongoDBDatabase();
+
+executeDatabaseOperation(mysql, "SELECT * FROM users");
+executeDatabaseOperation(postgres, "SELECT * FROM customers");
+executeDatabaseOperation(mongo, { collection: "products", find: { category: "electronics" } });
+```
+
+---
+
+## 🎨 Abstraction
+
+**Abstraction** is the process of hiding complex implementation details and showing only the necessary features of an object.
+
+### Implementing Abstraction:
+
+#### 1. **Abstract Base Classes**
+```javascript
+class Shape {
+    constructor(color) {
+        if (this.constructor === Shape) {
+            throw new Error("Shape is an abstract class and cannot be instantiated");
+        }
+        this.color = color;
+    }
+    
+    // Abstract methods (must be implemented by subclasses)
+    calculateArea() {
+        throw new Error("calculateArea method must be implemented");
+    }
+    
+    calculatePerimeter() {
+        throw new Error("calculatePerimeter method must be implemented");
+    }
+    
+    getInfo() {
+        return {
+            type: this.constructor.name,
+            color: this.color,
+            area: this.calculateArea(),
+            perimeter: this.calculatePerimeter()
+        };
+    }
+}
+
+class Circle extends Shape {
+    constructor(radius, color) {
+        super(color);
+        this.radius = radius;
+    }
+    
+    calculateArea() {
+        return Math.PI * this.radius ** 2;
+    }
+    
+    calculatePerimeter() {
+        return 2 * Math.PI * this.radius;
+    }
+}
+
+class Rectangle extends Shape {
+    constructor(width, height, color) {
+        super(color);
+        this.width = width;
+        this.height = height;
+    }
+    
+    calculateArea() {
+        return this.width * this.height;
+    }
+    
+    calculatePerimeter() {
+        return 2 * (this.width + this.height);
+    }
+}
+
+// Usage
+try {
+    // const shape = new Shape("red"); // Error: Shape is abstract
+    
+    const circle = new Circle(5, "blue");
+    const rectangle = new Rectangle(4, 6, "green");
+    
+    console.log(circle.getInfo());
+    console.log(rectangle.getInfo());
+    
+} catch (error) {
+    console.error("Error:", error.message);
+}
+```
+
+#### 2. **Complex System Abstraction**
+```javascript
+class PaymentProcessor {
+    constructor() {
+        this.paymentMethods = new Map();
+        this.transactions = [];
+    }
+    
+    // Abstract payment processing
+    processPayment(amount, paymentMethod, userData) {
+        try {
+            // Validate payment
+            this.validatePayment(amount, paymentMethod, userData);
+            
+            // Process payment
+            const result = this.executePayment(amount, paymentMethod, userData);
+            
+            // Record transaction
+            this.recordTransaction(result);
+            
+            return result;
+            
+        } catch (error) {
+            this.handlePaymentError(error);
+            throw error;
+        }
+    }
+    
+    // Private methods (implementation details hidden)
+    validatePayment(amount, paymentMethod, userData) {
+        if (amount <= 0) {
+            throw new Error("Invalid amount");
+        }
+        
+        if (!this.paymentMethods.has(paymentMethod)) {
+            throw new Error("Unsupported payment method");
+        }
+        
+        if (!userData || !userData.userId) {
+            throw new Error("Invalid user data");
+        }
+    }
+    
+    executePayment(amount, paymentMethod, userData) {
+        const processor = this.paymentMethods.get(paymentMethod);
+        return processor.process(amount, userData);
+    }
+    
+    recordTransaction(result) {
+        this.transactions.push({
+            id: Date.now(),
+            timestamp: new Date(),
+            ...result
+        });
+    }
+    
+    handlePaymentError(error) {
+        console.error("Payment processing error:", error.message);
+        // Could send to monitoring service, log to database, etc.
+    }
+    
+    // Public interface for adding payment methods
+    addPaymentMethod(name, processor) {
+        this.paymentMethods.set(name, processor);
+    }
+    
+    // Public interface for getting transaction history
+    getTransactionHistory() {
+        return [...this.transactions];
+    }
+}
+
+// Payment method implementations (hidden complexity)
+class CreditCardProcessor {
+    process(amount, userData) {
+        // Simulate credit card processing
+        const transactionId = `CC_${Date.now()}`;
+        const fee = amount * 0.029 + 0.30; // 2.9% + $0.30
+        
+        return {
+            success: true,
+            transactionId,
+            amount,
+            fee,
+            netAmount: amount - fee,
+            method: 'credit_card',
+            timestamp: new Date()
+        };
+    }
+}
+
+class PayPalProcessor {
+    process(amount, userData) {
+        // Simulate PayPal processing
+        const transactionId = `PP_${Date.now()}`;
+        const fee = amount * 0.0249 + 0.49; // 2.49% + $0.49
+        
+        return {
+            success: true,
+            transactionId,
+            amount,
+            fee,
+            netAmount: amount - fee,
+            method: 'paypal',
+            timestamp: new Date()
+        };
+    }
+}
+
+// Usage
+const paymentProcessor = new PaymentProcessor();
+
+// Add payment methods
+paymentProcessor.addPaymentMethod('credit_card', new CreditCardProcessor());
+paymentProcessor.addPaymentMethod('paypal', new PayPalProcessor());
+
+// Process payments (complexity hidden from user)
+try {
+    const result1 = paymentProcessor.processPayment(100, 'credit_card', { userId: 'user123' });
+    console.log('Credit card payment:', result1);
+    
+    const result2 = paymentProcessor.processPayment(50, 'paypal', { userId: 'user456' });
+    console.log('PayPal payment:', result2);
+    
+    console.log('Transaction history:', paymentProcessor.getTransactionHistory());
+    
+} catch (error) {
+    console.error('Payment failed:', error.message);
+}
+```
+
+---
+
+## 🎨 Design Patterns
+
+**Design Patterns** are proven solutions to common problems in software design. They provide templates for solving recurring design problems and promote code reusability and maintainability.
+
+### Common Design Patterns in JavaScript:
+
+#### 1. **Singleton Pattern**
+```javascript
+class DatabaseConnection {
+    constructor() {
+        if (DatabaseConnection.instance) {
+            return DatabaseConnection.instance;
+        }
+        
+        this.connectionId = Date.now();
+        this.isConnected = false;
+        DatabaseConnection.instance = this;
+    }
+    
+    connect() {
+        if (!this.isConnected) {
+            this.isConnected = true;
+            return `Connected to database with ID: ${this.connectionId}`;
+        }
+        return `Already connected to database with ID: ${this.connectionId}`;
+    }
+    
+    disconnect() {
+        if (this.isConnected) {
+            this.isConnected = false;
+            return `Disconnected from database with ID: ${this.connectionId}`;
+        }
+        return `Already disconnected from database with ID: ${this.connectionId}`;
+    }
+    
+    query(sql) {
+        if (!this.isConnected) {
+            throw new Error("Not connected to database");
+        }
+        return `Executing query: ${sql}`;
+    }
+}
+
+// Usage
+const db1 = new DatabaseConnection();
+const db2 = new DatabaseConnection();
+
+console.log(db1 === db2);           // true (same instance)
+console.log(db1.connect());         // "Connected to database with ID: 1234567890"
+console.log(db2.connect());         // "Already connected to database with ID: 1234567890"
+console.log(db1.query("SELECT * FROM users")); // "Executing query: SELECT * FROM users"
+```
+
+#### 2. **Factory Pattern**
+```javascript
+class User {
+    constructor(name, email, role) {
+        this.name = name;
+        this.email = email;
+        this.role = role;
+        this.createdAt = new Date();
+    }
+    
+    getInfo() {
+        return {
+            name: this.name,
+            email: this.email,
+            role: this.role,
+            createdAt: this.createdAt
+        };
+    }
+}
+
+class UserFactory {
+    static createAdmin(name, email) {
+        return new User(name, email, 'admin');
+    }
+    
+    static createUser(name, email) {
+        return new User(name, email, 'user');
+    }
+    
+    static createModerator(name, email) {
+        return new User(name, email, 'moderator');
+    }
+    
+    static createUserByRole(name, email, role) {
+        const validRoles = ['admin', 'user', 'moderator', 'guest'];
+        
+        if (!validRoles.includes(role)) {
+            throw new Error(`Invalid role: ${role}`);
+        }
+        
+        return new User(name, email, role);
+    }
+}
+
+// Usage
+const admin = UserFactory.createAdmin("John Admin", "admin@example.com");
+const user = UserFactory.createUser("Jane User", "user@example.com");
+const moderator = UserFactory.createModerator("Bob Mod", "mod@example.com");
+
+console.log(admin.getInfo());   // { name: "John Admin", role: "admin", ... }
+console.log(user.getInfo());    // { name: "Jane User", role: "user", ... }
+console.log(moderator.getInfo()); // { name: "Bob Mod", role: "moderator", ... }
+
+try {
+    const invalidUser = UserFactory.createUserByRole("Invalid", "invalid@example.com", "superuser");
+} catch (error) {
+    console.error("Error:", error.message); // "Invalid role: superuser"
+}
+```
+
+#### 3. **Observer Pattern**
+```javascript
+class EventEmitter {
+    constructor() {
+        this.events = {};
+    }
+    
+    on(event, callback) {
+        if (!this.events[event]) {
+            this.events[event] = [];
+        }
+        this.events[event].push(callback);
+    }
+    
+    off(event, callback) {
+        if (!this.events[event]) return;
+        
+        this.events[event] = this.events[event].filter(cb => cb !== callback);
+    }
+    
+    emit(event, data) {
+        if (!this.events[event]) return;
+        
+        this.events[event].forEach(callback => {
+            try {
+                callback(data);
+            } catch (error) {
+                console.error(`Error in event ${event} callback:`, error);
+            }
+        });
+    }
+    
+    once(event, callback) {
+        const onceCallback = (data) => {
+            callback(data);
+            this.off(event, onceCallback);
+        };
+        this.on(event, onceCallback);
+    }
+}
+
+// Usage
+class Newsletter extends EventEmitter {
+    constructor() {
+        super();
+        this.subscribers = [];
+    }
+    
+    subscribe(email) {
+        this.subscribers.push(email);
+        this.emit('subscribed', { email, totalSubscribers: this.subscribers.length });
+    }
+    
+    unsubscribe(email) {
+        const index = this.subscribers.indexOf(email);
+        if (index > -1) {
+            this.subscribers.splice(index, 1);
+            this.emit('unsubscribed', { email, totalSubscribers: this.subscribers.length });
+        }
+    }
+    
+    sendNewsletter(content) {
+        this.emit('sending', { content, subscribers: this.subscribers.length });
+        
+        this.subscribers.forEach(email => {
+            this.emit('sent', { email, content });
+        });
+        
+        this.emit('completed', { totalSent: this.subscribers.length });
+    }
+}
+
+const newsletter = new Newsletter();
+
+// Subscribe to events
+newsletter.on('subscribed', (data) => {
+    console.log(`New subscriber: ${data.email}. Total: ${data.totalSubscribers}`);
+});
+
+newsletter.on('unsubscribed', (data) => {
+    console.log(`Unsubscribed: ${data.email}. Total: ${data.totalSubscribers}`);
+});
+
+newsletter.once('sending', (data) => {
+    console.log(`Starting to send newsletter to ${data.subscribers} subscribers`);
+});
+
+newsletter.on('sent', (data) => {
+    console.log(`Newsletter sent to ${data.email}`);
+});
+
+newsletter.on('completed', (data) => {
+    console.log(`Newsletter campaign completed. Total sent: ${data.totalSent}`);
+});
+
+// Use the newsletter
+newsletter.subscribe("user1@example.com");
+newsletter.subscribe("user2@example.com");
+newsletter.subscribe("user3@example.com");
+
+newsletter.sendNewsletter("Welcome to our newsletter!");
+newsletter.unsubscribe("user2@example.com");
+```
+
+#### 4. **Module Pattern**
+```javascript
+const ShoppingCart = (function() {
+    // Private variables
+    let items = [];
+    let total = 0;
+    
+    // Private helper functions
+    function calculateTotal() {
+        total = items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        return total;
+    }
+    
+    function validateItem(item) {
+        if (!item.name || !item.price || !item.quantity) {
+            throw new Error("Item must have name, price, and quantity");
+        }
+        
+        if (item.price < 0 || item.quantity < 1) {
+            throw new Error("Price must be positive and quantity must be at least 1");
+        }
+    }
+    
+    // Public interface
+    return {
+        addItem(item) {
+            validateItem(item);
+            
+            const existingItem = items.find(i => i.name === item.name);
+            if (existingItem) {
+                existingItem.quantity += item.quantity;
+            } else {
+                items.push({ ...item });
+            }
+            
+            calculateTotal();
+            return `Added ${item.quantity} ${item.name}(s) to cart`;
+        },
+        
+        removeItem(itemName) {
+            const index = items.findIndex(item => item.name === itemName);
+            if (index > -1) {
+                const removedItem = items.splice(index, 1)[0];
+                calculateTotal();
+                return `Removed ${removedItem.name} from cart`;
+            }
+            throw new Error(`Item ${itemName} not found in cart`);
+        },
+        
+        updateQuantity(itemName, newQuantity) {
+            if (newQuantity < 1) {
+                throw new Error("Quantity must be at least 1");
+            }
+            
+            const item = items.find(i => i.name === itemName);
+            if (item) {
+                item.quantity = newQuantity;
+                calculateTotal();
+                return `Updated ${itemName} quantity to ${newQuantity}`;
+            }
+            throw new Error(`Item ${itemName} not found in cart`);
+        },
+        
+        getItems() {
+            return [...items]; // Return copy
+        },
+        
+        getTotal() {
+            return total;
+        },
+        
+        clear() {
+            items = [];
+            total = 0;
+            return "Cart cleared";
+        },
+        
+        getItemCount() {
+            return items.reduce((count, item) => count + item.quantity, 0);
+        }
+    };
+})();
+
+// Usage
+try {
+    console.log(ShoppingCart.addItem({ name: "Laptop", price: 999, quantity: 1 }));
+    console.log(ShoppingCart.addItem({ name: "Mouse", price: 25, quantity: 2 }));
+    console.log(ShoppingCart.addItem({ name: "Laptop", price: 999, quantity: 1 }));
+    
+    console.log("Items:", ShoppingCart.getItems());
+    console.log("Total:", ShoppingCart.getTotal());
+    console.log("Item count:", ShoppingCart.getItemCount());
+    
+    console.log(ShoppingCart.updateQuantity("Mouse", 3));
+    console.log("Updated total:", ShoppingCart.getTotal());
+    
+    console.log(ShoppingCart.removeItem("Mouse"));
+    console.log("Final total:", ShoppingCart.getTotal());
+    
+} catch (error) {
+    console.error("Error:", error.message);
+}
+```
+
+#### 5. **Strategy Pattern**
+```javascript
+// Strategy interfaces
+class PaymentStrategy {
+    process(amount) {
+        throw new Error("process method must be implemented");
+    }
+}
+
+// Concrete strategies
+class CreditCardStrategy extends PaymentStrategy {
+    constructor(cardNumber, cvv, expiryDate) {
+        super();
+        this.cardNumber = cardNumber;
+        this.cvv = cvv;
+        this.expiryDate = expiryDate;
+    }
+    
+    process(amount) {
+        // Simulate credit card processing
+        const transactionId = `CC_${Date.now()}`;
+        const fee = amount * 0.029 + 0.30;
+        
+        return {
+            success: true,
+            method: 'Credit Card',
+            amount,
+            fee,
+            netAmount: amount - fee,
+            transactionId
+        };
+    }
+}
+
+class PayPalStrategy extends PaymentStrategy {
+    constructor(email, password) {
+        super();
+        this.email = email;
+        this.password = password;
+    }
+    
+    process(amount) {
+        // Simulate PayPal processing
+        const transactionId = `PP_${Date.now()}`;
+        const fee = amount * 0.0249 + 0.49;
+        
+        return {
+            success: true,
+            method: 'PayPal',
+            amount,
+            fee,
+            netAmount: amount - fee,
+            transactionId
+        };
+    }
+}
+
+class CryptoStrategy extends PaymentStrategy {
+    constructor(walletAddress) {
+        super();
+        this.walletAddress = walletAddress;
+    }
+    
+    process(amount) {
+        // Simulate crypto processing
+        const transactionId = `CRYPTO_${Date.now()}`;
+        const fee = amount * 0.01; // 1% fee
+        
+        return {
+            success: true,
+            method: 'Cryptocurrency',
+            amount,
+            fee,
+            netAmount: amount - fee,
+            transactionId
+        };
+    }
+}
+
+// Context class
+class PaymentProcessor {
+    constructor() {
+        this.strategy = null;
+    }
+    
+    setStrategy(strategy) {
+        this.strategy = strategy;
+    }
+    
+    processPayment(amount) {
+        if (!this.strategy) {
+            throw new Error("Payment strategy not set");
+        }
+        
+        return this.strategy.process(amount);
+    }
+}
+
+// Usage
+const paymentProcessor = new PaymentProcessor();
+
+// Process with different strategies
+const creditCard = new CreditCardStrategy("1234-5678-9012-3456", "123", "12/25");
+const paypal = new PayPalStrategy("user@example.com", "password123");
+const crypto = new CryptoStrategy("0x742d35Cc6634C0532925a3b8D4C9db96C4b4d8b6");
+
+const amount = 100;
+
+// Credit card payment
+paymentProcessor.setStrategy(creditCard);
+console.log("Credit card payment:", paymentProcessor.processPayment(amount));
+
+// PayPal payment
+paymentProcessor.setStrategy(paypal);
+console.log("PayPal payment:", paymentProcessor.processPayment(amount));
+
+// Crypto payment
+paymentProcessor.setStrategy(crypto);
+console.log("Crypto payment:", paymentProcessor.processPayment(amount));
+```
+
+---
+
+## 💻 Detailed Examples
+
+### Example 1: Building a Complete OOP System
+<div style="position: relative;">
+<button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
+
+```javascript
+console.log("=== BUILDING A COMPLETE OOP SYSTEM ===");
+
+// Abstract base class for all employees
+class Employee {
+    constructor(name, id, baseSalary) {
+        if (this.constructor === Employee) {
+            throw new Error("Employee is an abstract class");
+        }
+        
+        this.name = name;
+        this.id = id;
+        this.baseSalary = baseSalary;
+        this.hireDate = new Date();
+    }
+    
+    calculateSalary() {
+        throw new Error("calculateSalary method must be implemented");
+    }
+    
+    getInfo() {
+        return {
+            name: this.name,
+            id: this.id,
+            baseSalary: this.baseSalary,
+            hireDate: this.hireDate,
+            type: this.constructor.name
+        };
+    }
+}
+
+// Concrete employee classes
+class FullTimeEmployee extends Employee {
+    constructor(name, id, baseSalary, benefits = []) {
+        super(name, id, baseSalary);
+        this.benefits = benefits;
+        this.workHours = 40;
+    }
+    
+    calculateSalary() {
+        const benefitsValue = this.benefits.reduce((total, benefit) => total + benefit.value, 0);
+        return this.baseSalary + benefitsValue;
+    }
+    
+    addBenefit(benefit) {
+        this.benefits.push(benefit);
+        return `Added benefit: ${benefit.name}`;
+    }
+    
+    getBenefits() {
+        return this.benefits.map(b => `${b.name}: $${b.value}`);
+    }
+}
+
+class PartTimeEmployee extends Employee {
+    constructor(name, id, hourlyRate, hoursWorked) {
+        super(name, id, 0); // No base salary for part-time
+        this.hourlyRate = hourlyRate;
+        this.hoursWorked = hoursWorked;
+    }
+    
+    calculateSalary() {
+        return this.hourlyRate * this.hoursWorked;
+    }
+    
+    addHours(hours) {
+        if (hours > 0) {
+            this.hoursWorked += hours;
+            return `Added ${hours} hours. Total: ${this.hoursWorked}`;
+        }
+        throw new Error("Hours must be positive");
+    }
+    
+    getInfo() {
+        return {
+            ...super.getInfo(),
+            hourlyRate: this.hourlyRate,
+            hoursWorked: this.hoursWorked
+        };
+    }
+}
+
+class Manager extends FullTimeEmployee {
+    constructor(name, id, baseSalary, department, teamSize = 0) {
+        super(name, id, baseSalary);
+        this.department = department;
+        this.teamSize = teamSize;
+        this.team = [];
+    }
+    
+    addTeamMember(employee) {
+        if (employee instanceof Employee) {
+            this.team.push(employee);
+            this.teamSize = this.team.length;
+            return `Added ${employee.name} to ${this.department} team`;
+        }
+        throw new Error("Can only add Employee instances to team");
+    }
+    
+    removeTeamMember(employeeId) {
+        const index = this.team.findIndex(emp => emp.id === employeeId);
+        if (index > -1) {
+            const removed = this.team.splice(index, 1)[0];
+            this.teamSize = this.team.length;
+            return `Removed ${removed.name} from team`;
+        }
+        throw new Error("Employee not found in team");
+    }
+    
+    getTeamInfo() {
+        return this.team.map(emp => ({
+            name: emp.name,
+            id: emp.id,
+            type: emp.constructor.name,
+            salary: emp.calculateSalary()
+        }));
+    }
+    
+    calculateSalary() {
+        const baseSalary = super.calculateSalary();
+        const managementBonus = this.teamSize * 100; // $100 per team member
+        return baseSalary + managementBonus;
+    }
+}
+
+// Department class
+class Department {
+    constructor(name, manager) {
+        this.name = name;
+        this.manager = manager;
+        this.employees = [];
+        this.budget = 0;
+    }
+    
+    addEmployee(employee) {
+        if (employee instanceof Employee) {
+            this.employees.push(employee);
+            return `Added ${employee.name} to ${this.name} department`;
+        }
+        throw new Error("Can only add Employee instances");
+    }
+    
+    removeEmployee(employeeId) {
+        const index = this.employees.findIndex(emp => emp.id === employeeId);
+        if (index > -1) {
+            const removed = this.employees.splice(index, 1)[0];
+            return `Removed ${removed.name} from ${this.name} department`;
+        }
+        throw new Error("Employee not found in department");
+    }
+    
+    calculateTotalSalary() {
+        return this.employees.reduce((total, emp) => total + emp.calculateSalary(), 0);
+    }
+    
+    getEmployeeCount() {
+        return this.employees.length;
+    }
+    
+    getInfo() {
+        return {
+            name: this.name,
+            manager: this.manager.name,
+            employeeCount: this.getEmployeeCount(),
+            totalSalary: this.calculateTotalSalary(),
+            employees: this.employees.map(emp => emp.getInfo())
+        };
+    }
+}
+
+// Company class
+class Company {
+    constructor(name) {
+        this.name = name;
+        this.departments = new Map();
+        this.employees = new Map();
+        this.nextEmployeeId = 1001;
+    }
+    
+    addDepartment(department) {
+        if (department instanceof Department) {
+            this.departments.set(department.name, department);
+            return `Added ${department.name} department`;
+        }
+        throw new Error("Can only add Department instances");
+    }
+    
+    addEmployee(employee, departmentName) {
+        if (!this.departments.has(departmentName)) {
+            throw new Error(`Department ${departmentName} not found`);
+        }
+        
+        const department = this.departments.get(departmentName);
+        department.addEmployee(employee);
+        this.employees.set(employee.id, employee);
+        
+        return `Added ${employee.name} to ${departmentName} department`;
+    }
+    
+    getEmployee(employeeId) {
+        return this.employees.get(employeeId);
+    }
+    
+    getDepartment(departmentName) {
+        return this.departments.get(departmentName);
+    }
+    
+    calculateTotalPayroll() {
+        let total = 0;
+        for (const department of this.departments.values()) {
+            total += department.calculateTotalSalary();
+        }
+        return total;
+    }
+    
+    getCompanyInfo() {
+        return {
+            name: this.name,
+            departments: Array.from(this.departments.keys()),
+            totalEmployees: this.employees.size,
+            totalPayroll: this.calculateTotalPayroll(),
+            departmentDetails: Array.from(this.departments.values()).map(dept => dept.getInfo())
+        };
+    }
+}
+
+// Usage example
+console.log("=== CREATING COMPANY STRUCTURE ===");
+
+const company = new Company("TechCorp");
+
+// Create departments
+const engineeringDept = new Department("Engineering", null);
+const salesDept = new Department("Sales", null);
+
+// Create employees
+const manager = new Manager("John Manager", 1001, 80000, "Engineering");
+const developer1 = new FullTimeEmployee("Alice Dev", 1002, 70000, [
+    { name: "Health Insurance", value: 5000 },
+    { name: "401k Match", value: 3500 }
+]);
+const developer2 = new PartTimeEmployee("Bob Dev", 1003, 45, 20);
+const salesRep = new FullTimeEmployee("Carol Sales", 1004, 60000, [
+    { name: "Commission", value: 10000 }
+]);
+
+// Set up structure
+company.addDepartment(engineeringDept);
+company.addDepartment(salesDept);
+
+engineeringDept.manager = manager;
+salesDept.manager = new Manager("Dave Sales", 1005, 75000, "Sales");
+
+// Add employees
+company.addEmployee(manager, "Engineering");
+company.addEmployee(developer1, "Engineering");
+company.addEmployee(developer2, "Engineering");
+company.addEmployee(salesRep, "Sales");
+
+// Add team members
+manager.addTeamMember(developer1);
+manager.addTeamMember(developer2);
+
+console.log("=== COMPANY INFORMATION ===");
+console.log(company.getCompanyInfo());
+
+console.log("\n=== ENGINEERING DEPARTMENT ===");
+console.log(engineeringDept.getInfo());
+
+console.log("\n=== MANAGER TEAM INFO ===");
+console.log(manager.getTeamInfo());
+
+console.log("\n=== INDIVIDUAL EMPLOYEE SALARIES ===");
+console.log(`${manager.name}: $${manager.calculateSalary()}`);
+console.log(`${developer1.name}: $${developer1.calculateSalary()}`);
+console.log(`${developer2.name}: $${developer2.calculateSalary()}`);
+console.log(`${salesRep.name}: $${salesRep.calculateSalary()}`);
+
+console.log("\n=== TOTAL COMPANY PAYROLL ===");
+console.log(`Total: $${company.calculateTotalPayroll()}`);
+```
+
+### Example 2: Advanced OOP with Mixins and Composition
+<div style="position: relative;">
+<button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
+
+```javascript
+console.log("=== ADVANCED OOP WITH MIXINS AND COMPOSITION ===");
+
+// Mixin for logging functionality
+const LoggableMixin = (superclass) => class extends superclass {
+    log(message) {
+        const timestamp = new Date().toISOString();
+        console.log(`[${timestamp}] ${this.constructor.name}: ${message}`);
+    }
+    
+    logError(error) {
+        this.log(`ERROR: ${error.message}`);
+    }
+    
+    logInfo(info) {
+        this.log(`INFO: ${info}`);
+    }
+};
+
+// Mixin for validation functionality
+const ValidatableMixin = (superclass) => class extends superclass {
+    validate(rule, value) {
+        if (typeof rule === 'function') {
+            return rule(value);
+        }
+        return true;
+    }
+    
+    validateAll(rules) {
+        const errors = [];
+        
+        for (const [field, rule] of Object.entries(rules)) {
+            if (!this.validate(rule, this[field])) {
+                errors.push(`Validation failed for ${field}`);
+            }
+        }
+        
+        return {
+            isValid: errors.length === 0,
+            errors
+        };
+    }
+};
+
+// Mixin for serialization
+const SerializableMixin = (superclass) => class extends superclass {
+    toJSON() {
+        const json = {};
+        for (const key in this) {
+            if (this.hasOwnProperty(key) && !key.startsWith('_')) {
+                json[key] = this[key];
+            }
+        }
+        return json;
+    }
+    
+    fromJSON(json) {
+        for (const key in json) {
+            if (this.hasOwnProperty(key)) {
+                this[key] = json[key];
+            }
+        }
+        return this;
+    }
+    
+    clone() {
+        const cloned = new this.constructor();
+        return cloned.fromJSON(this.toJSON());
+    }
+};
+
+// Base class with mixins
+class User extends LoggableMixin(ValidatableMixin(SerializableMixin(class {}))) {
+    constructor(name, email, age) {
+        super();
+        this.name = name;
+        this.email = email;
+        this.age = age;
+        this.createdAt = new Date();
+        
+        this.logInfo(`User ${name} created`);
+    }
+    
+    // Validation rules
+    static validationRules = {
+        name: (value) => value && value.length >= 2,
+        email: (value) => value && value.includes('@'),
+        age: (value) => value && value >= 13 && value <= 120
+    };
+    
+    validateUser() {
+        return this.validateAll(User.validationRules);
+    }
+    
+    updateProfile(updates) {
+        this.logInfo(`Updating profile for ${this.name}`);
+        
+        // Validate updates
+        const tempUser = this.clone();
+        Object.assign(tempUser, updates);
+        
+        const validation = tempUser.validateUser();
+        if (!validation.isValid) {
+            this.logError(new Error(`Validation failed: ${validation.errors.join(', ')}`));
+            throw new Error(`Validation failed: ${validation.errors.join(', ')}`);
+        }
+        
+        // Apply updates
+        Object.assign(this, updates);
+        this.logInfo(`Profile updated successfully`);
+        
+        return this;
+    }
+}
+
+// Advanced composition example
+class Permission {
+    constructor(name, description, level = 1) {
+        this.name = name;
+        this.description = description;
+        this.level = level;
+    }
+    
+    canAccess(userLevel) {
+        return userLevel >= this.level;
+    }
+}
+
+class Role {
+    constructor(name, permissions = []) {
+        this.name = name;
+        this.permissions = new Set(permissions);
+    }
+    
+    addPermission(permission) {
+        this.permissions.add(permission);
+    }
+    
+    removePermission(permission) {
+        this.permissions.delete(permission);
+    }
+    
+    hasPermission(permissionName) {
+        return Array.from(this.permissions).some(p => p.name === permissionName);
+    }
+    
+    getPermissions() {
+        return Array.from(this.permissions);
+    }
+}
+
+class AuthenticatedUser extends User {
+    constructor(name, email, age, password) {
+        super(name, email, age);
+        this.password = this.hashPassword(password);
+        this.roles = new Set();
+        this.isActive = true;
+        this.lastLogin = null;
+    }
+    
+    hashPassword(password) {
+        // Simple hash for demonstration
+        return btoa(password + 'salt');
+    }
+    
+    verifyPassword(password) {
+        return this.hashPassword(password) === this.password;
+    }
+    
+    addRole(role) {
+        if (role instanceof Role) {
+            this.roles.add(role);
+            this.logInfo(`Role ${role.name} added to ${this.name}`);
+        }
+    }
+    
+    removeRole(roleName) {
+        const roleToRemove = Array.from(this.roles).find(r => r.name === roleName);
+        if (roleToRemove) {
+            this.roles.delete(roleToRemove);
+            this.logInfo(`Role ${roleName} removed from ${this.name}`);
+        }
+    }
+    
+    hasPermission(permissionName) {
+        return Array.from(this.roles).some(role => role.hasPermission(permissionName));
+    }
+    
+    login(password) {
+        if (this.verifyPassword(password)) {
+            this.lastLogin = new Date();
+            this.logInfo(`User ${this.name} logged in successfully`);
+            return true;
+        } else {
+            this.logError(new Error(`Failed login attempt for ${this.name}`));
+            return false;
+        }
+    }
+    
+    logout() {
+        this.logInfo(`User ${this.name} logged out`);
+        return true;
+    }
+    
+    getInfo() {
+        return {
+            ...super.toJSON(),
+            roles: Array.from(this.roles).map(r => r.name),
+            permissions: Array.from(this.roles).flatMap(r => r.getPermissions().map(p => p.name)),
+            lastLogin: this.lastLogin,
+            isActive: this.isActive
+        };
+    }
+}
+
+// Usage
+console.log("=== CREATING USERS AND ROLES ===");
+
+// Create permissions
+const readPermission = new Permission("read", "Can read content", 1);
+const writePermission = new Permission("write", "Can write content", 2);
+const adminPermission = new Permission("admin", "Full administrative access", 5);
+
+// Create roles
+const userRole = new Role("user", [readPermission]);
+const editorRole = new Role("editor", [readPermission, writePermission]);
+const adminRole = new Role("admin", [readPermission, writePermission, adminPermission]);
+
+// Create users
+const regularUser = new AuthenticatedUser("John Doe", "john@example.com", 25, "password123");
+const editorUser = new AuthenticatedUser("Jane Editor", "jane@example.com", 30, "editorpass");
+const adminUser = new AuthenticatedUser("Admin User", "admin@example.com", 35, "adminpass");
+
+// Assign roles
+regularUser.addRole(userRole);
+editorUser.addRole(editorRole);
+adminUser.addRole(adminRole);
+
+console.log("=== USER VALIDATION ===");
+console.log("Regular user validation:", regularUser.validateUser());
+
+console.log("\n=== USER PERMISSIONS ===");
+console.log(`${regularUser.name} can read:`, regularUser.hasPermission("read"));
+console.log(`${regularUser.name} can write:`, regularUser.hasPermission("write"));
+console.log(`${editorUser.name} can write:`, editorUser.hasPermission("write"));
+console.log(`${adminUser.name} can admin:`, adminUser.hasPermission("admin"));
+
+console.log("\n=== USER LOGIN SIMULATION ===");
+regularUser.login("password123");
+regularUser.login("wrongpassword");
+
+console.log("\n=== USER INFORMATION ===");
+console.log("Regular user:", regularUser.getInfo());
+
+console.log("\n=== CLONING USER ===");
+const clonedUser = regularUser.clone();
+clonedUser.name = "Cloned User";
+console.log("Original:", regularUser.name);
+console.log("Cloned:", clonedUser.name);
+
+console.log("\n=== JSON SERIALIZATION ===");
+const userJSON = regularUser.toJSON();
+console.log("User as JSON:", userJSON);
+```
+
+---
+
+## ⚠️ Common Pitfalls
+
+### Pitfall 1: Forgetting `new` Keyword
+```javascript
+// ❌ WRONG: Missing 'new' keyword
+function Person(name) {
+    this.name = name;
+}
+
+const person = Person("John"); // TypeError: Cannot set property 'name' of undefined
+
+// ✅ CORRECT: Use 'new' keyword
+const person = new Person("John");
+```
+
+### Pitfall 2: Not Calling `super()` in Child Classes
+```javascript
+// ❌ WRONG: Missing super() call
+class Dog extends Animal {
+    constructor(name, breed) {
+        // super(name); // Missing!
+        this.breed = breed; // ReferenceError: Must call super constructor
+    }
+}
+
+// ✅ CORRECT: Call super() first
+class Dog extends Animal {
+    constructor(name, breed) {
+        super(name);
+        this.breed = breed;
+    }
+}
+```
+
+### Pitfall 3: Modifying Prototypes After Creating Instances
+```javascript
+// ❌ WRONG: Modifying prototype after instances exist
+const person1 = new Person("John");
+Person.prototype.greet = function() { return "Hello!"; };
+const person2 = new Person("Jane");
+
+console.log(person1.greet()); // "Hello!" (unexpected behavior)
+console.log(person2.greet()); // "Hello!"
+```
+
+### Pitfall 4: Not Handling `this` Context
+```javascript
+// ❌ WRONG: Losing 'this' context
+class Button {
+    constructor(text) {
+        this.text = text;
+        this.element = document.createElement('button');
+        this.element.addEventListener('click', this.handleClick);
+    }
+    
+    handleClick() {
+        console.log(this.text); // undefined (this refers to DOM element)
+    }
+}
+
+// ✅ CORRECT: Bind 'this' or use arrow function
+class Button {
+    constructor(text) {
+        this.text = text;
+        this.element = document.createElement('button');
+        this.element.addEventListener('click', this.handleClick.bind(this));
+        // OR: this.element.addEventListener('click', () => this.handleClick());
+    }
+    
+    handleClick() {
+        console.log(this.text); // Works correctly
+    }
+}
+```
+
+---
+
+## 🎯 Best Practices
+
+### ✅ Do's:
+- **Use meaningful names** for classes, methods, and properties
+- **Follow single responsibility principle** - one class, one purpose
+- **Use composition over inheritance** when possible
+- **Make properties private** when they shouldn't be accessed externally
+- **Validate input** in constructors and methods
+- **Use TypeScript** for better type safety in large projects
+
+### ❌ Don'ts:
+- **Don't create deep inheritance hierarchies** (more than 2-3 levels)
+- **Don't expose internal state** unnecessarily
+- **Don't forget error handling** in critical methods
+- **Don't use classes for everything** - sometimes functions are better
+- **Don't ignore performance** implications of object creation
+
+---
+
+## 🔑 Key Points
+
+- **Object-Oriented Programming** organizes code into objects with data and behavior
+- **Classes** are templates for creating objects with shared properties and methods
+- **Inheritance** allows classes to inherit from other classes
+- **Encapsulation** bundles data and methods while controlling access
+- **Polymorphism** allows objects to take multiple forms
+- **Abstraction** hides complex implementation details
+- **Design Patterns** provide proven solutions to common problems
+- **Use composition over inheritance** for better flexibility
+
+---
+
+## ❓ Common Interview Questions
+
+<div class="interview-question">
+    <h4>Q1: What is the difference between classical inheritance and prototypal inheritance?</h4>
+    <button class="solution-toggle-btn" onclick="toggleSolution(this)">Show Solution</button>
+    <div class="solution">
+        <p><strong>A:</strong> Classical inheritance creates a copy of the parent class's methods and properties, while prototypal inheritance creates a link to the parent's prototype. In JavaScript, ES6 classes are syntactic sugar over prototypal inheritance. Classical inheritance is more rigid and can lead to the "diamond problem," while prototypal inheritance is more flexible and allows for dynamic property addition.</p>
+    </div>
+</div>
+
+<div class="interview-question">
+    <h4>Q2: How do you implement private methods and properties in JavaScript?</h4>
+    <button class="solution-toggle-btn" onclick="toggleSolution(this)">Show Solution</button>
+    <div class="solution">
+        <p><strong>A:</strong> Use private fields with # prefix (ES2022), closures, or naming conventions with underscore. Private fields are truly private and cannot be accessed outside the class. Closures create private variables by capturing them in function scope. Underscore prefix is a convention indicating "private" but doesn't prevent access.</p>
+    </div>
+</div>
+
+<div class="interview-question">
+    <h4>Q3: What is the difference between `Object.create()` and `new` keyword?</h4>
+    <button class="solution-toggle-btn" onclick="toggleSolution(this)">Show Solution</button>
+    <div class="solution">
+        <p><strong>A:</strong> `Object.create()` creates an object with a specified prototype without calling a constructor function. The `new` keyword calls a constructor function, creates a new object, sets the prototype, and executes the constructor. `Object.create()` is more direct for prototype-based inheritance, while `new` is better for class-like behavior.</p>
+    </div>
+</div>
+
+<div class="interview-question">
+    <h4>Q4: How do you prevent a class from being instantiated?</h4>
+    <button class="solution-toggle-btn" onclick="toggleSolution(this)">Show Solution</button>
+    <div class="solution">
+        <p><strong>A:</strong> Check if `this.constructor === ClassName` in the constructor and throw an error, or use abstract classes with abstract methods that must be implemented by subclasses. You can also use static methods only or make the constructor private in some environments.</p>
+    </div>
+</div>
+
+<div class="interview-question">
+    <h4>Q5: What are mixins and when would you use them?</h4>
+    <button class="solution-toggle-btn" onclick="toggleSolution(this)">Show Solution</button>
+    <div class="solution">
+        <p><strong>A:</strong> Mixins are functions that take a class and return a new class with additional functionality. They're useful for sharing behavior across unrelated classes without inheritance. Use mixins for cross-cutting concerns like logging, validation, or serialization that multiple classes need.</p>
+    </div>
+</div>
+
+---
+
+## 🏋️ Practice Exercises
+
+<div class="practice-exercise">
+    <h4>Exercise 1: Implement a Custom Event System</h4>
+    <p>Create a custom event system that allows objects to subscribe to and emit events. Include methods for adding/removing listeners, emitting events, and handling errors.</p>
+    <button class="solution-toggle-btn" onclick="toggleSolution(this)">Show Solution</button>
+    <div class="solution">
+        <div style="position: relative;">
+            <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+            <pre><code>class EventSystem {
+    constructor() {
+        this.events = new Map();
+        this.onceEvents = new Map();
+    }
+    
+    on(event, callback) {
+        if (!this.events.has(event)) {
+            this.events.set(event, []);
+        }
+        this.events.get(event).push(callback);
+    }
+    
+    once(event, callback) {
+        if (!this.onceEvents.has(event)) {
+            this.onceEvents.set(event, []);
+        }
+        this.onceEvents.get(event).push(callback);
+    }
+    
+    off(event, callback) {
+        if (this.events.has(event)) {
+            const callbacks = this.events.get(event);
+            const index = callbacks.indexOf(callback);
+            if (index > -1) {
+                callbacks.splice(index, 1);
+            }
+        }
+    }
+    
+    emit(event, data) {
+        // Emit regular events
+        if (this.events.has(event)) {
+            this.events.get(event).forEach(callback => {
+                try {
+                    callback(data);
+                } catch (error) {
+                    console.error(`Error in event ${event} callback:`, error);
+                }
+            });
+        }
+        
+        // Emit once events and remove them
+        if (this.onceEvents.has(event)) {
+            const callbacks = this.onceEvents.get(event);
+            callbacks.forEach(callback => {
+                try {
+                    callback(data);
+                } catch (error) {
+                    console.error(`Error in once event ${event} callback:`, error);
+                }
+            });
+            this.onceEvents.delete(event);
+        }
+    }
+    
+    removeAllListeners(event) {
+        if (event) {
+            this.events.delete(event);
+            this.onceEvents.delete(event);
+        } else {
+            this.events.clear();
+            this.onceEvents.clear();
+        }
+    }
+    
+    listenerCount(event) {
+        const regularCount = this.events.has(event) ? this.events.get(event).length : 0;
+        const onceCount = this.onceEvents.has(event) ? this.onceEvents.get(event).length : 0;
+        return regularCount + onceCount;
+    }
+}
+
+// Usage example
+const eventSystem = new EventSystem();
+
+const logCallback = (data) => console.log('Log event:', data);
+const errorCallback = (data) => console.error('Error event:', data);
+const onceCallback = (data) => console.log('Once event:', data);
+
+eventSystem.on('log', logCallback);
+eventSystem.on('error', errorCallback);
+eventSystem.once('startup', onceCallback);
+
+console.log('Listener count for log:', eventSystem.listenerCount('log')); // 1
+
+eventSystem.emit('log', 'Application started');
+eventSystem.emit('error', 'Something went wrong');
+eventSystem.emit('startup', 'System initialized');
+
+console.log('Listener count for startup:', eventSystem.listenerCount('startup')); // 0 (once event removed)
+
+eventSystem.off('log', logCallback);
+console.log('Listener count for log after removal:', eventSystem.listenerCount('log')); // 0</code></pre>
+        </div>
+    </div>
+</div>
+
+<div class="practice-exercise">
+    <h4>Exercise 2: Create a Factory Pattern for Database Connections</h4>
+    <p>Implement a factory pattern that creates different types of database connections (MySQL, PostgreSQL, MongoDB) with a common interface.</p>
+    <button class="solution-toggle-btn" onclick="toggleSolution(this)">Show Solution</button>
+    <div class="solution">
+        <div style="position: relative;">
+            <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+            <pre><code>// Abstract database connection
+class DatabaseConnection {
+    connect() {
+        throw new Error("connect method must be implemented");
+    }
+    
+    disconnect() {
+        throw new Error("disconnect method must be implemented");
+    }
+    
+    query(sql) {
+        throw new Error("query method must be implemented");
+    }
+    
+    isConnected() {
+        throw new Error("isConnected method must be implemented");
+    }
+}
+
+// Concrete implementations
+class MySQLConnection extends DatabaseConnection {
+    constructor(host, port, database, username, password) {
+        super();
+        this.host = host;
+        this.port = port;
+        this.database = database;
+        this.username = username;
+        this.password = password;
+        this.connected = false;
+    }
+    
+    connect() {
+        this.connected = true;
+        return `Connected to MySQL at ${this.host}:${this.port}/${this.database}`;
+    }
+    
+    disconnect() {
+        this.connected = false;
+        return `Disconnected from MySQL`;
+    }
+    
+    query(sql) {
+        if (!this.connected) {
+            throw new Error("Not connected to MySQL");
+        }
+        return `MySQL: ${sql}`;
+    }
+    
+    isConnected() {
+        return this.connected;
+    }
+}
+
+class PostgreSQLConnection extends DatabaseConnection {
+    constructor(host, port, database, username, password) {
+        super();
+        this.host = host;
+        this.port = port;
+        this.database = database;
+        this.username = username;
+        this.password = password;
+        this.connected = false;
+    }
+    
+    connect() {
+        this.connected = true;
+        return `Connected to PostgreSQL at ${this.host}:${this.port}/${this.database}`;
+    }
+    
+    disconnect() {
+        this.connected = false;
+        return `Disconnected from PostgreSQL`;
+    }
+    
+    query(sql) {
+        if (!this.connected) {
+            throw new Error("Not connected to PostgreSQL");
+        }
+        return `PostgreSQL: ${sql}`;
+    }
+    
+    isConnected() {
+        return this.connected;
+    }
+}
+
+class MongoDBConnection extends DatabaseConnection {
+    constructor(uri, database) {
+        super();
+        this.uri = uri;
+        this.database = database;
+        this.connected = false;
+    }
+    
+    connect() {
+        this.connected = true;
+        return `Connected to MongoDB at ${this.uri}/${this.database}`;
+    }
+    
+    disconnect() {
+        this.connected = false;
+        return `Disconnected from MongoDB`;
+    }
+    
+    query(query) {
+        if (!this.connected) {
+            throw new Error("Not connected to MongoDB");
+        }
+        return `MongoDB: ${JSON.stringify(query)}`;
+    }
+    
+    isConnected() {
+        return this.connected;
+    }
+}
+
+// Factory class
+class DatabaseFactory {
+    static createConnection(type, config) {
+        switch (type.toLowerCase()) {
+            case 'mysql':
+                return new MySQLConnection(
+                    config.host,
+                    config.port,
+                    config.database,
+                    config.username,
+                    config.password
+                );
+            
+            case 'postgresql':
+                return new PostgreSQLConnection(
+                    config.host,
+                    config.port,
+                    config.database,
+                    config.username,
+                    config.password
+                );
+            
+            case 'mongodb':
+                return new MongoDBConnection(
+                    config.uri,
+                    config.database
+                );
+            
+            default:
+                throw new Error(`Unsupported database type: ${type}`);
+        }
+    }
+    
+    static getSupportedTypes() {
+        return ['mysql', 'postgresql', 'mongodb'];
+    }
+}
+
+// Usage
+const mysqlConfig = {
+    host: 'localhost',
+    port: 3306,
+    database: 'myapp',
+    username: 'root',
+    password: 'password'
+};
+
+const postgresConfig = {
+    host: 'localhost',
+    port: 5432,
+    database: 'myapp',
+    username: 'postgres',
+    password: 'password'
+};
+
+const mongoConfig = {
+    uri: 'mongodb://localhost:27017',
+    database: 'myapp'
+};
+
+try {
+    const mysql = DatabaseFactory.createConnection('mysql', mysqlConfig);
+    const postgres = DatabaseFactory.createConnection('postgresql', postgresConfig);
+    const mongo = DatabaseFactory.createConnection('mongodb', mongoConfig);
+    
+    console.log(mysql.connect());
+    console.log(mysql.query('SELECT * FROM users'));
+    console.log(mysql.disconnect());
+    
+    console.log(postgres.connect());
+    console.log(postgres.query('SELECT * FROM customers'));
+    console.log(postgres.disconnect());
+    
+    console.log(mongo.connect());
+    console.log(mongo.query({ collection: 'products', find: { category: 'electronics' } }));
+    console.log(mongo.disconnect());
+    
+    console.log('Supported types:', DatabaseFactory.getSupportedTypes());
+    
+} catch (error) {
+    console.error('Error:', error.message);
+}</code></pre>
+        </div>
+    </div>
+</div>
+
+<div class="practice-exercise">
+    <h4>Exercise 3: Build a Chainable API with Method Chaining</h4>
+    <p>Create a QueryBuilder class that allows method chaining for building database queries. Include methods for select, where, orderBy, limit, and build.</p>
+    <button class="solution-toggle-btn" onclick="toggleSolution(this)">Show Solution</button>
+    <div class="solution">
+        <div style="position: relative;">
+            <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+            <pre><code>class QueryBuilder {
+    constructor(table) {
+        this.table = table;
+        this.selectFields = ['*'];
+        this.whereConditions = [];
+        this.orderByFields = [];
+        this.limitValue = null;
+        this.offsetValue = null;
+        this.joinClauses = [];
+    }
+    
+    select(...fields) {
+        if (fields.length === 0) {
+            this.selectFields = ['*'];
+        } else {
+            this.selectFields = fields;
+        }
+        return this;
+    }
+    
+    where(field, operator, value) {
+        this.whereConditions.push({ field, operator, value });
+        return this;
+    }
+    
+    whereIn(field, values) {
+        this.whereConditions.push({ field, operator: 'IN', value: values });
+        return this;
+    }
+    
+    whereNull(field) {
+        this.whereConditions.push({ field, operator: 'IS NULL', value: null });
+        return this;
+    }
+    
+    orderBy(field, direction = 'ASC') {
+        this.orderByFields.push({ field, direction: direction.toUpperCase() });
+        return this;
+    }
+    
+    limit(value) {
+        this.limitValue = value;
+        return this;
+    }
+    
+    offset(value) {
+        this.offsetValue = value;
+        return this;
+    }
+    
+    join(table, field1, operator, field2, type = 'INNER') {
+        this.joinClauses.push({
+            table,
+            field1,
+            operator,
+            field2,
+            type: type.toUpperCase()
+        });
+        return this;
+    }
+    
+    leftJoin(table, field1, operator, field2) {
+        return this.join(table, field1, operator, field2, 'LEFT');
+    }
+    
+    rightJoin(table, field1, operator, field2) {
+        return this.join(table, field1, operator, field2, 'RIGHT');
+    }
+    
+    build() {
+        let query = `SELECT ${this.selectFields.join(', ')} FROM ${this.table}`;
+        
+        // Add JOIN clauses
+        if (this.joinClauses.length > 0) {
+            this.joinClauses.forEach(join => {
+                query += ` ${join.type} JOIN ${join.table} ON ${join.field1} ${join.operator} ${join.field2}`;
+            });
+        }
+        
+        // Add WHERE clauses
+        if (this.whereConditions.length > 0) {
+            query += ' WHERE ';
+            const whereClauses = this.whereConditions.map(condition => {
+                if (condition.operator === 'IN') {
+                    const values = Array.isArray(condition.value) 
+                        ? condition.value.map(v => `'${v}'`).join(', ')
+                        : `'${condition.value}'`;
+                    return `${condition.field} IN (${values})`;
+                } else if (condition.operator === 'IS NULL') {
+                    return `${condition.field} IS NULL`;
+                } else {
+                    return `${condition.field} ${condition.operator} '${condition.value}'`;
+                }
+            });
+            query += whereClauses.join(' AND ');
+        }
+        
+        // Add ORDER BY
+        if (this.orderByFields.length > 0) {
+            query += ' ORDER BY ';
+            const orderClauses = this.orderByFields.map(order => 
+                `${order.field} ${order.direction}`
+            );
+            query += orderClauses.join(', ');
+        }
+        
+        // Add LIMIT
+        if (this.limitValue !== null) {
+            query += ` LIMIT ${this.limitValue}`;
+        }
+        
+        // Add OFFSET
+        if (this.offsetValue !== null) {
+            query += ` OFFSET ${this.offsetValue}`;
+        }
+        
+        return query + ';';
+    }
+    
+    // Utility methods
+    reset() {
+        this.selectFields = ['*'];
+        this.whereConditions = [];
+        this.orderByFields = [];
+        this.limitValue = null;
+        this.offsetValue = null;
+        this.joinClauses = [];
+        return this;
+    }
+    
+    clone() {
+        const cloned = new QueryBuilder(this.table);
+        cloned.selectFields = [...this.selectFields];
+        cloned.whereConditions = [...this.whereConditions];
+        cloned.orderByFields = [...this.orderByFields];
+        cloned.limitValue = this.limitValue;
+        cloned.offsetValue = this.offsetValue;
+        cloned.joinClauses = [...this.joinClauses];
+        return cloned;
+    }
+}
+
+// Usage examples
+const query = new QueryBuilder('users');
+
+// Simple query
+const simpleQuery = query
+    .select('id', 'name', 'email')
+    .where('age', '>', 18)
+    .where('status', '=', 'active')
+    .orderBy('name', 'ASC')
+    .limit(10)
+    .build();
+
+console.log('Simple query:', simpleQuery);
+
+// Complex query with joins
+const complexQuery = query
+    .reset()
+    .select('u.name', 'u.email', 'p.title')
+    .join('profiles', 'u.id', '=', 'p.user_id')
+    .where('u.status', '=', 'active')
+    .whereIn('u.role', ['user', 'admin'])
+    .orderBy('u.name', 'ASC')
+    .orderBy('p.created_at', 'DESC')
+    .limit(20)
+    .offset(10)
+    .build();
+
+console.log('Complex query:', complexQuery);
+
+// Clone and modify
+const clonedQuery = query.clone()
+    .where('u.created_at', '>', '2023-01-01')
+    .build();
+
+console.log('Cloned query:', clonedQuery);
+
+// Reset and build new query
+const resetQuery = query
+    .reset()
+    .select('COUNT(*) as total')
+    .where('status', '=', 'active')
+    .build();
+
+console.log('Reset query:', resetQuery);</code></pre>
+        </div>
+    </div>
+</div>
+
+---
+
+## 📚 Additional Resources
+
+- [MDN: Classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)
+- [MDN: Inheritance and the prototype chain](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Inheritance_and_the_prototype_chain)
+- [Eloquent JavaScript: Object-Oriented Programming](https://eloquentjavascript.net/06_object.html)
+- [JavaScript.info: Classes](https://javascript.info/class)
+- [Design Patterns: Elements of Reusable Object-Oriented Software](https://en.wikipedia.org/wiki/Design_Patterns)
+
+---
+
+## 📋 Copy Code Functionality
+
+<script src="../common-scripts.js"></script>
+
+
+
+---
+
+## 🧭 Navigation
+
+<div class="navigation">
+    <a href="01-Functional-Programming.md" class="nav-link prev">← Previous: Functional Programming</a>
+    <a href="03-Asynchronous-JavaScript.md" class="nav-link next">Next: Asynchronous JavaScript →</a>
+</div>
+
+*Last updated: December 2024*

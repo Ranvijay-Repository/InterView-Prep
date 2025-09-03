@@ -1,0 +1,829 @@
+# 🔹 Scope & Lexical Scope
+
+*Understanding Variable Visibility and Access*
+
+<link rel="stylesheet" href="../common-styles.css">
+
+---
+
+## 📚 Table of Contents
+- [What is Scope?](#what-is-scope)
+- [Types of Scope](#types-of-scope)
+- [Scope Chain Visualization](#scope-chain-visualization)
+- [Lexical Scope](#lexical-scope)
+- [Detailed Examples](#detailed-examples)
+- [Common Mistakes](#common-mistakes)
+- [Best Practices](#best-practices)
+- [Key Points for Interviews](#key-points-for-interviews)
+- [Common Interview Questions](#common-interview-questions)
+
+---
+
+## 🎯 What is Scope?
+
+Scope determines the **accessibility (visibility)** of variables, functions, and objects in your code. It's like a set of rules that determines where you can access variables and where you can't. Think of scope as the "visibility radius" of a variable.
+
+### 🔍 Simple Analogy
+Imagine a building with different floors:
+- **Global Scope** = Ground floor (accessible to everyone)
+- **Function Scope** = Individual floors (accessible only to people on that floor)
+- **Block Scope** = Individual rooms (accessible only to people in that room)
+
+---
+
+## 🏗️ Types of Scope
+
+### 1. Global Scope
+- **Location**: Outside any function or block
+- **Accessibility**: Accessible from anywhere in the code
+- **Lifetime**: Lives for the entire duration of the program
+- **Variables**: Global variables, functions, and objects
+
+### 2. Function Scope (Local Scope)
+- **Location**: Inside a function
+- **Accessibility**: Only accessible within that function
+- **Lifetime**: Destroyed when function execution ends
+- **Variables**: Local variables, parameters, and nested functions
+
+### 3. Block Scope
+- **Location**: Inside a block (if, for, while, etc.)
+- **Accessibility**: Only accessible within that block
+- **Lifetime**: Destroyed when block execution ends
+- **Variables**: Introduced with ES6 (let and const)
+
+---
+
+## 🔗 Scope Chain Visualization
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    SCOPE CHAIN                              │
+├─────────────────────────────────────────────────────────────┤
+│  🌍 Global Scope                                           │
+│  ├─ globalVar                                              │
+│  ├─ globalFunction()                                       │
+│  └─ outerFunction()                                        │
+│      ├─ outerVar                                           │
+│      ├─ outerFunction()                                    │
+│      └─ innerFunction()                                    │
+│          ├─ innerVar                                       │
+│          └─ Access to: innerVar, outerVar, globalVar      │
+│                                                             │
+│  🔗 Scope Chain: innerFunction → outerFunction → Global   │
+│  📍 Access Direction: Inner can access outer, not vice versa │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### 🔄 Scope Resolution Process
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                SCOPE RESOLUTION PROCESS                     │
+├─────────────────────────────────────────────────────────────┤
+│  1. 🔍 Check current scope for variable                    │
+│  2. 🔍 If not found, check outer scope                     │
+│  3. 🔍 Continue up the scope chain                         │
+│  4. ❌ If not found in global scope → ReferenceError      │
+│  5. ✅ If found, use that variable                         │
+└─────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 🧭 Lexical Scope (Static Scope)
+
+Lexical scope means that the scope of a variable is determined by its **location within the source code**, not by where it's called from. The scope is "written" (lexical) in the code structure.
+
+### 🔑 Key Points
+- **Determined at write time**: Scope is set when code is written
+- **Not affected by call location**: Where you call a function doesn't change its scope
+- **Follows code structure**: Scope follows the physical structure of your code
+- **Predictable**: You can always determine scope by looking at the code
+
+---
+
+## 💻 Detailed Examples
+
+### Example 1: Basic Scope Types
+```javascript
+console.log("=== BASIC SCOPE TYPES ===");
+
+// 🌍 Global Scope
+let globalVar = "I'm global";
+const globalConst = "I'm also global";
+
+function outerFunction() {
+    // 🏠 Function Scope
+    let outerVar = "I'm in outer function";
+    const outerConst = "I'm also in outer function";
+    
+    function innerFunction() {
+        // 🏠 Function Scope (nested)
+        let innerVar = "I'm in inner function";
+        
+        console.log("=== Inner Function Access ===");
+        console.log("innerVar:", innerVar);           // ✅ Own scope
+        console.log("outerVar:", outerVar);           // ✅ Outer scope
+        console.log("globalVar:", globalVar);         // ✅ Global scope
+        console.log("outerConst:", outerConst);       // ✅ Outer scope
+        console.log("globalConst:", globalConst);     // ✅ Global scope
+    }
+    
+    console.log("=== Outer Function Access ===");
+    console.log("outerVar:", outerVar);               // ✅ Own scope
+    console.log("globalVar:", globalVar);             // ✅ Outer scope
+    // console.log("innerVar:", innerVar);            // ❌ Inner scope not accessible
+    
+    innerFunction();
+}
+
+console.log("=== Global Access ===");
+console.log("globalVar:", globalVar);                 // ✅ Own scope
+// console.log("outerVar:", outerVar);                // ❌ Function scope not accessible
+
+outerFunction();
+```
+
+### Example 2: Block Scope vs Function Scope
+```javascript
+console.log("=== BLOCK SCOPE VS FUNCTION SCOPE ===");
+
+function scopeTest() {
+    // 🏠 Function scope
+    var functionScopedVar = "I'm function scoped";
+    let blockScopedVar = "I'm block scoped";
+    
+    if (true) {
+        // 🚪 Block scope
+        var functionScopedInBlock = "I'm function scoped (in block)";
+        let blockScopedInBlock = "I'm block scoped (in block)";
+        
+        console.log("=== Inside Block ===");
+        console.log("functionScopedVar:", functionScopedVar);           // ✅ Accessible
+        console.log("blockScopedVar:", blockScopedVar);               // ✅ Accessible
+        console.log("functionScopedInBlock:", functionScopedInBlock);  // ✅ Accessible
+        console.log("blockScopedInBlock:", blockScopedInBlock);       // ✅ Accessible
+    }
+    
+    console.log("=== Outside Block ===");
+    console.log("functionScopedVar:", functionScopedVar);           // ✅ Accessible
+    console.log("blockScopedVar:", blockScopedVar);               // ✅ Accessible
+    console.log("functionScopedInBlock:", functionScopedInBlock);  // ✅ Accessible (var is function scoped)
+    // console.log("blockScopedInBlock:", blockScopedInBlock);    // ❌ Error - let is block scoped
+}
+
+scopeTest();
+
+// Block scope examples
+console.log("=== BLOCK SCOPE EXAMPLES ===");
+
+// if block
+if (true) {
+    let ifBlockVar = "I'm in if block";
+    console.log("ifBlockVar:", ifBlockVar);
+}
+// console.log("ifBlockVar:", ifBlockVar); // ❌ ReferenceError
+
+// for loop block
+for (let i = 0; i < 3; i++) {
+    let loopVar = `Loop iteration ${i}`;
+    console.log(loopVar);
+}
+// console.log("i:", i); // ❌ ReferenceError
+// console.log("loopVar:", loopVar); // ❌ ReferenceError
+
+// while loop block
+let counter = 0;
+while (counter < 2) {
+    let whileVar = `While iteration ${counter}`;
+    console.log(whileVar);
+    counter++;
+}
+// console.log("whileVar:", whileVar); // ❌ ReferenceError
+```
+
+### Example 3: Variable Shadowing
+```javascript
+console.log("=== VARIABLE SHADOWING ===");
+
+// 🌍 Global scope
+let name = "Global Name";
+const age = 100;
+
+function outer() {
+    // 🏠 Function scope
+    let name = "Outer Name";
+    const age = 50;
+    
+    console.log("=== Outer Function ===");
+    console.log("name:", name);        // "Outer Name" (shadows global)
+    console.log("age:", age);          // 50 (shadows global)
+    
+    function inner() {
+        // 🏠 Nested function scope
+        let name = "Inner Name";
+        
+        console.log("=== Inner Function ===");
+        console.log("name:", name);        // "Inner Name" (shadows outer)
+        console.log("age:", age);          // 50 (from outer, no shadowing)
+        
+        // Access global variables using window (browser) or global (Node.js)
+        if (typeof window !== 'undefined') {
+            console.log("Global name:", window.name); // "Global Name"
+        } else {
+            console.log("Global name:", global.name); // "Global Name"
+        }
+    }
+    
+    inner();
+    
+    console.log("=== Back in Outer Function ===");
+    console.log("name:", name);        // "Outer Name" (still shadowed)
+    console.log("age:", age);          // 50
+}
+
+outer();
+
+console.log("=== Global Scope ===");
+console.log("name:", name);            // "Global Name" (unchanged)
+console.log("age:", age);              // 100 (unchanged)
+
+console.log("=== SHADOWING EXPLANATION ===");
+console.log("1. Inner scope variables hide (shadow) outer scope variables");
+console.log("2. Outer scope variables remain unchanged");
+console.log("3. Shadowing creates a new variable, not modifies existing");
+console.log("4. Each scope has its own 'name' variable");
+```
+
+### Example 4: Scope Chain in Practice
+```javascript
+console.log("=== SCOPE CHAIN IN PRACTICE ===");
+
+// 🌍 Global scope
+let globalValue = 100;
+const globalConfig = { theme: "dark" };
+
+function firstLevel() {
+    // 🏠 First level function scope
+    let firstValue = 200;
+    const firstConfig = { level: 1 };
+    
+    console.log("=== First Level ===");
+    console.log("firstValue:", firstValue);           // 200 (own)
+    console.log("firstConfig:", firstConfig);         // { level: 1 } (own)
+    console.log("globalValue:", globalValue);         // 100 (global)
+    console.log("globalConfig:", globalConfig);       // { theme: "dark" } (global)
+    
+    function secondLevel() {
+        // 🏠 Second level function scope
+        let secondValue = 300;
+        const secondConfig = { level: 2 };
+        
+        console.log("=== Second Level ===");
+        console.log("secondValue:", secondValue);     // 300 (own)
+        console.log("secondConfig:", secondConfig);   // { level: 2 } (own)
+        console.log("firstValue:", firstValue);       // 200 (first level)
+        console.log("firstConfig:", firstConfig);     // { level: 1 } (first level)
+        console.log("globalValue:", globalValue);     // 100 (global)
+        console.log("globalConfig:", globalConfig);   // { theme: "dark" } (global)
+        
+        function thirdLevel() {
+            // 🏠 Third level function scope
+            let thirdValue = 400;
+            const thirdConfig = { level: 3 };
+            
+            console.log("=== Third Level ===");
+            console.log("thirdValue:", thirdValue);   // 400 (own)
+            console.log("thirdConfig:", thirdConfig); // { level: 3 } (own)
+            console.log("secondValue:", secondValue); // 300 (second level)
+            console.log("secondConfig:", secondConfig); // { level: 2 } (second level)
+            console.log("firstValue:", firstValue);   // 200 (first level)
+            console.log("firstConfig:", firstConfig); // { level: 1 } (first level)
+            console.log("globalValue:", globalValue); // 100 (global)
+            console.log("globalConfig:", globalConfig); // { theme: "dark" } (global)
+            
+            // Try to access non-existent variable
+            try {
+                console.log("nonExistentVar:", nonExistentVar);
+            } catch (error) {
+                console.log("Error accessing nonExistentVar:", error.message);
+            }
+        }
+        
+        thirdLevel();
+    }
+    
+    secondLevel();
+}
+
+firstLevel();
+
+console.log("=== SCOPE CHAIN EXPLANATION ===");
+console.log("1. Each function creates its own scope");
+console.log("2. Inner functions can access outer function variables");
+console.log("3. Outer functions cannot access inner function variables");
+console.log("4. Scope chain: inner → outer → global");
+console.log("5. Variables are searched up the chain until found");
+```
+
+### Example 5: Common Scope Mistakes
+```javascript
+console.log("=== COMMON SCOPE MISTAKES ===");
+
+// ❌ Mistake 1: var in loops (function scoped)
+console.log("=== MISTAKE 1: var IN LOOPS ===");
+
+function varLoopMistake() {
+    for (var i = 0; i < 3; i++) {
+        setTimeout(() => {
+            console.log("var i:", i); // All print 3!
+        }, 100);
+    }
+    
+    console.log("Final var i:", i); // 3 (accessible outside loop!)
+}
+
+varLoopMistake();
+
+// ✅ Solution 1: Use let (block scoped)
+console.log("=== SOLUTION 1: let IN LOOPS ===");
+
+function letLoopSolution() {
+    for (let j = 0; j < 3; j++) {
+        setTimeout(() => {
+            console.log("let j:", j); // 0, 1, 2
+        }, 100);
+    }
+    
+    try {
+        console.log("Final let j:", j); // ReferenceError
+    } catch (error) {
+        console.log("let j error:", error.message);
+    }
+}
+
+letLoopSolution();
+
+// ❌ Mistake 2: var hoisting in blocks
+console.log("=== MISTAKE 2: var HOISTING IN BLOCKS ===");
+
+function varHoistingMistake() {
+    if (true) {
+        var blockVar = "I'm in a block";
+    }
+    console.log("blockVar outside block:", blockVar); // "I'm in a block" (var is function scoped)
+}
+
+varHoistingMistake();
+
+// ✅ Solution 2: Use let/const for block scope
+console.log("=== SOLUTION 2: let/const FOR BLOCK SCOPE ===");
+
+function letBlockSolution() {
+    if (true) {
+        let blockLet = "I'm in a block";
+        const blockConst = "I'm also in a block";
+        console.log("Inside block:", blockLet, blockConst);
+    }
+    
+    try {
+        console.log("blockLet outside block:", blockLet); // ReferenceError
+    } catch (error) {
+        console.log("blockLet error:", error.message);
+    }
+}
+
+letBlockSolution();
+
+// ❌ Mistake 3: Forgetting function scope
+console.log("=== MISTAKE 3: FORGETTING FUNCTION SCOPE ===");
+
+let globalX = "Global X";
+
+function scopeMistake() {
+    console.log("x before declaration:", x); // undefined (not "Global X"!)
+    
+    var x = "Local X";
+    console.log("x after declaration:", x); // "Local X"
+}
+
+scopeMistake();
+console.log("Global x:", globalX); // "Global X" (unchanged)
+```
+
+### Example 6: Advanced Scope Patterns
+```javascript
+console.log("=== ADVANCED SCOPE PATTERNS ===");
+
+// Pattern 1: Module Pattern with Scope
+console.log("=== PATTERN 1: MODULE PATTERN ===");
+
+const calculator = (function() {
+    // 🏠 Private scope (not accessible from outside)
+    let privateCounter = 0;
+    const privateConfig = { precision: 2 };
+    
+    function privateHelper(num) {
+        return Math.round(num * Math.pow(10, privateConfig.precision)) / Math.pow(10, privateConfig.precision);
+    }
+    
+    // 🏠 Return public interface
+    return {
+        add: function(num) {
+            privateCounter = privateHelper(privateCounter + num);
+            return privateCounter;
+        },
+        
+        subtract: function(num) {
+            privateCounter = privateHelper(privateCounter - num);
+            return privateCounter;
+        },
+        
+        getValue: function() {
+            return privateCounter;
+        },
+        
+        reset: function() {
+            privateCounter = 0;
+        }
+    };
+})();
+
+console.log("Calculator add 5:", calculator.add(5));      // 5
+console.log("Calculator add 3.14159:", calculator.add(3.14159)); // 8.14
+console.log("Calculator getValue:", calculator.getValue()); // 8.14
+
+// Private variables are not accessible
+// console.log("privateCounter:", calculator.privateCounter); // undefined
+// console.log("privateHelper:", calculator.privateHelper);   // undefined
+
+// Pattern 2: Factory Functions with Scope
+console.log("=== PATTERN 2: FACTORY FUNCTIONS ===");
+
+function createCounter(initialValue = 0) {
+    // 🏠 Each counter gets its own scope
+    let count = initialValue;
+    
+    return {
+        increment: function() {
+            count++;
+            return count;
+        },
+        
+        decrement: function() {
+            count--;
+            return count;
+        },
+        
+        getValue: function() {
+            return count;
+        },
+        
+        reset: function() {
+            count = initialValue;
+        }
+    };
+}
+
+const counter1 = createCounter(10);
+const counter2 = createCounter(20);
+
+console.log("Counter1 increment:", counter1.increment()); // 11
+console.log("Counter2 increment:", counter2.increment()); // 21
+console.log("Counter1 getValue:", counter1.getValue());   // 11
+console.log("Counter2 getValue:", counter2.getValue());   // 21
+
+// Each counter has its own count variable
+console.log("Each counter has independent state");
+```
+
+---
+
+## ⚠️ Common Mistakes
+
+### Mistake 1: Expecting Block Scope with var
+```javascript
+console.log("=== MISTAKE 1: var DOESN'T HAVE BLOCK SCOPE ===");
+
+if (true) {
+    var blockVar = "I'm in a block";
+}
+console.log("blockVar outside block:", blockVar); // "I'm in a block" (not ReferenceError)
+
+// Solution: Use let/const
+if (true) {
+    let blockLet = "I'm in a block";
+}
+// console.log("blockLet outside block:", blockLet); // ReferenceError
+```
+
+### Mistake 2: Forgetting Function Scope
+```javascript
+console.log("=== MISTAKE 2: FORGETTING FUNCTION SCOPE ===");
+
+let globalVar = "Global";
+
+function test() {
+    console.log("Before declaration:", globalVar); // undefined (not "Global")
+    
+    var globalVar = "Local"; // This shadows the global variable
+    
+    console.log("After declaration:", globalVar); // "Local"
+}
+
+test();
+console.log("Global var:", globalVar); // "Global" (unchanged)
+```
+
+### Mistake 3: Loop Variable Scope Issues
+```javascript
+console.log("=== MISTAKE 3: LOOP VARIABLE SCOPE ===");
+
+// ❌ Problem with var
+for (var i = 0; i < 3; i++) {
+    setTimeout(() => {
+        console.log("var i:", i); // All print 3!
+    }, 100);
+}
+
+// ✅ Solution with let
+for (let j = 0; j < 3; j++) {
+    setTimeout(() => {
+        console.log("let j:", j); // 0, 1, 2
+    }, 100);
+}
+```
+
+---
+
+## ✅ Best Practices
+
+### 1. Use let/const Instead of var
+```javascript
+console.log("=== BEST PRACTICE 1: USE LET/CONST ===");
+
+// ❌ Avoid var
+var oldWay = "avoid this";
+
+// ✅ Use let/const
+let modernWay = "use this";
+const constantWay = "for constants";
+
+console.log("Benefits:");
+console.log("- Block scope instead of function scope");
+console.log("- No hoisting issues");
+console.log("- More predictable behavior");
+```
+
+### 2. Minimize Global Variables
+```javascript
+console.log("=== BEST PRACTICE 2: MINIMIZE GLOBAL VARIABLES ===");
+
+// ❌ Avoid global variables
+window.globalVar = "bad";
+global.globalVar = "also bad";
+
+// ✅ Use modules or IIFE
+const app = (function() {
+    let privateVar = "private";
+    
+    return {
+        getPrivateVar: function() {
+            return privateVar;
+        }
+    };
+})();
+```
+
+### 3. Use Descriptive Variable Names
+```javascript
+console.log("=== BEST PRACTICE 3: DESCRIPTIVE NAMES ===");
+
+// ❌ Unclear names
+let x = 10;
+let data = [];
+
+// ✅ Clear names
+let userCount = 10;
+let userList = [];
+
+console.log("Clear names make scope easier to understand");
+```
+
+---
+
+## 🎯 Key Points for Interviews
+
+### 🔑 Core Concepts
+1. **Scope Definition**: Determines variable accessibility and visibility
+2. **Three Types**: Global, Function, and Block scope
+3. **Scope Chain**: Inner functions can access outer variables
+4. **Lexical Scope**: Scope is determined by code location, not call location
+5. **Variable Shadowing**: Inner scope variables hide outer scope variables
+
+### 🚨 Common Mistakes
+1. **Expecting var to have block scope**
+2. **Forgetting function scope boundaries**
+3. **Loop variable scope issues with var**
+4. **Not understanding variable shadowing**
+
+### 💡 Advanced Concepts
+1. **Closure**: Functions that remember their scope
+2. **Module Pattern**: Using scope for data privacy
+3. **Factory Functions**: Creating objects with independent scope
+4. **Scope Chain Resolution**: How JavaScript finds variables
+
+---
+
+## ❓ Common Interview Questions
+
+### Q: What is scope in JavaScript?
+**A:** Scope determines the accessibility and visibility of variables, functions, and objects in your code. It defines where variables can be accessed and where they cannot.
+
+**Types of Scope:**
+- **Global Scope**: Variables accessible everywhere
+- **Function Scope**: Variables accessible only within a function
+- **Block Scope**: Variables accessible only within a block (let/const)
+
+### Q: What is lexical scope?
+**A:** Lexical scope means that the scope of a variable is determined by its location within the source code, not by where it's called from.
+
+**Key Points:**
+- Scope is "written" in the code structure
+- Inner functions can access outer variables
+- Outer functions cannot access inner variables
+- Scope is determined at write time, not runtime
+
+### Q: What's the difference between function scope and block scope?
+**A:** 
+
+**Function Scope (var):**
+- Variables accessible throughout entire function
+- Not limited to blocks within function
+- Can lead to unexpected behavior
+
+**Block Scope (let/const):**
+- Variables accessible only within specific block
+- More predictable and safer
+- Prevents common scope-related bugs
+
+**Example:**
+```javascript
+function test() {
+    if (true) {
+        var functionVar = "function scoped";
+        let blockVar = "block scoped";
+    }
+    
+    console.log(functionVar); // "function scoped" (accessible)
+    console.log(blockVar);    // ReferenceError (not accessible)
+}
+```
+
+### Q: How does the scope chain work?
+**A:** The scope chain is the mechanism JavaScript uses to find variables:
+
+**Process:**
+1. JavaScript first looks for variable in current scope
+2. If not found, looks in outer scope (parent function)
+3. Continues up the chain until global scope
+4. If not found anywhere, throws ReferenceError
+
+**Example:**
+```javascript
+let globalVar = "global";
+
+function outer() {
+    let outerVar = "outer";
+    
+    function inner() {
+        let innerVar = "inner";
+        console.log(innerVar);    // ✅ Own scope
+        console.log(outerVar);    // ✅ Outer scope
+        console.log(globalVar);   // ✅ Global scope
+        console.log(undefinedVar); // ❌ ReferenceError
+    }
+    
+    inner();
+}
+
+outer();
+```
+
+### Q: What is variable shadowing?
+**A:** Variable shadowing occurs when a variable in an inner scope has the same name as a variable in an outer scope, effectively "hiding" the outer variable within the inner scope.
+
+**Characteristics:**
+- Inner variable takes precedence
+- Outer variable remains unchanged
+- Can lead to confusion if not understood
+- Useful for creating local variables with same names
+
+**Example:**
+```javascript
+let name = "Global Name";
+
+function test() {
+    let name = "Local Name";  // Shadows global name
+    console.log(name);         // "Local Name"
+}
+
+test();
+console.log(name);             // "Global Name" (unchanged)
+```
+
+---
+
+## 🧪 Practice Exercises
+
+### Exercise 1: Scope Chain Analysis
+```javascript
+console.log("Exercise 1: Predict the output");
+
+let x = 1;
+
+function a() {
+    let x = 2;
+    
+    function b() {
+        let x = 3;
+        console.log("b() x:", x); // What will this print?
+    }
+    
+    b();
+    console.log("a() x:", x); // What will this print?
+}
+
+a();
+console.log("Global x:", x); // What will this print?
+```
+
+### Exercise 2: Block Scope Understanding
+```javascript
+console.log("Exercise 2: Block scope analysis");
+
+function test() {
+    if (true) {
+        let blockVar = "I'm in a block";
+        var functionVar = "I'm function scoped";
+    }
+    
+    console.log("functionVar:", functionVar); // What will this print?
+    console.log("blockVar:", blockVar);       // What will this print?
+}
+
+test();
+```
+
+### Exercise 3: Variable Shadowing
+```javascript
+console.log("Exercise 3: Variable shadowing");
+
+let name = "Global";
+let value = 100;
+
+function outer() {
+    let name = "Outer";
+    
+    function inner() {
+        let name = "Inner";
+        console.log("Inner name:", name);
+        console.log("Inner value:", value);
+    }
+    
+    inner();
+    console.log("Outer name:", name);
+    console.log("Outer value:", value);
+}
+
+outer();
+console.log("Global name:", name);
+console.log("Global value:", value);
+```
+
+---
+
+## 📚 Additional Resources
+
+- **MDN Web Docs**: [Variable Scope](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Closures)
+- **JavaScript.info**: [Variable Scope and Closure](https://javascript.info/closure)
+- **ECMAScript Specification**: [Lexical Environments](https://tc39.es/ecma262/#sec-lexical-environments)
+
+---
+
+## 🧭 Navigation
+
+<div class="navigation">
+    <a href="./02-Hoisting.md" class="nav-link prev">⬅️ Previous: Hoisting</a>
+    <a href="./04-Closures.md" class="nav-link next">Next: Closures ➡️</a>
+</div>
+
+---
+
+## 📋 Copy Code Functionality
+
+<script src="../common-scripts.js"></script>
+
+
+
+*Last updated: December 2024*
