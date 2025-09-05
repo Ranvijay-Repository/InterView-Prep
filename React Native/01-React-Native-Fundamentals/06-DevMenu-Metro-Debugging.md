@@ -1,0 +1,312 @@
+# 🛠️ **DevMenu Metro Debugging**
+
+> **Master the React Native development tools including DevMenu, Metro bundler, and debugging techniques**
+
+<link rel="stylesheet" href="../../common-styles.css">
+
+---
+
+## 📚 **Table of Contents**
+
+- [Introduction](#introduction)
+- [DevMenu Overview](#devmenu-overview)
+- [Metro Bundler](#metro-bundler)
+- [Debugging Tools](#debugging-tools)
+- [Performance Monitoring](#performance-monitoring)
+- [Error Handling](#error-handling)
+- [Hot Reloading](#hot-reloading)
+- [Common Debugging Scenarios](#common-debugging-scenarios)
+- [Interview Questions](#interview-questions)
+- [Best Practices](#best-practices)
+
+---
+
+## 🎯 **Introduction**
+
+React Native provides powerful development tools to help you build, debug, and optimize your applications. Understanding these tools is essential for efficient development.
+
+### **Development Tools Overview**
+
+```
+┌─────────────────────────────────────┐
+│        Development Tools            │
+│  ┌─────────────────────────────────┐│
+│  │        DevMenu                  ││
+│  │  - Reload                      ││
+│  │  - Debugger                    ││
+│  │  - Performance Monitor         ││
+│  │  - Element Inspector           ││
+│  └─────────────────────────────────┘│
+│  ┌─────────────────────────────────┐│
+│  │        Metro Bundler           ││
+│  │  - Fast Refresh                ││
+│  │  - Hot Reloading               ││
+│  │  - Bundle Analysis             ││
+│  │  - Source Maps                 ││
+│  └─────────────────────────────────┘│
+│  ┌─────────────────────────────────┐│
+│  │        Debugging Tools         ││
+│  │  - Chrome DevTools             ││
+│  │  - Flipper                     ││
+│  │  - React DevTools              ││
+│  │  - Network Inspector           ││
+│  └─────────────────────────────────┘│
+└─────────────────────────────────────┘
+```
+
+---
+
+## 📱 **DevMenu Overview**
+
+The DevMenu is a powerful debugging interface that provides quick access to development tools and features.
+
+### **DevMenu Features**
+
+<button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+```javascript
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
+
+const DevMenuExample = () => {
+  const [devMenuInfo, setDevMenuInfo] = useState('');
+  const [isDebugMode, setIsDebugMode] = useState(__DEV__);
+  
+  useEffect(() => {
+    setDevMenuInfo(`
+      DevMenu Features:
+      • Reload - Refresh the app
+      • Debugger - Open Chrome DevTools
+      • Performance Monitor - View performance metrics
+      • Element Inspector - Inspect UI elements
+      • Network Inspector - Monitor network requests
+      • Settings - Configure development options
+    `);
+  }, []);
+  
+  const showDevMenuInfo = () => {
+    Alert.alert(
+      'DevMenu Access',
+      'To access DevMenu:\n\n' +
+      'iOS Simulator: Cmd + D\n' +
+      'Android Emulator: Cmd + M (Mac) or Ctrl + M (Windows/Linux)\n' +
+      'Physical Device: Shake the device\n\n' +
+      'Make sure you are in development mode!',
+      [{ text: 'OK' }]
+    );
+  };
+  
+  const showDebuggingTips = () => {
+    Alert.alert(
+      'Debugging Tips',
+      '1. Use console.log() for basic debugging\n' +
+      '2. Use React DevTools for component inspection\n' +
+      '3. Use Network tab to monitor API calls\n' +
+      '4. Use Performance tab to identify bottlenecks\n' +
+      '5. Use Element Inspector to debug layouts',
+      [{ text: 'OK' }]
+    );
+  };
+  
+  const simulateError = () => {
+    try {
+      // This will cause an error for demonstration
+      const obj = null;
+      obj.someProperty = 'value';
+    } catch (error) {
+      console.error('Simulated error:', error);
+      Alert.alert('Error Caught', 'Check the console for error details');
+    }
+  };
+  
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>DevMenu & Debugging</Text>
+      
+      <View style={styles.infoContainer}>
+        <Text style={styles.infoText}>{devMenuInfo}</Text>
+      </View>
+      
+      <View style={styles.statusContainer}>
+        <Text style={styles.statusLabel}>Development Mode:</Text>
+        <Text style={[styles.statusValue, { color: isDebugMode ? '#4CAF50' : '#F44336' }]}>
+          {isDebugMode ? 'Enabled' : 'Disabled'}
+        </Text>
+      </View>
+      
+      <TouchableOpacity
+        style={styles.button}
+        onPress={showDevMenuInfo}
+      >
+        <Text style={styles.buttonText}>How to Access DevMenu</Text>
+      </TouchableOpacity>
+      
+      <TouchableOpacity
+        style={styles.button}
+        onPress={showDebuggingTips}
+      >
+        <Text style={styles.buttonText}>Debugging Tips</Text>
+      </TouchableOpacity>
+      
+      <TouchableOpacity
+        style={[styles.button, styles.errorButton]}
+        onPress={simulateError}
+      >
+        <Text style={styles.buttonText}>Simulate Error</Text>
+      </TouchableOpacity>
+      
+      <View style={styles.consoleContainer}>
+        <Text style={styles.consoleTitle}>Console Output:</Text>
+        <Text style={styles.consoleText}>
+          Check your console for debug information and error logs.
+        </Text>
+      </View>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+    backgroundColor: '#f5f5f5',
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 30,
+    textAlign: 'center',
+  },
+  infoContainer: {
+    backgroundColor: 'white',
+    padding: 20,
+    borderRadius: 10,
+    marginBottom: 20,
+  },
+  infoText: {
+    fontSize: 14,
+    lineHeight: 20,
+    color: '#666',
+    fontFamily: 'monospace',
+  },
+  statusContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: 'white',
+    padding: 15,
+    borderRadius: 10,
+    marginBottom: 20,
+  },
+  statusLabel: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#333',
+  },
+  statusValue: {
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  button: {
+    backgroundColor: '#007AFF',
+    padding: 15,
+    borderRadius: 8,
+    marginBottom: 15,
+    alignItems: 'center',
+  },
+  errorButton: {
+    backgroundColor: '#FF3B30',
+  },
+  buttonText: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+  consoleContainer: {
+    backgroundColor: '#2D3748',
+    padding: 20,
+    borderRadius: 10,
+    marginTop: 20,
+  },
+  consoleTitle: {
+    color: '#4CAF50',
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  consoleText: {
+    color: '#E2E8F0',
+    fontSize: 14,
+    lineHeight: 20,
+  },
+});
+
+export default DevMenuExample;
+```
+
+---
+
+## 🚀 **Metro Bundler**
+
+Metro is the JavaScript bundler for React Native. Understanding its configuration and features helps optimize your development workflow.
+
+### **Metro Configuration**
+
+<button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+```javascript
+// metro.config.js
+const { getDefaultConfig } = require('metro-config');
+
+module.exports = (async () => {
+  const {
+    resolver: { sourceExts, assetExts },
+  } = await getDefaultConfig();
+  
+  return {
+    transformer: {
+      babelTransformerPath: require.resolve('react-native-svg-transformer'),
+    },
+    resolver: {
+      assetExts: assetExts.filter(ext => ext !== 'svg'),
+      sourceExts: [...sourceExts, 'svg'],
+    },
+  };
+})();
+```
+
+### **Metro Commands**
+
+<button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+```bash
+# Start Metro bundler
+npx react-native start
+
+# Start with cache reset
+npx react-native start --reset-cache
+
+# Start with verbose logging
+npx react-native start --verbose
+
+# Bundle for production
+npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle
+
+# Analyze bundle size
+npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output bundle.js --sourcemap-output bundle.map
+```
+
+---
+
+## 🔗 **Navigation**
+
+<div class="nav-container">
+    <a href="./05-Touch-Handling-Gestures.md" class="nav-link prev">⬅️ Previous: Touch Handling & Gestures</a>
+    <a href="../02-Navigation-Deep-Linking/01-React-Navigation-Basics.md" class="nav-link next">Next: React Navigation Basics ➡️</a>
+</div>
+
+---
+
+## 📋 Copy Code Functionality
+
+<script src="../../common-scripts.js"></script>
+
+---
+
+*Last updated: December 2024*

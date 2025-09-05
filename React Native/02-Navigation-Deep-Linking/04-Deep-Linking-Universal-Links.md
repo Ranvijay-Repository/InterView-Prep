@@ -1,0 +1,306 @@
+# 🔗 **Deep Linking & Universal Links**
+
+> **Master deep linking and universal links to create seamless navigation experiences and handle external app launches**
+
+<link rel="stylesheet" href="../../common-styles.css">
+
+---
+
+## 📚 **Table of Contents**
+
+- [Introduction](#introduction)
+- [Deep Linking Setup](#deep-linking-setup)
+- [URL Scheme Configuration](#url-scheme-configuration)
+- [Universal Links (iOS)](#universal-links-ios)
+- [App Links (Android)](#app-links-android)
+- [Navigation Integration](#navigation-integration)
+- [Link Handling](#link-handling)
+- [Common Patterns](#common-patterns)
+- [Interview Questions](#interview-questions)
+- [Best Practices](#best-practices)
+
+---
+
+## 🎯 **Introduction**
+
+Deep linking allows users to navigate directly to specific content within your app from external sources like web links, notifications, or other apps. This creates a seamless user experience and improves app engagement.
+
+### **Deep Linking Overview**
+
+```
+┌─────────────────────────────────────┐
+│        Deep Linking System          │
+│  ┌─────────────────────────────────┐│
+│  │        URL Schemes              ││
+│  │  - Custom schemes               ││
+│  │  - App-specific URLs            ││
+│  │  - Protocol handling            ││
+│  └─────────────────────────────────┘│
+│  ┌─────────────────────────────────┐│
+│  │        Universal Links          ││
+│  │  - iOS Universal Links          ││
+│  │  - Android App Links            ││
+│  │  - Web fallback                 ││
+│  └─────────────────────────────────┘│
+│  ┌─────────────────────────────────┐│
+│  │        Navigation Integration   ││
+│  │  - Route parsing                ││
+│  │  - Parameter extraction         ││
+│  │  - State management             ││
+│  └─────────────────────────────────┘│
+└─────────────────────────────────────┘
+```
+
+---
+
+## 🔗 **Deep Linking Setup**
+
+### **Basic Deep Linking Implementation**
+
+<button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+```javascript
+import React, { useEffect, useState } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import { Linking } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+
+const DeepLinkingExample = () => {
+  const navigation = useNavigation();
+  const [initialUrl, setInitialUrl] = useState(null);
+  const [currentUrl, setCurrentUrl] = useState(null);
+  
+  useEffect(() => {
+    // Get initial URL when app is opened
+    const getInitialUrl = async () => {
+      const url = await Linking.getInitialURL();
+      if (url) {
+        setInitialUrl(url);
+        handleDeepLink(url);
+      }
+    };
+    
+    getInitialUrl();
+    
+    // Listen for incoming links when app is already running
+    const linkingListener = Linking.addEventListener('url', (event) => {
+      setCurrentUrl(event.url);
+      handleDeepLink(event.url);
+    });
+    
+    return () => {
+      linkingListener?.remove();
+    };
+  }, []);
+  
+  const handleDeepLink = (url) => {
+    console.log('Deep link received:', url);
+    
+    // Parse the URL
+    const parsedUrl = parseDeepLink(url);
+    
+    if (parsedUrl) {
+      // Navigate based on the parsed URL
+      navigateToScreen(parsedUrl);
+    }
+  };
+  
+  const parseDeepLink = (url) => {
+    try {
+      // Example URL: myapp://profile/123?name=John&age=25
+      const urlParts = url.split('://');
+      if (urlParts.length < 2) return null;
+      
+      const scheme = urlParts[0];
+      const pathAndQuery = urlParts[1];
+      
+      // Check if it's our app's scheme
+      if (scheme !== 'myapp') return null;
+      
+      const [path, queryString] = pathAndQuery.split('?');
+      const pathSegments = path.split('/');
+      
+      const params = {};
+      if (queryString) {
+        queryString.split('&').forEach(param => {
+          const [key, value] = param.split('=');
+          params[key] = decodeURIComponent(value);
+        });
+      }
+      
+      return {
+        scheme,
+        path,
+        pathSegments,
+        params,
+      };
+    } catch (error) {
+      console.error('Error parsing deep link:', error);
+      return null;
+    }
+  };
+  
+  const navigateToScreen = (parsedUrl) => {
+    const { pathSegments, params } = parsedUrl;
+    
+    switch (pathSegments[0]) {
+      case 'profile':
+        if (pathSegments[1]) {
+          navigation.navigate('Profile', {
+            userId: pathSegments[1],
+            ...params,
+          });
+        }
+        break;
+      case 'product':
+        if (pathSegments[1]) {
+          navigation.navigate('Product', {
+            productId: pathSegments[1],
+            ...params,
+          });
+        }
+        break;
+      case 'home':
+        navigation.navigate('Home', params);
+        break;
+      default:
+        console.log('Unknown deep link path:', pathSegments[0]);
+    }
+  };
+  
+  const testDeepLink = (url) => {
+    Alert.alert(
+      'Test Deep Link',
+      `Opening: ${url}`,
+      [
+        { text: 'Cancel', style: 'cancel' },
+        { text: 'Open', onPress: () => Linking.openURL(url) },
+      ]
+    );
+  };
+  
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>Deep Linking Example</Text>
+      
+      <View style={styles.infoContainer}>
+        <Text style={styles.infoText}>
+          Initial URL: {initialUrl || 'None'}
+        </Text>
+        <Text style={styles.infoText}>
+          Current URL: {currentUrl || 'None'}
+        </Text>
+      </View>
+      
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => testDeepLink('myapp://home')}
+        >
+          <Text style={styles.buttonText}>Test Home Link</Text>
+        </TouchableOpacity>
+        
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => testDeepLink('myapp://profile/123?name=John&age=25')}
+        >
+          <Text style={styles.buttonText}>Test Profile Link</Text>
+        </TouchableOpacity>
+        
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => testDeepLink('myapp://product/456?category=electronics')}
+        >
+          <Text style={styles.buttonText}>Test Product Link</Text>
+        </TouchableOpacity>
+      </View>
+      
+      <View style={styles.instructionsContainer}>
+        <Text style={styles.instructionsTitle}>Instructions:</Text>
+        <Text style={styles.instructionsText}>
+          1. Use the test buttons above to simulate deep links{'\n'}
+          2. Or use the terminal: adb shell am start -W -a android.intent.action.VIEW -d "myapp://profile/123" com.yourapp{'\n'}
+          3. Check the console for deep link parsing logs
+        </Text>
+      </View>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+    backgroundColor: '#f5f5f5',
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 30,
+    textAlign: 'center',
+  },
+  infoContainer: {
+    backgroundColor: 'white',
+    padding: 20,
+    borderRadius: 10,
+    marginBottom: 20,
+  },
+  infoText: {
+    fontSize: 14,
+    color: '#666',
+    marginBottom: 10,
+    fontFamily: 'monospace',
+  },
+  buttonContainer: {
+    marginBottom: 20,
+  },
+  button: {
+    backgroundColor: '#007AFF',
+    padding: 15,
+    borderRadius: 8,
+    alignItems: 'center',
+    marginBottom: 15,
+  },
+  buttonText: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+  instructionsContainer: {
+    backgroundColor: '#E3F2FD',
+    padding: 20,
+    borderRadius: 10,
+  },
+  instructionsTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    color: '#1976D2',
+  },
+  instructionsText: {
+    fontSize: 14,
+    color: '#1976D2',
+    lineHeight: 20,
+  },
+});
+
+export default DeepLinkingExample;
+```
+
+---
+
+## 🔗 **Navigation**
+
+<div class="nav-container">
+    <a href="./03-Navigation-State-Params.md" class="nav-link prev">⬅️ Previous: Navigation State & Params</a>
+    <a href="../03-Networking-Data-Management/01-Networking-Fundamentals.md" class="nav-link next">Next: Networking Fundamentals ➡️</a>
+</div>
+
+---
+
+## 📋 Copy Code Functionality
+
+<script src="../../common-scripts.js"></script>
+
+---
+
+*Last updated: December 2024*
