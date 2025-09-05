@@ -209,4 +209,4 @@ This comprehensive documentation system covers everything from basic concepts to
 
 | Previous | Next |
 |----------|------|
-| [JavaScript Master Index](../JavaScript.md) | [JavaScript Essentials for RN](00-Core-Foundations/00-JavaScript-Essentials-for-RN.md) |
+| [JavaScript Master Index](../Javascript/JavaScript.md) | [JavaScript Essentials for RN](00-Core-Foundations/00-JavaScript-Essentials-for-RN.md) |

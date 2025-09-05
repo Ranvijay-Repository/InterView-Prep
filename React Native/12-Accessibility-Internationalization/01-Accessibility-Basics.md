@@ -1,0 +1,1515 @@
+# ♿ **Accessibility Basics**
+
+> **Master accessibility implementation, screen readers, and inclusive design for React Native applications**
+
+<link rel="stylesheet" href="../../common-styles.css">
+
+---
+
+## 📚 **Table of Contents**
+
+- [Accessibility Overview](#-accessibility-overview)
+- [Screen Reader Support](#-screen-reader-support)
+- [Accessibility Properties](#-accessibility-properties)
+- [Navigation & Focus](#-navigation--focus)
+- [Testing Accessibility](#-testing-accessibility)
+- [Best Practices](#-best-practices)
+- [Interview Questions](#-interview-questions)
+
+---
+
+## 🏗️ **Accessibility Overview**
+
+### **Accessibility Principles**
+
+```mermaid
+graph TD
+    A[Perceivable] --> E[Accessible App]
+    B[Operable] --> E
+    C[Understandable] --> E
+    D[Robust] --> E
+    
+    F[Screen Readers] --> A
+    G[Keyboard Navigation] --> B
+    H[Clear Language] --> C
+    I[Standards Compliance] --> D
+```
+
+### **Accessibility Features**
+- **Screen Reader Support**: VoiceOver (iOS), TalkBack (Android)
+- **Keyboard Navigation**: Tab order and focus management
+- **High Contrast**: Support for high contrast modes
+- **Dynamic Type**: Scalable text sizes
+- **Voice Control**: Voice commands for navigation
+
+---
+
+## 📱 **Screen Reader Support**
+
+### **Basic Accessibility Implementation**
+
+<button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+```javascript
+import React, { useState } from 'react';
+import { View, Text, TouchableOpacity, TextInput, StyleSheet } from 'react-native';
+
+const AccessibleButton = ({ title, onPress, accessibilityLabel, accessibilityHint }) => {
+  return (
+    <TouchableOpacity
+      style={styles.button}
+      onPress={onPress}
+      accessible={true}
+      accessibilityRole="button"
+      accessibilityLabel={accessibilityLabel || title}
+      accessibilityHint={accessibilityHint}
+      accessibilityState={{ disabled: false }}
+    >
+      <Text style={styles.buttonText}>{title}</Text>
+    </TouchableOpacity>
+  );
+};
+
+const AccessibleInput = ({ 
+  label, 
+  value, 
+  onChangeText, 
+  placeholder, 
+  accessibilityLabel,
+  accessibilityHint 
+}) => {
+  return (
+    <View style={styles.inputContainer}>
+      <Text 
+        style={styles.label}
+        accessible={true}
+        accessibilityRole="text"
+      >
+        {label}
+      </Text>
+      <TextInput
+        style={styles.input}
+        value={value}
+        onChangeText={onChangeText}
+        placeholder={placeholder}
+        accessible={true}
+        accessibilityRole="text"
+        accessibilityLabel={accessibilityLabel || label}
+        accessibilityHint={accessibilityHint}
+        accessibilityState={{ 
+          disabled: false,
+          selected: false 
+        }}
+      />
+    </View>
+  );
+};
+
+const AccessibilityExample = () => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const handleSubmit = () => {
+    if (name && email) {
+      setIsSubmitted(true);
+    }
+  };
+
+  const handleReset = () => {
+    setName('');
+    setEmail('');
+    setIsSubmitted(false);
+  };
+
+  return (
+    <View style={styles.container}>
+      <Text 
+        style={styles.title}
+        accessible={true}
+        accessibilityRole="header"
+        accessibilityLevel={1}
+      >
+        Contact Form
+      </Text>
+      
+      <AccessibleInput
+        label="Name"
+        value={name}
+        onChangeText={setName}
+        placeholder="Enter your name"
+        accessibilityLabel="Name input field"
+        accessibilityHint="Enter your full name"
+      />
+      
+      <AccessibleInput
+        label="Email"
+        value={email}
+        onChangeText={setEmail}
+        placeholder="Enter your email"
+        accessibilityLabel="Email input field"
+        accessibilityHint="Enter your email address"
+      />
+      
+      <AccessibleButton
+        title="Submit"
+        onPress={handleSubmit}
+        accessibilityLabel="Submit form"
+        accessibilityHint="Submit the contact form with your information"
+      />
+      
+      <AccessibleButton
+        title="Reset"
+        onPress={handleReset}
+        accessibilityLabel="Reset form"
+        accessibilityHint="Clear all form fields and start over"
+      />
+      
+      {isSubmitted && (
+        <View 
+          style={styles.successContainer}
+          accessible={true}
+          accessibilityRole="text"
+          accessibilityLabel="Form submitted successfully"
+        >
+          <Text style={styles.successText}>
+            Form submitted successfully!
+          </Text>
+        </View>
+      )}
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+    backgroundColor: '#fff',
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 20,
+    color: '#333',
+  },
+  inputContainer: {
+    marginBottom: 15,
+  },
+  label: {
+    fontSize: 16,
+    fontWeight: '600',
+    marginBottom: 5,
+    color: '#333',
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 5,
+    padding: 10,
+    fontSize: 16,
+    backgroundColor: '#fff',
+  },
+  button: {
+    backgroundColor: '#007bff',
+    padding: 15,
+    borderRadius: 5,
+    marginBottom: 10,
+    alignItems: 'center',
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  successContainer: {
+    backgroundColor: '#d4edda',
+    padding: 15,
+    borderRadius: 5,
+    marginTop: 20,
+  },
+  successText: {
+    color: '#155724',
+    fontSize: 16,
+    fontWeight: '600',
+  },
+});
+
+export default AccessibilityExample;
+```
+
+### **Advanced Accessibility Features**
+
+<button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+```javascript
+import React, { useState, useRef } from 'react';
+import { 
+  View, 
+  Text, 
+  TouchableOpacity, 
+  ScrollView, 
+  StyleSheet,
+  AccessibilityInfo,
+  Platform 
+} from 'react-native';
+
+const AccessibleList = ({ items, onItemPress }) => {
+  const [selectedIndex, setSelectedIndex] = useState(-1);
+
+  const handleItemPress = (item, index) => {
+    setSelectedIndex(index);
+    onItemPress(item);
+  };
+
+  return (
+    <ScrollView 
+      style={styles.list}
+      accessible={true}
+      accessibilityRole="list"
+      accessibilityLabel="List of items"
+    >
+      {items.map((item, index) => (
+        <TouchableOpacity
+          key={item.id}
+          style={[
+            styles.listItem,
+            selectedIndex === index && styles.selectedItem
+          ]}
+          onPress={() => handleItemPress(item, index)}
+          accessible={true}
+          accessibilityRole="button"
+          accessibilityLabel={item.title}
+          accessibilityHint={`Item ${index + 1} of ${items.length}`}
+          accessibilityState={{ 
+            selected: selectedIndex === index,
+            disabled: false 
+          }}
+          accessibilityActions={[
+            { name: 'activate', label: 'Select item' },
+            { name: 'longpress', label: 'Show item details' }
+          ]}
+          onAccessibilityAction={(event) => {
+            switch (event.nativeEvent.actionName) {
+              case 'activate':
+                handleItemPress(item, index);
+                break;
+              case 'longpress':
+                // Handle long press action
+                console.log('Long press on item:', item.title);
+                break;
+            }
+          }}
+        >
+          <Text style={styles.itemTitle}>{item.title}</Text>
+          <Text style={styles.itemDescription}>{item.description}</Text>
+        </TouchableOpacity>
+      ))}
+    </ScrollView>
+  );
+};
+
+const AccessibleModal = ({ visible, onClose, title, children }) => {
+  const modalRef = useRef(null);
+
+  React.useEffect(() => {
+    if (visible) {
+      // Announce modal opening to screen readers
+      AccessibilityInfo.announceForAccessibility(`Modal opened: ${title}`);
+      
+      // Set focus to modal
+      setTimeout(() => {
+        if (modalRef.current) {
+          modalRef.current.focus();
+        }
+      }, 100);
+    }
+  }, [visible, title]);
+
+  if (!visible) return null;
+
+  return (
+    <View 
+      style={styles.modalOverlay}
+      accessible={true}
+      accessibilityRole="dialog"
+      accessibilityLabel={title}
+      accessibilityModal={true}
+    >
+      <View 
+        ref={modalRef}
+        style={styles.modal}
+        accessible={true}
+        accessibilityRole="dialog"
+        accessibilityLabel={title}
+      >
+        <View style={styles.modalHeader}>
+          <Text 
+            style={styles.modalTitle}
+            accessible={true}
+            accessibilityRole="header"
+            accessibilityLevel={2}
+          >
+            {title}
+          </Text>
+          <TouchableOpacity
+            style={styles.closeButton}
+            onPress={onClose}
+            accessible={true}
+            accessibilityRole="button"
+            accessibilityLabel="Close modal"
+            accessibilityHint="Close this dialog"
+          >
+            <Text style={styles.closeButtonText}>×</Text>
+          </TouchableOpacity>
+        </View>
+        
+        <View style={styles.modalContent}>
+          {children}
+        </View>
+      </View>
+    </View>
+  );
+};
+
+const AccessibilityAdvancedExample = () => {
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [isScreenReaderEnabled, setIsScreenReaderEnabled] = useState(false);
+
+  const items = [
+    { id: 1, title: 'Apple', description: 'A red fruit' },
+    { id: 2, title: 'Banana', description: 'A yellow fruit' },
+    { id: 3, title: 'Orange', description: 'A citrus fruit' },
+    { id: 4, title: 'Grape', description: 'Small purple fruits' },
+  ];
+
+  React.useEffect(() => {
+    // Check if screen reader is enabled
+    AccessibilityInfo.isScreenReaderEnabled().then(setIsScreenReaderEnabled);
+    
+    // Listen for screen reader changes
+    const subscription = AccessibilityInfo.addEventListener(
+      'screenReaderChanged',
+      setIsScreenReaderEnabled
+    );
+
+    return () => subscription?.remove();
+  }, []);
+
+  const handleItemPress = (item) => {
+    setSelectedItem(item);
+    setModalVisible(true);
+  };
+
+  const handleCloseModal = () => {
+    setModalVisible(false);
+    setSelectedItem(null);
+  };
+
+  return (
+    <View style={styles.container}>
+      <Text 
+        style={styles.title}
+        accessible={true}
+        accessibilityRole="header"
+        accessibilityLevel={1}
+      >
+        Accessibility Demo
+      </Text>
+      
+      <View 
+        style={styles.statusContainer}
+        accessible={true}
+        accessibilityRole="text"
+        accessibilityLabel={`Screen reader is ${isScreenReaderEnabled ? 'enabled' : 'disabled'}`}
+      >
+        <Text style={styles.statusText}>
+          Screen Reader: {isScreenReaderEnabled ? 'Enabled' : 'Disabled'}
+        </Text>
+      </View>
+      
+      <AccessibleList 
+        items={items} 
+        onItemPress={handleItemPress}
+      />
+      
+      <AccessibleModal
+        visible={modalVisible}
+        onClose={handleCloseModal}
+        title="Item Details"
+      >
+        {selectedItem && (
+          <View>
+            <Text 
+              style={styles.detailTitle}
+              accessible={true}
+              accessibilityRole="header"
+              accessibilityLevel={3}
+            >
+              {selectedItem.title}
+            </Text>
+            <Text 
+              style={styles.detailDescription}
+              accessible={true}
+              accessibilityRole="text"
+            >
+              {selectedItem.description}
+            </Text>
+          </View>
+        )}
+      </AccessibleModal>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+    backgroundColor: '#fff',
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 20,
+    color: '#333',
+  },
+  statusContainer: {
+    backgroundColor: '#e9ecef',
+    padding: 10,
+    borderRadius: 5,
+    marginBottom: 20,
+  },
+  statusText: {
+    fontSize: 16,
+    color: '#495057',
+  },
+  list: {
+    flex: 1,
+  },
+  listItem: {
+    padding: 15,
+    borderBottomWidth: 1,
+    borderBottomColor: '#e9ecef',
+    backgroundColor: '#fff',
+  },
+  selectedItem: {
+    backgroundColor: '#e3f2fd',
+  },
+  itemTitle: {
+    fontSize: 18,
+    fontWeight: '600',
+    color: '#333',
+    marginBottom: 5,
+  },
+  itemDescription: {
+    fontSize: 14,
+    color: '#666',
+  },
+  modalOverlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  modal: {
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    padding: 20,
+    margin: 20,
+    maxWidth: '90%',
+    maxHeight: '80%',
+  },
+  modalHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  modalTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#333',
+    flex: 1,
+  },
+  closeButton: {
+    width: 30,
+    height: 30,
+    borderRadius: 15,
+    backgroundColor: '#f8f9fa',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  closeButtonText: {
+    fontSize: 20,
+    color: '#666',
+  },
+  modalContent: {
+    flex: 1,
+  },
+  detailTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#333',
+    marginBottom: 10,
+  },
+  detailDescription: {
+    fontSize: 16,
+    color: '#666',
+    lineHeight: 24,
+  },
+});
+
+export default AccessibilityAdvancedExample;
+```
+
+---
+
+## 🎯 **Accessibility Properties**
+
+### **Accessibility Props Reference**
+
+<button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+```javascript
+import React from 'react';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+
+const AccessibilityPropsExample = () => {
+  return (
+    <View style={styles.container}>
+      {/* Basic Accessibility Props */}
+      <TouchableOpacity
+        style={styles.button}
+        accessible={true} // Makes element accessible
+        accessibilityRole="button" // Defines the role
+        accessibilityLabel="Submit form" // Screen reader label
+        accessibilityHint="Submits the current form data" // Additional context
+        accessibilityState={{ disabled: false, selected: false }} // Current state
+        accessibilityValue={{ text: "Not submitted" }} // Current value
+        onPress={() => console.log('Button pressed')}
+      >
+        <Text style={styles.buttonText}>Submit</Text>
+      </TouchableOpacity>
+
+      {/* Accessibility Actions */}
+      <TouchableOpacity
+        style={styles.button}
+        accessible={true}
+        accessibilityRole="button"
+        accessibilityLabel="Delete item"
+        accessibilityActions={[
+          { name: 'activate', label: 'Delete item' },
+          { name: 'longpress', label: 'Show delete options' }
+        ]}
+        onAccessibilityAction={(event) => {
+          switch (event.nativeEvent.actionName) {
+            case 'activate':
+              console.log('Delete activated');
+              break;
+            case 'longpress':
+              console.log('Delete options shown');
+              break;
+          }
+        }}
+      >
+        <Text style={styles.buttonText}>Delete</Text>
+      </TouchableOpacity>
+
+      {/* Accessibility Live Region */}
+      <View
+        style={styles.liveRegion}
+        accessible={true}
+        accessibilityRole="text"
+        accessibilityLiveRegion="polite" // Announces changes
+        accessibilityLabel="Status updates"
+      >
+        <Text style={styles.liveText}>Status: Ready</Text>
+      </View>
+
+      {/* Accessibility Elements */}
+      <View
+        style={styles.container}
+        accessible={true}
+        accessibilityRole="group"
+        accessibilityLabel="User profile section"
+        accessibilityElementsHidden={false} // Hide from screen readers
+        importantForAccessibility="yes" // Android specific
+      >
+        <Text style={styles.sectionTitle}>Profile</Text>
+        <Text style={styles.sectionContent}>User information goes here</Text>
+      </View>
+
+      {/* Accessibility Traits (iOS) */}
+      <TouchableOpacity
+        style={styles.button}
+        accessible={true}
+        accessibilityRole="button"
+        accessibilityTraits={['button', 'startsMediaSession']} // iOS specific
+        accessibilityLabel="Play video"
+      >
+        <Text style={styles.buttonText}>Play</Text>
+      </TouchableOpacity>
+
+      {/* Accessibility Levels */}
+      <Text
+        style={styles.heading}
+        accessible={true}
+        accessibilityRole="header"
+        accessibilityLevel={1} // Heading level
+      >
+        Main Heading
+      </Text>
+
+      <Text
+        style={styles.subheading}
+        accessible={true}
+        accessibilityRole="header"
+        accessibilityLevel={2}
+      >
+        Sub Heading
+      </Text>
+
+      {/* Accessibility Modal */}
+      <View
+        style={styles.modal}
+        accessible={true}
+        accessibilityRole="dialog"
+        accessibilityModal={true} // Indicates this is a modal
+        accessibilityLabel="Settings dialog"
+      >
+        <Text style={styles.modalTitle}>Settings</Text>
+      </View>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+    backgroundColor: '#fff',
+  },
+  button: {
+    backgroundColor: '#007bff',
+    padding: 15,
+    borderRadius: 5,
+    marginBottom: 10,
+    alignItems: 'center',
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  liveRegion: {
+    backgroundColor: '#f8f9fa',
+    padding: 10,
+    borderRadius: 5,
+    marginBottom: 10,
+  },
+  liveText: {
+    fontSize: 16,
+    color: '#495057',
+  },
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    color: '#333',
+  },
+  sectionContent: {
+    fontSize: 14,
+    color: '#666',
+    marginBottom: 20,
+  },
+  heading: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    color: '#333',
+  },
+  subheading: {
+    fontSize: 20,
+    fontWeight: '600',
+    marginBottom: 10,
+    color: '#333',
+  },
+  modal: {
+    backgroundColor: '#fff',
+    padding: 20,
+    borderRadius: 10,
+    marginTop: 20,
+  },
+  modalTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#333',
+  },
+});
+
+export default AccessibilityPropsExample;
+```
+
+---
+
+## 🧭 **Navigation & Focus**
+
+### **Focus Management**
+
+<button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+```javascript
+import React, { useRef, useState, useEffect } from 'react';
+import { 
+  View, 
+  Text, 
+  TextInput, 
+  TouchableOpacity, 
+  StyleSheet,
+  AccessibilityInfo 
+} from 'react-native';
+
+const FocusManagementExample = () => {
+  const [currentFocus, setCurrentFocus] = useState(0);
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+  });
+
+  const inputRefs = useRef([]);
+  const buttonRefs = useRef([]);
+
+  const formFields = [
+    { key: 'firstName', label: 'First Name', placeholder: 'Enter first name' },
+    { key: 'lastName', label: 'Last Name', placeholder: 'Enter last name' },
+    { key: 'email', label: 'Email', placeholder: 'Enter email address' },
+    { key: 'phone', label: 'Phone', placeholder: 'Enter phone number' },
+  ];
+
+  useEffect(() => {
+    // Set initial focus
+    if (inputRefs.current[0]) {
+      inputRefs.current[0].focus();
+    }
+  }, []);
+
+  const handleInputChange = (key, value) => {
+    setFormData(prev => ({ ...prev, [key]: value }));
+  };
+
+  const handleNext = () => {
+    const nextIndex = currentFocus + 1;
+    if (nextIndex < formFields.length) {
+      setCurrentFocus(nextIndex);
+      if (inputRefs.current[nextIndex]) {
+        inputRefs.current[nextIndex].focus();
+      }
+    }
+  };
+
+  const handlePrevious = () => {
+    const prevIndex = currentFocus - 1;
+    if (prevIndex >= 0) {
+      setCurrentFocus(prevIndex);
+      if (inputRefs.current[prevIndex]) {
+        inputRefs.current[prevIndex].focus();
+      }
+    }
+  };
+
+  const handleSubmit = () => {
+    console.log('Form submitted:', formData);
+    // Announce success to screen readers
+    AccessibilityInfo.announceForAccessibility('Form submitted successfully');
+  };
+
+  const handleReset = () => {
+    setFormData({
+      firstName: '',
+      lastName: '',
+      email: '',
+      phone: '',
+    });
+    setCurrentFocus(0);
+    if (inputRefs.current[0]) {
+      inputRefs.current[0].focus();
+    }
+    AccessibilityInfo.announceForAccessibility('Form reset');
+  };
+
+  return (
+    <View style={styles.container}>
+      <Text 
+        style={styles.title}
+        accessible={true}
+        accessibilityRole="header"
+        accessibilityLevel={1}
+      >
+        Focus Management Demo
+      </Text>
+
+      <View 
+        style={styles.formContainer}
+        accessible={true}
+        accessibilityRole="form"
+        accessibilityLabel="Contact form"
+      >
+        {formFields.map((field, index) => (
+          <View key={field.key} style={styles.inputContainer}>
+            <Text 
+              style={styles.label}
+              accessible={true}
+              accessibilityRole="text"
+            >
+              {field.label}
+            </Text>
+            <TextInput
+              ref={ref => inputRefs.current[index] = ref}
+              style={[
+                styles.input,
+                currentFocus === index && styles.focusedInput
+              ]}
+              value={formData[field.key]}
+              onChangeText={(value) => handleInputChange(field.key, value)}
+              placeholder={field.placeholder}
+              accessible={true}
+              accessibilityRole="text"
+              accessibilityLabel={field.label}
+              accessibilityHint={`Field ${index + 1} of ${formFields.length}`}
+              accessibilityState={{ 
+                focused: currentFocus === index,
+                disabled: false 
+              }}
+              onSubmitEditing={() => {
+                if (index < formFields.length - 1) {
+                  handleNext();
+                } else {
+                  handleSubmit();
+                }
+              }}
+              returnKeyType={index < formFields.length - 1 ? 'next' : 'done'}
+            />
+          </View>
+        ))}
+      </View>
+
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity
+          ref={ref => buttonRefs.current[0] = ref}
+          style={[
+            styles.button,
+            styles.secondaryButton
+          ]}
+          onPress={handlePrevious}
+          accessible={true}
+          accessibilityRole="button"
+          accessibilityLabel="Previous field"
+          accessibilityHint="Move to the previous form field"
+          accessibilityState={{ disabled: currentFocus === 0 }}
+          disabled={currentFocus === 0}
+        >
+          <Text style={styles.secondaryButtonText}>Previous</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          ref={ref => buttonRefs.current[1] = ref}
+          style={[
+            styles.button,
+            styles.secondaryButton
+          ]}
+          onPress={handleNext}
+          accessible={true}
+          accessibilityRole="button"
+          accessibilityLabel="Next field"
+          accessibilityHint="Move to the next form field"
+          accessibilityState={{ disabled: currentFocus === formFields.length - 1 }}
+          disabled={currentFocus === formFields.length - 1}
+        >
+          <Text style={styles.secondaryButtonText}>Next</Text>
+        </TouchableOpacity>
+      </View>
+
+      <View style={styles.actionContainer}>
+        <TouchableOpacity
+          ref={ref => buttonRefs.current[2] = ref}
+          style={[
+            styles.button,
+            styles.primaryButton
+          ]}
+          onPress={handleSubmit}
+          accessible={true}
+          accessibilityRole="button"
+          accessibilityLabel="Submit form"
+          accessibilityHint="Submit the contact form"
+        >
+          <Text style={styles.primaryButtonText}>Submit</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          ref={ref => buttonRefs.current[3] = ref}
+          style={[
+            styles.button,
+            styles.secondaryButton
+          ]}
+          onPress={handleReset}
+          accessible={true}
+          accessibilityRole="button"
+          accessibilityLabel="Reset form"
+          accessibilityHint="Clear all form fields and start over"
+        >
+          <Text style={styles.secondaryButtonText}>Reset</Text>
+        </TouchableOpacity>
+      </View>
+
+      <View 
+        style={styles.statusContainer}
+        accessible={true}
+        accessibilityRole="text"
+        accessibilityLiveRegion="polite"
+        accessibilityLabel={`Current field: ${formFields[currentFocus]?.label || 'None'}`}
+      >
+        <Text style={styles.statusText}>
+          Current Field: {formFields[currentFocus]?.label || 'None'}
+        </Text>
+      </View>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+    backgroundColor: '#fff',
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 20,
+    color: '#333',
+  },
+  formContainer: {
+    marginBottom: 20,
+  },
+  inputContainer: {
+    marginBottom: 15,
+  },
+  label: {
+    fontSize: 16,
+    fontWeight: '600',
+    marginBottom: 5,
+    color: '#333',
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 5,
+    padding: 10,
+    fontSize: 16,
+    backgroundColor: '#fff',
+  },
+  focusedInput: {
+    borderColor: '#007bff',
+    borderWidth: 2,
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 20,
+  },
+  actionContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 20,
+  },
+  button: {
+    padding: 15,
+    borderRadius: 5,
+    alignItems: 'center',
+    minWidth: 100,
+  },
+  primaryButton: {
+    backgroundColor: '#007bff',
+  },
+  secondaryButton: {
+    backgroundColor: '#6c757d',
+  },
+  primaryButtonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  secondaryButtonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  statusContainer: {
+    backgroundColor: '#f8f9fa',
+    padding: 10,
+    borderRadius: 5,
+  },
+  statusText: {
+    fontSize: 14,
+    color: '#495057',
+    textAlign: 'center',
+  },
+});
+
+export default FocusManagementExample;
+```
+
+---
+
+## 🧪 **Testing Accessibility**
+
+### **Accessibility Testing Utilities**
+
+<button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+```javascript
+import React, { useState, useEffect } from 'react';
+import { 
+  View, 
+  Text, 
+  TouchableOpacity, 
+  StyleSheet,
+  AccessibilityInfo,
+  Platform 
+} from 'react-native';
+
+const AccessibilityTestingService = () => {
+  const [isScreenReaderEnabled, setIsScreenReaderEnabled] = useState(false);
+  const [isBoldTextEnabled, setIsBoldTextEnabled] = useState(false);
+  const [isGrayscaleEnabled, setIsGrayscaleEnabled] = useState(false);
+  const [isInvertColorsEnabled, setIsInvertColorsEnabled] = useState(false);
+  const [isReduceMotionEnabled, setIsReduceMotionEnabled] = useState(false);
+  const [isReduceTransparencyEnabled, setIsReduceTransparencyEnabled] = useState(false);
+  const [isVoiceOverEnabled, setIsVoiceOverEnabled] = useState(false);
+  const [isTalkBackEnabled, setIsTalkBackEnabled] = useState(false);
+
+  useEffect(() => {
+    // Check accessibility settings
+    checkAccessibilitySettings();
+    
+    // Listen for accessibility changes
+    const subscriptions = [
+      AccessibilityInfo.addEventListener('screenReaderChanged', setIsScreenReaderEnabled),
+      AccessibilityInfo.addEventListener('boldTextChanged', setIsBoldTextEnabled),
+      AccessibilityInfo.addEventListener('grayscaleChanged', setIsGrayscaleEnabled),
+      AccessibilityInfo.addEventListener('invertColorsChanged', setIsInvertColorsEnabled),
+      AccessibilityInfo.addEventListener('reduceMotionChanged', setIsReduceMotionEnabled),
+      AccessibilityInfo.addEventListener('reduceTransparencyChanged', setIsReduceTransparencyEnabled),
+    ];
+
+    return () => {
+      subscriptions.forEach(subscription => subscription?.remove());
+    };
+  }, []);
+
+  const checkAccessibilitySettings = async () => {
+    try {
+      const [
+        screenReader,
+        boldText,
+        grayscale,
+        invertColors,
+        reduceMotion,
+        reduceTransparency,
+      ] = await Promise.all([
+        AccessibilityInfo.isScreenReaderEnabled(),
+        AccessibilityInfo.isBoldTextEnabled(),
+        AccessibilityInfo.isGrayscaleEnabled(),
+        AccessibilityInfo.isInvertColorsEnabled(),
+        AccessibilityInfo.isReduceMotionEnabled(),
+        AccessibilityInfo.isReduceTransparencyEnabled(),
+      ]);
+
+      setIsScreenReaderEnabled(screenReader);
+      setIsBoldTextEnabled(boldText);
+      setIsGrayscaleEnabled(grayscale);
+      setIsInvertColorsEnabled(invertColors);
+      setIsReduceMotionEnabled(reduceMotion);
+      setIsReduceTransparencyEnabled(reduceTransparency);
+
+      // Platform-specific checks
+      if (Platform.OS === 'ios') {
+        const voiceOver = await AccessibilityInfo.isVoiceOverEnabled();
+        setIsVoiceOverEnabled(voiceOver);
+      } else if (Platform.OS === 'android') {
+        const talkBack = await AccessibilityInfo.isTalkBackEnabled();
+        setIsTalkBackEnabled(talkBack);
+      }
+    } catch (error) {
+      console.error('Error checking accessibility settings:', error);
+    }
+  };
+
+  const runAccessibilityTests = () => {
+    const tests = [
+      {
+        name: 'Screen Reader Support',
+        passed: isScreenReaderEnabled,
+        description: 'Screen reader is enabled and supported',
+      },
+      {
+        name: 'Bold Text Support',
+        passed: isBoldTextEnabled,
+        description: 'Bold text accessibility setting is enabled',
+      },
+      {
+        name: 'Grayscale Support',
+        passed: isGrayscaleEnabled,
+        description: 'Grayscale accessibility setting is enabled',
+      },
+      {
+        name: 'Invert Colors Support',
+        passed: isInvertColorsEnabled,
+        description: 'Invert colors accessibility setting is enabled',
+      },
+      {
+        name: 'Reduce Motion Support',
+        passed: isReduceMotionEnabled,
+        description: 'Reduce motion accessibility setting is enabled',
+      },
+      {
+        name: 'Reduce Transparency Support',
+        passed: isReduceTransparencyEnabled,
+        description: 'Reduce transparency accessibility setting is enabled',
+      },
+    ];
+
+    // Platform-specific tests
+    if (Platform.OS === 'ios') {
+      tests.push({
+        name: 'VoiceOver Support',
+        passed: isVoiceOverEnabled,
+        description: 'VoiceOver is enabled on iOS',
+      });
+    } else if (Platform.OS === 'android') {
+      tests.push({
+        name: 'TalkBack Support',
+        passed: isTalkBackEnabled,
+        description: 'TalkBack is enabled on Android',
+      });
+    }
+
+    return tests;
+  };
+
+  const announceTestResults = (tests) => {
+    const passedTests = tests.filter(test => test.passed).length;
+    const totalTests = tests.length;
+    const message = `Accessibility tests completed. ${passedTests} out of ${totalTests} tests passed.`;
+    
+    AccessibilityInfo.announceForAccessibility(message);
+  };
+
+  return {
+    isScreenReaderEnabled,
+    isBoldTextEnabled,
+    isGrayscaleEnabled,
+    isInvertColorsEnabled,
+    isReduceMotionEnabled,
+    isReduceTransparencyEnabled,
+    isVoiceOverEnabled,
+    isTalkBackEnabled,
+    runAccessibilityTests,
+    announceTestResults,
+  };
+};
+
+const AccessibilityTestingExample = () => {
+  const [testResults, setTestResults] = useState([]);
+  const [isTesting, setIsTesting] = useState(false);
+  
+  const testingService = AccessibilityTestingService();
+
+  const handleRunTests = () => {
+    setIsTesting(true);
+    
+    setTimeout(() => {
+      const results = testingService.runAccessibilityTests();
+      setTestResults(results);
+      testingService.announceTestResults(results);
+      setIsTesting(false);
+    }, 1000);
+  };
+
+  const getTestStatusColor = (passed) => {
+    return passed ? '#28a745' : '#dc3545';
+  };
+
+  const getTestStatusText = (passed) => {
+    return passed ? 'PASSED' : 'FAILED';
+  };
+
+  return (
+    <View style={styles.container}>
+      <Text 
+        style={styles.title}
+        accessible={true}
+        accessibilityRole="header"
+        accessibilityLevel={1}
+      >
+        Accessibility Testing
+      </Text>
+
+      <TouchableOpacity
+        style={[
+          styles.testButton,
+          isTesting && styles.testButtonDisabled
+        ]}
+        onPress={handleRunTests}
+        accessible={true}
+        accessibilityRole="button"
+        accessibilityLabel="Run accessibility tests"
+        accessibilityHint="Run tests to check accessibility features"
+        accessibilityState={{ disabled: isTesting }}
+        disabled={isTesting}
+      >
+        <Text style={styles.testButtonText}>
+          {isTesting ? 'Running Tests...' : 'Run Tests'}
+        </Text>
+      </TouchableOpacity>
+
+      {testResults.length > 0 && (
+        <View style={styles.resultsContainer}>
+          <Text 
+            style={styles.resultsTitle}
+            accessible={true}
+            accessibilityRole="header"
+            accessibilityLevel={2}
+          >
+            Test Results
+          </Text>
+          
+          {testResults.map((test, index) => (
+            <View 
+              key={index}
+              style={styles.testResult}
+              accessible={true}
+              accessibilityRole="text"
+              accessibilityLabel={`${test.name}: ${getTestStatusText(test.passed)}`}
+            >
+              <View style={styles.testHeader}>
+                <Text style={styles.testName}>{test.name}</Text>
+                <Text 
+                  style={[
+                    styles.testStatus,
+                    { color: getTestStatusColor(test.passed) }
+                  ]}
+                >
+                  {getTestStatusText(test.passed)}
+                </Text>
+              </View>
+              <Text style={styles.testDescription}>{test.description}</Text>
+            </View>
+          ))}
+        </View>
+      )}
+
+      <View style={styles.settingsContainer}>
+        <Text 
+          style={styles.settingsTitle}
+          accessible={true}
+          accessibilityRole="header"
+          accessibilityLevel={2}
+        >
+          Current Settings
+        </Text>
+        
+        <View style={styles.settingItem}>
+          <Text style={styles.settingLabel}>Screen Reader:</Text>
+          <Text style={styles.settingValue}>
+            {testingService.isScreenReaderEnabled ? 'Enabled' : 'Disabled'}
+          </Text>
+        </View>
+        
+        <View style={styles.settingItem}>
+          <Text style={styles.settingLabel}>Bold Text:</Text>
+          <Text style={styles.settingValue}>
+            {testingService.isBoldTextEnabled ? 'Enabled' : 'Disabled'}
+          </Text>
+        </View>
+        
+        <View style={styles.settingItem}>
+          <Text style={styles.settingLabel}>Reduce Motion:</Text>
+          <Text style={styles.settingValue}>
+            {testingService.isReduceMotionEnabled ? 'Enabled' : 'Disabled'}
+          </Text>
+        </View>
+        
+        {Platform.OS === 'ios' && (
+          <View style={styles.settingItem}>
+            <Text style={styles.settingLabel}>VoiceOver:</Text>
+            <Text style={styles.settingValue}>
+              {testingService.isVoiceOverEnabled ? 'Enabled' : 'Disabled'}
+            </Text>
+          </View>
+        )}
+        
+        {Platform.OS === 'android' && (
+          <View style={styles.settingItem}>
+            <Text style={styles.settingLabel}>TalkBack:</Text>
+            <Text style={styles.settingValue}>
+              {testingService.isTalkBackEnabled ? 'Enabled' : 'Disabled'}
+            </Text>
+          </View>
+        )}
+      </View>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+    backgroundColor: '#fff',
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 20,
+    color: '#333',
+  },
+  testButton: {
+    backgroundColor: '#007bff',
+    padding: 15,
+    borderRadius: 5,
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  testButtonDisabled: {
+    backgroundColor: '#6c757d',
+  },
+  testButtonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  resultsContainer: {
+    marginBottom: 20,
+  },
+  resultsTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 15,
+    color: '#333',
+  },
+  testResult: {
+    backgroundColor: '#f8f9fa',
+    padding: 15,
+    borderRadius: 5,
+    marginBottom: 10,
+  },
+  testHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 5,
+  },
+  testName: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#333',
+    flex: 1,
+  },
+  testStatus: {
+    fontSize: 14,
+    fontWeight: 'bold',
+  },
+  testDescription: {
+    fontSize: 14,
+    color: '#666',
+  },
+  settingsContainer: {
+    backgroundColor: '#f8f9fa',
+    padding: 15,
+    borderRadius: 5,
+  },
+  settingsTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 15,
+    color: '#333',
+  },
+  settingItem: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  settingLabel: {
+    fontSize: 16,
+    color: '#333',
+  },
+  settingValue: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#007bff',
+  },
+});
+
+export default AccessibilityTestingExample;
+```
+
+---
+
+## 🎯 **Best Practices**
+
+### **1. Accessibility Implementation**
+- Use semantic HTML elements
+- Provide meaningful labels and hints
+- Ensure proper focus management
+- Test with screen readers
+
+### **2. Screen Reader Support**
+- Use appropriate accessibility roles
+- Provide descriptive labels
+- Announce important changes
+- Support accessibility actions
+
+### **3. Testing & Validation**
+- Test with real screen readers
+- Validate accessibility properties
+- Check focus management
+- Verify keyboard navigation
+
+---
+
+## ❓ **Interview Questions**
+
+### **Basic Questions**
+1. **What is accessibility and why is it important?**
+2. **How do you implement screen reader support?**
+3. **What are accessibility roles and labels?**
+
+### **Advanced Questions**
+1. **How would you implement focus management in a complex form?**
+2. **Explain the difference between accessibilityLabel and accessibilityHint.**
+3. **How do you test accessibility in React Native apps?**
+
+### **Practical Questions**
+1. **Implement an accessible form with proper focus management.**
+2. **Create a screen reader-friendly list component.**
+3. **Set up accessibility testing for your app.**
+
+---
+
+## 🧭 Navigation
+
+<div class="navigation">
+    <a href="../11-Security-Privacy/04-Security-Best-Practices.md" class="nav-link prev">⬅️ Previous: Security Best Practices</a>
+    <a href="./02-Internationalization.md" class="nav-link next">Next: Internationalization ➡️</a>
+</div>
+
+---
+
+<script src="../../common-scripts.js"></script>
+
+*Last updated: December 2024*
