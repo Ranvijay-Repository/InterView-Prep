@@ -1,0 +1,975 @@
+# 🌐 **Network Security**
+
+> **Master network security, TLS/SSL, certificate pinning, and secure communication for React Native applications**
+
+<link rel="stylesheet" href="../../common-styles.css">
+
+---
+
+## 📚 **Table of Contents**
+
+- [Network Security Overview](#-network-security-overview)
+- [TLS/SSL Configuration](#-tlsssl-configuration)
+- [Certificate Pinning](#-certificate-pinning)
+- [API Security](#-api-security)
+- [Request/Response Security](#-requestresponse-security)
+- [Best Practices](#-best-practices)
+- [Interview Questions](#-interview-questions)
+
+---
+
+## 🏗️ **Network Security Overview**
+
+### **Security Layers**
+
+```mermaid
+graph TD
+    A[Application Layer] --> B[Transport Layer Security]
+    B --> C[Network Layer]
+    C --> D[Physical Layer]
+    
+    E[Certificate Pinning] --> B
+    F[API Authentication] --> A
+    G[Request Encryption] --> A
+    H[Response Validation] --> A
+```
+
+### **Security Considerations**
+- **Transport Security**: TLS/SSL encryption
+- **Certificate Validation**: Pin certificates
+- **API Authentication**: Secure API calls
+- **Data Integrity**: Validate responses
+
+---
+
+## 🔒 **TLS/SSL Configuration**
+
+### **Network Security Configuration**
+
+<button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+```javascript
+// Network security configuration
+import { Platform } from 'react-native';
+
+const NetworkSecurityConfig = {
+  // Android network security config
+  android: {
+    cleartextTrafficPermitted: false,
+    certificateTransparency: true,
+    certificatePinning: {
+      enabled: true,
+      certificates: [
+        'sha256/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=',
+        'sha256/BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB=',
+      ],
+    },
+  },
+  
+  // iOS App Transport Security
+  ios: {
+    allowArbitraryLoads: false,
+    allowArbitraryLoadsInWebContent: false,
+    allowLocalNetworking: false,
+    exceptionDomains: {
+      'api.yourapp.com': {
+        NSExceptionAllowsInsecureHTTPLoads: false,
+        NSExceptionMinimumTLSVersion: 'TLSv1.2',
+        NSExceptionRequiresForwardSecrecy: true,
+      },
+    },
+  },
+};
+
+export default NetworkSecurityConfig;
+```
+
+### **Secure HTTP Client**
+
+<button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+```javascript
+import axios from 'axios';
+import { Platform } from 'react-native';
+import { getDeviceId } from 'react-native-device-info';
+
+// Secure HTTP Client with functional approach
+const createSecureHttpClient = () => {
+  const client = axios.create({
+    timeout: 30000,
+    headers: {
+      'Content-Type': 'application/json',
+      'User-Agent': getUserAgent(),
+    },
+  });
+  
+  setupInterceptors(client);
+  return client;
+};
+
+// Setup request/response interceptors
+const setupInterceptors = (client) => {
+  // Request interceptor
+  client.interceptors.request.use(
+    (config) => {
+      // Add security headers
+      config.headers['X-Request-ID'] = generateRequestId();
+      config.headers['X-Device-ID'] = getDeviceId();
+      config.headers['X-Platform'] = Platform.OS;
+      config.headers['X-App-Version'] = getAppVersion();
+      
+      // Add authentication token
+      const token = getAuthToken();
+      if (token) {
+        config.headers['Authorization'] = `Bearer ${token}`;
+      }
+      
+      return config;
+    },
+    (error) => {
+      return Promise.reject(error);
+    }
+  );
+
+  // Response interceptor
+  client.interceptors.response.use(
+    (response) => {
+      // Validate response
+      validateResponse(response);
+      return response;
+    },
+    (error) => {
+      // Handle security errors
+      handleSecurityError(error);
+      return Promise.reject(error);
+    }
+  );
+};
+
+// Generate unique request ID
+const generateRequestId = () => {
+  return Date.now().toString(36) + Math.random().toString(36).substr(2);
+};
+
+// Get user agent
+const getUserAgent = () => {
+  return `YourApp/1.0.0 (${Platform.OS} ${Platform.Version})`;
+};
+
+// Get app version
+const getAppVersion = () => {
+  return '1.0.0'; // Replace with actual version
+};
+
+// Get authentication token
+const getAuthToken = () => {
+  // Implement token retrieval logic
+  return null;
+};
+
+// Validate response
+const validateResponse = (response) => {
+  // Check response status
+  if (response.status < 200 || response.status >= 300) {
+    throw new Error(`Invalid response status: ${response.status}`);
+  }
+
+  // Validate response headers
+  const requiredHeaders = ['content-type', 'x-request-id'];
+  for (const header of requiredHeaders) {
+    if (!response.headers[header]) {
+      throw new Error(`Missing required header: ${header}`);
+    }
+  }
+
+  // Validate response data
+  if (!response.data) {
+    throw new Error('Empty response data');
+  }
+};
+
+// Handle security errors
+const handleSecurityError = (error) => {
+  if (error.response) {
+    const status = error.response.status;
+    
+    switch (status) {
+      case 401:
+        // Unauthorized - redirect to login
+        handleUnauthorized();
+        break;
+      case 403:
+        // Forbidden - insufficient permissions
+        handleForbidden();
+        break;
+      case 429:
+        // Rate limited
+        handleRateLimit();
+        break;
+      default:
+        console.error('HTTP Error:', status, error.response.data);
+    }
+  } else if (error.request) {
+    // Network error
+    console.error('Network Error:', error.message);
+  } else {
+    // Other error
+    console.error('Error:', error.message);
+  }
+};
+
+// Handle unauthorized access
+const handleUnauthorized = () => {
+  // Clear stored tokens
+  // Redirect to login screen
+  console.log('Unauthorized access - redirecting to login');
+};
+
+// Handle forbidden access
+const handleForbidden = () => {
+  console.log('Insufficient permissions');
+};
+
+// Handle rate limiting
+const handleRateLimit = () => {
+  console.log('Rate limited - please try again later');
+};
+
+// Make secure GET request
+const makeSecureGetRequest = async (client, url, config = {}) => {
+  try {
+    const response = await client.get(url, config);
+    return response.data;
+  } catch (error) {
+    throw processError(error);
+  }
+};
+
+// Make secure POST request
+const makeSecurePostRequest = async (client, url, data, config = {}) => {
+  try {
+    const response = await client.post(url, data, config);
+    return response.data;
+  } catch (error) {
+    throw processError(error);
+  }
+};
+
+// Make secure PUT request
+const makeSecurePutRequest = async (client, url, data, config = {}) => {
+  try {
+    const response = await client.put(url, data, config);
+    return response.data;
+  } catch (error) {
+    throw processError(error);
+  }
+};
+
+// Make secure DELETE request
+const makeSecureDeleteRequest = async (client, url, config = {}) => {
+  try {
+    const response = await client.delete(url, config);
+    return response.data;
+  } catch (error) {
+    throw processError(error);
+  }
+};
+
+// Process error
+const processError = (error) => {
+  if (error.response) {
+    return {
+      type: 'HTTP_ERROR',
+      status: error.response.status,
+      message: error.response.data?.message || 'HTTP Error',
+      data: error.response.data,
+    };
+  } else if (error.request) {
+    return {
+      type: 'NETWORK_ERROR',
+      message: 'Network connection failed',
+      originalError: error.message,
+    };
+  } else {
+    return {
+      type: 'UNKNOWN_ERROR',
+      message: error.message || 'Unknown error occurred',
+      originalError: error,
+    };
+  }
+};
+
+// Export all functions
+export {
+  createSecureHttpClient,
+  makeSecureGetRequest,
+  makeSecurePostRequest,
+  makeSecurePutRequest,
+  makeSecureDeleteRequest,
+  processError,
+};
+```
+
+---
+
+## 📌 **Certificate Pinning**
+
+### **Certificate Pinning Implementation**
+
+<button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+```javascript
+import { Platform } from 'react-native';
+import { getSystemVersion } from 'react-native-device-info';
+
+// Certificate pinning configuration
+const PINNED_CERTIFICATES = {
+  'api.yourapp.com': [
+    'sha256/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=',
+    'sha256/BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB=',
+  ],
+  'cdn.yourapp.com': [
+    'sha256/CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC=',
+  ],
+};
+
+// Validate certificate for domain
+const validateCertificate = (domain, certificate) => {
+  const pinnedCerts = PINNED_CERTIFICATES[domain];
+  
+  if (!pinnedCerts) {
+    console.warn(`No pinned certificates for domain: ${domain}`);
+    return true; // Allow if no pins configured
+  }
+
+  const certificateHash = calculateCertificateHash(certificate);
+  
+  return pinnedCerts.includes(certificateHash);
+};
+
+// Calculate certificate hash
+const calculateCertificateHash = (certificate) => {
+  // This would typically use a crypto library
+  // For demonstration, we'll use a simplified approach
+  const crypto = require('crypto');
+  const hash = crypto.createHash('sha256');
+  hash.update(certificate);
+  return `sha256/${hash.digest('base64')}`;
+};
+
+// Get certificate pinning configuration
+const getPinningConfig = () => {
+  if (Platform.OS === 'android') {
+    return getAndroidPinningConfig();
+  } else if (Platform.OS === 'ios') {
+    return getIOSPinningConfig();
+  }
+  
+  return {};
+};
+
+// Android certificate pinning configuration
+const getAndroidPinningConfig = () => {
+  return {
+    cleartextTrafficPermitted: false,
+    certificateTransparency: true,
+    certificatePinning: {
+      enabled: true,
+      certificates: Object.values(PINNED_CERTIFICATES).flat(),
+    },
+  };
+};
+
+// iOS certificate pinning configuration
+const getIOSPinningConfig = () => {
+  return {
+    allowArbitraryLoads: false,
+    allowArbitraryLoadsInWebContent: false,
+    allowLocalNetworking: false,
+    exceptionDomains: Object.keys(PINNED_CERTIFICATES).reduce((domains, domain) => {
+      domains[domain] = {
+        NSExceptionAllowsInsecureHTTPLoads: false,
+        NSExceptionMinimumTLSVersion: 'TLSv1.2',
+        NSExceptionRequiresForwardSecrecy: true,
+      };
+      return domains;
+    }, {}),
+  };
+};
+
+// Export all functions
+export {
+  validateCertificate,
+  calculateCertificateHash,
+  getPinningConfig,
+  getAndroidPinningConfig,
+  getIOSPinningConfig,
+  PINNED_CERTIFICATES,
+};
+```
+
+### **Network Security Manager**
+
+<button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+```javascript
+import { Platform } from 'react-native';
+import CertificatePinning from './CertificatePinning';
+import SecureHttpClient from './SecureHttpClient';
+
+// Network Security Manager with functional approach
+const createNetworkSecurityManager = () => {
+  const securityConfig = getSecurityConfig();
+  const httpClient = createSecureHttpClient();
+  
+  return {
+    securityConfig,
+    httpClient,
+  };
+};
+
+// Get security configuration
+const getSecurityConfig = () => {
+  const baseConfig = {
+    timeout: 30000,
+    retryAttempts: 3,
+    retryDelay: 1000,
+    enableLogging: __DEV__,
+  };
+
+  if (Platform.OS === 'android') {
+    return {
+      ...baseConfig,
+      ...getAndroidPinningConfig(),
+    };
+  } else if (Platform.OS === 'ios') {
+    return {
+      ...baseConfig,
+      ...getIOSPinningConfig(),
+    };
+  }
+
+  return baseConfig;
+};
+
+// Validate network request
+const validateRequest = (url, method, data) => {
+  // Validate URL
+  if (!isValidUrl(url)) {
+    throw new Error('Invalid URL');
+  }
+
+  // Validate method
+  if (!isValidMethod(method)) {
+    throw new Error('Invalid HTTP method');
+  }
+
+  // Validate data
+  if (data && !isValidData(data)) {
+    throw new Error('Invalid request data');
+  }
+
+  return true;
+};
+
+// Check if URL is valid
+const isValidUrl = (url) => {
+  try {
+    const urlObj = new URL(url);
+    return urlObj.protocol === 'https:' || urlObj.protocol === 'http:';
+  } catch (error) {
+    return false;
+  }
+};
+
+// Check if HTTP method is valid
+const isValidMethod = (method) => {
+  const validMethods = ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'];
+  return validMethods.includes(method.toUpperCase());
+};
+
+// Check if data is valid
+const isValidData = (data) => {
+  if (typeof data === 'string') {
+    try {
+      JSON.parse(data);
+      return true;
+    } catch (error) {
+      return false;
+    }
+  }
+  
+  return typeof data === 'object' && data !== null;
+};
+
+// Make secure request
+const makeSecureRequest = async (httpClient, url, method, data = null, options = {}) => {
+  try {
+    // Validate request
+    validateRequest(url, method, data);
+
+    // Add security headers
+    const securityHeaders = getSecurityHeaders();
+    const requestOptions = {
+      ...options,
+      headers: {
+        ...securityHeaders,
+        ...options.headers,
+      },
+    };
+
+    // Make request based on method
+    let response;
+    switch (method.toUpperCase()) {
+      case 'GET':
+        response = await makeSecureGetRequest(httpClient, url, requestOptions);
+        break;
+      case 'POST':
+        response = await makeSecurePostRequest(httpClient, url, data, requestOptions);
+        break;
+      case 'PUT':
+        response = await makeSecurePutRequest(httpClient, url, data, requestOptions);
+        break;
+      case 'DELETE':
+        response = await makeSecureDeleteRequest(httpClient, url, requestOptions);
+        break;
+      default:
+        throw new Error(`Unsupported HTTP method: ${method}`);
+    }
+
+    // Validate response
+    validateResponse(response);
+
+    return response;
+  } catch (error) {
+    console.error('Secure request failed:', error);
+    throw error;
+  }
+};
+
+// Get security headers
+const getSecurityHeaders = () => {
+  return {
+    'X-Request-ID': generateRequestId(),
+    'X-Timestamp': Date.now().toString(),
+    'X-Platform': Platform.OS,
+    'X-App-Version': getAppVersion(),
+  };
+};
+
+// Generate request ID
+const generateRequestId = () => {
+  return Date.now().toString(36) + Math.random().toString(36).substr(2);
+};
+
+// Get app version
+const getAppVersion = () => {
+  return '1.0.0'; // Replace with actual version
+};
+
+// Validate response
+const validateResponse = (response) => {
+  // Check response status
+  if (response.status < 200 || response.status >= 300) {
+    throw new Error(`Invalid response status: ${response.status}`);
+  }
+
+  // Validate response headers
+  const requiredHeaders = ['content-type'];
+  for (const header of requiredHeaders) {
+    if (!response.headers[header]) {
+      throw new Error(`Missing required header: ${header}`);
+    }
+  }
+
+  // Validate response data
+  if (!response.data) {
+    throw new Error('Empty response data');
+  }
+};
+
+// Export all functions
+export {
+  createNetworkSecurityManager,
+  makeSecureRequest,
+  getSecurityHeaders,
+  generateRequestId,
+  getAppVersion,
+  validateResponse,
+  validateRequest,
+  isValidUrl,
+  isValidMethod,
+  isValidData,
+};
+```
+
+---
+
+## 🔐 **API Security**
+
+### **API Authentication Service**
+
+<button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+```javascript
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as Keychain from 'react-native-keychain';
+import CryptoJS from 'crypto-js';
+
+// API Authentication Service with functional approach
+const API_AUTH_CONFIG = {
+  baseURL: 'https://api.yourapp.com',
+  tokenKey: 'auth_token',
+  refreshTokenKey: 'refresh_token',
+  tokenExpiryKey: 'token_expiry',
+};
+
+// Authenticate user
+const authenticate = async (username, password) => {
+  try {
+    // Hash password
+    const hashedPassword = hashPassword(password);
+    
+    // Make authentication request
+    const response = await fetch(`${API_AUTH_CONFIG.baseURL}/auth/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Request-ID': generateRequestId(),
+      },
+      body: JSON.stringify({
+        username,
+        password: hashedPassword,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Authentication failed: ${response.status}`);
+    }
+
+    const data = await response.json();
+    
+    // Store tokens securely
+    await storeTokens(data.access_token, data.refresh_token, data.expires_in);
+    
+    return data;
+  } catch (error) {
+    console.error('Authentication error:', error);
+    throw error;
+  }
+};
+
+// Store tokens securely
+const storeTokens = async (accessToken, refreshToken, expiresIn) => {
+  try {
+    // Store access token in keychain
+    await Keychain.setInternetCredentials(
+      API_AUTH_CONFIG.tokenKey,
+      'access_token',
+      accessToken,
+      {
+        accessControl: Keychain.ACCESS_CONTROL.BIOMETRY_ANY,
+        authenticationType: Keychain.AUTHENTICATION_TYPE.DEVICE_PASSCODE_OR_BIOMETRICS,
+      }
+    );
+
+    // Store refresh token in keychain
+    await Keychain.setInternetCredentials(
+      API_AUTH_CONFIG.refreshTokenKey,
+      'refresh_token',
+      refreshToken,
+      {
+        accessControl: Keychain.ACCESS_CONTROL.BIOMETRY_ANY,
+        authenticationType: Keychain.AUTHENTICATION_TYPE.DEVICE_PASSCODE_OR_BIOMETRICS,
+      }
+    );
+
+    // Store token expiry
+    const expiryTime = Date.now() + (expiresIn * 1000);
+    await AsyncStorage.setItem(API_AUTH_CONFIG.tokenExpiryKey, expiryTime.toString());
+  } catch (error) {
+    console.error('Error storing tokens:', error);
+    throw error;
+  }
+};
+
+// Get access token
+const getAccessToken = async () => {
+  try {
+    const credentials = await Keychain.getInternetCredentials(API_AUTH_CONFIG.tokenKey);
+    return credentials ? credentials.password : null;
+  } catch (error) {
+    console.error('Error getting access token:', error);
+    return null;
+  }
+};
+
+// Get refresh token
+const getRefreshToken = async () => {
+  try {
+    const credentials = await Keychain.getInternetCredentials(API_AUTH_CONFIG.refreshTokenKey);
+    return credentials ? credentials.password : null;
+  } catch (error) {
+    console.error('Error getting refresh token:', error);
+    return null;
+  }
+};
+
+// Check if token is expired
+const isTokenExpired = async () => {
+  try {
+    const expiryTime = await AsyncStorage.getItem(API_AUTH_CONFIG.tokenExpiryKey);
+    if (!expiryTime) {
+      return true;
+    }
+    
+    return Date.now() >= parseInt(expiryTime);
+  } catch (error) {
+    console.error('Error checking token expiry:', error);
+    return true;
+  }
+};
+
+// Refresh access token
+const refreshAccessToken = async () => {
+  try {
+    const refreshToken = await getRefreshToken();
+    if (!refreshToken) {
+      throw new Error('No refresh token available');
+    }
+
+    const response = await fetch(`${API_AUTH_CONFIG.baseURL}/auth/refresh`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Request-ID': generateRequestId(),
+      },
+      body: JSON.stringify({
+        refresh_token: refreshToken,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Token refresh failed: ${response.status}`);
+    }
+
+    const data = await response.json();
+    
+    // Store new tokens
+    await storeTokens(data.access_token, data.refresh_token, data.expires_in);
+    
+    return data.access_token;
+  } catch (error) {
+    console.error('Token refresh error:', error);
+    throw error;
+  }
+};
+
+// Logout user
+const logout = async () => {
+  try {
+    // Clear tokens from keychain
+    await Keychain.resetInternetCredentials(API_AUTH_CONFIG.tokenKey);
+    await Keychain.resetInternetCredentials(API_AUTH_CONFIG.refreshTokenKey);
+    
+    // Clear token expiry
+    await AsyncStorage.removeItem(API_AUTH_CONFIG.tokenExpiryKey);
+    
+    // Make logout request to server
+    const accessToken = await getAccessToken();
+    if (accessToken) {
+      await fetch(`${API_AUTH_CONFIG.baseURL}/auth/logout`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${accessToken}`,
+          'X-Request-ID': generateRequestId(),
+        },
+      });
+    }
+  } catch (error) {
+    console.error('Logout error:', error);
+  }
+};
+
+// Hash password
+const hashPassword = (password) => {
+  const salt = CryptoJS.lib.WordArray.random(128/8).toString();
+  const hash = CryptoJS.PBKDF2(password, salt, {
+    keySize: 512/32,
+    iterations: 10000
+  });
+  return hash.toString();
+};
+
+// Generate request ID
+const generateRequestId = () => {
+  return Date.now().toString(36) + Math.random().toString(36).substr(2);
+};
+
+// Export all functions
+export {
+  authenticate,
+  storeTokens,
+  getAccessToken,
+  getRefreshToken,
+  isTokenExpired,
+  refreshAccessToken,
+  logout,
+  hashPassword,
+  generateRequestId,
+  API_AUTH_CONFIG,
+};
+```
+
+---
+
+## 🛡️ **Request/Response Security**
+
+### **Secure API Client**
+
+<button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+```javascript
+import { Platform } from 'react-native';
+import APIAuthenticationService from './APIAuthenticationService';
+import NetworkSecurityManager from './NetworkSecurityManager';
+
+// Secure API Client with functional approach
+const createSecureAPIClient = () => {
+  const baseURL = 'https://api.yourapp.com';
+  const securityManager = createNetworkSecurityManager();
+  
+  return {
+    baseURL,
+    securityManager,
+  };
+};
+
+// Make authenticated request
+const makeAuthenticatedRequest = async (securityManager, baseURL, endpoint, method, data = null, options = {}) => {
+  try {
+    // Check if token is expired
+    if (await isTokenExpired()) {
+      // Refresh token
+      await refreshAccessToken();
+    }
+
+    // Get access token
+    const accessToken = await getAccessToken();
+    if (!accessToken) {
+      throw new Error('No access token available');
+    }
+
+    // Add authorization header
+    const requestOptions = {
+      ...options,
+      headers: {
+        ...options.headers,
+        'Authorization': `Bearer ${accessToken}`,
+      },
+    };
+
+    // Make secure request
+    const url = `${baseURL}${endpoint}`;
+    const response = await makeSecureRequest(
+      securityManager.httpClient,
+      url,
+      method,
+      data,
+      requestOptions
+    );
+
+    return response;
+  } catch (error) {
+    console.error('Authenticated request failed:', error);
+    throw error;
+  }
+};
+
+// Get user profile
+const getUserProfile = async (securityManager, baseURL) => {
+  return await makeAuthenticatedRequest(securityManager, baseURL, '/user/profile', 'GET');
+};
+
+// Update user profile
+const updateUserProfile = async (securityManager, baseURL, profileData) => {
+  return await makeAuthenticatedRequest(securityManager, baseURL, '/user/profile', 'PUT', profileData);
+};
+
+// Get user data
+const getUserData = async (securityManager, baseURL) => {
+  return await makeAuthenticatedRequest(securityManager, baseURL, '/user/data', 'GET');
+};
+
+// Upload file
+const uploadFile = async (securityManager, baseURL, fileData) => {
+  const formData = new FormData();
+  formData.append('file', fileData);
+
+  return await makeAuthenticatedRequest(securityManager, baseURL, '/upload', 'POST', formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
+};
+
+// Export all functions
+export {
+  createSecureAPIClient,
+  makeAuthenticatedRequest,
+  getUserProfile,
+  updateUserProfile,
+  getUserData,
+  uploadFile,
+};
+```
+
+---
+
+## 🎯 **Best Practices**
+
+### **1. Transport Security**
+- Always use HTTPS
+- Implement certificate pinning
+- Use strong TLS versions
+- Validate certificates
+
+### **2. API Security**
+- Implement proper authentication
+- Use secure token storage
+- Implement token refresh
+- Validate all requests
+
+### **3. Data Protection**
+- Encrypt sensitive data
+- Validate all responses
+- Implement request signing
+- Monitor for anomalies
+
+---
+
+## ❓ **Interview Questions**
+
+### **Basic Questions**
+1. **What is certificate pinning and why is it important?**
+2. **How do you implement secure network communication?**
+3. **What are the benefits of TLS/SSL?**
+
+### **Advanced Questions**
+1. **How would you implement certificate pinning in React Native?**
+2. **Explain the authentication flow for mobile apps.**
+3. **How do you handle network security errors?**
+
+### **Practical Questions**
+1. **Implement secure HTTP client with certificate pinning.**
+2. **Create API authentication service with token refresh.**
+3. **Set up network security configuration for both platforms.**
+
+---
+
+## 🧭 Navigation
+
+<div class="navigation">
+    <a href="./01-Secure-Storage.md" class="nav-link prev">⬅️ Previous: Secure Storage</a>
+    <a href="./03-Data-Encryption.md" class="nav-link next">Next: Data Encryption ➡️</a>
+</div>
+
+---
+
+<script src="../../common-scripts.js"></script>
+
+*Last updated: December 2024*
