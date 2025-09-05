@@ -396,19 +396,14 @@ export default ZustandExample;
 
 ---
 
-## 🔗 **Navigation**
+## 🧭 Navigation
 
-<div class="nav-container">
+<div class="navigation">
     <a href="./02-Redux-Toolkit-RTK-Query.md" class="nav-link prev">⬅️ Previous: Redux Toolkit & RTK Query</a>
     <a href="./04-State-Persistence-Hydration.md" class="nav-link next">Next: State Persistence & Hydration ➡️</a>
 </div>
 
 ---
 
-## 📋 Copy Code Functionality
-
-<script src="../../common-scripts.js"></script>
-
----
 
 *Last updated: December 2024*

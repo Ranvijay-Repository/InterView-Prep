@@ -414,19 +414,14 @@ export default PhysicsBasedExample;
 
 ---
 
-## 🔗 **Navigation**
+## 🧭 Navigation
 
-<div class="nav-container">
+<div class="navigation">
     <a href="./03-Reanimated-2-3.md" class="nav-link prev">⬅️ Previous: Reanimated 2/3</a>
     <a href="../07-Native-Interoperability/01-Old-vs-New-Architecture.md" class="nav-link next">Next: Old vs New Architecture ➡️</a>
 </div>
 
 ---
 
-## 📋 Copy Code Functionality
-
-<script src="../../common-scripts.js"></script>
-
----
 
 *Last updated: December 2024*

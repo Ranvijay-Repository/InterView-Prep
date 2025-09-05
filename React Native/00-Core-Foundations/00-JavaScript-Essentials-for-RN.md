@@ -639,46 +639,58 @@ useEffect(() => {
 ### **3. Error Boundaries**
 
 ```javascript
-// ✅ Implement error boundaries
-class ErrorBoundary extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { hasError: false };
-  }
+// ✅ Implement error boundaries with functional components
+import React, { useState, useEffect } from 'react';
+import { Text } from 'react-native';
+
+const ErrorBoundary = ({ children }) => {
+  const [hasError, setHasError] = useState(false);
+  const [error, setError] = useState(null);
+  const [errorInfo, setErrorInfo] = useState(null);
   
-  static getDerivedStateFromError(error) {
-    return { hasError: true };
-  }
-  
-  componentDidCatch(error, errorInfo) {
-    console.error('Error caught by boundary:', error, errorInfo);
-  }
-  
-  render() {
-    if (this.state.hasError) {
-      return <Text>Something went wrong.</Text>;
-    }
+  useEffect(() => {
+    const handleError = (error, errorInfo) => {
+      setHasError(true);
+      setError(error);
+      setErrorInfo(errorInfo);
+      console.error('Error caught by boundary:', error, errorInfo);
+    };
     
-    return this.props.children;
+    // Set up error handling
+    const originalConsoleError = console.error;
+    console.error = (...args) => {
+      if (args[0]?.includes?.('Error')) {
+        handleError(args[0], args[1]);
+      }
+      originalConsoleError(...args);
+    };
+    
+    return () => {
+      console.error = originalConsoleError;
+    };
+  }, []);
+  
+  if (hasError) {
+    return <Text>Something went wrong.</Text>;
   }
-}
+  
+  return children;
+};
+
+export default ErrorBoundary;
 ```
 
 ---
 
-## 🔗 **Navigation**
+## 🧭 Navigation
 
-<div class="nav-container">
+<div class="navigation">
     <a href="../React-Native.md" class="nav-link prev">⬅️ Previous: React Native Master Index</a>
     <a href="./01-React-Essentials-for-RN.md" class="nav-link next">Next: React Essentials for RN ➡️</a>
 </div>
 
 ---
 
-## 📋 Copy Code Functionality
-
 <script src="../../common-scripts.js"></script>
-
----
 
 *Last updated: December 2024*

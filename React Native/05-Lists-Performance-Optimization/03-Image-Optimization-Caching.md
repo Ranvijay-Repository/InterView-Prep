@@ -488,19 +488,14 @@ export default ImageGallery;
 
 ---
 
-## 🔗 **Navigation**
+## 🧭 Navigation
 
-<div class="nav-container">
+<div class="navigation">
     <a href="./02-Virtualization-Optimization.md" class="nav-link prev">⬅️ Previous: Virtualization & Optimization</a>
     <a href="./04-Performance-Profiling.md" class="nav-link next">Next: Performance Profiling ➡️</a>
 </div>
 
 ---
 
-## 📋 Copy Code Functionality
-
-<script src="../../common-scripts.js"></script>
-
----
 
 *Last updated: December 2024*

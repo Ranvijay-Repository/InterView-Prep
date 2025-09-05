@@ -317,19 +317,14 @@ export default BasicReanimatedExample;
 
 ---
 
-## 🔗 **Navigation**
+## 🧭 Navigation
 
-<div class="nav-container">
+<div class="navigation">
     <a href="./02-Gesture-Handler.md" class="nav-link prev">⬅️ Previous: Gesture Handler</a>
     <a href="./04-Physics-Based-Animations.md" class="nav-link next">Next: Physics-Based Animations ➡️</a>
 </div>
 
 ---
 
-## 📋 Copy Code Functionality
-
-<script src="../../common-scripts.js"></script>
-
----
 
 *Last updated: December 2024*

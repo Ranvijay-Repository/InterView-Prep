@@ -345,19 +345,14 @@ export default BasicGestureExample;
 
 ---
 
-## 🔗 **Navigation**
+## 🧭 Navigation
 
-<div class="nav-container">
+<div class="navigation">
     <a href="./01-Animated-API-LayoutAnimation.md" class="nav-link prev">⬅️ Previous: Animated API & LayoutAnimation</a>
     <a href="./03-Reanimated-2-3.md" class="nav-link next">Next: Reanimated 2/3 ➡️</a>
 </div>
 
 ---
 
-## 📋 Copy Code Functionality
-
-<script src="../../common-scripts.js"></script>
-
----
 
 *Last updated: December 2024*

@@ -194,11 +194,6 @@ Use [Advanced Debugging](19-Advanced-Debugging/01-Debugging-Tools.md) and [Perfo
 
 ---
 
-## 📋 Copy Code Functionality
-
-<script src="../common-scripts.js"></script>
-
----
 
 ## 🎯 **Ready to Master React Native?**
 
@@ -210,7 +205,7 @@ This comprehensive documentation system covers everything from basic concepts to
 
 ---
 
-## 🔗 **Navigation**
+## 🧭 Navigation
 
 | Previous | Next |
 |----------|------|

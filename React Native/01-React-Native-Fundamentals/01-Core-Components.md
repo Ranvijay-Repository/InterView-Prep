@@ -507,19 +507,14 @@ export default ImageWithLoading;
 
 ---
 
-## 🔗 **Navigation**
+## 🧭 Navigation
 
-<div class="nav-container">
+<div class="navigation">
     <a href="../00-Core-Foundations/02-TypeScript-Essentials-for-RN.md" class="nav-link prev">⬅️ Previous: TypeScript Essentials for RN</a>
     <a href="./02-Styling-Flexbox.md" class="nav-link next">Next: Styling & Flexbox ➡️</a>
 </div>
 
 ---
 
-## 📋 Copy Code Functionality
-
-<script src="../../common-scripts.js"></script>
-
----
 
 *Last updated: December 2024*

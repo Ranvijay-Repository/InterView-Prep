@@ -387,19 +387,14 @@ export default CameraManager;
 
 ---
 
-## 🔗 **Navigation**
+## 🧭 Navigation
 
-<div class="nav-container">
+<div class="navigation">
     <a href="./01-Permissions-Security.md" class="nav-link prev">⬅️ Previous: Permissions & Security</a>
     <a href="./03-Background-Tasks.md" class="nav-link next">Next: Background Tasks ➡️</a>
 </div>
 
 ---
 
-## 📋 Copy Code Functionality
-
-<script src="../../common-scripts.js"></script>
-
----
 
 *Last updated: December 2024*

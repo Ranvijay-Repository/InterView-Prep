@@ -368,19 +368,14 @@ export default FlatListExample;
 
 ---
 
-## 🔗 **Navigation**
+## 🧭 Navigation
 
-<div class="nav-container">
+<div class="navigation">
     <a href="../04-State-Management/04-State-Persistence-Hydration.md" class="nav-link prev">⬅️ Previous: State Persistence & Hydration</a>
     <a href="./02-Virtualization-Optimization.md" class="nav-link next">Next: Virtualization & Optimization ➡️</a>
 </div>
 
 ---
 
-## 📋 Copy Code Functionality
-
-<script src="../../common-scripts.js"></script>
-
----
 
 *Last updated: December 2024*

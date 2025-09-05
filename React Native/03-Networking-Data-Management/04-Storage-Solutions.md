@@ -316,19 +316,14 @@ export default AsyncStorageExample;
 
 ---
 
-## 🔗 **Navigation**
+## 🧭 Navigation
 
-<div class="nav-container">
+<div class="navigation">
     <a href="./03-Offline-First-Strategies.md" class="nav-link prev">⬅️ Previous: Offline-First Strategies</a>
     <a href="../04-State-Management/01-Local-State-Context-API.md" class="nav-link next">Next: Local State & Context API ➡️</a>
 </div>
 
 ---
 
-## 📋 Copy Code Functionality
-
-<script src="../../common-scripts.js"></script>
-
----
 
 *Last updated: December 2024*

@@ -254,19 +254,14 @@ export default RootNavigator;
 
 ---
 
-## 🔗 **Navigation**
+## 🧭 Navigation
 
-<div class="nav-container">
+<div class="navigation">
     <a href="./01-React-Navigation-Basics.md" class="nav-link prev">⬅️ Previous: React Navigation Basics</a>
     <a href="./03-Navigation-State-Params.md" class="nav-link next">Next: Navigation State & Params ➡️</a>
 </div>
 
 ---
 
-## 📋 Copy Code Functionality
-
-<script src="../../common-scripts.js"></script>
-
----
 
 *Last updated: December 2024*

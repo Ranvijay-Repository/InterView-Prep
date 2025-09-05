@@ -354,19 +354,14 @@ export default HomeScreen;
 
 ---
 
-## 🔗 **Navigation**
+## 🧭 Navigation
 
-<div class="nav-container">
+<div class="navigation">
     <a href="./02-Nested-Navigators.md" class="nav-link prev">⬅️ Previous: Nested Navigators</a>
     <a href="./04-Deep-Linking-Universal-Links.md" class="nav-link next">Next: Deep Linking & Universal Links ➡️</a>
 </div>
 
 ---
 
-## 📋 Copy Code Functionality
-
-<script src="../../common-scripts.js"></script>
-
----
 
 *Last updated: December 2024*

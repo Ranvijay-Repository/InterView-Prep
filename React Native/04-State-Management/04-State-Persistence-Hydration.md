@@ -462,19 +462,14 @@ export default PersistenceExample;
 
 ---
 
-## 🔗 **Navigation**
+## 🧭 Navigation
 
-<div class="nav-container">
+<div class="navigation">
     <a href="./03-Modern-State-Solutions.md" class="nav-link prev">⬅️ Previous: Modern State Solutions</a>
     <a href="../05-Lists-Performance-Optimization/01-FlatList-SectionList.md" class="nav-link next">Next: FlatList & SectionList ➡️</a>
 </div>
 
 ---
 
-## 📋 Copy Code Functionality
-
-<script src="../../common-scripts.js"></script>
-
----
 
 *Last updated: December 2024*

@@ -1072,19 +1072,14 @@ if (isUser(data)) {
 
 ---
 
-## 🔗 **Navigation**
+## 🧭 Navigation
 
-<div class="nav-container">
+<div class="navigation">
     <a href="./01-React-Essentials-for-RN.md" class="nav-link prev">⬅️ Previous: React Essentials for RN</a>
     <a href="../01-React-Native-Fundamentals/01-Core-Components.md" class="nav-link next">Next: Core Components ➡️</a>
 </div>
 
 ---
 
-## 📋 Copy Code Functionality
-
-<script src="../../common-scripts.js"></script>
-
----
 
 *Last updated: December 2024*

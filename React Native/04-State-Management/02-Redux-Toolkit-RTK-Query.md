@@ -300,19 +300,14 @@ export default userSlice.reducer;
 
 ---
 
-## 🔗 **Navigation**
+## 🧭 Navigation
 
-<div class="nav-container">
+<div class="navigation">
     <a href="./01-Local-State-Context-API.md" class="nav-link prev">⬅️ Previous: Local State & Context API</a>
     <a href="./03-Modern-State-Solutions.md" class="nav-link next">Next: Modern State Solutions ➡️</a>
 </div>
 
 ---
 
-## 📋 Copy Code Functionality
-
-<script src="../../common-scripts.js"></script>
-
----
 
 *Last updated: December 2024*

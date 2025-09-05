@@ -389,19 +389,14 @@ export default OptimizedFlatList;
 
 ---
 
-## 🔗 **Navigation**
+## 🧭 Navigation
 
-<div class="nav-container">
+<div class="navigation">
     <a href="./01-FlatList-SectionList.md" class="nav-link prev">⬅️ Previous: FlatList & SectionList</a>
     <a href="./03-Image-Optimization-Caching.md" class="nav-link next">Next: Image Optimization & Caching ➡️</a>
 </div>
 
 ---
 
-## 📋 Copy Code Functionality
-
-<script src="../../common-scripts.js"></script>
-
----
 
 *Last updated: December 2024*

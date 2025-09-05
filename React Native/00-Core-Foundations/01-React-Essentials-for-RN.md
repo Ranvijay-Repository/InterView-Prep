@@ -635,47 +635,64 @@ const SearchScreen = () => {
 ### **Error Boundaries**
 
 ```javascript
-// ✅ Error boundary for React Native
-class ErrorBoundary extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { hasError: false, error: null };
-  }
+// ✅ Error boundary for React Native with functional components
+import React, { useState, useEffect } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+
+const ErrorBoundary = ({ children, onError }) => {
+  const [hasError, setHasError] = useState(false);
+  const [error, setError] = useState(null);
   
-  static getDerivedStateFromError(error) {
-    return { hasError: true, error };
-  }
-  
-  componentDidCatch(error, errorInfo) {
-    console.error('Error caught by boundary:', error, errorInfo);
+  useEffect(() => {
+    const handleError = (error, errorInfo) => {
+      setHasError(true);
+      setError(error);
+      console.error('Error caught by boundary:', error, errorInfo);
+      
+      // Log to crash reporting service
+      if (onError) {
+        onError(error, errorInfo);
+      }
+    };
     
-    // Log to crash reporting service
-    if (this.props.onError) {
-      this.props.onError(error, errorInfo);
-    }
+    // Set up error handling
+    const originalConsoleError = console.error;
+    console.error = (...args) => {
+      if (args[0]?.includes?.('Error')) {
+        handleError(args[0], args[1]);
+      }
+      originalConsoleError(...args);
+    };
+    
+    return () => {
+      console.error = originalConsoleError;
+    };
+  }, [onError]);
+  
+  const handleRetry = () => {
+    setHasError(false);
+    setError(null);
+  };
+  
+  if (hasError) {
+    return (
+      <View style={styles.errorContainer}>
+        <Text style={styles.errorTitle}>Something went wrong</Text>
+        <Text style={styles.errorMessage}>
+          {error?.message || 'An unexpected error occurred'}
+        </Text>
+        <TouchableOpacity 
+          style={styles.retryButton}
+          onPress={handleRetry}
+        >
+          <Text style={styles.retryButtonText}>Try Again</Text>
+        </TouchableOpacity>
+      </View>
+    );
   }
   
-  render() {
-    if (this.state.hasError) {
-      return (
-        <View style={styles.errorContainer}>
-          <Text style={styles.errorTitle}>Something went wrong</Text>
-          <Text style={styles.errorMessage}>
-            {this.state.error?.message || 'An unexpected error occurred'}
-          </Text>
-          <TouchableOpacity 
-            style={styles.retryButton}
-            onPress={() => this.setState({ hasError: false, error: null })}
-          >
-            <Text style={styles.retryButtonText}>Try Again</Text>
-          </TouchableOpacity>
-        </View>
-      );
-    }
-    
-    return this.props.children;
-  }
-}
+  return children;
+};
 
 // Usage
 const App = () => (
@@ -882,19 +899,14 @@ const handlePress = useCallback(() => {
 
 ---
 
-## 🔗 **Navigation**
+## 🧭 Navigation
 
-<div class="nav-container">
+<div class="navigation">
     <a href="./00-JavaScript-Essentials-for-RN.md" class="nav-link prev">⬅️ Previous: JavaScript Essentials for RN</a>
     <a href="./02-TypeScript-Essentials-for-RN.md" class="nav-link next">Next: TypeScript Essentials for RN ➡️</a>
 </div>
 
 ---
 
-## 📋 Copy Code Functionality
-
-<script src="../../common-scripts.js"></script>
-
----
 
 *Last updated: December 2024*

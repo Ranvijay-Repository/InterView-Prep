@@ -472,19 +472,14 @@ export default PerformanceMonitor;
 
 ---
 
-## 🔗 **Navigation**
+## 🧭 Navigation
 
-<div class="nav-container">
+<div class="navigation">
     <a href="./03-Image-Optimization-Caching.md" class="nav-link prev">⬅️ Previous: Image Optimization & Caching</a>
     <a href="../06-Animations-Gestures/01-Animated-API-LayoutAnimation.md" class="nav-link next">Next: Animated API & LayoutAnimation ➡️</a>
 </div>
 
 ---
 
-## 📋 Copy Code Functionality
-
-<script src="../../common-scripts.js"></script>
-
----
 
 *Last updated: December 2024*

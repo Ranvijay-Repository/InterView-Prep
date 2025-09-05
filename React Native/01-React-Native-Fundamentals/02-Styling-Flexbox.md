@@ -551,19 +551,14 @@ export default LayoutProperties;
 
 ---
 
-## 🔗 **Navigation**
+## 🧭 Navigation
 
-<div class="nav-container">
+<div class="navigation">
     <a href="./01-Core-Components.md" class="nav-link prev">⬅️ Previous: Core Components</a>
     <a href="./03-Platform-APIs.md" class="nav-link next">Next: Platform APIs ➡️</a>
 </div>
 
 ---
 
-## 📋 Copy Code Functionality
-
-<script src="../../common-scripts.js"></script>
-
----
 
 *Last updated: December 2024*

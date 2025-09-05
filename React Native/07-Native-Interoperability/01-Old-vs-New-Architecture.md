@@ -346,19 +346,14 @@ export default NewArchitectureBenefits;
 
 ---
 
-## 🔗 **Navigation**
+## 🧭 Navigation
 
-<div class="nav-container">
+<div class="navigation">
     <a href="../06-Animations-Gestures/04-Physics-Based-Animations.md" class="nav-link prev">⬅️ Previous: Physics-Based Animations</a>
     <a href="./02-JSI-Fabric-TurboModules.md" class="nav-link next">Next: JSI, Fabric & TurboModules ➡️</a>
 </div>
 
 ---
 
-## 📋 Copy Code Functionality
-
-<script src="../../common-scripts.js"></script>
-
----
 
 *Last updated: December 2024*

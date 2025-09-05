@@ -348,19 +348,14 @@ export default CustomViewExample;
 
 ---
 
-## 🔗 **Navigation**
+## 🧭 Navigation
 
-<div class="nav-container">
+<div class="navigation">
     <a href="./03-Codegen-TurboModules.md" class="nav-link prev">⬅️ Previous: Codegen & TurboModules</a>
     <a href="../08-Platform-Capabilities/01-Permissions-Security.md" class="nav-link next">Next: Permissions & Security ➡️</a>
 </div>
 
 ---
 
-## 📋 Copy Code Functionality
-
-<script src="../../common-scripts.js"></script>
-
----
 
 *Last updated: December 2024*

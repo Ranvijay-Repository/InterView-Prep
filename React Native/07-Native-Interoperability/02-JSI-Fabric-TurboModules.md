@@ -376,19 +376,14 @@ export default FabricExample;
 
 ---
 
-## 🔗 **Navigation**
+## 🧭 Navigation
 
-<div class="nav-container">
+<div class="navigation">
     <a href="./01-Old-vs-New-Architecture.md" class="nav-link prev">⬅️ Previous: Old vs New Architecture</a>
     <a href="./03-Codegen-TurboModules.md" class="nav-link next">Next: Codegen & TurboModules ➡️</a>
 </div>
 
 ---
 
-## 📋 Copy Code Functionality
-
-<script src="../../common-scripts.js"></script>
-
----
 
 *Last updated: December 2024*

@@ -435,19 +435,14 @@ export default ThreadingExample;
 
 ---
 
-## 🔗 **Navigation**
+## 🧭 Navigation
 
-<div class="nav-container">
+<div class="navigation">
     <a href="./03-Platform-APIs.md" class="nav-link prev">⬅️ Previous: Platform APIs</a>
     <a href="./05-Touch-Handling-Gestures.md" class="nav-link next">Next: Touch Handling & Gestures ➡️</a>
 </div>
 
 ---
 
-## 📋 Copy Code Functionality
-
-<script src="../../common-scripts.js"></script>
-
----
 
 *Last updated: December 2024*

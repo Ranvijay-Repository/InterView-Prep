@@ -382,19 +382,14 @@ export default TurboModuleExample;
 
 ---
 
-## 🔗 **Navigation**
+## 🧭 Navigation
 
-<div class="nav-container">
+<div class="navigation">
     <a href="./02-JSI-Fabric-TurboModules.md" class="nav-link prev">⬅️ Previous: JSI, Fabric & TurboModules</a>
     <a href="./04-Native-UI-Components.md" class="nav-link next">Next: Native UI Components ➡️</a>
 </div>
 
 ---
 
-## 📋 Copy Code Functionality
-
-<script src="../../common-scripts.js"></script>
-
----
 
 *Last updated: December 2024*

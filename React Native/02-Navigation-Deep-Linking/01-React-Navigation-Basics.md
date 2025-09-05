@@ -357,19 +357,14 @@ export default StackNavigatorWithParams;
 
 ---
 
-## 🔗 **Navigation**
+## 🧭 Navigation
 
-<div class="nav-container">
+<div class="navigation">
     <a href="../01-React-Native-Fundamentals/06-DevMenu-Metro-Debugging.md" class="nav-link prev">⬅️ Previous: DevMenu Metro Debugging</a>
     <a href="./02-Nested-Navigators.md" class="nav-link next">Next: Nested Navigators ➡️</a>
 </div>
 
 ---
 
-## 📋 Copy Code Functionality
-
-<script src="../../common-scripts.js"></script>
-
----
 
 *Last updated: December 2024*

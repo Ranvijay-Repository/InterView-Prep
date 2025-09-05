@@ -311,19 +311,14 @@ export default TouchableHighlightExample;
 
 ---
 
-## 🔗 **Navigation**
+## 🧭 Navigation
 
-<div class="nav-container">
+<div class="navigation">
     <a href="./04-App-Lifecycle-Threads.md" class="nav-link prev">⬅️ Previous: App Lifecycle & Threads</a>
     <a href="./06-DevMenu-Metro-Debugging.md" class="nav-link next">Next: DevMenu Metro Debugging ➡️</a>
 </div>
 
 ---
 
-## 📋 Copy Code Functionality
-
-<script src="../../common-scripts.js"></script>
-
----
 
 *Last updated: December 2024*

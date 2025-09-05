@@ -288,19 +288,14 @@ export default DeepLinkingExample;
 
 ---
 
-## 🔗 **Navigation**
+## 🧭 Navigation
 
-<div class="nav-container">
+<div class="navigation">
     <a href="./03-Navigation-State-Params.md" class="nav-link prev">⬅️ Previous: Navigation State & Params</a>
     <a href="../03-Networking-Data-Management/01-Networking-Fundamentals.md" class="nav-link next">Next: Networking Fundamentals ➡️</a>
 </div>
 
 ---
 
-## 📋 Copy Code Functionality
-
-<script src="../../common-scripts.js"></script>
-
----
 
 *Last updated: December 2024*

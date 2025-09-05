@@ -487,19 +487,14 @@ export default NotificationManager;
 
 ---
 
-## 🔗 **Navigation**
+## 🧭 Navigation
 
-<div class="nav-container">
+<div class="navigation">
     <a href="./03-Background-Tasks.md" class="nav-link prev">⬅️ Previous: Background Tasks</a>
     <a href="../09-Testing-Quality/01-Unit-Testing.md" class="nav-link next">Next: Unit Testing ➡️</a>
 </div>
 
 ---
 
-## 📋 Copy Code Functionality
-
-<script src="../../common-scripts.js"></script>
-
----
 
 *Last updated: December 2024*

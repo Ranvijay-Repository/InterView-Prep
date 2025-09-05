@@ -294,19 +294,14 @@ npx react-native bundle --platform android --dev false --entry-file index.js --b
 
 ---
 
-## 🔗 **Navigation**
+## 🧭 Navigation
 
-<div class="nav-container">
+<div class="navigation">
     <a href="./05-Touch-Handling-Gestures.md" class="nav-link prev">⬅️ Previous: Touch Handling & Gestures</a>
     <a href="../02-Navigation-Deep-Linking/01-React-Navigation-Basics.md" class="nav-link next">Next: React Navigation Basics ➡️</a>
 </div>
 
 ---
 
-## 📋 Copy Code Functionality
-
-<script src="../../common-scripts.js"></script>
-
----
 
 *Last updated: December 2024*

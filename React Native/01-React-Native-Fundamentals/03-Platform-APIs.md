@@ -361,19 +361,14 @@ export default DimensionsExample;
 
 ---
 
-## 🔗 **Navigation**
+## 🧭 Navigation
 
-<div class="nav-container">
+<div class="navigation">
     <a href="./02-Styling-Flexbox.md" class="nav-link prev">⬅️ Previous: Styling & Flexbox</a>
     <a href="./04-App-Lifecycle-Threads.md" class="nav-link next">Next: App Lifecycle & Threads ➡️</a>
 </div>
 
 ---
 
-## 📋 Copy Code Functionality
-
-<script src="../../common-scripts.js"></script>
-
----
 
 *Last updated: December 2024*

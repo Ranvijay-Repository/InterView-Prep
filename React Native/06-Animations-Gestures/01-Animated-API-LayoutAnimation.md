@@ -299,19 +299,14 @@ export default BasicAnimatedExample;
 
 ---
 
-## 🔗 **Navigation**
+## 🧭 Navigation
 
-<div class="nav-container">
+<div class="navigation">
     <a href="../05-Lists-Performance-Optimization/04-Performance-Profiling.md" class="nav-link prev">⬅️ Previous: Performance Profiling</a>
     <a href="./02-Gesture-Handler.md" class="nav-link next">Next: Gesture Handler ➡️</a>
 </div>
 
 ---
 
-## 📋 Copy Code Functionality
-
-<script src="../../common-scripts.js"></script>
-
----
 
 *Last updated: December 2024*

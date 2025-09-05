@@ -370,19 +370,14 @@ export default LocalStateExample;
 
 ---
 
-## 🔗 **Navigation**
+## 🧭 Navigation
 
-<div class="nav-container">
+<div class="navigation">
     <a href="../03-Networking-Data-Management/04-Storage-Solutions.md" class="nav-link prev">⬅️ Previous: Storage Solutions</a>
     <a href="./02-Redux-Toolkit-RTK-Query.md" class="nav-link next">Next: Redux Toolkit & RTK Query ➡️</a>
 </div>
 
 ---
 
-## 📋 Copy Code Functionality
-
-<script src="../../common-scripts.js"></script>
-
----
 
 *Last updated: December 2024*

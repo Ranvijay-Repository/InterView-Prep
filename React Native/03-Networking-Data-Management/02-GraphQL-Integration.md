@@ -343,19 +343,14 @@ export default PostsScreen;
 
 ---
 
-## 🔗 **Navigation**
+## 🧭 Navigation
 
-<div class="nav-container">
+<div class="navigation">
     <a href="./01-Networking-Fundamentals.md" class="nav-link prev">⬅️ Previous: Networking Fundamentals</a>
     <a href="./03-Offline-First-Strategies.md" class="nav-link next">Next: Offline-First Strategies ➡️</a>
 </div>
 
 ---
 
-## 📋 Copy Code Functionality
-
-<script src="../../common-scripts.js"></script>
-
----
 
 *Last updated: December 2024*
