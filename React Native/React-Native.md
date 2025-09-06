@@ -53,13 +53,13 @@
 
 ### 🔹 **7. Native Interoperability**
 - [01. Old vs New Architecture](07-Native-Interoperability/01-Old-vs-New-Architecture.md)
-- [02. JSI & Fabric](07-Native-Interoperability/02-JSI-Fabric.md)
-- [03. TurboModules](07-Native-Interoperability/03-TurboModules.md)
-- [04. Custom Native Components](07-Native-Interoperability/04-Custom-Native-Components.md)
+- [02. JSI Fabric TurboModules](07-Native-Interoperability/02-JSI-Fabric-TurboModules.md)
+- [03. Codegen TurboModules](07-Native-Interoperability/03-Codegen-TurboModules.md)
+- [04. Native UI Components](07-Native-Interoperability/04-Native-UI-Components.md)
 
 ### 🔹 **8. Platform Capabilities**
 - [01. Permissions & Security](08-Platform-Capabilities/01-Permissions-Security.md)
-- [02. Camera & Media](08-Platform-Capabilities/02-Camera-Media.md)
+- [02. Camera Media FileSystem](08-Platform-Capabilities/02-Camera-Media-FileSystem.md)
 - [03. Background Tasks](08-Platform-Capabilities/03-Background-Tasks.md)
 - [04. Push Notifications](08-Platform-Capabilities/04-Push-Notifications.md)
 
@@ -67,10 +67,10 @@
 - [01. Unit Testing](09-Testing-Quality/01-Unit-Testing.md)
 - [02. Integration Testing](09-Testing-Quality/02-Integration-Testing.md)
 - [03. E2E Testing](09-Testing-Quality/03-E2E-Testing.md)
-- [04. Performance Testing](09-Testing-Quality/04-Performance-Testing.md)
+- [04. Quality Assurance](09-Testing-Quality/04-Quality-Assurance.md)
 
 ### 🔹 **10. Build, Release & CI/CD**
-- [01. Metro & Bundling](10-Build-Release-CICD/01-Metro-Bundling.md)
+- [01. Metro Config Bundling](10-Build-Release-CICD/01-Metro-Config-Bundling.md)
 - [02. Android Build Process](10-Build-Release-CICD/02-Android-Build-Process.md)
 - [03. iOS Build Process](10-Build-Release-CICD/03-iOS-Build-Process.md)
 - [04. CI/CD Pipelines](10-Build-Release-CICD/04-CICD-Pipelines.md)
@@ -78,44 +78,45 @@
 ### 🔹 **11. Security & Privacy**
 - [01. Secure Storage](11-Security-Privacy/01-Secure-Storage.md)
 - [02. Network Security](11-Security-Privacy/02-Network-Security.md)
-- [03. Code Protection](11-Security-Privacy/03-Code-Protection.md)
-- [04. Privacy Compliance](11-Security-Privacy/04-Privacy-Compliance.md)
+- [03. Data Encryption](11-Security-Privacy/03-Data-Encryption.md)
+- [04. Security Best Practices](11-Security-Privacy/04-Security-Best-Practices.md)
 
 ### 🔹 **12. Accessibility & Internationalization**
-- [01. Accessibility Fundamentals](12-Accessibility-Internationalization/01-Accessibility-Fundamentals.md)
-- [02. Advanced Accessibility](12-Accessibility-Internationalization/02-Advanced-Accessibility.md)
-- [03. Internationalization](12-Accessibility-Internationalization/03-Internationalization.md)
-- [04. RTL Support](12-Accessibility-Internationalization/04-RTL-Support.md)
+- [01. Accessibility Basics](12-Accessibility-Internationalization/01-Accessibility-Basics.md)
+- [02. Internationalization](12-Accessibility-Internationalization/02-Internationalization.md)
+- [03. Accessibility Testing](12-Accessibility-Internationalization/03-Accessibility-Testing.md)
+- [04. Accessibility Best Practices](12-Accessibility-Internationalization/04-Accessibility-Best-Practices.md)
 
 ### 🔹 **13. Architecture & Scaling**
 - [01. Clean Architecture](13-Architecture-Scaling/01-Clean-Architecture.md)
-- [02. Project Structure](13-Architecture-Scaling/02-Project-Structure.md)
-- [03. Monorepo Management](13-Architecture-Scaling/03-Monorepo-Management.md)
-- [04. Error Handling & Monitoring](13-Architecture-Scaling/04-Error-Handling-Monitoring.md)
+- [02. MVVM Pattern](13-Architecture-Scaling/02-MVVM-Pattern.md)
+- [03. Feature-Based Modules](13-Architecture-Scaling/03-Feature-Based-Modules.md)
+- [04. Monorepo Management](13-Architecture-Scaling/04-Monorepo-Management.md)
 
 ### 🔹 **14. Expo vs Bare Workflow**
 - [01. Expo Overview](14-Expo-vs-Bare-Workflow/01-Expo-Overview.md)
 - [02. Bare Workflow](14-Expo-vs-Bare-Workflow/02-Bare-Workflow.md)
-- [03. Migration Strategies](14-Expo-vs-Bare-Workflow/03-Migration-Strategies.md)
-- [04. Custom Dev Clients](14-Expo-vs-Bare-Workflow/04-Custom-Dev-Clients.md)
+- [03. Expo vs Bare Comparison](14-Expo-vs-Bare-Workflow/03-Expo-vs-Bare-Comparison.md)
+- [04. Migration Strategies](14-Expo-vs-Bare-Workflow/04-Migration-Strategies.md)
 
 ### 🔹 **15. Error Handling & Recovery**
 - [01. Error Boundaries](15-Error-Handling-Recovery/01-Error-Boundaries.md)
-- [02. Crash Reporting](15-Error-Handling-Recovery/02-Crash-Reporting.md)
+- [02. Error Handling Patterns](15-Error-Handling-Recovery/02-Error-Handling-Patterns.md)
 - [03. Error Recovery Strategies](15-Error-Handling-Recovery/03-Error-Recovery-Strategies.md)
-- [04. Offline Error Handling](15-Error-Handling-Recovery/04-Offline-Error-Handling.md)
+- [04. Error Reporting Analytics](15-Error-Handling-Recovery/04-Error-Reporting-Analytics.md)
 
 ### 🔹 **16. Memory Management**
-- [01. Memory Leaks](16-Memory-Management/01-Memory-Leaks.md)
-- [02. Image Memory Optimization](16-Memory-Management/02-Image-Memory-Optimization.md)
-- [03. Large Dataset Handling](16-Memory-Management/03-Large-Dataset-Handling.md)
-- [04. Memory Profiling](16-Memory-Management/04-Memory-Profiling.md)
+- [01. Memory Leaks Prevention](16-Memory-Management/01-Memory-Leaks-Prevention.md)
+- [01. Memory Optimization](16-Memory-Management/01-Memory-Optimization.md)
+- [02. Garbage Collection Optimization](16-Memory-Management/02-Garbage-Collection-Optimization.md)
+- [03. Memory Profiling Tools](16-Memory-Management/03-Memory-Profiling-Tools.md)
+- [04. Memory Optimization Best Practices](16-Memory-Management/04-Memory-Optimization-Best-Practices.md)
 
 ### 🔹 **17. Cross-Platform Development**
 - [01. Platform-Specific Code](17-Cross-Platform-Development/01-Platform-Specific-Code.md)
-- [02. Conditional Rendering](17-Cross-Platform-Development/02-Conditional-Rendering.md)
-- [03. Platform Detection](17-Cross-Platform-Development/03-Platform-Detection.md)
-- [04. Cross-Platform Testing](17-Cross-Platform-Development/04-Cross-Platform-Testing.md)
+- [02. Responsive Design Patterns](17-Cross-Platform-Development/02-Responsive-Design-Patterns.md)
+- [03. Device Capabilities Detection](17-Cross-Platform-Development/03-Device-Capabilities-Detection.md)
+- [04. Cross-Platform Testing Strategies](17-Cross-Platform-Development/04-Cross-Platform-Testing-Strategies.md)
 
 ### 🔹 **18. React Native Ecosystem**
 - [01. Popular Libraries](18-React-Native-Ecosystem/01-Popular-Libraries.md)
@@ -173,10 +174,10 @@ Use [Advanced Debugging](19-Advanced-Debugging/01-Debugging-Tools.md) and [Perfo
 
 ## 📊 **Documentation Statistics**
 
-- **Total Files**: 80
+- **Total Files**: 84
 - **Total Sections**: 21
 - **Core Topics**: 20
-- **Advanced Topics**: 60
+- **Advanced Topics**: 64
 - **Performance Topics**: 8
 - **Security Topics**: 4
 - **Testing Topics**: 4
