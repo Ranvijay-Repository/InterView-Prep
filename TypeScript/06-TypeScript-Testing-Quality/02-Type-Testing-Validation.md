@@ -864,4 +864,4 @@ Use them for runtime type checking and validation.
   <a href="03-Code-Quality-Linting.md" class="nav-button">Next: Code Quality & Linting →</a>
 </div>
 
-*Last updated: December 2024*
+*Last updated: December 2025*

@@ -709,4 +709,4 @@ Incremental compilation stores compilation metadata in a build info file (`.tsbu
   <a href="02-Runtime-Performance.md" class="nav-button">Next: Runtime Performance →</a>
 </div>
 
-*Last updated: December 2024*
+*Last updated: December 2025*

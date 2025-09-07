@@ -344,4 +344,4 @@ function throwError(msg: string): never {
   <a href="02-Functions-Parameters.md" class="nav-button">Next: Functions & Parameters →</a>
 </div>
 
-*Last updated: December 2024*
+*Last updated: December 2025*

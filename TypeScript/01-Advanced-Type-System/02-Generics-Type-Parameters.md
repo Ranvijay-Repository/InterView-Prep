@@ -597,4 +597,4 @@ class Processor<T> {
   <a href="03-Conditional-Types.md" class="nav-button">Next: Conditional Types →</a>
 </div>
 
-*Last updated: December 2024*
+*Last updated: December 2025*

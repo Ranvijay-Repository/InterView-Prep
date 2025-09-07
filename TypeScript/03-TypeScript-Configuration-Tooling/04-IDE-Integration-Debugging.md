@@ -611,4 +611,4 @@ Configure in settings:
   <a href="../04-Advanced-TypeScript-Patterns/01-Design-Patterns-TypeScript.md" class="nav-button">Next: Design Patterns in TypeScript →</a>
 </div>
 
-*Last updated: December 2024*
+*Last updated: December 2025*

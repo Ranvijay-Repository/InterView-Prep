@@ -142,7 +142,7 @@ This comprehensive documentation system covers everything from basic concepts to
 
 **Start exploring and level up your TypeScript skills!** 🚀✨
 
-*Last updated: December 2024*
+*Last updated: December 2025*
 
 ---
 

@@ -878,4 +878,4 @@ TypeScript has recursion limits to prevent infinite recursion. You can handle th
   <a href="../09-TypeScript-Performance-Optimization/01-Compilation-Performance.md" class="nav-button">Next: TypeScript Performance & Optimization →</a>
 </div>
 
-*Last updated: December 2024*
+*Last updated: December 2025*

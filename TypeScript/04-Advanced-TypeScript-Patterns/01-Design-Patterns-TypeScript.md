@@ -931,4 +931,4 @@ interface Subject<T> {
   <a href="02-Functional-Programming-TypeScript.md" class="nav-button">Next: Functional Programming with TypeScript →</a>
 </div>
 
-*Last updated: December 2024*
+*Last updated: December 2025*

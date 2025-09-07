@@ -682,4 +682,4 @@ function handleState(state: AppState) {
   <a href="02-Discriminated-Unions.md" class="nav-button">Next: Discriminated Unions →</a>
 </div>
 
-*Last updated: December 2024*
+*Last updated: December 2025*

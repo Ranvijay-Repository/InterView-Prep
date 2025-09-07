@@ -1091,4 +1091,4 @@ const leakInfo = memoryMonitor.detectMemoryLeaks();
   <a href="../07-TypeScript-Libraries-Ecosystem/01-Popular-TypeScript-Libraries.md" class="nav-button">Next: Popular TypeScript Libraries →</a>
 </div>
 
-*Last updated: December 2024*
+*Last updated: December 2025*

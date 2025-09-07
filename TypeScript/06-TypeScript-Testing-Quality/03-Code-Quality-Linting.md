@@ -814,4 +814,4 @@ jobs:
   <a href="04-Performance-Monitoring.md" class="nav-button">Next: Performance Monitoring →</a>
 </div>
 
-*Last updated: December 2024*
+*Last updated: December 2025*

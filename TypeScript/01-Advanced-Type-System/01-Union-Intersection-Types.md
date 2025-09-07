@@ -508,4 +508,4 @@ Use intersection types when:
   <a href="02-Generics-Type-Parameters.md" class="nav-button">Next: Generics & Type Parameters →</a>
 </div>
 
-*Last updated: December 2024*
+*Last updated: December 2025*

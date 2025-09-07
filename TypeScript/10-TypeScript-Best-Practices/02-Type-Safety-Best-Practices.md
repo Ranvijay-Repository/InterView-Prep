@@ -1097,4 +1097,4 @@ Type guards are functions that narrow types at runtime:
   <a href="03-Error-Handling-Strategies.md" class="nav-button">Next: Error Handling Strategies →</a>
 </div>
 
-*Last updated: December 2024*
+*Last updated: December 2025*

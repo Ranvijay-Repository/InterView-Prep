@@ -852,4 +852,4 @@ const shortTermThinking = {
   <a href="../TypeScript.md" class="nav-button">Next: Back to TypeScript Index →</a>
 </div>
 
-*Last updated: December 2024*
+*Last updated: December 2025*

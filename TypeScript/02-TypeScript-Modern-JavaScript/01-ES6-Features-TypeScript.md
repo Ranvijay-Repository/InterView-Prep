@@ -670,4 +670,4 @@ import type { User } from "./user";   // Type-only import
   <a href="02-Modules-Imports.md" class="nav-button">Next: Modules & Imports →</a>
 </div>
 
-*Last updated: December 2024*
+*Last updated: December 2025*

@@ -833,4 +833,4 @@ const outdatedPatterns = {
   <a href="03-TypeScript-Community-Resources.md" class="nav-button">Next: TypeScript Community & Resources →</a>
 </div>
 
-*Last updated: December 2024*
+*Last updated: December 2025*

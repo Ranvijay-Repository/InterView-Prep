@@ -474,4 +474,4 @@ TypeScript provides:
   <a href="../02-TypeScript-Modern-JavaScript/01-ES6-Features-TypeScript.md" class="nav-button">Next: ES6+ Features & TypeScript →</a>
 </div>
 
-*Last updated: December 2024*
+*Last updated: December 2025*

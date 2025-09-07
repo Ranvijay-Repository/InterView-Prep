@@ -703,4 +703,4 @@ module.exports = {
   <a href="04-IDE-Integration-Debugging.md" class="nav-button">Next: IDE Integration & Debugging →</a>
 </div>
 
-*Last updated: December 2024*
+*Last updated: December 2025*

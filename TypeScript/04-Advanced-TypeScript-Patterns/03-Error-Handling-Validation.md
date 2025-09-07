@@ -836,4 +836,4 @@ interface Failure<E> { success: false; error: E; }
   <a href="04-Performance-Optimization.md" class="nav-button">Next: Performance Optimization →</a>
 </div>
 
-*Last updated: December 2024*
+*Last updated: December 2025*

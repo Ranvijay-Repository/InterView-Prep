@@ -1002,4 +1002,4 @@ Garbage collection is the automatic memory management process that:
   <a href="../10-TypeScript-Best-Practices/01-Code-Organization-Architecture.md" class="nav-button">Next: TypeScript Best Practices →</a>
 </div>
 
-*Last updated: December 2024*
+*Last updated: December 2025*

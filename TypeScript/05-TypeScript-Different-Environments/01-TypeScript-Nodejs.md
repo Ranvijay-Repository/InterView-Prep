@@ -722,4 +722,4 @@ declare global {
   <a href="02-TypeScript-React.md" class="nav-button">Next: TypeScript with React →</a>
 </div>
 
-*Last updated: December 2024*
+*Last updated: December 2025*

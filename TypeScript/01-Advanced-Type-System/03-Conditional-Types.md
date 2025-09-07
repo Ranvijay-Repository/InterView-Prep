@@ -459,4 +459,4 @@ type DeepReadonly<T> = {
   <a href="04-Mapped-Types-Template-Literals.md" class="nav-button">Next: Mapped Types & Template Literals →</a>
 </div>
 
-*Last updated: December 2024*
+*Last updated: December 2025*

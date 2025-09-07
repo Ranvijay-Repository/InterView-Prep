@@ -872,4 +872,4 @@ const inconsistentNaming = {
   <a href="02-Type-Safety-Best-Practices.md" class="nav-button">Next: Type Safety Best Practices →</a>
 </div>
 
-*Last updated: December 2024*
+*Last updated: December 2025*

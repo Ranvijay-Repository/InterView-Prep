@@ -666,4 +666,4 @@ class ResourceManagerBad {
   <a href="../05-TypeScript-Different-Environments/01-TypeScript-Nodejs.md" class="nav-button">Next: TypeScript with Node.js →</a>
 </div>
 
-*Last updated: December 2024*
+*Last updated: December 2025*

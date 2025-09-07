@@ -1047,4 +1047,4 @@ export class UserService {
   <a href="../06-TypeScript-Testing-Quality/01-Unit-Testing-TypeScript.md" class="nav-button">Next: Unit Testing with TypeScript →</a>
 </div>
 
-*Last updated: December 2024*
+*Last updated: December 2025*

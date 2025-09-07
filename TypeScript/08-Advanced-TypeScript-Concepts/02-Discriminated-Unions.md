@@ -804,4 +804,4 @@ function handleState(state: AppState) {
   <a href="03-Branded-Types-Opaque-Types.md" class="nav-button">Next: Branded Types & Opaque Types →</a>
 </div>
 
-*Last updated: December 2024*
+*Last updated: December 2025*

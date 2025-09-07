@@ -700,4 +700,4 @@ function metadata(key: string, value: any) {
   <a href="../03-TypeScript-Configuration-Tooling/01-tsconfig-json-Deep-Dive.md" class="nav-button">Next: tsconfig.json Deep Dive →</a>
 </div>
 
-*Last updated: December 2024*
+*Last updated: December 2025*

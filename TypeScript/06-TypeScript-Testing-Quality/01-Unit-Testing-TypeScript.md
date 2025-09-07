@@ -1050,4 +1050,4 @@ it('should reject promise', async () => {
   <a href="02-Type-Testing-Validation.md" class="nav-button">Next: Type Testing & Validation →</a>
 </div>
 
-*Last updated: December 2024*
+*Last updated: December 2025*

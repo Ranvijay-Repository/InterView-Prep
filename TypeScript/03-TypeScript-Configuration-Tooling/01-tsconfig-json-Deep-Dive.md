@@ -584,4 +584,4 @@ Create environment-specific configs:
   <a href="02-Compiler-Options-Strict-Mode.md" class="nav-button">Next: Compiler Options & Strict Mode →</a>
 </div>
 
-*Last updated: December 2024*
+*Last updated: December 2025*

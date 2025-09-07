@@ -1171,4 +1171,4 @@ try {
   <a href="04-Migration-Strategies.md" class="nav-button">Next: Migration Strategies →</a>
 </div>
 
-*Last updated: December 2024*
+*Last updated: December 2025*

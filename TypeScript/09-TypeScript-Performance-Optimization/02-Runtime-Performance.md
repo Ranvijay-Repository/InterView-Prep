@@ -943,4 +943,4 @@ function expensiveOperation() {
   <a href="03-Bundle-Size-Optimization.md" class="nav-button">Next: Bundle Size Optimization →</a>
 </div>
 
-*Last updated: December 2024*
+*Last updated: December 2025*

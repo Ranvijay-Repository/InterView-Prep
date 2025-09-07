@@ -503,4 +503,4 @@ Configure in `tsconfig.json`:
   <a href="03-Async-Await-Promises.md" class="nav-button">Next: Async/Await & Promises →</a>
 </div>
 
-*Last updated: December 2024*
+*Last updated: December 2025*

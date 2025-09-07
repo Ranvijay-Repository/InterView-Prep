@@ -760,4 +760,4 @@ Tree shaking is a dead code elimination technique that removes unused code from 
   <a href="04-Memory-Management.md" class="nav-button">Next: Memory Management →</a>
 </div>
 
-*Last updated: December 2024*
+*Last updated: December 2025*

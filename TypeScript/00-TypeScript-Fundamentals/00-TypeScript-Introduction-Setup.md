@@ -420,5 +420,5 @@ Strict mode enables additional type checking options:
   <a href="01-Basic-Types-Type-Annotations.md" class="nav-button">Next: Basic Types & Type Annotations →</a>
 </div>
 
-*Last updated: December 2024*
+*Last updated: December 2025*
 

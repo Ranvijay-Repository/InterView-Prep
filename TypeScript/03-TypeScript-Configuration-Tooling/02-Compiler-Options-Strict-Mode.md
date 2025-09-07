@@ -614,4 +614,4 @@ Use `baseUrl` and `paths` in `tsconfig.json`:
   <a href="03-TypeScript-Build-Tools.md" class="nav-button">Next: TypeScript with Build Tools →</a>
 </div>
 
-*Last updated: December 2024*
+*Last updated: December 2025*

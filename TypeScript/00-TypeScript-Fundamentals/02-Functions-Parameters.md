@@ -457,4 +457,4 @@ sum(1, 2, 3, 4, 5); // numbers = [1, 2, 3, 4, 5]
   <a href="03-Classes-Objects.md" class="nav-button">Next: Classes & Objects →</a>
 </div>
 
-*Last updated: December 2024*
+*Last updated: December 2025*

@@ -731,4 +731,4 @@ const selfServingBehavior = {
   <a href="04-TypeScript-Future-Roadmap.md" class="nav-button">Next: TypeScript Future Roadmap →</a>
 </div>
 
-*Last updated: December 2024*
+*Last updated: December 2025*

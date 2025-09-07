@@ -883,4 +883,4 @@ const userNames = _.map(users, user => user.name);
   <a href="02-TypeScript-Ecosystem-Trends.md" class="nav-button">Next: TypeScript Ecosystem & Trends →</a>
 </div>
 
-*Last updated: December 2024*
+*Last updated: December 2025*

@@ -789,4 +789,4 @@ function createUserId(id: number): UserId {
   <a href="04-Recursive-Types-Advanced-Patterns.md" class="nav-button">Next: Recursive Types & Advanced Patterns →</a>
 </div>
 
-*Last updated: December 2024*
+*Last updated: December 2025*

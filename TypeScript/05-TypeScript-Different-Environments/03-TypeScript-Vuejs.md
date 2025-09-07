@@ -910,4 +910,4 @@ const emit = defineEmits<Emits>()
   <a href="04-TypeScript-Angular.md" class="nav-button">Next: TypeScript with Angular →</a>
 </div>
 
-*Last updated: December 2024*
+*Last updated: December 2025*

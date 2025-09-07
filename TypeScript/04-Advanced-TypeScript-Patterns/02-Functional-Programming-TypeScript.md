@@ -689,4 +689,4 @@ Higher-order functions are functions that:
   <a href="03-Error-Handling-Validation.md" class="nav-button">Next: Error Handling & Validation →</a>
 </div>
 
-*Last updated: December 2024*
+*Last updated: December 2025*

@@ -691,4 +691,4 @@ const fetchWithRetry = async (url: string, maxRetries: number = 3): Promise<Resp
   <a href="04-Decorators-Metadata.md" class="nav-button">Next: Decorators & Metadata →</a>
 </div>
 
-*Last updated: December 2024*
+*Last updated: December 2025*

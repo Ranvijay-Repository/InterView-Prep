@@ -639,4 +639,4 @@ class Circle {
   <a href="../01-Advanced-Type-System/01-Union-Intersection-Types.md" class="nav-button">Next: Union & Intersection Types →</a>
 </div>
 
-*Last updated: December 2024*
+*Last updated: December 2025*

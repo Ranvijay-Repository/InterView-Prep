@@ -931,4 +931,4 @@ const Context = createContext<ContextType | undefined>(undefined);
   <a href="03-TypeScript-Vuejs.md" class="nav-button">Next: TypeScript with Vue.js →</a>
 </div>
 
-*Last updated: December 2024*
+*Last updated: December 2025*
