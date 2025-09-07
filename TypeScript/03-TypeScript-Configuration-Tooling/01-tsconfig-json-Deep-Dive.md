@@ -1,0 +1,587 @@
+# ⚙️ **tsconfig.json Deep Dive**
+
+> **Complete guide to TypeScript configuration, compiler options, and project setup**
+
+<link rel="stylesheet" href="../../common-styles.css">
+
+---
+
+## 📚 **Table of Contents**
+
+- [tsconfig.json Overview](#tsconfigjson-overview)
+- [Compiler Options](#compiler-options)
+- [Project References](#project-references)
+- [File Inclusion/Exclusion](#file-inclusionexclusion)
+- [Advanced Configuration](#advanced-configuration)
+- [Environment-Specific Configs](#environment-specific-configs)
+- [Best Practices](#best-practices)
+- [Common Interview Questions](#common-interview-questions)
+
+---
+
+## 🎯 **tsconfig.json Overview**
+
+The `tsconfig.json` file is the configuration file for TypeScript projects, defining compiler options and project settings.
+
+### **Basic Structure**
+
+```json
+{
+  "compilerOptions": {
+    // Compiler options
+  },
+  "include": [
+    // Files to include
+  ],
+  "exclude": [
+    // Files to exclude
+  ],
+  "extends": "./base-config.json",
+  "references": [
+    // Project references
+  ]
+}
+```
+
+### **Configuration Inheritance**
+
+```json
+// base-config.json
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "commonjs",
+    "strict": true,
+    "esModuleInterop": true
+  }
+}
+
+// tsconfig.json
+{
+  "extends": "./base-config.json",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "rootDir": "./src"
+  },
+  "include": ["src/**/*"]
+}
+```
+
+---
+
+## 🔧 **Compiler Options**
+
+### **Basic Options**
+
+```json
+{
+  "compilerOptions": {
+    // Target JavaScript version
+    "target": "ES2020",
+    
+    // Module system
+    "module": "commonjs",
+    
+    // Output directory
+    "outDir": "./dist",
+    
+    // Root directory
+    "rootDir": "./src",
+    
+    // Source maps
+    "sourceMap": true,
+    
+    // Declaration files
+    "declaration": true,
+    "declarationMap": true
+  }
+}
+```
+
+### **Strict Type Checking**
+
+```json
+{
+  "compilerOptions": {
+    // Enable all strict type checking options
+    "strict": true,
+    
+    // Individual strict options
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true
+  }
+}
+```
+
+### **Module Resolution**
+
+```json
+{
+  "compilerOptions": {
+    // Module resolution strategy
+    "moduleResolution": "node",
+    
+    // Base URL for module resolution
+    "baseUrl": "./src",
+    
+    // Path mapping
+    "paths": {
+      "@/*": ["*"],
+      "@/components/*": ["components/*"],
+      "@/utils/*": ["utils/*"],
+      "@/types/*": ["types/*"]
+    },
+    
+    // Module interop
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    
+    // Force consistent casing
+    "forceConsistentCasingInFileNames": true
+  }
+}
+```
+
+### **Advanced Options**
+
+```json
+{
+  "compilerOptions": {
+    // Skip type checking of declaration files
+    "skipLibCheck": true,
+    
+    // Allow JavaScript files
+    "allowJs": true,
+    "checkJs": true,
+    
+    // Experimental features
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    
+    // Incremental compilation
+    "incremental": true,
+    "tsBuildInfoFile": "./dist/.tsbuildinfo",
+    
+    // Composite projects
+    "composite": true,
+    
+    // Watch mode
+    "watch": true,
+    "preserveWatchOutput": true
+  }
+}
+```
+
+---
+
+## 📁 **Project References**
+
+Project references allow you to structure TypeScript projects into smaller, manageable pieces.
+
+### **Basic Project References**
+
+```json
+// tsconfig.json (root)
+{
+  "files": [],
+  "references": [
+    { "path": "./packages/core" },
+    { "path": "./packages/ui" },
+    { "path": "./apps/web" },
+    { "path": "./apps/mobile" }
+  ]
+}
+
+// packages/core/tsconfig.json
+{
+  "compilerOptions": {
+    "composite": true,
+    "outDir": "./dist",
+    "rootDir": "./src"
+  },
+  "include": ["src/**/*"]
+}
+
+// packages/ui/tsconfig.json
+{
+  "compilerOptions": {
+    "composite": true,
+    "outDir": "./dist",
+    "rootDir": "./src"
+  },
+  "include": ["src/**/*"],
+  "references": [
+    { "path": "../core" }
+  ]
+}
+```
+
+### **Build with Project References**
+
+```bash
+# Build all projects
+tsc --build
+
+# Build specific project
+tsc --build packages/core
+
+# Clean build
+tsc --build --clean
+
+# Force rebuild
+tsc --build --force
+```
+
+---
+
+## 📂 **File Inclusion/Exclusion**
+
+### **Include Patterns**
+
+```json
+{
+  "include": [
+    "src/**/*",
+    "tests/**/*",
+    "*.ts"
+  ]
+}
+```
+
+### **Exclude Patterns**
+
+```json
+{
+  "exclude": [
+    "node_modules",
+    "dist",
+    "build",
+    "**/*.test.ts",
+    "**/*.spec.ts"
+  ]
+}
+```
+
+### **Files Array**
+
+```json
+{
+  "files": [
+    "src/index.ts",
+    "src/app.ts",
+    "src/config.ts"
+  ]
+}
+```
+
+---
+
+## 🚀 **Advanced Configuration**
+
+### **Environment-Specific Configs**
+
+```json
+// tsconfig.base.json
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "commonjs",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  }
+}
+
+// tsconfig.dev.json
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "sourceMap": true,
+    "declaration": true,
+    "outDir": "./dist"
+  },
+  "include": ["src/**/*"]
+}
+
+// tsconfig.prod.json
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "sourceMap": false,
+    "declaration": false,
+    "outDir": "./dist",
+    "removeComments": true
+  },
+  "include": ["src/**/*"]
+}
+```
+
+### **Library Configuration**
+
+```json
+// tsconfig.lib.json
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "declaration": true,
+    "declarationMap": true,
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["**/*.test.ts", "**/*.spec.ts"]
+}
+```
+
+### **Node.js Configuration**
+
+```json
+// tsconfig.node.json
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
+}
+```
+
+---
+
+## 🌍 **Environment-Specific Configs**
+
+### **Development Configuration**
+
+```json
+// tsconfig.dev.json
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "sourceMap": true,
+    "declaration": true,
+    "outDir": "./dist",
+    "watch": true,
+    "preserveWatchOutput": true
+  },
+  "include": ["src/**/*", "tests/**/*"]
+}
+```
+
+### **Production Configuration**
+
+```json
+// tsconfig.prod.json
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "sourceMap": false,
+    "declaration": false,
+    "outDir": "./dist",
+    "removeComments": true,
+    "noEmitOnError": true
+  },
+  "include": ["src/**/*"]
+}
+```
+
+### **Testing Configuration**
+
+```json
+// tsconfig.test.json
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "types": ["jest", "node"]
+  },
+  "include": ["src/**/*", "tests/**/*"],
+  "exclude": ["node_modules", "dist"]
+}
+```
+
+---
+
+## ✅ **Best Practices**
+
+### **1. Use Strict Mode**
+
+```json
+// ✅ Good: Enable strict mode
+{
+  "compilerOptions": {
+    "strict": true
+  }
+}
+
+// ❌ Avoid: Disabling strict mode
+{
+  "compilerOptions": {
+    "strict": false
+  }
+}
+```
+
+### **2. Use Path Mapping for Clean Imports**
+
+```json
+// ✅ Good: Path mapping
+{
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "@/*": ["*"],
+      "@/components/*": ["components/*"]
+    }
+  }
+}
+
+// ❌ Avoid: Relative imports
+import { User } from "../../../types/user";
+```
+
+### **3. Use Project References for Large Projects**
+
+```json
+// ✅ Good: Project references
+{
+  "files": [],
+  "references": [
+    { "path": "./packages/core" },
+    { "path": "./packages/ui" }
+  ]
+}
+
+// ❌ Avoid: Monolithic configuration
+{
+  "include": ["packages/**/*", "apps/**/*"]
+}
+```
+
+### **4. Use Environment-Specific Configs**
+
+```json
+// ✅ Good: Environment-specific configs
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "sourceMap": true
+  }
+}
+
+// ❌ Avoid: Single config for all environments
+{
+  "compilerOptions": {
+    "sourceMap": true,
+    "declaration": true,
+    "removeComments": true
+  }
+}
+```
+
+---
+
+## ❓ **Common Interview Questions**
+
+### **1. What is tsconfig.json and why is it important?**
+
+**Answer:**
+`tsconfig.json` is the configuration file for TypeScript projects. It defines:
+- Compiler options
+- File inclusion/exclusion patterns
+- Project references
+- Module resolution settings
+
+### **2. What are the key compiler options in TypeScript?**
+
+**Answer:**
+Key options include:
+- `target`: JavaScript version to compile to
+- `module`: Module system to use
+- `strict`: Enable strict type checking
+- `outDir`: Output directory
+- `rootDir`: Root directory
+- `sourceMap`: Generate source maps
+
+### **3. How do you configure module resolution in TypeScript?**
+
+**Answer:**
+Use `moduleResolution` and `baseUrl` with `paths`:
+
+```json
+{
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "baseUrl": "./src",
+    "paths": {
+      "@/*": ["*"]
+    }
+  }
+}
+```
+
+### **4. What are project references and when should you use them?**
+
+**Answer:**
+Project references allow you to structure large projects into smaller, manageable pieces. Use them when:
+- Building monorepos
+- Working with multiple packages
+- Need incremental builds
+- Want better build performance
+
+### **5. How do you handle different environments with TypeScript?**
+
+**Answer:**
+Create environment-specific configs:
+
+```json
+// tsconfig.dev.json
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "sourceMap": true
+  }
+}
+
+// tsconfig.prod.json
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "sourceMap": false,
+    "removeComments": true
+  }
+}
+```
+
+---
+
+## 🧭 Navigation
+
+<div class="navigation">
+  <a href="../02-TypeScript-Modern-JavaScript/04-Decorators-Metadata.md" class="nav-button">← Previous: Decorators & Metadata</a>
+  <a href="02-Compiler-Options-Strict-Mode.md" class="nav-button">Next: Compiler Options & Strict Mode →</a>
+</div>
+
+*Last updated: December 2024*
