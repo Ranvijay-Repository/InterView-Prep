@@ -1,0 +1,839 @@
+# 🛡️ **Error Handling & Validation**
+
+> **Complete guide to error handling, validation, and type-safe error management in TypeScript**
+
+<link rel="stylesheet" href="../../common-styles.css">
+
+---
+
+## 📚 **Table of Contents**
+
+- [Error Handling Overview](#error-handling-overview)
+- [Custom Error Types](#custom-error-types)
+- [Result Pattern](#result-pattern)
+- [Validation Patterns](#validation-patterns)
+- [Async Error Handling](#async-error-handling)
+- [Advanced Error Patterns](#advanced-error-patterns)
+- [Best Practices](#best-practices)
+- [Common Interview Questions](#common-interview-questions)
+
+---
+
+## 🎯 **Error Handling Overview**
+
+Proper error handling is crucial for building robust TypeScript applications.
+
+### **Error Handling Strategies**
+
+```typescript
+// Error handling strategies
+const errorStrategies = {
+  tryCatch: "Traditional try/catch blocks",
+  resultPattern: "Return success/error results",
+  optionPattern: "Use Maybe/Option types",
+  customErrors: "Define specific error types"
+};
+
+// TypeScript benefits for error handling
+const typescriptBenefits = {
+  typeSafety: "Compile-time error type checking",
+  intellisense: "Better IDE support for error handling",
+  exhaustiveness: "Ensure all error cases are handled",
+  documentation: "Self-documenting error types"
+};
+```
+
+### **Basic Error Handling**
+
+```typescript
+// Basic try/catch
+const divide = (a: number, b: number): number => {
+  if (b === 0) {
+    throw new Error("Division by zero");
+  }
+  return a / b;
+};
+
+const safeDivide = (a: number, b: number): number | null => {
+  try {
+    return divide(a, b);
+  } catch (error) {
+    console.error("Error:", error);
+    return null;
+  }
+};
+
+// Usage
+const result = safeDivide(10, 2); // 5
+const errorResult = safeDivide(10, 0); // null
+```
+
+---
+
+## 🚨 **Custom Error Types**
+
+Custom error types provide better error handling and debugging.
+
+### **Basic Custom Errors**
+
+```typescript
+// Custom error classes
+class ValidationError extends Error {
+  constructor(message: string, public field: string) {
+    super(message);
+    this.name = "ValidationError";
+  }
+}
+
+class NetworkError extends Error {
+  constructor(message: string, public statusCode: number) {
+    super(message);
+    this.name = "NetworkError";
+  }
+}
+
+class BusinessLogicError extends Error {
+  constructor(message: string, public code: string) {
+    super(message);
+    this.name = "BusinessLogicError";
+  }
+}
+
+// Usage
+const validateUser = (user: any): User => {
+  if (!user.name) {
+    throw new ValidationError("Name is required", "name");
+  }
+  if (!user.email) {
+    throw new ValidationError("Email is required", "email");
+  }
+  return user as User;
+};
+```
+
+### **Advanced Custom Errors**
+
+```typescript
+// Error with additional context
+interface ErrorContext {
+  timestamp: Date;
+  userId?: string;
+  requestId?: string;
+  stack?: string;
+}
+
+class AppError extends Error {
+  public readonly context: ErrorContext;
+  public readonly isOperational: boolean;
+
+  constructor(
+    message: string,
+    public code: string,
+    isOperational: boolean = true,
+    context: Partial<ErrorContext> = {}
+  ) {
+    super(message);
+    this.name = "AppError";
+    this.isOperational = isOperational;
+    this.context = {
+      timestamp: new Date(),
+      ...context
+    };
+  }
+}
+
+// Specific error types
+class UserNotFoundError extends AppError {
+  constructor(userId: string) {
+    super(`User with ID ${userId} not found`, "USER_NOT_FOUND", true, {
+      userId
+    });
+  }
+}
+
+class InsufficientPermissionsError extends AppError {
+  constructor(userId: string, action: string) {
+    super(
+      `User ${userId} lacks permissions for ${action}`,
+      "INSUFFICIENT_PERMISSIONS",
+      true,
+      { userId, action }
+    );
+  }
+}
+```
+
+### **Error Factory Pattern**
+
+```typescript
+// Error factory for consistent error creation
+class ErrorFactory {
+  static userNotFound(userId: string): UserNotFoundError {
+    return new UserNotFoundError(userId);
+  }
+
+  static validationError(field: string, message: string): ValidationError {
+    return new ValidationError(message, field);
+  }
+
+  static networkError(statusCode: number, message: string): NetworkError {
+    return new NetworkError(message, statusCode);
+  }
+
+  static businessLogicError(code: string, message: string): BusinessLogicError {
+    return new BusinessLogicError(message, code);
+  }
+}
+
+// Usage
+const user = await fetchUser(123);
+if (!user) {
+  throw ErrorFactory.userNotFound("123");
+}
+```
+
+---
+
+## 📊 **Result Pattern**
+
+The Result pattern provides type-safe error handling without exceptions.
+
+### **Basic Result Pattern**
+
+```typescript
+// Result type definition
+type Result<T, E = Error> = Success<T> | Failure<E>;
+
+interface Success<T> {
+  success: true;
+  data: T;
+}
+
+interface Failure<E> {
+  success: false;
+  error: E;
+}
+
+// Result constructors
+const success = <T>(data: T): Success<T> => ({
+  success: true,
+  data
+});
+
+const failure = <E>(error: E): Failure<E> => ({
+  success: false,
+  error
+});
+
+// Usage
+const divide = (a: number, b: number): Result<number, string> => {
+  if (b === 0) {
+    return failure("Division by zero");
+  }
+  return success(a / b);
+};
+
+const result = divide(10, 2);
+if (result.success) {
+  console.log(result.data); // 5
+} else {
+  console.error(result.error); // Error message
+}
+```
+
+### **Advanced Result Pattern**
+
+```typescript
+// Result class with methods
+class Result<T, E = Error> {
+  private constructor(
+    private _success: boolean,
+    private _data?: T,
+    private _error?: E
+  ) {}
+
+  static success<T>(data: T): Result<T, never> {
+    return new Result(true, data);
+  }
+
+  static failure<E>(error: E): Result<never, E> {
+    return new Result(false, undefined, error);
+  }
+
+  get isSuccess(): boolean {
+    return this._success;
+  }
+
+  get isFailure(): boolean {
+    return !this._success;
+  }
+
+  get data(): T {
+    if (!this._success) {
+      throw new Error("Cannot access data on failure result");
+    }
+    return this._data!;
+  }
+
+  get error(): E {
+    if (this._success) {
+      throw new Error("Cannot access error on success result");
+    }
+    return this._error!;
+  }
+
+  map<U>(fn: (data: T) => U): Result<U, E> {
+    if (this._success) {
+      return Result.success(fn(this._data!));
+    }
+    return Result.failure(this._error!);
+  }
+
+  mapError<F>(fn: (error: E) => F): Result<T, F> {
+    if (this._success) {
+      return Result.success(this._data!);
+    }
+    return Result.failure(fn(this._error!));
+  }
+
+  flatMap<U>(fn: (data: T) => Result<U, E>): Result<U, E> {
+    if (this._success) {
+      return fn(this._data!);
+    }
+    return Result.failure(this._error!);
+  }
+}
+
+// Usage
+const fetchUser = (id: number): Result<User, string> => {
+  if (id <= 0) {
+    return Result.failure("Invalid user ID");
+  }
+  // Simulate API call
+  return Result.success({ id, name: "John", email: "john@example.com" });
+};
+
+const result = fetchUser(1)
+  .map(user => user.name)
+  .map(name => name.toUpperCase());
+
+if (result.isSuccess) {
+  console.log(result.data); // "JOHN"
+} else {
+  console.error(result.error);
+}
+```
+
+---
+
+## ✅ **Validation Patterns**
+
+Validation ensures data integrity and provides clear error messages.
+
+### **Basic Validation**
+
+```typescript
+// Validation result type
+type ValidationResult<T> = {
+  success: true;
+  data: T;
+} | {
+  success: false;
+  errors: string[];
+};
+
+// Simple validator
+const validateEmail = (email: string): ValidationResult<string> => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    return {
+      success: false,
+      errors: ["Invalid email format"]
+    };
+  }
+  return {
+    success: true,
+    data: email
+  };
+};
+
+// Usage
+const emailResult = validateEmail("invalid-email");
+if (emailResult.success) {
+  console.log(emailResult.data);
+} else {
+  console.error(emailResult.errors);
+}
+```
+
+### **Advanced Validation**
+
+```typescript
+// Validation rule type
+type ValidationRule<T> = {
+  validate: (value: T) => boolean;
+  message: string;
+};
+
+// Validator class
+class Validator<T> {
+  private rules: ValidationRule<T>[] = [];
+
+  addRule(rule: ValidationRule<T>): Validator<T> {
+    this.rules.push(rule);
+    return this;
+  }
+
+  validate(value: T): ValidationResult<T> {
+    const errors: string[] = [];
+    
+    for (const rule of this.rules) {
+      if (!rule.validate(value)) {
+        errors.push(rule.message);
+      }
+    }
+
+    if (errors.length > 0) {
+      return {
+        success: false,
+        errors
+      };
+    }
+
+    return {
+      success: true,
+      data: value
+    };
+  }
+}
+
+// Usage
+const userValidator = new Validator<User>()
+  .addRule({
+    validate: (user) => user.name.length > 0,
+    message: "Name is required"
+  })
+  .addRule({
+    validate: (user) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(user.email),
+    message: "Invalid email format"
+  })
+  .addRule({
+    validate: (user) => user.age >= 0,
+    message: "Age must be non-negative"
+  });
+
+const user = { name: "", email: "invalid", age: -1 };
+const result = userValidator.validate(user);
+if (!result.success) {
+  console.error(result.errors); // ["Name is required", "Invalid email format", "Age must be non-negative"]
+}
+```
+
+### **Schema Validation**
+
+```typescript
+// Schema validation with Zod-like API
+interface Schema<T> {
+  parse(value: unknown): T;
+  safeParse(value: unknown): { success: true; data: T } | { success: false; error: string };
+}
+
+class StringSchema implements Schema<string> {
+  constructor(
+    private minLength?: number,
+    private maxLength?: number,
+    private pattern?: RegExp
+  ) {}
+
+  parse(value: unknown): string {
+    if (typeof value !== "string") {
+      throw new Error("Expected string");
+    }
+    if (this.minLength && value.length < this.minLength) {
+      throw new Error(`String must be at least ${this.minLength} characters`);
+    }
+    if (this.maxLength && value.length > this.maxLength) {
+      throw new Error(`String must be at most ${this.maxLength} characters`);
+    }
+    if (this.pattern && !this.pattern.test(value)) {
+      throw new Error("String does not match required pattern");
+    }
+    return value;
+  }
+
+  safeParse(value: unknown): { success: true; data: string } | { success: false; error: string } {
+    try {
+      const data = this.parse(value);
+      return { success: true, data };
+    } catch (error) {
+      return { success: false, error: (error as Error).message };
+    }
+  }
+}
+
+// Usage
+const emailSchema = new StringSchema(1, 100, /^[^\s@]+@[^\s@]+\.[^\s@]+$/);
+const result = emailSchema.safeParse("invalid-email");
+if (result.success) {
+  console.log(result.data);
+} else {
+  console.error(result.error);
+}
+```
+
+---
+
+## ⚡ **Async Error Handling**
+
+Async error handling requires special consideration for promises and async/await.
+
+### **Promise Error Handling**
+
+```typescript
+// Promise-based error handling
+const fetchUser = (id: number): Promise<User> => {
+  return new Promise((resolve, reject) => {
+    if (id <= 0) {
+      reject(new Error("Invalid user ID"));
+      return;
+    }
+    // Simulate API call
+    setTimeout(() => {
+      resolve({ id, name: "John", email: "john@example.com" });
+    }, 1000);
+  });
+};
+
+// Error handling with promises
+const handleUserFetch = async (id: number): Promise<User | null> => {
+  try {
+    const user = await fetchUser(id);
+    return user;
+  } catch (error) {
+    console.error("Failed to fetch user:", error);
+    return null;
+  }
+};
+
+// Usage
+const user = await handleUserFetch(1);
+if (user) {
+  console.log(user.name);
+}
+```
+
+### **Async Result Pattern**
+
+```typescript
+// Async result type
+type AsyncResult<T, E = Error> = Promise<Result<T, E>>;
+
+// Async result functions
+const asyncSuccess = <T>(data: T): AsyncResult<T, never> =>
+  Promise.resolve(Result.success(data));
+
+const asyncFailure = <E>(error: E): AsyncResult<never, E> =>
+  Promise.resolve(Result.failure(error));
+
+// Async operations with result pattern
+const fetchUserAsync = (id: number): AsyncResult<User, string> => {
+  return new Promise((resolve) => {
+    if (id <= 0) {
+      resolve(Result.failure("Invalid user ID"));
+      return;
+    }
+    
+    setTimeout(() => {
+      resolve(Result.success({ id, name: "John", email: "john@example.com" }));
+    }, 1000);
+  });
+};
+
+// Usage
+const result = await fetchUserAsync(1);
+if (result.isSuccess) {
+  console.log(result.data.name);
+} else {
+  console.error(result.error);
+}
+```
+
+### **Error Recovery Patterns**
+
+```typescript
+// Retry with exponential backoff
+const retry = async <T>(
+  fn: () => Promise<T>,
+  maxRetries: number = 3,
+  baseDelay: number = 1000
+): Promise<T> => {
+  let lastError: Error;
+  
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    try {
+      return await fn();
+    } catch (error) {
+      lastError = error as Error;
+      
+      if (attempt === maxRetries) {
+        throw lastError;
+      }
+      
+      const delay = baseDelay * Math.pow(2, attempt - 1);
+      await new Promise(resolve => setTimeout(resolve, delay));
+    }
+  }
+  
+  throw lastError!;
+};
+
+// Circuit breaker pattern
+class CircuitBreaker {
+  private failureCount = 0;
+  private lastFailureTime = 0;
+  private state: "CLOSED" | "OPEN" | "HALF_OPEN" = "CLOSED";
+
+  constructor(
+    private threshold: number = 5,
+    private timeout: number = 60000
+  ) {}
+
+  async execute<T>(operation: () => Promise<T>): Promise<T> {
+    if (this.state === "OPEN") {
+      if (Date.now() - this.lastFailureTime > this.timeout) {
+        this.state = "HALF_OPEN";
+      } else {
+        throw new Error("Circuit breaker is OPEN");
+      }
+    }
+
+    try {
+      const result = await operation();
+      this.onSuccess();
+      return result;
+    } catch (error) {
+      this.onFailure();
+      throw error;
+    }
+  }
+
+  private onSuccess(): void {
+    this.failureCount = 0;
+    this.state = "CLOSED";
+  }
+
+  private onFailure(): void {
+    this.failureCount++;
+    this.lastFailureTime = Date.now();
+    
+    if (this.failureCount >= this.threshold) {
+      this.state = "OPEN";
+    }
+  }
+}
+```
+
+---
+
+## 🚀 **Advanced Error Patterns**
+
+### **Error Boundary Pattern**
+
+```typescript
+// Error boundary for React-like error handling
+class ErrorBoundary {
+  private errorHandlers: Map<string, (error: Error) => void> = new Map();
+
+  register(component: string, handler: (error: Error) => void): void {
+    this.errorHandlers.set(component, handler);
+  }
+
+  handleError(component: string, error: Error): void {
+    const handler = this.errorHandlers.get(component);
+    if (handler) {
+      handler(error);
+    } else {
+      console.error(`Unhandled error in ${component}:`, error);
+    }
+  }
+}
+
+// Usage
+const errorBoundary = new ErrorBoundary();
+errorBoundary.register("UserService", (error) => {
+  console.error("UserService error:", error);
+  // Handle error appropriately
+});
+```
+
+### **Error Aggregation**
+
+```typescript
+// Aggregate multiple errors
+class ErrorAggregator {
+  private errors: Error[] = [];
+
+  addError(error: Error): void {
+    this.errors.push(error);
+  }
+
+  hasErrors(): boolean {
+    return this.errors.length > 0;
+  }
+
+  getErrors(): Error[] {
+    return [...this.errors];
+  }
+
+  getErrorMessages(): string[] {
+    return this.errors.map(error => error.message);
+  }
+
+  clear(): void {
+    this.errors = [];
+  }
+}
+
+// Usage
+const aggregator = new ErrorAggregator();
+try {
+  // Some operation
+} catch (error) {
+  aggregator.addError(error as Error);
+}
+
+if (aggregator.hasErrors()) {
+  console.error("Errors:", aggregator.getErrorMessages());
+}
+```
+
+---
+
+## ✅ **Best Practices**
+
+### **1. Use Specific Error Types**
+
+```typescript
+// ✅ Good: Specific error types
+class UserNotFoundError extends Error {
+  constructor(userId: string) {
+    super(`User ${userId} not found`);
+    this.name = "UserNotFoundError";
+  }
+}
+
+// ❌ Avoid: Generic errors
+throw new Error("User not found");
+```
+
+### **2. Use Result Pattern for Expected Errors**
+
+```typescript
+// ✅ Good: Result pattern for expected errors
+const divide = (a: number, b: number): Result<number, string> => {
+  if (b === 0) {
+    return Result.failure("Division by zero");
+  }
+  return Result.success(a / b);
+};
+
+// ❌ Avoid: Exceptions for expected errors
+const divide = (a: number, b: number): number => {
+  if (b === 0) {
+    throw new Error("Division by zero");
+  }
+  return a / b;
+};
+```
+
+### **3. Provide Context in Errors**
+
+```typescript
+// ✅ Good: Rich error context
+class ValidationError extends Error {
+  constructor(
+    message: string,
+    public field: string,
+    public value: any,
+    public rule: string
+  ) {
+    super(message);
+    this.name = "ValidationError";
+  }
+}
+
+// ❌ Avoid: Minimal error information
+throw new Error("Validation failed");
+```
+
+### **4. Handle Errors at Appropriate Levels**
+
+```typescript
+// ✅ Good: Handle errors at appropriate levels
+const processUser = async (userId: string): Promise<Result<User, string>> => {
+  try {
+    const user = await fetchUser(userId);
+    const validatedUser = validateUser(user);
+    return Result.success(validatedUser);
+  } catch (error) {
+    if (error instanceof ValidationError) {
+      return Result.failure(`Validation failed: ${error.message}`);
+    }
+    return Result.failure("Failed to process user");
+  }
+};
+```
+
+---
+
+## ❓ **Common Interview Questions**
+
+### **1. What are the different error handling strategies in TypeScript?**
+
+**Answer:**
+- **Try/catch**: Traditional exception handling
+- **Result pattern**: Return success/error results
+- **Option pattern**: Use Maybe/Option types
+- **Custom errors**: Define specific error types
+
+### **2. What's the difference between throw and return errors?**
+
+**Answer:**
+- **Throw**: For unexpected errors, breaks control flow
+- **Return**: For expected errors, maintains control flow
+
+### **3. How do you implement the Result pattern?**
+
+**Answer:**
+```typescript
+type Result<T, E> = Success<T> | Failure<E>;
+interface Success<T> { success: true; data: T; }
+interface Failure<E> { success: false; error: E; }
+```
+
+### **4. What are the benefits of custom error types?**
+
+**Answer:**
+- **Specificity**: Different error types for different scenarios
+- **Context**: Rich error information
+- **Handling**: Specific error handling logic
+- **Debugging**: Better error tracking and debugging
+
+### **5. How do you handle async errors in TypeScript?**
+
+**Answer:**
+- Use try/catch with async/await
+- Use Promise.catch() for promise chains
+- Implement async result patterns
+- Use error recovery patterns like retry and circuit breaker
+
+---
+
+## 🧭 Navigation
+
+<div class="navigation">
+  <a href="02-Functional-Programming-TypeScript.md" class="nav-button">← Previous: Functional Programming with TypeScript</a>
+  <a href="04-Performance-Optimization.md" class="nav-button">Next: Performance Optimization →</a>
+</div>
+
+*Last updated: December 2024*
