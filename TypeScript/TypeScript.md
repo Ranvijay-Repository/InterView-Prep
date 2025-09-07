@@ -48,13 +48,13 @@
 - [01. Unit Testing with TypeScript](06-TypeScript-Testing-Quality/01-Unit-Testing-TypeScript.md)
 - [02. Type Testing & Validation](06-TypeScript-Testing-Quality/02-Type-Testing-Validation.md)
 - [03. Code Quality & Linting](06-TypeScript-Testing-Quality/03-Code-Quality-Linting.md)
-- [04. Documentation & JSDoc](06-TypeScript-Testing-Quality/04-Documentation-JSDoc.md)
+- [04. Performance Monitoring](06-TypeScript-Testing-Quality/04-Performance-Monitoring.md)
 
 ### 🔹 **7. TypeScript Libraries & Ecosystem**
 - [01. Popular TypeScript Libraries](07-TypeScript-Libraries-Ecosystem/01-Popular-TypeScript-Libraries.md)
-- [02. Creating TypeScript Libraries](07-TypeScript-Libraries-Ecosystem/02-Creating-TypeScript-Libraries.md)
-- [03. Type Definitions & @types](07-TypeScript-Libraries-Ecosystem/03-Type-Definitions-types.md)
-- [04. Publishing & Distribution](07-TypeScript-Libraries-Ecosystem/04-Publishing-Distribution.md)
+- [02. TypeScript Ecosystem & Trends](07-TypeScript-Libraries-Ecosystem/02-TypeScript-Ecosystem-Trends.md)
+- [03. TypeScript Community & Resources](07-TypeScript-Libraries-Ecosystem/03-TypeScript-Community-Resources.md)
+- [04. TypeScript Future Roadmap](07-TypeScript-Libraries-Ecosystem/04-TypeScript-Future-Roadmap.md)
 
 ### 🔹 **8. Advanced TypeScript Concepts**
 - [01. Type Guards & Narrowing](08-Advanced-TypeScript-Concepts/01-Type-Guards-Narrowing.md)
