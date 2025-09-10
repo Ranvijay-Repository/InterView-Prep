@@ -18,7 +18,7 @@ jobs:
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.1'
+          ruby-version: '3.2'
           bundler-cache: true
 
       - name: Lint Jekyll files
@@ -68,10 +68,10 @@ jobs:
           echo "⚙️  Validating Jekyll configuration..."
           bundle exec jekyll doctor || echo "Jekyll doctor found some issues (non-blocking)"
 
-      - name: Test Jekyll build (dry run)
+      - name: Test Jekyll build
         run: |
           echo "🏗️  Testing Jekyll build..."
-          bundle exec jekyll build --dry-run
+          bundle exec jekyll build
           echo "✅ Jekyll build test passed"
 
       - name: Comment PR with lint results

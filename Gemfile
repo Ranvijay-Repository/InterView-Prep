@@ -2,7 +2,7 @@
 source "https://rubygems.org"
 
 # GitHub Pages compatible gems
-gem "github-pages", group: :jekyll_plugins
+gem "github-pages", "~> 232", group: :jekyll_plugins
 
 # Jekyll plugins
 gem "jekyll-feed", "~> 0.12"
