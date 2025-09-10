@@ -69,12 +69,12 @@ const HomeStack = () => {
       <Stack.Screen 
         name="HomeMain" 
         component={HomeScreen}
-        options={{ title: 'Home' }}
+        options={{#123;{{#123; title: 'Home' }}#125;}}#125;
       />
       <Stack.Screen 
         name="HomeDetails" 
         component={HomeDetailsScreen}
-        options={{ title: 'Home Details' }}
+        options={{#123;{{#123; title: 'Home Details' }}#125;}}#125;
       />
     </Stack.Navigator>
   );
@@ -87,12 +87,12 @@ const ProfileStack = () => {
       <Stack.Screen 
         name="ProfileMain" 
         component={ProfileScreen}
-        options={{ title: 'Profile' }}
+        options={{#123;{{#123; title: 'Profile' }}#125;}}#125;
       />
       <Stack.Screen 
         name="ProfileEdit" 
         component={ProfileEditScreen}
-        options={{ title: 'Edit Profile' }}
+        options={{#123;{{#123; title: 'Edit Profile' }}#125;}}#125;
       />
     </Stack.Navigator>
   );
@@ -121,12 +121,12 @@ const TabNavigator = () => {
       <Tab.Screen 
         name="HomeTab" 
         component={HomeStack}
-        options={{ headerShown: false }}
+        options={{#123;{{#123; headerShown: false }}#125;}}#125;
       />
       <Tab.Screen 
         name="ProfileTab" 
         component={ProfileStack}
-        options={{ headerShown: false }}
+        options={{#123;{{#123; headerShown: false }}#125;}}#125;
       />
     </Tab.Navigator>
   );
@@ -139,15 +139,15 @@ const RootNavigator = () => {
       <Stack.Screen 
         name="MainTabs" 
         component={TabNavigator}
-        options={{ headerShown: false }}
+        options={{#123;{{#123; headerShown: false }}#125;}}#125;
       />
       <Stack.Screen 
         name="Modal" 
         component={ModalScreen}
-        options={{ 
+        options={{#123;{{#123; 
           presentation: 'modal',
           title: 'Modal Screen'
-        }}
+        }}#125;}}#125;
       />
     </Stack.Navigator>
   );

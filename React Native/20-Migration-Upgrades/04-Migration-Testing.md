@@ -196,7 +196,7 @@ describe('Fabric Renderer', () => {
 
   it('should handle layout changes', () => {
     const { getByTestId } = render(
-      <View testID="container" style={{ width: 100, height: 100 }}>
+      <View testID="container" style={{#123;{{#123; width: 100, height: 100 }}#125;}}#125;>
         <Text>Content</Text>
       </View>
     );

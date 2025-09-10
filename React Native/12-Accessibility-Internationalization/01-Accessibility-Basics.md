@@ -62,7 +62,7 @@ const AccessibleButton = ({ title, onPress, accessibilityLabel, accessibilityHin
       accessibilityRole="button"
       accessibilityLabel={accessibilityLabel || title}
       accessibilityHint={accessibilityHint}
-      accessibilityState={{ disabled: false }}
+      accessibilityState={{#123;{{#123; disabled: false }}#125;}}#125;
     >
       <Text style={styles.buttonText}>{title}</Text>
     </TouchableOpacity>
@@ -95,10 +95,10 @@ const AccessibleInput = ({
         accessibilityRole="text"
         accessibilityLabel={accessibilityLabel || label}
         accessibilityHint={accessibilityHint}
-        accessibilityState={{ 
+        accessibilityState={{#123;{{#123; 
           disabled: false,
           selected: false 
-        }}
+        }}#125;}}#125;
       />
     </View>
   );
@@ -279,10 +279,10 @@ const AccessibleList = ({ items, onItemPress }) => {
           accessibilityRole="button"
           accessibilityLabel={item.title}
           accessibilityHint={`Item ${index + 1} of ${items.length}`}
-          accessibilityState={{ 
+          accessibilityState={{#123;{{#123; 
             selected: selectedIndex === index,
             disabled: false 
-          }}
+          }}#125;}}#125;
           accessibilityActions={[
             { name: 'activate', label: 'Select item' },
             { name: 'longpress', label: 'Show item details' }
@@ -297,7 +297,7 @@ const AccessibleList = ({ items, onItemPress }) => {
                 console.log('Long press on item:', item.title);
                 break;
             }
-          }}
+          }}#125;}}#125;
         >
           <Text style={styles.itemTitle}>{item.title}</Text>
           <Text style={styles.itemDescription}>{item.description}</Text>
@@ -587,8 +587,8 @@ const AccessibilityPropsExample = () => {
         accessibilityRole="button" // Defines the role
         accessibilityLabel="Submit form" // Screen reader label
         accessibilityHint="Submits the current form data" // Additional context
-        accessibilityState={{ disabled: false, selected: false }} // Current state
-        accessibilityValue={{ text: "Not submitted" }} // Current value
+        accessibilityState={{#123;{{#123; disabled: false, selected: false }}#125;}}#125; // Current state
+        accessibilityValue={{#123;{{#123; text: "Not submitted" }}#125;}}#125; // Current value
         onPress={() => console.log('Button pressed')}
       >
         <Text style={styles.buttonText}>Submit</Text>
@@ -613,7 +613,7 @@ const AccessibilityPropsExample = () => {
               console.log('Delete options shown');
               break;
           }
-        }}
+        }}#125;}}#125;
       >
         <Text style={styles.buttonText}>Delete</Text>
       </TouchableOpacity>
@@ -880,17 +880,17 @@ const FocusManagementExample = () => {
               accessibilityRole="text"
               accessibilityLabel={field.label}
               accessibilityHint={`Field ${index + 1} of ${formFields.length}`}
-              accessibilityState={{ 
+              accessibilityState={{#123;{{#123; 
                 focused: currentFocus === index,
                 disabled: false 
-              }}
+              }}#125;}}#125;
               onSubmitEditing={() => {
                 if (index < formFields.length - 1) {
                   handleNext();
                 } else {
                   handleSubmit();
                 }
-              }}
+              }}#125;}}#125;
               returnKeyType={index < formFields.length - 1 ? 'next' : 'done'}
             />
           </View>
@@ -909,7 +909,7 @@ const FocusManagementExample = () => {
           accessibilityRole="button"
           accessibilityLabel="Previous field"
           accessibilityHint="Move to the previous form field"
-          accessibilityState={{ disabled: currentFocus === 0 }}
+          accessibilityState={{#123;{{#123; disabled: currentFocus === 0 }}#125;}}#125;
           disabled={currentFocus === 0}
         >
           <Text style={styles.secondaryButtonText}>Previous</Text>
@@ -926,7 +926,7 @@ const FocusManagementExample = () => {
           accessibilityRole="button"
           accessibilityLabel="Next field"
           accessibilityHint="Move to the next form field"
-          accessibilityState={{ disabled: currentFocus === formFields.length - 1 }}
+          accessibilityState={{#123;{{#123; disabled: currentFocus === formFields.length - 1 }}#125;}}#125;
           disabled={currentFocus === formFields.length - 1}
         >
           <Text style={styles.secondaryButtonText}>Next</Text>
@@ -1268,7 +1268,7 @@ const AccessibilityTestingExample = () => {
         accessibilityRole="button"
         accessibilityLabel="Run accessibility tests"
         accessibilityHint="Run tests to check accessibility features"
-        accessibilityState={{ disabled: isTesting }}
+        accessibilityState={{#123;{{#123; disabled: isTesting }}#125;}}#125;
         disabled={isTesting}
       >
         <Text style={styles.testButtonText}>

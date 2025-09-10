@@ -333,9 +333,9 @@ const BasicImage = () => {
       <View style={styles.imageContainer}>
         <Text style={styles.label}>Network Image:</Text>
         <Image
-          source={{
+          source={{#123;{{#123;
             uri: 'https://picsum.photos/200/200'
-          }}
+          }}#125;}}#125;
           style={styles.image}
           resizeMode="cover"
         />
@@ -345,9 +345,9 @@ const BasicImage = () => {
       <View style={styles.imageContainer}>
         <Text style={styles.label}>Image with Error Handling:</Text>
         <Image
-          source={{
+          source={{#123;{{#123;
             uri: 'https://example.com/image.jpg'
-          }}
+          }}#125;}}#125;
           style={styles.image}
           onLoad={() => console.log('Image loaded successfully')}
           onError={(error) => console.log('Image failed to load:', error)}
@@ -422,9 +422,9 @@ const ImageWithLoading = () => {
       
       <View style={styles.imageContainer}>
         <Image
-          source={{
+          source={{#123;{{#123;
             uri: 'https://picsum.photos/300/300'
-          }}
+          }}#125;}}#125;
           style={styles.image}
           onLoadStart={handleLoadStart}
           onLoadEnd={handleLoadEnd}
