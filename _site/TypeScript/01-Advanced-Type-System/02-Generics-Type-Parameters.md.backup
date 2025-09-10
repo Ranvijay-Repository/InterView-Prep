@@ -26,6 +26,7 @@ Generics allow you to create reusable components that work with multiple types w
 ### **Why Use Generics?**
 
 
+{% raw %}
 ```typescript
 // Without generics - not type-safe
 function getFirstItem(items: any[]): any {
@@ -43,11 +44,13 @@ function getFirstItem<T>(items: T[]): T {
 const firstNumber = getFirstItem([1, 2, 3]); // Returns number
 const firstString = getFirstItem(["a", "b", "c"]); // Returns string
 ```
+{% endraw %}
 
 
 ### **Basic Generic Syntax**
 
 
+{% raw %}
 ```typescript
 // Generic function
 function identity<T>(arg: T): T {
@@ -62,6 +65,7 @@ const result2 = identity<number>(42);      // result2 is number
 const result3 = identity("hello"); // TypeScript infers T as string
 const result4 = identity(42);      // TypeScript infers T as number
 ```
+{% endraw %}
 
 
 ---
@@ -73,6 +77,7 @@ Generic functions can work with different types while maintaining type safety.
 ### **Basic Generic Functions**
 
 
+{% raw %}
 ```typescript
 // Generic function with single type parameter
 function logAndReturn<T>(value: T): T {
@@ -90,11 +95,13 @@ const stringValue = logAndReturn("hello"); // T inferred as string
 const numberValue = logAndReturn(42);      // T inferred as number
 const pairResult = pair("hello", 42);      // [string, number]
 ```
+{% endraw %}
 
 
 ### **Generic Array Functions**
 
 
+{% raw %}
 ```typescript
 // Generic function for array operations
 function getLastItem<T>(array: T[]): T | undefined {
@@ -110,11 +117,13 @@ const numbers = [1, 2, 3, 4, 5];
 const lastNumber = getLastItem(numbers); // number | undefined
 const evenNumbers = filterArray(numbers, n => n % 2 === 0); // number[]
 ```
+{% endraw %}
 
 
 ### **Generic Function with Constraints**
 
 
+{% raw %}
 ```typescript
 // Generic function with length property constraint
 function getLength<T extends { length: number }>(item: T): number {
@@ -126,6 +135,7 @@ getLength("hello");        // 5
 getLength([1, 2, 3]);      // 3
 getLength({ length: 10 }); // 10
 ```
+{% endraw %}
 
 
 ---
@@ -137,6 +147,7 @@ Generic classes allow you to create classes that work with different types.
 ### **Basic Generic Class**
 
 
+{% raw %}
 ```typescript
 // Generic container class
 class Container<T> {
@@ -168,11 +179,13 @@ const numberContainer = new Container<number>();
 numberContainer.add(1);
 numberContainer.add(2);
 ```
+{% endraw %}
 
 
 ### **Generic Class with Multiple Type Parameters**
 
 
+{% raw %}
 ```typescript
 // Generic key-value storage
 class KeyValueStore<K, V> {
@@ -200,11 +213,13 @@ const userStore = new KeyValueStore<string, { name: string; age: number }>();
 userStore.set("user1", { name: "John", age: 30 });
 userStore.set("user2", { name: "Jane", age: 25 });
 ```
+{% endraw %}
 
 
 ### **Generic Class with Constraints**
 
 
+{% raw %}
 ```typescript
 // Generic class with comparable constraint
 interface Comparable<T> {
@@ -241,6 +256,7 @@ const sortedPeople = new SortedList<Person>();
 sortedPeople.add(new Person("Alice", 30));
 sortedPeople.add(new Person("Bob", 25));
 ```
+{% endraw %}
 
 
 ---
@@ -252,6 +268,7 @@ Generic interfaces define contracts that can work with different types.
 ### **Basic Generic Interface**
 
 
+{% raw %}
 ```typescript
 // Generic repository interface
 interface Repository<T> {
@@ -293,11 +310,13 @@ class UserRepository implements Repository<User> {
   }
 }
 ```
+{% endraw %}
 
 
 ### **Generic Interface with Multiple Type Parameters**
 
 
+{% raw %}
 ```typescript
 // Generic API response interface
 interface ApiResponse<T, E = string> {
@@ -312,11 +331,13 @@ type UserApiResponse = ApiResponse<User>;
 type UserListApiResponse = ApiResponse<User[]>;
 type CustomErrorResponse = ApiResponse<User, { code: number; message: string }>;
 ```
+{% endraw %}
 
 
 ### **Generic Interface with Constraints**
 
 
+{% raw %}
 ```typescript
 // Generic interface with serializable constraint
 interface Serializable {
@@ -346,6 +367,7 @@ class MemoryCache<T extends Serializable> implements Cache<T> {
   }
 }
 ```
+{% endraw %}
 
 
 ---
@@ -357,6 +379,7 @@ Constraints limit the types that can be used with generics, providing more speci
 ### **Basic Constraints**
 
 
+{% raw %}
 ```typescript
 // Constraint to ensure type has length property
 function getLength<T extends { length: number }>(item: T): number {
@@ -369,11 +392,13 @@ getLength([1, 2, 3]);      // 3
 getLength({ length: 10 }); // 10
 // getLength(42);          // ❌ Error: number doesn't have length property
 ```
+{% endraw %}
 
 
 ### **Keyof Constraint**
 
 
+{% raw %}
 ```typescript
 // Constraint using keyof
 function getProperty<T, K extends keyof T>(obj: T, key: K): T[K] {
@@ -386,11 +411,13 @@ const name = getProperty(person, "name"); // string
 const age = getProperty(person, "age");   // number
 // const invalid = getProperty(person, "invalid"); // ❌ Error
 ```
+{% endraw %}
 
 
 ### **Multiple Constraints**
 
 
+{% raw %}
 ```typescript
 // Multiple constraints
 interface HasId {
@@ -409,6 +436,7 @@ function processEntity<T extends HasId & HasName>(entity: T): string {
 const user = { id: "1", name: "John", email: "john@example.com" };
 const result = processEntity(user); // "John (ID: 1)"
 ```
+{% endraw %}
 
 
 ---
@@ -418,6 +446,7 @@ const result = processEntity(user); // "John (ID: 1)"
 ### **Conditional Types with Generics**
 
 
+{% raw %}
 ```typescript
 // Conditional type based on generic parameter
 type ApiResponse<T> = T extends string 
@@ -435,11 +464,13 @@ function createResponse<T>(value: T): ApiResponse<T> {
 const stringResponse = createResponse("Hello"); // { message: string }
 const numberResponse = createResponse(42);      // { data: number }
 ```
+{% endraw %}
 
 
 ### **Mapped Types with Generics**
 
 
+{% raw %}
 ```typescript
 // Generic mapped type
 type Partial<T> = {
@@ -460,11 +491,13 @@ interface User {
 type PartialUser = Partial<User>; // All properties optional
 type RequiredUser = Required<User>; // All properties required
 ```
+{% endraw %}
 
 
 ### **Generic Utility Types**
 
 
+{% raw %}
 ```typescript
 // Generic utility type for API responses
 type ApiResult<T, E = Error> = 
@@ -490,6 +523,7 @@ if (result.success) {
   console.error(result.error); // Error
 }
 ```
+{% endraw %}
 
 
 ---
@@ -499,6 +533,7 @@ if (result.success) {
 ### **1. Use Descriptive Generic Names**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Descriptive generic names
 function processUserData<TUser extends User, TResponse extends ApiResponse<TUser>>(
@@ -512,11 +547,13 @@ function processUserData<T, U, V>(user: T): U {
   // Implementation
 }
 ```
+{% endraw %}
 
 
 ### **2. Use Constraints to Provide Better Type Safety**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Constraint provides type safety
 function getProperty<T, K extends keyof T>(obj: T, key: K): T[K] {
@@ -528,11 +565,13 @@ function getProperty(obj: any, key: string): any {
   return obj[key];
 }
 ```
+{% endraw %}
 
 
 ### **3. Prefer Type Inference When Possible**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Let TypeScript infer the type
 const result = getFirstItem([1, 2, 3]); // T inferred as number
@@ -540,11 +579,13 @@ const result = getFirstItem([1, 2, 3]); // T inferred as number
 // ❌ Avoid: Unnecessary explicit type
 const result = getFirstItem<number>([1, 2, 3]);
 ```
+{% endraw %}
 
 
 ### **4. Use Generic Constraints for Better APIs**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Constraint ensures required properties
 function createEntity<T extends { id: string; name: string }>(
@@ -553,6 +594,7 @@ function createEntity<T extends { id: string; name: string }>(
   return { ...data, createdAt: new Date() };
 }
 ```
+{% endraw %}
 
 
 ---
@@ -574,6 +616,7 @@ Generics allow you to create reusable components that work with multiple types w
 Use angle brackets to define type parameters:
 
 
+{% raw %}
 ```typescript
 function identity<T>(arg: T): T {
   return arg;
@@ -583,6 +626,7 @@ function identity<T>(arg: T): T {
 const result = identity<string>("hello");
 const inferred = identity("hello"); // Type inferred
 ```
+{% endraw %}
 
 
 ### **3. What are generic constraints and how do you use them?**
@@ -591,11 +635,13 @@ const inferred = identity("hello"); // Type inferred
 Constraints limit the types that can be used with generics:
 
 
+{% raw %}
 ```typescript
 function getLength<T extends { length: number }>(item: T): number {
   return item.length;
 }
 ```
+{% endraw %}
 
 
 ### **4. How do you create a generic class?**
@@ -604,6 +650,7 @@ function getLength<T extends { length: number }>(item: T): number {
 Define type parameters after the class name:
 
 
+{% raw %}
 ```typescript
 class Container<T> {
   private items: T[] = [];
@@ -617,6 +664,7 @@ class Container<T> {
   }
 }
 ```
+{% endraw %}
 
 
 ### **5. What's the difference between generic functions and generic classes?**
@@ -626,6 +674,7 @@ class Container<T> {
 - **Generic classes**: Maintain type consistency across multiple methods and properties
 
 
+{% raw %}
 ```typescript
 // Generic function
 function process<T>(item: T): T { return item; }
@@ -636,6 +685,7 @@ class Processor<T> {
   store(item: T): void { /* store */ }
 }
 ```
+{% endraw %}
 
 
 ---

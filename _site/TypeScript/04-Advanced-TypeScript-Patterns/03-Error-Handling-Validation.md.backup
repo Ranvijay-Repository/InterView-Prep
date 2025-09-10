@@ -26,6 +26,7 @@ Proper error handling is crucial for building robust TypeScript applications.
 ### **Error Handling Strategies**
 
 
+{% raw %}
 ```typescript
 // Error handling strategies
 const errorStrategies = {
@@ -43,11 +44,13 @@ const typescriptBenefits = {
   documentation: "Self-documenting error types"
 };
 ```
+{% endraw %}
 
 
 ### **Basic Error Handling**
 
 
+{% raw %}
 ```typescript
 // Basic try/catch
 const divide = (a: number, b: number): number => {
@@ -70,6 +73,7 @@ const safeDivide = (a: number, b: number): number | null => {
 const result = safeDivide(10, 2); // 5
 const errorResult = safeDivide(10, 0); // null
 ```
+{% endraw %}
 
 
 ---
@@ -81,6 +85,7 @@ Custom error types provide better error handling and debugging.
 ### **Basic Custom Errors**
 
 
+{% raw %}
 ```typescript
 // Custom error classes
 class ValidationError extends Error {
@@ -115,11 +120,13 @@ const validateUser = (user: any): User => {
   return user as User;
 };
 ```
+{% endraw %}
 
 
 ### **Advanced Custom Errors**
 
 
+{% raw %}
 ```typescript
 // Error with additional context
 interface ErrorContext {
@@ -169,11 +176,13 @@ class InsufficientPermissionsError extends AppError {
   }
 }
 ```
+{% endraw %}
 
 
 ### **Error Factory Pattern**
 
 
+{% raw %}
 ```typescript
 // Error factory for consistent error creation
 class ErrorFactory {
@@ -200,6 +209,7 @@ if (!user) {
   throw ErrorFactory.userNotFound("123");
 }
 ```
+{% endraw %}
 
 
 ---
@@ -211,6 +221,7 @@ The Result pattern provides type-safe error handling without exceptions.
 ### **Basic Result Pattern**
 
 
+{% raw %}
 ```typescript
 // Result type definition
 type Result<T, E = Error> = Success<T> | Failure<E>;
@@ -251,11 +262,13 @@ if (result.success) {
   console.error(result.error); // Error message
 }
 ```
+{% endraw %}
 
 
 ### **Advanced Result Pattern**
 
 
+{% raw %}
 ```typescript
 // Result class with methods
 class Result<T, E = Error> {
@@ -336,6 +349,7 @@ if (result.isSuccess) {
   console.error(result.error);
 }
 ```
+{% endraw %}
 
 
 ---
@@ -347,6 +361,7 @@ Validation ensures data integrity and provides clear error messages.
 ### **Basic Validation**
 
 
+{% raw %}
 ```typescript
 // Validation result type
 type ValidationResult<T> = {
@@ -380,11 +395,13 @@ if (emailResult.success) {
   console.error(emailResult.errors);
 }
 ```
+{% endraw %}
 
 
 ### **Advanced Validation**
 
 
+{% raw %}
 ```typescript
 // Validation rule type
 type ValidationRule<T> = {
@@ -445,11 +462,13 @@ if (!result.success) {
   console.error(result.errors); // ["Name is required", "Invalid email format", "Age must be non-negative"]
 }
 ```
+{% endraw %}
 
 
 ### **Schema Validation**
 
 
+{% raw %}
 ```typescript
 // Schema validation with Zod-like API
 interface Schema<T> {
@@ -499,6 +518,7 @@ if (result.success) {
   console.error(result.error);
 }
 ```
+{% endraw %}
 
 
 ---
@@ -510,6 +530,7 @@ Async error handling requires special consideration for promises and async/await
 ### **Promise Error Handling**
 
 
+{% raw %}
 ```typescript
 // Promise-based error handling
 const fetchUser = (id: number): Promise<User> => {
@@ -542,11 +563,13 @@ if (user) {
   console.log(user.name);
 }
 ```
+{% endraw %}
 
 
 ### **Async Result Pattern**
 
 
+{% raw %}
 ```typescript
 // Async result type
 type AsyncResult<T, E = Error> = Promise<Result<T, E>>;
@@ -580,11 +603,13 @@ if (result.isSuccess) {
   console.error(result.error);
 }
 ```
+{% endraw %}
 
 
 ### **Error Recovery Patterns**
 
 
+{% raw %}
 ```typescript
 // Retry with exponential backoff
 const retry = async <T>(
@@ -657,6 +682,7 @@ class CircuitBreaker {
   }
 }
 ```
+{% endraw %}
 
 
 ---
@@ -666,6 +692,7 @@ class CircuitBreaker {
 ### **Error Boundary Pattern**
 
 
+{% raw %}
 ```typescript
 // Error boundary for React-like error handling
 class ErrorBoundary {
@@ -692,11 +719,13 @@ errorBoundary.register("UserService", (error) => {
   // Handle error appropriately
 });
 ```
+{% endraw %}
 
 
 ### **Error Aggregation**
 
 
+{% raw %}
 ```typescript
 // Aggregate multiple errors
 class ErrorAggregator {
@@ -735,6 +764,7 @@ if (aggregator.hasErrors()) {
   console.error("Errors:", aggregator.getErrorMessages());
 }
 ```
+{% endraw %}
 
 
 ---
@@ -744,6 +774,7 @@ if (aggregator.hasErrors()) {
 ### **1. Use Specific Error Types**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Specific error types
 class UserNotFoundError extends Error {
@@ -756,11 +787,13 @@ class UserNotFoundError extends Error {
 // ❌ Avoid: Generic errors
 throw new Error("User not found");
 ```
+{% endraw %}
 
 
 ### **2. Use Result Pattern for Expected Errors**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Result pattern for expected errors
 const divide = (a: number, b: number): Result<number, string> => {
@@ -778,11 +811,13 @@ const divide = (a: number, b: number): number => {
   return a / b;
 };
 ```
+{% endraw %}
 
 
 ### **3. Provide Context in Errors**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Rich error context
 class ValidationError extends Error {
@@ -800,11 +835,13 @@ class ValidationError extends Error {
 // ❌ Avoid: Minimal error information
 throw new Error("Validation failed");
 ```
+{% endraw %}
 
 
 ### **4. Handle Errors at Appropriate Levels**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Handle errors at appropriate levels
 const processUser = async (userId: string): Promise<Result<User, string>> => {
@@ -820,6 +857,7 @@ const processUser = async (userId: string): Promise<Result<User, string>> => {
   }
 };
 ```
+{% endraw %}
 
 
 ---
@@ -844,11 +882,13 @@ const processUser = async (userId: string): Promise<Result<User, string>> => {
 
 **Answer:**
 
+{% raw %}
 ```typescript
 type Result<T, E> = Success<T> | Failure<E>;
 interface Success<T> { success: true; data: T; }
 interface Failure<E> { success: false; error: E; }
 ```
+{% endraw %}
 
 
 ### **4. What are the benefits of custom error types?**

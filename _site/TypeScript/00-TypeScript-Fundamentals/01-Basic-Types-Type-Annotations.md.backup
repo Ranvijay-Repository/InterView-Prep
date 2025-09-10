@@ -24,6 +24,7 @@ TypeScript provides several basic types that correspond to JavaScript's primitiv
 ### **Primitive Types**
 
 
+{% raw %}
 ```typescript
 // String
 let message: string = "Hello, TypeScript!";
@@ -44,11 +45,13 @@ let isComplete: boolean = false;
 let nullValue: null = null;
 let undefinedValue: undefined = undefined;
 ```
+{% endraw %}
 
 
 ### **Special Types**
 
 
+{% raw %}
 ```typescript
 // Any - disables type checking
 let anything: any = 42;
@@ -69,6 +72,7 @@ function throwError(message: string): never {
 let userInput: unknown = getUserInput();
 // userInput.toUpperCase(); // ❌ Error: Object is of type 'unknown'
 ```
+{% endraw %}
 
 
 ---
@@ -80,6 +84,7 @@ Type annotations explicitly specify the type of a variable, function parameter, 
 ### **Variable Type Annotations**
 
 
+{% raw %}
 ```typescript
 // Explicit type annotations
 let userName: string = "John";
@@ -94,11 +99,13 @@ let names: string[] = ["Alice", "Bob", "Charlie"];
 let scores: Array<number> = [85, 92, 78, 96];
 let colors: Array<string> = ["red", "green", "blue"];
 ```
+{% endraw %}
 
 
 ### **Function Type Annotations**
 
 
+{% raw %}
 ```typescript
 // Function parameter and return type annotations
 function add(a: number, b: number): number {
@@ -123,6 +130,7 @@ function createUser(name: string, role: string = "user"): object {
   return { name, role };
 }
 ```
+{% endraw %}
 
 
 ---
@@ -134,6 +142,7 @@ TypeScript can automatically infer types in many cases, reducing the need for ex
 ### **Basic Type Inference**
 
 
+{% raw %}
 ```typescript
 // TypeScript infers the type from the value
 let message = "Hello"; // Type: string
@@ -151,11 +160,13 @@ let person = {
   isActive: true
 }; // Type: { name: string; age: number; isActive: boolean; }
 ```
+{% endraw %}
 
 
 ### **Function Return Type Inference**
 
 
+{% raw %}
 ```typescript
 // TypeScript infers return type
 function getFullName(firstName: string, lastName: string) {
@@ -167,6 +178,7 @@ function calculateArea(width: number, height: number): number {
   return width * height;
 }
 ```
+{% endraw %}
 
 
 ---
@@ -178,15 +190,18 @@ Type assertions tell TypeScript to treat a value as a specific type.
 ### **Angle Bracket Syntax**
 
 
+{% raw %}
 ```typescript
 let someValue: unknown = "this is a string";
 let strLength: number = (<string>someValue).length;
 ```
+{% endraw %}
 
 
 ### **As Syntax (Preferred)**
 
 
+{% raw %}
 ```typescript
 let someValue: unknown = "this is a string";
 let strLength: number = (someValue as string).length;
@@ -195,11 +210,13 @@ let strLength: number = (someValue as string).length;
 let inputElement = document.getElementById("username") as HTMLInputElement;
 inputElement.value = "new value";
 ```
+{% endraw %}
 
 
 ### **Type Assertion Examples**
 
 
+{% raw %}
 ```typescript
 // JSON parsing with type assertion
 interface User {
@@ -215,6 +232,7 @@ let user: User = JSON.parse(jsonString) as User;
 let mixedArray = [1, "hello", true];
 let stringArray = mixedArray as string[];
 ```
+{% endraw %}
 
 
 ---
@@ -224,6 +242,7 @@ let stringArray = mixedArray as string[];
 ### **1. Use Type Inference When Possible**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Let TypeScript infer the type
 let message = "Hello, TypeScript!";
@@ -233,11 +252,13 @@ let numbers = [1, 2, 3, 4, 5];
 let message: string = "Hello, TypeScript!";
 let numbers: number[] = [1, 2, 3, 4, 5];
 ```
+{% endraw %}
 
 
 ### **2. Be Explicit for Function Parameters and Return Types**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Explicit parameter and return types
 function calculateTotal(items: Item[]): number {
@@ -249,11 +270,13 @@ function calculateTotal(items) {
   return items.reduce((sum, item) => sum + item.price, 0);
 }
 ```
+{% endraw %}
 
 
 ### **3. Use Unknown Instead of Any**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Use unknown for truly unknown values
 function processUserInput(input: unknown): string {
@@ -268,11 +291,13 @@ function processUserInput(input: any): string {
   return input.toUpperCase(); // No type safety
 }
 ```
+{% endraw %}
 
 
 ### **4. Prefer Type Assertions Over Type Casting**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Type assertion with proper checks
 function getElementById(id: string): HTMLElement | null {
@@ -285,6 +310,7 @@ function getElementById(id: string): HTMLElement {
   return document.getElementById(id) as HTMLElement; // Could be null
 }
 ```
+{% endraw %}
 
 
 ---
@@ -308,6 +334,7 @@ TypeScript includes these basic types:
 - **`unknown`**: Type-safe top type, requires type checking before use
 
 
+{% raw %}
 ```typescript
 let anyValue: any = 42;
 anyValue.toUpperCase(); // No error, but runtime error
@@ -318,6 +345,7 @@ if (typeof unknownValue === "string") {
   unknownValue.toUpperCase(); // ✅ Safe to use
 }
 ```
+{% endraw %}
 
 
 ### **3. When should you use type annotations vs type inference?**
@@ -342,11 +370,13 @@ Type assertions tell TypeScript to treat a value as a specific type. Use them wh
 - Working with third-party libraries
 
 
+{% raw %}
 ```typescript
 // Example: DOM element
 let input = document.getElementById("username") as HTMLInputElement;
 input.value = "new value";
 ```
+{% endraw %}
 
 
 ### **5. What's the difference between `void` and `never`?**
@@ -356,6 +386,7 @@ input.value = "new value";
 - **`never`**: Used for functions that never return (throw errors, infinite loops)
 
 
+{% raw %}
 ```typescript
 function logMessage(msg: string): void {
   console.log(msg); // Returns undefined
@@ -365,6 +396,7 @@ function throwError(msg: string): never {
   throw new Error(msg); // Never returns
 }
 ```
+{% endraw %}
 
 
 ---

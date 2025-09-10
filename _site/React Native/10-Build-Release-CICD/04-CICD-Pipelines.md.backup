@@ -24,6 +24,7 @@
 ### **CI/CD Pipeline Flow**
 
 
+{% raw %}
 ```mermaid
 graph TD
     A[Code Push] --> B[Trigger Pipeline]
@@ -37,6 +38,7 @@ graph TD
     I --> J[Deploy to Production]
     J --> K[Notify Team]
 ```
+{% endraw %}
 
 
 ### **Key Benefits**
@@ -53,6 +55,7 @@ graph TD
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```yaml
 # .github/workflows/ci.yml
 name: CI/CD Pipeline
@@ -89,12 +92,14 @@ jobs:
     - name: Run type checking
       run: npm run type-check
 ```
+{% endraw %}
 
 
 ### **Android Build Workflow**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```yaml
 # .github/workflows/android.yml
 name: Android Build
@@ -152,12 +157,14 @@ jobs:
         name: android-apk
         path: android/app/build/outputs/apk/release/app-release.apk
 ```
+{% endraw %}
 
 
 ### **iOS Build Workflow**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```yaml
 # .github/workflows/ios.yml
 name: iOS Build
@@ -211,6 +218,7 @@ jobs:
         name: ios-ipa
         path: ios/build/YourApp.ipa
 ```
+{% endraw %}
 
 
 ---
@@ -221,6 +229,7 @@ jobs:
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```yaml
 # .gitlab-ci.yml
 stages:
@@ -310,6 +319,7 @@ deploy-production:
     - main
   when: manual
 ```
+{% endraw %}
 
 
 ---
@@ -320,6 +330,7 @@ deploy-production:
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```groovy
 // Jenkinsfile
 pipeline {
@@ -443,6 +454,7 @@ pipeline {
     }
 }
 ```
+{% endraw %}
 
 
 ---
@@ -453,6 +465,7 @@ pipeline {
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```json
 // eas.json
 {
@@ -491,12 +504,14 @@ pipeline {
   }
 }
 ```
+{% endraw %}
 
 
 ### **EAS Build Workflow**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```yaml
 # .github/workflows/eas-build.yml
 name: EAS Build
@@ -538,6 +553,7 @@ jobs:
           eas build --platform all --profile preview
         fi
 ```
+{% endraw %}
 
 
 ---
@@ -548,6 +564,7 @@ jobs:
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```yaml
 # .github/workflows/optimized.yml
 name: Optimized CI/CD
@@ -598,12 +615,14 @@ jobs:
     - name: Run tests
       run: npm test
 ```
+{% endraw %}
 
 
 ### **Parallel Builds**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```yaml
 # .github/workflows/parallel.yml
 name: Parallel Builds
@@ -672,6 +691,7 @@ jobs:
     - name: Deploy
       run: echo "Deploying to production"
 ```
+{% endraw %}
 
 
 ---

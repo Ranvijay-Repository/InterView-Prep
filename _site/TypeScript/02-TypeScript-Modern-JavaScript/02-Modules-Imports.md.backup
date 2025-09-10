@@ -26,6 +26,7 @@ TypeScript supports both CommonJS and ES6 module systems, providing flexibility 
 ### **Module Types**
 
 
+{% raw %}
 ```typescript
 // ES6 Modules (recommended)
 export interface User {
@@ -43,11 +44,13 @@ module.exports = {
   UserService: class UserService { }
 };
 ```
+{% endraw %}
 
 
 ### **Module vs Script**
 
 
+{% raw %}
 ```typescript
 // Script file (no imports/exports)
 const message = "Hello World";
@@ -57,6 +60,7 @@ console.log(message);
 export const message = "Hello World";
 import { message } from "./script";
 ```
+{% endraw %}
 
 
 ---
@@ -68,6 +72,7 @@ TypeScript provides multiple ways to export values, types, and interfaces.
 ### **Named Exports**
 
 
+{% raw %}
 ```typescript
 // Export individual items
 export interface User {
@@ -100,11 +105,13 @@ export function validateUser(user: User): boolean {
 export type UserId = number;
 export type UserStatus = "active" | "inactive" | "pending";
 ```
+{% endraw %}
 
 
 ### **Default Exports**
 
 
+{% raw %}
 ```typescript
 // Default export (one per module)
 export default class UserRepository {
@@ -136,11 +143,13 @@ export default {
   getEndpoint: (path: string) => `${API_URL}${path}`
 };
 ```
+{% endraw %}
 
 
 ### **Re-exports**
 
 
+{% raw %}
 ```typescript
 // Re-export from another module
 export { User, UserService } from "./user";
@@ -158,6 +167,7 @@ export * from "./product";
 export * as UserModule from "./user";
 export * as ProductModule from "./product";
 ```
+{% endraw %}
 
 
 ---
@@ -169,6 +179,7 @@ TypeScript provides flexible import syntax for different use cases.
 ### **Named Imports**
 
 
+{% raw %}
 ```typescript
 // Import specific items
 import { User, UserService } from "./user";
@@ -185,11 +196,13 @@ const user: UserType = { id: 1, name: "John", email: "john@example.com" };
 const service = new Service();
 const apiUrl = UserModule.API_URL;
 ```
+{% endraw %}
 
 
 ### **Default Imports**
 
 
+{% raw %}
 ```typescript
 // Import default export
 import UserRepository from "./user-repository";
@@ -202,11 +215,13 @@ import UserRepo from "./user-repository";
 const repository = new UserRepository();
 const user = createUser("John", "john@example.com");
 ```
+{% endraw %}
 
 
 ### **Mixed Imports**
 
 
+{% raw %}
 ```typescript
 // Import both default and named exports
 import UserRepository, { User, UserService } from "./user";
@@ -218,6 +233,7 @@ import UserRepo, * as UserTypes from "./user";
 const repository = new UserRepo();
 const user: UserTypes.User = { id: 1, name: "John", email: "john@example.com" };
 ```
+{% endraw %}
 
 
 ---
@@ -229,6 +245,7 @@ TypeScript uses different module resolution strategies based on configuration.
 ### **Module Resolution Strategies**
 
 
+{% raw %}
 ```json
 // tsconfig.json
 {
@@ -243,11 +260,13 @@ TypeScript uses different module resolution strategies based on configuration.
   }
 }
 ```
+{% endraw %}
 
 
 ### **Path Mapping**
 
 
+{% raw %}
 ```typescript
 // Using path mapping
 import { User } from "@/types/user";
@@ -259,11 +278,13 @@ import { User } from "../../types/user";
 import { UserService } from "../services/user-service";
 import { Button } from "./components/Button";
 ```
+{% endraw %}
 
 
 ### **Module Resolution Examples**
 
 
+{% raw %}
 ```typescript
 // Relative imports
 import { User } from "./user";           // Same directory
@@ -279,6 +300,7 @@ import React from "react";
 import { useState } from "react";
 import * as _ from "lodash";
 ```
+{% endraw %}
 
 
 ---
@@ -290,6 +312,7 @@ TypeScript provides type-only imports for better performance and clarity.
 ### **Type-Only Import Syntax**
 
 
+{% raw %}
 ```typescript
 // Type-only imports
 import type { User, UserService } from "./user";
@@ -306,11 +329,13 @@ import type UserRepository from "./user-repository";
 const service = new UserService(); // Runtime import
 const user: User = { id: 1, name: "John", email: "john@example.com" }; // Type-only
 ```
+{% endraw %}
 
 
 ### **When to Use Type-Only Imports**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Use type-only for interfaces and types
 import type { User, UserStatus } from "./user";
@@ -322,6 +347,7 @@ import type UserRepository from "./user-repository";
 // ❌ Avoid: Type-only for runtime values
 import type { UserService } from "./user"; // UserService is a class, not a type
 ```
+{% endraw %}
 
 
 ---
@@ -333,6 +359,7 @@ Dynamic imports allow you to load modules at runtime, enabling code splitting an
 ### **Basic Dynamic Imports**
 
 
+{% raw %}
 ```typescript
 // Dynamic import with async/await
 const loadUserModule = async () => {
@@ -354,11 +381,13 @@ const initializeApp = async () => {
   // Use userService
 };
 ```
+{% endraw %}
 
 
 ### **Dynamic Imports with Type Safety**
 
 
+{% raw %}
 ```typescript
 // Dynamic import with type assertion
 const loadUserService = async (): Promise<typeof import("./user")> => {
@@ -377,11 +406,13 @@ const userService = new userModule.UserService();
 // Or with generic
 const userModule = await loadModule<typeof import("./user")>("./user");
 ```
+{% endraw %}
 
 
 ### **Dynamic Imports in React**
 
 
+{% raw %}
 ```typescript
 // Lazy loading React components
 import { lazy, Suspense } from "react";
@@ -398,6 +429,7 @@ const App = () => {
   );
 };
 ```
+{% endraw %}
 
 
 ---
@@ -407,6 +439,7 @@ const App = () => {
 ### **1. Use Named Exports for Multiple Items**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Named exports for multiple related items
 export interface User {
@@ -427,11 +460,13 @@ export default {
   API_URL: "https://api.example.com"
 };
 ```
+{% endraw %}
 
 
 ### **2. Use Default Exports for Single Main Item**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Default export for main class/function
 export default class UserRepository {
@@ -444,11 +479,13 @@ export default {
   UserService: class UserService { }
 };
 ```
+{% endraw %}
 
 
 ### **3. Use Type-Only Imports for Types**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Type-only imports for interfaces and types
 import type { User, UserStatus } from "./user";
@@ -457,11 +494,13 @@ import { UserService } from "./user"; // Runtime import
 // ❌ Avoid: Regular imports for types only
 import { User, UserStatus, UserService } from "./user";
 ```
+{% endraw %}
 
 
 ### **4. Use Path Mapping for Clean Imports**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Path mapping for clean imports
 import { User } from "@/types/user";
@@ -471,6 +510,7 @@ import { UserService } from "@/services/user-service";
 import { User } from "../../../types/user";
 import { UserService } from "../../services/user-service";
 ```
+{% endraw %}
 
 
 ---
@@ -484,6 +524,7 @@ import { UserService } from "../../services/user-service";
 - **Default exports**: Export one main item, imported without `{ }`
 
 
+{% raw %}
 ```typescript
 // Named export
 export const name = "John";
@@ -493,6 +534,7 @@ import { name } from "./module";
 export default class User { }
 import User from "./module";
 ```
+{% endraw %}
 
 
 ### **2. How do you handle circular dependencies in TypeScript?**
@@ -509,10 +551,12 @@ import User from "./module";
 Type-only imports are removed at runtime and only used for type checking:
 
 
+{% raw %}
 ```typescript
 import type { User } from "./user"; // Removed at compile time
 import { UserService } from "./user"; // Included at runtime
 ```
+{% endraw %}
 
 
 ### **4. How do you configure module resolution in TypeScript?**
@@ -521,6 +565,7 @@ import { UserService } from "./user"; // Included at runtime
 Configure in `tsconfig.json`:
 
 
+{% raw %}
 ```json
 {
   "compilerOptions": {
@@ -532,6 +577,7 @@ Configure in `tsconfig.json`:
   }
 }
 ```
+{% endraw %}
 
 
 ### **5. What's the difference between ES6 modules and CommonJS?**

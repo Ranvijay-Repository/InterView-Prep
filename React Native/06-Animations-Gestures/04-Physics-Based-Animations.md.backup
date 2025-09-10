@@ -27,6 +27,7 @@ Physics-based animations create realistic motion by simulating physical forces l
 ### **Physics-Based Animations Overview**
 
 
+{% raw %}
 ```
 ┌─────────────────────────────────────┐
 │        Physics-Based System         │
@@ -53,6 +54,7 @@ Physics-based animations create realistic motion by simulating physical forces l
 │  └─────────────────────────────────┘│
 └─────────────────────────────────────┘
 ```
+{% endraw %}
 
 
 ---
@@ -63,6 +65,7 @@ Physics-based animations create realistic motion by simulating physical forces l
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 import React, { useRef } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
@@ -414,6 +417,7 @@ const styles = StyleSheet.create({
 
 export default PhysicsBasedExample;
 ```
+{% endraw %}
 
 
 ---

@@ -45,6 +45,7 @@
 
 ### ASCII Diagram: Property-Based Testing Flow
 
+{% raw %}
 ```
 PROPERTY-BASED TESTING FLOW
 ┌─────────────────────────────────┐
@@ -98,6 +99,7 @@ PROPERTY-BASED TESTING FLOW
         │  Statistics   │
         └───────────────┘
 ```
+{% endraw %}
 
 
 ### Property Types:
@@ -122,6 +124,7 @@ PROPERTY-BASED TESTING FLOW
 
 ### ASCII Diagram: Mutation Testing Process
 
+{% raw %}
 ```
 MUTATION TESTING PROCESS
 ┌─────────────────────────────────┐
@@ -175,6 +178,7 @@ MUTATION TESTING PROCESS
         │  Score: 75%   │
         └───────────────┘
 ```
+{% endraw %}
 
 
 ### Mutation Operators:
@@ -199,6 +203,7 @@ MUTATION TESTING PROCESS
 
 ### ASCII Diagram: Visual Regression Testing
 
+{% raw %}
 ```
 VISUAL REGRESSION TESTING
 ┌─────────────────────────────────┐
@@ -252,6 +257,7 @@ VISUAL REGRESSION TESTING
         │  Metrics      │
         └───────────────┘
 ```
+{% endraw %}
 
 
 ### Testing Areas:

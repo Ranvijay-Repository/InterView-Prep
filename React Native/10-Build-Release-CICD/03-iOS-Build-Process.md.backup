@@ -24,6 +24,7 @@
 ### **Build Process Flow**
 
 
+{% raw %}
 ```mermaid
 graph TD
     A[Source Code] --> B[Metro Bundler]
@@ -36,6 +37,7 @@ graph TD
     H --> I[App Store Connect]
     I --> J[App Store]
 ```
+{% endraw %}
 
 
 ### **Key Components**
@@ -52,6 +54,7 @@ graph TD
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // ios/YourApp.xcodeproj/project.pbxproj
 // Key build settings for optimization
@@ -140,12 +143,14 @@ graph TD
     "SWIFT_OPTIMIZATION_LEVEL" = "-Onone";
 };
 ```
+{% endraw %}
 
 
 ### **CocoaPods Configuration**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```ruby
 # ios/Podfile
 require_relative '../node_modules/react-native/scripts/react_native_pods'
@@ -187,6 +192,7 @@ target 'YourApp' do
   end
 end
 ```
+{% endraw %}
 
 
 ---
@@ -197,6 +203,7 @@ end
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // ios/YourApp.xcodeproj/xcshareddata/xcschemes/YourApp.xcscheme
 // Build configuration for different environments
@@ -228,12 +235,14 @@ const buildSchemes = {
   },
 };
 ```
+{% endraw %}
 
 
 ### **Build Scripts**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // scripts/build-ios.js
 const { execSync } = require('child_process');
@@ -285,6 +294,7 @@ const scheme = process.argv[2] || 'YourApp';
 const configuration = process.argv[3] || 'Release';
 buildiOS(scheme, configuration);
 ```
+{% endraw %}
 
 
 ---
@@ -295,6 +305,7 @@ buildiOS(scheme, configuration);
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // ios/YourApp.xcodeproj/project.pbxproj
 // Code signing settings
@@ -312,12 +323,14 @@ buildiOS(scheme, configuration);
     "DEVELOPMENT_TEAM" = "YOUR_TEAM_ID";
 };
 ```
+{% endraw %}
 
 
 ### **Fastlane Configuration**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```ruby
 # ios/fastlane/Fastfile
 default_platform(:ios)
@@ -367,6 +380,7 @@ platform :ios do
   end
 end
 ```
+{% endraw %}
 
 
 ---
@@ -377,6 +391,7 @@ end
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // ios/fastlane/metadata/en-US/name.txt
 Your App Name
@@ -403,12 +418,14 @@ What's New in Version 1.0.0:
 - Performance improvements
 - UI enhancements
 ```
+{% endraw %}
 
 
 ### **Screenshot Automation**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```ruby
 # ios/fastlane/Fastfile
 desc "Generate screenshots"
@@ -424,6 +441,7 @@ lane :screenshots do
   collect_screenshots
 end
 ```
+{% endraw %}
 
 
 ---
@@ -434,6 +452,7 @@ end
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // scripts/release-ios.js
 const { execSync } = require('child_process');
@@ -502,12 +521,14 @@ const releaseiOS = async () => {
 // Run release
 releaseiOS();
 ```
+{% endraw %}
 
 
 ### **App Store Connect Upload**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // scripts/upload-appstore.js
 const { execSync } = require('child_process');
@@ -540,6 +561,7 @@ const uploadToAppStore = async () => {
 // Run upload
 uploadToAppStore();
 ```
+{% endraw %}
 
 
 ---

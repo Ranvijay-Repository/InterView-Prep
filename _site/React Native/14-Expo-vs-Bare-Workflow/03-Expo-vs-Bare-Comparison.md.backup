@@ -23,6 +23,7 @@
 ### **Development Workflow Comparison**
 
 
+{% raw %}
 ```mermaid
 graph TD
     A[Project Setup] --> B[Expo: npx create-expo-app]
@@ -37,12 +38,14 @@ graph TD
     F --> H[Expo Updates]
     G --> I[Custom CI/CD]
 ```
+{% endraw %}
 
 
 ### **Key Differences**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Workflow comparison data
 const WorkflowComparison = {
@@ -138,6 +141,7 @@ const DevelopmentExperience = {
 
 export { WorkflowComparison, DevelopmentExperience };
 ```
+{% endraw %}
 
 
 ---
@@ -148,6 +152,7 @@ export { WorkflowComparison, DevelopmentExperience };
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Feature comparison matrix
 const FeatureComparison = {
@@ -282,6 +287,7 @@ const BareCamera = () => {
 
 export { FeatureComparison, FeatureImplementation };
 ```
+{% endraw %}
 
 
 ---
@@ -292,6 +298,7 @@ export { FeatureComparison, FeatureImplementation };
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Performance comparison data
 const PerformanceComparison = {
@@ -419,6 +426,7 @@ const PerformanceTesting = {
 
 export { PerformanceComparison, PerformanceTesting };
 ```
+{% endraw %}
 
 
 ---
@@ -429,6 +437,7 @@ export { PerformanceComparison, PerformanceTesting };
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Migration strategies and tools
 const MigrationStrategies = {
@@ -566,6 +575,7 @@ const MigrationHelpers = {
 
 export { MigrationStrategies, MigrationHelpers };
 ```
+{% endraw %}
 
 
 ---
@@ -576,6 +586,7 @@ export { MigrationStrategies, MigrationHelpers };
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Decision matrix for choosing between Expo and Bare
 const DecisionMatrix = {
@@ -734,6 +745,7 @@ const DecisionHelper = {
 
 export { DecisionMatrix, DecisionHelper };
 ```
+{% endraw %}
 
 
 ---

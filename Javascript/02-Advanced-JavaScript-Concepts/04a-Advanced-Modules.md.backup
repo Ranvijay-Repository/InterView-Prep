@@ -43,6 +43,7 @@
 
 ### ASCII Diagram: Module Federation Architecture
 
+{% raw %}
 ```
 MODULE FEDERATION ARCHITECTURE
 ┌─────────────────────────────────┐
@@ -75,6 +76,7 @@ MODULE FEDERATION ARCHITECTURE
         │  (Dynamic)    │
         └───────────────┘
 ```
+{% endraw %}
 
 
 ---
@@ -83,6 +85,7 @@ MODULE FEDERATION ARCHITECTURE
 
 ### 1. **Conditional Module Loading**
 
+{% raw %}
 ```javascript
 // Load different modules based on conditions
 const loadModule = async (condition) => {
@@ -95,10 +98,12 @@ const loadModule = async (condition) => {
     }
 };
 ```
+{% endraw %}
 
 
 ### 2. **Module Preloading**
 
+{% raw %}
 ```javascript
 // Preload modules for better performance
 const preloadModule = (modulePath) => {
@@ -108,6 +113,7 @@ const preloadModule = (modulePath) => {
     document.head.appendChild(link);
 };
 ```
+{% endraw %}
 
 
 ---

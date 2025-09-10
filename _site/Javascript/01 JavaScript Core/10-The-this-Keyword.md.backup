@@ -57,20 +57,24 @@ In the global scope, `this` refers to the global object:
 
 ### Browser Environment:
 
+{% raw %}
 ```javascript
 console.log(this === window);  // true
 this.globalVar = "I'm global";
 console.log(window.globalVar); // "I'm global"
 ```
+{% endraw %}
 
 
 ### Node.js Environment:
 
+{% raw %}
 ```javascript
 console.log(this === global);  // true
 this.nodeVar = "I'm global";
 console.log(global.nodeVar);   // "I'm global"
 ```
+{% endraw %}
 
 
 ---
@@ -82,6 +86,7 @@ When a function is called without any context, `this` defaults to the global obj
 
 ### ASCII Diagram: Default Binding
 
+{% raw %}
 ```
 GLOBAL SCOPE
 ┌─────────────────────────────────┐
@@ -96,6 +101,7 @@ GLOBAL SCOPE
 │ this = global object            │
 └─────────────────────────────────┘
 ```
+{% endraw %}
 
 
 ---
@@ -107,6 +113,7 @@ When a function is called as a method of an object, `this` refers to that object
 
 ### ASCII Diagram: Implicit Binding
 
+{% raw %}
 ```
 OBJECT METHOD CALL
 ┌─────────────────────────────────┐
@@ -123,6 +130,7 @@ OBJECT METHOD CALL
 │ this.name = "John"              │
 └─────────────────────────────────┘
 ```
+{% endraw %}
 
 
 ---
@@ -134,6 +142,7 @@ When a function is called with the `new` keyword, `this` refers to the newly cre
 
 ### ASCII Diagram: Constructor Binding
 
+{% raw %}
 ```
 CONSTRUCTOR CALL
 ┌─────────────────────────────────┐
@@ -150,6 +159,7 @@ CONSTRUCTOR CALL
 │ this.name = "John"              │
 └─────────────────────────────────┘
 ```
+{% endraw %}
 
 
 ---
@@ -161,6 +171,7 @@ Arrow functions don't have their own `this` binding. They inherit `this` from th
 
 ### ASCII Diagram: Arrow Function Binding
 
+{% raw %}
 ```
 ARROW FUNCTION BINDING
 ┌─────────────────────────────────┐
@@ -182,6 +193,7 @@ ARROW FUNCTION BINDING
 │ obj.arrowMethod();  // "John"   │
 └─────────────────────────────────┘
 ```
+{% endraw %}
 
 
 ---
@@ -193,6 +205,7 @@ You can explicitly set what `this` should refer to using `call()`, `apply()`, or
 
 ### ASCII Diagram: Explicit Binding
 
+{% raw %}
 ```
 EXPLICIT BINDING
 ┌─────────────────────────────────┐
@@ -212,6 +225,7 @@ EXPLICIT BINDING
 │ this = person2                  │
 └─────────────────────────────────┘
 ```
+{% endraw %}
 
 
 ---
@@ -226,6 +240,7 @@ EXPLICIT BINDING
 
 ### ASCII Diagram: Binding Priority
 
+{% raw %}
 ```
 BINDING PRIORITY CHART
 ┌─────────────────────────────────┐
@@ -250,6 +265,7 @@ BINDING PRIORITY CHART
 │    this = global/undefined     │
 └─────────────────────────────────┘
 ```
+{% endraw %}
 
 
 ---
@@ -261,6 +277,7 @@ BINDING PRIORITY CHART
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
 
 
+{% raw %}
 ```javascript
 console.log("=== DEFAULT BINDING EXAMPLES ===");
 
@@ -307,6 +324,7 @@ console.log("Standalone functions get default binding");
 console.log("In non-strict mode: this = global object");
 console.log("In strict mode: this = undefined");
 ```
+{% endraw %}
 
 </div>
 
@@ -315,6 +333,7 @@ console.log("In strict mode: this = undefined");
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
 
 
+{% raw %}
 ```javascript
 console.log("=== IMPLICIT BINDING EXAMPLES ===");
 
@@ -367,6 +386,7 @@ person.greet();        // this = person ✅
 person.greetArrow();   // this = global (not person!) ❌
 person.introduce();    // Shows nested function behavior
 ```
+{% endraw %}
 
 </div>
 
@@ -375,6 +395,7 @@ person.introduce();    // Shows nested function behavior
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
 
 
+{% raw %}
 ```javascript
 console.log("=== CONSTRUCTOR BINDING EXAMPLES ===");
 
@@ -426,6 +447,7 @@ console.log("Constructor functions must be called with 'new'");
 console.log("Without 'new', 'this' refers to global object");
 console.log("This can cause serious bugs and security issues");
 ```
+{% endraw %}
 
 </div>
 
@@ -434,6 +456,7 @@ console.log("This can cause serious bugs and security issues");
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
 
 
+{% raw %}
 ```javascript
 console.log("=== EXPLICIT BINDING EXAMPLES ===");
 
@@ -478,6 +501,7 @@ console.log("call() and apply() execute immediately");
 console.log("bind() returns a new function with bound this");
 console.log("bind() allows partial application of parameters");
 ```
+{% endraw %}
 
 </div>
 
@@ -486,6 +510,7 @@ console.log("bind() allows partial application of parameters");
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
 
 
+{% raw %}
 ```javascript
 console.log("=== ARROW FUNCTIONS AND THIS ===");
 
@@ -567,6 +592,7 @@ console.log("Arrow functions inherit 'this' from enclosing scope");
 console.log("Regular functions have their own 'this' binding");
 console.log("Use arrow functions when you need to preserve 'this'");
 ```
+{% endraw %}
 
 </div>
 
@@ -576,6 +602,7 @@ console.log("Use arrow functions when you need to preserve 'this'");
 
 ### Pitfall 1: Losing `this` in Callbacks
 
+{% raw %}
 ```javascript
 // ❌ WRONG: Losing 'this' in callback
 const user = {
@@ -597,10 +624,12 @@ const user = {
     }
 };
 ```
+{% endraw %}
 
 
 ### Pitfall 2: Method Assignment
 
+{% raw %}
 ```javascript
 // ❌ WRONG: Method loses 'this' when assigned
 const user = {
@@ -617,10 +646,12 @@ greetFunction();  // "Hello, undefined" 😱
 const boundGreet = user.greet.bind(user);
 boundGreet();  // "Hello, John" ✅
 ```
+{% endraw %}
 
 
 ### Pitfall 3: Constructor without `new`
 
+{% raw %}
 ```javascript
 // ❌ WRONG: Forgetting 'new' keyword
 function Person(name) {
@@ -635,6 +666,7 @@ console.log(globalThis.name);   // "John" 😱
 const person = new Person("John");  // this = new instance
 console.log(person.name);           // "John" ✅
 ```
+{% endraw %}
 
 
 ---

@@ -26,6 +26,7 @@ The TypeScript community is vibrant, supportive, and continuously growing with d
 ### **Community Statistics**
 
 {% raw %}
+{% raw %}
 ```typescript
 // TypeScript community metrics
 const communityMetrics = {
@@ -48,6 +49,7 @@ const communityGrowth = {
 
 ### **Community Values**
 
+{% raw %}
 {% raw %}
 ```typescript
 // TypeScript community values
@@ -76,6 +78,7 @@ const communityGuidelines = {
 
 ### **Official Resources**
 
+{% raw %}
 {% raw %}
 ```typescript
 // Official TypeScript resources
@@ -110,6 +113,7 @@ const playgroundFeatures = {
 ### **Educational Platforms**
 
 {% raw %}
+{% raw %}
 ```typescript
 // Educational platforms
 const educationalPlatforms = {
@@ -143,6 +147,7 @@ const learningPath = {
 ### **Books and Publications**
 
 {% raw %}
+{% raw %}
 ```typescript
 // Recommended books
 const recommendedBooks = {
@@ -175,6 +180,7 @@ const readingRecommendations = {
 
 ### **Video Content**
 
+{% raw %}
 {% raw %}
 ```typescript
 // Video learning resources
@@ -213,6 +219,7 @@ const conferenceTalks = {
 ### **Certifications**
 
 {% raw %}
+{% raw %}
 ```typescript
 // TypeScript certifications
 const certifications = {
@@ -246,6 +253,7 @@ const preparationResources = {
 ### **Skill Development**
 
 {% raw %}
+{% raw %}
 ```typescript
 // Skill development areas
 const skillDevelopment = {
@@ -278,6 +286,7 @@ const softSkills = {
 
 ### **Portfolio Development**
 
+{% raw %}
 {% raw %}
 ```typescript
 // Portfolio development
@@ -316,6 +325,7 @@ const portfolioBestPractices = {
 ### **Getting Started**
 
 {% raw %}
+{% raw %}
 ```typescript
 // Open source contribution
 const openSourceContribution = {
@@ -351,6 +361,7 @@ const contributionProcess = {
 ### **Popular Projects**
 
 {% raw %}
+{% raw %}
 ```typescript
 // Popular TypeScript projects
 const popularProjects = {
@@ -383,6 +394,7 @@ const contributionOpportunities = {
 
 ### **Community Guidelines**
 
+{% raw %}
 {% raw %}
 ```typescript
 // Community contribution guidelines
@@ -421,6 +433,7 @@ const issueReporting = {
 ### **Conferences**
 
 {% raw %}
+{% raw %}
 ```typescript
 // TypeScript conferences
 const conferences = {
@@ -454,6 +467,7 @@ const conferencePreparation = {
 ### **Meetups and Events**
 
 {% raw %}
+{% raw %}
 ```typescript
 // Local meetups and events
 const meetups = {
@@ -486,6 +500,7 @@ const eventTypes = {
 
 ### **Online Communities**
 
+{% raw %}
 {% raw %}
 ```typescript
 // Online communities
@@ -524,6 +539,7 @@ const communityEngagement = {
 ### **Job Market**
 
 {% raw %}
+{% raw %}
 ```typescript
 // TypeScript job market
 const jobMarket = {
@@ -557,6 +573,7 @@ const industrySectors = {
 ### **Career Paths**
 
 {% raw %}
+{% raw %}
 ```typescript
 // TypeScript career paths
 const careerPaths = {
@@ -589,6 +606,7 @@ const specializationAreas = {
 
 ### **Interview Preparation**
 
+{% raw %}
 {% raw %}
 ```typescript
 // Interview preparation
@@ -627,6 +645,7 @@ const codingChallenges = {
 ### **1. Active Community Participation**
 
 {% raw %}
+{% raw %}
 ```typescript
 // ✅ Good: Active participation
 const activeParticipation = {
@@ -649,6 +668,7 @@ const passiveParticipation = {
 
 ### **2. Continuous Learning**
 
+{% raw %}
 {% raw %}
 ```typescript
 // ✅ Good: Continuous learning
@@ -673,6 +693,7 @@ const stagnantLearning = {
 ### **3. Professional Development**
 
 {% raw %}
+{% raw %}
 ```typescript
 // ✅ Good: Professional development
 const professionalDevelopment = {
@@ -696,6 +717,7 @@ const neglectingDevelopment = {
 
 ### **4. Community Contribution**
 
+{% raw %}
 {% raw %}
 ```typescript
 // ✅ Good: Community contribution

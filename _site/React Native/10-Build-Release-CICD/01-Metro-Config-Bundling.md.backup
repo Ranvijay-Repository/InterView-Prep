@@ -31,6 +31,7 @@ Metro is the JavaScript bundler for React Native applications. It's responsible 
 ### **Metro Architecture**
 
 
+{% raw %}
 ```mermaid
 graph TD
     A[Source Files] --> B[Metro Resolver]
@@ -45,6 +46,7 @@ graph TD
     G[Cache] --> C
     C --> G
 ```
+{% endraw %}
 
 
 ---
@@ -55,6 +57,7 @@ graph TD
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // metro.config.js
 const { getDefaultConfig } = require('metro-config');
@@ -81,12 +84,14 @@ module.exports = (async () => {
   };
 })();
 ```
+{% endraw %}
 
 
 ### **Advanced Metro Configuration**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // metro.config.js
 const { getDefaultConfig, mergeConfig } = require('metro-config');
@@ -131,6 +136,7 @@ const config = {
 
 module.exports = mergeConfig(defaultConfig, config);
 ```
+{% endraw %}
 
 
 ---
@@ -141,6 +147,7 @@ module.exports = mergeConfig(defaultConfig, config);
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Dynamic imports for code splitting
 import React, { useState, useEffect } from 'react';
@@ -175,12 +182,14 @@ const LazyComponent = () => {
 
 export default LazyComponent;
 ```
+{% endraw %}
 
 
 ### **Bundle Analysis**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Bundle analyzer script
 const fs = require('fs');
@@ -218,6 +227,7 @@ const analyzeBundle = (bundlePath) => {
 const bundleAnalysis = analyzeBundle('./android/app/build/generated/assets/react/release/index.android.bundle');
 console.log('Bundle Analysis:', bundleAnalysis);
 ```
+{% endraw %}
 
 
 ---
@@ -228,6 +238,7 @@ console.log('Bundle Analysis:', bundleAnalysis);
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // android/app/build.gradle
 android {
@@ -268,12 +279,14 @@ android {
     }
 }
 ```
+{% endraw %}
 
 
 ### **iOS Build Configuration**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // ios/YourApp.xcodeproj/project.pbxproj
 // Build settings for optimization
@@ -291,6 +304,7 @@ android {
     "STRIP_STYLE" = "all";
 };
 ```
+{% endraw %}
 
 
 ---
@@ -301,6 +315,7 @@ android {
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Bundle size monitoring script
 const fs = require('fs');
@@ -334,12 +349,14 @@ const monitorBundleSize = () => {
 // Run monitoring
 monitorBundleSize();
 ```
+{% endraw %}
 
 
 ### **Build Performance Tracking**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Build performance tracker
 const { execSync } = require('child_process');
@@ -383,6 +400,7 @@ const trackBuildPerformance = async () => {
 // Run performance tracking
 trackBuildPerformance();
 ```
+{% endraw %}
 
 
 ---

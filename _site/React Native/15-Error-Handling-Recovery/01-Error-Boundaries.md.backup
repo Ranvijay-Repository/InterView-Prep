@@ -25,6 +25,7 @@ Error boundaries are React components that catch JavaScript errors anywhere in t
 ### **Key Concepts**
 
 
+{% raw %}
 ```javascript
 // Error boundaries catch errors in:
 // - Render methods
@@ -37,11 +38,13 @@ Error boundaries are React components that catch JavaScript errors anywhere in t
 // - Server-side rendering
 // - Errors thrown in the error boundary itself
 ```
+{% endraw %}
 
 
 ### **Error Boundary Lifecycle**
 
 
+{% raw %}
 ```mermaid
 graph TD
     A[Component Renders] --> B{Error Occurs?}
@@ -52,6 +55,7 @@ graph TD
     F --> G[Fallback UI Rendered]
     G --> H[Error Logged]
 ```
+{% endraw %}
 
 
 ---
@@ -61,6 +65,7 @@ graph TD
 ### **Basic Error Boundary with Hooks**
 
 
+{% raw %}
 ```javascript
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
@@ -156,11 +161,13 @@ const styles = StyleSheet.create({
 
 export default ErrorBoundary;
 ```
+{% endraw %}
 
 
 ### **Advanced Error Boundary with Context**
 
 
+{% raw %}
 ```javascript
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
@@ -264,6 +271,7 @@ const ErrorBoundary = ({ children, fallback: FallbackComponent }) => {
 
 export { ErrorProvider, ErrorBoundary };
 ```
+{% endraw %}
 
 
 ---
@@ -273,6 +281,7 @@ export { ErrorProvider, ErrorBoundary };
 ### **Route-Level Error Boundaries**
 
 
+{% raw %}
 ```javascript
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -301,11 +310,13 @@ const AppNavigator = () => {
   );
 };
 ```
+{% endraw %}
 
 
 ### **Feature-Level Error Boundaries**
 
 
+{% raw %}
 ```javascript
 import React from 'react';
 import ErrorBoundary from '../components/ErrorBoundary';
@@ -345,11 +356,13 @@ const App = () => {
   );
 };
 ```
+{% endraw %}
 
 
 ### **Async Error Boundary**
 
 
+{% raw %}
 ```javascript
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
@@ -411,6 +424,7 @@ const AsyncErrorBoundary = ({ children, onAsyncError }) => {
   return children;
 };
 ```
+{% endraw %}
 
 
 ---
@@ -420,6 +434,7 @@ const AsyncErrorBoundary = ({ children, onAsyncError }) => {
 ### **Automatic Retry with Exponential Backoff**
 
 
+{% raw %}
 ```javascript
 import React, { useState, useEffect, useCallback } from 'react';
 
@@ -503,11 +518,13 @@ const DataComponent = () => {
   );
 };
 ```
+{% endraw %}
 
 
 ### **Graceful Degradation**
 
 
+{% raw %}
 ```javascript
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
@@ -570,6 +587,7 @@ const GracefulDegradation = () => {
   );
 };
 ```
+{% endraw %}
 
 
 ---
@@ -579,6 +597,7 @@ const GracefulDegradation = () => {
 ### **Error Logger Service**
 
 
+{% raw %}
 ```javascript
 class ErrorLogger {
   constructor() {
@@ -638,11 +657,13 @@ class ErrorLogger {
 
 export const errorLogger = new ErrorLogger();
 ```
+{% endraw %}
 
 
 ### **Error Monitoring Hook**
 
 
+{% raw %}
 ```javascript
 import { useEffect } from 'react';
 import { errorLogger } from '../services/ErrorLogger';
@@ -676,6 +697,7 @@ const useErrorMonitoring = (componentName) => {
 
 export default useErrorMonitoring;
 ```
+{% endraw %}
 
 
 ---
@@ -685,6 +707,7 @@ export default useErrorMonitoring;
 ### **1. Error Boundary Placement**
 
 
+{% raw %}
 ```javascript
 // ✅ Good: Place error boundaries at strategic levels
 const App = () => {
@@ -718,11 +741,13 @@ const App = () => {
   );
 };
 ```
+{% endraw %}
 
 
 ### **2. Error Information**
 
 
+{% raw %}
 ```javascript
 // ✅ Good: Provide useful error information
 const ErrorBoundary = ({ children }) => {
@@ -751,11 +776,13 @@ const ErrorBoundary = ({ children }) => {
   // ... rest of component
 };
 ```
+{% endraw %}
 
 
 ### **3. Recovery Mechanisms**
 
 
+{% raw %}
 ```javascript
 // ✅ Good: Provide recovery options
 const ErrorFallback = ({ error, resetError }) => {
@@ -779,6 +806,7 @@ const ErrorFallback = ({ error }) => {
   );
 };
 ```
+{% endraw %}
 
 
 ---
@@ -812,6 +840,7 @@ Error boundaries are React components that catch JavaScript errors anywhere in t
 
 **Answer:**
 
+{% raw %}
 ```javascript
 const ErrorBoundary = ({ children }) => {
   const [hasError, setHasError] = useState(false);
@@ -837,6 +866,7 @@ const ErrorBoundary = ({ children }) => {
   return children;
 };
 ```
+{% endraw %}
 
 
 ### **4. How would you handle async errors in React Native?**
@@ -845,6 +875,7 @@ const ErrorBoundary = ({ children }) => {
 Async errors require additional handling since error boundaries don't catch them:
 
 
+{% raw %}
 ```javascript
 const useAsyncError = () => {
   const [error, setError] = useState(null);
@@ -867,6 +898,7 @@ const useAsyncError = () => {
   return { error, handleAsyncError };
 };
 ```
+{% endraw %}
 
 
 ### **5. How would you implement error recovery strategies?**
@@ -875,6 +907,7 @@ const useAsyncError = () => {
 Implement retry mechanisms with exponential backoff:
 
 
+{% raw %}
 ```javascript
 const useErrorRecovery = (maxRetries = 3) => {
   const [retryCount, setRetryCount] = useState(0);
@@ -901,6 +934,7 @@ const useErrorRecovery = (maxRetries = 3) => {
   return { retry, retryCount };
 };
 ```
+{% endraw %}
 
 
 ---

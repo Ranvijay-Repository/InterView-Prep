@@ -357,18 +357,18 @@ const ExpoCamera = () =&gt; {
   }
   
   return (
-    &lt;Camera style={{#123;{{#123; flex: 1 }}#125;}}#125; type={Camera.Constants.Type.back}&gt;
-      &lt;View style={{#123;{{#123; flex: 1, backgroundColor: 'transparent', flexDirection: 'row' }}#125;}}#125;&gt;
+    &lt;Camera style={{}} type={Camera.Constants.Type.back}&gt;
+      &lt;View style={{}}&gt;
         &lt;TouchableOpacity
-          style={{#123;{{#123; flex: 0.1, alignSelf: 'flex-end', alignItems: 'center' }}#125;}}#125;
+          style={{}}
           onPress={() =&gt; {
             setType(
               type === Camera.Constants.Type.back
                 ? Camera.Constants.Type.front
                 : Camera.Constants.Type.back
             );
-          }}#125;}}#125;&gt;
-          &lt;Text style={{#123;{{#123; fontSize: 18, marginBottom: 10, color: 'white' }}#125;}}#125;&gt; Flip &lt;/Text&gt;
+}}&gt;
+          &lt;Text style={{}}&gt; Flip &lt;/Text&gt;
         &lt;/TouchableOpacity&gt;
       &lt;/View&gt;
     &lt;/Camera&gt;
@@ -397,27 +397,27 @@ const BareCamera = () =&gt; {
   
   return (
     &lt;RNCamera
-      style={{#123;{{#123; flex: 1 }}#125;}}#125;
+      style={{}}
       type={RNCamera.Constants.Type.back}
       flashMode={RNCamera.Constants.FlashMode.on}
-      androidCameraPermissionOptions={{#123;{{#123;
+      androidCameraPermissionOptions={{
         title: 'Permission to use camera',
         message: 'We need your permission to use your camera',
         buttonPositive: 'Ok',
         buttonNegative: 'Cancel',
-      }}#125;}}#125;
+}}
     &gt;
-      &lt;View style={{#123;{{#123; flex: 1, backgroundColor: 'transparent', flexDirection: 'row' }}#125;}}#125;&gt;
+      &lt;View style={{}}&gt;
         &lt;TouchableOpacity
-          style={{#123;{{#123; flex: 0.1, alignSelf: 'flex-end', alignItems: 'center' }}#125;}}#125;
+          style={{}}
           onPress={() =&gt; {
             setType(
               type === RNCamera.Constants.Type.back
                 ? RNCamera.Constants.Type.front
                 : RNCamera.Constants.Type.back
             );
-          }}#125;}}#125;&gt;
-          &lt;Text style={{#123;{{#123; fontSize: 18, marginBottom: 10, color: 'white' }}#125;}}#125;&gt; Flip &lt;/Text&gt;
+}}&gt;
+          &lt;Text style={{}}&gt; Flip &lt;/Text&gt;
         &lt;/TouchableOpacity&gt;
       &lt;/View&gt;
     &lt;/RNCamera&gt;

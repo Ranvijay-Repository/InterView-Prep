@@ -55,6 +55,7 @@
 
 #### 1. **Object Literals**
 
+{% raw %}
 ```javascript
 // Simple object literal
 const person = {
@@ -68,10 +69,12 @@ const person = {
 console.log(person.name);        // "John Doe"
 console.log(person.greet());     // "Hello, I'm John Doe"
 ```
+{% endraw %}
 
 
 #### 2. **Object Constructor**
 
+{% raw %}
 ```javascript
 // Using Object constructor
 const car = new Object();
@@ -82,10 +85,12 @@ car.start = function() {
     return `${this.brand} ${this.model} is starting...`;
 };
 ```
+{% endraw %}
 
 
 #### 3. **Object.create()**
 
+{% raw %}
 ```javascript
 // Create object with specific prototype
 const animal = {
@@ -100,10 +105,12 @@ dog.makeSound = function() {
     return "Woof!";
 };
 ```
+{% endraw %}
 
 
 ### ASCII Diagram: Object Structure
 
+{% raw %}
 ```
 JAVASCRIPT OBJECT STRUCTURE
 ┌─────────────────────────────────┐
@@ -123,10 +130,12 @@ JAVASCRIPT OBJECT STRUCTURE
 │ __proto__ → Object.prototype    │
 └─────────────────────────────────┘
 ```
+{% endraw %}
 
 
 ### Object Property Descriptors:
 
+{% raw %}
 ```javascript
 const user = {};
 
@@ -142,6 +151,7 @@ const descriptor = Object.getOwnPropertyDescriptor(user, 'name');
 console.log(descriptor);
 // { value: 'John', writable: false, enumerable: true, configurable: false }
 ```
+{% endraw %}
 
 
 ---
@@ -152,6 +162,7 @@ console.log(descriptor);
 
 ### Basic Constructor Function:
 
+{% raw %}
 ```javascript
 function Person(name, age, email) {
     this.name = name;
@@ -175,10 +186,12 @@ const person2 = new Person("Bob", 30, "bob@example.com");
 console.log(person1.greet());        // "Hello, I'm Alice"
 console.log(person2.haveBirthday()); // "Bob is now 31 years old!"
 ```
+{% endraw %}
 
 
 ### ASCII Diagram: Constructor Function Flow
 
+{% raw %}
 ```
 CONSTRUCTOR FUNCTION EXECUTION
 ┌─────────────────────────────────┐
@@ -204,10 +217,12 @@ RESULT:
 │ }                              │
 └─────────────────────────────────┘
 ```
+{% endraw %}
 
 
 ### Constructor Function Best Practices:
 
+{% raw %}
 ```javascript
 function Car(brand, model, year) {
     // Validate parameters
@@ -255,6 +270,7 @@ try {
     console.error("Error:", error.message);
 }
 ```
+{% endraw %}
 
 
 ---
@@ -267,6 +283,7 @@ try {
 
 #### 1. **Prototype Chain**
 
+{% raw %}
 ```javascript
 function Animal(name) {
     this.name = name;
@@ -305,10 +322,12 @@ console.log(myDog.makeSound());    // "Woof!"
 console.log(myDog.eat());          // "Buddy is eating"
 console.log(myDog.fetch());        // "Buddy is fetching the ball"
 ```
+{% endraw %}
 
 
 ### ASCII Diagram: Prototype Chain
 
+{% raw %}
 ```
 PROTOTYPE CHAIN STRUCTURE
 ┌─────────────────────────────────┐
@@ -332,10 +351,12 @@ myDog.makeSound() → Dog.prototype.makeSound() ✅
 myDog.eat() → Animal.prototype.eat() ✅
 myDog.toString() → Object.prototype.toString() ✅
 ```
+{% endraw %}
 
 
 #### 2. **Prototype Methods vs Instance Methods**
 
+{% raw %}
 ```javascript
 function Calculator() {
     // Instance method - each instance gets its own copy
@@ -361,10 +382,12 @@ console.log(calc1.add === calc2.add);           // false (different functions)
 console.log(calc1.multiply === calc2.multiply); // true (same function)
 console.log(Calculator.divide(10, 2));          // 5 (static method)
 ```
+{% endraw %}
 
 
 #### 3. **Object.create() for Prototype Inheritance**
 
+{% raw %}
 ```javascript
 // Base object
 const vehicle = {
@@ -416,10 +439,12 @@ console.log(car.start());      // "Toyota Car is starting with a roar!"
 console.log(car.stop());       // "Car is stopping..."
 console.log(motorcycle.start()); // "Motorcycle is starting..."
 ```
+{% endraw %}
 
 
 ### Checking Prototype Relationships:
 
+{% raw %}
 ```javascript
 // Check if object is prototype of another
 console.log(vehicle.isPrototypeOf(car));        // true
@@ -436,6 +461,7 @@ console.log(car.hasOwnProperty('start'));       // false (inherited)
 console.log(Object.getOwnPropertyNames(car));   // ['type', 'brand']
 console.log(Object.getOwnPropertyNames(Object.getPrototypeOf(car))); // ['start', 'stop']
 ```
+{% endraw %}
 
 
 ---
@@ -446,6 +472,7 @@ console.log(Object.getOwnPropertyNames(Object.getPrototypeOf(car))); // ['start'
 
 ### Basic Class Syntax:
 
+{% raw %}
 ```javascript
 class Person {
     // Constructor method
@@ -504,10 +531,12 @@ console.log(person1.greet());        // "Hello, I'm Alice"
 console.log(person1.isAdult);       // true
 console.log(person2.age);           // 18
 ```
+{% endraw %}
 
 
 ### Class Inheritance with `extends`:
 
+{% raw %}
 ```javascript
 class Animal {
     constructor(name) {
@@ -555,6 +584,7 @@ console.log(myDog.makeSound());    // "Woof!"
 console.log(myDog.fetch());        // "Buddy is fetching the ball"
 console.log(myDog.sleep());        // "Buddy is sleeping and dreaming of treats"
 ```
+{% endraw %}
 
 
 ---
@@ -567,6 +597,7 @@ console.log(myDog.sleep());        // "Buddy is sleeping and dreaming of treats"
 
 #### 1. **Closure-based Encapsulation**
 
+{% raw %}
 ```javascript
 function createCounter() {
     // Private variable
@@ -623,10 +654,12 @@ try {
     console.error("Error:", error.message);
 }
 ```
+{% endraw %}
 
 
 #### 2. **Class-based Encapsulation with Private Fields**
 
+{% raw %}
 ```javascript
 class BankAccount {
     // Private fields
@@ -744,6 +777,7 @@ try {
     console.error("Error:", error.message);
 }
 ```
+{% endraw %}
 
 
 ---
@@ -756,6 +790,7 @@ try {
 
 #### 1. **Single Inheritance**
 
+{% raw %}
 ```javascript
 class Animal {
     constructor(name, species) {
@@ -818,10 +853,12 @@ console.log(myCat.sleep());      // "Whiskers is sleeping"
 console.log(myCat.makeSound());  // "Meow!"
 console.log(myCat.purr());       // "Whiskers is purring"
 ```
+{% endraw %}
 
 
 #### 2. **Multi-level Inheritance**
 
+{% raw %}
 ```javascript
 class Vehicle {
     constructor(make, model, year) {
@@ -888,10 +925,12 @@ console.log(tesla.openTrunk());         // "Tesla Model 3 trunk is opening"
 console.log(tesla.getBatteryStatus());  // "Battery level: 100%"
 console.log(tesla.charge());            // "Tesla Model 3 is fully charged"
 ```
+{% endraw %}
 
 
 #### 3. **Composition over Inheritance**
 
+{% raw %}
 ```javascript
 // Instead of deep inheritance, use composition
 class Engine {
@@ -979,6 +1018,7 @@ console.log(myCar.start());      // "Toyota Camry: V6 engine started"
 console.log(myCar.accelerate()); // "Toyota Camry accelerating: Shifted to gear 1"
 console.log(myCar.getStatus());  // Object with car, engine, and transmission status
 ```
+{% endraw %}
 
 
 ---
@@ -991,6 +1031,7 @@ console.log(myCar.getStatus());  // Object with car, engine, and transmission st
 
 #### 1. **Method Overriding**
 
+{% raw %}
 ```javascript
 class Animal {
     makeSound() {
@@ -1050,10 +1091,12 @@ const animals = [
 console.log(animalSounds(animals));     // ["Woof!", "Chirp!", "Blub blub"]
 console.log(animalMovements(animals));  // ["Running on four legs", "Flying", "Swimming"]
 ```
+{% endraw %}
 
 
 #### 2. **Method Overloading (Simulated)**
 
+{% raw %}
 ```javascript
 class Calculator {
     add(a, b, c) {
@@ -1092,10 +1135,12 @@ console.log(calc.addTwo(2, 3));    // 5
 console.log(calc.addThree(2, 3, 4)); // 9
 console.log(calc.addMany(1, 2, 3, 4, 5)); // 15
 ```
+{% endraw %}
 
 
 #### 3. **Interface-like Polymorphism**
 
+{% raw %}
 ```javascript
 // Define "interfaces" through common method names
 class Database {
@@ -1177,6 +1222,7 @@ executeDatabaseOperation(mysql, "SELECT * FROM users");
 executeDatabaseOperation(postgres, "SELECT * FROM customers");
 executeDatabaseOperation(mongo, { collection: "products", find: { category: "electronics" } });
 ```
+{% endraw %}
 
 
 ---
@@ -1189,6 +1235,7 @@ executeDatabaseOperation(mongo, { collection: "products", find: { category: "ele
 
 #### 1. **Abstract Base Classes**
 
+{% raw %}
 ```javascript
 class Shape {
     constructor(color) {
@@ -1262,10 +1309,12 @@ try {
     console.error("Error:", error.message);
 }
 ```
+{% endraw %}
 
 
 #### 2. **Complex System Abstraction**
 
+{% raw %}
 ```javascript
 class PaymentProcessor {
     constructor() {
@@ -1395,6 +1444,7 @@ try {
     console.error('Payment failed:', error.message);
 }
 ```
+{% endraw %}
 
 
 ---
@@ -1407,6 +1457,7 @@ try {
 
 #### 1. **Singleton Pattern**
 
+{% raw %}
 ```javascript
 class DatabaseConnection {
     constructor() {
@@ -1452,10 +1503,12 @@ console.log(db1.connect());         // "Connected to database with ID: 123456789
 console.log(db2.connect());         // "Already connected to database with ID: 1234567890"
 console.log(db1.query("SELECT * FROM users")); // "Executing query: SELECT * FROM users"
 ```
+{% endraw %}
 
 
 #### 2. **Factory Pattern**
 
+{% raw %}
 ```javascript
 class User {
     constructor(name, email, role) {
@@ -1514,10 +1567,12 @@ try {
     console.error("Error:", error.message); // "Invalid role: superuser"
 }
 ```
+{% endraw %}
 
 
 #### 3. **Observer Pattern**
 
+{% raw %}
 ```javascript
 class EventEmitter {
     constructor() {
@@ -1620,10 +1675,12 @@ newsletter.subscribe("user3@example.com");
 newsletter.sendNewsletter("Welcome to our newsletter!");
 newsletter.unsubscribe("user2@example.com");
 ```
+{% endraw %}
 
 
 #### 4. **Module Pattern**
 
+{% raw %}
 ```javascript
 const ShoppingCart = (function() {
     // Private variables
@@ -1726,10 +1783,12 @@ try {
     console.error("Error:", error.message);
 }
 ```
+{% endraw %}
 
 
 #### 5. **Strategy Pattern**
 
+{% raw %}
 ```javascript
 // Strategy interfaces
 class PaymentStrategy {
@@ -1849,6 +1908,7 @@ console.log("PayPal payment:", paymentProcessor.processPayment(amount));
 paymentProcessor.setStrategy(crypto);
 console.log("Crypto payment:", paymentProcessor.processPayment(amount));
 ```
+{% endraw %}
 
 
 ---
@@ -1860,6 +1920,7 @@ console.log("Crypto payment:", paymentProcessor.processPayment(amount));
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
 
 
+{% raw %}
 ```javascript
 console.log("=== BUILDING A COMPLETE OOP SYSTEM ===");
 
@@ -2141,6 +2202,7 @@ console.log(`${salesRep.name}: $${salesRep.calculateSalary()}`);
 console.log("\n=== TOTAL COMPANY PAYROLL ===");
 console.log(`Total: $${company.calculateTotalPayroll()}`);
 ```
+{% endraw %}
 
 
 ### Example 2: Advanced OOP with Mixins and Composition
@@ -2148,6 +2210,7 @@ console.log(`Total: $${company.calculateTotalPayroll()}`);
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
 
 
+{% raw %}
 ```javascript
 console.log("=== ADVANCED OOP WITH MIXINS AND COMPOSITION ===");
 
@@ -2412,6 +2475,7 @@ console.log("\n=== JSON SERIALIZATION ===");
 const userJSON = regularUser.toJSON();
 console.log("User as JSON:", userJSON);
 ```
+{% endraw %}
 
 
 ---
@@ -2420,6 +2484,7 @@ console.log("User as JSON:", userJSON);
 
 ### Pitfall 1: Forgetting `new` Keyword
 
+{% raw %}
 ```javascript
 // ❌ WRONG: Missing 'new' keyword
 function Person(name) {
@@ -2431,10 +2496,12 @@ const person = Person("John"); // TypeError: Cannot set property 'name' of undef
 // ✅ CORRECT: Use 'new' keyword
 const person = new Person("John");
 ```
+{% endraw %}
 
 
 ### Pitfall 2: Not Calling `super()` in Child Classes
 
+{% raw %}
 ```javascript
 // ❌ WRONG: Missing super() call
 class Dog extends Animal {
@@ -2452,10 +2519,12 @@ class Dog extends Animal {
     }
 }
 ```
+{% endraw %}
 
 
 ### Pitfall 3: Modifying Prototypes After Creating Instances
 
+{% raw %}
 ```javascript
 // ❌ WRONG: Modifying prototype after instances exist
 const person1 = new Person("John");
@@ -2465,10 +2534,12 @@ const person2 = new Person("Jane");
 console.log(person1.greet()); // "Hello!" (unexpected behavior)
 console.log(person2.greet()); // "Hello!"
 ```
+{% endraw %}
 
 
 ### Pitfall 4: Not Handling `this` Context
 
+{% raw %}
 ```javascript
 // ❌ WRONG: Losing 'this' context
 class Button {
@@ -2497,6 +2568,7 @@ class Button {
     }
 }
 ```
+{% endraw %}
 
 
 ---

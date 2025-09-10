@@ -28,6 +28,7 @@ Library evaluation is crucial for making informed decisions about which librarie
 ### **Evaluation Framework**
 
 
+{% raw %}
 ```
 ┌─────────────────────────────────────┐
 │        Library Evaluation          │
@@ -54,6 +55,7 @@ Library evaluation is crucial for making informed decisions about which librarie
 │  └─────────────────────────────────┘│
 └─────────────────────────────────────┘
 ```
+{% endraw %}
 
 
 ### **Evaluation Process**
@@ -71,6 +73,7 @@ Library evaluation is crucial for making informed decisions about which librarie
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Technical evaluation checklist
 const TechnicalCriteria = {
@@ -99,12 +102,14 @@ const TechnicalCriteria = {
   }
 };
 ```
+{% endraw %}
 
 
 ### **Maintenance Criteria**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Maintenance evaluation checklist
 const MaintenanceCriteria = {
@@ -133,12 +138,14 @@ const MaintenanceCriteria = {
   }
 };
 ```
+{% endraw %}
 
 
 ### **Community Criteria**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Community evaluation checklist
 const CommunityCriteria = {
@@ -167,6 +174,7 @@ const CommunityCriteria = {
   }
 };
 ```
+{% endraw %}
 
 
 ---
@@ -177,6 +185,7 @@ const CommunityCriteria = {
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```bash
 # Bundle size analysis tools
 npm install --save-dev react-native-bundle-visualizer
@@ -187,10 +196,12 @@ npx react-native-bundle-visualizer
 # Check specific library impact
 npm install --save-dev webpack-bundle-analyzer
 ```
+{% endraw %}
 
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Bundle size analysis script
 const BundleAnalyzer = {
@@ -218,12 +229,14 @@ const BundleAnalyzer = {
   }
 };
 ```
+{% endraw %}
 
 
 ### **Performance Testing**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Performance testing utilities
 const PerformanceTester = {
@@ -270,12 +283,14 @@ const PerformanceTester = {
   }
 };
 ```
+{% endraw %}
 
 
 ### **Compatibility Checker**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Compatibility checking utilities
 const CompatibilityChecker = {
@@ -329,6 +344,7 @@ const CompatibilityChecker = {
   }
 };
 ```
+{% endraw %}
 
 
 ---
@@ -339,6 +355,7 @@ const CompatibilityChecker = {
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```bash
 # Security audit tools
 npm audit
@@ -349,10 +366,12 @@ npm install --save-dev audit-ci
 # Run security audit
 npx audit-ci --config audit-ci.json
 ```
+{% endraw %}
 
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Security assessment utilities
 const SecurityAssessment = {
@@ -407,12 +426,14 @@ const SecurityAssessment = {
   }
 };
 ```
+{% endraw %}
 
 
 ### **Code Quality Assessment**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Code quality assessment
 const CodeQualityAssessment = {
@@ -451,6 +472,7 @@ const CodeQualityAssessment = {
   }
 };
 ```
+{% endraw %}
 
 
 ---
@@ -461,6 +483,7 @@ const CodeQualityAssessment = {
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Bundle size impact analysis
 const BundleSizeAnalysis = {
@@ -500,12 +523,14 @@ const BundleSizeAnalysis = {
   }
 };
 ```
+{% endraw %}
 
 
 ### **Runtime Performance Impact**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Runtime performance analysis
 const RuntimePerformanceAnalysis = {
@@ -555,6 +580,7 @@ const RuntimePerformanceAnalysis = {
   }
 };
 ```
+{% endraw %}
 
 
 ---
@@ -565,6 +591,7 @@ const RuntimePerformanceAnalysis = {
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Maintenance assessment utilities
 const MaintenanceAssessment = {
@@ -619,12 +646,14 @@ const MaintenanceAssessment = {
   }
 };
 ```
+{% endraw %}
 
 
 ### **Long-term Support Assessment**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Long-term support assessment
 const LongTermSupportAssessment = {
@@ -679,6 +708,7 @@ const LongTermSupportAssessment = {
   }
 };
 ```
+{% endraw %}
 
 
 ---
@@ -689,6 +719,7 @@ const LongTermSupportAssessment = {
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // GitHub metrics analysis
 const GitHubMetricsAnalysis = {
@@ -741,12 +772,14 @@ const GitHubMetricsAnalysis = {
   }
 };
 ```
+{% endraw %}
 
 
 ### **Community Engagement Analysis**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Community engagement analysis
 const CommunityEngagementAnalysis = {
@@ -803,6 +836,7 @@ const CommunityEngagementAnalysis = {
   }
 };
 ```
+{% endraw %}
 
 
 ---
@@ -813,6 +847,7 @@ const CommunityEngagementAnalysis = {
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Library evaluation scoring system
 const LibraryEvaluationScoring = {
@@ -872,12 +907,14 @@ const LibraryEvaluationScoring = {
   }
 };
 ```
+{% endraw %}
 
 
 ### **Decision Matrix**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Decision matrix for library selection
 const DecisionMatrix = {
@@ -918,6 +955,7 @@ const DecisionMatrix = {
   }
 };
 ```
+{% endraw %}
 
 
 ---
@@ -928,6 +966,7 @@ const DecisionMatrix = {
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Best practices for library evaluation
 const EvaluationBestPractices = {
@@ -964,12 +1003,14 @@ const EvaluationBestPractices = {
   }
 };
 ```
+{% endraw %}
 
 
 ### **2. Risk Assessment**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Risk assessment for library selection
 const RiskAssessment = {
@@ -1022,6 +1063,7 @@ const RiskAssessment = {
   }
 };
 ```
+{% endraw %}
 
 
 ---

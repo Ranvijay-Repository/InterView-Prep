@@ -26,6 +26,7 @@ Code quality tools help maintain consistency, catch errors, and enforce best pra
 ### **Code Quality Tools**
 
 
+{% raw %}
 ```typescript
 // Code quality tools ecosystem
 const codeQualityTools = {
@@ -44,11 +45,13 @@ const benefits = {
   collaboration: "Better team collaboration"
 };
 ```
+{% endraw %}
 
 
 ### **Quality Metrics**
 
 
+{% raw %}
 ```typescript
 // Code quality metrics
 const qualityMetrics = {
@@ -58,6 +61,7 @@ const qualityMetrics = {
   technicalDebt: "Time to fix code issues"
 };
 ```
+{% endraw %}
 
 
 ---
@@ -67,17 +71,20 @@ const qualityMetrics = {
 ### **Basic ESLint Setup**
 
 
+{% raw %}
 ```bash
 # Install ESLint and TypeScript support
 npm install --save-dev eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin
 npm install --save-dev eslint-plugin-import eslint-plugin-node
 npm install --save-dev eslint-plugin-promise eslint-plugin-standard
 ```
+{% endraw %}
 
 
 ### **Basic ESLint Configuration**
 
 
+{% raw %}
 ```json
 // .eslintrc.json
 {
@@ -106,11 +113,13 @@ npm install --save-dev eslint-plugin-promise eslint-plugin-standard
   }
 }
 ```
+{% endraw %}
 
 
 ### **Advanced ESLint Configuration**
 
 
+{% raw %}
 ```json
 // .eslintrc.json
 {
@@ -340,6 +349,7 @@ npm install --save-dev eslint-plugin-promise eslint-plugin-standard
   }
 }
 ```
+{% endraw %}
 
 
 ---
@@ -349,16 +359,19 @@ npm install --save-dev eslint-plugin-promise eslint-plugin-standard
 ### **Basic Prettier Setup**
 
 
+{% raw %}
 ```bash
 # Install Prettier
 npm install --save-dev prettier
 npm install --save-dev eslint-config-prettier eslint-plugin-prettier
 ```
+{% endraw %}
 
 
 ### **Prettier Configuration**
 
 
+{% raw %}
 ```json
 // .prettierrc
 {
@@ -379,11 +392,13 @@ npm install --save-dev eslint-config-prettier eslint-plugin-prettier
   "embeddedLanguageFormatting": "auto"
 }
 ```
+{% endraw %}
 
 
 ### **Prettier Ignore**
 
 
+{% raw %}
 ```text
 # .prettierignore
 node_modules/
@@ -395,11 +410,13 @@ coverage/
 package-lock.json
 yarn.lock
 ```
+{% endraw %}
 
 
 ### **ESLint-Prettier Integration**
 
 
+{% raw %}
 ```json
 // .eslintrc.json
 {
@@ -417,6 +434,7 @@ yarn.lock
   }
 }
 ```
+{% endraw %}
 
 
 ---
@@ -426,6 +444,7 @@ yarn.lock
 ### **Type Safety Rules**
 
 
+{% raw %}
 ```json
 // TypeScript type safety rules
 {
@@ -485,11 +504,13 @@ yarn.lock
   }
 }
 ```
+{% endraw %}
 
 
 ### **Code Style Rules**
 
 
+{% raw %}
 ```json
 // TypeScript code style rules
 {
@@ -536,6 +557,7 @@ yarn.lock
   }
 }
 ```
+{% endraw %}
 
 
 ---
@@ -545,6 +567,7 @@ yarn.lock
 ### **Custom ESLint Rules**
 
 
+{% raw %}
 ```typescript
 // custom-rules/no-console-in-production.ts
 import { ESLint } from 'eslint';
@@ -580,11 +603,13 @@ const rule = {
 
 export default rule;
 ```
+{% endraw %}
 
 
 ### **Custom Prettier Plugin**
 
 
+{% raw %}
 ```typescript
 // custom-prettier-plugin.ts
 import { Plugin } from 'prettier';
@@ -620,6 +645,7 @@ const plugin: Plugin = {
 
 export default plugin;
 ```
+{% endraw %}
 
 
 ---
@@ -629,6 +655,7 @@ export default plugin;
 ### **GitHub Actions**
 
 
+{% raw %}
 ```yaml
 # .github/workflows/quality.yml
 name: Code Quality
@@ -675,11 +702,13 @@ jobs:
       with:
         file: ./coverage/lcov.info
 ```
+{% endraw %}
 
 
 ### **Package.json Scripts**
 
 
+{% raw %}
 ```json
 {
   "scripts": {
@@ -695,6 +724,7 @@ jobs:
   }
 }
 ```
+{% endraw %}
 
 
 ---
@@ -704,6 +734,7 @@ jobs:
 ### **1. Use Strict ESLint Rules**
 
 
+{% raw %}
 ```json
 // ✅ Good: Strict rules
 {
@@ -722,11 +753,13 @@ jobs:
   }
 }
 ```
+{% endraw %}
 
 
 ### **2. Use Prettier for Formatting**
 
 
+{% raw %}
 ```json
 // ✅ Good: Use Prettier
 {
@@ -746,11 +779,13 @@ jobs:
   }
 }
 ```
+{% endraw %}
 
 
 ### **3. Use TypeScript-Specific Rules**
 
 
+{% raw %}
 ```json
 // ✅ Good: TypeScript-specific rules
 {
@@ -769,11 +804,13 @@ jobs:
   }
 }
 ```
+{% endraw %}
 
 
 ### **4. Use Import Organization**
 
 
+{% raw %}
 ```json
 // ✅ Good: Import organization
 {
@@ -792,6 +829,7 @@ jobs:
   }
 }
 ```
+{% endraw %}
 
 
 ---
@@ -810,6 +848,7 @@ jobs:
 
 **Answer:**
 
+{% raw %}
 ```json
 {
   "extends": ["@typescript-eslint/recommended"],
@@ -817,6 +856,7 @@ jobs:
   "plugins": ["@typescript-eslint"]
 }
 ```
+{% endraw %}
 
 
 ### **3. What are the benefits of using Prettier?**

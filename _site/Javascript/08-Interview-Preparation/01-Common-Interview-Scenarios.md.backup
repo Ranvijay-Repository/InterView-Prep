@@ -46,6 +46,7 @@
 
 ### ASCII Diagram: Live Coding Interview Flow
 
+{% raw %}
 ```
 LIVE CODING INTERVIEW FLOW
 ┌─────────────────────────────────┐
@@ -111,6 +112,7 @@ LIVE CODING INTERVIEW FLOW
         │  Usage        │
         └───────────────┘
 ```
+{% endraw %}
 
 
 ### Common Challenge Types:
@@ -135,6 +137,7 @@ LIVE CODING INTERVIEW FLOW
 
 ### ASCII Diagram: System Design Process
 
+{% raw %}
 ```
 SYSTEM DESIGN PROCESS
 ┌─────────────────────────────────┐
@@ -207,6 +210,7 @@ SYSTEM DESIGN PROCESS
         │  Performance  │
         └───────────────┘
 ```
+{% endraw %}
 
 
 ### Design Areas:
@@ -231,6 +235,7 @@ SYSTEM DESIGN PROCESS
 
 ### ASCII Diagram: Debugging Process
 
+{% raw %}
 ```
 DEBUGGING PROCESS
 ┌─────────────────────────────────┐
@@ -304,6 +309,7 @@ DEBUGGING PROCESS
         │  Documentation│
         └───────────────┘
 ```
+{% endraw %}
 
 
 ### Debugging Techniques:
@@ -328,6 +334,7 @@ DEBUGGING PROCESS
 
 ### ASCII Diagram: Code Review Process
 
+{% raw %}
 ```
 CODE REVIEW PROCESS
 ┌─────────────────────────────────┐
@@ -400,6 +407,7 @@ CODE REVIEW PROCESS
         │  Approve      │
         └───────────────┘
 ```
+{% endraw %}
 
 
 ### Review Areas:

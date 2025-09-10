@@ -27,6 +27,7 @@ Offline-first development ensures your React Native app provides a great user ex
 ### **Offline-First Overview**
 
 
+{% raw %}
 ```
 ┌─────────────────────────────────────┐
 │        Offline-First System         │
@@ -52,6 +53,7 @@ Offline-first development ensures your React Native app provides a great user ex
 │  └─────────────────────────────────┘│
 └─────────────────────────────────────┘
 ```
+{% endraw %}
 
 
 ---
@@ -62,6 +64,7 @@ Offline-first development ensures your React Native app provides a great user ex
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
@@ -264,6 +267,7 @@ const styles = StyleSheet.create({
 
 export default OfflineDetectionExample;
 ```
+{% endraw %}
 
 
 ---

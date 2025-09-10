@@ -25,6 +25,7 @@ Discriminated unions are a powerful TypeScript feature that combines union types
 ### **What are Discriminated Unions?**
 
 
+{% raw %}
 ```typescript
 // Discriminated unions combine union types with a discriminator
 const discriminatedUnions = {
@@ -66,11 +67,13 @@ function handleState(state: AppState) {
   }
 }
 ```
+{% endraw %}
 
 
 ### **Benefits of Discriminated Unions**
 
 
+{% raw %}
 ```typescript
 // Benefits of discriminated unions
 const benefits = {
@@ -109,6 +112,7 @@ function handleGoodState(state: GoodState) {
   }
 }
 ```
+{% endraw %}
 
 
 ---
@@ -118,6 +122,7 @@ function handleGoodState(state: GoodState) {
 ### **Simple State Management**
 
 
+{% raw %}
 ```typescript
 // Simple state management with discriminated unions
 interface IdleState {
@@ -154,11 +159,13 @@ function handleAsyncState(state: AsyncState) {
   }
 }
 ```
+{% endraw %}
 
 
 ### **API Response Handling**
 
 
+{% raw %}
 ```typescript
 // API response handling with discriminated unions
 interface ApiLoadingResponse {
@@ -197,11 +204,13 @@ const userResponse: ApiResponse<User> = {
   timestamp: Date.now()
 };
 ```
+{% endraw %}
 
 
 ### **Form State Management**
 
 
+{% raw %}
 ```typescript
 // Form state management with discriminated unions
 interface FormIdleState {
@@ -258,6 +267,7 @@ function handleFormState(state: FormState) {
   }
 }
 ```
+{% endraw %}
 
 
 ---
@@ -267,6 +277,7 @@ function handleFormState(state: FormState) {
 ### **Nested Discriminated Unions**
 
 
+{% raw %}
 ```typescript
 // Nested discriminated unions
 interface BaseEvent {
@@ -306,11 +317,13 @@ function handleEvent(event: Event) {
   }
 }
 ```
+{% endraw %}
 
 
 ### **Generic Discriminated Unions**
 
 
+{% raw %}
 ```typescript
 // Generic discriminated unions
 interface LoadingResult<T> {
@@ -352,11 +365,13 @@ const productResult: Result<Product[]> = {
   promise: fetchProducts()
 };
 ```
+{% endraw %}
 
 
 ### **Conditional Discriminated Unions**
 
 
+{% raw %}
 ```typescript
 // Conditional discriminated unions
 interface BaseRequest {
@@ -401,6 +416,7 @@ function handleRequest(request: HttpRequest) {
   }
 }
 ```
+{% endraw %}
 
 
 ---
@@ -410,6 +426,7 @@ function handleRequest(request: HttpRequest) {
 ### **Exhaustive Pattern Matching**
 
 
+{% raw %}
 ```typescript
 // Exhaustive pattern matching
 interface RedState {
@@ -444,11 +461,13 @@ function handleColorState(state: ColorState) {
   }
 }
 ```
+{% endraw %}
 
 
 ### **Partial Pattern Matching**
 
 
+{% raw %}
 ```typescript
 // Partial pattern matching
 interface PartialState {
@@ -477,11 +496,13 @@ function handlePartialOrComplete(state: PartialOrComplete) {
   }
 }
 ```
+{% endraw %}
 
 
 ### **Recursive Pattern Matching**
 
 
+{% raw %}
 ```typescript
 // Recursive pattern matching
 interface LeafNode {
@@ -517,6 +538,7 @@ const tree: TreeNode = {
   }
 };
 ```
+{% endraw %}
 
 
 ---
@@ -526,6 +548,7 @@ const tree: TreeNode = {
 ### **Redux State Management**
 
 
+{% raw %}
 ```typescript
 // Redux state management with discriminated unions
 interface InitialState {
@@ -564,11 +587,13 @@ function handleReduxState(state: ReduxState) {
   }
 }
 ```
+{% endraw %}
 
 
 ### **WebSocket Message Handling**
 
 
+{% raw %}
 ```typescript
 // WebSocket message handling with discriminated unions
 interface ConnectMessage {
@@ -607,11 +632,13 @@ function handleWebSocketMessage(message: WebSocketMessage) {
   }
 }
 ```
+{% endraw %}
 
 
 ### **File System Operations**
 
 
+{% raw %}
 ```typescript
 // File system operations with discriminated unions
 interface FileReadOperation {
@@ -653,6 +680,7 @@ function handleFileOperation(operation: FileOperation) {
   }
 }
 ```
+{% endraw %}
 
 
 ---
@@ -662,6 +690,7 @@ function handleFileOperation(operation: FileOperation) {
 ### **1. Use Descriptive Discriminators**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Descriptive discriminators
 interface LoadingState {
@@ -683,11 +712,13 @@ interface SuccessState {
   data: any;
 }
 ```
+{% endraw %}
 
 
 ### **2. Keep Discriminators Simple**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Simple string discriminators
 interface LoadingState {
@@ -709,11 +740,13 @@ interface SuccessState {
   data: any;
 }
 ```
+{% endraw %}
 
 
 ### **3. Use Exhaustive Checks**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Exhaustive checks
 function handleState(state: AppState) {
@@ -741,11 +774,13 @@ function handleState(state: AppState) {
   }
 }
 ```
+{% endraw %}
 
 
 ### **4. Group Related States**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Group related states
 interface LoadingState {
@@ -778,6 +813,7 @@ interface UserState {
 
 type AppState = LoadingState | UserState;
 ```
+{% endraw %}
 
 
 ---
@@ -809,6 +845,7 @@ Discriminated unions are union types with a common discriminator property that h
 **Answer:**
 Use the `never` type in the default case to ensure all cases are handled:
 
+{% raw %}
 ```typescript
 function handleState(state: AppState) {
   switch (state.status) {
@@ -822,6 +859,7 @@ function handleState(state: AppState) {
   }
 }
 ```
+{% endraw %}
 
 
 ### **5. When should you use discriminated unions?**

@@ -45,6 +45,7 @@
 
 ### ASCII Diagram: Critical Rendering Path
 
+{% raw %}
 ```
 CRITICAL RENDERING PATH
 ┌─────────────────────────────────┐
@@ -107,6 +108,7 @@ CRITICAL RENDERING PATH
         │  (GPU)        │
         └───────────────┘
 ```
+{% endraw %}
 
 
 ### Optimization Techniques:
@@ -131,6 +133,7 @@ CRITICAL RENDERING PATH
 
 ### ASCII Diagram: Resource Hints Flow
 
+{% raw %}
 ```
 RESOURCE HINTS FLOW
 ┌─────────────────────────────────┐
@@ -182,6 +185,7 @@ RESOURCE HINTS FLOW
         │  (Heavy)      │
         └───────────────┘
 ```
+{% endraw %}
 
 
 ### Resource Hint Types:
@@ -206,6 +210,7 @@ RESOURCE HINTS FLOW
 
 ### ASCII Diagram: Service Worker Caching
 
+{% raw %}
 ```
 SERVICE WORKER CACHING
 ┌─────────────────────────────────┐
@@ -260,6 +265,7 @@ SERVICE WORKER CACHING
         │  Error        │
         └───────────────┘
 ```
+{% endraw %}
 
 
 ### Caching Strategies:

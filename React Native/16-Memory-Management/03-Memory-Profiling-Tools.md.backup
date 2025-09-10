@@ -9,6 +9,7 @@ Memory profiling tools are essential for identifying memory leaks, optimizing pe
 ### 1. Flipper Integration
 
 
+{% raw %}
 ```javascript
 import { useEffect, useState } from 'react';
 import { View, Text, Button } from 'react-native';
@@ -51,11 +52,13 @@ const FlipperMemoryProfiler = () => {
   );
 };
 ```
+{% endraw %}
 
 
 ### 2. React DevTools Profiler
 
 
+{% raw %}
 ```javascript
 import { Profiler } from 'react';
 import { View, Text } from 'react-native';
@@ -81,6 +84,7 @@ const ProfilerExample = () => {
   );
 };
 ```
+{% endraw %}
 
 
 ## Custom Memory Monitoring
@@ -88,6 +92,7 @@ const ProfilerExample = () => {
 ### 1. Memory Usage Tracker
 
 
+{% raw %}
 ```javascript
 import { useEffect, useState, useRef } from 'react';
 import { View, Text, ScrollView } from 'react-native';
@@ -165,11 +170,13 @@ const MemoryTracker = () => {
   );
 };
 ```
+{% endraw %}
 
 
 ### 2. Component Memory Profiler
 
 
+{% raw %}
 ```javascript
 import { useEffect, useRef, useState } from 'react';
 import { View, Text, Button } from 'react-native';
@@ -253,6 +260,7 @@ const ComponentMemoryProfiler = () => {
   );
 };
 ```
+{% endraw %}
 
 
 ## Advanced Memory Profiling
@@ -260,6 +268,7 @@ const ComponentMemoryProfiler = () => {
 ### 1. Heap Snapshot Analysis
 
 
+{% raw %}
 ```javascript
 import { useEffect, useRef } from 'react';
 
@@ -310,11 +319,13 @@ const HeapSnapshotProfiler = () => {
   return <View>Heap Snapshot Profiler</View>;
 };
 ```
+{% endraw %}
 
 
 ### 2. Memory Leak Detector
 
 
+{% raw %}
 ```javascript
 import { useEffect, useRef, useState } from 'react';
 import { View, Text, Button } from 'react-native';
@@ -432,6 +443,7 @@ const MemoryLeakDetector = () => {
   );
 };
 ```
+{% endraw %}
 
 
 ## Performance Monitoring
@@ -439,6 +451,7 @@ const MemoryLeakDetector = () => {
 ### 1. Frame Rate Monitor
 
 
+{% raw %}
 ```javascript
 import { useEffect, useState, useRef } from 'react';
 import { View, Text } from 'react-native';
@@ -504,11 +517,13 @@ const FrameRateMonitor = () => {
   );
 };
 ```
+{% endraw %}
 
 
 ### 2. Memory Pressure Monitor
 
 
+{% raw %}
 ```javascript
 import { useEffect, useState } from 'react';
 import { AppState, View, Text } from 'react-native';
@@ -567,6 +582,7 @@ const MemoryPressureMonitor = () => {
   );
 };
 ```
+{% endraw %}
 
 
 ## Integration with Development Tools
@@ -574,6 +590,7 @@ const MemoryPressureMonitor = () => {
 ### 1. Metro Bundle Analyzer
 
 
+{% raw %}
 ```javascript
 // metro.config.js
 const { getDefaultConfig } = require('metro-config');
@@ -604,11 +621,13 @@ module.exports = (async () => {
   };
 })();
 ```
+{% endraw %}
 
 
 ### 2. Custom Dev Menu Integration
 
 
+{% raw %}
 ```javascript
 import { DevSettings } from 'react-native';
 
@@ -640,6 +659,7 @@ const DevMenuIntegration = () => {
   return <View>Dev Menu Integration</View>;
 };
 ```
+{% endraw %}
 
 
 ## Testing Memory Profiling
@@ -647,6 +667,7 @@ const DevMenuIntegration = () => {
 ### 1. Memory Test Suite
 
 
+{% raw %}
 ```javascript
 import { render, cleanup } from '@testing-library/react-native';
 
@@ -692,6 +713,7 @@ describe('Memory Profiling Tests', () => {
   });
 });
 ```
+{% endraw %}
 
 
 ## Summary

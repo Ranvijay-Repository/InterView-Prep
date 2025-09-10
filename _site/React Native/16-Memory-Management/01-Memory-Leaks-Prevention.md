@@ -204,8 +204,8 @@ const ImageMemoryExample = () => {
       {images.map((url, index) => (
         <Image
           key={index}
-          source={{#123;{{#123; uri: url }}#125;}}#125;
-          style={{#123;{{#123; width: 100, height: 100 }}#125;}}#125;
+          source={{}}
+          style={{}}
           // Optimize memory usage
           resizeMode="cover"
           // Clear cache if needed
@@ -319,7 +319,7 @@ const LazyLoadingExample = () => {
 
   // Only render visible items
   const renderItem = useCallback(({ item }) => (
-    <View style={{#123;{{#123; height: 100, padding: 10 }}#125;}}#125;>
+    <View style={{}}>
       <Text>{item.title}</Text>
     </View>
   ), []);
@@ -381,7 +381,7 @@ const MemoryMonitor = () => {
   }, []);
 
   return (
-    <View style={{#123;{{#123; padding: 20 }}#125;}}#125;>
+    <View style={{}}>
       <Text>Memory Usage:</Text>
       {memoryInfo && (
         <>

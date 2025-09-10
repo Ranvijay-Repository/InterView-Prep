@@ -46,6 +46,7 @@
 
 ### ASCII Diagram: E-commerce Architecture
 
+{% raw %}
 ```
 E-COMMERCE ARCHITECTURE
 ┌─────────────────────────────────┐
@@ -118,6 +119,7 @@ E-COMMERCE ARCHITECTURE
         │  Analytics    │
         └───────────────┘
 ```
+{% endraw %}
 
 
 ### E-commerce Patterns:
@@ -142,6 +144,7 @@ E-COMMERCE ARCHITECTURE
 
 ### ASCII Diagram: Financial Application Architecture
 
+{% raw %}
 ```
 FINANCIAL APPLICATION ARCHITECTURE
 ┌─────────────────────────────────┐
@@ -205,6 +208,7 @@ FINANCIAL APPLICATION ARCHITECTURE
         │  Systems      │
         └───────────────┘
 ```
+{% endraw %}
 
 
 ### Financial Patterns:
@@ -229,6 +233,7 @@ FINANCIAL APPLICATION ARCHITECTURE
 
 ### ASCII Diagram: Gaming Architecture
 
+{% raw %}
 ```
 GAMING ARCHITECTURE
 ┌─────────────────────────────────┐
@@ -292,6 +297,7 @@ GAMING ARCHITECTURE
         │  Gestures     │
         └───────────────┘
 ```
+{% endraw %}
 
 
 ### Gaming Patterns:
@@ -316,6 +322,7 @@ GAMING ARCHITECTURE
 
 ### ASCII Diagram: IoT Architecture
 
+{% raw %}
 ```
 IOT ARCHITECTURE
 ┌─────────────────────────────────┐
@@ -378,6 +385,7 @@ IOT ARCHITECTURE
         │  Reporting    │
         └───────────────┘
 ```
+{% endraw %}
 
 
 ### IoT Patterns:

@@ -25,6 +25,7 @@ TypeScript compilation performance is crucial for developer productivity and eff
 ### **Performance Factors**
 
 
+{% raw %}
 ```typescript
 // Factors affecting TypeScript compilation performance
 const performanceFactors = {
@@ -53,11 +54,13 @@ const performanceGoals = {
   caching: "Effective caching strategies"
 };
 ```
+{% endraw %}
 
 
 ### **Compilation Phases**
 
 
+{% raw %}
 ```typescript
 // TypeScript compilation phases
 const compilationPhases = {
@@ -77,6 +80,7 @@ const performanceBottlenecks = {
   memory: "Memory allocation and garbage collection"
 };
 ```
+{% endraw %}
 
 
 ---
@@ -86,6 +90,7 @@ const performanceBottlenecks = {
 ### **Incremental Build Configuration**
 
 
+{% raw %}
 ```typescript
 // tsconfig.json for incremental compilation
 {
@@ -118,11 +123,13 @@ const buildInfoFile = {
   benefits: "Enables incremental compilation"
 };
 ```
+{% endraw %}
 
 
 ### **Incremental Compilation Setup**
 
 
+{% raw %}
 ```typescript
 // Setting up incremental compilation
 const incrementalSetup = {
@@ -157,11 +164,13 @@ function monitorCompilation() {
   return duration;
 }
 ```
+{% endraw %}
 
 
 ### **Build Info Management**
 
 
+{% raw %}
 ```typescript
 // Build info file management
 const buildInfoManagement = {
@@ -197,6 +206,7 @@ function backupBuildInfo() {
   }
 }
 ```
+{% endraw %}
 
 
 ---
@@ -206,6 +216,7 @@ function backupBuildInfo() {
 ### **Project References Setup**
 
 
+{% raw %}
 ```typescript
 // Project references configuration
 const projectReferences = {
@@ -254,11 +265,13 @@ const packageTsConfig = {
   "exclude": ["node_modules", "dist"]
 };
 ```
+{% endraw %}
 
 
 ### **Project References Benefits**
 
 
+{% raw %}
 ```typescript
 // Benefits of project references
 const projectReferenceBenefits = {
@@ -290,11 +303,13 @@ const buildScript = {
   }
 };
 ```
+{% endraw %}
 
 
 ### **Project References Best Practices**
 
 
+{% raw %}
 ```typescript
 // Best practices for project references
 const bestPractices = {
@@ -321,6 +336,7 @@ const dependencyManagement = {
   shared: "Extract shared code to common packages"
 };
 ```
+{% endraw %}
 
 
 ---
@@ -330,6 +346,7 @@ const dependencyManagement = {
 ### **Compiler Options Optimization**
 
 
+{% raw %}
 ```typescript
 // Optimized compiler options
 const optimizedOptions = {
@@ -370,11 +387,13 @@ const performanceOptions = {
   maxNodeModuleJsDepth: 0 // Limit depth of node_modules type checking
 };
 ```
+{% endraw %}
 
 
 ### **Build Tool Integration**
 
 
+{% raw %}
 ```typescript
 // Build tool integration
 const buildToolIntegration = {
@@ -423,11 +442,13 @@ const esbuildConfig = {
   treeShaking: true
 };
 ```
+{% endraw %}
 
 
 ### **Parallel Compilation**
 
 
+{% raw %}
 ```typescript
 // Parallel compilation strategies
 const parallelCompilation = {
@@ -453,6 +474,7 @@ const processForking = {
   cleanup: "Clean up processes after compilation"
 };
 ```
+{% endraw %}
 
 
 ---
@@ -462,6 +484,7 @@ const processForking = {
 ### **Watch Mode Optimization**
 
 
+{% raw %}
 ```typescript
 // Watch mode optimization
 const watchModeOptimization = {
@@ -496,11 +519,13 @@ const fileSystemWatching = {
   ]
 };
 ```
+{% endraw %}
 
 
 ### **Development Server Integration**
 
 
+{% raw %}
 ```typescript
 // Development server integration
 const devServerIntegration = {
@@ -542,11 +567,13 @@ const webpackDevServer = {
   }
 };
 ```
+{% endraw %}
 
 
 ### **CI/CD Optimization**
 
 
+{% raw %}
 ```typescript
 // CI/CD optimization
 const ciCdOptimization = {
@@ -597,6 +624,7 @@ const githubActions = {
   }
 };
 ```
+{% endraw %}
 
 
 ---
@@ -606,6 +634,7 @@ const githubActions = {
 ### **1. Enable Incremental Compilation**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Enable incremental compilation
 {
@@ -622,11 +651,13 @@ const githubActions = {
   }
 }
 ```
+{% endraw %}
 
 
 ### **2. Use Project References**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Use project references
 {
@@ -642,11 +673,13 @@ const githubActions = {
   "include": ["src/**/*", "packages/**/*"]
 }
 ```
+{% endraw %}
 
 
 ### **3. Optimize Compiler Options**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Optimized compiler options
 {
@@ -665,11 +698,13 @@ const githubActions = {
   }
 }
 ```
+{% endraw %}
 
 
 ### **4. Use Build Tools**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Use build tools
 const buildTools = {
@@ -685,6 +720,7 @@ const directCompilation = {
   features: "Limited build features"
 };
 ```
+{% endraw %}
 
 
 ---

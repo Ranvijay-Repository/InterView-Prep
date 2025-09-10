@@ -26,6 +26,7 @@ The `tsconfig.json` file is the configuration file for TypeScript projects, defi
 ### **Basic Structure**
 
 
+{% raw %}
 ```json
 {
   "compilerOptions": {
@@ -43,11 +44,13 @@ The `tsconfig.json` file is the configuration file for TypeScript projects, defi
   ]
 }
 ```
+{% endraw %}
 
 
 ### **Configuration Inheritance**
 
 
+{% raw %}
 ```json
 // base-config.json
 {
@@ -69,6 +72,7 @@ The `tsconfig.json` file is the configuration file for TypeScript projects, defi
   "include": ["src/**/*"]
 }
 ```
+{% endraw %}
 
 
 ---
@@ -78,6 +82,7 @@ The `tsconfig.json` file is the configuration file for TypeScript projects, defi
 ### **Basic Options**
 
 
+{% raw %}
 ```json
 {
   "compilerOptions": {
@@ -102,11 +107,13 @@ The `tsconfig.json` file is the configuration file for TypeScript projects, defi
   }
 }
 ```
+{% endraw %}
 
 
 ### **Strict Type Checking**
 
 
+{% raw %}
 ```json
 {
   "compilerOptions": {
@@ -125,11 +132,13 @@ The `tsconfig.json` file is the configuration file for TypeScript projects, defi
   }
 }
 ```
+{% endraw %}
 
 
 ### **Module Resolution**
 
 
+{% raw %}
 ```json
 {
   "compilerOptions": {
@@ -156,11 +165,13 @@ The `tsconfig.json` file is the configuration file for TypeScript projects, defi
   }
 }
 ```
+{% endraw %}
 
 
 ### **Advanced Options**
 
 
+{% raw %}
 ```json
 {
   "compilerOptions": {
@@ -188,6 +199,7 @@ The `tsconfig.json` file is the configuration file for TypeScript projects, defi
   }
 }
 ```
+{% endraw %}
 
 
 ---
@@ -199,6 +211,7 @@ Project references allow you to structure TypeScript projects into smaller, mana
 ### **Basic Project References**
 
 
+{% raw %}
 ```json
 // tsconfig.json (root)
 {
@@ -234,11 +247,13 @@ Project references allow you to structure TypeScript projects into smaller, mana
   ]
 }
 ```
+{% endraw %}
 
 
 ### **Build with Project References**
 
 
+{% raw %}
 ```bash
 # Build all projects
 tsc --build
@@ -252,6 +267,7 @@ tsc --build --clean
 # Force rebuild
 tsc --build --force
 ```
+{% endraw %}
 
 
 ---
@@ -261,6 +277,7 @@ tsc --build --force
 ### **Include Patterns**
 
 
+{% raw %}
 ```json
 {
   "include": [
@@ -270,11 +287,13 @@ tsc --build --force
   ]
 }
 ```
+{% endraw %}
 
 
 ### **Exclude Patterns**
 
 
+{% raw %}
 ```json
 {
   "exclude": [
@@ -286,11 +305,13 @@ tsc --build --force
   ]
 }
 ```
+{% endraw %}
 
 
 ### **Files Array**
 
 
+{% raw %}
 ```json
 {
   "files": [
@@ -300,6 +321,7 @@ tsc --build --force
   ]
 }
 ```
+{% endraw %}
 
 
 ---
@@ -309,6 +331,7 @@ tsc --build --force
 ### **Environment-Specific Configs**
 
 
+{% raw %}
 ```json
 // tsconfig.base.json
 {
@@ -345,11 +368,13 @@ tsc --build --force
   "include": ["src/**/*"]
 }
 ```
+{% endraw %}
 
 
 ### **Library Configuration**
 
 
+{% raw %}
 ```json
 // tsconfig.lib.json
 {
@@ -370,11 +395,13 @@ tsc --build --force
   "exclude": ["**/*.test.ts", "**/*.spec.ts"]
 }
 ```
+{% endraw %}
 
 
 ### **Node.js Configuration**
 
 
+{% raw %}
 ```json
 // tsconfig.node.json
 {
@@ -395,6 +422,7 @@ tsc --build --force
   "exclude": ["node_modules", "dist"]
 }
 ```
+{% endraw %}
 
 
 ---
@@ -404,6 +432,7 @@ tsc --build --force
 ### **Development Configuration**
 
 
+{% raw %}
 ```json
 // tsconfig.dev.json
 {
@@ -418,11 +447,13 @@ tsc --build --force
   "include": ["src/**/*", "tests/**/*"]
 }
 ```
+{% endraw %}
 
 
 ### **Production Configuration**
 
 
+{% raw %}
 ```json
 // tsconfig.prod.json
 {
@@ -437,11 +468,13 @@ tsc --build --force
   "include": ["src/**/*"]
 }
 ```
+{% endraw %}
 
 
 ### **Testing Configuration**
 
 
+{% raw %}
 ```json
 // tsconfig.test.json
 {
@@ -454,6 +487,7 @@ tsc --build --force
   "exclude": ["node_modules", "dist"]
 }
 ```
+{% endraw %}
 
 
 ---
@@ -463,6 +497,7 @@ tsc --build --force
 ### **1. Use Strict Mode**
 
 
+{% raw %}
 ```json
 // ✅ Good: Enable strict mode
 {
@@ -478,11 +513,13 @@ tsc --build --force
   }
 }
 ```
+{% endraw %}
 
 
 ### **2. Use Path Mapping for Clean Imports**
 
 
+{% raw %}
 ```json
 // ✅ Good: Path mapping
 {
@@ -498,11 +535,13 @@ tsc --build --force
 // ❌ Avoid: Relative imports
 import { User } from "../../../types/user";
 ```
+{% endraw %}
 
 
 ### **3. Use Project References for Large Projects**
 
 
+{% raw %}
 ```json
 // ✅ Good: Project references
 {
@@ -518,11 +557,13 @@ import { User } from "../../../types/user";
   "include": ["packages/**/*", "apps/**/*"]
 }
 ```
+{% endraw %}
 
 
 ### **4. Use Environment-Specific Configs**
 
 
+{% raw %}
 ```json
 // ✅ Good: Environment-specific configs
 {
@@ -541,6 +582,7 @@ import { User } from "../../../types/user";
   }
 }
 ```
+{% endraw %}
 
 
 ---
@@ -573,6 +615,7 @@ Key options include:
 Use `moduleResolution` and `baseUrl` with `paths`:
 
 
+{% raw %}
 ```json
 {
   "compilerOptions": {
@@ -584,6 +627,7 @@ Use `moduleResolution` and `baseUrl` with `paths`:
   }
 }
 ```
+{% endraw %}
 
 
 ### **4. What are project references and when should you use them?**
@@ -601,6 +645,7 @@ Project references allow you to structure large projects into smaller, manageabl
 Create environment-specific configs:
 
 
+{% raw %}
 ```json
 // tsconfig.dev.json
 {
@@ -619,6 +664,7 @@ Create environment-specific configs:
   }
 }
 ```
+{% endraw %}
 
 
 ---

@@ -44,6 +44,7 @@ Memory in JavaScript follows a predictable lifecycle from allocation to garbage 
 
 ### ASCII Diagram: Memory Lifecycle
 
+{% raw %}
 ```
 MEMORY LIFECYCLE
 ┌─────────────────────────────────┐
@@ -64,6 +65,7 @@ MEMORY LIFECYCLE
 │    unreachable memory          │
 └─────────────────────────────────┘
 ```
+{% endraw %}
 
 
 ---
@@ -102,6 +104,7 @@ JavaScript engines use different algorithms to identify and collect garbage memo
 
 ### ASCII Diagram: Reference Counting
 
+{% raw %}
 ```
 REFERENCE COUNTING EXAMPLE
 ┌─────────────────────────────────┐
@@ -125,6 +128,7 @@ REFERENCE COUNTING EXAMPLE
 │ Memory is freed                 │
 └─────────────────────────────────┘
 ```
+{% endraw %}
 
 
 ---
@@ -140,6 +144,7 @@ REFERENCE COUNTING EXAMPLE
 
 ### ASCII Diagram: Mark and Sweep
 
+{% raw %}
 ```
 MARK AND SWEEP PROCESS
 ┌─────────────────────────────────┐
@@ -175,6 +180,7 @@ MARK AND SWEEP PROCESS
 │ Result: Clean memory            │
 └─────────────────────────────────┘
 ```
+{% endraw %}
 
 
 ---
@@ -190,6 +196,7 @@ MARK AND SWEEP PROCESS
 
 ### ASCII Diagram: Generational Collection
 
+{% raw %}
 ```
 GENERATIONAL GARBAGE COLLECTION
 ┌─────────────────────────────────┐
@@ -219,6 +226,7 @@ GENERATIONAL GARBAGE COLLECTION
 │  • Slower collection            │
 └─────────────────────────────────┘
 ```
+{% endraw %}
 
 
 ---
@@ -243,6 +251,7 @@ GENERATIONAL GARBAGE COLLECTION
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
 
 
+{% raw %}
 ```javascript
 console.log("=== BASIC MEMORY MANAGEMENT ===");
 
@@ -291,6 +300,7 @@ console.log("Setting variables to null removes references");
 console.log("Unreferenced objects become eligible for GC");
 console.log("Memory is freed automatically by the engine");
 ```
+{% endraw %}
 
 </div>
 
@@ -299,6 +309,7 @@ console.log("Memory is freed automatically by the engine");
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
 
 
+{% raw %}
 ```javascript
 console.log("=== CIRCULAR REFERENCES AND GC ===");
 
@@ -358,6 +369,7 @@ console.log("Circular references don't prevent garbage collection");
 console.log("Mark and Sweep algorithm handles circular references");
 console.log("Objects become unreachable when no external references exist");
 ```
+{% endraw %}
 
 </div>
 
@@ -366,6 +378,7 @@ console.log("Objects become unreachable when no external references exist");
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
 
 
+{% raw %}
 ```javascript
 console.log("=== MEMORY LEAKS IN EVENT LISTENERS ===");
 
@@ -451,6 +464,7 @@ console.log("Event listeners can cause memory leaks");
 console.log("Always remove listeners before destroying elements");
 console.log("Use removeEventListener() to prevent memory leaks");
 ```
+{% endraw %}
 
 </div>
 
@@ -460,6 +474,7 @@ console.log("Use removeEventListener() to prevent memory leaks");
 
 ### Pitfall 1: Global Variables
 
+{% raw %}
 ```javascript
 // ❌ WRONG: Accidental global variable
 function processData() {
@@ -471,10 +486,12 @@ function processData() {
     let result = "processed";
 }
 ```
+{% endraw %}
 
 
 ### Pitfall 2: Forgotten Event Listeners
 
+{% raw %}
 ```javascript
 // ❌ WRONG: Event listener not removed
 element.addEventListener("click", handler);
@@ -484,6 +501,7 @@ element.addEventListener("click", handler);
 element.addEventListener("click", handler);
 element.removeEventListener("click", handler);
 ```
+{% endraw %}
 
 
 ---

@@ -23,6 +23,7 @@
 ### **Security Layers**
 
 
+{% raw %}
 ```mermaid
 graph TD
     A[Application Layer] --> B[Transport Layer Security]
@@ -34,6 +35,7 @@ graph TD
     G[Request Encryption] --> A
     H[Response Validation] --> A
 ```
+{% endraw %}
 
 
 ### **Security Considerations**
@@ -50,6 +52,7 @@ graph TD
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Network security configuration
 import { Platform } from 'react-native';
@@ -85,12 +88,14 @@ const NetworkSecurityConfig = {
 
 export default NetworkSecurityConfig;
 ```
+{% endraw %}
 
 
 ### **Secure HTTP Client**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 import axios from 'axios';
 import { Platform } from 'react-native';
@@ -312,6 +317,7 @@ export {
   processError,
 };
 ```
+{% endraw %}
 
 
 ---
@@ -322,6 +328,7 @@ export {
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 import { Platform } from 'react-native';
 import { getSystemVersion } from 'react-native-device-info';
@@ -411,12 +418,14 @@ export {
   PINNED_CERTIFICATES,
 };
 ```
+{% endraw %}
 
 
 ### **Network Security Manager**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 import { Platform } from 'react-native';
 import CertificatePinning from './CertificatePinning';
@@ -607,6 +616,7 @@ export {
   isValidData,
 };
 ```
+{% endraw %}
 
 
 ---
@@ -617,6 +627,7 @@ export {
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Keychain from 'react-native-keychain';
@@ -826,6 +837,7 @@ export {
   API_AUTH_CONFIG,
 };
 ```
+{% endraw %}
 
 
 ---
@@ -836,6 +848,7 @@ export {
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 import { Platform } from 'react-native';
 import APIAuthenticationService from './APIAuthenticationService';
@@ -930,6 +943,7 @@ export {
   uploadFile,
 };
 ```
+{% endraw %}
 
 
 ---

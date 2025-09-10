@@ -28,6 +28,7 @@ React Native uses a subset of CSS properties and implements Flexbox for layout. 
 ### **Styling System Overview**
 
 
+{% raw %}
 ```
 ┌─────────────────────────────────────┐
 │        React Native Styling         │
@@ -51,6 +52,7 @@ React Native uses a subset of CSS properties and implements Flexbox for layout. 
 │  └─────────────────────────────────┘│
 └─────────────────────────────────────┘
 ```
+{% endraw %}
 
 
 ---
@@ -63,6 +65,7 @@ The `StyleSheet` API provides a way to create and manage styles in React Native.
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
@@ -120,12 +123,14 @@ const styles = StyleSheet.create({
 
 export default BasicStyling;
 ```
+{% endraw %}
 
 
 ### **StyleSheet with Dynamic Styles**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
@@ -212,6 +217,7 @@ const styles = StyleSheet.create({
 
 export default DynamicStyling;
 ```
+{% endraw %}
 
 
 ---
@@ -224,6 +230,7 @@ Flexbox is the primary layout system in React Native. Understanding its properti
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
@@ -314,12 +321,14 @@ const styles = StyleSheet.create({
 
 export default FlexDirection;
 ```
+{% endraw %}
 
 
 ### **Justify Content**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
@@ -420,6 +429,7 @@ const styles = StyleSheet.create({
 
 export default JustifyContent;
 ```
+{% endraw %}
 
 
 ---
@@ -432,6 +442,7 @@ Understanding layout properties is essential for creating precise and responsive
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
@@ -559,6 +570,7 @@ const styles = StyleSheet.create({
 
 export default LayoutProperties;
 ```
+{% endraw %}
 
 
 ---

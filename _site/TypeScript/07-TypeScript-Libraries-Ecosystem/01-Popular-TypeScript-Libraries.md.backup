@@ -26,6 +26,7 @@ TypeScript libraries can be categorized based on their functionality and use cas
 ### **Library Categories**
 
 {% raw %}
+{% raw %}
 ```typescript
 // TypeScript library categories
 const libraryCategories = {
@@ -52,6 +53,7 @@ const popularLibraries = {
 ### **Library Selection Criteria**
 
 {% raw %}
+{% raw %}
 ```typescript
 // Criteria for selecting TypeScript libraries
 const selectionCriteria = {
@@ -71,6 +73,7 @@ const selectionCriteria = {
 
 ### **Lodash**
 
+{% raw %}
 {% raw %}
 ```typescript
 // Lodash with TypeScript
@@ -120,6 +123,7 @@ const throttledScroll = _.throttle(() => {
 
 ### **date-fns**
 
+{% raw %}
 {% raw %}
 ```typescript
 // date-fns with TypeScript
@@ -171,6 +175,7 @@ console.log(isDateInRange(userDate, startOfToday, endOfToday));
 
 ### **Ramda**
 
+{% raw %}
 {% raw %}
 ```typescript
 // Ramda with TypeScript
@@ -229,6 +234,7 @@ const oddNumbers = R.filter(isOdd, numbers);
 
 ### **Zod**
 
+{% raw %}
 {% raw %}
 ```typescript
 // Zod with TypeScript
@@ -306,6 +312,7 @@ const UserWithValidationSchema = z.object({
 
 ### **io-ts**
 
+{% raw %}
 {% raw %}
 ```typescript
 // io-ts with TypeScript
@@ -389,6 +396,7 @@ const UserWithEmailCodec = t.type({
 
 ### **Redux Toolkit**
 
+{% raw %}
 {% raw %}
 ```typescript
 // Redux Toolkit with TypeScript
@@ -496,6 +504,7 @@ const UserList = () => {
 ### **Zustand**
 
 {% raw %}
+{% raw %}
 ```typescript
 // Zustand with TypeScript
 import { create } from 'zustand';
@@ -600,6 +609,7 @@ const UserList = () => {
 ### **Jest**
 
 {% raw %}
+{% raw %}
 ```typescript
 // Jest with TypeScript
 import { describe, it, expect, beforeEach, afterEach, jest } from '@jest/globals';
@@ -676,6 +686,7 @@ jest.mock('../utils/dateUtils', () => ({
 ### **Vitest**
 
 {% raw %}
+{% raw %}
 ```typescript
 // Vitest with TypeScript
 import { describe, it, expect, beforeEach, vi } from 'vitest';
@@ -733,6 +744,7 @@ vi.mock('../utils/dateUtils', () => ({
 ### **Webpack**
 
 {% raw %}
+{% raw %}
 ```typescript
 // webpack.config.ts
 import { Configuration } from 'webpack';
@@ -768,6 +780,7 @@ export default config;
 ### **Vite**
 
 {% raw %}
+{% raw %}
 ```typescript
 // vite.config.ts
 import { defineConfig } from 'vite';
@@ -798,6 +811,7 @@ export default defineConfig({
 ### **1. Choose Libraries with Full TypeScript Support**
 
 {% raw %}
+{% raw %}
 ```typescript
 // ✅ Good: Full TypeScript support
 import { z } from 'zod';
@@ -815,6 +829,7 @@ import _ from 'lodash';
 ### **2. Use Type-Safe Validation**
 
 {% raw %}
+{% raw %}
 ```typescript
 // ✅ Good: Type-safe validation
 const validateUser = (data: unknown): User => {
@@ -830,6 +845,7 @@ const validateUser = (data: any): User => {
 
 ### **3. Prefer Functional Libraries**
 
+{% raw %}
 {% raw %}
 ```typescript
 // ✅ Good: Functional approach
@@ -850,6 +866,7 @@ for (const user of users) {
 
 ### **4. Use Modern Libraries**
 
+{% raw %}
 {% raw %}
 ```typescript
 // ✅ Good: Modern libraries
@@ -893,6 +910,7 @@ import * as Joi from 'joi';
 ### **4. How do you use Lodash with TypeScript?**
 
 **Answer:**
+{% raw %}
 {% raw %}
 ```typescript
 import _ from 'lodash';

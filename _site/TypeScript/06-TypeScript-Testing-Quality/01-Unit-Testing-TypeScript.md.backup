@@ -26,6 +26,7 @@ Setting up unit testing for TypeScript applications requires proper configuratio
 ### **Basic Setup**
 
 
+{% raw %}
 ```bash
 # Install testing dependencies
 npm install --save-dev jest @types/jest ts-jest
@@ -38,11 +39,13 @@ npm install --save-dev supertest @types/supertest
 # For React testing
 npm install --save-dev @testing-library/react @testing-library/user-event
 ```
+{% endraw %}
 
 
 ### **Package.json Scripts**
 
 
+{% raw %}
 ```json
 {
   "scripts": {
@@ -53,11 +56,13 @@ npm install --save-dev @testing-library/react @testing-library/user-event
   }
 }
 ```
+{% endraw %}
 
 
 ### **Basic Jest Configuration**
 
 
+{% raw %}
 ```javascript
 // jest.config.js
 module.exports = {
@@ -81,6 +86,7 @@ module.exports = {
   },
 };
 ```
+{% endraw %}
 
 
 ---
@@ -90,6 +96,7 @@ module.exports = {
 ### **Advanced Jest Configuration**
 
 
+{% raw %}
 ```javascript
 // jest.config.js
 module.exports = {
@@ -127,11 +134,13 @@ module.exports = {
   resetMocks: true,
 };
 ```
+{% endraw %}
 
 
 ### **TypeScript Configuration for Testing**
 
 
+{% raw %}
 ```json
 // tsconfig.test.json
 {
@@ -149,11 +158,13 @@ module.exports = {
   ]
 }
 ```
+{% endraw %}
 
 
 ### **Setup Files**
 
 
+{% raw %}
 ```typescript
 // src/setupTests.ts
 import '@testing-library/jest-dom';
@@ -172,6 +183,7 @@ afterEach(() => {
 // Global test timeout
 jest.setTimeout(10000);
 ```
+{% endraw %}
 
 
 ---
@@ -181,6 +193,7 @@ jest.setTimeout(10000);
 ### **Function Testing**
 
 
+{% raw %}
 ```typescript
 // src/utils/math.ts
 export const add = (a: number, b: number): number => a + b;
@@ -254,11 +267,13 @@ describe('Math Utils', () => {
   });
 });
 ```
+{% endraw %}
 
 
 ### **Class Testing**
 
 
+{% raw %}
 ```typescript
 // src/models/User.ts
 export class User {
@@ -412,6 +427,7 @@ describe('User', () => {
   });
 });
 ```
+{% endraw %}
 
 
 ---
@@ -421,6 +437,7 @@ describe('User', () => {
 ### **Basic Mocking**
 
 
+{% raw %}
 ```typescript
 // src/services/UserService.ts
 export class UserService {
@@ -495,11 +512,13 @@ describe('UserService', () => {
   });
 });
 ```
+{% endraw %}
 
 
 ### **Advanced Mocking**
 
 
+{% raw %}
 ```typescript
 // src/utils/__tests__/dateUtils.test.ts
 import { formatDate, parseDate, isWeekend } from '../dateUtils';
@@ -543,11 +562,13 @@ describe('Date Utils', () => {
   });
 });
 ```
+{% endraw %}
 
 
 ### **Module Mocking**
 
 
+{% raw %}
 ```typescript
 // src/services/__tests__/EmailService.test.ts
 import { EmailService } from '../EmailService';
@@ -586,6 +607,7 @@ describe('EmailService', () => {
   });
 });
 ```
+{% endraw %}
 
 
 ---
@@ -595,6 +617,7 @@ describe('EmailService', () => {
 ### **Promise Testing**
 
 
+{% raw %}
 ```typescript
 // src/services/__tests__/ApiService.test.ts
 import { ApiService } from '../ApiService';
@@ -637,11 +660,13 @@ describe('ApiService', () => {
   });
 });
 ```
+{% endraw %}
 
 
 ### **Callback Testing**
 
 
+{% raw %}
 ```typescript
 // src/utils/__tests__/asyncUtils.test.ts
 import { retry, delay, timeout } from '../asyncUtils';
@@ -686,6 +711,7 @@ describe('Async Utils', () => {
   });
 });
 ```
+{% endraw %}
 
 
 ---
@@ -695,6 +721,7 @@ describe('Async Utils', () => {
 ### **Test Doubles and Spies**
 
 
+{% raw %}
 ```typescript
 // src/services/__tests__/OrderService.test.ts
 import { OrderService } from '../OrderService';
@@ -794,11 +821,13 @@ describe('OrderService', () => {
   });
 });
 ```
+{% endraw %}
 
 
 ### **Integration Testing**
 
 
+{% raw %}
 ```typescript
 // src/__tests__/integration/userIntegration.test.ts
 import request from 'supertest';
@@ -882,6 +911,7 @@ describe('User Integration Tests', () => {
   });
 });
 ```
+{% endraw %}
 
 
 ---
@@ -891,6 +921,7 @@ describe('User Integration Tests', () => {
 ### **1. Use Descriptive Test Names**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Descriptive test names
 describe('UserService', () => {
@@ -922,11 +953,13 @@ describe('UserService', () => {
   });
 });
 ```
+{% endraw %}
 
 
 ### **2. Use Arrange-Act-Assert Pattern**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: AAA pattern
 it('should calculate total price correctly', () => {
@@ -950,11 +983,13 @@ it('should calculate total price correctly', () => {
   expect(calculateTotal(items)).toBe(35);
 });
 ```
+{% endraw %}
 
 
 ### **3. Use Proper Mocking**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Proper mocking
 describe('UserService', () => {
@@ -986,11 +1021,13 @@ describe('UserService', () => {
   });
 });
 ```
+{% endraw %}
 
 
 ### **4. Test Edge Cases**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Test edge cases
 describe('divide', () => {
@@ -1018,6 +1055,7 @@ describe('divide', () => {
   });
 });
 ```
+{% endraw %}
 
 
 ---
@@ -1044,6 +1082,7 @@ describe('divide', () => {
 
 **Answer:**
 
+{% raw %}
 ```typescript
 // Mock entire module
 jest.mock('./module');
@@ -1055,12 +1094,14 @@ jest.spyOn(object, 'method').mockImplementation(() => {});
 jest.fn().mockReturnValue('value');
 jest.fn().mockResolvedValue('async value');
 ```
+{% endraw %}
 
 
 ### **4. How do you test async code?**
 
 **Answer:**
 
+{% raw %}
 ```typescript
 // Test promises
 it('should resolve promise', async () => {
@@ -1073,6 +1114,7 @@ it('should reject promise', async () => {
   await expect(asyncFunction()).rejects.toThrow('Error');
 });
 ```
+{% endraw %}
 
 
 ### **5. What's the difference between unit and integration tests?**

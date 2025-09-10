@@ -42,6 +42,7 @@ Think of a closure like a backpack:
 
 ### 🔄 Lifecycle
 
+{% raw %}
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │                    CLOSURE LIFECYCLE                        │
@@ -54,6 +55,7 @@ Think of a closure like a backpack:
 │  6. 🔴 Closure can be called multiple times               │
 └─────────────────────────────────────────────────────────────┘
 ```
+{% endraw %}
 
 
 ---
@@ -61,6 +63,7 @@ Think of a closure like a backpack:
 ## 🗂️ Closure Visualization
 
 
+{% raw %}
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │                    CLOSURE STRUCTURE                        │
@@ -81,11 +84,13 @@ Think of a closure like a backpack:
 │  💾 Memory: outerVar and outerConst persist               │
 └─────────────────────────────────────────────────────────────┘
 ```
+{% endraw %}
 
 
 ### 🔍 Memory Management
 
 
+{% raw %}
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │                CLOSURE MEMORY MANAGEMENT                    │
@@ -101,6 +106,7 @@ Think of a closure like a backpack:
 │  └─ Closure only affects what it references               │
 └─────────────────────────────────────────────────────────────┘
 ```
+{% endraw %}
 
 
 ---
@@ -141,6 +147,7 @@ Think of a closure like a backpack:
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
 
 
+{% raw %}
 ```javascript
 console.log("=== BASIC CLOSURE ===");
 
@@ -179,11 +186,13 @@ console.log("Closure result:", result);
 console.log("=== Closure Memory ===");
 console.log("Closure remembers outer variables even after outer function returned");
 ```
+{% endraw %}
 
 </div>
 
 ### Example 2: Data Privacy with Closures
 
+{% raw %}
 ```javascript
 console.log("=== DATA PRIVACY WITH CLOSURES ===");
 
@@ -243,10 +252,12 @@ console.log("counter.validateIncrement:", counter.validateIncrement); // undefin
 // Private variables are truly private!
 console.log("Private variables are completely hidden from outside access");
 ```
+{% endraw %}
 
 
 ### Example 3: Function Factory with Closures
 
+{% raw %}
 ```javascript
 console.log("=== FUNCTION FACTORY WITH CLOSURES ===");
 
@@ -300,10 +311,12 @@ console.log("add(5, 3):", add(5, 3));           // 8
 console.log("multiply(4, 6):", multiply(4, 6)); // 24
 console.log("divide(10, 2):", divide(10, 2));   // 5
 ```
+{% endraw %}
 
 
 ### Example 4: Module Pattern with Closures
 
+{% raw %}
 ```javascript
 console.log("=== MODULE PATTERN WITH CLOSURES ===");
 
@@ -407,10 +420,12 @@ console.log("users:", userModule.users);           // undefined
 console.log("nextId:", userModule.nextId);         // undefined
 console.log("generateId:", userModule.generateId); // undefined
 ```
+{% endraw %}
 
 
 ### Example 5: Event Handlers and Closures
 
+{% raw %}
 ```javascript
 console.log("=== EVENT HANDLERS AND CLOSURES ===");
 
@@ -462,10 +477,12 @@ console.log("=== Closure Independence ===");
 console.log("Each button handler has its own click count");
 console.log("Handler 1 and Handler 2 are completely independent");
 ```
+{% endraw %}
 
 
 ### Example 6: Memoization with Closures
 
+{% raw %}
 ```javascript
 console.log("=== MEMOIZATION WITH CLOSURES ===");
 
@@ -533,6 +550,7 @@ console.log("2. Subsequent calls with same input are fast");
 console.log("3. Cache persists between function calls");
 console.log("4. Memory usage increases with cache size");
 ```
+{% endraw %}
 
 
 ---
@@ -541,6 +559,7 @@ console.log("4. Memory usage increases with cache size");
 
 ### Pitfall 1: Creating Closures in Loops
 
+{% raw %}
 ```javascript
 console.log("=== PITFALL 1: CLOSURES IN LOOPS ===");
 
@@ -606,10 +625,12 @@ fixedHandlers2.forEach((handler, index) => {
     handler();
 });
 ```
+{% endraw %}
 
 
 ### Pitfall 2: Memory Leaks
 
+{% raw %}
 ```javascript
 console.log("=== PITFALL 2: MEMORY LEAKS ===");
 
@@ -639,6 +660,7 @@ function createMemoryEfficient() {
 
 const efficientClosure = createMemoryEfficient();
 ```
+{% endraw %}
 
 
 ---
@@ -647,6 +669,7 @@ const efficientClosure = createMemoryEfficient();
 
 ### 1. Only Capture What You Need
 
+{% raw %}
 ```javascript
 console.log("=== BEST PRACTICE 1: CAPTURE ONLY WHAT YOU NEED ===");
 
@@ -670,10 +693,12 @@ function goodPractice() {
     };
 }
 ```
+{% endraw %}
 
 
 ### 2. Use Closures for Data Privacy
 
+{% raw %}
 ```javascript
 console.log("=== BEST PRACTICE 2: USE CLOSURES FOR PRIVACY ===");
 
@@ -695,10 +720,12 @@ const privateModule = (function() {
 console.log("Public access:", privateModule.getData());
 // console.log("Private access:", privateModule.privateData); // undefined
 ```
+{% endraw %}
 
 
 ### 3. Be Mindful of Memory
 
+{% raw %}
 ```javascript
 console.log("=== BEST PRACTICE 3: BE MINDFUL OF MEMORY ===");
 
@@ -720,6 +747,7 @@ function createTemporaryClosure() {
     };
 }
 ```
+{% endraw %}
 
 
 ---
@@ -770,6 +798,7 @@ function createTemporaryClosure() {
 
 **Example:**
 
+{% raw %}
 ```javascript
 function outer() {
     let x = 10;
@@ -784,6 +813,7 @@ function outer() {
 const closure = outer();
 console.log(closure()); // 10 (x is still accessible)
 ```
+{% endraw %}
 
 
 ### Q: What are the main use cases for closures?
@@ -819,6 +849,7 @@ console.log(closure()); // 10 (x is still accessible)
 
 **Examples:**
 
+{% raw %}
 ```javascript
 // ❌ Memory leak: capturing large object
 function leaky() {
@@ -839,6 +870,7 @@ function efficient() {
     };
 }
 ```
+{% endraw %}
 
 
 ### Q: How do you fix the closure-in-loop problem?
@@ -846,26 +878,31 @@ function efficient() {
 
 **Problem:**
 
+{% raw %}
 ```javascript
 for (var i = 0; i < 3; i++) {
     setTimeout(() => console.log(i), 100); // All print 3
 }
 ```
+{% endraw %}
 
 
 **Solutions:**
 
 **1. Use let (block scope):**
 
+{% raw %}
 ```javascript
 for (let i = 0; i < 3; i++) {
     setTimeout(() => console.log(i), 100); // 0, 1, 2
 }
 ```
+{% endraw %}
 
 
 **2. IIFE (Immediately Invoked Function Expression):**
 
+{% raw %}
 ```javascript
 for (var i = 0; i < 3; i++) {
     (function(index) {
@@ -873,10 +910,12 @@ for (var i = 0; i < 3; i++) {
     })(i);
 }
 ```
+{% endraw %}
 
 
 **3. bind() method:**
 
+{% raw %}
 ```javascript
 for (var i = 0; i < 3; i++) {
     setTimeout(function(index) {
@@ -884,6 +923,7 @@ for (var i = 0; i < 3; i++) {
     }.bind(null, i), 100);
 }
 ```
+{% endraw %}
 
 
 ---
@@ -892,6 +932,7 @@ for (var i = 0; i < 3; i++) {
 
 ### Exercise 1: Basic Closure Understanding
 
+{% raw %}
 ```javascript
 console.log("Exercise 1: Predict the output");
 
@@ -912,10 +953,12 @@ console.log(counter1()); // What will this print?
 console.log(counter2()); // What will this print?
 console.log(counter1()); // What will this print?
 ```
+{% endraw %}
 
 
 ### Exercise 2: Closure in Loop Fix
 
+{% raw %}
 ```javascript
 console.log("Exercise 2: Fix the closure in loop");
 
@@ -934,10 +977,12 @@ function createButtons() {
 
 // Your fix here...
 ```
+{% endraw %}
 
 
 ### Exercise 3: Module Pattern Implementation
 
+{% raw %}
 ```javascript
 console.log("Exercise 3: Implement a module pattern");
 
@@ -947,6 +992,7 @@ console.log("Exercise 3: Implement a module pattern");
 
 // Your implementation here...
 ```
+{% endraw %}
 
 
 ---

@@ -43,7 +43,7 @@ const FlipperMemoryProfiler = () => {
   }, []);
 
   return (
-    <View style={{#123;{{#123; padding: 20 }}#125;}}#125;>
+    <View style={{}}>
       <Text>Flipper Memory Profiler</Text>
       {memoryData && (
         <Text>Memory Data: {JSON.stringify(memoryData, null, 2)}</Text>
@@ -144,11 +144,11 @@ const MemoryTracker = () => {
   };
 
   return (
-    <ScrollView style={{#123;{{#123; padding: 20 }}#125;}}#125;>
-      <Text style={{#123;{{#123; fontSize: 18, fontWeight: 'bold' }}#125;}}#125;>Memory Tracker</Text>
+    <ScrollView style={{}}>
+      <Text style={{}}>Memory Tracker</Text>
       
       {currentMemory && (
-        <View style={{#123;{{#123; marginTop: 10 }}#125;}}#125;>
+        <View style={{}}>
           <Text>Current Memory Usage:</Text>
           <Text>Used: {currentMemory.used} MB</Text>
           <Text>Total: {currentMemory.total} MB</Text>
@@ -158,8 +158,8 @@ const MemoryTracker = () => {
         </View>
       )}
 
-      <View style={{#123;{{#123; marginTop: 20 }}#125;}}#125;>
-        <Text style={{#123;{{#123; fontWeight: 'bold' }}#125;}}#125;>Memory History:</Text>
+      <View style={{}}>
+        <Text style={{}}>Memory History:</Text>
         {memoryHistory.slice(-10).map((entry, index) => (
           <Text key={index}>
             {new Date(entry.timestamp).toLocaleTimeString()}: {entry.used}MB ({entry.percentage}%)
@@ -235,20 +235,20 @@ const ComponentMemoryProfiler = () => {
   };
 
   return (
-    <View style={{#123;{{#123; padding: 20 }}#125;}}#125;>
+    <View style={{}}>
       <Text>Component Memory Profiler</Text>
       
-      <View style={{#123;{{#123; marginTop: 20 }}#125;}}#125;>
+      <View style={{}}>
         <Button
           title={isProfiling ? "Stop Profiling" : "Start Profiling"}
           onPress={isProfiling ? endProfiling : startProfiling}
         />
       </View>
 
-      <View style={{#123;{{#123; marginTop: 20 }}#125;}}#125;>
+      <View style={{}}>
         {Array.from(components.entries()).map(([name, data]) => (
-          <View key={name} style={{#123;{{#123; marginBottom: 10 }}#125;}}#125;>
-            <Text style={{#123;{{#123; fontWeight: 'bold' }}#125;}}#125;>{name}:</Text>
+          <View key={name} style={{}}>
+            <Text style={{}}>{name}:</Text>
             <Text>Start Memory: {data.startMemory} bytes</Text>
             <Text>End Memory: {data.endMemory || 'N/A'} bytes</Text>
             <Text>Memory Delta: {data.memoryDelta || 'N/A'} bytes</Text>
@@ -411,17 +411,17 @@ const MemoryLeakDetector = () => {
   };
 
   return (
-    <View style={{#123;{{#123; padding: 20 }}#125;}}#125;>
-      <Text style={{#123;{{#123; fontSize: 18, fontWeight: 'bold' }}#125;}}#125;>Memory Leak Detector</Text>
+    <View style={{}}>
+      <Text style={{}}>Memory Leak Detector</Text>
       
-      <View style={{#123;{{#123; marginTop: 20 }}#125;}}#125;>
+      <View style={{}}>
         <Button title="Detect Leaks" onPress={detectLeaks} />
         <Button title="Clear References" onPress={clearReferences} />
       </View>
 
       {leakReport && (
-        <View style={{#123;{{#123; marginTop: 20 }}#125;}}#125;>
-          <Text style={{#123;{{#123; fontWeight: 'bold' }}#125;}}#125;>Leak Report:</Text>
+        <View style={{}}>
+          <Text style={{}}>Leak Report:</Text>
           <Text>Is Leaking: {leakReport.isLeaking ? 'Yes' : 'No'}</Text>
           <Text>Growth Rate: {leakReport.growthRate}%</Text>
           <Text>Recent Average: {leakReport.recentAverage} MB</Text>
@@ -430,8 +430,8 @@ const MemoryLeakDetector = () => {
           <Text>Timer Refs: {leakReport.timerRefs}</Text>
           
           {leakReport.recommendations.length > 0 && (
-            <View style={{#123;{{#123; marginTop: 10 }}#125;}}#125;>
-              <Text style={{#123;{{#123; fontWeight: 'bold' }}#125;}}#125;>Recommendations:</Text>
+            <View style={{}}>
+              <Text style={{}}>Recommendations:</Text>
               {leakReport.recommendations.map((rec, index) => (
                 <Text key={index}>• {rec}</Text>
               ))}
@@ -508,9 +508,9 @@ const FrameRateMonitor = () => {
   const performance = getPerformanceStatus();
 
   return (
-    <View style={{#123;{{#123; padding: 20 }}#125;}}#125;>
-      <Text style={{#123;{{#123; fontSize: 18, fontWeight: 'bold' }}#125;}}#125;>Frame Rate Monitor</Text>
-      <Text style={{#123;{{#123; color: performance.color }}#125;}}#125;>FPS: {fps}</Text>
+    <View style={{}}>
+      <Text style={{}}>Frame Rate Monitor</Text>
+      <Text style={{}}>FPS: {fps}</Text>
       <Text>Frame Drops: {frameDrops}</Text>
       <Text>Status: {performance.status}</Text>
     </View>
@@ -574,9 +574,9 @@ const MemoryPressureMonitor = () => {
   };
 
   return (
-    <View style={{#123;{{#123; padding: 20 }}#125;}}#125;>
-      <Text style={{#123;{{#123; fontSize: 18, fontWeight: 'bold' }}#125;}}#125;>Memory Pressure Monitor</Text>
-      <Text style={{#123;{{#123; color: getPressureColor() }}#125;}}#125;>Pressure Level: {pressureLevel}</Text>
+    <View style={{}}>
+      <Text style={{}}>Memory Pressure Monitor</Text>
+      <Text style={{}}>Pressure Level: {pressureLevel}</Text>
       <Text>Memory Warnings: {memoryWarnings}</Text>
     </View>
   );

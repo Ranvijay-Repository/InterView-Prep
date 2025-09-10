@@ -29,6 +29,7 @@ React Native provides several platform APIs that allow you to access device-spec
 ### **Platform APIs Overview**
 
 
+{% raw %}
 ```
 ┌─────────────────────────────────────┐
 │        Platform APIs                │
@@ -52,6 +53,7 @@ React Native provides several platform APIs that allow you to access device-spec
 │  └─────────────────────────────────┘│
 └─────────────────────────────────────┘
 ```
+{% endraw %}
 
 
 ---
@@ -64,6 +66,7 @@ The `Platform` module provides information about the current platform and allows
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 import React from 'react';
 import { View, Text, StyleSheet, Platform } from 'react-native';
@@ -137,12 +140,14 @@ const styles = StyleSheet.create({
 
 export default PlatformExample;
 ```
+{% endraw %}
 
 
 ### **Platform-Specific Styling**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Platform } from 'react-native';
@@ -245,6 +250,7 @@ const styles = StyleSheet.create({
 
 export default PlatformSpecificStyling;
 ```
+{% endraw %}
 
 
 ---
@@ -257,6 +263,7 @@ The `Dimensions` API provides information about the device's screen dimensions a
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Dimensions } from 'react-native';
@@ -365,6 +372,7 @@ const styles = StyleSheet.create({
 
 export default DimensionsExample;
 ```
+{% endraw %}
 
 
 ---

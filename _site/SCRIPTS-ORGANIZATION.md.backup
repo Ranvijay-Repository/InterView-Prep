@@ -8,6 +8,7 @@ You're absolutely right! I've now organized all the shell scripts into a dedicat
 
 ### **Scripts Directory: `scripts/`**
 {% raw %}
+{% raw %}
 ```
 scripts/
 ├── README.md                           # Documentation for all scripts
@@ -41,6 +42,7 @@ scripts/
 
 ### **For Initial Setup**
 {% raw %}
+{% raw %}
 ```bash
 # Set up production branch
 ./scripts/setup-production-branch.sh
@@ -51,6 +53,7 @@ scripts/
 {% endraw %}
 
 ### **For Maintenance**
+{% raw %}
 {% raw %}
 ```bash
 # If you encounter Liquid syntax errors

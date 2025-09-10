@@ -9,6 +9,7 @@ Cross-platform testing in React Native requires comprehensive strategies to ensu
 ### 1. Testing Pyramid Structure
 
 
+{% raw %}
 ```mermaid
 graph TD
     A[E2E Tests] --> B[Integration Tests]
@@ -22,11 +23,13 @@ graph TD
     D1[UI Components] --> D
     E1[Helper Functions] --> E
 ```
+{% endraw %}
 
 
 ### 2. Cross-Platform Test Structure
 
 
+{% raw %}
 ```javascript
 // __tests__/setup.js
 import { configure } from '@testing-library/react-native';
@@ -62,6 +65,7 @@ jest.mock('react-native/Libraries/Utilities/Dimensions', () => ({
   removeEventListener: jest.fn(),
 }));
 ```
+{% endraw %}
 
 
 ## Platform-Specific Testing
@@ -69,6 +73,7 @@ jest.mock('react-native/Libraries/Utilities/Dimensions', () => ({
 ### 1. Platform-Specific Test Utilities
 
 
+{% raw %}
 ```javascript
 // test-utils/platformTestUtils.js
 import { Platform } from 'react-native';
@@ -133,11 +138,13 @@ export const testOnAllPlatforms = (testFn) => {
   });
 };
 ```
+{% endraw %}
 
 
 ### 2. Platform-Specific Component Testing
 
 
+{% raw %}
 ```javascript
 // __tests__/components/PlatformButton.test.js
 import React from 'react';
@@ -205,6 +212,7 @@ describe('PlatformButton', () => {
   });
 });
 ```
+{% endraw %}
 
 
 ## Responsive Design Testing
@@ -212,6 +220,7 @@ describe('PlatformButton', () => {
 ### 1. Screen Size Testing
 
 
+{% raw %}
 ```javascript
 // test-utils/responsiveTestUtils.js
 import { Dimensions } from 'react-native';
@@ -261,11 +270,13 @@ export const testBreakpoints = (component, breakpoints) => {
   });
 };
 ```
+{% endraw %}
 
 
 ### 2. Responsive Component Testing
 
 
+{% raw %}
 ```javascript
 // __tests__/components/ResponsiveGrid.test.js
 import React from 'react';
@@ -336,6 +347,7 @@ describe('ResponsiveGrid', () => {
   );
 });
 ```
+{% endraw %}
 
 
 ## Device Capability Testing
@@ -343,6 +355,7 @@ describe('ResponsiveGrid', () => {
 ### 1. Device Capability Mocking
 
 
+{% raw %}
 ```javascript
 // test-utils/deviceCapabilityUtils.js
 import DeviceInfo from 'react-native-device-info';
@@ -386,11 +399,13 @@ export const testOnDifferentDevices = (testCases) => {
   });
 };
 ```
+{% endraw %}
 
 
 ### 2. Capability-Based Testing
 
 
+{% raw %}
 ```javascript
 // __tests__/components/AdaptiveComponent.test.js
 import React from 'react';
@@ -436,6 +451,7 @@ describe('AdaptiveComponent', () => {
   );
 });
 ```
+{% endraw %}
 
 
 ## Integration Testing
@@ -443,6 +459,7 @@ describe('AdaptiveComponent', () => {
 ### 1. Cross-Platform Integration Tests
 
 
+{% raw %}
 ```javascript
 // __tests__/integration/CrossPlatformIntegration.test.js
 import React from 'react';
@@ -490,11 +507,13 @@ describe('Cross-Platform Integration Tests', () => {
   });
 });
 ```
+{% endraw %}
 
 
 ### 2. API Integration Testing
 
 
+{% raw %}
 ```javascript
 // __tests__/integration/APIIntegration.test.js
 import { testOnBothPlatforms } from '../../test-utils/platformTestUtils';
@@ -537,6 +556,7 @@ describe('API Integration Tests', () => {
   });
 });
 ```
+{% endraw %}
 
 
 ## E2E Testing
@@ -544,6 +564,7 @@ describe('API Integration Tests', () => {
 ### 1. Cross-Platform E2E Setup
 
 
+{% raw %}
 ```javascript
 // e2e/setup.js
 import { device, expect, element, by } from 'detox';
@@ -578,11 +599,13 @@ describe('Cross-Platform E2E Tests', () => {
   });
 });
 ```
+{% endraw %}
 
 
 ### 2. Platform-Specific E2E Tests
 
 
+{% raw %}
 ```javascript
 // e2e/ios-specific.test.js
 import { device, expect, element, by } from 'detox';
@@ -606,9 +629,11 @@ describe('iOS Specific E2E Tests', () => {
   });
 });
 ```
+{% endraw %}
 
 
 
+{% raw %}
 ```javascript
 // e2e/android-specific.test.js
 import { device, expect, element, by } from 'detox';
@@ -632,6 +657,7 @@ describe('Android Specific E2E Tests', () => {
   });
 });
 ```
+{% endraw %}
 
 
 ## Performance Testing
@@ -639,6 +665,7 @@ describe('Android Specific E2E Tests', () => {
 ### 1. Cross-Platform Performance Tests
 
 
+{% raw %}
 ```javascript
 // __tests__/performance/CrossPlatformPerformance.test.js
 import { testOnBothPlatforms } from '../../test-utils/platformTestUtils';
@@ -681,11 +708,13 @@ describe('Cross-Platform Performance Tests', () => {
   });
 });
 ```
+{% endraw %}
 
 
 ### 2. Memory Performance Tests
 
 
+{% raw %}
 ```javascript
 // __tests__/performance/MemoryPerformance.test.js
 import { testOnBothPlatforms } from '../../test-utils/platformTestUtils';
@@ -729,6 +758,7 @@ describe('Memory Performance Tests', () => {
   });
 });
 ```
+{% endraw %}
 
 
 ## Testing Best Practices
@@ -736,6 +766,7 @@ describe('Memory Performance Tests', () => {
 ### 1. Test Organization
 
 
+{% raw %}
 ```javascript
 // __tests__/index.js - Test entry point
 import './setup';
@@ -744,11 +775,13 @@ import './integration';
 import './performance';
 import './e2e';
 ```
+{% endraw %}
 
 
 ### 2. Test Utilities
 
 
+{% raw %}
 ```javascript
 // test-utils/index.js
 export * from './platformTestUtils';
@@ -757,11 +790,13 @@ export * from './deviceCapabilityUtils';
 export * from './mockUtils';
 export * from './testHelpers';
 ```
+{% endraw %}
 
 
 ### 3. Mock Utilities
 
 
+{% raw %}
 ```javascript
 // test-utils/mockUtils.js
 export const mockNavigation = () => ({
@@ -791,6 +826,7 @@ export const mockAsyncStorage = () => ({
   multiRemove: jest.fn(),
 });
 ```
+{% endraw %}
 
 
 ## Summary

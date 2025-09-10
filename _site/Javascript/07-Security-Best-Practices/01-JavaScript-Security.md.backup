@@ -45,6 +45,7 @@
 
 ### ASCII Diagram: CSP Enforcement Flow
 
+{% raw %}
 ```
 CSP ENFORCEMENT FLOW
 ┌─────────────────────────────────┐
@@ -109,6 +110,7 @@ CSP ENFORCEMENT FLOW
         │  To Server    │
         └───────────────┘
 ```
+{% endraw %}
 
 
 ### CSP Directives:
@@ -133,6 +135,7 @@ CSP ENFORCEMENT FLOW
 
 ### ASCII Diagram: SRI Verification Process
 
+{% raw %}
 ```
 SRI VERIFICATION PROCESS
 ┌─────────────────────────────────┐
@@ -199,6 +202,7 @@ SRI VERIFICATION PROCESS
         │  Block        │
         └───────────────┘
 ```
+{% endraw %}
 
 
 ### SRI Implementation:
@@ -223,6 +227,7 @@ SRI VERIFICATION PROCESS
 
 ### ASCII Diagram: Trusted Types Flow
 
+{% raw %}
 ```
 TRUSTED TYPES FLOW
 ┌─────────────────────────────────┐
@@ -281,6 +286,7 @@ TRUSTED TYPES FLOW
         │  No XSS       │
         └───────────────┘
 ```
+{% endraw %}
 
 
 ### Trusted Types Features:

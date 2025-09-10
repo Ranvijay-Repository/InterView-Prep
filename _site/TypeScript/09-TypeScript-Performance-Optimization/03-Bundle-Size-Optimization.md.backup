@@ -25,6 +25,7 @@ Bundle size optimization is crucial for web performance, affecting load times, u
 ### **Bundle Size Factors**
 
 
+{% raw %}
 ```typescript
 // Factors affecting bundle size
 const bundleSizeFactors = {
@@ -54,11 +55,13 @@ const bundleSizeGoals = {
   caching: "Optimal caching strategies"
 };
 ```
+{% endraw %}
 
 
 ### **Bundle Analysis**
 
 
+{% raw %}
 ```typescript
 // Bundle analysis tools
 const bundleAnalysisTools = {
@@ -107,6 +110,7 @@ function monitorBundleSize() {
   return { size, gzipped };
 }
 ```
+{% endraw %}
 
 
 ---
@@ -116,6 +120,7 @@ function monitorBundleSize() {
 ### **Tree Shaking Configuration**
 
 
+{% raw %}
 ```typescript
 // Tree shaking configuration
 const treeShakingConfig = {
@@ -159,11 +164,13 @@ import { debounce, throttle } from 'lodash-es';
 // ❌ Avoid: Default imports for utilities
 import _ from 'lodash';
 ```
+{% endraw %}
 
 
 ### **Tree Shaking Best Practices**
 
 
+{% raw %}
 ```typescript
 // Tree shaking best practices
 const treeShakingBestPractices = {
@@ -204,11 +211,13 @@ function testTreeShaking() {
   });
 }
 ```
+{% endraw %}
 
 
 ### **Tree Shaking with Lodash**
 
 
+{% raw %}
 ```typescript
 // Tree shaking with Lodash
 const lodashTreeShaking = {
@@ -246,6 +255,7 @@ const webpackConfig = {
   ]
 };
 ```
+{% endraw %}
 
 
 ---
@@ -255,6 +265,7 @@ const webpackConfig = {
 ### **Dynamic Imports**
 
 
+{% raw %}
 ```typescript
 // Dynamic imports for code splitting
 const dynamicImports = {
@@ -313,11 +324,13 @@ const vendorSplitting = {
   charts: "Split chart libraries"
 };
 ```
+{% endraw %}
 
 
 ### **Webpack Code Splitting**
 
 
+{% raw %}
 ```typescript
 // Webpack code splitting configuration
 const webpackCodeSplitting = {
@@ -371,11 +384,13 @@ const splitChunksConfig = {
   }
 };
 ```
+{% endraw %}
 
 
 ### **Rollup Code Splitting**
 
 
+{% raw %}
 ```typescript
 // Rollup code splitting configuration
 const rollupCodeSplitting = {
@@ -410,6 +425,7 @@ const dynamicImportsRollup = {
   ]
 };
 ```
+{% endraw %}
 
 
 ---
@@ -419,6 +435,7 @@ const dynamicImportsRollup = {
 ### **Import Strategies**
 
 
+{% raw %}
 ```typescript
 // Import optimization strategies
 const importStrategies = {
@@ -452,11 +469,13 @@ export { debounce, throttle } from 'lodash-es';
 export { default as math } from './math';
 export { default as _ } from 'lodash';
 ```
+{% endraw %}
 
 
 ### **Barrel Export Optimization**
 
 
+{% raw %}
 ```typescript
 // Barrel export optimization
 const barrelExportOptimization = {
@@ -490,11 +509,13 @@ const conditionalExports = {
   }
 };
 ```
+{% endraw %}
 
 
 ### **Import Analysis**
 
 
+{% raw %}
 ```typescript
 // Import analysis tools
 const importAnalysis = {
@@ -546,6 +567,7 @@ function monitorImports() {
   return imports;
 }
 ```
+{% endraw %}
 
 
 ---
@@ -555,6 +577,7 @@ function monitorImports() {
 ### **Webpack Configuration**
 
 
+{% raw %}
 ```typescript
 // Webpack bundle optimization
 const webpackOptimization = {
@@ -602,11 +625,13 @@ const webpackTreeShaking = {
   }
 };
 ```
+{% endraw %}
 
 
 ### **Rollup Configuration**
 
 
+{% raw %}
 ```typescript
 // Rollup bundle optimization
 const rollupOptimization = {
@@ -646,11 +671,13 @@ const rollupTreeShaking = {
   }
 };
 ```
+{% endraw %}
 
 
 ### **esbuild Configuration**
 
 
+{% raw %}
 ```typescript
 // esbuild bundle optimization
 const esbuildOptimization = {
@@ -675,6 +702,7 @@ const esbuildCodeSplitting = {
   chunkNames: '[name]-[hash]'
 };
 ```
+{% endraw %}
 
 
 ---
@@ -684,6 +712,7 @@ const esbuildCodeSplitting = {
 ### **1. Use Tree Shaking**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Tree-shakeable imports
 import { debounce, throttle } from 'lodash-es';
@@ -691,11 +720,13 @@ import { debounce, throttle } from 'lodash-es';
 // ❌ Avoid: Non-tree-shakeable imports
 import _ from 'lodash';
 ```
+{% endraw %}
 
 
 ### **2. Implement Code Splitting**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Code splitting
 const LazyComponent = lazy(() => import('./LazyComponent'));
@@ -703,11 +734,13 @@ const LazyComponent = lazy(() => import('./LazyComponent'));
 // ❌ Avoid: No code splitting
 import LazyComponent from './LazyComponent';
 ```
+{% endraw %}
 
 
 ### **3. Optimize Imports**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Specific imports
 import { useState, useEffect } from 'react';
@@ -715,11 +748,13 @@ import { useState, useEffect } from 'react';
 // ❌ Avoid: Wildcard imports
 import * as React from 'react';
 ```
+{% endraw %}
 
 
 ### **4. Configure Build Tools**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Optimized build configuration
 const config = {
@@ -736,6 +771,7 @@ const config = {
   optimization: {}
 };
 ```
+{% endraw %}
 
 
 ---

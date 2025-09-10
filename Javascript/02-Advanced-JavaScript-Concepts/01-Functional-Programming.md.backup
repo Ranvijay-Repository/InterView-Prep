@@ -77,6 +77,7 @@ Functions are treated as values that can be:
 
 ### ASCII Diagram: Pure vs Impure Functions
 
+{% raw %}
 ```
 PURE FUNCTION                    IMPURE FUNCTION
 ┌─────────────────────────┐     ┌─────────────────────────┐
@@ -90,11 +91,13 @@ PURE FUNCTION                    IMPURE FUNCTION
 │ No side effects         │     │ + Make API call         │
 └─────────────────────────┘     └─────────────────────────┘
 ```
+{% endraw %}
 
 
 ### Examples:
 
 
+{% raw %}
 ```javascript
 // ✅ PURE FUNCTION
 function add(a, b) {
@@ -108,6 +111,7 @@ function addToTotal(value) {
     return total;
 }
 ```
+{% endraw %}
 
 
 ---
@@ -124,6 +128,7 @@ function addToTotal(value) {
 
 ### ASCII Diagram: Mutable vs Immutable Operations
 
+{% raw %}
 ```
 MUTABLE APPROACH              IMMUTABLE APPROACH
 ┌─────────────────────────┐   ┌─────────────────────────┐
@@ -136,11 +141,13 @@ MUTABLE APPROACH              IMMUTABLE APPROACH
 │                         │   │ (Unchanged!)            │
 └─────────────────────────┘   └─────────────────────────┘
 ```
+{% endraw %}
 
 
 ### Immutability Techniques:
 
 
+{% raw %}
 ```javascript
 // Arrays
 const original = [1, 2, 3];
@@ -163,6 +170,7 @@ originalObj.age = 31;  // Modifies original
 const newObj = { ...originalObj, age: 31 };  // Creates new object
 const newObj2 = Object.assign({}, originalObj, { age: 31 });  // Alternative
 ```
+{% endraw %}
 
 
 ---
@@ -177,6 +185,7 @@ const newObj2 = Object.assign({}, originalObj, { age: 31 });  // Alternative
 
 #### 1. **Array Methods**
 
+{% raw %}
 ```javascript
 // map, filter, reduce, forEach, find, some, every
 const numbers = [1, 2, 3, 4, 5];
@@ -185,10 +194,12 @@ const doubled = numbers.map(x => x * 2);        // [2, 4, 6, 8, 10]
 const evens = numbers.filter(x => x % 2 === 0); // [2, 4]
 const sum = numbers.reduce((acc, x) => acc + x, 0); // 15
 ```
+{% endraw %}
 
 
 #### 2. **Custom Higher Order Functions**
 
+{% raw %}
 ```javascript
 // Function that takes a function and returns a function
 function withLogging(fn) {
@@ -203,10 +214,12 @@ function withLogging(fn) {
 const addWithLogging = withLogging((a, b) => a + b);
 addWithLogging(2, 3); // Logs the call and result
 ```
+{% endraw %}
 
 
 ### ASCII Diagram: Higher Order Function Flow
 
+{% raw %}
 ```
 HIGHER ORDER FUNCTION PATTERN
 ┌─────────────────────────────────┐
@@ -223,6 +236,7 @@ HIGHER ORDER FUNCTION PATTERN
 │ }                              │
 └─────────────────────────────────┘
 ```
+{% endraw %}
 
 
 ---
@@ -233,6 +247,7 @@ HIGHER ORDER FUNCTION PATTERN
 
 ### Basic Composition:
 
+{% raw %}
 ```javascript
 // Simple composition
 const addOne = x => x + 1;
@@ -252,10 +267,12 @@ function compose(...fns) {
 const composed = compose(square, double, addOne);
 const result2 = composed(5); // 144
 ```
+{% endraw %}
 
 
 ### ASCII Diagram: Function Composition
 
+{% raw %}
 ```
 FUNCTION COMPOSITION FLOW
 ┌─────────────────────────────────┐
@@ -273,10 +290,12 @@ FUNCTION COMPOSITION FLOW
 COMPOSITION PATTERN:
 f(g(h(x))) = compose(f, g, h)(x)
 ```
+{% endraw %}
 
 
 ### Pipe Function (Left to Right):
 
+{% raw %}
 ```javascript
 // Pipe function (left to right execution)
 function pipe(...fns) {
@@ -290,6 +309,7 @@ const result3 = piped(5); // 144
 
 // Same as: square(double(addOne(5)))
 ```
+{% endraw %}
 
 
 ---
@@ -300,6 +320,7 @@ const result3 = piped(5); // 144
 
 ### Basic Currying:
 
+{% raw %}
 ```javascript
 // Regular function
 function add(a, b, c) {
@@ -321,10 +342,12 @@ const result = curriedAdd(1)(2)(3); // 6
 // Modern currying with arrow functions
 const modernCurriedAdd = a => b => c => a + b + c;
 ```
+{% endraw %}
 
 
 ### ASCII Diagram: Currying Process
 
+{% raw %}
 ```
 CURRYING TRANSFORMATION
 ┌─────────────────────────────────┐
@@ -340,10 +363,12 @@ CURRYING TRANSFORMATION
 │ add(1)(2)(3) → 6              │
 └─────────────────────────────────┘
 ```
+{% endraw %}
 
 
 ### Partial Application:
 
+{% raw %}
 ```javascript
 // Partial application - fixing some arguments
 function partial(fn, ...fixedArgs) {
@@ -359,6 +384,7 @@ const result = addTen(5, 3); // 18 (10 + 5 + 3)
 const addFive = add.bind(null, 5);
 const result2 = addFive(3, 2); // 10 (5 + 3 + 2)
 ```
+{% endraw %}
 
 
 ---
@@ -367,6 +393,7 @@ const result2 = addFive(3, 2); // 10 (5 + 3 + 2)
 
 ### 1. **Point-Free Style (Tacit Programming)**
 
+{% raw %}
 ```javascript
 // With explicit parameters
 const numbers = [1, 2, 3, 4, 5];
@@ -375,10 +402,12 @@ const doubled = numbers.map(x => double(x));
 // Point-free style
 const doubled = numbers.map(double);
 ```
+{% endraw %}
 
 
 ### 2. **Function Memoization**
 
+{% raw %}
 ```javascript
 function memoize(fn) {
     const cache = new Map();
@@ -403,10 +432,12 @@ const expensiveOperation = memoize((n) => {
 expensiveOperation(5); // Computing... → 10
 expensiveOperation(5); // 10 (from cache)
 ```
+{% endraw %}
 
 
 ### 3. **Lazy Evaluation**
 
+{% raw %}
 ```javascript
 // Lazy array operations
 function* lazyMap(array, fn) {
@@ -423,6 +454,7 @@ for (const value of lazyDoubled) {
     console.log(value); // 2, 4, 6, 8, 10
 }
 ```
+{% endraw %}
 
 
 ---
@@ -434,6 +466,7 @@ for (const value of lazyDoubled) {
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
 
 
+{% raw %}
 ```javascript
 console.log("=== BUILDING A FUNCTIONAL UTILITY LIBRARY ===");
 
@@ -513,6 +546,7 @@ console.log("calculateTax(50000):", calculateTax(50000));     // 10000
 console.log("calculateTax(25000):", calculateTax(25000));     // 5000
 console.log("calculateTax(0):", calculateTax(0));             // 0
 ```
+{% endraw %}
 
 </div>
 
@@ -521,6 +555,7 @@ console.log("calculateTax(0):", calculateTax(0));             // 0
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
 
 
+{% raw %}
 ```javascript
 console.log("=== IMMUTABLE DATA STRUCTURES ===");
 
@@ -625,6 +660,7 @@ console.log("Updated index 1:", updatedNumbers);
 
 console.log("Original array unchanged:", numbers);
 ```
+{% endraw %}
 
 </div>
 
@@ -633,6 +669,7 @@ console.log("Original array unchanged:", numbers);
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
 
 
+{% raw %}
 ```javascript
 console.log("=== ADVANCED FUNCTION COMPOSITION ===");
 
@@ -731,6 +768,7 @@ const processWithLogging = pipe(
 
 const result3 = processWithLogging(5);
 ```
+{% endraw %}
 
 
 ### Example 4: Currying and Partial Application
@@ -738,6 +776,7 @@ const result3 = processWithLogging(5);
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
 
 
+{% raw %}
 ```javascript
 console.log("=== CURRYING AND PARTIAL APPLICATION ===");
 
@@ -845,6 +884,7 @@ const calculate = pipe(
 
 console.log("calculate(2):", calculate(2));                 // (2 + 5) * 3 - 10 = 11
 ```
+{% endraw %}
 
 
 ### Example 5: Real-World Functional Programming
@@ -852,6 +892,7 @@ console.log("calculate(2):", calculate(2));                 // (2 + 5) * 3 - 10 
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
 
 
+{% raw %}
 ```javascript
 console.log("=== REAL-WORLD FUNCTIONAL PROGRAMMING ===");
 
@@ -995,6 +1036,7 @@ const processedOrder = processOrder(currentCart);
 console.log("\n=== Processed Order ===");
 console.log("Processed order:", processedOrder);
 ```
+{% endraw %}
 
 
 ---
@@ -1003,6 +1045,7 @@ console.log("Processed order:", processedOrder);
 
 ### Pitfall 1: Over-Engineering Simple Problems
 
+{% raw %}
 ```javascript
 // ❌ WRONG: Over-engineered solution
 const add = curry((a, b) => a + b);
@@ -1012,10 +1055,12 @@ const result = add(5)(3);
 const add = (a, b) => a + b;
 const result = add(5, 3);
 ```
+{% endraw %}
 
 
 ### Pitfall 2: Ignoring Performance
 
+{% raw %}
 ```javascript
 // ❌ WRONG: Creating new arrays in loops
 const processArray = (arr) => {
@@ -1029,10 +1074,12 @@ const processArray = (arr) => {
 // ✅ CORRECT: Efficient approach
 const processArray = (arr) => arr.map(x => x * 2);
 ```
+{% endraw %}
 
 
 ### Pitfall 3: Forgetting Error Handling
 
+{% raw %}
 ```javascript
 // ❌ WRONG: No error handling
 const divide = (a, b) => a / b;
@@ -1043,6 +1090,7 @@ const divide = (a, b) => {
     return a / b;
 };
 ```
+{% endraw %}
 
 
 ---

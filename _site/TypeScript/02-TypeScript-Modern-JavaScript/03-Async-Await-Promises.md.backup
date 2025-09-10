@@ -26,6 +26,7 @@ Promises provide a way to handle asynchronous operations with better error handl
 ### **Basic Promise Syntax**
 
 
+{% raw %}
 ```typescript
 // Creating a Promise
 const fetchUser = (id: number): Promise<User> => {
@@ -52,11 +53,13 @@ const processData = (data: string): Promise<ProcessedData> => {
   });
 };
 ```
+{% endraw %}
 
 
 ### **Promise States and Methods**
 
 
+{% raw %}
 ```typescript
 // Promise states: pending, fulfilled, rejected
 const promise = fetchUser(1);
@@ -77,11 +80,13 @@ promise
     console.log("Promise completed");
   });
 ```
+{% endraw %}
 
 
 ### **Promise with TypeScript Generics**
 
 
+{% raw %}
 ```typescript
 // Generic Promise type
 const createPromise = <T>(value: T, delay: number = 1000): Promise<T> => {
@@ -95,6 +100,7 @@ const stringPromise = createPromise<string>("Hello", 500);
 const numberPromise = createPromise<number>(42, 1000);
 const userPromise = createPromise<User>({ id: 1, name: "John", email: "john@example.com" });
 ```
+{% endraw %}
 
 
 ---
@@ -106,6 +112,7 @@ Async/await provides a more readable way to work with Promises.
 ### **Basic Async/Await**
 
 
+{% raw %}
 ```typescript
 // Async function
 const getUserInfo = async (id: number): Promise<string> => {
@@ -130,11 +137,13 @@ const processUserData = async (id: number): Promise<ProcessedUser> => {
   };
 };
 ```
+{% endraw %}
 
 
 ### **Async Function Types**
 
 
+{% raw %}
 ```typescript
 // Async function type
 type AsyncFunction<T, R> = (param: T) => Promise<R>;
@@ -149,11 +158,13 @@ const fetchData = async <T>(url: string): Promise<T> => {
 const userData = await fetchData<User>("/api/users/1");
 const productData = await fetchData<Product[]>("/api/products");
 ```
+{% endraw %}
 
 
 ### **Async Arrow Functions**
 
 
+{% raw %}
 ```typescript
 // Async arrow function
 const processData = async (data: string): Promise<ProcessedData> => {
@@ -174,6 +185,7 @@ const processUsers = async (userIds: number[]): Promise<User[]> => {
   return users;
 };
 ```
+{% endraw %}
 
 
 ---
@@ -185,6 +197,7 @@ Proper error handling is crucial for robust asynchronous code.
 ### **Try/Catch with Async/Await**
 
 
+{% raw %}
 ```typescript
 // Basic error handling
 const safeFetchUser = async (id: number): Promise<User | null> => {
@@ -220,11 +233,13 @@ const fetchUserWithCustomError = async (id: number): Promise<User> => {
   }
 };
 ```
+{% endraw %}
 
 
 ### **Promise Error Handling**
 
 
+{% raw %}
 ```typescript
 // Promise with error handling
 const fetchUserWithPromise = (id: number): Promise<User> => {
@@ -254,6 +269,7 @@ const complexAsyncOperation = (): Promise<string> => {
     });
 };
 ```
+{% endraw %}
 
 
 ---
@@ -265,6 +281,7 @@ Promise combinators allow you to work with multiple Promises efficiently.
 ### **Promise.all**
 
 
+{% raw %}
 ```typescript
 // Promise.all - wait for all promises to resolve
 const fetchAllUsers = async (ids: number[]): Promise<User[]> => {
@@ -284,11 +301,13 @@ const fetchAllUsersSafely = async (ids: number[]): Promise<(User | Error)[]> => 
 const users = await fetchAllUsers([1, 2, 3, 4, 5]);
 const safeUsers = await fetchAllUsersSafely([1, 2, 3, 4, 5]);
 ```
+{% endraw %}
 
 
 ### **Promise.allSettled**
 
 
+{% raw %}
 ```typescript
 // Promise.allSettled - wait for all promises to settle
 const fetchUsersWithStatus = async (ids: number[]): Promise<PromiseSettledResult<User>[]> => {
@@ -306,11 +325,13 @@ results.forEach((result, index) => {
   }
 });
 ```
+{% endraw %}
 
 
 ### **Promise.race**
 
 
+{% raw %}
 ```typescript
 // Promise.race - first promise to settle wins
 const fetchUserWithTimeout = async (id: number, timeout: number = 5000): Promise<User> => {
@@ -331,11 +352,13 @@ try {
   console.error("Error:", error);
 }
 ```
+{% endraw %}
 
 
 ### **Promise.any**
 
 
+{% raw %}
 ```typescript
 // Promise.any - first promise to fulfill wins
 const fetchUserFromMultipleSources = async (id: number): Promise<User> => {
@@ -356,6 +379,7 @@ try {
   console.error("All sources failed:", error);
 }
 ```
+{% endraw %}
 
 
 ---
@@ -365,6 +389,7 @@ try {
 ### **Retry Logic**
 
 
+{% raw %}
 ```typescript
 // Retry with exponential backoff
 const fetchUserWithRetry = async (
@@ -393,11 +418,13 @@ const fetchUserWithRetry = async (
   throw lastError!;
 };
 ```
+{% endraw %}
 
 
 ### **Circuit Breaker Pattern**
 
 
+{% raw %}
 ```typescript
 // Circuit breaker implementation
 class CircuitBreaker {
@@ -448,11 +475,13 @@ class CircuitBreaker {
 const circuitBreaker = new CircuitBreaker();
 const user = await circuitBreaker.execute(() => fetchUser(1));
 ```
+{% endraw %}
 
 
 ### **Async Queue**
 
 
+{% raw %}
 ```typescript
 // Async queue implementation
 class AsyncQueue<T> {
@@ -487,6 +516,7 @@ class AsyncQueue<T> {
   }
 }
 ```
+{% endraw %}
 
 
 ---
@@ -496,6 +526,7 @@ class AsyncQueue<T> {
 ### **Async Function Return Types**
 
 
+{% raw %}
 ```typescript
 // Explicit return types for async functions
 const fetchUserData = async (id: number): Promise<User> => {
@@ -518,11 +549,13 @@ const fetchUserOrNull = async (id: number): Promise<User | null> => {
   }
 };
 ```
+{% endraw %}
 
 
 ### **Generic Async Functions**
 
 
+{% raw %}
 ```typescript
 // Generic async function
 const fetchData = async <T>(url: string): Promise<T> => {
@@ -543,11 +576,13 @@ const fetchEntity = async <T extends { id: number }>(
 const user = await fetchEntity<User>("/api/users");
 const product = await fetchEntity<Product>("/api/products");
 ```
+{% endraw %}
 
 
 ### **Async Iterators**
 
 
+{% raw %}
 ```typescript
 // Async iterator for processing data in chunks
 async function* processUsersInBatches(userIds: number[]): AsyncGenerator<User, void, unknown> {
@@ -568,6 +603,7 @@ for await (const user of processUsersInBatches([1, 2, 3, 4, 5])) {
   console.log("Processing user:", user);
 }
 ```
+{% endraw %}
 
 
 ---
@@ -577,6 +613,7 @@ for await (const user of processUsersInBatches([1, 2, 3, 4, 5])) {
 ### **1. Use Async/Await for Better Readability**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Async/await
 const processUser = async (id: number): Promise<void> => {
@@ -597,11 +634,13 @@ const processUser = (id: number): Promise<void> => {
     .catch(error => console.error(error));
 };
 ```
+{% endraw %}
 
 
 ### **2. Handle Errors Appropriately**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Specific error handling
 const fetchUserSafely = async (id: number): Promise<User | null> => {
@@ -624,11 +663,13 @@ const fetchUserSafely = async (id: number): Promise<User | null> => {
   }
 };
 ```
+{% endraw %}
 
 
 ### **3. Use Promise Combinators for Multiple Operations**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Promise.all for parallel operations
 const fetchUserData = async (id: number): Promise<UserData> => {
@@ -650,6 +691,7 @@ const fetchUserData = async (id: number): Promise<UserData> => {
   return { user, profile, settings };
 };
 ```
+{% endraw %}
 
 
 ---
@@ -663,6 +705,7 @@ const fetchUserData = async (id: number): Promise<UserData> => {
 - **Async/await**: Syntactic sugar over Promises, more readable, uses try/catch
 
 
+{% raw %}
 ```typescript
 // Promise
 fetchUser(1).then(user => console.log(user)).catch(error => console.error(error));
@@ -675,6 +718,7 @@ try {
   console.error(error);
 }
 ```
+{% endraw %}
 
 
 ### **2. How do you handle errors in async/await?**
@@ -683,6 +727,7 @@ try {
 Use try/catch blocks:
 
 
+{% raw %}
 ```typescript
 const fetchUser = async (id: number): Promise<User> => {
   try {
@@ -694,6 +739,7 @@ const fetchUser = async (id: number): Promise<User> => {
   }
 };
 ```
+{% endraw %}
 
 
 ### **3. What are Promise combinators and when do you use them?**
@@ -710,6 +756,7 @@ const fetchUser = async (id: number): Promise<User> => {
 Use a loop with exponential backoff:
 
 
+{% raw %}
 ```typescript
 const fetchWithRetry = async (url: string, maxRetries: number = 3): Promise<Response> => {
   for (let i = 0; i < maxRetries; i++) {
@@ -722,6 +769,7 @@ const fetchWithRetry = async (url: string, maxRetries: number = 3): Promise<Resp
   }
 };
 ```
+{% endraw %}
 
 
 ### **5. What's the difference between Promise.all and Promise.allSettled?**

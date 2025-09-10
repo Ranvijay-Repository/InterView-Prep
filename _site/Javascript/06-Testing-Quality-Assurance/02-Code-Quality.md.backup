@@ -45,6 +45,7 @@
 
 ### ASCII Diagram: SonarQube Analysis Flow
 
+{% raw %}
 ```
 SONARQUBE ANALYSIS FLOW
 ┌─────────────────────────────────┐
@@ -101,6 +102,7 @@ SONARQUBE ANALYSIS FLOW
         │  Actions      │
         └───────────────┘
 ```
+{% endraw %}
 
 
 ### Code Smell Categories:
@@ -125,6 +127,7 @@ SONARQUBE ANALYSIS FLOW
 
 ### ASCII Diagram: Bundle Analysis Process
 
+{% raw %}
 ```
 BUNDLE ANALYSIS PROCESS
 ┌─────────────────────────────────┐
@@ -180,6 +183,7 @@ BUNDLE ANALYSIS PROCESS
         │  Tree Shaking │
         └───────────────┘
 ```
+{% endraw %}
 
 
 ### Analysis Tools:
@@ -204,6 +208,7 @@ BUNDLE ANALYSIS PROCESS
 
 ### ASCII Diagram: Performance Budget Monitoring
 
+{% raw %}
 ```
 PERFORMANCE BUDGET MONITORING
 ┌─────────────────────────────────┐
@@ -259,6 +264,7 @@ PERFORMANCE BUDGET MONITORING
         │  Compression  │
         └───────────────┘
 ```
+{% endraw %}
 
 
 ### Budget Metrics:

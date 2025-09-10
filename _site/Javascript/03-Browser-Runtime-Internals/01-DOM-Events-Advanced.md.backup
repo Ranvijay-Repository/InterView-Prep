@@ -44,6 +44,7 @@
 
 ### ASCII Diagram: Event Propagation Flow
 
+{% raw %}
 ```
 EVENT PROPAGATION FLOW
 ┌─────────────────────────────────┐
@@ -86,6 +87,7 @@ EVENT PROPAGATION FLOW
         │  Down → Up    │
         └───────────────┘
 ```
+{% endraw %}
 
 
 ### Event Phases:
@@ -95,6 +97,7 @@ EVENT PROPAGATION FLOW
 
 ### Event Listener Options:
 
+{% raw %}
 ```javascript
 // Capturing phase (true = capturing, false = bubbling)
 element.addEventListener('click', handler, true);  // Capturing
@@ -109,6 +112,7 @@ element.addEventListener('click', handler, {
     signal: abortSignal // AbortController signal
 });
 ```
+{% endraw %}
 
 
 ---
@@ -125,6 +129,7 @@ element.addEventListener('click', handler, {
 
 ### ASCII Diagram: Event Delegation Pattern
 
+{% raw %}
 ```
 EVENT DELEGATION PATTERN
 ┌─────────────────────────────────┐
@@ -159,6 +164,7 @@ EVENT DELEGATION PATTERN
         │  & HANDLING   │
         └───────────────┘
 ```
+{% endraw %}
 
 
 ### Use Cases:
@@ -181,6 +187,7 @@ EVENT DELEGATION PATTERN
 
 ### ASCII Diagram: Custom Event System
 
+{% raw %}
 ```
 CUSTOM EVENT SYSTEM
 ┌─────────────────────────────────┐
@@ -209,6 +216,7 @@ CUSTOM EVENT SYSTEM
         │  Custom Event │
         └───────────────┘
 ```
+{% endraw %}
 
 
 ### Custom Event Features:

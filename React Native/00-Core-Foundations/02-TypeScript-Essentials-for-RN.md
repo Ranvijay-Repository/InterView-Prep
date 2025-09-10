@@ -552,7 +552,7 @@ const ProductList: React.FC<{ products: Product[] }> = ({ products }) => {
   
   const renderProduct = (product: Product) => (
     <View style={styles.productItem}>
-      <Image source={{#123;{{#123; uri: product.image }}#125;}}#125; style={styles.productImage} />
+      <Image source={{}} style={styles.productImage} />
       <Text style={styles.productName}>{product.name}</Text>
       <Text style={styles.productPrice}>${product.price}</Text>
     </View>

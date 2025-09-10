@@ -7,6 +7,7 @@
 ## 📁 **Repository Structure Overview**
 
 
+{% raw %}
 ```
 /Users/ranvijaychouhan/Desktop/Personal/Interview-prep/
 ├── 📄 JavaScript Master Index
@@ -22,6 +23,7 @@
     ├── Javascript/ (42 files across 11 sections)
     └── React Native/ (80 files across 21 sections)
 ```
+{% endraw %}
 
 
 ---
@@ -32,34 +34,42 @@
 
 **❌ Before (Incorrect):**
 
+{% raw %}
 ```markdown
 - [01. Execution Context & Call Stack](JavaScript/01%20JavaScript%20Core/01-Execution-Context-Call-Stack.md)
 - [01. Functional Programming](JavaScript/02-Advanced-JavaScript-Concepts/01-Functional-Programming.md)
 ```
+{% endraw %}
 
 
 **✅ After (Corrected):**
 
+{% raw %}
 ```markdown
 - [01. Execution Context & Call Stack](01%20JavaScript%20Core/01-Execution-Context-Call-Stack.md)
 - [01. Functional Programming](02-Advanced-JavaScript-Concepts/01-Functional-Programming.md)
 ```
+{% endraw %}
 
 
 ### **React Native Master Index Corrections**
 
 **❌ Before (Incorrect):**
 
+{% raw %}
 ```markdown
 | [JavaScript Master Index](../JavaScript.md) |
 ```
+{% endraw %}
 
 
 **✅ After (Corrected):**
 
+{% raw %}
 ```markdown
 | [JavaScript Master Index](../Javascript/JavaScript.md) |
 ```
+{% endraw %}
 
 
 ---

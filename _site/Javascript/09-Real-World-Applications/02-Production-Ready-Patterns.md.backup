@@ -46,6 +46,7 @@
 
 ### ASCII Diagram: Error Handling Flow
 
+{% raw %}
 ```
 ERROR HANDLING FLOW
 ┌─────────────────────────────────┐
@@ -120,6 +121,7 @@ ERROR HANDLING FLOW
         │  Health Check │
         └───────────────┘
 ```
+{% endraw %}
 
 
 ### Error Handling Strategies:
@@ -144,6 +146,7 @@ ERROR HANDLING FLOW
 
 ### ASCII Diagram: Logging & Monitoring System
 
+{% raw %}
 ```
 LOGGING & MONITORING SYSTEM
 ┌─────────────────────────────────┐
@@ -216,6 +219,7 @@ LOGGING & MONITORING SYSTEM
         │  Management   │
         └───────────────┘
 ```
+{% endraw %}
 
 
 ### Monitoring Areas:
@@ -240,6 +244,7 @@ LOGGING & MONITORING SYSTEM
 
 ### ASCII Diagram: Deployment Pipeline
 
+{% raw %}
 ```
 DEPLOYMENT PIPELINE
 ┌─────────────────────────────────┐
@@ -312,6 +317,7 @@ DEPLOYMENT PIPELINE
         │  Triggers     │
         └───────────────┘
 ```
+{% endraw %}
 
 
 ### Deployment Strategies:
@@ -336,6 +342,7 @@ DEPLOYMENT PIPELINE
 
 ### ASCII Diagram: DevOps Pipeline
 
+{% raw %}
 ```
 DEVOPS PIPELINE
 ┌─────────────────────────────────┐
@@ -414,6 +421,7 @@ DEVOPS PIPELINE
         │  Sharing      │
         └───────────────┘
 ```
+{% endraw %}
 
 
 ### DevOps Practices:

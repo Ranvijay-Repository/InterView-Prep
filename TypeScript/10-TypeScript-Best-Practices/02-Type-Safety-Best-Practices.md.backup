@@ -25,6 +25,7 @@ Type safety is the cornerstone of TypeScript, providing compile-time error detec
 ### **Type Safety Benefits**
 
 
+{% raw %}
 ```typescript
 // Type safety benefits
 const typeSafetyBenefits = {
@@ -53,11 +54,13 @@ const typeSafetyPrinciples = {
   noImplicitReturns: "Require explicit returns"
 };
 ```
+{% endraw %}
 
 
 ### **Type Safety Challenges**
 
 
+{% raw %}
 ```typescript
 // Type safety challenges
 const typeSafetyChallenges = {
@@ -79,6 +82,7 @@ const commonIssues = {
   casting: "Unsafe type casting"
 };
 ```
+{% endraw %}
 
 
 ---
@@ -88,6 +92,7 @@ const commonIssues = {
 ### **Strict Mode Configuration**
 
 
+{% raw %}
 ```typescript
 // Strict mode configuration
 const strictModeConfig = {
@@ -144,11 +149,13 @@ function strictModeExamples() {
   }
 }
 ```
+{% endraw %}
 
 
 ### **TypeScript Configuration**
 
 
+{% raw %}
 ```typescript
 // TypeScript configuration for type safety
 const tsConfig = {
@@ -192,11 +199,13 @@ const tsConfig = {
   "exclude": ["node_modules", "dist", "**/*.test.ts"]
 };
 ```
+{% endraw %}
 
 
 ### **ESLint Configuration**
 
 
+{% raw %}
 ```typescript
 // ESLint configuration for type safety
 const eslintConfig = {
@@ -224,6 +233,7 @@ const eslintConfig = {
   }
 };
 ```
+{% endraw %}
 
 
 ---
@@ -233,6 +243,7 @@ const eslintConfig = {
 ### **Type Guard Functions**
 
 
+{% raw %}
 ```typescript
 // Type guard functions
 const typeGuardFunctions = {
@@ -310,11 +321,13 @@ function processValue(value: unknown) {
   }
 }
 ```
+{% endraw %}
 
 
 ### **Runtime Validation**
 
 
+{% raw %}
 ```typescript
 // Runtime validation
 const runtimeValidation = {
@@ -389,11 +402,13 @@ function processUserData(data: unknown) {
   console.log(`Processing user: ${user.name}`);
 }
 ```
+{% endraw %}
 
 
 ### **Schema Validation**
 
 
+{% raw %}
 ```typescript
 // Schema validation
 const schemaValidation = {
@@ -493,6 +508,7 @@ function validateUserData(data: unknown) {
   return result.data;
 }
 ```
+{% endraw %}
 
 
 ---
@@ -502,6 +518,7 @@ function validateUserData(data: unknown) {
 ### **Null and Undefined Handling**
 
 
+{% raw %}
 ```typescript
 // Null and undefined handling
 const nullUndefinedHandling = {
@@ -563,11 +580,13 @@ function nullCheckExamples() {
   }
 }
 ```
+{% endraw %}
 
 
 ### **Input Validation**
 
 
+{% raw %}
 ```typescript
 // Input validation
 const inputValidation = {
@@ -632,11 +651,13 @@ function validateAndSanitizeInput(input: unknown): ValidationResult<User> {
   return { success: true, data: sanitizedUser };
 }
 ```
+{% endraw %}
 
 
 ### **Error Boundaries**
 
 
+{% raw %}
 ```typescript
 // Error boundaries
 const errorBoundaries = {
@@ -712,6 +733,7 @@ const asyncResult = await safeExecuteAsync(async () => {
   return await fetch('/api/data');
 }, null);
 ```
+{% endraw %}
 
 
 ---
@@ -721,6 +743,7 @@ const asyncResult = await safeExecuteAsync(async () => {
 ### **Error Types**
 
 
+{% raw %}
 ```typescript
 // Error types
 const errorTypes = {
@@ -790,11 +813,13 @@ function isNotFoundError(error: unknown): error is NotFoundError {
   return error instanceof NotFoundError;
 }
 ```
+{% endraw %}
 
 
 ### **Error Handling Patterns**
 
 
+{% raw %}
 ```typescript
 // Error handling patterns
 const errorHandlingPatterns = {
@@ -870,11 +895,13 @@ function errorHandlingMiddleware(error: Error, req: Request, res: Response, next
   }
 }
 ```
+{% endraw %}
 
 
 ### **Error Recovery**
 
 
+{% raw %}
 ```typescript
 // Error recovery
 const errorRecovery = {
@@ -980,6 +1007,7 @@ const resultWithFallback = await withFallback(
   async () => await fetch('/api/backup-data')
 );
 ```
+{% endraw %}
 
 
 ---
@@ -989,6 +1017,7 @@ const resultWithFallback = await withFallback(
 ### **1. Use Strict Type Configuration**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Strict type configuration
 const strictConfig = {
@@ -1009,11 +1038,13 @@ const looseConfig = {
   }
 };
 ```
+{% endraw %}
 
 
 ### **2. Use Type Guards**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Type guards
 function isString(value: unknown): value is string {
@@ -1033,11 +1064,13 @@ function processValueBad(value: unknown) {
   console.log(str.toUpperCase());
 }
 ```
+{% endraw %}
 
 
 ### **3. Handle Null and Undefined**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Null and undefined handling
 function processUser(user: User | null): string {
@@ -1052,11 +1085,13 @@ function processUserBad(user: User | null): string {
   return user.name; // Error: Object is possibly 'null'
 }
 ```
+{% endraw %}
 
 
 ### **4. Use Defensive Programming**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Defensive programming
 function safeParseJSON(json: string): any {
@@ -1073,6 +1108,7 @@ function unsafeParseJSON(json: string): any {
   return JSON.parse(json); // Can throw
 }
 ```
+{% endraw %}
 
 
 ---

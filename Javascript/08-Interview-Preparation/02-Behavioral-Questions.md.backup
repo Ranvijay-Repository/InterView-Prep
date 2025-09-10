@@ -45,6 +45,7 @@
 
 ### ASCII Diagram: JavaScript Behavioral Question Flow
 
+{% raw %}
 ```
 JAVASCRIPT BEHAVIORAL QUESTION FLOW
 ┌─────────────────────────────────┐
@@ -115,6 +116,7 @@ JAVASCRIPT BEHAVIORAL QUESTION FLOW
         │  Learning     │
         └───────────────┘
 ```
+{% endraw %}
 
 
 ### Question Categories:
@@ -139,6 +141,7 @@ JAVASCRIPT BEHAVIORAL QUESTION FLOW
 
 ### ASCII Diagram: Technical Leadership Process
 
+{% raw %}
 ```
 TECHNICAL LEADERSHIP PROCESS
 ┌─────────────────────────────────┐
@@ -213,6 +216,7 @@ TECHNICAL LEADERSHIP PROCESS
         │  Improvements │
         └───────────────┘
 ```
+{% endraw %}
 
 
 ### Leadership Areas:
@@ -237,6 +241,7 @@ TECHNICAL LEADERSHIP PROCESS
 
 ### ASCII Diagram: Code Quality Management
 
+{% raw %}
 ```
 CODE QUALITY MANAGEMENT
 ┌─────────────────────────────────┐
@@ -314,6 +319,7 @@ CODE QUALITY MANAGEMENT
         │  Actions      │
         └───────────────┘
 ```
+{% endraw %}
 
 
 ### Quality Areas:

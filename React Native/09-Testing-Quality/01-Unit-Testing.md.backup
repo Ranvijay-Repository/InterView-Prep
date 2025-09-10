@@ -27,6 +27,7 @@ Unit testing is essential for ensuring code quality and reliability in React Nat
 ### **Unit Testing Overview**
 
 
+{% raw %}
 ```
 ┌─────────────────────────────────────┐
 │        Unit Testing System          │
@@ -53,6 +54,7 @@ Unit testing is essential for ensuring code quality and reliability in React Nat
 │  └─────────────────────────────────┘│
 └─────────────────────────────────────┘
 ```
+{% endraw %}
 
 
 ---
@@ -63,6 +65,7 @@ Unit testing is essential for ensuring code quality and reliability in React Nat
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // jest.config.js
 module.exports = {
@@ -100,12 +103,14 @@ module.exports = {
   verbose: true,
 };
 ```
+{% endraw %}
 
 
 ### **Test Setup File**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // src/setupTests.js
 import '@testing-library/jest-native/extend-expect';
@@ -209,6 +214,7 @@ global.console = {
   error: jest.fn(),
 };
 ```
+{% endraw %}
 
 
 ---
@@ -219,6 +225,7 @@ global.console = {
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // __tests__/components/Button.test.js
 import React from 'react';
@@ -288,12 +295,14 @@ describe('Button Component', () => {
   });
 });
 ```
+{% endraw %}
 
 
 ### **Hook Testing Example**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // __tests__/hooks/useCounter.test.js
 import { renderHook, act } from '@testing-library/react-hooks';
@@ -373,6 +382,7 @@ describe('useCounter Hook', () => {
   });
 });
 ```
+{% endraw %}
 
 
 ---

@@ -26,6 +26,7 @@ Arrow functions provide a concise syntax for writing functions and have differen
 ### **Basic Arrow Function Syntax**
 
 
+{% raw %}
 ```typescript
 // Traditional function
 function add(a: number, b: number): number {
@@ -46,11 +47,13 @@ const square = (x: number): number => x * x;
 // No parameters arrow function
 const getCurrentTime = (): Date => new Date();
 ```
+{% endraw %}
 
 
 ### **Arrow Functions with TypeScript**
 
 
+{% raw %}
 ```typescript
 // Arrow function with explicit return type
 const processUser = (user: User): string => {
@@ -70,11 +73,13 @@ const greet = (name: string, greeting: string = "Hello"): string => {
   return `${greeting}, ${name}!`;
 };
 ```
+{% endraw %}
 
 
 ### **Arrow Functions in Array Methods**
 
 
+{% raw %}
 ```typescript
 interface User {
   id: number;
@@ -101,6 +106,7 @@ const totalAge = users.reduce((sum: number, user: User): number => sum + user.ag
 // Find with arrow functions
 const user = users.find((user: User): boolean => user.id === 2);
 ```
+{% endraw %}
 
 
 ---
@@ -112,6 +118,7 @@ Destructuring allows you to extract values from arrays and objects into distinct
 ### **Array Destructuring**
 
 
+{% raw %}
 ```typescript
 // Basic array destructuring
 const numbers: number[] = [1, 2, 3, 4, 5];
@@ -131,11 +138,13 @@ const processCoordinates = ([x, y]: [number, number]): string => {
   return `Coordinates: (${x}, ${y})`;
 };
 ```
+{% endraw %}
 
 
 ### **Object Destructuring**
 
 
+{% raw %}
 ```typescript
 interface User {
   id: number;
@@ -178,11 +187,13 @@ const createUser = ({ name, email, age }: { name: string; email: string; age: nu
   return { id: Date.now(), name, email, age };
 };
 ```
+{% endraw %}
 
 
 ### **Destructuring with TypeScript**
 
 
+{% raw %}
 ```typescript
 // Destructuring with explicit types
 const processUser = ({ name, age }: { name: string; age: number }): string => {
@@ -205,6 +216,7 @@ const processOptionalUser = ({ name, age = 0 }: { name: string; age?: number }):
   return `${name} is ${age} years old`;
 };
 ```
+{% endraw %}
 
 
 ---
@@ -216,6 +228,7 @@ Template literals provide an easy way to create strings with embedded expression
 ### **Basic Template Literals**
 
 
+{% raw %}
 ```typescript
 // Basic template literal
 const name: string = "John";
@@ -237,11 +250,13 @@ const htmlTemplate = `
   </div>
 `;
 ```
+{% endraw %}
 
 
 ### **Template Literals with TypeScript**
 
 
+{% raw %}
 ```typescript
 // Template literal with type safety
 const createApiUrl = (endpoint: string, id: number): string => {
@@ -265,6 +280,7 @@ const getStatusMessage = (isOnline: boolean, lastSeen: Date): string => {
   return `User is ${isOnline ? "online" : `last seen ${lastSeen.toLocaleDateString()}`}`;
 };
 ```
+{% endraw %}
 
 
 ---
@@ -276,6 +292,7 @@ TypeScript enhances ES6 classes with type annotations and access modifiers.
 ### **Basic Class Syntax**
 
 
+{% raw %}
 ```typescript
 // Basic class with TypeScript
 class Person {
@@ -302,11 +319,13 @@ class Person {
   }
 }
 ```
+{% endraw %}
 
 
 ### **Class Inheritance**
 
 
+{% raw %}
 ```typescript
 // Base class
 class Animal {
@@ -349,11 +368,13 @@ class Dog extends Animal {
   }
 }
 ```
+{% endraw %}
 
 
 ### **Static Methods and Properties**
 
 
+{% raw %}
 ```typescript
 class MathUtils {
   public static readonly PI: number = 3.14159;
@@ -375,6 +396,7 @@ class MathUtils {
 const sum = MathUtils.add(5, 3);
 const area = MathUtils.circleArea(5);
 ```
+{% endraw %}
 
 
 ---
@@ -386,6 +408,7 @@ TypeScript supports ES6 module syntax with type safety.
 ### **Export and Import Syntax**
 
 
+{% raw %}
 ```typescript
 // user.ts - Exporting
 export interface User {
@@ -415,11 +438,13 @@ export default class UserRepository {
 export const API_URL = "https://api.example.com";
 export const MAX_USERS = 100;
 ```
+{% endraw %}
 
 
 ### **Import Syntax**
 
 
+{% raw %}
 ```typescript
 // Importing named exports
 import { User, UserService } from "./user";
@@ -440,11 +465,13 @@ import type { User } from "./user";
 const user: User = { id: 1, name: "John", email: "john@example.com" };
 const userService = new UserService();
 ```
+{% endraw %}
 
 
 ### **Re-exporting**
 
 
+{% raw %}
 ```typescript
 // index.ts - Re-exporting
 export { User, UserService } from "./user";
@@ -455,6 +482,7 @@ export { Order, OrderService } from "./order";
 export { User as UserType } from "./user";
 export { Product as ProductType } from "./product";
 ```
+{% endraw %}
 
 
 ---
@@ -466,6 +494,7 @@ TypeScript provides excellent support for asynchronous programming with Promises
 ### **Basic Promise Usage**
 
 
+{% raw %}
 ```typescript
 // Promise with TypeScript
 const fetchUser = (id: number): Promise<User> => {
@@ -491,11 +520,13 @@ const processUser = (id: number): Promise<string> => {
     });
 };
 ```
+{% endraw %}
 
 
 ### **Async/Await with TypeScript**
 
 
+{% raw %}
 ```typescript
 // Async function with TypeScript
 const getUserInfo = async (id: number): Promise<string> => {
@@ -529,11 +560,13 @@ const fetchAllUsers = async (ids: number[]): Promise<User[]> => {
   return Promise.all(promises);
 };
 ```
+{% endraw %}
 
 
 ### **Advanced Async Patterns**
 
 
+{% raw %}
 ```typescript
 // Async function with timeout
 const fetchUserWithTimeout = async (id: number, timeout: number = 5000): Promise<User> => {
@@ -566,6 +599,7 @@ const fetchUserWithRetry = async (id: number, maxRetries: number = 3): Promise<U
   throw lastError!;
 };
 ```
+{% endraw %}
 
 
 ---
@@ -575,6 +609,7 @@ const fetchUserWithRetry = async (id: number, maxRetries: number = 3): Promise<U
 ### **1. Use Arrow Functions for Short Functions**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Arrow function for short operations
 const numbers = [1, 2, 3, 4, 5];
@@ -586,11 +621,13 @@ const complexLogic = (data: any[]) => {
   // Better to use regular function
 };
 ```
+{% endraw %}
 
 
 ### **2. Use Destructuring for Clean Code**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Destructuring for clean parameter handling
 const createUser = ({ name, email, age }: UserInput): User => {
@@ -607,11 +644,13 @@ const createUser = (userInput: UserInput): User => {
   };
 };
 ```
+{% endraw %}
 
 
 ### **3. Use Template Literals for String Building**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Template literals
 const message = `Hello ${name}, you have ${count} messages`;
@@ -619,11 +658,13 @@ const message = `Hello ${name}, you have ${count} messages`;
 // ❌ Avoid: String concatenation
 const message = "Hello " + name + ", you have " + count + " messages";
 ```
+{% endraw %}
 
 
 ### **4. Use Async/Await for Better Readability**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Async/await
 const processData = async (): Promise<void> => {
@@ -644,6 +685,7 @@ const processData = (): Promise<void> => {
     .catch(error => console.error(error));
 };
 ```
+{% endraw %}
 
 
 ---
@@ -664,10 +706,12 @@ const processData = (): Promise<void> => {
 Destructuring works the same as JavaScript but with type safety:
 
 
+{% raw %}
 ```typescript
 const { name, age }: { name: string; age: number } = user;
 const [first, second]: [number, number] = [1, 2];
 ```
+{% endraw %}
 
 
 ### **3. What are the benefits of using async/await over Promises?**
@@ -684,6 +728,7 @@ const [first, second]: [number, number] = [1, 2];
 Use try/catch blocks:
 
 
+{% raw %}
 ```typescript
 const fetchData = async (): Promise<void> => {
   try {
@@ -694,6 +739,7 @@ const fetchData = async (): Promise<void> => {
   }
 };
 ```
+{% endraw %}
 
 
 ### **5. What's the difference between import and import type?**
@@ -703,10 +749,12 @@ const fetchData = async (): Promise<void> => {
 - **`import type`**: Imports only type information, removed at compile time
 
 
+{% raw %}
 ```typescript
 import { User } from "./user";        // Runtime import
 import type { User } from "./user";   // Type-only import
 ```
+{% endraw %}
 
 
 ---

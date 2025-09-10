@@ -26,6 +26,7 @@ Integration testing ensures that different parts of your React Native applicatio
 ### **Integration Testing Overview**
 
 
+{% raw %}
 ```
 ┌─────────────────────────────────────┐
 │        Integration Testing          │
@@ -52,6 +53,7 @@ Integration testing ensures that different parts of your React Native applicatio
 │  └─────────────────────────────────┘│
 └─────────────────────────────────────┘
 ```
+{% endraw %}
 
 
 ---
@@ -62,6 +64,7 @@ Integration testing ensures that different parts of your React Native applicatio
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // __tests__/integration/api.test.js
 import { rest } from 'msw';
@@ -179,12 +182,14 @@ describe('API Integration Tests', () => {
   });
 });
 ```
+{% endraw %}
 
 
 ### **Component Integration Testing**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // __tests__/integration/UserProfile.test.js
 import React from 'react';
@@ -302,6 +307,7 @@ describe('UserProfile Integration Tests', () => {
   });
 });
 ```
+{% endraw %}
 
 
 ---

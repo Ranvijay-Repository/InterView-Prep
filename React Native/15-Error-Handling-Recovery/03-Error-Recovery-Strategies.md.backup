@@ -23,6 +23,7 @@
 ### **Recovery Strategy Architecture**
 
 
+{% raw %}
 ```mermaid
 graph TD
     A[Error Occurs] --> B[Error Detection]
@@ -36,6 +37,7 @@ graph TD
     G --> H
     H --> I[Monitor & Learn]
 ```
+{% endraw %}
 
 
 ### **Recovery Principles**
@@ -52,6 +54,7 @@ graph TD
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 import React, { useState, useCallback } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native';
@@ -451,6 +454,7 @@ const styles = StyleSheet.create({
 
 export { CircuitBreaker, Bulkhead, Timeout, ResiliencePatternsDemo };
 ```
+{% endraw %}
 
 
 ---
@@ -461,6 +465,7 @@ export { CircuitBreaker, Bulkhead, Timeout, ResiliencePatternsDemo };
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 import React, { useState, useCallback } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native';
@@ -848,6 +853,7 @@ const styles = StyleSheet.create({
 
 export { FaultTolerance, FaultToleranceDemo };
 ```
+{% endraw %}
 
 
 ---
@@ -858,6 +864,7 @@ export { FaultTolerance, FaultToleranceDemo };
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 import React, { useState, useCallback } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native';
@@ -1202,6 +1209,7 @@ const styles = StyleSheet.create({
 
 export { ErrorMonitoring, ErrorMonitoringDemo };
 ```
+{% endraw %}
 
 
 ---

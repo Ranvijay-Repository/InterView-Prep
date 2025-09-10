@@ -24,6 +24,7 @@
 ### **Build Process Flow**
 
 
+{% raw %}
 ```mermaid
 graph TD
     A[Source Code] --> B[Metro Bundler]
@@ -36,6 +37,7 @@ graph TD
     H --> I[Signing]
     I --> J[Release]
 ```
+{% endraw %}
 
 
 ### **Key Components**
@@ -52,6 +54,7 @@ graph TD
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```gradle
 // android/build.gradle
 buildscript {
@@ -76,12 +79,14 @@ allprojects {
     }
 }
 ```
+{% endraw %}
 
 
 ### **App Level Gradle**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```gradle
 // android/app/build.gradle
 apply plugin: "com.android.application"
@@ -136,6 +141,7 @@ android {
     }
 }
 ```
+{% endraw %}
 
 
 ---
@@ -146,6 +152,7 @@ android {
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```gradle
 // android/app/build.gradle
 android {
@@ -173,12 +180,14 @@ android {
     }
 }
 ```
+{% endraw %}
 
 
 ### **Build Variant Scripts**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // scripts/build-android.js
 const { execSync } = require('child_process');
@@ -215,6 +224,7 @@ const variant = process.argv[2] || 'debug';
 const flavor = process.argv[3] || 'development';
 buildAndroid(variant, flavor);
 ```
+{% endraw %}
 
 
 ---
@@ -225,6 +235,7 @@ buildAndroid(variant, flavor);
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```proguard
 # android/app/proguard-rules.pro
 
@@ -266,12 +277,14 @@ buildAndroid(variant, flavor);
     public static final android.os.Parcelable$Creator *;
 }
 ```
+{% endraw %}
 
 
 ### **R8 Configuration**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```gradle
 // android/app/build.gradle
 android {
@@ -293,6 +306,7 @@ android {
     }
 }
 ```
+{% endraw %}
 
 
 ---
@@ -303,6 +317,7 @@ android {
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```gradle
 // android/app/build.gradle
 android {
@@ -322,12 +337,14 @@ android {
     }
 }
 ```
+{% endraw %}
 
 
 ### **AAB Configuration**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```gradle
 // android/app/build.gradle
 android {
@@ -361,6 +378,7 @@ android {
     }
 }
 ```
+{% endraw %}
 
 
 ---
@@ -371,6 +389,7 @@ android {
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // scripts/release-android.js
 const { execSync } = require('child_process');
@@ -436,12 +455,14 @@ const releaseAndroid = async () => {
 // Run release
 releaseAndroid();
 ```
+{% endraw %}
 
 
 ### **Play Store Upload**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // scripts/upload-playstore.js
 const { execSync } = require('child_process');
@@ -475,6 +496,7 @@ const uploadToPlayStore = async () => {
 // Run upload
 uploadToPlayStore();
 ```
+{% endraw %}
 
 
 ---

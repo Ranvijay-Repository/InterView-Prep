@@ -104,6 +104,7 @@ Think of data types like different types of storage:
 ### 🔍 Memory Storage Visualization
 
 
+{% raw %}
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │                    MEMORY STORAGE                           │
@@ -130,6 +131,7 @@ Think of data types like different types of storage:
 │  └─────────────────────────────────────────────────────┘   │
 └─────────────────────────────────────────────────────────────┘
 ```
+{% endraw %}
 
 
 ### 🔄 Storage Comparison
@@ -149,6 +151,7 @@ Think of data types like different types of storage:
 
 ### Example 1: Basic Type Demonstration
 
+{% raw %}
 ```javascript
 console.log("=== BASIC TYPE DEMONSTRATION ===");
 
@@ -188,10 +191,12 @@ console.log("Date:", dateVar, typeof dateVar);
 console.log("RegExp:", regexVar, typeof regexVar);
 console.log("Error:", errorVar, typeof errorVar);
 ```
+{% endraw %}
 
 
 ### Example 2: Memory Storage and Assignment
 
+{% raw %}
 ```javascript
 console.log("=== MEMORY STORAGE AND ASSIGNMENT ===");
 
@@ -229,10 +234,12 @@ console.log("Copied object:", copiedObject);    // Age is 31
 
 console.log("Reference types share the same memory location - both point to same data");
 ```
+{% endraw %}
 
 
 ### Example 3: Comparison Behavior
 
+{% raw %}
 ```javascript
 console.log("=== COMPARISON BEHAVIOR ===");
 
@@ -299,10 +306,12 @@ function deepEqual(obj1, obj2) {
 console.log("Deep comparison obj1 vs obj2:", deepEqual(obj1, obj2)); // true
 console.log("Deep comparison arr1 vs arr2:", deepEqual(arr1, arr2)); // true
 ```
+{% endraw %}
 
 
 ### Example 4: Function Parameters and Return Values
 
+{% raw %}
 ```javascript
 console.log("=== FUNCTION PARAMETERS AND RETURN VALUES ===");
 
@@ -363,10 +372,12 @@ console.log("New object:", newObject);                   // New object
 
 console.log("Even with reference types, reassignment doesn't affect original");
 ```
+{% endraw %}
 
 
 ### Example 5: Common Pitfalls and Solutions
 
+{% raw %}
 ```javascript
 console.log("=== COMMON PITFALLS AND SOLUTIONS ===");
 
@@ -427,10 +438,12 @@ console.log("After safe modification:");
 console.log("Original config:", config);     // Language unchanged
 console.log("Safe config:", safeConfig);     // Language changed
 ```
+{% endraw %}
 
 
 ### Example 6: Type Checking and Conversion
 
+{% raw %}
 ```javascript
 console.log("=== TYPE CHECKING AND CONVERSION ===");
 
@@ -498,6 +511,7 @@ console.log("Boolean({}):", Boolean({}));
 console.log("Boolean([]):", Boolean([]));
 console.log("Boolean(function(){}):", Boolean(function(){}));
 ```
+{% endraw %}
 
 
 ---
@@ -506,6 +520,7 @@ console.log("Boolean(function(){}):", Boolean(function(){}));
 
 ### Pitfall 1: Mutable Reference Types
 
+{% raw %}
 ```javascript
 console.log("=== PITFALL 1: MUTABLE REFERENCE TYPES ===");
 
@@ -522,10 +537,12 @@ safeUserCopy.age = 32;
 console.log("Original user age:", originalUser.age); // 31 (unchanged)
 console.log("Safe copy age:", safeUserCopy.age);     // 32
 ```
+{% endraw %}
 
 
 ### Pitfall 2: Array Methods that Modify Original
 
+{% raw %}
 ```javascript
 console.log("=== PITFALL 2: ARRAY METHODS ===");
 
@@ -542,10 +559,12 @@ safeArrayCopy.push(5);
 console.log("Original array:", originalArray); // [1, 2, 3, 4] (unchanged)
 console.log("Safe copy:", safeArrayCopy);      // [1, 2, 3, 4, 5]
 ```
+{% endraw %}
 
 
 ### Pitfall 3: Object Property Assignment
 
+{% raw %}
 ```javascript
 console.log("=== PITFALL 3: OBJECT PROPERTY ASSIGNMENT ===");
 
@@ -562,6 +581,7 @@ deepConfigCopy.theme.color = "blue";
 console.log("Original theme color:", originalConfig.theme.color); // "light" (unchanged)
 console.log("Deep copy theme color:", deepConfigCopy.theme.color); // "blue"
 ```
+{% endraw %}
 
 
 ---
@@ -570,6 +590,7 @@ console.log("Deep copy theme color:", deepConfigCopy.theme.color); // "blue"
 
 ### 1. Use const for Reference Types When Possible
 
+{% raw %}
 ```javascript
 console.log("=== BEST PRACTICE 1: USE CONST FOR REFERENCE TYPES ===");
 
@@ -587,10 +608,12 @@ numbers.push(4); // ✅ Can modify array
 let currentUser = user;
 currentUser = { name: "Jane", age: 25 }; // ✅ Can reassign
 ```
+{% endraw %}
 
 
 ### 2. Create Copies Instead of Sharing References
 
+{% raw %}
 ```javascript
 console.log("=== BEST PRACTICE 2: CREATE COPIES ===");
 
@@ -608,10 +631,12 @@ const copy2 = Object.assign({}, original);
 // ✅ Good: Deep copy for nested objects
 const deepCopy = JSON.parse(JSON.stringify(original));
 ```
+{% endraw %}
 
 
 ### 3. Use Type-Safe Comparisons
 
+{% raw %}
 ```javascript
 console.log("=== BEST PRACTICE 3: TYPE-SAFE COMPARISONS ===");
 
@@ -631,6 +656,7 @@ function deepEqual(a, b) {
 }
 console.log(deepEqual(obj1, obj2)); // true
 ```
+{% endraw %}
 
 
 ---
@@ -704,6 +730,7 @@ console.log(deepEqual(obj1, obj2)); // true
 
 **Example:**
 
+{% raw %}
 ```javascript
 let obj1 = { name: "John" };
 let obj2 = obj1; // obj2 gets memory address of obj1
@@ -712,6 +739,7 @@ obj2.name = "Jane";
 console.log(obj1.name); // "Jane" (original is modified)
 console.log(obj2.name); // "Jane"
 ```
+{% endraw %}
 
 
 **Why This Happens:**
@@ -724,6 +752,7 @@ console.log(obj2.name); // "Jane"
 
 **Shallow Copy (for simple objects):**
 
+{% raw %}
 ```javascript
 // Spread operator
 const copy1 = { ...originalObject };
@@ -734,10 +763,12 @@ const copy2 = Object.assign({}, originalObject);
 // Array spread
 const arrayCopy = [...originalArray];
 ```
+{% endraw %}
 
 
 **Deep Copy (for nested objects):**
 
+{% raw %}
 ```javascript
 // JSON method (simple but has limitations)
 const deepCopy1 = JSON.parse(JSON.stringify(originalObject));
@@ -759,6 +790,7 @@ function deepClone(obj) {
 
 const deepCopy2 = deepClone(originalObject);
 ```
+{% endraw %}
 
 
 ### Q: Why does JavaScript have both primitive and reference types?
@@ -788,6 +820,7 @@ const deepCopy2 = deepClone(originalObject);
 
 ### Exercise 1: Type Identification
 
+{% raw %}
 ```javascript
 console.log("Exercise 1: Identify the data types");
 
@@ -810,10 +843,12 @@ const values = [
 // Your task: Identify the type of each value
 // Use typeof, Array.isArray, and other methods
 ```
+{% endraw %}
 
 
 ### Exercise 2: Copying Objects
 
+{% raw %}
 ```javascript
 console.log("Exercise 2: Create copies of objects");
 
@@ -830,10 +865,12 @@ const original = {
 // Your task: Create shallow and deep copies
 // Test that modifications don't affect the original
 ```
+{% endraw %}
 
 
 ### Exercise 3: Memory Management
 
+{% raw %}
 ```javascript
 console.log("Exercise 3: Understand memory behavior");
 
@@ -842,6 +879,7 @@ console.log("Exercise 3: Understand memory behavior");
 // 2. Reference type sharing
 // 3. How to avoid unintended modifications
 ```
+{% endraw %}
 
 
 ---

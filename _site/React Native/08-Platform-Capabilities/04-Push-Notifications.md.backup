@@ -26,6 +26,7 @@ Push notifications are essential for engaging users and keeping them informed ab
 ### **Push Notifications Overview**
 
 
+{% raw %}
 ```
 ┌─────────────────────────────────────┐
 │        Push Notifications           │
@@ -52,6 +53,7 @@ Push notifications are essential for engaging users and keeping them informed ab
 │  └─────────────────────────────────┘│
 └─────────────────────────────────────┘
 ```
+{% endraw %}
 
 
 ---
@@ -62,6 +64,7 @@ Push notifications are essential for engaging users and keeping them informed ab
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 import React, { useState, useEffect, useCallback } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Alert, Platform } from 'react-native';
@@ -487,6 +490,7 @@ const styles = StyleSheet.create({
 
 export default NotificationManager;
 ```
+{% endraw %}
 
 
 ---

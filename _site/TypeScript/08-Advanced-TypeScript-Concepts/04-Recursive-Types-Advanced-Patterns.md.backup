@@ -25,6 +25,7 @@ Recursive types allow TypeScript to define types that reference themselves, enab
 ### **What are Recursive Types?**
 
 
+{% raw %}
 ```typescript
 // Recursive types reference themselves
 const recursiveTypes = {
@@ -54,11 +55,13 @@ interface ConstrainedTreeNode<T extends string | number> {
   right?: ConstrainedTreeNode<T>;
 }
 ```
+{% endraw %}
 
 
 ### **Benefits of Recursive Types**
 
 
+{% raw %}
 ```typescript
 // Benefits of recursive types
 const benefits = {
@@ -83,6 +86,7 @@ interface GoodTreeNode {
   right?: GoodTreeNode; // ✅ Type safe
 }
 ```
+{% endraw %}
 
 
 ---
@@ -92,6 +96,7 @@ interface GoodTreeNode {
 ### **Tree Structures**
 
 
+{% raw %}
 ```typescript
 // Tree structures with recursive types
 interface BinaryTree<T> {
@@ -145,11 +150,13 @@ const tree: BinaryTree<number> = {
 traverseTree(tree, value => console.log(value));
 const found = findInTree(tree, value => value > 7);
 ```
+{% endraw %}
 
 
 ### **Linked Lists**
 
 
+{% raw %}
 ```typescript
 // Linked lists with recursive types
 interface ListNode<T> {
@@ -215,11 +222,13 @@ traverseList(list, value => console.log(value));
 const found = findInList(list, value => value > 2);
 const reversed = reverseList(list);
 ```
+{% endraw %}
 
 
 ### **Nested Objects**
 
 
+{% raw %}
 ```typescript
 // Nested objects with recursive types
 interface NestedObject {
@@ -271,6 +280,7 @@ const nested: NestedObject = {
 const name = getNestedValue(nested, ['user', 'profile', 'name']);
 setNestedValue(nested, ['user', 'profile', 'email'], 'john@example.com');
 ```
+{% endraw %}
 
 
 ---
@@ -280,6 +290,7 @@ setNestedValue(nested, ['user', 'profile', 'email'], 'john@example.com');
 ### **Recursive Type Utilities**
 
 
+{% raw %}
 ```typescript
 // Recursive type utilities
 type DeepReadonly<T> = {
@@ -316,11 +327,13 @@ type PartialUser = DeepPartial<User>;
 type RequiredUser = DeepRequired<User>;
 type MutableUser = DeepMutable<User>;
 ```
+{% endraw %}
 
 
 ### **Recursive Conditional Types**
 
 
+{% raw %}
 ```typescript
 // Recursive conditional types
 type Flatten<T> = T extends (infer U)[] ? Flatten<U> : T;
@@ -340,11 +353,13 @@ type Flattened = Flatten<NestedArray>; // number
 type MixedArray = (string | number)[][];
 type Extracted = ExtractArrayTypes<MixedArray>; // string | number
 ```
+{% endraw %}
 
 
 ### **Recursive Mapped Types**
 
 
+{% raw %}
 ```typescript
 // Recursive mapped types
 type RecursiveRecord<K extends string, V> = {
@@ -360,6 +375,7 @@ type NestedRecord = RecursiveRecord<'a' | 'b', string>;
 type NestedArray = RecursiveArray<number>;
 type NestedObject = RecursiveObject<string>;
 ```
+{% endraw %}
 
 
 ---
@@ -369,6 +385,7 @@ type NestedObject = RecursiveObject<string>;
 ### **Recursive Type Guards**
 
 
+{% raw %}
 ```typescript
 // Recursive type guards
 function isTreeNode(value: unknown): value is TreeNode {
@@ -406,11 +423,13 @@ function isNestedObject(value: unknown): value is NestedObject {
   return true;
 }
 ```
+{% endraw %}
 
 
 ### **Recursive Type Validation**
 
 
+{% raw %}
 ```typescript
 // Recursive type validation
 type ValidationResult<T> = {
@@ -454,11 +473,13 @@ function validateTreeNode(node: unknown): ValidationResult<TreeNode> {
   };
 }
 ```
+{% endraw %}
 
 
 ### **Recursive Type Transformations**
 
 
+{% raw %}
 ```typescript
 // Recursive type transformations
 type TransformTree<T, U> = {
@@ -499,6 +520,7 @@ function filterTree<T>(
   };
 }
 ```
+{% endraw %}
 
 
 ---
@@ -508,6 +530,7 @@ function filterTree<T>(
 ### **File System Tree**
 
 
+{% raw %}
 ```typescript
 // File system tree with recursive types
 interface FileNode {
@@ -588,11 +611,13 @@ const foundFile = findFile(fileSystem, 'readme.txt');
 const totalSize = calculateTotalSize(fileSystem);
 const allFiles = listAllFiles(fileSystem);
 ```
+{% endraw %}
 
 
 ### **JSON Schema Validation**
 
 
+{% raw %}
 ```typescript
 // JSON schema validation with recursive types
 interface JsonSchema {
@@ -688,11 +713,13 @@ const userData = {
 
 const isValid = validateAgainstSchema(userData, userSchema);
 ```
+{% endraw %}
 
 
 ### **Component Tree**
 
 
+{% raw %}
 ```typescript
 // Component tree with recursive types
 interface ComponentNode {
@@ -779,6 +806,7 @@ const foundComponent = findComponent(componentTree, 'nav');
 const componentPath = getComponentPath(componentTree, 'nav');
 const renderedHTML = renderComponent(componentTree);
 ```
+{% endraw %}
 
 
 ---
@@ -788,6 +816,7 @@ const renderedHTML = renderComponent(componentTree);
 ### **1. Use Recursive Types for Tree-like Structures**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Recursive types for trees
 interface TreeNode<T> {
@@ -801,11 +830,13 @@ interface BadTreeNode<T> {
   children: any[]; // ❌ No type safety
 }
 ```
+{% endraw %}
 
 
 ### **2. Provide Type Guards for Recursive Types**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Type guards for recursive types
 function isTreeNode(value: unknown): value is TreeNode {
@@ -823,11 +854,13 @@ function processTreeNode(node: any) {
   // ❌ No type safety
 }
 ```
+{% endraw %}
 
 
 ### **3. Use Recursive Utilities for Deep Operations**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Recursive utilities
 type DeepReadonly<T> = {
@@ -839,11 +872,13 @@ function makeReadonly(obj: any): any {
   // ❌ Manual and error-prone
 }
 ```
+{% endraw %}
 
 
 ### **4. Handle Recursive Type Limits**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Handle recursion limits
 type SafeRecursive<T, Depth extends number = 5> = 
@@ -856,6 +891,7 @@ type UnsafeRecursive<T> = {
   [P in keyof T]: T[P] extends object ? UnsafeRecursive<T[P]> : T[P];
 };
 ```
+{% endraw %}
 
 
 ---
@@ -871,6 +907,7 @@ Recursive types are types that reference themselves, allowing you to define comp
 
 **Answer:**
 
+{% raw %}
 ```typescript
 interface TreeNode {
   value: number;
@@ -878,6 +915,7 @@ interface TreeNode {
   right?: TreeNode;
 }
 ```
+{% endraw %}
 
 The type references itself in the `left` and `right` properties.
 

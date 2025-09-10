@@ -285,9 +285,9 @@
         <span class="na">path</span><span class="pi">:</span> <span class="pi">|</span>
           <span class="s">~/.gradle/caches</span>
           <span class="s">~/.gradle/wrapper</span>
-        <span class="na">key</span><span class="pi">:</span> <span class="s">${{#123;{{#123; runner.os }}#125;}}#125;-gradle-${{#123;{{#123; hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}#125;}}#125;</span>
+        <span class="na">key</span><span class="pi">:</span> <span class="s">${{}}-gradle-${{}}</span>
         <span class="na">restore-keys</span><span class="pi">:</span> <span class="pi">|</span>
-          <span class="s">${{#123;{{#123; runner.os }}#125;}}#125;-gradle-</span>
+          <span class="s">${{}}-gradle-</span>
           
     <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Build Android APK</span>
       <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
@@ -666,11 +666,11 @@
       <span class="na">uses</span><span class="pi">:</span> <span class="s">expo/expo-github-action@v8</span>
       <span class="na">with</span><span class="pi">:</span>
         <span class="na">eas-version</span><span class="pi">:</span> <span class="s">latest</span>
-        <span class="na">token</span><span class="pi">:</span> <span class="s">${{#123;{{#123; secrets.EXPO_TOKEN }}#125;}}#125;</span>
+        <span class="na">token</span><span class="pi">:</span> <span class="s">${{}}</span>
         
     <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Build with EAS</span>
       <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
-        <span class="s">if [ "${{#123;{{#123; github.ref }}#125;}}#125;" = "refs/heads/main" ]; then</span>
+        <span class="s">if [ "${{}}" = "refs/heads/main" ]; then</span>
           <span class="s">eas build --platform all --profile production</span>
         <span class="s">else</span>
           <span class="s">eas build --platform all --profile preview</span>
@@ -714,9 +714,9 @@
         <span class="na">path</span><span class="pi">:</span> <span class="pi">|</span>
           <span class="s">.metro-cache</span>
           <span class="s">node_modules/.cache</span>
-        <span class="na">key</span><span class="pi">:</span> <span class="s">${{#123;{{#123; runner.os }}#125;}}#125;-metro-${{#123;{{#123; hashFiles('**/package-lock.json') }}#125;}}#125;</span>
+        <span class="na">key</span><span class="pi">:</span> <span class="s">${{}}-metro-${{}}</span>
         <span class="na">restore-keys</span><span class="pi">:</span> <span class="pi">|</span>
-          <span class="s">${{#123;{{#123; runner.os }}#125;}}#125;-metro-</span>
+          <span class="s">${{}}-metro-</span>
           
     <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Cache Gradle</span>
       <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/cache@v3</span>
@@ -724,9 +724,9 @@
         <span class="na">path</span><span class="pi">:</span> <span class="pi">|</span>
           <span class="s">~/.gradle/caches</span>
           <span class="s">~/.gradle/wrapper</span>
-        <span class="na">key</span><span class="pi">:</span> <span class="s">${{#123;{{#123; runner.os }}#125;}}#125;-gradle-${{#123;{{#123; hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}#125;}}#125;</span>
+        <span class="na">key</span><span class="pi">:</span> <span class="s">${{}}-gradle-${{}}</span>
         <span class="na">restore-keys</span><span class="pi">:</span> <span class="pi">|</span>
-          <span class="s">${{#123;{{#123; runner.os }}#125;}}#125;-gradle-</span>
+          <span class="s">${{}}-gradle-</span>
           
     <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Install dependencies</span>
       <span class="na">run</span><span class="pi">:</span> <span class="s">npm ci</span>

@@ -173,7 +173,7 @@ const ListItem = memo(({ item, onPress }) => {
 
   return (
     <TouchableOpacity onPress={handlePress}>
-      <View style={{#123;{{#123; padding: 10 }}#125;}}#125;>
+      <View style={{}}>
         <Text>{item.title}</Text>
         <Text>{item.description}</Text>
       </View>
@@ -460,7 +460,7 @@ const MemoryTracker = () => {
   }, []);
 
   return (
-    <View style={{#123;{{#123; padding: 20 }}#125;}}#125;>
+    <View style={{}}>
       <Text>Memory Usage:</Text>
       {memoryStats && (
         <>

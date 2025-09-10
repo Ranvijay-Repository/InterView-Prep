@@ -105,12 +105,12 @@ const App = () => {
         <Stack.Screen 
           name="Home" 
           component={HomeScreen}
-          options={{#123;{{#123; title: 'Home' }}#125;}}#125;
+          options={{}}
         />
         <Stack.Screen 
           name="Details" 
           component={DetailsScreen}
-          options={{#123;{{#123; title: 'Details' }}#125;}}#125;
+          options={{}}
         />
       </Stack.Navigator>
     </NavigationContainer>
@@ -175,7 +175,7 @@ const StackNavigator = () => {
   return (
     <Stack.Navigator
       initialRouteName="Home"
-      screenOptions={{#123;{{#123;
+      screenOptions={{
         headerStyle: {
           backgroundColor: '#007AFF',
         },
@@ -183,17 +183,17 @@ const StackNavigator = () => {
         headerTitleStyle: {
           fontWeight: 'bold',
         },
-      }}#125;}}#125;
+}}
     >
       <Stack.Screen 
         name="Home" 
         component={HomeScreen}
-        options={{#123;{{#123; title: 'Home' }}#125;}}#125;
+        options={{}}
       />
       <Stack.Screen 
         name="Details" 
         component={DetailsScreen}
-        options={{#123;{{#123; title: 'Details' }}#125;}}#125;
+        options={{}}
       />
     </Stack.Navigator>
   );
@@ -300,7 +300,7 @@ const StackNavigatorWithParams = () => {
   return (
     <Stack.Navigator
       initialRouteName="Home"
-      screenOptions={{#123;{{#123;
+      screenOptions={{
         headerStyle: {
           backgroundColor: '#007AFF',
         },
@@ -308,17 +308,17 @@ const StackNavigatorWithParams = () => {
         headerTitleStyle: {
           fontWeight: 'bold',
         },
-      }}#125;}}#125;
+}}
     >
       <Stack.Screen 
         name="Home" 
         component={HomeScreen}
-        options={{#123;{{#123; title: 'Home' }}#125;}}#125;
+        options={{}}
       />
       <Stack.Screen 
         name="Profile" 
         component={ProfileScreen}
-        options={{#123;{{#123; title: 'Profile' }}#125;}}#125;
+        options={{}}
       />
     </Stack.Navigator>
   );

@@ -26,6 +26,7 @@ Functional programming emphasizes immutability, pure functions, and function com
 ### **Core Principles**
 
 
+{% raw %}
 ```typescript
 // Functional programming principles
 const principles = {
@@ -43,11 +44,13 @@ const typescriptBenefits = {
   functionTypes: "First-class function types"
 };
 ```
+{% endraw %}
 
 
 ### **Functional vs Imperative**
 
 
+{% raw %}
 ```typescript
 // Imperative approach
 function processUsersImperative(users: User[]): string[] {
@@ -66,6 +69,7 @@ const processUsersFunctional = (users: User[]): string[] =>
     .filter(user => user.age > 18)
     .map(user => user.name.toUpperCase());
 ```
+{% endraw %}
 
 
 ---
@@ -77,6 +81,7 @@ Pure functions are functions that always return the same output for the same inp
 ### **Pure Function Characteristics**
 
 
+{% raw %}
 ```typescript
 // Pure function example
 const add = (a: number, b: number): number => a + b;
@@ -98,11 +103,13 @@ const updateUser = (user: User, updates: Partial<User>): User => ({
   ...updates
 });
 ```
+{% endraw %}
 
 
 ### **Impure Functions (Avoid)**
 
 
+{% raw %}
 ```typescript
 // ❌ Impure function - modifies external state
 let counter = 0;
@@ -122,11 +129,13 @@ const addToArrayImpure = <T>(array: T[], item: T): T[] => {
   return array;
 };
 ```
+{% endraw %}
 
 
 ### **Pure Function Benefits**
 
 
+{% raw %}
 ```typescript
 // Pure functions are predictable
 const multiply = (a: number, b: number): number => a * b;
@@ -142,6 +151,7 @@ const testMultiply = () => {
   console.assert(multiply(-2, 3) === -6, "Should return -6");
 };
 ```
+{% endraw %}
 
 
 ---
@@ -153,6 +163,7 @@ Immutability ensures data cannot be changed after creation, preventing bugs and 
 ### **Immutable Data Structures**
 
 
+{% raw %}
 ```typescript
 // Immutable objects
 const user: Readonly<User> = {
@@ -182,11 +193,13 @@ const addToNumbers = (numbers: readonly number[], newNumber: number): number[] =
 const removeFromNumbers = (numbers: readonly number[], index: number): number[] =>
   numbers.filter((_, i) => i !== index);
 ```
+{% endraw %}
 
 
 ### **Deep Immutability**
 
 
+{% raw %}
 ```typescript
 // Deep immutable types
 interface DeepReadonly<T> {
@@ -231,11 +244,13 @@ const updateUserTheme = (user: User, theme: string): User => ({
   }
 });
 ```
+{% endraw %}
 
 
 ### **Immutable Update Patterns**
 
 
+{% raw %}
 ```typescript
 // Update nested objects
 const updateNestedProperty = <T extends Record<string, any>>(
@@ -268,6 +283,7 @@ const user = {
 
 const updatedUser = updateNestedProperty(user, ["profile", "settings", "theme"], "light");
 ```
+{% endraw %}
 
 
 ---
@@ -279,6 +295,7 @@ Higher-order functions are functions that take other functions as arguments or r
 ### **Basic Higher-Order Functions**
 
 
+{% raw %}
 ```typescript
 // Function that takes a function as argument
 const withLogging = <T>(fn: (value: T) => T) => (value: T): T => {
@@ -301,11 +318,13 @@ console.log(triple(5)); // 15
 const loggedDouble = withLogging(double);
 loggedDouble(5); // Logs input and output
 ```
+{% endraw %}
 
 
 ### **Array Higher-Order Functions**
 
 
+{% raw %}
 ```typescript
 // Custom map implementation
 const map = <T, U>(array: T[], fn: (item: T, index: number) => U): U[] => {
@@ -346,11 +365,13 @@ const doubled = map(numbers, x => x * 2);
 const evens = filter(numbers, x => x % 2 === 0);
 const sum = reduce(numbers, (acc, x) => acc + x, 0);
 ```
+{% endraw %}
 
 
 ### **Function Currying**
 
 
+{% raw %}
 ```typescript
 // Curried function
 const add = (a: number) => (b: number) => a + b;
@@ -379,6 +400,7 @@ console.log(curriedMultiply(2)(3)(4)); // 24
 console.log(curriedMultiply(2, 3)(4)); // 24
 console.log(curriedMultiply(2)(3, 4)); // 24
 ```
+{% endraw %}
 
 
 ---
@@ -390,6 +412,7 @@ Function composition is the process of combining simple functions to create more
 ### **Basic Function Composition**
 
 
+{% raw %}
 ```typescript
 // Simple composition
 const compose = <T>(f: (x: T) => T, g: (x: T) => T) => (x: T): T => f(g(x));
@@ -406,11 +429,13 @@ const square = (x: number) => x * x;
 const composed = composeMany(square, multiply2, add1);
 console.log(composed(3)); // ((3 + 1) * 2)² = 64
 ```
+{% endraw %}
 
 
 ### **Advanced Function Composition**
 
 
+{% raw %}
 ```typescript
 // Generic composition with different types
 const compose = <A, B, C>(f: (b: B) => C, g: (a: A) => B) => (a: A): C => f(g(a));
@@ -434,11 +459,13 @@ const processUsers = pipe(
 
 console.log(processUsers(users)); // "John, Bob"
 ```
+{% endraw %}
 
 
 ### **Monadic Composition**
 
 
+{% raw %}
 ```typescript
 // Maybe monad for safe composition
 type Maybe<T> = T | null | undefined;
@@ -476,6 +503,7 @@ const processUser = pipe(
 console.log(processUser(1)); // "JOHN@EXAMPLE.COM"
 console.log(processUser(-1)); // null
 ```
+{% endraw %}
 
 
 ---
@@ -485,6 +513,7 @@ console.log(processUser(-1)); // null
 ### **Functor Pattern**
 
 
+{% raw %}
 ```typescript
 // Functor interface
 interface Functor<T> {
@@ -529,11 +558,13 @@ const maybeValue = new MaybeFunctor(5);
 const result = maybeValue.map(x => x * 2);
 console.log(result.getValue()); // 10
 ```
+{% endraw %}
 
 
 ### **Applicative Functor**
 
 
+{% raw %}
 ```typescript
 // Applicative functor interface
 interface Applicative<T> extends Functor<T> {
@@ -577,6 +608,7 @@ const maybe3 = new MaybeApplicative(3);
 const result = maybe5.ap(maybe3.ap(maybeAdd));
 console.log(result.getValue()); // 8
 ```
+{% endraw %}
 
 
 ---
@@ -586,6 +618,7 @@ console.log(result.getValue()); // 8
 ### **1. Prefer Pure Functions**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Pure function
 const calculateTotal = (items: Item[]): number =>
@@ -601,11 +634,13 @@ const calculateTotalImpure = (items: Item[]): number => {
   return total;
 };
 ```
+{% endraw %}
 
 
 ### **2. Use Immutable Data Structures**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Immutable updates
 const updateUser = (user: User, updates: Partial<User>): User => ({
@@ -619,11 +654,13 @@ const updateUserImpure = (user: User, updates: Partial<User>): User => {
   return user;
 };
 ```
+{% endraw %}
 
 
 ### **3. Compose Functions Instead of Nesting**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Function composition
 const processData = pipe(
@@ -637,11 +674,13 @@ const processData = pipe(
 const processDataNested = (data: any[]) =>
   takeFirst(10, sortByDate(transformData(filterValid(data))));
 ```
+{% endraw %}
 
 
 ### **4. Use Higher-Order Functions**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Higher-order function
 const withErrorHandling = <T>(fn: () => T) => (): T | null => {
@@ -672,6 +711,7 @@ const fetchProduct = (): Product | null => {
   }
 };
 ```
+{% endraw %}
 
 
 ---
@@ -709,9 +749,11 @@ Functional programming is a programming paradigm that emphasizes:
 Function composition is combining simple functions to create more complex ones:
 
 
+{% raw %}
 ```typescript
 const compose = <T>(f: (x: T) => T, g: (x: T) => T) => (x: T): T => f(g(x));
 ```
+{% endraw %}
 
 
 ### **5. What are higher-order functions?**

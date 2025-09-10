@@ -27,6 +27,7 @@ Decorators are a special kind of declaration that can be attached to classes, me
 ### **Enabling Decorators**
 
 
+{% raw %}
 ```json
 // tsconfig.json
 {
@@ -37,11 +38,13 @@ Decorators are a special kind of declaration that can be attached to classes, me
   }
 }
 ```
+{% endraw %}
 
 
 ### **Basic Decorator Syntax**
 
 
+{% raw %}
 ```typescript
 // Simple decorator function
 function simpleDecorator(target: any) {
@@ -66,6 +69,7 @@ class MyClass {
   }
 }
 ```
+{% endraw %}
 
 
 ---
@@ -77,6 +81,7 @@ Class decorators are applied to class constructors and can modify or replace the
 ### **Basic Class Decorator**
 
 
+{% raw %}
 ```typescript
 // Class decorator that adds a property
 function addTimestamp(target: any) {
@@ -98,11 +103,13 @@ class User {
 const user = new User("John");
 console.log(user.createdAt); // Current timestamp
 ```
+{% endraw %}
 
 
 ### **Class Decorator with Parameters**
 
 
+{% raw %}
 ```typescript
 // Class decorator factory
 function addProperty(propertyName: string, defaultValue: any) {
@@ -128,11 +135,13 @@ const instance = new MyClass("Test");
 console.log(instance.version); // "1.0.0"
 console.log(instance.author);  // "John Doe"
 ```
+{% endraw %}
 
 
 ### **Class Decorator for Validation**
 
 
+{% raw %}
 ```typescript
 // Validation decorator
 function validateClass(target: any) {
@@ -173,6 +182,7 @@ class User {
   }
 }
 ```
+{% endraw %}
 
 
 ---
@@ -184,6 +194,7 @@ Method decorators are applied to method definitions and can modify method behavi
 ### **Basic Method Decorator**
 
 
+{% raw %}
 ```typescript
 // Method decorator that logs method calls
 function logMethod(target: any, propertyKey: string, descriptor: PropertyDescriptor) {
@@ -215,11 +226,13 @@ class Calculator {
 const calc = new Calculator();
 calc.add(2, 3); // Logs method call and result
 ```
+{% endraw %}
 
 
 ### **Method Decorator with Parameters**
 
 
+{% raw %}
 ```typescript
 // Method decorator factory
 function retry(maxAttempts: number) {
@@ -257,11 +270,13 @@ class ApiService {
   }
 }
 ```
+{% endraw %}
 
 
 ### **Method Decorator for Caching**
 
 
+{% raw %}
 ```typescript
 // Caching decorator
 function cache(ttl: number = 60000) {
@@ -304,6 +319,7 @@ class DataService {
   }
 }
 ```
+{% endraw %}
 
 
 ---
@@ -315,6 +331,7 @@ Property decorators are applied to property declarations and can modify property
 ### **Basic Property Decorator**
 
 
+{% raw %}
 ```typescript
 // Property decorator that adds validation
 function required(target: any, propertyKey: string) {
@@ -346,11 +363,13 @@ class User {
   status: string;
 }
 ```
+{% endraw %}
 
 
 ### **Property Decorator with Getter/Setter**
 
 
+{% raw %}
 ```typescript
 // Property decorator that adds getter/setter
 function property(target: any, propertyKey: string) {
@@ -387,6 +406,7 @@ const person = new Person();
 person.name = "John"; // Logs: Setting name: John
 console.log(person.name); // Logs: Getting name: John
 ```
+{% endraw %}
 
 
 ---
@@ -398,6 +418,7 @@ Parameter decorators are applied to parameter declarations and can modify parame
 ### **Basic Parameter Decorator**
 
 
+{% raw %}
 ```typescript
 // Parameter decorator that logs parameter values
 function logParameter(target: any, propertyKey: string, parameterIndex: number) {
@@ -429,6 +450,7 @@ class Service {
   }
 }
 ```
+{% endraw %}
 
 
 ---
@@ -440,6 +462,7 @@ TypeScript's metadata reflection API allows you to access and modify metadata at
 ### **Basic Metadata Operations**
 
 
+{% raw %}
 ```typescript
 import "reflect-metadata";
 
@@ -459,11 +482,13 @@ const exists = Reflect.hasMetadata("key", target, propertyKey);
 const keys = Reflect.getMetadataKeys(target);
 const keys = Reflect.getMetadataKeys(target, propertyKey);
 ```
+{% endraw %}
 
 
 ### **Metadata with Decorators**
 
 
+{% raw %}
 ```typescript
 // Custom metadata decorator
 function metadata(key: string, value: any) {
@@ -493,11 +518,13 @@ const author = Reflect.getMetadata("author", MyClass);
 const nameRequired = Reflect.getMetadata("required", MyClass.prototype, "name");
 const statusDefault = Reflect.getMetadata("default", MyClass.prototype, "status");
 ```
+{% endraw %}
 
 
 ### **Metadata for Dependency Injection**
 
 
+{% raw %}
 ```typescript
 // Injectable decorator
 function injectable(target: any) {
@@ -537,6 +564,7 @@ class Container {
   }
 }
 ```
+{% endraw %}
 
 
 ---
@@ -546,6 +574,7 @@ class Container {
 ### **Decorator Composition**
 
 
+{% raw %}
 ```typescript
 // Compose multiple decorators
 function compose(...decorators: any[]) {
@@ -574,11 +603,13 @@ class MyClass {
   }
 }
 ```
+{% endraw %}
 
 
 ### **Conditional Decorators**
 
 
+{% raw %}
 ```typescript
 // Conditional decorator
 function conditional(condition: boolean, decorator: any) {
@@ -606,6 +637,7 @@ class MyClass {
   }
 }
 ```
+{% endraw %}
 
 
 ---
@@ -615,6 +647,7 @@ class MyClass {
 ### **1. Use Decorators for Cross-Cutting Concerns**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Use decorators for logging, caching, validation
 @logMethod
@@ -630,11 +663,13 @@ async processOrder(order: Order): Promise<void> {
   // Implementation
 }
 ```
+{% endraw %}
 
 
 ### **2. Keep Decorators Simple and Focused**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Simple, focused decorator
 function logMethod(target: any, propertyKey: string, descriptor: PropertyDescriptor) {
@@ -650,11 +685,13 @@ function complexDecorator(target: any, propertyKey: string, descriptor: Property
   // 100+ lines of complex logic
 }
 ```
+{% endraw %}
 
 
 ### **3. Use Metadata for Configuration**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Use metadata for configuration
 @metadata("version", "1.0.0")
@@ -672,6 +709,7 @@ class MyClass {
   name: string;
 }
 ```
+{% endraw %}
 
 
 ---
@@ -689,6 +727,7 @@ Decorators are special declarations that can be attached to classes, methods, pr
 Enable in `tsconfig.json`:
 
 
+{% raw %}
 ```json
 {
   "compilerOptions": {
@@ -697,6 +736,7 @@ Enable in `tsconfig.json`:
   }
 }
 ```
+{% endraw %}
 
 
 ### **3. What are the different types of decorators?**
@@ -713,6 +753,7 @@ Enable in `tsconfig.json`:
 Use the `reflect-metadata` library and `Reflect.defineMetadata()` and `Reflect.getMetadata()`:
 
 
+{% raw %}
 ```typescript
 import "reflect-metadata";
 
@@ -722,6 +763,7 @@ function metadata(key: string, value: any) {
   };
 }
 ```
+{% endraw %}
 
 
 ### **5. What are some common use cases for decorators?**

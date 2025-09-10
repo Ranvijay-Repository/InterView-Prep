@@ -41,6 +41,7 @@ The New Architecture introduces:
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // JavaScript → Bridge → Native
 // Slower communication
@@ -55,12 +56,14 @@ MyNativeModule.doSomething('param', (result) => {
   console.log(result);
 });
 ```
+{% endraw %}
 
 
 ### **New Architecture (JSI-Based)**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // JavaScript ↔ JSI ↔ Native
 // Direct communication
@@ -73,6 +76,7 @@ import { MyNativeModule } from './MyNativeModule';
 const result = await MyNativeModule.doSomething('param');
 console.log(result);
 ```
+{% endraw %}
 
 
 ### **Key Differences**
@@ -92,6 +96,7 @@ console.log(result);
 
 ### **1. React Native Version**
 
+{% raw %}
 ```json
 // package.json
 {
@@ -100,10 +105,12 @@ console.log(result);
   }
 }
 ```
+{% endraw %}
 
 
 ### **2. Platform Requirements**
 
+{% raw %}
 ```bash
 # iOS
 # Xcode 13+
@@ -114,10 +121,12 @@ console.log(result);
 # Gradle 7.0+
 # compileSdkVersion 31+
 ```
+{% endraw %}
 
 
 ### **3. Dependencies**
 
+{% raw %}
 ```json
 // package.json
 {
@@ -127,6 +136,7 @@ console.log(result);
   }
 }
 ```
+{% endraw %}
 
 
 ---
@@ -139,16 +149,19 @@ console.log(result);
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```properties
 # android/gradle.properties
 newArchEnabled=true
 ```
+{% endraw %}
 
 
 #### **iOS Configuration**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```ruby
 # ios/Podfile
 use_frameworks! :linkage => :static
@@ -158,12 +171,14 @@ target 'YourApp' do
   # ... existing configuration
 end
 ```
+{% endraw %}
 
 
 ### **Step 2: Update Dependencies**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```bash
 # Update React Native
 npm install react-native@latest
@@ -174,10 +189,12 @@ cd ios && pod install && cd ..
 # Clean and rebuild
 npx react-native clean
 ```
+{% endraw %}
 
 
 ### **Step 3: Update Metro Configuration**
 
+{% raw %}
 ```javascript
 // metro.config.js
 const {getDefaultConfig, mergeConfig} = require('@react-native/metro-config');
@@ -190,12 +207,14 @@ const config = {
 
 module.exports = mergeConfig(getDefaultConfig(__dirname), config);
 ```
+{% endraw %}
 
 
 ### **Step 4: Update Native Code**
 
 #### **Android Updates**
 
+{% raw %}
 ```gradle
 // android/app/build.gradle
 android {
@@ -211,10 +230,12 @@ dependencies {
     implementation "com.facebook.react:newarch"
 }
 ```
+{% endraw %}
 
 
 #### **iOS Updates**
 
+{% raw %}
 ```swift
 // ios/YourApp/AppDelegate.mm
 #import <React/RCTBundleURLProvider.h>
@@ -235,12 +256,14 @@ dependencies {
   return YES;
 }
 ```
+{% endraw %}
 
 
 ### **Step 5: Update JavaScript Code**
 
 #### **Remove Bridge Dependencies**
 
+{% raw %}
 ```javascript
 // ❌ Old way
 import { NativeModules } from 'react-native';
@@ -249,10 +272,12 @@ const { MyModule } = NativeModules;
 // ✅ New way
 import { MyModule } from './MyModule';
 ```
+{% endraw %}
 
 
 #### **Update Event Listeners**
 
+{% raw %}
 ```javascript
 // ❌ Old way
 import { DeviceEventEmitter } from 'react-native';
@@ -268,6 +293,7 @@ MyModule.addListener('MyEvent', (data) => {
   console.log(data);
 });
 ```
+{% endraw %}
 
 
 ---
@@ -276,6 +302,7 @@ MyModule.addListener('MyEvent', (data) => {
 
 ### **1. Native Module Compatibility**
 
+{% raw %}
 ```javascript
 // Check if module supports New Architecture
 const isNewArchEnabled = global.RN$Bridgeless === true;
@@ -288,10 +315,12 @@ if (isNewArchEnabled) {
   const { MyModule } = require('react-native').NativeModules;
 }
 ```
+{% endraw %}
 
 
 ### **2. Third-Party Library Issues**
 
+{% raw %}
 ```bash
 # Check library compatibility
 npm list react-native
@@ -300,10 +329,12 @@ npm list react-native
 # Check library documentation
 # Consider alternatives if not supported
 ```
+{% endraw %}
 
 
 ### **3. Build Issues**
 
+{% raw %}
 ```bash
 # Clean everything
 npx react-native clean
@@ -314,10 +345,12 @@ cd android && ./gradlew clean && cd ..
 npx react-native run-ios
 npx react-native run-android
 ```
+{% endraw %}
 
 
 ### **4. Performance Issues**
 
+{% raw %}
 ```javascript
 // Monitor performance
 import { Performance } from 'react-native-performance';
@@ -328,6 +361,7 @@ const startTime = Performance.now();
 const endTime = Performance.now();
 console.log(`Render time: ${endTime - startTime}ms`);
 ```
+{% endraw %}
 
 
 ---
@@ -336,6 +370,7 @@ console.log(`Render time: ${endTime - startTime}ms`);
 
 ### **1. Unit Tests**
 
+{% raw %}
 ```javascript
 // Test new architecture features
 describe('New Architecture', () => {
@@ -350,10 +385,12 @@ describe('New Architecture', () => {
   });
 });
 ```
+{% endraw %}
 
 
 ### **2. Integration Tests**
 
+{% raw %}
 ```javascript
 // Test app functionality
 describe('App with New Architecture', () => {
@@ -367,10 +404,12 @@ describe('App with New Architecture', () => {
   });
 });
 ```
+{% endraw %}
 
 
 ### **3. Performance Tests**
 
+{% raw %}
 ```javascript
 // Test performance improvements
 describe('Performance', () => {
@@ -383,6 +422,7 @@ describe('Performance', () => {
   });
 });
 ```
+{% endraw %}
 
 
 ---
@@ -391,6 +431,7 @@ describe('Performance', () => {
 
 ### **1. Gradual Migration**
 
+{% raw %}
 ```javascript
 // Use feature flags
 const useNewArchitecture = useFeatureFlag('new-architecture');
@@ -402,10 +443,12 @@ const MyComponent = () => {
   return <OldArchitectureComponent />;
 };
 ```
+{% endraw %}
 
 
 ### **2. Backward Compatibility**
 
+{% raw %}
 ```javascript
 // Maintain compatibility
 const MyModule = {
@@ -417,10 +460,12 @@ const MyModule = {
   }
 };
 ```
+{% endraw %}
 
 
 ### **3. Error Handling**
 
+{% raw %}
 ```javascript
 // Handle new architecture errors
 try {
@@ -432,10 +477,12 @@ try {
   return await oldArchModule.doSomething();
 }
 ```
+{% endraw %}
 
 
 ### **4. Monitoring**
 
+{% raw %}
 ```javascript
 // Monitor new architecture usage
 import { Analytics } from './Analytics';
@@ -447,15 +494,18 @@ const trackNewArchUsage = () => {
   });
 };
 ```
+{% endraw %}
 
 
 ### **5. Documentation**
 
+{% raw %}
 ```markdown
 # Document migration steps
 # Keep compatibility matrix
 # Update team on changes
 ```
+{% endraw %}
 
 
 ---

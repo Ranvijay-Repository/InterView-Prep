@@ -23,6 +23,7 @@
 ### **Expo Platform Architecture**
 
 
+{% raw %}
 ```mermaid
 graph TD
     A[Expo Platform] --> B[Expo CLI]
@@ -37,6 +38,7 @@ graph TD
     D --> J[Analytics]
     D --> K[Updates]
 ```
+{% endraw %}
 
 
 ### **Key Benefits**
@@ -53,6 +55,7 @@ graph TD
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
@@ -252,6 +255,7 @@ const styles = StyleSheet.create({
 
 export default ExpoFeaturesDemo;
 ```
+{% endraw %}
 
 
 ---
@@ -262,6 +266,7 @@ export default ExpoFeaturesDemo;
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Expo CLI command examples
 const ExpoCLICommands = {
@@ -420,6 +425,7 @@ const executeCommand = async (command) => {
 
 export { ExpoCLICommands, ExpoCLI };
 ```
+{% endraw %}
 
 
 ---
@@ -430,6 +436,7 @@ export { ExpoCLICommands, ExpoCLI };
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
@@ -593,6 +600,7 @@ const styles = StyleSheet.create({
 
 export default ExpoSDKDemo;
 ```
+{% endraw %}
 
 
 ---

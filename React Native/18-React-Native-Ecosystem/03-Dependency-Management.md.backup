@@ -27,6 +27,7 @@ Dependency management is crucial for maintaining healthy, secure, and performant
 ### **Dependency Management Framework**
 
 
+{% raw %}
 ```
 ┌─────────────────────────────────────┐
 │        Dependency Management       │
@@ -53,6 +54,7 @@ Dependency management is crucial for maintaining healthy, secure, and performant
 │  └─────────────────────────────────┘│
 └─────────────────────────────────────┘
 ```
+{% endraw %}
 
 
 ### **Key Management Areas**
@@ -70,6 +72,7 @@ Dependency management is crucial for maintaining healthy, secure, and performant
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```bash
 # npm commands
 npm install                    # Install all dependencies
@@ -81,10 +84,12 @@ npm update                     # Update all packages
 npm audit                      # Security audit
 npm audit fix                  # Fix security issues
 ```
+{% endraw %}
 
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```json
 // package.json configuration
 {
@@ -112,12 +117,14 @@ npm audit fix                  # Fix security issues
   }
 }
 ```
+{% endraw %}
 
 
 ### **Yarn (Alternative Package Manager)**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```bash
 # Yarn commands
 yarn install                   # Install all dependencies
@@ -129,10 +136,12 @@ yarn audit                     # Security audit
 yarn audit fix                 # Fix security issues
 yarn why package-name          # Show why package is installed
 ```
+{% endraw %}
 
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```yaml
 # .yarnrc.yml configuration
 nodeLinker: node-modules
@@ -140,12 +149,14 @@ npmRegistryServer: "https://registry.yarnpkg.com"
 enableGlobalCache: false
 compressionLevel: mixed
 ```
+{% endraw %}
 
 
 ### **pnpm (Fast, Disk Space Efficient)**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```bash
 # pnpm commands
 pnpm install                   # Install dependencies
@@ -156,15 +167,18 @@ pnpm update                    # Update packages
 pnpm audit                     # Security audit
 pnpm why package-name          # Show dependency tree
 ```
+{% endraw %}
 
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```yaml
 # .npmrc configuration for pnpm
 shamefully-hoist=true
 strict-peer-dependencies=false
 ```
+{% endraw %}
 
 
 ### **Package Manager Comparison**
@@ -185,6 +199,7 @@ strict-peer-dependencies=false
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Semantic versioning examples
 const versionExamples = {
@@ -207,12 +222,14 @@ const versionExamples = {
   tag: "beta"
 };
 ```
+{% endraw %}
 
 
 ### **Version Range Strategies**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```json
 // package.json with different version strategies
 {
@@ -237,12 +254,14 @@ const versionExamples = {
   }
 }
 ```
+{% endraw %}
 
 
 ### **Lock File Management**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```bash
 # Lock file commands
 npm ci                         # Install from lock file
@@ -254,10 +273,12 @@ npm update                     # Update package-lock.json
 yarn upgrade                   # Update yarn.lock
 pnpm update                    # Update pnpm-lock.yaml
 ```
+{% endraw %}
 
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Lock file validation
 const LockFileValidator = {
@@ -291,6 +312,7 @@ const LockFileValidator = {
   }
 };
 ```
+{% endraw %}
 
 
 ---
@@ -301,6 +323,7 @@ const LockFileValidator = {
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```bash
 # Analyze dependency tree
 npm ls                         # List dependency tree
@@ -310,10 +333,12 @@ yarn list                      # List dependencies
 yarn list --depth=0           # List only direct dependencies
 pnpm list                      # List dependencies
 ```
+{% endraw %}
 
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Dependency tree analysis
 const DependencyAnalyzer = {
@@ -371,12 +396,14 @@ const DependencyAnalyzer = {
   }
 };
 ```
+{% endraw %}
 
 
 ### **Peer Dependencies**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```json
 // package.json with peer dependencies
 {
@@ -396,10 +423,12 @@ const DependencyAnalyzer = {
   }
 }
 ```
+{% endraw %}
 
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Peer dependency validation
 const PeerDependencyValidator = {
@@ -441,6 +470,7 @@ const PeerDependencyValidator = {
   }
 };
 ```
+{% endraw %}
 
 
 ---
@@ -451,6 +481,7 @@ const PeerDependencyValidator = {
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```bash
 # Security audit commands
 npm audit                     # Run security audit
@@ -463,10 +494,12 @@ npx audit-ci                  # CI-friendly audit tool
 npx snyk test                 # Snyk security testing
 npx retire                    # Retire.js vulnerability scanner
 ```
+{% endraw %}
 
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Security audit automation
 const SecurityAuditor = {
@@ -517,12 +550,14 @@ const SecurityAuditor = {
   }
 };
 ```
+{% endraw %}
 
 
 ### **License Compliance**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```bash
 # License checking tools
 npm install -g license-checker
@@ -534,10 +569,12 @@ license-checker --exclude 'MIT,Apache-2.0' # Exclude specific licenses
 npx license-report            # Generate license report
 npx npm-license-crawler       # Crawl npm licenses
 ```
+{% endraw %}
 
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // License compliance checker
 const LicenseChecker = {
@@ -584,6 +621,7 @@ const LicenseChecker = {
   }
 };
 ```
+{% endraw %}
 
 
 ---
@@ -594,6 +632,7 @@ const LicenseChecker = {
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```bash
 # Bundle analysis tools
 npm install -g react-native-bundle-visualizer
@@ -603,10 +642,12 @@ react-native-bundle-visualizer
 npx webpack-bundle-analyzer
 npx source-map-explorer
 ```
+{% endraw %}
 
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Bundle size optimization
 const BundleOptimizer = {
@@ -651,12 +692,14 @@ const BundleOptimizer = {
   }
 };
 ```
+{% endraw %}
 
 
 ### **Dependency Optimization**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Dependency optimization strategies
 const DependencyOptimizer = {
@@ -711,6 +754,7 @@ const DependencyOptimizer = {
   }
 };
 ```
+{% endraw %}
 
 
 ---
@@ -721,6 +765,7 @@ const DependencyOptimizer = {
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Automated dependency auditing
 const DependencyAuditor = {
@@ -808,12 +853,14 @@ const DependencyAuditor = {
   }
 };
 ```
+{% endraw %}
 
 
 ### **Audit Reporting**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Audit reporting
 const AuditReporter = {
@@ -884,6 +931,7 @@ const AuditReporter = {
   }
 };
 ```
+{% endraw %}
 
 
 ---
@@ -894,6 +942,7 @@ const AuditReporter = {
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Dependency management best practices
 const DependencyBestPractices = {
@@ -940,12 +989,14 @@ const DependencyBestPractices = {
   }
 };
 ```
+{% endraw %}
 
 
 ### **2. CI/CD Integration**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```yaml
 # .github/workflows/dependency-audit.yml
 name: Dependency Audit
@@ -980,6 +1031,7 @@ jobs:
       - name: Check licenses
         run: npx license-checker --summary
 ```
+{% endraw %}
 
 
 ---

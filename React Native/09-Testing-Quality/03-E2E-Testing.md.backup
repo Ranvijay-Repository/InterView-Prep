@@ -26,6 +26,7 @@ End-to-end (E2E) testing validates the complete user journey through your React 
 ### **E2E Testing Overview**
 
 
+{% raw %}
 ```
 ┌─────────────────────────────────────┐
 │        E2E Testing System           │
@@ -52,6 +53,7 @@ End-to-end (E2E) testing validates the complete user journey through your React 
 │  └─────────────────────────────────┘│
 └─────────────────────────────────────┘
 ```
+{% endraw %}
 
 
 ---
@@ -62,6 +64,7 @@ End-to-end (E2E) testing validates the complete user journey through your React 
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // .detoxrc.js
 module.exports = {
@@ -116,12 +119,14 @@ module.exports = {
   },
 };
 ```
+{% endraw %}
 
 
 ### **E2E Test Configuration**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // e2e/config.json
 {
@@ -136,12 +141,14 @@ module.exports = {
   "testEnvironment": "detox/runners/jest/testEnvironment"
 }
 ```
+{% endraw %}
 
 
 ### **E2E Test Initialization**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // e2e/init.js
 const { device, expect, element, by, waitFor } = require('detox');
@@ -198,6 +205,7 @@ global.testUtils = {
   },
 };
 ```
+{% endraw %}
 
 
 ---
@@ -208,6 +216,7 @@ global.testUtils = {
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // e2e/auth.e2e.js
 const { device, expect, element, by, waitFor } = require('detox');
@@ -284,12 +293,14 @@ describe('Authentication Flow', () => {
   });
 });
 ```
+{% endraw %}
 
 
 ### **User Profile Management**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // e2e/profile.e2e.js
 const { device, expect, element, by, waitFor } = require('detox');
@@ -385,6 +396,7 @@ describe('User Profile Management', () => {
   });
 });
 ```
+{% endraw %}
 
 
 ---

@@ -26,6 +26,7 @@ Modern IDEs provide excellent TypeScript support with IntelliSense, debugging, a
 ### **Popular IDEs with TypeScript Support**
 
 
+{% raw %}
 ```typescript
 // IDE comparison for TypeScript
 const ideSupport = {
@@ -46,11 +47,13 @@ const ideSupport = {
   }
 };
 ```
+{% endraw %}
 
 
 ### **Essential TypeScript IDE Features**
 
 
+{% raw %}
 ```typescript
 // Key features for TypeScript development
 const essentialFeatures = {
@@ -61,6 +64,7 @@ const essentialFeatures = {
   navigation: "Go to definition, find references, symbol search"
 };
 ```
+{% endraw %}
 
 
 ---
@@ -72,6 +76,7 @@ VS Code provides excellent TypeScript support out of the box.
 ### **Basic VS Code Configuration**
 
 
+{% raw %}
 ```json
 // .vscode/settings.json
 {
@@ -84,11 +89,13 @@ VS Code provides excellent TypeScript support out of the box.
   "typescript.suggest.includeCompletionsWithInsertText": true
 }
 ```
+{% endraw %}
 
 
 ### **Advanced VS Code Configuration**
 
 
+{% raw %}
 ```json
 // .vscode/settings.json
 {
@@ -111,11 +118,13 @@ VS Code provides excellent TypeScript support out of the box.
   "typescript.suggest.includeCompletionsWithFunctionParameterSnippets": true
 }
 ```
+{% endraw %}
 
 
 ### **VS Code Extensions**
 
 
+{% raw %}
 ```json
 // .vscode/extensions.json
 {
@@ -132,6 +141,7 @@ VS Code provides excellent TypeScript support out of the box.
   ]
 }
 ```
+{% endraw %}
 
 
 ---
@@ -143,6 +153,7 @@ IntelliSense provides intelligent code completion and suggestions.
 ### **Basic IntelliSense Features**
 
 
+{% raw %}
 ```typescript
 // IntelliSense provides:
 // 1. Code completion
@@ -169,11 +180,13 @@ function createUser(name: string, email: string, age?: number): User {
 // IntelliSense shows parameter types and names
 createUser( // <- Shows: (name: string, email: string, age?: number) => User
 ```
+{% endraw %}
 
 
 ### **Advanced IntelliSense Configuration**
 
 
+{% raw %}
 ```json
 // .vscode/settings.json
 {
@@ -193,11 +206,13 @@ createUser( // <- Shows: (name: string, email: string, age?: number) => User
   "typescript.suggest.includeCompletionsWithFunctionParameterSnippets": true
 }
 ```
+{% endraw %}
 
 
 ### **IntelliSense with Generics**
 
 
+{% raw %}
 ```typescript
 // IntelliSense works with generics
 interface ApiResponse<T> {
@@ -217,6 +232,7 @@ const userResponse = await fetchData<User>("/api/users/1");
 const productResponse = await fetchData<Product[]>("/api/products");
 // productResponse.data. <- IntelliSense shows Product[] methods
 ```
+{% endraw %}
 
 
 ---
@@ -228,6 +244,7 @@ Proper debugging setup is essential for TypeScript development.
 ### **VS Code Debug Configuration**
 
 
+{% raw %}
 ```json
 // .vscode/launch.json
 {
@@ -265,11 +282,13 @@ Proper debugging setup is essential for TypeScript development.
   ]
 }
 ```
+{% endraw %}
 
 
 ### **Node.js Debugging**
 
 
+{% raw %}
 ```typescript
 // Debugging with Node.js
 import { createServer } from 'http';
@@ -291,11 +310,13 @@ server.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
 ```
+{% endraw %}
 
 
 ### **Browser Debugging**
 
 
+{% raw %}
 ```typescript
 // Browser debugging with source maps
 class UserService {
@@ -323,6 +344,7 @@ class UserService {
 const userService = new UserService();
 userService.fetchUser(1); // Debug this call
 ```
+{% endraw %}
 
 
 ---
@@ -334,6 +356,7 @@ Linting and formatting ensure code quality and consistency.
 ### **ESLint Configuration**
 
 
+{% raw %}
 ```json
 // .eslintrc.json
 {
@@ -358,11 +381,13 @@ Linting and formatting ensure code quality and consistency.
   }
 }
 ```
+{% endraw %}
 
 
 ### **Prettier Configuration**
 
 
+{% raw %}
 ```json
 // .prettierrc
 {
@@ -376,11 +401,13 @@ Linting and formatting ensure code quality and consistency.
   "arrowParens": "avoid"
 }
 ```
+{% endraw %}
 
 
 ### **VS Code Formatting Settings**
 
 
+{% raw %}
 ```json
 // .vscode/settings.json
 {
@@ -396,6 +423,7 @@ Linting and formatting ensure code quality and consistency.
   "typescript.suggest.autoImports": true
 }
 ```
+{% endraw %}
 
 
 ---
@@ -405,6 +433,7 @@ Linting and formatting ensure code quality and consistency.
 ### **Code Navigation**
 
 
+{% raw %}
 ```typescript
 // Advanced navigation features
 class UserService {
@@ -430,11 +459,13 @@ class UserService {
 const userService = new UserService();
 userService.fetchUser(1);
 ```
+{% endraw %}
 
 
 ### **Refactoring Tools**
 
 
+{% raw %}
 ```typescript
 // Refactoring examples
 class DataProcessor {
@@ -463,11 +494,13 @@ class DataProcessor {
   }
 }
 ```
+{% endraw %}
 
 
 ### **Code Snippets**
 
 
+{% raw %}
 ```json
 // .vscode/typescript.json
 {
@@ -494,6 +527,7 @@ class DataProcessor {
   }
 }
 ```
+{% endraw %}
 
 
 ---
@@ -503,6 +537,7 @@ class DataProcessor {
 ### **1. Configure IntelliSense Properly**
 
 
+{% raw %}
 ```json
 // ✅ Good: Enable all IntelliSense features
 {
@@ -517,11 +552,13 @@ class DataProcessor {
   "typescript.suggest.includeCompletionsForModuleExports": false
 }
 ```
+{% endraw %}
 
 
 ### **2. Use Source Maps for Debugging**
 
 
+{% raw %}
 ```json
 // ✅ Good: Enable source maps
 {
@@ -538,11 +575,13 @@ class DataProcessor {
   }
 }
 ```
+{% endraw %}
 
 
 ### **3. Configure Linting and Formatting**
 
 
+{% raw %}
 ```json
 // ✅ Good: Enable linting and formatting
 {
@@ -559,11 +598,13 @@ class DataProcessor {
   "editor.codeActionsOnSave": {}
 }
 ```
+{% endraw %}
 
 
 ### **4. Use Debug Configurations**
 
 
+{% raw %}
 ```json
 // ✅ Good: Proper debug configuration
 {
@@ -583,6 +624,7 @@ class DataProcessor {
   "program": "index.js"
 }
 ```
+{% endraw %}
 
 
 ---
@@ -595,6 +637,7 @@ class DataProcessor {
 Create a `.vscode/launch.json` file with proper configuration:
 
 
+{% raw %}
 ```json
 {
   "name": "Debug TypeScript",
@@ -605,6 +648,7 @@ Create a `.vscode/launch.json` file with proper configuration:
   "sourceMaps": true
 }
 ```
+{% endraw %}
 
 
 ### **2. What are the benefits of using IntelliSense with TypeScript?**
@@ -621,6 +665,7 @@ Create a `.vscode/launch.json` file with proper configuration:
 Use `@typescript-eslint/parser` and `@typescript-eslint/recommended`:
 
 
+{% raw %}
 ```json
 {
   "extends": ["@typescript-eslint/recommended"],
@@ -628,6 +673,7 @@ Use `@typescript-eslint/parser` and `@typescript-eslint/recommended`:
   "plugins": ["@typescript-eslint"]
 }
 ```
+{% endraw %}
 
 
 ### **4. What's the difference between source maps and inline source maps?**
@@ -642,12 +688,14 @@ Use `@typescript-eslint/parser` and `@typescript-eslint/recommended`:
 Configure in settings:
 
 
+{% raw %}
 ```json
 {
   "typescript.suggest.autoImports": true,
   "typescript.preferences.includePackageJsonAutoImports": "auto"
 }
 ```
+{% endraw %}
 
 
 ---

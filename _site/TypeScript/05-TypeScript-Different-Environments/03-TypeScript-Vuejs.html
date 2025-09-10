@@ -235,20 +235,20 @@ npm <span class="nb">install</span> <span class="nt">--save-dev</span> @types/no
 <div class="language-vue highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- UserCard.vue --&gt;</span>
 <span class="nt">&lt;</span><span class="k">template</span><span class="nt">&gt;</span>
   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"user-card"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;h3&gt;</span><span class="si">{{</span><span class="err">#</span><span class="mi">123</span><span class="p">;{{</span><span class="err">#</span><span class="mi">123</span><span class="p">;</span> <span class="nx">user</span><span class="p">.</span><span class="nx">name</span> <span class="si">}}</span><span class="err">#</span><span class="mi">125</span><span class="p">;</span><span class="si">}}</span><span class="err">#</span><span class="mi">125</span><span class="p">;</span><span class="o">&lt;</span><span class="sr">/h3</span><span class="err">&gt;
-</span>    <span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="p">{{</span><span class="err">#</span><span class="mi">123</span><span class="p">;{{</span><span class="err">#</span><span class="mi">123</span><span class="p">;</span> <span class="nx">user</span><span class="p">.</span><span class="nx">email</span> <span class="si">}}</span><span class="err">#</span><span class="mi">125</span><span class="p">;</span><span class="si">}}</span><span class="err">#</span><span class="mi">125</span><span class="p">;</span><span class="o">&lt;</span><span class="sr">/p</span><span class="err">&gt;
-</span>    <span class="o">&lt;</span><span class="nx">button</span> <span class="p">@</span><span class="nd">click</span><span class="o">=</span><span class="dl">"</span><span class="s2">handleEdit</span><span class="dl">"</span><span class="o">&gt;</span><span class="nx">Edit</span><span class="o">&lt;</span><span class="sr">/button</span><span class="err">&gt;
-</span>  <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
-</span><span class="o">&lt;</span><span class="sr">/template</span><span class="err">&gt;
-</span>
-<span class="o">&lt;</span><span class="nx">script</span> <span class="nx">lang</span><span class="o">=</span><span class="dl">"</span><span class="s2">ts</span><span class="dl">"</span><span class="o">&gt;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">defineComponent</span><span class="p">,</span> <span class="nx">PropType</span> <span class="err">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">vue</span><span class="dl">'</span>
+    <span class="nt">&lt;h3&gt;</span><span class="si">{{}}</span><span class="nt">&lt;/h3&gt;</span>
+    <span class="nt">&lt;p&gt;</span><span class="si">{{}}</span><span class="nt">&lt;/p&gt;</span>
+    <span class="nt">&lt;button</span> <span class="err">@</span><span class="na">click=</span><span class="s">"handleEdit"</span><span class="nt">&gt;</span>Edit<span class="nt">&lt;/button&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/</span><span class="k">template</span><span class="nt">&gt;</span>
+
+<span class="nt">&lt;</span><span class="k">script</span> <span class="na">lang=</span><span class="s">"ts"</span><span class="nt">&gt;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">defineComponent</span><span class="p">,</span> <span class="nx">PropType</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">vue</span><span class="dl">'</span>
 
 <span class="kr">interface</span> <span class="nx">User</span> <span class="p">{</span>
-  <span class="na">id</span><span class="p">:</span> <span class="nx">number</span>
-  <span class="na">name</span><span class="p">:</span> <span class="nx">string</span>
-  <span class="na">email</span><span class="p">:</span> <span class="nx">string</span>
-<span class="err">}</span>
+  <span class="nl">id</span><span class="p">:</span> <span class="nx">number</span>
+  <span class="nx">name</span><span class="p">:</span> <span class="nx">string</span>
+  <span class="nx">email</span><span class="p">:</span> <span class="nx">string</span>
+<span class="p">}</span>
 
 <span class="k">export</span> <span class="k">default</span> <span class="nx">defineComponent</span><span class="p">({</span>
   <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">UserCard</span><span class="dl">'</span><span class="p">,</span>
@@ -256,17 +256,17 @@ npm <span class="nb">install</span> <span class="nt">--save-dev</span> @types/no
     <span class="na">user</span><span class="p">:</span> <span class="p">{</span>
       <span class="na">type</span><span class="p">:</span> <span class="nb">Object</span> <span class="k">as</span> <span class="nx">PropType</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span><span class="p">,</span>
       <span class="na">required</span><span class="p">:</span> <span class="kc">true</span>
-    <span class="err">}</span>
-  <span class="err">}</span><span class="p">,</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
   <span class="na">emits</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">edit</span><span class="dl">'</span><span class="p">],</span>
   <span class="na">methods</span><span class="p">:</span> <span class="p">{</span>
     <span class="nx">handleEdit</span><span class="p">()</span> <span class="p">{</span>
       <span class="k">this</span><span class="p">.</span><span class="nx">$emit</span><span class="p">(</span><span class="dl">'</span><span class="s1">edit</span><span class="dl">'</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">user</span><span class="p">)</span>
-    <span class="err">}</span>
-  <span class="err">}</span>
-<span class="err">}</span><span class="p">)</span>
-<span class="o">&lt;</span><span class="sr">/script</span><span class="err">&gt;
-</span></code></pre></div></div>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+<span class="nt">&lt;/</span><span class="k">script</span><span class="nt">&gt;</span>
+</code></pre></div></div>
 
 <h3 id="composition-api-with-typescript"><strong>Composition API with TypeScript</strong></h3>
 
@@ -323,29 +323,29 @@ npm <span class="nb">install</span> <span class="nt">--save-dev</span> @types/no
 <div class="language-vue highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- GenericList.vue --&gt;</span>
 <span class="nt">&lt;</span><span class="k">template</span><span class="nt">&gt;</span>
   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"generic-list"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;h3&gt;</span><span class="si">{{</span><span class="err">#</span><span class="mi">123</span><span class="p">;{{</span><span class="err">#</span><span class="mi">123</span><span class="p">;</span> <span class="nx">title</span> <span class="si">}}</span><span class="err">#</span><span class="mi">125</span><span class="p">;</span><span class="si">}}</span><span class="err">#</span><span class="mi">125</span><span class="p">;</span><span class="o">&lt;</span><span class="sr">/h3</span><span class="err">&gt;
-</span>    <span class="o">&lt;</span><span class="nx">ul</span><span class="o">&gt;</span>
-      <span class="o">&lt;</span><span class="nx">li</span> <span class="nx">v</span><span class="o">-</span><span class="k">for</span><span class="o">=</span><span class="dl">"</span><span class="s2">item in items</span><span class="dl">"</span> <span class="p">:</span><span class="nx">key</span><span class="o">=</span><span class="dl">"</span><span class="s2">keyExtractor(item)</span><span class="dl">"</span><span class="o">&gt;</span>
-        <span class="o">&lt;</span><span class="na">slot</span> <span class="p">:</span><span class="nx">item</span><span class="o">=</span><span class="dl">"</span><span class="s2">item</span><span class="dl">"</span> <span class="p">:</span><span class="nx">index</span><span class="o">=</span><span class="dl">"</span><span class="s2">items.indexOf(item)</span><span class="dl">"</span><span class="o">&gt;</span>
-          <span class="p">{{</span><span class="err">#</span><span class="mi">123</span><span class="p">;{{</span><span class="err">#</span><span class="mi">123</span><span class="p">;</span> <span class="nx">item</span> <span class="si">}}</span><span class="err">#</span><span class="mi">125</span><span class="p">;</span><span class="si">}}</span><span class="err">#</span><span class="mi">125</span><span class="p">;</span>
-        <span class="o">&lt;</span><span class="sr">/slot</span><span class="err">&gt;
-</span>      <span class="o">&lt;</span><span class="sr">/li</span><span class="err">&gt;
-</span>    <span class="o">&lt;</span><span class="sr">/ul</span><span class="err">&gt;
-</span>  <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
-</span><span class="o">&lt;</span><span class="sr">/template</span><span class="err">&gt;
-</span>
-<span class="o">&lt;</span><span class="nx">script</span> <span class="nx">setup</span> <span class="nx">lang</span><span class="o">=</span><span class="dl">"</span><span class="s2">ts</span><span class="dl">"</span> <span class="nx">generic</span><span class="o">=</span><span class="dl">"</span><span class="s2">T</span><span class="dl">"</span><span class="o">&gt;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">PropType</span> <span class="err">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">vue</span><span class="dl">'</span>
+    <span class="nt">&lt;h3&gt;</span><span class="si">{{}}</span><span class="nt">&lt;/h3&gt;</span>
+    <span class="nt">&lt;ul&gt;</span>
+      <span class="nt">&lt;li</span> <span class="na">v-for=</span><span class="s">"item in items"</span> <span class="na">:key=</span><span class="s">"keyExtractor(item)"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;slot</span> <span class="na">:item=</span><span class="s">"item"</span> <span class="na">:index=</span><span class="s">"items.indexOf(item)"</span><span class="nt">&gt;</span>
+          <span class="si">{{}}</span>
+        <span class="nt">&lt;/slot&gt;</span>
+      <span class="nt">&lt;/li&gt;</span>
+    <span class="nt">&lt;/ul&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/</span><span class="k">template</span><span class="nt">&gt;</span>
+
+<span class="nt">&lt;</span><span class="k">script</span> <span class="na">setup</span> <span class="na">lang=</span><span class="s">"ts"</span> <span class="na">generic=</span><span class="s">"T"</span><span class="nt">&gt;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">PropType</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">vue</span><span class="dl">'</span>
 
 <span class="kr">interface</span> <span class="nx">Props</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="p">{</span>
   <span class="na">items</span><span class="p">:</span> <span class="nx">T</span><span class="p">[]</span>
   <span class="na">title</span><span class="p">:</span> <span class="nx">string</span>
   <span class="na">keyExtractor</span><span class="p">:</span> <span class="p">(</span><span class="na">item</span><span class="p">:</span> <span class="nx">T</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">string</span> <span class="o">|</span> <span class="nx">number</span>
-<span class="err">}</span>
+<span class="p">}</span>
 
 <span class="nx">defineProps</span><span class="o">&lt;</span><span class="nx">Props</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;&gt;</span><span class="p">()</span>
-<span class="o">&lt;</span><span class="sr">/script</span><span class="err">&gt;
-</span></code></pre></div></div>
+<span class="nt">&lt;/</span><span class="k">script</span><span class="nt">&gt;</span>
+</code></pre></div></div>
 
 <hr />
 
@@ -551,46 +551,46 @@ npm <span class="nb">install</span> <span class="nt">--save-dev</span> @types/no
 <div class="language-vue highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- UserCard.vue --&gt;</span>
 <span class="nt">&lt;</span><span class="k">template</span><span class="nt">&gt;</span>
   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"user-card"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;h3&gt;</span><span class="si">{{</span><span class="err">#</span><span class="mi">123</span><span class="p">;{{</span><span class="err">#</span><span class="mi">123</span><span class="p">;</span> <span class="nx">user</span><span class="p">.</span><span class="nx">name</span> <span class="si">}}</span><span class="err">#</span><span class="mi">125</span><span class="p">;</span><span class="si">}}</span><span class="err">#</span><span class="mi">125</span><span class="p">;</span><span class="o">&lt;</span><span class="sr">/h3</span><span class="err">&gt;
-</span>    <span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="p">{{</span><span class="err">#</span><span class="mi">123</span><span class="p">;{{</span><span class="err">#</span><span class="mi">123</span><span class="p">;</span> <span class="nx">user</span><span class="p">.</span><span class="nx">email</span> <span class="si">}}</span><span class="err">#</span><span class="mi">125</span><span class="p">;</span><span class="si">}}</span><span class="err">#</span><span class="mi">125</span><span class="p">;</span><span class="o">&lt;</span><span class="sr">/p</span><span class="err">&gt;
-</span>    <span class="o">&lt;</span><span class="nx">button</span> <span class="p">@</span><span class="nd">click</span><span class="o">=</span><span class="dl">"</span><span class="s2">handleEdit</span><span class="dl">"</span><span class="o">&gt;</span><span class="nx">Edit</span><span class="o">&lt;</span><span class="sr">/button</span><span class="err">&gt;
-</span>    <span class="o">&lt;</span><span class="nx">button</span> <span class="p">@</span><span class="nd">click</span><span class="o">=</span><span class="dl">"</span><span class="s2">handleDelete</span><span class="dl">"</span><span class="o">&gt;</span><span class="nx">Delete</span><span class="o">&lt;</span><span class="sr">/button</span><span class="err">&gt;
-</span>  <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
-</span><span class="o">&lt;</span><span class="sr">/template</span><span class="err">&gt;
-</span>
-<span class="o">&lt;</span><span class="nx">script</span> <span class="nx">setup</span> <span class="nx">lang</span><span class="o">=</span><span class="dl">"</span><span class="s2">ts</span><span class="dl">"</span><span class="o">&gt;</span>
+    <span class="nt">&lt;h3&gt;</span><span class="si">{{}}</span><span class="nt">&lt;/h3&gt;</span>
+    <span class="nt">&lt;p&gt;</span><span class="si">{{}}</span><span class="nt">&lt;/p&gt;</span>
+    <span class="nt">&lt;button</span> <span class="err">@</span><span class="na">click=</span><span class="s">"handleEdit"</span><span class="nt">&gt;</span>Edit<span class="nt">&lt;/button&gt;</span>
+    <span class="nt">&lt;button</span> <span class="err">@</span><span class="na">click=</span><span class="s">"handleDelete"</span><span class="nt">&gt;</span>Delete<span class="nt">&lt;/button&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/</span><span class="k">template</span><span class="nt">&gt;</span>
+
+<span class="nt">&lt;</span><span class="k">script</span> <span class="na">setup</span> <span class="na">lang=</span><span class="s">"ts"</span><span class="nt">&gt;</span>
 <span class="kr">interface</span> <span class="nx">User</span> <span class="p">{</span>
-  <span class="na">id</span><span class="p">:</span> <span class="nx">number</span>
-  <span class="na">name</span><span class="p">:</span> <span class="nx">string</span>
-  <span class="na">email</span><span class="p">:</span> <span class="nx">string</span>
-<span class="err">}</span>
+  <span class="nl">id</span><span class="p">:</span> <span class="nx">number</span>
+  <span class="nx">name</span><span class="p">:</span> <span class="nx">string</span>
+  <span class="nx">email</span><span class="p">:</span> <span class="nx">string</span>
+<span class="p">}</span>
 
 <span class="kr">interface</span> <span class="nx">Props</span> <span class="p">{</span>
-  <span class="na">user</span><span class="p">:</span> <span class="nx">User</span>
-<span class="err">}</span>
+  <span class="nl">user</span><span class="p">:</span> <span class="nx">User</span>
+<span class="p">}</span>
 
 <span class="kr">interface</span> <span class="nx">Emits</span> <span class="p">{</span>
-  <span class="na">edit</span><span class="p">:</span> <span class="p">[</span><span class="na">user</span><span class="p">:</span> <span class="nx">User</span><span class="p">]</span>
-  <span class="na">delete</span><span class="p">:</span> <span class="p">[</span><span class="na">userId</span><span class="p">:</span> <span class="nx">number</span><span class="p">]</span>
-  <span class="na">update</span><span class="p">:</span> <span class="p">[</span><span class="na">user</span><span class="p">:</span> <span class="nx">User</span><span class="p">]</span>
-<span class="err">}</span>
+  <span class="nl">edit</span><span class="p">:</span> <span class="p">[</span><span class="nx">user</span><span class="p">:</span> <span class="nx">User</span><span class="p">]</span>
+  <span class="k">delete</span><span class="p">:</span> <span class="p">[</span><span class="nx">userId</span><span class="p">:</span> <span class="nx">number</span><span class="p">]</span>
+  <span class="nx">update</span><span class="p">:</span> <span class="p">[</span><span class="nx">user</span><span class="p">:</span> <span class="nx">User</span><span class="p">]</span>
+<span class="p">}</span>
 
 <span class="kd">const</span> <span class="nx">props</span> <span class="o">=</span> <span class="nx">defineProps</span><span class="o">&lt;</span><span class="nx">Props</span><span class="o">&gt;</span><span class="p">()</span>
 <span class="kd">const</span> <span class="nx">emit</span> <span class="o">=</span> <span class="nx">defineEmits</span><span class="o">&lt;</span><span class="nx">Emits</span><span class="o">&gt;</span><span class="p">()</span>
 
 <span class="kd">const</span> <span class="nx">handleEdit</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
   <span class="nx">emit</span><span class="p">(</span><span class="dl">'</span><span class="s1">edit</span><span class="dl">'</span><span class="p">,</span> <span class="nx">props</span><span class="p">.</span><span class="nx">user</span><span class="p">)</span>
-<span class="err">}</span>
+<span class="p">}</span>
 
 <span class="kd">const</span> <span class="nx">handleDelete</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
   <span class="nx">emit</span><span class="p">(</span><span class="dl">'</span><span class="s1">delete</span><span class="dl">'</span><span class="p">,</span> <span class="nx">props</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">id</span><span class="p">)</span>
-<span class="err">}</span>
+<span class="p">}</span>
 
-<span class="kd">const</span> <span class="nx">handleUpdate</span> <span class="o">=</span> <span class="p">(</span><span class="na">updatedUser</span><span class="p">:</span> <span class="nx">User</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="kd">const</span> <span class="nx">handleUpdate</span> <span class="o">=</span> <span class="p">(</span><span class="nx">updatedUser</span><span class="p">:</span> <span class="nx">User</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
   <span class="nx">emit</span><span class="p">(</span><span class="dl">'</span><span class="s1">update</span><span class="dl">'</span><span class="p">,</span> <span class="nx">updatedUser</span><span class="p">)</span>
-<span class="err">}</span>
-<span class="o">&lt;</span><span class="sr">/script</span><span class="err">&gt;
-</span></code></pre></div></div>
+<span class="p">}</span>
+<span class="nt">&lt;/</span><span class="k">script</span><span class="nt">&gt;</span>
+</code></pre></div></div>
 
 <h3 id="complex-props"><strong>Complex Props</strong></h3>
 
@@ -600,43 +600,43 @@ npm <span class="nb">install</span> <span class="nt">--save-dev</span> @types/no
     <span class="nt">&lt;thead&gt;</span>
       <span class="nt">&lt;tr&gt;</span>
         <span class="nt">&lt;th</span> <span class="na">v-for=</span><span class="s">"column in columns"</span> <span class="na">:key=</span><span class="s">"column.key"</span><span class="nt">&gt;</span>
-          <span class="si">{{</span><span class="err">#</span><span class="mi">123</span><span class="p">;{{</span><span class="err">#</span><span class="mi">123</span><span class="p">;</span> <span class="nx">column</span><span class="p">.</span><span class="nx">title</span> <span class="si">}}</span><span class="err">#</span><span class="mi">125</span><span class="p">;</span><span class="si">}}</span><span class="err">#</span><span class="mi">125</span><span class="p">;</span>
-        <span class="o">&lt;</span><span class="sr">/th</span><span class="err">&gt;
-</span>      <span class="o">&lt;</span><span class="sr">/tr</span><span class="err">&gt;
-</span>    <span class="o">&lt;</span><span class="sr">/thead</span><span class="err">&gt;
-</span>    <span class="o">&lt;</span><span class="nx">tbody</span><span class="o">&gt;</span>
-      <span class="o">&lt;</span><span class="nx">tr</span> <span class="nx">v</span><span class="o">-</span><span class="k">for</span><span class="o">=</span><span class="dl">"</span><span class="s2">item in data</span><span class="dl">"</span> <span class="p">:</span><span class="nx">key</span><span class="o">=</span><span class="dl">"</span><span class="s2">keyExtractor(item)</span><span class="dl">"</span><span class="o">&gt;</span>
-        <span class="o">&lt;</span><span class="nx">td</span> <span class="nx">v</span><span class="o">-</span><span class="k">for</span><span class="o">=</span><span class="dl">"</span><span class="s2">column in columns</span><span class="dl">"</span> <span class="p">:</span><span class="nx">key</span><span class="o">=</span><span class="dl">"</span><span class="s2">column.key</span><span class="dl">"</span><span class="o">&gt;</span>
-          <span class="o">&lt;</span><span class="na">slot</span> 
-            <span class="p">:</span><span class="nx">name</span><span class="o">=</span><span class="dl">"</span><span class="s2">column.key</span><span class="dl">"</span> 
-            <span class="p">:</span><span class="nx">item</span><span class="o">=</span><span class="dl">"</span><span class="s2">item</span><span class="dl">"</span> 
-            <span class="p">:</span><span class="nx">value</span><span class="o">=</span><span class="dl">"</span><span class="s2">item[column.key]</span><span class="dl">"</span>
-          <span class="o">&gt;</span>
-            <span class="p">{{</span><span class="err">#</span><span class="mi">123</span><span class="p">;{{</span><span class="err">#</span><span class="mi">123</span><span class="p">;</span> <span class="nx">item</span><span class="p">[</span><span class="nx">column</span><span class="p">.</span><span class="nx">key</span><span class="p">]</span> <span class="si">}}</span><span class="err">#</span><span class="mi">125</span><span class="p">;</span><span class="si">}}</span><span class="err">#</span><span class="mi">125</span><span class="p">;</span>
-          <span class="o">&lt;</span><span class="sr">/slot</span><span class="err">&gt;
-</span>        <span class="o">&lt;</span><span class="sr">/td</span><span class="err">&gt;
-</span>      <span class="o">&lt;</span><span class="sr">/tr</span><span class="err">&gt;
-</span>    <span class="o">&lt;</span><span class="sr">/tbody</span><span class="err">&gt;
-</span>  <span class="o">&lt;</span><span class="sr">/table</span><span class="err">&gt;
-</span><span class="o">&lt;</span><span class="sr">/template</span><span class="err">&gt;
-</span>
-<span class="o">&lt;</span><span class="nx">script</span> <span class="nx">setup</span> <span class="nx">lang</span><span class="o">=</span><span class="dl">"</span><span class="s2">ts</span><span class="dl">"</span> <span class="nx">generic</span><span class="o">=</span><span class="dl">"</span><span class="s2">T</span><span class="dl">"</span><span class="o">&gt;</span>
+          <span class="si">{{}}</span>
+        <span class="nt">&lt;/th&gt;</span>
+      <span class="nt">&lt;/tr&gt;</span>
+    <span class="nt">&lt;/thead&gt;</span>
+    <span class="nt">&lt;tbody&gt;</span>
+      <span class="nt">&lt;tr</span> <span class="na">v-for=</span><span class="s">"item in data"</span> <span class="na">:key=</span><span class="s">"keyExtractor(item)"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;td</span> <span class="na">v-for=</span><span class="s">"column in columns"</span> <span class="na">:key=</span><span class="s">"column.key"</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;slot</span> 
+            <span class="na">:name=</span><span class="s">"column.key"</span> 
+            <span class="na">:item=</span><span class="s">"item"</span> 
+            <span class="na">:value=</span><span class="s">"item[column.key]"</span>
+          <span class="nt">&gt;</span>
+            <span class="si">{{}}</span>
+          <span class="nt">&lt;/slot&gt;</span>
+        <span class="nt">&lt;/td&gt;</span>
+      <span class="nt">&lt;/tr&gt;</span>
+    <span class="nt">&lt;/tbody&gt;</span>
+  <span class="nt">&lt;/table&gt;</span>
+<span class="nt">&lt;/</span><span class="k">template</span><span class="nt">&gt;</span>
+
+<span class="nt">&lt;</span><span class="k">script</span> <span class="na">setup</span> <span class="na">lang=</span><span class="s">"ts"</span> <span class="na">generic=</span><span class="s">"T"</span><span class="nt">&gt;</span>
 <span class="kr">interface</span> <span class="nx">Column</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="p">{</span>
   <span class="na">key</span><span class="p">:</span> <span class="nx">keyof</span> <span class="nx">T</span>
   <span class="na">title</span><span class="p">:</span> <span class="nx">string</span>
   <span class="nx">sortable</span><span class="p">?:</span> <span class="nx">boolean</span>
   <span class="nx">width</span><span class="p">?:</span> <span class="nx">string</span>
-<span class="err">}</span>
+<span class="p">}</span>
 
 <span class="kr">interface</span> <span class="nx">Props</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="p">{</span>
   <span class="na">data</span><span class="p">:</span> <span class="nx">T</span><span class="p">[]</span>
   <span class="na">columns</span><span class="p">:</span> <span class="nx">Column</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">[]</span>
   <span class="na">keyExtractor</span><span class="p">:</span> <span class="p">(</span><span class="na">item</span><span class="p">:</span> <span class="nx">T</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">string</span> <span class="o">|</span> <span class="nx">number</span>
-<span class="err">}</span>
+<span class="p">}</span>
 
 <span class="nx">defineProps</span><span class="o">&lt;</span><span class="nx">Props</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;&gt;</span><span class="p">()</span>
-<span class="o">&lt;</span><span class="sr">/script</span><span class="err">&gt;
-</span></code></pre></div></div>
+<span class="nt">&lt;/</span><span class="k">script</span><span class="nt">&gt;</span>
+</code></pre></div></div>
 
 <hr />
 

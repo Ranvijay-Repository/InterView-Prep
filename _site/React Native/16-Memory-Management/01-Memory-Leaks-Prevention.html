@@ -331,8 +331,8 @@
       <span class="p">{</span><span class="nx">images</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">url</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">(</span>
         <span class="o">&lt;</span><span class="nx">Image</span>
           <span class="nx">key</span><span class="o">=</span><span class="p">{</span><span class="nx">index</span><span class="p">}</span>
-          <span class="nx">source</span><span class="o">=</span><span class="p">{{</span><span class="err">#</span><span class="mi">123</span><span class="p">;{{</span><span class="err">#</span><span class="mi">123</span><span class="p">;</span> <span class="nl">uri</span><span class="p">:</span> <span class="nx">url</span> <span class="p">}}</span><span class="err">#</span><span class="mi">125</span><span class="p">;}}</span><span class="err">#</span><span class="mi">125</span><span class="p">;</span>
-          <span class="nx">style</span><span class="o">=</span><span class="p">{{</span><span class="err">#</span><span class="mi">123</span><span class="p">;{{</span><span class="err">#</span><span class="mi">123</span><span class="p">;</span> <span class="nl">width</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span> <span class="na">height</span><span class="p">:</span> <span class="mi">100</span> <span class="p">}}</span><span class="err">#</span><span class="mi">125</span><span class="p">;}}</span><span class="err">#</span><span class="mi">125</span><span class="p">;</span>
+          <span class="nx">source</span><span class="o">=</span><span class="p">{{}}</span>
+          <span class="nx">style</span><span class="o">=</span><span class="p">{{}}</span>
           <span class="c1">// Optimize memory usage</span>
           <span class="nx">resizeMode</span><span class="o">=</span><span class="dl">"</span><span class="s2">cover</span><span class="dl">"</span>
           <span class="c1">// Clear cache if needed</span>
@@ -431,7 +431,7 @@
 
   <span class="c1">// Only render visible items</span>
   <span class="kd">const</span> <span class="nx">renderItem</span> <span class="o">=</span> <span class="nx">useCallback</span><span class="p">(({</span> <span class="nx">item</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">(</span>
-    <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{{</span><span class="err">#</span><span class="mi">123</span><span class="p">;{{</span><span class="err">#</span><span class="mi">123</span><span class="p">;</span> <span class="nl">height</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span> <span class="na">padding</span><span class="p">:</span> <span class="mi">10</span> <span class="p">}}</span><span class="err">#</span><span class="mi">125</span><span class="p">;}}</span><span class="err">#</span><span class="mi">125</span><span class="p">;</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{{}}</span><span class="o">&gt;</span>
       <span class="o">&lt;</span><span class="nx">Text</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">item</span><span class="p">.</span><span class="nx">title</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
 </span>    <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
 </span>  <span class="p">),</span> <span class="p">[]);</span>
@@ -488,7 +488,7 @@
   <span class="p">},</span> <span class="p">[]);</span>
 
   <span class="k">return</span> <span class="p">(</span>
-    <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{{</span><span class="err">#</span><span class="mi">123</span><span class="p">;{{</span><span class="err">#</span><span class="mi">123</span><span class="p">;</span> <span class="nl">padding</span><span class="p">:</span> <span class="mi">20</span> <span class="p">}}</span><span class="err">#</span><span class="mi">125</span><span class="p">;}}</span><span class="err">#</span><span class="mi">125</span><span class="p">;</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{{}}</span><span class="o">&gt;</span>
       <span class="o">&lt;</span><span class="nx">Text</span><span class="o">&gt;</span><span class="nx">Memory</span> <span class="na">Usage</span><span class="p">:</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
 </span>      <span class="p">{</span><span class="nx">memoryInfo</span> <span class="o">&amp;&amp;</span> <span class="p">(</span>
         <span class="o">&lt;&gt;</span>

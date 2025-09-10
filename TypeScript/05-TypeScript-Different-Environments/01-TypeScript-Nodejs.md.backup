@@ -26,6 +26,7 @@ Setting up TypeScript for Node.js development requires proper configuration and 
 ### **Basic Setup**
 
 
+{% raw %}
 ```bash
 # Initialize Node.js project
 npm init -y
@@ -37,11 +38,13 @@ npm install --save-dev ts-node nodemon
 # Install additional development dependencies
 npm install --save-dev @types/express @types/cors @types/helmet
 ```
+{% endraw %}
 
 
 ### **Package.json Scripts**
 
 
+{% raw %}
 ```json
 {
   "scripts": {
@@ -53,11 +56,13 @@ npm install --save-dev @types/express @types/cors @types/helmet
   }
 }
 ```
+{% endraw %}
 
 
 ### **Basic TypeScript Configuration**
 
 
+{% raw %}
 ```json
 // tsconfig.json
 {
@@ -78,6 +83,7 @@ npm install --save-dev @types/express @types/cors @types/helmet
   "exclude": ["node_modules", "dist"]
 }
 ```
+{% endraw %}
 
 
 ---
@@ -87,6 +93,7 @@ npm install --save-dev @types/express @types/cors @types/helmet
 ### **Advanced TypeScript Configuration**
 
 
+{% raw %}
 ```json
 // tsconfig.json - Production configuration
 {
@@ -112,11 +119,13 @@ npm install --save-dev @types/express @types/cors @types/helmet
   "exclude": ["node_modules", "dist", "**/*.test.ts"]
 }
 ```
+{% endraw %}
 
 
 ### **Development Configuration**
 
 
+{% raw %}
 ```json
 // tsconfig.dev.json
 {
@@ -129,11 +138,13 @@ npm install --save-dev @types/express @types/cors @types/helmet
   "include": ["src/**/*", "tests/**/*"]
 }
 ```
+{% endraw %}
 
 
 ### **Nodemon Configuration**
 
 
+{% raw %}
 ```json
 // nodemon.json
 {
@@ -143,6 +154,7 @@ npm install --save-dev @types/express @types/cors @types/helmet
   "exec": "ts-node src/index.ts"
 }
 ```
+{% endraw %}
 
 
 ---
@@ -152,6 +164,7 @@ npm install --save-dev @types/express @types/cors @types/helmet
 ### **Built-in Node.js Types**
 
 
+{% raw %}
 ```typescript
 // Node.js built-in modules
 import * as fs from 'fs';
@@ -185,11 +198,13 @@ server.listen(3000, () => {
   console.log('Server running on port 3000');
 });
 ```
+{% endraw %}
 
 
 ### **Custom Node.js Types**
 
 
+{% raw %}
 ```typescript
 // Custom types for Node.js applications
 interface ServerConfig {
@@ -223,11 +238,13 @@ declare global {
   }
 }
 ```
+{% endraw %}
 
 
 ### **Event Emitter Types**
 
 
+{% raw %}
 ```typescript
 // Custom event emitter with typed events
 interface AppEvents {
@@ -259,6 +276,7 @@ appEvents.on('userCreated', (user) => {
 
 appEvents.emit('userCreated', { id: 1, name: 'John', email: 'john@example.com' });
 ```
+{% endraw %}
 
 
 ---
@@ -268,6 +286,7 @@ appEvents.emit('userCreated', { id: 1, name: 'John', email: 'john@example.com' }
 ### **Basic Express Setup**
 
 
+{% raw %}
 ```typescript
 // src/app.ts
 import express, { Application, Request, Response, NextFunction } from 'express';
@@ -295,11 +314,13 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
 
 export default app;
 ```
+{% endraw %}
 
 
 ### **Typed Express Routes**
 
 
+{% raw %}
 ```typescript
 // src/routes/users.ts
 import { Router, Request, Response } from 'express';
@@ -343,11 +364,13 @@ router.post('/', async (req: Request<{}, User, CreateUserRequest>, res: Response
 
 export default router;
 ```
+{% endraw %}
 
 
 ### **Custom Request Types**
 
 
+{% raw %}
 ```typescript
 // src/types/express.d.ts
 import { User } from './User';
@@ -380,6 +403,7 @@ export const authenticate = async (req: Request, res: Response, next: NextFuncti
   }
 };
 ```
+{% endraw %}
 
 
 ---
@@ -389,6 +413,7 @@ export const authenticate = async (req: Request, res: Response, next: NextFuncti
 ### **MongoDB with Mongoose**
 
 
+{% raw %}
 ```typescript
 // src/models/User.ts
 import mongoose, { Document, Schema } from 'mongoose';
@@ -411,11 +436,13 @@ const UserSchema = new Schema<IUser>({
 
 export const User = mongoose.model<IUser>('User', UserSchema);
 ```
+{% endraw %}
 
 
 ### **PostgreSQL with TypeORM**
 
 
+{% raw %}
 ```typescript
 // src/entities/User.ts
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
@@ -441,11 +468,13 @@ export class User {
   updatedAt: Date;
 }
 ```
+{% endraw %}
 
 
 ### **Database Service Layer**
 
 
+{% raw %}
 ```typescript
 // src/services/UserService.ts
 import { User } from '../models/User';
@@ -475,6 +504,7 @@ export class UserService {
   }
 }
 ```
+{% endraw %}
 
 
 ---
@@ -484,6 +514,7 @@ export class UserService {
 ### **Jest Configuration**
 
 
+{% raw %}
 ```json
 // jest.config.js
 module.exports = {
@@ -502,11 +533,13 @@ module.exports = {
   coverageReporters: ['text', 'lcov', 'html'],
 };
 ```
+{% endraw %}
 
 
 ### **Unit Tests**
 
 
+{% raw %}
 ```typescript
 // src/__tests__/UserService.test.ts
 import { UserService } from '../services/UserService';
@@ -554,11 +587,13 @@ describe('UserService', () => {
   });
 });
 ```
+{% endraw %}
 
 
 ### **Integration Tests**
 
 
+{% raw %}
 ```typescript
 // src/__tests__/integration/users.test.ts
 import request from 'supertest';
@@ -603,6 +638,7 @@ describe('Users API', () => {
   });
 });
 ```
+{% endraw %}
 
 
 ---
@@ -612,6 +648,7 @@ describe('Users API', () => {
 ### **1. Use Strict Type Checking**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Strict type checking
 interface User {
@@ -635,11 +672,13 @@ const createUser = (userData: any): any => {
   };
 };
 ```
+{% endraw %}
 
 
 ### **2. Use Environment Variables**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Environment variables
 const config = {
@@ -655,11 +694,13 @@ const config = {
   jwtSecret: 'my-secret'
 };
 ```
+{% endraw %}
 
 
 ### **3. Use Dependency Injection**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Dependency injection
 class UserController {
@@ -680,11 +721,13 @@ class UserController {
   }
 }
 ```
+{% endraw %}
 
 
 ### **4. Use Error Handling**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Proper error handling
 const getUserById = async (id: string): Promise<User> => {
@@ -704,6 +747,7 @@ const getUserById = async (id: string): Promise<User> => {
   return User.findById(id);
 };
 ```
+{% endraw %}
 
 
 ---
@@ -730,6 +774,7 @@ const getUserById = async (id: string): Promise<User> => {
 
 **Answer:**
 
+{% raw %}
 ```typescript
 interface ProcessEnv {
   NODE_ENV: 'development' | 'production' | 'test';
@@ -743,6 +788,7 @@ declare global {
   }
 }
 ```
+{% endraw %}
 
 
 ### **4. How do you test TypeScript Node.js applications?**

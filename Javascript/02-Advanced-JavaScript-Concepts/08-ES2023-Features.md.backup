@@ -44,6 +44,7 @@
 
 ### ASCII Diagram: Array Grouping Flow
 
+{% raw %}
 ```
 ARRAY GROUPING FLOW
 ┌─────────────────────────────────┐
@@ -72,6 +73,7 @@ ARRAY GROUPING FLOW
         │  By Keys      │
         └───────────────┘
 ```
+{% endraw %}
 
 
 ### Available Methods:
@@ -95,6 +97,7 @@ ARRAY GROUPING FLOW
 
 ### ASCII Diagram: Hashbang Execution Flow
 
+{% raw %}
 ```
 HASHBANG EXECUTION FLOW
 ┌─────────────────────────────────┐
@@ -123,6 +126,7 @@ HASHBANG EXECUTION FLOW
         │  As Argument  │
         └───────────────┘
 ```
+{% endraw %}
 
 
 ### Use Cases:
@@ -145,6 +149,7 @@ HASHBANG EXECUTION FLOW
 
 ### ASCII Diagram: Symbol WeakMap Structure
 
+{% raw %}
 ```
 SYMBOL WEAKMAP STRUCTURE
 ┌─────────────────────────────────┐
@@ -174,6 +179,7 @@ SYMBOL WEAKMAP STRUCTURE
         │  Collection   │
         └───────────────┘
 ```
+{% endraw %}
 
 
 ### Benefits:

@@ -45,6 +45,7 @@
 
 ### ASCII Diagram: Dependency Scanning Process
 
+{% raw %}
 ```
 DEPENDENCY SCANNING PROCESS
 ┌─────────────────────────────────┐
@@ -115,6 +116,7 @@ DEPENDENCY SCANNING PROCESS
         │  Verify Fixes │
         └───────────────┘
 ```
+{% endraw %}
 
 
 ### Scanning Tools:
@@ -139,6 +141,7 @@ DEPENDENCY SCANNING PROCESS
 
 ### ASCII Diagram: Secure Coding Workflow
 
+{% raw %}
 ```
 SECURE CODING WORKFLOW
 ┌─────────────────────────────────┐
@@ -197,6 +200,7 @@ SECURE CODING WORKFLOW
         │  Logging      │
         └───────────────┘
 ```
+{% endraw %}
 
 
 ### Security Practices:
@@ -221,6 +225,7 @@ SECURE CODING WORKFLOW
 
 ### ASCII Diagram: OWASP Top 10 Categories
 
+{% raw %}
 ```
 OWASP TOP 10 CATEGORIES
 ┌─────────────────────────────────┐
@@ -287,6 +292,7 @@ OWASP TOP 10 CATEGORIES
         │  Response     │
         └───────────────┘
 ```
+{% endraw %}
 
 
 ### Top 10 Categories:

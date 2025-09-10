@@ -68,6 +68,7 @@ JavaScript uses **"Pass by Value"** for all data types, but with a crucial disti
 
 ### ASCII Diagram: JavaScript Parameter Passing
 
+{% raw %}
 ```
 PRIMITIVES (Pass by Value)           OBJECTS (Pass by Value of Reference)
 ┌─────────────────┐                  ┌─────────────────┐
@@ -79,6 +80,7 @@ PRIMITIVES (Pass by Value)           OBJECTS (Pass by Value of Reference)
 Function receives: 42                 Function receives: [ref to {x: 1}]
 (completely new copy)                 (copy of reference, same data)
 ```
+{% endraw %}
 
 
 ---
@@ -87,6 +89,7 @@ Function receives: 42                 Function receives: [ref to {x: 1}]
 
 ### Primitive Values in Memory:
 
+{% raw %}
 ```
 STACK MEMORY
 ┌─────────────┐
@@ -96,10 +99,12 @@ STACK MEMORY
 │ param = 42  │ ← Function parameter (copy)
 └─────────────┘
 ```
+{% endraw %}
 
 
 ### Object References in Memory:
 
+{% raw %}
 ```
 STACK MEMORY          HEAP MEMORY
 ┌─────────────┐       ┌─────────────┐
@@ -109,6 +114,7 @@ STACK MEMORY          HEAP MEMORY
 │ param = [ref]│──────┘             │
 └─────────────┘       (Same object)
 ```
+{% endraw %}
 
 
 ---
@@ -120,6 +126,7 @@ STACK MEMORY          HEAP MEMORY
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
 
 
+{% raw %}
 ```javascript
 console.log("=== PRIMITIVE VALUES (PASS BY VALUE) ===");
 
@@ -154,6 +161,7 @@ console.log("\n=== KEY INSIGHT ===");
 console.log("Primitive values are truly passed by value!");
 console.log("Function modifications don't affect the original variables.");
 ```
+{% endraw %}
 
 </div>
 
@@ -162,6 +170,7 @@ console.log("Function modifications don't affect the original variables.");
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
 
 
+{% raw %}
 ```javascript
 console.log("=== OBJECTS (PASS BY VALUE OF REFERENCE) ===");
 
@@ -202,6 +211,7 @@ console.log("\n=== KEY INSIGHT ===");
 console.log("Object properties can be modified inside functions");
 console.log("But reassigning the parameter doesn't change the original reference");
 ```
+{% endraw %}
 
 </div>
 
@@ -210,6 +220,7 @@ console.log("But reassigning the parameter doesn't change the original reference
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
 
 
+{% raw %}
 ```javascript
 console.log("=== ARRAYS (PASS BY VALUE OF REFERENCE) ===");
 
@@ -246,6 +257,7 @@ console.log("\n=== KEY INSIGHT ===");
 console.log("Array elements can be modified inside functions");
 console.log("But reassigning the parameter doesn't change the original reference");
 ```
+{% endraw %}
 
 </div>
 
@@ -254,6 +266,7 @@ console.log("But reassigning the parameter doesn't change the original reference
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
 
 
+{% raw %}
 ```javascript
 console.log("=== FUNCTION PARAMETERS AND RETURN VALUES ===");
 
@@ -311,6 +324,7 @@ console.log("Primitives: Safe, won't be modified");
 console.log("Objects/Arrays: Properties/elements can be modified");
 console.log("Return values provide a way to get modified primitives back");
 ```
+{% endraw %}
 
 </div>
 
@@ -319,6 +333,7 @@ console.log("Return values provide a way to get modified primitives back");
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
 
 
+{% raw %}
 ```javascript
 console.log("=== PREVENTING UNINTENDED MODIFICATIONS ===");
 
@@ -382,6 +397,7 @@ console.log("Always consider whether your function should modify input");
 console.log("Use defensive copying to prevent unintended side effects");
 console.log("Pure functions are easier to test and reason about");
 ```
+{% endraw %}
 
 </div>
 
@@ -391,6 +407,7 @@ console.log("Pure functions are easier to test and reason about");
 
 ### Misconception 1: "JavaScript is Pass by Reference"
 
+{% raw %}
 ```javascript
 // ❌ WRONG: Thinking JavaScript passes objects by reference
 function wrongUnderstanding(obj) {
@@ -401,10 +418,12 @@ const original = { value: "original" };
 wrongUnderstanding(original);
 console.log(original); // Still { value: "original" } ✅
 ```
+{% endraw %}
 
 
 ### Misconception 2: "Primitives are Passed by Reference"
 
+{% raw %}
 ```javascript
 // ❌ WRONG: Thinking primitives are passed by reference
 function modifyString(str) {
@@ -415,6 +434,7 @@ let message = "hello";
 modifyString(message);
 console.log(message); // Still "hello" ✅
 ```
+{% endraw %}
 
 
 ---

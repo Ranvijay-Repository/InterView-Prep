@@ -25,6 +25,7 @@ Effective error handling is crucial for building robust, maintainable TypeScript
 ### **Error Handling Principles**
 
 
+{% raw %}
 ```typescript
 // Error handling principles
 const errorHandlingPrinciples = {
@@ -56,11 +57,13 @@ const errorHandlingChallenges = {
   recovery: "Implementing effective recovery mechanisms"
 };
 ```
+{% endraw %}
 
 
 ### **Error Handling Goals**
 
 
+{% raw %}
 ```typescript
 // Error handling goals
 const errorHandlingGoals = {
@@ -81,6 +84,7 @@ const errorHandlingMetrics = {
   systemStability: "Overall system stability metrics"
 };
 ```
+{% endraw %}
 
 
 ---
@@ -90,6 +94,7 @@ const errorHandlingMetrics = {
 ### **Error Categories**
 
 
+{% raw %}
 ```typescript
 // Error categories
 const errorCategories = {
@@ -119,11 +124,13 @@ interface ErrorClassification {
   loggable: boolean;
 }
 ```
+{% endraw %}
 
 
 ### **Custom Error Classes**
 
 
+{% raw %}
 ```typescript
 // Custom error classes
 abstract class BaseError extends Error {
@@ -226,11 +233,13 @@ class NotFoundError extends BaseError {
   }
 }
 ```
+{% endraw %}
 
 
 ### **Error Type Guards**
 
 
+{% raw %}
 ```typescript
 // Error type guards
 function isBaseError(error: unknown): error is BaseError {
@@ -317,6 +326,7 @@ function classifyError(error: unknown): ErrorClassification {
   };
 }
 ```
+{% endraw %}
 
 
 ---
@@ -326,6 +336,7 @@ function classifyError(error: unknown): ErrorClassification {
 ### **Try-Catch Patterns**
 
 
+{% raw %}
 ```typescript
 // Try-catch patterns
 const tryCatchPatterns = {
@@ -404,11 +415,13 @@ function tryCatchFinally() {
   }
 }
 ```
+{% endraw %}
 
 
 ### **Result Pattern**
 
 
+{% raw %}
 ```typescript
 // Result pattern for error handling
 type Result<T, E = Error> = {
@@ -482,11 +495,13 @@ function processUser(input: unknown): Result<ProcessedUser, ValidationError | Bu
   return success(processedUser);
 }
 ```
+{% endraw %}
 
 
 ### **Either Pattern**
 
 
+{% raw %}
 ```typescript
 // Either pattern for error handling
 type Either<L, R> = Left<L> | Right<R>;
@@ -550,6 +565,7 @@ function validateUser(userData: { email: string; age: number }): Either<Validati
   return right(user);
 }
 ```
+{% endraw %}
 
 
 ---
@@ -559,6 +575,7 @@ function validateUser(userData: { email: string; age: number }): Either<Validati
 ### **Retry Mechanisms**
 
 
+{% raw %}
 ```typescript
 // Retry mechanisms
 const retryMechanisms = {
@@ -651,11 +668,13 @@ async function retryWithJitter<T>(
   throw lastError!;
 }
 ```
+{% endraw %}
 
 
 ### **Circuit Breaker Pattern**
 
 
+{% raw %}
 ```typescript
 // Circuit breaker pattern
 enum CircuitState {
@@ -720,11 +739,13 @@ class CircuitBreaker {
   }
 }
 ```
+{% endraw %}
 
 
 ### **Fallback Strategies**
 
 
+{% raw %}
 ```typescript
 // Fallback strategies
 const fallbackStrategies = {
@@ -820,6 +841,7 @@ class DegradedModeService {
   }
 }
 ```
+{% endraw %}
 
 
 ---
@@ -829,6 +851,7 @@ class DegradedModeService {
 ### **Error Logging**
 
 
+{% raw %}
 ```typescript
 // Error logging
 const errorLogging = {
@@ -933,11 +956,13 @@ class ErrorLogger {
   }
 }
 ```
+{% endraw %}
 
 
 ### **Error Monitoring**
 
 
+{% raw %}
 ```typescript
 // Error monitoring
 const errorMonitoring = {
@@ -1048,6 +1073,7 @@ interface ErrorAlert {
   timestamp: string;
 }
 ```
+{% endraw %}
 
 
 ---
@@ -1057,6 +1083,7 @@ interface ErrorAlert {
 ### **1. Use Specific Error Types**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Specific error types
 class ValidationError extends BaseError {
@@ -1068,11 +1095,13 @@ class ValidationError extends BaseError {
 // ❌ Avoid: Generic Error
 throw new Error('Something went wrong');
 ```
+{% endraw %}
 
 
 ### **2. Handle Errors Gracefully**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Graceful error handling
 async function fetchUser(id: string): Promise<User | null> {
@@ -1097,11 +1126,13 @@ async function fetchUserBad(id: string): Promise<User> {
   return await response.json();
 }
 ```
+{% endraw %}
 
 
 ### **3. Implement Error Recovery**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Error recovery
 async function fetchDataWithFallback(): Promise<Data> {
@@ -1118,11 +1149,13 @@ async function fetchDataBad(): Promise<Data> {
   return await fetchFromPrimarySource();
 }
 ```
+{% endraw %}
 
 
 ### **4. Log Errors Appropriately**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Structured error logging
 const logger = new ErrorLogger();
@@ -1145,6 +1178,7 @@ try {
   throw error;
 }
 ```
+{% endraw %}
 
 
 ---

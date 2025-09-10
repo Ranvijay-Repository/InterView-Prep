@@ -45,6 +45,7 @@
 
 ### ASCII Diagram: WebAssembly Execution Flow
 
+{% raw %}
 ```
 WEBASSEMBLY EXECUTION FLOW
 ┌─────────────────────────────────┐
@@ -79,6 +80,7 @@ WEBASSEMBLY EXECUTION FLOW
         │  API Calls    │
         └───────────────┘
 ```
+{% endraw %}
 
 
 ### Use Cases:
@@ -103,6 +105,7 @@ WEBASSEMBLY EXECUTION FLOW
 
 ### ASCII Diagram: WebGL Rendering Pipeline
 
+{% raw %}
 ```
 WEBGL RENDERING PIPELINE
 ┌─────────────────────────────────┐
@@ -134,6 +137,7 @@ WEBGL RENDERING PIPELINE
         │  Output       │
         └───────────────┘
 ```
+{% endraw %}
 
 
 ### Optimization Techniques:
@@ -158,6 +162,7 @@ WEBGL RENDERING PIPELINE
 
 ### ASCII Diagram: IndexedDB Architecture
 
+{% raw %}
 ```
 INDEXEDDB ARCHITECTURE
 ┌─────────────────────────────────┐
@@ -190,6 +195,7 @@ INDEXEDDB ARCHITECTURE
         │  Persistence  │
         └───────────────┘
 ```
+{% endraw %}
 
 
 ### Storage Features:

@@ -27,6 +27,7 @@ Native debugging involves debugging platform-specific code, native modules, and 
 ### **Native Debugging Ecosystem**
 
 
+{% raw %}
 ```
 ┌─────────────────────────────────────┐
 │        Native Debugging            │
@@ -53,6 +54,7 @@ Native debugging involves debugging platform-specific code, native modules, and 
 │  └─────────────────────────────────┘│
 └─────────────────────────────────────┘
 ```
+{% endraw %}
 
 
 ### **Key Debugging Areas**
@@ -70,6 +72,7 @@ Native debugging involves debugging platform-specific code, native modules, and 
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```bash
 # Open iOS project in Xcode
 cd ios && open YourApp.xcworkspace
@@ -79,12 +82,14 @@ cd ios && open YourApp.xcworkspace
 # Or use command line
 xcodebuild -workspace YourApp.xcworkspace -scheme YourApp -configuration Debug
 ```
+{% endraw %}
 
 
 ### **iOS Native Module Debugging**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```swift
 // iOS native module with debugging
 import Foundation
@@ -117,12 +122,14 @@ class DebugModule: NSObject {
     }
 }
 ```
+{% endraw %}
 
 
 ### **iOS Console Logging**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```swift
 // iOS console logging utilities
 import Foundation
@@ -159,12 +166,14 @@ func performOperation(_ resolver: @escaping RCTPromiseResolveBlock, rejecter: @e
     resolver(result)
 }
 ```
+{% endraw %}
 
 
 ### **iOS Instruments Profiling**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```bash
 # Use Instruments for profiling
 # Product -> Profile (Cmd+I) in Xcode
@@ -177,6 +186,7 @@ instruments -t "Allocations" -D memory.trace YourApp.app
 # Network profiling
 instruments -t "Network" -D network.trace YourApp.app
 ```
+{% endraw %}
 
 
 ---
@@ -187,6 +197,7 @@ instruments -t "Network" -D network.trace YourApp.app
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```bash
 # Open Android project in Android Studio
 cd android && ./gradlew assembleDebug
@@ -197,12 +208,14 @@ cd android && ./gradlew assembleDebug
 ./gradlew installDebug
 adb shell am start -n com.yourapp/.MainActivity
 ```
+{% endraw %}
 
 
 ### **Android Native Module Debugging**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```java
 // Android native module with debugging
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -243,12 +256,14 @@ public class DebugModule extends ReactContextBaseJavaModule {
     }
 }
 ```
+{% endraw %}
 
 
 ### **Android Logcat Debugging**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```bash
 # View Android logs
 adb logcat
@@ -267,12 +282,14 @@ adb logcat -c
 # Save logs to file
 adb logcat > debug.log
 ```
+{% endraw %}
 
 
 ### **Android Native Logging**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```java
 // Android native logging utilities
 import android.util.Log;
@@ -323,6 +340,7 @@ public void performOperation(Promise promise) {
     }
 }
 ```
+{% endraw %}
 
 
 ---
@@ -333,6 +351,7 @@ public void performOperation(Promise promise) {
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // JavaScript side debugging
 import { NativeModules } from 'react-native';
@@ -361,12 +380,14 @@ const debugNativeCall = async (methodName, ...args) => {
 // Usage
 const result = await debugNativeCall('logMessage', 'Hello from JavaScript');
 ```
+{% endraw %}
 
 
 ### **Native Module Error Handling**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Robust native module error handling
 const SafeNativeModule = {
@@ -403,6 +424,7 @@ const SafeNativeModule = {
   }
 };
 ```
+{% endraw %}
 
 
 ---
@@ -413,6 +435,7 @@ const SafeNativeModule = {
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Bridge communication debugging
 const BridgeDebugger = {
@@ -468,12 +491,14 @@ const BridgeDebugger = {
   }
 };
 ```
+{% endraw %}
 
 
 ### **JSI Debugging (New Architecture)**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // JSI debugging for New Architecture
 const JSIDebugger = {
@@ -507,6 +532,7 @@ const JSIDebugger = {
   }
 };
 ```
+{% endraw %}
 
 
 ---
@@ -517,6 +543,7 @@ const JSIDebugger = {
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Native performance monitoring
 const NativePerformanceMonitor = {
@@ -566,12 +593,14 @@ const NativePerformanceMonitor = {
   }
 };
 ```
+{% endraw %}
 
 
 ### **Native Memory Monitoring**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Native memory monitoring
 const NativeMemoryMonitor = {
@@ -607,6 +636,7 @@ const NativeMemoryMonitor = {
   }
 };
 ```
+{% endraw %}
 
 
 ---
@@ -617,6 +647,7 @@ const NativeMemoryMonitor = {
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Cross-platform debugging utilities
 const CrossPlatformDebugger = {
@@ -653,12 +684,14 @@ const CrossPlatformDebugger = {
   }
 };
 ```
+{% endraw %}
 
 
 ### **Cross-Platform Testing**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Cross-platform testing utilities
 const CrossPlatformTester = {
@@ -691,6 +724,7 @@ const CrossPlatformTester = {
   }
 };
 ```
+{% endraw %}
 
 
 ---
@@ -701,6 +735,7 @@ const CrossPlatformTester = {
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Native debugging best practices
 const NativeDebuggingBestPractices = {
@@ -744,12 +779,14 @@ const NativeDebuggingBestPractices = {
   }
 };
 ```
+{% endraw %}
 
 
 ### **2. Debugging Tools Integration**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Debugging tools integration
 const DebuggingToolsIntegration = {
@@ -781,6 +818,7 @@ const DebuggingToolsIntegration = {
   }
 };
 ```
+{% endraw %}
 
 
 ---

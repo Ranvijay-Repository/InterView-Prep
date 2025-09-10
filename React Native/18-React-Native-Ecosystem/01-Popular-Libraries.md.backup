@@ -28,6 +28,7 @@ The React Native ecosystem offers a rich collection of libraries for various fun
 ### **Library Categories**
 
 
+{% raw %}
 ```
 ┌─────────────────────────────────────┐
 │        React Native Libraries      │
@@ -54,6 +55,7 @@ The React Native ecosystem offers a rich collection of libraries for various fun
 │  └─────────────────────────────────┘│
 └─────────────────────────────────────┘
 ```
+{% endraw %}
 
 
 ### **Library Selection Criteria**
@@ -71,6 +73,7 @@ The React Native ecosystem offers a rich collection of libraries for various fun
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```bash
 # Installation
 npm install @react-navigation/native @react-navigation/stack @react-navigation/bottom-tabs
@@ -78,10 +81,12 @@ npm install @react-navigation/native @react-navigation/stack @react-navigation/b
 # Platform dependencies
 npm install react-native-screens react-native-safe-area-context
 ```
+{% endraw %}
 
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Basic navigation setup
 import { NavigationContainer } from '@react-navigation/native';
@@ -102,12 +107,14 @@ const App = () => {
   );
 };
 ```
+{% endraw %}
 
 
 ### **React Native Navigation (Wix)**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```bash
 # Installation
 npm install react-native-navigation
@@ -115,10 +122,12 @@ npm install react-native-navigation
 # iOS setup
 cd ios && pod install && cd ..
 ```
+{% endraw %}
 
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // React Native Navigation setup
 import { Navigation } from 'react-native-navigation';
@@ -142,6 +151,7 @@ Navigation.events().registerAppLaunchedListener(() => {
   });
 });
 ```
+{% endraw %}
 
 
 ### **Navigation Library Comparison**
@@ -162,14 +172,17 @@ Navigation.events().registerAppLaunchedListener(() => {
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```bash
 # Installation
 npm install @reduxjs/toolkit react-redux
 ```
+{% endraw %}
 
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Redux store setup
 import { configureStore, createSlice } from '@reduxjs/toolkit';
@@ -202,20 +215,24 @@ const App = () => {
   );
 };
 ```
+{% endraw %}
 
 
 ### **Zustand (Lightweight Alternative)**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```bash
 # Installation
 npm install zustand
 ```
+{% endraw %}
 
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Zustand store
 import { create } from 'zustand';
@@ -238,20 +255,24 @@ const Counter = () => {
   );
 };
 ```
+{% endraw %}
 
 
 ### **Jotai (Atomic State Management)**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```bash
 # Installation
 npm install jotai
 ```
+{% endraw %}
 
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Jotai atoms
 import { atom, useAtom } from 'jotai';
@@ -270,6 +291,7 @@ const Counter = () => {
   );
 };
 ```
+{% endraw %}
 
 
 ---
@@ -280,14 +302,17 @@ const Counter = () => {
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```bash
 # Installation
 npm install native-base react-native-svg
 ```
+{% endraw %}
 
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // NativeBase components
 import { Box, Button, Text, VStack } from 'native-base';
@@ -305,20 +330,24 @@ const MyComponent = () => {
   );
 };
 ```
+{% endraw %}
 
 
 ### **React Native Elements**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```bash
 # Installation
 npm install react-native-elements react-native-vector-icons
 ```
+{% endraw %}
 
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // React Native Elements
 import { Button, Card, Text } from 'react-native-elements';
@@ -333,20 +362,24 @@ const MyComponent = () => {
   );
 };
 ```
+{% endraw %}
 
 
 ### **Tamagui (Modern Alternative)**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```bash
 # Installation
 npm install @tamagui/core @tamagui/config
 ```
+{% endraw %}
 
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Tamagui components
 import { Button, Text, YStack } from '@tamagui/core';
@@ -362,6 +395,7 @@ const MyComponent = () => {
   );
 };
 ```
+{% endraw %}
 
 
 ---
@@ -372,14 +406,17 @@ const MyComponent = () => {
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```bash
 # Installation
 npm install axios
 ```
+{% endraw %}
 
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Axios setup
 import axios from 'axios';
@@ -416,20 +453,24 @@ api.interceptors.response.use(
   }
 );
 ```
+{% endraw %}
 
 
 ### **React Query (Data Fetching)**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```bash
 # Installation
 npm install @tanstack/react-query
 ```
+{% endraw %}
 
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // React Query setup
 import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
@@ -458,20 +499,24 @@ const UserProfile = ({ userId }) => {
   return <Text>{data.name}</Text>;
 };
 ```
+{% endraw %}
 
 
 ### **SWR (Alternative to React Query)**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```bash
 # Installation
 npm install swr
 ```
+{% endraw %}
 
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // SWR usage
 import useSWR from 'swr';
@@ -494,6 +539,7 @@ const UserProfile = ({ userId }) => {
   return <Text>{data.name}</Text>;
 };
 ```
+{% endraw %}
 
 
 ---
@@ -504,14 +550,17 @@ const UserProfile = ({ userId }) => {
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```bash
 # Installation
 npm install @react-native-async-storage/async-storage
 ```
+{% endraw %}
 
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // AsyncStorage usage
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -544,20 +593,24 @@ const StorageService = {
   }
 };
 ```
+{% endraw %}
 
 
 ### **React Native Keychain (Secure Storage)**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```bash
 # Installation
 npm install react-native-keychain
 ```
+{% endraw %}
 
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Keychain usage
 import * as Keychain from 'react-native-keychain';
@@ -591,20 +644,24 @@ const SecureStorage = {
   }
 };
 ```
+{% endraw %}
 
 
 ### **WatermelonDB (Local Database)**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```bash
 # Installation
 npm install @nozbe/watermelondb
 ```
+{% endraw %}
 
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // WatermelonDB setup
 import { Database } from '@nozbe/watermelondb';
@@ -635,6 +692,7 @@ const database = new Database({
   modelClasses: [Post]
 });
 ```
+{% endraw %}
 
 
 ---
@@ -645,14 +703,17 @@ const database = new Database({
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```bash
 # Installation
 npm install react-native-reanimated
 ```
+{% endraw %}
 
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Reanimated usage
 import Animated, {
@@ -685,20 +746,24 @@ const AnimatedComponent = () => {
   );
 };
 ```
+{% endraw %}
 
 
 ### **Lottie React Native (Vector Animations)**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```bash
 # Installation
 npm install lottie-react-native
 ```
+{% endraw %}
 
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Lottie usage
 import LottieView from 'lottie-react-native';
@@ -714,20 +779,24 @@ const LottieAnimation = () => {
   );
 };
 ```
+{% endraw %}
 
 
 ### **React Native Animatable**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```bash
 # Installation
 npm install react-native-animatable
 ```
+{% endraw %}
 
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Animatable usage
 import * as Animatable from 'react-native-animatable';
@@ -744,6 +813,7 @@ const AnimatableComponent = () => {
   );
 };
 ```
+{% endraw %}
 
 
 ---
@@ -754,14 +824,17 @@ const AnimatableComponent = () => {
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```bash
 # Installation
 npm install react-native-vector-icons
 ```
+{% endraw %}
 
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Vector Icons usage
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -775,20 +848,24 @@ const IconExample = () => {
   );
 };
 ```
+{% endraw %}
 
 
 ### **React Native Device Info**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```bash
 # Installation
 npm install react-native-device-info
 ```
+{% endraw %}
 
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Device Info usage
 import DeviceInfo from 'react-native-device-info';
@@ -819,20 +896,24 @@ const DeviceInfoExample = () => {
   );
 };
 ```
+{% endraw %}
 
 
 ### **React Native Permissions**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```bash
 # Installation
 npm install react-native-permissions
 ```
+{% endraw %}
 
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Permissions usage
 import { request, PERMISSIONS, RESULTS } from 'react-native-permissions';
@@ -869,6 +950,7 @@ const PermissionExample = () => {
   );
 };
 ```
+{% endraw %}
 
 
 ---
@@ -879,6 +961,7 @@ const PermissionExample = () => {
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Library evaluation checklist
 const LibraryEvaluation = {
@@ -901,12 +984,14 @@ const LibraryEvaluation = {
   }
 };
 ```
+{% endraw %}
 
 
 ### **2. Library Integration**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Proper library integration
 const LibraryIntegration = {
@@ -928,12 +1013,14 @@ const LibraryIntegration = {
   }
 };
 ```
+{% endraw %}
 
 
 ### **3. Performance Optimization**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Library performance optimization
 const LibraryOptimization = {
@@ -953,6 +1040,7 @@ const LibraryOptimization = {
   }
 };
 ```
+{% endraw %}
 
 
 ---

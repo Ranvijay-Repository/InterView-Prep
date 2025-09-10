@@ -43,6 +43,7 @@ Think of TDZ like a construction zone:
 
 ### 🔄 TDZ Lifecycle
 
+{% raw %}
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │                    TDZ LIFECYCLE                            │
@@ -55,6 +56,7 @@ Think of TDZ like a construction zone:
 │  6. 🟡 TDZ ends - normal variable usage                    │
 └─────────────────────────────────────────────────────────────┘
 ```
+{% endraw %}
 
 
 ---
@@ -62,6 +64,7 @@ Think of TDZ like a construction zone:
 ## 🗂️ TDZ Visualization
 
 
+{% raw %}
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │                    TEMPORAL DEAD ZONE                       │
@@ -81,11 +84,13 @@ Think of TDZ like a construction zone:
 │  🟢 SAFE PERIOD: After let x = 5                          │
 └─────────────────────────────────────────────────────────────┘
 ```
+{% endraw %}
 
 
 ### 🔍 TDZ vs Hoisting Comparison
 
 
+{% raw %}
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │                TDZ VS HOISTING COMPARISON                   │
@@ -103,6 +108,7 @@ Think of TDZ like a construction zone:
 │  └─ Throws ReferenceError                                 │
 └─────────────────────────────────────────────────────────────┘
 ```
+{% endraw %}
 
 
 ---
@@ -131,6 +137,7 @@ Think of TDZ like a construction zone:
 
 ### Example 1: Basic TDZ Demonstration
 
+{% raw %}
 ```javascript
 console.log("=== BASIC TDZ DEMONSTRATION ===");
 
@@ -186,10 +193,12 @@ console.log("   globalVar:", globalVar);
 console.log("   globalLet:", globalLet);
 console.log("   globalConst:", globalConst);
 ```
+{% endraw %}
 
 
 ### Example 2: TDZ in Different Scopes
 
+{% raw %}
 ```javascript
 console.log("=== TDZ IN DIFFERENT SCOPES ===");
 
@@ -242,10 +251,12 @@ try {
     console.log("Outside block error:", error.message);
 }
 ```
+{% endraw %}
 
 
 ### Example 3: TDZ with Function Parameters
 
+{% raw %}
 ```javascript
 console.log("=== TDZ WITH FUNCTION PARAMETERS ===");
 
@@ -293,10 +304,12 @@ const arrowTDZ = (param) => {
 
 arrowTDZ("Arrow parameter");
 ```
+{% endraw %}
 
 
 ### Example 4: TDZ in Loops and Blocks
 
+{% raw %}
 ```javascript
 console.log("=== TDZ IN LOOPS AND BLOCKS ===");
 
@@ -360,10 +373,12 @@ switch (1) {
         break;
 }
 ```
+{% endraw %}
 
 
 ### Example 5: TDZ with const and Destructuring
 
+{% raw %}
 ```javascript
 console.log("=== TDZ WITH CONST AND DESTRUCTURING ===");
 
@@ -435,10 +450,12 @@ console.log("After nested destructuring:");
 console.log("firstName:", firstName);
 console.log("lastName:", lastName);
 ```
+{% endraw %}
 
 
 ### Example 6: Complex TDZ Scenarios
 
+{% raw %}
 ```javascript
 console.log("=== COMPLEX TDZ SCENARIOS ===");
 
@@ -537,6 +554,7 @@ asyncTDZ().then(result => {
     console.log("Async function result:", result);
 });
 ```
+{% endraw %}
 
 
 ---
@@ -545,6 +563,7 @@ asyncTDZ().then(result => {
 
 ### Scenario 1: Function Hoisting vs Variable Hoisting
 
+{% raw %}
 ```javascript
 console.log("=== SCENARIO 1: FUNCTION VS VARIABLE HOISTING ===");
 
@@ -575,10 +594,12 @@ let letDeclaration = function() {
     return "Let declaration";
 };
 ```
+{% endraw %}
 
 
 ### Scenario 2: TDZ in Different Environments
 
+{% raw %}
 ```javascript
 console.log("=== SCENARIO 2: TDZ IN DIFFERENT ENVIRONMENTS ===");
 
@@ -612,6 +633,7 @@ if (typeof global !== 'undefined') {
     console.log("globalVar after declaration:", globalVar);
 }
 ```
+{% endraw %}
 
 
 ---
@@ -620,6 +642,7 @@ if (typeof global !== 'undefined') {
 
 ### 1. Declare Variables at the Top
 
+{% raw %}
 ```javascript
 console.log("=== BEST PRACTICE 1: DECLARE AT TOP ===");
 
@@ -649,10 +672,12 @@ function badPractice() {
     console.log("End");
 }
 ```
+{% endraw %}
 
 
 ### 2. Use const by Default
 
+{% raw %}
 ```javascript
 console.log("=== BEST PRACTICE 2: USE CONST BY DEFAULT ===");
 
@@ -668,10 +693,12 @@ let currentUser = null;
 // ✅ Use var only in legacy code or specific cases
 var legacyVar = "old way";
 ```
+{% endraw %}
 
 
 ### 3. Understand Hoisting Behavior
 
+{% raw %}
 ```javascript
 console.log("=== BEST PRACTICE 3: UNDERSTAND HOISTING ===");
 
@@ -694,6 +721,7 @@ function hoistingExample() {
     let letDeclaration = "I'm hoisted but in TDZ";
 }
 ```
+{% endraw %}
 
 
 ---
@@ -771,6 +799,7 @@ function hoistingExample() {
 
 **1. Declare Variables at the Top:**
 
+{% raw %}
 ```javascript
 function goodPractice() {
     let name, age, email; // Declare all variables first
@@ -781,23 +810,28 @@ function goodPractice() {
     email = "john@example.com";
 }
 ```
+{% endraw %}
 
 
 **2. Use const by Default:**
 
+{% raw %}
 ```javascript
 const PI = 3.14159;
 const API_URL = "https://api.example.com";
 let counter = 0; // Only use let when reassignment is needed
 ```
+{% endraw %}
 
 
 **3. Understand Hoisting:**
 
+{% raw %}
 ```javascript
 // Know that let/const are hoisted but not initialized
 // Don't try to access them before declaration
 ```
+{% endraw %}
 
 
 ### Q: What happens when you try to access a variable in TDZ?
@@ -810,6 +844,7 @@ let counter = 0; // Only use let when reassignment is needed
 
 **Example:**
 
+{% raw %}
 ```javascript
 function test() {
     console.log(x); // ReferenceError: Cannot access 'x' before initialization
@@ -818,6 +853,7 @@ function test() {
 
 test(); // Function throws error and stops
 ```
+{% endraw %}
 
 
 **Why This Happens:**
@@ -832,6 +868,7 @@ test(); // Function throws error and stops
 
 ### Exercise 1: TDZ Prediction
 
+{% raw %}
 ```javascript
 console.log("Exercise 1: Predict the output");
 
@@ -845,10 +882,12 @@ function test() {
 
 // test(); // What will happen when this is called?
 ```
+{% endraw %}
 
 
 ### Exercise 2: Hoisting vs TDZ
 
+{% raw %}
 ```javascript
 console.log("Exercise 2: Compare hoisting behaviors");
 
@@ -863,10 +902,12 @@ function functionDeclaration() {
     return "I'm a function";
 }
 ```
+{% endraw %}
 
 
 ### Exercise 3: TDZ in Different Scopes
 
+{% raw %}
 ```javascript
 console.log("Exercise 3: TDZ in different scopes");
 
@@ -876,6 +917,7 @@ console.log("Exercise 3: TDZ in different scopes");
 
 // Your code here...
 ```
+{% endraw %}
 
 
 ---

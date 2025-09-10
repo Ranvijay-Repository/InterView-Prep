@@ -25,6 +25,7 @@ Union types allow a value to be one of several types, providing flexibility whil
 ### **Basic Union Types**
 
 
+{% raw %}
 ```typescript
 // Union of primitive types
 let id: string | number;
@@ -38,11 +39,13 @@ value = "hello";
 value = 42;
 value = true;
 ```
+{% endraw %}
 
 
 ### **Function Parameters with Union Types**
 
 
+{% raw %}
 ```typescript
 // Function accepting multiple types
 function formatValue(value: string | number): string {
@@ -56,11 +59,13 @@ function formatValue(value: string | number): string {
 formatValue("hello"); // "HELLO"
 formatValue(42);      // "42"
 ```
+{% endraw %}
 
 
 ### **Array Union Types**
 
 
+{% raw %}
 ```typescript
 // Array that can contain strings or numbers
 let mixedArray: (string | number)[] = ["hello", 42, "world", 100];
@@ -71,6 +76,7 @@ stringOrNumberArray = ["a", "b", "c"]; // ✅ Valid
 stringOrNumberArray = [1, 2, 3];       // ✅ Valid
 // stringOrNumberArray = ["a", 1, "b"]; // ❌ Error: Mixed types not allowed
 ```
+{% endraw %}
 
 
 ---
@@ -82,6 +88,7 @@ Intersection types combine multiple types into one, requiring all properties fro
 ### **Basic Intersection Types**
 
 
+{% raw %}
 ```typescript
 // Intersection of object types
 interface Person {
@@ -105,11 +112,13 @@ const employee: EmployeePerson = {
   department: "Engineering"
 };
 ```
+{% endraw %}
 
 
 ### **Function Intersection Types**
 
 
+{% raw %}
 ```typescript
 // Intersection of function types
 type LogFunction = (message: string) => void;
@@ -126,11 +135,13 @@ const logWithTimestamp: LogWithTimestamp = (message: string) => {
 // Add timestamp method
 (logWithTimestamp as any).timestamp = () => new Date().toISOString();
 ```
+{% endraw %}
 
 
 ### **Complex Intersection Types**
 
 
+{% raw %}
 ```typescript
 // Intersection with optional properties
 interface BaseConfig {
@@ -159,6 +170,7 @@ const config: AppConfig = {
   apiKey: "secret-key"
 };
 ```
+{% endraw %}
 
 
 ---
@@ -170,6 +182,7 @@ Type guards help narrow down union types to specific types at runtime.
 ### **Typeof Type Guards**
 
 
+{% raw %}
 ```typescript
 function processValue(value: string | number | boolean): string {
   if (typeof value === "string") {
@@ -184,11 +197,13 @@ function processValue(value: string | number | boolean): string {
   }
 }
 ```
+{% endraw %}
 
 
 ### **Instanceof Type Guards**
 
 
+{% raw %}
 ```typescript
 class Dog {
   breed: string;
@@ -214,11 +229,13 @@ function handlePet(pet: Dog | Cat): string {
   }
 }
 ```
+{% endraw %}
 
 
 ### **Custom Type Guards**
 
 
+{% raw %}
 ```typescript
 // Custom type guard function
 function isString(value: unknown): value is string {
@@ -241,6 +258,7 @@ function processUnknownValue(value: unknown): string {
   return "Unknown type";
 }
 ```
+{% endraw %}
 
 
 ---
@@ -252,6 +270,7 @@ Discriminated unions use a common property to distinguish between different type
 ### **Basic Discriminated Union**
 
 
+{% raw %}
 ```typescript
 // Discriminated union with 'type' property
 type Shape = 
@@ -277,11 +296,13 @@ function calculateArea(shape: Shape): number {
   }
 }
 ```
+{% endraw %}
 
 
 ### **Complex Discriminated Union**
 
 
+{% raw %}
 ```typescript
 // API response discriminated union
 type ApiResponse<T> = 
@@ -303,6 +324,7 @@ function handleApiResponse<T>(response: ApiResponse<T>): string {
   }
 }
 ```
+{% endraw %}
 
 
 ---
@@ -312,6 +334,7 @@ function handleApiResponse<T>(response: ApiResponse<T>): string {
 ### **Union of Function Types**
 
 
+{% raw %}
 ```typescript
 // Union of different function signatures
 type EventHandler = 
@@ -328,11 +351,13 @@ addEventListener((event: MouseEvent) => {
   console.log("Mouse event:", event.clientX, event.clientY);
 });
 ```
+{% endraw %}
 
 
 ### **Conditional Union Types**
 
 
+{% raw %}
 ```typescript
 // Union based on condition
 type ApiEndpoint<T extends "GET" | "POST"> = 
@@ -355,11 +380,13 @@ function makeRequest<T extends "GET" | "POST">(
   }
 }
 ```
+{% endraw %}
 
 
 ### **Intersection with Generics**
 
 
+{% raw %}
 ```typescript
 // Intersection type with generics
 interface Timestamped {
@@ -389,6 +416,7 @@ const user: TimestampedUser = {
   updatedAt: new Date()
 };
 ```
+{% endraw %}
 
 
 ---
@@ -398,6 +426,7 @@ const user: TimestampedUser = {
 ### **1. Use Discriminated Unions for State Management**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Clear state representation
 type LoadingState = 
@@ -413,11 +442,13 @@ type BadState = {
   error?: string;
 };
 ```
+{% endraw %}
 
 
 ### **2. Prefer Union Types Over Any**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Specific union type
 function processInput(input: string | number | boolean): string {
@@ -429,11 +460,13 @@ function processInput(input: any): string {
   // No type safety
 }
 ```
+{% endraw %}
 
 
 ### **3. Use Type Guards for Runtime Safety**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Type guard with runtime check
 function isUser(obj: unknown): obj is User {
@@ -449,11 +482,13 @@ if (isUser(data)) {
   console.log(data.name);
 }
 ```
+{% endraw %}
 
 
 ### **4. Leverage Exhaustiveness Checking**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Exhaustiveness check
 function handleStatus(status: "pending" | "approved" | "rejected"): string {
@@ -471,6 +506,7 @@ function handleStatus(status: "pending" | "approved" | "rejected"): string {
   }
 }
 ```
+{% endraw %}
 
 
 ---
@@ -484,6 +520,7 @@ function handleStatus(status: "pending" | "approved" | "rejected"): string {
 - **Intersection types (`&`)**: A value must satisfy all types simultaneously
 
 
+{% raw %}
 ```typescript
 // Union: can be string OR number
 let id: string | number;
@@ -491,6 +528,7 @@ let id: string | number;
 // Intersection: must have both Person AND Employee properties
 type EmployeePerson = Person & Employee;
 ```
+{% endraw %}
 
 
 ### **2. How do type guards work in TypeScript?**
@@ -515,6 +553,7 @@ Discriminated unions use a common property to distinguish between types:
 Use the `never` type in the default case to ensure all union members are handled:
 
 
+{% raw %}
 ```typescript
 function handleShape(shape: Circle | Rectangle): number {
   switch (shape.type) {
@@ -528,6 +567,7 @@ function handleShape(shape: Circle | Rectangle): number {
   }
 }
 ```
+{% endraw %}
 
 
 ### **5. When would you use intersection types over inheritance?**

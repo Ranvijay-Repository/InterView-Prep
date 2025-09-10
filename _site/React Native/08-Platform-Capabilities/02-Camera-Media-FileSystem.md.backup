@@ -26,6 +26,7 @@ Camera, media, and file system capabilities are essential for many React Native 
 ### **Camera, Media & File System Overview**
 
 
+{% raw %}
 ```
 ┌─────────────────────────────────────┐
 │        Camera, Media & File System  │
@@ -52,6 +53,7 @@ Camera, media, and file system capabilities are essential for many React Native 
 │  └─────────────────────────────────┘│
 └─────────────────────────────────────┘
 ```
+{% endraw %}
 
 
 ---
@@ -62,6 +64,7 @@ Camera, media, and file system capabilities are essential for many React Native 
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 import React, { useState, useRef, useCallback } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Alert, Image } from 'react-native';
@@ -387,6 +390,7 @@ const styles = StyleSheet.create({
 
 export default CameraManager;
 ```
+{% endraw %}
 
 
 ---

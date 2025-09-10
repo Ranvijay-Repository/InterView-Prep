@@ -25,6 +25,7 @@ TypeScript compiles to JavaScript, so runtime performance depends on the generat
 ### **Performance Factors**
 
 
+{% raw %}
 ```typescript
 // Factors affecting TypeScript runtime performance
 const performanceFactors = {
@@ -53,11 +54,13 @@ const performanceGoals = {
   efficientGC: "Efficient garbage collection"
 };
 ```
+{% endraw %}
 
 
 ### **TypeScript to JavaScript**
 
 
+{% raw %}
 ```typescript
 // TypeScript code
 interface User {
@@ -92,6 +95,7 @@ const performanceConsiderations = {
   decorators: "Decorators may add runtime overhead"
 };
 ```
+{% endraw %}
 
 
 ---
@@ -101,6 +105,7 @@ const performanceConsiderations = {
 ### **V8 Engine Optimization**
 
 
+{% raw %}
 ```typescript
 // V8 engine optimization patterns
 const v8Optimization = {
@@ -140,11 +145,13 @@ function processUsersBad(users: any[]) {
   return users.map(user => user.name || user.fullName || 'Unknown');
 }
 ```
+{% endraw %}
 
 
 ### **Function Optimization**
 
 
+{% raw %}
 ```typescript
 // Function optimization patterns
 const functionOptimization = {
@@ -181,11 +188,13 @@ const optimizationTechniques = {
   avoidClosures: "Avoid unnecessary closures"
 };
 ```
+{% endraw %}
 
 
 ### **Object and Array Performance**
 
 
+{% raw %}
 ```typescript
 // Object and array performance
 const objectArrayPerformance = {
@@ -234,6 +243,7 @@ function processNumbersBad(numbers: number[]): number[] {
   return result.sort((a, b) => a - b);
 }
 ```
+{% endraw %}
 
 
 ---
@@ -243,6 +253,7 @@ function processNumbersBad(numbers: number[]): number[] {
 ### **Memory Optimization**
 
 
+{% raw %}
 ```typescript
 // Memory optimization techniques
 const memoryOptimization = {
@@ -297,11 +308,13 @@ class ArrayPool {
   }
 }
 ```
+{% endraw %}
 
 
 ### **Garbage Collection Optimization**
 
 
+{% raw %}
 ```typescript
 // Garbage collection optimization
 const gcOptimization = {
@@ -357,11 +370,13 @@ class WeakReferenceExample {
   }
 }
 ```
+{% endraw %}
 
 
 ### **Memory Leak Prevention**
 
 
+{% raw %}
 ```typescript
 // Memory leak prevention
 const memoryLeakPrevention = {
@@ -426,6 +441,7 @@ class TimerManager {
   }
 }
 ```
+{% endraw %}
 
 
 ---
@@ -435,6 +451,7 @@ class TimerManager {
 ### **Algorithm Optimization**
 
 
+{% raw %}
 ```typescript
 // Algorithm optimization
 const algorithmOptimization = {
@@ -500,11 +517,13 @@ const expensiveCalculation = memoize((n: number): number => {
   return n * n * n;
 });
 ```
+{% endraw %}
 
 
 ### **Data Structure Optimization**
 
 
+{% raw %}
 ```typescript
 // Data structure optimization
 const dataStructureOptimization = {
@@ -555,11 +574,13 @@ function processDataBad(data: Array<{id: string, value: number}>) {
   return obj;
 }
 ```
+{% endraw %}
 
 
 ### **String and Number Optimization**
 
 
+{% raw %}
 ```typescript
 // String and number optimization
 const stringNumberOptimization = {
@@ -602,6 +623,7 @@ function parseNumberBad(str: string): number {
   return parseInt(str);
 }
 ```
+{% endraw %}
 
 
 ---
@@ -611,6 +633,7 @@ function parseNumberBad(str: string): number {
 ### **Performance Measurement**
 
 
+{% raw %}
 ```typescript
 // Performance measurement utilities
 class PerformanceMonitor {
@@ -669,11 +692,13 @@ function expensiveOperation() {
   return result;
 }
 ```
+{% endraw %}
 
 
 ### **Memory Monitoring**
 
 
+{% raw %}
 ```typescript
 // Memory monitoring utilities
 class MemoryMonitor {
@@ -730,11 +755,13 @@ setInterval(() => {
   }
 }, 5000);
 ```
+{% endraw %}
 
 
 ### **Performance Profiling**
 
 
+{% raw %}
 ```typescript
 // Performance profiling utilities
 class PerformanceProfiler {
@@ -809,6 +836,7 @@ const asyncResult = await profiler.profileAsync('async-operation', async () => {
   return await fetchData();
 });
 ```
+{% endraw %}
 
 
 ---
@@ -818,6 +846,7 @@ const asyncResult = await profiler.profileAsync('async-operation', async () => {
 ### **1. Optimize Object Shapes**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Consistent object shapes
 interface User {
@@ -837,11 +866,13 @@ function createUserBad(id: number, name: string, email?: string) {
   return user;
 }
 ```
+{% endraw %}
 
 
 ### **2. Use Appropriate Data Structures**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Use Set for unique values
 function getUniqueValues(arr: any[]): any[] {
@@ -859,11 +890,13 @@ function getUniqueValuesBad(arr: any[]): any[] {
   return unique;
 }
 ```
+{% endraw %}
 
 
 ### **3. Optimize Algorithms**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: O(n) time complexity
 function findDuplicates(arr: number[]): number[] {
@@ -896,11 +929,13 @@ function findDuplicatesBad(arr: number[]): number[] {
   return duplicates;
 }
 ```
+{% endraw %}
 
 
 ### **4. Monitor Performance**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Monitor performance
 const monitor = new PerformanceMonitor();
@@ -919,6 +954,7 @@ function expensiveOperation() {
   // Operation code without monitoring
 }
 ```
+{% endraw %}
 
 
 ---

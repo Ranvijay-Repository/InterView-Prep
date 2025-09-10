@@ -28,6 +28,7 @@ Networking is a crucial aspect of mobile applications. React Native provides the
 ### **Networking Overview**
 
 
+{% raw %}
 ```
 ┌─────────────────────────────────────┐
 │        Networking System            │
@@ -54,6 +55,7 @@ Networking is a crucial aspect of mobile applications. React Native provides the
 │  └─────────────────────────────────┘│
 └─────────────────────────────────────┘
 ```
+{% endraw %}
 
 
 ---
@@ -64,6 +66,7 @@ Networking is a crucial aspect of mobile applications. React Native provides the
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ActivityIndicator, Alert } from 'react-native';
@@ -259,6 +262,7 @@ const styles = StyleSheet.create({
 
 export default BasicFetchExample;
 ```
+{% endraw %}
 
 
 ---

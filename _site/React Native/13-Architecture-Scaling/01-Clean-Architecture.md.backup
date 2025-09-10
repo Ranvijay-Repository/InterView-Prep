@@ -23,6 +23,7 @@
 ### **Architecture Principles**
 
 
+{% raw %}
 ```mermaid
 graph TD
     A[Presentation Layer] --> B[Domain Layer]
@@ -33,6 +34,7 @@ graph TD
     F[Repositories] --> C
     G[Data Sources] --> C
 ```
+{% endraw %}
 
 
 ### **Key Principles**
@@ -49,6 +51,7 @@ graph TD
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Domain entities
 const User = {
@@ -152,12 +155,14 @@ const isValidEmail = (email) => {
 
 export { User, UserRepository, CreateUserUseCase, GetUserUseCase };
 ```
+{% endraw %}
 
 
 ### **Data Layer Implementation**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -312,6 +317,7 @@ const RemoteUserDataSource = {
 
 export { UserDataModel, LocalUserDataSource, RemoteUserDataSource };
 ```
+{% endraw %}
 
 
 ---
@@ -322,6 +328,7 @@ export { UserDataModel, LocalUserDataSource, RemoteUserDataSource };
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Dependency injection container
 const createDIContainer = () => {
@@ -471,6 +478,7 @@ const initializeContainer = () => {
 
 export { createDIContainer, UserRepositoryImpl, createUserService, initializeContainer };
 ```
+{% endraw %}
 
 
 ---

@@ -67,6 +67,7 @@ This repository is your **complete learning companion** for mastering modern web
 ## 🏗️ **Repository Structure Overview**
 
 
+{% raw %}
 ```
 📁 Interview-prep/
 ├── 📄 README.md (This file)
@@ -121,6 +122,7 @@ This repository is your **complete learning companion** for mastering modern web
     ├── 📁 TypeScript/ (Planned)
     └── 📁 More... (Extensible)
 ```
+{% endraw %}
 
 
 ---

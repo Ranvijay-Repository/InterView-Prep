@@ -25,6 +25,7 @@ Proper code organization is essential for maintainable, scalable, and collaborat
 ### **Organization Principles**
 
 
+{% raw %}
 ```typescript
 // Code organization principles
 const organizationPrinciples = {
@@ -55,11 +56,13 @@ const organizationChallenges = {
   refactoring: "Refactoring without breaking existing code"
 };
 ```
+{% endraw %}
 
 
 ### **Code Organization Goals**
 
 
+{% raw %}
 ```typescript
 // Code organization goals
 const organizationGoals = {
@@ -81,6 +84,7 @@ const organizationMetrics = {
   codeDuplication: "Amount of duplicated code"
 };
 ```
+{% endraw %}
 
 
 ---
@@ -90,6 +94,7 @@ const organizationMetrics = {
 ### **Basic Project Structure**
 
 
+{% raw %}
 ```typescript
 // Basic TypeScript project structure
 const basicProjectStructure = {
@@ -125,11 +130,13 @@ const exampleProjectStructure = {
   }
 };
 ```
+{% endraw %}
 
 
 ### **Advanced Project Structure**
 
 
+{% raw %}
 ```typescript
 // Advanced project structure for large applications
 const advancedProjectStructure = {
@@ -166,11 +173,13 @@ const featureBasedOrganization = {
   }
 };
 ```
+{% endraw %}
 
 
 ### **Monorepo Structure**
 
 
+{% raw %}
 ```typescript
 // Monorepo structure
 const monorepoStructure = {
@@ -205,6 +214,7 @@ const packageStructure = {
   "README.md": "Package documentation"
 };
 ```
+{% endraw %}
 
 
 ---
@@ -214,6 +224,7 @@ const packageStructure = {
 ### **Layered Architecture**
 
 
+{% raw %}
 ```typescript
 // Layered architecture pattern
 const layeredArchitecture = {
@@ -277,11 +288,13 @@ class UserRepositoryImpl implements UserRepository {
   }
 }
 ```
+{% endraw %}
 
 
 ### **Clean Architecture**
 
 
+{% raw %}
 ```typescript
 // Clean architecture pattern
 const cleanArchitecture = {
@@ -343,11 +356,13 @@ class UserRepositoryImpl implements UserRepository {
   }
 }
 ```
+{% endraw %}
 
 
 ### **Hexagonal Architecture**
 
 
+{% raw %}
 ```typescript
 // Hexagonal architecture pattern
 const hexagonalArchitecture = {
@@ -413,6 +428,7 @@ class NotificationServiceImpl implements NotificationService {
   }
 }
 ```
+{% endraw %}
 
 
 ---
@@ -422,6 +438,7 @@ class NotificationServiceImpl implements NotificationService {
 ### **Module Design Principles**
 
 
+{% raw %}
 ```typescript
 // Module design principles
 const moduleDesignPrinciples = {
@@ -468,11 +485,13 @@ class UserService {
   }
 }
 ```
+{% endraw %}
 
 
 ### **Module Dependencies**
 
 
+{% raw %}
 ```typescript
 // Module dependency management
 const moduleDependencies = {
@@ -539,11 +558,13 @@ class UserService {
   }
 }
 ```
+{% endraw %}
 
 
 ### **Module Communication**
 
 
+{% raw %}
 ```typescript
 // Module communication patterns
 const moduleCommunication = {
@@ -627,6 +648,7 @@ class StateManager {
   }
 }
 ```
+{% endraw %}
 
 
 ---
@@ -636,6 +658,7 @@ class StateManager {
 ### **File and Directory Naming**
 
 
+{% raw %}
 ```typescript
 // File and directory naming conventions
 const namingConventions = {
@@ -668,11 +691,13 @@ const directoryNamingExamples = {
   tests: "unit-tests/"
 };
 ```
+{% endraw %}
 
 
 ### **Variable and Function Naming**
 
 
+{% raw %}
 ```typescript
 // Variable and function naming conventions
 const variableNaming = {
@@ -706,11 +731,13 @@ const functionExamples = {
   deleters: "deleteUser, deleteOrder, deletePayment"
 };
 ```
+{% endraw %}
 
 
 ### **Class and Interface Naming**
 
 
+{% raw %}
 ```typescript
 // Class and interface naming conventions
 const classNaming = {
@@ -744,6 +771,7 @@ const interfaceExamples = {
   responses: "UserResponse, OrderResponse, PaymentResponse"
 };
 ```
+{% endraw %}
 
 
 ---
@@ -753,6 +781,7 @@ const interfaceExamples = {
 ### **1. Follow Single Responsibility Principle**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Single responsibility
 class UserService {
@@ -780,11 +809,13 @@ class UserService {
   }
 }
 ```
+{% endraw %}
 
 
 ### **2. Use Dependency Injection**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Dependency injection
 class UserService {
@@ -803,11 +834,13 @@ class UserService {
   }
 }
 ```
+{% endraw %}
 
 
 ### **3. Organize by Feature**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Feature-based organization
 const featureOrganization = {
@@ -826,11 +859,13 @@ const technicalOrganization = {
   "types/": "All types mixed together"
 };
 ```
+{% endraw %}
 
 
 ### **4. Use Consistent Naming**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Consistent naming
 const consistentNaming = {
@@ -848,6 +883,7 @@ const inconsistentNaming = {
   functions: "getUser, CreateUser, update_user, deleteUser"
 };
 ```
+{% endraw %}
 
 
 ---

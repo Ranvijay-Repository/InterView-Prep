@@ -26,6 +26,7 @@ Image optimization is crucial for React Native performance. Proper image handlin
 ### **Image Optimization Overview**
 
 
+{% raw %}
 ```
 ┌─────────────────────────────────────┐
 │        Image Optimization           │
@@ -52,6 +53,7 @@ Image optimization is crucial for React Native performance. Proper image handlin
 │  └─────────────────────────────────┘│
 └─────────────────────────────────────┘
 ```
+{% endraw %}
 
 
 ---
@@ -62,6 +64,7 @@ Image optimization is crucial for React Native performance. Proper image handlin
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 import React, { useState, useCallback, useRef } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity, ActivityIndicator, Alert } from 'react-native';
@@ -173,12 +176,14 @@ const styles = StyleSheet.create({
 
 export default OptimizedImage;
 ```
+{% endraw %}
 
 
 ### **Image Gallery with Optimization**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 import React, { useState, useCallback, useMemo } from 'react';
 import { View, Text, FlatList, StyleSheet, TouchableOpacity, Dimensions, Alert } from 'react-native';
@@ -490,6 +495,7 @@ const styles = StyleSheet.create({
 
 export default ImageGallery;
 ```
+{% endraw %}
 
 
 ---

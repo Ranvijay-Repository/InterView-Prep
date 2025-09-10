@@ -41,6 +41,7 @@
 
 ### ASCII Diagram: Shallow Copy
 
+{% raw %}
 ```
 ORIGINAL OBJECT          SHALLOW COPY
 ┌─────────────────┐     ┌─────────────────┐
@@ -57,6 +58,7 @@ ORIGINAL OBJECT          SHALLOW COPY
                                         └─────────────┘
                                         (SHARED REFERENCE)
 ```
+{% endraw %}
 
 
 ### Shallow Copy Methods:
@@ -73,6 +75,7 @@ ORIGINAL OBJECT          SHALLOW COPY
 
 ### ASCII Diagram: Deep Copy
 
+{% raw %}
 ```
 ORIGINAL OBJECT          DEEP COPY
 ┌─────────────────┐     ┌─────────────────┐
@@ -89,6 +92,7 @@ ORIGINAL OBJECT          DEEP COPY
                                         └─────────────┘
                                         (INDEPENDENT COPY)
 ```
+{% endraw %}
 
 
 ### Deep Copy Methods:
@@ -115,34 +119,42 @@ ORIGINAL OBJECT          DEEP COPY
 
 ### Method 1: Spread Operator (Shallow)
 
+{% raw %}
 ```javascript
 const original = { a: 1, b: { c: 2 } };
 const copy = { ...original };
 ```
+{% endraw %}
 
 
 ### Method 2: Object.assign (Shallow)
 
+{% raw %}
 ```javascript
 const original = { a: 1, b: { c: 2 } };
 const copy = Object.assign({}, original);
 ```
+{% endraw %}
 
 
 ### Method 3: JSON Methods (Deep)
 
+{% raw %}
 ```javascript
 const original = { a: 1, b: { c: 2 } };
 const copy = JSON.parse(JSON.stringify(original));
 ```
+{% endraw %}
 
 
 ### Method 4: structuredClone (Deep)
 
+{% raw %}
 ```javascript
 const original = { a: 1, b: { c: 2 } };
 const copy = structuredClone(original);
 ```
+{% endraw %}
 
 
 ---
@@ -154,6 +166,7 @@ const copy = structuredClone(original);
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
 
 
+{% raw %}
 ```javascript
 console.log("=== SHALLOW COPY LIMITATIONS ===");
 
@@ -188,6 +201,7 @@ console.log("=== Array Modification ===");
 console.log("Original hobbies:", originalPerson.hobbies); // ["reading", "gaming", "swimming"] 😱
 console.log("Copy hobbies:", shallowCopy.hobbies);        // ["reading", "gaming", "swimming"]
 ```
+{% endraw %}
 
 </div>
 
@@ -196,6 +210,7 @@ console.log("Copy hobbies:", shallowCopy.hobbies);        // ["reading", "gaming
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
 
 
+{% raw %}
 ```javascript
 console.log("=== DEEP COPY WITH JSON METHODS ===");
 
@@ -235,6 +250,7 @@ console.log("=== Array Modification ===");
 console.log("Original tags:", originalData.tags); // ["javascript", "react", "node"] ✅
 console.log("Copy tags:", deepCopy.tags);         // ["javascript", "react", "node", "typescript"]
 ```
+{% endraw %}
 
 </div>
 
@@ -243,6 +259,7 @@ console.log("Copy tags:", deepCopy.tags);         // ["javascript", "react", "no
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
 
 
+{% raw %}
 ```javascript
 console.log("=== STRUCTURED CLONE (MODERN) ===");
 
@@ -285,6 +302,7 @@ if (typeof structuredClone === 'function') {
     console.log("structuredClone not available in this environment");
 }
 ```
+{% endraw %}
 
 </div>
 
@@ -293,6 +311,7 @@ if (typeof structuredClone === 'function') {
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
 
 
+{% raw %}
 ```javascript
 console.log("=== CUSTOM DEEP COPY FUNCTION ===");
 
@@ -359,6 +378,7 @@ console.log("Copy nested value:", customDeepCopy.nested.value);       // 100
 console.log("Original array:", testObject.nested.array);              // [1, 2, 3] ✅
 console.log("Copy array:", customDeepCopy.nested.array);              // [1, 2, 3, 4]
 ```
+{% endraw %}
 
 </div>
 
@@ -367,6 +387,7 @@ console.log("Copy array:", customDeepCopy.nested.array);              // [1, 2, 
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
 
 
+{% raw %}
 ```javascript
 console.log("=== PERFORMANCE COMPARISON ===");
 
@@ -409,6 +430,7 @@ console.log("=== Memory Usage Note ===");
 console.log("Shallow copy: Lower memory, shared references");
 console.log("Deep copy: Higher memory, independent copies");
 ```
+{% endraw %}
 
 </div>
 
@@ -418,6 +440,7 @@ console.log("Deep copy: Higher memory, independent copies");
 
 ### Pitfall 1: JSON Methods Limitations
 
+{% raw %}
 ```javascript
 // ❌ JSON methods can't handle:
 const problematicObject = {
@@ -440,10 +463,12 @@ try {
     console.log("JSON copy failed:", error.message); // "Converting circular structure to JSON"
 }
 ```
+{% endraw %}
 
 
 ### Pitfall 2: Shallow Copy Misunderstanding
 
+{% raw %}
 ```javascript
 // ❌ Common mistake: thinking spread operator creates deep copy
 const original = {
@@ -457,6 +482,7 @@ const copy = { ...original };
 copy.user.name = "Jane";
 console.log(original.user.name); // "Jane" 😱
 ```
+{% endraw %}
 
 
 ---

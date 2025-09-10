@@ -44,6 +44,7 @@
 
 ### ASCII Diagram: Static Block Execution
 
+{% raw %}
 ```
 STATIC BLOCK EXECUTION
 ┌─────────────────────────────────┐
@@ -67,6 +68,7 @@ STATIC BLOCK EXECUTION
         │  Once         │
         └───────────────┘
 ```
+{% endraw %}
 
 
 ---
@@ -84,6 +86,7 @@ STATIC BLOCK EXECUTION
 
 ### ASCII Diagram: Decorator Pattern
 
+{% raw %}
 ```
 DECORATOR PATTERN
 ┌─────────────────────────────────┐
@@ -112,6 +115,7 @@ DECORATOR PATTERN
         │ functionality │
         └───────────────┘
 ```
+{% endraw %}
 
 
 ---
@@ -129,6 +133,7 @@ DECORATOR PATTERN
 
 ### ASCII Diagram: Proxy Interception
 
+{% raw %}
 ```
 PROXY INTERCEPTION
 ┌─────────────────────────────────┐
@@ -165,6 +170,7 @@ PROXY INTERCEPTION
         │  Object       │
         └───────────────┘
 ```
+{% endraw %}
 
 
 ---
@@ -173,6 +179,7 @@ PROXY INTERCEPTION
 
 ### 1. **Factory Pattern with Private Fields**
 
+{% raw %}
 ```javascript
 class UserFactory {
     static #userCount = 0;
@@ -187,10 +194,12 @@ class UserFactory {
     }
 }
 ```
+{% endraw %}
 
 
 ### 2. **Singleton with Private Constructor**
 
+{% raw %}
 ```javascript
 class DatabaseConnection {
     static #instance = null;
@@ -211,6 +220,7 @@ class DatabaseConnection {
     }
 }
 ```
+{% endraw %}
 
 
 ---

@@ -150,9 +150,9 @@ interface User {
   selector: 'app-user',
   template: `
     <div class="user-card">
-      <h3>{{#123;{{#123; user.name }}#125;}}#125;</h3>
-      <p>{{#123;{{#123; user.email }}#125;}}#125;</p>
-      <p>Age: {{#123;{{#123; user.age }}#125;}}#125;</p>
+      <h3>{{}}</h3>
+      <p>{{}}</p>
+      <p>Age: {{}}</p>
       <button (click)="onEdit()">Edit</button>
       <button (click)="onDelete()">Delete</button>
     </div>
@@ -207,7 +207,7 @@ interface User {
     <div class="user-list">
       <h2>Users</h2>
       <div *ngIf="loading" class="loading">Loading...</div>
-      <div *ngIf="error" class="error">{{#123;{{#123; error }}#125;}}#125;</div>
+      <div *ngIf="error" class="error">{{}}</div>
       <div *ngFor="let user of users" class="user-item">
         <app-user 
           [user]="user" 
@@ -302,9 +302,9 @@ interface Column<T> {
             [style.width]="column.width"
             [class.sortable]="column.sortable"
             (click)="onSort(column)">
-            {{#123;{{#123; column.title }}#125;}}#125;
+            {{}}
             <span *ngIf="column.sortable" class="sort-indicator">
-              {{#123;{{#123; getSortIndicator(column) }}#125;}}#125;
+              {{}}
             </span>
           </th>
         </tr>
@@ -314,7 +314,7 @@ interface Column<T> {
           <td *ngFor="let column of columns">
             <ng-container [ngSwitch]="column.key">
               <ng-container *ngSwitchDefault>
-                {{#123;{{#123; item[column.key] }}#125;}}#125;
+                {{}}
               </ng-container>
               <ng-container *ngSwitchCase="'actions'">
                 <ng-content [select]="'[slot=actions]'" [ngTemplateOutlet]="actionsTemplate" [ngTemplateOutletContext]="{ $implicit: item }"></ng-content>

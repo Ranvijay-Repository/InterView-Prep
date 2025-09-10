@@ -45,6 +45,7 @@
 
 ### ASCII Diagram: Railway Oriented Programming Flow
 
+{% raw %}
 ```
 RAILWAY ORIENTED PROGRAMMING
 ┌─────────────────────────────────┐
@@ -82,6 +83,7 @@ RAILWAY ORIENTED PROGRAMMING
         │  Data         │  │  Message      │
         └───────────────┘  └───────────────┘
 ```
+{% endraw %}
 
 
 ### Use Cases:
@@ -106,6 +108,7 @@ RAILWAY ORIENTED PROGRAMMING
 
 ### ASCII Diagram: Either/Maybe Monad Structure
 
+{% raw %}
 ```
 EITHER/MAYBE MONAD STRUCTURE
 ┌─────────────────────────────────┐
@@ -142,6 +145,7 @@ EITHER/MAYBE MONAD STRUCTURE
         │  Fallbacks    │
         └───────────────┘
 ```
+{% endraw %}
 
 
 ### Monad Operations:
@@ -166,6 +170,7 @@ EITHER/MAYBE MONAD STRUCTURE
 
 ### ASCII Diagram: Lens Pattern Structure
 
+{% raw %}
 ```
 LENS PATTERN STRUCTURE
 ┌─────────────────────────────────┐
@@ -211,6 +216,7 @@ LENS PATTERN STRUCTURE
         │  Transform    │
         └───────────────┘
 ```
+{% endraw %}
 
 
 ### Lens Operations:

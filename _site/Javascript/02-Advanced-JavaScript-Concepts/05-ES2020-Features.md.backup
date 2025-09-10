@@ -46,6 +46,7 @@
 
 ### ASCII Diagram: Optional Chaining Flow
 
+{% raw %}
 ```
 OPTIONAL CHAINING FLOW
 ┌─────────────────────────────────┐
@@ -71,6 +72,7 @@ OPTIONAL CHAINING FLOW
         │  undefined    │
         └───────────────┘
 ```
+{% endraw %}
 
 
 ### Use Cases:
@@ -93,6 +95,7 @@ OPTIONAL CHAINING FLOW
 
 ### ASCII Diagram: Nullish Coalescing Logic
 
+{% raw %}
 ```
 NULLISH COALESCING LOGIC
 ┌─────────────────────────────────┐
@@ -124,10 +127,12 @@ NULLISH COALESCING LOGIC
         │  Falsy Values │
         └───────────────┘
 ```
+{% endraw %}
 
 
 ### Comparison with Logical OR (||):
 
+{% raw %}
 ```javascript
 // Logical OR (||) - falls back on all falsy values
 0 || 42        // 42 (0 is falsy)
@@ -141,6 +146,7 @@ false ?? true  // false (false is not nullish)
 null ?? 42     // 42 (null is nullish)
 undefined ?? 42 // 42 (undefined is nullish)
 ```
+{% endraw %}
 
 
 ---
@@ -158,6 +164,7 @@ undefined ?? 42 // 42 (undefined is nullish)
 
 ### ASCII Diagram: BigInt vs Number Range
 
+{% raw %}
 ```
 BIGINT VS NUMBER RANGE
 ┌─────────────────────────────────┐
@@ -187,10 +194,12 @@ BIGINT VS NUMBER RANGE
         │  Values       │
         └───────────────┘
 ```
+{% endraw %}
 
 
 ### BigInt Operations:
 
+{% raw %}
 ```javascript
 // Creation
 const bigInt = 123n;
@@ -207,6 +216,7 @@ const power = 2n ** 100n;       // 1267650600228229401496703205376n
 123n == 123;                    // true (loose equality)
 123n === 123;                   // false (strict equality)
 ```
+{% endraw %}
 
 
 ---
@@ -224,6 +234,7 @@ const power = 2n ** 100n;       // 1267650600228229401496703205376n
 
 ### ASCII Diagram: Top-level await Execution
 
+{% raw %}
 ```
 TOP-LEVEL AWAIT EXECUTION
 ┌─────────────────────────────────┐
@@ -254,6 +265,7 @@ TOP-LEVEL AWAIT EXECUTION
         │  Loading      │
         └───────────────┘
 ```
+{% endraw %}
 
 
 ### Use Cases:
@@ -277,6 +289,7 @@ TOP-LEVEL AWAIT EXECUTION
 
 ### ASCII Diagram: Array.at() Indexing
 
+{% raw %}
 ```
 ARRAY.AT() INDEXING
 ┌─────────────────────────────────┐
@@ -309,10 +322,12 @@ ARRAY.AT() INDEXING
         │  end          │
         └───────────────┘
 ```
+{% endraw %}
 
 
 ### Comparison with Traditional Methods:
 
+{% raw %}
 ```javascript
 const arr = ['a', 'b', 'c', 'd', 'e'];
 
@@ -329,6 +344,7 @@ arr.at(-3);              // 'c' (third to last)
 arr.at(10);              // undefined (out of bounds)
 arr.at(-10);             // undefined (out of bounds)
 ```
+{% endraw %}
 
 
 ---

@@ -26,6 +26,7 @@ Advanced debugging tools help developers identify, diagnose, and fix issues in R
 ### **Debugging Ecosystem**
 
 
+{% raw %}
 ```
 ┌─────────────────────────────────────┐
 │        Debugging Tools              │
@@ -52,6 +53,7 @@ Advanced debugging tools help developers identify, diagnose, and fix issues in R
 │  └─────────────────────────────────┘│
 └─────────────────────────────────────┘
 ```
+{% endraw %}
 
 
 ### **Key Debugging Areas**
@@ -69,6 +71,7 @@ Advanced debugging tools help developers identify, diagnose, and fix issues in R
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```bash
 # Install Flipper
 # Download from: https://fbflipper.com/
@@ -79,12 +82,14 @@ npm install --save-dev react-native-flipper
 # For iOS
 cd ios && pod install && cd ..
 ```
+{% endraw %}
 
 
 ### **Flipper Configuration**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // App.js
 import { useEffect } from 'react';
@@ -110,12 +115,14 @@ const App = () => {
   );
 };
 ```
+{% endraw %}
 
 
 ### **Flipper Plugins**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // flipper-config.js
 import { addPlugin } from 'react-native-flipper';
@@ -146,12 +153,14 @@ addPlugin({
   }
 });
 ```
+{% endraw %}
 
 
 ### **Custom Flipper Plugins**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Custom plugin for app state
 import { addPlugin } from 'react-native-flipper';
@@ -184,6 +193,7 @@ const AppStatePlugin = {
 
 addPlugin(AppStatePlugin);
 ```
+{% endraw %}
 
 
 ---
@@ -194,6 +204,7 @@ addPlugin(AppStatePlugin);
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```bash
 # Enable Chrome debugging
 npx react-native start
@@ -202,12 +213,14 @@ npx react-native start
 # iOS: Cmd+D -> Debug
 # Android: Cmd+M -> Debug
 ```
+{% endraw %}
 
 
 ### **Chrome DevTools Features**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Console debugging
 console.log('Debug message');
@@ -225,12 +238,14 @@ console.timeEnd('operation');
 // Memory debugging
 console.memory; // Memory usage info
 ```
+{% endraw %}
 
 
 ### **Source Maps and Breakpoints**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Debugging with breakpoints
 const debugFunction = (data) => {
@@ -255,12 +270,14 @@ const debugLog = (message, data) => {
   }
 };
 ```
+{% endraw %}
 
 
 ### **Network Debugging**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Network debugging with Chrome DevTools
 const apiCall = async (url, options) => {
@@ -285,6 +302,7 @@ const apiCall = async (url, options) => {
   }
 };
 ```
+{% endraw %}
 
 
 ---
@@ -295,6 +313,7 @@ const apiCall = async (url, options) => {
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```bash
 # Install React Native Debugger
 # Download from: https://github.com/jhen0409/react-native-debugger
@@ -302,12 +321,14 @@ const apiCall = async (url, options) => {
 # Or install via Homebrew (macOS)
 brew install --cask react-native-debugger
 ```
+{% endraw %}
 
 
 ### **Redux DevTools Integration**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Redux store configuration
 import { createStore, applyMiddleware } from 'redux';
@@ -332,12 +353,14 @@ const userActions = {
   })
 };
 ```
+{% endraw %}
 
 
 ### **Async Storage Debugging**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // AsyncStorage debugging
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -365,6 +388,7 @@ const debugAsyncStorage = {
   }
 };
 ```
+{% endraw %}
 
 
 ---
@@ -375,6 +399,7 @@ const debugAsyncStorage = {
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```swift
 // iOS native debugging
 import Foundation
@@ -407,12 +432,14 @@ class DebugModule: NSObject {
     }
 }
 ```
+{% endraw %}
 
 
 ### **Android Debugging with Android Studio**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```java
 // Android native debugging
 import android.util.Log;
@@ -442,12 +469,14 @@ public class DebugModule extends ReactContextBaseJavaModule {
     }
 }
 ```
+{% endraw %}
 
 
 ### **Native Logs**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```bash
 # iOS logs
 xcrun simctl spawn booted log stream --predicate 'process == "YourApp"'
@@ -458,6 +487,7 @@ adb logcat | grep "ReactNativeJS"
 # Filter specific tags
 adb logcat -s "ReactNativeJS" "ReactNative" "YourApp"
 ```
+{% endraw %}
 
 
 ---
@@ -468,6 +498,7 @@ adb logcat -s "ReactNativeJS" "ReactNative" "YourApp"
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Remote debugging configuration
 const debugConfig = {
@@ -492,12 +523,14 @@ const remoteDebug = {
   }
 };
 ```
+{% endraw %}
 
 
 ### **Production Debugging**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Production debugging with crash reporting
 import crashlytics from '@react-native-firebase/crashlytics';
@@ -521,6 +554,7 @@ const productionDebug = {
   }
 };
 ```
+{% endraw %}
 
 
 ---
@@ -531,6 +565,7 @@ const productionDebug = {
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Systematic debugging approach
 const debugStrategy = {
@@ -555,12 +590,14 @@ const debugStrategy = {
   }
 };
 ```
+{% endraw %}
 
 
 ### **2. Performance Debugging**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Performance debugging utilities
 const performanceDebug = {
@@ -587,12 +624,14 @@ const performanceDebug = {
   }
 };
 ```
+{% endraw %}
 
 
 ### **3. Error Boundaries**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Error boundary for debugging
 class DebugErrorBoundary extends React.Component {
@@ -629,6 +668,7 @@ class DebugErrorBoundary extends React.Component {
   }
 }
 ```
+{% endraw %}
 
 
 ---

@@ -26,6 +26,7 @@ Animations are crucial for creating engaging user experiences in React Native. T
 ### **Animation System Overview**
 
 
+{% raw %}
 ```
 ┌─────────────────────────────────────┐
 │        Animation System             │
@@ -52,6 +53,7 @@ Animations are crucial for creating engaging user experiences in React Native. T
 │  └─────────────────────────────────┘│
 └─────────────────────────────────────┘
 ```
+{% endraw %}
 
 
 ---
@@ -62,6 +64,7 @@ Animations are crucial for creating engaging user experiences in React Native. T
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 import React, { useRef, useEffect } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Animated, Dimensions } from 'react-native';
@@ -299,6 +302,7 @@ const styles = StyleSheet.create({
 
 export default BasicAnimatedExample;
 ```
+{% endraw %}
 
 
 ---

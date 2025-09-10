@@ -26,6 +26,7 @@ The TypeScript ecosystem continues to evolve with new tools, frameworks, and bes
 ### **Ecosystem Components**
 
 {% raw %}
+{% raw %}
 ```typescript
 // TypeScript ecosystem components
 const ecosystemComponents = {
@@ -51,6 +52,7 @@ const growthAreas = {
 ### **Adoption Statistics**
 
 {% raw %}
+{% raw %}
 ```typescript
 // TypeScript adoption trends
 const adoptionTrends = {
@@ -69,6 +71,7 @@ const adoptionTrends = {
 
 ### **TypeScript 5.0+ Features**
 
+{% raw %}
 {% raw %}
 ```typescript
 // TypeScript 5.0+ new features
@@ -114,6 +117,7 @@ type SubmitEvent = EventName<'submit'>; // 'onSubmit'
 
 ### **Modern JavaScript Integration**
 
+{% raw %}
 {% raw %}
 ```typescript
 // Modern JavaScript features with TypeScript
@@ -184,6 +188,7 @@ class Config {
 ### **Performance Optimizations**
 
 {% raw %}
+{% raw %}
 ```typescript
 // Performance optimization trends
 const performanceTrends = {
@@ -236,6 +241,7 @@ const loadModule = async (moduleName: string) => {
 ### **WebAssembly Integration**
 
 {% raw %}
+{% raw %}
 ```typescript
 // WebAssembly with TypeScript
 const wasmIntegration = {
@@ -276,6 +282,7 @@ const result = wasm.add(5, 3); // 8
 ### **Edge Computing**
 
 {% raw %}
+{% raw %}
 ```typescript
 // Edge computing with TypeScript
 const edgeComputing = {
@@ -309,6 +316,7 @@ export default async function handler(request: Request): Promise<Response> {
 
 ### **AI and Machine Learning**
 
+{% raw %}
 {% raw %}
 ```typescript
 // AI/ML integration with TypeScript
@@ -394,6 +402,7 @@ class OpenAIService {
 ### **React 18+ Features**
 
 {% raw %}
+{% raw %}
 ```typescript
 // React 18+ with TypeScript
 const react18Features = {
@@ -443,6 +452,7 @@ const App = () => (
 
 ### **Vue 3 Composition API**
 
+{% raw %}
 {% raw %}
 ```typescript
 // Vue 3 with TypeScript
@@ -520,6 +530,7 @@ const handleUpdate = (value: string) => {
 ### **Angular 15+ Features**
 
 {% raw %}
+{% raw %}
 ```typescript
 // Angular 15+ with TypeScript
 const angular15Features = {
@@ -582,6 +593,7 @@ export class CounterComponent {
 ### **Build Tools**
 
 {% raw %}
+{% raw %}
 ```typescript
 // Modern build tools
 const buildTools = {
@@ -634,6 +646,7 @@ export default defineConfig({
 ### **Development Tools**
 
 {% raw %}
+{% raw %}
 ```typescript
 // Development tools evolution
 const devTools = {
@@ -672,6 +685,7 @@ const devTools = {
 ### **Language Evolution**
 
 {% raw %}
+{% raw %}
 ```typescript
 // Future TypeScript features
 const futureFeatures = {
@@ -702,6 +716,7 @@ const result = value
 ### **Ecosystem Trends**
 
 {% raw %}
+{% raw %}
 ```typescript
 // Ecosystem predictions
 const ecosystemPredictions = {
@@ -730,6 +745,7 @@ const futurePatterns = {
 ### **1. Stay Updated with Trends**
 
 {% raw %}
+{% raw %}
 ```typescript
 // ✅ Good: Use modern features
 const modernCode = {
@@ -752,6 +768,7 @@ const outdatedCode = {
 ### **2. Adopt New Tools Gradually**
 
 {% raw %}
+{% raw %}
 ```typescript
 // ✅ Good: Gradual adoption
 const gradualAdoption = {
@@ -772,6 +789,7 @@ const completeRewrite = {
 
 ### **3. Focus on Performance**
 
+{% raw %}
 {% raw %}
 ```typescript
 // ✅ Good: Performance-first approach
@@ -794,6 +812,7 @@ const ignoringPerformance = {
 
 ### **4. Embrace Modern Patterns**
 
+{% raw %}
 {% raw %}
 ```typescript
 // ✅ Good: Modern patterns

@@ -684,7 +684,7 @@ const Tab = createBottomTabNavigator();
 const PlatformTabNavigator = () => {
   return (
     <Tab.Navigator
-      screenOptions={{#123;{{#123;
+      screenOptions={{
         tabBarStyle: {
           backgroundColor: Platform.OS === 'ios' ? '#F2F2F7' : '#FFFFFF',
           borderTopWidth: Platform.OS === 'ios' ? 0.5 : 0,
@@ -699,7 +699,7 @@ const PlatformTabNavigator = () => {
         },
         tabBarActiveTintColor: Platform.OS === 'ios' ? '#007AFF' : '#2196F3',
         tabBarInactiveTintColor: Platform.OS === 'ios' ? '#8E8E93' : '#757575',
-      }}#125;}}#125;
+}}
     >
       <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="Profile" component={ProfileScreen} />

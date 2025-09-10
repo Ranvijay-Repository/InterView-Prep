@@ -43,6 +43,7 @@
 
 ### ASCII Diagram: Top-Level Await Flow
 
+{% raw %}
 ```
 TOP-LEVEL AWAIT FLOW
 ┌─────────────────────────────────┐
@@ -73,6 +74,7 @@ TOP-LEVEL AWAIT FLOW
         │  Loading      │
         └───────────────┘
 ```
+{% endraw %}
 
 
 ---
@@ -89,6 +91,7 @@ TOP-LEVEL AWAIT FLOW
 
 ### ASCII Diagram: Promise.withResolvers Pattern
 
+{% raw %}
 ```
 PROMISE.WITHRESOLVERS PATTERN
 ┌─────────────────────────────────┐
@@ -123,6 +126,7 @@ PROMISE.WITHRESOLVERS PATTERN
         │  Resolution   │
         └───────────────┘
 ```
+{% endraw %}
 
 
 ---
@@ -131,6 +135,7 @@ PROMISE.WITHRESOLVERS PATTERN
 
 ### 1. **Async Iterator Pattern**
 
+{% raw %}
 ```javascript
 class AsyncDataStream {
     constructor(data) {
@@ -153,10 +158,12 @@ for await (const item of stream) {
     console.log(item);
 }
 ```
+{% endraw %}
 
 
 ### 2. **Async Generator Functions**
 
+{% raw %}
 ```javascript
 async function* asyncGenerator() {
     yield await fetchData(1);
@@ -169,6 +176,7 @@ for await (const data of asyncGenerator()) {
     console.log(data);
 }
 ```
+{% endraw %}
 
 
 ---

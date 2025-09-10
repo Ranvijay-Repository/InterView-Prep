@@ -42,6 +42,7 @@
 
 ### ASCII Diagram: Monad Structure
 
+{% raw %}
 ```
 MONAD STRUCTURE
 ┌─────────────────────────────────┐
@@ -60,6 +61,7 @@ MONAD STRUCTURE
         │  Composable   │
         └───────────────┘
 ```
+{% endraw %}
 
 
 ### Why Monads Matter:
@@ -80,6 +82,7 @@ MONAD STRUCTURE
 
 ### ASCII Diagram: Applicative Pattern
 
+{% raw %}
 ```
 APPLICATIVE PATTERN
 ┌─────────────────────────────────┐
@@ -101,6 +104,7 @@ APPLICATIVE PATTERN
         │ Context       │
         └───────────────┘
 ```
+{% endraw %}
 
 
 ### Use Cases:
@@ -115,6 +119,7 @@ APPLICATIVE PATTERN
 
 ### Function Composition with Monads
 
+{% raw %}
 ```javascript
 // Monadic composition example
 const composeM = (f, g) => x => 
@@ -129,10 +134,12 @@ const safeSqrt = x =>
 
 const composed = composeM(safeSqrt, safeDivide);
 ```
+{% endraw %}
 
 
 ### Applicative Composition
 
+{% raw %}
 ```javascript
 // Applicative composition
 const liftA2 = (f, a, b) => 
@@ -145,6 +152,7 @@ const liftA3 = (f, a, b, c) =>
 const add3 = (a, b, c) => a + b + c;
 const safeAdd3 = liftA3(add3, Maybe.just(1), Maybe.just(2), Maybe.just(3));
 ```
+{% endraw %}
 
 
 ---

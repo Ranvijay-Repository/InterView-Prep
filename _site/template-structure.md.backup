@@ -4,6 +4,7 @@ This template shows the proper structure to use for all documentation files to a
 
 ## 📁 File Structure
 {% raw %}
+{% raw %}
 ```
 /Users/ranvijaychouhan/Desktop/Personal/Interview-prep/
 ├── common-styles.css          # All common styles
@@ -19,6 +20,7 @@ This template shows the proper structure to use for all documentation files to a
 ### 1. **CSS Integration**
 Add this line at the top of your markdown file (after the title):
 {% raw %}
+{% raw %}
 ```html
 <link rel="stylesheet" href="../common-styles.css">
 ```
@@ -27,6 +29,7 @@ Add this line at the top of your markdown file (after the title):
 ### 2. **JavaScript Integration**
 Add this line before the closing `</body>` tag:
 {% raw %}
+{% raw %}
 ```html
 <script src="../common-scripts.js"></script>
 ```
@@ -34,6 +37,7 @@ Add this line before the closing `</body>` tag:
 
 ## 📝 Standard File Structure
 
+{% raw %}
 {% raw %}
 ```markdown
 # 🔹 Your Title Here

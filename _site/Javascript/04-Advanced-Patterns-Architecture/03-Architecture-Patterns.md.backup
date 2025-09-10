@@ -45,6 +45,7 @@
 
 ### ASCII Diagram: Micro-frontends Architecture
 
+{% raw %}
 ```
 MICRO-FRONTENDS ARCHITECTURE
 ┌─────────────────────────────────┐
@@ -88,6 +89,7 @@ MICRO-FRONTENDS ARCHITECTURE
         │  State Store  │
         └───────────────┘
 ```
+{% endraw %}
 
 
 ### Integration Methods:
@@ -111,6 +113,7 @@ MICRO-FRONTENDS ARCHITECTURE
 
 ### ASCII Diagram: Event Sourcing Flow
 
+{% raw %}
 ```
 EVENT SOURCING FLOW
 ┌─────────────────────────────────┐
@@ -161,6 +164,7 @@ EVENT SOURCING FLOW
         │  Views        │
         └───────────────┘
 ```
+{% endraw %}
 
 
 ### Event Types:
@@ -184,6 +188,7 @@ EVENT SOURCING FLOW
 
 ### ASCII Diagram: CQRS Architecture
 
+{% raw %}
 ```
 CQRS ARCHITECTURE
 ┌─────────────────────────────────┐
@@ -228,6 +233,7 @@ CQRS ARCHITECTURE
         │  - Normalized │  │  - Optimized  │
         └───────────────┘  └───────────────┘
 ```
+{% endraw %}
 
 
 ### CQRS Benefits:

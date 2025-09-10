@@ -10,6 +10,7 @@
 
 #### 1. **Exporting Modules**
 
+{% raw %}
 ```javascript
 // math.js - CommonJS exports
 const PI = 3.14159;
@@ -62,10 +63,12 @@ exports.add = add;
 exports.subtract = subtract;
 exports.Calculator = Calculator;
 ```
+{% endraw %}
 
 
 #### 2. **Importing Modules**
 
+{% raw %}
 ```javascript
 // main.js - CommonJS imports
 const math = require('./math.js');
@@ -84,10 +87,12 @@ const { PI, add, Calculator: CalcClass } = require('./math.js');
 const mathUtils = require('./math.js');
 const { add: addNumbers } = require('./math.js');
 ```
+{% endraw %}
 
 
 ### ASCII Diagram: CommonJS vs ES6 Modules
 
+{% raw %}
 ```
 COMMONJS vs ES6 MODULES
 ┌─────────────────────────────────┐    ┌─────────────────────────────────┐
@@ -104,6 +109,7 @@ COMMONJS vs ES6 MODULES
 │ Runtime evaluation              │    │ Compile-time analysis          │
 └─────────────────────────────────┘    └─────────────────────────────────┘
 ```
+{% endraw %}
 
 
 ---
@@ -114,6 +120,7 @@ COMMONJS vs ES6 MODULES
 
 ### Basic Dynamic Import:
 
+{% raw %}
 ```javascript
 // Dynamic import example
 async function loadModule(moduleName) {
@@ -142,10 +149,12 @@ async function main() {
 
 main();
 ```
+{% endraw %}
 
 
 ### Conditional Module Loading:
 
+{% raw %}
 ```javascript
 // Load different modules based on conditions
 async function loadFeature(featureName) {
@@ -171,6 +180,7 @@ async function loadUserInterface(theme) {
     return uiModule.default;
 }
 ```
+{% endraw %}
 
 
 ---
@@ -183,6 +193,7 @@ async function loadUserInterface(theme) {
 
 #### 1. **Webpack**
 
+{% raw %}
 ```javascript
 // webpack.config.js
 const path = require('path');
@@ -212,10 +223,12 @@ module.exports = {
     }
 };
 ```
+{% endraw %}
 
 
 #### 2. **Vite**
 
+{% raw %}
 ```javascript
 // vite.config.js
 import { defineConfig } from 'vite';
@@ -232,6 +245,7 @@ export default defineConfig({
     plugins: []
 });
 ```
+{% endraw %}
 
 
 ---
@@ -242,6 +256,7 @@ export default defineConfig({
 
 ### Tree Shaking Example:
 
+{% raw %}
 ```javascript
 // utils.js - Multiple exports
 export function add(a, b) {
@@ -268,6 +283,7 @@ console.log(multiply(4, 2)); // 8
 
 // subtract and divide functions will be removed from the bundle
 ```
+{% endraw %}
 
 
 ---
@@ -279,6 +295,7 @@ console.log(multiply(4, 2)); // 8
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
 
 
+{% raw %}
 ```javascript
 console.log("=== BUILDING A MODULAR APPLICATION ===");
 
@@ -480,6 +497,7 @@ if (import.meta.url === `file://${process.argv[1]}`) {
 // Export for testing or other modules
 export { main, UserService, APIClient, Logger };
 ```
+{% endraw %}
 
 
 ---
@@ -488,6 +506,7 @@ export { main, UserService, APIClient, Logger };
 
 ### Pitfall 1: Circular Dependencies
 
+{% raw %}
 ```javascript
 // ❌ WRONG: Circular dependency
 // a.js
@@ -500,10 +519,12 @@ export const b = 'b';
 
 // This creates a circular dependency error
 ```
+{% endraw %}
 
 
 ### Pitfall 2: Missing File Extensions
 
+{% raw %}
 ```javascript
 // ❌ WRONG: Missing .js extension (in some environments)
 import { add } from './math'; // May not work
@@ -511,10 +532,12 @@ import { add } from './math'; // May not work
 // ✅ CORRECT: Include file extension
 import { add } from './math.js';
 ```
+{% endraw %}
 
 
 ### Pitfall 3: Mixing Module Systems
 
+{% raw %}
 ```javascript
 // ❌ WRONG: Mixing CommonJS and ES6 modules
 const math = require('./math.js'); // CommonJS
@@ -522,6 +545,7 @@ import { add } from './math.js';   // ES6
 
 // Stick to one module system per project
 ```
+{% endraw %}
 
 
 ---

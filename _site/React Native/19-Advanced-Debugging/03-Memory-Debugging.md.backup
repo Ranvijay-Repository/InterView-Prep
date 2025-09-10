@@ -27,6 +27,7 @@ Memory debugging involves identifying memory leaks, monitoring memory usage, and
 ### **Memory Debugging Framework**
 
 
+{% raw %}
 ```
 ┌─────────────────────────────────────┐
 │        Memory Debugging            │
@@ -53,6 +54,7 @@ Memory debugging involves identifying memory leaks, monitoring memory usage, and
 │  └─────────────────────────────────┘│
 └─────────────────────────────────────┘
 ```
+{% endraw %}
 
 
 ### **Key Memory Metrics**
@@ -70,6 +72,7 @@ Memory debugging involves identifying memory leaks, monitoring memory usage, and
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Memory leak detection utilities
 const MemoryLeakDetector = {
@@ -114,12 +117,14 @@ const MemoryLeakDetector = {
   }
 };
 ```
+{% endraw %}
 
 
 ### **Common Memory Leak Patterns**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Common memory leak patterns and fixes
 
@@ -151,12 +156,14 @@ class FixedComponent extends React.Component {
   }
 }
 ```
+{% endraw %}
 
 
 ### **Memory Leak Detection in Lists**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Memory leak detection for FlatList
 const MemoryLeakAwareFlatList = ({ data, renderItem, ...props }) => {
@@ -198,6 +205,7 @@ const MemoryLeakAwareFlatList = ({ data, renderItem, ...props }) => {
   );
 };
 ```
+{% endraw %}
 
 
 ---
@@ -208,6 +216,7 @@ const MemoryLeakAwareFlatList = ({ data, renderItem, ...props }) => {
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Memory profiling utilities
 const MemoryProfiler = {
@@ -244,12 +253,14 @@ const MemoryProfiler = {
   }
 };
 ```
+{% endraw %}
 
 
 ### **Custom Memory Profiler**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Custom memory profiler
 class CustomMemoryProfiler {
@@ -307,6 +318,7 @@ class CustomMemoryProfiler {
 // Global profiler instance
 const memoryProfiler = new CustomMemoryProfiler();
 ```
+{% endraw %}
 
 
 ---
@@ -317,6 +329,7 @@ const memoryProfiler = new CustomMemoryProfiler();
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // JavaScript memory management utilities
 const JavaScriptMemoryManager = {
@@ -362,12 +375,14 @@ const JavaScriptMemoryManager = {
   }
 };
 ```
+{% endraw %}
 
 
 ### **Memory-Efficient Data Structures**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Memory-efficient data structures
 const MemoryEfficientStructures = {
@@ -423,6 +438,7 @@ const MemoryEfficientStructures = {
   }
 };
 ```
+{% endraw %}
 
 
 ---
@@ -433,6 +449,7 @@ const MemoryEfficientStructures = {
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Native memory monitoring
 const NativeMemoryMonitor = {
@@ -460,12 +477,14 @@ const NativeMemoryMonitor = {
   }
 };
 ```
+{% endraw %}
 
 
 ### **Image Memory Optimization**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Image memory optimization
 const ImageMemoryOptimizer = {
@@ -521,6 +540,7 @@ const ImageMemoryOptimizer = {
   }
 };
 ```
+{% endraw %}
 
 
 ---
@@ -531,6 +551,7 @@ const ImageMemoryOptimizer = {
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Memory optimization strategies
 const MemoryOptimizer = {
@@ -583,12 +604,14 @@ const MemoryOptimizer = {
   }
 };
 ```
+{% endraw %}
 
 
 ### **Component Memory Optimization**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Memory-optimized component
 const MemoryOptimizedComponent = ({ data, onItemPress }) => {
@@ -636,6 +659,7 @@ const MemoryOptimizedComponent = ({ data, onItemPress }) => {
   );
 };
 ```
+{% endraw %}
 
 
 ---
@@ -646,6 +670,7 @@ const MemoryOptimizedComponent = ({ data, onItemPress }) => {
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Real-time memory monitoring
 const MemoryMonitor = {
@@ -708,6 +733,7 @@ const MemoryMonitor = {
   }
 };
 ```
+{% endraw %}
 
 
 ---
@@ -718,6 +744,7 @@ const MemoryMonitor = {
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Memory management best practices
 const MemoryBestPractices = {
@@ -757,12 +784,14 @@ const MemoryBestPractices = {
   }
 };
 ```
+{% endraw %}
 
 
 ### **2. Memory Testing**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Memory testing utilities
 const MemoryTester = {
@@ -793,6 +822,7 @@ const MemoryTester = {
   }
 };
 ```
+{% endraw %}
 
 
 ---

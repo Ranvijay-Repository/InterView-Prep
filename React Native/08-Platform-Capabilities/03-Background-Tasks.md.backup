@@ -26,6 +26,7 @@ Background tasks enable React Native applications to perform operations when the
 ### **Background Tasks Overview**
 
 
+{% raw %}
 ```
 ┌─────────────────────────────────────┐
 │        Background Tasks             │
@@ -52,6 +53,7 @@ Background tasks enable React Native applications to perform operations when the
 │  └─────────────────────────────────┘│
 └─────────────────────────────────────┘
 ```
+{% endraw %}
 
 
 ---
@@ -62,6 +64,7 @@ Background tasks enable React Native applications to perform operations when the
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 import { AppRegistry, NativeModules } from 'react-native';
 import BackgroundJob from 'react-native-background-job';
@@ -328,6 +331,7 @@ export {
   getTaskStatus,
 };
 ```
+{% endraw %}
 
 
 ---

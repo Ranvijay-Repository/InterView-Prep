@@ -44,6 +44,7 @@
 
 ### ASCII Diagram: Class Fields Structure
 
+{% raw %}
 ```
 CLASS FIELDS STRUCTURE
 ┌─────────────────────────────────┐
@@ -77,6 +78,7 @@ CLASS FIELDS STRUCTURE
         │  Public       │
         └───────────────┘
 ```
+{% endraw %}
 
 
 ### Field Types:
@@ -100,6 +102,7 @@ CLASS FIELDS STRUCTURE
 
 ### ASCII Diagram: Top-level await Module Flow
 
+{% raw %}
 ```
 TOP-LEVEL AWAIT MODULE FLOW
 ┌─────────────────────────────────┐
@@ -130,6 +133,7 @@ TOP-LEVEL AWAIT MODULE FLOW
         │  Loading      │
         └───────────────┘
 ```
+{% endraw %}
 
 
 ### Use Cases:
@@ -154,6 +158,7 @@ TOP-LEVEL AWAIT MODULE FLOW
 
 ### ASCII Diagram: Error.cause Chain
 
+{% raw %}
 ```
 ERROR.CAUSE CHAIN
 ┌─────────────────────────────────┐
@@ -183,6 +188,7 @@ ERROR.CAUSE CHAIN
         │  Debugging    │
         └───────────────┘
 ```
+{% endraw %}
 
 
 ### Error Chaining Benefits:

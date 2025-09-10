@@ -154,7 +154,7 @@
 
 <h2 id="-root-cause">🔍 <strong>Root Cause</strong></h2>
 
-<p>The errors were occurring because Jekyll (which powers GitHub Pages) was trying to interpret JavaScript object syntax <code class="language-plaintext highlighter-rouge">&amp;#123;&amp;#123; &amp;#125;&amp;#125;</code> as Liquid template variables. This happened in several files:</p>
+<p>The errors were occurring because Jekyll (which powers GitHub Pages) was trying to interpret JavaScript object syntax <code class="language-plaintext highlighter-rouge">&amp;&amp; &amp;&amp;</code> as Liquid template variables. This happened in several files:</p>
 
 <ol>
   <li><strong>React Native/00-Core-Foundations/02-TypeScript-Essentials-for-RN.md</strong> (line 672)</li>

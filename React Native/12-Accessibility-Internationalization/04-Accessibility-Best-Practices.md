@@ -177,7 +177,7 @@ const AccessibleButton = ({
         if (event.nativeEvent.actionName === 'activate') {
           onPress();
         }
-      }}#125;}}#125;
+}}
     >
       <Text style={getTextStyle()}>{title}</Text>
     </TouchableOpacity>

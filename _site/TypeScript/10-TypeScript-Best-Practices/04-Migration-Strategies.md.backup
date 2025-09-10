@@ -25,6 +25,7 @@ Migration strategies are essential for modernizing codebases and adopting new te
 ### **Migration Principles**
 
 
+{% raw %}
 ```typescript
 // Migration principles
 const migrationPrinciples = {
@@ -56,11 +57,13 @@ const migrationChallenges = {
   documentation: "Updating documentation and processes"
 };
 ```
+{% endraw %}
 
 
 ### **Migration Strategies**
 
 
+{% raw %}
 ```typescript
 // Migration strategies
 const migrationStrategies = {
@@ -83,6 +86,7 @@ const migrationPhases = {
   cleanup: "Clean up old code and infrastructure"
 };
 ```
+{% endraw %}
 
 
 ---
@@ -92,6 +96,7 @@ const migrationPhases = {
 ### **Migration Approaches**
 
 
+{% raw %}
 ```typescript
 // JavaScript to TypeScript migration approaches
 const migrationApproaches = {
@@ -141,11 +146,13 @@ const migrationChecklist = {
   ]
 };
 ```
+{% endraw %}
 
 
 ### **TypeScript Configuration Setup**
 
 
+{% raw %}
 ```typescript
 // Initial TypeScript configuration
 const initialTsConfig = {
@@ -193,11 +200,13 @@ const progressiveStrictConfig = {
   }
 };
 ```
+{% endraw %}
 
 
 ### **File Conversion Process**
 
 
+{% raw %}
 ```typescript
 // File conversion process
 const fileConversionProcess = {
@@ -278,6 +287,7 @@ class MigrationUtilities {
   }
 }
 ```
+{% endraw %}
 
 
 ---
@@ -287,6 +297,7 @@ class MigrationUtilities {
 ### **Version Upgrade Strategy**
 
 
+{% raw %}
 ```typescript
 // TypeScript version upgrade strategy
 const versionUpgradeStrategy = {
@@ -335,11 +346,13 @@ const breakingChangesHandling = {
   buildChanges: "Handle build process changes"
 };
 ```
+{% endraw %}
 
 
 ### **TypeScript 4.x to 5.x Migration**
 
 
+{% raw %}
 ```typescript
 // TypeScript 4.x to 5.x migration
 const ts4To5Migration = {
@@ -394,11 +407,13 @@ function createArray<T extends readonly unknown[]>(...items: T): T {
 
 const numbers = createArray(1, 2, 3); // Type: readonly [1, 2, 3]
 ```
+{% endraw %}
 
 
 ### **Configuration Migration**
 
 
+{% raw %}
 ```typescript
 // Configuration migration
 const configurationMigration = {
@@ -438,6 +453,7 @@ const ts5Config = {
   "exclude": ["node_modules", "dist"]
 };
 ```
+{% endraw %}
 
 
 ---
@@ -447,6 +463,7 @@ const ts5Config = {
 ### **Legacy Code Challenges**
 
 
+{% raw %}
 ```typescript
 // Legacy code challenges
 const legacyCodeChallenges = {
@@ -478,11 +495,13 @@ const legacyCodePatterns = {
   inheritance: "Deep inheritance hierarchies"
 };
 ```
+{% endraw %}
 
 
 ### **Modernization Process**
 
 
+{% raw %}
 ```typescript
 // Modernization process
 const modernizationProcess = {
@@ -571,11 +590,13 @@ class ModernizationUtilities {
   }
 }
 ```
+{% endraw %}
 
 
 ### **Dependency Modernization**
 
 
+{% raw %}
 ```typescript
 // Dependency modernization
 const dependencyModernization = {
@@ -634,6 +655,7 @@ const users = filter(data, { active: true });
 const formattedDate = format(new Date(), 'yyyy-MM-dd');
 document.getElementById('button')?.addEventListener('click', () => console.log('clicked'));
 ```
+{% endraw %}
 
 
 ---
@@ -643,6 +665,7 @@ document.getElementById('button')?.addEventListener('click', () => console.log('
 ### **Migration Tools**
 
 
+{% raw %}
 ```typescript
 // Migration tools
 const migrationTools = {
@@ -692,11 +715,13 @@ module.exports = function transformer(fileInfo, api) {
 };
 `;
 ```
+{% endraw %}
 
 
 ### **Automation Scripts**
 
 
+{% raw %}
 ```typescript
 // Automation scripts
 const automationScripts = {
@@ -813,11 +838,13 @@ class TestingAutomation {
   }
 }
 ```
+{% endraw %}
 
 
 ### **CI/CD Integration**
 
 
+{% raw %}
 ```typescript
 // CI/CD integration
 const ciCdIntegration = {
@@ -918,6 +945,7 @@ pipeline {
 }
 `;
 ```
+{% endraw %}
 
 
 ---
@@ -927,6 +955,7 @@ pipeline {
 ### **1. Plan Migration Carefully**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Careful migration planning
 const migrationPlan = {
@@ -947,11 +976,13 @@ const rushedMigration = {
   noTraining: "No team training"
 };
 ```
+{% endraw %}
 
 
 ### **2. Migrate Incrementally**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Incremental migration
 const incrementalMigration = {
@@ -970,11 +1001,13 @@ const bigBangMigration = {
   hardRollback: "Difficult to rollback"
 };
 ```
+{% endraw %}
 
 
 ### **3. Test Thoroughly**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Comprehensive testing
 const comprehensiveTesting = {
@@ -993,11 +1026,13 @@ const insufficientTesting = {
   noBuildTests: "No build process testing"
 };
 ```
+{% endraw %}
 
 
 ### **4. Document Migration Process**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Document migration process
 const migrationDocumentation = {
@@ -1017,6 +1052,7 @@ const noDocumentation = {
   noProcedures: "No documented procedures"
 };
 ```
+{% endraw %}
 
 
 ---

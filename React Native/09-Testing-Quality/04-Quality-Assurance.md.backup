@@ -26,6 +26,7 @@ Quality assurance ensures that React Native applications meet high standards for
 ### **Quality Assurance Overview**
 
 
+{% raw %}
 ```
 ┌─────────────────────────────────────┐
 │        Quality Assurance            │
@@ -52,6 +53,7 @@ Quality assurance ensures that React Native applications meet high standards for
 │  └─────────────────────────────────┘│
 └─────────────────────────────────────┘
 ```
+{% endraw %}
 
 
 ---
@@ -62,6 +64,7 @@ Quality assurance ensures that React Native applications meet high standards for
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // .eslintrc.js
 module.exports = {
@@ -179,12 +182,14 @@ module.exports = {
   ],
 };
 ```
+{% endraw %}
 
 
 ### **Prettier Configuration**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // .prettierrc.js
 module.exports = {
@@ -217,12 +222,14 @@ module.exports = {
   ],
 };
 ```
+{% endraw %}
 
 
 ### **TypeScript Configuration**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // tsconfig.json
 {
@@ -277,6 +284,7 @@ module.exports = {
   ]
 }
 ```
+{% endraw %}
 
 
 ---
@@ -287,6 +295,7 @@ module.exports = {
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```json
 {
   "scripts": {
@@ -312,12 +321,14 @@ module.exports = {
   }
 }
 ```
+{% endraw %}
 
 
 ### **Husky Configuration**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // .husky/pre-commit
 #!/usr/bin/env sh
@@ -325,9 +336,11 @@ module.exports = {
 
 npm run pre-commit
 ```
+{% endraw %}
 
 
 
+{% raw %}
 ```javascript
 // .husky/pre-push
 #!/usr/bin/env sh
@@ -335,12 +348,14 @@ npm run pre-commit
 
 npm run pre-push
 ```
+{% endraw %}
 
 
 ### **Lint-staged Configuration**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // .lintstagedrc.js
 module.exports = {
@@ -358,6 +373,7 @@ module.exports = {
   ],
 };
 ```
+{% endraw %}
 
 
 ---

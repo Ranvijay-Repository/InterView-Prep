@@ -52,6 +52,7 @@ JavaScript moves the "furniture" (declarations) to the top, but doesn't place it
 ## 📊 Hoisting Visualization
 
 
+{% raw %}
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │                    HOISTING PROCESS                         │
@@ -69,6 +70,7 @@ JavaScript moves the "furniture" (declarations) to the top, but doesn't place it
 │                              Initializations stay put        │
 └─────────────────────────────────────────────────────────────┘
 ```
+{% endraw %}
 
 
 ---
@@ -80,6 +82,7 @@ JavaScript moves the "furniture" (declarations) to the top, but doesn't place it
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
 
+{% raw %}
 ```javascript
 console.log("=== VARIABLE HOISTING COMPARISON ===");
 
@@ -97,6 +100,7 @@ try {
 let letVariable = "I'm let";
 console.log("4. letVariable after declaration:", letVariable);  // "I'm let"
 ```
+{% endraw %}
 
 </div>
 
@@ -105,6 +109,7 @@ console.log("4. letVariable after declaration:", letVariable);  // "I'm let"
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
 
 
+{% raw %}
 ```javascript
 console.log("=== FUNCTION HOISTING COMPARISON ===");
 
@@ -128,6 +133,7 @@ var greetExpr = function(name) {
     return `Hello ${name}!`;
 };
 ```
+{% endraw %}
 
 </div>
 
@@ -140,6 +146,7 @@ var greetExpr = function(name) {
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
 
 
+{% raw %}
 ```javascript
 console.log("=== PITFALL 1: INITIALIZATION NOT HOISTED ===");
 
@@ -150,11 +157,13 @@ var x = 5;
 // What actually happens: undefined
 // Why: Only declaration is hoisted, not initialization
 ```
+{% endraw %}
 
 </div>
 
 ### Pitfall 2: Function Expression vs Function Declaration
 
+{% raw %}
 ```javascript
 console.log("=== PITFALL 2: FUNCTION EXPRESSION VS DECLARATION ===");
 
@@ -171,6 +180,7 @@ try {
 
 var sayGoodbye = function() { console.log("Goodbye!"); };
 ```
+{% endraw %}
 
 
 ---
@@ -179,6 +189,7 @@ var sayGoodbye = function() { console.log("Goodbye!"); };
 
 ### 1. Use let/const Instead of var
 
+{% raw %}
 ```javascript
 console.log("=== BEST PRACTICE 1: USE LET/CONST ===");
 
@@ -189,10 +200,12 @@ var oldWay = "avoid this";
 let modernWay = "use this";
 const constantWay = "for constants";
 ```
+{% endraw %}
 
 
 ### 2. Declare Functions Before Use
 
+{% raw %}
 ```javascript
 console.log("=== BEST PRACTICE 2: DECLARE FUNCTIONS FIRST ===");
 
@@ -203,6 +216,7 @@ function someFunction() {
 
 someFunction(); // Clear and predictable
 ```
+{% endraw %}
 
 
 ---
@@ -261,6 +275,7 @@ someFunction(); // Clear and predictable
 
 ### Exercise 1: Hoisting Prediction
 
+{% raw %}
 ```javascript
 console.log("Exercise 1: Predict the output");
 
@@ -273,6 +288,7 @@ let b = 20;
 console.log(typeof c); // What will this print?
 function c() { return "function"; }
 ```
+{% endraw %}
 
 
 ---

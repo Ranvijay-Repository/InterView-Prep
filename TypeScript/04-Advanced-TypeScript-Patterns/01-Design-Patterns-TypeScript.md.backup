@@ -26,6 +26,7 @@ Design patterns are reusable solutions to common problems in software design. Ty
 ### **Pattern Categories**
 
 
+{% raw %}
 ```typescript
 // Design pattern categories
 interface PatternCategories {
@@ -42,11 +43,13 @@ const typescriptBenefits = {
   documentation: "Self-documenting code"
 };
 ```
+{% endraw %}
 
 
 ### **Pattern Implementation Principles**
 
 
+{% raw %}
 ```typescript
 // Key principles for TypeScript pattern implementation
 const principles = {
@@ -56,6 +59,7 @@ const principles = {
   composition: "Prefer composition over inheritance"
 };
 ```
+{% endraw %}
 
 
 ---
@@ -67,6 +71,7 @@ Creational patterns deal with object creation mechanisms.
 ### **Singleton Pattern**
 
 
+{% raw %}
 ```typescript
 // Singleton pattern with TypeScript
 class DatabaseConnection {
@@ -94,11 +99,13 @@ const db1 = DatabaseConnection.getInstance();
 const db2 = DatabaseConnection.getInstance();
 console.log(db1 === db2); // true
 ```
+{% endraw %}
 
 
 ### **Factory Pattern**
 
 
+{% raw %}
 ```typescript
 // Factory pattern with TypeScript
 interface Animal {
@@ -140,11 +147,13 @@ class AnimalFactory {
 const dog = AnimalFactory.createAnimal("dog", "Buddy");
 const cat = AnimalFactory.createAnimal("cat", "Whiskers");
 ```
+{% endraw %}
 
 
 ### **Builder Pattern**
 
 
+{% raw %}
 ```typescript
 // Builder pattern with TypeScript
 interface User {
@@ -206,6 +215,7 @@ const user = new UserBuilder()
   .setPhone("123-456-7890")
   .build();
 ```
+{% endraw %}
 
 
 ---
@@ -217,6 +227,7 @@ Structural patterns deal with object composition and relationships.
 ### **Adapter Pattern**
 
 
+{% raw %}
 ```typescript
 // Adapter pattern with TypeScript
 interface OldAPI {
@@ -255,11 +266,13 @@ const oldAPI = new OldAPIService();
 const adapter = new APIAdapter(oldAPI);
 const data = await adapter.fetchData();
 ```
+{% endraw %}
 
 
 ### **Decorator Pattern**
 
 
+{% raw %}
 ```typescript
 // Decorator pattern with TypeScript
 interface Coffee {
@@ -319,11 +332,13 @@ coffee = new SugarDecorator(coffee);
 console.log(coffee.description()); // "Simple coffee, milk, sugar"
 console.log(coffee.cost()); // 2.7
 ```
+{% endraw %}
 
 
 ### **Facade Pattern**
 
 
+{% raw %}
 ```typescript
 // Facade pattern with TypeScript
 class CPU {
@@ -377,6 +392,7 @@ class ComputerFacade {
 const computer = new ComputerFacade();
 computer.start();
 ```
+{% endraw %}
 
 
 ---
@@ -388,6 +404,7 @@ Behavioral patterns deal with object interaction and communication.
 ### **Observer Pattern**
 
 
+{% raw %}
 ```typescript
 // Observer pattern with TypeScript
 interface Observer<T> {
@@ -442,11 +459,13 @@ agency.attach(channel2);
 
 agency.publishNews("Breaking: TypeScript 5.0 released!");
 ```
+{% endraw %}
 
 
 ### **Strategy Pattern**
 
 
+{% raw %}
 ```typescript
 // Strategy pattern with TypeScript
 interface PaymentStrategy {
@@ -496,11 +515,13 @@ console.log(processor.processPayment(100));
 processor.setStrategy(new PayPalPayment("user@example.com"));
 console.log(processor.processPayment(50));
 ```
+{% endraw %}
 
 
 ### **Command Pattern**
 
 
+{% raw %}
 ```typescript
 // Command pattern with TypeScript
 interface Command {
@@ -587,6 +608,7 @@ remote.pressButton(); // Light is off
 
 remote.pressUndo(); // Light is on
 ```
+{% endraw %}
 
 
 ---
@@ -596,6 +618,7 @@ remote.pressUndo(); // Light is on
 ### **Generic Factory Pattern**
 
 
+{% raw %}
 ```typescript
 // Generic factory pattern
 interface Factory<T> {
@@ -647,11 +670,13 @@ registry.register("product", new ProductFactory());
 const user = registry.create<User>("user");
 const product = registry.create<Product>("product");
 ```
+{% endraw %}
 
 
 ### **Type-Safe Builder Pattern**
 
 
+{% raw %}
 ```typescript
 // Type-safe builder pattern
 interface UserBuilderState {
@@ -706,6 +731,7 @@ const user = new UserBuilder()
   .setAge(30)
   .build();
 ```
+{% endraw %}
 
 
 ---
@@ -715,6 +741,7 @@ const user = new UserBuilder()
 ### **Dependency Injection Pattern**
 
 
+{% raw %}
 ```typescript
 // Dependency injection pattern
 interface Service {
@@ -775,11 +802,13 @@ const userService = new UserService(
 
 console.log(userService.createUser("John"));
 ```
+{% endraw %}
 
 
 ### **Repository Pattern**
 
 
+{% raw %}
 ```typescript
 // Repository pattern
 interface Repository<T, K> {
@@ -823,6 +852,7 @@ const userRepo = new UserRepository();
 const user = await userRepo.save({ id: 1, name: "John", email: "john@example.com" });
 const foundUser = await userRepo.findById(1);
 ```
+{% endraw %}
 
 
 ---
@@ -832,6 +862,7 @@ const foundUser = await userRepo.findById(1);
 ### **1. Use TypeScript's Type System**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Use interfaces for contracts
 interface PaymentStrategy {
@@ -845,11 +876,13 @@ class PaymentProcessor {
   }
 }
 ```
+{% endraw %}
 
 
 ### **2. Leverage Generics for Reusability**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Use generics for reusable patterns
 interface Repository<T, K> {
@@ -863,11 +896,13 @@ interface UserRepository {
   save(user: User): Promise<User>;
 }
 ```
+{% endraw %}
 
 
 ### **3. Prefer Composition Over Inheritance**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Use composition
 class CoffeeWithMilk {
@@ -883,11 +918,13 @@ class CoffeeWithMilk extends Coffee {
   // Implementation
 }
 ```
+{% endraw %}
 
 
 ### **4. Use Dependency Injection**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Use dependency injection
 class UserService {
@@ -899,6 +936,7 @@ class UserService {
   private userRepo = new UserRepository();
 }
 ```
+{% endraw %}
 
 
 ---
@@ -918,6 +956,7 @@ Design patterns are reusable solutions to common problems in software design. Th
 
 **Answer:**
 
+{% raw %}
 ```typescript
 class Singleton {
   private static instance: Singleton;
@@ -932,6 +971,7 @@ class Singleton {
   }
 }
 ```
+{% endraw %}
 
 
 ### **3. What's the difference between the Factory and Builder patterns?**
@@ -944,6 +984,7 @@ class Singleton {
 
 **Answer:**
 
+{% raw %}
 ```typescript
 interface Observer<T> {
   update(data: T): void;
@@ -954,6 +995,7 @@ interface Subject<T> {
   notify(data: T): void;
 }
 ```
+{% endraw %}
 
 
 ### **5. What are the benefits of using design patterns with TypeScript?**

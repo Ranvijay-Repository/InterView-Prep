@@ -142,9 +142,9 @@ jobs:
         path: |
           ~/.gradle/caches
           ~/.gradle/wrapper
-        key: ${{#123;{{#123; runner.os }}#125;}}#125;-gradle-${{#123;{{#123; hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}#125;}}#125;
+        key: ${{}}-gradle-${{}}
         restore-keys: |
-          ${{#123;{{#123; runner.os }}#125;}}#125;-gradle-
+          ${{}}-gradle-
           
     - name: Build Android APK
       run: |
@@ -543,11 +543,11 @@ jobs:
       uses: expo/expo-github-action@v8
       with:
         eas-version: latest
-        token: ${{#123;{{#123; secrets.EXPO_TOKEN }}#125;}}#125;
+        token: ${{}}
         
     - name: Build with EAS
       run: |
-        if [ "${{#123;{{#123; github.ref }}#125;}}#125;" = "refs/heads/main" ]; then
+        if [ "${{}}" = "refs/heads/main" ]; then
           eas build --platform all --profile production
         else
           eas build --platform all --profile preview
@@ -595,9 +595,9 @@ jobs:
         path: |
           .metro-cache
           node_modules/.cache
-        key: ${{#123;{{#123; runner.os }}#125;}}#125;-metro-${{#123;{{#123; hashFiles('**/package-lock.json') }}#125;}}#125;
+        key: ${{}}-metro-${{}}
         restore-keys: |
-          ${{#123;{{#123; runner.os }}#125;}}#125;-metro-
+          ${{}}-metro-
           
     - name: Cache Gradle
       uses: actions/cache@v3
@@ -605,9 +605,9 @@ jobs:
         path: |
           ~/.gradle/caches
           ~/.gradle/wrapper
-        key: ${{#123;{{#123; runner.os }}#125;}}#125;-gradle-${{#123;{{#123; hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}#125;}}#125;
+        key: ${{}}-gradle-${{}}
         restore-keys: |
-          ${{#123;{{#123; runner.os }}#125;}}#125;-gradle-
+          ${{}}-gradle-
           
     - name: Install dependencies
       run: npm ci

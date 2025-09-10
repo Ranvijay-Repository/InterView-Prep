@@ -366,17 +366,17 @@ const FeatureNavigation = {
         <Tab.Screen 
           name="Dashboard" 
           component={DashboardNavigator}
-          options={{#123;{{#123; tabBarIcon: ({ color }) => <DashboardIcon color={color} /> }}#125;}}#125;
+          options={{}) => <DashboardIcon color={}}
         />
         <Tab.Screen 
           name="Profile" 
           component={ProfileNavigator}
-          options={{#123;{{#123; tabBarIcon: ({ color }) => <ProfileIcon color={color} /> }}#125;}}#125;
+          options={{}) => <ProfileIcon color={}}
         />
         <Tab.Screen 
           name="Settings" 
           component={SettingsNavigator}
-          options={{#123;{{#123; tabBarIcon: ({ color }) => <SettingsIcon color={color} /> }}#125;}}#125;
+          options={{}) => <SettingsIcon color={}}
         />
       </Tab.Navigator>
     );

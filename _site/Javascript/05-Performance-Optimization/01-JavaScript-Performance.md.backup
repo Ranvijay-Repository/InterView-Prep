@@ -45,6 +45,7 @@
 
 ### ASCII Diagram: V8 Optimization Pipeline
 
+{% raw %}
 ```
 V8 OPTIMIZATION PIPELINE
 ┌─────────────────────────────────┐
@@ -97,6 +98,7 @@ V8 OPTIMIZATION PIPELINE
         │  Execution    │
         └───────────────┘
 ```
+{% endraw %}
 
 
 ### Optimization Techniques:
@@ -121,6 +123,7 @@ V8 OPTIMIZATION PIPELINE
 
 ### ASCII Diagram: Hidden Classes Structure
 
+{% raw %}
 ```
 HIDDEN CLASSES STRUCTURE
 ┌─────────────────────────────────┐
@@ -162,6 +165,7 @@ HIDDEN CLASSES STRUCTURE
         │    Access     │
         └───────────────┘
 ```
+{% endraw %}
 
 
 ### Best Practices:
@@ -186,6 +190,7 @@ HIDDEN CLASSES STRUCTURE
 
 ### ASCII Diagram: Garbage Collection Process
 
+{% raw %}
 ```
 GARBAGE COLLECTION PROCESS
 ┌─────────────────────────────────┐
@@ -230,6 +235,7 @@ GARBAGE COLLECTION PROCESS
         │  Compact      │
         └───────────────┘
 ```
+{% endraw %}
 
 
 ### Optimization Strategies:

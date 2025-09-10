@@ -23,6 +23,7 @@
 ### **Encryption Layers**
 
 
+{% raw %}
 ```mermaid
 graph TD
     A[Application Data] --> B[Application Layer Encryption]
@@ -35,6 +36,7 @@ graph TD
     F --> D
     F --> E
 ```
+{% endraw %}
 
 
 ### **Encryption Types**
@@ -51,6 +53,7 @@ graph TD
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 import CryptoJS from 'crypto-js';
 
@@ -132,12 +135,14 @@ export {
   AES_CONFIG,
 };
 ```
+{% endraw %}
 
 
 ### **RSA Encryption Implementation**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 import CryptoJS from 'crypto-js';
 
@@ -203,6 +208,7 @@ export {
   RSA_CONFIG,
 };
 ```
+{% endraw %}
 
 
 ---
@@ -213,6 +219,7 @@ export {
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 import * as Keychain from 'react-native-keychain';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -341,12 +348,14 @@ export {
   KEY_MANAGEMENT_CONFIG,
 };
 ```
+{% endraw %}
 
 
 ### **Key Rotation Strategy**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 import { generateMasterKey, storeMasterKey, getMasterKey } from './KeyManagement';
 
@@ -442,6 +451,7 @@ export {
   KEY_ROTATION_CONFIG,
 };
 ```
+{% endraw %}
 
 
 ---
@@ -452,6 +462,7 @@ export {
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Data classification levels
 const DATA_CLASSIFICATION = {
@@ -575,6 +586,7 @@ export {
   removeDataProtection,
 };
 ```
+{% endraw %}
 
 
 ---
@@ -585,6 +597,7 @@ export {
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 import { generateRSAKeyPair, encryptWithRSA, decryptWithRSA } from './RSAEncryption';
 import { encryptData, decryptData } from './AESEncryption';
@@ -670,6 +683,7 @@ const createE2EEncryptionService = () => {
 // Export E2E encryption service
 export { createE2EEncryptionService };
 ```
+{% endraw %}
 
 
 ---

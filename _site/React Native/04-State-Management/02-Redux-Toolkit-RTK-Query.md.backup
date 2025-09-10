@@ -27,6 +27,7 @@ Redux Toolkit (RTK) is the modern way to write Redux logic. It provides utilitie
 ### **Redux Toolkit Overview**
 
 
+{% raw %}
 ```
 ┌─────────────────────────────────────┐
 │        Redux Toolkit System         │
@@ -52,6 +53,7 @@ Redux Toolkit (RTK) is the modern way to write Redux logic. It provides utilitie
 │  └─────────────────────────────────┘│
 └─────────────────────────────────────┘
 ```
+{% endraw %}
 
 
 ---
@@ -62,6 +64,7 @@ Redux Toolkit (RTK) is the modern way to write Redux logic. It provides utilitie
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // store/index.js
 import { configureStore } from '@reduxjs/toolkit';
@@ -90,12 +93,14 @@ setupListeners(store.dispatch);
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 ```
+{% endraw %}
 
 
 ### **App Setup with Provider**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // App.js
 import React from 'react';
@@ -116,6 +121,7 @@ const App = () => {
 
 export default App;
 ```
+{% endraw %}
 
 
 ---
@@ -126,6 +132,7 @@ export default App;
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // store/slices/counterSlice.js
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
@@ -179,12 +186,14 @@ export const {
 
 export default counterSlice.reducer;
 ```
+{% endraw %}
 
 
 ### **User Slice with Async Thunk**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // store/slices/userSlice.js
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
@@ -306,6 +315,7 @@ const userSlice = createSlice({
 export const { setCurrentUser, clearError, updateUser } = userSlice.actions;
 export default userSlice.reducer;
 ```
+{% endraw %}
 
 
 ---

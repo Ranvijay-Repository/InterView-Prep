@@ -45,6 +45,7 @@ A closure is a function that has access to variables in its outer (enclosing) sc
 ### **Closure Diagram**
 
 {% raw %}
+{% raw %}
 ```
 ┌─────────────────────────────────────┐
 │           Outer Function            │
@@ -66,6 +67,7 @@ A closure is a function that has access to variables in its outer (enclosing) sc
 #### **1. Event Handlers with Closures**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+{% raw %}
 {% raw %}
 ```javascript
 // ❌ Common mistake - closure capturing wrong value
@@ -120,6 +122,7 @@ const GoodExample = () => {
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 {% raw %}
+{% raw %}
 ```javascript
 // ✅ Proper closure usage for API calls
 const useApiCall = () => {
@@ -153,6 +156,7 @@ const useApiCall = () => {
 React Native uses the same event loop as web JavaScript, but with some mobile-specific considerations:
 
 {% raw %}
+{% raw %}
 ```
 ┌─────────────────────────────────────┐
 │           Call Stack                │
@@ -184,6 +188,7 @@ React Native uses the same event loop as web JavaScript, but with some mobile-sp
 
 #### **1. Promises vs Callbacks**
 
+{% raw %}
 {% raw %}
 ```javascript
 // ❌ Callback hell
@@ -241,6 +246,7 @@ const fetchUserData = async (userId) => {
 #### **2. Async/Await in React Native Components**
 
 {% raw %}
+{% raw %}
 ```javascript
 // ✅ Proper async/await usage in React Native
 const UserProfile = ({ userId }) => {
@@ -286,6 +292,7 @@ const UserProfile = ({ userId }) => {
 
 ### **Error Handling Patterns**
 
+{% raw %}
 {% raw %}
 {% raw %}
 ```javascript
@@ -349,6 +356,7 @@ const MyComponent = () => {
 ### **Cancellation Patterns**
 
 {% raw %}
+{% raw %}
 ```javascript
 // ✅ Request cancellation with AbortController
 const useApiCall = () => {
@@ -397,6 +405,7 @@ const useApiCall = () => {
 
 {% raw %}
 {% raw %}
+{% raw %}
 ```javascript
 // ✅ Object destructuring
 const UserCard = ({ user, onPress, style }) => {
@@ -421,6 +430,7 @@ const [data, setData] = useState(null);
 
 ### **Template Literals**
 
+{% raw %}
 {% raw %}
 ```javascript
 // ✅ Dynamic styling with template literals
@@ -449,6 +459,7 @@ const buildApiUrl = (endpoint, params) => {
 
 ### **Arrow Functions & Higher-Order Functions**
 
+{% raw %}
 {% raw %}
 ```javascript
 // ✅ Arrow functions in React Native
@@ -495,6 +506,7 @@ const withLoading = (WrappedComponent) => {
 ### **Memory Leaks in React Native**
 
 {% raw %}
+{% raw %}
 ```javascript
 // ❌ Memory leak - not cleaning up subscriptions
 const BadComponent = () => {
@@ -528,6 +540,7 @@ const GoodComponent = () => {
 ### **Event Listener Cleanup**
 
 {% raw %}
+{% raw %}
 ```javascript
 // ✅ Proper event listener cleanup
 const useDeviceOrientation = () => {
@@ -556,6 +569,7 @@ const useDeviceOrientation = () => {
 
 ### **1. Stale Closures**
 
+{% raw %}
 {% raw %}
 ```javascript
 // ❌ Stale closure problem
@@ -596,6 +610,7 @@ const GoodExample = () => {
 
 ### **2. Infinite Re-renders**
 
+{% raw %}
 {% raw %}
 ```javascript
 // ❌ Infinite re-render
@@ -652,6 +667,7 @@ const GoodExample = () => {
 ### **1. Use Functional Updates**
 
 {% raw %}
+{% raw %}
 ```javascript
 // ✅ Always use functional updates for state
 const [count, setCount] = useState(0);
@@ -664,6 +680,7 @@ setCount(prevCount => prevCount + 1);
 ### **2. Proper Dependency Arrays**
 
 {% raw %}
+{% raw %}
 ```javascript
 // ✅ Be explicit about dependencies
 useEffect(() => {
@@ -674,6 +691,7 @@ useEffect(() => {
 
 ### **3. Error Boundaries**
 
+{% raw %}
 {% raw %}
 ```javascript
 // ✅ Implement error boundaries with functional components

@@ -45,6 +45,7 @@
 
 ### ASCII Diagram: Promise.any() Flow
 
+{% raw %}
 ```
 PROMISE.ANY() FLOW
 ┌─────────────────────────────────┐
@@ -72,10 +73,12 @@ PROMISE.ANY() FLOW
         │  With B       │
         └───────────────┘
 ```
+{% endraw %}
 
 
 ### Comparison with Other Promise Methods:
 
+{% raw %}
 ```javascript
 // Promise.all() - waits for ALL promises to fulfill
 Promise.all([promise1, promise2, promise3])
@@ -92,6 +95,7 @@ Promise.any([promise1, promise2, promise3])
     .then(result => console.log('First success:', result))
     .catch(error => console.log('All failed:', error));
 ```
+{% endraw %}
 
 
 ---
@@ -108,6 +112,7 @@ Promise.any([promise1, promise2, promise3])
 
 ### ASCII Diagram: Logical Assignment Flow
 
+{% raw %}
 ```
 LOGICAL ASSIGNMENT FLOW
 ┌─────────────────────────────────┐
@@ -138,6 +143,7 @@ LOGICAL ASSIGNMENT FLOW
         │  Logic        │
         └─────────────┘
 ```
+{% endraw %}
 
 
 ### Available Operators:
@@ -159,6 +165,7 @@ LOGICAL ASSIGNMENT FLOW
 
 ### ASCII Diagram: WeakRef Memory Management
 
+{% raw %}
 ```
 WEAKREF MEMORY MANAGEMENT
 ┌─────────────────────────────────┐
@@ -188,6 +195,7 @@ WEAKREF MEMORY MANAGEMENT
         │  Cleanup      │
         └───────────────┘
 ```
+{% endraw %}
 
 
 ### Use Cases:
@@ -210,6 +218,7 @@ WEAKREF MEMORY MANAGEMENT
 
 ### ASCII Diagram: FinalizationRegistry Flow
 
+{% raw %}
 ```
 FINALIZATIONREGISTRY FLOW
 ┌─────────────────────────────────┐
@@ -239,6 +248,7 @@ FINALIZATIONREGISTRY FLOW
         │  Performed    │
         └───────────────┘
 ```
+{% endraw %}
 
 
 ### Use Cases:

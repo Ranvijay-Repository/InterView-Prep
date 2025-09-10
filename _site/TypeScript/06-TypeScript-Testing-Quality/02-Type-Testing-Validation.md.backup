@@ -26,6 +26,7 @@ Type testing ensures that TypeScript types work correctly at both compile-time a
 ### **Type Testing Categories**
 
 
+{% raw %}
 ```typescript
 // Type testing categories
 const typeTestingCategories = {
@@ -43,11 +44,13 @@ const benefits = {
   validation: "Runtime data validation"
 };
 ```
+{% endraw %}
 
 
 ### **Type Testing Tools**
 
 
+{% raw %}
 ```typescript
 // Popular type testing tools
 const typeTestingTools = {
@@ -59,6 +62,7 @@ const typeTestingTools = {
   joi: "Schema validation"
 };
 ```
+{% endraw %}
 
 
 ---
@@ -68,6 +72,7 @@ const typeTestingTools = {
 ### **Type Definition Testing**
 
 
+{% raw %}
 ```typescript
 // type-tests.ts
 import { expectType, expectError } from 'tsd';
@@ -96,11 +101,13 @@ expectType<number>(identity(42));
 expectError(identity('hello')); // Should error if type doesn't match
 expectError(add('1', 2)); // Should error with wrong argument types
 ```
+{% endraw %}
 
 
 ### **Advanced Type Testing**
 
 
+{% raw %}
 ```typescript
 // advanced-type-tests.ts
 import { expectType, expectError } from 'tsd';
@@ -134,11 +141,13 @@ type EventName<T extends string> = `on${Capitalize<T>}`;
 expectType<'onClick'>({} as EventName<'click'>);
 expectType<'onSubmit'>({} as EventName<'submit'>);
 ```
+{% endraw %}
 
 
 ### **Type Definition Testing with dtslint**
 
 
+{% raw %}
 ```typescript
 // types/__tests__/my-library.test.ts
 import { expectType, expectError } from 'tsd';
@@ -156,6 +165,7 @@ expectType<void>(lib.setConfig({ apiUrl: 'https://api.example.com' }));
 expectError(lib.setConfig('invalid')); // Should error with wrong type
 expectError(lib.fetchData('extra-arg')); // Should error with extra arguments
 ```
+{% endraw %}
 
 
 ---
@@ -165,6 +175,7 @@ expectError(lib.fetchData('extra-arg')); // Should error with extra arguments
 ### **Basic Runtime Validation**
 
 
+{% raw %}
 ```typescript
 // runtime-validation.ts
 interface User {
@@ -215,11 +226,13 @@ try {
   console.error('Validation error:', error);
 }
 ```
+{% endraw %}
 
 
 ### **Advanced Runtime Validation**
 
 
+{% raw %}
 ```typescript
 // advanced-runtime-validation.ts
 interface ValidationResult<T> {
@@ -335,6 +348,7 @@ if (result.success) {
   console.error('Validation errors:', result.errors);
 }
 ```
+{% endraw %}
 
 
 ---
@@ -344,6 +358,7 @@ if (result.success) {
 ### **Zod Schema Validation**
 
 
+{% raw %}
 ```typescript
 // zod-validation.ts
 import { z } from 'zod';
@@ -390,11 +405,13 @@ if (result.success) {
   console.error('Validation errors:', result.error.errors);
 }
 ```
+{% endraw %}
 
 
 ### **Advanced Zod Schemas**
 
 
+{% raw %}
 ```typescript
 // advanced-zod-schemas.ts
 import { z } from 'zod';
@@ -468,11 +485,13 @@ const validateUserList = (data: unknown) => {
   return UserListSchema.parse(data);
 };
 ```
+{% endraw %}
 
 
 ### **io-ts Runtime Validation**
 
 
+{% raw %}
 ```typescript
 // io-ts-validation.ts
 import * as t from 'io-ts';
@@ -511,6 +530,7 @@ if (isRight(result)) {
   console.error('Validation errors:', result.left);
 }
 ```
+{% endraw %}
 
 
 ---
@@ -520,6 +540,7 @@ if (isRight(result)) {
 ### **Basic Type Guards**
 
 
+{% raw %}
 ```typescript
 // type-guards.ts
 interface User {
@@ -570,11 +591,13 @@ const processUser = (data: unknown) => {
   }
 };
 ```
+{% endraw %}
 
 
 ### **Advanced Type Guards**
 
 
+{% raw %}
 ```typescript
 // advanced-type-guards.ts
 interface ApiResponse<T> {
@@ -620,11 +643,13 @@ const handleApiResponse = <T>(response: unknown) => {
   }
 };
 ```
+{% endraw %}
 
 
 ### **Type Assertions**
 
 
+{% raw %}
 ```typescript
 // type-assertions.ts
 interface User {
@@ -662,6 +687,7 @@ const assertIsValidUser = (value: unknown): asserts value is User => {
   }
 };
 ```
+{% endraw %}
 
 
 ---
@@ -671,6 +697,7 @@ const assertIsValidUser = (value: unknown): asserts value is User => {
 ### **Type-Level Testing**
 
 
+{% raw %}
 ```typescript
 // type-level-tests.ts
 import { expectType, expectError } from 'tsd';
@@ -724,11 +751,13 @@ type TestTemplateLiterals = {
   union: `on${'click' | 'submit' | 'change'}`;
 };
 ```
+{% endraw %}
 
 
 ### **Runtime Type Testing**
 
 
+{% raw %}
 ```typescript
 // runtime-type-tests.ts
 import { z } from 'zod';
@@ -762,6 +791,7 @@ const isTestType = (value: unknown): value is InferredType => {
 console.assert(isTestType(validData), 'Valid data should pass type check');
 console.assert(!isTestType(invalidData), 'Invalid data should fail type check');
 ```
+{% endraw %}
 
 
 ---
@@ -771,6 +801,7 @@ console.assert(!isTestType(invalidData), 'Invalid data should fail type check');
 ### **1. Use Type Testing for Critical Types**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Test critical types
 type ApiResponse<T> = {
@@ -790,11 +821,13 @@ type ComplexType = {
   // Complex type without testing
 };
 ```
+{% endraw %}
 
 
 ### **2. Use Runtime Validation for External Data**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Validate external data
 const validateApiResponse = (data: unknown): ApiResponse<User> => {
@@ -806,11 +839,13 @@ const processApiResponse = (data: any): User => {
   return data.data; // Unsafe!
 };
 ```
+{% endraw %}
 
 
 ### **3. Use Type Guards for Runtime Safety**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Use type guards
 const isUser = (value: unknown): value is User => {
@@ -825,11 +860,13 @@ if (isUser(data)) {
 // ❌ Avoid: Type assertions without validation
 const user = data as User; // Unsafe!
 ```
+{% endraw %}
 
 
 ### **4. Test Type Transformations**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Test type transformations
 type Original = { a: number; b: string; c: boolean };
@@ -842,6 +879,7 @@ type UntestedTransformation = {
   // Complex transformation without testing
 };
 ```
+{% endraw %}
 
 
 ---
@@ -870,11 +908,13 @@ type UntestedTransformation = {
 Type guards are functions that narrow types at runtime:
 
 
+{% raw %}
 ```typescript
 const isString = (value: unknown): value is string => {
   return typeof value === 'string';
 };
 ```
+{% endraw %}
 
 
 Use them for runtime type checking and validation.

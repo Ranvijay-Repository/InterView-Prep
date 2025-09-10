@@ -25,6 +25,7 @@ Memory management in TypeScript applications is crucial for performance, stabili
 ### **Memory Management Concepts**
 
 
+{% raw %}
 ```typescript
 // Memory management concepts
 const memoryConcepts = {
@@ -52,11 +53,13 @@ const memoryGoals = {
   performance: "Maintain good performance"
 };
 ```
+{% endraw %}
 
 
 ### **JavaScript Memory Model**
 
 
+{% raw %}
 ```typescript
 // JavaScript memory model
 const memoryModel = {
@@ -93,6 +96,7 @@ function memoryDeallocation() {
   // Or when function ends, local variables are cleaned up
 }
 ```
+{% endraw %}
 
 
 ---
@@ -102,6 +106,7 @@ function memoryDeallocation() {
 ### **Garbage Collection Process**
 
 
+{% raw %}
 ```typescript
 // Garbage collection process
 const gcProcess = {
@@ -161,11 +166,13 @@ function optimizeObjectLifetime() {
   }
 }
 ```
+{% endraw %}
 
 
 ### **Garbage Collection Monitoring**
 
 
+{% raw %}
 ```typescript
 // Garbage collection monitoring
 class GCMonitor {
@@ -215,11 +222,13 @@ class GCMonitor {
 const gcMonitor = new GCMonitor();
 gcMonitor.startMonitoring();
 ```
+{% endraw %}
 
 
 ### **Garbage Collection Optimization**
 
 
+{% raw %}
 ```typescript
 // Garbage collection optimization techniques
 const gcOptimizationTechniques = {
@@ -298,6 +307,7 @@ function optimizeStringOperations() {
   }
 }
 ```
+{% endraw %}
 
 
 ---
@@ -307,6 +317,7 @@ function optimizeStringOperations() {
 ### **Common Memory Leak Sources**
 
 
+{% raw %}
 ```typescript
 // Common memory leak sources
 const memoryLeakSources = {
@@ -382,11 +393,13 @@ class TimerManager {
   }
 }
 ```
+{% endraw %}
 
 
 ### **Closure Memory Leaks**
 
 
+{% raw %}
 ```typescript
 // Closure memory leak prevention
 const closureLeakPrevention = {
@@ -437,11 +450,13 @@ class WeakReferenceExample {
   }
 }
 ```
+{% endraw %}
 
 
 ### **DOM Reference Cleanup**
 
 
+{% raw %}
 ```typescript
 // DOM reference cleanup
 const domReferenceCleanup = {
@@ -493,6 +508,7 @@ domCleanup.addEventListener(button, 'click', () => console.log('clicked'));
 // Clean up when done
 domCleanup.cleanup();
 ```
+{% endraw %}
 
 
 ---
@@ -502,6 +518,7 @@ domCleanup.cleanup();
 ### **Memory-Efficient Data Structures**
 
 
+{% raw %}
 ```typescript
 // Memory-efficient data structures
 const memoryEfficientStructures = {
@@ -566,11 +583,13 @@ class WeakMapExample {
   }
 }
 ```
+{% endraw %}
 
 
 ### **Memory-Efficient Algorithms**
 
 
+{% raw %}
 ```typescript
 // Memory-efficient algorithms
 const memoryEfficientAlgorithms = {
@@ -641,11 +660,13 @@ class LazyArray<T> {
   }
 }
 ```
+{% endraw %}
 
 
 ### **Memory-Efficient Patterns**
 
 
+{% raw %}
 ```typescript
 // Memory-efficient patterns
 const memoryEfficientPatterns = {
@@ -720,6 +741,7 @@ class LazyLoader<T> {
   }
 }
 ```
+{% endraw %}
 
 
 ---
@@ -729,6 +751,7 @@ class LazyLoader<T> {
 ### **Memory Usage Monitoring**
 
 
+{% raw %}
 ```typescript
 // Memory usage monitoring
 class MemoryMonitor {
@@ -820,11 +843,13 @@ setInterval(() => {
   console.log(`Memory trend: ${trend}`);
 }, 30000);
 ```
+{% endraw %}
 
 
 ### **Memory Leak Detection**
 
 
+{% raw %}
 ```typescript
 // Memory leak detection
 class MemoryLeakDetector {
@@ -887,6 +912,7 @@ setInterval(() => {
   }
 }, 10000);
 ```
+{% endraw %}
 
 
 ---
@@ -896,6 +922,7 @@ setInterval(() => {
 ### **1. Prevent Memory Leaks**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Clean up event listeners
 class Component {
@@ -922,11 +949,13 @@ class BadComponent {
   }
 }
 ```
+{% endraw %}
 
 
 ### **2. Use Object Pools**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Use object pools
 class ObjectPool<T> {
@@ -950,11 +979,13 @@ function processData(data: any[]) {
   }));
 }
 ```
+{% endraw %}
 
 
 ### **3. Optimize Memory Usage**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Use typed arrays for numeric data
 const numbers = new Float32Array(1000);
@@ -962,11 +993,13 @@ const numbers = new Float32Array(1000);
 // ❌ Avoid: Regular arrays for numeric data
 const numbersBad = new Array(1000);
 ```
+{% endraw %}
 
 
 ### **4. Monitor Memory Usage**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Monitor memory usage
 const memoryMonitor = new MemoryMonitor();
@@ -975,6 +1008,7 @@ memoryMonitor.startMonitoring();
 // ❌ Avoid: No memory monitoring
 // No monitoring
 ```
+{% endraw %}
 
 
 ---

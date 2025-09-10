@@ -26,6 +26,7 @@ TypeScript enhances JavaScript functions with type annotations for parameters an
 ### **Basic Function Declaration**
 
 
+{% raw %}
 ```typescript
 // Function with typed parameters and return type
 function add(a: number, b: number): number {
@@ -42,11 +43,13 @@ function logMessage(message: string): void {
   console.log(message);
 }
 ```
+{% endraw %}
 
 
 ### **Function with Optional Parameters**
 
 
+{% raw %}
 ```typescript
 // Optional parameter with ?
 function createUser(name: string, age?: number): object {
@@ -60,11 +63,13 @@ function createUser(name: string, age?: number): object {
 createUser("John"); // { name: "John" }
 createUser("Alice", 25); // { name: "Alice", age: 25 }
 ```
+{% endraw %}
 
 
 ### **Function with Default Parameters**
 
 
+{% raw %}
 ```typescript
 // Default parameter values
 function greetUser(name: string, greeting: string = "Hello"): string {
@@ -75,6 +80,7 @@ function greetUser(name: string, greeting: string = "Hello"): string {
 greetUser("John"); // "Hello, John!"
 greetUser("Alice", "Hi"); // "Hi, Alice!"
 ```
+{% endraw %}
 
 
 ---
@@ -86,6 +92,7 @@ Function expressions in TypeScript can be typed using the function type syntax.
 ### **Basic Function Expression**
 
 
+{% raw %}
 ```typescript
 // Function expression with type annotation
 const multiply = function(x: number, y: number): number {
@@ -97,11 +104,13 @@ const divide: (a: number, b: number) => number = function(x, y) {
   return x / y;
 };
 ```
+{% endraw %}
 
 
 ### **Function Type Aliases**
 
 
+{% raw %}
 ```typescript
 // Define function type
 type MathOperation = (a: number, b: number) => number;
@@ -115,6 +124,7 @@ function calculate(a: number, b: number, operation: MathOperation): number {
   return operation(a, b);
 }
 ```
+{% endraw %}
 
 
 ---
@@ -126,6 +136,7 @@ Arrow functions in TypeScript provide concise syntax with full type support.
 ### **Basic Arrow Functions**
 
 
+{% raw %}
 ```typescript
 // Simple arrow function
 const square = (x: number): number => x * x;
@@ -138,11 +149,13 @@ const formatName = (firstName: string, lastName: string): string => {
 // Arrow function with no parameters
 const getCurrentTime = (): Date => new Date();
 ```
+{% endraw %}
 
 
 ### **Arrow Functions with Complex Types**
 
 
+{% raw %}
 ```typescript
 // Arrow function returning an object
 const createPerson = (name: string, age: number): { name: string; age: number } => ({
@@ -155,6 +168,7 @@ const getEvenNumbers = (numbers: number[]): number[] => {
   return numbers.filter(n => n % 2 === 0);
 };
 ```
+{% endraw %}
 
 
 ---
@@ -166,6 +180,7 @@ TypeScript provides several ways to handle different parameter scenarios.
 ### **Required Parameters**
 
 
+{% raw %}
 ```typescript
 // All parameters are required
 function buildUrl(protocol: string, domain: string, path: string): string {
@@ -175,11 +190,13 @@ function buildUrl(protocol: string, domain: string, path: string): string {
 // Usage
 buildUrl("https", "example.com", "api/users");
 ```
+{% endraw %}
 
 
 ### **Optional Parameters**
 
 
+{% raw %}
 ```typescript
 // Optional parameters with ?
 function searchUsers(query: string, limit?: number, offset?: number): User[] {
@@ -192,11 +209,13 @@ searchUsers("john"); // limit and offset are undefined
 searchUsers("john", 10); // limit = 10, offset is undefined
 searchUsers("john", 10, 20); // limit = 10, offset = 20
 ```
+{% endraw %}
 
 
 ### **Rest Parameters**
 
 
+{% raw %}
 ```typescript
 // Rest parameters (spread operator)
 function sum(...numbers: number[]): number {
@@ -207,11 +226,13 @@ function sum(...numbers: number[]): number {
 sum(1, 2, 3, 4, 5); // 15
 sum(10, 20); // 30
 ```
+{% endraw %}
 
 
 ### **Destructured Parameters**
 
 
+{% raw %}
 ```typescript
 // Object destructuring in parameters
 function createUser({ name, age, email }: { name: string; age: number; email: string }): User {
@@ -223,6 +244,7 @@ function getFirstAndLast([first, ...rest]: string[]): { first: string; last: str
   return { first, last: rest[rest.length - 1] };
 }
 ```
+{% endraw %}
 
 
 ---
@@ -234,6 +256,7 @@ TypeScript allows you to specify what a function returns.
 ### **Explicit Return Types**
 
 
+{% raw %}
 ```typescript
 // Function with explicit return type
 function getFullName(firstName: string, lastName: string): string {
@@ -256,11 +279,13 @@ function parseId(id: string | number): number {
   return id;
 }
 ```
+{% endraw %}
 
 
 ### **Void and Never Return Types**
 
 
+{% raw %}
 ```typescript
 // Void - function doesn't return a value
 function logError(error: string): void {
@@ -279,6 +304,7 @@ function infiniteLoop(): never {
   }
 }
 ```
+{% endraw %}
 
 
 ---
@@ -290,6 +316,7 @@ Function overloads allow you to define multiple function signatures for the same
 ### **Basic Function Overloads**
 
 
+{% raw %}
 ```typescript
 // Function overloads
 function format(value: string): string;
@@ -304,11 +331,13 @@ format("hello"); // string
 format(42); // string
 format(true); // string
 ```
+{% endraw %}
 
 
 ### **Complex Function Overloads**
 
 
+{% raw %}
 ```typescript
 // Overloads for different parameter combinations
 function createElement(tag: string): HTMLElement;
@@ -336,6 +365,7 @@ function createElement(
   return element;
 }
 ```
+{% endraw %}
 
 
 ---
@@ -345,6 +375,7 @@ function createElement(
 ### **1. Use Explicit Return Types for Public APIs**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Explicit return type for public function
 export function calculateTotal(items: Item[]): number {
@@ -356,11 +387,13 @@ export function calculateTotal(items: Item[]) {
   return items.reduce((sum, item) => sum + item.price, 0);
 }
 ```
+{% endraw %}
 
 
 ### **2. Use Function Overloads for Complex APIs**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Clear overloads for different use cases
 function fetchData(url: string): Promise<Response>;
@@ -369,11 +402,13 @@ function fetchData(url: string, options?: RequestInit): Promise<Response> {
   return fetch(url, options);
 }
 ```
+{% endraw %}
 
 
 ### **3. Prefer Arrow Functions for Simple Operations**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Arrow function for simple operations
 const double = (x: number): number => x * 2;
@@ -383,11 +418,13 @@ function double(x: number): number {
   return x * 2;
 }
 ```
+{% endraw %}
 
 
 ### **4. Use Rest Parameters for Variable Arguments**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Rest parameters for variable arguments
 function logMessages(...messages: string[]): void {
@@ -399,6 +436,7 @@ function logMessages(messages: string[]): void {
   messages.forEach(msg => console.log(msg));
 }
 ```
+{% endraw %}
 
 
 ---
@@ -414,6 +452,7 @@ Function types can be defined using:
 - **Type alias**: `type MyFunction = (param: type) => returnType;`
 
 
+{% raw %}
 ```typescript
 // Function type syntax
 const add: (a: number, b: number) => number = (x, y) => x + y;
@@ -426,6 +465,7 @@ interface MathOperation {
 // Type alias
 type MathOp = (a: number, b: number) => number;
 ```
+{% endraw %}
 
 
 ### **2. What's the difference between optional and default parameters?**
@@ -435,6 +475,7 @@ type MathOp = (a: number, b: number) => number;
 - **Default parameters**: Have a default value if not provided
 
 
+{% raw %}
 ```typescript
 // Optional parameter
 function greet(name: string, age?: number): string {
@@ -446,6 +487,7 @@ function greet(name: string, greeting: string = "Hello"): string {
   return `${greeting}, ${name}!`;
 }
 ```
+{% endraw %}
 
 
 ### **3. How do function overloads work in TypeScript?**
@@ -454,6 +496,7 @@ function greet(name: string, greeting: string = "Hello"): string {
 Function overloads allow multiple function signatures for the same function. TypeScript uses the first matching signature:
 
 
+{% raw %}
 ```typescript
 function process(value: string): string;
 function process(value: number): number;
@@ -461,6 +504,7 @@ function process(value: string | number): string | number {
   return value;
 }
 ```
+{% endraw %}
 
 
 ### **4. When should you use `void` vs `never` return types?**
@@ -470,6 +514,7 @@ function process(value: string | number): string | number {
 - **`never`**: Function never completes (throws error, infinite loop)
 
 
+{% raw %}
 ```typescript
 function logMessage(msg: string): void {
   console.log(msg); // Completes, returns undefined
@@ -479,6 +524,7 @@ function throwError(msg: string): never {
   throw new Error(msg); // Never completes
 }
 ```
+{% endraw %}
 
 
 ### **5. How do you handle rest parameters in TypeScript?**
@@ -487,6 +533,7 @@ function throwError(msg: string): never {
 Rest parameters collect remaining arguments into an array:
 
 
+{% raw %}
 ```typescript
 function sum(...numbers: number[]): number {
   return numbers.reduce((total, num) => total + num, 0);
@@ -494,6 +541,7 @@ function sum(...numbers: number[]): number {
 
 sum(1, 2, 3, 4, 5); // numbers = [1, 2, 3, 4, 5]
 ```
+{% endraw %}
 
 
 ---

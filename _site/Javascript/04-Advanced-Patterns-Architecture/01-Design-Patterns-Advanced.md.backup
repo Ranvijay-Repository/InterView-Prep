@@ -46,6 +46,7 @@
 
 ### ASCII Diagram: Revealing Module Pattern Structure
 
+{% raw %}
 ```
 REVEALING MODULE PATTERN
 ┌─────────────────────────────────┐
@@ -76,6 +77,7 @@ REVEALING MODULE PATTERN
         │  module.property  │
         └───────────────┘
 ```
+{% endraw %}
 
 
 ### Use Cases:
@@ -100,6 +102,7 @@ REVEALING MODULE PATTERN
 
 ### ASCII Diagram: Factory Pattern Variations
 
+{% raw %}
 ```
 FACTORY PATTERN VARIATIONS
 ┌─────────────────────────────────┐
@@ -130,6 +133,7 @@ FACTORY PATTERN VARIATIONS
         │  ProductC1    │
         └───────────────┘
 ```
+{% endraw %}
 
 
 ### Factory Types:
@@ -154,6 +158,7 @@ FACTORY PATTERN VARIATIONS
 
 ### ASCII Diagram: Command Pattern Flow
 
+{% raw %}
 ```
 COMMAND PATTERN FLOW
 ┌─────────────────────────────────┐
@@ -193,6 +198,7 @@ COMMAND PATTERN FLOW
         │  State Change │
         └───────────────┘
 ```
+{% endraw %}
 
 
 ### Use Cases:
@@ -217,6 +223,7 @@ COMMAND PATTERN FLOW
 
 ### ASCII Diagram: Chain of Responsibility
 
+{% raw %}
 ```
 CHAIN OF RESPONSIBILITY
 ┌─────────────────────────────────┐
@@ -254,6 +261,7 @@ CHAIN OF RESPONSIBILITY
         │  No → Default │
         └───────────────┘
 ```
+{% endraw %}
 
 
 ### Use Cases:

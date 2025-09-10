@@ -26,6 +26,7 @@ TypeScript is a strongly typed programming language that builds on JavaScript, g
 ### **Key Characteristics**
 
 
+{% raw %}
 ```typescript
 // TypeScript adds static type checking to JavaScript
 let message: string = "Hello, TypeScript!";
@@ -36,11 +37,13 @@ let isActive: boolean = true;
 let userName: string = "John";
 // userName = 123; // ❌ Error: Type 'number' is not assignable to type 'string'
 ```
+{% endraw %}
 
 
 ### **TypeScript Architecture**
 
 
+{% raw %}
 ```mermaid
 graph TD
     A[TypeScript Code] --> B[TypeScript Compiler]
@@ -51,6 +54,7 @@ graph TD
     B --> G[IntelliSense]
     G --> H[IDE Support]
 ```
+{% endraw %}
 
 
 ---
@@ -60,6 +64,7 @@ graph TD
 ### **1. Type Safety**
 
 
+{% raw %}
 ```typescript
 // JavaScript - Runtime Error
 function calculateArea(width, height) {
@@ -75,11 +80,13 @@ function calculateArea(width: number, height: number): number {
 
 // calculateArea("5", "10"); // ❌ Error: Argument of type 'string' is not assignable to parameter of type 'number'
 ```
+{% endraw %}
 
 
 ### **2. Better IDE Support**
 
 
+{% raw %}
 ```typescript
 interface User {
   id: number;
@@ -98,11 +105,13 @@ const user: User = {
 // IDE provides autocomplete and type checking
 user. // IDE shows: id, name, email, isActive
 ```
+{% endraw %}
 
 
 ### **3. Refactoring Safety**
 
 
+{% raw %}
 ```typescript
 // When you rename a property, TypeScript ensures all references are updated
 interface Product {
@@ -113,6 +122,7 @@ interface Product {
 
 // TypeScript will show errors for all places using the old property names
 ```
+{% endraw %}
 
 
 ---
@@ -132,6 +142,7 @@ interface Product {
 ### **Code Comparison**
 
 
+{% raw %}
 ```javascript
 // JavaScript
 function greet(name) {
@@ -140,9 +151,11 @@ function greet(name) {
 
 greet(123); // Works but unexpected result: "Hello, 123"
 ```
+{% endraw %}
 
 
 
+{% raw %}
 ```typescript
 // TypeScript
 function greet(name: string): string {
@@ -152,6 +165,7 @@ function greet(name: string): string {
 // greet(123); // ❌ Error: Argument of type 'number' is not assignable to parameter of type 'string'
 greet("World"); // ✅ Correct usage
 ```
+{% endraw %}
 
 
 ---
@@ -161,6 +175,7 @@ greet("World"); // ✅ Correct usage
 ### **1. Install TypeScript Globally**
 
 
+{% raw %}
 ```bash
 # Install TypeScript globally
 npm install -g typescript
@@ -168,11 +183,13 @@ npm install -g typescript
 # Verify installation
 tsc --version
 ```
+{% endraw %}
 
 
 ### **2. Install TypeScript in Project**
 
 
+{% raw %}
 ```bash
 # Initialize npm project
 npm init -y
@@ -183,11 +200,13 @@ npm install --save-dev typescript
 # Install type definitions for Node.js
 npm install --save-dev @types/node
 ```
+{% endraw %}
 
 
 ### **3. Create tsconfig.json**
 
 
+{% raw %}
 ```json
 {
   "compilerOptions": {
@@ -204,6 +223,7 @@ npm install --save-dev @types/node
   "exclude": ["node_modules", "dist"]
 }
 ```
+{% endraw %}
 
 
 ---
@@ -213,6 +233,7 @@ npm install --save-dev @types/node
 ### **Project Structure**
 
 
+{% raw %}
 ```
 my-typescript-project/
 ├── src/
@@ -224,11 +245,13 @@ my-typescript-project/
 ├── tsconfig.json
 └── README.md
 ```
+{% endraw %}
 
 
 ### **Basic TypeScript File**
 
 
+{% raw %}
 ```typescript
 // src/index.ts
 interface Person {
@@ -248,11 +271,13 @@ function createPerson(name: string, age: number, email?: string): Person {
 const person = createPerson("Alice", 30, "alice@example.com");
 console.log(person);
 ```
+{% endraw %}
 
 
 ### **Compile and Run**
 
 
+{% raw %}
 ```bash
 # Compile TypeScript to JavaScript
 tsc
@@ -260,6 +285,7 @@ tsc
 # Run the compiled JavaScript
 node dist/index.js
 ```
+{% endraw %}
 
 
 ---
@@ -269,6 +295,7 @@ node dist/index.js
 ### **Compiler Options**
 
 
+{% raw %}
 ```json
 {
   "compilerOptions": {
@@ -306,11 +333,13 @@ node dist/index.js
   }
 }
 ```
+{% endraw %}
 
 
 ### **Watch Mode**
 
 
+{% raw %}
 ```bash
 # Compile and watch for changes
 tsc --watch
@@ -318,6 +347,7 @@ tsc --watch
 # Or use the short form
 tsc -w
 ```
+{% endraw %}
 
 
 ---
@@ -327,6 +357,7 @@ tsc -w
 ### **1. Use Strict Mode**
 
 
+{% raw %}
 ```json
 {
   "compilerOptions": {
@@ -341,11 +372,13 @@ tsc -w
   }
 }
 ```
+{% endraw %}
 
 
 ### **2. Organize Your Code**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Separate types, interfaces, and implementations
 // types.ts
@@ -364,11 +397,13 @@ export function formatUserName(user: User): string {
 import { User } from './types';
 import { formatUserName } from './utils';
 ```
+{% endraw %}
 
 
 ### **3. Use Meaningful Type Names**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Descriptive type names
 interface DatabaseConnection {
@@ -386,6 +421,7 @@ interface Config {
   d: string;
 }
 ```
+{% endraw %}
 
 
 ---
@@ -414,6 +450,7 @@ TypeScript is a strongly typed programming language that builds on JavaScript. I
 
 **Answer:**
 
+{% raw %}
 ```bash
 # Install globally
 npm install -g typescript
@@ -427,6 +464,7 @@ tsc --init
 # Compile
 tsc
 ```
+{% endraw %}
 
 
 ### **4. What is the TypeScript compiler and how does it work?**

@@ -27,6 +27,7 @@ TypeScript classes provide a way to define object-oriented structures with type 
 ### **Basic Class Declaration**
 
 
+{% raw %}
 ```typescript
 class Person {
   name: string;
@@ -46,11 +47,13 @@ class Person {
 const person = new Person("John", 30);
 console.log(person.greet()); // "Hello, I'm John and I'm 30 years old."
 ```
+{% endraw %}
 
 
 ### **Class with Optional Properties**
 
 
+{% raw %}
 ```typescript
 class User {
   id: number;
@@ -69,6 +72,7 @@ class User {
 const user1 = new User(1, "john_doe");
 const user2 = new User(2, "jane_doe", "jane@example.com");
 ```
+{% endraw %}
 
 
 ---
@@ -80,6 +84,7 @@ TypeScript provides several ways to define and initialize class properties.
 ### **Property Initialization**
 
 
+{% raw %}
 ```typescript
 class Rectangle {
   // Property with type annotation
@@ -103,11 +108,13 @@ class Rectangle {
   }
 }
 ```
+{% endraw %}
 
 
 ### **Property Parameter Shorthand**
 
 
+{% raw %}
 ```typescript
 class Point {
   // Shorthand property declaration in constructor
@@ -133,6 +140,7 @@ class Point {
   }
 }
 ```
+{% endraw %}
 
 
 ---
@@ -144,6 +152,7 @@ TypeScript classes support various types of methods with full type safety.
 ### **Instance Methods**
 
 
+{% raw %}
 ```typescript
 class Calculator {
   private history: number[] = [];
@@ -169,11 +178,13 @@ class Calculator {
   }
 }
 ```
+{% endraw %}
 
 
 ### **Static Methods**
 
 
+{% raw %}
 ```typescript
 class MathUtils {
   static PI: number = 3.14159;
@@ -191,11 +202,13 @@ class MathUtils {
 const area = MathUtils.circleArea(5);
 const dist = MathUtils.distance(0, 0, 3, 4);
 ```
+{% endraw %}
 
 
 ### **Getter and Setter Methods**
 
 
+{% raw %}
 ```typescript
 class Temperature {
   private _celsius: number = 0;
@@ -225,6 +238,7 @@ const temp = new Temperature();
 temp.celsius = 25;
 console.log(temp.fahrenheit); // 77
 ```
+{% endraw %}
 
 
 ---
@@ -236,6 +250,7 @@ TypeScript provides access modifiers to control visibility of class members.
 ### **Public, Private, and Protected**
 
 
+{% raw %}
 ```typescript
 class BankAccount {
   public accountNumber: string; // Accessible from anywhere
@@ -267,11 +282,13 @@ class BankAccount {
   }
 }
 ```
+{% endraw %}
 
 
 ### **Readonly Modifier**
 
 
+{% raw %}
 ```typescript
 class Product {
   readonly id: string;
@@ -290,6 +307,7 @@ class Product {
   // this.id = "new-id"; // ❌ Error
 }
 ```
+{% endraw %}
 
 
 ---
@@ -301,6 +319,7 @@ TypeScript supports class inheritance with the `extends` keyword.
 ### **Basic Inheritance**
 
 
+{% raw %}
 ```typescript
 class Animal {
   protected name: string;
@@ -342,11 +361,13 @@ const dog = new Dog("Buddy", 3, "Golden Retriever");
 console.log(dog.makeSound()); // "Woof!"
 console.log(dog.getInfo()); // "Buddy is 3 years old"
 ```
+{% endraw %}
 
 
 ### **Method Overriding**
 
 
+{% raw %}
 ```typescript
 class Vehicle {
   protected speed: number = 0;
@@ -373,6 +394,7 @@ class Car extends Vehicle {
   }
 }
 ```
+{% endraw %}
 
 
 ---
@@ -384,6 +406,7 @@ Abstract classes provide a base for other classes but cannot be instantiated dir
 ### **Abstract Class Definition**
 
 
+{% raw %}
 ```typescript
 abstract class Shape {
   protected color: string;
@@ -436,6 +459,7 @@ const rectangle = new Rectangle("blue", 4, 6);
 console.log(circle.calculateArea()); // 78.54
 console.log(rectangle.calculateArea()); // 24
 ```
+{% endraw %}
 
 
 ---
@@ -447,6 +471,7 @@ Understanding when to use interfaces vs classes is crucial in TypeScript.
 ### **When to Use Classes**
 
 
+{% raw %}
 ```typescript
 // Use classes when you need:
 // 1. Implementation details
@@ -476,11 +501,13 @@ class DatabaseConnection {
   }
 }
 ```
+{% endraw %}
 
 
 ### **When to Use Interfaces**
 
 
+{% raw %}
 ```typescript
 // Use interfaces when you need:
 // 1. Type contracts
@@ -510,6 +537,7 @@ class Sprite implements Drawable, Movable {
   }
 }
 ```
+{% endraw %}
 
 
 ---
@@ -519,6 +547,7 @@ class Sprite implements Drawable, Movable {
 ### **1. Use Access Modifiers Appropriately**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Proper use of access modifiers
 class UserService {
@@ -541,11 +570,13 @@ class UserService {
   }
 }
 ```
+{% endraw %}
 
 
 ### **2. Prefer Composition Over Inheritance**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Composition
 class Engine {
@@ -572,11 +603,13 @@ class MotorVehicle extends Vehicle { }
 class Car extends MotorVehicle { }
 class SportsCar extends Car { }
 ```
+{% endraw %}
 
 
 ### **3. Use Abstract Classes for Common Behavior**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Abstract class for shared behavior
 abstract class Repository<T> {
@@ -594,6 +627,7 @@ abstract class Repository<T> {
   }
 }
 ```
+{% endraw %}
 
 
 ---
@@ -607,6 +641,7 @@ abstract class Repository<T> {
 - **Interfaces**: Define contracts, cannot be instantiated, support multiple inheritance, are compile-time only
 
 
+{% raw %}
 ```typescript
 // Interface - contract only
 interface Drawable {
@@ -620,6 +655,7 @@ class Circle implements Drawable {
   }
 }
 ```
+{% endraw %}
 
 
 ### **2. How do access modifiers work in TypeScript?**
@@ -655,6 +691,7 @@ Inheritance uses the `extends` keyword:
 - **`readonly`**: Cannot be modified after initialization, can be initialized in constructor
 
 
+{% raw %}
 ```typescript
 const PI = 3.14159; // Cannot be reassigned
 
@@ -666,6 +703,7 @@ class Circle {
   }
 }
 ```
+{% endraw %}
 
 
 ---

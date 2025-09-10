@@ -26,6 +26,7 @@ Build tools help compile, bundle, and optimize TypeScript code for production de
 ### **Popular Build Tools**
 
 
+{% raw %}
 ```typescript
 // Build tool comparison
 const buildTools = {
@@ -47,11 +48,13 @@ const buildTools = {
   }
 };
 ```
+{% endraw %}
 
 
 ### **Build Tool Selection Criteria**
 
 
+{% raw %}
 ```typescript
 // When to use each tool
 const selectionCriteria = {
@@ -61,6 +64,7 @@ const selectionCriteria = {
   parcel: "Quick prototyping, zero configuration, simple projects"
 };
 ```
+{% endraw %}
 
 
 ---
@@ -72,6 +76,7 @@ Webpack is a powerful module bundler with extensive TypeScript support.
 ### **Basic Webpack Configuration**
 
 
+{% raw %}
 ```javascript
 // webpack.config.js
 const path = require('path');
@@ -96,11 +101,13 @@ module.exports = {
   },
 };
 ```
+{% endraw %}
 
 
 ### **Advanced Webpack Configuration**
 
 
+{% raw %}
 ```javascript
 // webpack.config.js
 const path = require('path');
@@ -156,11 +163,13 @@ module.exports = {
   },
 };
 ```
+{% endraw %}
 
 
 ### **Webpack with TypeScript Loaders**
 
 
+{% raw %}
 ```javascript
 // webpack.config.js
 module.exports = {
@@ -190,6 +199,7 @@ module.exports = {
   },
 };
 ```
+{% endraw %}
 
 
 ---
@@ -201,6 +211,7 @@ Vite provides fast development and optimized production builds for TypeScript.
 ### **Basic Vite Configuration**
 
 
+{% raw %}
 ```typescript
 // vite.config.ts
 import { defineConfig } from 'vite';
@@ -222,11 +233,13 @@ export default defineConfig({
   },
 });
 ```
+{% endraw %}
 
 
 ### **Advanced Vite Configuration**
 
 
+{% raw %}
 ```typescript
 // vite.config.ts
 import { defineConfig } from 'vite';
@@ -269,11 +282,13 @@ export default defineConfig({
   },
 });
 ```
+{% endraw %}
 
 
 ### **Vite with TypeScript**
 
 
+{% raw %}
 ```typescript
 // vite.config.ts
 import { defineConfig } from 'vite';
@@ -300,6 +315,7 @@ export default defineConfig({
   },
 });
 ```
+{% endraw %}
 
 
 ---
@@ -311,6 +327,7 @@ Rollup is excellent for building libraries and applications with tree shaking.
 ### **Basic Rollup Configuration**
 
 
+{% raw %}
 ```javascript
 // rollup.config.js
 import typescript from '@rollup/plugin-typescript';
@@ -336,11 +353,13 @@ export default {
   external: ['react', 'react-dom'],
 };
 ```
+{% endraw %}
 
 
 ### **Advanced Rollup Configuration**
 
 
+{% raw %}
 ```javascript
 // rollup.config.js
 import typescript from '@rollup/plugin-typescript';
@@ -384,6 +403,7 @@ export default {
   external: ['react', 'react-dom'],
 };
 ```
+{% endraw %}
 
 
 ---
@@ -395,6 +415,7 @@ Parcel provides zero-configuration builds with built-in TypeScript support.
 ### **Basic Parcel Configuration**
 
 
+{% raw %}
 ```json
 // package.json
 {
@@ -408,11 +429,13 @@ Parcel provides zero-configuration builds with built-in TypeScript support.
   }
 }
 ```
+{% endraw %}
 
 
 ### **Parcel with TypeScript**
 
 
+{% raw %}
 ```typescript
 // src/index.ts
 import './styles.css';
@@ -431,11 +454,13 @@ const user: User = {
 
 console.log(user);
 ```
+{% endraw %}
 
 
 ### **Parcel Configuration File**
 
 
+{% raw %}
 ```javascript
 // .parcelrc
 {
@@ -445,6 +470,7 @@ console.log(user);
   }
 }
 ```
+{% endraw %}
 
 
 ---
@@ -456,6 +482,7 @@ Custom build scripts provide fine-grained control over the build process.
 ### **Basic Build Script**
 
 
+{% raw %}
 ```typescript
 // scripts/build.ts
 import { execSync } from 'child_process';
@@ -489,11 +516,13 @@ const build = async () => {
 
 build().catch(console.error);
 ```
+{% endraw %}
 
 
 ### **Advanced Build Script**
 
 
+{% raw %}
 ```typescript
 // scripts/build.ts
 import { execSync } from 'child_process';
@@ -572,6 +601,7 @@ const build = async () => {
 
 build().catch(console.error);
 ```
+{% endraw %}
 
 
 ---
@@ -581,6 +611,7 @@ build().catch(console.error);
 ### **1. Choose the Right Build Tool**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Choose based on project needs
 const buildToolSelection = {
@@ -596,11 +627,13 @@ const wrongChoice = {
   webpack: "Simple libraries with minimal dependencies"
 };
 ```
+{% endraw %}
 
 
 ### **2. Optimize Build Performance**
 
 
+{% raw %}
 ```javascript
 // ✅ Good: Optimize build performance
 module.exports = {
@@ -637,11 +670,13 @@ module.exports = {
   },
 };
 ```
+{% endraw %}
 
 
 ### **3. Use Source Maps for Debugging**
 
 
+{% raw %}
 ```javascript
 // ✅ Good: Enable source maps
 module.exports = {
@@ -656,11 +691,13 @@ module.exports = {
   devtool: false, // No source maps
 };
 ```
+{% endraw %}
 
 
 ### **4. Configure Path Mapping**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Configure path mapping
 export default defineConfig({
@@ -675,6 +712,7 @@ export default defineConfig({
 // ❌ Avoid: Relative imports
 import { Button } from '../../../components/Button';
 ```
+{% endraw %}
 
 
 ---
@@ -705,6 +743,7 @@ import { Button } from '../../../components/Button';
 
 **Answer:**
 
+{% raw %}
 ```typescript
 // Vite
 export default defineConfig({
@@ -724,6 +763,7 @@ module.exports = {
   },
 };
 ```
+{% endraw %}
 
 
 ### **5. What are the benefits of using build tools with TypeScript?**

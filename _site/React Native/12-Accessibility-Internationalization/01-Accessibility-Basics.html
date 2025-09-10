@@ -215,7 +215,7 @@
       <span class="nx">accessibilityRole</span><span class="o">=</span><span class="dl">"</span><span class="s2">button</span><span class="dl">"</span>
       <span class="nx">accessibilityLabel</span><span class="o">=</span><span class="p">{</span><span class="nx">accessibilityLabel</span> <span class="o">||</span> <span class="nx">title</span><span class="p">}</span>
       <span class="nx">accessibilityHint</span><span class="o">=</span><span class="p">{</span><span class="nx">accessibilityHint</span><span class="p">}</span>
-      <span class="nx">accessibilityState</span><span class="o">=</span><span class="p">{{</span><span class="err">#</span><span class="mi">123</span><span class="p">;{{</span><span class="err">#</span><span class="mi">123</span><span class="p">;</span> <span class="nl">disabled</span><span class="p">:</span> <span class="kc">false</span> <span class="p">}}</span><span class="err">#</span><span class="mi">125</span><span class="p">;}}</span><span class="err">#</span><span class="mi">125</span><span class="p">;</span>
+      <span class="nx">accessibilityState</span><span class="o">=</span><span class="p">{{}}</span>
     <span class="o">&gt;</span>
       <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">buttonText</span><span class="p">}</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">title</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
 </span>    <span class="o">&lt;</span><span class="sr">/TouchableOpacity</span><span class="err">&gt;
@@ -248,10 +248,10 @@
         <span class="nx">accessibilityRole</span><span class="o">=</span><span class="dl">"</span><span class="s2">text</span><span class="dl">"</span>
         <span class="nx">accessibilityLabel</span><span class="o">=</span><span class="p">{</span><span class="nx">accessibilityLabel</span> <span class="o">||</span> <span class="nx">label</span><span class="p">}</span>
         <span class="nx">accessibilityHint</span><span class="o">=</span><span class="p">{</span><span class="nx">accessibilityHint</span><span class="p">}</span>
-        <span class="nx">accessibilityState</span><span class="o">=</span><span class="p">{{</span><span class="err">#</span><span class="mi">123</span><span class="p">;{{</span><span class="err">#</span><span class="mi">123</span><span class="p">;</span> 
-          <span class="nl">disabled</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nx">accessibilityState</span><span class="o">=</span><span class="p">{{</span>
+          <span class="na">disabled</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
           <span class="na">selected</span><span class="p">:</span> <span class="kc">false</span> 
-        <span class="p">}}</span><span class="err">#</span><span class="mi">125</span><span class="p">;}}</span><span class="err">#</span><span class="mi">125</span><span class="p">;</span>
+<span class="p">}}</span>
       <span class="sr">/</span><span class="err">&gt;
 </span>    <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
 </span>  <span class="p">);</span>
@@ -432,10 +432,10 @@
           <span class="nx">accessibilityRole</span><span class="o">=</span><span class="dl">"</span><span class="s2">button</span><span class="dl">"</span>
           <span class="nx">accessibilityLabel</span><span class="o">=</span><span class="p">{</span><span class="nx">item</span><span class="p">.</span><span class="nx">title</span><span class="p">}</span>
           <span class="nx">accessibilityHint</span><span class="o">=</span><span class="p">{</span><span class="s2">`Item </span><span class="p">${</span><span class="nx">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">}</span><span class="s2"> of </span><span class="p">${</span><span class="nx">items</span><span class="p">.</span><span class="nx">length</span><span class="p">}</span><span class="s2">`</span><span class="p">}</span>
-          <span class="nx">accessibilityState</span><span class="o">=</span><span class="p">{{</span><span class="err">#</span><span class="mi">123</span><span class="p">;{{</span><span class="err">#</span><span class="mi">123</span><span class="p">;</span> 
-            <span class="nl">selected</span><span class="p">:</span> <span class="nx">selectedIndex</span> <span class="o">===</span> <span class="nx">index</span><span class="p">,</span>
+          <span class="nx">accessibilityState</span><span class="o">=</span><span class="p">{{</span>
+            <span class="na">selected</span><span class="p">:</span> <span class="nx">selectedIndex</span> <span class="o">===</span> <span class="nx">index</span><span class="p">,</span>
             <span class="na">disabled</span><span class="p">:</span> <span class="kc">false</span> 
-          <span class="p">}}</span><span class="err">#</span><span class="mi">125</span><span class="p">;}}</span><span class="err">#</span><span class="mi">125</span><span class="p">;</span>
+<span class="p">}}</span>
           <span class="nx">accessibilityActions</span><span class="o">=</span><span class="p">{[</span>
             <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">activate</span><span class="dl">'</span><span class="p">,</span> <span class="na">label</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Select item</span><span class="dl">'</span> <span class="p">},</span>
             <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">longpress</span><span class="dl">'</span><span class="p">,</span> <span class="na">label</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Show item details</span><span class="dl">'</span> <span class="p">}</span>
@@ -450,7 +450,7 @@
                 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Long press on item:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">item</span><span class="p">.</span><span class="nx">title</span><span class="p">);</span>
                 <span class="k">break</span><span class="p">;</span>
             <span class="p">}</span>
-          <span class="p">}}</span><span class="err">#</span><span class="mi">125</span><span class="p">;}}</span><span class="err">#</span><span class="mi">125</span><span class="p">;</span>
+<span class="p">}}</span>
         <span class="o">&gt;</span>
           <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">itemTitle</span><span class="p">}</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">item</span><span class="p">.</span><span class="nx">title</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
 </span>          <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">itemDescription</span><span class="p">}</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">item</span><span class="p">.</span><span class="nx">description</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
@@ -740,8 +740,8 @@
         <span class="nx">accessibilityRole</span><span class="o">=</span><span class="dl">"</span><span class="s2">button</span><span class="dl">"</span> <span class="c1">// Defines the role</span>
         <span class="nx">accessibilityLabel</span><span class="o">=</span><span class="dl">"</span><span class="s2">Submit form</span><span class="dl">"</span> <span class="c1">// Screen reader label</span>
         <span class="nx">accessibilityHint</span><span class="o">=</span><span class="dl">"</span><span class="s2">Submits the current form data</span><span class="dl">"</span> <span class="c1">// Additional context</span>
-        <span class="nx">accessibilityState</span><span class="o">=</span><span class="p">{{</span><span class="err">#</span><span class="mi">123</span><span class="p">;{{</span><span class="err">#</span><span class="mi">123</span><span class="p">;</span> <span class="nl">disabled</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> <span class="na">selected</span><span class="p">:</span> <span class="kc">false</span> <span class="p">}}</span><span class="err">#</span><span class="mi">125</span><span class="p">;}}</span><span class="err">#</span><span class="mi">125</span><span class="p">;</span> <span class="c1">// Current state</span>
-        <span class="nx">accessibilityValue</span><span class="o">=</span><span class="p">{{</span><span class="err">#</span><span class="mi">123</span><span class="p">;{{</span><span class="err">#</span><span class="mi">123</span><span class="p">;</span> <span class="nl">text</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Not submitted</span><span class="dl">"</span> <span class="p">}}</span><span class="err">#</span><span class="mi">125</span><span class="p">;}}</span><span class="err">#</span><span class="mi">125</span><span class="p">;</span> <span class="c1">// Current value</span>
+        <span class="nx">accessibilityState</span><span class="o">=</span><span class="p">{{}}</span> <span class="c1">// Current state</span>
+        <span class="nx">accessibilityValue</span><span class="o">=</span><span class="p">{{}}</span> <span class="c1">// Current value</span>
         <span class="nx">onPress</span><span class="o">=</span><span class="p">{()</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Button pressed</span><span class="dl">'</span><span class="p">)}</span>
       <span class="o">&gt;</span>
         <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">buttonText</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Submit</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
@@ -766,7 +766,7 @@
               <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Delete options shown</span><span class="dl">'</span><span class="p">);</span>
               <span class="k">break</span><span class="p">;</span>
           <span class="p">}</span>
-        <span class="p">}}</span><span class="err">#</span><span class="mi">125</span><span class="p">;}}</span><span class="err">#</span><span class="mi">125</span><span class="p">;</span>
+<span class="p">}}</span>
       <span class="o">&gt;</span>
         <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">buttonText</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Delete</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
 </span>      <span class="o">&lt;</span><span class="sr">/TouchableOpacity</span><span class="err">&gt;
@@ -779,7 +779,7 @@
         <span class="nx">accessibilityLiveRegion</span><span class="o">=</span><span class="dl">"</span><span class="s2">polite</span><span class="dl">"</span> <span class="c1">// Announces changes</span>
         <span class="nx">accessibilityLabel</span><span class="o">=</span><span class="dl">"</span><span class="s2">Status updates</span><span class="dl">"</span>
       <span class="o">&gt;</span>
-        <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">liveText</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Status</span><span class="p">:</span> <span class="nx">Ready</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+        <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">liveText</span><span class="p">}</span><span class="o">&gt;</span><span class="na">Status</span><span class="p">:</span> <span class="nx">Ready</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
 </span>      <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
 </span>
       <span class="p">{</span><span class="cm">/* Accessibility Elements */</span><span class="p">}</span>
@@ -1033,17 +1033,17 @@
               <span class="nx">accessibilityRole</span><span class="o">=</span><span class="dl">"</span><span class="s2">text</span><span class="dl">"</span>
               <span class="nx">accessibilityLabel</span><span class="o">=</span><span class="p">{</span><span class="nx">field</span><span class="p">.</span><span class="nx">label</span><span class="p">}</span>
               <span class="nx">accessibilityHint</span><span class="o">=</span><span class="p">{</span><span class="s2">`Field </span><span class="p">${</span><span class="nx">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">}</span><span class="s2"> of </span><span class="p">${</span><span class="nx">formFields</span><span class="p">.</span><span class="nx">length</span><span class="p">}</span><span class="s2">`</span><span class="p">}</span>
-              <span class="nx">accessibilityState</span><span class="o">=</span><span class="p">{{</span><span class="err">#</span><span class="mi">123</span><span class="p">;{{</span><span class="err">#</span><span class="mi">123</span><span class="p">;</span> 
-                <span class="nl">focused</span><span class="p">:</span> <span class="nx">currentFocus</span> <span class="o">===</span> <span class="nx">index</span><span class="p">,</span>
+              <span class="nx">accessibilityState</span><span class="o">=</span><span class="p">{{</span>
+                <span class="na">focused</span><span class="p">:</span> <span class="nx">currentFocus</span> <span class="o">===</span> <span class="nx">index</span><span class="p">,</span>
                 <span class="na">disabled</span><span class="p">:</span> <span class="kc">false</span> 
-              <span class="p">}}</span><span class="err">#</span><span class="mi">125</span><span class="p">;}}</span><span class="err">#</span><span class="mi">125</span><span class="p">;</span>
+<span class="p">}}</span>
               <span class="nx">onSubmitEditing</span><span class="o">=</span><span class="p">{()</span> <span class="o">=&gt;</span> <span class="p">{</span>
                 <span class="k">if</span> <span class="p">(</span><span class="nx">index</span> <span class="o">&lt;</span> <span class="nx">formFields</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
                   <span class="nx">handleNext</span><span class="p">();</span>
                 <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
                   <span class="nx">handleSubmit</span><span class="p">();</span>
                 <span class="p">}</span>
-              <span class="p">}}</span><span class="err">#</span><span class="mi">125</span><span class="p">;}}</span><span class="err">#</span><span class="mi">125</span><span class="p">;</span>
+<span class="p">}}</span>
               <span class="nx">returnKeyType</span><span class="o">=</span><span class="p">{</span><span class="nx">index</span> <span class="o">&lt;</span> <span class="nx">formFields</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span> <span class="p">?</span> <span class="dl">'</span><span class="s1">next</span><span class="dl">'</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">done</span><span class="dl">'</span><span class="p">}</span>
             <span class="sr">/</span><span class="err">&gt;
 </span>          <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
@@ -1062,7 +1062,7 @@
           <span class="nx">accessibilityRole</span><span class="o">=</span><span class="dl">"</span><span class="s2">button</span><span class="dl">"</span>
           <span class="nx">accessibilityLabel</span><span class="o">=</span><span class="dl">"</span><span class="s2">Previous field</span><span class="dl">"</span>
           <span class="nx">accessibilityHint</span><span class="o">=</span><span class="dl">"</span><span class="s2">Move to the previous form field</span><span class="dl">"</span>
-          <span class="nx">accessibilityState</span><span class="o">=</span><span class="p">{{</span><span class="err">#</span><span class="mi">123</span><span class="p">;{{</span><span class="err">#</span><span class="mi">123</span><span class="p">;</span> <span class="nl">disabled</span><span class="p">:</span> <span class="nx">currentFocus</span> <span class="o">===</span> <span class="mi">0</span> <span class="p">}}</span><span class="err">#</span><span class="mi">125</span><span class="p">;}}</span><span class="err">#</span><span class="mi">125</span><span class="p">;</span>
+          <span class="nx">accessibilityState</span><span class="o">=</span><span class="p">{{}}</span>
           <span class="nx">disabled</span><span class="o">=</span><span class="p">{</span><span class="nx">currentFocus</span> <span class="o">===</span> <span class="mi">0</span><span class="p">}</span>
         <span class="o">&gt;</span>
           <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">secondaryButtonText</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Previous</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
@@ -1079,7 +1079,7 @@
           <span class="nx">accessibilityRole</span><span class="o">=</span><span class="dl">"</span><span class="s2">button</span><span class="dl">"</span>
           <span class="nx">accessibilityLabel</span><span class="o">=</span><span class="dl">"</span><span class="s2">Next field</span><span class="dl">"</span>
           <span class="nx">accessibilityHint</span><span class="o">=</span><span class="dl">"</span><span class="s2">Move to the next form field</span><span class="dl">"</span>
-          <span class="nx">accessibilityState</span><span class="o">=</span><span class="p">{{</span><span class="err">#</span><span class="mi">123</span><span class="p">;{{</span><span class="err">#</span><span class="mi">123</span><span class="p">;</span> <span class="nl">disabled</span><span class="p">:</span> <span class="nx">currentFocus</span> <span class="o">===</span> <span class="nx">formFields</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span> <span class="p">}}</span><span class="err">#</span><span class="mi">125</span><span class="p">;}}</span><span class="err">#</span><span class="mi">125</span><span class="p">;</span>
+          <span class="nx">accessibilityState</span><span class="o">=</span><span class="p">{{}}</span>
           <span class="nx">disabled</span><span class="o">=</span><span class="p">{</span><span class="nx">currentFocus</span> <span class="o">===</span> <span class="nx">formFields</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">}</span>
         <span class="o">&gt;</span>
           <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">secondaryButtonText</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Next</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
@@ -1126,7 +1126,7 @@
         <span class="nx">accessibilityLabel</span><span class="o">=</span><span class="p">{</span><span class="s2">`Current field: </span><span class="p">${</span><span class="nx">formFields</span><span class="p">[</span><span class="nx">currentFocus</span><span class="p">]?.</span><span class="nx">label</span> <span class="o">||</span> <span class="dl">'</span><span class="s1">None</span><span class="dl">'</span><span class="p">}</span><span class="s2">`</span><span class="p">}</span>
       <span class="o">&gt;</span>
         <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">statusText</span><span class="p">}</span><span class="o">&gt;</span>
-          <span class="nx">Current</span> <span class="nx">Field</span><span class="p">:</span> <span class="p">{</span><span class="nx">formFields</span><span class="p">[</span><span class="nx">currentFocus</span><span class="p">]?.</span><span class="nx">label</span> <span class="o">||</span> <span class="dl">'</span><span class="s1">None</span><span class="dl">'</span><span class="p">}</span>
+          <span class="nx">Current</span> <span class="na">Field</span><span class="p">:</span> <span class="p">{</span><span class="nx">formFields</span><span class="p">[</span><span class="nx">currentFocus</span><span class="p">]?.</span><span class="nx">label</span> <span class="o">||</span> <span class="dl">'</span><span class="s1">None</span><span class="dl">'</span><span class="p">}</span>
         <span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
 </span>      <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
 </span>    <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
@@ -1421,7 +1421,7 @@
         <span class="nx">accessibilityRole</span><span class="o">=</span><span class="dl">"</span><span class="s2">button</span><span class="dl">"</span>
         <span class="nx">accessibilityLabel</span><span class="o">=</span><span class="dl">"</span><span class="s2">Run accessibility tests</span><span class="dl">"</span>
         <span class="nx">accessibilityHint</span><span class="o">=</span><span class="dl">"</span><span class="s2">Run tests to check accessibility features</span><span class="dl">"</span>
-        <span class="nx">accessibilityState</span><span class="o">=</span><span class="p">{{</span><span class="err">#</span><span class="mi">123</span><span class="p">;{{</span><span class="err">#</span><span class="mi">123</span><span class="p">;</span> <span class="nl">disabled</span><span class="p">:</span> <span class="nx">isTesting</span> <span class="p">}}</span><span class="err">#</span><span class="mi">125</span><span class="p">;}}</span><span class="err">#</span><span class="mi">125</span><span class="p">;</span>
+        <span class="nx">accessibilityState</span><span class="o">=</span><span class="p">{{}}</span>
         <span class="nx">disabled</span><span class="o">=</span><span class="p">{</span><span class="nx">isTesting</span><span class="p">}</span>
       <span class="o">&gt;</span>
         <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">testButtonText</span><span class="p">}</span><span class="o">&gt;</span>

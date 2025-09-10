@@ -23,6 +23,7 @@
 ### **Project Structure**
 
 
+{% raw %}
 ```mermaid
 graph TD
     A[src/] --> B[features/]
@@ -41,6 +42,7 @@ graph TD
     D --> L[store/]
     D --> M[config/]
 ```
+{% endraw %}
 
 
 ### **Key Principles**
@@ -57,6 +59,7 @@ graph TD
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Feature module structure
 const FeatureModule = {
@@ -117,12 +120,14 @@ const FeatureModule = {
 
 export default FeatureModule;
 ```
+{% endraw %}
 
 
 ### **Feature Module Implementation**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Profile feature module
 const ProfileFeature = {
@@ -215,6 +220,7 @@ const FeatureRegistry = {
 
 export { ProfileFeature, FeatureRegistry };
 ```
+{% endraw %}
 
 
 ---
@@ -225,6 +231,7 @@ export { ProfileFeature, FeatureRegistry };
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Shared components index
 const SharedComponents = {
@@ -293,6 +300,7 @@ const SharedComponentRegistry = {
 
 export { SharedComponents, createSharedComponent, SharedComponentRegistry };
 ```
+{% endraw %}
 
 
 ---
@@ -303,6 +311,7 @@ export { SharedComponents, createSharedComponent, SharedComponentRegistry };
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -406,6 +415,7 @@ const NavigationService = {
 
 export { FeatureNavigation, NavigationService };
 ```
+{% endraw %}
 
 
 ---

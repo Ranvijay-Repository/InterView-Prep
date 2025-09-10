@@ -46,6 +46,7 @@
 
 ### ASCII Diagram: Intersection Observer Flow
 
+{% raw %}
 ```
 INTERSECTION OBSERVER FLOW
 ┌─────────────────────────────────┐
@@ -83,6 +84,7 @@ INTERSECTION OBSERVER FLOW
         │  Track        │
         └───────────────┘
 ```
+{% endraw %}
 
 
 ### Use Cases:
@@ -107,6 +109,7 @@ INTERSECTION OBSERVER FLOW
 
 ### ASCII Diagram: Resize Observer Flow
 
+{% raw %}
 ```
 RESIZE OBSERVER FLOW
 ┌─────────────────────────────────┐
@@ -145,6 +148,7 @@ RESIZE OBSERVER FLOW
         │  Adaptation   │
         └───────────────┘
 ```
+{% endraw %}
 
 
 ### Use Cases:
@@ -169,6 +173,7 @@ RESIZE OBSERVER FLOW
 
 ### ASCII Diagram: Performance Measurement Flow
 
+{% raw %}
 ```
 PERFORMANCE MEASUREMENT FLOW
 ┌─────────────────────────────────┐
@@ -203,6 +208,7 @@ PERFORMANCE MEASUREMENT FLOW
         │  Metrics      │
         └───────────────┘
 ```
+{% endraw %}
 
 
 ### Available APIs:
@@ -227,6 +233,7 @@ PERFORMANCE MEASUREMENT FLOW
 
 ### ASCII Diagram: Web Animations Flow
 
+{% raw %}
 ```
 WEB ANIMATIONS FLOW
 ┌─────────────────────────────────┐
@@ -261,6 +268,7 @@ WEB ANIMATIONS FLOW
         │  Cancel       │
         └───────────────┘
 ```
+{% endraw %}
 
 
 ### Animation Features:

@@ -26,6 +26,7 @@ Angular is built with TypeScript from the ground up, providing excellent type sa
 ### **Basic Setup**
 
 
+{% raw %}
 ```bash
 # Install Angular CLI
 npm install -g @angular/cli
@@ -36,11 +37,13 @@ ng new my-app
 # Or add TypeScript to existing project
 ng add @angular/cli
 ```
+{% endraw %}
 
 
 ### **Angular Configuration**
 
 
+{% raw %}
 ```json
 // tsconfig.json
 {
@@ -76,11 +79,13 @@ ng add @angular/cli
   }
 }
 ```
+{% endraw %}
 
 
 ### **Angular CLI Configuration**
 
 
+{% raw %}
 ```json
 // angular.json
 {
@@ -119,6 +124,7 @@ ng add @angular/cli
   }
 }
 ```
+{% endraw %}
 
 
 ---
@@ -128,6 +134,7 @@ ng add @angular/cli
 ### **Basic Component**
 
 
+{% raw %}
 ```typescript
 // user.component.ts
 import { Component, Input, Output, EventEmitter } from '@angular/core';
@@ -166,11 +173,13 @@ export class UserComponent {
   }
 }
 ```
+{% endraw %}
 
 
 ### **Component with Lifecycle Hooks**
 
 
+{% raw %}
 ```typescript
 // user-list.component.ts
 import { 
@@ -264,11 +273,13 @@ export class UserListComponent implements OnInit, OnDestroy, OnChanges {
   }
 }
 ```
+{% endraw %}
 
 
 ### **Generic Component**
 
 
+{% raw %}
 ```typescript
 // data-table.component.ts
 import { Component, Input, Output, EventEmitter } from '@angular/core';
@@ -348,6 +359,7 @@ export class DataTableComponent<T> {
   }
 }
 ```
+{% endraw %}
 
 
 ---
@@ -357,6 +369,7 @@ export class DataTableComponent<T> {
 ### **Basic Service**
 
 
+{% raw %}
 ```typescript
 // user.service.ts
 import { Injectable } from '@angular/core';
@@ -461,11 +474,13 @@ export class UserService {
   }
 }
 ```
+{% endraw %}
 
 
 ### **Custom Injection Token**
 
 
+{% raw %}
 ```typescript
 // config.service.ts
 import { Injectable, InjectionToken } from '@angular/core';
@@ -526,6 +541,7 @@ export class ConfigService {
 })
 export class AppModule {}
 ```
+{% endraw %}
 
 
 ---
@@ -535,6 +551,7 @@ export class AppModule {}
 ### **Reactive Forms**
 
 
+{% raw %}
 ```typescript
 // user-form.component.ts
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
@@ -641,11 +658,13 @@ export class UserFormComponent implements OnInit {
   }
 }
 ```
+{% endraw %}
 
 
 ### **Custom Validators**
 
 
+{% raw %}
 ```typescript
 // custom-validators.ts
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
@@ -707,6 +726,7 @@ export class CustomValidators {
   }
 }
 ```
+{% endraw %}
 
 
 ---
@@ -716,6 +736,7 @@ export class CustomValidators {
 ### **Route Configuration**
 
 
+{% raw %}
 ```typescript
 // app-routing.module.ts
 import { NgModule } from '@angular/core';
@@ -756,11 +777,13 @@ const routes: Routes = [
 })
 export class AppRoutingModule {}
 ```
+{% endraw %}
 
 
 ### **Route Guards**
 
 
+{% raw %}
 ```typescript
 // auth.guard.ts
 import { Injectable } from '@angular/core';
@@ -798,11 +821,13 @@ export class AuthGuard implements CanActivate {
   }
 }
 ```
+{% endraw %}
 
 
 ### **Route Resolvers**
 
 
+{% raw %}
 ```typescript
 // user.resolver.ts
 import { Injectable } from '@angular/core';
@@ -829,6 +854,7 @@ export class UserResolver implements Resolve<User> {
   }
 }
 ```
+{% endraw %}
 
 
 ---
@@ -838,6 +864,7 @@ export class UserResolver implements Resolve<User> {
 ### **State Management with NgRx**
 
 
+{% raw %}
 ```typescript
 // user.actions.ts
 import { createAction, props } from '@ngrx/store';
@@ -866,9 +893,11 @@ export const createUserFailure = createAction(
   props<{ error: string }>()
 );
 ```
+{% endraw %}
 
 
 
+{% raw %}
 ```typescript
 // user.reducer.ts
 import { createReducer, on } from '@ngrx/store';
@@ -911,11 +940,13 @@ export const userReducer = createReducer(
   }))
 );
 ```
+{% endraw %}
 
 
 ### **Interceptors**
 
 
+{% raw %}
 ```typescript
 // auth.interceptor.ts
 import { Injectable } from '@angular/core';
@@ -941,6 +972,7 @@ export class AuthInterceptor implements HttpInterceptor {
   }
 }
 ```
+{% endraw %}
 
 
 ---
@@ -950,6 +982,7 @@ export class AuthInterceptor implements HttpInterceptor {
 ### **1. Use Strict Type Checking**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Strict typing
 interface User {
@@ -963,11 +996,13 @@ interface User {
 // ❌ Avoid: Loose typing
 @Input() user: any;
 ```
+{% endraw %}
 
 
 ### **2. Use OnPush Change Detection**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: OnPush change detection
 @Component({
@@ -988,11 +1023,13 @@ export class UserComponent {
   // Component implementation
 }
 ```
+{% endraw %}
 
 
 ### **3. Use TrackBy Functions**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: TrackBy function
 trackByUserId(index: number, user: User): number {
@@ -1002,11 +1039,13 @@ trackByUserId(index: number, user: User): number {
 // ❌ Avoid: No trackBy function
 *ngFor="let user of users"
 ```
+{% endraw %}
 
 
 ### **4. Use Reactive Forms**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Reactive forms
 userForm = this.fb.group({
@@ -1019,6 +1058,7 @@ userForm = this.fb.group({
   <input name="name" ngModel required>
 </form>
 ```
+{% endraw %}
 
 
 ---
@@ -1042,6 +1082,7 @@ Angular is built with TypeScript by default. Just use `ng new my-app` and TypeSc
 
 **Answer:**
 
+{% raw %}
 ```typescript
 @Component({
   selector: 'app-user',
@@ -1052,24 +1093,28 @@ export class UserComponent {
   @Output() edit = new EventEmitter<User>();
 }
 ```
+{% endraw %}
 
 
 ### **4. How do you handle forms in Angular with TypeScript?**
 
 **Answer:**
 
+{% raw %}
 ```typescript
 userForm = this.fb.group({
   name: ['', Validators.required],
   email: ['', [Validators.required, Validators.email]]
 });
 ```
+{% endraw %}
 
 
 ### **5. How do you create services in Angular with TypeScript?**
 
 **Answer:**
 
+{% raw %}
 ```typescript
 @Injectable({
   providedIn: 'root'
@@ -1082,6 +1127,7 @@ export class UserService {
   }
 }
 ```
+{% endraw %}
 
 
 ---

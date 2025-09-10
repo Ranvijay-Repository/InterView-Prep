@@ -25,6 +25,7 @@ Type guards are TypeScript's way of narrowing down types at runtime, providing t
 ### **What are Type Guards?**
 
 
+{% raw %}
 ```typescript
 // Type guards help TypeScript understand types at runtime
 const typeGuards = {
@@ -49,11 +50,13 @@ function processValue(value: unknown) {
   }
 }
 ```
+{% endraw %}
 
 
 ### **Type Guard Benefits**
 
 
+{% raw %}
 ```typescript
 // Benefits of using type guards
 const typeGuardBenefits = {
@@ -78,6 +81,7 @@ function processWithGuard(value: unknown) {
   }
 }
 ```
+{% endraw %}
 
 
 ---
@@ -87,6 +91,7 @@ function processWithGuard(value: unknown) {
 ### **typeof Type Guards**
 
 
+{% raw %}
 ```typescript
 // typeof type guards
 const typeofGuards = {
@@ -130,11 +135,13 @@ function handleObject(value: unknown) {
   return [];
 }
 ```
+{% endraw %}
 
 
 ### **instanceof Type Guards**
 
 
+{% raw %}
 ```typescript
 // instanceof type guards
 const instanceofGuards = {
@@ -178,11 +185,13 @@ function processArray(value: unknown) {
   return 0;
 }
 ```
+{% endraw %}
 
 
 ### **in Operator Type Guards**
 
 
+{% raw %}
 ```typescript
 // in operator type guards
 const inOperatorGuards = {
@@ -229,6 +238,7 @@ function processUser(user: User) {
   }
 }
 ```
+{% endraw %}
 
 
 ---
@@ -238,6 +248,7 @@ function processUser(user: User) {
 ### **Basic Custom Type Guards**
 
 
+{% raw %}
 ```typescript
 // Custom type guard function
 function isString(value: unknown): value is string {
@@ -267,11 +278,13 @@ function processValue(value: unknown) {
   return null;
 }
 ```
+{% endraw %}
 
 
 ### **Complex Type Guards**
 
 
+{% raw %}
 ```typescript
 // Complex type guards
 interface ApiResponse {
@@ -311,11 +324,13 @@ function handleApiResponse(response: unknown) {
   }
 }
 ```
+{% endraw %}
 
 
 ### **Generic Type Guards**
 
 
+{% raw %}
 ```typescript
 // Generic type guards
 function isArrayOf<T>(value: unknown, guard: (item: unknown) => item is T): value is T[] {
@@ -347,6 +362,7 @@ function processNumberObject(value: unknown) {
   return 0;
 }
 ```
+{% endraw %}
 
 
 ---
@@ -356,6 +372,7 @@ function processNumberObject(value: unknown) {
 ### **Control Flow Analysis**
 
 
+{% raw %}
 ```typescript
 // Control flow analysis
 function analyzeValue(value: string | number | boolean) {
@@ -382,11 +399,13 @@ function processValue(value: unknown) {
   return value.toUpperCase();
 }
 ```
+{% endraw %}
 
 
 ### **Discriminated Unions**
 
 
+{% raw %}
 ```typescript
 // Discriminated unions
 interface LoadingState {
@@ -423,11 +442,13 @@ function handleState(state: AppState) {
   }
 }
 ```
+{% endraw %}
 
 
 ### **Assertion Functions**
 
 
+{% raw %}
 ```typescript
 // Assertion functions
 function assertIsString(value: unknown): asserts value is string {
@@ -456,6 +477,7 @@ function assertIsArray(value: unknown): asserts value is any[] {
   }
 }
 ```
+{% endraw %}
 
 
 ---
@@ -465,6 +487,7 @@ function assertIsArray(value: unknown): asserts value is any[] {
 ### **Branded Types**
 
 
+{% raw %}
 ```typescript
 // Branded types
 type Brand<T, B> = T & { __brand: B };
@@ -499,11 +522,13 @@ function processProduct(productId: ProductId) {
   console.log('Processing product:', productId);
 }
 ```
+{% endraw %}
 
 
 ### **Opaque Types**
 
 
+{% raw %}
 ```typescript
 // Opaque types
 declare const __opaque: unique symbol;
@@ -530,11 +555,13 @@ function isProductId(value: unknown): value is ProductId {
   return typeof value === 'number' && value > 0;
 }
 ```
+{% endraw %}
 
 
 ### **Template Literal Types**
 
 
+{% raw %}
 ```typescript
 // Template literal types
 type EventName<T extends string> = `on${Capitalize<T>}`;
@@ -554,6 +581,7 @@ function handleEvent(eventName: string) {
   }
 }
 ```
+{% endraw %}
 
 
 ---
@@ -563,6 +591,7 @@ function handleEvent(eventName: string) {
 ### **1. Use Built-in Type Guards When Possible**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Use built-in type guards
 function processValue(value: unknown) {
@@ -588,11 +617,13 @@ function processValue(value: unknown) {
   }
 }
 ```
+{% endraw %}
 
 
 ### **2. Make Type Guards Specific**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Specific type guards
 function isApiResponse(value: unknown): value is ApiResponse {
@@ -609,11 +640,13 @@ function isObject(value: unknown): value is object {
   return typeof value === 'object' && value !== null;
 }
 ```
+{% endraw %}
 
 
 ### **3. Use Discriminated Unions**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Discriminated unions
 interface LoadingState {
@@ -630,11 +663,13 @@ type AppState = LoadingState | SuccessState;
 // ❌ Avoid: Union types without discrimination
 type AppState = { status: string; data?: any };
 ```
+{% endraw %}
 
 
 ### **4. Handle Exhaustive Checks**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Exhaustive checks
 function handleState(state: AppState) {
@@ -658,6 +693,7 @@ function handleState(state: AppState) {
   }
 }
 ```
+{% endraw %}
 
 
 ---
@@ -680,11 +716,13 @@ Type guards are functions that help TypeScript narrow down types at runtime. The
 
 **Answer:**
 
+{% raw %}
 ```typescript
 function isString(value: unknown): value is string {
   return typeof value === 'string';
 }
 ```
+{% endraw %}
 
 The return type `value is string` is a type predicate that tells TypeScript the value is a string.
 
@@ -698,6 +736,7 @@ Discriminated unions are union types with a common property (discriminator) that
 **Answer:**
 Use the `never` type to ensure all cases are handled:
 
+{% raw %}
 ```typescript
 function handleState(state: AppState) {
   switch (state.status) {
@@ -711,6 +750,7 @@ function handleState(state: AppState) {
   }
 }
 ```
+{% endraw %}
 
 
 ---

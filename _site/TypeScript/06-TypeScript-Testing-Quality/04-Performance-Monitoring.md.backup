@@ -26,6 +26,7 @@ Performance monitoring helps identify bottlenecks, optimize code, and ensure app
 ### **Performance Monitoring Areas**
 
 
+{% raw %}
 ```typescript
 // Performance monitoring areas
 const performanceAreas = {
@@ -44,11 +45,13 @@ const monitoringTools = {
   analysis: "Bundle analyzers, performance budgets"
 };
 ```
+{% endraw %}
 
 
 ### **Performance Metrics**
 
 
+{% raw %}
 ```typescript
 // Key performance metrics
 const performanceMetrics = {
@@ -60,6 +63,7 @@ const performanceMetrics = {
   timeToInteractive: "Time until page is interactive"
 };
 ```
+{% endraw %}
 
 
 ---
@@ -69,6 +73,7 @@ const performanceMetrics = {
 ### **Web Performance API**
 
 
+{% raw %}
 ```typescript
 // Performance monitoring with Web Performance API
 class PerformanceMonitor {
@@ -179,11 +184,13 @@ const asyncResult = await monitor.measureAsyncFunction('apiCall', async () => {
 const vitals = await monitor.getWebVitals();
 console.log('Web Vitals:', vitals);
 ```
+{% endraw %}
 
 
 ### **Custom Performance Metrics**
 
 
+{% raw %}
 ```typescript
 // Custom performance metrics
 interface PerformanceMetric {
@@ -300,6 +307,7 @@ customMonitor.recordMetric('api.response.time', 300, { endpoint: '/api/users' })
 const averageResponseTime = customMonitor.getAverageMetric('api.response.time');
 console.log('Average response time:', averageResponseTime);
 ```
+{% endraw %}
 
 
 ---
@@ -309,6 +317,7 @@ console.log('Average response time:', averageResponseTime);
 ### **Chrome DevTools Profiling**
 
 
+{% raw %}
 ```typescript
 // Performance profiling utilities
 class Profiler {
@@ -396,11 +405,13 @@ for (let i = 0; i < 10; i++) {
 const stats = profiler.getProfileStats('expensiveFunction');
 console.log('Profile statistics:', stats);
 ```
+{% endraw %}
 
 
 ### **Node.js Profiling**
 
 
+{% raw %}
 ```typescript
 // Node.js performance profiling
 import { performance } from 'perf_hooks';
@@ -496,6 +507,7 @@ for (let i = 0; i < 100; i++) {
 const stats = nodeProfiler.getStats('dbQuery');
 console.log('Database query statistics:', stats);
 ```
+{% endraw %}
 
 
 ---
@@ -505,6 +517,7 @@ console.log('Database query statistics:', stats);
 ### **Memory Monitoring**
 
 
+{% raw %}
 ```typescript
 // Memory monitoring utilities
 class MemoryMonitor {
@@ -595,11 +608,13 @@ setInterval(() => {
   }
 }, 30000);
 ```
+{% endraw %}
 
 
 ### **Performance Budgets**
 
 
+{% raw %}
 ```typescript
 // Performance budget monitoring
 interface PerformanceBudget {
@@ -695,6 +710,7 @@ budgetMonitor.updateBudget('memoryUsage', 80000000);
 const report = budgetMonitor.getBudgetReport();
 console.log(report);
 ```
+{% endraw %}
 
 
 ---
@@ -704,6 +720,7 @@ console.log(report);
 ### **Bundle Size Monitoring**
 
 
+{% raw %}
 ```typescript
 // Bundle size monitoring
 interface BundleInfo {
@@ -834,6 +851,7 @@ bundleAnalyzer.addBundle('vendor', {
 const report = bundleAnalyzer.generateReport();
 console.log(report);
 ```
+{% endraw %}
 
 
 ---
@@ -843,6 +861,7 @@ console.log(report);
 ### **Load Testing**
 
 
+{% raw %}
 ```typescript
 // Load testing utilities
 interface LoadTestConfig {
@@ -992,6 +1011,7 @@ const requestFn = async () => {
 const result = await loadTester.runLoadTest(config, requestFn);
 console.log('Load test results:', result);
 ```
+{% endraw %}
 
 
 ---
@@ -1001,6 +1021,7 @@ console.log('Load test results:', result);
 ### **1. Monitor Key Metrics**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Monitor key metrics
 const monitor = new PerformanceMonitor();
@@ -1019,11 +1040,13 @@ const userLogin = () => {
   // Login logic without monitoring
 };
 ```
+{% endraw %}
 
 
 ### **2. Set Performance Budgets**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Set performance budgets
 const budgetMonitor = new PerformanceBudgetMonitor();
@@ -1033,11 +1056,13 @@ budgetMonitor.addBudget('bundleSize', 500000, 'bytes');
 // ❌ Avoid: No performance budgets
 // No performance constraints
 ```
+{% endraw %}
 
 
 ### **3. Use Profiling Tools**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Use profiling tools
 const profiler = new Profiler();
@@ -1048,11 +1073,13 @@ profiler.endProfile('expensiveOperation');
 // ❌ Avoid: No profiling
 // Expensive operation without profiling
 ```
+{% endraw %}
 
 
 ### **4. Monitor Memory Usage**
 
 
+{% raw %}
 ```typescript
 // ✅ Good: Monitor memory usage
 const memoryMonitor = new MemoryMonitor();
@@ -1063,6 +1090,7 @@ const leakInfo = memoryMonitor.detectMemoryLeaks();
 // ❌ Avoid: Ignoring memory usage
 // No memory monitoring
 ```
+{% endraw %}
 
 
 ---

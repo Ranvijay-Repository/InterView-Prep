@@ -9,6 +9,7 @@ Memory optimization is crucial for building performant React Native applications
 ### 1. Efficient Component Structure
 
 
+{% raw %}
 ```javascript
 import { memo, useMemo, useCallback } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
@@ -72,11 +73,13 @@ const OptimizedList = ({ items, onItemPress, onItemLongPress }) => {
   );
 };
 ```
+{% endraw %}
 
 
 ### 2. State Management Optimization
 
 
+{% raw %}
 ```javascript
 import { useReducer, useCallback, useMemo } from 'react';
 
@@ -164,6 +167,7 @@ const OptimizedStateComponent = () => {
   );
 };
 ```
+{% endraw %}
 
 
 ## Image and Media Optimization
@@ -171,6 +175,7 @@ const OptimizedStateComponent = () => {
 ### 1. Efficient Image Loading
 
 
+{% raw %}
 ```javascript
 import { useState, useCallback, useMemo } from 'react';
 import { Image, View, Text } from 'react-native';
@@ -259,11 +264,13 @@ class ImageCacheManager {
 
 const imageCache = new ImageCacheManager();
 ```
+{% endraw %}
 
 
 ### 2. Lazy Loading and Virtualization
 
 
+{% raw %}
 ```javascript
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { FlatList, View, Text } from 'react-native';
@@ -327,6 +334,7 @@ const LazyLoadingList = ({ data, renderItem, itemHeight = 80 }) => {
   );
 };
 ```
+{% endraw %}
 
 
 ## Memory-Efficient Data Handling
@@ -334,6 +342,7 @@ const LazyLoadingList = ({ data, renderItem, itemHeight = 80 }) => {
 ### 1. Efficient Data Structures
 
 
+{% raw %}
 ```javascript
 import { useMemo, useCallback } from 'react';
 
@@ -391,11 +400,13 @@ const EfficientDataHandling = () => {
   );
 };
 ```
+{% endraw %}
 
 
 ### 2. Object Pooling for Frequent Operations
 
 
+{% raw %}
 ```javascript
 import { useRef, useCallback } from 'react';
 
@@ -479,6 +490,7 @@ const useObjectPool = () => {
   return { getObject, releaseObject, getPoolStats };
 };
 ```
+{% endraw %}
 
 
 ## Event Handling Optimization
@@ -486,6 +498,7 @@ const useObjectPool = () => {
 ### 1. Efficient Event Listeners
 
 
+{% raw %}
 ```javascript
 import { useEffect, useRef, useCallback } from 'react';
 import { AppState, Dimensions, NetInfo } from 'react-native';
@@ -535,11 +548,13 @@ const OptimizedEventHandling = () => {
   return <View>Optimized Event Handling</View>;
 };
 ```
+{% endraw %}
 
 
 ### 2. Debounced and Throttled Functions
 
 
+{% raw %}
 ```javascript
 import { useCallback, useRef } from 'react';
 
@@ -643,6 +658,7 @@ const SearchComponent = () => {
   );
 };
 ```
+{% endraw %}
 
 
 ## Memory Monitoring and Cleanup
@@ -650,6 +666,7 @@ const SearchComponent = () => {
 ### 1. Automatic Cleanup Hooks
 
 
+{% raw %}
 ```javascript
 import { useEffect, useRef } from 'react';
 
@@ -717,11 +734,13 @@ const ComponentWithCleanup = () => {
   return <View>Component with Cleanup</View>;
 };
 ```
+{% endraw %}
 
 
 ### 2. Memory Pressure Handling
 
 
+{% raw %}
 ```javascript
 import { useEffect, useState, useCallback } from 'react';
 import { AppState } from 'react-native';
@@ -787,6 +806,7 @@ const useMemoryPressure = () => {
   };
 };
 ```
+{% endraw %}
 
 
 ## Performance Testing and Monitoring
@@ -794,6 +814,7 @@ const useMemoryPressure = () => {
 ### 1. Memory Performance Tests
 
 
+{% raw %}
 ```javascript
 import { render, cleanup } from '@testing-library/react-native';
 
@@ -856,6 +877,7 @@ describe('Memory Performance Tests', () => {
   });
 });
 ```
+{% endraw %}
 
 
 ## Summary

@@ -23,6 +23,7 @@ Your repository now has a complete CI/CD pipeline that ensures:
 
 ### 1. **Development Workflow**
 
+{% raw %}
 ```bash
 # Create feature branch
 git checkout -b feature/my-feature
@@ -36,10 +37,12 @@ git push origin feature/my-feature
 # → Triggers lint workflow
 # → Shows build status in PR
 ```
+{% endraw %}
 
 
 ### 2. **Deployment Workflow**
 
+{% raw %}
 ```bash
 # When PR is approved and merged:
 # → Triggers deploy workflow
@@ -47,6 +50,7 @@ git push origin feature/my-feature
 # → Builds Jekyll site
 # → Deploys to GitHub Pages
 ```
+{% endraw %}
 
 
 ### 3. **Security Features**
@@ -75,9 +79,11 @@ git push origin feature/my-feature
 
 ### 1. **Run the Setup Script**
 
+{% raw %}
 ```bash
 ./scripts/setup-production-branch.sh
 ```
+{% endraw %}
 
 
 ### 2. **Configure Branch Protection**

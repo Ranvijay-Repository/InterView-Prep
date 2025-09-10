@@ -26,6 +26,7 @@ TypeScript compiler options control how the TypeScript compiler processes your c
 ### **Basic Compiler Options**
 
 
+{% raw %}
 ```json
 {
   "compilerOptions": {
@@ -49,11 +50,13 @@ TypeScript compiler options control how the TypeScript compiler processes your c
   }
 }
 ```
+{% endraw %}
 
 
 ### **Compiler Option Categories**
 
 
+{% raw %}
 ```typescript
 // Type checking options
 "strict": true,
@@ -74,6 +77,7 @@ TypeScript compiler options control how the TypeScript compiler processes your c
 "experimentalDecorators": true,
 "emitDecoratorMetadata": true
 ```
+{% endraw %}
 
 
 ---
@@ -85,6 +89,7 @@ Strict mode enables additional type checking options for better type safety.
 ### **Strict Mode Overview**
 
 
+{% raw %}
 ```json
 {
   "compilerOptions": {
@@ -102,11 +107,13 @@ Strict mode enables additional type checking options for better type safety.
   }
 }
 ```
+{% endraw %}
 
 
 ### **noImplicitAny**
 
 
+{% raw %}
 ```typescript
 // ❌ Error with noImplicitAny: true
 function processData(data) { // Parameter 'data' implicitly has an 'any' type
@@ -123,11 +130,13 @@ function processData(data: string) { // Type inferred as string
   return data.toUpperCase();
 }
 ```
+{% endraw %}
 
 
 ### **strictNullChecks**
 
 
+{% raw %}
 ```typescript
 // ❌ Error with strictNullChecks: true
 function getUser(id: number): User {
@@ -156,11 +165,13 @@ function getUser(id: number): User {
   return user;
 }
 ```
+{% endraw %}
 
 
 ### **strictFunctionTypes**
 
 
+{% raw %}
 ```typescript
 // ❌ Error with strictFunctionTypes: true
 interface Animal {
@@ -183,11 +194,13 @@ let dogHandler: (dog: Dog) => void;
 // This is allowed because functions are contravariant in their parameter types
 dogHandler = animalHandler; // OK
 ```
+{% endraw %}
 
 
 ### **strictPropertyInitialization**
 
 
+{% raw %}
 ```typescript
 // ❌ Error with strictPropertyInitialization: true
 class User {
@@ -218,6 +231,7 @@ class User {
   age?: number;
 }
 ```
+{% endraw %}
 
 
 ---
@@ -227,6 +241,7 @@ class User {
 ### **Additional Type Checking Options**
 
 
+{% raw %}
 ```json
 {
   "compilerOptions": {
@@ -250,11 +265,13 @@ class User {
   }
 }
 ```
+{% endraw %}
 
 
 ### **noUnreachableCode**
 
 
+{% raw %}
 ```typescript
 // ❌ Error with noUnreachableCode: true
 function processData(data: string): string {
@@ -273,11 +290,13 @@ function processData(data: string): string {
   return data;
 }
 ```
+{% endraw %}
 
 
 ### **noUnusedLocals and noUnusedParameters**
 
 
+{% raw %}
 ```typescript
 // ❌ Error with noUnusedLocals: true
 function processData(data: string): string {
@@ -300,11 +319,13 @@ function processData(data: string, _unusedParam: number): string {
   return data;
 }
 ```
+{% endraw %}
 
 
 ### **noUncheckedIndexedAccess**
 
 
+{% raw %}
 ```typescript
 // ❌ Error with noUncheckedIndexedAccess: true
 function getFirstElement<T>(array: T[]): T {
@@ -324,6 +345,7 @@ function getFirstElement<T>(array: T[]): T {
   return array[0];
 }
 ```
+{% endraw %}
 
 
 ---
@@ -333,6 +355,7 @@ function getFirstElement<T>(array: T[]): T {
 ### **Module Resolution Strategy**
 
 
+{% raw %}
 ```json
 {
   "compilerOptions": {
@@ -358,11 +381,13 @@ function getFirstElement<T>(array: T[]): T {
   }
 }
 ```
+{% endraw %}
 
 
 ### **Module Resolution Examples**
 
 
+{% raw %}
 ```typescript
 // With baseUrl: "./src" and paths: { "@/*": ["*"] }
 import { User } from "@/types/user";           // Resolves to src/types/user
@@ -374,6 +399,7 @@ import { User } from "../../types/user";
 import { Button } from "../components/Button";
 import { utils } from "../utils/helpers";
 ```
+{% endraw %}
 
 
 ---
@@ -383,6 +409,7 @@ import { utils } from "../utils/helpers";
 ### **Output Configuration**
 
 
+{% raw %}
 ```json
 {
   "compilerOptions": {
@@ -410,11 +437,13 @@ import { utils } from "../utils/helpers";
   }
 }
 ```
+{% endraw %}
 
 
 ### **Source Map Options**
 
 
+{% raw %}
 ```json
 {
   "compilerOptions": {
@@ -432,6 +461,7 @@ import { utils } from "../utils/helpers";
   }
 }
 ```
+{% endraw %}
 
 
 ---
@@ -441,6 +471,7 @@ import { utils } from "../utils/helpers";
 ### **Experimental Features**
 
 
+{% raw %}
 ```json
 {
   "compilerOptions": {
@@ -456,11 +487,13 @@ import { utils } from "../utils/helpers";
   }
 }
 ```
+{% endraw %}
 
 
 ### **Incremental Compilation**
 
 
+{% raw %}
 ```json
 {
   "compilerOptions": {
@@ -477,11 +510,13 @@ import { utils } from "../utils/helpers";
   }
 }
 ```
+{% endraw %}
 
 
 ### **Advanced Type Checking**
 
 
+{% raw %}
 ```json
 {
   "compilerOptions": {
@@ -503,6 +538,7 @@ import { utils } from "../utils/helpers";
   }
 }
 ```
+{% endraw %}
 
 
 ---
@@ -512,6 +548,7 @@ import { utils } from "../utils/helpers";
 ### **1. Enable Strict Mode**
 
 
+{% raw %}
 ```json
 // ✅ Good: Enable strict mode
 {
@@ -527,11 +564,13 @@ import { utils } from "../utils/helpers";
   }
 }
 ```
+{% endraw %}
 
 
 ### **2. Use Specific Strict Options**
 
 
+{% raw %}
 ```json
 // ✅ Good: Enable specific strict options
 {
@@ -550,11 +589,13 @@ import { utils } from "../utils/helpers";
   }
 }
 ```
+{% endraw %}
 
 
 ### **3. Configure Module Resolution**
 
 
+{% raw %}
 ```json
 // ✅ Good: Configure module resolution
 {
@@ -574,11 +615,13 @@ import { utils } from "../utils/helpers";
   }
 }
 ```
+{% endraw %}
 
 
 ### **4. Use Incremental Compilation**
 
 
+{% raw %}
 ```json
 // ✅ Good: Enable incremental compilation
 {
@@ -595,6 +638,7 @@ import { utils } from "../utils/helpers";
   }
 }
 ```
+{% endraw %}
 
 
 ---
@@ -638,6 +682,7 @@ Strict mode enables additional type checking options for better type safety. It 
 Use `baseUrl` and `paths` in `tsconfig.json`:
 
 
+{% raw %}
 ```json
 {
   "compilerOptions": {
@@ -649,6 +694,7 @@ Use `baseUrl` and `paths` in `tsconfig.json`:
   }
 }
 ```
+{% endraw %}
 
 
 ---

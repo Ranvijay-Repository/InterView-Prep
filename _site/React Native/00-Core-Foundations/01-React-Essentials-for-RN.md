@@ -749,7 +749,7 @@ const App = () => (
   <ErrorBoundary onError={(error, errorInfo) => {
     // Log to crash reporting service
     console.error('App error:', error, errorInfo);
-  }}#125;}}#125;>
+}}>
     <MainApp />
   </ErrorBoundary>
 );

@@ -23,6 +23,7 @@
 ### **Security Framework**
 
 
+{% raw %}
 ```mermaid
 graph TD
     A[Security Assessment] --> B[Threat Modeling]
@@ -36,6 +37,7 @@ graph TD
     H[Penetration Testing] --> D
     I[Security Audits] --> E
 ```
+{% endraw %}
 
 
 ### **Security Principles**
@@ -52,6 +54,7 @@ graph TD
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Security assessment checklist
 const SECURITY_CHECKLIST = {
@@ -270,12 +273,14 @@ export {
   SECURITY_CHECKLIST,
 };
 ```
+{% endraw %}
 
 
 ### **Security Testing**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Security testing utilities
 const createSecurityTestingService = () => {
@@ -499,6 +504,7 @@ export {
   testRequestValidation,
 };
 ```
+{% endraw %}
 
 
 ---
@@ -509,6 +515,7 @@ export {
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Security middleware for API requests
 const createSecurityMiddleware = () => {
@@ -738,6 +745,7 @@ export {
   logSecurityEvent,
 };
 ```
+{% endraw %}
 
 
 ---
@@ -748,6 +756,7 @@ export {
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Security monitoring service
 const createSecurityMonitoringService = () => {
@@ -982,6 +991,7 @@ export {
   storeSecurityEvent,
 };
 ```
+{% endraw %}
 
 
 ---
@@ -992,6 +1002,7 @@ export {
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 
+{% raw %}
 ```javascript
 // Incident response service
 const createIncidentResponseService = () => {
@@ -1231,6 +1242,7 @@ export {
   generateIncidentId,
 };
 ```
+{% endraw %}
 
 
 ---

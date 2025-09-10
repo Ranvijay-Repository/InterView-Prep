@@ -26,6 +26,7 @@ Error handling in React Native requires a multi-layered approach to ensure robus
 ### **Error Types in React Native**
 
 
+{% raw %}
 ```javascript
 // 1. JavaScript Errors
 const handleJSError = () => {
@@ -69,11 +70,13 @@ const handleNativeError = async () => {
   }
 };
 ```
+{% endraw %}
 
 
 ### **Error Classification System**
 
 
+{% raw %}
 ```javascript
 class ErrorClassifier {
   static classify(error) {
@@ -111,6 +114,7 @@ const handleError = (error) => {
   }
 };
 ```
+{% endraw %}
 
 
 ---
@@ -120,6 +124,7 @@ const handleError = (error) => {
 ### **Promise-Based Error Handling**
 
 
+{% raw %}
 ```javascript
 import { useState, useEffect, useCallback } from 'react';
 
@@ -182,11 +187,13 @@ const DataComponent = () => {
   return null;
 };
 ```
+{% endraw %}
 
 
 ### **Async Error Boundary Pattern**
 
 
+{% raw %}
 ```javascript
 import React, { useState, useEffect, useCallback } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
@@ -289,6 +296,7 @@ const styles = StyleSheet.create({
 
 export default AsyncErrorBoundary;
 ```
+{% endraw %}
 
 
 ---
@@ -298,6 +306,7 @@ export default AsyncErrorBoundary;
 ### **HTTP Client with Error Handling**
 
 
+{% raw %}
 ```javascript
 class HttpClient {
   constructor(baseURL, options = {}) {
@@ -390,11 +399,13 @@ class HttpError extends Error {
 
 export { HttpClient, HttpError };
 ```
+{% endraw %}
 
 
 ### **Network Status Monitoring**
 
 
+{% raw %}
 ```javascript
 import NetInfo from '@react-native-netinfo/netinfo';
 import { useState, useEffect } from 'react';
@@ -470,6 +481,7 @@ const NetworkAwareComponent = () => {
   );
 };
 ```
+{% endraw %}
 
 
 ---
@@ -479,6 +491,7 @@ const NetworkAwareComponent = () => {
 ### **Redux Error Handling**
 
 
+{% raw %}
 ```javascript
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
@@ -542,11 +555,13 @@ const userSlice = createSlice({
 export const { clearError, resetUser } = userSlice.actions;
 export default userSlice.reducer;
 ```
+{% endraw %}
 
 
 ### **Context API Error Handling**
 
 
+{% raw %}
 ```javascript
 import React, { createContext, useContext, useReducer, useCallback } from 'react';
 
@@ -622,6 +637,7 @@ const useError = () => {
 
 export { ErrorProvider, useError };
 ```
+{% endraw %}
 
 
 ---
@@ -631,6 +647,7 @@ export { ErrorProvider, useError };
 ### **Retry with Exponential Backoff**
 
 
+{% raw %}
 ```javascript
 const useRetry = (maxRetries = 3, baseDelay = 1000) => {
   const [retryCount, setRetryCount] = useState(0);
@@ -671,11 +688,13 @@ const useRetry = (maxRetries = 3, baseDelay = 1000) => {
   return { retry, reset, retryCount, isRetrying };
 };
 ```
+{% endraw %}
 
 
 ### **Circuit Breaker Pattern**
 
 
+{% raw %}
 ```javascript
 class CircuitBreaker {
   constructor(threshold = 5, timeout = 60000) {
@@ -746,6 +765,7 @@ const fetchData = async () => {
   }
 };
 ```
+{% endraw %}
 
 
 ---
@@ -755,6 +775,7 @@ const fetchData = async () => {
 ### **Error Analytics Service**
 
 
+{% raw %}
 ```javascript
 class ErrorAnalytics {
   constructor() {
@@ -849,11 +870,13 @@ class ErrorAnalytics {
 
 export const errorAnalytics = new ErrorAnalytics();
 ```
+{% endraw %}
 
 
 ### **Error Monitoring Hook**
 
 
+{% raw %}
 ```javascript
 import { useEffect, useCallback } from 'react';
 import { errorAnalytics } from '../services/ErrorAnalytics';
@@ -889,6 +912,7 @@ const useErrorMonitoring = (componentName) => {
 
 export default useErrorMonitoring;
 ```
+{% endraw %}
 
 
 ---
@@ -898,6 +922,7 @@ export default useErrorMonitoring;
 ### **1. Error Handling Strategy**
 
 
+{% raw %}
 ```javascript
 // ✅ Good: Comprehensive error handling
 const handleApiCall = async () => {
@@ -936,11 +961,13 @@ const handleApiCall = async () => {
   }
 };
 ```
+{% endraw %}
 
 
 ### **2. Error Recovery**
 
 
+{% raw %}
 ```javascript
 // ✅ Good: Provide recovery options
 const DataComponent = () => {
@@ -1003,11 +1030,13 @@ const DataComponent = () => {
   );
 };
 ```
+{% endraw %}
 
 
 ### **3. Error Logging**
 
 
+{% raw %}
 ```javascript
 // ✅ Good: Structured error logging
 const logError = (error, context) => {
@@ -1034,6 +1063,7 @@ const logError = (error) => {
   console.error('Error:', error);
 };
 ```
+{% endraw %}
 
 
 ---
@@ -1055,6 +1085,7 @@ I would implement a multi-layered error handling strategy:
 
 **Answer:**
 
+{% raw %}
 ```javascript
 const handleNetworkError = async (operation) => {
   try {
@@ -1073,12 +1104,14 @@ const handleNetworkError = async (operation) => {
   }
 };
 ```
+{% endraw %}
 
 
 ### **3. How would you implement retry logic for failed API calls?**
 
 **Answer:**
 
+{% raw %}
 ```javascript
 const retryWithBackoff = async (operation, maxRetries = 3) => {
   for (let attempt = 0; attempt < maxRetries; attempt++) {
@@ -1095,12 +1128,14 @@ const retryWithBackoff = async (operation, maxRetries = 3) => {
   }
 };
 ```
+{% endraw %}
 
 
 ### **4. How do you handle errors in Redux?**
 
 **Answer:**
 
+{% raw %}
 ```javascript
 const userSlice = createSlice({
   name: 'user',
@@ -1131,12 +1166,14 @@ const userSlice = createSlice({
   },
 });
 ```
+{% endraw %}
 
 
 ### **5. How would you implement error monitoring in a production app?**
 
 **Answer:**
 
+{% raw %}
 ```javascript
 class ErrorMonitor {
   constructor() {
@@ -1176,6 +1213,7 @@ class ErrorMonitor {
   }
 }
 ```
+{% endraw %}
 
 
 ---

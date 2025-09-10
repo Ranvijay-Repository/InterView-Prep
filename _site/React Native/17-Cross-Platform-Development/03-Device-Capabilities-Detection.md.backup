@@ -9,6 +9,7 @@ Device capabilities detection is crucial for creating adaptive React Native appl
 ### 1. Basic Device Information
 
 
+{% raw %}
 ```javascript
 import { Platform, Dimensions, PixelRatio } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
@@ -56,11 +57,13 @@ const useDeviceInfo = () => {
   return deviceInfo;
 };
 ```
+{% endraw %}
 
 
 ### 2. Advanced Device Classification
 
 
+{% raw %}
 ```javascript
 import { Dimensions, PixelRatio } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
@@ -119,6 +122,7 @@ const useDeviceClassification = () => {
   return classification;
 };
 ```
+{% endraw %}
 
 
 ## Camera and Media Capabilities
@@ -126,6 +130,7 @@ const useDeviceClassification = () => {
 ### 1. Camera Detection
 
 
+{% raw %}
 ```javascript
 import { Platform } from 'react-native';
 import { Camera } from 'react-native-camera';
@@ -180,11 +185,13 @@ const useCameraCapabilities = () => {
   return cameraInfo;
 };
 ```
+{% endraw %}
 
 
 ### 2. Media Library Detection
 
 
+{% raw %}
 ```javascript
 import { Platform } from 'react-native';
 import { MediaLibrary } from 'expo-media-library';
@@ -241,6 +248,7 @@ const useMediaLibraryCapabilities = () => {
   return mediaInfo;
 };
 ```
+{% endraw %}
 
 
 ## Network and Connectivity
@@ -248,6 +256,7 @@ const useMediaLibraryCapabilities = () => {
 ### 1. Network Capabilities
 
 
+{% raw %}
 ```javascript
 import NetInfo from '@react-native-netinfo/netinfo';
 
@@ -300,11 +309,13 @@ const useNetworkCapabilities = () => {
   return networkInfo;
 };
 ```
+{% endraw %}
 
 
 ### 2. Network Speed Detection
 
 
+{% raw %}
 ```javascript
 import NetInfo from '@react-native-netinfo/netinfo';
 
@@ -358,6 +369,7 @@ const useNetworkSpeed = () => {
   return networkSpeed;
 };
 ```
+{% endraw %}
 
 
 ## Sensor Capabilities
@@ -365,6 +377,7 @@ const useNetworkSpeed = () => {
 ### 1. Motion Sensors
 
 
+{% raw %}
 ```javascript
 import { Accelerometer, Gyroscope, Magnetometer } from 'react-native-sensors';
 
@@ -409,11 +422,13 @@ const useMotionSensors = () => {
   return sensorInfo;
 };
 ```
+{% endraw %}
 
 
 ### 2. Biometric Sensors
 
 
+{% raw %}
 ```javascript
 import TouchID from 'react-native-touch-id';
 import { Platform } from 'react-native';
@@ -463,6 +478,7 @@ const useBiometricCapabilities = () => {
   return biometricInfo;
 };
 ```
+{% endraw %}
 
 
 ## Storage Capabilities
@@ -470,6 +486,7 @@ const useBiometricCapabilities = () => {
 ### 1. Storage Detection
 
 
+{% raw %}
 ```javascript
 import { Platform } from 'react-native';
 import RNFS from 'react-native-fs';
@@ -519,11 +536,13 @@ const useStorageCapabilities = () => {
   return storageInfo;
 };
 ```
+{% endraw %}
 
 
 ### 2. Database Capabilities
 
 
+{% raw %}
 ```javascript
 import SQLite from 'react-native-sqlite-storage';
 
@@ -584,6 +603,7 @@ const useDatabaseCapabilities = () => {
   return dbInfo;
 };
 ```
+{% endraw %}
 
 
 ## Performance Capabilities
@@ -591,6 +611,7 @@ const useDatabaseCapabilities = () => {
 ### 1. Performance Detection
 
 
+{% raw %}
 ```javascript
 import { Platform } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
@@ -662,11 +683,13 @@ const usePerformanceCapabilities = () => {
   return performanceInfo;
 };
 ```
+{% endraw %}
 
 
 ### 2. Memory Capabilities
 
 
+{% raw %}
 ```javascript
 import { Platform } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
@@ -730,6 +753,7 @@ const useMemoryCapabilities = () => {
   return memoryInfo;
 };
 ```
+{% endraw %}
 
 
 ## Capability-Based Feature Toggles
@@ -737,6 +761,7 @@ const useMemoryCapabilities = () => {
 ### 1. Feature Toggle System
 
 
+{% raw %}
 ```javascript
 import { useMemo } from 'react';
 import { useDeviceInfo } from './useDeviceInfo';
@@ -786,11 +811,13 @@ const useFeatureToggles = () => {
   return featureToggles;
 };
 ```
+{% endraw %}
 
 
 ### 2. Adaptive Component Rendering
 
 
+{% raw %}
 ```javascript
 import { useFeatureToggles } from './useFeatureToggles';
 
@@ -820,6 +847,7 @@ const AdaptiveComponent = ({ children }) => {
   );
 };
 ```
+{% endraw %}
 
 
 ## Summary
