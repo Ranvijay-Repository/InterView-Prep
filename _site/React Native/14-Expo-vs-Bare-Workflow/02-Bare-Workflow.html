@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔧 Bare Workflow - Interview Prep Documentation</title>
+    <meta name="description" content="Comprehensive guides for JavaScript, TypeScript, and React Native interview preparation">
+    
+    <!-- GitHub Pages compatible styling -->
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+        }
+        
+        .container {
+            max-width: 100%;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            color: #2c3e50;
+            margin-top: 2em;
+            margin-bottom: 1em;
+        }
+        
+        h1 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            border-bottom: 1px solid #ecf0f1;
+            padding-bottom: 5px;
+        }
+        
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border-left: 4px solid #3498db;
+        }
+        
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+        
+        blockquote {
+            border-left: 4px solid #3498db;
+            margin: 0;
+            padding-left: 20px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1em 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .navigation {
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px 0;
+            margin-bottom: 20px;
+        }
+        
+        .navigation a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+        
+        .navigation a:hover {
+            text-decoration: underline;
+        }
+        
+        .breadcrumb {
+            margin-bottom: 20px;
+            color: #666;
+        }
+        
+        .breadcrumb a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            h2 {
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="navigation">
+            <a href="/">Home</a>
+            <a href="/Javascript/">JavaScript</a>
+            <a href="/TypeScript/">TypeScript</a>
+            <a href="/React-Native/">React Native</a>
+        </nav>
+        
+        
+        
+        <main>
+            <h1 id="-bare-workflow">🔧 <strong>Bare Workflow</strong></h1>
+
+<blockquote>
+  <p><strong>Master bare React Native workflow, native development, and custom native modules</strong></p>
+</blockquote>
+
+<link rel="stylesheet" href="../../common-styles.css" />
+
+<hr />
+
+<h2 id="-table-of-contents">📚 <strong>Table of Contents</strong></h2>
+
+<ul>
+  <li><a href="#-bare-workflow-overview">Bare Workflow Overview</a></li>
+  <li><a href="#-project-setup">Project Setup</a></li>
+  <li><a href="#-native-development">Native Development</a></li>
+  <li><a href="#-custom-native-modules">Custom Native Modules</a></li>
+  <li><a href="#-build-process">Build Process</a></li>
+  <li><a href="#-best-practices">Best Practices</a></li>
+  <li><a href="#-interview-questions">Interview Questions</a></li>
+</ul>
+
+<hr />
+
+<h2 id="-bare-workflow-overview">🔧 <strong>Bare Workflow Overview</strong></h2>
+
+<h3 id="bare-workflow-architecture"><strong>Bare Workflow Architecture</strong></h3>
+
+<pre><code class="language-mermaid">graph TD
+    A[Bare React Native] --&gt; B[Android Project]
+    A --&gt; C[iOS Project]
+    A --&gt; D[JavaScript Bundle]
+    
+    B --&gt; E[Gradle Build]
+    B --&gt; F[Native Android Code]
+    C --&gt; G[Xcode Build]
+    C --&gt; H[Native iOS Code]
+    D --&gt; I[Metro Bundler]
+</code></pre>
+
+<h3 id="key-benefits"><strong>Key Benefits</strong></h3>
+<ul>
+  <li><strong>Full Control</strong>: Complete access to native code</li>
+  <li><strong>Custom Native Modules</strong>: Write custom native functionality</li>
+  <li><strong>Performance</strong>: Optimized native implementations</li>
+  <li><strong>Flexibility</strong>: No Expo limitations</li>
+</ul>
+
+<hr />
+
+<h2 id="️-project-setup">🏗️ <strong>Project Setup</strong></h2>
+
+<h3 id="bare-react-native-project-structure"><strong>Bare React Native Project Structure</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Project structure for bare React Native</span>
+<span class="kd">const</span> <span class="nx">BareProjectStructure</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="c1">// Root directory</span>
+  <span class="na">root</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">'</span><span class="s1">package.json</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Project dependencies and scripts</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">metro.config.js</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Metro bundler configuration</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">react-native.config.js</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">React Native CLI configuration</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">babel.config.js</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Babel configuration</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">tsconfig.json</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">TypeScript configuration</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">android/</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Android native project</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">ios/</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">iOS native project</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">src/</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">JavaScript/TypeScript source code</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+
+  <span class="c1">// Android project structure</span>
+  <span class="na">android</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">'</span><span class="s1">app/</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Android application code</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">app/src/main/</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Main Android source</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">app/src/main/java/</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Java/Kotlin source code</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">app/src/main/res/</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Android resources</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">app/build.gradle</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">App-level Gradle configuration</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">build.gradle</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Project-level Gradle configuration</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">gradle.properties</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Gradle properties</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">settings.gradle</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Gradle settings</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+
+  <span class="c1">// iOS project structure</span>
+  <span class="na">ios</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">'</span><span class="s1">ProjectName.xcodeproj/</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Xcode project file</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">ProjectName/</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">iOS application code</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">ProjectName/AppDelegate.h</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">iOS app delegate header</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">ProjectName/AppDelegate.m</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">iOS app delegate implementation</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">ProjectName/Info.plist</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">iOS app configuration</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">ProjectName.xcworkspace</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Xcode workspace (if using CocoaPods)</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">Podfile</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">CocoaPods dependencies</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+
+  <span class="c1">// Source code structure</span>
+  <span class="na">src</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">'</span><span class="s1">components/</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Reusable React components</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">screens/</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Screen components</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">navigation/</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Navigation configuration</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">services/</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">API and business logic services</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">utils/</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Utility functions</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">types/</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">TypeScript type definitions</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">constants/</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">App constants</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">assets/</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Images, fonts, and other assets</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// Package.json for bare React Native project</span>
+<span class="kd">const</span> <span class="nx">BarePackageJson</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">BareReactNativeApp</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">version</span><span class="p">:</span> <span class="dl">'</span><span class="s1">1.0.0</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">private</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="na">scripts</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">'</span><span class="s1">android</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">react-native run-android</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">ios</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">react-native run-ios</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">start</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">react-native start</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">test</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">jest</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">lint</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">eslint .</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">build:android</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">cd android &amp;&amp; ./gradlew assembleRelease</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">build:ios</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">cd ios &amp;&amp; xcodebuild -workspace BareReactNativeApp.xcworkspace -scheme BareReactNativeApp -configuration Release</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">clean:android</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">cd android &amp;&amp; ./gradlew clean</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">clean:ios</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">cd ios &amp;&amp; xcodebuild clean</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">dependencies</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">^18.2.0</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">react-native</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">^0.72.0</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">@react-navigation/native</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">^6.1.0</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">@react-navigation/stack</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">^6.3.0</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">react-native-screens</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">^3.25.0</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">react-native-safe-area-context</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">^4.7.0</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">react-native-gesture-handler</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">^2.12.0</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">devDependencies</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">'</span><span class="s1">@babel/core</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">^7.20.0</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">@babel/preset-env</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">^7.20.0</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">@babel/runtime</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">^7.20.0</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">@react-native/eslint-config</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">^0.72.0</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">@react-native/metro-config</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">^0.72.0</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">@tsconfig/react-native</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">^3.0.0</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">@types/react</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">^18.0.24</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">@types/react-test-renderer</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">^18.0.0</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">babel-jest</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">^29.2.1</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">eslint</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">^8.19.0</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">jest</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">^29.2.1</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">metro-react-native-babel-preset</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">0.76.5</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">prettier</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">^2.4.1</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">react-test-renderer</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">18.2.0</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">typescript</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">^4.8.4</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">jest</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">preset</span><span class="p">:</span> <span class="dl">'</span><span class="s1">react-native</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+<span class="p">};</span>
+
+<span class="k">export</span> <span class="p">{</span> <span class="nx">BareProjectStructure</span><span class="p">,</span> <span class="nx">BarePackageJson</span> <span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="metro-configuration"><strong>Metro Configuration</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// metro.config.js for bare React Native</span>
+<span class="kd">const</span> <span class="p">{</span> <span class="nx">getDefaultConfig</span><span class="p">,</span> <span class="nx">mergeConfig</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">@react-native/metro-config</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">defaultConfig</span> <span class="o">=</span> <span class="nx">getDefaultConfig</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">transformer</span><span class="p">:</span> <span class="p">{</span>
+    <span class="c1">// Enable Hermes</span>
+    <span class="na">hermesParser</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    
+    <span class="c1">// Enable inline requires</span>
+    <span class="na">inlineRequires</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    
+    <span class="c1">// Enable minification</span>
+    <span class="na">minifierConfig</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">keep_fnames</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+      <span class="na">mangle</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">keep_fnames</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+      <span class="p">},</span>
+    <span class="p">},</span>
+  <span class="p">},</span>
+  
+  <span class="na">resolver</span><span class="p">:</span> <span class="p">{</span>
+    <span class="c1">// Asset extensions</span>
+    <span class="na">assetExts</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">bin</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">txt</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">jpg</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">png</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">json</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">ttf</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">otf</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">woff</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">woff2</span><span class="dl">'</span><span class="p">],</span>
+    
+    <span class="c1">// Source extensions</span>
+    <span class="na">sourceExts</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">js</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">json</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">ts</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">tsx</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">jsx</span><span class="dl">'</span><span class="p">],</span>
+    
+    <span class="c1">// Platform extensions</span>
+    <span class="na">platforms</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">ios</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">android</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">native</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">web</span><span class="dl">'</span><span class="p">],</span>
+  <span class="p">},</span>
+  
+  <span class="na">serializer</span><span class="p">:</span> <span class="p">{</span>
+    <span class="c1">// Custom serializer options</span>
+    <span class="na">getModulesRunBeforeMainModule</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">[</span>
+      <span class="nx">require</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="dl">'</span><span class="s1">react-native/Libraries/Core/InitializeCore</span><span class="dl">'</span><span class="p">),</span>
+    <span class="p">],</span>
+  <span class="p">},</span>
+  
+  <span class="na">server</span><span class="p">:</span> <span class="p">{</span>
+    <span class="c1">// Metro server configuration</span>
+    <span class="na">port</span><span class="p">:</span> <span class="mi">8081</span><span class="p">,</span>
+    <span class="na">enhanceMiddleware</span><span class="p">:</span> <span class="p">(</span><span class="nx">middleware</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="c1">// Custom middleware logic</span>
+        <span class="k">return</span> <span class="nx">middleware</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">);</span>
+      <span class="p">};</span>
+    <span class="p">},</span>
+  <span class="p">},</span>
+  
+  <span class="na">watchFolders</span><span class="p">:</span> <span class="p">[</span>
+    <span class="c1">// Additional folders to watch</span>
+    <span class="c1">// '../shared-package',</span>
+  <span class="p">],</span>
+<span class="p">};</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">mergeConfig</span><span class="p">(</span><span class="nx">defaultConfig</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-native-development">📱 <strong>Native Development</strong></h2>
+
+<h3 id="android-native-module"><strong>Android Native Module</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// android/app/src/main/java/com/bareapp/CustomModule.java</span>
+<span class="kn">package</span> <span class="nn">com.bareapp</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.facebook.react.bridge.ReactApplicationContext</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.facebook.react.bridge.ReactContextBaseJavaModule</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.facebook.react.bridge.ReactMethod</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.facebook.react.bridge.Promise</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.facebook.react.bridge.WritableMap</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.facebook.react.bridge.Arguments</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.facebook.react.bridge.ReadableMap</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">android.util.Log</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">android.content.Context</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">android.content.pm.PackageManager</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">android.os.Build</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CustomModule</span> <span class="kd">extends</span> <span class="nc">ReactContextBaseJavaModule</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="nc">String</span> <span class="no">MODULE_NAME</span> <span class="o">=</span> <span class="s">"CustomModule"</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">ReactApplicationContext</span> <span class="n">reactContext</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">CustomModule</span><span class="o">(</span><span class="nc">ReactApplicationContext</span> <span class="n">reactContext</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">(</span><span class="n">reactContext</span><span class="o">);</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">reactContext</span> <span class="o">=</span> <span class="n">reactContext</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="no">MODULE_NAME</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@ReactMethod</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">getDeviceInfo</span><span class="o">(</span><span class="nc">Promise</span> <span class="n">promise</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="nc">WritableMap</span> <span class="n">deviceInfo</span> <span class="o">=</span> <span class="nc">Arguments</span><span class="o">.</span><span class="na">createMap</span><span class="o">();</span>
+            
+            <span class="n">deviceInfo</span><span class="o">.</span><span class="na">putString</span><span class="o">(</span><span class="s">"brand"</span><span class="o">,</span> <span class="nc">Build</span><span class="o">.</span><span class="na">BRAND</span><span class="o">);</span>
+            <span class="n">deviceInfo</span><span class="o">.</span><span class="na">putString</span><span class="o">(</span><span class="s">"model"</span><span class="o">,</span> <span class="nc">Build</span><span class="o">.</span><span class="na">MODEL</span><span class="o">);</span>
+            <span class="n">deviceInfo</span><span class="o">.</span><span class="na">putString</span><span class="o">(</span><span class="s">"version"</span><span class="o">,</span> <span class="nc">Build</span><span class="o">.</span><span class="na">VERSION</span><span class="o">.</span><span class="na">RELEASE</span><span class="o">);</span>
+            <span class="n">deviceInfo</span><span class="o">.</span><span class="na">putInt</span><span class="o">(</span><span class="s">"sdkVersion"</span><span class="o">,</span> <span class="nc">Build</span><span class="o">.</span><span class="na">VERSION</span><span class="o">.</span><span class="na">SDK_INT</span><span class="o">);</span>
+            <span class="n">deviceInfo</span><span class="o">.</span><span class="na">putString</span><span class="o">(</span><span class="s">"manufacturer"</span><span class="o">,</span> <span class="nc">Build</span><span class="o">.</span><span class="na">MANUFACTURER</span><span class="o">);</span>
+            
+            <span class="n">promise</span><span class="o">.</span><span class="na">resolve</span><span class="o">(</span><span class="n">deviceInfo</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">promise</span><span class="o">.</span><span class="na">reject</span><span class="o">(</span><span class="s">"DEVICE_INFO_ERROR"</span><span class="o">,</span> <span class="n">e</span><span class="o">.</span><span class="na">getMessage</span><span class="o">());</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="nd">@ReactMethod</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">showToast</span><span class="o">(</span><span class="nc">String</span> <span class="n">message</span><span class="o">,</span> <span class="nc">Promise</span> <span class="n">promise</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="n">android</span><span class="o">.</span><span class="na">widget</span><span class="o">.</span><span class="na">Toast</span><span class="o">.</span><span class="na">makeText</span><span class="o">(</span>
+                <span class="n">reactContext</span><span class="o">,</span>
+                <span class="n">message</span><span class="o">,</span>
+                <span class="n">android</span><span class="o">.</span><span class="na">widget</span><span class="o">.</span><span class="na">Toast</span><span class="o">.</span><span class="na">LENGTH_LONG</span>
+            <span class="o">).</span><span class="na">show</span><span class="o">();</span>
+            
+            <span class="n">promise</span><span class="o">.</span><span class="na">resolve</span><span class="o">(</span><span class="s">"Toast shown successfully"</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">promise</span><span class="o">.</span><span class="na">reject</span><span class="o">(</span><span class="s">"TOAST_ERROR"</span><span class="o">,</span> <span class="n">e</span><span class="o">.</span><span class="na">getMessage</span><span class="o">());</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="nd">@ReactMethod</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">checkPermission</span><span class="o">(</span><span class="nc">String</span> <span class="n">permission</span><span class="o">,</span> <span class="nc">Promise</span> <span class="n">promise</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="nc">Context</span> <span class="n">context</span> <span class="o">=</span> <span class="n">reactContext</span><span class="o">.</span><span class="na">getApplicationContext</span><span class="o">();</span>
+            <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="na">checkSelfPermission</span><span class="o">(</span><span class="n">permission</span><span class="o">);</span>
+            
+            <span class="kt">boolean</span> <span class="n">granted</span> <span class="o">=</span> <span class="n">result</span> <span class="o">==</span> <span class="nc">PackageManager</span><span class="o">.</span><span class="na">PERMISSION_GRANTED</span><span class="o">;</span>
+            <span class="n">promise</span><span class="o">.</span><span class="na">resolve</span><span class="o">(</span><span class="n">granted</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">promise</span><span class="o">.</span><span class="na">reject</span><span class="o">(</span><span class="s">"PERMISSION_ERROR"</span><span class="o">,</span> <span class="n">e</span><span class="o">.</span><span class="na">getMessage</span><span class="o">());</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="nd">@ReactMethod</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">performAsyncTask</span><span class="o">(</span><span class="nc">ReadableMap</span> <span class="n">params</span><span class="o">,</span> <span class="nc">Promise</span> <span class="n">promise</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// Simulate async task</span>
+        <span class="k">new</span> <span class="nf">Thread</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="o">{</span>
+            <span class="k">try</span> <span class="o">{</span>
+                <span class="nc">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">2000</span><span class="o">);</span> <span class="c1">// Simulate work</span>
+                
+                <span class="nc">WritableMap</span> <span class="n">result</span> <span class="o">=</span> <span class="nc">Arguments</span><span class="o">.</span><span class="na">createMap</span><span class="o">();</span>
+                <span class="n">result</span><span class="o">.</span><span class="na">putString</span><span class="o">(</span><span class="s">"status"</span><span class="o">,</span> <span class="s">"completed"</span><span class="o">);</span>
+                <span class="n">result</span><span class="o">.</span><span class="na">putString</span><span class="o">(</span><span class="s">"message"</span><span class="o">,</span> <span class="s">"Async task completed successfully"</span><span class="o">);</span>
+                <span class="n">result</span><span class="o">.</span><span class="na">putDouble</span><span class="o">(</span><span class="s">"timestamp"</span><span class="o">,</span> <span class="nc">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">());</span>
+                
+                <span class="n">promise</span><span class="o">.</span><span class="na">resolve</span><span class="o">(</span><span class="n">result</span><span class="o">);</span>
+            <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">promise</span><span class="o">.</span><span class="na">reject</span><span class="o">(</span><span class="s">"ASYNC_TASK_ERROR"</span><span class="o">,</span> <span class="n">e</span><span class="o">.</span><span class="na">getMessage</span><span class="o">());</span>
+            <span class="o">}</span>
+        <span class="o">}).</span><span class="na">start</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="ios-native-module"><strong>iOS Native Module</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-objc highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ios/BareApp/CustomModule.h</span>
+<span class="cp">#import &lt;React/RCTBridgeModule.h&gt;
+#import &lt;React/RCTEventEmitter.h&gt;
+</span>
+<span class="k">@interface</span> <span class="nc">CustomModule</span> <span class="p">:</span> <span class="nc">NSObject</span> <span class="o">&lt;</span><span class="n">RCTBridgeModule</span><span class="o">&gt;</span>
+
+<span class="k">@end</span>
+</code></pre></div></div>
+
+<div class="language-objc highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ios/BareApp/CustomModule.m</span>
+<span class="cp">#import "CustomModule.h"
+#import &lt;React/RCTLog.h&gt;
+#import &lt;UIKit/UIKit.h&gt;
+#import &lt;sys/utsname.h&gt;
+</span>
+<span class="k">@implementation</span> <span class="nc">CustomModule</span>
+
+<span class="n">RCT_EXPORT_MODULE</span><span class="p">();</span>
+
+<span class="n">RCT_EXPORT_METHOD</span><span class="p">(</span><span class="n">getDeviceInfo</span><span class="o">:</span><span class="p">(</span><span class="n">RCTPromiseResolveBlock</span><span class="p">)</span><span class="n">resolve</span>
+                  <span class="n">rejecter</span><span class="o">:</span><span class="p">(</span><span class="n">RCTPromiseRejectBlock</span><span class="p">)</span><span class="n">reject</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">@try</span> <span class="p">{</span>
+        <span class="n">NSMutableDictionary</span> <span class="o">*</span><span class="n">deviceInfo</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSMutableDictionary</span> <span class="nf">dictionary</span><span class="p">];</span>
+        
+        <span class="n">UIDevice</span> <span class="o">*</span><span class="n">device</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIDevice</span> <span class="nf">currentDevice</span><span class="p">];</span>
+        <span class="n">deviceInfo</span><span class="p">[</span><span class="s">@"name"</span><span class="p">]</span> <span class="o">=</span> <span class="n">device</span><span class="p">.</span><span class="n">name</span><span class="p">;</span>
+        <span class="n">deviceInfo</span><span class="p">[</span><span class="s">@"model"</span><span class="p">]</span> <span class="o">=</span> <span class="n">device</span><span class="p">.</span><span class="n">model</span><span class="p">;</span>
+        <span class="n">deviceInfo</span><span class="p">[</span><span class="s">@"systemName"</span><span class="p">]</span> <span class="o">=</span> <span class="n">device</span><span class="p">.</span><span class="n">systemName</span><span class="p">;</span>
+        <span class="n">deviceInfo</span><span class="p">[</span><span class="s">@"systemVersion"</span><span class="p">]</span> <span class="o">=</span> <span class="n">device</span><span class="p">.</span><span class="n">systemVersion</span><span class="p">;</span>
+        <span class="n">deviceInfo</span><span class="p">[</span><span class="s">@"identifierForVendor"</span><span class="p">]</span> <span class="o">=</span> <span class="n">device</span><span class="p">.</span><span class="n">identifierForVendor</span><span class="p">.</span><span class="n">UUIDString</span><span class="p">;</span>
+        
+        <span class="c1">// Get device model name</span>
+        <span class="k">struct</span> <span class="n">utsname</span> <span class="n">systemInfo</span><span class="p">;</span>
+        <span class="n">uname</span><span class="p">(</span><span class="o">&amp;</span><span class="n">systemInfo</span><span class="p">);</span>
+        <span class="n">deviceInfo</span><span class="p">[</span><span class="s">@"deviceModel"</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSString</span> <span class="nf">stringWithCString</span><span class="p">:</span><span class="n">systemInfo</span><span class="p">.</span><span class="n">machine</span>
+                                                         <span class="nl">encoding:</span><span class="n">NSUTF8StringEncoding</span><span class="p">];</span>
+        
+        <span class="n">resolve</span><span class="p">(</span><span class="n">deviceInfo</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">@catch</span> <span class="p">(</span><span class="n">NSException</span> <span class="o">*</span><span class="n">exception</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">reject</span><span class="p">(</span><span class="s">@"DEVICE_INFO_ERROR"</span><span class="p">,</span> <span class="n">exception</span><span class="p">.</span><span class="n">reason</span><span class="p">,</span> <span class="nb">nil</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">RCT_EXPORT_METHOD</span><span class="p">(</span><span class="n">showToast</span><span class="o">:</span><span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="n">message</span>
+                  <span class="n">resolver</span><span class="o">:</span><span class="p">(</span><span class="n">RCTPromiseResolveBlock</span><span class="p">)</span><span class="n">resolve</span>
+                  <span class="n">rejecter</span><span class="o">:</span><span class="p">(</span><span class="n">RCTPromiseRejectBlock</span><span class="p">)</span><span class="n">reject</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">@try</span> <span class="p">{</span>
+        <span class="n">dispatch_async</span><span class="p">(</span><span class="n">dispatch_get_main_queue</span><span class="p">(),</span> <span class="o">^</span><span class="p">{</span>
+            <span class="n">UIAlertController</span> <span class="o">*</span><span class="n">alert</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIAlertController</span> <span class="nf">alertControllerWithTitle</span><span class="p">:</span><span class="s">@"Toast"</span>
+                                                                           <span class="nl">message:</span><span class="n">message</span>
+                                                                    <span class="nl">preferredStyle:</span><span class="n">UIAlertControllerStyleAlert</span><span class="p">];</span>
+            
+            <span class="n">UIViewController</span> <span class="o">*</span><span class="n">rootViewController</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIApplication</span> <span class="nf">sharedApplication</span><span class="p">].</span><span class="n">delegate</span><span class="p">.</span><span class="n">window</span><span class="p">.</span><span class="n">rootViewController</span><span class="p">;</span>
+            <span class="p">[</span><span class="n">rootViewController</span> <span class="nf">presentViewController</span><span class="p">:</span><span class="n">alert</span> <span class="nf">animated</span><span class="p">:</span><span class="nb">YES</span> <span class="n">completion</span><span class="o">:</span><span class="nb">nil</span><span class="p">];</span>
+            
+            <span class="c1">// Auto dismiss after 2 seconds</span>
+            <span class="n">dispatch_after</span><span class="p">(</span><span class="n">dispatch_time</span><span class="p">(</span><span class="n">DISPATCH_TIME_NOW</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">NSEC_PER_SEC</span><span class="p">),</span> <span class="n">dispatch_get_main_queue</span><span class="p">(),</span> <span class="o">^</span><span class="p">{</span>
+                <span class="p">[</span><span class="n">alert</span> <span class="nf">dismissViewControllerAnimated</span><span class="p">:</span><span class="nb">YES</span> <span class="nf">completion</span><span class="p">:</span><span class="nb">nil</span><span class="p">];</span>
+            <span class="p">});</span>
+        <span class="p">});</span>
+        
+        <span class="n">resolve</span><span class="p">(</span><span class="s">@"Toast shown successfully"</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">@catch</span> <span class="p">(</span><span class="n">NSException</span> <span class="o">*</span><span class="n">exception</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">reject</span><span class="p">(</span><span class="s">@"TOAST_ERROR"</span><span class="p">,</span> <span class="n">exception</span><span class="p">.</span><span class="n">reason</span><span class="p">,</span> <span class="nb">nil</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">RCT_EXPORT_METHOD</span><span class="p">(</span><span class="n">checkPermission</span><span class="o">:</span><span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="n">permission</span>
+                  <span class="n">resolver</span><span class="o">:</span><span class="p">(</span><span class="n">RCTPromiseResolveBlock</span><span class="p">)</span><span class="n">resolve</span>
+                  <span class="n">rejecter</span><span class="o">:</span><span class="p">(</span><span class="n">RCTPromiseRejectBlock</span><span class="p">)</span><span class="n">reject</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">@try</span> <span class="p">{</span>
+        <span class="c1">// iOS permission checking logic</span>
+        <span class="n">BOOL</span> <span class="n">granted</span> <span class="o">=</span> <span class="nb">NO</span><span class="p">;</span>
+        
+        <span class="k">if</span> <span class="p">([</span><span class="n">permission</span> <span class="nf">isEqualToString</span><span class="p">:</span><span class="s">@"camera"</span><span class="p">])</span> <span class="p">{</span>
+            <span class="n">granted</span> <span class="o">=</span> <span class="p">[</span><span class="n">AVCaptureDevice</span> <span class="nf">authorizationStatusForMediaType</span><span class="p">:</span><span class="n">AVMediaTypeVideo</span><span class="p">]</span> <span class="o">==</span> <span class="n">AVAuthorizationStatusAuthorized</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">([</span><span class="n">permission</span> <span class="nf">isEqualToString</span><span class="p">:</span><span class="s">@"location"</span><span class="p">])</span> <span class="p">{</span>
+            <span class="n">granted</span> <span class="o">=</span> <span class="p">[</span><span class="n">CLLocationManager</span> <span class="nf">authorizationStatus</span><span class="p">]</span> <span class="o">==</span> <span class="n">kCLAuthorizationStatusAuthorizedWhenInUse</span> <span class="o">||</span>
+                     <span class="p">[</span><span class="n">CLLocationManager</span> <span class="nf">authorizationStatus</span><span class="p">]</span> <span class="o">==</span> <span class="n">kCLAuthorizationStatusAuthorizedAlways</span><span class="p">;</span>
+        <span class="p">}</span>
+        
+        <span class="n">resolve</span><span class="p">(</span><span class="err">@</span><span class="p">(</span><span class="n">granted</span><span class="p">));</span>
+    <span class="p">}</span> <span class="k">@catch</span> <span class="p">(</span><span class="n">NSException</span> <span class="o">*</span><span class="n">exception</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">reject</span><span class="p">(</span><span class="s">@"PERMISSION_ERROR"</span><span class="p">,</span> <span class="n">exception</span><span class="p">.</span><span class="n">reason</span><span class="p">,</span> <span class="nb">nil</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">RCT_EXPORT_METHOD</span><span class="p">(</span><span class="n">performAsyncTask</span><span class="o">:</span><span class="p">(</span><span class="n">NSDictionary</span> <span class="o">*</span><span class="p">)</span><span class="n">params</span>
+                  <span class="n">resolver</span><span class="o">:</span><span class="p">(</span><span class="n">RCTPromiseResolveBlock</span><span class="p">)</span><span class="n">resolve</span>
+                  <span class="n">rejecter</span><span class="o">:</span><span class="p">(</span><span class="n">RCTPromiseRejectBlock</span><span class="p">)</span><span class="n">reject</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">@try</span> <span class="p">{</span>
+        <span class="n">dispatch_async</span><span class="p">(</span><span class="n">dispatch_get_global_queue</span><span class="p">(</span><span class="n">DISPATCH_QUEUE_PRIORITY_DEFAULT</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="o">^</span><span class="p">{</span>
+            <span class="c1">// Simulate async work</span>
+            <span class="p">[</span><span class="n">NSThread</span> <span class="nf">sleepForTimeInterval</span><span class="p">:</span><span class="mi">2</span><span class="p">.</span><span class="mi">0</span><span class="p">];</span>
+            
+            <span class="n">NSDictionary</span> <span class="o">*</span><span class="n">result</span> <span class="o">=</span> <span class="p">@{</span>
+                <span class="s">@"status"</span><span class="o">:</span> <span class="s">@"completed"</span><span class="p">,</span>
+                <span class="s">@"message"</span><span class="o">:</span> <span class="s">@"Async task completed successfully"</span><span class="p">,</span>
+                <span class="s">@"timestamp"</span><span class="o">:</span> <span class="err">@</span><span class="p">([[</span><span class="n">NSDate</span> <span class="nf">date</span><span class="p">]</span> <span class="nf">timeIntervalSince1970</span><span class="p">]</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">)</span>
+            <span class="p">};</span>
+            
+            <span class="n">resolve</span><span class="p">(</span><span class="n">result</span><span class="p">);</span>
+        <span class="p">});</span>
+    <span class="p">}</span> <span class="k">@catch</span> <span class="p">(</span><span class="n">NSException</span> <span class="o">*</span><span class="n">exception</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">reject</span><span class="p">(</span><span class="s">@"ASYNC_TASK_ERROR"</span><span class="p">,</span> <span class="n">exception</span><span class="p">.</span><span class="n">reason</span><span class="p">,</span> <span class="nb">nil</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">@end</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-custom-native-modules">🔧 <strong>Custom Native Modules</strong></h2>
+
+<h3 id="javascript-bridge"><strong>JavaScript Bridge</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">NativeModules</span><span class="p">,</span> <span class="nx">NativeEventEmitter</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="p">{</span> <span class="nx">CustomModule</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">NativeModules</span><span class="p">;</span>
+
+<span class="c1">// Custom module wrapper</span>
+<span class="kd">const</span> <span class="nx">CustomModuleWrapper</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="c1">// Get device information</span>
+  <span class="na">getDeviceInfo</span><span class="p">:</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">deviceInfo</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">CustomModule</span><span class="p">.</span><span class="nx">getDeviceInfo</span><span class="p">();</span>
+      <span class="k">return</span> <span class="nx">deviceInfo</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Error getting device info:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+      <span class="k">throw</span> <span class="nx">error</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+
+  <span class="c1">// Show toast message</span>
+  <span class="na">showToast</span><span class="p">:</span> <span class="k">async</span> <span class="p">(</span><span class="nx">message</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">CustomModule</span><span class="p">.</span><span class="nx">showToast</span><span class="p">(</span><span class="nx">message</span><span class="p">);</span>
+      <span class="k">return</span> <span class="nx">result</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Error showing toast:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+      <span class="k">throw</span> <span class="nx">error</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+
+  <span class="c1">// Check permission</span>
+  <span class="na">checkPermission</span><span class="p">:</span> <span class="k">async</span> <span class="p">(</span><span class="nx">permission</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">granted</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">CustomModule</span><span class="p">.</span><span class="nx">checkPermission</span><span class="p">(</span><span class="nx">permission</span><span class="p">);</span>
+      <span class="k">return</span> <span class="nx">granted</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Error checking permission:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+      <span class="k">throw</span> <span class="nx">error</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+
+  <span class="c1">// Perform async task</span>
+  <span class="na">performAsyncTask</span><span class="p">:</span> <span class="k">async</span> <span class="p">(</span><span class="nx">params</span> <span class="o">=</span> <span class="p">{})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">CustomModule</span><span class="p">.</span><span class="nx">performAsyncTask</span><span class="p">(</span><span class="nx">params</span><span class="p">);</span>
+      <span class="k">return</span> <span class="nx">result</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Error performing async task:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+      <span class="k">throw</span> <span class="nx">error</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// Event emitter for native events</span>
+<span class="kd">const</span> <span class="nx">customModuleEmitter</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">NativeEventEmitter</span><span class="p">(</span><span class="nx">CustomModule</span><span class="p">);</span>
+
+<span class="c1">// Subscribe to native events</span>
+<span class="kd">const</span> <span class="nx">subscribeToEvents</span> <span class="o">=</span> <span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">subscription</span> <span class="o">=</span> <span class="nx">customModuleEmitter</span><span class="p">.</span><span class="nx">addListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">CustomEvent</span><span class="dl">'</span><span class="p">,</span> <span class="nx">callback</span><span class="p">);</span>
+  <span class="k">return</span> <span class="nx">subscription</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="c1">// Unsubscribe from events</span>
+<span class="kd">const</span> <span class="nx">unsubscribeFromEvents</span> <span class="o">=</span> <span class="p">(</span><span class="nx">subscription</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">subscription</span><span class="p">.</span><span class="nx">remove</span><span class="p">();</span>
+<span class="p">};</span>
+
+<span class="k">export</span> <span class="p">{</span> <span class="nx">CustomModuleWrapper</span><span class="p">,</span> <span class="nx">subscribeToEvents</span><span class="p">,</span> <span class="nx">unsubscribeFromEvents</span> <span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="react-native-component-using-custom-module"><strong>React Native Component Using Custom Module</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useState</span><span class="p">,</span> <span class="nx">useEffect</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">View</span><span class="p">,</span> <span class="nx">Text</span><span class="p">,</span> <span class="nx">TouchableOpacity</span><span class="p">,</span> <span class="nx">StyleSheet</span><span class="p">,</span> <span class="nx">Alert</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">CustomModuleWrapper</span><span class="p">,</span> <span class="nx">subscribeToEvents</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./CustomModuleWrapper</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">BareWorkflowDemo</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">deviceInfo</span><span class="p">,</span> <span class="nx">setDeviceInfo</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">loading</span><span class="p">,</span> <span class="nx">setLoading</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">loadDeviceInfo</span><span class="p">();</span>
+    
+    <span class="c1">// Subscribe to native events</span>
+    <span class="kd">const</span> <span class="nx">subscription</span> <span class="o">=</span> <span class="nx">subscribeToEvents</span><span class="p">((</span><span class="nx">event</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Received native event:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">event</span><span class="p">);</span>
+    <span class="p">});</span>
+
+    <span class="k">return</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">subscription</span><span class="p">.</span><span class="nx">remove</span><span class="p">();</span>
+    <span class="p">};</span>
+  <span class="p">},</span> <span class="p">[]);</span>
+
+  <span class="kd">const</span> <span class="nx">loadDeviceInfo</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="nx">setLoading</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+      <span class="kd">const</span> <span class="nx">info</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">CustomModuleWrapper</span><span class="p">.</span><span class="nx">getDeviceInfo</span><span class="p">();</span>
+      <span class="nx">setDeviceInfo</span><span class="p">(</span><span class="nx">info</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">Alert</span><span class="p">.</span><span class="nx">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">Error</span><span class="dl">'</span><span class="p">,</span> <span class="s2">`Failed to load device info: </span><span class="p">${</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">finally</span> <span class="p">{</span>
+      <span class="nx">setLoading</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+
+  <span class="kd">const</span> <span class="nx">handleShowToast</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="k">await</span> <span class="nx">CustomModuleWrapper</span><span class="p">.</span><span class="nx">showToast</span><span class="p">(</span><span class="dl">'</span><span class="s1">Hello from native module!</span><span class="dl">'</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">Alert</span><span class="p">.</span><span class="nx">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">Error</span><span class="dl">'</span><span class="p">,</span> <span class="s2">`Failed to show toast: </span><span class="p">${</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+
+  <span class="kd">const</span> <span class="nx">handleCheckPermission</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">granted</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">CustomModuleWrapper</span><span class="p">.</span><span class="nx">checkPermission</span><span class="p">(</span><span class="dl">'</span><span class="s1">camera</span><span class="dl">'</span><span class="p">);</span>
+      <span class="nx">Alert</span><span class="p">.</span><span class="nx">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">Permission Status</span><span class="dl">'</span><span class="p">,</span> <span class="s2">`Camera permission: </span><span class="p">${</span><span class="nx">granted</span> <span class="p">?</span> <span class="dl">'</span><span class="s1">Granted</span><span class="dl">'</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">Denied</span><span class="dl">'</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">Alert</span><span class="p">.</span><span class="nx">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">Error</span><span class="dl">'</span><span class="p">,</span> <span class="s2">`Failed to check permission: </span><span class="p">${</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+
+  <span class="kd">const</span> <span class="nx">handleAsyncTask</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="nx">setLoading</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+      <span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">CustomModuleWrapper</span><span class="p">.</span><span class="nx">performAsyncTask</span><span class="p">({</span> 
+        <span class="na">taskId</span><span class="p">:</span> <span class="dl">'</span><span class="s1">test-task</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">timeout</span><span class="p">:</span> <span class="mi">5000</span> 
+      <span class="p">});</span>
+      <span class="nx">Alert</span><span class="p">.</span><span class="nx">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">Async Task Result</span><span class="dl">'</span><span class="p">,</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">result</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="mi">2</span><span class="p">));</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">Alert</span><span class="p">.</span><span class="nx">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">Error</span><span class="dl">'</span><span class="p">,</span> <span class="s2">`Async task failed: </span><span class="p">${</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">finally</span> <span class="p">{</span>
+      <span class="nx">setLoading</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">container</span><span class="p">}</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">title</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Bare</span> <span class="nx">Workflow</span> <span class="nx">Demo</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>      
+      <span class="p">{</span><span class="nx">loading</span> <span class="o">&amp;&amp;</span> <span class="p">(</span>
+        <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">loadingText</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Loading</span><span class="p">...</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>      <span class="p">)}</span>
+
+      <span class="p">{</span><span class="nx">deviceInfo</span> <span class="o">&amp;&amp;</span> <span class="p">(</span>
+        <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">section</span><span class="p">}</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">sectionTitle</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Device</span> <span class="nx">Information</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>          <span class="p">{</span><span class="nb">Object</span><span class="p">.</span><span class="nx">entries</span><span class="p">(</span><span class="nx">deviceInfo</span><span class="p">).</span><span class="nx">map</span><span class="p">(([</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">])</span> <span class="o">=&gt;</span> <span class="p">(</span>
+            <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">key</span><span class="o">=</span><span class="p">{</span><span class="nx">key</span><span class="p">}</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">infoText</span><span class="p">}</span><span class="o">&gt;</span>
+              <span class="p">{</span><span class="nx">key</span><span class="p">}:</span> <span class="p">{</span><span class="nb">String</span><span class="p">(</span><span class="nx">value</span><span class="p">)}</span>
+            <span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>          <span class="p">))}</span>
+        <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>      <span class="p">)}</span>
+
+      <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">buttonContainer</span><span class="p">}</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">TouchableOpacity</span> 
+          <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">button</span><span class="p">}</span>
+          <span class="nx">onPress</span><span class="o">=</span><span class="p">{</span><span class="nx">handleShowToast</span><span class="p">}</span>
+        <span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">buttonText</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Show</span> <span class="nx">Toast</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/TouchableOpacity</span><span class="err">&gt;
+</span>
+        <span class="o">&lt;</span><span class="nx">TouchableOpacity</span> 
+          <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">button</span><span class="p">}</span>
+          <span class="nx">onPress</span><span class="o">=</span><span class="p">{</span><span class="nx">handleCheckPermission</span><span class="p">}</span>
+        <span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">buttonText</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Check</span> <span class="nx">Permission</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/TouchableOpacity</span><span class="err">&gt;
+</span>
+        <span class="o">&lt;</span><span class="nx">TouchableOpacity</span> 
+          <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">button</span><span class="p">}</span>
+          <span class="nx">onPress</span><span class="o">=</span><span class="p">{</span><span class="nx">handleAsyncTask</span><span class="p">}</span>
+          <span class="nx">disabled</span><span class="o">=</span><span class="p">{</span><span class="nx">loading</span><span class="p">}</span>
+        <span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">buttonText</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Perform</span> <span class="nx">Async</span> <span class="nx">Task</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/TouchableOpacity</span><span class="err">&gt;
+</span>
+        <span class="o">&lt;</span><span class="nx">TouchableOpacity</span> 
+          <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">button</span><span class="p">}</span>
+          <span class="nx">onPress</span><span class="o">=</span><span class="p">{</span><span class="nx">loadDeviceInfo</span><span class="p">}</span>
+        <span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">buttonText</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Reload</span> <span class="nx">Device</span> <span class="nx">Info</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/TouchableOpacity</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>    <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">styles</span> <span class="o">=</span> <span class="nx">StyleSheet</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span>
+  <span class="na">container</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">flex</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="na">padding</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#fff</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">title</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">fontSize</span><span class="p">:</span> <span class="mi">24</span><span class="p">,</span>
+    <span class="na">fontWeight</span><span class="p">:</span> <span class="dl">'</span><span class="s1">bold</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">marginBottom</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#333</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">loadingText</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">fontSize</span><span class="p">:</span> <span class="mi">18</span><span class="p">,</span>
+    <span class="na">textAlign</span><span class="p">:</span> <span class="dl">'</span><span class="s1">center</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#666</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">marginBottom</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">section</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">marginBottom</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="na">padding</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+    <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#f8f9fa</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">borderRadius</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">sectionTitle</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">fontSize</span><span class="p">:</span> <span class="mi">18</span><span class="p">,</span>
+    <span class="na">fontWeight</span><span class="p">:</span> <span class="dl">'</span><span class="s1">bold</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">marginBottom</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#333</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">infoText</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">fontSize</span><span class="p">:</span> <span class="mi">14</span><span class="p">,</span>
+    <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#666</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">marginBottom</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">buttonContainer</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">marginTop</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">button</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#007bff</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">padding</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+    <span class="na">borderRadius</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+    <span class="na">marginBottom</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="na">alignItems</span><span class="p">:</span> <span class="dl">'</span><span class="s1">center</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">buttonText</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#fff</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">fontSize</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+    <span class="na">fontWeight</span><span class="p">:</span> <span class="dl">'</span><span class="s1">bold</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+<span class="p">});</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">BareWorkflowDemo</span><span class="p">;</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-best-practices">🎯 <strong>Best Practices</strong></h2>
+
+<h3 id="1-bare-workflow-development"><strong>1. Bare Workflow Development</strong></h3>
+<ul>
+  <li>Use proper project structure</li>
+  <li>Implement native modules correctly</li>
+  <li>Handle errors gracefully</li>
+  <li>Test on both platforms</li>
+</ul>
+
+<h3 id="2-native-development"><strong>2. Native Development</strong></h3>
+<ul>
+  <li>Follow platform conventions</li>
+  <li>Use proper memory management</li>
+  <li>Implement proper error handling</li>
+  <li>Document native APIs</li>
+</ul>
+
+<h3 id="3-performance"><strong>3. Performance</strong></h3>
+<ul>
+  <li>Optimize native code</li>
+  <li>Use proper threading</li>
+  <li>Minimize bridge calls</li>
+  <li>Profile performance</li>
+</ul>
+
+<hr />
+
+<h2 id="-interview-questions">❓ <strong>Interview Questions</strong></h2>
+
+<h3 id="basic-questions"><strong>Basic Questions</strong></h3>
+<ol>
+  <li><strong>What is bare React Native workflow?</strong></li>
+  <li><strong>How do you create custom native modules?</strong></li>
+  <li><strong>What are the benefits of bare workflow?</strong></li>
+</ol>
+
+<h3 id="advanced-questions"><strong>Advanced Questions</strong></h3>
+<ol>
+  <li><strong>How would you implement a custom native module?</strong></li>
+  <li><strong>Explain the bridge between JavaScript and native code.</strong></li>
+  <li><strong>How do you handle platform-specific code?</strong></li>
+</ol>
+
+<h3 id="practical-questions"><strong>Practical Questions</strong></h3>
+<ol>
+  <li><strong>Create a custom native module for both platforms.</strong></li>
+  <li><strong>Implement a native UI component.</strong></li>
+  <li><strong>Set up a bare React Native project.</strong></li>
+</ol>
+
+<hr />
+
+<h2 id="-navigation">🧭 Navigation</h2>
+
+<div class="navigation">
+    <a href="./01-Expo-Overview.md" class="nav-link prev">⬅️ Previous: Expo Overview</a>
+    <a href="./03-Expo-vs-Bare-Comparison.md" class="nav-link next">Next: Expo vs Bare Comparison ➡️</a>
+</div>
+
+<hr />
+
+<script src="../../common-scripts.js"></script>
+
+<p><em>Last updated: December 2024</em></p>
+
+        </main>
+        
+        <footer style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #ecf0f1; color: #666; text-align: center;">
+            <p>Interview Prep Documentation - Built with Jekyll</p>
+        </footer>
+    </div>
+</body>
+</html>

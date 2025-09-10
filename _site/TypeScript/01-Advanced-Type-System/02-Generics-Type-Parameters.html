@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔧 Generics &amp; Type Parameters - Interview Prep Documentation</title>
+    <meta name="description" content="Comprehensive guides for JavaScript, TypeScript, and React Native interview preparation">
+    
+    <!-- GitHub Pages compatible styling -->
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+        }
+        
+        .container {
+            max-width: 100%;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            color: #2c3e50;
+            margin-top: 2em;
+            margin-bottom: 1em;
+        }
+        
+        h1 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            border-bottom: 1px solid #ecf0f1;
+            padding-bottom: 5px;
+        }
+        
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border-left: 4px solid #3498db;
+        }
+        
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+        
+        blockquote {
+            border-left: 4px solid #3498db;
+            margin: 0;
+            padding-left: 20px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1em 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .navigation {
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px 0;
+            margin-bottom: 20px;
+        }
+        
+        .navigation a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+        
+        .navigation a:hover {
+            text-decoration: underline;
+        }
+        
+        .breadcrumb {
+            margin-bottom: 20px;
+            color: #666;
+        }
+        
+        .breadcrumb a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            h2 {
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="navigation">
+            <a href="/">Home</a>
+            <a href="/Javascript/">JavaScript</a>
+            <a href="/TypeScript/">TypeScript</a>
+            <a href="/React-Native/">React Native</a>
+        </nav>
+        
+        
+        
+        <main>
+            <h1 id="-generics--type-parameters">🔧 <strong>Generics &amp; Type Parameters</strong></h1>
+
+<blockquote>
+  <p><strong>Complete guide to TypeScript generics, type parameters, constraints, and advanced generic patterns</strong></p>
+</blockquote>
+
+<link rel="stylesheet" href="../../common-styles.css" />
+
+<hr />
+
+<h2 id="-table-of-contents">📚 <strong>Table of Contents</strong></h2>
+
+<ul>
+  <li><a href="#introduction-to-generics">Introduction to Generics</a></li>
+  <li><a href="#generic-functions">Generic Functions</a></li>
+  <li><a href="#generic-classes">Generic Classes</a></li>
+  <li><a href="#generic-interfaces">Generic Interfaces</a></li>
+  <li><a href="#generic-constraints">Generic Constraints</a></li>
+  <li><a href="#advanced-generic-patterns">Advanced Generic Patterns</a></li>
+  <li><a href="#best-practices">Best Practices</a></li>
+  <li><a href="#common-interview-questions">Common Interview Questions</a></li>
+</ul>
+
+<hr />
+
+<h2 id="-introduction-to-generics">🎯 <strong>Introduction to Generics</strong></h2>
+
+<p>Generics allow you to create reusable components that work with multiple types while maintaining type safety.</p>
+
+<h3 id="why-use-generics"><strong>Why Use Generics?</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Without generics - not type-safe</span>
+<span class="kd">function</span> <span class="nx">getFirstItem</span><span class="p">(</span><span class="nx">items</span><span class="p">:</span> <span class="kr">any</span><span class="p">[]):</span> <span class="kr">any</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">items</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">firstNumber</span> <span class="o">=</span> <span class="nx">getFirstItem</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]);</span> <span class="c1">// Returns any</span>
+<span class="kd">const</span> <span class="nx">firstString</span> <span class="o">=</span> <span class="nx">getFirstItem</span><span class="p">([</span><span class="dl">"</span><span class="s2">a</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">b</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">c</span><span class="dl">"</span><span class="p">]);</span> <span class="c1">// Returns any</span>
+
+<span class="c1">// With generics - type-safe</span>
+<span class="kd">function</span> <span class="nx">getFirstItem</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">items</span><span class="p">:</span> <span class="nx">T</span><span class="p">[]):</span> <span class="nx">T</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">items</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">firstNumber</span> <span class="o">=</span> <span class="nx">getFirstItem</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]);</span> <span class="c1">// Returns number</span>
+<span class="kd">const</span> <span class="nx">firstString</span> <span class="o">=</span> <span class="nx">getFirstItem</span><span class="p">([</span><span class="dl">"</span><span class="s2">a</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">b</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">c</span><span class="dl">"</span><span class="p">]);</span> <span class="c1">// Returns string</span>
+</code></pre></div></div>
+
+<h3 id="basic-generic-syntax"><strong>Basic Generic Syntax</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Generic function</span>
+<span class="kd">function</span> <span class="nx">identity</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">arg</span><span class="p">:</span> <span class="nx">T</span><span class="p">):</span> <span class="nx">T</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">arg</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Usage with explicit type</span>
+<span class="kd">const</span> <span class="nx">result1</span> <span class="o">=</span> <span class="nx">identity</span><span class="o">&lt;</span><span class="kr">string</span><span class="o">&gt;</span><span class="p">(</span><span class="dl">"</span><span class="s2">hello</span><span class="dl">"</span><span class="p">);</span> <span class="c1">// result1 is string</span>
+<span class="kd">const</span> <span class="nx">result2</span> <span class="o">=</span> <span class="nx">identity</span><span class="o">&lt;</span><span class="kr">number</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">42</span><span class="p">);</span>      <span class="c1">// result2 is number</span>
+
+<span class="c1">// Usage with type inference</span>
+<span class="kd">const</span> <span class="nx">result3</span> <span class="o">=</span> <span class="nx">identity</span><span class="p">(</span><span class="dl">"</span><span class="s2">hello</span><span class="dl">"</span><span class="p">);</span> <span class="c1">// TypeScript infers T as string</span>
+<span class="kd">const</span> <span class="nx">result4</span> <span class="o">=</span> <span class="nx">identity</span><span class="p">(</span><span class="mi">42</span><span class="p">);</span>      <span class="c1">// TypeScript infers T as number</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-generic-functions">🔧 <strong>Generic Functions</strong></h2>
+
+<p>Generic functions can work with different types while maintaining type safety.</p>
+
+<h3 id="basic-generic-functions"><strong>Basic Generic Functions</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Generic function with single type parameter</span>
+<span class="kd">function</span> <span class="nx">logAndReturn</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="nx">T</span><span class="p">):</span> <span class="nx">T</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+  <span class="k">return</span> <span class="nx">value</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Generic function with multiple type parameters</span>
+<span class="kd">function</span> <span class="nx">pair</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">,</span> <span class="nx">U</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">first</span><span class="p">:</span> <span class="nx">T</span><span class="p">,</span> <span class="nx">second</span><span class="p">:</span> <span class="nx">U</span><span class="p">):</span> <span class="p">[</span><span class="nx">T</span><span class="p">,</span> <span class="nx">U</span><span class="p">]</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">[</span><span class="nx">first</span><span class="p">,</span> <span class="nx">second</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="c1">// Usage</span>
+<span class="kd">const</span> <span class="nx">stringValue</span> <span class="o">=</span> <span class="nx">logAndReturn</span><span class="p">(</span><span class="dl">"</span><span class="s2">hello</span><span class="dl">"</span><span class="p">);</span> <span class="c1">// T inferred as string</span>
+<span class="kd">const</span> <span class="nx">numberValue</span> <span class="o">=</span> <span class="nx">logAndReturn</span><span class="p">(</span><span class="mi">42</span><span class="p">);</span>      <span class="c1">// T inferred as number</span>
+<span class="kd">const</span> <span class="nx">pairResult</span> <span class="o">=</span> <span class="nx">pair</span><span class="p">(</span><span class="dl">"</span><span class="s2">hello</span><span class="dl">"</span><span class="p">,</span> <span class="mi">42</span><span class="p">);</span>      <span class="c1">// [string, number]</span>
+</code></pre></div></div>
+
+<h3 id="generic-array-functions"><strong>Generic Array Functions</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Generic function for array operations</span>
+<span class="kd">function</span> <span class="nx">getLastItem</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">array</span><span class="p">:</span> <span class="nx">T</span><span class="p">[]):</span> <span class="nx">T</span> <span class="o">|</span> <span class="kc">undefined</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">array</span><span class="p">[</span><span class="nx">array</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">filterArray</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">array</span><span class="p">:</span> <span class="nx">T</span><span class="p">[],</span> <span class="nx">predicate</span><span class="p">:</span> <span class="p">(</span><span class="nx">item</span><span class="p">:</span> <span class="nx">T</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">boolean</span><span class="p">):</span> <span class="nx">T</span><span class="p">[]</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">array</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">predicate</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Usage</span>
+<span class="kd">const</span> <span class="nx">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">];</span>
+<span class="kd">const</span> <span class="nx">lastNumber</span> <span class="o">=</span> <span class="nx">getLastItem</span><span class="p">(</span><span class="nx">numbers</span><span class="p">);</span> <span class="c1">// number | undefined</span>
+<span class="kd">const</span> <span class="nx">evenNumbers</span> <span class="o">=</span> <span class="nx">filterArray</span><span class="p">(</span><span class="nx">numbers</span><span class="p">,</span> <span class="nx">n</span> <span class="o">=&gt;</span> <span class="nx">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">===</span> <span class="mi">0</span><span class="p">);</span> <span class="c1">// number[]</span>
+</code></pre></div></div>
+
+<h3 id="generic-function-with-constraints"><strong>Generic Function with Constraints</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Generic function with length property constraint</span>
+<span class="kd">function</span> <span class="nx">getLength</span><span class="o">&lt;</span><span class="nx">T</span> <span class="kd">extends</span> <span class="p">{</span> <span class="na">length</span><span class="p">:</span> <span class="kr">number</span> <span class="p">}</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">item</span><span class="p">:</span> <span class="nx">T</span><span class="p">):</span> <span class="kr">number</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">item</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Usage</span>
+<span class="nx">getLength</span><span class="p">(</span><span class="dl">"</span><span class="s2">hello</span><span class="dl">"</span><span class="p">);</span>        <span class="c1">// 5</span>
+<span class="nx">getLength</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]);</span>      <span class="c1">// 3</span>
+<span class="nx">getLength</span><span class="p">({</span> <span class="na">length</span><span class="p">:</span> <span class="mi">10</span> <span class="p">});</span> <span class="c1">// 10</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="️-generic-classes">🏗️ <strong>Generic Classes</strong></h2>
+
+<p>Generic classes allow you to create classes that work with different types.</p>
+
+<h3 id="basic-generic-class"><strong>Basic Generic Class</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Generic container class</span>
+<span class="kd">class</span> <span class="nx">Container</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="k">private</span> <span class="na">items</span><span class="p">:</span> <span class="nx">T</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[];</span>
+
+  <span class="nx">add</span><span class="p">(</span><span class="na">item</span><span class="p">:</span> <span class="nx">T</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">items</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">item</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="kd">get</span><span class="p">(</span><span class="na">index</span><span class="p">:</span> <span class="kr">number</span><span class="p">):</span> <span class="nx">T</span> <span class="o">|</span> <span class="kc">undefined</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">items</span><span class="p">[</span><span class="nx">index</span><span class="p">];</span>
+  <span class="p">}</span>
+
+  <span class="nx">getAll</span><span class="p">():</span> <span class="nx">T</span><span class="p">[]</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">[...</span><span class="k">this</span><span class="p">.</span><span class="nx">items</span><span class="p">];</span>
+  <span class="p">}</span>
+
+  <span class="nx">size</span><span class="p">():</span> <span class="kr">number</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">items</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Usage</span>
+<span class="kd">const</span> <span class="nx">stringContainer</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Container</span><span class="o">&lt;</span><span class="kr">string</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="nx">stringContainer</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="dl">"</span><span class="s2">hello</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">stringContainer</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="dl">"</span><span class="s2">world</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">numberContainer</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Container</span><span class="o">&lt;</span><span class="kr">number</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="nx">numberContainer</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="nx">numberContainer</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="generic-class-with-multiple-type-parameters"><strong>Generic Class with Multiple Type Parameters</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Generic key-value storage</span>
+<span class="kd">class</span> <span class="nx">KeyValueStore</span><span class="o">&lt;</span><span class="nx">K</span><span class="p">,</span> <span class="nx">V</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="k">private</span> <span class="nx">store</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Map</span><span class="o">&lt;</span><span class="nx">K</span><span class="p">,</span> <span class="nx">V</span><span class="o">&gt;</span><span class="p">();</span>
+
+  <span class="kd">set</span><span class="p">(</span><span class="na">key</span><span class="p">:</span> <span class="nx">K</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="nx">V</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">store</span><span class="p">.</span><span class="kd">set</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="kd">get</span><span class="p">(</span><span class="na">key</span><span class="p">:</span> <span class="nx">K</span><span class="p">):</span> <span class="nx">V</span> <span class="o">|</span> <span class="kc">undefined</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">store</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="nx">has</span><span class="p">(</span><span class="na">key</span><span class="p">:</span> <span class="nx">K</span><span class="p">):</span> <span class="nx">boolean</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">store</span><span class="p">.</span><span class="nx">has</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">delete</span><span class="p">(</span><span class="na">key</span><span class="p">:</span> <span class="nx">K</span><span class="p">):</span> <span class="nx">boolean</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">store</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Usage</span>
+<span class="kd">const</span> <span class="nx">userStore</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">KeyValueStore</span><span class="o">&lt;</span><span class="kr">string</span><span class="p">,</span> <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span> <span class="nl">age</span><span class="p">:</span> <span class="kr">number</span> <span class="p">}</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="nx">userStore</span><span class="p">.</span><span class="kd">set</span><span class="p">(</span><span class="dl">"</span><span class="s2">user1</span><span class="dl">"</span><span class="p">,</span> <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">John</span><span class="dl">"</span><span class="p">,</span> <span class="na">age</span><span class="p">:</span> <span class="mi">30</span> <span class="p">});</span>
+<span class="nx">userStore</span><span class="p">.</span><span class="kd">set</span><span class="p">(</span><span class="dl">"</span><span class="s2">user2</span><span class="dl">"</span><span class="p">,</span> <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Jane</span><span class="dl">"</span><span class="p">,</span> <span class="na">age</span><span class="p">:</span> <span class="mi">25</span> <span class="p">});</span>
+</code></pre></div></div>
+
+<h3 id="generic-class-with-constraints"><strong>Generic Class with Constraints</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Generic class with comparable constraint</span>
+<span class="kr">interface</span> <span class="nx">Comparable</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="nx">compareTo</span><span class="p">(</span><span class="na">other</span><span class="p">:</span> <span class="nx">T</span><span class="p">):</span> <span class="kr">number</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nx">SortedList</span><span class="o">&lt;</span><span class="nx">T</span> <span class="kd">extends</span> <span class="nx">Comparable</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;&gt;</span> <span class="p">{</span>
+  <span class="k">private</span> <span class="na">items</span><span class="p">:</span> <span class="nx">T</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[];</span>
+
+  <span class="nx">add</span><span class="p">(</span><span class="na">item</span><span class="p">:</span> <span class="nx">T</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">items</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">item</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">items</span><span class="p">.</span><span class="nx">sort</span><span class="p">((</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">a</span><span class="p">.</span><span class="nx">compareTo</span><span class="p">(</span><span class="nx">b</span><span class="p">));</span>
+  <span class="p">}</span>
+
+  <span class="kd">get</span><span class="p">(</span><span class="na">index</span><span class="p">:</span> <span class="kr">number</span><span class="p">):</span> <span class="nx">T</span> <span class="o">|</span> <span class="kc">undefined</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">items</span><span class="p">[</span><span class="nx">index</span><span class="p">];</span>
+  <span class="p">}</span>
+
+  <span class="nx">getAll</span><span class="p">():</span> <span class="nx">T</span><span class="p">[]</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">[...</span><span class="k">this</span><span class="p">.</span><span class="nx">items</span><span class="p">];</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Usage with a comparable class</span>
+<span class="kd">class</span> <span class="nx">Person</span> <span class="k">implements</span> <span class="nx">Comparable</span><span class="o">&lt;</span><span class="nx">Person</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="kd">constructor</span><span class="p">(</span><span class="k">public</span> <span class="na">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">,</span> <span class="k">public</span> <span class="na">age</span><span class="p">:</span> <span class="kr">number</span><span class="p">)</span> <span class="p">{}</span>
+
+  <span class="nx">compareTo</span><span class="p">(</span><span class="na">other</span><span class="p">:</span> <span class="nx">Person</span><span class="p">):</span> <span class="kr">number</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">age</span> <span class="o">-</span> <span class="nx">other</span><span class="p">.</span><span class="nx">age</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">sortedPeople</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SortedList</span><span class="o">&lt;</span><span class="nx">Person</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="nx">sortedPeople</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="k">new</span> <span class="nx">Person</span><span class="p">(</span><span class="dl">"</span><span class="s2">Alice</span><span class="dl">"</span><span class="p">,</span> <span class="mi">30</span><span class="p">));</span>
+<span class="nx">sortedPeople</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="k">new</span> <span class="nx">Person</span><span class="p">(</span><span class="dl">"</span><span class="s2">Bob</span><span class="dl">"</span><span class="p">,</span> <span class="mi">25</span><span class="p">));</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-generic-interfaces">📋 <strong>Generic Interfaces</strong></h2>
+
+<p>Generic interfaces define contracts that can work with different types.</p>
+
+<h3 id="basic-generic-interface"><strong>Basic Generic Interface</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Generic repository interface</span>
+<span class="kr">interface</span> <span class="nx">Repository</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="nx">findById</span><span class="p">(</span><span class="na">id</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nx">T</span> <span class="o">|</span> <span class="kc">undefined</span><span class="p">;</span>
+  <span class="nx">findAll</span><span class="p">():</span> <span class="nx">T</span><span class="p">[];</span>
+  <span class="nx">save</span><span class="p">(</span><span class="na">entity</span><span class="p">:</span> <span class="nx">T</span><span class="p">):</span> <span class="nx">T</span><span class="p">;</span>
+  <span class="k">delete</span><span class="p">(</span><span class="na">id</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nx">boolean</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Implementation</span>
+<span class="kd">class</span> <span class="nx">UserRepository</span> <span class="k">implements</span> <span class="nx">Repository</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="k">private</span> <span class="na">users</span><span class="p">:</span> <span class="nx">User</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[];</span>
+
+  <span class="nx">findById</span><span class="p">(</span><span class="na">id</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nx">User</span> <span class="o">|</span> <span class="kc">undefined</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="nx">user</span> <span class="o">=&gt;</span> <span class="nx">user</span><span class="p">.</span><span class="nx">id</span> <span class="o">===</span> <span class="nx">id</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="nx">findAll</span><span class="p">():</span> <span class="nx">User</span><span class="p">[]</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">[...</span><span class="k">this</span><span class="p">.</span><span class="nx">users</span><span class="p">];</span>
+  <span class="p">}</span>
+
+  <span class="nx">save</span><span class="p">(</span><span class="na">user</span><span class="p">:</span> <span class="nx">User</span><span class="p">):</span> <span class="nx">User</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">existingIndex</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">findIndex</span><span class="p">(</span><span class="nx">u</span> <span class="o">=&gt;</span> <span class="nx">u</span><span class="p">.</span><span class="nx">id</span> <span class="o">===</span> <span class="nx">user</span><span class="p">.</span><span class="nx">id</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">existingIndex</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">users</span><span class="p">[</span><span class="nx">existingIndex</span><span class="p">]</span> <span class="o">=</span> <span class="nx">user</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">user</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">user</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">delete</span><span class="p">(</span><span class="na">id</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nx">boolean</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">index</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">findIndex</span><span class="p">(</span><span class="nx">user</span> <span class="o">=&gt;</span> <span class="nx">user</span><span class="p">.</span><span class="nx">id</span> <span class="o">===</span> <span class="nx">id</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">index</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+      <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="generic-interface-with-multiple-type-parameters"><strong>Generic Interface with Multiple Type Parameters</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Generic API response interface</span>
+<span class="kr">interface</span> <span class="nx">ApiResponse</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">,</span> <span class="nx">E</span> <span class="o">=</span> <span class="kr">string</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="na">data</span><span class="p">:</span> <span class="nx">T</span><span class="p">;</span>
+  <span class="nl">error</span><span class="p">:</span> <span class="nx">E</span> <span class="o">|</span> <span class="kc">null</span><span class="p">;</span>
+  <span class="nl">status</span><span class="p">:</span> <span class="dl">"</span><span class="s2">success</span><span class="dl">"</span> <span class="o">|</span> <span class="dl">"</span><span class="s2">error</span><span class="dl">"</span><span class="p">;</span>
+  <span class="nl">timestamp</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Usage</span>
+<span class="kd">type</span> <span class="nx">UserApiResponse</span> <span class="o">=</span> <span class="nx">ApiResponse</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="kd">type</span> <span class="nx">UserListApiResponse</span> <span class="o">=</span> <span class="nx">ApiResponse</span><span class="o">&lt;</span><span class="nx">User</span><span class="p">[]</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="kd">type</span> <span class="nx">CustomErrorResponse</span> <span class="o">=</span> <span class="nx">ApiResponse</span><span class="o">&lt;</span><span class="nx">User</span><span class="p">,</span> <span class="p">{</span> <span class="na">code</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span> <span class="nl">message</span><span class="p">:</span> <span class="kr">string</span> <span class="p">}</span><span class="o">&gt;</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="generic-interface-with-constraints"><strong>Generic Interface with Constraints</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Generic interface with serializable constraint</span>
+<span class="kr">interface</span> <span class="nx">Serializable</span> <span class="p">{</span>
+  <span class="nx">toJSON</span><span class="p">():</span> <span class="kr">string</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kr">interface</span> <span class="nx">Cache</span><span class="o">&lt;</span><span class="nx">T</span> <span class="kd">extends</span> <span class="nx">Serializable</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="kd">get</span><span class="p">(</span><span class="na">key</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nx">T</span> <span class="o">|</span> <span class="kc">undefined</span><span class="p">;</span>
+  <span class="kd">set</span><span class="p">(</span><span class="na">key</span><span class="p">:</span> <span class="kr">string</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="nx">T</span><span class="p">):</span> <span class="k">void</span><span class="p">;</span>
+  <span class="nx">clear</span><span class="p">():</span> <span class="k">void</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Implementation</span>
+<span class="kd">class</span> <span class="nx">MemoryCache</span><span class="o">&lt;</span><span class="nx">T</span> <span class="kd">extends</span> <span class="nx">Serializable</span><span class="o">&gt;</span> <span class="k">implements</span> <span class="nx">Cache</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="k">private</span> <span class="nx">cache</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Map</span><span class="o">&lt;</span><span class="kr">string</span><span class="p">,</span> <span class="nx">T</span><span class="o">&gt;</span><span class="p">();</span>
+
+  <span class="kd">get</span><span class="p">(</span><span class="na">key</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nx">T</span> <span class="o">|</span> <span class="kc">undefined</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="kd">set</span><span class="p">(</span><span class="na">key</span><span class="p">:</span> <span class="kr">string</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="nx">T</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="kd">set</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="nx">clear</span><span class="p">():</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-generic-constraints">🔒 <strong>Generic Constraints</strong></h2>
+
+<p>Constraints limit the types that can be used with generics, providing more specific type information.</p>
+
+<h3 id="basic-constraints"><strong>Basic Constraints</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Constraint to ensure type has length property</span>
+<span class="kd">function</span> <span class="nx">getLength</span><span class="o">&lt;</span><span class="nx">T</span> <span class="kd">extends</span> <span class="p">{</span> <span class="na">length</span><span class="p">:</span> <span class="kr">number</span> <span class="p">}</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">item</span><span class="p">:</span> <span class="nx">T</span><span class="p">):</span> <span class="kr">number</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">item</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Usage</span>
+<span class="nx">getLength</span><span class="p">(</span><span class="dl">"</span><span class="s2">hello</span><span class="dl">"</span><span class="p">);</span>        <span class="c1">// 5</span>
+<span class="nx">getLength</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]);</span>      <span class="c1">// 3</span>
+<span class="nx">getLength</span><span class="p">({</span> <span class="na">length</span><span class="p">:</span> <span class="mi">10</span> <span class="p">});</span> <span class="c1">// 10</span>
+<span class="c1">// getLength(42);          // ❌ Error: number doesn't have length property</span>
+</code></pre></div></div>
+
+<h3 id="keyof-constraint"><strong>Keyof Constraint</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Constraint using keyof</span>
+<span class="kd">function</span> <span class="nx">getProperty</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">,</span> <span class="nx">K</span> <span class="kd">extends</span> <span class="kr">keyof</span> <span class="nx">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">obj</span><span class="p">:</span> <span class="nx">T</span><span class="p">,</span> <span class="nx">key</span><span class="p">:</span> <span class="nx">K</span><span class="p">):</span> <span class="nx">T</span><span class="p">[</span><span class="nx">K</span><span class="p">]</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">obj</span><span class="p">[</span><span class="nx">key</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="c1">// Usage</span>
+<span class="kd">const</span> <span class="nx">person</span> <span class="o">=</span> <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">John</span><span class="dl">"</span><span class="p">,</span> <span class="na">age</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span> <span class="na">city</span><span class="p">:</span> <span class="dl">"</span><span class="s2">New York</span><span class="dl">"</span> <span class="p">};</span>
+<span class="kd">const</span> <span class="nx">name</span> <span class="o">=</span> <span class="nx">getProperty</span><span class="p">(</span><span class="nx">person</span><span class="p">,</span> <span class="dl">"</span><span class="s2">name</span><span class="dl">"</span><span class="p">);</span> <span class="c1">// string</span>
+<span class="kd">const</span> <span class="nx">age</span> <span class="o">=</span> <span class="nx">getProperty</span><span class="p">(</span><span class="nx">person</span><span class="p">,</span> <span class="dl">"</span><span class="s2">age</span><span class="dl">"</span><span class="p">);</span>   <span class="c1">// number</span>
+<span class="c1">// const invalid = getProperty(person, "invalid"); // ❌ Error</span>
+</code></pre></div></div>
+
+<h3 id="multiple-constraints"><strong>Multiple Constraints</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Multiple constraints</span>
+<span class="kr">interface</span> <span class="nx">HasId</span> <span class="p">{</span>
+  <span class="nl">id</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kr">interface</span> <span class="nx">HasName</span> <span class="p">{</span>
+  <span class="nl">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">processEntity</span><span class="o">&lt;</span><span class="nx">T</span> <span class="kd">extends</span> <span class="nx">HasId</span> <span class="o">&amp;</span> <span class="nx">HasName</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">entity</span><span class="p">:</span> <span class="nx">T</span><span class="p">):</span> <span class="kr">string</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="s2">`</span><span class="p">${</span><span class="nx">entity</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span><span class="s2"> (ID: </span><span class="p">${</span><span class="nx">entity</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span><span class="s2">)`</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Usage</span>
+<span class="kd">const</span> <span class="nx">user</span> <span class="o">=</span> <span class="p">{</span> <span class="na">id</span><span class="p">:</span> <span class="dl">"</span><span class="s2">1</span><span class="dl">"</span><span class="p">,</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">John</span><span class="dl">"</span><span class="p">,</span> <span class="na">email</span><span class="p">:</span> <span class="dl">"</span><span class="s2">john@example.com</span><span class="dl">"</span> <span class="p">};</span>
+<span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">processEntity</span><span class="p">(</span><span class="nx">user</span><span class="p">);</span> <span class="c1">// "John (ID: 1)"</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-advanced-generic-patterns">🚀 <strong>Advanced Generic Patterns</strong></h2>
+
+<h3 id="conditional-types-with-generics"><strong>Conditional Types with Generics</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Conditional type based on generic parameter</span>
+<span class="kd">type</span> <span class="nx">ApiResponse</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nx">T</span> <span class="kd">extends</span> <span class="kr">string</span> 
+  <span class="p">?</span> <span class="p">{</span> <span class="na">message</span><span class="p">:</span> <span class="nx">T</span> <span class="p">}</span> 
+  <span class="p">:</span> <span class="p">{</span> <span class="na">data</span><span class="p">:</span> <span class="nx">T</span> <span class="p">};</span>
+
+<span class="kd">function</span> <span class="nx">createResponse</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="nx">T</span><span class="p">):</span> <span class="nx">ApiResponse</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">value</span> <span class="o">===</span> <span class="dl">"</span><span class="s2">string</span><span class="dl">"</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">{</span> <span class="na">message</span><span class="p">:</span> <span class="nx">value</span> <span class="p">}</span> <span class="k">as</span> <span class="nx">ApiResponse</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="p">{</span> <span class="na">data</span><span class="p">:</span> <span class="nx">value</span> <span class="p">}</span> <span class="k">as</span> <span class="nx">ApiResponse</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Usage</span>
+<span class="kd">const</span> <span class="nx">stringResponse</span> <span class="o">=</span> <span class="nx">createResponse</span><span class="p">(</span><span class="dl">"</span><span class="s2">Hello</span><span class="dl">"</span><span class="p">);</span> <span class="c1">// { message: string }</span>
+<span class="kd">const</span> <span class="nx">numberResponse</span> <span class="o">=</span> <span class="nx">createResponse</span><span class="p">(</span><span class="mi">42</span><span class="p">);</span>      <span class="c1">// { data: number }</span>
+</code></pre></div></div>
+
+<h3 id="mapped-types-with-generics"><strong>Mapped Types with Generics</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Generic mapped type</span>
+<span class="kd">type</span> <span class="nb">Partial</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="p">[</span><span class="nx">P</span> <span class="k">in</span> <span class="kr">keyof</span> <span class="nx">T</span><span class="p">]?:</span> <span class="nx">T</span><span class="p">[</span><span class="nx">P</span><span class="p">];</span>
+<span class="p">};</span>
+
+<span class="kd">type</span> <span class="nx">Required</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="p">[</span><span class="nx">P</span> <span class="k">in</span> <span class="kr">keyof</span> <span class="nx">T</span><span class="p">]</span><span class="o">-</span><span class="p">?:</span> <span class="nx">T</span><span class="p">[</span><span class="nx">P</span><span class="p">];</span>
+<span class="p">};</span>
+
+<span class="c1">// Usage</span>
+<span class="kr">interface</span> <span class="nx">User</span> <span class="p">{</span>
+  <span class="nl">id</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">email</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">PartialUser</span> <span class="o">=</span> <span class="nb">Partial</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// All properties optional</span>
+<span class="kd">type</span> <span class="nx">RequiredUser</span> <span class="o">=</span> <span class="nx">Required</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// All properties required</span>
+</code></pre></div></div>
+
+<h3 id="generic-utility-types"><strong>Generic Utility Types</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Generic utility type for API responses</span>
+<span class="kd">type</span> <span class="nx">ApiResult</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">,</span> <span class="nx">E</span> <span class="o">=</span> <span class="nb">Error</span><span class="o">&gt;</span> <span class="o">=</span> 
+  <span class="o">|</span> <span class="p">{</span> <span class="na">success</span><span class="p">:</span> <span class="kc">true</span><span class="p">;</span> <span class="nl">data</span><span class="p">:</span> <span class="nx">T</span> <span class="p">}</span>
+  <span class="o">|</span> <span class="p">{</span> <span class="na">success</span><span class="p">:</span> <span class="kc">false</span><span class="p">;</span> <span class="nl">error</span><span class="p">:</span> <span class="nx">E</span> <span class="p">};</span>
+
+<span class="c1">// Generic function using utility type</span>
+<span class="k">async</span> <span class="kd">function</span> <span class="nx">fetchData</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">url</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">ApiResult</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;&gt;</span> <span class="p">{</span>
+  <span class="k">try</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">);</span>
+    <span class="kd">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+    <span class="k">return</span> <span class="p">{</span> <span class="na">success</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="nx">data</span> <span class="p">};</span>
+  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">{</span> <span class="na">success</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> <span class="na">error</span><span class="p">:</span> <span class="nx">error</span> <span class="k">as</span> <span class="nb">Error</span> <span class="p">};</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Usage</span>
+<span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fetchData</span><span class="o">&lt;</span><span class="nx">User</span><span class="p">[]</span><span class="o">&gt;</span><span class="p">(</span><span class="dl">"</span><span class="s2">/api/users</span><span class="dl">"</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">success</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span> <span class="c1">// T[]</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">error</span><span class="p">);</span> <span class="c1">// Error</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-best-practices">✅ <strong>Best Practices</strong></h2>
+
+<h3 id="1-use-descriptive-generic-names"><strong>1. Use Descriptive Generic Names</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ✅ Good: Descriptive generic names</span>
+<span class="kd">function</span> <span class="nx">processUserData</span><span class="o">&lt;</span><span class="nx">TUser</span> <span class="kd">extends</span> <span class="nx">User</span><span class="p">,</span> <span class="nx">TResponse</span> <span class="kd">extends</span> <span class="nx">ApiResponse</span><span class="o">&lt;</span><span class="nx">TUser</span><span class="o">&gt;&gt;</span><span class="p">(</span>
+  <span class="nx">user</span><span class="p">:</span> <span class="nx">TUser</span>
+<span class="p">):</span> <span class="nx">TResponse</span> <span class="p">{</span>
+  <span class="c1">// Implementation</span>
+<span class="p">}</span>
+
+<span class="c1">// ❌ Avoid: Generic names like T, U, V</span>
+<span class="kd">function</span> <span class="nx">processUserData</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">,</span> <span class="nx">U</span><span class="p">,</span> <span class="nx">V</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">user</span><span class="p">:</span> <span class="nx">T</span><span class="p">):</span> <span class="nx">U</span> <span class="p">{</span>
+  <span class="c1">// Implementation</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="2-use-constraints-to-provide-better-type-safety"><strong>2. Use Constraints to Provide Better Type Safety</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ✅ Good: Constraint provides type safety</span>
+<span class="kd">function</span> <span class="nx">getProperty</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">,</span> <span class="nx">K</span> <span class="kd">extends</span> <span class="kr">keyof</span> <span class="nx">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">obj</span><span class="p">:</span> <span class="nx">T</span><span class="p">,</span> <span class="nx">key</span><span class="p">:</span> <span class="nx">K</span><span class="p">):</span> <span class="nx">T</span><span class="p">[</span><span class="nx">K</span><span class="p">]</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">obj</span><span class="p">[</span><span class="nx">key</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="c1">// ❌ Avoid: No constraints, less type safety</span>
+<span class="kd">function</span> <span class="nx">getProperty</span><span class="p">(</span><span class="nx">obj</span><span class="p">:</span> <span class="kr">any</span><span class="p">,</span> <span class="nx">key</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="kr">any</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">obj</span><span class="p">[</span><span class="nx">key</span><span class="p">];</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="3-prefer-type-inference-when-possible"><strong>3. Prefer Type Inference When Possible</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ✅ Good: Let TypeScript infer the type</span>
+<span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">getFirstItem</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]);</span> <span class="c1">// T inferred as number</span>
+
+<span class="c1">// ❌ Avoid: Unnecessary explicit type</span>
+<span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">getFirstItem</span><span class="o">&lt;</span><span class="kr">number</span><span class="o">&gt;</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]);</span>
+</code></pre></div></div>
+
+<h3 id="4-use-generic-constraints-for-better-apis"><strong>4. Use Generic Constraints for Better APIs</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ✅ Good: Constraint ensures required properties</span>
+<span class="kd">function</span> <span class="nx">createEntity</span><span class="o">&lt;</span><span class="nx">T</span> <span class="kd">extends</span> <span class="p">{</span> <span class="na">id</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span> <span class="nl">name</span><span class="p">:</span> <span class="kr">string</span> <span class="p">}</span><span class="o">&gt;</span><span class="p">(</span>
+  <span class="nx">data</span><span class="p">:</span> <span class="nx">T</span>
+<span class="p">):</span> <span class="nx">T</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">{</span> <span class="p">...</span><span class="nx">data</span><span class="p">,</span> <span class="na">createdAt</span><span class="p">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">()</span> <span class="p">};</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-common-interview-questions">❓ <strong>Common Interview Questions</strong></h2>
+
+<h3 id="1-what-are-generics-and-why-are-they-useful"><strong>1. What are generics and why are they useful?</strong></h3>
+
+<p><strong>Answer:</strong>
+Generics allow you to create reusable components that work with multiple types while maintaining type safety. They provide:</p>
+<ul>
+  <li>Type safety at compile time</li>
+  <li>Code reusability</li>
+  <li>Better IntelliSense support</li>
+  <li>Elimination of type casting</li>
+</ul>
+
+<h3 id="2-how-do-you-create-a-generic-function"><strong>2. How do you create a generic function?</strong></h3>
+
+<p><strong>Answer:</strong>
+Use angle brackets to define type parameters:</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">identity</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">arg</span><span class="p">:</span> <span class="nx">T</span><span class="p">):</span> <span class="nx">T</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">arg</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Usage</span>
+<span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">identity</span><span class="o">&lt;</span><span class="kr">string</span><span class="o">&gt;</span><span class="p">(</span><span class="dl">"</span><span class="s2">hello</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">inferred</span> <span class="o">=</span> <span class="nx">identity</span><span class="p">(</span><span class="dl">"</span><span class="s2">hello</span><span class="dl">"</span><span class="p">);</span> <span class="c1">// Type inferred</span>
+</code></pre></div></div>
+
+<h3 id="3-what-are-generic-constraints-and-how-do-you-use-them"><strong>3. What are generic constraints and how do you use them?</strong></h3>
+
+<p><strong>Answer:</strong>
+Constraints limit the types that can be used with generics:</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">getLength</span><span class="o">&lt;</span><span class="nx">T</span> <span class="kd">extends</span> <span class="p">{</span> <span class="na">length</span><span class="p">:</span> <span class="kr">number</span> <span class="p">}</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">item</span><span class="p">:</span> <span class="nx">T</span><span class="p">):</span> <span class="kr">number</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">item</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="4-how-do-you-create-a-generic-class"><strong>4. How do you create a generic class?</strong></h3>
+
+<p><strong>Answer:</strong>
+Define type parameters after the class name:</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">Container</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="k">private</span> <span class="na">items</span><span class="p">:</span> <span class="nx">T</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[];</span>
+  
+  <span class="nx">add</span><span class="p">(</span><span class="na">item</span><span class="p">:</span> <span class="nx">T</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">items</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">item</span><span class="p">);</span>
+  <span class="p">}</span>
+  
+  <span class="kd">get</span><span class="p">(</span><span class="na">index</span><span class="p">:</span> <span class="kr">number</span><span class="p">):</span> <span class="nx">T</span> <span class="o">|</span> <span class="kc">undefined</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">items</span><span class="p">[</span><span class="nx">index</span><span class="p">];</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="5-whats-the-difference-between-generic-functions-and-generic-classes"><strong>5. What’s the difference between generic functions and generic classes?</strong></h3>
+
+<p><strong>Answer:</strong></p>
+<ul>
+  <li><strong>Generic functions</strong>: Work with different types for a single operation</li>
+  <li><strong>Generic classes</strong>: Maintain type consistency across multiple methods and properties</li>
+</ul>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Generic function</span>
+<span class="kd">function</span> <span class="nx">process</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">item</span><span class="p">:</span> <span class="nx">T</span><span class="p">):</span> <span class="nx">T</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">item</span><span class="p">;</span> <span class="p">}</span>
+
+<span class="c1">// Generic class</span>
+<span class="kd">class</span> <span class="nx">Processor</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="nx">process</span><span class="p">(</span><span class="na">item</span><span class="p">:</span> <span class="nx">T</span><span class="p">):</span> <span class="nx">T</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">item</span><span class="p">;</span> <span class="p">}</span>
+  <span class="nx">store</span><span class="p">(</span><span class="na">item</span><span class="p">:</span> <span class="nx">T</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span> <span class="cm">/* store */</span> <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-navigation">🧭 Navigation</h2>
+
+<div class="navigation">
+  <a href="01-Union-Intersection-Types.md" class="nav-button">← Previous: Union &amp; Intersection Types</a>
+  <a href="03-Conditional-Types.md" class="nav-button">Next: Conditional Types →</a>
+</div>
+
+<p><em>Last updated: December 2025</em></p>
+
+        </main>
+        
+        <footer style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #ecf0f1; color: #666; text-align: center;">
+            <p>Interview Prep Documentation - Built with Jekyll</p>
+        </footer>
+    </div>
+</body>
+</html>

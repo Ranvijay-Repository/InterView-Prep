@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📚 Popular TypeScript Libraries - Interview Prep Documentation</title>
+    <meta name="description" content="Comprehensive guides for JavaScript, TypeScript, and React Native interview preparation">
+    
+    <!-- GitHub Pages compatible styling -->
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+        }
+        
+        .container {
+            max-width: 100%;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            color: #2c3e50;
+            margin-top: 2em;
+            margin-bottom: 1em;
+        }
+        
+        h1 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            border-bottom: 1px solid #ecf0f1;
+            padding-bottom: 5px;
+        }
+        
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border-left: 4px solid #3498db;
+        }
+        
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+        
+        blockquote {
+            border-left: 4px solid #3498db;
+            margin: 0;
+            padding-left: 20px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1em 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .navigation {
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px 0;
+            margin-bottom: 20px;
+        }
+        
+        .navigation a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+        
+        .navigation a:hover {
+            text-decoration: underline;
+        }
+        
+        .breadcrumb {
+            margin-bottom: 20px;
+            color: #666;
+        }
+        
+        .breadcrumb a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            h2 {
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="navigation">
+            <a href="/">Home</a>
+            <a href="/Javascript/">JavaScript</a>
+            <a href="/TypeScript/">TypeScript</a>
+            <a href="/React-Native/">React Native</a>
+        </nav>
+        
+        
+        
+        <main>
+            <h1 id="-popular-typescript-libraries">📚 <strong>Popular TypeScript Libraries</strong></h1>
+
+<blockquote>
+  <p><strong>Complete guide to popular TypeScript libraries, their usage, and best practices for different use cases</strong></p>
+</blockquote>
+
+<link rel="stylesheet" href="../../common-styles.css" />
+
+<hr />
+
+<h2 id="-table-of-contents">📚 <strong>Table of Contents</strong></h2>
+
+<ul>
+  <li><a href="#library-categories">Library Categories</a></li>
+  <li><a href="#utility-libraries">Utility Libraries</a></li>
+  <li><a href="#validation-libraries">Validation Libraries</a></li>
+  <li><a href="#state-management">State Management</a></li>
+  <li><a href="#testing-libraries">Testing Libraries</a></li>
+  <li><a href="#build-tools">Build Tools</a></li>
+  <li><a href="#best-practices">Best Practices</a></li>
+  <li><a href="#common-interview-questions">Common Interview Questions</a></li>
+</ul>
+
+<hr />
+
+<h2 id="-library-categories">🎯 <strong>Library Categories</strong></h2>
+
+<p>TypeScript libraries can be categorized based on their functionality and use cases.</p>
+
+<h3 id="library-categories"><strong>Library Categories</strong></h3>
+
+<p>{% raw %}</p>
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// TypeScript library categories</span>
+<span class="kd">const</span> <span class="nx">libraryCategories</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">utilities</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Lodash, Ramda, date-fns</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">validation</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Zod, io-ts, Yup, Joi</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">stateManagement</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Redux Toolkit, Zustand, Recoil</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">testing</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Jest, Vitest, Playwright</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">buildTools</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Webpack, Vite, Rollup</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">frameworks</span><span class="p">:</span> <span class="dl">"</span><span class="s2">React, Vue, Angular, Svelte</span><span class="dl">"</span>
+<span class="p">};</span>
+
+<span class="c1">// Popular TypeScript libraries</span>
+<span class="kd">const</span> <span class="nx">popularLibraries</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">lodash</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Utility library with TypeScript support</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">zod</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Schema validation library</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">dateFns</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Date utility library</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">axios</span><span class="p">:</span> <span class="dl">"</span><span class="s2">HTTP client library</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">reactQuery</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Data fetching library</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">prisma</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Database ORM</span><span class="dl">"</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="library-selection-criteria"><strong>Library Selection Criteria</strong></h3>
+
+<p>{% raw %}</p>
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Criteria for selecting TypeScript libraries</span>
+<span class="kd">const</span> <span class="nx">selectionCriteria</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">typeSupport</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Full TypeScript support with type definitions</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">maintenance</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Active maintenance and updates</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">community</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Large community and ecosystem</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">performance</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Good performance characteristics</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">documentation</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Comprehensive documentation</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">bundleSize</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Reasonable bundle size impact</span><span class="dl">"</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="️-utility-libraries">🛠️ <strong>Utility Libraries</strong></h2>
+
+<h3 id="lodash"><strong>Lodash</strong></h3>
+
+<p>{% raw %}</p>
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Lodash with TypeScript</span>
+<span class="k">import</span> <span class="nx">_</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">lodash</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="c1">// Type-safe utility functions</span>
+<span class="kd">const</span> <span class="nx">users</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="p">{</span> <span class="na">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">John</span><span class="dl">'</span><span class="p">,</span> <span class="na">age</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span> <span class="na">active</span><span class="p">:</span> <span class="kc">true</span> <span class="p">},</span>
+  <span class="p">{</span> <span class="na">id</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Jane</span><span class="dl">'</span><span class="p">,</span> <span class="na">age</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span> <span class="na">active</span><span class="p">:</span> <span class="kc">false</span> <span class="p">},</span>
+  <span class="p">{</span> <span class="na">id</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Bob</span><span class="dl">'</span><span class="p">,</span> <span class="na">age</span><span class="p">:</span> <span class="mi">35</span><span class="p">,</span> <span class="na">active</span><span class="p">:</span> <span class="kc">true</span> <span class="p">}</span>
+<span class="p">];</span>
+
+<span class="c1">// Type-safe operations</span>
+<span class="kd">const</span> <span class="nx">activeUsers</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">users</span><span class="p">,</span> <span class="nx">user</span> <span class="o">=&gt;</span> <span class="nx">user</span><span class="p">.</span><span class="nx">active</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">userNames</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">users</span><span class="p">,</span> <span class="nx">user</span> <span class="o">=&gt;</span> <span class="nx">user</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">groupedUsers</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">groupBy</span><span class="p">(</span><span class="nx">users</span><span class="p">,</span> <span class="dl">'</span><span class="s1">active</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">sortedUsers</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">sortBy</span><span class="p">(</span><span class="nx">users</span><span class="p">,</span> <span class="dl">'</span><span class="s1">age</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="c1">// Type-safe object operations</span>
+<span class="kd">const</span> <span class="nx">user</span> <span class="o">=</span> <span class="p">{</span> <span class="na">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">John</span><span class="dl">'</span><span class="p">,</span> <span class="na">profile</span><span class="p">:</span> <span class="p">{</span> <span class="na">age</span><span class="p">:</span> <span class="mi">30</span> <span class="p">}</span> <span class="p">};</span>
+<span class="kd">const</span> <span class="nx">userName</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="nx">user</span><span class="p">,</span> <span class="dl">'</span><span class="s1">name</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Unknown</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">userAge</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="nx">user</span><span class="p">,</span> <span class="dl">'</span><span class="s1">profile.age</span><span class="dl">'</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">updatedUser</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="kd">set</span><span class="p">(</span><span class="nx">user</span><span class="p">,</span> <span class="dl">'</span><span class="s1">profile.age</span><span class="dl">'</span><span class="p">,</span> <span class="mi">31</span><span class="p">);</span>
+
+<span class="c1">// Type-safe array operations</span>
+<span class="kd">const</span> <span class="nx">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">];</span>
+<span class="kd">const</span> <span class="nx">doubled</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">numbers</span><span class="p">,</span> <span class="nx">n</span> <span class="o">=&gt;</span> <span class="nx">n</span> <span class="o">*</span> <span class="mi">2</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">sum</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">sum</span><span class="p">(</span><span class="nx">numbers</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">unique</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">uniq</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]);</span>
+
+<span class="c1">// Type-safe function operations</span>
+<span class="kd">const</span> <span class="nx">add</span> <span class="o">=</span> <span class="p">(</span><span class="nx">a</span><span class="p">:</span> <span class="kr">number</span><span class="p">,</span> <span class="nx">b</span><span class="p">:</span> <span class="kr">number</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">curriedAdd</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">curry</span><span class="p">(</span><span class="nx">add</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">add5</span> <span class="o">=</span> <span class="nx">curriedAdd</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">add5</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span> <span class="c1">// 8</span>
+
+<span class="c1">// Type-safe debounce and throttle</span>
+<span class="kd">const</span> <span class="nx">debouncedSearch</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">debounce</span><span class="p">((</span><span class="nx">query</span><span class="p">:</span> <span class="kr">string</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Searching for:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">query</span><span class="p">);</span>
+<span class="p">},</span> <span class="mi">300</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">throttledScroll</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">throttle</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Scroll event</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">},</span> <span class="mi">100</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="date-fns"><strong>date-fns</strong></h3>
+
+<p>{% raw %}</p>
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// date-fns with TypeScript</span>
+<span class="k">import</span> <span class="p">{</span> 
+  <span class="nx">format</span><span class="p">,</span> 
+  <span class="nx">parseISO</span><span class="p">,</span> 
+  <span class="nx">addDays</span><span class="p">,</span> 
+  <span class="nx">subDays</span><span class="p">,</span> 
+  <span class="nx">differenceInDays</span><span class="p">,</span>
+  <span class="nx">isAfter</span><span class="p">,</span>
+  <span class="nx">isBefore</span><span class="p">,</span>
+  <span class="nx">startOfDay</span><span class="p">,</span>
+  <span class="nx">endOfDay</span>
+<span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">date-fns</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="c1">// Type-safe date operations</span>
+<span class="kd">const</span> <span class="nx">now</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">();</span>
+<span class="kd">const</span> <span class="nx">formattedDate</span> <span class="o">=</span> <span class="nx">format</span><span class="p">(</span><span class="nx">now</span><span class="p">,</span> <span class="dl">'</span><span class="s1">yyyy-MM-dd</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">parsedDate</span> <span class="o">=</span> <span class="nx">parseISO</span><span class="p">(</span><span class="dl">'</span><span class="s1">2023-01-15</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="c1">// Date arithmetic</span>
+<span class="kd">const</span> <span class="nx">tomorrow</span> <span class="o">=</span> <span class="nx">addDays</span><span class="p">(</span><span class="nx">now</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">yesterday</span> <span class="o">=</span> <span class="nx">subDays</span><span class="p">(</span><span class="nx">now</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">daysDifference</span> <span class="o">=</span> <span class="nx">differenceInDays</span><span class="p">(</span><span class="nx">tomorrow</span><span class="p">,</span> <span class="nx">yesterday</span><span class="p">);</span>
+
+<span class="c1">// Date comparisons</span>
+<span class="kd">const</span> <span class="nx">isFuture</span> <span class="o">=</span> <span class="nx">isAfter</span><span class="p">(</span><span class="nx">tomorrow</span><span class="p">,</span> <span class="nx">now</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">isPast</span> <span class="o">=</span> <span class="nx">isBefore</span><span class="p">(</span><span class="nx">yesterday</span><span class="p">,</span> <span class="nx">now</span><span class="p">);</span>
+
+<span class="c1">// Date boundaries</span>
+<span class="kd">const</span> <span class="nx">startOfToday</span> <span class="o">=</span> <span class="nx">startOfDay</span><span class="p">(</span><span class="nx">now</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">endOfToday</span> <span class="o">=</span> <span class="nx">endOfDay</span><span class="p">(</span><span class="nx">now</span><span class="p">);</span>
+
+<span class="c1">// Custom date utilities</span>
+<span class="kd">const</span> <span class="nx">formatUserDate</span> <span class="o">=</span> <span class="p">(</span><span class="nx">date</span><span class="p">:</span> <span class="nb">Date</span><span class="p">):</span> <span class="kr">string</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">format</span><span class="p">(</span><span class="nx">date</span><span class="p">,</span> <span class="dl">'</span><span class="s1">MMM dd, yyyy</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">isDateInRange</span> <span class="o">=</span> <span class="p">(</span><span class="nx">date</span><span class="p">:</span> <span class="nb">Date</span><span class="p">,</span> <span class="nx">start</span><span class="p">:</span> <span class="nb">Date</span><span class="p">,</span> <span class="nx">end</span><span class="p">:</span> <span class="nb">Date</span><span class="p">):</span> <span class="nx">boolean</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">isAfter</span><span class="p">(</span><span class="nx">date</span><span class="p">,</span> <span class="nx">start</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">isBefore</span><span class="p">(</span><span class="nx">date</span><span class="p">,</span> <span class="nx">end</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="c1">// Usage</span>
+<span class="kd">const</span> <span class="nx">userDate</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="dl">'</span><span class="s1">2023-01-15</span><span class="dl">'</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">formatUserDate</span><span class="p">(</span><span class="nx">userDate</span><span class="p">));</span> <span class="c1">// "Jan 15, 2023"</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isDateInRange</span><span class="p">(</span><span class="nx">userDate</span><span class="p">,</span> <span class="nx">startOfToday</span><span class="p">,</span> <span class="nx">endOfToday</span><span class="p">));</span>
+</code></pre></div></div>
+
+<h3 id="ramda"><strong>Ramda</strong></h3>
+
+<p>{% raw %}</p>
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Ramda with TypeScript</span>
+<span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">R</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">ramda</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="c1">// Type-safe functional programming</span>
+<span class="kd">const</span> <span class="nx">users</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="p">{</span> <span class="na">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">John</span><span class="dl">'</span><span class="p">,</span> <span class="na">age</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span> <span class="na">active</span><span class="p">:</span> <span class="kc">true</span> <span class="p">},</span>
+  <span class="p">{</span> <span class="na">id</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Jane</span><span class="dl">'</span><span class="p">,</span> <span class="na">age</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span> <span class="na">active</span><span class="p">:</span> <span class="kc">false</span> <span class="p">},</span>
+  <span class="p">{</span> <span class="na">id</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Bob</span><span class="dl">'</span><span class="p">,</span> <span class="na">age</span><span class="p">:</span> <span class="mi">35</span><span class="p">,</span> <span class="na">active</span><span class="p">:</span> <span class="kc">true</span> <span class="p">}</span>
+<span class="p">];</span>
+
+<span class="c1">// Functional composition</span>
+<span class="kd">const</span> <span class="nx">getActiveUserNames</span> <span class="o">=</span> <span class="nx">R</span><span class="p">.</span><span class="nx">pipe</span><span class="p">(</span>
+  <span class="nx">R</span><span class="p">.</span><span class="nx">filter</span><span class="p">((</span><span class="nx">user</span><span class="p">:</span> <span class="k">typeof</span> <span class="nx">users</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">=&gt;</span> <span class="nx">user</span><span class="p">.</span><span class="nx">active</span><span class="p">),</span>
+  <span class="nx">R</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">R</span><span class="p">.</span><span class="nx">prop</span><span class="p">(</span><span class="dl">'</span><span class="s1">name</span><span class="dl">'</span><span class="p">)),</span>
+  <span class="nx">R</span><span class="p">.</span><span class="nx">sort</span><span class="p">(</span><span class="nx">R</span><span class="p">.</span><span class="nx">ascend</span><span class="p">(</span><span class="nx">R</span><span class="p">.</span><span class="nx">identity</span><span class="p">))</span>
+<span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">activeNames</span> <span class="o">=</span> <span class="nx">getActiveUserNames</span><span class="p">(</span><span class="nx">users</span><span class="p">);</span>
+
+<span class="c1">// Curried functions</span>
+<span class="kd">const</span> <span class="nx">add</span> <span class="o">=</span> <span class="nx">R</span><span class="p">.</span><span class="nx">curry</span><span class="p">((</span><span class="nx">a</span><span class="p">:</span> <span class="kr">number</span><span class="p">,</span> <span class="nx">b</span><span class="p">:</span> <span class="kr">number</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">multiply</span> <span class="o">=</span> <span class="nx">R</span><span class="p">.</span><span class="nx">curry</span><span class="p">((</span><span class="nx">a</span><span class="p">:</span> <span class="kr">number</span><span class="p">,</span> <span class="nx">b</span><span class="p">:</span> <span class="kr">number</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">a</span> <span class="o">*</span> <span class="nx">b</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">add5</span> <span class="o">=</span> <span class="nx">add</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">multiplyBy2</span> <span class="o">=</span> <span class="nx">multiply</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+
+<span class="c1">// Function composition</span>
+<span class="kd">const</span> <span class="nx">add5AndMultiplyBy2</span> <span class="o">=</span> <span class="nx">R</span><span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">add5</span><span class="p">,</span> <span class="nx">multiplyBy2</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">add5AndMultiplyBy2</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span> <span class="c1">// (3 + 5) * 2 = 16</span>
+
+<span class="c1">// Object operations</span>
+<span class="kd">const</span> <span class="nx">user</span> <span class="o">=</span> <span class="p">{</span> <span class="na">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">John</span><span class="dl">'</span><span class="p">,</span> <span class="na">profile</span><span class="p">:</span> <span class="p">{</span> <span class="na">age</span><span class="p">:</span> <span class="mi">30</span> <span class="p">}</span> <span class="p">};</span>
+<span class="kd">const</span> <span class="nx">userName</span> <span class="o">=</span> <span class="nx">R</span><span class="p">.</span><span class="nx">path</span><span class="p">([</span><span class="dl">'</span><span class="s1">name</span><span class="dl">'</span><span class="p">],</span> <span class="nx">user</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">userAge</span> <span class="o">=</span> <span class="nx">R</span><span class="p">.</span><span class="nx">path</span><span class="p">([</span><span class="dl">'</span><span class="s1">profile</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">age</span><span class="dl">'</span><span class="p">],</span> <span class="nx">user</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">updatedUser</span> <span class="o">=</span> <span class="nx">R</span><span class="p">.</span><span class="nx">assocPath</span><span class="p">([</span><span class="dl">'</span><span class="s1">profile</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">age</span><span class="dl">'</span><span class="p">],</span> <span class="mi">31</span><span class="p">,</span> <span class="nx">user</span><span class="p">);</span>
+
+<span class="c1">// Array operations</span>
+<span class="kd">const</span> <span class="nx">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">];</span>
+<span class="kd">const</span> <span class="nx">doubled</span> <span class="o">=</span> <span class="nx">R</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">R</span><span class="p">.</span><span class="nx">multiply</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="nx">numbers</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">sum</span> <span class="o">=</span> <span class="nx">R</span><span class="p">.</span><span class="nx">sum</span><span class="p">(</span><span class="nx">numbers</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">unique</span> <span class="o">=</span> <span class="nx">R</span><span class="p">.</span><span class="nx">uniq</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]);</span>
+
+<span class="c1">// Predicate functions</span>
+<span class="kd">const</span> <span class="nx">isEven</span> <span class="o">=</span> <span class="p">(</span><span class="nx">n</span><span class="p">:</span> <span class="kr">number</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">===</span> <span class="mi">0</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">isOdd</span> <span class="o">=</span> <span class="nx">R</span><span class="p">.</span><span class="nx">complement</span><span class="p">(</span><span class="nx">isEven</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">evenNumbers</span> <span class="o">=</span> <span class="nx">R</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">isEven</span><span class="p">,</span> <span class="nx">numbers</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">oddNumbers</span> <span class="o">=</span> <span class="nx">R</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">isOdd</span><span class="p">,</span> <span class="nx">numbers</span><span class="p">);</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-validation-libraries">✅ <strong>Validation Libraries</strong></h2>
+
+<h3 id="zod"><strong>Zod</strong></h3>
+
+<p>{% raw %}</p>
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Zod with TypeScript</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">z</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">zod</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="c1">// Basic schema definition</span>
+<span class="kd">const</span> <span class="nx">UserSchema</span> <span class="o">=</span> <span class="nx">z</span><span class="p">.</span><span class="nx">object</span><span class="p">({</span>
+  <span class="na">id</span><span class="p">:</span> <span class="nx">z</span><span class="p">.</span><span class="kr">number</span><span class="p">(),</span>
+  <span class="na">name</span><span class="p">:</span> <span class="nx">z</span><span class="p">.</span><span class="kr">string</span><span class="p">().</span><span class="nx">min</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
+  <span class="na">email</span><span class="p">:</span> <span class="nx">z</span><span class="p">.</span><span class="kr">string</span><span class="p">().</span><span class="nx">email</span><span class="p">(),</span>
+  <span class="na">age</span><span class="p">:</span> <span class="nx">z</span><span class="p">.</span><span class="kr">number</span><span class="p">().</span><span class="nx">min</span><span class="p">(</span><span class="mi">18</span><span class="p">).</span><span class="nx">max</span><span class="p">(</span><span class="mi">120</span><span class="p">),</span>
+  <span class="na">createdAt</span><span class="p">:</span> <span class="nx">z</span><span class="p">.</span><span class="nx">date</span><span class="p">().</span><span class="nx">optional</span><span class="p">()</span>
+<span class="p">});</span>
+
+<span class="c1">// Infer TypeScript type from schema</span>
+<span class="kd">type</span> <span class="nx">User</span> <span class="o">=</span> <span class="nx">z</span><span class="p">.</span><span class="nx">infer</span><span class="o">&lt;</span><span class="k">typeof</span> <span class="nx">UserSchema</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="c1">// Validation functions</span>
+<span class="kd">const</span> <span class="nx">validateUser</span> <span class="o">=</span> <span class="p">(</span><span class="nx">data</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">):</span> <span class="nx">User</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">UserSchema</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">safeValidateUser</span> <span class="o">=</span> <span class="p">(</span><span class="nx">data</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">UserSchema</span><span class="p">.</span><span class="nx">safeParse</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="c1">// Usage</span>
+<span class="k">try</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">user</span> <span class="o">=</span> <span class="nx">validateUser</span><span class="p">({</span>
+    <span class="na">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">John Doe</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">email</span><span class="p">:</span> <span class="dl">'</span><span class="s1">john@example.com</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">age</span><span class="p">:</span> <span class="mi">30</span>
+  <span class="p">});</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Valid user:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">user</span><span class="p">);</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Validation error:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Advanced schemas</span>
+<span class="kd">const</span> <span class="nx">EventSchema</span> <span class="o">=</span> <span class="nx">z</span><span class="p">.</span><span class="nx">discriminatedUnion</span><span class="p">(</span><span class="dl">'</span><span class="s1">type</span><span class="dl">'</span><span class="p">,</span> <span class="p">[</span>
+  <span class="nx">z</span><span class="p">.</span><span class="nx">object</span><span class="p">({</span>
+    <span class="na">type</span><span class="p">:</span> <span class="nx">z</span><span class="p">.</span><span class="nx">literal</span><span class="p">(</span><span class="dl">'</span><span class="s1">user_created</span><span class="dl">'</span><span class="p">),</span>
+    <span class="na">userId</span><span class="p">:</span> <span class="nx">z</span><span class="p">.</span><span class="kr">number</span><span class="p">(),</span>
+    <span class="na">timestamp</span><span class="p">:</span> <span class="nx">z</span><span class="p">.</span><span class="nx">date</span><span class="p">()</span>
+  <span class="p">}),</span>
+  <span class="nx">z</span><span class="p">.</span><span class="nx">object</span><span class="p">({</span>
+    <span class="na">type</span><span class="p">:</span> <span class="nx">z</span><span class="p">.</span><span class="nx">literal</span><span class="p">(</span><span class="dl">'</span><span class="s1">user_updated</span><span class="dl">'</span><span class="p">),</span>
+    <span class="na">userId</span><span class="p">:</span> <span class="nx">z</span><span class="p">.</span><span class="kr">number</span><span class="p">(),</span>
+    <span class="na">changes</span><span class="p">:</span> <span class="nx">z</span><span class="p">.</span><span class="nx">record</span><span class="p">(</span><span class="nx">z</span><span class="p">.</span><span class="nx">unknown</span><span class="p">()),</span>
+    <span class="na">timestamp</span><span class="p">:</span> <span class="nx">z</span><span class="p">.</span><span class="nx">date</span><span class="p">()</span>
+  <span class="p">})</span>
+<span class="p">]);</span>
+
+<span class="kd">type</span> <span class="nx">Event</span> <span class="o">=</span> <span class="nx">z</span><span class="p">.</span><span class="nx">infer</span><span class="o">&lt;</span><span class="k">typeof</span> <span class="nx">EventSchema</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="c1">// Custom validators</span>
+<span class="kd">const</span> <span class="nx">PasswordSchema</span> <span class="o">=</span> <span class="nx">z</span><span class="p">.</span><span class="kr">string</span><span class="p">()</span>
+  <span class="p">.</span><span class="nx">min</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Password must be at least 8 characters</span><span class="dl">'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">regex</span><span class="p">(</span><span class="sr">/</span><span class="se">[</span><span class="sr">A-Z</span><span class="se">]</span><span class="sr">/</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Password must contain uppercase letter</span><span class="dl">'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">regex</span><span class="p">(</span><span class="sr">/</span><span class="se">[</span><span class="sr">a-z</span><span class="se">]</span><span class="sr">/</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Password must contain lowercase letter</span><span class="dl">'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">regex</span><span class="p">(</span><span class="sr">/</span><span class="se">\d</span><span class="sr">/</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Password must contain number</span><span class="dl">'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">regex</span><span class="p">(</span><span class="sr">/</span><span class="se">[</span><span class="sr">!@#$%^&amp;*(),.?":{}|&lt;&gt;</span><span class="se">]</span><span class="sr">/</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Password must contain special character</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="c1">// Transform and refine</span>
+<span class="kd">const</span> <span class="nx">UserWithValidationSchema</span> <span class="o">=</span> <span class="nx">z</span><span class="p">.</span><span class="nx">object</span><span class="p">({</span>
+  <span class="na">id</span><span class="p">:</span> <span class="nx">z</span><span class="p">.</span><span class="kr">number</span><span class="p">(),</span>
+  <span class="na">name</span><span class="p">:</span> <span class="nx">z</span><span class="p">.</span><span class="kr">string</span><span class="p">().</span><span class="nx">transform</span><span class="p">(</span><span class="nx">name</span> <span class="o">=&gt;</span> <span class="nx">name</span><span class="p">.</span><span class="nx">trim</span><span class="p">()),</span>
+  <span class="na">email</span><span class="p">:</span> <span class="nx">z</span><span class="p">.</span><span class="kr">string</span><span class="p">().</span><span class="nx">email</span><span class="p">().</span><span class="nx">transform</span><span class="p">(</span><span class="nx">email</span> <span class="o">=&gt;</span> <span class="nx">email</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()),</span>
+  <span class="na">age</span><span class="p">:</span> <span class="nx">z</span><span class="p">.</span><span class="kr">number</span><span class="p">().</span><span class="nx">refine</span><span class="p">(</span><span class="nx">age</span> <span class="o">=&gt;</span> <span class="nx">age</span> <span class="o">&gt;=</span> <span class="mi">18</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Must be at least 18 years old</span><span class="dl">'</span><span class="p">),</span>
+  <span class="na">password</span><span class="p">:</span> <span class="nx">PasswordSchema</span>
+<span class="p">}).</span><span class="nx">refine</span><span class="p">(</span><span class="nx">data</span> <span class="o">=&gt;</span> <span class="nx">data</span><span class="p">.</span><span class="nx">name</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Name cannot be empty</span><span class="dl">'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="io-ts"><strong>io-ts</strong></h3>
+
+<p>{% raw %}</p>
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// io-ts with TypeScript</span>
+<span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">t</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">io-ts</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">isRight</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">fp-ts/Either</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="c1">// Basic types</span>
+<span class="kd">const</span> <span class="nx">UserCodec</span> <span class="o">=</span> <span class="nx">t</span><span class="p">.</span><span class="kd">type</span><span class="p">({</span>
+  <span class="na">id</span><span class="p">:</span> <span class="nx">t</span><span class="p">.</span><span class="kr">number</span><span class="p">,</span>
+  <span class="na">name</span><span class="p">:</span> <span class="nx">t</span><span class="p">.</span><span class="kr">string</span><span class="p">,</span>
+  <span class="na">email</span><span class="p">:</span> <span class="nx">t</span><span class="p">.</span><span class="kr">string</span><span class="p">,</span>
+  <span class="na">age</span><span class="p">:</span> <span class="nx">t</span><span class="p">.</span><span class="kr">number</span>
+<span class="p">});</span>
+
+<span class="c1">// Infer TypeScript type</span>
+<span class="kd">type</span> <span class="nx">User</span> <span class="o">=</span> <span class="nx">t</span><span class="p">.</span><span class="nx">TypeOf</span><span class="o">&lt;</span><span class="k">typeof</span> <span class="nx">UserCodec</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="c1">// Validation</span>
+<span class="kd">const</span> <span class="nx">validateUser</span> <span class="o">=</span> <span class="p">(</span><span class="nx">data</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">):</span> <span class="nx">User</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">UserCodec</span><span class="p">.</span><span class="nx">decode</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">isRight</span><span class="p">(</span><span class="nx">result</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">result</span><span class="p">.</span><span class="nx">right</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Invalid user data</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="c1">// Safe validation</span>
+<span class="kd">const</span> <span class="nx">safeValidateUser</span> <span class="o">=</span> <span class="p">(</span><span class="nx">data</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">UserCodec</span><span class="p">.</span><span class="nx">decode</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="c1">// Usage</span>
+<span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">safeValidateUser</span><span class="p">(</span><span class="nx">userData</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">isRight</span><span class="p">(</span><span class="nx">result</span><span class="p">))</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Valid user:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">result</span><span class="p">.</span><span class="nx">right</span><span class="p">);</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Validation errors:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">result</span><span class="p">.</span><span class="nx">left</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Advanced types</span>
+<span class="kd">const</span> <span class="nx">EventCodec</span> <span class="o">=</span> <span class="nx">t</span><span class="p">.</span><span class="nx">union</span><span class="p">([</span>
+  <span class="nx">t</span><span class="p">.</span><span class="kd">type</span><span class="p">({</span>
+    <span class="na">type</span><span class="p">:</span> <span class="nx">t</span><span class="p">.</span><span class="nx">literal</span><span class="p">(</span><span class="dl">'</span><span class="s1">user_created</span><span class="dl">'</span><span class="p">),</span>
+    <span class="na">userId</span><span class="p">:</span> <span class="nx">t</span><span class="p">.</span><span class="kr">number</span><span class="p">,</span>
+    <span class="na">timestamp</span><span class="p">:</span> <span class="nx">t</span><span class="p">.</span><span class="nb">Date</span>
+  <span class="p">}),</span>
+  <span class="nx">t</span><span class="p">.</span><span class="kd">type</span><span class="p">({</span>
+    <span class="na">type</span><span class="p">:</span> <span class="nx">t</span><span class="p">.</span><span class="nx">literal</span><span class="p">(</span><span class="dl">'</span><span class="s1">user_updated</span><span class="dl">'</span><span class="p">),</span>
+    <span class="na">userId</span><span class="p">:</span> <span class="nx">t</span><span class="p">.</span><span class="kr">number</span><span class="p">,</span>
+    <span class="na">changes</span><span class="p">:</span> <span class="nx">t</span><span class="p">.</span><span class="nx">record</span><span class="p">(</span><span class="nx">t</span><span class="p">.</span><span class="kr">string</span><span class="p">,</span> <span class="nx">t</span><span class="p">.</span><span class="nx">unknown</span><span class="p">),</span>
+    <span class="na">timestamp</span><span class="p">:</span> <span class="nx">t</span><span class="p">.</span><span class="nb">Date</span>
+  <span class="p">})</span>
+<span class="p">]);</span>
+
+<span class="c1">// Custom codecs</span>
+<span class="kd">const</span> <span class="nx">EmailCodec</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">t</span><span class="p">.</span><span class="nx">Type</span><span class="o">&lt;</span><span class="kr">string</span><span class="p">,</span> <span class="kr">string</span><span class="p">,</span> <span class="nx">unknown</span><span class="o">&gt;</span><span class="p">(</span>
+  <span class="dl">'</span><span class="s1">Email</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">(</span><span class="nx">input</span><span class="p">):</span> <span class="nx">input</span> <span class="k">is</span> <span class="kr">string</span> <span class="o">=&gt;</span> <span class="k">typeof</span> <span class="nx">input</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">string</span><span class="dl">'</span> <span class="o">&amp;&amp;</span> <span class="nx">input</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="dl">'</span><span class="s1">@</span><span class="dl">'</span><span class="p">),</span>
+  <span class="p">(</span><span class="nx">input</span><span class="p">,</span> <span class="nx">context</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">input</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">string</span><span class="dl">'</span> <span class="o">&amp;&amp;</span> <span class="nx">input</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="dl">'</span><span class="s1">@</span><span class="dl">'</span><span class="p">))</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">t</span><span class="p">.</span><span class="nx">success</span><span class="p">(</span><span class="nx">input</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">t</span><span class="p">.</span><span class="nx">failure</span><span class="p">(</span><span class="nx">input</span><span class="p">,</span> <span class="nx">context</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Invalid email format</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">},</span>
+  <span class="nx">t</span><span class="p">.</span><span class="nx">identity</span>
+<span class="p">);</span>
+
+<span class="c1">// Complex validation</span>
+<span class="kd">const</span> <span class="nx">UserWithEmailCodec</span> <span class="o">=</span> <span class="nx">t</span><span class="p">.</span><span class="kd">type</span><span class="p">({</span>
+  <span class="na">id</span><span class="p">:</span> <span class="nx">t</span><span class="p">.</span><span class="kr">number</span><span class="p">,</span>
+  <span class="na">name</span><span class="p">:</span> <span class="nx">t</span><span class="p">.</span><span class="kr">string</span><span class="p">,</span>
+  <span class="na">email</span><span class="p">:</span> <span class="nx">EmailCodec</span><span class="p">,</span>
+  <span class="na">age</span><span class="p">:</span> <span class="nx">t</span><span class="p">.</span><span class="kr">number</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-state-management">🔄 <strong>State Management</strong></h2>
+
+<h3 id="redux-toolkit"><strong>Redux Toolkit</strong></h3>
+
+<p>{% raw %}</p>
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Redux Toolkit with TypeScript</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">createSlice</span><span class="p">,</span> <span class="nx">createAsyncThunk</span><span class="p">,</span> <span class="nx">configureStore</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@reduxjs/toolkit</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="c1">// Define types</span>
+<span class="kr">interface</span> <span class="nx">User</span> <span class="p">{</span>
+  <span class="nl">id</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span>
+  <span class="nl">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">email</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kr">interface</span> <span class="nx">UserState</span> <span class="p">{</span>
+  <span class="nl">users</span><span class="p">:</span> <span class="nx">User</span><span class="p">[];</span>
+  <span class="nl">loading</span><span class="p">:</span> <span class="nx">boolean</span><span class="p">;</span>
+  <span class="nl">error</span><span class="p">:</span> <span class="kr">string</span> <span class="o">|</span> <span class="kc">null</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Async thunk</span>
+<span class="kd">const</span> <span class="nx">fetchUsers</span> <span class="o">=</span> <span class="nx">createAsyncThunk</span><span class="o">&lt;</span><span class="nx">User</span><span class="p">[],</span> <span class="k">void</span><span class="p">,</span> <span class="p">{</span> <span class="na">rejectValue</span><span class="p">:</span> <span class="kr">string</span> <span class="p">}</span><span class="o">&gt;</span><span class="p">(</span>
+  <span class="dl">'</span><span class="s1">users/fetchUsers</span><span class="dl">'</span><span class="p">,</span>
+  <span class="k">async</span> <span class="p">(</span><span class="nx">_</span><span class="p">,</span> <span class="p">{</span> <span class="nx">rejectWithValue</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="dl">'</span><span class="s1">/api/users</span><span class="dl">'</span><span class="p">);</span>
+      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">response</span><span class="p">.</span><span class="nx">ok</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Failed to fetch users</span><span class="dl">'</span><span class="p">);</span>
+      <span class="p">}</span>
+      <span class="k">return</span> <span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">rejectWithValue</span><span class="p">(</span><span class="nx">error</span> <span class="k">instanceof</span> <span class="nb">Error</span> <span class="p">?</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">Unknown error</span><span class="dl">'</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">);</span>
+
+<span class="c1">// Slice</span>
+<span class="kd">const</span> <span class="nx">userSlice</span> <span class="o">=</span> <span class="nx">createSlice</span><span class="p">({</span>
+  <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">users</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">initialState</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">users</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="na">loading</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="na">error</span><span class="p">:</span> <span class="kc">null</span>
+  <span class="p">}</span> <span class="k">as</span> <span class="nx">UserState</span><span class="p">,</span>
+  <span class="na">reducers</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">clearError</span><span class="p">:</span> <span class="p">(</span><span class="nx">state</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">state</span><span class="p">.</span><span class="nx">error</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="na">extraReducers</span><span class="p">:</span> <span class="p">(</span><span class="nx">builder</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">builder</span>
+      <span class="p">.</span><span class="nx">addCase</span><span class="p">(</span><span class="nx">fetchUsers</span><span class="p">.</span><span class="nx">pending</span><span class="p">,</span> <span class="p">(</span><span class="nx">state</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">state</span><span class="p">.</span><span class="nx">loading</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+        <span class="nx">state</span><span class="p">.</span><span class="nx">error</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+      <span class="p">})</span>
+      <span class="p">.</span><span class="nx">addCase</span><span class="p">(</span><span class="nx">fetchUsers</span><span class="p">.</span><span class="nx">fulfilled</span><span class="p">,</span> <span class="p">(</span><span class="nx">state</span><span class="p">,</span> <span class="nx">action</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">state</span><span class="p">.</span><span class="nx">loading</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+        <span class="nx">state</span><span class="p">.</span><span class="nx">users</span> <span class="o">=</span> <span class="nx">action</span><span class="p">.</span><span class="nx">payload</span><span class="p">;</span>
+      <span class="p">})</span>
+      <span class="p">.</span><span class="nx">addCase</span><span class="p">(</span><span class="nx">fetchUsers</span><span class="p">.</span><span class="nx">rejected</span><span class="p">,</span> <span class="p">(</span><span class="nx">state</span><span class="p">,</span> <span class="nx">action</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">state</span><span class="p">.</span><span class="nx">loading</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+        <span class="nx">state</span><span class="p">.</span><span class="nx">error</span> <span class="o">=</span> <span class="nx">action</span><span class="p">.</span><span class="nx">payload</span> <span class="o">||</span> <span class="dl">'</span><span class="s1">Failed to fetch users</span><span class="dl">'</span><span class="p">;</span>
+      <span class="p">});</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+
+<span class="c1">// Store</span>
+<span class="kd">const</span> <span class="nx">store</span> <span class="o">=</span> <span class="nx">configureStore</span><span class="p">({</span>
+  <span class="na">reducer</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">users</span><span class="p">:</span> <span class="nx">userSlice</span><span class="p">.</span><span class="nx">reducer</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+
+<span class="c1">// Types</span>
+<span class="k">export</span> <span class="kd">type</span> <span class="nx">RootState</span> <span class="o">=</span> <span class="nx">ReturnType</span><span class="o">&lt;</span><span class="k">typeof</span> <span class="nx">store</span><span class="p">.</span><span class="nx">getState</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="k">export</span> <span class="kd">type</span> <span class="nx">AppDispatch</span> <span class="o">=</span> <span class="k">typeof</span> <span class="nx">store</span><span class="p">.</span><span class="nx">dispatch</span><span class="p">;</span>
+
+<span class="c1">// Hooks</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">useDispatch</span><span class="p">,</span> <span class="nx">useSelector</span><span class="p">,</span> <span class="nx">TypedUseSelectorHook</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-redux</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">useAppDispatch</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">useDispatch</span><span class="o">&lt;</span><span class="nx">AppDispatch</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">useAppSelector</span><span class="p">:</span> <span class="nx">TypedUseSelectorHook</span><span class="o">&lt;</span><span class="nx">RootState</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nx">useSelector</span><span class="p">;</span>
+
+<span class="c1">// Usage in component</span>
+<span class="kd">const</span> <span class="nx">UserList</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">dispatch</span> <span class="o">=</span> <span class="nx">useAppDispatch</span><span class="p">();</span>
+  <span class="kd">const</span> <span class="p">{</span> <span class="nx">users</span><span class="p">,</span> <span class="nx">loading</span><span class="p">,</span> <span class="nx">error</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">useAppSelector</span><span class="p">(</span><span class="nx">state</span> <span class="o">=&gt;</span> <span class="nx">state</span><span class="p">.</span><span class="nx">users</span><span class="p">);</span>
+
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">dispatch</span><span class="p">(</span><span class="nx">fetchUsers</span><span class="p">());</span>
+  <span class="p">},</span> <span class="p">[</span><span class="nx">dispatch</span><span class="p">]);</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="nx">loading</span><span class="p">)</span> <span class="k">return</span> <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span><span class="nx">Loading</span><span class="p">...</span><span class="o">&lt;</span><span class="sr">/div&gt;</span><span class="err">;
+</span>  <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="k">return</span> <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span><span class="na">Error</span><span class="p">:</span> <span class="p">{</span><span class="nx">error</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/div&gt;</span><span class="err">;
+</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">ul</span><span class="o">&gt;</span>
+      <span class="p">{</span><span class="nx">users</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">user</span> <span class="o">=&gt;</span> <span class="p">(</span>
+        <span class="o">&lt;</span><span class="nx">li</span> <span class="nx">key</span><span class="o">=</span><span class="p">{</span><span class="nx">user</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">user</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/li</span><span class="err">&gt;
+</span>      <span class="p">))}</span>
+    <span class="o">&lt;</span><span class="sr">/ul</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="zustand"><strong>Zustand</strong></h3>
+
+<p>{% raw %}</p>
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Zustand with TypeScript</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">create</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">zustand</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">devtools</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">zustand/middleware</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="c1">// Define types</span>
+<span class="kr">interface</span> <span class="nx">User</span> <span class="p">{</span>
+  <span class="nl">id</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span>
+  <span class="nl">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">email</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kr">interface</span> <span class="nx">UserStore</span> <span class="p">{</span>
+  <span class="nl">users</span><span class="p">:</span> <span class="nx">User</span><span class="p">[];</span>
+  <span class="nl">loading</span><span class="p">:</span> <span class="nx">boolean</span><span class="p">;</span>
+  <span class="nl">error</span><span class="p">:</span> <span class="kr">string</span> <span class="o">|</span> <span class="kc">null</span><span class="p">;</span>
+  <span class="nl">fetchUsers</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="k">void</span><span class="o">&gt;</span><span class="p">;</span>
+  <span class="nl">addUser</span><span class="p">:</span> <span class="p">(</span><span class="nx">user</span><span class="p">:</span> <span class="nx">Omit</span><span class="o">&lt;</span><span class="nx">User</span><span class="p">,</span> <span class="dl">'</span><span class="s1">id</span><span class="dl">'</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span>
+  <span class="nl">updateUser</span><span class="p">:</span> <span class="p">(</span><span class="nx">id</span><span class="p">:</span> <span class="kr">number</span><span class="p">,</span> <span class="nx">updates</span><span class="p">:</span> <span class="nb">Partial</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span>
+  <span class="nl">deleteUser</span><span class="p">:</span> <span class="p">(</span><span class="nx">id</span><span class="p">:</span> <span class="kr">number</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span>
+  <span class="nl">clearError</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Store</span>
+<span class="kd">const</span> <span class="nx">useUserStore</span> <span class="o">=</span> <span class="nx">create</span><span class="o">&lt;</span><span class="nx">UserStore</span><span class="o">&gt;</span><span class="p">()(</span>
+  <span class="nx">devtools</span><span class="p">(</span>
+    <span class="p">(</span><span class="kd">set</span><span class="p">,</span> <span class="kd">get</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">({</span>
+      <span class="na">users</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="na">loading</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="na">error</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+
+      <span class="na">fetchUsers</span><span class="p">:</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="kd">set</span><span class="p">({</span> <span class="na">loading</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="na">error</span><span class="p">:</span> <span class="kc">null</span> <span class="p">});</span>
+        <span class="k">try</span> <span class="p">{</span>
+          <span class="kd">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="dl">'</span><span class="s1">/api/users</span><span class="dl">'</span><span class="p">);</span>
+          <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">response</span><span class="p">.</span><span class="nx">ok</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Failed to fetch users</span><span class="dl">'</span><span class="p">);</span>
+          <span class="p">}</span>
+          <span class="kd">const</span> <span class="nx">users</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+          <span class="kd">set</span><span class="p">({</span> <span class="nx">users</span><span class="p">,</span> <span class="na">loading</span><span class="p">:</span> <span class="kc">false</span> <span class="p">});</span>
+        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+          <span class="kd">set</span><span class="p">({</span> 
+            <span class="na">error</span><span class="p">:</span> <span class="nx">error</span> <span class="k">instanceof</span> <span class="nb">Error</span> <span class="p">?</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">Unknown error</span><span class="dl">'</span><span class="p">,</span>
+            <span class="na">loading</span><span class="p">:</span> <span class="kc">false</span> 
+          <span class="p">});</span>
+        <span class="p">}</span>
+      <span class="p">},</span>
+
+      <span class="na">addUser</span><span class="p">:</span> <span class="p">(</span><span class="nx">user</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">newUser</span> <span class="o">=</span> <span class="p">{</span> <span class="p">...</span><span class="nx">user</span><span class="p">,</span> <span class="na">id</span><span class="p">:</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">()</span> <span class="p">};</span>
+        <span class="kd">set</span><span class="p">(</span><span class="nx">state</span> <span class="o">=&gt;</span> <span class="p">({</span> <span class="na">users</span><span class="p">:</span> <span class="p">[...</span><span class="nx">state</span><span class="p">.</span><span class="nx">users</span><span class="p">,</span> <span class="nx">newUser</span><span class="p">]</span> <span class="p">}));</span>
+      <span class="p">},</span>
+
+      <span class="na">updateUser</span><span class="p">:</span> <span class="p">(</span><span class="nx">id</span><span class="p">,</span> <span class="nx">updates</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="kd">set</span><span class="p">(</span><span class="nx">state</span> <span class="o">=&gt;</span> <span class="p">({</span>
+          <span class="na">users</span><span class="p">:</span> <span class="nx">state</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">user</span> <span class="o">=&gt;</span>
+            <span class="nx">user</span><span class="p">.</span><span class="nx">id</span> <span class="o">===</span> <span class="nx">id</span> <span class="p">?</span> <span class="p">{</span> <span class="p">...</span><span class="nx">user</span><span class="p">,</span> <span class="p">...</span><span class="nx">updates</span> <span class="p">}</span> <span class="p">:</span> <span class="nx">user</span>
+          <span class="p">)</span>
+        <span class="p">}));</span>
+      <span class="p">},</span>
+
+      <span class="na">deleteUser</span><span class="p">:</span> <span class="p">(</span><span class="nx">id</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="kd">set</span><span class="p">(</span><span class="nx">state</span> <span class="o">=&gt;</span> <span class="p">({</span>
+          <span class="na">users</span><span class="p">:</span> <span class="nx">state</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">user</span> <span class="o">=&gt;</span> <span class="nx">user</span><span class="p">.</span><span class="nx">id</span> <span class="o">!==</span> <span class="nx">id</span><span class="p">)</span>
+        <span class="p">}));</span>
+      <span class="p">},</span>
+
+      <span class="na">clearError</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="kd">set</span><span class="p">({</span> <span class="na">error</span><span class="p">:</span> <span class="kc">null</span> <span class="p">});</span>
+      <span class="p">}</span>
+    <span class="p">}),</span>
+    <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">user-store</span><span class="dl">'</span> <span class="p">}</span>
+  <span class="p">)</span>
+<span class="p">);</span>
+
+<span class="c1">// Usage in component</span>
+<span class="kd">const</span> <span class="nx">UserList</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">{</span> <span class="nx">users</span><span class="p">,</span> <span class="nx">loading</span><span class="p">,</span> <span class="nx">error</span><span class="p">,</span> <span class="nx">fetchUsers</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">useUserStore</span><span class="p">();</span>
+
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">fetchUsers</span><span class="p">();</span>
+  <span class="p">},</span> <span class="p">[</span><span class="nx">fetchUsers</span><span class="p">]);</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="nx">loading</span><span class="p">)</span> <span class="k">return</span> <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span><span class="nx">Loading</span><span class="p">...</span><span class="o">&lt;</span><span class="sr">/div&gt;</span><span class="err">;
+</span>  <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="k">return</span> <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span><span class="na">Error</span><span class="p">:</span> <span class="p">{</span><span class="nx">error</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/div&gt;</span><span class="err">;
+</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">ul</span><span class="o">&gt;</span>
+      <span class="p">{</span><span class="nx">users</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">user</span> <span class="o">=&gt;</span> <span class="p">(</span>
+        <span class="o">&lt;</span><span class="nx">li</span> <span class="nx">key</span><span class="o">=</span><span class="p">{</span><span class="nx">user</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">user</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/li</span><span class="err">&gt;
+</span>      <span class="p">))}</span>
+    <span class="o">&lt;</span><span class="sr">/ul</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-testing-libraries">🧪 <strong>Testing Libraries</strong></h2>
+
+<h3 id="jest"><strong>Jest</strong></h3>
+
+<p>{% raw %}</p>
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Jest with TypeScript</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">describe</span><span class="p">,</span> <span class="nx">it</span><span class="p">,</span> <span class="nx">expect</span><span class="p">,</span> <span class="nx">beforeEach</span><span class="p">,</span> <span class="nx">afterEach</span><span class="p">,</span> <span class="nx">jest</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@jest/globals</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="c1">// Mock functions</span>
+<span class="kd">const</span> <span class="nx">mockFetch</span> <span class="o">=</span> <span class="nx">jest</span><span class="p">.</span><span class="nx">fn</span><span class="p">();</span>
+<span class="nb">global</span><span class="p">.</span><span class="nx">fetch</span> <span class="o">=</span> <span class="nx">mockFetch</span><span class="p">;</span>
+
+<span class="c1">// Test utilities</span>
+<span class="kd">const</span> <span class="nx">createMockUser</span> <span class="o">=</span> <span class="p">(</span><span class="nx">overrides</span><span class="p">:</span> <span class="nb">Partial</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{}):</span> <span class="nx">User</span> <span class="o">=&gt;</span> <span class="p">({</span>
+  <span class="na">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">John Doe</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">email</span><span class="p">:</span> <span class="dl">'</span><span class="s1">john@example.com</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">age</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
+  <span class="p">...</span><span class="nx">overrides</span>
+<span class="p">});</span>
+
+<span class="c1">// Test suites</span>
+<span class="nx">describe</span><span class="p">(</span><span class="dl">'</span><span class="s1">UserService</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="na">userService</span><span class="p">:</span> <span class="nx">UserService</span><span class="p">;</span>
+
+  <span class="nx">beforeEach</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">userService</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">UserService</span><span class="p">();</span>
+    <span class="nx">jest</span><span class="p">.</span><span class="nx">clearAllMocks</span><span class="p">();</span>
+  <span class="p">});</span>
+
+  <span class="nx">afterEach</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">jest</span><span class="p">.</span><span class="nx">restoreAllMocks</span><span class="p">();</span>
+  <span class="p">});</span>
+
+  <span class="nx">describe</span><span class="p">(</span><span class="dl">'</span><span class="s1">getUser</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">it</span><span class="p">(</span><span class="dl">'</span><span class="s1">should return user when found</span><span class="dl">'</span><span class="p">,</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">mockUser</span> <span class="o">=</span> <span class="nx">createMockUser</span><span class="p">();</span>
+      <span class="nx">mockFetch</span><span class="p">.</span><span class="nx">mockResolvedValue</span><span class="p">({</span>
+        <span class="na">ok</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="na">json</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">mockUser</span><span class="p">)</span>
+      <span class="p">});</span>
+
+      <span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">userService</span><span class="p">.</span><span class="nx">getUser</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+
+      <span class="nx">expect</span><span class="p">(</span><span class="nx">mockFetch</span><span class="p">).</span><span class="nx">toHaveBeenCalledWith</span><span class="p">(</span><span class="dl">'</span><span class="s1">/api/users/1</span><span class="dl">'</span><span class="p">);</span>
+      <span class="nx">expect</span><span class="p">(</span><span class="nx">result</span><span class="p">).</span><span class="nx">toEqual</span><span class="p">(</span><span class="nx">mockUser</span><span class="p">);</span>
+    <span class="p">});</span>
+
+    <span class="nx">it</span><span class="p">(</span><span class="dl">'</span><span class="s1">should throw error when user not found</span><span class="dl">'</span><span class="p">,</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">mockFetch</span><span class="p">.</span><span class="nx">mockResolvedValue</span><span class="p">({</span>
+        <span class="na">ok</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="na">status</span><span class="p">:</span> <span class="mi">404</span>
+      <span class="p">});</span>
+
+      <span class="k">await</span> <span class="nx">expect</span><span class="p">(</span><span class="nx">userService</span><span class="p">.</span><span class="nx">getUser</span><span class="p">(</span><span class="mi">999</span><span class="p">)).</span><span class="nx">rejects</span><span class="p">.</span><span class="nx">toThrow</span><span class="p">(</span><span class="dl">'</span><span class="s1">User not found</span><span class="dl">'</span><span class="p">);</span>
+    <span class="p">});</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+
+<span class="c1">// Snapshot testing</span>
+<span class="nx">describe</span><span class="p">(</span><span class="dl">'</span><span class="s1">UserComponent</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">it</span><span class="p">(</span><span class="dl">'</span><span class="s1">should render user correctly</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">user</span> <span class="o">=</span> <span class="nx">createMockUser</span><span class="p">();</span>
+    <span class="kd">const</span> <span class="nx">component</span> <span class="o">=</span> <span class="nx">render</span><span class="p">(</span><span class="o">&lt;</span><span class="nx">UserComponent</span> <span class="nx">user</span><span class="o">=</span><span class="p">{</span><span class="nx">user</span><span class="p">}</span> <span class="sr">/&gt;</span><span class="se">)</span><span class="err">;
+</span>    
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">component</span><span class="p">).</span><span class="nx">toMatchSnapshot</span><span class="p">();</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+
+<span class="c1">// Mock modules</span>
+<span class="nx">jest</span><span class="p">.</span><span class="nx">mock</span><span class="p">(</span><span class="dl">'</span><span class="s1">../utils/dateUtils</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">({</span>
+  <span class="na">formatDate</span><span class="p">:</span> <span class="nx">jest</span><span class="p">.</span><span class="nx">fn</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="dl">'</span><span class="s1">2023-01-15</span><span class="dl">'</span><span class="p">),</span>
+  <span class="na">parseDate</span><span class="p">:</span> <span class="nx">jest</span><span class="p">.</span><span class="nx">fn</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="dl">'</span><span class="s1">2023-01-15</span><span class="dl">'</span><span class="p">))</span>
+<span class="p">}));</span>
+</code></pre></div></div>
+
+<h3 id="vitest"><strong>Vitest</strong></h3>
+
+<p>{% raw %}</p>
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Vitest with TypeScript</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">describe</span><span class="p">,</span> <span class="nx">it</span><span class="p">,</span> <span class="nx">expect</span><span class="p">,</span> <span class="nx">beforeEach</span><span class="p">,</span> <span class="nx">vi</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">vitest</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="c1">// Mock functions</span>
+<span class="kd">const</span> <span class="nx">mockFetch</span> <span class="o">=</span> <span class="nx">vi</span><span class="p">.</span><span class="nx">fn</span><span class="p">();</span>
+<span class="nb">global</span><span class="p">.</span><span class="nx">fetch</span> <span class="o">=</span> <span class="nx">mockFetch</span><span class="p">;</span>
+
+<span class="c1">// Test utilities</span>
+<span class="kd">const</span> <span class="nx">createMockUser</span> <span class="o">=</span> <span class="p">(</span><span class="nx">overrides</span><span class="p">:</span> <span class="nb">Partial</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{}):</span> <span class="nx">User</span> <span class="o">=&gt;</span> <span class="p">({</span>
+  <span class="na">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">John Doe</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">email</span><span class="p">:</span> <span class="dl">'</span><span class="s1">john@example.com</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">age</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
+  <span class="p">...</span><span class="nx">overrides</span>
+<span class="p">});</span>
+
+<span class="c1">// Test suites</span>
+<span class="nx">describe</span><span class="p">(</span><span class="dl">'</span><span class="s1">UserService</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="na">userService</span><span class="p">:</span> <span class="nx">UserService</span><span class="p">;</span>
+
+  <span class="nx">beforeEach</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">userService</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">UserService</span><span class="p">();</span>
+    <span class="nx">vi</span><span class="p">.</span><span class="nx">clearAllMocks</span><span class="p">();</span>
+  <span class="p">});</span>
+
+  <span class="nx">describe</span><span class="p">(</span><span class="dl">'</span><span class="s1">getUser</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">it</span><span class="p">(</span><span class="dl">'</span><span class="s1">should return user when found</span><span class="dl">'</span><span class="p">,</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">mockUser</span> <span class="o">=</span> <span class="nx">createMockUser</span><span class="p">();</span>
+      <span class="nx">mockFetch</span><span class="p">.</span><span class="nx">mockResolvedValue</span><span class="p">({</span>
+        <span class="na">ok</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="na">json</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">mockUser</span><span class="p">)</span>
+      <span class="p">});</span>
+
+      <span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">userService</span><span class="p">.</span><span class="nx">getUser</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+
+      <span class="nx">expect</span><span class="p">(</span><span class="nx">mockFetch</span><span class="p">).</span><span class="nx">toHaveBeenCalledWith</span><span class="p">(</span><span class="dl">'</span><span class="s1">/api/users/1</span><span class="dl">'</span><span class="p">);</span>
+      <span class="nx">expect</span><span class="p">(</span><span class="nx">result</span><span class="p">).</span><span class="nx">toEqual</span><span class="p">(</span><span class="nx">mockUser</span><span class="p">);</span>
+    <span class="p">});</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+
+<span class="c1">// Mock modules</span>
+<span class="nx">vi</span><span class="p">.</span><span class="nx">mock</span><span class="p">(</span><span class="dl">'</span><span class="s1">../utils/dateUtils</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">({</span>
+  <span class="na">formatDate</span><span class="p">:</span> <span class="nx">vi</span><span class="p">.</span><span class="nx">fn</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="dl">'</span><span class="s1">2023-01-15</span><span class="dl">'</span><span class="p">),</span>
+  <span class="na">parseDate</span><span class="p">:</span> <span class="nx">vi</span><span class="p">.</span><span class="nx">fn</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="dl">'</span><span class="s1">2023-01-15</span><span class="dl">'</span><span class="p">))</span>
+<span class="p">}));</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-build-tools">🔧 <strong>Build Tools</strong></h2>
+
+<h3 id="webpack"><strong>Webpack</strong></h3>
+
+<p>{% raw %}</p>
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// webpack.config.ts</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Configuration</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">webpack</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">resolve</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">path</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">config</span><span class="p">:</span> <span class="nx">Configuration</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">entry</span><span class="p">:</span> <span class="dl">'</span><span class="s1">./src/index.ts</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">module</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">rules</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="na">test</span><span class="p">:</span> <span class="sr">/</span><span class="se">\.</span><span class="sr">tsx</span><span class="se">?</span><span class="sr">$/</span><span class="p">,</span>
+        <span class="na">use</span><span class="p">:</span> <span class="dl">'</span><span class="s1">ts-loader</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">exclude</span><span class="p">:</span> <span class="sr">/node_modules/</span>
+      <span class="p">}</span>
+    <span class="p">]</span>
+  <span class="p">},</span>
+  <span class="na">resolve</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">extensions</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">.tsx</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">.ts</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">.js</span><span class="dl">'</span><span class="p">],</span>
+    <span class="na">alias</span><span class="p">:</span> <span class="p">{</span>
+      <span class="dl">'</span><span class="s1">@</span><span class="dl">'</span><span class="p">:</span> <span class="nx">resolve</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="dl">'</span><span class="s1">src</span><span class="dl">'</span><span class="p">)</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="na">output</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">filename</span><span class="p">:</span> <span class="dl">'</span><span class="s1">bundle.js</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">path</span><span class="p">:</span> <span class="nx">resolve</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="dl">'</span><span class="s1">dist</span><span class="dl">'</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">config</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="vite"><strong>Vite</strong></h3>
+
+<p>{% raw %}</p>
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// vite.config.ts</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">defineConfig</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">vite</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">resolve</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">path</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">defineConfig</span><span class="p">({</span>
+  <span class="na">resolve</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">alias</span><span class="p">:</span> <span class="p">{</span>
+      <span class="dl">'</span><span class="s1">@</span><span class="dl">'</span><span class="p">:</span> <span class="nx">resolve</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="dl">'</span><span class="s1">src</span><span class="dl">'</span><span class="p">)</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="na">build</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">outDir</span><span class="p">:</span> <span class="dl">'</span><span class="s1">dist</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">sourcemap</span><span class="p">:</span> <span class="kc">true</span>
+  <span class="p">},</span>
+  <span class="na">server</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">port</span><span class="p">:</span> <span class="mi">3000</span><span class="p">,</span>
+    <span class="na">open</span><span class="p">:</span> <span class="kc">true</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-best-practices">✅ <strong>Best Practices</strong></h2>
+
+<h3 id="1-choose-libraries-with-full-typescript-support"><strong>1. Choose Libraries with Full TypeScript Support</strong></h3>
+
+<p>{% raw %}</p>
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ✅ Good: Full TypeScript support</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">z</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">zod</span><span class="dl">'</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">schema</span> <span class="o">=</span> <span class="nx">z</span><span class="p">.</span><span class="nx">object</span><span class="p">({</span>
+  <span class="na">name</span><span class="p">:</span> <span class="nx">z</span><span class="p">.</span><span class="kr">string</span><span class="p">(),</span>
+  <span class="na">age</span><span class="p">:</span> <span class="nx">z</span><span class="p">.</span><span class="kr">number</span><span class="p">()</span>
+<span class="p">});</span>
+
+<span class="c1">// ❌ Avoid: Limited TypeScript support</span>
+<span class="k">import</span> <span class="nx">_</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">lodash</span><span class="dl">'</span><span class="p">;</span>
+<span class="c1">// May not have full type definitions</span>
+</code></pre></div></div>
+
+<h3 id="2-use-type-safe-validation"><strong>2. Use Type-Safe Validation</strong></h3>
+
+<p>{% raw %}</p>
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ✅ Good: Type-safe validation</span>
+<span class="kd">const</span> <span class="nx">validateUser</span> <span class="o">=</span> <span class="p">(</span><span class="nx">data</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">):</span> <span class="nx">User</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">UserSchema</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="c1">// ❌ Avoid: Unsafe validation</span>
+<span class="kd">const</span> <span class="nx">validateUser</span> <span class="o">=</span> <span class="p">(</span><span class="nx">data</span><span class="p">:</span> <span class="kr">any</span><span class="p">):</span> <span class="nx">User</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">data</span><span class="p">;</span> <span class="c1">// No validation</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="3-prefer-functional-libraries"><strong>3. Prefer Functional Libraries</strong></h3>
+
+<p>{% raw %}</p>
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ✅ Good: Functional approach</span>
+<span class="kd">const</span> <span class="nx">activeUserNames</span> <span class="o">=</span> <span class="nx">R</span><span class="p">.</span><span class="nx">pipe</span><span class="p">(</span>
+  <span class="nx">R</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">user</span> <span class="o">=&gt;</span> <span class="nx">user</span><span class="p">.</span><span class="nx">active</span><span class="p">),</span>
+  <span class="nx">R</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">R</span><span class="p">.</span><span class="nx">prop</span><span class="p">(</span><span class="dl">'</span><span class="s1">name</span><span class="dl">'</span><span class="p">))</span>
+<span class="p">)(</span><span class="nx">users</span><span class="p">);</span>
+
+<span class="c1">// ❌ Avoid: Imperative approach</span>
+<span class="kd">const</span> <span class="nx">activeUserNames</span> <span class="o">=</span> <span class="p">[];</span>
+<span class="k">for</span> <span class="p">(</span><span class="kd">const</span> <span class="nx">user</span> <span class="k">of</span> <span class="nx">users</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">user</span><span class="p">.</span><span class="nx">active</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">activeUserNames</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">user</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="4-use-modern-libraries"><strong>4. Use Modern Libraries</strong></h3>
+
+<p>{% raw %}</p>
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ✅ Good: Modern libraries</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">create</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">zustand</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">z</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">zod</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="c1">// ❌ Avoid: Outdated libraries</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">createStore</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">redux</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">Joi</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">joi</span><span class="dl">'</span><span class="p">;</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-common-interview-questions">❓ <strong>Common Interview Questions</strong></h2>
+
+<h3 id="1-what-are-the-most-popular-typescript-libraries"><strong>1. What are the most popular TypeScript libraries?</strong></h3>
+
+<p><strong>Answer:</strong></p>
+<ul>
+  <li><strong>Utilities</strong>: Lodash, Ramda, date-fns</li>
+  <li><strong>Validation</strong>: Zod, io-ts, Yup</li>
+  <li><strong>State Management</strong>: Redux Toolkit, Zustand, Recoil</li>
+  <li><strong>Testing</strong>: Jest, Vitest, Playwright</li>
+  <li><strong>Build Tools</strong>: Webpack, Vite, Rollup</li>
+</ul>
+
+<h3 id="2-how-do-you-choose-a-typescript-library"><strong>2. How do you choose a TypeScript library?</strong></h3>
+
+<p><strong>Answer:</strong></p>
+<ul>
+  <li><strong>Type Support</strong>: Full TypeScript support with type definitions</li>
+  <li><strong>Maintenance</strong>: Active maintenance and updates</li>
+  <li><strong>Community</strong>: Large community and ecosystem</li>
+  <li><strong>Performance</strong>: Good performance characteristics</li>
+  <li><strong>Documentation</strong>: Comprehensive documentation</li>
+</ul>
+
+<h3 id="3-whats-the-difference-between-zod-and-io-ts"><strong>3. What’s the difference between Zod and io-ts?</strong></h3>
+
+<p><strong>Answer:</strong></p>
+<ul>
+  <li><strong>Zod</strong>: More modern, better TypeScript integration, easier to use</li>
+  <li><strong>io-ts</strong>: Functional programming approach, uses Either types, more complex</li>
+</ul>
+
+<h3 id="4-how-do-you-use-lodash-with-typescript"><strong>4. How do you use Lodash with TypeScript?</strong></h3>
+
+<p><strong>Answer:</strong></p>
+
+<p>{% raw %}</p>
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">_</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">lodash</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">users</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">users</span><span class="p">,</span> <span class="nx">user</span> <span class="o">=&gt;</span> <span class="nx">user</span><span class="p">.</span><span class="nx">active</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">userNames</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">users</span><span class="p">,</span> <span class="nx">user</span> <span class="o">=&gt;</span> <span class="nx">user</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="5-what-are-the-benefits-of-using-typescript-libraries"><strong>5. What are the benefits of using TypeScript libraries?</strong></h3>
+
+<p><strong>Answer:</strong></p>
+<ul>
+  <li><strong>Type Safety</strong>: Compile-time type checking</li>
+  <li><strong>Better IDE Support</strong>: IntelliSense and autocomplete</li>
+  <li><strong>Refactoring</strong>: Safer code changes</li>
+  <li><strong>Documentation</strong>: Self-documenting code through types</li>
+</ul>
+
+<hr />
+
+<h2 id="-navigation">🧭 Navigation</h2>
+
+<div class="navigation">
+  <a href="../06-TypeScript-Testing-Quality/04-Performance-Monitoring.md" class="nav-button">← Previous: Performance Monitoring</a>
+  <a href="02-TypeScript-Ecosystem-Trends.md" class="nav-button">Next: TypeScript Ecosystem &amp; Trends →</a>
+</div>
+
+<p><em>Last updated: December 2025</em></p>
+
+        </main>
+        
+        <footer style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #ecf0f1; color: #666; text-align: center;">
+            <p>Interview Prep Documentation - Built with Jekyll</p>
+        </footer>
+    </div>
+</body>
+</html>

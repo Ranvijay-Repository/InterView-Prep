@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔹 Advanced Functional Programming - Interview Prep Documentation</title>
+    <meta name="description" content="Comprehensive guides for JavaScript, TypeScript, and React Native interview preparation">
+    
+    <!-- GitHub Pages compatible styling -->
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+        }
+        
+        .container {
+            max-width: 100%;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            color: #2c3e50;
+            margin-top: 2em;
+            margin-bottom: 1em;
+        }
+        
+        h1 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            border-bottom: 1px solid #ecf0f1;
+            padding-bottom: 5px;
+        }
+        
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border-left: 4px solid #3498db;
+        }
+        
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+        
+        blockquote {
+            border-left: 4px solid #3498db;
+            margin: 0;
+            padding-left: 20px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1em 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .navigation {
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px 0;
+            margin-bottom: 20px;
+        }
+        
+        .navigation a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+        
+        .navigation a:hover {
+            text-decoration: underline;
+        }
+        
+        .breadcrumb {
+            margin-bottom: 20px;
+            color: #666;
+        }
+        
+        .breadcrumb a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            h2 {
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="navigation">
+            <a href="/">Home</a>
+            <a href="/Javascript/">JavaScript</a>
+            <a href="/TypeScript/">TypeScript</a>
+            <a href="/React-Native/">React Native</a>
+        </nav>
+        
+        
+        
+        <main>
+            <h1 id="-advanced-functional-programming">🔹 Advanced Functional Programming</h1>
+
+<blockquote>
+  <p><strong>Senior-level functional programming concepts: Monads, Functors, Applicatives, and advanced patterns</strong></p>
+</blockquote>
+
+<link rel="stylesheet" href="../common-styles.css" />
+
+<hr />
+
+<h2 id="-table-of-contents">📚 Table of Contents</h2>
+
+<ul>
+  <li><a href="#what-are-functors">What are Functors?</a></li>
+  <li><a href="#understanding-monads">Understanding Monads</a></li>
+  <li><a href="#applicative-functors">Applicative Functors</a></li>
+  <li><a href="#advanced-composition-patterns">Advanced Composition Patterns</a></li>
+  <li><a href="#detailed-examples">Detailed Examples</a></li>
+  <li><a href="#common-interview-questions">Common Interview Questions</a></li>
+  <li><a href="#practice-exercises">Practice Exercises</a></li>
+  <li><a href="#additional-resources">Additional Resources</a></li>
+</ul>
+
+<hr />
+
+<h2 id="-what-are-functors">🎯 What are Functors?</h2>
+
+<p><strong>Functors</strong> are containers that can be mapped over. They provide a way to apply functions to values inside containers without changing the container structure.</p>
+
+<h3 id="why-functors-matter-for-senior-roles">Why Functors Matter for Senior Roles:</h3>
+<ul>
+  <li><strong>Functional Architecture</strong>: Build robust, composable systems</li>
+  <li><strong>Error Handling</strong>: Create safe, predictable data flows</li>
+  <li><strong>Data Transformation</strong>: Handle complex data pipelines elegantly</li>
+  <li><strong>Interview Preparation</strong>: Demonstrate deep functional programming knowledge</li>
+</ul>
+
+<hr />
+
+<h2 id="-understanding-monads">🔗 Understanding Monads</h2>
+
+<p><strong>Monads</strong> are a way to chain operations on values that might not exist or might fail. They provide a clean way to handle side effects and asynchronous operations.</p>
+
+<h3 id="monad-laws">Monad Laws:</h3>
+<ol>
+  <li><strong>Left Identity</strong>: <code class="language-plaintext highlighter-rouge">unit(x).flatMap(f) === f(x)</code></li>
+  <li><strong>Right Identity</strong>: <code class="language-plaintext highlighter-rouge">m.flatMap(unit) === m</code></li>
+  <li><strong>Associativity</strong>: <code class="language-plaintext highlighter-rouge">m.flatMap(f).flatMap(g) === m.flatMap(x =&gt; f(x).flatMap(g))</code></li>
+</ol>
+
+<h3 id="ascii-diagram-monad-structure">ASCII Diagram: Monad Structure</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>MONAD STRUCTURE
+┌─────────────────────────────────┐
+│           MONAD                 │
+│  ┌─────────────────────────────┐ │
+│  │ value: T                    │ │
+│  │ flatMap: (T → Monad&lt;U&gt;)     │ │
+│  │           → Monad&lt;U&gt;        │ │
+│  └─────────────────────────────┘ │
+└─────────────────────────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  Operations   │
+        │  Chainable    │
+        │  Composable   │
+        └───────────────┘
+</code></pre></div></div>
+
+<h3 id="why-monads-matter">Why Monads Matter:</h3>
+<ul>
+  <li><strong>Error Handling</strong>: Safe chaining of operations that might fail</li>
+  <li><strong>Null Safety</strong>: Handle undefined/null values gracefully</li>
+  <li><strong>Async Operations</strong>: Chain asynchronous operations cleanly</li>
+  <li><strong>Functional Composition</strong>: Build complex operations from simple ones</li>
+</ul>
+
+<h2 id="-applicative-functors">🎯 Applicative Functors</h2>
+
+<p><strong>Applicative Functors</strong> allow you to apply functions that are inside a context to values that are also inside a context, without unwrapping them.</p>
+
+<h3 id="applicative-laws">Applicative Laws:</h3>
+<ol>
+  <li><strong>Identity</strong>: <code class="language-plaintext highlighter-rouge">pure(id) &lt;*&gt; v === v</code></li>
+  <li><strong>Homomorphism</strong>: <code class="language-plaintext highlighter-rouge">pure(f) &lt;*&gt; pure(x) === pure(f(x))</code></li>
+  <li><strong>Interchange</strong>: <code class="language-plaintext highlighter-rouge">u &lt;*&gt; pure(y) === pure(f =&gt; f(y)) &lt;*&gt; u</code></li>
+  <li><strong>Composition</strong>: <code class="language-plaintext highlighter-rouge">u &lt;*&gt; (v &lt;*&gt; w) === pure(compose) &lt;*&gt; u &lt;*&gt; v &lt;*&gt; w</code></li>
+</ol>
+
+<h3 id="ascii-diagram-applicative-pattern">ASCII Diagram: Applicative Pattern</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>APPLICATIVE PATTERN
+┌─────────────────────────────────┐
+│      APPLICATIVE FUNCTOR       │
+│  ┌─────────────────────────────┐ │
+│  │ pure: T → Applicative&lt;T&gt;   │ │
+│  │ &lt;*&gt;: Applicative&lt;T→U&gt;      │ │
+│  │      → Applicative&lt;T&gt;      │ │
+│  │      → Applicative&lt;U&gt;      │ │
+│  └─────────────────────────────┘ │
+└─────────────────────────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │ Function in   │
+        │ Context       │
+        │ Applied to    │
+        │ Value in      │
+        │ Context       │
+        └───────────────┘
+</code></pre></div></div>
+
+<h3 id="use-cases">Use Cases:</h3>
+<ul>
+  <li><strong>Validation</strong>: Apply validation functions to data</li>
+  <li><strong>Configuration</strong>: Apply config functions to settings</li>
+  <li><strong>Error Handling</strong>: Apply functions to error contexts</li>
+  <li><strong>Async Operations</strong>: Apply functions to Promise results</li>
+</ul>
+
+<hr />
+
+<h2 id="-advanced-composition-patterns">🔄 Advanced Composition Patterns</h2>
+
+<h3 id="function-composition-with-monads">Function Composition with Monads</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Monadic composition example</span>
+<span class="kd">const</span> <span class="nx">composeM</span> <span class="o">=</span> <span class="p">(</span><span class="nx">f</span><span class="p">,</span> <span class="nx">g</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">x</span> <span class="o">=&gt;</span> 
+    <span class="nx">x</span><span class="p">.</span><span class="nx">flatMap</span><span class="p">(</span><span class="nx">g</span><span class="p">).</span><span class="nx">flatMap</span><span class="p">(</span><span class="nx">f</span><span class="p">);</span>
+
+<span class="c1">// Usage with Maybe monad</span>
+<span class="kd">const</span> <span class="nx">safeDivide</span> <span class="o">=</span> <span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="o">=&gt;</span> 
+    <span class="nx">b</span> <span class="o">===</span> <span class="mi">0</span> <span class="p">?</span> <span class="nx">Maybe</span><span class="p">.</span><span class="nx">nothing</span><span class="p">()</span> <span class="p">:</span> <span class="nx">Maybe</span><span class="p">.</span><span class="nx">just</span><span class="p">(</span><span class="nx">a</span> <span class="o">/</span> <span class="nx">b</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">safeSqrt</span> <span class="o">=</span> <span class="nx">x</span> <span class="o">=&gt;</span> 
+    <span class="nx">x</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="p">?</span> <span class="nx">Maybe</span><span class="p">.</span><span class="nx">nothing</span><span class="p">()</span> <span class="p">:</span> <span class="nx">Maybe</span><span class="p">.</span><span class="nx">just</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">sqrt</span><span class="p">(</span><span class="nx">x</span><span class="p">));</span>
+
+<span class="kd">const</span> <span class="nx">composed</span> <span class="o">=</span> <span class="nx">composeM</span><span class="p">(</span><span class="nx">safeSqrt</span><span class="p">,</span> <span class="nx">safeDivide</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="applicative-composition">Applicative Composition</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Applicative composition</span>
+<span class="kd">const</span> <span class="nx">liftA2</span> <span class="o">=</span> <span class="p">(</span><span class="nx">f</span><span class="p">,</span> <span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="o">=&gt;</span> 
+    <span class="nx">a</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">f</span><span class="p">).</span><span class="nx">ap</span><span class="p">(</span><span class="nx">b</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">liftA3</span> <span class="o">=</span> <span class="p">(</span><span class="nx">f</span><span class="p">,</span> <span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">,</span> <span class="nx">c</span><span class="p">)</span> <span class="o">=&gt;</span> 
+    <span class="nx">a</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">f</span><span class="p">).</span><span class="nx">ap</span><span class="p">(</span><span class="nx">b</span><span class="p">).</span><span class="nx">ap</span><span class="p">(</span><span class="nx">c</span><span class="p">);</span>
+
+<span class="c1">// Example: Adding three numbers safely</span>
+<span class="kd">const</span> <span class="nx">add3</span> <span class="o">=</span> <span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">,</span> <span class="nx">c</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span> <span class="o">+</span> <span class="nx">c</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">safeAdd3</span> <span class="o">=</span> <span class="nx">liftA3</span><span class="p">(</span><span class="nx">add3</span><span class="p">,</span> <span class="nx">Maybe</span><span class="p">.</span><span class="nx">just</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="nx">Maybe</span><span class="p">.</span><span class="nx">just</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="nx">Maybe</span><span class="p">.</span><span class="nx">just</span><span class="p">(</span><span class="mi">3</span><span class="p">));</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-detailed-examples">💻 Detailed Examples</h2>
+
+<h3 id="example-1-maybe-monad-implementation">Example 1: Maybe Monad Implementation</h3>
+<div style="position: relative;">
+<button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+<pre><code>class Maybe {
+    constructor(value) {
+        this.value = value;
+    }
+    
+    static just(value) {
+        return new Maybe(value);
+    }
+    
+    static nothing() {
+        return new Maybe(null);
+    }
+    
+    map(f) {
+        return this.isNothing() ? Maybe.nothing() : Maybe.just(f(this.value));
+    }
+    
+    flatMap(f) {
+        return this.isNothing() ? Maybe.nothing() : f(this.value);
+    }
+    
+    isNothing() {
+        return this.value === null || this.value === undefined;
+    }
+    
+    getOrElse(defaultValue) {
+        return this.isNothing() ? defaultValue : this.value;
+    }
+}
+
+// Usage examples
+const safeDivide = (a, b) =&gt; 
+    b === 0 ? Maybe.nothing() : Maybe.just(a / b);
+
+const result = Maybe.just(10)
+    .flatMap(x =&gt; safeDivide(x, 2))
+    .map(x =&gt; x * 3)
+    .getOrElse(0);
+
+console.log(result); // 15
+</code></pre>
+</div>
+
+<h3 id="example-2-either-monad-for-error-handling">Example 2: Either Monad for Error Handling</h3>
+<div style="position: relative;">
+<button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+<pre><code>class Either {
+    constructor(left, right) {
+        this.left = left;
+        this.right = right;
+    }
+    
+    static left(error) {
+        return new Either(error, null);
+    }
+    
+    static right(value) {
+        return new Either(null, value);
+    }
+    
+    map(f) {
+        return this.isLeft() ? this : Either.right(f(this.right));
+    }
+    
+    flatMap(f) {
+        return this.isLeft() ? this : f(this.right);
+    }
+    
+    isLeft() {
+        return this.left !== null;
+    }
+    
+    isRight() {
+        return this.right !== null;
+    }
+    
+    fold(leftFn, rightFn) {
+        return this.isLeft() ? leftFn(this.left) : rightFn(this.right);
+    }
+}
+
+// Usage example
+const fetchUser = (id) =&gt; {
+    if (id &lt; 0) {
+        return Either.left("Invalid user ID");
+    }
+    return Either.right({ id, name: "John Doe" });
+};
+
+const result = fetchUser(5)
+    .map(user =&gt; ({ ...user, greeting: `Hello ${user.name}!` }))
+    .fold(
+        error =&gt; console.error("Error:", error),
+        user =&gt; console.log("Success:", user)
+    );
+</code></pre>
+</div>
+
+<hr />
+
+<h2 id="-common-interview-questions">❓ Common Interview Questions</h2>
+
+<h3 id="q1-what-is-a-monad-and-why-is-it-useful">Q1: What is a Monad and why is it useful?</h3>
+<p><strong>A:</strong> A Monad is a design pattern that provides a way to chain operations on values that might not exist or might fail. It’s useful for error handling, null safety, and composing operations that have side effects. Monads follow three laws: left identity, right identity, and associativity.</p>
+
+<h3 id="q2-whats-the-difference-between-functors-and-monads">Q2: What’s the difference between Functors and Monads?</h3>
+<p><strong>A:</strong> Functors can map over values inside containers using <code class="language-plaintext highlighter-rouge">map()</code>, while Monads can chain operations using <code class="language-plaintext highlighter-rouge">flatMap()</code> (also called <code class="language-plaintext highlighter-rouge">bind</code> or <code class="language-plaintext highlighter-rouge">&gt;&gt;=</code>). Monads are more powerful because they can handle nested contexts and side effects, while Functors only transform values within a single context.</p>
+
+<h3 id="q3-how-would-you-implement-the-maybe-monad">Q3: How would you implement the Maybe monad?</h3>
+<p><strong>A:</strong> The Maybe monad represents optional values and has two states: <code class="language-plaintext highlighter-rouge">Just(value)</code> for existing values and <code class="language-plaintext highlighter-rouge">Nothing</code> for missing values. It implements <code class="language-plaintext highlighter-rouge">map()</code> for safe transformations and <code class="language-plaintext highlighter-rouge">flatMap()</code> for chaining operations that might fail. The key is that operations on <code class="language-plaintext highlighter-rouge">Nothing</code> always return <code class="language-plaintext highlighter-rouge">Nothing</code>.</p>
+
+<h3 id="q4-what-are-applicative-functors-and-when-would-you-use-them">Q4: What are Applicative Functors and when would you use them?</h3>
+<p><strong>A:</strong> Applicative Functors allow you to apply functions that are inside a context to values that are also inside a context. They’re useful when you need to combine multiple contextual values or apply multiple functions to the same data. They’re more powerful than Functors but less powerful than Monads.</p>
+
+<h3 id="q5-how-do-monads-help-with-error-handling">Q5: How do Monads help with error handling?</h3>
+<p><strong>A:</strong> Monads like Either or Maybe provide a clean way to handle errors without throwing exceptions. They allow you to chain operations and handle errors at any point in the chain. The error state propagates through the chain, and you can handle it at the end using methods like <code class="language-plaintext highlighter-rouge">fold()</code> or <code class="language-plaintext highlighter-rouge">getOrElse()</code>.</p>
+
+<hr />
+
+<h2 id="️-practice-exercises">🏋️ Practice Exercises</h2>
+
+<h3 id="exercise-1-implement-the-list-monad">Exercise 1: Implement the List Monad</h3>
+<p>Create a List monad that can handle operations on arrays of values. Implement <code class="language-plaintext highlighter-rouge">map()</code>, <code class="language-plaintext highlighter-rouge">flatMap()</code>, and demonstrate how it can be used for list comprehensions.</p>
+
+<h3 id="exercise-2-build-a-validation-monad">Exercise 2: Build a Validation Monad</h3>
+<p>Implement a Validation monad that can collect multiple validation errors and return them all at once, rather than failing on the first error.</p>
+
+<h3 id="exercise-3-create-a-state-monad">Exercise 3: Create a State Monad</h3>
+<p>Implement a State monad that can carry state through a computation chain, allowing you to build stateful computations in a functional way.</p>
+
+<hr />
+
+<h2 id="-additional-resources">📚 Additional Resources</h2>
+
+<ul>
+  <li><strong>Functional Programming in JavaScript</strong>: <a href="https://github.com/MostlyAdequate/mostly-adequate-guide">Mostly Adequate Guide</a></li>
+  <li><strong>Category Theory</strong>: <a href="https://bartoszmilewski.com/">Bartosz Milewski’s Programming Cafe</a></li>
+  <li><strong>Monads in JavaScript</strong>: <a href="https://leanpub.com/javascriptallongesix">JavaScript Allongé</a></li>
+  <li><strong>Functional Programming Libraries</strong>: <a href="https://ramdajs.com/">Ramda</a>, <a href="https://folktale.origamitower.com/">Folktale</a></li>
+</ul>
+
+<hr />
+
+<h2 id="-copy-code-functionality">📋 Copy Code Functionality</h2>
+
+<script src="../common-scripts.js"></script>
+
+<hr />
+
+<h2 id="-navigation">🧭 Navigation</h2>
+
+<div class="navigation">
+    <a href="01-Functional-Programming.md" class="nav-link prev">← Previous: Functional Programming Basics</a>
+    <a href="02-Object-Oriented-JavaScript.md" class="nav-link next">Next: Object-Oriented JavaScript →</a>
+</div>
+
+<p><em>Last updated: December 2024</em></p>
+
+        </main>
+        
+        <footer style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #ecf0f1; color: #666; text-align: center;">
+            <p>Interview Prep Documentation - Built with Jekyll</p>
+        </footer>
+    </div>
+</body>
+</html>

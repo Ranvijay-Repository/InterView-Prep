@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔧 Functions &amp; Parameters - Interview Prep Documentation</title>
+    <meta name="description" content="Comprehensive guides for JavaScript, TypeScript, and React Native interview preparation">
+    
+    <!-- GitHub Pages compatible styling -->
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+        }
+        
+        .container {
+            max-width: 100%;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            color: #2c3e50;
+            margin-top: 2em;
+            margin-bottom: 1em;
+        }
+        
+        h1 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            border-bottom: 1px solid #ecf0f1;
+            padding-bottom: 5px;
+        }
+        
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border-left: 4px solid #3498db;
+        }
+        
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+        
+        blockquote {
+            border-left: 4px solid #3498db;
+            margin: 0;
+            padding-left: 20px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1em 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .navigation {
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px 0;
+            margin-bottom: 20px;
+        }
+        
+        .navigation a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+        
+        .navigation a:hover {
+            text-decoration: underline;
+        }
+        
+        .breadcrumb {
+            margin-bottom: 20px;
+            color: #666;
+        }
+        
+        .breadcrumb a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            h2 {
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="navigation">
+            <a href="/">Home</a>
+            <a href="/Javascript/">JavaScript</a>
+            <a href="/TypeScript/">TypeScript</a>
+            <a href="/React-Native/">React Native</a>
+        </nav>
+        
+        
+        
+        <main>
+            <h1 id="-functions--parameters">🔧 <strong>Functions &amp; Parameters</strong></h1>
+
+<blockquote>
+  <p><strong>Complete guide to TypeScript functions, parameter types, return types, and advanced function features</strong></p>
+</blockquote>
+
+<link rel="stylesheet" href="../../common-styles.css" />
+
+<hr />
+
+<h2 id="-table-of-contents">📚 <strong>Table of Contents</strong></h2>
+
+<ul>
+  <li><a href="#function-declarations">Function Declarations</a></li>
+  <li><a href="#function-expressions">Function Expressions</a></li>
+  <li><a href="#arrow-functions">Arrow Functions</a></li>
+  <li><a href="#parameter-types">Parameter Types</a></li>
+  <li><a href="#return-types">Return Types</a></li>
+  <li><a href="#function-overloads">Function Overloads</a></li>
+  <li><a href="#best-practices">Best Practices</a></li>
+  <li><a href="#common-interview-questions">Common Interview Questions</a></li>
+</ul>
+
+<hr />
+
+<h2 id="-function-declarations">🎯 <strong>Function Declarations</strong></h2>
+
+<p>TypeScript enhances JavaScript functions with type annotations for parameters and return values.</p>
+
+<h3 id="basic-function-declaration"><strong>Basic Function Declaration</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Function with typed parameters and return type</span>
+<span class="kd">function</span> <span class="nx">add</span><span class="p">(</span><span class="nx">a</span><span class="p">:</span> <span class="kr">number</span><span class="p">,</span> <span class="nx">b</span><span class="p">:</span> <span class="kr">number</span><span class="p">):</span> <span class="kr">number</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Function with string parameters</span>
+<span class="kd">function</span> <span class="nx">greet</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="kr">string</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="s2">`Hello, </span><span class="p">${</span><span class="nx">name</span><span class="p">}</span><span class="s2">!`</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Function with no return value (void)</span>
+<span class="kd">function</span> <span class="nx">logMessage</span><span class="p">(</span><span class="nx">message</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">message</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="function-with-optional-parameters"><strong>Function with Optional Parameters</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Optional parameter with ?</span>
+<span class="kd">function</span> <span class="nx">createUser</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">,</span> <span class="nx">age</span><span class="p">?:</span> <span class="kr">number</span><span class="p">):</span> <span class="nx">object</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">age</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">{</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">age</span> <span class="p">};</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="p">{</span> <span class="nx">name</span> <span class="p">};</span>
+<span class="p">}</span>
+
+<span class="c1">// Usage</span>
+<span class="nx">createUser</span><span class="p">(</span><span class="dl">"</span><span class="s2">John</span><span class="dl">"</span><span class="p">);</span> <span class="c1">// { name: "John" }</span>
+<span class="nx">createUser</span><span class="p">(</span><span class="dl">"</span><span class="s2">Alice</span><span class="dl">"</span><span class="p">,</span> <span class="mi">25</span><span class="p">);</span> <span class="c1">// { name: "Alice", age: 25 }</span>
+</code></pre></div></div>
+
+<h3 id="function-with-default-parameters"><strong>Function with Default Parameters</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Default parameter values</span>
+<span class="kd">function</span> <span class="nx">greetUser</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">,</span> <span class="nx">greeting</span><span class="p">:</span> <span class="kr">string</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Hello</span><span class="dl">"</span><span class="p">):</span> <span class="kr">string</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="s2">`</span><span class="p">${</span><span class="nx">greeting</span><span class="p">}</span><span class="s2">, </span><span class="p">${</span><span class="nx">name</span><span class="p">}</span><span class="s2">!`</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Usage</span>
+<span class="nx">greetUser</span><span class="p">(</span><span class="dl">"</span><span class="s2">John</span><span class="dl">"</span><span class="p">);</span> <span class="c1">// "Hello, John!"</span>
+<span class="nx">greetUser</span><span class="p">(</span><span class="dl">"</span><span class="s2">Alice</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Hi</span><span class="dl">"</span><span class="p">);</span> <span class="c1">// "Hi, Alice!"</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-function-expressions">📝 <strong>Function Expressions</strong></h2>
+
+<p>Function expressions in TypeScript can be typed using the function type syntax.</p>
+
+<h3 id="basic-function-expression"><strong>Basic Function Expression</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Function expression with type annotation</span>
+<span class="kd">const</span> <span class="nx">multiply</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">:</span> <span class="kr">number</span><span class="p">,</span> <span class="nx">y</span><span class="p">:</span> <span class="kr">number</span><span class="p">):</span> <span class="kr">number</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">x</span> <span class="o">*</span> <span class="nx">y</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="c1">// Function expression assigned to typed variable</span>
+<span class="kd">const</span> <span class="nx">divide</span><span class="p">:</span> <span class="p">(</span><span class="nx">a</span><span class="p">:</span> <span class="kr">number</span><span class="p">,</span> <span class="nx">b</span><span class="p">:</span> <span class="kr">number</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="kr">number</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">x</span> <span class="o">/</span> <span class="nx">y</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="function-type-aliases"><strong>Function Type Aliases</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Define function type</span>
+<span class="kd">type</span> <span class="nx">MathOperation</span> <span class="o">=</span> <span class="p">(</span><span class="nx">a</span><span class="p">:</span> <span class="kr">number</span><span class="p">,</span> <span class="nx">b</span><span class="p">:</span> <span class="kr">number</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="kr">number</span><span class="p">;</span>
+
+<span class="c1">// Use the type</span>
+<span class="kd">const</span> <span class="nx">add</span><span class="p">:</span> <span class="nx">MathOperation</span> <span class="o">=</span> <span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">x</span> <span class="o">+</span> <span class="nx">y</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">subtract</span><span class="p">:</span> <span class="nx">MathOperation</span> <span class="o">=</span> <span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">x</span> <span class="o">-</span> <span class="nx">y</span><span class="p">;</span>
+
+<span class="c1">// Function that takes a function as parameter</span>
+<span class="kd">function</span> <span class="nx">calculate</span><span class="p">(</span><span class="nx">a</span><span class="p">:</span> <span class="kr">number</span><span class="p">,</span> <span class="nx">b</span><span class="p">:</span> <span class="kr">number</span><span class="p">,</span> <span class="nx">operation</span><span class="p">:</span> <span class="nx">MathOperation</span><span class="p">):</span> <span class="kr">number</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">operation</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-arrow-functions">🏹 <strong>Arrow Functions</strong></h2>
+
+<p>Arrow functions in TypeScript provide concise syntax with full type support.</p>
+
+<h3 id="basic-arrow-functions"><strong>Basic Arrow Functions</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Simple arrow function</span>
+<span class="kd">const</span> <span class="nx">square</span> <span class="o">=</span> <span class="p">(</span><span class="nx">x</span><span class="p">:</span> <span class="kr">number</span><span class="p">):</span> <span class="kr">number</span> <span class="o">=&gt;</span> <span class="nx">x</span> <span class="o">*</span> <span class="nx">x</span><span class="p">;</span>
+
+<span class="c1">// Arrow function with block body</span>
+<span class="kd">const</span> <span class="nx">formatName</span> <span class="o">=</span> <span class="p">(</span><span class="nx">firstName</span><span class="p">:</span> <span class="kr">string</span><span class="p">,</span> <span class="nx">lastName</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="kr">string</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="s2">`</span><span class="p">${</span><span class="nx">firstName</span><span class="p">}</span><span class="s2"> </span><span class="p">${</span><span class="nx">lastName</span><span class="p">}</span><span class="s2">`</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="c1">// Arrow function with no parameters</span>
+<span class="kd">const</span> <span class="nx">getCurrentTime</span> <span class="o">=</span> <span class="p">():</span> <span class="nb">Date</span> <span class="o">=&gt;</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">();</span>
+</code></pre></div></div>
+
+<h3 id="arrow-functions-with-complex-types"><strong>Arrow Functions with Complex Types</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Arrow function returning an object</span>
+<span class="kd">const</span> <span class="nx">createPerson</span> <span class="o">=</span> <span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">,</span> <span class="nx">age</span><span class="p">:</span> <span class="kr">number</span><span class="p">):</span> <span class="p">{</span> <span class="nl">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span> <span class="nl">age</span><span class="p">:</span> <span class="kr">number</span> <span class="p">}</span> <span class="o">=&gt;</span> <span class="p">({</span>
+  <span class="nx">name</span><span class="p">,</span>
+  <span class="nx">age</span>
+<span class="p">});</span>
+
+<span class="c1">// Arrow function with array return type</span>
+<span class="kd">const</span> <span class="nx">getEvenNumbers</span> <span class="o">=</span> <span class="p">(</span><span class="nx">numbers</span><span class="p">:</span> <span class="kr">number</span><span class="p">[]):</span> <span class="kr">number</span><span class="p">[]</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">numbers</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">n</span> <span class="o">=&gt;</span> <span class="nx">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">===</span> <span class="mi">0</span><span class="p">);</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-parameter-types">📋 <strong>Parameter Types</strong></h2>
+
+<p>TypeScript provides several ways to handle different parameter scenarios.</p>
+
+<h3 id="required-parameters"><strong>Required Parameters</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// All parameters are required</span>
+<span class="kd">function</span> <span class="nx">buildUrl</span><span class="p">(</span><span class="nx">protocol</span><span class="p">:</span> <span class="kr">string</span><span class="p">,</span> <span class="nx">domain</span><span class="p">:</span> <span class="kr">string</span><span class="p">,</span> <span class="nx">path</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="kr">string</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="s2">`</span><span class="p">${</span><span class="nx">protocol</span><span class="p">}</span><span class="s2">://</span><span class="p">${</span><span class="nx">domain</span><span class="p">}</span><span class="s2">/</span><span class="p">${</span><span class="nx">path</span><span class="p">}</span><span class="s2">`</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Usage</span>
+<span class="nx">buildUrl</span><span class="p">(</span><span class="dl">"</span><span class="s2">https</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">example.com</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">api/users</span><span class="dl">"</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="optional-parameters"><strong>Optional Parameters</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Optional parameters with ?</span>
+<span class="kd">function</span> <span class="nx">searchUsers</span><span class="p">(</span><span class="nx">query</span><span class="p">:</span> <span class="kr">string</span><span class="p">,</span> <span class="nx">limit</span><span class="p">?:</span> <span class="kr">number</span><span class="p">,</span> <span class="nx">offset</span><span class="p">?:</span> <span class="kr">number</span><span class="p">):</span> <span class="nx">User</span><span class="p">[]</span> <span class="p">{</span>
+  <span class="c1">// Implementation</span>
+  <span class="k">return</span> <span class="p">[];</span>
+<span class="p">}</span>
+
+<span class="c1">// Usage</span>
+<span class="nx">searchUsers</span><span class="p">(</span><span class="dl">"</span><span class="s2">john</span><span class="dl">"</span><span class="p">);</span> <span class="c1">// limit and offset are undefined</span>
+<span class="nx">searchUsers</span><span class="p">(</span><span class="dl">"</span><span class="s2">john</span><span class="dl">"</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span> <span class="c1">// limit = 10, offset is undefined</span>
+<span class="nx">searchUsers</span><span class="p">(</span><span class="dl">"</span><span class="s2">john</span><span class="dl">"</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span> <span class="c1">// limit = 10, offset = 20</span>
+</code></pre></div></div>
+
+<h3 id="rest-parameters"><strong>Rest Parameters</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Rest parameters (spread operator)</span>
+<span class="kd">function</span> <span class="nx">sum</span><span class="p">(...</span><span class="nx">numbers</span><span class="p">:</span> <span class="kr">number</span><span class="p">[]):</span> <span class="kr">number</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">numbers</span><span class="p">.</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">total</span><span class="p">,</span> <span class="nx">num</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">total</span> <span class="o">+</span> <span class="nx">num</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Usage</span>
+<span class="nx">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span> <span class="c1">// 15</span>
+<span class="nx">sum</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span> <span class="c1">// 30</span>
+</code></pre></div></div>
+
+<h3 id="destructured-parameters"><strong>Destructured Parameters</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Object destructuring in parameters</span>
+<span class="kd">function</span> <span class="nx">createUser</span><span class="p">({</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">age</span><span class="p">,</span> <span class="nx">email</span> <span class="p">}:</span> <span class="p">{</span> <span class="nl">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span> <span class="nl">age</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span> <span class="nl">email</span><span class="p">:</span> <span class="kr">string</span> <span class="p">}):</span> <span class="nx">User</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">{</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">age</span><span class="p">,</span> <span class="nx">email</span> <span class="p">};</span>
+<span class="p">}</span>
+
+<span class="c1">// Array destructuring in parameters</span>
+<span class="kd">function</span> <span class="nx">getFirstAndLast</span><span class="p">([</span><span class="nx">first</span><span class="p">,</span> <span class="p">...</span><span class="nx">rest</span><span class="p">]:</span> <span class="kr">string</span><span class="p">[]):</span> <span class="p">{</span> <span class="nl">first</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span> <span class="nl">last</span><span class="p">:</span> <span class="kr">string</span> <span class="p">}</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">{</span> <span class="nx">first</span><span class="p">,</span> <span class="na">last</span><span class="p">:</span> <span class="nx">rest</span><span class="p">[</span><span class="nx">rest</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="p">};</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-return-types">🔄 <strong>Return Types</strong></h2>
+
+<p>TypeScript allows you to specify what a function returns.</p>
+
+<h3 id="explicit-return-types"><strong>Explicit Return Types</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Function with explicit return type</span>
+<span class="kd">function</span> <span class="nx">getFullName</span><span class="p">(</span><span class="nx">firstName</span><span class="p">:</span> <span class="kr">string</span><span class="p">,</span> <span class="nx">lastName</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="kr">string</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="s2">`</span><span class="p">${</span><span class="nx">firstName</span><span class="p">}</span><span class="s2"> </span><span class="p">${</span><span class="nx">lastName</span><span class="p">}</span><span class="s2">`</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Function returning an object</span>
+<span class="kd">function</span> <span class="nx">createConfig</span><span class="p">():</span> <span class="p">{</span> <span class="nl">apiUrl</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span> <span class="nl">timeout</span><span class="p">:</span> <span class="kr">number</span> <span class="p">}</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="na">apiUrl</span><span class="p">:</span> <span class="dl">"</span><span class="s2">https://api.example.com</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">timeout</span><span class="p">:</span> <span class="mi">5000</span>
+  <span class="p">};</span>
+<span class="p">}</span>
+
+<span class="c1">// Function returning a union type</span>
+<span class="kd">function</span> <span class="nx">parseId</span><span class="p">(</span><span class="nx">id</span><span class="p">:</span> <span class="kr">string</span> <span class="o">|</span> <span class="kr">number</span><span class="p">):</span> <span class="kr">number</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">id</span> <span class="o">===</span> <span class="dl">"</span><span class="s2">string</span><span class="dl">"</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">id</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">id</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="void-and-never-return-types"><strong>Void and Never Return Types</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Void - function doesn't return a value</span>
+<span class="kd">function</span> <span class="nx">logError</span><span class="p">(</span><span class="nx">error</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Never - function never returns (throws error or infinite loop)</span>
+<span class="kd">function</span> <span class="nx">throwError</span><span class="p">(</span><span class="nx">message</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nx">never</span> <span class="p">{</span>
+  <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="nx">message</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Never - infinite loop</span>
+<span class="kd">function</span> <span class="nx">infiniteLoop</span><span class="p">():</span> <span class="nx">never</span> <span class="p">{</span>
+  <span class="k">while</span> <span class="p">(</span><span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// This function never returns</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-function-overloads">🔀 <strong>Function Overloads</strong></h2>
+
+<p>Function overloads allow you to define multiple function signatures for the same function.</p>
+
+<h3 id="basic-function-overloads"><strong>Basic Function Overloads</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Function overloads</span>
+<span class="kd">function</span> <span class="nx">format</span><span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="kr">string</span><span class="p">;</span>
+<span class="kd">function</span> <span class="nx">format</span><span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="kr">number</span><span class="p">):</span> <span class="kr">string</span><span class="p">;</span>
+<span class="kd">function</span> <span class="nx">format</span><span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="nx">boolean</span><span class="p">):</span> <span class="kr">string</span><span class="p">;</span>
+<span class="kd">function</span> <span class="nx">format</span><span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="kr">string</span> <span class="o">|</span> <span class="kr">number</span> <span class="o">|</span> <span class="nx">boolean</span><span class="p">):</span> <span class="kr">string</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nb">String</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Usage</span>
+<span class="nx">format</span><span class="p">(</span><span class="dl">"</span><span class="s2">hello</span><span class="dl">"</span><span class="p">);</span> <span class="c1">// string</span>
+<span class="nx">format</span><span class="p">(</span><span class="mi">42</span><span class="p">);</span> <span class="c1">// string</span>
+<span class="nx">format</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span> <span class="c1">// string</span>
+</code></pre></div></div>
+
+<h3 id="complex-function-overloads"><strong>Complex Function Overloads</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Overloads for different parameter combinations</span>
+<span class="kd">function</span> <span class="nx">createElement</span><span class="p">(</span><span class="nx">tag</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nx">HTMLElement</span><span class="p">;</span>
+<span class="kd">function</span> <span class="nx">createElement</span><span class="p">(</span><span class="nx">tag</span><span class="p">:</span> <span class="kr">string</span><span class="p">,</span> <span class="nx">attributes</span><span class="p">:</span> <span class="nb">Record</span><span class="o">&lt;</span><span class="kr">string</span><span class="p">,</span> <span class="kr">string</span><span class="o">&gt;</span><span class="p">):</span> <span class="nx">HTMLElement</span><span class="p">;</span>
+<span class="kd">function</span> <span class="nx">createElement</span><span class="p">(</span><span class="nx">tag</span><span class="p">:</span> <span class="kr">string</span><span class="p">,</span> <span class="nx">attributes</span><span class="p">:</span> <span class="nb">Record</span><span class="o">&lt;</span><span class="kr">string</span><span class="p">,</span> <span class="kr">string</span><span class="o">&gt;</span><span class="p">,</span> <span class="nx">children</span><span class="p">:</span> <span class="kr">string</span><span class="p">[]):</span> <span class="nx">HTMLElement</span><span class="p">;</span>
+<span class="kd">function</span> <span class="nx">createElement</span><span class="p">(</span>
+  <span class="nx">tag</span><span class="p">:</span> <span class="kr">string</span><span class="p">,</span>
+  <span class="nx">attributes</span><span class="p">?:</span> <span class="nb">Record</span><span class="o">&lt;</span><span class="kr">string</span><span class="p">,</span> <span class="kr">string</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="nx">children</span><span class="p">?:</span> <span class="kr">string</span><span class="p">[]</span>
+<span class="p">):</span> <span class="nx">HTMLElement</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">element</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="nx">tag</span><span class="p">);</span>
+  
+  <span class="k">if</span> <span class="p">(</span><span class="nx">attributes</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nb">Object</span><span class="p">.</span><span class="nx">entries</span><span class="p">(</span><span class="nx">attributes</span><span class="p">).</span><span class="nx">forEach</span><span class="p">(([</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">])</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">element</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
+    <span class="p">});</span>
+  <span class="p">}</span>
+  
+  <span class="k">if</span> <span class="p">(</span><span class="nx">children</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">children</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">child</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">element</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">createTextNode</span><span class="p">(</span><span class="nx">child</span><span class="p">));</span>
+    <span class="p">});</span>
+  <span class="p">}</span>
+  
+  <span class="k">return</span> <span class="nx">element</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-best-practices">✅ <strong>Best Practices</strong></h2>
+
+<h3 id="1-use-explicit-return-types-for-public-apis"><strong>1. Use Explicit Return Types for Public APIs</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ✅ Good: Explicit return type for public function</span>
+<span class="k">export</span> <span class="kd">function</span> <span class="nx">calculateTotal</span><span class="p">(</span><span class="nx">items</span><span class="p">:</span> <span class="nx">Item</span><span class="p">[]):</span> <span class="kr">number</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">items</span><span class="p">.</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">sum</span><span class="p">,</span> <span class="nx">item</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">sum</span> <span class="o">+</span> <span class="nx">item</span><span class="p">.</span><span class="nx">price</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// ❌ Avoid: Relying on inference for public APIs</span>
+<span class="k">export</span> <span class="kd">function</span> <span class="nx">calculateTotal</span><span class="p">(</span><span class="nx">items</span><span class="p">:</span> <span class="nx">Item</span><span class="p">[])</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">items</span><span class="p">.</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">sum</span><span class="p">,</span> <span class="nx">item</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">sum</span> <span class="o">+</span> <span class="nx">item</span><span class="p">.</span><span class="nx">price</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="2-use-function-overloads-for-complex-apis"><strong>2. Use Function Overloads for Complex APIs</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ✅ Good: Clear overloads for different use cases</span>
+<span class="kd">function</span> <span class="nx">fetchData</span><span class="p">(</span><span class="nx">url</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">Response</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="kd">function</span> <span class="nx">fetchData</span><span class="p">(</span><span class="nx">url</span><span class="p">:</span> <span class="kr">string</span><span class="p">,</span> <span class="nx">options</span><span class="p">:</span> <span class="nx">RequestInit</span><span class="p">):</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">Response</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="kd">function</span> <span class="nx">fetchData</span><span class="p">(</span><span class="nx">url</span><span class="p">:</span> <span class="kr">string</span><span class="p">,</span> <span class="nx">options</span><span class="p">?:</span> <span class="nx">RequestInit</span><span class="p">):</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">Response</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="3-prefer-arrow-functions-for-simple-operations"><strong>3. Prefer Arrow Functions for Simple Operations</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ✅ Good: Arrow function for simple operations</span>
+<span class="kd">const</span> <span class="nx">double</span> <span class="o">=</span> <span class="p">(</span><span class="nx">x</span><span class="p">:</span> <span class="kr">number</span><span class="p">):</span> <span class="kr">number</span> <span class="o">=&gt;</span> <span class="nx">x</span> <span class="o">*</span> <span class="mi">2</span><span class="p">;</span>
+
+<span class="c1">// ❌ Avoid: Function declaration for simple operations</span>
+<span class="kd">function</span> <span class="nx">double</span><span class="p">(</span><span class="nx">x</span><span class="p">:</span> <span class="kr">number</span><span class="p">):</span> <span class="kr">number</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">x</span> <span class="o">*</span> <span class="mi">2</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="4-use-rest-parameters-for-variable-arguments"><strong>4. Use Rest Parameters for Variable Arguments</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ✅ Good: Rest parameters for variable arguments</span>
+<span class="kd">function</span> <span class="nx">logMessages</span><span class="p">(...</span><span class="nx">messages</span><span class="p">:</span> <span class="kr">string</span><span class="p">[]):</span> <span class="k">void</span> <span class="p">{</span>
+  <span class="nx">messages</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">msg</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">msg</span><span class="p">));</span>
+<span class="p">}</span>
+
+<span class="c1">// ❌ Avoid: Array parameter when rest is more appropriate</span>
+<span class="kd">function</span> <span class="nx">logMessages</span><span class="p">(</span><span class="nx">messages</span><span class="p">:</span> <span class="kr">string</span><span class="p">[]):</span> <span class="k">void</span> <span class="p">{</span>
+  <span class="nx">messages</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">msg</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">msg</span><span class="p">));</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-common-interview-questions">❓ <strong>Common Interview Questions</strong></h2>
+
+<h3 id="1-how-do-you-define-function-types-in-typescript"><strong>1. How do you define function types in TypeScript?</strong></h3>
+
+<p><strong>Answer:</strong>
+Function types can be defined using:</p>
+<ul>
+  <li><strong>Function type syntax</strong>: <code class="language-plaintext highlighter-rouge">(param: type) =&gt; returnType</code></li>
+  <li><strong>Function interface</strong>: <code class="language-plaintext highlighter-rouge">interface MyFunction { (param: type): returnType; }</code></li>
+  <li><strong>Type alias</strong>: <code class="language-plaintext highlighter-rouge">type MyFunction = (param: type) =&gt; returnType;</code></li>
+</ul>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Function type syntax</span>
+<span class="kd">const</span> <span class="nx">add</span><span class="p">:</span> <span class="p">(</span><span class="nx">a</span><span class="p">:</span> <span class="kr">number</span><span class="p">,</span> <span class="nx">b</span><span class="p">:</span> <span class="kr">number</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="kr">number</span> <span class="o">=</span> <span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">x</span> <span class="o">+</span> <span class="nx">y</span><span class="p">;</span>
+
+<span class="c1">// Interface</span>
+<span class="kr">interface</span> <span class="nx">MathOperation</span> <span class="p">{</span>
+  <span class="p">(</span><span class="nx">a</span><span class="p">:</span> <span class="kr">number</span><span class="p">,</span> <span class="nx">b</span><span class="p">:</span> <span class="kr">number</span><span class="p">):</span> <span class="kr">number</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Type alias</span>
+<span class="kd">type</span> <span class="nx">MathOp</span> <span class="o">=</span> <span class="p">(</span><span class="nx">a</span><span class="p">:</span> <span class="kr">number</span><span class="p">,</span> <span class="nx">b</span><span class="p">:</span> <span class="kr">number</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="kr">number</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="2-whats-the-difference-between-optional-and-default-parameters"><strong>2. What’s the difference between optional and default parameters?</strong></h3>
+
+<p><strong>Answer:</strong></p>
+<ul>
+  <li><strong>Optional parameters</strong>: Can be omitted, will be <code class="language-plaintext highlighter-rouge">undefined</code> if not provided</li>
+  <li><strong>Default parameters</strong>: Have a default value if not provided</li>
+</ul>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Optional parameter</span>
+<span class="kd">function</span> <span class="nx">greet</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">,</span> <span class="nx">age</span><span class="p">?:</span> <span class="kr">number</span><span class="p">):</span> <span class="kr">string</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">age</span> <span class="p">?</span> <span class="s2">`</span><span class="p">${</span><span class="nx">name</span><span class="p">}</span><span class="s2"> is </span><span class="p">${</span><span class="nx">age</span><span class="p">}</span><span class="s2">`</span> <span class="p">:</span> <span class="s2">`Hello </span><span class="p">${</span><span class="nx">name</span><span class="p">}</span><span class="s2">`</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Default parameter</span>
+<span class="kd">function</span> <span class="nx">greet</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">,</span> <span class="nx">greeting</span><span class="p">:</span> <span class="kr">string</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Hello</span><span class="dl">"</span><span class="p">):</span> <span class="kr">string</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="s2">`</span><span class="p">${</span><span class="nx">greeting</span><span class="p">}</span><span class="s2">, </span><span class="p">${</span><span class="nx">name</span><span class="p">}</span><span class="s2">!`</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="3-how-do-function-overloads-work-in-typescript"><strong>3. How do function overloads work in TypeScript?</strong></h3>
+
+<p><strong>Answer:</strong>
+Function overloads allow multiple function signatures for the same function. TypeScript uses the first matching signature:</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">process</span><span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="kr">string</span><span class="p">;</span>
+<span class="kd">function</span> <span class="nx">process</span><span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="kr">number</span><span class="p">):</span> <span class="kr">number</span><span class="p">;</span>
+<span class="kd">function</span> <span class="nx">process</span><span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="kr">string</span> <span class="o">|</span> <span class="kr">number</span><span class="p">):</span> <span class="kr">string</span> <span class="o">|</span> <span class="kr">number</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">value</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="4-when-should-you-use-void-vs-never-return-types"><strong>4. When should you use <code class="language-plaintext highlighter-rouge">void</code> vs <code class="language-plaintext highlighter-rouge">never</code> return types?</strong></h3>
+
+<p><strong>Answer:</strong></p>
+<ul>
+  <li><strong><code class="language-plaintext highlighter-rouge">void</code></strong>: Function completes but doesn’t return a value</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">never</code></strong>: Function never completes (throws error, infinite loop)</li>
+</ul>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">logMessage</span><span class="p">(</span><span class="nx">msg</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">msg</span><span class="p">);</span> <span class="c1">// Completes, returns undefined</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">throwError</span><span class="p">(</span><span class="nx">msg</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nx">never</span> <span class="p">{</span>
+  <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="nx">msg</span><span class="p">);</span> <span class="c1">// Never completes</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="5-how-do-you-handle-rest-parameters-in-typescript"><strong>5. How do you handle rest parameters in TypeScript?</strong></h3>
+
+<p><strong>Answer:</strong>
+Rest parameters collect remaining arguments into an array:</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">sum</span><span class="p">(...</span><span class="nx">numbers</span><span class="p">:</span> <span class="kr">number</span><span class="p">[]):</span> <span class="kr">number</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">numbers</span><span class="p">.</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">total</span><span class="p">,</span> <span class="nx">num</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">total</span> <span class="o">+</span> <span class="nx">num</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nx">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span> <span class="c1">// numbers = [1, 2, 3, 4, 5]</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-navigation">🧭 Navigation</h2>
+
+<div class="navigation">
+  <a href="01-Basic-Types-Type-Annotations.md" class="nav-button">← Previous: Basic Types &amp; Type Annotations</a>
+  <a href="03-Classes-Objects.md" class="nav-button">Next: Classes &amp; Objects →</a>
+</div>
+
+<p><em>Last updated: December 2025</em></p>
+
+        </main>
+        
+        <footer style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #ecf0f1; color: #666; text-align: center;">
+            <p>Interview Prep Documentation - Built with Jekyll</p>
+        </footer>
+    </div>
+</body>
+</html>

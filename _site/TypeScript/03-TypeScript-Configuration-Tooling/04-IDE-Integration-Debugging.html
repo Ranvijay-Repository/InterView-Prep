@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔧 IDE Integration &amp; Debugging - Interview Prep Documentation</title>
+    <meta name="description" content="Comprehensive guides for JavaScript, TypeScript, and React Native interview preparation">
+    
+    <!-- GitHub Pages compatible styling -->
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+        }
+        
+        .container {
+            max-width: 100%;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            color: #2c3e50;
+            margin-top: 2em;
+            margin-bottom: 1em;
+        }
+        
+        h1 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            border-bottom: 1px solid #ecf0f1;
+            padding-bottom: 5px;
+        }
+        
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border-left: 4px solid #3498db;
+        }
+        
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+        
+        blockquote {
+            border-left: 4px solid #3498db;
+            margin: 0;
+            padding-left: 20px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1em 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .navigation {
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px 0;
+            margin-bottom: 20px;
+        }
+        
+        .navigation a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+        
+        .navigation a:hover {
+            text-decoration: underline;
+        }
+        
+        .breadcrumb {
+            margin-bottom: 20px;
+            color: #666;
+        }
+        
+        .breadcrumb a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            h2 {
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="navigation">
+            <a href="/">Home</a>
+            <a href="/Javascript/">JavaScript</a>
+            <a href="/TypeScript/">TypeScript</a>
+            <a href="/React-Native/">React Native</a>
+        </nav>
+        
+        
+        
+        <main>
+            <h1 id="-ide-integration--debugging">🔧 <strong>IDE Integration &amp; Debugging</strong></h1>
+
+<blockquote>
+  <p><strong>Complete guide to TypeScript IDE integration, debugging setup, and development tools</strong></p>
+</blockquote>
+
+<link rel="stylesheet" href="../../common-styles.css" />
+
+<hr />
+
+<h2 id="-table-of-contents">📚 <strong>Table of Contents</strong></h2>
+
+<ul>
+  <li><a href="#ide-integration-overview">IDE Integration Overview</a></li>
+  <li><a href="#vs-code-setup">VS Code Setup</a></li>
+  <li><a href="#intellisense--autocomplete">IntelliSense &amp; Autocomplete</a></li>
+  <li><a href="#debugging-configuration">Debugging Configuration</a></li>
+  <li><a href="#linting--formatting">Linting &amp; Formatting</a></li>
+  <li><a href="#advanced-ide-features">Advanced IDE Features</a></li>
+  <li><a href="#best-practices">Best Practices</a></li>
+  <li><a href="#common-interview-questions">Common Interview Questions</a></li>
+</ul>
+
+<hr />
+
+<h2 id="-ide-integration-overview">🎯 <strong>IDE Integration Overview</strong></h2>
+
+<p>Modern IDEs provide excellent TypeScript support with IntelliSense, debugging, and development tools.</p>
+
+<h3 id="popular-ides-with-typescript-support"><strong>Popular IDEs with TypeScript Support</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// IDE comparison for TypeScript</span>
+<span class="kd">const</span> <span class="nx">ideSupport</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">vscode</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">features</span><span class="p">:</span> <span class="p">[</span><span class="dl">"</span><span class="s2">IntelliSense</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Debugging</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Extensions</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Git integration</span><span class="dl">"</span><span class="p">],</span>
+    <span class="na">pros</span><span class="p">:</span> <span class="p">[</span><span class="dl">"</span><span class="s2">Excellent TypeScript support</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Large ecosystem</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Free</span><span class="dl">"</span><span class="p">],</span>
+    <span class="na">cons</span><span class="p">:</span> <span class="p">[</span><span class="dl">"</span><span class="s2">Resource intensive</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Complex configuration</span><span class="dl">"</span><span class="p">]</span>
+  <span class="p">},</span>
+  <span class="na">webstorm</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">features</span><span class="p">:</span> <span class="p">[</span><span class="dl">"</span><span class="s2">Advanced refactoring</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Built-in tools</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Database support</span><span class="dl">"</span><span class="p">],</span>
+    <span class="na">pros</span><span class="p">:</span> <span class="p">[</span><span class="dl">"</span><span class="s2">Powerful features</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Built-in everything</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Great for large projects</span><span class="dl">"</span><span class="p">],</span>
+    <span class="na">cons</span><span class="p">:</span> <span class="p">[</span><span class="dl">"</span><span class="s2">Paid</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Heavy</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Steep learning curve</span><span class="dl">"</span><span class="p">]</span>
+  <span class="p">},</span>
+  <span class="na">vim</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">features</span><span class="p">:</span> <span class="p">[</span><span class="dl">"</span><span class="s2">Lightweight</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Customizable</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Terminal integration</span><span class="dl">"</span><span class="p">],</span>
+    <span class="na">pros</span><span class="p">:</span> <span class="p">[</span><span class="dl">"</span><span class="s2">Fast</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Lightweight</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Highly customizable</span><span class="dl">"</span><span class="p">],</span>
+    <span class="na">cons</span><span class="p">:</span> <span class="p">[</span><span class="dl">"</span><span class="s2">Steep learning curve</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Limited GUI features</span><span class="dl">"</span><span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="essential-typescript-ide-features"><strong>Essential TypeScript IDE Features</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Key features for TypeScript development</span>
+<span class="kd">const</span> <span class="nx">essentialFeatures</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">intellisense</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Code completion, parameter hints, quick info</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">debugging</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Breakpoints, variable inspection, call stack</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">refactoring</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Rename, extract method, move symbol</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">errorChecking</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Real-time error detection, type checking</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">navigation</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Go to definition, find references, symbol search</span><span class="dl">"</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-vs-code-setup">💻 <strong>VS Code Setup</strong></h2>
+
+<p>VS Code provides excellent TypeScript support out of the box.</p>
+
+<h3 id="basic-vs-code-configuration"><strong>Basic VS Code Configuration</strong></h3>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">//</span><span class="w"> </span><span class="err">.vscode/settings.json</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="nl">"typescript.preferences.importModuleSpecifier"</span><span class="p">:</span><span class="w"> </span><span class="s2">"relative"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"typescript.suggest.autoImports"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"typescript.updateImportsOnFileMove.enabled"</span><span class="p">:</span><span class="w"> </span><span class="s2">"always"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"typescript.preferences.includePackageJsonAutoImports"</span><span class="p">:</span><span class="w"> </span><span class="s2">"auto"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"typescript.suggest.includeCompletionsForModuleExports"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"typescript.suggest.includeCompletionsWithSnippetText"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"typescript.suggest.includeCompletionsWithInsertText"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="advanced-vs-code-configuration"><strong>Advanced VS Code Configuration</strong></h3>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">//</span><span class="w"> </span><span class="err">.vscode/settings.json</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="nl">"typescript.preferences.importModuleSpecifier"</span><span class="p">:</span><span class="w"> </span><span class="s2">"relative"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"typescript.suggest.autoImports"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"typescript.updateImportsOnFileMove.enabled"</span><span class="p">:</span><span class="w"> </span><span class="s2">"always"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"typescript.preferences.includePackageJsonAutoImports"</span><span class="p">:</span><span class="w"> </span><span class="s2">"auto"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"typescript.suggest.includeCompletionsForModuleExports"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"typescript.suggest.includeCompletionsWithSnippetText"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"typescript.suggest.includeCompletionsWithInsertText"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"typescript.suggest.includeCompletionsWithReplaceText"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"typescript.suggest.includeCompletionsWithClassMemberSnippets"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"typescript.suggest.includeCompletionsWithObjectLiteralMethodSnippets"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"typescript.suggest.includeCompletionsWithFunctionParameterSnippets"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"typescript.suggest.includeCompletionsWithInsertText"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"typescript.suggest.includeCompletionsWithSnippetText"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"typescript.suggest.includeCompletionsWithReplaceText"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"typescript.suggest.includeCompletionsWithClassMemberSnippets"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"typescript.suggest.includeCompletionsWithObjectLiteralMethodSnippets"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"typescript.suggest.includeCompletionsWithFunctionParameterSnippets"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="vs-code-extensions"><strong>VS Code Extensions</strong></h3>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">//</span><span class="w"> </span><span class="err">.vscode/extensions.json</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="nl">"recommendations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"ms-vscode.vscode-typescript-next"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"bradlc.vscode-tailwindcss"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"esbenp.prettier-vscode"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ms-vscode.vscode-eslint"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ms-vscode.vscode-json"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ms-vscode.vscode-css-peek"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ms-vscode.vscode-html-css-support"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ms-vscode.vscode-typescript-next"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ms-vscode.vscode-typescript-next"</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<hr />
+
+<h2 id="-intellisense--autocomplete">🧠 <strong>IntelliSense &amp; Autocomplete</strong></h2>
+
+<p>IntelliSense provides intelligent code completion and suggestions.</p>
+
+<h3 id="basic-intellisense-features"><strong>Basic IntelliSense Features</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// IntelliSense provides:</span>
+<span class="c1">// 1. Code completion</span>
+<span class="kr">interface</span> <span class="nx">User</span> <span class="p">{</span>
+  <span class="nl">id</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span>
+  <span class="nl">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">email</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">user</span><span class="p">:</span> <span class="nx">User</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">John</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">email</span><span class="p">:</span> <span class="dl">"</span><span class="s2">john@example.com</span><span class="dl">"</span>
+<span class="p">};</span>
+
+<span class="c1">// IntelliSense will suggest: id, name, email</span>
+<span class="nx">user</span><span class="p">.</span> <span class="c1">// &lt;- IntelliSense shows available properties</span>
+
+<span class="c1">// 2. Parameter hints</span>
+<span class="kd">function</span> <span class="nx">createUser</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">,</span> <span class="nx">email</span><span class="p">:</span> <span class="kr">string</span><span class="p">,</span> <span class="nx">age</span><span class="p">?:</span> <span class="kr">number</span><span class="p">):</span> <span class="nx">User</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">{</span> <span class="na">id</span><span class="p">:</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">(),</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">email</span> <span class="p">};</span>
+<span class="p">}</span>
+
+<span class="c1">// IntelliSense shows parameter types and names</span>
+<span class="nx">createUser</span><span class="p">(</span> <span class="c1">// &lt;- Shows: (name: string, email: string, age?: number) =&gt; User</span>
+</code></pre></div></div>
+
+<h3 id="advanced-intellisense-configuration"><strong>Advanced IntelliSense Configuration</strong></h3>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">//</span><span class="w"> </span><span class="err">.vscode/settings.json</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="nl">"typescript.suggest.autoImports"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"typescript.suggest.includeCompletionsForModuleExports"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"typescript.suggest.includeCompletionsWithSnippetText"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"typescript.suggest.includeCompletionsWithInsertText"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"typescript.suggest.includeCompletionsWithReplaceText"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"typescript.suggest.includeCompletionsWithClassMemberSnippets"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"typescript.suggest.includeCompletionsWithObjectLiteralMethodSnippets"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"typescript.suggest.includeCompletionsWithFunctionParameterSnippets"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"typescript.suggest.includeCompletionsWithInsertText"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"typescript.suggest.includeCompletionsWithSnippetText"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"typescript.suggest.includeCompletionsWithReplaceText"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"typescript.suggest.includeCompletionsWithClassMemberSnippets"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"typescript.suggest.includeCompletionsWithObjectLiteralMethodSnippets"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"typescript.suggest.includeCompletionsWithFunctionParameterSnippets"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="intellisense-with-generics"><strong>IntelliSense with Generics</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// IntelliSense works with generics</span>
+<span class="kr">interface</span> <span class="nx">ApiResponse</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="na">data</span><span class="p">:</span> <span class="nx">T</span><span class="p">;</span>
+  <span class="nl">status</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span>
+  <span class="nl">message</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">fetchData</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">url</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">ApiResponse</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">());</span>
+<span class="p">}</span>
+
+<span class="c1">// IntelliSense provides type-specific suggestions</span>
+<span class="kd">const</span> <span class="nx">userResponse</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fetchData</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span><span class="p">(</span><span class="dl">"</span><span class="s2">/api/users/1</span><span class="dl">"</span><span class="p">);</span>
+<span class="c1">// userResponse.data. &lt;- IntelliSense shows User properties</span>
+
+<span class="kd">const</span> <span class="nx">productResponse</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fetchData</span><span class="o">&lt;</span><span class="nx">Product</span><span class="p">[]</span><span class="o">&gt;</span><span class="p">(</span><span class="dl">"</span><span class="s2">/api/products</span><span class="dl">"</span><span class="p">);</span>
+<span class="c1">// productResponse.data. &lt;- IntelliSense shows Product[] methods</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-debugging-configuration">🐛 <strong>Debugging Configuration</strong></h2>
+
+<p>Proper debugging setup is essential for TypeScript development.</p>
+
+<h3 id="vs-code-debug-configuration"><strong>VS Code Debug Configuration</strong></h3>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">//</span><span class="w"> </span><span class="err">.vscode/launch.json</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="nl">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.2.0"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"configurations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Debug TypeScript"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"node"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"request"</span><span class="p">:</span><span class="w"> </span><span class="s2">"launch"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"program"</span><span class="p">:</span><span class="w"> </span><span class="s2">"${workspaceFolder}/src/index.ts"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"outFiles"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"${workspaceFolder}/dist/**/*.js"</span><span class="p">],</span><span class="w">
+      </span><span class="nl">"sourceMaps"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"env"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"NODE_ENV"</span><span class="p">:</span><span class="w"> </span><span class="s2">"development"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nl">"console"</span><span class="p">:</span><span class="w"> </span><span class="s2">"integratedTerminal"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Debug Jest Tests"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"node"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"request"</span><span class="p">:</span><span class="w"> </span><span class="s2">"launch"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"program"</span><span class="p">:</span><span class="w"> </span><span class="s2">"${workspaceFolder}/node_modules/.bin/jest"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"args"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"--runInBand"</span><span class="p">],</span><span class="w">
+      </span><span class="nl">"console"</span><span class="p">:</span><span class="w"> </span><span class="s2">"integratedTerminal"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"internalConsoleOptions"</span><span class="p">:</span><span class="w"> </span><span class="s2">"neverOpen"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Debug Webpack Dev Server"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"node"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"request"</span><span class="p">:</span><span class="w"> </span><span class="s2">"launch"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"program"</span><span class="p">:</span><span class="w"> </span><span class="s2">"${workspaceFolder}/node_modules/.bin/webpack-dev-server"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"args"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"--mode"</span><span class="p">,</span><span class="w"> </span><span class="s2">"development"</span><span class="p">],</span><span class="w">
+      </span><span class="nl">"console"</span><span class="p">:</span><span class="w"> </span><span class="s2">"integratedTerminal"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="nodejs-debugging"><strong>Node.js Debugging</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Debugging with Node.js</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">createServer</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">http</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">server</span> <span class="o">=</span> <span class="nx">createServer</span><span class="p">((</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// Set breakpoint here</span>
+  <span class="kd">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">url</span><span class="p">;</span>
+  <span class="kd">const</span> <span class="nx">method</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">method</span><span class="p">;</span>
+  
+  <span class="c1">// Debug variables</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Request:</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span> <span class="nx">url</span><span class="p">,</span> <span class="nx">method</span> <span class="p">});</span>
+  
+  <span class="nx">res</span><span class="p">.</span><span class="nx">writeHead</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="p">{</span> <span class="dl">'</span><span class="s1">Content-Type</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">application/json</span><span class="dl">'</span> <span class="p">});</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span> <span class="na">message</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Hello World</span><span class="dl">'</span> <span class="p">}));</span>
+<span class="p">});</span>
+
+<span class="kd">const</span> <span class="nx">PORT</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">PORT</span> <span class="o">||</span> <span class="mi">3000</span><span class="p">;</span>
+<span class="nx">server</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="nx">PORT</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`Server running on port </span><span class="p">${</span><span class="nx">PORT</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<h3 id="browser-debugging"><strong>Browser Debugging</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Browser debugging with source maps</span>
+<span class="kd">class</span> <span class="nx">UserService</span> <span class="p">{</span>
+  <span class="k">private</span> <span class="nx">users</span><span class="p">:</span> <span class="nx">User</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[];</span>
+
+  <span class="k">async</span> <span class="nx">fetchUser</span><span class="p">(</span><span class="nx">id</span><span class="p">:</span> <span class="kr">number</span><span class="p">):</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="c1">// Set breakpoint here</span>
+    <span class="kd">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="s2">`/api/users/</span><span class="p">${</span><span class="nx">id</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">response</span><span class="p">.</span><span class="nx">ok</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">`Failed to fetch user: </span><span class="p">${</span><span class="nx">response</span><span class="p">.</span><span class="nx">status</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="kd">const</span> <span class="nx">user</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+    <span class="k">return</span> <span class="nx">user</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="nx">addUser</span><span class="p">(</span><span class="nx">user</span><span class="p">:</span> <span class="nx">User</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="c1">// Set breakpoint here</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">user</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Usage</span>
+<span class="kd">const</span> <span class="nx">userService</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">UserService</span><span class="p">();</span>
+<span class="nx">userService</span><span class="p">.</span><span class="nx">fetchUser</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span> <span class="c1">// Debug this call</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-linting--formatting">🔍 <strong>Linting &amp; Formatting</strong></h2>
+
+<p>Linting and formatting ensure code quality and consistency.</p>
+
+<h3 id="eslint-configuration"><strong>ESLint Configuration</strong></h3>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">//</span><span class="w"> </span><span class="err">.eslintrc.json</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="nl">"extends"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"@typescript-eslint/recommended"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"@typescript-eslint/recommended-requiring-type-checking"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"parser"</span><span class="p">:</span><span class="w"> </span><span class="s2">"@typescript-eslint/parser"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"parserOptions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"ecmaVersion"</span><span class="p">:</span><span class="w"> </span><span class="mi">2020</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"sourceType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"module"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"project"</span><span class="p">:</span><span class="w"> </span><span class="s2">"./tsconfig.json"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"plugins"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"@typescript-eslint"</span><span class="p">],</span><span class="w">
+  </span><span class="nl">"rules"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"@typescript-eslint/no-unused-vars"</span><span class="p">:</span><span class="w"> </span><span class="s2">"error"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"@typescript-eslint/no-explicit-any"</span><span class="p">:</span><span class="w"> </span><span class="s2">"warn"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"@typescript-eslint/explicit-function-return-type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"warn"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"@typescript-eslint/no-non-null-assertion"</span><span class="p">:</span><span class="w"> </span><span class="s2">"warn"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"@typescript-eslint/prefer-const"</span><span class="p">:</span><span class="w"> </span><span class="s2">"error"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"@typescript-eslint/no-var-requires"</span><span class="p">:</span><span class="w"> </span><span class="s2">"error"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="prettier-configuration"><strong>Prettier Configuration</strong></h3>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">//</span><span class="w"> </span><span class="err">.prettierrc</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="nl">"semi"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"trailingComma"</span><span class="p">:</span><span class="w"> </span><span class="s2">"es5"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"singleQuote"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"printWidth"</span><span class="p">:</span><span class="w"> </span><span class="mi">80</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"tabWidth"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"useTabs"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"bracketSpacing"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"arrowParens"</span><span class="p">:</span><span class="w"> </span><span class="s2">"avoid"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="vs-code-formatting-settings"><strong>VS Code Formatting Settings</strong></h3>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">//</span><span class="w"> </span><span class="err">.vscode/settings.json</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="nl">"editor.formatOnSave"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"editor.formatOnPaste"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"editor.formatOnType"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"editor.defaultFormatter"</span><span class="p">:</span><span class="w"> </span><span class="s2">"esbenp.prettier-vscode"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"editor.codeActionsOnSave"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"source.fixAll.eslint"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"source.organizeImports"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"typescript.preferences.organizeImports"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"typescript.suggest.autoImports"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<hr />
+
+<h2 id="-advanced-ide-features">🚀 <strong>Advanced IDE Features</strong></h2>
+
+<h3 id="code-navigation"><strong>Code Navigation</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Advanced navigation features</span>
+<span class="kd">class</span> <span class="nx">UserService</span> <span class="p">{</span>
+  <span class="k">private</span> <span class="nx">users</span><span class="p">:</span> <span class="nx">User</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[];</span>
+
+  <span class="k">async</span> <span class="nx">fetchUser</span><span class="p">(</span><span class="nx">id</span><span class="p">:</span> <span class="kr">number</span><span class="p">):</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="c1">// Go to definition: Ctrl+Click on User</span>
+    <span class="kd">const</span> <span class="nx">user</span> <span class="o">=</span> <span class="k">await</span> <span class="k">this</span><span class="p">.</span><span class="nx">findUser</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nx">user</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">private</span> <span class="k">async</span> <span class="nx">findUser</span><span class="p">(</span><span class="nx">id</span><span class="p">:</span> <span class="kr">number</span><span class="p">):</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="c1">// Find all references: Shift+F12</span>
+    <span class="kd">const</span> <span class="nx">user</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="nx">u</span> <span class="o">=&gt;</span> <span class="nx">u</span><span class="p">.</span><span class="nx">id</span> <span class="o">===</span> <span class="nx">id</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">user</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">User not found</span><span class="dl">'</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">user</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Rename symbol: F2</span>
+<span class="kd">const</span> <span class="nx">userService</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">UserService</span><span class="p">();</span>
+<span class="nx">userService</span><span class="p">.</span><span class="nx">fetchUser</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="refactoring-tools"><strong>Refactoring Tools</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Refactoring examples</span>
+<span class="kd">class</span> <span class="nx">DataProcessor</span> <span class="p">{</span>
+  <span class="c1">// Extract method: Select code and use Ctrl+Shift+R</span>
+  <span class="nx">processData</span><span class="p">(</span><span class="nx">data</span><span class="p">:</span> <span class="kr">any</span><span class="p">[]):</span> <span class="kr">any</span><span class="p">[]</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">data</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">item</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="c1">// Extract this logic into a separate method</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">item</span><span class="p">.</span><span class="kd">type</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">user</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">{</span>
+          <span class="p">...</span><span class="nx">item</span><span class="p">,</span>
+          <span class="na">processed</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+          <span class="na">timestamp</span><span class="p">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">()</span>
+        <span class="p">};</span>
+      <span class="p">}</span>
+      <span class="k">return</span> <span class="nx">item</span><span class="p">;</span>
+    <span class="p">});</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Extract interface: Select object and use Ctrl+Shift+R</span>
+  <span class="nx">createUser</span><span class="p">(</span><span class="nx">userData</span><span class="p">:</span> <span class="kr">any</span><span class="p">):</span> <span class="nx">User</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">{</span>
+      <span class="na">id</span><span class="p">:</span> <span class="nx">userData</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span>
+      <span class="na">name</span><span class="p">:</span> <span class="nx">userData</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span>
+      <span class="na">email</span><span class="p">:</span> <span class="nx">userData</span><span class="p">.</span><span class="nx">email</span>
+    <span class="p">};</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="code-snippets"><strong>Code Snippets</strong></h3>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">//</span><span class="w"> </span><span class="err">.vscode/typescript.json</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="nl">"TypeScript React Component"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"prefix"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tsr"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"body"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"import React from 'react';"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"interface ${1:ComponentName}Props {"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"  $2"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"}"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"const ${1:ComponentName}: React.FC&lt;${1:ComponentName}Props&gt; = ({ $3 }) =&gt; {"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"  return ("</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"    &lt;div&gt;"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"      $4"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"    &lt;/div&gt;"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"  );"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"};"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"export default ${1:ComponentName};"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TypeScript React Component"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<hr />
+
+<h2 id="-best-practices">✅ <strong>Best Practices</strong></h2>
+
+<h3 id="1-configure-intellisense-properly"><strong>1. Configure IntelliSense Properly</strong></h3>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">//</span><span class="w"> </span><span class="err">✅</span><span class="w"> </span><span class="err">Good:</span><span class="w"> </span><span class="err">Enable</span><span class="w"> </span><span class="err">all</span><span class="w"> </span><span class="err">IntelliSense</span><span class="w"> </span><span class="err">features</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="nl">"typescript.suggest.autoImports"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"typescript.suggest.includeCompletionsForModuleExports"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"typescript.suggest.includeCompletionsWithSnippetText"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="err">//</span><span class="w"> </span><span class="err">❌</span><span class="w"> </span><span class="err">Avoid:</span><span class="w"> </span><span class="err">Disabling</span><span class="w"> </span><span class="err">IntelliSense</span><span class="w"> </span><span class="err">features</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="nl">"typescript.suggest.autoImports"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"typescript.suggest.includeCompletionsForModuleExports"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="2-use-source-maps-for-debugging"><strong>2. Use Source Maps for Debugging</strong></h3>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">//</span><span class="w"> </span><span class="err">✅</span><span class="w"> </span><span class="err">Good:</span><span class="w"> </span><span class="err">Enable</span><span class="w"> </span><span class="err">source</span><span class="w"> </span><span class="err">maps</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="nl">"compilerOptions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"sourceMap"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"inlineSourceMap"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="err">//</span><span class="w"> </span><span class="err">❌</span><span class="w"> </span><span class="err">Avoid:</span><span class="w"> </span><span class="err">Disabling</span><span class="w"> </span><span class="err">source</span><span class="w"> </span><span class="err">maps</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="nl">"compilerOptions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"sourceMap"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="3-configure-linting-and-formatting"><strong>3. Configure Linting and Formatting</strong></h3>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">//</span><span class="w"> </span><span class="err">✅</span><span class="w"> </span><span class="err">Good:</span><span class="w"> </span><span class="err">Enable</span><span class="w"> </span><span class="err">linting</span><span class="w"> </span><span class="err">and</span><span class="w"> </span><span class="err">formatting</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="nl">"editor.formatOnSave"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"editor.codeActionsOnSave"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"source.fixAll.eslint"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"source.organizeImports"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="err">//</span><span class="w"> </span><span class="err">❌</span><span class="w"> </span><span class="err">Avoid:</span><span class="w"> </span><span class="err">No</span><span class="w"> </span><span class="err">linting</span><span class="w"> </span><span class="err">or</span><span class="w"> </span><span class="err">formatting</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="nl">"editor.formatOnSave"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"editor.codeActionsOnSave"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="4-use-debug-configurations"><strong>4. Use Debug Configurations</strong></h3>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">//</span><span class="w"> </span><span class="err">✅</span><span class="w"> </span><span class="err">Good:</span><span class="w"> </span><span class="err">Proper</span><span class="w"> </span><span class="err">debug</span><span class="w"> </span><span class="err">configuration</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Debug TypeScript"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"node"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"request"</span><span class="p">:</span><span class="w"> </span><span class="s2">"launch"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"program"</span><span class="p">:</span><span class="w"> </span><span class="s2">"${workspaceFolder}/src/index.ts"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"outFiles"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"${workspaceFolder}/dist/**/*.js"</span><span class="p">],</span><span class="w">
+  </span><span class="nl">"sourceMaps"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="err">//</span><span class="w"> </span><span class="err">❌</span><span class="w"> </span><span class="err">Avoid:</span><span class="w"> </span><span class="err">No</span><span class="w"> </span><span class="err">debug</span><span class="w"> </span><span class="err">configuration</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Debug"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"node"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"request"</span><span class="p">:</span><span class="w"> </span><span class="s2">"launch"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"program"</span><span class="p">:</span><span class="w"> </span><span class="s2">"index.js"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<hr />
+
+<h2 id="-common-interview-questions">❓ <strong>Common Interview Questions</strong></h2>
+
+<h3 id="1-how-do-you-set-up-typescript-debugging-in-vs-code"><strong>1. How do you set up TypeScript debugging in VS Code?</strong></h3>
+
+<p><strong>Answer:</strong>
+Create a <code class="language-plaintext highlighter-rouge">.vscode/launch.json</code> file with proper configuration:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Debug TypeScript"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"node"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"request"</span><span class="p">:</span><span class="w"> </span><span class="s2">"launch"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"program"</span><span class="p">:</span><span class="w"> </span><span class="s2">"${workspaceFolder}/src/index.ts"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"outFiles"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"${workspaceFolder}/dist/**/*.js"</span><span class="p">],</span><span class="w">
+  </span><span class="nl">"sourceMaps"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="2-what-are-the-benefits-of-using-intellisense-with-typescript"><strong>2. What are the benefits of using IntelliSense with TypeScript?</strong></h3>
+
+<p><strong>Answer:</strong></p>
+<ul>
+  <li><strong>Code completion</strong>: Automatic suggestions for properties and methods</li>
+  <li><strong>Parameter hints</strong>: Shows function parameters and types</li>
+  <li><strong>Error detection</strong>: Real-time type checking and error highlighting</li>
+  <li><strong>Navigation</strong>: Go to definition, find references, symbol search</li>
+</ul>
+
+<h3 id="3-how-do-you-configure-eslint-for-typescript"><strong>3. How do you configure ESLint for TypeScript?</strong></h3>
+
+<p><strong>Answer:</strong>
+Use <code class="language-plaintext highlighter-rouge">@typescript-eslint/parser</code> and <code class="language-plaintext highlighter-rouge">@typescript-eslint/recommended</code>:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"extends"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"@typescript-eslint/recommended"</span><span class="p">],</span><span class="w">
+  </span><span class="nl">"parser"</span><span class="p">:</span><span class="w"> </span><span class="s2">"@typescript-eslint/parser"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"plugins"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"@typescript-eslint"</span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="4-whats-the-difference-between-source-maps-and-inline-source-maps"><strong>4. What’s the difference between source maps and inline source maps?</strong></h3>
+
+<p><strong>Answer:</strong></p>
+<ul>
+  <li><strong>Source maps</strong>: Separate <code class="language-plaintext highlighter-rouge">.map</code> files for debugging</li>
+  <li><strong>Inline source maps</strong>: Source maps embedded in the generated JavaScript</li>
+</ul>
+
+<h3 id="5-how-do-you-enable-automatic-imports-in-vs-code"><strong>5. How do you enable automatic imports in VS Code?</strong></h3>
+
+<p><strong>Answer:</strong>
+Configure in settings:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"typescript.suggest.autoImports"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"typescript.preferences.includePackageJsonAutoImports"</span><span class="p">:</span><span class="w"> </span><span class="s2">"auto"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<hr />
+
+<h2 id="-navigation">🧭 Navigation</h2>
+
+<div class="navigation">
+  <a href="03-TypeScript-Build-Tools.md" class="nav-button">← Previous: TypeScript with Build Tools</a>
+  <a href="../04-Advanced-TypeScript-Patterns/01-Design-Patterns-TypeScript.md" class="nav-button">Next: Design Patterns in TypeScript →</a>
+</div>
+
+<p><em>Last updated: December 2025</em></p>
+
+        </main>
+        
+        <footer style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #ecf0f1; color: #666; text-align: center;">
+            <p>Interview Prep Documentation - Built with Jekyll</p>
+        </footer>
+    </div>
+</body>
+</html>

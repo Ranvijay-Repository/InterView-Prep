@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⚡ Performance Debugging - Interview Prep Documentation</title>
+    <meta name="description" content="Comprehensive guides for JavaScript, TypeScript, and React Native interview preparation">
+    
+    <!-- GitHub Pages compatible styling -->
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+        }
+        
+        .container {
+            max-width: 100%;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            color: #2c3e50;
+            margin-top: 2em;
+            margin-bottom: 1em;
+        }
+        
+        h1 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            border-bottom: 1px solid #ecf0f1;
+            padding-bottom: 5px;
+        }
+        
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border-left: 4px solid #3498db;
+        }
+        
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+        
+        blockquote {
+            border-left: 4px solid #3498db;
+            margin: 0;
+            padding-left: 20px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1em 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .navigation {
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px 0;
+            margin-bottom: 20px;
+        }
+        
+        .navigation a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+        
+        .navigation a:hover {
+            text-decoration: underline;
+        }
+        
+        .breadcrumb {
+            margin-bottom: 20px;
+            color: #666;
+        }
+        
+        .breadcrumb a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            h2 {
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="navigation">
+            <a href="/">Home</a>
+            <a href="/Javascript/">JavaScript</a>
+            <a href="/TypeScript/">TypeScript</a>
+            <a href="/React-Native/">React Native</a>
+        </nav>
+        
+        
+        
+        <main>
+            <h1 id="-performance-debugging">⚡ <strong>Performance Debugging</strong></h1>
+
+<blockquote>
+  <p><strong>Master performance debugging techniques for React Native applications, including profiling, optimization, and performance monitoring</strong></p>
+</blockquote>
+
+<link rel="stylesheet" href="../../common-styles.css" />
+
+<hr />
+
+<h2 id="-table-of-contents">📚 <strong>Table of Contents</strong></h2>
+
+<ul>
+  <li><a href="#performance-debugging-overview">Performance Debugging Overview</a></li>
+  <li><a href="#javascript-performance">JavaScript Performance</a></li>
+  <li><a href="#native-performance">Native Performance</a></li>
+  <li><a href="#memory-performance">Memory Performance</a></li>
+  <li><a href="#network-performance">Network Performance</a></li>
+  <li><a href="#ui-performance">UI Performance</a></li>
+  <li><a href="#performance-monitoring">Performance Monitoring</a></li>
+  <li><a href="#best-practices">Best Practices</a></li>
+  <li><a href="#interview-questions">Interview Questions</a></li>
+</ul>
+
+<hr />
+
+<h2 id="-performance-debugging-overview">🎯 <strong>Performance Debugging Overview</strong></h2>
+
+<p>Performance debugging involves identifying bottlenecks, measuring performance metrics, and optimizing React Native applications for better user experience.</p>
+
+<h3 id="performance-debugging-framework"><strong>Performance Debugging Framework</strong></h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>┌─────────────────────────────────────┐
+│        Performance Debugging       │
+│  ┌─────────────────────────────────┐│
+│  │        Measurement Tools       ││
+│  │  - Chrome DevTools             ││
+│  │  - Flipper Performance         ││
+│  │  - React DevTools Profiler     ││
+│  │  - Native Profilers            ││
+│  └─────────────────────────────────┘│
+│  ┌─────────────────────────────────┐│
+│  │        Performance Areas       ││
+│  │  - JavaScript Execution        ││
+│  │  - Native Bridge               ││
+│  │  - Memory Usage                ││
+│  │  - Network Operations          ││
+│  │  - UI Rendering                ││
+│  └─────────────────────────────────┘│
+│  ┌─────────────────────────────────┐│
+│  │        Optimization            ││
+│  │  - Code Splitting              ││
+│  │  - Lazy Loading                ││
+│  │  - Memoization                 ││
+│  │  - Bundle Optimization         ││
+│  └─────────────────────────────────┘│
+└─────────────────────────────────────┘
+</code></pre></div></div>
+
+<h3 id="key-performance-metrics"><strong>Key Performance Metrics</strong></h3>
+<ul>
+  <li><strong>Startup Time</strong>: App launch to first screen</li>
+  <li><strong>Time to Interactive</strong>: When app becomes responsive</li>
+  <li><strong>Frame Rate</strong>: FPS during animations</li>
+  <li><strong>Memory Usage</strong>: RAM consumption over time</li>
+  <li><strong>Bundle Size</strong>: JavaScript bundle size</li>
+  <li><strong>Network Latency</strong>: API response times</li>
+</ul>
+
+<hr />
+
+<h2 id="-javascript-performance">🚀 <strong>JavaScript Performance</strong></h2>
+
+<h3 id="performance-measurement"><strong>Performance Measurement</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Performance measurement utilities</span>
+<span class="kd">const</span> <span class="nx">performanceUtils</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">measureFunction</span><span class="p">:</span> <span class="p">(</span><span class="nx">fn</span><span class="p">,</span> <span class="nx">name</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">start</span> <span class="o">=</span> <span class="nx">performance</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
+    <span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">fn</span><span class="p">();</span>
+    <span class="kd">const</span> <span class="nx">end</span> <span class="o">=</span> <span class="nx">performance</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">name</span><span class="p">}</span><span class="s2"> took </span><span class="p">${</span><span class="nx">end</span> <span class="o">-</span> <span class="nx">start</span><span class="p">}</span><span class="s2"> milliseconds`</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nx">result</span><span class="p">;</span>
+  <span class="p">},</span>
+  
+  <span class="na">measureAsync</span><span class="p">:</span> <span class="k">async</span> <span class="p">(</span><span class="nx">fn</span><span class="p">,</span> <span class="nx">name</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">start</span> <span class="o">=</span> <span class="nx">performance</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
+    <span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fn</span><span class="p">();</span>
+    <span class="kd">const</span> <span class="nx">end</span> <span class="o">=</span> <span class="nx">performance</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">name</span><span class="p">}</span><span class="s2"> took </span><span class="p">${</span><span class="nx">end</span> <span class="o">-</span> <span class="nx">start</span><span class="p">}</span><span class="s2"> milliseconds`</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nx">result</span><span class="p">;</span>
+  <span class="p">},</span>
+  
+  <span class="na">measureRender</span><span class="p">:</span> <span class="p">(</span><span class="nx">componentName</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">start</span> <span class="o">=</span> <span class="nx">performance</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
+    <span class="k">return</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">end</span> <span class="o">=</span> <span class="nx">performance</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">componentName</span><span class="p">}</span><span class="s2"> render took </span><span class="p">${</span><span class="nx">end</span> <span class="o">-</span> <span class="nx">start</span><span class="p">}</span><span class="s2"> milliseconds`</span><span class="p">);</span>
+    <span class="p">};</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="react-performance-profiling"><strong>React Performance Profiling</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// React Profiler for component performance</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Profiler</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">onRenderCallback</span> <span class="o">=</span> <span class="p">(</span><span class="nx">id</span><span class="p">,</span> <span class="nx">phase</span><span class="p">,</span> <span class="nx">actualDuration</span><span class="p">,</span> <span class="nx">baseDuration</span><span class="p">,</span> <span class="nx">startTime</span><span class="p">,</span> <span class="nx">commitTime</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Profiler:</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">id</span><span class="p">,</span>
+    <span class="nx">phase</span><span class="p">,</span>
+    <span class="nx">actualDuration</span><span class="p">,</span>
+    <span class="nx">baseDuration</span><span class="p">,</span>
+    <span class="nx">startTime</span><span class="p">,</span>
+    <span class="nx">commitTime</span>
+  <span class="p">});</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">MyComponent</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">Profiler</span> <span class="nx">id</span><span class="o">=</span><span class="dl">"</span><span class="s2">MyComponent</span><span class="dl">"</span> <span class="nx">onRender</span><span class="o">=</span><span class="p">{</span><span class="nx">onRenderCallback</span><span class="p">}</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="nx">View</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">Text</span><span class="o">&gt;</span><span class="nx">Performance</span> <span class="nx">monitored</span> <span class="nx">component</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>    <span class="o">&lt;</span><span class="sr">/Profiler</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="javascript-performance-optimization"><strong>JavaScript Performance Optimization</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Memoization for expensive calculations</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">useMemo</span><span class="p">,</span> <span class="nx">useCallback</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">ExpensiveComponent</span> <span class="o">=</span> <span class="p">({</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">filter</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// Memoize expensive calculation</span>
+  <span class="kd">const</span> <span class="nx">filteredData</span> <span class="o">=</span> <span class="nx">useMemo</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Filtering data...</span><span class="dl">'</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nx">data</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">item</span> <span class="o">=&gt;</span> <span class="nx">item</span><span class="p">.</span><span class="nx">category</span> <span class="o">===</span> <span class="nx">filter</span><span class="p">);</span>
+  <span class="p">},</span> <span class="p">[</span><span class="nx">data</span><span class="p">,</span> <span class="nx">filter</span><span class="p">]);</span>
+  
+  <span class="c1">// Memoize callback functions</span>
+  <span class="kd">const</span> <span class="nx">handlePress</span> <span class="o">=</span> <span class="nx">useCallback</span><span class="p">((</span><span class="nx">id</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Item pressed:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">id</span><span class="p">);</span>
+  <span class="p">},</span> <span class="p">[]);</span>
+  
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">FlatList</span>
+      <span class="nx">data</span><span class="o">=</span><span class="p">{</span><span class="nx">filteredData</span><span class="p">}</span>
+      <span class="nx">renderItem</span><span class="o">=</span><span class="p">{({</span> <span class="nx">item</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">(</span>
+        <span class="o">&lt;</span><span class="nx">TouchableOpacity</span> <span class="nx">onPress</span><span class="o">=</span><span class="p">{()</span> <span class="o">=&gt;</span> <span class="nx">handlePress</span><span class="p">(</span><span class="nx">item</span><span class="p">.</span><span class="nx">id</span><span class="p">)}</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">Text</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">item</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/TouchableOpacity</span><span class="err">&gt;
+</span>      <span class="p">)}</span>
+    <span class="sr">/</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="bundle-analysis"><strong>Bundle Analysis</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Analyze bundle size</span>
+npx react-native bundle <span class="nt">--platform</span> android <span class="nt">--dev</span> <span class="nb">false</span> <span class="nt">--entry-file</span> index.js <span class="nt">--bundle-output</span> android-bundle.js <span class="nt">--assets-dest</span> android-assets
+
+<span class="c"># Use bundle analyzer</span>
+npm <span class="nb">install</span> <span class="nt">--save-dev</span> react-native-bundle-visualizer
+npx react-native-bundle-visualizer
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-native-performance">📱 <strong>Native Performance</strong></h2>
+
+<h3 id="native-performance-monitoring"><strong>Native Performance Monitoring</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Native performance monitoring</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">NativeModules</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">PerformanceMonitor</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">startTrace</span><span class="p">:</span> <span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">NativeModules</span><span class="p">.</span><span class="nx">PerformanceMonitor</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">NativeModules</span><span class="p">.</span><span class="nx">PerformanceMonitor</span><span class="p">.</span><span class="nx">startTrace</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  
+  <span class="na">stopTrace</span><span class="p">:</span> <span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">NativeModules</span><span class="p">.</span><span class="nx">PerformanceMonitor</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">NativeModules</span><span class="p">.</span><span class="nx">PerformanceMonitor</span><span class="p">.</span><span class="nx">stopTrace</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  
+  <span class="na">measureNativeOperation</span><span class="p">:</span> <span class="k">async</span> <span class="p">(</span><span class="nx">operation</span><span class="p">,</span> <span class="nx">name</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">PerformanceMonitor</span><span class="p">.</span><span class="nx">startTrace</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">operation</span><span class="p">();</span>
+      <span class="k">return</span> <span class="nx">result</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">finally</span> <span class="p">{</span>
+      <span class="nx">PerformanceMonitor</span><span class="p">.</span><span class="nx">stopTrace</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="bridge-performance"><strong>Bridge Performance</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Optimize bridge communication</span>
+<span class="kd">const</span> <span class="nx">BridgeOptimizer</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="c1">// Batch native calls</span>
+  <span class="na">batchNativeCalls</span><span class="p">:</span> <span class="p">(</span><span class="nx">calls</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">results</span> <span class="o">=</span> <span class="p">[];</span>
+      <span class="kd">let</span> <span class="nx">completed</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+      
+      <span class="nx">calls</span><span class="p">.</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">call</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">call</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="nx">result</span> <span class="o">=&gt;</span> <span class="p">{</span>
+          <span class="nx">results</span><span class="p">[</span><span class="nx">index</span><span class="p">]</span> <span class="o">=</span> <span class="nx">result</span><span class="p">;</span>
+          <span class="nx">completed</span><span class="o">++</span><span class="p">;</span>
+          
+          <span class="k">if</span> <span class="p">(</span><span class="nx">completed</span> <span class="o">===</span> <span class="nx">calls</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">resolve</span><span class="p">(</span><span class="nx">results</span><span class="p">);</span>
+          <span class="p">}</span>
+        <span class="p">});</span>
+      <span class="p">});</span>
+    <span class="p">});</span>
+  <span class="p">},</span>
+  
+  <span class="c1">// Debounce frequent calls</span>
+  <span class="na">debounce</span><span class="p">:</span> <span class="p">(</span><span class="nx">func</span><span class="p">,</span> <span class="nx">delay</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">timeoutId</span><span class="p">;</span>
+    <span class="k">return</span> <span class="p">(...</span><span class="nx">args</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">clearTimeout</span><span class="p">(</span><span class="nx">timeoutId</span><span class="p">);</span>
+      <span class="nx">timeoutId</span> <span class="o">=</span> <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nx">func</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">args</span><span class="p">),</span> <span class="nx">delay</span><span class="p">);</span>
+    <span class="p">};</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="native-module-performance"><strong>Native Module Performance</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Optimize native module calls</span>
+<span class="kd">const</span> <span class="nx">OptimizedNativeModule</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="c1">// Cache native module references</span>
+  <span class="na">getCachedModule</span><span class="p">:</span> <span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">cachedModule</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+    <span class="k">return</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">cachedModule</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">cachedModule</span> <span class="o">=</span> <span class="nx">NativeModules</span><span class="p">.</span><span class="nx">MyNativeModule</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="k">return</span> <span class="nx">cachedModule</span><span class="p">;</span>
+    <span class="p">};</span>
+  <span class="p">})(),</span>
+  
+  <span class="c1">// Use promises instead of callbacks</span>
+  <span class="na">asyncCall</span><span class="p">:</span> <span class="k">async</span> <span class="p">(</span><span class="nx">params</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">module</span> <span class="o">=</span> <span class="nx">OptimizedNativeModule</span><span class="p">.</span><span class="nx">getCachedModule</span><span class="p">();</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">module</span><span class="p">.</span><span class="nx">asyncMethod</span><span class="p">(</span><span class="nx">params</span><span class="p">,</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="nx">reject</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
+        <span class="k">else</span> <span class="nx">resolve</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
+      <span class="p">});</span>
+    <span class="p">});</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-memory-performance">🧠 <strong>Memory Performance</strong></h2>
+
+<h3 id="memory-monitoring"><strong>Memory Monitoring</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Memory monitoring utilities</span>
+<span class="kd">const</span> <span class="nx">MemoryMonitor</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">getMemoryInfo</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">performance</span><span class="p">.</span><span class="nx">memory</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="p">{</span>
+        <span class="na">used</span><span class="p">:</span> <span class="nx">performance</span><span class="p">.</span><span class="nx">memory</span><span class="p">.</span><span class="nx">usedJSHeapSize</span><span class="p">,</span>
+        <span class="na">total</span><span class="p">:</span> <span class="nx">performance</span><span class="p">.</span><span class="nx">memory</span><span class="p">.</span><span class="nx">totalJSHeapSize</span><span class="p">,</span>
+        <span class="na">limit</span><span class="p">:</span> <span class="nx">performance</span><span class="p">.</span><span class="nx">memory</span><span class="p">.</span><span class="nx">jsHeapSizeLimit</span>
+      <span class="p">};</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+  <span class="p">},</span>
+  
+  <span class="na">logMemoryUsage</span><span class="p">:</span> <span class="p">(</span><span class="nx">label</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">memory</span> <span class="o">=</span> <span class="nx">MemoryMonitor</span><span class="p">.</span><span class="nx">getMemoryInfo</span><span class="p">();</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">memory</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`[Memory] </span><span class="p">${</span><span class="nx">label</span><span class="p">}</span><span class="s2">:`</span><span class="p">,</span> <span class="p">{</span>
+        <span class="na">used</span><span class="p">:</span> <span class="s2">`</span><span class="p">${(</span><span class="nx">memory</span><span class="p">.</span><span class="nx">used</span> <span class="o">/</span> <span class="mi">1024</span> <span class="o">/</span> <span class="mi">1024</span><span class="p">).</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">2</span><span class="p">)}</span><span class="s2"> MB`</span><span class="p">,</span>
+        <span class="na">total</span><span class="p">:</span> <span class="s2">`</span><span class="p">${(</span><span class="nx">memory</span><span class="p">.</span><span class="nx">total</span> <span class="o">/</span> <span class="mi">1024</span> <span class="o">/</span> <span class="mi">1024</span><span class="p">).</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">2</span><span class="p">)}</span><span class="s2"> MB`</span><span class="p">,</span>
+        <span class="na">limit</span><span class="p">:</span> <span class="s2">`</span><span class="p">${(</span><span class="nx">memory</span><span class="p">.</span><span class="nx">limit</span> <span class="o">/</span> <span class="mi">1024</span> <span class="o">/</span> <span class="mi">1024</span><span class="p">).</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">2</span><span class="p">)}</span><span class="s2"> MB`</span>
+      <span class="p">});</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  
+  <span class="na">monitorMemoryLeaks</span><span class="p">:</span> <span class="p">(</span><span class="nx">componentName</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">startMemory</span> <span class="o">=</span> <span class="nx">MemoryMonitor</span><span class="p">.</span><span class="nx">getMemoryInfo</span><span class="p">();</span>
+    
+    <span class="k">return</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">endMemory</span> <span class="o">=</span> <span class="nx">MemoryMonitor</span><span class="p">.</span><span class="nx">getMemoryInfo</span><span class="p">();</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">startMemory</span> <span class="o">&amp;&amp;</span> <span class="nx">endMemory</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">memoryIncrease</span> <span class="o">=</span> <span class="nx">endMemory</span><span class="p">.</span><span class="nx">used</span> <span class="o">-</span> <span class="nx">startMemory</span><span class="p">.</span><span class="nx">used</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">memoryIncrease</span> <span class="o">&gt;</span> <span class="mi">10</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// 10MB</span>
+          <span class="nx">console</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span><span class="s2">`[Memory Leak] </span><span class="p">${</span><span class="nx">componentName</span><span class="p">}</span><span class="s2"> increased memory by </span><span class="p">${(</span><span class="nx">memoryIncrease</span> <span class="o">/</span> <span class="mi">1024</span> <span class="o">/</span> <span class="mi">1024</span><span class="p">).</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">2</span><span class="p">)}</span><span class="s2"> MB`</span><span class="p">);</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">};</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="memory-optimization"><strong>Memory Optimization</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Memory optimization techniques</span>
+<span class="kd">const</span> <span class="nx">MemoryOptimizer</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="c1">// Weak references for large objects</span>
+  <span class="na">createWeakCache</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">cache</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">WeakMap</span><span class="p">();</span>
+    <span class="k">return</span> <span class="p">{</span>
+      <span class="na">set</span><span class="p">:</span> <span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">cache</span><span class="p">.</span><span class="kd">set</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">),</span>
+      <span class="na">get</span><span class="p">:</span> <span class="p">(</span><span class="nx">key</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">cache</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="nx">key</span><span class="p">),</span>
+      <span class="na">has</span><span class="p">:</span> <span class="p">(</span><span class="nx">key</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">cache</span><span class="p">.</span><span class="nx">has</span><span class="p">(</span><span class="nx">key</span><span class="p">)</span>
+    <span class="p">};</span>
+  <span class="p">},</span>
+  
+  <span class="c1">// Cleanup subscriptions</span>
+  <span class="na">createSubscriptionManager</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">subscriptions</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Set</span><span class="p">();</span>
+    
+    <span class="k">return</span> <span class="p">{</span>
+      <span class="na">add</span><span class="p">:</span> <span class="p">(</span><span class="nx">subscription</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">subscriptions</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">subscription</span><span class="p">);</span>
+        <span class="k">return</span> <span class="nx">subscription</span><span class="p">;</span>
+      <span class="p">},</span>
+      
+      <span class="na">remove</span><span class="p">:</span> <span class="p">(</span><span class="nx">subscription</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">subscriptions</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="nx">subscription</span><span class="p">);</span>
+      <span class="p">},</span>
+      
+      <span class="na">cleanup</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">subscriptions</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">subscription</span> <span class="o">=&gt;</span> <span class="p">{</span>
+          <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">subscription</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">function</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">subscription</span><span class="p">();</span>
+          <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">subscription</span> <span class="o">&amp;&amp;</span> <span class="k">typeof</span> <span class="nx">subscription</span><span class="p">.</span><span class="nx">unsubscribe</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">function</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">subscription</span><span class="p">.</span><span class="nx">unsubscribe</span><span class="p">();</span>
+          <span class="p">}</span>
+        <span class="p">});</span>
+        <span class="nx">subscriptions</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
+      <span class="p">}</span>
+    <span class="p">};</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-network-performance">🌐 <strong>Network Performance</strong></h2>
+
+<h3 id="network-performance-monitoring"><strong>Network Performance Monitoring</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Network performance monitoring</span>
+<span class="kd">const</span> <span class="nx">NetworkMonitor</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">measureRequest</span><span class="p">:</span> <span class="k">async</span> <span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">startTime</span> <span class="o">=</span> <span class="nx">performance</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
+    <span class="kd">const</span> <span class="nx">startMemory</span> <span class="o">=</span> <span class="nx">MemoryMonitor</span><span class="p">.</span><span class="nx">getMemoryInfo</span><span class="p">();</span>
+    
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
+      <span class="kd">const</span> <span class="nx">endTime</span> <span class="o">=</span> <span class="nx">performance</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
+      <span class="kd">const</span> <span class="nx">endMemory</span> <span class="o">=</span> <span class="nx">MemoryMonitor</span><span class="p">.</span><span class="nx">getMemoryInfo</span><span class="p">();</span>
+      
+      <span class="kd">const</span> <span class="nx">metrics</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="nx">url</span><span class="p">,</span>
+        <span class="na">duration</span><span class="p">:</span> <span class="nx">endTime</span> <span class="o">-</span> <span class="nx">startTime</span><span class="p">,</span>
+        <span class="na">status</span><span class="p">:</span> <span class="nx">response</span><span class="p">.</span><span class="nx">status</span><span class="p">,</span>
+        <span class="na">memoryDelta</span><span class="p">:</span> <span class="nx">endMemory</span> <span class="p">?</span> <span class="nx">endMemory</span><span class="p">.</span><span class="nx">used</span> <span class="o">-</span> <span class="nx">startMemory</span><span class="p">.</span><span class="nx">used</span> <span class="p">:</span> <span class="mi">0</span>
+      <span class="p">};</span>
+      
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">[Network] Request metrics:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">metrics</span><span class="p">);</span>
+      <span class="k">return</span> <span class="nx">response</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">endTime</span> <span class="o">=</span> <span class="nx">performance</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">[Network] Request failed:</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span>
+        <span class="nx">url</span><span class="p">,</span>
+        <span class="na">duration</span><span class="p">:</span> <span class="nx">endTime</span> <span class="o">-</span> <span class="nx">startTime</span><span class="p">,</span>
+        <span class="na">error</span><span class="p">:</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span>
+      <span class="p">});</span>
+      <span class="k">throw</span> <span class="nx">error</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  
+  <span class="c1">// Batch network requests</span>
+  <span class="na">batchRequests</span><span class="p">:</span> <span class="k">async</span> <span class="p">(</span><span class="nx">requests</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">startTime</span> <span class="o">=</span> <span class="nx">performance</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
+    <span class="kd">const</span> <span class="nx">results</span> <span class="o">=</span> <span class="k">await</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">allSettled</span><span class="p">(</span><span class="nx">requests</span><span class="p">);</span>
+    <span class="kd">const</span> <span class="nx">endTime</span> <span class="o">=</span> <span class="nx">performance</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
+    
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`[Network] Batch of </span><span class="p">${</span><span class="nx">requests</span><span class="p">.</span><span class="nx">length</span><span class="p">}</span><span class="s2"> requests took </span><span class="p">${</span><span class="nx">endTime</span> <span class="o">-</span> <span class="nx">startTime</span><span class="p">}</span><span class="s2">ms`</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nx">results</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="network-optimization"><strong>Network Optimization</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Network optimization strategies</span>
+<span class="kd">const</span> <span class="nx">NetworkOptimizer</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="c1">// Request caching</span>
+  <span class="na">createCache</span><span class="p">:</span> <span class="p">(</span><span class="nx">ttl</span> <span class="o">=</span> <span class="mi">300000</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="c1">// 5 minutes default</span>
+    <span class="kd">const</span> <span class="nx">cache</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Map</span><span class="p">();</span>
+    
+    <span class="k">return</span> <span class="p">{</span>
+      <span class="na">get</span><span class="p">:</span> <span class="p">(</span><span class="nx">key</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">item</span> <span class="o">=</span> <span class="nx">cache</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">item</span> <span class="o">&amp;&amp;</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">()</span> <span class="o">-</span> <span class="nx">item</span><span class="p">.</span><span class="nx">timestamp</span> <span class="o">&lt;</span> <span class="nx">ttl</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">return</span> <span class="nx">item</span><span class="p">.</span><span class="nx">data</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="nx">cache</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+        <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+      <span class="p">},</span>
+      
+      <span class="na">set</span><span class="p">:</span> <span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">cache</span><span class="p">.</span><span class="kd">set</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="p">{</span>
+          <span class="nx">data</span><span class="p">,</span>
+          <span class="na">timestamp</span><span class="p">:</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">()</span>
+        <span class="p">});</span>
+      <span class="p">}</span>
+    <span class="p">};</span>
+  <span class="p">},</span>
+  
+  <span class="c1">// Request deduplication</span>
+  <span class="na">createDeduplicator</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">pendingRequests</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Map</span><span class="p">();</span>
+    
+    <span class="k">return</span> <span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">requestFn</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">pendingRequests</span><span class="p">.</span><span class="nx">has</span><span class="p">(</span><span class="nx">key</span><span class="p">))</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">pendingRequests</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+      <span class="p">}</span>
+      
+      <span class="kd">const</span> <span class="nx">promise</span> <span class="o">=</span> <span class="nx">requestFn</span><span class="p">().</span><span class="k">finally</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">pendingRequests</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+      <span class="p">});</span>
+      
+      <span class="nx">pendingRequests</span><span class="p">.</span><span class="kd">set</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">promise</span><span class="p">);</span>
+      <span class="k">return</span> <span class="nx">promise</span><span class="p">;</span>
+    <span class="p">};</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-ui-performance">🎨 <strong>UI Performance</strong></h2>
+
+<h3 id="ui-performance-monitoring"><strong>UI Performance Monitoring</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// UI performance monitoring</span>
+<span class="kd">const</span> <span class="nx">UIPerformanceMonitor</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">measureRender</span><span class="p">:</span> <span class="p">(</span><span class="nx">componentName</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">startTime</span> <span class="o">=</span> <span class="nx">performance</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
+    
+    <span class="k">return</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">endTime</span> <span class="o">=</span> <span class="nx">performance</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
+      <span class="kd">const</span> <span class="nx">renderTime</span> <span class="o">=</span> <span class="nx">endTime</span> <span class="o">-</span> <span class="nx">startTime</span><span class="p">;</span>
+      
+      <span class="k">if</span> <span class="p">(</span><span class="nx">renderTime</span> <span class="o">&gt;</span> <span class="mi">16</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// 60fps threshold</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span><span class="s2">`[UI Performance] </span><span class="p">${</span><span class="nx">componentName</span><span class="p">}</span><span class="s2"> render took </span><span class="p">${</span><span class="nx">renderTime</span><span class="p">.</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">2</span><span class="p">)}</span><span class="s2">ms (target: &lt;16ms)`</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">};</span>
+  <span class="p">},</span>
+  
+  <span class="na">measureLayout</span><span class="p">:</span> <span class="p">(</span><span class="nx">componentName</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">startTime</span> <span class="o">=</span> <span class="nx">performance</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
+    
+    <span class="k">return</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">endTime</span> <span class="o">=</span> <span class="nx">performance</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
+      <span class="kd">const</span> <span class="nx">layoutTime</span> <span class="o">=</span> <span class="nx">endTime</span> <span class="o">-</span> <span class="nx">startTime</span><span class="p">;</span>
+      
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`[UI Performance] </span><span class="p">${</span><span class="nx">componentName</span><span class="p">}</span><span class="s2"> layout took </span><span class="p">${</span><span class="nx">layoutTime</span><span class="p">.</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">2</span><span class="p">)}</span><span class="s2">ms`</span><span class="p">);</span>
+    <span class="p">};</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="ui-optimization"><strong>UI Optimization</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// UI optimization techniques</span>
+<span class="kd">const</span> <span class="nx">UIOptimizer</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="c1">// Optimize FlatList performance</span>
+  <span class="na">optimizeFlatList</span><span class="p">:</span> <span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">renderItem</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="o">&lt;</span><span class="nx">FlatList</span>
+        <span class="nx">data</span><span class="o">=</span><span class="p">{</span><span class="nx">data</span><span class="p">}</span>
+        <span class="nx">renderItem</span><span class="o">=</span><span class="p">{</span><span class="nx">renderItem</span><span class="p">}</span>
+        <span class="nx">keyExtractor</span><span class="o">=</span><span class="p">{(</span><span class="nx">item</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">item</span><span class="p">.</span><span class="nx">id</span><span class="p">.</span><span class="nx">toString</span><span class="p">()}</span>
+        <span class="nx">getItemLayout</span><span class="o">=</span><span class="p">{(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">({</span>
+          <span class="na">length</span><span class="p">:</span> <span class="mi">80</span><span class="p">,</span>
+          <span class="na">offset</span><span class="p">:</span> <span class="mi">80</span> <span class="o">*</span> <span class="nx">index</span><span class="p">,</span>
+          <span class="nx">index</span>
+        <span class="p">})}</span>
+        <span class="nx">removeClippedSubviews</span><span class="o">=</span><span class="p">{</span><span class="kc">true</span><span class="p">}</span>
+        <span class="nx">maxToRenderPerBatch</span><span class="o">=</span><span class="p">{</span><span class="mi">10</span><span class="p">}</span>
+        <span class="nx">windowSize</span><span class="o">=</span><span class="p">{</span><span class="mi">10</span><span class="p">}</span>
+        <span class="nx">initialNumToRender</span><span class="o">=</span><span class="p">{</span><span class="mi">10</span><span class="p">}</span>
+        <span class="nx">updateCellsBatchingPeriod</span><span class="o">=</span><span class="p">{</span><span class="mi">50</span><span class="p">}</span>
+      <span class="sr">/</span><span class="err">&gt;
+</span>    <span class="p">);</span>
+  <span class="p">},</span>
+  
+  <span class="c1">// Optimize images</span>
+  <span class="na">optimizeImage</span><span class="p">:</span> <span class="p">(</span><span class="nx">source</span><span class="p">,</span> <span class="nx">style</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="o">&lt;</span><span class="nx">Image</span>
+        <span class="nx">source</span><span class="o">=</span><span class="p">{</span><span class="nx">source</span><span class="p">}</span>
+        <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">style</span><span class="p">}</span>
+        <span class="nx">resizeMode</span><span class="o">=</span><span class="dl">"</span><span class="s2">cover</span><span class="dl">"</span>
+        <span class="nx">fadeDuration</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">}</span>
+        <span class="nx">loadingIndicatorSource</span><span class="o">=</span><span class="p">{</span><span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./placeholder.png</span><span class="dl">'</span><span class="p">)}</span>
+      <span class="sr">/</span><span class="err">&gt;
+</span>    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-performance-monitoring">📊 <strong>Performance Monitoring</strong></h2>
+
+<h3 id="performance-metrics-collection"><strong>Performance Metrics Collection</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Performance metrics collection</span>
+<span class="kd">const</span> <span class="nx">PerformanceMetrics</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">metrics</span><span class="p">:</span> <span class="k">new</span> <span class="nb">Map</span><span class="p">(),</span>
+  
+  <span class="na">record</span><span class="p">:</span> <span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">metadata</span> <span class="o">=</span> <span class="p">{})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">metric</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="nx">name</span><span class="p">,</span>
+      <span class="nx">value</span><span class="p">,</span>
+      <span class="na">timestamp</span><span class="p">:</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">(),</span>
+      <span class="nx">metadata</span>
+    <span class="p">};</span>
+    
+    <span class="nx">PerformanceMetrics</span><span class="p">.</span><span class="nx">metrics</span><span class="p">.</span><span class="kd">set</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">metric</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`[Performance] </span><span class="p">${</span><span class="nx">name</span><span class="p">}</span><span class="s2">: </span><span class="p">${</span><span class="nx">value</span><span class="p">}</span><span class="s2">`</span><span class="p">,</span> <span class="nx">metadata</span><span class="p">);</span>
+  <span class="p">},</span>
+  
+  <span class="na">getMetrics</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nb">Array</span><span class="p">.</span><span class="k">from</span><span class="p">(</span><span class="nx">PerformanceMetrics</span><span class="p">.</span><span class="nx">metrics</span><span class="p">.</span><span class="nx">values</span><span class="p">());</span>
+  <span class="p">},</span>
+  
+  <span class="na">clear</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">PerformanceMetrics</span><span class="p">.</span><span class="nx">metrics</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="performance-dashboard"><strong>Performance Dashboard</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Performance dashboard component</span>
+<span class="kd">const</span> <span class="nx">PerformanceDashboard</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">metrics</span><span class="p">,</span> <span class="nx">setMetrics</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">([]);</span>
+  
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">interval</span> <span class="o">=</span> <span class="nx">setInterval</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">setMetrics</span><span class="p">(</span><span class="nx">PerformanceMetrics</span><span class="p">.</span><span class="nx">getMetrics</span><span class="p">());</span>
+    <span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
+    
+    <span class="k">return</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">clearInterval</span><span class="p">(</span><span class="nx">interval</span><span class="p">);</span>
+  <span class="p">},</span> <span class="p">[]);</span>
+  
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">dashboard</span><span class="p">}</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">title</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Performance</span> <span class="nx">Metrics</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>      <span class="p">{</span><span class="nx">metrics</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">metric</span> <span class="o">=&gt;</span> <span class="p">(</span>
+        <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">key</span><span class="o">=</span><span class="p">{</span><span class="nx">metric</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">metric</span><span class="p">}</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">metricName</span><span class="p">}</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">metric</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>          <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">metricValue</span><span class="p">}</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">metric</span><span class="p">.</span><span class="nx">value</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>      <span class="p">))}</span>
+    <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-best-practices">✅ <strong>Best Practices</strong></h2>
+
+<h3 id="1-performance-testing"><strong>1. Performance Testing</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Performance testing utilities</span>
+<span class="kd">const</span> <span class="nx">PerformanceTester</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">runPerformanceTest</span><span class="p">:</span> <span class="k">async</span> <span class="p">(</span><span class="nx">testName</span><span class="p">,</span> <span class="nx">testFn</span><span class="p">,</span> <span class="nx">iterations</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">results</span> <span class="o">=</span> <span class="p">[];</span>
+    
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">iterations</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">start</span> <span class="o">=</span> <span class="nx">performance</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
+      <span class="k">await</span> <span class="nx">testFn</span><span class="p">();</span>
+      <span class="kd">const</span> <span class="nx">end</span> <span class="o">=</span> <span class="nx">performance</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
+      <span class="nx">results</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">end</span> <span class="o">-</span> <span class="nx">start</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="kd">const</span> <span class="nx">avg</span> <span class="o">=</span> <span class="nx">results</span><span class="p">.</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">/</span> <span class="nx">results</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+    <span class="kd">const</span> <span class="nx">min</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">min</span><span class="p">(...</span><span class="nx">results</span><span class="p">);</span>
+    <span class="kd">const</span> <span class="nx">max</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">max</span><span class="p">(...</span><span class="nx">results</span><span class="p">);</span>
+    
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`[Performance Test] </span><span class="p">${</span><span class="nx">testName</span><span class="p">}</span><span class="s2">:`</span><span class="p">,</span> <span class="p">{</span>
+      <span class="na">average</span><span class="p">:</span> <span class="s2">`</span><span class="p">${</span><span class="nx">avg</span><span class="p">.</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">2</span><span class="p">)}</span><span class="s2">ms`</span><span class="p">,</span>
+      <span class="na">min</span><span class="p">:</span> <span class="s2">`</span><span class="p">${</span><span class="nx">min</span><span class="p">.</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">2</span><span class="p">)}</span><span class="s2">ms`</span><span class="p">,</span>
+      <span class="na">max</span><span class="p">:</span> <span class="s2">`</span><span class="p">${</span><span class="nx">max</span><span class="p">.</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">2</span><span class="p">)}</span><span class="s2">ms`</span>
+    <span class="p">});</span>
+    
+    <span class="k">return</span> <span class="p">{</span> <span class="na">average</span><span class="p">:</span> <span class="nx">avg</span><span class="p">,</span> <span class="nx">min</span><span class="p">,</span> <span class="nx">max</span><span class="p">,</span> <span class="nx">results</span> <span class="p">};</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="2-performance-budgets"><strong>2. Performance Budgets</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Performance budgets</span>
+<span class="kd">const</span> <span class="nx">PerformanceBudgets</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">budgets</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">renderTime</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span> <span class="c1">// 60fps</span>
+    <span class="na">networkRequest</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span> <span class="c1">// 1 second</span>
+    <span class="na">bundleSize</span><span class="p">:</span> <span class="mi">10</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">,</span> <span class="c1">// 10MB</span>
+    <span class="na">memoryUsage</span><span class="p">:</span> <span class="mi">100</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span> <span class="c1">// 100MB</span>
+  <span class="p">},</span>
+  
+  <span class="na">checkBudget</span><span class="p">:</span> <span class="p">(</span><span class="nx">metric</span><span class="p">,</span> <span class="nx">value</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">budget</span> <span class="o">=</span> <span class="nx">PerformanceBudgets</span><span class="p">.</span><span class="nx">budgets</span><span class="p">[</span><span class="nx">metric</span><span class="p">];</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">budget</span> <span class="o">&amp;&amp;</span> <span class="nx">value</span> <span class="o">&gt;</span> <span class="nx">budget</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span><span class="s2">`[Performance Budget] </span><span class="p">${</span><span class="nx">metric</span><span class="p">}</span><span class="s2"> exceeded: </span><span class="p">${</span><span class="nx">value</span><span class="p">}</span><span class="s2"> &gt; </span><span class="p">${</span><span class="nx">budget</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-interview-questions">🎯 <strong>Interview Questions</strong></h2>
+
+<h3 id="basic-questions"><strong>Basic Questions</strong></h3>
+<ol>
+  <li><strong>How do you measure performance in React Native?</strong>
+    <ul>
+      <li>Use Chrome DevTools Performance tab</li>
+      <li>Monitor render times and memory usage</li>
+      <li>Use React Profiler for component performance</li>
+      <li>Check native performance with platform tools</li>
+    </ul>
+  </li>
+  <li><strong>What are common performance bottlenecks?</strong>
+    <ul>
+      <li>Excessive re-renders</li>
+      <li>Large bundle sizes</li>
+      <li>Memory leaks</li>
+      <li>Inefficient list rendering</li>
+      <li>Network request delays</li>
+    </ul>
+  </li>
+  <li><strong>How do you optimize React Native performance?</strong>
+    <ul>
+      <li>Use memoization and callbacks</li>
+      <li>Optimize FlatList rendering</li>
+      <li>Implement code splitting</li>
+      <li>Monitor memory usage</li>
+      <li>Optimize images and assets</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="intermediate-questions"><strong>Intermediate Questions</strong></h3>
+<ol>
+  <li><strong>How do you debug memory leaks?</strong>
+    <ul>
+      <li>Use Chrome DevTools Memory tab</li>
+      <li>Monitor memory usage over time</li>
+      <li>Check for retained references</li>
+      <li>Use memory profilers</li>
+      <li>Implement proper cleanup</li>
+    </ul>
+  </li>
+  <li><strong>What’s your approach to optimizing network performance?</strong>
+    <ul>
+      <li>Implement request caching</li>
+      <li>Use request deduplication</li>
+      <li>Batch network requests</li>
+      <li>Monitor network metrics</li>
+      <li>Optimize API responses</li>
+    </ul>
+  </li>
+  <li><strong>How do you measure and optimize UI performance?</strong>
+    <ul>
+      <li>Monitor render times</li>
+      <li>Use React Profiler</li>
+      <li>Optimize FlatList performance</li>
+      <li>Check frame rates</li>
+      <li>Implement lazy loading</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="advanced-questions"><strong>Advanced Questions</strong></h3>
+<ol>
+  <li><strong>How do you implement performance monitoring in production?</strong>
+    <ul>
+      <li>Use crash reporting services</li>
+      <li>Implement performance metrics collection</li>
+      <li>Set up performance budgets</li>
+      <li>Monitor key performance indicators</li>
+      <li>Create performance dashboards</li>
+    </ul>
+  </li>
+  <li><strong>What’s your strategy for debugging complex performance issues?</strong>
+    <ul>
+      <li>Systematic performance profiling</li>
+      <li>Isolate performance bottlenecks</li>
+      <li>Use multiple debugging tools</li>
+      <li>Implement performance testing</li>
+      <li>Monitor performance over time</li>
+    </ul>
+  </li>
+  <li><strong>How do you optimize React Native apps for different devices?</strong>
+    <ul>
+      <li>Test on various device specifications</li>
+      <li>Implement adaptive performance strategies</li>
+      <li>Use device-specific optimizations</li>
+      <li>Monitor performance across devices</li>
+      <li>Implement graceful degradation</li>
+    </ul>
+  </li>
+</ol>
+
+<hr />
+
+<h2 id="-related-topics">🔗 <strong>Related Topics</strong></h2>
+
+<ul>
+  <li><a href="/React%20Native/19-Advanced-Debugging/01-Debugging-Tools.html">Debugging Tools</a></li>
+  <li><a href="/React%20Native/19-Advanced-Debugging/03-Memory-Debugging.html">Memory Debugging</a></li>
+  <li><a href="/React%20Native/19-Advanced-Debugging/04-Native-Debugging.html">Native Debugging</a></li>
+  <li><a href="/React%20Native/05-Lists-Performance-Optimization/01-FlatList-SectionList.html">Performance Optimization</a></li>
+  <li><a href="../16-Memory-Management/01-Memory-Leaks.md">Memory Management</a></li>
+</ul>
+
+<hr />
+
+<h2 id="-navigation">🧭 Navigation</h2>
+
+<div class="navigation">
+    <a href="./01-Debugging-Tools.md" class="nav-link prev">⬅️ Previous: Debugging Tools</a>
+    <a href="./03-Memory-Debugging.md" class="nav-link next">Next: Memory Debugging ➡️</a>
+</div>
+
+<hr />
+
+<script src="../../common-scripts.js"></script>
+
+<p><em>Last updated: December 2024</em></p>
+
+        </main>
+        
+        <footer style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #ecf0f1; color: #666; text-align: center;">
+            <p>Interview Prep Documentation - Built with Jekyll</p>
+        </footer>
+    </div>
+</body>
+</html>

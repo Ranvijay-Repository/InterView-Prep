@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔄 Recursive Types &amp; Advanced Patterns - Interview Prep Documentation</title>
+    <meta name="description" content="Comprehensive guides for JavaScript, TypeScript, and React Native interview preparation">
+    
+    <!-- GitHub Pages compatible styling -->
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+        }
+        
+        .container {
+            max-width: 100%;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            color: #2c3e50;
+            margin-top: 2em;
+            margin-bottom: 1em;
+        }
+        
+        h1 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            border-bottom: 1px solid #ecf0f1;
+            padding-bottom: 5px;
+        }
+        
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border-left: 4px solid #3498db;
+        }
+        
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+        
+        blockquote {
+            border-left: 4px solid #3498db;
+            margin: 0;
+            padding-left: 20px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1em 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .navigation {
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px 0;
+            margin-bottom: 20px;
+        }
+        
+        .navigation a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+        
+        .navigation a:hover {
+            text-decoration: underline;
+        }
+        
+        .breadcrumb {
+            margin-bottom: 20px;
+            color: #666;
+        }
+        
+        .breadcrumb a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            h2 {
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="navigation">
+            <a href="/">Home</a>
+            <a href="/Javascript/">JavaScript</a>
+            <a href="/TypeScript/">TypeScript</a>
+            <a href="/React-Native/">React Native</a>
+        </nav>
+        
+        
+        
+        <main>
+            <h1 id="-recursive-types--advanced-patterns">🔄 <strong>Recursive Types &amp; Advanced Patterns</strong></h1>
+
+<blockquote>
+  <p><strong>Complete guide to TypeScript recursive types, advanced type patterns, and complex type system techniques</strong></p>
+</blockquote>
+
+<link rel="stylesheet" href="../../common-styles.css" />
+
+<hr />
+
+<h2 id="-table-of-contents">📚 <strong>Table of Contents</strong></h2>
+
+<ul>
+  <li><a href="#recursive-types-overview">Recursive Types Overview</a></li>
+  <li><a href="#basic-recursive-types">Basic Recursive Types</a></li>
+  <li><a href="#advanced-recursive-patterns">Advanced Recursive Patterns</a></li>
+  <li><a href="#complex-type-patterns">Complex Type Patterns</a></li>
+  <li><a href="#real-world-examples">Real-World Examples</a></li>
+  <li><a href="#best-practices">Best Practices</a></li>
+  <li><a href="#common-interview-questions">Common Interview Questions</a></li>
+</ul>
+
+<hr />
+
+<h2 id="-recursive-types-overview">🎯 <strong>Recursive Types Overview</strong></h2>
+
+<p>Recursive types allow TypeScript to define types that reference themselves, enabling complex data structures and advanced type patterns.</p>
+
+<h3 id="what-are-recursive-types"><strong>What are Recursive Types?</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Recursive types reference themselves</span>
+<span class="kd">const</span> <span class="nx">recursiveTypes</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">purpose</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Define types that reference themselves</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">examples</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Trees, linked lists, nested structures</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">benefits</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Type safety for complex data structures</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">patterns</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Advanced type system patterns</span><span class="dl">"</span>
+<span class="p">};</span>
+
+<span class="c1">// Basic recursive type</span>
+<span class="kr">interface</span> <span class="nx">TreeNode</span> <span class="p">{</span>
+  <span class="nl">value</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span>
+  <span class="nl">left</span><span class="p">?:</span> <span class="nx">TreeNode</span><span class="p">;</span>
+  <span class="nl">right</span><span class="p">?:</span> <span class="nx">TreeNode</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Recursive type with generics</span>
+<span class="kr">interface</span> <span class="nx">GenericTreeNode</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="na">value</span><span class="p">:</span> <span class="nx">T</span><span class="p">;</span>
+  <span class="nl">children</span><span class="p">:</span> <span class="nx">GenericTreeNode</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">[];</span>
+<span class="p">}</span>
+
+<span class="c1">// Recursive type with constraints</span>
+<span class="kr">interface</span> <span class="nx">ConstrainedTreeNode</span><span class="o">&lt;</span><span class="nx">T</span> <span class="kd">extends</span> <span class="kr">string</span> <span class="o">|</span> <span class="kr">number</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="na">value</span><span class="p">:</span> <span class="nx">T</span><span class="p">;</span>
+  <span class="nl">left</span><span class="p">?:</span> <span class="nx">ConstrainedTreeNode</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">;</span>
+  <span class="nl">right</span><span class="p">?:</span> <span class="nx">ConstrainedTreeNode</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="benefits-of-recursive-types"><strong>Benefits of Recursive Types</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Benefits of recursive types</span>
+<span class="kd">const</span> <span class="nx">benefits</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">typeSafety</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Type safety for complex data structures</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">intellisense</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Better IDE support for nested structures</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">validation</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Compile-time validation of structure</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">patterns</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Enable advanced type patterns</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">modeling</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Model complex domain concepts</span><span class="dl">"</span>
+<span class="p">};</span>
+
+<span class="c1">// Without recursive types</span>
+<span class="kr">interface</span> <span class="nx">BadTreeNode</span> <span class="p">{</span>
+  <span class="nl">value</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span>
+  <span class="nl">left</span><span class="p">?:</span> <span class="kr">any</span><span class="p">;</span> <span class="c1">// ❌ No type safety</span>
+  <span class="nl">right</span><span class="p">?:</span> <span class="kr">any</span><span class="p">;</span> <span class="c1">// ❌ No type safety</span>
+<span class="p">}</span>
+
+<span class="c1">// With recursive types</span>
+<span class="kr">interface</span> <span class="nx">GoodTreeNode</span> <span class="p">{</span>
+  <span class="nl">value</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span>
+  <span class="nl">left</span><span class="p">?:</span> <span class="nx">GoodTreeNode</span><span class="p">;</span> <span class="c1">// ✅ Type safe</span>
+  <span class="nl">right</span><span class="p">?:</span> <span class="nx">GoodTreeNode</span><span class="p">;</span> <span class="c1">// ✅ Type safe</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-basic-recursive-types">🔧 <strong>Basic Recursive Types</strong></h2>
+
+<h3 id="tree-structures"><strong>Tree Structures</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Tree structures with recursive types</span>
+<span class="kr">interface</span> <span class="nx">BinaryTree</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="na">value</span><span class="p">:</span> <span class="nx">T</span><span class="p">;</span>
+  <span class="nl">left</span><span class="p">?:</span> <span class="nx">BinaryTree</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">;</span>
+  <span class="nl">right</span><span class="p">?:</span> <span class="nx">BinaryTree</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kr">interface</span> <span class="nx">NaryTree</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="na">value</span><span class="p">:</span> <span class="nx">T</span><span class="p">;</span>
+  <span class="nl">children</span><span class="p">:</span> <span class="nx">NaryTree</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">[];</span>
+<span class="p">}</span>
+
+<span class="c1">// Tree operations</span>
+<span class="kd">function</span> <span class="nx">traverseTree</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">tree</span><span class="p">:</span> <span class="nx">BinaryTree</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">,</span> <span class="nx">callback</span><span class="p">:</span> <span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="nx">T</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+  <span class="nx">callback</span><span class="p">(</span><span class="nx">tree</span><span class="p">.</span><span class="nx">value</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">tree</span><span class="p">.</span><span class="nx">left</span><span class="p">)</span> <span class="nx">traverseTree</span><span class="p">(</span><span class="nx">tree</span><span class="p">.</span><span class="nx">left</span><span class="p">,</span> <span class="nx">callback</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">tree</span><span class="p">.</span><span class="nx">right</span><span class="p">)</span> <span class="nx">traverseTree</span><span class="p">(</span><span class="nx">tree</span><span class="p">.</span><span class="nx">right</span><span class="p">,</span> <span class="nx">callback</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">findInTree</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">tree</span><span class="p">:</span> <span class="nx">BinaryTree</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">,</span> <span class="nx">predicate</span><span class="p">:</span> <span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="nx">T</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">boolean</span><span class="p">):</span> <span class="nx">T</span> <span class="o">|</span> <span class="kc">null</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">predicate</span><span class="p">(</span><span class="nx">tree</span><span class="p">.</span><span class="nx">value</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">tree</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">tree</span><span class="p">.</span><span class="nx">left</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">leftResult</span> <span class="o">=</span> <span class="nx">findInTree</span><span class="p">(</span><span class="nx">tree</span><span class="p">.</span><span class="nx">left</span><span class="p">,</span> <span class="nx">predicate</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">leftResult</span><span class="p">)</span> <span class="k">return</span> <span class="nx">leftResult</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">tree</span><span class="p">.</span><span class="nx">right</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">rightResult</span> <span class="o">=</span> <span class="nx">findInTree</span><span class="p">(</span><span class="nx">tree</span><span class="p">.</span><span class="nx">right</span><span class="p">,</span> <span class="nx">predicate</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">rightResult</span><span class="p">)</span> <span class="k">return</span> <span class="nx">rightResult</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Usage</span>
+<span class="kd">const</span> <span class="nx">tree</span><span class="p">:</span> <span class="nx">BinaryTree</span><span class="o">&lt;</span><span class="kr">number</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">value</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+  <span class="na">left</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">value</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="na">left</span><span class="p">:</span> <span class="p">{</span> <span class="na">value</span><span class="p">:</span> <span class="mi">1</span> <span class="p">},</span>
+    <span class="na">right</span><span class="p">:</span> <span class="p">{</span> <span class="na">value</span><span class="p">:</span> <span class="mi">4</span> <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="na">right</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">value</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+    <span class="na">left</span><span class="p">:</span> <span class="p">{</span> <span class="na">value</span><span class="p">:</span> <span class="mi">6</span> <span class="p">},</span>
+    <span class="na">right</span><span class="p">:</span> <span class="p">{</span> <span class="na">value</span><span class="p">:</span> <span class="mi">9</span> <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="nx">traverseTree</span><span class="p">(</span><span class="nx">tree</span><span class="p">,</span> <span class="nx">value</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">value</span><span class="p">));</span>
+<span class="kd">const</span> <span class="nx">found</span> <span class="o">=</span> <span class="nx">findInTree</span><span class="p">(</span><span class="nx">tree</span><span class="p">,</span> <span class="nx">value</span> <span class="o">=&gt;</span> <span class="nx">value</span> <span class="o">&gt;</span> <span class="mi">7</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="linked-lists"><strong>Linked Lists</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Linked lists with recursive types</span>
+<span class="kr">interface</span> <span class="nx">ListNode</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="na">value</span><span class="p">:</span> <span class="nx">T</span><span class="p">;</span>
+  <span class="nl">next</span><span class="p">?:</span> <span class="nx">ListNode</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kr">interface</span> <span class="nx">DoublyListNode</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="na">value</span><span class="p">:</span> <span class="nx">T</span><span class="p">;</span>
+  <span class="nl">next</span><span class="p">?:</span> <span class="nx">DoublyListNode</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">;</span>
+  <span class="nl">prev</span><span class="p">?:</span> <span class="nx">DoublyListNode</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Linked list operations</span>
+<span class="kd">function</span> <span class="nx">traverseList</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">head</span><span class="p">:</span> <span class="nx">ListNode</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">,</span> <span class="nx">callback</span><span class="p">:</span> <span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="nx">T</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">current</span> <span class="o">=</span> <span class="nx">head</span><span class="p">;</span>
+  <span class="k">while</span> <span class="p">(</span><span class="nx">current</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">callback</span><span class="p">(</span><span class="nx">current</span><span class="p">.</span><span class="nx">value</span><span class="p">);</span>
+    <span class="nx">current</span> <span class="o">=</span> <span class="nx">current</span><span class="p">.</span><span class="nx">next</span><span class="o">!</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">findInList</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">head</span><span class="p">:</span> <span class="nx">ListNode</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">,</span> <span class="nx">predicate</span><span class="p">:</span> <span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="nx">T</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">boolean</span><span class="p">):</span> <span class="nx">T</span> <span class="o">|</span> <span class="kc">null</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">current</span> <span class="o">=</span> <span class="nx">head</span><span class="p">;</span>
+  <span class="k">while</span> <span class="p">(</span><span class="nx">current</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">predicate</span><span class="p">(</span><span class="nx">current</span><span class="p">.</span><span class="nx">value</span><span class="p">))</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">current</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="nx">current</span> <span class="o">=</span> <span class="nx">current</span><span class="p">.</span><span class="nx">next</span><span class="o">!</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">reverseList</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">head</span><span class="p">:</span> <span class="nx">ListNode</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">):</span> <span class="nx">ListNode</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="na">prev</span><span class="p">:</span> <span class="nx">ListNode</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">|</span> <span class="kc">undefined</span><span class="p">;</span>
+  <span class="kd">let</span> <span class="na">current</span><span class="p">:</span> <span class="nx">ListNode</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">|</span> <span class="kc">undefined</span> <span class="o">=</span> <span class="nx">head</span><span class="p">;</span>
+  
+  <span class="k">while</span> <span class="p">(</span><span class="nx">current</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">next</span> <span class="o">=</span> <span class="nx">current</span><span class="p">.</span><span class="nx">next</span><span class="p">;</span>
+    <span class="nx">current</span><span class="p">.</span><span class="nx">next</span> <span class="o">=</span> <span class="nx">prev</span><span class="p">;</span>
+    <span class="nx">prev</span> <span class="o">=</span> <span class="nx">current</span><span class="p">;</span>
+    <span class="nx">current</span> <span class="o">=</span> <span class="nx">next</span><span class="p">;</span>
+  <span class="p">}</span>
+  
+  <span class="k">return</span> <span class="nx">prev</span><span class="o">!</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Usage</span>
+<span class="kd">const</span> <span class="nx">list</span><span class="p">:</span> <span class="nx">ListNode</span><span class="o">&lt;</span><span class="kr">number</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">value</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="na">next</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">value</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="na">next</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">value</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+      <span class="na">next</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">value</span><span class="p">:</span> <span class="mi">4</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="nx">traverseList</span><span class="p">(</span><span class="nx">list</span><span class="p">,</span> <span class="nx">value</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">value</span><span class="p">));</span>
+<span class="kd">const</span> <span class="nx">found</span> <span class="o">=</span> <span class="nx">findInList</span><span class="p">(</span><span class="nx">list</span><span class="p">,</span> <span class="nx">value</span> <span class="o">=&gt;</span> <span class="nx">value</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">reversed</span> <span class="o">=</span> <span class="nx">reverseList</span><span class="p">(</span><span class="nx">list</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="nested-objects"><strong>Nested Objects</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Nested objects with recursive types</span>
+<span class="kr">interface</span> <span class="nx">NestedObject</span> <span class="p">{</span>
+  <span class="p">[</span><span class="nx">key</span><span class="p">:</span> <span class="kr">string</span><span class="p">]:</span> <span class="kr">string</span> <span class="o">|</span> <span class="kr">number</span> <span class="o">|</span> <span class="nx">boolean</span> <span class="o">|</span> <span class="nx">NestedObject</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kr">interface</span> <span class="nx">TypedNestedObject</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="p">[</span><span class="na">key</span><span class="p">:</span> <span class="kr">string</span><span class="p">]:</span> <span class="nx">T</span> <span class="o">|</span> <span class="nx">TypedNestedObject</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Nested object operations</span>
+<span class="kd">function</span> <span class="nx">getNestedValue</span><span class="p">(</span><span class="nx">obj</span><span class="p">:</span> <span class="nx">NestedObject</span><span class="p">,</span> <span class="nx">path</span><span class="p">:</span> <span class="kr">string</span><span class="p">[]):</span> <span class="kr">any</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">current</span> <span class="o">=</span> <span class="nx">obj</span><span class="p">;</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kd">const</span> <span class="nx">key</span> <span class="k">of</span> <span class="nx">path</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">current</span> <span class="o">&amp;&amp;</span> <span class="k">typeof</span> <span class="nx">current</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">object</span><span class="dl">'</span> <span class="o">&amp;&amp;</span> <span class="nx">key</span> <span class="k">in</span> <span class="nx">current</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">current</span> <span class="o">=</span> <span class="nx">current</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="k">as</span> <span class="nx">NestedObject</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="kc">undefined</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">current</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">setNestedValue</span><span class="p">(</span><span class="nx">obj</span><span class="p">:</span> <span class="nx">NestedObject</span><span class="p">,</span> <span class="nx">path</span><span class="p">:</span> <span class="kr">string</span><span class="p">[],</span> <span class="nx">value</span><span class="p">:</span> <span class="kr">any</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">current</span> <span class="o">=</span> <span class="nx">obj</span><span class="p">;</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">path</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">key</span> <span class="o">=</span> <span class="nx">path</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="nx">key</span> <span class="k">in</span> <span class="nx">current</span><span class="p">)</span> <span class="o">||</span> <span class="k">typeof</span> <span class="nx">current</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">!==</span> <span class="dl">'</span><span class="s1">object</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">current</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="p">{};</span>
+    <span class="p">}</span>
+    <span class="nx">current</span> <span class="o">=</span> <span class="nx">current</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="k">as</span> <span class="nx">NestedObject</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="nx">current</span><span class="p">[</span><span class="nx">path</span><span class="p">[</span><span class="nx">path</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Usage</span>
+<span class="kd">const</span> <span class="nx">nested</span><span class="p">:</span> <span class="nx">NestedObject</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">user</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">profile</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">John</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">age</span><span class="p">:</span> <span class="mi">30</span>
+    <span class="p">},</span>
+    <span class="na">settings</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">theme</span><span class="p">:</span> <span class="dl">'</span><span class="s1">dark</span><span class="dl">'</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">name</span> <span class="o">=</span> <span class="nx">getNestedValue</span><span class="p">(</span><span class="nx">nested</span><span class="p">,</span> <span class="p">[</span><span class="dl">'</span><span class="s1">user</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">profile</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">name</span><span class="dl">'</span><span class="p">]);</span>
+<span class="nx">setNestedValue</span><span class="p">(</span><span class="nx">nested</span><span class="p">,</span> <span class="p">[</span><span class="dl">'</span><span class="s1">user</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">profile</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">email</span><span class="dl">'</span><span class="p">],</span> <span class="dl">'</span><span class="s1">john@example.com</span><span class="dl">'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-advanced-recursive-patterns">🚀 <strong>Advanced Recursive Patterns</strong></h2>
+
+<h3 id="recursive-type-utilities"><strong>Recursive Type Utilities</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Recursive type utilities</span>
+<span class="kd">type</span> <span class="nx">DeepReadonly</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="k">readonly</span> <span class="p">[</span><span class="nx">P</span> <span class="k">in</span> <span class="kr">keyof</span> <span class="nx">T</span><span class="p">]:</span> <span class="nx">T</span><span class="p">[</span><span class="nx">P</span><span class="p">]</span> <span class="kd">extends</span> <span class="nx">object</span> <span class="p">?</span> <span class="nx">DeepReadonly</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">[</span><span class="nx">P</span><span class="p">]</span><span class="o">&gt;</span> <span class="p">:</span> <span class="nx">T</span><span class="p">[</span><span class="nx">P</span><span class="p">];</span>
+<span class="p">};</span>
+
+<span class="kd">type</span> <span class="nx">DeepPartial</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="p">[</span><span class="nx">P</span> <span class="k">in</span> <span class="kr">keyof</span> <span class="nx">T</span><span class="p">]?:</span> <span class="nx">T</span><span class="p">[</span><span class="nx">P</span><span class="p">]</span> <span class="kd">extends</span> <span class="nx">object</span> <span class="p">?</span> <span class="nx">DeepPartial</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">[</span><span class="nx">P</span><span class="p">]</span><span class="o">&gt;</span> <span class="p">:</span> <span class="nx">T</span><span class="p">[</span><span class="nx">P</span><span class="p">];</span>
+<span class="p">};</span>
+
+<span class="kd">type</span> <span class="nx">DeepRequired</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="p">[</span><span class="nx">P</span> <span class="k">in</span> <span class="kr">keyof</span> <span class="nx">T</span><span class="p">]</span><span class="o">-</span><span class="p">?:</span> <span class="nx">T</span><span class="p">[</span><span class="nx">P</span><span class="p">]</span> <span class="kd">extends</span> <span class="nx">object</span> <span class="p">?</span> <span class="nx">DeepRequired</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">[</span><span class="nx">P</span><span class="p">]</span><span class="o">&gt;</span> <span class="p">:</span> <span class="nx">T</span><span class="p">[</span><span class="nx">P</span><span class="p">];</span>
+<span class="p">};</span>
+
+<span class="kd">type</span> <span class="nx">DeepMutable</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="o">-</span><span class="k">readonly</span> <span class="p">[</span><span class="nx">P</span> <span class="k">in</span> <span class="kr">keyof</span> <span class="nx">T</span><span class="p">]:</span> <span class="nx">T</span><span class="p">[</span><span class="nx">P</span><span class="p">]</span> <span class="kd">extends</span> <span class="nx">object</span> <span class="p">?</span> <span class="nx">DeepMutable</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">[</span><span class="nx">P</span><span class="p">]</span><span class="o">&gt;</span> <span class="p">:</span> <span class="nx">T</span><span class="p">[</span><span class="nx">P</span><span class="p">];</span>
+<span class="p">};</span>
+
+<span class="c1">// Usage</span>
+<span class="kr">interface</span> <span class="nx">User</span> <span class="p">{</span>
+  <span class="nl">id</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span>
+  <span class="nl">profile</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+    <span class="nl">email</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+    <span class="nl">settings</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">theme</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+      <span class="nl">notifications</span><span class="p">:</span> <span class="nx">boolean</span><span class="p">;</span>
+    <span class="p">};</span>
+  <span class="p">};</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">ReadonlyUser</span> <span class="o">=</span> <span class="nx">DeepReadonly</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="kd">type</span> <span class="nx">PartialUser</span> <span class="o">=</span> <span class="nx">DeepPartial</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="kd">type</span> <span class="nx">RequiredUser</span> <span class="o">=</span> <span class="nx">DeepRequired</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="kd">type</span> <span class="nx">MutableUser</span> <span class="o">=</span> <span class="nx">DeepMutable</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="recursive-conditional-types"><strong>Recursive Conditional Types</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Recursive conditional types</span>
+<span class="kd">type</span> <span class="nx">Flatten</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nx">T</span> <span class="kd">extends</span> <span class="p">(</span><span class="nx">infer</span> <span class="nx">U</span><span class="p">)[]</span> <span class="p">?</span> <span class="nx">Flatten</span><span class="o">&lt;</span><span class="nx">U</span><span class="o">&gt;</span> <span class="p">:</span> <span class="nx">T</span><span class="p">;</span>
+
+<span class="kd">type</span> <span class="nx">DeepFlatten</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nx">T</span> <span class="kd">extends</span> <span class="p">(</span><span class="nx">infer</span> <span class="nx">U</span><span class="p">)[]</span> <span class="p">?</span> <span class="nx">DeepFlatten</span><span class="o">&lt;</span><span class="nx">U</span><span class="o">&gt;</span> <span class="p">:</span> <span class="nx">T</span><span class="p">;</span>
+
+<span class="kd">type</span> <span class="nx">ExtractArrayTypes</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nx">T</span> <span class="kd">extends</span> <span class="p">(</span><span class="nx">infer</span> <span class="nx">U</span><span class="p">)[]</span> <span class="p">?</span> <span class="nx">U</span> <span class="p">:</span> <span class="nx">never</span><span class="p">;</span>
+
+<span class="kd">type</span> <span class="nx">RecursiveExtract</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">,</span> <span class="nx">U</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nx">T</span> <span class="kd">extends</span> <span class="nx">U</span> <span class="p">?</span> <span class="nx">T</span> <span class="p">:</span> <span class="nx">T</span> <span class="kd">extends</span> <span class="nx">object</span> <span class="p">?</span> <span class="p">{</span>
+  <span class="p">[</span><span class="nx">K</span> <span class="k">in</span> <span class="kr">keyof</span> <span class="nx">T</span><span class="p">]:</span> <span class="nx">RecursiveExtract</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">[</span><span class="nx">K</span><span class="p">],</span> <span class="nx">U</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="p">}[</span><span class="kr">keyof</span> <span class="nx">T</span><span class="p">]</span> <span class="p">:</span> <span class="nx">never</span><span class="p">;</span>
+
+<span class="c1">// Usage</span>
+<span class="kd">type</span> <span class="nx">NestedArray</span> <span class="o">=</span> <span class="kr">number</span><span class="p">[][][];</span>
+<span class="kd">type</span> <span class="nx">Flattened</span> <span class="o">=</span> <span class="nx">Flatten</span><span class="o">&lt;</span><span class="nx">NestedArray</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// number</span>
+
+<span class="kd">type</span> <span class="nx">MixedArray</span> <span class="o">=</span> <span class="p">(</span><span class="kr">string</span> <span class="o">|</span> <span class="kr">number</span><span class="p">)[][];</span>
+<span class="kd">type</span> <span class="nx">Extracted</span> <span class="o">=</span> <span class="nx">ExtractArrayTypes</span><span class="o">&lt;</span><span class="nx">MixedArray</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// string | number</span>
+</code></pre></div></div>
+
+<h3 id="recursive-mapped-types"><strong>Recursive Mapped Types</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Recursive mapped types</span>
+<span class="kd">type</span> <span class="nx">RecursiveRecord</span><span class="o">&lt;</span><span class="nx">K</span> <span class="kd">extends</span> <span class="kr">string</span><span class="p">,</span> <span class="nx">V</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="p">[</span><span class="nx">P</span> <span class="k">in</span> <span class="nx">K</span><span class="p">]:</span> <span class="nx">V</span> <span class="o">|</span> <span class="nx">RecursiveRecord</span><span class="o">&lt;</span><span class="nx">K</span><span class="p">,</span> <span class="nx">V</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="kd">type</span> <span class="nx">RecursiveArray</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nx">T</span> <span class="o">|</span> <span class="nx">RecursiveArray</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">[];</span>
+
+<span class="kd">type</span> <span class="nx">RecursiveObject</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nx">T</span> <span class="o">|</span> <span class="p">{</span> <span class="p">[</span><span class="na">key</span><span class="p">:</span> <span class="kr">string</span><span class="p">]:</span> <span class="nx">RecursiveObject</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="p">};</span>
+
+<span class="c1">// Usage</span>
+<span class="kd">type</span> <span class="nx">NestedRecord</span> <span class="o">=</span> <span class="nx">RecursiveRecord</span><span class="o">&lt;</span><span class="dl">'</span><span class="s1">a</span><span class="dl">'</span> <span class="o">|</span> <span class="dl">'</span><span class="s1">b</span><span class="dl">'</span><span class="p">,</span> <span class="kr">string</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="kd">type</span> <span class="nx">NestedArray</span> <span class="o">=</span> <span class="nx">RecursiveArray</span><span class="o">&lt;</span><span class="kr">number</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="kd">type</span> <span class="nx">NestedObject</span> <span class="o">=</span> <span class="nx">RecursiveObject</span><span class="o">&lt;</span><span class="kr">string</span><span class="o">&gt;</span><span class="p">;</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-complex-type-patterns">🎭 <strong>Complex Type Patterns</strong></h2>
+
+<h3 id="recursive-type-guards"><strong>Recursive Type Guards</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Recursive type guards</span>
+<span class="kd">function</span> <span class="nx">isTreeNode</span><span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">):</span> <span class="nx">value</span> <span class="k">is</span> <span class="nx">TreeNode</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="k">typeof</span> <span class="nx">value</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">object</span><span class="dl">'</span> <span class="o">&amp;&amp;</span>
+    <span class="nx">value</span> <span class="o">!==</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span>
+    <span class="dl">'</span><span class="s1">value</span><span class="dl">'</span> <span class="k">in</span> <span class="nx">value</span> <span class="o">&amp;&amp;</span>
+    <span class="k">typeof</span> <span class="p">(</span><span class="nx">value</span> <span class="k">as</span> <span class="kr">any</span><span class="p">).</span><span class="nx">value</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">number</span><span class="dl">'</span> <span class="o">&amp;&amp;</span>
+    <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="dl">'</span><span class="s1">left</span><span class="dl">'</span> <span class="k">in</span> <span class="nx">value</span><span class="p">)</span> <span class="o">||</span> <span class="nx">isTreeNode</span><span class="p">((</span><span class="nx">value</span> <span class="k">as</span> <span class="kr">any</span><span class="p">).</span><span class="nx">left</span><span class="p">))</span> <span class="o">&amp;&amp;</span>
+    <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="dl">'</span><span class="s1">right</span><span class="dl">'</span> <span class="k">in</span> <span class="nx">value</span><span class="p">)</span> <span class="o">||</span> <span class="nx">isTreeNode</span><span class="p">((</span><span class="nx">value</span> <span class="k">as</span> <span class="kr">any</span><span class="p">).</span><span class="nx">right</span><span class="p">))</span>
+  <span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">isListNode</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">,</span> <span class="nx">itemGuard</span><span class="p">:</span> <span class="p">(</span><span class="nx">item</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">item</span> <span class="k">is</span> <span class="nx">T</span><span class="p">):</span> <span class="nx">value</span> <span class="k">is</span> <span class="nx">ListNode</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="k">typeof</span> <span class="nx">value</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">object</span><span class="dl">'</span> <span class="o">&amp;&amp;</span>
+    <span class="nx">value</span> <span class="o">!==</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span>
+    <span class="dl">'</span><span class="s1">value</span><span class="dl">'</span> <span class="k">in</span> <span class="nx">value</span> <span class="o">&amp;&amp;</span>
+    <span class="nx">itemGuard</span><span class="p">((</span><span class="nx">value</span> <span class="k">as</span> <span class="kr">any</span><span class="p">).</span><span class="nx">value</span><span class="p">)</span> <span class="o">&amp;&amp;</span>
+    <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="dl">'</span><span class="s1">next</span><span class="dl">'</span> <span class="k">in</span> <span class="nx">value</span><span class="p">)</span> <span class="o">||</span> <span class="nx">isListNode</span><span class="p">((</span><span class="nx">value</span> <span class="k">as</span> <span class="kr">any</span><span class="p">).</span><span class="nx">next</span><span class="p">,</span> <span class="nx">itemGuard</span><span class="p">))</span>
+  <span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">isNestedObject</span><span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">):</span> <span class="nx">value</span> <span class="k">is</span> <span class="nx">NestedObject</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">value</span> <span class="o">!==</span> <span class="dl">'</span><span class="s1">object</span><span class="dl">'</span> <span class="o">||</span> <span class="nx">value</span> <span class="o">===</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+  <span class="p">}</span>
+  
+  <span class="k">for</span> <span class="p">(</span><span class="kd">const</span> <span class="p">[</span><span class="nx">key</span><span class="p">,</span> <span class="nx">val</span><span class="p">]</span> <span class="k">of</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">entries</span><span class="p">(</span><span class="nx">value</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">val</span> <span class="o">!==</span> <span class="dl">'</span><span class="s1">string</span><span class="dl">'</span> <span class="o">&amp;&amp;</span> <span class="k">typeof</span> <span class="nx">val</span> <span class="o">!==</span> <span class="dl">'</span><span class="s1">number</span><span class="dl">'</span> <span class="o">&amp;&amp;</span> <span class="k">typeof</span> <span class="nx">val</span> <span class="o">!==</span> <span class="dl">'</span><span class="s1">boolean</span><span class="dl">'</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nx">isNestedObject</span><span class="p">(</span><span class="nx">val</span><span class="p">))</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  
+  <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="recursive-type-validation"><strong>Recursive Type Validation</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Recursive type validation</span>
+<span class="kd">type</span> <span class="nx">ValidationResult</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">valid</span><span class="p">:</span> <span class="nx">boolean</span><span class="p">;</span>
+  <span class="nl">errors</span><span class="p">:</span> <span class="kr">string</span><span class="p">[];</span>
+  <span class="nl">data</span><span class="p">?:</span> <span class="nx">T</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="kd">function</span> <span class="nx">validateTreeNode</span><span class="p">(</span><span class="nx">node</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">):</span> <span class="nx">ValidationResult</span><span class="o">&lt;</span><span class="nx">TreeNode</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="na">errors</span><span class="p">:</span> <span class="kr">string</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[];</span>
+  
+  <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">node</span> <span class="o">!==</span> <span class="dl">'</span><span class="s1">object</span><span class="dl">'</span> <span class="o">||</span> <span class="nx">node</span> <span class="o">===</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">errors</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="dl">'</span><span class="s1">Node must be an object</span><span class="dl">'</span><span class="p">);</span>
+    <span class="k">return</span> <span class="p">{</span> <span class="na">valid</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> <span class="nx">errors</span> <span class="p">};</span>
+  <span class="p">}</span>
+  
+  <span class="kd">const</span> <span class="nx">nodeObj</span> <span class="o">=</span> <span class="nx">node</span> <span class="k">as</span> <span class="kr">any</span><span class="p">;</span>
+  
+  <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">nodeObj</span><span class="p">.</span><span class="nx">value</span> <span class="o">!==</span> <span class="dl">'</span><span class="s1">number</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">errors</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="dl">'</span><span class="s1">Node value must be a number</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">}</span>
+  
+  <span class="k">if</span> <span class="p">(</span><span class="dl">'</span><span class="s1">left</span><span class="dl">'</span> <span class="k">in</span> <span class="nx">nodeObj</span> <span class="o">&amp;&amp;</span> <span class="nx">nodeObj</span><span class="p">.</span><span class="nx">left</span> <span class="o">!==</span> <span class="kc">undefined</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">leftResult</span> <span class="o">=</span> <span class="nx">validateTreeNode</span><span class="p">(</span><span class="nx">nodeObj</span><span class="p">.</span><span class="nx">left</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">leftResult</span><span class="p">.</span><span class="nx">valid</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">errors</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="s2">`Left child: </span><span class="p">${</span><span class="nx">leftResult</span><span class="p">.</span><span class="nx">errors</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="dl">'</span><span class="s1">, </span><span class="dl">'</span><span class="p">)}</span><span class="s2">`</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  
+  <span class="k">if</span> <span class="p">(</span><span class="dl">'</span><span class="s1">right</span><span class="dl">'</span> <span class="k">in</span> <span class="nx">nodeObj</span> <span class="o">&amp;&amp;</span> <span class="nx">nodeObj</span><span class="p">.</span><span class="nx">right</span> <span class="o">!==</span> <span class="kc">undefined</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">rightResult</span> <span class="o">=</span> <span class="nx">validateTreeNode</span><span class="p">(</span><span class="nx">nodeObj</span><span class="p">.</span><span class="nx">right</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">rightResult</span><span class="p">.</span><span class="nx">valid</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">errors</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="s2">`Right child: </span><span class="p">${</span><span class="nx">rightResult</span><span class="p">.</span><span class="nx">errors</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="dl">'</span><span class="s1">, </span><span class="dl">'</span><span class="p">)}</span><span class="s2">`</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="na">valid</span><span class="p">:</span> <span class="nx">errors</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">errors</span><span class="p">,</span>
+    <span class="na">data</span><span class="p">:</span> <span class="nx">errors</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">0</span> <span class="p">?</span> <span class="nx">node</span> <span class="k">as</span> <span class="nx">TreeNode</span> <span class="p">:</span> <span class="kc">undefined</span>
+  <span class="p">};</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="recursive-type-transformations"><strong>Recursive Type Transformations</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Recursive type transformations</span>
+<span class="kd">type</span> <span class="nx">TransformTree</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">,</span> <span class="nx">U</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">value</span><span class="p">:</span> <span class="nx">U</span><span class="p">;</span>
+  <span class="nl">left</span><span class="p">?:</span> <span class="nx">TransformTree</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">,</span> <span class="nx">U</span><span class="o">&gt;</span><span class="p">;</span>
+  <span class="nl">right</span><span class="p">?:</span> <span class="nx">TransformTree</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">,</span> <span class="nx">U</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="kd">function</span> <span class="nx">transformTree</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">,</span> <span class="nx">U</span><span class="o">&gt;</span><span class="p">(</span>
+  <span class="nx">tree</span><span class="p">:</span> <span class="nx">BinaryTree</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="nx">transformer</span><span class="p">:</span> <span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="nx">T</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">U</span>
+<span class="p">):</span> <span class="nx">TransformTree</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">,</span> <span class="nx">U</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="na">value</span><span class="p">:</span> <span class="nx">transformer</span><span class="p">(</span><span class="nx">tree</span><span class="p">.</span><span class="nx">value</span><span class="p">),</span>
+    <span class="na">left</span><span class="p">:</span> <span class="nx">tree</span><span class="p">.</span><span class="nx">left</span> <span class="p">?</span> <span class="nx">transformTree</span><span class="p">(</span><span class="nx">tree</span><span class="p">.</span><span class="nx">left</span><span class="p">,</span> <span class="nx">transformer</span><span class="p">)</span> <span class="p">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="na">right</span><span class="p">:</span> <span class="nx">tree</span><span class="p">.</span><span class="nx">right</span> <span class="p">?</span> <span class="nx">transformTree</span><span class="p">(</span><span class="nx">tree</span><span class="p">.</span><span class="nx">right</span><span class="p">,</span> <span class="nx">transformer</span><span class="p">)</span> <span class="p">:</span> <span class="kc">undefined</span>
+  <span class="p">};</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">FilterTree</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">value</span><span class="p">:</span> <span class="nx">T</span><span class="p">;</span>
+  <span class="nl">left</span><span class="p">?:</span> <span class="nx">FilterTree</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">;</span>
+  <span class="nl">right</span><span class="p">?:</span> <span class="nx">FilterTree</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="kd">function</span> <span class="nx">filterTree</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">(</span>
+  <span class="nx">tree</span><span class="p">:</span> <span class="nx">BinaryTree</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="nx">predicate</span><span class="p">:</span> <span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="nx">T</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">boolean</span>
+<span class="p">):</span> <span class="nx">FilterTree</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">|</span> <span class="kc">null</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">predicate</span><span class="p">(</span><span class="nx">tree</span><span class="p">.</span><span class="nx">value</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+  <span class="p">}</span>
+  
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="na">value</span><span class="p">:</span> <span class="nx">tree</span><span class="p">.</span><span class="nx">value</span><span class="p">,</span>
+    <span class="na">left</span><span class="p">:</span> <span class="nx">tree</span><span class="p">.</span><span class="nx">left</span> <span class="p">?</span> <span class="nx">filterTree</span><span class="p">(</span><span class="nx">tree</span><span class="p">.</span><span class="nx">left</span><span class="p">,</span> <span class="nx">predicate</span><span class="p">)</span> <span class="p">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="na">right</span><span class="p">:</span> <span class="nx">tree</span><span class="p">.</span><span class="nx">right</span> <span class="p">?</span> <span class="nx">filterTree</span><span class="p">(</span><span class="nx">tree</span><span class="p">.</span><span class="nx">right</span><span class="p">,</span> <span class="nx">predicate</span><span class="p">)</span> <span class="p">:</span> <span class="kc">undefined</span>
+  <span class="p">};</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-real-world-examples">🌍 <strong>Real-World Examples</strong></h2>
+
+<h3 id="file-system-tree"><strong>File System Tree</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// File system tree with recursive types</span>
+<span class="kr">interface</span> <span class="nx">FileNode</span> <span class="p">{</span>
+  <span class="nl">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">file</span><span class="dl">'</span> <span class="o">|</span> <span class="dl">'</span><span class="s1">directory</span><span class="dl">'</span><span class="p">;</span>
+  <span class="nl">size</span><span class="p">?:</span> <span class="kr">number</span><span class="p">;</span>
+  <span class="nl">children</span><span class="p">?:</span> <span class="nx">FileNode</span><span class="p">[];</span>
+<span class="p">}</span>
+
+<span class="c1">// File system operations</span>
+<span class="kd">function</span> <span class="nx">findFile</span><span class="p">(</span><span class="nx">root</span><span class="p">:</span> <span class="nx">FileNode</span><span class="p">,</span> <span class="nx">fileName</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nx">FileNode</span> <span class="o">|</span> <span class="kc">null</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">root</span><span class="p">.</span><span class="nx">name</span> <span class="o">===</span> <span class="nx">fileName</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">root</span><span class="p">;</span>
+  <span class="p">}</span>
+  
+  <span class="k">if</span> <span class="p">(</span><span class="nx">root</span><span class="p">.</span><span class="nx">children</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">const</span> <span class="nx">child</span> <span class="k">of</span> <span class="nx">root</span><span class="p">.</span><span class="nx">children</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">found</span> <span class="o">=</span> <span class="nx">findFile</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">fileName</span><span class="p">);</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">found</span><span class="p">)</span> <span class="k">return</span> <span class="nx">found</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  
+  <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">calculateTotalSize</span><span class="p">(</span><span class="nx">root</span><span class="p">:</span> <span class="nx">FileNode</span><span class="p">):</span> <span class="kr">number</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">root</span><span class="p">.</span><span class="kd">type</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">file</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">root</span><span class="p">.</span><span class="nx">size</span> <span class="o">||</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="p">}</span>
+  
+  <span class="k">if</span> <span class="p">(</span><span class="nx">root</span><span class="p">.</span><span class="nx">children</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">root</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">total</span><span class="p">,</span> <span class="nx">child</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">total</span> <span class="o">+</span> <span class="nx">calculateTotalSize</span><span class="p">(</span><span class="nx">child</span><span class="p">),</span> <span class="mi">0</span><span class="p">);</span>
+  <span class="p">}</span>
+  
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">listAllFiles</span><span class="p">(</span><span class="nx">root</span><span class="p">:</span> <span class="nx">FileNode</span><span class="p">):</span> <span class="kr">string</span><span class="p">[]</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">files</span><span class="p">:</span> <span class="kr">string</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[];</span>
+  
+  <span class="k">if</span> <span class="p">(</span><span class="nx">root</span><span class="p">.</span><span class="kd">type</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">file</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">files</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">root</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+  <span class="p">}</span>
+  
+  <span class="k">if</span> <span class="p">(</span><span class="nx">root</span><span class="p">.</span><span class="nx">children</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">const</span> <span class="nx">child</span> <span class="k">of</span> <span class="nx">root</span><span class="p">.</span><span class="nx">children</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">files</span><span class="p">.</span><span class="nx">push</span><span class="p">(...</span><span class="nx">listAllFiles</span><span class="p">(</span><span class="nx">child</span><span class="p">));</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  
+  <span class="k">return</span> <span class="nx">files</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Usage</span>
+<span class="kd">const</span> <span class="nx">fileSystem</span><span class="p">:</span> <span class="nx">FileNode</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">root</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">directory</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">children</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">documents</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">directory</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">children</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">readme.txt</span><span class="dl">'</span><span class="p">,</span> <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">file</span><span class="dl">'</span><span class="p">,</span> <span class="na">size</span><span class="p">:</span> <span class="mi">1024</span> <span class="p">},</span>
+        <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">notes.md</span><span class="dl">'</span><span class="p">,</span> <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">file</span><span class="dl">'</span><span class="p">,</span> <span class="na">size</span><span class="p">:</span> <span class="mi">2048</span> <span class="p">}</span>
+      <span class="p">]</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">images</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">directory</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">children</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">photo.jpg</span><span class="dl">'</span><span class="p">,</span> <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">file</span><span class="dl">'</span><span class="p">,</span> <span class="na">size</span><span class="p">:</span> <span class="mi">1024000</span> <span class="p">}</span>
+      <span class="p">]</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">foundFile</span> <span class="o">=</span> <span class="nx">findFile</span><span class="p">(</span><span class="nx">fileSystem</span><span class="p">,</span> <span class="dl">'</span><span class="s1">readme.txt</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">totalSize</span> <span class="o">=</span> <span class="nx">calculateTotalSize</span><span class="p">(</span><span class="nx">fileSystem</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">allFiles</span> <span class="o">=</span> <span class="nx">listAllFiles</span><span class="p">(</span><span class="nx">fileSystem</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="json-schema-validation"><strong>JSON Schema Validation</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// JSON schema validation with recursive types</span>
+<span class="kr">interface</span> <span class="nx">JsonSchema</span> <span class="p">{</span>
+  <span class="nl">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">string</span><span class="dl">'</span> <span class="o">|</span> <span class="dl">'</span><span class="s1">number</span><span class="dl">'</span> <span class="o">|</span> <span class="dl">'</span><span class="s1">boolean</span><span class="dl">'</span> <span class="o">|</span> <span class="dl">'</span><span class="s1">object</span><span class="dl">'</span> <span class="o">|</span> <span class="dl">'</span><span class="s1">array</span><span class="dl">'</span><span class="p">;</span>
+  <span class="nl">properties</span><span class="p">?:</span> <span class="nb">Record</span><span class="o">&lt;</span><span class="kr">string</span><span class="p">,</span> <span class="nx">JsonSchema</span><span class="o">&gt;</span><span class="p">;</span>
+  <span class="nl">items</span><span class="p">?:</span> <span class="nx">JsonSchema</span><span class="p">;</span>
+  <span class="nl">required</span><span class="p">?:</span> <span class="kr">string</span><span class="p">[];</span>
+  <span class="nl">enum</span><span class="p">?:</span> <span class="kr">any</span><span class="p">[];</span>
+<span class="p">}</span>
+
+<span class="c1">// Schema validation</span>
+<span class="kd">function</span> <span class="nx">validateAgainstSchema</span><span class="p">(</span><span class="nx">data</span><span class="p">:</span> <span class="kr">any</span><span class="p">,</span> <span class="nx">schema</span><span class="p">:</span> <span class="nx">JsonSchema</span><span class="p">):</span> <span class="nx">boolean</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">schema</span><span class="p">.</span><span class="kd">type</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">string</span><span class="dl">'</span> <span class="o">&amp;&amp;</span> <span class="k">typeof</span> <span class="nx">data</span> <span class="o">!==</span> <span class="dl">'</span><span class="s1">string</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+  <span class="p">}</span>
+  
+  <span class="k">if</span> <span class="p">(</span><span class="nx">schema</span><span class="p">.</span><span class="kd">type</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">number</span><span class="dl">'</span> <span class="o">&amp;&amp;</span> <span class="k">typeof</span> <span class="nx">data</span> <span class="o">!==</span> <span class="dl">'</span><span class="s1">number</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+  <span class="p">}</span>
+  
+  <span class="k">if</span> <span class="p">(</span><span class="nx">schema</span><span class="p">.</span><span class="kd">type</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">boolean</span><span class="dl">'</span> <span class="o">&amp;&amp;</span> <span class="k">typeof</span> <span class="nx">data</span> <span class="o">!==</span> <span class="dl">'</span><span class="s1">boolean</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+  <span class="p">}</span>
+  
+  <span class="k">if</span> <span class="p">(</span><span class="nx">schema</span><span class="p">.</span><span class="kd">type</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">object</span><span class="dl">'</span> <span class="o">&amp;&amp;</span> <span class="k">typeof</span> <span class="nx">data</span> <span class="o">!==</span> <span class="dl">'</span><span class="s1">object</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+  <span class="p">}</span>
+  
+  <span class="k">if</span> <span class="p">(</span><span class="nx">schema</span><span class="p">.</span><span class="kd">type</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">array</span><span class="dl">'</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nb">Array</span><span class="p">.</span><span class="nx">isArray</span><span class="p">(</span><span class="nx">data</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+  <span class="p">}</span>
+  
+  <span class="k">if</span> <span class="p">(</span><span class="nx">schema</span><span class="p">.</span><span class="kr">enum</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nx">schema</span><span class="p">.</span><span class="kr">enum</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="nx">data</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+  <span class="p">}</span>
+  
+  <span class="k">if</span> <span class="p">(</span><span class="nx">schema</span><span class="p">.</span><span class="kd">type</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">object</span><span class="dl">'</span> <span class="o">&amp;&amp;</span> <span class="nx">schema</span><span class="p">.</span><span class="nx">properties</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">const</span> <span class="p">[</span><span class="nx">key</span><span class="p">,</span> <span class="nx">propSchema</span><span class="p">]</span> <span class="k">of</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">entries</span><span class="p">(</span><span class="nx">schema</span><span class="p">.</span><span class="nx">properties</span><span class="p">))</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">schema</span><span class="p">.</span><span class="nx">required</span><span class="p">?.</span><span class="nx">includes</span><span class="p">(</span><span class="nx">key</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="p">(</span><span class="nx">key</span> <span class="k">in</span> <span class="nx">data</span><span class="p">))</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">key</span> <span class="k">in</span> <span class="nx">data</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nx">validateAgainstSchema</span><span class="p">(</span><span class="nx">data</span><span class="p">[</span><span class="nx">key</span><span class="p">],</span> <span class="nx">propSchema</span><span class="p">))</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  
+  <span class="k">if</span> <span class="p">(</span><span class="nx">schema</span><span class="p">.</span><span class="kd">type</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">array</span><span class="dl">'</span> <span class="o">&amp;&amp;</span> <span class="nx">schema</span><span class="p">.</span><span class="nx">items</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">const</span> <span class="nx">item</span> <span class="k">of</span> <span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">validateAgainstSchema</span><span class="p">(</span><span class="nx">item</span><span class="p">,</span> <span class="nx">schema</span><span class="p">.</span><span class="nx">items</span><span class="p">))</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  
+  <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Usage</span>
+<span class="kd">const</span> <span class="nx">userSchema</span><span class="p">:</span> <span class="nx">JsonSchema</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">object</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">properties</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">id</span><span class="p">:</span> <span class="p">{</span> <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">number</span><span class="dl">'</span> <span class="p">},</span>
+    <span class="na">name</span><span class="p">:</span> <span class="p">{</span> <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">string</span><span class="dl">'</span> <span class="p">},</span>
+    <span class="na">email</span><span class="p">:</span> <span class="p">{</span> <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">string</span><span class="dl">'</span> <span class="p">},</span>
+    <span class="na">profile</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">object</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">properties</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">age</span><span class="p">:</span> <span class="p">{</span> <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">number</span><span class="dl">'</span> <span class="p">},</span>
+        <span class="na">settings</span><span class="p">:</span> <span class="p">{</span>
+          <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">object</span><span class="dl">'</span><span class="p">,</span>
+          <span class="na">properties</span><span class="p">:</span> <span class="p">{</span>
+            <span class="na">theme</span><span class="p">:</span> <span class="p">{</span> <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">string</span><span class="dl">'</span><span class="p">,</span> <span class="na">enum</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">light</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">dark</span><span class="dl">'</span><span class="p">]</span> <span class="p">}</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="na">required</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">id</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">name</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">email</span><span class="dl">'</span><span class="p">]</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">userData</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">John</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">email</span><span class="p">:</span> <span class="dl">'</span><span class="s1">john@example.com</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">profile</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">age</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
+    <span class="na">settings</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">theme</span><span class="p">:</span> <span class="dl">'</span><span class="s1">dark</span><span class="dl">'</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">isValid</span> <span class="o">=</span> <span class="nx">validateAgainstSchema</span><span class="p">(</span><span class="nx">userData</span><span class="p">,</span> <span class="nx">userSchema</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="component-tree"><strong>Component Tree</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Component tree with recursive types</span>
+<span class="kr">interface</span> <span class="nx">ComponentNode</span> <span class="p">{</span>
+  <span class="nl">id</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">type</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">props</span><span class="p">:</span> <span class="nb">Record</span><span class="o">&lt;</span><span class="kr">string</span><span class="p">,</span> <span class="kr">any</span><span class="o">&gt;</span><span class="p">;</span>
+  <span class="nl">children</span><span class="p">?:</span> <span class="nx">ComponentNode</span><span class="p">[];</span>
+<span class="p">}</span>
+
+<span class="c1">// Component operations</span>
+<span class="kd">function</span> <span class="nx">findComponent</span><span class="p">(</span><span class="nx">root</span><span class="p">:</span> <span class="nx">ComponentNode</span><span class="p">,</span> <span class="nx">componentId</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nx">ComponentNode</span> <span class="o">|</span> <span class="kc">null</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">root</span><span class="p">.</span><span class="nx">id</span> <span class="o">===</span> <span class="nx">componentId</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">root</span><span class="p">;</span>
+  <span class="p">}</span>
+  
+  <span class="k">if</span> <span class="p">(</span><span class="nx">root</span><span class="p">.</span><span class="nx">children</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">const</span> <span class="nx">child</span> <span class="k">of</span> <span class="nx">root</span><span class="p">.</span><span class="nx">children</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">found</span> <span class="o">=</span> <span class="nx">findComponent</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">componentId</span><span class="p">);</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">found</span><span class="p">)</span> <span class="k">return</span> <span class="nx">found</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  
+  <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">getComponentPath</span><span class="p">(</span><span class="nx">root</span><span class="p">:</span> <span class="nx">ComponentNode</span><span class="p">,</span> <span class="nx">componentId</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="kr">string</span><span class="p">[]</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">root</span><span class="p">.</span><span class="nx">id</span> <span class="o">===</span> <span class="nx">componentId</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">[</span><span class="nx">root</span><span class="p">.</span><span class="nx">id</span><span class="p">];</span>
+  <span class="p">}</span>
+  
+  <span class="k">if</span> <span class="p">(</span><span class="nx">root</span><span class="p">.</span><span class="nx">children</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">const</span> <span class="nx">child</span> <span class="k">of</span> <span class="nx">root</span><span class="p">.</span><span class="nx">children</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">path</span> <span class="o">=</span> <span class="nx">getComponentPath</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">componentId</span><span class="p">);</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">path</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">[</span><span class="nx">root</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span> <span class="p">...</span><span class="nx">path</span><span class="p">];</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  
+  <span class="k">return</span> <span class="p">[];</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">renderComponent</span><span class="p">(</span><span class="nx">node</span><span class="p">:</span> <span class="nx">ComponentNode</span><span class="p">):</span> <span class="kr">string</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">result</span> <span class="o">=</span> <span class="s2">`&lt;</span><span class="p">${</span><span class="nx">node</span><span class="p">.</span><span class="kd">type</span><span class="p">}</span><span class="s2"> id="</span><span class="p">${</span><span class="nx">node</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span><span class="s2">"&gt;`</span><span class="p">;</span>
+  
+  <span class="k">if</span> <span class="p">(</span><span class="nx">node</span><span class="p">.</span><span class="nx">children</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">const</span> <span class="nx">child</span> <span class="k">of</span> <span class="nx">node</span><span class="p">.</span><span class="nx">children</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">result</span> <span class="o">+=</span> <span class="nx">renderComponent</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  
+  <span class="nx">result</span> <span class="o">+=</span> <span class="s2">`&lt;/</span><span class="p">${</span><span class="nx">node</span><span class="p">.</span><span class="kd">type</span><span class="p">}</span><span class="s2">&gt;`</span><span class="p">;</span>
+  <span class="k">return</span> <span class="nx">result</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Usage</span>
+<span class="kd">const</span> <span class="nx">componentTree</span><span class="p">:</span> <span class="nx">ComponentNode</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">id</span><span class="p">:</span> <span class="dl">'</span><span class="s1">root</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">div</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">props</span><span class="p">:</span> <span class="p">{</span> <span class="na">className</span><span class="p">:</span> <span class="dl">'</span><span class="s1">app</span><span class="dl">'</span> <span class="p">},</span>
+  <span class="na">children</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="na">id</span><span class="p">:</span> <span class="dl">'</span><span class="s1">header</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">header</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">props</span><span class="p">:</span> <span class="p">{</span> <span class="na">className</span><span class="p">:</span> <span class="dl">'</span><span class="s1">header</span><span class="dl">'</span> <span class="p">},</span>
+      <span class="na">children</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span> <span class="na">id</span><span class="p">:</span> <span class="dl">'</span><span class="s1">logo</span><span class="dl">'</span><span class="p">,</span> <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">img</span><span class="dl">'</span><span class="p">,</span> <span class="na">props</span><span class="p">:</span> <span class="p">{</span> <span class="na">src</span><span class="p">:</span> <span class="dl">'</span><span class="s1">logo.png</span><span class="dl">'</span> <span class="p">}</span> <span class="p">},</span>
+        <span class="p">{</span> <span class="na">id</span><span class="p">:</span> <span class="dl">'</span><span class="s1">nav</span><span class="dl">'</span><span class="p">,</span> <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">nav</span><span class="dl">'</span><span class="p">,</span> <span class="na">props</span><span class="p">:</span> <span class="p">{</span> <span class="na">className</span><span class="p">:</span> <span class="dl">'</span><span class="s1">navigation</span><span class="dl">'</span> <span class="p">}</span> <span class="p">}</span>
+      <span class="p">]</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="na">id</span><span class="p">:</span> <span class="dl">'</span><span class="s1">main</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">main</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">props</span><span class="p">:</span> <span class="p">{</span> <span class="na">className</span><span class="p">:</span> <span class="dl">'</span><span class="s1">main-content</span><span class="dl">'</span> <span class="p">},</span>
+      <span class="na">children</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span> <span class="na">id</span><span class="p">:</span> <span class="dl">'</span><span class="s1">sidebar</span><span class="dl">'</span><span class="p">,</span> <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">aside</span><span class="dl">'</span><span class="p">,</span> <span class="na">props</span><span class="p">:</span> <span class="p">{</span> <span class="na">className</span><span class="p">:</span> <span class="dl">'</span><span class="s1">sidebar</span><span class="dl">'</span> <span class="p">}</span> <span class="p">},</span>
+        <span class="p">{</span> <span class="na">id</span><span class="p">:</span> <span class="dl">'</span><span class="s1">content</span><span class="dl">'</span><span class="p">,</span> <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">section</span><span class="dl">'</span><span class="p">,</span> <span class="na">props</span><span class="p">:</span> <span class="p">{</span> <span class="na">className</span><span class="p">:</span> <span class="dl">'</span><span class="s1">content</span><span class="dl">'</span> <span class="p">}</span> <span class="p">}</span>
+      <span class="p">]</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">foundComponent</span> <span class="o">=</span> <span class="nx">findComponent</span><span class="p">(</span><span class="nx">componentTree</span><span class="p">,</span> <span class="dl">'</span><span class="s1">nav</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">componentPath</span> <span class="o">=</span> <span class="nx">getComponentPath</span><span class="p">(</span><span class="nx">componentTree</span><span class="p">,</span> <span class="dl">'</span><span class="s1">nav</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">renderedHTML</span> <span class="o">=</span> <span class="nx">renderComponent</span><span class="p">(</span><span class="nx">componentTree</span><span class="p">);</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-best-practices">✅ <strong>Best Practices</strong></h2>
+
+<h3 id="1-use-recursive-types-for-tree-like-structures"><strong>1. Use Recursive Types for Tree-like Structures</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ✅ Good: Recursive types for trees</span>
+<span class="kr">interface</span> <span class="nx">TreeNode</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="na">value</span><span class="p">:</span> <span class="nx">T</span><span class="p">;</span>
+  <span class="nl">children</span><span class="p">:</span> <span class="nx">TreeNode</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">[];</span>
+<span class="p">}</span>
+
+<span class="c1">// ❌ Avoid: Non-recursive types for trees</span>
+<span class="kr">interface</span> <span class="nx">BadTreeNode</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="na">value</span><span class="p">:</span> <span class="nx">T</span><span class="p">;</span>
+  <span class="nl">children</span><span class="p">:</span> <span class="kr">any</span><span class="p">[];</span> <span class="c1">// ❌ No type safety</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="2-provide-type-guards-for-recursive-types"><strong>2. Provide Type Guards for Recursive Types</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ✅ Good: Type guards for recursive types</span>
+<span class="kd">function</span> <span class="nx">isTreeNode</span><span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">):</span> <span class="nx">value</span> <span class="k">is</span> <span class="nx">TreeNode</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="k">typeof</span> <span class="nx">value</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">object</span><span class="dl">'</span> <span class="o">&amp;&amp;</span>
+    <span class="nx">value</span> <span class="o">!==</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span>
+    <span class="dl">'</span><span class="s1">value</span><span class="dl">'</span> <span class="k">in</span> <span class="nx">value</span> <span class="o">&amp;&amp;</span>
+    <span class="nb">Array</span><span class="p">.</span><span class="nx">isArray</span><span class="p">((</span><span class="nx">value</span> <span class="k">as</span> <span class="kr">any</span><span class="p">).</span><span class="nx">children</span><span class="p">)</span> <span class="o">&amp;&amp;</span>
+    <span class="p">(</span><span class="nx">value</span> <span class="k">as</span> <span class="kr">any</span><span class="p">).</span><span class="nx">children</span><span class="p">.</span><span class="nx">every</span><span class="p">(</span><span class="nx">isTreeNode</span><span class="p">)</span>
+  <span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// ❌ Avoid: No type guards</span>
+<span class="kd">function</span> <span class="nx">processTreeNode</span><span class="p">(</span><span class="nx">node</span><span class="p">:</span> <span class="kr">any</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// ❌ No type safety</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="3-use-recursive-utilities-for-deep-operations"><strong>3. Use Recursive Utilities for Deep Operations</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ✅ Good: Recursive utilities</span>
+<span class="kd">type</span> <span class="nx">DeepReadonly</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="k">readonly</span> <span class="p">[</span><span class="nx">P</span> <span class="k">in</span> <span class="kr">keyof</span> <span class="nx">T</span><span class="p">]:</span> <span class="nx">T</span><span class="p">[</span><span class="nx">P</span><span class="p">]</span> <span class="kd">extends</span> <span class="nx">object</span> <span class="p">?</span> <span class="nx">DeepReadonly</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">[</span><span class="nx">P</span><span class="p">]</span><span class="o">&gt;</span> <span class="p">:</span> <span class="nx">T</span><span class="p">[</span><span class="nx">P</span><span class="p">];</span>
+<span class="p">};</span>
+
+<span class="c1">// ❌ Avoid: Manual deep operations</span>
+<span class="kd">function</span> <span class="nx">makeReadonly</span><span class="p">(</span><span class="nx">obj</span><span class="p">:</span> <span class="kr">any</span><span class="p">):</span> <span class="kr">any</span> <span class="p">{</span>
+  <span class="c1">// ❌ Manual and error-prone</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="4-handle-recursive-type-limits"><strong>4. Handle Recursive Type Limits</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ✅ Good: Handle recursion limits</span>
+<span class="kd">type</span> <span class="nx">SafeRecursive</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">,</span> <span class="nx">Depth</span> <span class="kd">extends</span> <span class="kr">number</span> <span class="o">=</span> <span class="mi">5</span><span class="o">&gt;</span> <span class="o">=</span> 
+  <span class="nx">Depth</span> <span class="kd">extends</span> <span class="mi">0</span> <span class="p">?</span> <span class="nx">T</span> <span class="p">:</span> <span class="p">{</span>
+    <span class="p">[</span><span class="nx">P</span> <span class="k">in</span> <span class="kr">keyof</span> <span class="nx">T</span><span class="p">]:</span> <span class="nx">T</span><span class="p">[</span><span class="nx">P</span><span class="p">]</span> <span class="kd">extends</span> <span class="nx">object</span> <span class="p">?</span> <span class="nx">SafeRecursive</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">[</span><span class="nx">P</span><span class="p">],</span> <span class="nx">Prev</span><span class="o">&lt;</span><span class="nx">Depth</span><span class="o">&gt;&gt;</span> <span class="p">:</span> <span class="nx">T</span><span class="p">[</span><span class="nx">P</span><span class="p">];</span>
+  <span class="p">};</span>
+
+<span class="c1">// ❌ Avoid: Unlimited recursion</span>
+<span class="kd">type</span> <span class="nx">UnsafeRecursive</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="p">[</span><span class="nx">P</span> <span class="k">in</span> <span class="kr">keyof</span> <span class="nx">T</span><span class="p">]:</span> <span class="nx">T</span><span class="p">[</span><span class="nx">P</span><span class="p">]</span> <span class="kd">extends</span> <span class="nx">object</span> <span class="p">?</span> <span class="nx">UnsafeRecursive</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">[</span><span class="nx">P</span><span class="p">]</span><span class="o">&gt;</span> <span class="p">:</span> <span class="nx">T</span><span class="p">[</span><span class="nx">P</span><span class="p">];</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-common-interview-questions">❓ <strong>Common Interview Questions</strong></h2>
+
+<h3 id="1-what-are-recursive-types-in-typescript"><strong>1. What are recursive types in TypeScript?</strong></h3>
+
+<p><strong>Answer:</strong>
+Recursive types are types that reference themselves, allowing you to define complex data structures like trees, linked lists, and nested objects with full type safety.</p>
+
+<h3 id="2-how-do-you-create-recursive-types"><strong>2. How do you create recursive types?</strong></h3>
+
+<p><strong>Answer:</strong></p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">interface</span> <span class="nx">TreeNode</span> <span class="p">{</span>
+  <span class="nl">value</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span>
+  <span class="nl">left</span><span class="p">?:</span> <span class="nx">TreeNode</span><span class="p">;</span>
+  <span class="nl">right</span><span class="p">?:</span> <span class="nx">TreeNode</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The type references itself in the <code class="language-plaintext highlighter-rouge">left</code> and <code class="language-plaintext highlighter-rouge">right</code> properties.</p>
+
+<h3 id="3-what-are-the-benefits-of-recursive-types"><strong>3. What are the benefits of recursive types?</strong></h3>
+
+<p><strong>Answer:</strong></p>
+<ul>
+  <li><strong>Type Safety</strong>: Full type safety for complex data structures</li>
+  <li><strong>IntelliSense</strong>: Better IDE support for nested structures</li>
+  <li><strong>Validation</strong>: Compile-time validation of structure</li>
+  <li><strong>Patterns</strong>: Enable advanced type patterns</li>
+  <li><strong>Modeling</strong>: Model complex domain concepts</li>
+</ul>
+
+<h3 id="4-how-do-you-handle-recursion-limits-in-typescript"><strong>4. How do you handle recursion limits in TypeScript?</strong></h3>
+
+<p><strong>Answer:</strong>
+TypeScript has recursion limits to prevent infinite recursion. You can handle this by:</p>
+<ul>
+  <li>Using conditional types with depth limits</li>
+  <li>Breaking down complex recursive types</li>
+  <li>Using iterative approaches where possible</li>
+</ul>
+
+<h3 id="5-what-are-some-real-world-use-cases-for-recursive-types"><strong>5. What are some real-world use cases for recursive types?</strong></h3>
+
+<p><strong>Answer:</strong></p>
+<ul>
+  <li><strong>File Systems</strong>: Directory trees and file hierarchies</li>
+  <li><strong>Component Trees</strong>: UI component hierarchies</li>
+  <li><strong>JSON Schemas</strong>: Nested validation schemas</li>
+  <li><strong>Data Structures</strong>: Trees, linked lists, graphs</li>
+  <li><strong>Configuration</strong>: Nested configuration objects</li>
+</ul>
+
+<hr />
+
+<h2 id="-navigation">🧭 Navigation</h2>
+
+<div class="navigation">
+  <a href="03-Branded-Types-Opaque-Types.md" class="nav-button">← Previous: Branded Types &amp; Opaque Types</a>
+  <a href="../09-TypeScript-Performance-Optimization/01-Compilation-Performance.md" class="nav-button">Next: TypeScript Performance &amp; Optimization →</a>
+</div>
+
+<p><em>Last updated: December 2025</em></p>
+
+        </main>
+        
+        <footer style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #ecf0f1; color: #666; text-align: center;">
+            <p>Interview Prep Documentation - Built with Jekyll</p>
+        </footer>
+    </div>
+</body>
+</html>

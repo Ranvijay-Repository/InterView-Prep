@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎨 Styling &amp; Flexbox - Interview Prep Documentation</title>
+    <meta name="description" content="Comprehensive guides for JavaScript, TypeScript, and React Native interview preparation">
+    
+    <!-- GitHub Pages compatible styling -->
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+        }
+        
+        .container {
+            max-width: 100%;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            color: #2c3e50;
+            margin-top: 2em;
+            margin-bottom: 1em;
+        }
+        
+        h1 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            border-bottom: 1px solid #ecf0f1;
+            padding-bottom: 5px;
+        }
+        
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border-left: 4px solid #3498db;
+        }
+        
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+        
+        blockquote {
+            border-left: 4px solid #3498db;
+            margin: 0;
+            padding-left: 20px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1em 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .navigation {
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px 0;
+            margin-bottom: 20px;
+        }
+        
+        .navigation a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+        
+        .navigation a:hover {
+            text-decoration: underline;
+        }
+        
+        .breadcrumb {
+            margin-bottom: 20px;
+            color: #666;
+        }
+        
+        .breadcrumb a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            h2 {
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="navigation">
+            <a href="/">Home</a>
+            <a href="/Javascript/">JavaScript</a>
+            <a href="/TypeScript/">TypeScript</a>
+            <a href="/React-Native/">React Native</a>
+        </nav>
+        
+        
+        
+        <main>
+            <h1 id="-styling--flexbox">🎨 <strong>Styling &amp; Flexbox</strong></h1>
+
+<blockquote>
+  <p><strong>Master the styling system and Flexbox layout in React Native for creating beautiful and responsive mobile interfaces</strong></p>
+</blockquote>
+
+<link rel="stylesheet" href="../../common-styles.css" />
+
+<hr />
+
+<h2 id="-table-of-contents">📚 <strong>Table of Contents</strong></h2>
+
+<ul>
+  <li><a href="#introduction">Introduction</a></li>
+  <li><a href="#stylesheet-api">StyleSheet API</a></li>
+  <li><a href="#flexbox-fundamentals">Flexbox Fundamentals</a></li>
+  <li><a href="#layout-properties">Layout Properties</a></li>
+  <li><a href="#common-layout-patterns">Common Layout Patterns</a></li>
+  <li><a href="#responsive-design">Responsive Design</a></li>
+  <li><a href="#platform-specific-styling">Platform-Specific Styling</a></li>
+  <li><a href="#performance-optimization">Performance Optimization</a></li>
+  <li><a href="#interview-questions">Interview Questions</a></li>
+  <li><a href="#best-practices">Best Practices</a></li>
+</ul>
+
+<hr />
+
+<h2 id="-introduction">🎯 <strong>Introduction</strong></h2>
+
+<p>React Native uses a subset of CSS properties and implements Flexbox for layout. Understanding the styling system is crucial for creating beautiful and responsive mobile applications.</p>
+
+<h3 id="styling-system-overview"><strong>Styling System Overview</strong></h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>┌─────────────────────────────────────┐
+│        React Native Styling         │
+│  ┌─────────────────────────────────┐│
+│  │        StyleSheet API           ││
+│  │  - StyleSheet.create()          ││
+│  │  - Style validation             ││
+│  │  - Performance optimization     ││
+│  └─────────────────────────────────┘│
+│  ┌─────────────────────────────────┐│
+│  │        Flexbox Layout           ││
+│  │  - Flex direction               ││
+│  │  - Justify content              ││
+│  │  - Align items                  ││
+│  └─────────────────────────────────┘│
+│  ┌─────────────────────────────────┐│
+│  │        Layout Properties        ││
+│  │  - Dimensions                   ││
+│  │  - Positioning                  ││
+│  │  - Margins &amp; Padding            ││
+│  └─────────────────────────────────┘│
+└─────────────────────────────────────┘
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-stylesheet-api">📋 <strong>StyleSheet API</strong></h2>
+
+<p>The <code class="language-plaintext highlighter-rouge">StyleSheet</code> API provides a way to create and manage styles in React Native.</p>
+
+<h3 id="basic-stylesheet-usage"><strong>Basic StyleSheet Usage</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">View</span><span class="p">,</span> <span class="nx">Text</span><span class="p">,</span> <span class="nx">StyleSheet</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">BasicStyling</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">container</span><span class="p">}</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">title</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Welcome</span> <span class="nx">to</span> <span class="nx">React</span> <span class="nx">Native</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">subtitle</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Styling</span> <span class="kd">with</span> <span class="nx">StyleSheet</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">card</span><span class="p">}</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">cardText</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">This</span> <span class="nx">is</span> <span class="nx">a</span> <span class="nx">card</span> <span class="nx">component</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>    <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">styles</span> <span class="o">=</span> <span class="nx">StyleSheet</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span>
+  <span class="na">container</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">flex</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#f5f5f5</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">padding</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">title</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">fontSize</span><span class="p">:</span> <span class="mi">24</span><span class="p">,</span>
+    <span class="na">fontWeight</span><span class="p">:</span> <span class="dl">'</span><span class="s1">bold</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#333</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">marginBottom</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="na">textAlign</span><span class="p">:</span> <span class="dl">'</span><span class="s1">center</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">subtitle</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">fontSize</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+    <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#666</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">marginBottom</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="na">textAlign</span><span class="p">:</span> <span class="dl">'</span><span class="s1">center</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">card</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">white</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">padding</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="na">borderRadius</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="na">shadowColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#000</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">shadowOffset</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">width</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="na">height</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="na">shadowOpacity</span><span class="p">:</span> <span class="mf">0.25</span><span class="p">,</span>
+    <span class="na">shadowRadius</span><span class="p">:</span> <span class="mf">3.84</span><span class="p">,</span>
+    <span class="na">elevation</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">cardText</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">fontSize</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+    <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#444</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">lineHeight</span><span class="p">:</span> <span class="mi">24</span><span class="p">,</span>
+  <span class="p">},</span>
+<span class="p">});</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">BasicStyling</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="stylesheet-with-dynamic-styles"><strong>StyleSheet with Dynamic Styles</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useState</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">View</span><span class="p">,</span> <span class="nx">Text</span><span class="p">,</span> <span class="nx">TouchableOpacity</span><span class="p">,</span> <span class="nx">StyleSheet</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">DynamicStyling</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">isActive</span><span class="p">,</span> <span class="nx">setIsActive</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">theme</span><span class="p">,</span> <span class="nx">setTheme</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="dl">'</span><span class="s1">light</span><span class="dl">'</span><span class="p">);</span>
+  
+  <span class="kd">const</span> <span class="nx">toggleActive</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">setIsActive</span><span class="p">(</span><span class="o">!</span><span class="nx">isActive</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="nx">toggleTheme</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">setTheme</span><span class="p">(</span><span class="nx">theme</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">light</span><span class="dl">'</span> <span class="p">?</span> <span class="dl">'</span><span class="s1">dark</span><span class="dl">'</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">light</span><span class="dl">'</span><span class="p">);</span>
+  
+  <span class="kd">const</span> <span class="nx">dynamicStyles</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">container</span><span class="p">:</span> <span class="p">{</span>
+      <span class="p">...</span><span class="nx">styles</span><span class="p">.</span><span class="nx">container</span><span class="p">,</span>
+      <span class="na">backgroundColor</span><span class="p">:</span> <span class="nx">theme</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">light</span><span class="dl">'</span> <span class="p">?</span> <span class="dl">'</span><span class="s1">#f5f5f5</span><span class="dl">'</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">#333</span><span class="dl">'</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="na">text</span><span class="p">:</span> <span class="p">{</span>
+      <span class="p">...</span><span class="nx">styles</span><span class="p">.</span><span class="nx">text</span><span class="p">,</span>
+      <span class="na">color</span><span class="p">:</span> <span class="nx">theme</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">light</span><span class="dl">'</span> <span class="p">?</span> <span class="dl">'</span><span class="s1">#333</span><span class="dl">'</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">#fff</span><span class="dl">'</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="na">button</span><span class="p">:</span> <span class="p">{</span>
+      <span class="p">...</span><span class="nx">styles</span><span class="p">.</span><span class="nx">button</span><span class="p">,</span>
+      <span class="na">backgroundColor</span><span class="p">:</span> <span class="nx">isActive</span> <span class="p">?</span> <span class="dl">'</span><span class="s1">#007AFF</span><span class="dl">'</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">#ccc</span><span class="dl">'</span><span class="p">,</span>
+    <span class="p">},</span>
+  <span class="p">};</span>
+  
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">dynamicStyles</span><span class="p">.</span><span class="nx">container</span><span class="p">}</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">dynamicStyles</span><span class="p">.</span><span class="nx">text</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Dynamic</span> <span class="nx">Styling</span> <span class="nx">Example</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>      
+      <span class="o">&lt;</span><span class="nx">TouchableOpacity</span> 
+        <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">dynamicStyles</span><span class="p">.</span><span class="nx">button</span><span class="p">}</span>
+        <span class="nx">onPress</span><span class="o">=</span><span class="p">{</span><span class="nx">toggleActive</span><span class="p">}</span>
+      <span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">buttonText</span><span class="p">}</span><span class="o">&gt;</span>
+          <span class="p">{</span><span class="nx">isActive</span> <span class="p">?</span> <span class="dl">'</span><span class="s1">Active</span><span class="dl">'</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">Inactive</span><span class="dl">'</span><span class="p">}</span>
+        <span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/TouchableOpacity</span><span class="err">&gt;
+</span>      
+      <span class="o">&lt;</span><span class="nx">TouchableOpacity</span> 
+        <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">themeButton</span><span class="p">}</span>
+        <span class="nx">onPress</span><span class="o">=</span><span class="p">{</span><span class="nx">toggleTheme</span><span class="p">}</span>
+      <span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">buttonText</span><span class="p">}</span><span class="o">&gt;</span>
+          <span class="nx">Switch</span> <span class="nx">to</span> <span class="p">{</span><span class="nx">theme</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">light</span><span class="dl">'</span> <span class="p">?</span> <span class="dl">'</span><span class="s1">Dark</span><span class="dl">'</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">Light</span><span class="dl">'</span><span class="p">}</span> <span class="nx">Theme</span>
+        <span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/TouchableOpacity</span><span class="err">&gt;
+</span>    <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">styles</span> <span class="o">=</span> <span class="nx">StyleSheet</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span>
+  <span class="na">container</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">flex</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="na">padding</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="na">justifyContent</span><span class="p">:</span> <span class="dl">'</span><span class="s1">center</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">alignItems</span><span class="p">:</span> <span class="dl">'</span><span class="s1">center</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">text</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">fontSize</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="na">fontWeight</span><span class="p">:</span> <span class="dl">'</span><span class="s1">bold</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">marginBottom</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">button</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">padding</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+    <span class="na">borderRadius</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+    <span class="na">marginBottom</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="na">minWidth</span><span class="p">:</span> <span class="mi">150</span><span class="p">,</span>
+    <span class="na">alignItems</span><span class="p">:</span> <span class="dl">'</span><span class="s1">center</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">themeButton</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">padding</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+    <span class="na">borderRadius</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+    <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#FF6B6B</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">minWidth</span><span class="p">:</span> <span class="mi">150</span><span class="p">,</span>
+    <span class="na">alignItems</span><span class="p">:</span> <span class="dl">'</span><span class="s1">center</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">buttonText</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">white</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">fontWeight</span><span class="p">:</span> <span class="dl">'</span><span class="s1">bold</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">fontSize</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+  <span class="p">},</span>
+<span class="p">});</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">DynamicStyling</span><span class="p">;</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-flexbox-fundamentals">🔄 <strong>Flexbox Fundamentals</strong></h2>
+
+<p>Flexbox is the primary layout system in React Native. Understanding its properties is essential for creating responsive layouts.</p>
+
+<h3 id="flex-direction"><strong>Flex Direction</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">View</span><span class="p">,</span> <span class="nx">Text</span><span class="p">,</span> <span class="nx">StyleSheet</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">FlexDirection</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">container</span><span class="p">}</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">title</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Flex</span> <span class="nx">Direction</span> <span class="nx">Examples</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>      
+      <span class="p">{</span><span class="cm">/* Row (default) */</span><span class="p">}</span>
+      <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">example</span><span class="p">}</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">label</span><span class="p">}</span><span class="o">&gt;</span><span class="na">flexDirection</span><span class="p">:</span> <span class="dl">'</span><span class="s1">row</span><span class="dl">'</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{[</span><span class="nx">styles</span><span class="p">.</span><span class="nx">flexContainer</span><span class="p">,</span> <span class="nx">styles</span><span class="p">.</span><span class="nx">row</span><span class="p">]}</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{[</span><span class="nx">styles</span><span class="p">.</span><span class="nx">box</span><span class="p">,</span> <span class="nx">styles</span><span class="p">.</span><span class="nx">box1</span><span class="p">]}</span> <span class="sr">/</span><span class="err">&gt;
+</span>          <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{[</span><span class="nx">styles</span><span class="p">.</span><span class="nx">box</span><span class="p">,</span> <span class="nx">styles</span><span class="p">.</span><span class="nx">box2</span><span class="p">]}</span> <span class="sr">/</span><span class="err">&gt;
+</span>          <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{[</span><span class="nx">styles</span><span class="p">.</span><span class="nx">box</span><span class="p">,</span> <span class="nx">styles</span><span class="p">.</span><span class="nx">box3</span><span class="p">]}</span> <span class="sr">/</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>      
+      <span class="p">{</span><span class="cm">/* Column */</span><span class="p">}</span>
+      <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">example</span><span class="p">}</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">label</span><span class="p">}</span><span class="o">&gt;</span><span class="na">flexDirection</span><span class="p">:</span> <span class="dl">'</span><span class="s1">column</span><span class="dl">'</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{[</span><span class="nx">styles</span><span class="p">.</span><span class="nx">flexContainer</span><span class="p">,</span> <span class="nx">styles</span><span class="p">.</span><span class="nx">column</span><span class="p">]}</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{[</span><span class="nx">styles</span><span class="p">.</span><span class="nx">box</span><span class="p">,</span> <span class="nx">styles</span><span class="p">.</span><span class="nx">box1</span><span class="p">]}</span> <span class="sr">/</span><span class="err">&gt;
+</span>          <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{[</span><span class="nx">styles</span><span class="p">.</span><span class="nx">box</span><span class="p">,</span> <span class="nx">styles</span><span class="p">.</span><span class="nx">box2</span><span class="p">]}</span> <span class="sr">/</span><span class="err">&gt;
+</span>          <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{[</span><span class="nx">styles</span><span class="p">.</span><span class="nx">box</span><span class="p">,</span> <span class="nx">styles</span><span class="p">.</span><span class="nx">box3</span><span class="p">]}</span> <span class="sr">/</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>      
+      <span class="p">{</span><span class="cm">/* Row Reverse */</span><span class="p">}</span>
+      <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">example</span><span class="p">}</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">label</span><span class="p">}</span><span class="o">&gt;</span><span class="na">flexDirection</span><span class="p">:</span> <span class="dl">'</span><span class="s1">row-reverse</span><span class="dl">'</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{[</span><span class="nx">styles</span><span class="p">.</span><span class="nx">flexContainer</span><span class="p">,</span> <span class="nx">styles</span><span class="p">.</span><span class="nx">rowReverse</span><span class="p">]}</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{[</span><span class="nx">styles</span><span class="p">.</span><span class="nx">box</span><span class="p">,</span> <span class="nx">styles</span><span class="p">.</span><span class="nx">box1</span><span class="p">]}</span> <span class="sr">/</span><span class="err">&gt;
+</span>          <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{[</span><span class="nx">styles</span><span class="p">.</span><span class="nx">box</span><span class="p">,</span> <span class="nx">styles</span><span class="p">.</span><span class="nx">box2</span><span class="p">]}</span> <span class="sr">/</span><span class="err">&gt;
+</span>          <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{[</span><span class="nx">styles</span><span class="p">.</span><span class="nx">box</span><span class="p">,</span> <span class="nx">styles</span><span class="p">.</span><span class="nx">box3</span><span class="p">]}</span> <span class="sr">/</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>    <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">styles</span> <span class="o">=</span> <span class="nx">StyleSheet</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span>
+  <span class="na">container</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">flex</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="na">padding</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#f5f5f5</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">title</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">fontSize</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="na">fontWeight</span><span class="p">:</span> <span class="dl">'</span><span class="s1">bold</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">marginBottom</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="na">textAlign</span><span class="p">:</span> <span class="dl">'</span><span class="s1">center</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">example</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">marginBottom</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">label</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">fontSize</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+    <span class="na">fontWeight</span><span class="p">:</span> <span class="dl">'</span><span class="s1">600</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">marginBottom</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#333</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">flexContainer</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">height</span><span class="p">:</span> <span class="mi">80</span><span class="p">,</span>
+    <span class="na">borderWidth</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="na">borderColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#ddd</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">padding</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">row</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">flexDirection</span><span class="p">:</span> <span class="dl">'</span><span class="s1">row</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">column</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">flexDirection</span><span class="p">:</span> <span class="dl">'</span><span class="s1">column</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">rowReverse</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">flexDirection</span><span class="p">:</span> <span class="dl">'</span><span class="s1">row-reverse</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">box</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">width</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>
+    <span class="na">height</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>
+    <span class="na">margin</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">box1</span><span class="p">:</span> <span class="p">{</span> <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#FF6B6B</span><span class="dl">'</span> <span class="p">},</span>
+  <span class="na">box2</span><span class="p">:</span> <span class="p">{</span> <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#4ECDC4</span><span class="dl">'</span> <span class="p">},</span>
+  <span class="na">box3</span><span class="p">:</span> <span class="p">{</span> <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#45B7D1</span><span class="dl">'</span> <span class="p">},</span>
+<span class="p">});</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">FlexDirection</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="justify-content"><strong>Justify Content</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">View</span><span class="p">,</span> <span class="nx">Text</span><span class="p">,</span> <span class="nx">StyleSheet</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">JustifyContent</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">container</span><span class="p">}</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">title</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Justify</span> <span class="nx">Content</span> <span class="nx">Examples</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>      
+      <span class="p">{</span><span class="cm">/* Flex Start */</span><span class="p">}</span>
+      <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">example</span><span class="p">}</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">label</span><span class="p">}</span><span class="o">&gt;</span><span class="na">justifyContent</span><span class="p">:</span> <span class="dl">'</span><span class="s1">flex-start</span><span class="dl">'</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{[</span><span class="nx">styles</span><span class="p">.</span><span class="nx">flexContainer</span><span class="p">,</span> <span class="nx">styles</span><span class="p">.</span><span class="nx">flexStart</span><span class="p">]}</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{[</span><span class="nx">styles</span><span class="p">.</span><span class="nx">box</span><span class="p">,</span> <span class="nx">styles</span><span class="p">.</span><span class="nx">box1</span><span class="p">]}</span> <span class="sr">/</span><span class="err">&gt;
+</span>          <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{[</span><span class="nx">styles</span><span class="p">.</span><span class="nx">box</span><span class="p">,</span> <span class="nx">styles</span><span class="p">.</span><span class="nx">box2</span><span class="p">]}</span> <span class="sr">/</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>      
+      <span class="p">{</span><span class="cm">/* Center */</span><span class="p">}</span>
+      <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">example</span><span class="p">}</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">label</span><span class="p">}</span><span class="o">&gt;</span><span class="na">justifyContent</span><span class="p">:</span> <span class="dl">'</span><span class="s1">center</span><span class="dl">'</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{[</span><span class="nx">styles</span><span class="p">.</span><span class="nx">flexContainer</span><span class="p">,</span> <span class="nx">styles</span><span class="p">.</span><span class="nx">center</span><span class="p">]}</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{[</span><span class="nx">styles</span><span class="p">.</span><span class="nx">box</span><span class="p">,</span> <span class="nx">styles</span><span class="p">.</span><span class="nx">box1</span><span class="p">]}</span> <span class="sr">/</span><span class="err">&gt;
+</span>          <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{[</span><span class="nx">styles</span><span class="p">.</span><span class="nx">box</span><span class="p">,</span> <span class="nx">styles</span><span class="p">.</span><span class="nx">box2</span><span class="p">]}</span> <span class="sr">/</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>      
+      <span class="p">{</span><span class="cm">/* Flex End */</span><span class="p">}</span>
+      <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">example</span><span class="p">}</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">label</span><span class="p">}</span><span class="o">&gt;</span><span class="na">justifyContent</span><span class="p">:</span> <span class="dl">'</span><span class="s1">flex-end</span><span class="dl">'</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{[</span><span class="nx">styles</span><span class="p">.</span><span class="nx">flexContainer</span><span class="p">,</span> <span class="nx">styles</span><span class="p">.</span><span class="nx">flexEnd</span><span class="p">]}</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{[</span><span class="nx">styles</span><span class="p">.</span><span class="nx">box</span><span class="p">,</span> <span class="nx">styles</span><span class="p">.</span><span class="nx">box1</span><span class="p">]}</span> <span class="sr">/</span><span class="err">&gt;
+</span>          <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{[</span><span class="nx">styles</span><span class="p">.</span><span class="nx">box</span><span class="p">,</span> <span class="nx">styles</span><span class="p">.</span><span class="nx">box2</span><span class="p">]}</span> <span class="sr">/</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>      
+      <span class="p">{</span><span class="cm">/* Space Between */</span><span class="p">}</span>
+      <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">example</span><span class="p">}</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">label</span><span class="p">}</span><span class="o">&gt;</span><span class="na">justifyContent</span><span class="p">:</span> <span class="dl">'</span><span class="s1">space-between</span><span class="dl">'</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{[</span><span class="nx">styles</span><span class="p">.</span><span class="nx">flexContainer</span><span class="p">,</span> <span class="nx">styles</span><span class="p">.</span><span class="nx">spaceBetween</span><span class="p">]}</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{[</span><span class="nx">styles</span><span class="p">.</span><span class="nx">box</span><span class="p">,</span> <span class="nx">styles</span><span class="p">.</span><span class="nx">box1</span><span class="p">]}</span> <span class="sr">/</span><span class="err">&gt;
+</span>          <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{[</span><span class="nx">styles</span><span class="p">.</span><span class="nx">box</span><span class="p">,</span> <span class="nx">styles</span><span class="p">.</span><span class="nx">box2</span><span class="p">]}</span> <span class="sr">/</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>      
+      <span class="p">{</span><span class="cm">/* Space Around */</span><span class="p">}</span>
+      <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">example</span><span class="p">}</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">label</span><span class="p">}</span><span class="o">&gt;</span><span class="na">justifyContent</span><span class="p">:</span> <span class="dl">'</span><span class="s1">space-around</span><span class="dl">'</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{[</span><span class="nx">styles</span><span class="p">.</span><span class="nx">flexContainer</span><span class="p">,</span> <span class="nx">styles</span><span class="p">.</span><span class="nx">spaceAround</span><span class="p">]}</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{[</span><span class="nx">styles</span><span class="p">.</span><span class="nx">box</span><span class="p">,</span> <span class="nx">styles</span><span class="p">.</span><span class="nx">box1</span><span class="p">]}</span> <span class="sr">/</span><span class="err">&gt;
+</span>          <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{[</span><span class="nx">styles</span><span class="p">.</span><span class="nx">box</span><span class="p">,</span> <span class="nx">styles</span><span class="p">.</span><span class="nx">box2</span><span class="p">]}</span> <span class="sr">/</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>    <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">styles</span> <span class="o">=</span> <span class="nx">StyleSheet</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span>
+  <span class="na">container</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">flex</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="na">padding</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#f5f5f5</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">title</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">fontSize</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="na">fontWeight</span><span class="p">:</span> <span class="dl">'</span><span class="s1">bold</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">marginBottom</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="na">textAlign</span><span class="p">:</span> <span class="dl">'</span><span class="s1">center</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">example</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">marginBottom</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">label</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">fontSize</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+    <span class="na">fontWeight</span><span class="p">:</span> <span class="dl">'</span><span class="s1">600</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">marginBottom</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#333</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">flexContainer</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">height</span><span class="p">:</span> <span class="mi">60</span><span class="p">,</span>
+    <span class="na">flexDirection</span><span class="p">:</span> <span class="dl">'</span><span class="s1">row</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">borderWidth</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="na">borderColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#ddd</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">padding</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">flexStart</span><span class="p">:</span> <span class="p">{</span> <span class="na">justifyContent</span><span class="p">:</span> <span class="dl">'</span><span class="s1">flex-start</span><span class="dl">'</span> <span class="p">},</span>
+  <span class="na">center</span><span class="p">:</span> <span class="p">{</span> <span class="na">justifyContent</span><span class="p">:</span> <span class="dl">'</span><span class="s1">center</span><span class="dl">'</span> <span class="p">},</span>
+  <span class="na">flexEnd</span><span class="p">:</span> <span class="p">{</span> <span class="na">justifyContent</span><span class="p">:</span> <span class="dl">'</span><span class="s1">flex-end</span><span class="dl">'</span> <span class="p">},</span>
+  <span class="na">spaceBetween</span><span class="p">:</span> <span class="p">{</span> <span class="na">justifyContent</span><span class="p">:</span> <span class="dl">'</span><span class="s1">space-between</span><span class="dl">'</span> <span class="p">},</span>
+  <span class="na">spaceAround</span><span class="p">:</span> <span class="p">{</span> <span class="na">justifyContent</span><span class="p">:</span> <span class="dl">'</span><span class="s1">space-around</span><span class="dl">'</span> <span class="p">},</span>
+  <span class="na">box</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">width</span><span class="p">:</span> <span class="mi">40</span><span class="p">,</span>
+    <span class="na">height</span><span class="p">:</span> <span class="mi">40</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">box1</span><span class="p">:</span> <span class="p">{</span> <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#FF6B6B</span><span class="dl">'</span> <span class="p">},</span>
+  <span class="na">box2</span><span class="p">:</span> <span class="p">{</span> <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#4ECDC4</span><span class="dl">'</span> <span class="p">},</span>
+<span class="p">});</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">JustifyContent</span><span class="p">;</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-layout-properties">📐 <strong>Layout Properties</strong></h2>
+
+<p>Understanding layout properties is essential for creating precise and responsive designs.</p>
+
+<h3 id="dimensions-and-positioning"><strong>Dimensions and Positioning</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">View</span><span class="p">,</span> <span class="nx">Text</span><span class="p">,</span> <span class="nx">StyleSheet</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">LayoutProperties</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">container</span><span class="p">}</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">title</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Layout</span> <span class="nx">Properties</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>      
+      <span class="p">{</span><span class="cm">/* Fixed Dimensions */</span><span class="p">}</span>
+      <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">example</span><span class="p">}</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">label</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Fixed</span> <span class="nx">Dimensions</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">fixedBox</span><span class="p">}</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">boxText</span><span class="p">}</span><span class="o">&gt;</span><span class="mi">200</span><span class="nx">x100</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>      
+      <span class="p">{</span><span class="cm">/* Flexible Dimensions */</span><span class="p">}</span>
+      <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">example</span><span class="p">}</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">label</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Flexible</span> <span class="nx">Dimensions</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">flexibleContainer</span><span class="p">}</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{[</span><span class="nx">styles</span><span class="p">.</span><span class="nx">flexibleBox</span><span class="p">,</span> <span class="nx">styles</span><span class="p">.</span><span class="nx">flex1</span><span class="p">]}</span><span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">boxText</span><span class="p">}</span><span class="o">&gt;</span><span class="na">Flex</span><span class="p">:</span> <span class="mi">1</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>          <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>          <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{[</span><span class="nx">styles</span><span class="p">.</span><span class="nx">flexibleBox</span><span class="p">,</span> <span class="nx">styles</span><span class="p">.</span><span class="nx">flex2</span><span class="p">]}</span><span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">boxText</span><span class="p">}</span><span class="o">&gt;</span><span class="na">Flex</span><span class="p">:</span> <span class="mi">2</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>          <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>      
+      <span class="p">{</span><span class="cm">/* Positioning */</span><span class="p">}</span>
+      <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">example</span><span class="p">}</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">label</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Positioning</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">positioningContainer</span><span class="p">}</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{[</span><span class="nx">styles</span><span class="p">.</span><span class="nx">positionedBox</span><span class="p">,</span> <span class="nx">styles</span><span class="p">.</span><span class="nx">absolute</span><span class="p">]}</span><span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">boxText</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Absolute</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>          <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>          <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{[</span><span class="nx">styles</span><span class="p">.</span><span class="nx">positionedBox</span><span class="p">,</span> <span class="nx">styles</span><span class="p">.</span><span class="nx">relative</span><span class="p">]}</span><span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">boxText</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Relative</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>          <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>    <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">styles</span> <span class="o">=</span> <span class="nx">StyleSheet</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span>
+  <span class="na">container</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">flex</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="na">padding</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#f5f5f5</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">title</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">fontSize</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="na">fontWeight</span><span class="p">:</span> <span class="dl">'</span><span class="s1">bold</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">marginBottom</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="na">textAlign</span><span class="p">:</span> <span class="dl">'</span><span class="s1">center</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">example</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">marginBottom</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">label</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">fontSize</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+    <span class="na">fontWeight</span><span class="p">:</span> <span class="dl">'</span><span class="s1">600</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">marginBottom</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#333</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">fixedBox</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">width</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span>
+    <span class="na">height</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#FF6B6B</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">justifyContent</span><span class="p">:</span> <span class="dl">'</span><span class="s1">center</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">alignItems</span><span class="p">:</span> <span class="dl">'</span><span class="s1">center</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">borderRadius</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">flexibleContainer</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">height</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="na">flexDirection</span><span class="p">:</span> <span class="dl">'</span><span class="s1">row</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">flexibleBox</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">justifyContent</span><span class="p">:</span> <span class="dl">'</span><span class="s1">center</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">alignItems</span><span class="p">:</span> <span class="dl">'</span><span class="s1">center</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">borderRadius</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+    <span class="na">marginHorizontal</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">flex1</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">flex</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#4ECDC4</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">flex2</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">flex</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#45B7D1</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">positioningContainer</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">height</span><span class="p">:</span> <span class="mi">150</span><span class="p">,</span>
+    <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#f0f0f0</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">position</span><span class="p">:</span> <span class="dl">'</span><span class="s1">relative</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">borderRadius</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">positionedBox</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">width</span><span class="p">:</span> <span class="mi">80</span><span class="p">,</span>
+    <span class="na">height</span><span class="p">:</span> <span class="mi">60</span><span class="p">,</span>
+    <span class="na">justifyContent</span><span class="p">:</span> <span class="dl">'</span><span class="s1">center</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">alignItems</span><span class="p">:</span> <span class="dl">'</span><span class="s1">center</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">borderRadius</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">absolute</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">position</span><span class="p">:</span> <span class="dl">'</span><span class="s1">absolute</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">top</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="na">right</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#FF6B6B</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">relative</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">position</span><span class="p">:</span> <span class="dl">'</span><span class="s1">relative</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">top</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="na">left</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#4ECDC4</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">boxText</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">white</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">fontWeight</span><span class="p">:</span> <span class="dl">'</span><span class="s1">bold</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">fontSize</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+  <span class="p">},</span>
+<span class="p">});</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">LayoutProperties</span><span class="p">;</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-navigation">🧭 Navigation</h2>
+
+<div class="navigation">
+    <a href="./01-Core-Components.md" class="nav-link prev">⬅️ Previous: Core Components</a>
+    <a href="./03-Platform-APIs.md" class="nav-link next">Next: Platform APIs ➡️</a>
+</div>
+
+<hr />
+
+<p><em>Last updated: December 2024</em></p>
+
+        </main>
+        
+        <footer style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #ecf0f1; color: #666; text-align: center;">
+            <p>Interview Prep Documentation - Built with Jekyll</p>
+        </footer>
+    </div>
+</body>
+</html>

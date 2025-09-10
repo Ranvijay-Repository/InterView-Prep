@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔄 Deep Copy vs Shallow Copy - Interview Prep Documentation</title>
+    <meta name="description" content="Comprehensive guides for JavaScript, TypeScript, and React Native interview preparation">
+    
+    <!-- GitHub Pages compatible styling -->
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+        }
+        
+        .container {
+            max-width: 100%;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            color: #2c3e50;
+            margin-top: 2em;
+            margin-bottom: 1em;
+        }
+        
+        h1 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            border-bottom: 1px solid #ecf0f1;
+            padding-bottom: 5px;
+        }
+        
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border-left: 4px solid #3498db;
+        }
+        
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+        
+        blockquote {
+            border-left: 4px solid #3498db;
+            margin: 0;
+            padding-left: 20px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1em 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .navigation {
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px 0;
+            margin-bottom: 20px;
+        }
+        
+        .navigation a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+        
+        .navigation a:hover {
+            text-decoration: underline;
+        }
+        
+        .breadcrumb {
+            margin-bottom: 20px;
+            color: #666;
+        }
+        
+        .breadcrumb a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            h2 {
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="navigation">
+            <a href="/">Home</a>
+            <a href="/Javascript/">JavaScript</a>
+            <a href="/TypeScript/">TypeScript</a>
+            <a href="/React-Native/">React Native</a>
+        </nav>
+        
+        
+        
+        <main>
+            <h1 id="-deep-copy-vs-shallow-copy">🔄 Deep Copy vs Shallow Copy</h1>
+
+<blockquote>
+  <p><strong>Understanding how to properly clone objects and arrays in JavaScript</strong></p>
+</blockquote>
+
+<link rel="stylesheet" href="../common-styles.css" />
+
+<hr />
+
+<h2 id="-table-of-contents">📋 Table of Contents</h2>
+
+<ul>
+  <li><a href="#what-is-copying">What is Copying?</a></li>
+  <li><a href="#shallow-copy">Shallow Copy</a></li>
+  <li><a href="#deep-copy">Deep Copy</a></li>
+  <li><a href="#key-differences">Key Differences</a></li>
+  <li><a href="#copy-methods-comparison">Copy Methods Comparison</a></li>
+  <li><a href="#detailed-examples">Detailed Examples</a></li>
+  <li><a href="#common-pitfalls">Common Pitfalls</a></li>
+  <li><a href="#best-practices">Best Practices</a></li>
+  <li><a href="#key-points">Key Points</a></li>
+  <li><a href="#common-interview-questions">Common Interview Questions</a></li>
+  <li><a href="#practice-exercises">Practice Exercises</a></li>
+  <li><a href="#additional-resources">Additional Resources</a></li>
+</ul>
+
+<hr />
+
+<h2 id="-what-is-copying">🎯 What is Copying?</h2>
+
+<p><strong>Copying</strong> in JavaScript means creating a new instance of an object or array that is independent of the original. The goal is to avoid unintended mutations of the original data.</p>
+
+<h3 id="why-copying-matters">Why Copying Matters:</h3>
+<ul>
+  <li><strong>Data Integrity</strong>: Prevent accidental changes to original data</li>
+  <li><strong>Immutability</strong>: Create new versions instead of modifying existing ones</li>
+  <li><strong>State Management</strong>: Essential for React, Redux, and modern JavaScript patterns</li>
+  <li><strong>Bug Prevention</strong>: Avoid shared reference issues</li>
+</ul>
+
+<hr />
+
+<h2 id="-shallow-copy">🔍 Shallow Copy</h2>
+
+<p><strong>Shallow Copy</strong> creates a new object/array but only copies references to nested objects/arrays. The nested structures are still shared between the original and the copy.</p>
+
+<h3 id="ascii-diagram-shallow-copy">ASCII Diagram: Shallow Copy</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ORIGINAL OBJECT          SHALLOW COPY
+┌─────────────────┐     ┌─────────────────┐
+│ name: "John"    │     │ name: "John"    │
+│ age: 30         │     │ age: 30         │
+│ address: ───────┼─────┤ address: ───────┼─────┐
+└─────────────────┘     └─────────────────┘     │
+                        │                 │     │
+                        └─────────────────┘     │
+                                                ▼
+                                        ┌─────────────┐
+                                        │ city: "NY"  │
+                                        │ zip: "10001"│
+                                        └─────────────┘
+                                        (SHARED REFERENCE)
+</code></pre></div></div>
+
+<h3 id="shallow-copy-methods">Shallow Copy Methods:</h3>
+<ol>
+  <li><strong>Spread Operator</strong> (<code class="language-plaintext highlighter-rouge">...</code>)</li>
+  <li><strong>Object.assign()</strong></li>
+  <li><strong>Array.slice()</strong></li>
+  <li><strong>Array.from()</strong></li>
+</ol>
+
+<hr />
+
+<h2 id="️-deep-copy">🗃️ Deep Copy</h2>
+
+<p><strong>Deep Copy</strong> creates a completely independent copy of an object/array, including all nested structures. No references are shared between the original and the copy.</p>
+
+<h3 id="ascii-diagram-deep-copy">ASCII Diagram: Deep Copy</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ORIGINAL OBJECT          DEEP COPY
+┌─────────────────┐     ┌─────────────────┐
+│ name: "John"    │     │ name: "John"    │
+│ age: 30         │     │ age: 30         │
+│ address: ───────┼─────┤ address: ───────┼─────┐
+└─────────────────┘     └─────────────────┘     │
+                        │                 │     │
+                        └─────────────────┘     │
+                                                ▼
+                                        ┌─────────────┐
+                                        │ city: "NY"  │
+                                        │ zip: "10001"│
+                                        └─────────────┘
+                                        (INDEPENDENT COPY)
+</code></pre></div></div>
+
+<h3 id="deep-copy-methods">Deep Copy Methods:</h3>
+<ol>
+  <li><strong>JSON.parse(JSON.stringify())</strong></li>
+  <li><strong>structuredClone()</strong> (Modern browsers)</li>
+  <li><strong>Lodash.cloneDeep()</strong></li>
+  <li><strong>Custom recursive function</strong></li>
+</ol>
+
+<hr />
+
+<h2 id="️-key-differences">⚖️ Key Differences</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Aspect</th>
+      <th>Shallow Copy</th>
+      <th>Deep Copy</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Nested Objects</strong></td>
+      <td>References shared</td>
+      <td>Completely independent</td>
+    </tr>
+    <tr>
+      <td><strong>Memory Usage</strong></td>
+      <td>Lower</td>
+      <td>Higher</td>
+    </tr>
+    <tr>
+      <td><strong>Performance</strong></td>
+      <td>Faster</td>
+      <td>Slower</td>
+    </tr>
+    <tr>
+      <td><strong>Use Case</strong></td>
+      <td>Simple objects</td>
+      <td>Complex nested structures</td>
+    </tr>
+    <tr>
+      <td><strong>Mutation Safety</strong></td>
+      <td>Partial</td>
+      <td>Complete</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="-copy-methods-comparison">🔧 Copy Methods Comparison</h2>
+
+<h3 id="method-1-spread-operator-shallow">Method 1: Spread Operator (Shallow)</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">original</span> <span class="o">=</span> <span class="p">{</span> <span class="na">a</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">b</span><span class="p">:</span> <span class="p">{</span> <span class="na">c</span><span class="p">:</span> <span class="mi">2</span> <span class="p">}</span> <span class="p">};</span>
+<span class="kd">const</span> <span class="nx">copy</span> <span class="o">=</span> <span class="p">{</span> <span class="p">...</span><span class="nx">original</span> <span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="method-2-objectassign-shallow">Method 2: Object.assign (Shallow)</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">original</span> <span class="o">=</span> <span class="p">{</span> <span class="na">a</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">b</span><span class="p">:</span> <span class="p">{</span> <span class="na">c</span><span class="p">:</span> <span class="mi">2</span> <span class="p">}</span> <span class="p">};</span>
+<span class="kd">const</span> <span class="nx">copy</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">assign</span><span class="p">({},</span> <span class="nx">original</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="method-3-json-methods-deep">Method 3: JSON Methods (Deep)</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">original</span> <span class="o">=</span> <span class="p">{</span> <span class="na">a</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">b</span><span class="p">:</span> <span class="p">{</span> <span class="na">c</span><span class="p">:</span> <span class="mi">2</span> <span class="p">}</span> <span class="p">};</span>
+<span class="kd">const</span> <span class="nx">copy</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">original</span><span class="p">));</span>
+</code></pre></div></div>
+
+<h3 id="method-4-structuredclone-deep">Method 4: structuredClone (Deep)</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">original</span> <span class="o">=</span> <span class="p">{</span> <span class="na">a</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">b</span><span class="p">:</span> <span class="p">{</span> <span class="na">c</span><span class="p">:</span> <span class="mi">2</span> <span class="p">}</span> <span class="p">};</span>
+<span class="kd">const</span> <span class="nx">copy</span> <span class="o">=</span> <span class="nx">structuredClone</span><span class="p">(</span><span class="nx">original</span><span class="p">);</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-detailed-examples">💻 Detailed Examples</h2>
+
+<h3 id="example-1-shallow-copy-limitations">Example 1: Shallow Copy Limitations</h3>
+<div style="position: relative;">
+<button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
+
+
+
+```javascript
+console.log("=== SHALLOW COPY LIMITATIONS ===");
+
+const originalPerson = {
+    name: "John",
+    age: 30,
+    address: {
+        city: "New York",
+        zip: "10001"
+    },
+    hobbies: ["reading", "gaming"]
+};
+
+// Shallow copy using spread operator
+const shallowCopy = { ...originalPerson };
+
+console.log("=== Before Modification ===");
+console.log("Original:", originalPerson.address.city);  // "New York"
+console.log("Copy:", shallowCopy.address.city);         // "New York"
+
+// Modify nested object in copy
+shallowCopy.address.city = "Los Angeles";
+
+console.log("=== After Modification ===");
+console.log("Original:", originalPerson.address.city);  // "Los Angeles" 😱
+console.log("Copy:", shallowCopy.address.city);         // "Los Angeles"
+
+// Modify array in copy
+shallowCopy.hobbies.push("swimming");
+
+console.log("=== Array Modification ===");
+console.log("Original hobbies:", originalPerson.hobbies); // ["reading", "gaming", "swimming"] 😱
+console.log("Copy hobbies:", shallowCopy.hobbies);        // ["reading", "gaming", "swimming"]
+```
+
+
+</div>
+
+<h3 id="example-2-deep-copy-with-json-methods">Example 2: Deep Copy with JSON Methods</h3>
+<div style="position: relative;">
+<button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
+
+
+
+```javascript
+console.log("=== DEEP COPY WITH JSON METHODS ===");
+
+const originalData = {
+    user: {
+        name: "Alice",
+        preferences: {
+            theme: "dark",
+            language: "en"
+        }
+    },
+    settings: {
+        notifications: true,
+        autoSave: false
+    },
+    tags: ["javascript", "react", "node"]
+};
+
+// Deep copy using JSON methods
+const deepCopy = JSON.parse(JSON.stringify(originalData));
+
+console.log("=== Before Modification ===");
+console.log("Original theme:", originalData.user.preferences.theme);  // "dark"
+console.log("Copy theme:", deepCopy.user.preferences.theme);          // "dark"
+
+// Modify nested object in copy
+deepCopy.user.preferences.theme = "light";
+
+console.log("=== After Modification ===");
+console.log("Original theme:", originalData.user.preferences.theme);  // "dark" ✅
+console.log("Copy theme:", deepCopy.user.preferences.theme);          // "light"
+
+// Modify array in copy
+deepCopy.tags.push("typescript");
+
+console.log("=== Array Modification ===");
+console.log("Original tags:", originalData.tags); // ["javascript", "react", "node"] ✅
+console.log("Copy tags:", deepCopy.tags);         // ["javascript", "react", "node", "typescript"]
+```
+
+
+</div>
+
+<h3 id="example-3-structuredclone-modern-deep-copy">Example 3: structuredClone (Modern Deep Copy)</h3>
+<div style="position: relative;">
+<button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
+
+
+
+```javascript
+console.log("=== STRUCTURED CLONE (MODERN) ===");
+
+// Check if structuredClone is available
+if (typeof structuredClone === 'function') {
+    const complexObject = {
+        date: new Date(),
+        map: new Map([['key1', 'value1'], ['key2', 'value2']]),
+        set: new Set([1, 2, 3, 4, 5]),
+        regex: /hello/g,
+        function: function() { return "Hello"; },
+        undefined: undefined,
+        null: null,
+        boolean: true,
+        number: 42,
+        string: "Hello World"
+    };
+
+    try {
+        const deepCopy = structuredClone(complexObject);
+        
+        console.log("=== Complex Object Deep Copy ===");
+        console.log("Original date:", complexObject.date);
+        console.log("Copy date:", deepCopy.date);
+        console.log("Same date reference?", complexObject.date === deepCopy.date); // false ✅
+        
+        console.log("Original map size:", complexObject.map.size);
+        console.log("Copy map size:", deepCopy.map.size);
+        console.log("Same map reference?", complexObject.map === deepCopy.map); // false ✅
+        
+        // Modify copy
+        deepCopy.map.set('key3', 'value3');
+        console.log("Original map size after copy modification:", complexObject.map.size); // 2 ✅
+        console.log("Copy map size after modification:", deepCopy.map.size); // 3
+        
+    } catch (error) {
+        console.log("structuredClone error:", error.message);
+    }
+} else {
+    console.log("structuredClone not available in this environment");
+}
+```
+
+
+</div>
+
+<h3 id="example-4-custom-deep-copy-function">Example 4: Custom Deep Copy Function</h3>
+<div style="position: relative;">
+<button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
+
+
+
+```javascript
+console.log("=== CUSTOM DEEP COPY FUNCTION ===");
+
+function deepClone(obj, hash = new WeakMap()) {
+    // Handle null, undefined, primitives
+    if (obj === null || typeof obj !== 'object') {
+        return obj;
+    }
+    
+    // Handle Date objects
+    if (obj instanceof Date) {
+        return new Date(obj.getTime());
+    }
+    
+    // Handle Array objects
+    if (Array.isArray(obj)) {
+        return obj.map(item =&gt; deepClone(item, hash));
+    }
+    
+    // Handle circular references
+    if (hash.has(obj)) {
+        return hash.get(obj);
+    }
+    
+    // Handle regular objects
+    const clonedObj = {};
+    hash.set(obj, clonedObj);
+    
+    for (let key in obj) {
+        if (obj.hasOwnProperty(key)) {
+            clonedObj[key] = deepClone(obj[key], hash);
+        }
+    }
+    
+    return clonedObj;
+}
+
+// Test the custom function
+const testObject = {
+    name: "Test",
+    nested: {
+        value: 42,
+        array: [1, 2, 3]
+    },
+    circular: null
+};
+
+// Create circular reference
+testObject.circular = testObject;
+
+const customDeepCopy = deepClone(testObject);
+
+console.log("=== Custom Deep Copy Test ===");
+console.log("Original nested value:", testObject.nested.value);
+console.log("Copy nested value:", customDeepCopy.nested.value);
+
+// Modify copy
+customDeepCopy.nested.value = 100;
+customDeepCopy.nested.array.push(4);
+
+console.log("=== After Modification ===");
+console.log("Original nested value:", testObject.nested.value);        // 42 ✅
+console.log("Copy nested value:", customDeepCopy.nested.value);       // 100
+console.log("Original array:", testObject.nested.array);              // [1, 2, 3] ✅
+console.log("Copy array:", customDeepCopy.nested.array);              // [1, 2, 3, 4]
+```
+
+
+</div>
+
+<h3 id="example-5-performance-comparison">Example 5: Performance Comparison</h3>
+<div style="position: relative;">
+<button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
+
+
+
+```javascript
+console.log("=== PERFORMANCE COMPARISON ===");
+
+// Create a large object for testing
+function createLargeObject(depth, breadth) {
+    if (depth === 0) return Math.random();
+    
+    const obj = {};
+    for (let i = 0; i &lt; breadth; i++) {
+        obj[`key${i}`] = createLargeObject(depth - 1, breadth);
+    }
+    return obj;
+}
+
+const largeObject = createLargeObject(4, 5); // 4 levels deep, 5 properties per level
+
+console.log("Large object created with", Object.keys(largeObject).length, "top-level properties");
+
+// Performance test function
+function measurePerformance(name, copyFunction) {
+    const start = performance.now();
+    const result = copyFunction(largeObject);
+    const end = performance.now();
+    
+    console.log(`${name}: ${(end - start).toFixed(2)}ms`);
+    return result;
+}
+
+console.log("=== Performance Results ===");
+
+// Test different methods
+const shallowCopy = measurePerformance("Shallow Copy (Spread)", () =&gt; ({ ...largeObject }));
+const jsonCopy = measurePerformance("Deep Copy (JSON)", () =&gt; JSON.parse(JSON.stringify(largeObject)));
+
+if (typeof structuredClone === 'function') {
+    const structuredCopy = measurePerformance("Deep Copy (structuredClone)", () =&gt; structuredClone(largeObject));
+}
+
+console.log("=== Memory Usage Note ===");
+console.log("Shallow copy: Lower memory, shared references");
+console.log("Deep copy: Higher memory, independent copies");
+```
+
+
+</div>
+
+<hr />
+
+<h2 id="️-common-pitfalls">⚠️ Common Pitfalls</h2>
+
+<h3 id="pitfall-1-json-methods-limitations">Pitfall 1: JSON Methods Limitations</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ❌ JSON methods can't handle:</span>
+<span class="kd">const</span> <span class="nx">problematicObject</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">function</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="dl">"</span><span class="s2">Hello</span><span class="dl">"</span><span class="p">;</span> <span class="p">},</span>     <span class="c1">// Functions are lost</span>
+    <span class="na">undefined</span><span class="p">:</span> <span class="kc">undefined</span><span class="p">,</span>                         <span class="c1">// Undefined becomes null</span>
+    <span class="na">date</span><span class="p">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(),</span>                            <span class="c1">// Dates become strings</span>
+    <span class="na">regex</span><span class="p">:</span> <span class="sr">/hello/g</span><span class="p">,</span>                            <span class="c1">// Regex becomes empty object</span>
+    <span class="na">map</span><span class="p">:</span> <span class="k">new</span> <span class="nb">Map</span><span class="p">([[</span><span class="dl">'</span><span class="s1">key</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">value</span><span class="dl">'</span><span class="p">]]),</span>           <span class="c1">// Maps become empty objects</span>
+    <span class="na">set</span><span class="p">:</span> <span class="k">new</span> <span class="nb">Set</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]),</span>                    <span class="c1">// Sets become empty objects</span>
+    <span class="na">circular</span><span class="p">:</span> <span class="kc">null</span>                               <span class="c1">// Circular references cause errors</span>
+<span class="p">};</span>
+
+<span class="c1">// Create circular reference</span>
+<span class="nx">problematicObject</span><span class="p">.</span><span class="nx">circular</span> <span class="o">=</span> <span class="nx">problematicObject</span><span class="p">;</span>
+
+<span class="k">try</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">jsonCopy</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">problematicObject</span><span class="p">));</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">JSON copy successful</span><span class="dl">"</span><span class="p">);</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">JSON copy failed:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span> <span class="c1">// "Converting circular structure to JSON"</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="pitfall-2-shallow-copy-misunderstanding">Pitfall 2: Shallow Copy Misunderstanding</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ❌ Common mistake: thinking spread operator creates deep copy</span>
+<span class="kd">const</span> <span class="nx">original</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">user</span><span class="p">:</span> <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">John</span><span class="dl">"</span><span class="p">,</span> <span class="na">age</span><span class="p">:</span> <span class="mi">30</span> <span class="p">},</span>
+    <span class="na">settings</span><span class="p">:</span> <span class="p">{</span> <span class="na">theme</span><span class="p">:</span> <span class="dl">"</span><span class="s2">dark</span><span class="dl">"</span> <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">copy</span> <span class="o">=</span> <span class="p">{</span> <span class="p">...</span><span class="nx">original</span> <span class="p">};</span>
+
+<span class="c1">// This will affect the original!</span>
+<span class="nx">copy</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Jane</span><span class="dl">"</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">original</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span> <span class="c1">// "Jane" 😱</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-best-practices">🎯 Best Practices</h2>
+
+<h3 id="-when-to-use-shallow-copy">✅ When to Use Shallow Copy:</h3>
+<ul>
+  <li>Simple objects with primitive values only</li>
+  <li>Performance-critical operations</li>
+  <li>When you only need to copy top-level properties</li>
+  <li>React state updates (when appropriate)</li>
+</ul>
+
+<h3 id="-when-to-use-deep-copy">✅ When to Use Deep Copy:</h3>
+<ul>
+  <li>Complex nested objects</li>
+  <li>When you need complete independence</li>
+  <li>API responses that will be modified</li>
+  <li>Configuration objects that need customization</li>
+</ul>
+
+<h3 id="-recommended-approaches">✅ Recommended Approaches:</h3>
+<ol>
+  <li><strong>Shallow Copy</strong>: Use spread operator (<code class="language-plaintext highlighter-rouge">...</code>) for simple cases</li>
+  <li><strong>Deep Copy</strong>: Use <code class="language-plaintext highlighter-rouge">structuredClone()</code> for modern browsers</li>
+  <li><strong>Fallback</strong>: Use <code class="language-plaintext highlighter-rouge">JSON.parse(JSON.stringify())</code> for simple data</li>
+  <li><strong>Custom</strong>: Implement custom function for special cases</li>
+</ol>
+
+<hr />
+
+<h2 id="-key-points">🔑 Key Points</h2>
+
+<ul>
+  <li><strong>Shallow Copy</strong>: Copies references, nested objects are shared</li>
+  <li><strong>Deep Copy</strong>: Creates completely independent copies</li>
+  <li><strong>Spread Operator</strong>: Fastest shallow copy method</li>
+  <li><strong>JSON Methods</strong>: Simple deep copy but with limitations</li>
+  <li><strong>structuredClone</strong>: Modern, robust deep copy method</li>
+  <li><strong>Performance</strong>: Shallow copy is always faster than deep copy</li>
+  <li><strong>Memory</strong>: Deep copy uses more memory but provides safety</li>
+</ul>
+
+<hr />
+
+<h2 id="-common-interview-questions">❓ Common Interview Questions</h2>
+
+<h3 id="q1-whats-the-difference-between-shallow-and-deep-copy">Q1: What’s the difference between shallow and deep copy?</h3>
+<p><strong>A:</strong> Shallow copy creates a new object but shares references to nested objects, while deep copy creates completely independent copies of all nested structures.</p>
+
+<h3 id="q2-how-would-you-implement-a-deep-copy-function">Q2: How would you implement a deep copy function?</h3>
+<p><strong>A:</strong> Use recursion to traverse the object, handle special cases like Date, Array, and circular references, and create new instances for each level.</p>
+
+<h3 id="q3-what-are-the-limitations-of-jsonparsejsonstringify">Q3: What are the limitations of JSON.parse(JSON.stringify())?</h3>
+<p><strong>A:</strong> Can’t handle functions, undefined, Date objects, RegExp, Map, Set, or circular references.</p>
+
+<h3 id="q4-when-would-you-choose-shallow-copy-over-deep-copy">Q4: When would you choose shallow copy over deep copy?</h3>
+<p><strong>A:</strong> When you only need to copy top-level properties, for performance reasons, or when you intentionally want to share nested references.</p>
+
+<h3 id="q5-how-does-structuredclone-differ-from-json-methods">Q5: How does structuredClone differ from JSON methods?</h3>
+<p><strong>A:</strong> structuredClone can handle more data types including Date, RegExp, Map, Set, and circular references, making it more robust.</p>
+
+<hr />
+
+<h2 id="️-practice-exercises">🏋️ Practice Exercises</h2>
+
+<h3 id="exercise-1-implement-shallow-copy">Exercise 1: Implement Shallow Copy</h3>
+<p>Create a function that performs shallow copy without using spread operator or Object.assign.</p>
+
+<h3 id="exercise-2-handle-circular-references">Exercise 2: Handle Circular References</h3>
+<p>Implement a deep copy function that can handle circular references without causing infinite loops.</p>
+
+<h3 id="exercise-3-performance-optimization">Exercise 3: Performance Optimization</h3>
+<p>Create a hybrid copy function that automatically chooses between shallow and deep copy based on object complexity.</p>
+
+<hr />
+
+<h2 id="-additional-resources">📚 Additional Resources</h2>
+
+<ul>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/structuredClone">MDN: structuredClone</a></li>
+  <li><a href="https://javascript.info/object-copy">JavaScript.info: Object copying</a></li>
+  <li><a href="https://lodash.com/docs/4.17.15#cloneDeep">Lodash: cloneDeep</a></li>
+  <li><a href="https://jsperf.com/">Performance comparison tools</a></li>
+</ul>
+
+<hr />
+
+<h2 id="-copy-code-functionality">📋 Copy Code Functionality</h2>
+
+<script src="../common-scripts.js"></script>
+
+<hr />
+
+<h2 id="-navigation">🧭 Navigation</h2>
+
+<div class="navigation">
+    <a href="06-Primitive-vs-Reference-Types.md" class="nav-link prev">← Previous: Primitive vs Reference Types</a>
+    <a href="08-Pass-by-Value-vs-Pass-by-Reference.md" class="nav-link next">Next: Pass by Value vs Pass by Reference →</a>
+</div>
+
+<p><em>Last updated: December 2024</em></p>
+
+        </main>
+        
+        <footer style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #ecf0f1; color: #666; text-align: center;">
+            <p>Interview Prep Documentation - Built with Jekyll</p>
+        </footer>
+    </div>
+</body>
+</html>

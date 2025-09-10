@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Design Patterns in React Native - Interview Prep Documentation</title>
+    <meta name="description" content="Comprehensive guides for JavaScript, TypeScript, and React Native interview preparation">
+    
+    <!-- GitHub Pages compatible styling -->
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+        }
+        
+        .container {
+            max-width: 100%;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            color: #2c3e50;
+            margin-top: 2em;
+            margin-bottom: 1em;
+        }
+        
+        h1 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            border-bottom: 1px solid #ecf0f1;
+            padding-bottom: 5px;
+        }
+        
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border-left: 4px solid #3498db;
+        }
+        
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+        
+        blockquote {
+            border-left: 4px solid #3498db;
+            margin: 0;
+            padding-left: 20px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1em 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .navigation {
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px 0;
+            margin-bottom: 20px;
+        }
+        
+        .navigation a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+        
+        .navigation a:hover {
+            text-decoration: underline;
+        }
+        
+        .breadcrumb {
+            margin-bottom: 20px;
+            color: #666;
+        }
+        
+        .breadcrumb a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            h2 {
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="navigation">
+            <a href="/">Home</a>
+            <a href="/Javascript/">JavaScript</a>
+            <a href="/TypeScript/">TypeScript</a>
+            <a href="/React-Native/">React Native</a>
+        </nav>
+        
+        
+        
+        <main>
+            <h1 id="responsive-design-patterns-in-react-native">Responsive Design Patterns in React Native</h1>
+
+<h2 id="overview">Overview</h2>
+
+<p>Responsive design in React Native ensures your app looks and functions well across different screen sizes, orientations, and device types. This guide covers comprehensive patterns for creating adaptive layouts that work seamlessly on phones, tablets, and various screen densities.</p>
+
+<h2 id="screen-size-detection">Screen Size Detection</h2>
+
+<h3 id="1-basic-screen-size-detection">1. Basic Screen Size Detection</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Dimensions</span><span class="p">,</span> <span class="nx">PixelRatio</span><span class="p">,</span> <span class="nx">Platform</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="p">{</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">Dimensions</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">window</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="p">{</span> <span class="na">width</span><span class="p">:</span> <span class="nx">screenWidth</span><span class="p">,</span> <span class="na">height</span><span class="p">:</span> <span class="nx">screenHeight</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">Dimensions</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">screen</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">getScreenInfo</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">pixelRatio</span> <span class="o">=</span> <span class="nx">PixelRatio</span><span class="p">.</span><span class="kd">get</span><span class="p">();</span>
+  <span class="kd">const</span> <span class="nx">fontScale</span> <span class="o">=</span> <span class="nx">PixelRatio</span><span class="p">.</span><span class="nx">getFontScale</span><span class="p">();</span>
+  
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="na">window</span><span class="p">:</span> <span class="p">{</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span> <span class="p">},</span>
+    <span class="na">screen</span><span class="p">:</span> <span class="p">{</span> <span class="na">width</span><span class="p">:</span> <span class="nx">screenWidth</span><span class="p">,</span> <span class="na">height</span><span class="p">:</span> <span class="nx">screenHeight</span> <span class="p">},</span>
+    <span class="nx">pixelRatio</span><span class="p">,</span>
+    <span class="nx">fontScale</span><span class="p">,</span>
+    <span class="na">isTablet</span><span class="p">:</span> <span class="nx">width</span> <span class="o">&gt;=</span> <span class="mi">768</span><span class="p">,</span>
+    <span class="na">isPhone</span><span class="p">:</span> <span class="nx">width</span> <span class="o">&lt;</span> <span class="mi">768</span><span class="p">,</span>
+    <span class="na">isLandscape</span><span class="p">:</span> <span class="nx">width</span> <span class="o">&gt;</span> <span class="nx">height</span><span class="p">,</span>
+    <span class="na">isPortrait</span><span class="p">:</span> <span class="nx">height</span> <span class="o">&gt;</span> <span class="nx">width</span><span class="p">,</span>
+    <span class="na">deviceType</span><span class="p">:</span> <span class="nx">width</span> <span class="o">&gt;=</span> <span class="mi">768</span> <span class="p">?</span> <span class="dl">'</span><span class="s1">tablet</span><span class="dl">'</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">phone</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">};</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">useScreenInfo</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">screenInfo</span><span class="p">,</span> <span class="nx">setScreenInfo</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="nx">getScreenInfo</span><span class="p">());</span>
+
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">subscription</span> <span class="o">=</span> <span class="nx">Dimensions</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">change</span><span class="dl">'</span><span class="p">,</span> <span class="p">({</span> <span class="nb">window</span><span class="p">,</span> <span class="nx">screen</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">setScreenInfo</span><span class="p">({</span>
+        <span class="nb">window</span><span class="p">,</span>
+        <span class="nx">screen</span><span class="p">,</span>
+        <span class="na">pixelRatio</span><span class="p">:</span> <span class="nx">PixelRatio</span><span class="p">.</span><span class="kd">get</span><span class="p">(),</span>
+        <span class="na">fontScale</span><span class="p">:</span> <span class="nx">PixelRatio</span><span class="p">.</span><span class="nx">getFontScale</span><span class="p">(),</span>
+        <span class="na">isTablet</span><span class="p">:</span> <span class="nb">window</span><span class="p">.</span><span class="nx">width</span> <span class="o">&gt;=</span> <span class="mi">768</span><span class="p">,</span>
+        <span class="na">isPhone</span><span class="p">:</span> <span class="nb">window</span><span class="p">.</span><span class="nx">width</span> <span class="o">&lt;</span> <span class="mi">768</span><span class="p">,</span>
+        <span class="na">isLandscape</span><span class="p">:</span> <span class="nb">window</span><span class="p">.</span><span class="nx">width</span> <span class="o">&gt;</span> <span class="nb">window</span><span class="p">.</span><span class="nx">height</span><span class="p">,</span>
+        <span class="na">isPortrait</span><span class="p">:</span> <span class="nb">window</span><span class="p">.</span><span class="nx">height</span> <span class="o">&gt;</span> <span class="nb">window</span><span class="p">.</span><span class="nx">width</span><span class="p">,</span>
+        <span class="na">deviceType</span><span class="p">:</span> <span class="nb">window</span><span class="p">.</span><span class="nx">width</span> <span class="o">&gt;=</span> <span class="mi">768</span> <span class="p">?</span> <span class="dl">'</span><span class="s1">tablet</span><span class="dl">'</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">phone</span><span class="dl">'</span><span class="p">,</span>
+      <span class="p">});</span>
+    <span class="p">});</span>
+
+    <span class="k">return</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">subscription</span><span class="p">?.</span><span class="nx">remove</span><span class="p">();</span>
+  <span class="p">},</span> <span class="p">[]);</span>
+
+  <span class="k">return</span> <span class="nx">screenInfo</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="2-advanced-screen-classification">2. Advanced Screen Classification</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Dimensions</span><span class="p">,</span> <span class="nx">PixelRatio</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">getDeviceClassification</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">{</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">Dimensions</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">window</span><span class="dl">'</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="nx">pixelRatio</span> <span class="o">=</span> <span class="nx">PixelRatio</span><span class="p">.</span><span class="kd">get</span><span class="p">();</span>
+  <span class="kd">const</span> <span class="nx">diagonal</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">sqrt</span><span class="p">(</span><span class="nx">width</span> <span class="o">*</span> <span class="nx">width</span> <span class="o">+</span> <span class="nx">height</span> <span class="o">*</span> <span class="nx">height</span><span class="p">)</span> <span class="o">/</span> <span class="nx">PixelRatio</span><span class="p">.</span><span class="kd">get</span><span class="p">();</span>
+  
+  <span class="c1">// Device size classification</span>
+  <span class="kd">let</span> <span class="nx">deviceSize</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">phone</span><span class="dl">'</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">diagonal</span> <span class="o">&gt;=</span> <span class="mi">7</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">deviceSize</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">tablet</span><span class="dl">'</span><span class="p">;</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">diagonal</span> <span class="o">&gt;=</span> <span class="mi">6</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">deviceSize</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">phablet</span><span class="dl">'</span><span class="p">;</span>
+  <span class="p">}</span>
+  
+  <span class="c1">// Screen density classification</span>
+  <span class="kd">let</span> <span class="nx">density</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">mdpi</span><span class="dl">'</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">pixelRatio</span> <span class="o">&gt;=</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">density</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">xxxhdpi</span><span class="dl">'</span><span class="p">;</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">pixelRatio</span> <span class="o">&gt;=</span> <span class="mf">2.5</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">density</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">xxhdpi</span><span class="dl">'</span><span class="p">;</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">pixelRatio</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">density</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">xhdpi</span><span class="dl">'</span><span class="p">;</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">pixelRatio</span> <span class="o">&gt;=</span> <span class="mf">1.5</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">density</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">hdpi</span><span class="dl">'</span><span class="p">;</span>
+  <span class="p">}</span>
+  
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="nx">deviceSize</span><span class="p">,</span>
+    <span class="nx">density</span><span class="p">,</span>
+    <span class="nx">diagonal</span><span class="p">,</span>
+    <span class="nx">pixelRatio</span><span class="p">,</span>
+    <span class="na">isHighDensity</span><span class="p">:</span> <span class="nx">pixelRatio</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="na">isLowDensity</span><span class="p">:</span> <span class="nx">pixelRatio</span> <span class="o">&lt;</span> <span class="mf">1.5</span><span class="p">,</span>
+  <span class="p">};</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">useDeviceClassification</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">classification</span><span class="p">,</span> <span class="nx">setClassification</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="nx">getDeviceClassification</span><span class="p">());</span>
+
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">subscription</span> <span class="o">=</span> <span class="nx">Dimensions</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">change</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">setClassification</span><span class="p">(</span><span class="nx">getDeviceClassification</span><span class="p">());</span>
+    <span class="p">});</span>
+
+    <span class="k">return</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">subscription</span><span class="p">?.</span><span class="nx">remove</span><span class="p">();</span>
+  <span class="p">},</span> <span class="p">[]);</span>
+
+  <span class="k">return</span> <span class="nx">classification</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h2 id="responsive-layout-patterns">Responsive Layout Patterns</h2>
+
+<h3 id="1-flexible-grid-system">1. Flexible Grid System</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">View</span><span class="p">,</span> <span class="nx">StyleSheet</span><span class="p">,</span> <span class="nx">Dimensions</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="p">{</span> <span class="nx">width</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">Dimensions</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">window</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">ResponsiveGrid</span> <span class="o">=</span> <span class="p">({</span> <span class="nx">children</span><span class="p">,</span> <span class="nx">columns</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="nx">spacing</span> <span class="o">=</span> <span class="mi">16</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">itemWidth</span> <span class="o">=</span> <span class="p">(</span><span class="nx">width</span> <span class="o">-</span> <span class="p">(</span><span class="nx">spacing</span> <span class="o">*</span> <span class="p">(</span><span class="nx">columns</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)))</span> <span class="o">/</span> <span class="nx">columns</span><span class="p">;</span>
+  
+  <span class="kd">const</span> <span class="nx">renderGridItem</span> <span class="o">=</span> <span class="p">(</span><span class="nx">item</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">View</span>
+      <span class="nx">key</span><span class="o">=</span><span class="p">{</span><span class="nx">index</span><span class="p">}</span>
+      <span class="nx">style</span><span class="o">=</span><span class="p">{[</span>
+        <span class="nx">styles</span><span class="p">.</span><span class="nx">gridItem</span><span class="p">,</span>
+        <span class="p">{</span>
+          <span class="na">width</span><span class="p">:</span> <span class="nx">itemWidth</span><span class="p">,</span>
+          <span class="na">marginRight</span><span class="p">:</span> <span class="p">(</span><span class="nx">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="nx">columns</span> <span class="o">===</span> <span class="mi">0</span> <span class="p">?</span> <span class="mi">0</span> <span class="p">:</span> <span class="nx">spacing</span><span class="p">,</span>
+          <span class="na">marginBottom</span><span class="p">:</span> <span class="nx">spacing</span><span class="p">,</span>
+        <span class="p">}</span>
+      <span class="p">]}</span>
+    <span class="o">&gt;</span>
+      <span class="p">{</span><span class="nx">item</span><span class="p">}</span>
+    <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">gridContainer</span><span class="p">}</span><span class="o">&gt;</span>
+      <span class="p">{</span><span class="nx">children</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">renderGridItem</span><span class="p">)}</span>
+    <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">styles</span> <span class="o">=</span> <span class="nx">StyleSheet</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span>
+  <span class="na">gridContainer</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">flexDirection</span><span class="p">:</span> <span class="dl">'</span><span class="s1">row</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">flexWrap</span><span class="p">:</span> <span class="dl">'</span><span class="s1">wrap</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">padding</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">gridItem</span><span class="p">:</span> <span class="p">{</span>
+    <span class="c1">// Base styles for grid items</span>
+  <span class="p">},</span>
+<span class="p">});</span>
+
+<span class="c1">// Usage example</span>
+<span class="kd">const</span> <span class="nx">ProductGrid</span> <span class="o">=</span> <span class="p">({</span> <span class="nx">products</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">{</span> <span class="nx">isTablet</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">useScreenInfo</span><span class="p">();</span>
+  <span class="kd">const</span> <span class="nx">columns</span> <span class="o">=</span> <span class="nx">isTablet</span> <span class="p">?</span> <span class="mi">3</span> <span class="p">:</span> <span class="mi">2</span><span class="p">;</span>
+  
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">ResponsiveGrid</span> <span class="nx">columns</span><span class="o">=</span><span class="p">{</span><span class="nx">columns</span><span class="p">}</span> <span class="nx">spacing</span><span class="o">=</span><span class="p">{</span><span class="mi">12</span><span class="p">}</span><span class="o">&gt;</span>
+      <span class="p">{</span><span class="nx">products</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">product</span> <span class="o">=&gt;</span> <span class="p">(</span>
+        <span class="o">&lt;</span><span class="nx">ProductCard</span> <span class="nx">key</span><span class="o">=</span><span class="p">{</span><span class="nx">product</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span> <span class="nx">product</span><span class="o">=</span><span class="p">{</span><span class="nx">product</span><span class="p">}</span> <span class="sr">/</span><span class="err">&gt;
+</span>      <span class="p">))}</span>
+    <span class="o">&lt;</span><span class="sr">/ResponsiveGrid</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="2-adaptive-container-sizes">2. Adaptive Container Sizes</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">StyleSheet</span><span class="p">,</span> <span class="nx">Dimensions</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="p">{</span> <span class="nx">width</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">Dimensions</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">window</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">createResponsiveStyles</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">isTablet</span> <span class="o">=</span> <span class="nx">width</span> <span class="o">&gt;=</span> <span class="mi">768</span><span class="p">;</span>
+  <span class="kd">const</span> <span class="nx">isLandscape</span> <span class="o">=</span> <span class="nx">width</span> <span class="o">&gt;</span> <span class="nx">Dimensions</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">window</span><span class="dl">'</span><span class="p">).</span><span class="nx">height</span><span class="p">;</span>
+  
+  <span class="k">return</span> <span class="nx">StyleSheet</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span>
+    <span class="na">container</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">flex</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="na">padding</span><span class="p">:</span> <span class="nx">isTablet</span> <span class="p">?</span> <span class="mi">24</span> <span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+      <span class="na">maxWidth</span><span class="p">:</span> <span class="nx">isTablet</span> <span class="p">?</span> <span class="mi">1200</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">100%</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">alignSelf</span><span class="p">:</span> <span class="dl">'</span><span class="s1">center</span><span class="dl">'</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="na">content</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">flex</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="na">paddingHorizontal</span><span class="p">:</span> <span class="nx">isTablet</span> <span class="p">?</span> <span class="mi">32</span> <span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+      <span class="na">paddingVertical</span><span class="p">:</span> <span class="nx">isTablet</span> <span class="p">?</span> <span class="mi">24</span> <span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="na">card</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">borderRadius</span><span class="p">:</span> <span class="nx">isTablet</span> <span class="p">?</span> <span class="mi">12</span> <span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+      <span class="na">padding</span><span class="p">:</span> <span class="nx">isTablet</span> <span class="p">?</span> <span class="mi">24</span> <span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+      <span class="na">marginBottom</span><span class="p">:</span> <span class="nx">isTablet</span> <span class="p">?</span> <span class="mi">20</span> <span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+      <span class="na">shadowRadius</span><span class="p">:</span> <span class="nx">isTablet</span> <span class="p">?</span> <span class="mi">8</span> <span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+      <span class="na">elevation</span><span class="p">:</span> <span class="nx">isTablet</span> <span class="p">?</span> <span class="mi">8</span> <span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="na">text</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">fontSize</span><span class="p">:</span> <span class="nx">isTablet</span> <span class="p">?</span> <span class="mi">18</span> <span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+      <span class="na">lineHeight</span><span class="p">:</span> <span class="nx">isTablet</span> <span class="p">?</span> <span class="mi">28</span> <span class="p">:</span> <span class="mi">24</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="na">button</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">paddingHorizontal</span><span class="p">:</span> <span class="nx">isTablet</span> <span class="p">?</span> <span class="mi">32</span> <span class="p">:</span> <span class="mi">24</span><span class="p">,</span>
+      <span class="na">paddingVertical</span><span class="p">:</span> <span class="nx">isTablet</span> <span class="p">?</span> <span class="mi">16</span> <span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+      <span class="na">borderRadius</span><span class="p">:</span> <span class="nx">isTablet</span> <span class="p">?</span> <span class="mi">8</span> <span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+    <span class="p">},</span>
+  <span class="p">});</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">ResponsiveContainer</span> <span class="o">=</span> <span class="p">({</span> <span class="nx">children</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">styles</span> <span class="o">=</span> <span class="nx">createResponsiveStyles</span><span class="p">();</span>
+  
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">container</span><span class="p">}</span><span class="o">&gt;</span>
+      <span class="p">{</span><span class="nx">children</span><span class="p">}</span>
+    <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="3-breakpoint-based-layouts">3. Breakpoint-Based Layouts</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">useState</span><span class="p">,</span> <span class="nx">useEffect</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Dimensions</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">breakpoints</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">xs</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="na">sm</span><span class="p">:</span> <span class="mi">576</span><span class="p">,</span>
+  <span class="na">md</span><span class="p">:</span> <span class="mi">768</span><span class="p">,</span>
+  <span class="na">lg</span><span class="p">:</span> <span class="mi">992</span><span class="p">,</span>
+  <span class="na">xl</span><span class="p">:</span> <span class="mi">1200</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">useBreakpoint</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">breakpoint</span><span class="p">,</span> <span class="nx">setBreakpoint</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="dl">'</span><span class="s1">xs</span><span class="dl">'</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">screenWidth</span><span class="p">,</span> <span class="nx">setScreenWidth</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="nx">Dimensions</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">window</span><span class="dl">'</span><span class="p">).</span><span class="nx">width</span><span class="p">);</span>
+
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">subscription</span> <span class="o">=</span> <span class="nx">Dimensions</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">change</span><span class="dl">'</span><span class="p">,</span> <span class="p">({</span> <span class="nb">window</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">setScreenWidth</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">width</span><span class="p">);</span>
+    <span class="p">});</span>
+
+    <span class="k">return</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">subscription</span><span class="p">?.</span><span class="nx">remove</span><span class="p">();</span>
+  <span class="p">},</span> <span class="p">[]);</span>
+
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">currentBreakpoint</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">breakpoints</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">reverse</span><span class="p">()</span>
+      <span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="nx">bp</span> <span class="o">=&gt;</span> <span class="nx">screenWidth</span> <span class="o">&gt;=</span> <span class="nx">breakpoints</span><span class="p">[</span><span class="nx">bp</span><span class="p">])</span> <span class="o">||</span> <span class="dl">'</span><span class="s1">xs</span><span class="dl">'</span><span class="p">;</span>
+    
+    <span class="nx">setBreakpoint</span><span class="p">(</span><span class="nx">currentBreakpoint</span><span class="p">);</span>
+  <span class="p">},</span> <span class="p">[</span><span class="nx">screenWidth</span><span class="p">]);</span>
+
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="nx">breakpoint</span><span class="p">,</span>
+    <span class="na">isXs</span><span class="p">:</span> <span class="nx">breakpoint</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">xs</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">isSm</span><span class="p">:</span> <span class="nx">breakpoint</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">sm</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">isMd</span><span class="p">:</span> <span class="nx">breakpoint</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">md</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">isLg</span><span class="p">:</span> <span class="nx">breakpoint</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">lg</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">isXl</span><span class="p">:</span> <span class="nx">breakpoint</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">xl</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">isMobile</span><span class="p">:</span> <span class="nx">breakpoint</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">xs</span><span class="dl">'</span> <span class="o">||</span> <span class="nx">breakpoint</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">sm</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">isTablet</span><span class="p">:</span> <span class="nx">breakpoint</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">md</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">isDesktop</span><span class="p">:</span> <span class="nx">breakpoint</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">lg</span><span class="dl">'</span> <span class="o">||</span> <span class="nx">breakpoint</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">xl</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">};</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">ResponsiveLayout</span> <span class="o">=</span> <span class="p">({</span> <span class="nx">children</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">{</span> <span class="nx">isMobile</span><span class="p">,</span> <span class="nx">isTablet</span><span class="p">,</span> <span class="nx">isDesktop</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">useBreakpoint</span><span class="p">();</span>
+  
+  <span class="kd">const</span> <span class="nx">getLayoutStyle</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">isMobile</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">styles</span><span class="p">.</span><span class="nx">mobileLayout</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">isTablet</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">styles</span><span class="p">.</span><span class="nx">tabletLayout</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">styles</span><span class="p">.</span><span class="nx">desktopLayout</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{[</span><span class="nx">styles</span><span class="p">.</span><span class="nx">baseLayout</span><span class="p">,</span> <span class="nx">getLayoutStyle</span><span class="p">()]}</span><span class="o">&gt;</span>
+      <span class="p">{</span><span class="nx">children</span><span class="p">}</span>
+    <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h2 id="typography-and-spacing">Typography and Spacing</h2>
+
+<h3 id="1-responsive-typography">1. Responsive Typography</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">StyleSheet</span><span class="p">,</span> <span class="nx">Dimensions</span><span class="p">,</span> <span class="nx">PixelRatio</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="p">{</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">Dimensions</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">window</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">pixelRatio</span> <span class="o">=</span> <span class="nx">PixelRatio</span><span class="p">.</span><span class="kd">get</span><span class="p">();</span>
+
+<span class="kd">const</span> <span class="nx">createResponsiveTypography</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">baseFontSize</span> <span class="o">=</span> <span class="mi">16</span><span class="p">;</span>
+  <span class="kd">const</span> <span class="nx">scaleFactor</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">min</span><span class="p">(</span><span class="nx">width</span> <span class="o">/</span> <span class="mi">375</span><span class="p">,</span> <span class="nx">height</span> <span class="o">/</span> <span class="mi">667</span><span class="p">);</span> <span class="c1">// iPhone 6/7/8 as base</span>
+  <span class="kd">const</span> <span class="nx">scaledFontSize</span> <span class="o">=</span> <span class="nx">baseFontSize</span> <span class="o">*</span> <span class="nx">scaleFactor</span><span class="p">;</span>
+  
+  <span class="k">return</span> <span class="nx">StyleSheet</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span>
+    <span class="na">h1</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">fontSize</span><span class="p">:</span> <span class="nx">scaledFontSize</span> <span class="o">*</span> <span class="mf">2.25</span><span class="p">,</span> <span class="c1">// 36px on base</span>
+      <span class="na">fontWeight</span><span class="p">:</span> <span class="dl">'</span><span class="s1">bold</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">lineHeight</span><span class="p">:</span> <span class="nx">scaledFontSize</span> <span class="o">*</span> <span class="mf">2.5</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="na">h2</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">fontSize</span><span class="p">:</span> <span class="nx">scaledFontSize</span> <span class="o">*</span> <span class="mf">1.875</span><span class="p">,</span> <span class="c1">// 30px on base</span>
+      <span class="na">fontWeight</span><span class="p">:</span> <span class="dl">'</span><span class="s1">bold</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">lineHeight</span><span class="p">:</span> <span class="nx">scaledFontSize</span> <span class="o">*</span> <span class="mf">2.25</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="na">h3</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">fontSize</span><span class="p">:</span> <span class="nx">scaledFontSize</span> <span class="o">*</span> <span class="mf">1.5</span><span class="p">,</span> <span class="c1">// 24px on base</span>
+      <span class="na">fontWeight</span><span class="p">:</span> <span class="dl">'</span><span class="s1">600</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">lineHeight</span><span class="p">:</span> <span class="nx">scaledFontSize</span> <span class="o">*</span> <span class="mf">1.75</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="na">body</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">fontSize</span><span class="p">:</span> <span class="nx">scaledFontSize</span><span class="p">,</span> <span class="c1">// 16px on base</span>
+      <span class="na">lineHeight</span><span class="p">:</span> <span class="nx">scaledFontSize</span> <span class="o">*</span> <span class="mf">1.5</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="na">caption</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">fontSize</span><span class="p">:</span> <span class="nx">scaledFontSize</span> <span class="o">*</span> <span class="mf">0.875</span><span class="p">,</span> <span class="c1">// 14px on base</span>
+      <span class="na">lineHeight</span><span class="p">:</span> <span class="nx">scaledFontSize</span> <span class="o">*</span> <span class="mf">1.25</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="na">small</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">fontSize</span><span class="p">:</span> <span class="nx">scaledFontSize</span> <span class="o">*</span> <span class="mf">0.75</span><span class="p">,</span> <span class="c1">// 12px on base</span>
+      <span class="na">lineHeight</span><span class="p">:</span> <span class="nx">scaledFontSize</span> <span class="o">*</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="p">},</span>
+  <span class="p">});</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">ResponsiveText</span> <span class="o">=</span> <span class="p">({</span> <span class="nx">style</span><span class="p">,</span> <span class="nx">children</span><span class="p">,</span> <span class="p">...</span><span class="nx">props</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">typography</span> <span class="o">=</span> <span class="nx">createResponsiveTypography</span><span class="p">();</span>
+  
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{[</span><span class="nx">typography</span><span class="p">.</span><span class="nx">body</span><span class="p">,</span> <span class="nx">style</span><span class="p">]}</span> <span class="p">{...</span><span class="nx">props</span><span class="p">}</span><span class="o">&gt;</span>
+      <span class="p">{</span><span class="nx">children</span><span class="p">}</span>
+    <span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="2-responsive-spacing-system">2. Responsive Spacing System</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">StyleSheet</span><span class="p">,</span> <span class="nx">Dimensions</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="p">{</span> <span class="nx">width</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">Dimensions</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">window</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">createSpacingSystem</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">baseSpacing</span> <span class="o">=</span> <span class="mi">8</span><span class="p">;</span>
+  <span class="kd">const</span> <span class="nx">scaleFactor</span> <span class="o">=</span> <span class="nx">width</span> <span class="o">/</span> <span class="mi">375</span><span class="p">;</span> <span class="c1">// iPhone 6/7/8 as base</span>
+  <span class="kd">const</span> <span class="nx">scaledSpacing</span> <span class="o">=</span> <span class="nx">baseSpacing</span> <span class="o">*</span> <span class="nx">scaleFactor</span><span class="p">;</span>
+  
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="na">xs</span><span class="p">:</span> <span class="nx">scaledSpacing</span> <span class="o">*</span> <span class="mf">0.5</span><span class="p">,</span>    <span class="c1">// 4px</span>
+    <span class="na">sm</span><span class="p">:</span> <span class="nx">scaledSpacing</span><span class="p">,</span>          <span class="c1">// 8px</span>
+    <span class="na">md</span><span class="p">:</span> <span class="nx">scaledSpacing</span> <span class="o">*</span> <span class="mf">1.5</span><span class="p">,</span>    <span class="c1">// 12px</span>
+    <span class="na">lg</span><span class="p">:</span> <span class="nx">scaledSpacing</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span>      <span class="c1">// 16px</span>
+    <span class="na">xl</span><span class="p">:</span> <span class="nx">scaledSpacing</span> <span class="o">*</span> <span class="mi">3</span><span class="p">,</span>      <span class="c1">// 24px</span>
+    <span class="na">xxl</span><span class="p">:</span> <span class="nx">scaledSpacing</span> <span class="o">*</span> <span class="mi">4</span><span class="p">,</span>     <span class="c1">// 32px</span>
+    <span class="na">xxxl</span><span class="p">:</span> <span class="nx">scaledSpacing</span> <span class="o">*</span> <span class="mi">6</span><span class="p">,</span>    <span class="c1">// 48px</span>
+  <span class="p">};</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">useSpacing</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">spacing</span><span class="p">,</span> <span class="nx">setSpacing</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="nx">createSpacingSystem</span><span class="p">());</span>
+
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">subscription</span> <span class="o">=</span> <span class="nx">Dimensions</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">change</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">setSpacing</span><span class="p">(</span><span class="nx">createSpacingSystem</span><span class="p">());</span>
+    <span class="p">});</span>
+
+    <span class="k">return</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">subscription</span><span class="p">?.</span><span class="nx">remove</span><span class="p">();</span>
+  <span class="p">},</span> <span class="p">[]);</span>
+
+  <span class="k">return</span> <span class="nx">spacing</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">ResponsiveSpacing</span> <span class="o">=</span> <span class="p">({</span> <span class="nx">children</span><span class="p">,</span> <span class="nx">padding</span><span class="p">,</span> <span class="nx">margin</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">spacing</span> <span class="o">=</span> <span class="nx">useSpacing</span><span class="p">();</span>
+  
+  <span class="kd">const</span> <span class="nx">getSpacingValue</span> <span class="o">=</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">value</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">number</span><span class="dl">'</span><span class="p">)</span> <span class="k">return</span> <span class="nx">value</span><span class="p">;</span>
+    <span class="k">return</span> <span class="nx">spacing</span><span class="p">[</span><span class="nx">value</span><span class="p">]</span> <span class="o">||</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="p">};</span>
+
+  <span class="kd">const</span> <span class="nx">style</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">padding</span><span class="p">:</span> <span class="nx">getSpacingValue</span><span class="p">(</span><span class="nx">padding</span><span class="p">),</span>
+    <span class="na">margin</span><span class="p">:</span> <span class="nx">getSpacingValue</span><span class="p">(</span><span class="nx">margin</span><span class="p">),</span>
+  <span class="p">};</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">style</span><span class="p">}</span><span class="o">&gt;</span>
+      <span class="p">{</span><span class="nx">children</span><span class="p">}</span>
+    <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h2 id="image-and-media-responsiveness">Image and Media Responsiveness</h2>
+
+<h3 id="1-responsive-images">1. Responsive Images</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Image</span><span class="p">,</span> <span class="nx">Dimensions</span><span class="p">,</span> <span class="nx">StyleSheet</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="p">{</span> <span class="nx">width</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">Dimensions</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">window</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">ResponsiveImage</span> <span class="o">=</span> <span class="p">({</span> <span class="nx">source</span><span class="p">,</span> <span class="nx">aspectRatio</span> <span class="o">=</span> <span class="mi">16</span><span class="o">/</span><span class="mi">9</span><span class="p">,</span> <span class="nx">maxWidth</span><span class="p">,</span> <span class="p">...</span><span class="nx">props</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">imageDimensions</span><span class="p">,</span> <span class="nx">setImageDimensions</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">({</span> <span class="na">width</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="na">height</span><span class="p">:</span> <span class="mi">0</span> <span class="p">});</span>
+  
+  <span class="kd">const</span> <span class="nx">calculateDimensions</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">containerWidth</span> <span class="o">=</span> <span class="nx">maxWidth</span> <span class="o">||</span> <span class="nx">width</span><span class="p">;</span>
+    <span class="kd">const</span> <span class="nx">imageWidth</span> <span class="o">=</span> <span class="nx">containerWidth</span><span class="p">;</span>
+    <span class="kd">const</span> <span class="nx">imageHeight</span> <span class="o">=</span> <span class="nx">imageWidth</span> <span class="o">/</span> <span class="nx">aspectRatio</span><span class="p">;</span>
+    
+    <span class="k">return</span> <span class="p">{</span> <span class="na">width</span><span class="p">:</span> <span class="nx">imageWidth</span><span class="p">,</span> <span class="na">height</span><span class="p">:</span> <span class="nx">imageHeight</span> <span class="p">};</span>
+  <span class="p">};</span>
+
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setImageDimensions</span><span class="p">(</span><span class="nx">calculateDimensions</span><span class="p">());</span>
+  <span class="p">},</span> <span class="p">[</span><span class="nx">width</span><span class="p">,</span> <span class="nx">maxWidth</span><span class="p">,</span> <span class="nx">aspectRatio</span><span class="p">]);</span>
+
+  <span class="kd">const</span> <span class="nx">handleImageLoad</span> <span class="o">=</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="p">{</span> <span class="na">width</span><span class="p">:</span> <span class="nx">imgWidth</span><span class="p">,</span> <span class="na">height</span><span class="p">:</span> <span class="nx">imgHeight</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">nativeEvent</span><span class="p">.</span><span class="nx">source</span><span class="p">;</span>
+    <span class="kd">const</span> <span class="nx">calculatedDimensions</span> <span class="o">=</span> <span class="nx">calculateDimensions</span><span class="p">();</span>
+    
+    <span class="c1">// Maintain aspect ratio</span>
+    <span class="kd">const</span> <span class="nx">aspectRatio</span> <span class="o">=</span> <span class="nx">imgWidth</span> <span class="o">/</span> <span class="nx">imgHeight</span><span class="p">;</span>
+    <span class="kd">const</span> <span class="nx">finalWidth</span> <span class="o">=</span> <span class="nx">calculatedDimensions</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span>
+    <span class="kd">const</span> <span class="nx">finalHeight</span> <span class="o">=</span> <span class="nx">finalWidth</span> <span class="o">/</span> <span class="nx">aspectRatio</span><span class="p">;</span>
+    
+    <span class="nx">setImageDimensions</span><span class="p">({</span> <span class="na">width</span><span class="p">:</span> <span class="nx">finalWidth</span><span class="p">,</span> <span class="na">height</span><span class="p">:</span> <span class="nx">finalHeight</span> <span class="p">});</span>
+  <span class="p">};</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">Image</span>
+      <span class="nx">source</span><span class="o">=</span><span class="p">{</span><span class="nx">source</span><span class="p">}</span>
+      <span class="nx">style</span><span class="o">=</span><span class="p">{[</span>
+        <span class="nx">styles</span><span class="p">.</span><span class="nx">responsiveImage</span><span class="p">,</span>
+        <span class="nx">imageDimensions</span><span class="p">,</span>
+        <span class="nx">props</span><span class="p">.</span><span class="nx">style</span>
+      <span class="p">]}</span>
+      <span class="nx">onLoad</span><span class="o">=</span><span class="p">{</span><span class="nx">handleImageLoad</span><span class="p">}</span>
+      <span class="nx">resizeMode</span><span class="o">=</span><span class="dl">"</span><span class="s2">cover</span><span class="dl">"</span>
+      <span class="p">{...</span><span class="nx">props</span><span class="p">}</span>
+    <span class="sr">/</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">styles</span> <span class="o">=</span> <span class="nx">StyleSheet</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span>
+  <span class="na">responsiveImage</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">borderRadius</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+  <span class="p">},</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<h3 id="2-responsive-video-player">2. Responsive Video Player</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">View</span><span class="p">,</span> <span class="nx">Dimensions</span><span class="p">,</span> <span class="nx">StyleSheet</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">Video</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native-video</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="p">{</span> <span class="nx">width</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">Dimensions</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">window</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">ResponsiveVideoPlayer</span> <span class="o">=</span> <span class="p">({</span> <span class="nx">source</span><span class="p">,</span> <span class="nx">aspectRatio</span> <span class="o">=</span> <span class="mi">16</span><span class="o">/</span><span class="mi">9</span><span class="p">,</span> <span class="p">...</span><span class="nx">props</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">videoDimensions</span><span class="p">,</span> <span class="nx">setVideoDimensions</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">({</span> <span class="na">width</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="na">height</span><span class="p">:</span> <span class="mi">0</span> <span class="p">});</span>
+  
+  <span class="kd">const</span> <span class="nx">calculateVideoDimensions</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">videoWidth</span> <span class="o">=</span> <span class="nx">width</span><span class="p">;</span>
+    <span class="kd">const</span> <span class="nx">videoHeight</span> <span class="o">=</span> <span class="nx">videoWidth</span> <span class="o">/</span> <span class="nx">aspectRatio</span><span class="p">;</span>
+    
+    <span class="k">return</span> <span class="p">{</span> <span class="na">width</span><span class="p">:</span> <span class="nx">videoWidth</span><span class="p">,</span> <span class="na">height</span><span class="p">:</span> <span class="nx">videoHeight</span> <span class="p">};</span>
+  <span class="p">};</span>
+
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setVideoDimensions</span><span class="p">(</span><span class="nx">calculateVideoDimensions</span><span class="p">());</span>
+  <span class="p">},</span> <span class="p">[</span><span class="nx">width</span><span class="p">,</span> <span class="nx">aspectRatio</span><span class="p">]);</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{[</span><span class="nx">styles</span><span class="p">.</span><span class="nx">videoContainer</span><span class="p">,</span> <span class="nx">videoDimensions</span><span class="p">]}</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="nx">Video</span>
+        <span class="nx">source</span><span class="o">=</span><span class="p">{</span><span class="nx">source</span><span class="p">}</span>
+        <span class="nx">style</span><span class="o">=</span><span class="p">{[</span><span class="nx">styles</span><span class="p">.</span><span class="nx">video</span><span class="p">,</span> <span class="nx">videoDimensions</span><span class="p">]}</span>
+        <span class="nx">resizeMode</span><span class="o">=</span><span class="dl">"</span><span class="s2">contain</span><span class="dl">"</span>
+        <span class="p">{...</span><span class="nx">props</span><span class="p">}</span>
+      <span class="sr">/</span><span class="err">&gt;
+</span>    <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">styles</span> <span class="o">=</span> <span class="nx">StyleSheet</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span>
+  <span class="na">videoContainer</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#000</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">borderRadius</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+    <span class="na">overflow</span><span class="p">:</span> <span class="dl">'</span><span class="s1">hidden</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">video</span><span class="p">:</span> <span class="p">{</span>
+    <span class="c1">// Video styles</span>
+  <span class="p">},</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<h2 id="navigation-responsiveness">Navigation Responsiveness</h2>
+
+<h3 id="1-responsive-navigation">1. Responsive Navigation</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">useBreakpoint</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./useBreakpoint</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">createDrawerNavigator</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@react-navigation/drawer</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">createBottomTabNavigator</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@react-navigation/bottom-tabs</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">Drawer</span> <span class="o">=</span> <span class="nx">createDrawerNavigator</span><span class="p">();</span>
+<span class="kd">const</span> <span class="nx">Tab</span> <span class="o">=</span> <span class="nx">createBottomTabNavigator</span><span class="p">();</span>
+
+<span class="kd">const</span> <span class="nx">ResponsiveNavigator</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">{</span> <span class="nx">isMobile</span><span class="p">,</span> <span class="nx">isTablet</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">useBreakpoint</span><span class="p">();</span>
+  
+  <span class="k">if</span> <span class="p">(</span><span class="nx">isMobile</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="o">&lt;</span><span class="nx">Tab</span><span class="p">.</span><span class="nx">Navigator</span>
+        <span class="nx">screenOptions</span><span class="o">=</span><span class="p">{{</span><span class="err">#</span><span class="mi">123</span><span class="p">;{{</span><span class="err">#</span><span class="mi">123</span><span class="p">;</span>
+          <span class="nl">tabBarStyle</span><span class="p">:</span> <span class="p">{</span>
+            <span class="na">height</span><span class="p">:</span> <span class="mi">60</span><span class="p">,</span>
+            <span class="na">paddingBottom</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+          <span class="p">},</span>
+        <span class="p">}}</span><span class="err">#</span><span class="mi">125</span><span class="p">;}}</span><span class="err">#</span><span class="mi">125</span><span class="p">;</span>
+      <span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">Tab</span><span class="p">.</span><span class="nx">Screen</span> <span class="nx">name</span><span class="o">=</span><span class="dl">"</span><span class="s2">Home</span><span class="dl">"</span> <span class="nx">component</span><span class="o">=</span><span class="p">{</span><span class="nx">HomeScreen</span><span class="p">}</span> <span class="sr">/</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="nx">Tab</span><span class="p">.</span><span class="nx">Screen</span> <span class="nx">name</span><span class="o">=</span><span class="dl">"</span><span class="s2">Profile</span><span class="dl">"</span> <span class="nx">component</span><span class="o">=</span><span class="p">{</span><span class="nx">ProfileScreen</span><span class="p">}</span> <span class="sr">/</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/Tab.Navigator</span><span class="err">&gt;
+</span>    <span class="p">);</span>
+  <span class="p">}</span>
+  
+  <span class="k">if</span> <span class="p">(</span><span class="nx">isTablet</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="o">&lt;</span><span class="nx">Drawer</span><span class="p">.</span><span class="nx">Navigator</span>
+        <span class="nx">screenOptions</span><span class="o">=</span><span class="p">{{</span><span class="err">#</span><span class="mi">123</span><span class="p">;{{</span><span class="err">#</span><span class="mi">123</span><span class="p">;</span>
+          <span class="nl">drawerStyle</span><span class="p">:</span> <span class="p">{</span>
+            <span class="na">width</span><span class="p">:</span> <span class="mi">280</span><span class="p">,</span>
+          <span class="p">},</span>
+        <span class="p">}}</span><span class="err">#</span><span class="mi">125</span><span class="p">;}}</span><span class="err">#</span><span class="mi">125</span><span class="p">;</span>
+      <span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">Drawer</span><span class="p">.</span><span class="nx">Screen</span> <span class="nx">name</span><span class="o">=</span><span class="dl">"</span><span class="s2">Home</span><span class="dl">"</span> <span class="nx">component</span><span class="o">=</span><span class="p">{</span><span class="nx">HomeScreen</span><span class="p">}</span> <span class="sr">/</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="nx">Drawer</span><span class="p">.</span><span class="nx">Screen</span> <span class="nx">name</span><span class="o">=</span><span class="dl">"</span><span class="s2">Profile</span><span class="dl">"</span> <span class="nx">component</span><span class="o">=</span><span class="p">{</span><span class="nx">ProfileScreen</span><span class="p">}</span> <span class="sr">/</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/Drawer.Navigator</span><span class="err">&gt;
+</span>    <span class="p">);</span>
+  <span class="p">}</span>
+  
+  <span class="c1">// Desktop layout</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">desktopLayout</span><span class="p">}</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">sidebar</span><span class="p">}</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">Sidebar</span> <span class="o">/&gt;</span>
+      <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">mainContent</span><span class="p">}</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">MainContent</span> <span class="o">/&gt;</span>
+      <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>    <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="2-responsive-modal">2. Responsive Modal</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Modal</span><span class="p">,</span> <span class="nx">Dimensions</span><span class="p">,</span> <span class="nx">StyleSheet</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="p">{</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">Dimensions</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">window</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">ResponsiveModal</span> <span class="o">=</span> <span class="p">({</span> <span class="nx">visible</span><span class="p">,</span> <span class="nx">onClose</span><span class="p">,</span> <span class="nx">children</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">{</span> <span class="nx">isTablet</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">useBreakpoint</span><span class="p">();</span>
+  
+  <span class="kd">const</span> <span class="nx">getModalStyle</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">isTablet</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="p">{</span>
+        <span class="na">width</span><span class="p">:</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">min</span><span class="p">(</span><span class="nx">width</span> <span class="o">*</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mi">600</span><span class="p">),</span>
+        <span class="na">height</span><span class="p">:</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">min</span><span class="p">(</span><span class="nx">height</span> <span class="o">*</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mi">500</span><span class="p">),</span>
+        <span class="na">borderRadius</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+      <span class="p">};</span>
+    <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="p">{</span>
+      <span class="na">width</span><span class="p">:</span> <span class="nx">width</span> <span class="o">*</span> <span class="mf">0.9</span><span class="p">,</span>
+      <span class="na">height</span><span class="p">:</span> <span class="nx">height</span> <span class="o">*</span> <span class="mf">0.8</span><span class="p">,</span>
+      <span class="na">borderRadius</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+    <span class="p">};</span>
+  <span class="p">};</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">Modal</span>
+      <span class="nx">visible</span><span class="o">=</span><span class="p">{</span><span class="nx">visible</span><span class="p">}</span>
+      <span class="nx">transparent</span>
+      <span class="nx">animationType</span><span class="o">=</span><span class="dl">"</span><span class="s2">fade</span><span class="dl">"</span>
+      <span class="nx">onRequestClose</span><span class="o">=</span><span class="p">{</span><span class="nx">onClose</span><span class="p">}</span>
+    <span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">modalOverlay</span><span class="p">}</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{[</span><span class="nx">styles</span><span class="p">.</span><span class="nx">modalContent</span><span class="p">,</span> <span class="nx">getModalStyle</span><span class="p">()]}</span><span class="o">&gt;</span>
+          <span class="p">{</span><span class="nx">children</span><span class="p">}</span>
+        <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>    <span class="o">&lt;</span><span class="sr">/Modal</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">styles</span> <span class="o">=</span> <span class="nx">StyleSheet</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span>
+  <span class="na">modalOverlay</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">flex</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">rgba(0, 0, 0, 0.5)</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">justifyContent</span><span class="p">:</span> <span class="dl">'</span><span class="s1">center</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">alignItems</span><span class="p">:</span> <span class="dl">'</span><span class="s1">center</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">modalContent</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#FFFFFF</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">padding</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="na">shadowColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#000</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">shadowOffset</span><span class="p">:</span> <span class="p">{</span> <span class="na">width</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="na">height</span><span class="p">:</span> <span class="mi">2</span> <span class="p">},</span>
+    <span class="na">shadowOpacity</span><span class="p">:</span> <span class="mf">0.25</span><span class="p">,</span>
+    <span class="na">shadowRadius</span><span class="p">:</span> <span class="mf">3.84</span><span class="p">,</span>
+    <span class="na">elevation</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+  <span class="p">},</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<h2 id="performance-optimization">Performance Optimization</h2>
+
+<h3 id="1-responsive-performance-hooks">1. Responsive Performance Hooks</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">useMemo</span><span class="p">,</span> <span class="nx">useCallback</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">useBreakpoint</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./useBreakpoint</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">useResponsivePerformance</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">{</span> <span class="nx">isMobile</span><span class="p">,</span> <span class="nx">isTablet</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">useBreakpoint</span><span class="p">();</span>
+  
+  <span class="c1">// Adjust rendering performance based on device</span>
+  <span class="kd">const</span> <span class="nx">getRenderBatchSize</span> <span class="o">=</span> <span class="nx">useCallback</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">isMobile</span><span class="p">)</span> <span class="k">return</span> <span class="mi">10</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">isTablet</span><span class="p">)</span> <span class="k">return</span> <span class="mi">15</span><span class="p">;</span>
+    <span class="k">return</span> <span class="mi">20</span><span class="p">;</span>
+  <span class="p">},</span> <span class="p">[</span><span class="nx">isMobile</span><span class="p">,</span> <span class="nx">isTablet</span><span class="p">]);</span>
+  
+  <span class="kd">const</span> <span class="nx">getWindowSize</span> <span class="o">=</span> <span class="nx">useCallback</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">isMobile</span><span class="p">)</span> <span class="k">return</span> <span class="mi">10</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">isTablet</span><span class="p">)</span> <span class="k">return</span> <span class="mi">15</span><span class="p">;</span>
+    <span class="k">return</span> <span class="mi">20</span><span class="p">;</span>
+  <span class="p">},</span> <span class="p">[</span><span class="nx">isMobile</span><span class="p">,</span> <span class="nx">isTablet</span><span class="p">]);</span>
+  
+  <span class="kd">const</span> <span class="nx">getUpdateCellsBatchingPeriod</span> <span class="o">=</span> <span class="nx">useCallback</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">isMobile</span><span class="p">)</span> <span class="k">return</span> <span class="mi">50</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">isTablet</span><span class="p">)</span> <span class="k">return</span> <span class="mi">100</span><span class="p">;</span>
+    <span class="k">return</span> <span class="mi">150</span><span class="p">;</span>
+  <span class="p">},</span> <span class="p">[</span><span class="nx">isMobile</span><span class="p">,</span> <span class="nx">isTablet</span><span class="p">]);</span>
+  
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="na">renderBatchSize</span><span class="p">:</span> <span class="nx">getRenderBatchSize</span><span class="p">(),</span>
+    <span class="na">windowSize</span><span class="p">:</span> <span class="nx">getWindowSize</span><span class="p">(),</span>
+    <span class="na">updateCellsBatchingPeriod</span><span class="p">:</span> <span class="nx">getUpdateCellsBatchingPeriod</span><span class="p">(),</span>
+  <span class="p">};</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">ResponsiveFlatList</span> <span class="o">=</span> <span class="p">({</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">renderItem</span><span class="p">,</span> <span class="p">...</span><span class="nx">props</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">{</span> <span class="nx">renderBatchSize</span><span class="p">,</span> <span class="nx">windowSize</span><span class="p">,</span> <span class="nx">updateCellsBatchingPeriod</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">useResponsivePerformance</span><span class="p">();</span>
+  
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">FlatList</span>
+      <span class="nx">data</span><span class="o">=</span><span class="p">{</span><span class="nx">data</span><span class="p">}</span>
+      <span class="nx">renderItem</span><span class="o">=</span><span class="p">{</span><span class="nx">renderItem</span><span class="p">}</span>
+      <span class="nx">maxToRenderPerBatch</span><span class="o">=</span><span class="p">{</span><span class="nx">renderBatchSize</span><span class="p">}</span>
+      <span class="nx">windowSize</span><span class="o">=</span><span class="p">{</span><span class="nx">windowSize</span><span class="p">}</span>
+      <span class="nx">updateCellsBatchingPeriod</span><span class="o">=</span><span class="p">{</span><span class="nx">updateCellsBatchingPeriod</span><span class="p">}</span>
+      <span class="nx">removeClippedSubviews</span><span class="o">=</span><span class="p">{</span><span class="kc">true</span><span class="p">}</span>
+      <span class="p">{...</span><span class="nx">props</span><span class="p">}</span>
+    <span class="sr">/</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="2-responsive-image-caching">2. Responsive Image Caching</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">useMemo</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">useBreakpoint</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./useBreakpoint</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">useResponsiveImageCache</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">{</span> <span class="nx">isMobile</span><span class="p">,</span> <span class="nx">isTablet</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">useBreakpoint</span><span class="p">();</span>
+  
+  <span class="kd">const</span> <span class="nx">getImageQuality</span> <span class="o">=</span> <span class="nx">useMemo</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">isMobile</span><span class="p">)</span> <span class="k">return</span> <span class="mf">0.8</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">isTablet</span><span class="p">)</span> <span class="k">return</span> <span class="mf">0.9</span><span class="p">;</span>
+    <span class="k">return</span> <span class="mf">1.0</span><span class="p">;</span>
+  <span class="p">},</span> <span class="p">[</span><span class="nx">isMobile</span><span class="p">,</span> <span class="nx">isTablet</span><span class="p">]);</span>
+  
+  <span class="kd">const</span> <span class="nx">getImageSize</span> <span class="o">=</span> <span class="nx">useMemo</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">isMobile</span><span class="p">)</span> <span class="k">return</span> <span class="p">{</span> <span class="na">width</span><span class="p">:</span> <span class="mi">300</span><span class="p">,</span> <span class="na">height</span><span class="p">:</span> <span class="mi">200</span> <span class="p">};</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">isTablet</span><span class="p">)</span> <span class="k">return</span> <span class="p">{</span> <span class="na">width</span><span class="p">:</span> <span class="mi">600</span><span class="p">,</span> <span class="na">height</span><span class="p">:</span> <span class="mi">400</span> <span class="p">};</span>
+    <span class="k">return</span> <span class="p">{</span> <span class="na">width</span><span class="p">:</span> <span class="mi">800</span><span class="p">,</span> <span class="na">height</span><span class="p">:</span> <span class="mi">600</span> <span class="p">};</span>
+  <span class="p">},</span> <span class="p">[</span><span class="nx">isMobile</span><span class="p">,</span> <span class="nx">isTablet</span><span class="p">]);</span>
+  
+  <span class="kd">const</span> <span class="nx">getCacheSize</span> <span class="o">=</span> <span class="nx">useMemo</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">isMobile</span><span class="p">)</span> <span class="k">return</span> <span class="mi">50</span><span class="p">;</span> <span class="c1">// MB</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">isTablet</span><span class="p">)</span> <span class="k">return</span> <span class="mi">100</span><span class="p">;</span> <span class="c1">// MB</span>
+    <span class="k">return</span> <span class="mi">200</span><span class="p">;</span> <span class="c1">// MB</span>
+  <span class="p">},</span> <span class="p">[</span><span class="nx">isMobile</span><span class="p">,</span> <span class="nx">isTablet</span><span class="p">]);</span>
+  
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="na">imageQuality</span><span class="p">:</span> <span class="nx">getImageQuality</span><span class="p">,</span>
+    <span class="na">imageSize</span><span class="p">:</span> <span class="nx">getImageSize</span><span class="p">,</span>
+    <span class="na">cacheSize</span><span class="p">:</span> <span class="nx">getCacheSize</span><span class="p">,</span>
+  <span class="p">};</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h2 id="testing-responsive-design">Testing Responsive Design</h2>
+
+<h3 id="1-responsive-testing-utilities">1. Responsive Testing Utilities</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// test-utils/responsiveTestUtils.js</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Dimensions</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">mockDimensions</span> <span class="o">=</span> <span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">originalDimensions</span> <span class="o">=</span> <span class="nx">Dimensions</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">window</span><span class="dl">'</span><span class="p">);</span>
+  
+  <span class="nx">Dimensions</span><span class="p">.</span><span class="kd">get</span> <span class="o">=</span> <span class="nx">jest</span><span class="p">.</span><span class="nx">fn</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">({</span>
+    <span class="nx">width</span><span class="p">,</span>
+    <span class="nx">height</span><span class="p">,</span>
+    <span class="na">scale</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="na">fontScale</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="p">}));</span>
+  
+  <span class="k">return</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">Dimensions</span><span class="p">.</span><span class="kd">get</span> <span class="o">=</span> <span class="nx">jest</span><span class="p">.</span><span class="nx">fn</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nx">originalDimensions</span><span class="p">);</span>
+  <span class="p">};</span>
+<span class="p">};</span>
+
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">testResponsiveLayout</span> <span class="o">=</span> <span class="p">(</span><span class="nx">component</span><span class="p">,</span> <span class="nx">testCases</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">testCases</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(({</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">expectedBehavior</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">it</span><span class="p">(</span><span class="s2">`should handle </span><span class="p">${</span><span class="nx">name</span><span class="p">}</span><span class="s2"> layout (</span><span class="p">${</span><span class="nx">width</span><span class="p">}</span><span class="s2">x</span><span class="p">${</span><span class="nx">height</span><span class="p">}</span><span class="s2">)`</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">restoreDimensions</span> <span class="o">=</span> <span class="nx">mockDimensions</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
+      
+      <span class="k">try</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="p">{</span> <span class="nx">getByTestId</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">render</span><span class="p">(</span><span class="nx">component</span><span class="p">);</span>
+        <span class="nx">expectedBehavior</span><span class="p">(</span><span class="nx">getByTestId</span><span class="p">);</span>
+      <span class="p">}</span> <span class="k">finally</span> <span class="p">{</span>
+        <span class="nx">restoreDimensions</span><span class="p">();</span>
+      <span class="p">}</span>
+    <span class="p">});</span>
+  <span class="p">});</span>
+<span class="p">};</span>
+
+<span class="c1">// Usage example</span>
+<span class="nx">describe</span><span class="p">(</span><span class="dl">'</span><span class="s1">ResponsiveComponent</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">testResponsiveLayout</span><span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">ResponsiveComponent</span> <span class="o">/&gt;</span><span class="p">,</span>
+    <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">mobile portrait</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">width</span><span class="p">:</span> <span class="mi">375</span><span class="p">,</span>
+        <span class="na">height</span><span class="p">:</span> <span class="mi">667</span><span class="p">,</span>
+        <span class="na">expectedBehavior</span><span class="p">:</span> <span class="p">(</span><span class="nx">getByTestId</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+          <span class="nx">expect</span><span class="p">(</span><span class="nx">getByTestId</span><span class="p">(</span><span class="dl">'</span><span class="s1">mobile-layout</span><span class="dl">'</span><span class="p">)).</span><span class="nx">toBeTruthy</span><span class="p">();</span>
+        <span class="p">},</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">tablet landscape</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">width</span><span class="p">:</span> <span class="mi">1024</span><span class="p">,</span>
+        <span class="na">height</span><span class="p">:</span> <span class="mi">768</span><span class="p">,</span>
+        <span class="na">expectedBehavior</span><span class="p">:</span> <span class="p">(</span><span class="nx">getByTestId</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+          <span class="nx">expect</span><span class="p">(</span><span class="nx">getByTestId</span><span class="p">(</span><span class="dl">'</span><span class="s1">tablet-layout</span><span class="dl">'</span><span class="p">)).</span><span class="nx">toBeTruthy</span><span class="p">();</span>
+        <span class="p">},</span>
+      <span class="p">},</span>
+    <span class="p">]</span>
+  <span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<h2 id="summary">Summary</h2>
+
+<p>Responsive design patterns in React Native include:</p>
+
+<ol>
+  <li><strong>Screen Size Detection</strong>: Using Dimensions API and custom hooks</li>
+  <li><strong>Responsive Layouts</strong>: Flexible grids, adaptive containers, breakpoint-based layouts</li>
+  <li><strong>Typography and Spacing</strong>: Scalable text and spacing systems</li>
+  <li><strong>Image and Media</strong>: Responsive images and video players</li>
+  <li><strong>Navigation</strong>: Adaptive navigation patterns</li>
+  <li><strong>Performance</strong>: Responsive performance optimization</li>
+  <li><strong>Testing</strong>: Responsive testing utilities</li>
+</ol>
+
+<h2 id="key-takeaways">Key Takeaways</h2>
+
+<ul>
+  <li>Use Dimensions API to detect screen size and orientation changes</li>
+  <li>Implement breakpoint-based layouts for different device types</li>
+  <li>Create scalable typography and spacing systems</li>
+  <li>Optimize images and media for different screen sizes</li>
+  <li>Use responsive navigation patterns for better UX</li>
+  <li>Implement performance optimizations based on device capabilities</li>
+  <li>Test responsive design across different screen sizes</li>
+  <li>Consider accessibility and usability in responsive designs</li>
+  <li>Use custom hooks for reusable responsive logic</li>
+  <li>Implement proper cleanup for dimension change listeners</li>
+</ul>
+
+
+        </main>
+        
+        <footer style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #ecf0f1; color: #666; text-align: center;">
+            <p>Interview Prep Documentation - Built with Jekyll</p>
+        </footer>
+    </div>
+</body>
+</html>

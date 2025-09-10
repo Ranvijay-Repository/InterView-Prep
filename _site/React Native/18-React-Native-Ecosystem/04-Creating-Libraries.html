@@ -1,0 +1,1408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏗️ Creating Libraries - Interview Prep Documentation</title>
+    <meta name="description" content="Comprehensive guides for JavaScript, TypeScript, and React Native interview preparation">
+    
+    <!-- GitHub Pages compatible styling -->
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+        }
+        
+        .container {
+            max-width: 100%;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            color: #2c3e50;
+            margin-top: 2em;
+            margin-bottom: 1em;
+        }
+        
+        h1 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            border-bottom: 1px solid #ecf0f1;
+            padding-bottom: 5px;
+        }
+        
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border-left: 4px solid #3498db;
+        }
+        
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+        
+        blockquote {
+            border-left: 4px solid #3498db;
+            margin: 0;
+            padding-left: 20px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1em 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .navigation {
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px 0;
+            margin-bottom: 20px;
+        }
+        
+        .navigation a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+        
+        .navigation a:hover {
+            text-decoration: underline;
+        }
+        
+        .breadcrumb {
+            margin-bottom: 20px;
+            color: #666;
+        }
+        
+        .breadcrumb a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            h2 {
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="navigation">
+            <a href="/">Home</a>
+            <a href="/Javascript/">JavaScript</a>
+            <a href="/TypeScript/">TypeScript</a>
+            <a href="/React-Native/">React Native</a>
+        </nav>
+        
+        
+        
+        <main>
+            <h1 id="️-creating-libraries">🏗️ <strong>Creating Libraries</strong></h1>
+
+<blockquote>
+  <p><strong>Complete guide to creating React Native libraries, including project setup, TypeScript support, testing, documentation, and publishing</strong></p>
+</blockquote>
+
+<link rel="stylesheet" href="../../common-styles.css" />
+
+<hr />
+
+<h2 id="-table-of-contents">📚 <strong>Table of Contents</strong></h2>
+
+<ul>
+  <li><a href="#creating-libraries-overview">Creating Libraries Overview</a></li>
+  <li><a href="#project-setup">Project Setup</a></li>
+  <li><a href="#typescript-support">TypeScript Support</a></li>
+  <li><a href="#native-module-development">Native Module Development</a></li>
+  <li><a href="#testing-strategy">Testing Strategy</a></li>
+  <li><a href="#documentation">Documentation</a></li>
+  <li><a href="#publishing">Publishing</a></li>
+  <li><a href="#maintenance">Maintenance</a></li>
+  <li><a href="#best-practices">Best Practices</a></li>
+  <li><a href="#interview-questions">Interview Questions</a></li>
+</ul>
+
+<hr />
+
+<h2 id="-creating-libraries-overview">🎯 <strong>Creating Libraries Overview</strong></h2>
+
+<p>Creating React Native libraries involves building reusable components, modules, or utilities that can be shared across projects. Proper library development ensures maintainability, usability, and long-term success.</p>
+
+<h3 id="library-development-framework"><strong>Library Development Framework</strong></h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>┌─────────────────────────────────────┐
+│        Library Development         │
+│  ┌─────────────────────────────────┐│
+│  │        Project Setup           ││
+│  │  - Project Structure           ││
+│  │  - Build Configuration         ││
+│  │  - Package Configuration       ││
+│  │  - Development Tools           ││
+│  └─────────────────────────────────┘│
+│  ┌─────────────────────────────────┐│
+│  │        Development             ││
+│  │  - TypeScript Support          ││
+│  │  - Native Modules              ││
+│  │  - Testing                     ││
+│  │  - Documentation               ││
+│  └─────────────────────────────────┘│
+│  ┌─────────────────────────────────┐│
+│  │        Publishing              ││
+│  │  - npm Publishing              ││
+│  │  - Version Management          ││
+│  │  - Distribution                ││
+│  │  - Maintenance                 ││
+│  └─────────────────────────────────┘│
+└─────────────────────────────────────┘
+</code></pre></div></div>
+
+<h3 id="library-types"><strong>Library Types</strong></h3>
+<ul>
+  <li><strong>JavaScript Libraries</strong>: Pure JavaScript utilities</li>
+  <li><strong>React Components</strong>: Reusable UI components</li>
+  <li><strong>Native Modules</strong>: Platform-specific functionality</li>
+  <li><strong>Hybrid Libraries</strong>: JavaScript + Native code</li>
+</ul>
+
+<hr />
+
+<h2 id="-project-setup">🚀 <strong>Project Setup</strong></h2>
+
+<h3 id="initial-project-structure"><strong>Initial Project Structure</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Create library project</span>
+<span class="nb">mkdir </span>my-react-native-library
+<span class="nb">cd </span>my-react-native-library
+
+<span class="c"># Initialize npm project</span>
+npm init <span class="nt">-y</span>
+
+<span class="c"># Install development dependencies</span>
+npm <span class="nb">install</span> <span class="nt">--save-dev</span> typescript @types/react @types/react-native
+npm <span class="nb">install</span> <span class="nt">--save-dev</span> jest @types/jest react-test-renderer
+npm <span class="nb">install</span> <span class="nt">--save-dev</span> eslint prettier
+npm <span class="nb">install</span> <span class="nt">--save-dev</span> rollup @rollup/plugin-typescript
+</code></pre></div></div>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>my-react-native-library/
+├── src/
+│   ├── index.ts
+│   ├── components/
+│   ├── utils/
+│   └── types/
+├── android/
+│   ├── src/main/java/
+│   └── build.gradle
+├── ios/
+│   ├── MyLibrary/
+│   └── MyLibrary.podspec
+├── __tests__/
+├── docs/
+├── package.json
+├── tsconfig.json
+├── rollup.config.js
+├── .eslintrc.js
+├── .prettierrc
+└── README.md
+</code></pre></div></div>
+
+<h3 id="packagejson-configuration"><strong>Package.json Configuration</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my-react-native-library"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0.0"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A React Native library for awesome functionality"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"main"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dist/index.js"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"types"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dist/index.d.ts"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"files"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"dist"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"android"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ios"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"README.md"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"scripts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"build"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rollup -c"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"test"</span><span class="p">:</span><span class="w"> </span><span class="s2">"jest"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"lint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eslint src/**/*.ts"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"format"</span><span class="p">:</span><span class="w"> </span><span class="s2">"prettier --write src/**/*.ts"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"prepublishOnly"</span><span class="p">:</span><span class="w"> </span><span class="s2">"npm run build"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"keywords"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"react-native"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"library"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"mobile"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"author"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Your Name"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"license"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MIT"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"peerDependencies"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"react"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&gt;=16.8.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"react-native"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&gt;=0.60.0"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"devDependencies"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"@types/react"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^18.0.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"@types/react-native"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^0.71.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"typescript"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^4.9.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"jest"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^29.0.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"eslint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^8.0.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"prettier"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^2.0.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"rollup"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^3.0.0"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"repository"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"git"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/username/my-react-native-library.git"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"bugs"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/username/my-react-native-library/issues"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"homepage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/username/my-react-native-library#readme"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="typescript-configuration"><strong>TypeScript Configuration</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">//</span><span class="w"> </span><span class="err">tsconfig.json</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="nl">"compilerOptions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"target"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ES2018"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"lib"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"ES2018"</span><span class="p">],</span><span class="w">
+    </span><span class="nl">"allowJs"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"skipLibCheck"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"esModuleInterop"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"allowSyntheticDefaultImports"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"strict"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"forceConsistentCasingInFileNames"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"moduleResolution"</span><span class="p">:</span><span class="w"> </span><span class="s2">"node"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"resolveJsonModule"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"isolatedModules"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"noEmit"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"declaration"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"outDir"</span><span class="p">:</span><span class="w"> </span><span class="s2">"./dist"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"rootDir"</span><span class="p">:</span><span class="w"> </span><span class="s2">"./src"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"include"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"src/**/*"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"exclude"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"node_modules"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"dist"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"**/*.test.ts"</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<hr />
+
+<h2 id="-typescript-support">📝 <strong>TypeScript Support</strong></h2>
+
+<h3 id="type-definitions"><strong>Type Definitions</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// src/types/index.ts</span>
+<span class="k">export</span> <span class="kr">interface</span> <span class="nx">LibraryConfig</span> <span class="p">{</span>
+  <span class="nl">apiKey</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">environment</span><span class="p">:</span> <span class="dl">'</span><span class="s1">development</span><span class="dl">'</span> <span class="o">|</span> <span class="dl">'</span><span class="s1">production</span><span class="dl">'</span><span class="p">;</span>
+  <span class="nl">debug</span><span class="p">?:</span> <span class="nx">boolean</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="kr">interface</span> <span class="nx">LibraryOptions</span> <span class="p">{</span>
+  <span class="nl">timeout</span><span class="p">?:</span> <span class="kr">number</span><span class="p">;</span>
+  <span class="nl">retries</span><span class="p">?:</span> <span class="kr">number</span><span class="p">;</span>
+  <span class="nl">headers</span><span class="p">?:</span> <span class="nb">Record</span><span class="o">&lt;</span><span class="kr">string</span><span class="p">,</span> <span class="kr">string</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="kr">interface</span> <span class="nx">LibraryResponse</span><span class="o">&lt;</span><span class="nx">T</span> <span class="o">=</span> <span class="kr">any</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="na">success</span><span class="p">:</span> <span class="nx">boolean</span><span class="p">;</span>
+  <span class="nl">data</span><span class="p">?:</span> <span class="nx">T</span><span class="p">;</span>
+  <span class="nl">error</span><span class="p">?:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">statusCode</span><span class="p">?:</span> <span class="kr">number</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="kd">type</span> <span class="nx">LibraryCallback</span><span class="o">&lt;</span><span class="nx">T</span> <span class="o">=</span> <span class="kr">any</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">(</span><span class="nx">response</span><span class="p">:</span> <span class="nx">LibraryResponse</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="main-library-implementation"><strong>Main Library Implementation</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// src/index.ts</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">NativeModules</span><span class="p">,</span> <span class="nx">Platform</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">LibraryConfig</span><span class="p">,</span> <span class="nx">LibraryOptions</span><span class="p">,</span> <span class="nx">LibraryResponse</span><span class="p">,</span> <span class="nx">LibraryCallback</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./types</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="p">{</span> <span class="nx">MyLibraryModule</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">NativeModules</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nx">MyLibrary</span> <span class="p">{</span>
+  <span class="k">private</span> <span class="nx">config</span><span class="p">:</span> <span class="nx">LibraryConfig</span><span class="p">;</span>
+  <span class="k">private</span> <span class="nx">options</span><span class="p">:</span> <span class="nx">LibraryOptions</span><span class="p">;</span>
+
+  <span class="kd">constructor</span><span class="p">(</span><span class="nx">config</span><span class="p">:</span> <span class="nx">LibraryConfig</span><span class="p">,</span> <span class="nx">options</span><span class="p">:</span> <span class="nx">LibraryOptions</span> <span class="o">=</span> <span class="p">{})</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">config</span> <span class="o">=</span> <span class="nx">config</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="na">timeout</span><span class="p">:</span> <span class="mi">5000</span><span class="p">,</span>
+      <span class="na">retries</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+      <span class="na">headers</span><span class="p">:</span> <span class="p">{},</span>
+      <span class="p">...</span><span class="nx">options</span>
+    <span class="p">};</span>
+  <span class="p">}</span>
+
+  <span class="cm">/**
+   * Initialize the library
+   */</span>
+  <span class="k">async</span> <span class="nx">initialize</span><span class="p">():</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">LibraryResponse</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">MyLibraryModule</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">MyLibraryModule is not available</span><span class="dl">'</span><span class="p">);</span>
+      <span class="p">}</span>
+
+      <span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">MyLibraryModule</span><span class="p">.</span><span class="nx">initialize</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">config</span><span class="p">);</span>
+      <span class="k">return</span> <span class="p">{</span> <span class="na">success</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="na">data</span><span class="p">:</span> <span class="nx">result</span> <span class="p">};</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="p">{</span> 
+        <span class="na">success</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> 
+        <span class="na">error</span><span class="p">:</span> <span class="nx">error</span> <span class="k">instanceof</span> <span class="nb">Error</span> <span class="p">?</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">Unknown error</span><span class="dl">'</span> 
+      <span class="p">};</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="cm">/**
+   * Perform an action
+   */</span>
+  <span class="k">async</span> <span class="nx">performAction</span><span class="p">(</span><span class="nx">action</span><span class="p">:</span> <span class="kr">string</span><span class="p">,</span> <span class="nx">data</span><span class="p">?:</span> <span class="kr">any</span><span class="p">):</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">LibraryResponse</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">MyLibraryModule</span><span class="p">.</span><span class="nx">performAction</span><span class="p">(</span><span class="nx">action</span><span class="p">,</span> <span class="nx">data</span><span class="p">);</span>
+      <span class="k">return</span> <span class="p">{</span> <span class="na">success</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="na">data</span><span class="p">:</span> <span class="nx">result</span> <span class="p">};</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="p">{</span> 
+        <span class="na">success</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> 
+        <span class="na">error</span><span class="p">:</span> <span class="nx">error</span> <span class="k">instanceof</span> <span class="nb">Error</span> <span class="p">?</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">Unknown error</span><span class="dl">'</span> 
+      <span class="p">};</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="cm">/**
+   * Set up event listener
+   */</span>
+  <span class="nx">addEventListener</span><span class="p">(</span><span class="nx">event</span><span class="p">:</span> <span class="kr">string</span><span class="p">,</span> <span class="nx">callback</span><span class="p">:</span> <span class="nx">LibraryCallback</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">MyLibraryModule</span> <span class="o">&amp;&amp;</span> <span class="nx">MyLibraryModule</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">MyLibraryModule</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="nx">callback</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="cm">/**
+   * Remove event listener
+   */</span>
+  <span class="nx">removeEventListener</span><span class="p">(</span><span class="nx">event</span><span class="p">:</span> <span class="kr">string</span><span class="p">,</span> <span class="nx">callback</span><span class="p">:</span> <span class="nx">LibraryCallback</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">MyLibraryModule</span> <span class="o">&amp;&amp;</span> <span class="nx">MyLibraryModule</span><span class="p">.</span><span class="nx">removeEventListener</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">MyLibraryModule</span><span class="p">.</span><span class="nx">removeEventListener</span><span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="nx">callback</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">MyLibrary</span><span class="p">;</span>
+<span class="k">export</span> <span class="p">{</span> <span class="nx">LibraryConfig</span><span class="p">,</span> <span class="nx">LibraryOptions</span><span class="p">,</span> <span class="nx">LibraryResponse</span><span class="p">,</span> <span class="nx">LibraryCallback</span> <span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="component-library"><strong>Component Library</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// src/components/MyComponent.tsx</span>
+<span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useState</span><span class="p">,</span> <span class="nx">useEffect</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">View</span><span class="p">,</span> <span class="nx">Text</span><span class="p">,</span> <span class="nx">TouchableOpacity</span><span class="p">,</span> <span class="nx">StyleSheet</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="kr">interface</span> <span class="nx">MyComponentProps</span> <span class="p">{</span>
+  <span class="nl">title</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">onPress</span><span class="p">?:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span>
+  <span class="nl">disabled</span><span class="p">?:</span> <span class="nx">boolean</span><span class="p">;</span>
+  <span class="nl">style</span><span class="p">?:</span> <span class="kr">any</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">MyComponent</span><span class="p">:</span> <span class="nx">React</span><span class="p">.</span><span class="nx">FC</span><span class="o">&lt;</span><span class="nx">MyComponentProps</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">({</span>
+  <span class="nx">title</span><span class="p">,</span>
+  <span class="nx">onPress</span><span class="p">,</span>
+  <span class="nx">disabled</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="nx">style</span>
+<span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">isPressed</span><span class="p">,</span> <span class="nx">setIsPressed</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+
+  <span class="kd">const</span> <span class="nx">handlePress</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">disabled</span> <span class="o">&amp;&amp;</span> <span class="nx">onPress</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">onPress</span><span class="p">();</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">TouchableOpacity</span>
+      <span class="nx">style</span><span class="o">=</span><span class="p">{[</span>
+        <span class="nx">styles</span><span class="p">.</span><span class="nx">container</span><span class="p">,</span>
+        <span class="nx">disabled</span> <span class="o">&amp;&amp;</span> <span class="nx">styles</span><span class="p">.</span><span class="nx">disabled</span><span class="p">,</span>
+        <span class="nx">isPressed</span> <span class="o">&amp;&amp;</span> <span class="nx">styles</span><span class="p">.</span><span class="nx">pressed</span><span class="p">,</span>
+        <span class="nx">style</span>
+      <span class="p">]}</span>
+      <span class="nx">onPress</span><span class="o">=</span><span class="p">{</span><span class="nx">handlePress</span><span class="p">}</span>
+      <span class="nx">onPressIn</span><span class="o">=</span><span class="p">{()</span> <span class="o">=&gt;</span> <span class="nx">setIsPressed</span><span class="p">(</span><span class="kc">true</span><span class="p">)}</span>
+      <span class="nx">onPressOut</span><span class="o">=</span><span class="p">{()</span> <span class="o">=&gt;</span> <span class="nx">setIsPressed</span><span class="p">(</span><span class="kc">false</span><span class="p">)}</span>
+      <span class="nx">disabled</span><span class="o">=</span><span class="p">{</span><span class="nx">disabled</span><span class="p">}</span>
+    <span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{[</span><span class="nx">styles</span><span class="p">.</span><span class="nx">title</span><span class="p">,</span> <span class="nx">disabled</span> <span class="o">&amp;&amp;</span> <span class="nx">styles</span><span class="p">.</span><span class="nx">disabledText</span><span class="p">]}</span><span class="o">&gt;</span>
+        <span class="p">{</span><span class="nx">title</span><span class="p">}</span>
+      <span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>    <span class="o">&lt;</span><span class="sr">/TouchableOpacity</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">styles</span> <span class="o">=</span> <span class="nx">StyleSheet</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span>
+  <span class="na">container</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#007AFF</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">padding</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+    <span class="na">borderRadius</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+    <span class="na">alignItems</span><span class="p">:</span> <span class="dl">'</span><span class="s1">center</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">justifyContent</span><span class="p">:</span> <span class="dl">'</span><span class="s1">center</span><span class="dl">'</span>
+  <span class="p">},</span>
+  <span class="na">title</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">white</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">fontSize</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+    <span class="na">fontWeight</span><span class="p">:</span> <span class="dl">'</span><span class="s1">600</span><span class="dl">'</span>
+  <span class="p">},</span>
+  <span class="na">disabled</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#CCCCCC</span><span class="dl">'</span>
+  <span class="p">},</span>
+  <span class="na">disabledText</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#666666</span><span class="dl">'</span>
+  <span class="p">},</span>
+  <span class="na">pressed</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">opacity</span><span class="p">:</span> <span class="mf">0.8</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-native-module-development">📱 <strong>Native Module Development</strong></h2>
+
+<h3 id="android-native-module"><strong>Android Native Module</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// android/src/main/java/com/mylibrary/MyLibraryModule.java</span>
+<span class="kn">package</span> <span class="nn">com.mylibrary</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.facebook.react.bridge.ReactApplicationContext</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.facebook.react.bridge.ReactContextBaseJavaModule</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.facebook.react.bridge.ReactMethod</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.facebook.react.bridge.Promise</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.facebook.react.bridge.ReadableMap</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.facebook.react.bridge.WritableMap</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.facebook.react.bridge.Arguments</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyLibraryModule</span> <span class="kd">extends</span> <span class="nc">ReactContextBaseJavaModule</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="nc">String</span> <span class="no">MODULE_NAME</span> <span class="o">=</span> <span class="s">"MyLibraryModule"</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">ReactApplicationContext</span> <span class="n">reactContext</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">MyLibraryModule</span><span class="o">(</span><span class="nc">ReactApplicationContext</span> <span class="n">reactContext</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">(</span><span class="n">reactContext</span><span class="o">);</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">reactContext</span> <span class="o">=</span> <span class="n">reactContext</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="no">MODULE_NAME</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@ReactMethod</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">initialize</span><span class="o">(</span><span class="nc">ReadableMap</span> <span class="n">config</span><span class="o">,</span> <span class="nc">Promise</span> <span class="n">promise</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="nc">String</span> <span class="n">apiKey</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">"apiKey"</span><span class="o">);</span>
+            <span class="nc">String</span> <span class="n">environment</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">"environment"</span><span class="o">);</span>
+            <span class="kt">boolean</span> <span class="n">debug</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="na">hasKey</span><span class="o">(</span><span class="s">"debug"</span><span class="o">)</span> <span class="o">?</span> <span class="n">config</span><span class="o">.</span><span class="na">getBoolean</span><span class="o">(</span><span class="s">"debug"</span><span class="o">)</span> <span class="o">:</span> <span class="kc">false</span><span class="o">;</span>
+
+            <span class="c1">// Initialize your native functionality here</span>
+            <span class="c1">// For example, initialize a native SDK</span>
+            
+            <span class="nc">WritableMap</span> <span class="n">result</span> <span class="o">=</span> <span class="nc">Arguments</span><span class="o">.</span><span class="na">createMap</span><span class="o">();</span>
+            <span class="n">result</span><span class="o">.</span><span class="na">putBoolean</span><span class="o">(</span><span class="s">"success"</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
+            <span class="n">result</span><span class="o">.</span><span class="na">putString</span><span class="o">(</span><span class="s">"message"</span><span class="o">,</span> <span class="s">"Library initialized successfully"</span><span class="o">);</span>
+            
+            <span class="n">promise</span><span class="o">.</span><span class="na">resolve</span><span class="o">(</span><span class="n">result</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">promise</span><span class="o">.</span><span class="na">reject</span><span class="o">(</span><span class="s">"INITIALIZATION_ERROR"</span><span class="o">,</span> <span class="n">e</span><span class="o">.</span><span class="na">getMessage</span><span class="o">());</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="nd">@ReactMethod</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">performAction</span><span class="o">(</span><span class="nc">String</span> <span class="n">action</span><span class="o">,</span> <span class="nc">ReadableMap</span> <span class="n">data</span><span class="o">,</span> <span class="nc">Promise</span> <span class="n">promise</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="c1">// Perform the requested action</span>
+            <span class="nc">WritableMap</span> <span class="n">result</span> <span class="o">=</span> <span class="nc">Arguments</span><span class="o">.</span><span class="na">createMap</span><span class="o">();</span>
+            <span class="n">result</span><span class="o">.</span><span class="na">putBoolean</span><span class="o">(</span><span class="s">"success"</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
+            <span class="n">result</span><span class="o">.</span><span class="na">putString</span><span class="o">(</span><span class="s">"action"</span><span class="o">,</span> <span class="n">action</span><span class="o">);</span>
+            <span class="n">result</span><span class="o">.</span><span class="na">putMap</span><span class="o">(</span><span class="s">"data"</span><span class="o">,</span> <span class="n">data</span><span class="o">);</span>
+            
+            <span class="n">promise</span><span class="o">.</span><span class="na">resolve</span><span class="o">(</span><span class="n">result</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">promise</span><span class="o">.</span><span class="na">reject</span><span class="o">(</span><span class="s">"ACTION_ERROR"</span><span class="o">,</span> <span class="n">e</span><span class="o">.</span><span class="na">getMessage</span><span class="o">());</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="ios-native-module"><strong>iOS Native Module</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-objc highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ios/MyLibraryModule.h</span>
+<span class="cp">#import &lt;React/RCTBridgeModule.h&gt;
+#import &lt;React/RCTEventEmitter.h&gt;
+</span>
+<span class="k">@interface</span> <span class="nc">MyLibraryModule</span> <span class="p">:</span> <span class="nc">RCTEventEmitter</span> <span class="o">&lt;</span><span class="n">RCTBridgeModule</span><span class="o">&gt;</span>
+
+<span class="k">@end</span>
+</code></pre></div></div>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-objc highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ios/MyLibraryModule.m</span>
+<span class="cp">#import "MyLibraryModule.h"
+</span>
+<span class="k">@implementation</span> <span class="nc">MyLibraryModule</span>
+
+<span class="n">RCT_EXPORT_MODULE</span><span class="p">();</span>
+
+<span class="k">-</span> <span class="p">(</span><span class="n">NSArray</span><span class="o">&lt;</span><span class="n">NSString</span> <span class="o">*&gt;</span> <span class="o">*</span><span class="p">)</span><span class="n">supportedEvents</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">@[</span><span class="s">@"MyLibraryEvent"</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="n">RCT_EXPORT_METHOD</span><span class="p">(</span><span class="n">initialize</span><span class="o">:</span><span class="p">(</span><span class="n">NSDictionary</span> <span class="o">*</span><span class="p">)</span><span class="n">config</span>
+                  <span class="n">resolver</span><span class="o">:</span><span class="p">(</span><span class="n">RCTPromiseResolveBlock</span><span class="p">)</span><span class="n">resolve</span>
+                  <span class="n">rejecter</span><span class="o">:</span><span class="p">(</span><span class="n">RCTPromiseRejectBlock</span><span class="p">)</span><span class="n">reject</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">@try</span> <span class="p">{</span>
+        <span class="n">NSString</span> <span class="o">*</span><span class="n">apiKey</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s">@"apiKey"</span><span class="p">];</span>
+        <span class="n">NSString</span> <span class="o">*</span><span class="n">environment</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s">@"environment"</span><span class="p">];</span>
+        <span class="n">BOOL</span> <span class="n">debug</span> <span class="o">=</span> <span class="p">[</span><span class="n">config</span><span class="p">[</span><span class="s">@"debug"</span><span class="p">]</span> <span class="nf">boolValue</span><span class="p">];</span>
+        
+        <span class="c1">// Initialize your native functionality here</span>
+        <span class="c1">// For example, initialize a native SDK</span>
+        
+        <span class="n">NSDictionary</span> <span class="o">*</span><span class="n">result</span> <span class="o">=</span> <span class="p">@{</span>
+            <span class="s">@"success"</span><span class="o">:</span> <span class="nb">@YES</span><span class="p">,</span>
+            <span class="s">@"message"</span><span class="o">:</span> <span class="s">@"Library initialized successfully"</span>
+        <span class="p">};</span>
+        
+        <span class="n">resolve</span><span class="p">(</span><span class="n">result</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">@catch</span> <span class="p">(</span><span class="n">NSException</span> <span class="o">*</span><span class="n">exception</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">reject</span><span class="p">(</span><span class="s">@"INITIALIZATION_ERROR"</span><span class="p">,</span> <span class="n">exception</span><span class="p">.</span><span class="n">reason</span><span class="p">,</span> <span class="nb">nil</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">RCT_EXPORT_METHOD</span><span class="p">(</span><span class="n">performAction</span><span class="o">:</span><span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="n">action</span>
+                  <span class="n">data</span><span class="o">:</span><span class="p">(</span><span class="n">NSDictionary</span> <span class="o">*</span><span class="p">)</span><span class="n">data</span>
+                  <span class="n">resolver</span><span class="o">:</span><span class="p">(</span><span class="n">RCTPromiseResolveBlock</span><span class="p">)</span><span class="n">resolve</span>
+                  <span class="n">rejecter</span><span class="o">:</span><span class="p">(</span><span class="n">RCTPromiseRejectBlock</span><span class="p">)</span><span class="n">reject</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">@try</span> <span class="p">{</span>
+        <span class="c1">// Perform the requested action</span>
+        <span class="n">NSDictionary</span> <span class="o">*</span><span class="n">result</span> <span class="o">=</span> <span class="p">@{</span>
+            <span class="s">@"success"</span><span class="o">:</span> <span class="nb">@YES</span><span class="p">,</span>
+            <span class="s">@"action"</span><span class="o">:</span> <span class="n">action</span><span class="p">,</span>
+            <span class="s">@"data"</span><span class="o">:</span> <span class="n">data</span> <span class="p">?:</span> <span class="p">@{}</span>
+        <span class="p">};</span>
+        
+        <span class="n">resolve</span><span class="p">(</span><span class="n">result</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">@catch</span> <span class="p">(</span><span class="n">NSException</span> <span class="o">*</span><span class="n">exception</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">reject</span><span class="p">(</span><span class="s">@"ACTION_ERROR"</span><span class="p">,</span> <span class="n">exception</span><span class="p">.</span><span class="n">reason</span><span class="p">,</span> <span class="nb">nil</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">@end</span>
+</code></pre></div></div>
+
+<h3 id="podspec-configuration"><strong>Podspec Configuration</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># ios/MyLibrary.podspec</span>
+<span class="nb">require</span> <span class="s2">"json"</span>
+
+<span class="n">package</span> <span class="o">=</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="no">File</span><span class="p">.</span><span class="nf">read</span><span class="p">(</span><span class="no">File</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="n">__dir__</span><span class="p">,</span> <span class="s2">"package.json"</span><span class="p">)))</span>
+
+<span class="no">Pod</span><span class="o">::</span><span class="no">Spec</span><span class="p">.</span><span class="nf">new</span> <span class="k">do</span> <span class="o">|</span><span class="n">s</span><span class="o">|</span>
+  <span class="n">s</span><span class="p">.</span><span class="nf">name</span>         <span class="o">=</span> <span class="s2">"MyLibrary"</span>
+  <span class="n">s</span><span class="p">.</span><span class="nf">version</span>      <span class="o">=</span> <span class="n">package</span><span class="p">[</span><span class="s2">"version"</span><span class="p">]</span>
+  <span class="n">s</span><span class="p">.</span><span class="nf">summary</span>      <span class="o">=</span> <span class="n">package</span><span class="p">[</span><span class="s2">"description"</span><span class="p">]</span>
+  <span class="n">s</span><span class="p">.</span><span class="nf">homepage</span>     <span class="o">=</span> <span class="n">package</span><span class="p">[</span><span class="s2">"homepage"</span><span class="p">]</span>
+  <span class="n">s</span><span class="p">.</span><span class="nf">license</span>      <span class="o">=</span> <span class="n">package</span><span class="p">[</span><span class="s2">"license"</span><span class="p">]</span>
+  <span class="n">s</span><span class="p">.</span><span class="nf">authors</span>      <span class="o">=</span> <span class="n">package</span><span class="p">[</span><span class="s2">"author"</span><span class="p">]</span>
+
+  <span class="n">s</span><span class="p">.</span><span class="nf">platforms</span>    <span class="o">=</span> <span class="p">{</span> <span class="ss">:ios</span> <span class="o">=&gt;</span> <span class="s2">"11.0"</span> <span class="p">}</span>
+  <span class="n">s</span><span class="p">.</span><span class="nf">source</span>       <span class="o">=</span> <span class="p">{</span> <span class="ss">:git</span> <span class="o">=&gt;</span> <span class="s2">"https://github.com/username/my-react-native-library.git"</span><span class="p">,</span> <span class="ss">:tag</span> <span class="o">=&gt;</span> <span class="s2">"</span><span class="si">#{</span><span class="n">s</span><span class="p">.</span><span class="nf">version</span><span class="si">}</span><span class="s2">"</span> <span class="p">}</span>
+
+  <span class="n">s</span><span class="p">.</span><span class="nf">source_files</span> <span class="o">=</span> <span class="s2">"ios/**/*.{h,m,mm,swift}"</span>
+
+  <span class="n">s</span><span class="p">.</span><span class="nf">dependency</span> <span class="s2">"React-Core"</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-testing-strategy">🧪 <strong>Testing Strategy</strong></h2>
+
+<h3 id="unit-testing-setup"><strong>Unit Testing Setup</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">//</span><span class="w"> </span><span class="err">jest.config.js</span><span class="w">
+</span><span class="err">module.exports</span><span class="w"> </span><span class="err">=</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="err">preset:</span><span class="w"> </span><span class="err">'react-native'</span><span class="p">,</span><span class="w">
+  </span><span class="err">setupFilesAfterEnv:</span><span class="w"> </span><span class="p">[</span><span class="err">'&lt;rootDir&gt;/jest.setup.js'</span><span class="p">],</span><span class="w">
+  </span><span class="err">testPathIgnorePatterns:</span><span class="w"> </span><span class="p">[</span><span class="err">'/node_modules/'</span><span class="p">,</span><span class="w"> </span><span class="err">'/dist/'</span><span class="p">],</span><span class="w">
+  </span><span class="err">collectCoverageFrom:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="err">'src/**/*.</span><span class="p">{</span><span class="err">ts</span><span class="p">,</span><span class="err">tsx</span><span class="p">}</span><span class="err">'</span><span class="p">,</span><span class="w">
+    </span><span class="err">'!src/**/*.d.ts'</span><span class="p">,</span><span class="w">
+    </span><span class="err">'!src/**/*.test.</span><span class="p">{</span><span class="err">ts</span><span class="p">,</span><span class="err">tsx</span><span class="p">}</span><span class="err">'</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="err">coverageThreshold:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="err">global:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="err">branches:</span><span class="w"> </span><span class="mi">80</span><span class="p">,</span><span class="w">
+      </span><span class="err">functions:</span><span class="w"> </span><span class="mi">80</span><span class="p">,</span><span class="w">
+      </span><span class="err">lines:</span><span class="w"> </span><span class="mi">80</span><span class="p">,</span><span class="w">
+      </span><span class="err">statements:</span><span class="w"> </span><span class="mi">80</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="err">;</span><span class="w">
+</span></code></pre></div></div>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// jest.setup.js</span>
+<span class="k">import</span> <span class="dl">'</span><span class="s1">react-native-gesture-handler/jestSetup</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="c1">// Mock react-native modules</span>
+<span class="nx">jest</span><span class="p">.</span><span class="nx">mock</span><span class="p">(</span><span class="dl">'</span><span class="s1">react-native</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">RN</span> <span class="o">=</span> <span class="nx">jest</span><span class="p">.</span><span class="nx">requireActual</span><span class="p">(</span><span class="dl">'</span><span class="s1">react-native</span><span class="dl">'</span><span class="p">);</span>
+  
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="p">...</span><span class="nx">RN</span><span class="p">,</span>
+    <span class="na">NativeModules</span><span class="p">:</span> <span class="p">{</span>
+      <span class="p">...</span><span class="nx">RN</span><span class="p">.</span><span class="nx">NativeModules</span><span class="p">,</span>
+      <span class="na">MyLibraryModule</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">initialize</span><span class="p">:</span> <span class="nx">jest</span><span class="p">.</span><span class="nx">fn</span><span class="p">(),</span>
+        <span class="na">performAction</span><span class="p">:</span> <span class="nx">jest</span><span class="p">.</span><span class="nx">fn</span><span class="p">(),</span>
+        <span class="na">addEventListener</span><span class="p">:</span> <span class="nx">jest</span><span class="p">.</span><span class="nx">fn</span><span class="p">(),</span>
+        <span class="na">removeEventListener</span><span class="p">:</span> <span class="nx">jest</span><span class="p">.</span><span class="nx">fn</span><span class="p">()</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<h3 id="unit-tests"><strong>Unit Tests</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// __tests__/MyLibrary.test.ts</span>
+<span class="k">import</span> <span class="nx">MyLibrary</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">../src/index</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">NativeModules</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="p">{</span> <span class="nx">MyLibraryModule</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">NativeModules</span><span class="p">;</span>
+
+<span class="nx">describe</span><span class="p">(</span><span class="dl">'</span><span class="s1">MyLibrary</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="na">library</span><span class="p">:</span> <span class="nx">MyLibrary</span><span class="p">;</span>
+  <span class="kd">const</span> <span class="nx">mockConfig</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">apiKey</span><span class="p">:</span> <span class="dl">'</span><span class="s1">test-api-key</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">environment</span><span class="p">:</span> <span class="dl">'</span><span class="s1">development</span><span class="dl">'</span> <span class="k">as</span> <span class="kd">const</span><span class="p">,</span>
+    <span class="na">debug</span><span class="p">:</span> <span class="kc">true</span>
+  <span class="p">};</span>
+
+  <span class="nx">beforeEach</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">library</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyLibrary</span><span class="p">(</span><span class="nx">mockConfig</span><span class="p">);</span>
+    <span class="nx">jest</span><span class="p">.</span><span class="nx">clearAllMocks</span><span class="p">();</span>
+  <span class="p">});</span>
+
+  <span class="nx">describe</span><span class="p">(</span><span class="dl">'</span><span class="s1">initialize</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">it</span><span class="p">(</span><span class="dl">'</span><span class="s1">should initialize successfully</span><span class="dl">'</span><span class="p">,</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">mockResult</span> <span class="o">=</span> <span class="p">{</span> <span class="na">success</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="na">message</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Initialized</span><span class="dl">'</span> <span class="p">};</span>
+      <span class="p">(</span><span class="nx">MyLibraryModule</span><span class="p">.</span><span class="nx">initialize</span> <span class="k">as</span> <span class="nx">jest</span><span class="p">.</span><span class="nx">Mock</span><span class="p">).</span><span class="nx">mockResolvedValue</span><span class="p">(</span><span class="nx">mockResult</span><span class="p">);</span>
+
+      <span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">library</span><span class="p">.</span><span class="nx">initialize</span><span class="p">();</span>
+
+      <span class="nx">expect</span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">success</span><span class="p">).</span><span class="nx">toBe</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+      <span class="nx">expect</span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">data</span><span class="p">).</span><span class="nx">toEqual</span><span class="p">(</span><span class="nx">mockResult</span><span class="p">);</span>
+      <span class="nx">expect</span><span class="p">(</span><span class="nx">MyLibraryModule</span><span class="p">.</span><span class="nx">initialize</span><span class="p">).</span><span class="nx">toHaveBeenCalledWith</span><span class="p">(</span><span class="nx">mockConfig</span><span class="p">);</span>
+    <span class="p">});</span>
+
+    <span class="nx">it</span><span class="p">(</span><span class="dl">'</span><span class="s1">should handle initialization errors</span><span class="dl">'</span><span class="p">,</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">mockError</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Initialization failed</span><span class="dl">'</span><span class="p">);</span>
+      <span class="p">(</span><span class="nx">MyLibraryModule</span><span class="p">.</span><span class="nx">initialize</span> <span class="k">as</span> <span class="nx">jest</span><span class="p">.</span><span class="nx">Mock</span><span class="p">).</span><span class="nx">mockRejectedValue</span><span class="p">(</span><span class="nx">mockError</span><span class="p">);</span>
+
+      <span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">library</span><span class="p">.</span><span class="nx">initialize</span><span class="p">();</span>
+
+      <span class="nx">expect</span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">success</span><span class="p">).</span><span class="nx">toBe</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+      <span class="nx">expect</span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">error</span><span class="p">).</span><span class="nx">toBe</span><span class="p">(</span><span class="dl">'</span><span class="s1">Initialization failed</span><span class="dl">'</span><span class="p">);</span>
+    <span class="p">});</span>
+  <span class="p">});</span>
+
+  <span class="nx">describe</span><span class="p">(</span><span class="dl">'</span><span class="s1">performAction</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">it</span><span class="p">(</span><span class="dl">'</span><span class="s1">should perform action successfully</span><span class="dl">'</span><span class="p">,</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">mockResult</span> <span class="o">=</span> <span class="p">{</span> <span class="na">success</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="na">action</span><span class="p">:</span> <span class="dl">'</span><span class="s1">test</span><span class="dl">'</span><span class="p">,</span> <span class="na">data</span><span class="p">:</span> <span class="p">{}</span> <span class="p">};</span>
+      <span class="p">(</span><span class="nx">MyLibraryModule</span><span class="p">.</span><span class="nx">performAction</span> <span class="k">as</span> <span class="nx">jest</span><span class="p">.</span><span class="nx">Mock</span><span class="p">).</span><span class="nx">mockResolvedValue</span><span class="p">(</span><span class="nx">mockResult</span><span class="p">);</span>
+
+      <span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">library</span><span class="p">.</span><span class="nx">performAction</span><span class="p">(</span><span class="dl">'</span><span class="s1">test</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span> <span class="na">key</span><span class="p">:</span> <span class="dl">'</span><span class="s1">value</span><span class="dl">'</span> <span class="p">});</span>
+
+      <span class="nx">expect</span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">success</span><span class="p">).</span><span class="nx">toBe</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+      <span class="nx">expect</span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">data</span><span class="p">).</span><span class="nx">toEqual</span><span class="p">(</span><span class="nx">mockResult</span><span class="p">);</span>
+      <span class="nx">expect</span><span class="p">(</span><span class="nx">MyLibraryModule</span><span class="p">.</span><span class="nx">performAction</span><span class="p">).</span><span class="nx">toHaveBeenCalledWith</span><span class="p">(</span><span class="dl">'</span><span class="s1">test</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span> <span class="na">key</span><span class="p">:</span> <span class="dl">'</span><span class="s1">value</span><span class="dl">'</span> <span class="p">});</span>
+    <span class="p">});</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<h3 id="component-tests"><strong>Component Tests</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// __tests__/MyComponent.test.tsx</span>
+<span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">render</span><span class="p">,</span> <span class="nx">fireEvent</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@testing-library/react-native</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">MyComponent</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">../src/components/MyComponent</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="nx">describe</span><span class="p">(</span><span class="dl">'</span><span class="s1">MyComponent</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">it</span><span class="p">(</span><span class="dl">'</span><span class="s1">should render correctly</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="p">{</span> <span class="nx">getByText</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">render</span><span class="p">(</span>
+      <span class="o">&lt;</span><span class="nx">MyComponent</span> <span class="nx">title</span><span class="o">=</span><span class="dl">"</span><span class="s2">Test Button</span><span class="dl">"</span> <span class="o">/&gt;</span>
+    <span class="p">);</span>
+
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">getByText</span><span class="p">(</span><span class="dl">'</span><span class="s1">Test Button</span><span class="dl">'</span><span class="p">)).</span><span class="nx">toBeTruthy</span><span class="p">();</span>
+  <span class="p">});</span>
+
+  <span class="nx">it</span><span class="p">(</span><span class="dl">'</span><span class="s1">should call onPress when pressed</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">mockOnPress</span> <span class="o">=</span> <span class="nx">jest</span><span class="p">.</span><span class="nx">fn</span><span class="p">();</span>
+    <span class="kd">const</span> <span class="p">{</span> <span class="nx">getByText</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">render</span><span class="p">(</span>
+      <span class="o">&lt;</span><span class="nx">MyComponent</span> <span class="nx">title</span><span class="o">=</span><span class="dl">"</span><span class="s2">Test Button</span><span class="dl">"</span> <span class="nx">onPress</span><span class="o">=</span><span class="p">{</span><span class="nx">mockOnPress</span><span class="p">}</span> <span class="sr">/</span><span class="err">&gt;
+</span>    <span class="p">);</span>
+
+    <span class="nx">fireEvent</span><span class="p">.</span><span class="nx">press</span><span class="p">(</span><span class="nx">getByText</span><span class="p">(</span><span class="dl">'</span><span class="s1">Test Button</span><span class="dl">'</span><span class="p">));</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">mockOnPress</span><span class="p">).</span><span class="nx">toHaveBeenCalledTimes</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+  <span class="p">});</span>
+
+  <span class="nx">it</span><span class="p">(</span><span class="dl">'</span><span class="s1">should not call onPress when disabled</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">mockOnPress</span> <span class="o">=</span> <span class="nx">jest</span><span class="p">.</span><span class="nx">fn</span><span class="p">();</span>
+    <span class="kd">const</span> <span class="p">{</span> <span class="nx">getByText</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">render</span><span class="p">(</span>
+      <span class="o">&lt;</span><span class="nx">MyComponent</span> <span class="nx">title</span><span class="o">=</span><span class="dl">"</span><span class="s2">Test Button</span><span class="dl">"</span> <span class="nx">onPress</span><span class="o">=</span><span class="p">{</span><span class="nx">mockOnPress</span><span class="p">}</span> <span class="nx">disabled</span> <span class="o">/&gt;</span>
+    <span class="p">);</span>
+
+    <span class="nx">fireEvent</span><span class="p">.</span><span class="nx">press</span><span class="p">(</span><span class="nx">getByText</span><span class="p">(</span><span class="dl">'</span><span class="s1">Test Button</span><span class="dl">'</span><span class="p">));</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">mockOnPress</span><span class="p">).</span><span class="nx">not</span><span class="p">.</span><span class="nx">toHaveBeenCalled</span><span class="p">();</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-documentation">📚 <strong>Documentation</strong></h2>
+
+<h3 id="readmemd"><strong>README.md</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh"># My React Native Library</span>
+
+A powerful React Native library for awesome functionality.
+
+<span class="gu">## Installation</span>
+
+<span class="p">```</span><span class="nl">bash
+</span>
+
+npm <span class="nb">install </span>my-react-native-library
+
+
+</code></pre></div></div>
+
+<h3 id="ios-setup">iOS Setup</h3>
+
+<p>Add the following to your <code class="language-plaintext highlighter-rouge">ios/Podfile</code>:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+
+<span class="n">pod</span> <span class="s1">'MyLibrary'</span><span class="p">,</span> <span class="ss">:path</span> <span class="o">=&gt;</span> <span class="s1">'../node_modules/my-react-native-library/ios'</span>
+
+
+</code></pre></div></div>
+
+<p>Then run:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+
+<span class="nb">cd </span>ios <span class="o">&amp;&amp;</span> pod <span class="nb">install</span>
+
+
+</code></pre></div></div>
+
+<h3 id="android-setup">Android Setup</h3>
+
+<p>No additional setup required for Android.</p>
+
+<h2 id="usage">Usage</h2>
+
+<h3 id="basic-usage">Basic Usage</h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+
+<span class="k">import</span> <span class="nx">MyLibrary</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">my-react-native-library</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">library</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyLibrary</span><span class="p">({</span>
+  <span class="na">apiKey</span><span class="p">:</span> <span class="dl">'</span><span class="s1">your-api-key</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">environment</span><span class="p">:</span> <span class="dl">'</span><span class="s1">development</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">debug</span><span class="p">:</span> <span class="kc">true</span>
+<span class="p">});</span>
+
+<span class="c1">// Initialize the library</span>
+<span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">library</span><span class="p">.</span><span class="nx">initialize</span><span class="p">();</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">success</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Library initialized successfully</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Perform an action</span>
+<span class="kd">const</span> <span class="nx">actionResult</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">library</span><span class="p">.</span><span class="nx">performAction</span><span class="p">(</span><span class="dl">'</span><span class="s1">test</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span> <span class="na">data</span><span class="p">:</span> <span class="dl">'</span><span class="s1">value</span><span class="dl">'</span> <span class="p">});</span>
+
+
+</code></pre></div></div>
+
+<h3 id="component-usage">Component Usage</h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+
+<span class="k">import</span> <span class="p">{</span> <span class="nx">MyComponent</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">my-react-native-library</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">App</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">MyComponent</span>
+      <span class="nx">title</span><span class="o">=</span><span class="dl">"</span><span class="s2">Click Me</span><span class="dl">"</span>
+      <span class="nx">onPress</span><span class="o">=</span><span class="p">{()</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Button pressed</span><span class="dl">'</span><span class="p">)}</span>
+    <span class="sr">/</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">};</span>
+
+
+</code></pre></div></div>
+
+<h2 id="api-reference">API Reference</h2>
+
+<h3 id="mylibrary">MyLibrary</h3>
+
+<h4 id="constructor">Constructor</h4>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+
+<span class="k">new</span> <span class="nx">MyLibrary</span><span class="p">(</span><span class="nx">config</span><span class="p">:</span> <span class="nx">LibraryConfig</span><span class="p">,</span> <span class="nx">options</span><span class="p">?:</span> <span class="nx">LibraryOptions</span><span class="p">)</span>
+
+
+</code></pre></div></div>
+
+<h4 id="methods">Methods</h4>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">initialize(): Promise&lt;LibraryResponse&gt;</code></li>
+  <li><code class="language-plaintext highlighter-rouge">performAction(action: string, data?: any): Promise&lt;LibraryResponse&gt;</code></li>
+  <li><code class="language-plaintext highlighter-rouge">addEventListener(event: string, callback: LibraryCallback): void</code></li>
+  <li><code class="language-plaintext highlighter-rouge">removeEventListener(event: string, callback: LibraryCallback): void</code></li>
+</ul>
+
+<h3 id="mycomponent">MyComponent</h3>
+
+<h4 id="props">Props</h4>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">title: string</code> - Button title</li>
+  <li><code class="language-plaintext highlighter-rouge">onPress?: () =&gt; void</code> - Press handler</li>
+  <li><code class="language-plaintext highlighter-rouge">disabled?: boolean</code> - Disabled state</li>
+  <li><code class="language-plaintext highlighter-rouge">style?: any</code> - Custom styles</li>
+</ul>
+
+<h2 id="contributing">Contributing</h2>
+
+<ol>
+  <li>Fork the repository</li>
+  <li>Create your feature branch</li>
+  <li>Commit your changes</li>
+  <li>Push to the branch</li>
+  <li>Create a Pull Request</li>
+</ol>
+
+<h2 id="license">License</h2>
+
+<p>MIT</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+
+
+### **API Documentation**
+
+&lt;button onclick="copyCode(this)" class="copy-btn"&gt;📋 Copy&lt;/button&gt;
+
+
+```typescript
+// src/index.ts with JSDoc comments
+/**
+ * My React Native Library
+ * 
+ * A powerful library for React Native applications
+ * 
+ * @example
+ * ```typescript
+ * import MyLibrary from 'my-react-native-library';
+ * 
+ * const library = new MyLibrary({
+ *   apiKey: 'your-api-key',
+ *   environment: 'development'
+ * });
+ * 
+ * await library.initialize();
+ * ```
+ */
+class MyLibrary {
+  /**
+   * Creates an instance of MyLibrary
+   * 
+   * @param config - Library configuration
+   * @param options - Optional library options
+   * 
+   * @example
+   * ```typescript
+   * const library = new MyLibrary({
+   *   apiKey: 'your-api-key',
+   *   environment: 'development'
+   * });
+   * ```
+   */
+  constructor(config: LibraryConfig, options: LibraryOptions = {}) {
+    // Implementation
+  }
+
+  /**
+   * Initialize the library
+   * 
+   * @returns Promise that resolves to initialization result
+   * 
+   * @example
+   * ```typescript
+   * const result = await library.initialize();
+   * if (result.success) {
+   *   console.log('Initialized successfully');
+   * }
+   * ```
+   */
+  async initialize(): Promise&lt;LibraryResponse&gt; {
+    // Implementation
+  }
+}
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-publishing">📦 <strong>Publishing</strong></h2>
+
+<h3 id="build-configuration"><strong>Build Configuration</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// rollup.config.js</span>
+<span class="k">import</span> <span class="nx">typescript</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@rollup/plugin-typescript</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">resolve</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@rollup/plugin-node-resolve</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">commonjs</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@rollup/plugin-commonjs</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="p">{</span>
+  <span class="na">input</span><span class="p">:</span> <span class="dl">'</span><span class="s1">src/index.ts</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">output</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="na">file</span><span class="p">:</span> <span class="dl">'</span><span class="s1">dist/index.js</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">format</span><span class="p">:</span> <span class="dl">'</span><span class="s1">cjs</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">sourcemap</span><span class="p">:</span> <span class="kc">true</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="na">file</span><span class="p">:</span> <span class="dl">'</span><span class="s1">dist/index.esm.js</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">format</span><span class="p">:</span> <span class="dl">'</span><span class="s1">esm</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">sourcemap</span><span class="p">:</span> <span class="kc">true</span>
+    <span class="p">}</span>
+  <span class="p">],</span>
+  <span class="na">external</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">react-native</span><span class="dl">'</span><span class="p">],</span>
+  <span class="na">plugins</span><span class="p">:</span> <span class="p">[</span>
+    <span class="nx">resolve</span><span class="p">(),</span>
+    <span class="nx">commonjs</span><span class="p">(),</span>
+    <span class="nx">typescript</span><span class="p">({</span>
+      <span class="na">tsconfig</span><span class="p">:</span> <span class="dl">'</span><span class="s1">./tsconfig.json</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">declaration</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+      <span class="na">declarationDir</span><span class="p">:</span> <span class="dl">'</span><span class="s1">./dist</span><span class="dl">'</span>
+    <span class="p">})</span>
+  <span class="p">]</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="publishing-process"><strong>Publishing Process</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Build the library</span>
+npm run build
+
+<span class="c"># Run tests</span>
+npm <span class="nb">test</span>
+
+<span class="c"># Check for issues</span>
+npm run lint
+
+<span class="c"># Publish to npm</span>
+npm publish
+
+<span class="c"># Publish with specific tag</span>
+npm publish <span class="nt">--tag</span> beta
+
+<span class="c"># Publish with access level</span>
+npm publish <span class="nt">--access</span> public
+</code></pre></div></div>
+
+<h3 id="version-management"><strong>Version Management</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Version bumping</span>
+npm version patch    <span class="c"># 1.0.0 -&gt; 1.0.1</span>
+npm version minor    <span class="c"># 1.0.0 -&gt; 1.1.0</span>
+npm version major    <span class="c"># 1.0.0 -&gt; 2.0.0</span>
+
+<span class="c"># Pre-release versions</span>
+npm version prerelease <span class="nt">--preid</span><span class="o">=</span>beta    <span class="c"># 1.0.0 -&gt; 1.0.1-beta.0</span>
+npm version prerelease <span class="nt">--preid</span><span class="o">=</span>alpha   <span class="c"># 1.0.0 -&gt; 1.0.1-alpha.0</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-maintenance">🔧 <strong>Maintenance</strong></h2>
+
+<h3 id="automated-testing"><strong>Automated Testing</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># .github/workflows/test.yml</span>
+<span class="na">name</span><span class="pi">:</span> <span class="s">Test</span>
+
+<span class="na">on</span><span class="pi">:</span>
+  <span class="na">push</span><span class="pi">:</span>
+    <span class="na">branches</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">main</span><span class="pi">,</span> <span class="nv">develop</span><span class="pi">]</span>
+  <span class="na">pull_request</span><span class="pi">:</span>
+    <span class="na">branches</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">main</span><span class="pi">]</span>
+
+<span class="na">jobs</span><span class="pi">:</span>
+  <span class="na">test</span><span class="pi">:</span>
+    <span class="na">runs-on</span><span class="pi">:</span> <span class="s">ubuntu-latest</span>
+    
+    <span class="na">strategy</span><span class="pi">:</span>
+      <span class="na">matrix</span><span class="pi">:</span>
+        <span class="na">node-version</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">16</span><span class="pi">,</span> <span class="nv">18</span><span class="pi">,</span> <span class="nv">20</span><span class="pi">]</span>
+    
+    <span class="na">steps</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/checkout@v3</span>
+      
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Use Node.js ${{#123;{{#123; matrix.node-version }}#125;}}#125;</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/setup-node@v3</span>
+        <span class="na">with</span><span class="pi">:</span>
+          <span class="na">node-version</span><span class="pi">:</span> <span class="s">${{#123;{{#123; matrix.node-version }}#125;}}#125;</span>
+          <span class="na">cache</span><span class="pi">:</span> <span class="s1">'</span><span class="s">npm'</span>
+          
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Install dependencies</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="s">npm ci</span>
+        
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Run tests</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="s">npm test</span>
+        
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Run linting</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="s">npm run lint</span>
+        
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Build library</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="s">npm run build</span>
+</code></pre></div></div>
+
+<h3 id="release-automation"><strong>Release Automation</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># .github/workflows/release.yml</span>
+<span class="na">name</span><span class="pi">:</span> <span class="s">Release</span>
+
+<span class="na">on</span><span class="pi">:</span>
+  <span class="na">push</span><span class="pi">:</span>
+    <span class="na">tags</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s1">'</span><span class="s">v*'</span>
+
+<span class="na">jobs</span><span class="pi">:</span>
+  <span class="na">release</span><span class="pi">:</span>
+    <span class="na">runs-on</span><span class="pi">:</span> <span class="s">ubuntu-latest</span>
+    
+    <span class="na">steps</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/checkout@v3</span>
+      
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Use Node.js</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/setup-node@v3</span>
+        <span class="na">with</span><span class="pi">:</span>
+          <span class="na">node-version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">18'</span>
+          <span class="na">cache</span><span class="pi">:</span> <span class="s1">'</span><span class="s">npm'</span>
+          
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Install dependencies</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="s">npm ci</span>
+        
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Run tests</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="s">npm test</span>
+        
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Build library</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="s">npm run build</span>
+        
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Publish to npm</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="s">npm publish</span>
+        <span class="na">env</span><span class="pi">:</span>
+          <span class="na">NODE_AUTH_TOKEN</span><span class="pi">:</span> <span class="s">${{#123;{{#123; secrets.NPM_TOKEN }}#125;}}#125;</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-best-practices">✅ <strong>Best Practices</strong></h2>
+
+<h3 id="1-library-development-best-practices"><strong>1. Library Development Best Practices</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Library development best practices</span>
+<span class="kd">const</span> <span class="nx">LibraryBestPractices</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="c1">// Code organization</span>
+  <span class="na">codeOrganization</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">structure</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Organize code in logical modules</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">naming</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Use consistent naming conventions</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">exports</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Export only what users need</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">types</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Provide comprehensive TypeScript types</span><span class="dl">'</span>
+  <span class="p">},</span>
+  
+  <span class="c1">// Error handling</span>
+  <span class="na">errorHandling</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">validation</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Validate inputs and provide clear error messages</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">fallbacks</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Provide fallback behavior when possible</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">logging</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Log errors for debugging but don</span><span class="se">\'</span><span class="s1">t expose internals</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">recovery</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Implement graceful error recovery</span><span class="dl">'</span>
+  <span class="p">},</span>
+  
+  <span class="c1">// Performance</span>
+  <span class="na">performance</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">bundleSize</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Keep bundle size minimal</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">lazyLoading</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Use lazy loading for heavy features</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">memoization</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Use memoization for expensive operations</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">optimization</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Optimize for both development and production</span><span class="dl">'</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="2-testing-best-practices"><strong>2. Testing Best Practices</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Testing best practices</span>
+<span class="kd">const</span> <span class="nx">TestingBestPractices</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="c1">// Test coverage</span>
+  <span class="na">coverage</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">target</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Aim for 80%+ test coverage</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">critical</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Test critical paths thoroughly</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">edgeCases</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Test edge cases and error conditions</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">integration</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Include integration tests</span><span class="dl">'</span>
+  <span class="p">},</span>
+  
+  <span class="c1">// Test organization</span>
+  <span class="na">organization</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">structure</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Organize tests by feature/component</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">naming</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Use descriptive test names</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">setup</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Use proper test setup and teardown</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">mocking</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Mock external dependencies appropriately</span><span class="dl">'</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-interview-questions">🎯 <strong>Interview Questions</strong></h2>
+
+<h3 id="basic-questions"><strong>Basic Questions</strong></h3>
+<ol>
+  <li><strong>How do you create a React Native library?</strong>
+    <ul>
+      <li>Set up project structure with TypeScript</li>
+      <li>Configure build tools (Rollup, Webpack)</li>
+      <li>Implement library functionality</li>
+      <li>Add comprehensive testing</li>
+      <li>Create documentation and publish</li>
+    </ul>
+  </li>
+  <li><strong>What’s the difference between a JavaScript library and a native module?</strong>
+    <ul>
+      <li>JavaScript library: Pure JavaScript/TypeScript code</li>
+      <li>Native module: Platform-specific code (iOS/Android)</li>
+      <li>Hybrid: Combination of both approaches</li>
+    </ul>
+  </li>
+  <li><strong>How do you handle TypeScript in a React Native library?</strong>
+    <ul>
+      <li>Configure TypeScript with proper types</li>
+      <li>Provide type definitions for users</li>
+      <li>Use JSDoc for documentation</li>
+      <li>Export types for external use</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="intermediate-questions"><strong>Intermediate Questions</strong></h3>
+<ol>
+  <li><strong>How do you test a React Native library?</strong>
+    <ul>
+      <li>Unit tests for JavaScript functionality</li>
+      <li>Component tests for UI components</li>
+      <li>Integration tests for native modules</li>
+      <li>Mock external dependencies</li>
+      <li>Use testing libraries like Jest and React Testing Library</li>
+    </ul>
+  </li>
+  <li><strong>What’s your approach to versioning and publishing?</strong>
+    <ul>
+      <li>Use semantic versioning</li>
+      <li>Automate version bumping</li>
+      <li>Use CI/CD for publishing</li>
+      <li>Provide release notes</li>
+      <li>Handle breaking changes properly</li>
+    </ul>
+  </li>
+  <li><strong>How do you handle backward compatibility?</strong>
+    <ul>
+      <li>Use semantic versioning</li>
+      <li>Deprecate features gradually</li>
+      <li>Provide migration guides</li>
+      <li>Maintain multiple versions</li>
+      <li>Communicate changes clearly</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="advanced-questions"><strong>Advanced Questions</strong></h3>
+<ol>
+  <li><strong>How do you optimize a React Native library for performance?</strong>
+    <ul>
+      <li>Minimize bundle size</li>
+      <li>Use lazy loading</li>
+      <li>Implement memoization</li>
+      <li>Optimize native code</li>
+      <li>Profile and benchmark</li>
+    </ul>
+  </li>
+  <li><strong>What’s your strategy for maintaining a library long-term?</strong>
+    <ul>
+      <li>Regular updates and bug fixes</li>
+      <li>Community engagement</li>
+      <li>Documentation maintenance</li>
+      <li>Security monitoring</li>
+      <li>Performance optimization</li>
+    </ul>
+  </li>
+  <li><strong>How do you handle library dependencies and peer dependencies?</strong>
+    <ul>
+      <li>Use peer dependencies for React/React Native</li>
+      <li>Minimize direct dependencies</li>
+      <li>Handle version conflicts</li>
+      <li>Provide clear dependency requirements</li>
+      <li>Use proper version ranges</li>
+    </ul>
+  </li>
+</ol>
+
+<hr />
+
+<h2 id="-related-topics">🔗 <strong>Related Topics</strong></h2>
+
+<ul>
+  <li><a href="/React%20Native/18-React-Native-Ecosystem/01-Popular-Libraries.html">Popular Libraries</a></li>
+  <li><a href="/React%20Native/18-React-Native-Ecosystem/02-Library-Evaluation.html">Library Evaluation</a></li>
+  <li><a href="/React%20Native/18-React-Native-Ecosystem/03-Dependency-Management.html">Dependency Management</a></li>
+  <li><a href="/React%20Native/07-Native-Interoperability/01-Old-vs-New-Architecture.html">Native Interoperability</a></li>
+  <li><a href="/React%20Native/09-Testing-Quality/01-Unit-Testing.html">Testing Strategies</a></li>
+</ul>
+
+<hr />
+
+<h2 id="-navigation">🧭 Navigation</h2>
+
+<div class="navigation">
+    <a href="./03-Dependency-Management.md" class="nav-link prev">⬅️ Previous: Dependency Management</a>
+    <a href="../19-Advanced-Debugging/01-Debugging-Tools.md" class="nav-link next">Next: Debugging Tools ➡️</a>
+</div>
+
+<hr />
+
+<script src="../../common-scripts.js"></script>
+
+<p><em>Last updated: December 2024</em></p>
+
+        </main>
+        
+        <footer style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #ecf0f1; color: #666; text-align: center;">
+            <p>Interview Prep Documentation - Built with Jekyll</p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎯 MVVM Pattern - Interview Prep Documentation</title>
+    <meta name="description" content="Comprehensive guides for JavaScript, TypeScript, and React Native interview preparation">
+    
+    <!-- GitHub Pages compatible styling -->
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+        }
+        
+        .container {
+            max-width: 100%;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            color: #2c3e50;
+            margin-top: 2em;
+            margin-bottom: 1em;
+        }
+        
+        h1 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            border-bottom: 1px solid #ecf0f1;
+            padding-bottom: 5px;
+        }
+        
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border-left: 4px solid #3498db;
+        }
+        
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+        
+        blockquote {
+            border-left: 4px solid #3498db;
+            margin: 0;
+            padding-left: 20px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1em 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .navigation {
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px 0;
+            margin-bottom: 20px;
+        }
+        
+        .navigation a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+        
+        .navigation a:hover {
+            text-decoration: underline;
+        }
+        
+        .breadcrumb {
+            margin-bottom: 20px;
+            color: #666;
+        }
+        
+        .breadcrumb a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            h2 {
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="navigation">
+            <a href="/">Home</a>
+            <a href="/Javascript/">JavaScript</a>
+            <a href="/TypeScript/">TypeScript</a>
+            <a href="/React-Native/">React Native</a>
+        </nav>
+        
+        
+        
+        <main>
+            <h1 id="-mvvm-pattern">🎯 <strong>MVVM Pattern</strong></h1>
+
+<blockquote>
+  <p><strong>Master MVVM (Model-View-ViewModel) pattern implementation for React Native applications</strong></p>
+</blockquote>
+
+<link rel="stylesheet" href="../../common-styles.css" />
+
+<hr />
+
+<h2 id="-table-of-contents">📚 <strong>Table of Contents</strong></h2>
+
+<ul>
+  <li><a href="#-mvvm-overview">MVVM Overview</a></li>
+  <li><a href="#-view-layer">View Layer</a></li>
+  <li><a href="#-viewmodel-layer">ViewModel Layer</a></li>
+  <li><a href="#-model-layer">Model Layer</a></li>
+  <li><a href="#-data-binding">Data Binding</a></li>
+  <li><a href="#-best-practices">Best Practices</a></li>
+  <li><a href="#-interview-questions">Interview Questions</a></li>
+</ul>
+
+<hr />
+
+<h2 id="-mvvm-overview">🎯 <strong>MVVM Overview</strong></h2>
+
+<h3 id="mvvm-architecture"><strong>MVVM Architecture</strong></h3>
+
+<pre><code class="language-mermaid">graph TD
+    A[View] --&gt; B[ViewModel]
+    B --&gt; C[Model]
+    B --&gt; D[Repository]
+    D --&gt; E[Data Source]
+    
+    F[User Actions] --&gt; A
+    A --&gt; G[UI Updates]
+    B --&gt; H[Business Logic]
+</code></pre>
+
+<h3 id="key-components"><strong>Key Components</strong></h3>
+<ul>
+  <li><strong>View</strong>: UI components and user interactions</li>
+  <li><strong>ViewModel</strong>: Business logic and state management</li>
+  <li><strong>Model</strong>: Data structures and entities</li>
+  <li><strong>Repository</strong>: Data access abstraction</li>
+</ul>
+
+<hr />
+
+<h2 id="️-view-layer">🖼️ <strong>View Layer</strong></h2>
+
+<h3 id="view-implementation"><strong>View Implementation</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useState</span><span class="p">,</span> <span class="nx">useEffect</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">View</span><span class="p">,</span> <span class="nx">Text</span><span class="p">,</span> <span class="nx">TextInput</span><span class="p">,</span> <span class="nx">TouchableOpacity</span><span class="p">,</span> <span class="nx">StyleSheet</span><span class="p">,</span> <span class="nx">Alert</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">UserProfileView</span> <span class="o">=</span> <span class="p">({</span> <span class="nx">viewModel</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">user</span><span class="p">,</span> <span class="nx">setUser</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">loading</span><span class="p">,</span> <span class="nx">setLoading</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">error</span><span class="p">,</span> <span class="nx">setError</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// Subscribe to ViewModel state changes</span>
+    <span class="kd">const</span> <span class="nx">unsubscribe</span> <span class="o">=</span> <span class="nx">viewModel</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">((</span><span class="nx">state</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">setUser</span><span class="p">(</span><span class="nx">state</span><span class="p">.</span><span class="nx">user</span><span class="p">);</span>
+      <span class="nx">setLoading</span><span class="p">(</span><span class="nx">state</span><span class="p">.</span><span class="nx">loading</span><span class="p">);</span>
+      <span class="nx">setError</span><span class="p">(</span><span class="nx">state</span><span class="p">.</span><span class="nx">error</span><span class="p">);</span>
+    <span class="p">});</span>
+
+    <span class="c1">// Load user data</span>
+    <span class="nx">viewModel</span><span class="p">.</span><span class="nx">loadUser</span><span class="p">();</span>
+
+    <span class="k">return</span> <span class="nx">unsubscribe</span><span class="p">;</span>
+  <span class="p">},</span> <span class="p">[</span><span class="nx">viewModel</span><span class="p">]);</span>
+
+  <span class="kd">const</span> <span class="nx">handleSave</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="k">await</span> <span class="nx">viewModel</span><span class="p">.</span><span class="nx">saveUser</span><span class="p">(</span><span class="nx">user</span><span class="p">);</span>
+      <span class="nx">Alert</span><span class="p">.</span><span class="nx">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">Success</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">User saved successfully</span><span class="dl">'</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">Alert</span><span class="p">.</span><span class="nx">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">Error</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+
+  <span class="kd">const</span> <span class="nx">handleNameChange</span> <span class="o">=</span> <span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setUser</span><span class="p">(</span><span class="nx">prev</span> <span class="o">=&gt;</span> <span class="p">({</span> <span class="p">...</span><span class="nx">prev</span><span class="p">,</span> <span class="nx">name</span> <span class="p">}));</span>
+  <span class="p">};</span>
+
+  <span class="kd">const</span> <span class="nx">handleEmailChange</span> <span class="o">=</span> <span class="p">(</span><span class="nx">email</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setUser</span><span class="p">(</span><span class="nx">prev</span> <span class="o">=&gt;</span> <span class="p">({</span> <span class="p">...</span><span class="nx">prev</span><span class="p">,</span> <span class="nx">email</span> <span class="p">}));</span>
+  <span class="p">};</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="nx">loading</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">container</span><span class="p">}</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">loadingText</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Loading</span><span class="p">...</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>    <span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">container</span><span class="p">}</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">errorText</span><span class="p">}</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">error</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="nx">TouchableOpacity</span> 
+          <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">retryButton</span><span class="p">}</span>
+          <span class="nx">onPress</span><span class="o">=</span><span class="p">{()</span> <span class="o">=&gt;</span> <span class="nx">viewModel</span><span class="p">.</span><span class="nx">loadUser</span><span class="p">()}</span>
+        <span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">retryButtonText</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Retry</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/TouchableOpacity</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>    <span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">container</span><span class="p">}</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">title</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">User</span> <span class="nx">Profile</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>      
+      <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">form</span><span class="p">}</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">label</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Name</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="nx">TextInput</span>
+          <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">input</span><span class="p">}</span>
+          <span class="nx">value</span><span class="o">=</span><span class="p">{</span><span class="nx">user</span><span class="p">?.</span><span class="nx">name</span> <span class="o">||</span> <span class="dl">''</span><span class="p">}</span>
+          <span class="nx">onChangeText</span><span class="o">=</span><span class="p">{</span><span class="nx">handleNameChange</span><span class="p">}</span>
+          <span class="nx">placeholder</span><span class="o">=</span><span class="dl">"</span><span class="s2">Enter name</span><span class="dl">"</span>
+        <span class="o">/&gt;</span>
+        
+        <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">label</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Email</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="nx">TextInput</span>
+          <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">input</span><span class="p">}</span>
+          <span class="nx">value</span><span class="o">=</span><span class="p">{</span><span class="nx">user</span><span class="p">?.</span><span class="nx">email</span> <span class="o">||</span> <span class="dl">''</span><span class="p">}</span>
+          <span class="nx">onChangeText</span><span class="o">=</span><span class="p">{</span><span class="nx">handleEmailChange</span><span class="p">}</span>
+          <span class="nx">placeholder</span><span class="o">=</span><span class="dl">"</span><span class="s2">Enter email</span><span class="dl">"</span>
+          <span class="nx">keyboardType</span><span class="o">=</span><span class="dl">"</span><span class="s2">email-address</span><span class="dl">"</span>
+          <span class="nx">autoCapitalize</span><span class="o">=</span><span class="dl">"</span><span class="s2">none</span><span class="dl">"</span>
+        <span class="o">/&gt;</span>
+        
+        <span class="o">&lt;</span><span class="nx">TouchableOpacity</span> 
+          <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">saveButton</span><span class="p">}</span>
+          <span class="nx">onPress</span><span class="o">=</span><span class="p">{</span><span class="nx">handleSave</span><span class="p">}</span>
+          <span class="nx">disabled</span><span class="o">=</span><span class="p">{</span><span class="nx">loading</span><span class="p">}</span>
+        <span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">saveButtonText</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Save</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/TouchableOpacity</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>    <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">styles</span> <span class="o">=</span> <span class="nx">StyleSheet</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span>
+  <span class="na">container</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">flex</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="na">padding</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#fff</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">title</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">fontSize</span><span class="p">:</span> <span class="mi">24</span><span class="p">,</span>
+    <span class="na">fontWeight</span><span class="p">:</span> <span class="dl">'</span><span class="s1">bold</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">marginBottom</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#333</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">form</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">flex</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">label</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">fontSize</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+    <span class="na">fontWeight</span><span class="p">:</span> <span class="dl">'</span><span class="s1">600</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">marginBottom</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+    <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#333</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">input</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">borderWidth</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="na">borderColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#ccc</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">borderRadius</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+    <span class="na">padding</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="na">fontSize</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+    <span class="na">marginBottom</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+    <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#fff</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">saveButton</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#007bff</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">padding</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+    <span class="na">borderRadius</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+    <span class="na">alignItems</span><span class="p">:</span> <span class="dl">'</span><span class="s1">center</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">marginTop</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">saveButtonText</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#fff</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">fontSize</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+    <span class="na">fontWeight</span><span class="p">:</span> <span class="dl">'</span><span class="s1">bold</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">loadingText</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">fontSize</span><span class="p">:</span> <span class="mi">18</span><span class="p">,</span>
+    <span class="na">textAlign</span><span class="p">:</span> <span class="dl">'</span><span class="s1">center</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#666</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">errorText</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">fontSize</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+    <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#dc3545</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">textAlign</span><span class="p">:</span> <span class="dl">'</span><span class="s1">center</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">marginBottom</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">retryButton</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#6c757d</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">padding</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+    <span class="na">borderRadius</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+    <span class="na">alignItems</span><span class="p">:</span> <span class="dl">'</span><span class="s1">center</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">retryButtonText</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#fff</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">fontSize</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+    <span class="na">fontWeight</span><span class="p">:</span> <span class="dl">'</span><span class="s1">bold</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+<span class="p">});</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">UserProfileView</span><span class="p">;</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-viewmodel-layer">🧠 <strong>ViewModel Layer</strong></h2>
+
+<h3 id="viewmodel-implementation"><strong>ViewModel Implementation</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">useState</span><span class="p">,</span> <span class="nx">useCallback</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">createUserProfileViewModel</span> <span class="o">=</span> <span class="p">(</span><span class="nx">userService</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">state</span><span class="p">,</span> <span class="nx">setState</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">({</span>
+    <span class="na">user</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="na">loading</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="na">error</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="p">});</span>
+
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">subscribers</span><span class="p">,</span> <span class="nx">setSubscribers</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">([]);</span>
+
+  <span class="c1">// Subscribe to state changes</span>
+  <span class="kd">const</span> <span class="nx">subscribe</span> <span class="o">=</span> <span class="nx">useCallback</span><span class="p">((</span><span class="nx">callback</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setSubscribers</span><span class="p">(</span><span class="nx">prev</span> <span class="o">=&gt;</span> <span class="p">[...</span><span class="nx">prev</span><span class="p">,</span> <span class="nx">callback</span><span class="p">]);</span>
+    
+    <span class="c1">// Return unsubscribe function</span>
+    <span class="k">return</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">setSubscribers</span><span class="p">(</span><span class="nx">prev</span> <span class="o">=&gt;</span> <span class="nx">prev</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">sub</span> <span class="o">=&gt;</span> <span class="nx">sub</span> <span class="o">!==</span> <span class="nx">callback</span><span class="p">));</span>
+    <span class="p">};</span>
+  <span class="p">},</span> <span class="p">[]);</span>
+
+  <span class="c1">// Notify subscribers of state changes</span>
+  <span class="kd">const</span> <span class="nx">notifySubscribers</span> <span class="o">=</span> <span class="nx">useCallback</span><span class="p">((</span><span class="nx">newState</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">subscribers</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">callback</span> <span class="o">=&gt;</span> <span class="nx">callback</span><span class="p">(</span><span class="nx">newState</span><span class="p">));</span>
+  <span class="p">},</span> <span class="p">[</span><span class="nx">subscribers</span><span class="p">]);</span>
+
+  <span class="c1">// Update state and notify subscribers</span>
+  <span class="kd">const</span> <span class="nx">updateState</span> <span class="o">=</span> <span class="nx">useCallback</span><span class="p">((</span><span class="nx">updates</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setState</span><span class="p">(</span><span class="nx">prevState</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">newState</span> <span class="o">=</span> <span class="p">{</span> <span class="p">...</span><span class="nx">prevState</span><span class="p">,</span> <span class="p">...</span><span class="nx">updates</span> <span class="p">};</span>
+      <span class="nx">notifySubscribers</span><span class="p">(</span><span class="nx">newState</span><span class="p">);</span>
+      <span class="k">return</span> <span class="nx">newState</span><span class="p">;</span>
+    <span class="p">});</span>
+  <span class="p">},</span> <span class="p">[</span><span class="nx">notifySubscribers</span><span class="p">]);</span>
+
+  <span class="c1">// Load user data</span>
+  <span class="kd">const</span> <span class="nx">loadUser</span> <span class="o">=</span> <span class="nx">useCallback</span><span class="p">(</span><span class="k">async</span> <span class="p">(</span><span class="nx">userId</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">current</span><span class="dl">'</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="nx">updateState</span><span class="p">({</span> <span class="na">loading</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="na">error</span><span class="p">:</span> <span class="kc">null</span> <span class="p">});</span>
+      
+      <span class="kd">const</span> <span class="nx">user</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">userService</span><span class="p">.</span><span class="nx">getUser</span><span class="p">(</span><span class="nx">userId</span><span class="p">);</span>
+      <span class="nx">updateState</span><span class="p">({</span> <span class="nx">user</span><span class="p">,</span> <span class="na">loading</span><span class="p">:</span> <span class="kc">false</span> <span class="p">});</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">updateState</span><span class="p">({</span> 
+        <span class="na">error</span><span class="p">:</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">,</span> 
+        <span class="na">loading</span><span class="p">:</span> <span class="kc">false</span> 
+      <span class="p">});</span>
+    <span class="p">}</span>
+  <span class="p">},</span> <span class="p">[</span><span class="nx">userService</span><span class="p">,</span> <span class="nx">updateState</span><span class="p">]);</span>
+
+  <span class="c1">// Save user data</span>
+  <span class="kd">const</span> <span class="nx">saveUser</span> <span class="o">=</span> <span class="nx">useCallback</span><span class="p">(</span><span class="k">async</span> <span class="p">(</span><span class="nx">userData</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="nx">updateState</span><span class="p">({</span> <span class="na">loading</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="na">error</span><span class="p">:</span> <span class="kc">null</span> <span class="p">});</span>
+      
+      <span class="kd">let</span> <span class="nx">savedUser</span><span class="p">;</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">userData</span><span class="p">.</span><span class="nx">id</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">savedUser</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">userService</span><span class="p">.</span><span class="nx">updateUser</span><span class="p">(</span><span class="nx">userData</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span> <span class="nx">userData</span><span class="p">);</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">savedUser</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">userService</span><span class="p">.</span><span class="nx">createUser</span><span class="p">(</span><span class="nx">userData</span><span class="p">);</span>
+      <span class="p">}</span>
+      
+      <span class="nx">updateState</span><span class="p">({</span> <span class="na">user</span><span class="p">:</span> <span class="nx">savedUser</span><span class="p">,</span> <span class="na">loading</span><span class="p">:</span> <span class="kc">false</span> <span class="p">});</span>
+      <span class="k">return</span> <span class="nx">savedUser</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">updateState</span><span class="p">({</span> 
+        <span class="na">error</span><span class="p">:</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">,</span> 
+        <span class="na">loading</span><span class="p">:</span> <span class="kc">false</span> 
+      <span class="p">});</span>
+      <span class="k">throw</span> <span class="nx">error</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">},</span> <span class="p">[</span><span class="nx">userService</span><span class="p">,</span> <span class="nx">updateState</span><span class="p">]);</span>
+
+  <span class="c1">// Delete user</span>
+  <span class="kd">const</span> <span class="nx">deleteUser</span> <span class="o">=</span> <span class="nx">useCallback</span><span class="p">(</span><span class="k">async</span> <span class="p">(</span><span class="nx">userId</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="nx">updateState</span><span class="p">({</span> <span class="na">loading</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="na">error</span><span class="p">:</span> <span class="kc">null</span> <span class="p">});</span>
+      
+      <span class="k">await</span> <span class="nx">userService</span><span class="p">.</span><span class="nx">deleteUser</span><span class="p">(</span><span class="nx">userId</span><span class="p">);</span>
+      <span class="nx">updateState</span><span class="p">({</span> <span class="na">user</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span> <span class="na">loading</span><span class="p">:</span> <span class="kc">false</span> <span class="p">});</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">updateState</span><span class="p">({</span> 
+        <span class="na">error</span><span class="p">:</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">,</span> 
+        <span class="na">loading</span><span class="p">:</span> <span class="kc">false</span> 
+      <span class="p">});</span>
+      <span class="k">throw</span> <span class="nx">error</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">},</span> <span class="p">[</span><span class="nx">userService</span><span class="p">,</span> <span class="nx">updateState</span><span class="p">]);</span>
+
+  <span class="c1">// Validate user data</span>
+  <span class="kd">const</span> <span class="nx">validateUser</span> <span class="o">=</span> <span class="nx">useCallback</span><span class="p">((</span><span class="nx">userData</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">errors</span> <span class="o">=</span> <span class="p">[];</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">userData</span><span class="p">.</span><span class="nx">name</span> <span class="o">||</span> <span class="nx">userData</span><span class="p">.</span><span class="nx">name</span><span class="p">.</span><span class="nx">trim</span><span class="p">().</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">errors</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="dl">'</span><span class="s1">Name is required</span><span class="dl">'</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">userData</span><span class="p">.</span><span class="nx">email</span> <span class="o">||</span> <span class="o">!</span><span class="nx">isValidEmail</span><span class="p">(</span><span class="nx">userData</span><span class="p">.</span><span class="nx">email</span><span class="p">))</span> <span class="p">{</span>
+      <span class="nx">errors</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="dl">'</span><span class="s1">Valid email is required</span><span class="dl">'</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="nx">errors</span><span class="p">;</span>
+  <span class="p">},</span> <span class="p">[]);</span>
+
+  <span class="c1">// Get current state</span>
+  <span class="kd">const</span> <span class="nx">getState</span> <span class="o">=</span> <span class="nx">useCallback</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nx">state</span><span class="p">,</span> <span class="p">[</span><span class="nx">state</span><span class="p">]);</span>
+
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="c1">// State</span>
+    <span class="nx">getState</span><span class="p">,</span>
+    <span class="nx">subscribe</span><span class="p">,</span>
+    
+    <span class="c1">// Actions</span>
+    <span class="nx">loadUser</span><span class="p">,</span>
+    <span class="nx">saveUser</span><span class="p">,</span>
+    <span class="nx">deleteUser</span><span class="p">,</span>
+    <span class="nx">validateUser</span><span class="p">,</span>
+    
+    <span class="c1">// Utilities</span>
+    <span class="nx">updateState</span><span class="p">,</span>
+  <span class="p">};</span>
+<span class="p">};</span>
+
+<span class="c1">// Email validation utility</span>
+<span class="kd">const</span> <span class="nx">isValidEmail</span> <span class="o">=</span> <span class="p">(</span><span class="nx">email</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">emailRegex</span> <span class="o">=</span> <span class="sr">/^</span><span class="se">[^\s</span><span class="sr">@</span><span class="se">]</span><span class="sr">+@</span><span class="se">[^\s</span><span class="sr">@</span><span class="se">]</span><span class="sr">+</span><span class="se">\.[^\s</span><span class="sr">@</span><span class="se">]</span><span class="sr">+$/</span><span class="p">;</span>
+  <span class="k">return</span> <span class="nx">emailRegex</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">email</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="k">export</span> <span class="p">{</span> <span class="nx">createUserProfileViewModel</span> <span class="p">};</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-model-layer">📊 <strong>Model Layer</strong></h2>
+
+<h3 id="model-implementation"><strong>Model Implementation</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// User model</span>
+<span class="kd">const</span> <span class="nx">UserModel</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">id</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="na">name</span><span class="p">:</span> <span class="dl">''</span><span class="p">,</span>
+  <span class="na">email</span><span class="p">:</span> <span class="dl">''</span><span class="p">,</span>
+  <span class="na">avatar</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="na">createdAt</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="na">updatedAt</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+  
+  <span class="c1">// Create new user</span>
+  <span class="na">create</span><span class="p">:</span> <span class="p">(</span><span class="nx">userData</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">({</span>
+    <span class="na">id</span><span class="p">:</span> <span class="nx">userData</span><span class="p">.</span><span class="nx">id</span> <span class="o">||</span> <span class="nx">generateId</span><span class="p">(),</span>
+    <span class="na">name</span><span class="p">:</span> <span class="nx">userData</span><span class="p">.</span><span class="nx">name</span> <span class="o">||</span> <span class="dl">''</span><span class="p">,</span>
+    <span class="na">email</span><span class="p">:</span> <span class="nx">userData</span><span class="p">.</span><span class="nx">email</span> <span class="o">||</span> <span class="dl">''</span><span class="p">,</span>
+    <span class="na">avatar</span><span class="p">:</span> <span class="nx">userData</span><span class="p">.</span><span class="nx">avatar</span> <span class="o">||</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="na">createdAt</span><span class="p">:</span> <span class="nx">userData</span><span class="p">.</span><span class="nx">createdAt</span> <span class="o">||</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(),</span>
+    <span class="na">updatedAt</span><span class="p">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(),</span>
+  <span class="p">}),</span>
+  
+  <span class="c1">// Update user</span>
+  <span class="na">update</span><span class="p">:</span> <span class="p">(</span><span class="nx">user</span><span class="p">,</span> <span class="nx">updates</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">({</span>
+    <span class="p">...</span><span class="nx">user</span><span class="p">,</span>
+    <span class="p">...</span><span class="nx">updates</span><span class="p">,</span>
+    <span class="na">updatedAt</span><span class="p">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(),</span>
+  <span class="p">}),</span>
+  
+  <span class="c1">// Validate user</span>
+  <span class="na">validate</span><span class="p">:</span> <span class="p">(</span><span class="nx">user</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">errors</span> <span class="o">=</span> <span class="p">[];</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">user</span><span class="p">.</span><span class="nx">name</span> <span class="o">||</span> <span class="nx">user</span><span class="p">.</span><span class="nx">name</span><span class="p">.</span><span class="nx">trim</span><span class="p">().</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">errors</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="dl">'</span><span class="s1">Name is required</span><span class="dl">'</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">user</span><span class="p">.</span><span class="nx">email</span> <span class="o">||</span> <span class="o">!</span><span class="nx">isValidEmail</span><span class="p">(</span><span class="nx">user</span><span class="p">.</span><span class="nx">email</span><span class="p">))</span> <span class="p">{</span>
+      <span class="nx">errors</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="dl">'</span><span class="s1">Valid email is required</span><span class="dl">'</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="nx">errors</span><span class="p">;</span>
+  <span class="p">},</span>
+  
+  <span class="c1">// Check if user is valid</span>
+  <span class="na">isValid</span><span class="p">:</span> <span class="p">(</span><span class="nx">user</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">UserModel</span><span class="p">.</span><span class="nx">validate</span><span class="p">(</span><span class="nx">user</span><span class="p">).</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="p">},</span>
+  
+  <span class="c1">// Get user display name</span>
+  <span class="na">getDisplayName</span><span class="p">:</span> <span class="p">(</span><span class="nx">user</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">user</span><span class="p">.</span><span class="nx">name</span> <span class="o">||</span> <span class="nx">user</span><span class="p">.</span><span class="nx">email</span> <span class="o">||</span> <span class="dl">'</span><span class="s1">Unknown User</span><span class="dl">'</span><span class="p">;</span>
+  <span class="p">},</span>
+  
+  <span class="c1">// Get user initials</span>
+  <span class="na">getInitials</span><span class="p">:</span> <span class="p">(</span><span class="nx">user</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">name</span> <span class="o">=</span> <span class="nx">user</span><span class="p">.</span><span class="nx">name</span> <span class="o">||</span> <span class="dl">''</span><span class="p">;</span>
+    <span class="kd">const</span> <span class="nx">words</span> <span class="o">=</span> <span class="nx">name</span><span class="p">.</span><span class="nx">trim</span><span class="p">().</span><span class="nx">split</span><span class="p">(</span><span class="dl">'</span><span class="s1"> </span><span class="dl">'</span><span class="p">);</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="nx">words</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="p">(</span><span class="nx">words</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="nx">words</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]).</span><span class="nx">toUpperCase</span><span class="p">();</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">words</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">words</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">].</span><span class="nx">toUpperCase</span><span class="p">();</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="dl">'</span><span class="s1">U</span><span class="dl">'</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// User list model</span>
+<span class="kd">const</span> <span class="nx">UserListModel</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">users</span><span class="p">:</span> <span class="p">[],</span>
+  <span class="na">loading</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="na">error</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="na">totalCount</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="na">currentPage</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="na">hasMore</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+  
+  <span class="c1">// Create initial state</span>
+  <span class="na">create</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">({</span>
+    <span class="na">users</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="na">loading</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="na">error</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="na">totalCount</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="na">currentPage</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="na">hasMore</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="p">}),</span>
+  
+  <span class="c1">// Add users</span>
+  <span class="na">addUsers</span><span class="p">:</span> <span class="p">(</span><span class="nx">state</span><span class="p">,</span> <span class="nx">newUsers</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">({</span>
+    <span class="p">...</span><span class="nx">state</span><span class="p">,</span>
+    <span class="na">users</span><span class="p">:</span> <span class="p">[...</span><span class="nx">state</span><span class="p">.</span><span class="nx">users</span><span class="p">,</span> <span class="p">...</span><span class="nx">newUsers</span><span class="p">],</span>
+    <span class="na">totalCount</span><span class="p">:</span> <span class="nx">state</span><span class="p">.</span><span class="nx">totalCount</span> <span class="o">+</span> <span class="nx">newUsers</span><span class="p">.</span><span class="nx">length</span><span class="p">,</span>
+  <span class="p">}),</span>
+  
+  <span class="c1">// Set users</span>
+  <span class="na">setUsers</span><span class="p">:</span> <span class="p">(</span><span class="nx">state</span><span class="p">,</span> <span class="nx">users</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">({</span>
+    <span class="p">...</span><span class="nx">state</span><span class="p">,</span>
+    <span class="nx">users</span><span class="p">,</span>
+    <span class="na">totalCount</span><span class="p">:</span> <span class="nx">users</span><span class="p">.</span><span class="nx">length</span><span class="p">,</span>
+  <span class="p">}),</span>
+  
+  <span class="c1">// Update user</span>
+  <span class="na">updateUser</span><span class="p">:</span> <span class="p">(</span><span class="nx">state</span><span class="p">,</span> <span class="nx">userId</span><span class="p">,</span> <span class="nx">updates</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">({</span>
+    <span class="p">...</span><span class="nx">state</span><span class="p">,</span>
+    <span class="na">users</span><span class="p">:</span> <span class="nx">state</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">user</span> <span class="o">=&gt;</span> 
+      <span class="nx">user</span><span class="p">.</span><span class="nx">id</span> <span class="o">===</span> <span class="nx">userId</span> <span class="p">?</span> <span class="p">{</span> <span class="p">...</span><span class="nx">user</span><span class="p">,</span> <span class="p">...</span><span class="nx">updates</span> <span class="p">}</span> <span class="p">:</span> <span class="nx">user</span>
+    <span class="p">),</span>
+  <span class="p">}),</span>
+  
+  <span class="c1">// Remove user</span>
+  <span class="na">removeUser</span><span class="p">:</span> <span class="p">(</span><span class="nx">state</span><span class="p">,</span> <span class="nx">userId</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">({</span>
+    <span class="p">...</span><span class="nx">state</span><span class="p">,</span>
+    <span class="na">users</span><span class="p">:</span> <span class="nx">state</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">user</span> <span class="o">=&gt;</span> <span class="nx">user</span><span class="p">.</span><span class="nx">id</span> <span class="o">!==</span> <span class="nx">userId</span><span class="p">),</span>
+    <span class="na">totalCount</span><span class="p">:</span> <span class="nx">state</span><span class="p">.</span><span class="nx">totalCount</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="p">}),</span>
+  
+  <span class="c1">// Set loading state</span>
+  <span class="na">setLoading</span><span class="p">:</span> <span class="p">(</span><span class="nx">state</span><span class="p">,</span> <span class="nx">loading</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">({</span>
+    <span class="p">...</span><span class="nx">state</span><span class="p">,</span>
+    <span class="nx">loading</span><span class="p">,</span>
+  <span class="p">}),</span>
+  
+  <span class="c1">// Set error</span>
+  <span class="na">setError</span><span class="p">:</span> <span class="p">(</span><span class="nx">state</span><span class="p">,</span> <span class="nx">error</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">({</span>
+    <span class="p">...</span><span class="nx">state</span><span class="p">,</span>
+    <span class="nx">error</span><span class="p">,</span>
+    <span class="na">loading</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="p">}),</span>
+  
+  <span class="c1">// Clear error</span>
+  <span class="na">clearError</span><span class="p">:</span> <span class="p">(</span><span class="nx">state</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">({</span>
+    <span class="p">...</span><span class="nx">state</span><span class="p">,</span>
+    <span class="na">error</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="p">}),</span>
+  
+  <span class="c1">// Set pagination</span>
+  <span class="na">setPagination</span><span class="p">:</span> <span class="p">(</span><span class="nx">state</span><span class="p">,</span> <span class="p">{</span> <span class="nx">currentPage</span><span class="p">,</span> <span class="nx">hasMore</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">({</span>
+    <span class="p">...</span><span class="nx">state</span><span class="p">,</span>
+    <span class="nx">currentPage</span><span class="p">,</span>
+    <span class="nx">hasMore</span><span class="p">,</span>
+  <span class="p">})</span>
+<span class="p">};</span>
+
+<span class="c1">// Generate unique ID</span>
+<span class="kd">const</span> <span class="nx">generateId</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">().</span><span class="nx">toString</span><span class="p">(</span><span class="mi">36</span><span class="p">)</span> <span class="o">+</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">().</span><span class="nx">toString</span><span class="p">(</span><span class="mi">36</span><span class="p">).</span><span class="nx">substr</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="c1">// Email validation</span>
+<span class="kd">const</span> <span class="nx">isValidEmail</span> <span class="o">=</span> <span class="p">(</span><span class="nx">email</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">emailRegex</span> <span class="o">=</span> <span class="sr">/^</span><span class="se">[^\s</span><span class="sr">@</span><span class="se">]</span><span class="sr">+@</span><span class="se">[^\s</span><span class="sr">@</span><span class="se">]</span><span class="sr">+</span><span class="se">\.[^\s</span><span class="sr">@</span><span class="se">]</span><span class="sr">+$/</span><span class="p">;</span>
+  <span class="k">return</span> <span class="nx">emailRegex</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">email</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="k">export</span> <span class="p">{</span> <span class="nx">UserModel</span><span class="p">,</span> <span class="nx">UserListModel</span> <span class="p">};</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-data-binding">🔗 <strong>Data Binding</strong></h2>
+
+<h3 id="data-binding-implementation"><strong>Data Binding Implementation</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">useState</span><span class="p">,</span> <span class="nx">useEffect</span><span class="p">,</span> <span class="nx">useCallback</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="c1">// Data binding hook</span>
+<span class="kd">const</span> <span class="nx">useDataBinding</span> <span class="o">=</span> <span class="p">(</span><span class="nx">viewModel</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">state</span><span class="p">,</span> <span class="nx">setState</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="nx">viewModel</span><span class="p">.</span><span class="nx">getState</span><span class="p">());</span>
+
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">unsubscribe</span> <span class="o">=</span> <span class="nx">viewModel</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">((</span><span class="nx">newState</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">setState</span><span class="p">(</span><span class="nx">newState</span><span class="p">);</span>
+    <span class="p">});</span>
+
+    <span class="k">return</span> <span class="nx">unsubscribe</span><span class="p">;</span>
+  <span class="p">},</span> <span class="p">[</span><span class="nx">viewModel</span><span class="p">]);</span>
+
+  <span class="k">return</span> <span class="nx">state</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="c1">// Two-way data binding hook</span>
+<span class="kd">const</span> <span class="nx">useTwoWayBinding</span> <span class="o">=</span> <span class="p">(</span><span class="nx">initialValue</span><span class="p">,</span> <span class="nx">onChange</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">value</span><span class="p">,</span> <span class="nx">setValue</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="nx">initialValue</span><span class="p">);</span>
+
+  <span class="kd">const</span> <span class="nx">handleChange</span> <span class="o">=</span> <span class="nx">useCallback</span><span class="p">((</span><span class="nx">newValue</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setValue</span><span class="p">(</span><span class="nx">newValue</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">onChange</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">onChange</span><span class="p">(</span><span class="nx">newValue</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">},</span> <span class="p">[</span><span class="nx">onChange</span><span class="p">]);</span>
+
+  <span class="k">return</span> <span class="p">[</span><span class="nx">value</span><span class="p">,</span> <span class="nx">handleChange</span><span class="p">];</span>
+<span class="p">};</span>
+
+<span class="c1">// Form data binding</span>
+<span class="kd">const</span> <span class="nx">useFormBinding</span> <span class="o">=</span> <span class="p">(</span><span class="nx">initialFormData</span><span class="p">,</span> <span class="nx">validationRules</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">formData</span><span class="p">,</span> <span class="nx">setFormData</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="nx">initialFormData</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">errors</span><span class="p">,</span> <span class="nx">setErrors</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">({});</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">touched</span><span class="p">,</span> <span class="nx">setTouched</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">({});</span>
+
+  <span class="kd">const</span> <span class="nx">updateField</span> <span class="o">=</span> <span class="nx">useCallback</span><span class="p">((</span><span class="nx">fieldName</span><span class="p">,</span> <span class="nx">value</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setFormData</span><span class="p">(</span><span class="nx">prev</span> <span class="o">=&gt;</span> <span class="p">({</span> <span class="p">...</span><span class="nx">prev</span><span class="p">,</span> <span class="p">[</span><span class="nx">fieldName</span><span class="p">]:</span> <span class="nx">value</span> <span class="p">}));</span>
+    
+    <span class="c1">// Validate field if it's been touched</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">touched</span><span class="p">[</span><span class="nx">fieldName</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="nx">validationRules</span><span class="p">[</span><span class="nx">fieldName</span><span class="p">])</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">fieldErrors</span> <span class="o">=</span> <span class="nx">validationRules</span><span class="p">[</span><span class="nx">fieldName</span><span class="p">](</span><span class="nx">value</span><span class="p">);</span>
+      <span class="nx">setErrors</span><span class="p">(</span><span class="nx">prev</span> <span class="o">=&gt;</span> <span class="p">({</span> <span class="p">...</span><span class="nx">prev</span><span class="p">,</span> <span class="p">[</span><span class="nx">fieldName</span><span class="p">]:</span> <span class="nx">fieldErrors</span> <span class="p">}));</span>
+    <span class="p">}</span>
+  <span class="p">},</span> <span class="p">[</span><span class="nx">touched</span><span class="p">,</span> <span class="nx">validationRules</span><span class="p">]);</span>
+
+  <span class="kd">const</span> <span class="nx">touchField</span> <span class="o">=</span> <span class="nx">useCallback</span><span class="p">((</span><span class="nx">fieldName</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setTouched</span><span class="p">(</span><span class="nx">prev</span> <span class="o">=&gt;</span> <span class="p">({</span> <span class="p">...</span><span class="nx">prev</span><span class="p">,</span> <span class="p">[</span><span class="nx">fieldName</span><span class="p">]:</span> <span class="kc">true</span> <span class="p">}));</span>
+    
+    <span class="c1">// Validate field when touched</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">validationRules</span><span class="p">[</span><span class="nx">fieldName</span><span class="p">])</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">fieldErrors</span> <span class="o">=</span> <span class="nx">validationRules</span><span class="p">[</span><span class="nx">fieldName</span><span class="p">](</span><span class="nx">formData</span><span class="p">[</span><span class="nx">fieldName</span><span class="p">]);</span>
+      <span class="nx">setErrors</span><span class="p">(</span><span class="nx">prev</span> <span class="o">=&gt;</span> <span class="p">({</span> <span class="p">...</span><span class="nx">prev</span><span class="p">,</span> <span class="p">[</span><span class="nx">fieldName</span><span class="p">]:</span> <span class="nx">fieldErrors</span> <span class="p">}));</span>
+    <span class="p">}</span>
+  <span class="p">},</span> <span class="p">[</span><span class="nx">formData</span><span class="p">,</span> <span class="nx">validationRules</span><span class="p">]);</span>
+
+  <span class="kd">const</span> <span class="nx">validateForm</span> <span class="o">=</span> <span class="nx">useCallback</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">newErrors</span> <span class="o">=</span> <span class="p">{};</span>
+    <span class="kd">let</span> <span class="nx">isValid</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+
+    <span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">validationRules</span><span class="p">).</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">fieldName</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">fieldErrors</span> <span class="o">=</span> <span class="nx">validationRules</span><span class="p">[</span><span class="nx">fieldName</span><span class="p">](</span><span class="nx">formData</span><span class="p">[</span><span class="nx">fieldName</span><span class="p">]);</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">fieldErrors</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">newErrors</span><span class="p">[</span><span class="nx">fieldName</span><span class="p">]</span> <span class="o">=</span> <span class="nx">fieldErrors</span><span class="p">;</span>
+        <span class="nx">isValid</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">});</span>
+
+    <span class="nx">setErrors</span><span class="p">(</span><span class="nx">newErrors</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nx">isValid</span><span class="p">;</span>
+  <span class="p">},</span> <span class="p">[</span><span class="nx">formData</span><span class="p">,</span> <span class="nx">validationRules</span><span class="p">]);</span>
+
+  <span class="kd">const</span> <span class="nx">resetForm</span> <span class="o">=</span> <span class="nx">useCallback</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setFormData</span><span class="p">(</span><span class="nx">initialFormData</span><span class="p">);</span>
+    <span class="nx">setErrors</span><span class="p">({});</span>
+    <span class="nx">setTouched</span><span class="p">({});</span>
+  <span class="p">},</span> <span class="p">[</span><span class="nx">initialFormData</span><span class="p">]);</span>
+
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="nx">formData</span><span class="p">,</span>
+    <span class="nx">errors</span><span class="p">,</span>
+    <span class="nx">touched</span><span class="p">,</span>
+    <span class="nx">updateField</span><span class="p">,</span>
+    <span class="nx">touchField</span><span class="p">,</span>
+    <span class="nx">validateForm</span><span class="p">,</span>
+    <span class="nx">resetForm</span><span class="p">,</span>
+    <span class="na">isValid</span><span class="p">:</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">errors</span><span class="p">).</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="p">};</span>
+<span class="p">};</span>
+
+<span class="c1">// List data binding</span>
+<span class="kd">const</span> <span class="nx">useListBinding</span> <span class="o">=</span> <span class="p">(</span><span class="nx">initialItems</span><span class="p">,</span> <span class="nx">itemKey</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">id</span><span class="dl">'</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">items</span><span class="p">,</span> <span class="nx">setItems</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="nx">initialItems</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">selectedItems</span><span class="p">,</span> <span class="nx">setSelectedItems</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">([]);</span>
+
+  <span class="kd">const</span> <span class="nx">addItem</span> <span class="o">=</span> <span class="nx">useCallback</span><span class="p">((</span><span class="nx">item</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setItems</span><span class="p">(</span><span class="nx">prev</span> <span class="o">=&gt;</span> <span class="p">[...</span><span class="nx">prev</span><span class="p">,</span> <span class="nx">item</span><span class="p">]);</span>
+  <span class="p">},</span> <span class="p">[]);</span>
+
+  <span class="kd">const</span> <span class="nx">updateItem</span> <span class="o">=</span> <span class="nx">useCallback</span><span class="p">((</span><span class="nx">itemId</span><span class="p">,</span> <span class="nx">updates</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setItems</span><span class="p">(</span><span class="nx">prev</span> <span class="o">=&gt;</span> <span class="nx">prev</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">item</span> <span class="o">=&gt;</span> 
+      <span class="nx">item</span><span class="p">[</span><span class="nx">itemKey</span><span class="p">]</span> <span class="o">===</span> <span class="nx">itemId</span> <span class="p">?</span> <span class="p">{</span> <span class="p">...</span><span class="nx">item</span><span class="p">,</span> <span class="p">...</span><span class="nx">updates</span> <span class="p">}</span> <span class="p">:</span> <span class="nx">item</span>
+    <span class="p">));</span>
+  <span class="p">},</span> <span class="p">[</span><span class="nx">itemKey</span><span class="p">]);</span>
+
+  <span class="kd">const</span> <span class="nx">removeItem</span> <span class="o">=</span> <span class="nx">useCallback</span><span class="p">((</span><span class="nx">itemId</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setItems</span><span class="p">(</span><span class="nx">prev</span> <span class="o">=&gt;</span> <span class="nx">prev</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">item</span> <span class="o">=&gt;</span> <span class="nx">item</span><span class="p">[</span><span class="nx">itemKey</span><span class="p">]</span> <span class="o">!==</span> <span class="nx">itemId</span><span class="p">));</span>
+    <span class="nx">setSelectedItems</span><span class="p">(</span><span class="nx">prev</span> <span class="o">=&gt;</span> <span class="nx">prev</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">id</span> <span class="o">=&gt;</span> <span class="nx">id</span> <span class="o">!==</span> <span class="nx">itemId</span><span class="p">));</span>
+  <span class="p">},</span> <span class="p">[</span><span class="nx">itemKey</span><span class="p">]);</span>
+
+  <span class="kd">const</span> <span class="nx">selectItem</span> <span class="o">=</span> <span class="nx">useCallback</span><span class="p">((</span><span class="nx">itemId</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setSelectedItems</span><span class="p">(</span><span class="nx">prev</span> <span class="o">=&gt;</span> <span class="p">[...</span><span class="nx">prev</span><span class="p">,</span> <span class="nx">itemId</span><span class="p">]);</span>
+  <span class="p">},</span> <span class="p">[]);</span>
+
+  <span class="kd">const</span> <span class="nx">deselectItem</span> <span class="o">=</span> <span class="nx">useCallback</span><span class="p">((</span><span class="nx">itemId</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setSelectedItems</span><span class="p">(</span><span class="nx">prev</span> <span class="o">=&gt;</span> <span class="nx">prev</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">id</span> <span class="o">=&gt;</span> <span class="nx">id</span> <span class="o">!==</span> <span class="nx">itemId</span><span class="p">));</span>
+  <span class="p">},</span> <span class="p">[]);</span>
+
+  <span class="kd">const</span> <span class="nx">toggleSelection</span> <span class="o">=</span> <span class="nx">useCallback</span><span class="p">((</span><span class="nx">itemId</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setSelectedItems</span><span class="p">(</span><span class="nx">prev</span> <span class="o">=&gt;</span> 
+      <span class="nx">prev</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="nx">itemId</span><span class="p">)</span> 
+        <span class="p">?</span> <span class="nx">prev</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">id</span> <span class="o">=&gt;</span> <span class="nx">id</span> <span class="o">!==</span> <span class="nx">itemId</span><span class="p">)</span>
+        <span class="p">:</span> <span class="p">[...</span><span class="nx">prev</span><span class="p">,</span> <span class="nx">itemId</span><span class="p">]</span>
+    <span class="p">);</span>
+  <span class="p">},</span> <span class="p">[]);</span>
+
+  <span class="kd">const</span> <span class="nx">clearSelection</span> <span class="o">=</span> <span class="nx">useCallback</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setSelectedItems</span><span class="p">([]);</span>
+  <span class="p">},</span> <span class="p">[]);</span>
+
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="nx">items</span><span class="p">,</span>
+    <span class="nx">selectedItems</span><span class="p">,</span>
+    <span class="nx">addItem</span><span class="p">,</span>
+    <span class="nx">updateItem</span><span class="p">,</span>
+    <span class="nx">removeItem</span><span class="p">,</span>
+    <span class="nx">selectItem</span><span class="p">,</span>
+    <span class="nx">deselectItem</span><span class="p">,</span>
+    <span class="nx">toggleSelection</span><span class="p">,</span>
+    <span class="nx">clearSelection</span><span class="p">,</span>
+    <span class="na">selectedCount</span><span class="p">:</span> <span class="nx">selectedItems</span><span class="p">.</span><span class="nx">length</span><span class="p">,</span>
+  <span class="p">};</span>
+<span class="p">};</span>
+
+<span class="k">export</span> <span class="p">{</span> <span class="nx">useDataBinding</span><span class="p">,</span> <span class="nx">useTwoWayBinding</span><span class="p">,</span> <span class="nx">useFormBinding</span><span class="p">,</span> <span class="nx">useListBinding</span> <span class="p">};</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-best-practices">🎯 <strong>Best Practices</strong></h2>
+
+<h3 id="1-mvvm-implementation"><strong>1. MVVM Implementation</strong></h3>
+<ul>
+  <li>Keep ViewModels stateless</li>
+  <li>Use proper data binding</li>
+  <li>Separate business logic from UI</li>
+  <li>Implement proper error handling</li>
+</ul>
+
+<h3 id="2-state-management"><strong>2. State Management</strong></h3>
+<ul>
+  <li>Use reactive state updates</li>
+  <li>Implement proper subscriptions</li>
+  <li>Handle loading and error states</li>
+  <li>Optimize re-renders</li>
+</ul>
+
+<h3 id="3-testing"><strong>3. Testing</strong></h3>
+<ul>
+  <li>Test ViewModels in isolation</li>
+  <li>Mock dependencies properly</li>
+  <li>Test data binding</li>
+  <li>Validate business logic</li>
+</ul>
+
+<hr />
+
+<h2 id="-interview-questions">❓ <strong>Interview Questions</strong></h2>
+
+<h3 id="basic-questions"><strong>Basic Questions</strong></h3>
+<ol>
+  <li><strong>What is the MVVM pattern?</strong></li>
+  <li><strong>How do you implement data binding?</strong></li>
+  <li><strong>What are the benefits of MVVM?</strong></li>
+</ol>
+
+<h3 id="advanced-questions"><strong>Advanced Questions</strong></h3>
+<ol>
+  <li><strong>How would you implement MVVM in React Native?</strong></li>
+  <li><strong>Explain the relationship between View, ViewModel, and Model.</strong></li>
+  <li><strong>How do you handle state management in MVVM?</strong></li>
+</ol>
+
+<h3 id="practical-questions"><strong>Practical Questions</strong></h3>
+<ol>
+  <li><strong>Implement a user profile screen using MVVM.</strong></li>
+  <li><strong>Create a data binding system.</strong></li>
+  <li><strong>Design a form with validation using MVVM.</strong></li>
+</ol>
+
+<hr />
+
+<h2 id="-navigation">🧭 Navigation</h2>
+
+<div class="navigation">
+    <a href="./01-Clean-Architecture.md" class="nav-link prev">⬅️ Previous: Clean Architecture</a>
+    <a href="./03-Feature-Based-Modules.md" class="nav-link next">Next: Feature-Based Modules ➡️</a>
+</div>
+
+<hr />
+
+<script src="../../common-scripts.js"></script>
+
+<p><em>Last updated: December 2024</em></p>
+
+        </main>
+        
+        <footer style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #ecf0f1; color: #666; text-align: center;">
+            <p>Interview Prep Documentation - Built with Jekyll</p>
+        </footer>
+    </div>
+</body>
+</html>

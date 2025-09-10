@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔴 TypeScript with Angular - Interview Prep Documentation</title>
+    <meta name="description" content="Comprehensive guides for JavaScript, TypeScript, and React Native interview preparation">
+    
+    <!-- GitHub Pages compatible styling -->
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+        }
+        
+        .container {
+            max-width: 100%;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            color: #2c3e50;
+            margin-top: 2em;
+            margin-bottom: 1em;
+        }
+        
+        h1 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            border-bottom: 1px solid #ecf0f1;
+            padding-bottom: 5px;
+        }
+        
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border-left: 4px solid #3498db;
+        }
+        
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+        
+        blockquote {
+            border-left: 4px solid #3498db;
+            margin: 0;
+            padding-left: 20px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1em 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .navigation {
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px 0;
+            margin-bottom: 20px;
+        }
+        
+        .navigation a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+        
+        .navigation a:hover {
+            text-decoration: underline;
+        }
+        
+        .breadcrumb {
+            margin-bottom: 20px;
+            color: #666;
+        }
+        
+        .breadcrumb a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            h2 {
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="navigation">
+            <a href="/">Home</a>
+            <a href="/Javascript/">JavaScript</a>
+            <a href="/TypeScript/">TypeScript</a>
+            <a href="/React-Native/">React Native</a>
+        </nav>
+        
+        
+        
+        <main>
+            <h1 id="-typescript-with-angular">🔴 <strong>TypeScript with Angular</strong></h1>
+
+<blockquote>
+  <p><strong>Complete guide to using TypeScript with Angular, including component typing, services, and advanced patterns</strong></p>
+</blockquote>
+
+<link rel="stylesheet" href="../../common-styles.css" />
+
+<hr />
+
+<h2 id="-table-of-contents">📚 <strong>Table of Contents</strong></h2>
+
+<ul>
+  <li><a href="#angular-typescript-setup">Angular TypeScript Setup</a></li>
+  <li><a href="#component-typing">Component Typing</a></li>
+  <li><a href="#services-and-dependency-injection">Services and Dependency Injection</a></li>
+  <li><a href="#forms-and-validation">Forms and Validation</a></li>
+  <li><a href="#routing-and-navigation">Routing and Navigation</a></li>
+  <li><a href="#advanced-patterns">Advanced Patterns</a></li>
+  <li><a href="#best-practices">Best Practices</a></li>
+  <li><a href="#common-interview-questions">Common Interview Questions</a></li>
+</ul>
+
+<hr />
+
+<h2 id="-angular-typescript-setup">🎯 <strong>Angular TypeScript Setup</strong></h2>
+
+<p>Angular is built with TypeScript from the ground up, providing excellent type safety and developer experience.</p>
+
+<h3 id="basic-setup"><strong>Basic Setup</strong></h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Install Angular CLI</span>
+npm <span class="nb">install</span> <span class="nt">-g</span> @angular/cli
+
+<span class="c"># Create new Angular project</span>
+ng new my-app
+
+<span class="c"># Or add TypeScript to existing project</span>
+ng add @angular/cli
+</code></pre></div></div>
+
+<h3 id="angular-configuration"><strong>Angular Configuration</strong></h3>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">//</span><span class="w"> </span><span class="err">tsconfig.json</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="nl">"compileOnSave"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"compilerOptions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"baseUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"./"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"outDir"</span><span class="p">:</span><span class="w"> </span><span class="s2">"./dist/out-tsc"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"forceConsistentCasingInFileNames"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"strict"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"noImplicitOverride"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"noPropertyAccessFromIndexSignature"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"noImplicitReturns"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"noFallthroughCasesInSwitch"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"sourceMap"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"declaration"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"downlevelIteration"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"experimentalDecorators"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"moduleResolution"</span><span class="p">:</span><span class="w"> </span><span class="s2">"node"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"importHelpers"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"target"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ES2022"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"module"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ES2022"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"useDefineForClassFields"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"lib"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"ES2022"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"dom"</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"angularCompilerOptions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"enableI18nLegacyMessageIdFormat"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"strictInjectionParameters"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"strictInputAccessModifiers"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"strictTemplates"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="angular-cli-configuration"><strong>Angular CLI Configuration</strong></h3>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">//</span><span class="w"> </span><span class="err">angular.json</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="nl">"projects"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"my-app"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"projectType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"schematics"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"@schematics/angular:component"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"style"</span><span class="p">:</span><span class="w"> </span><span class="s2">"scss"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nl">"root"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"sourceRoot"</span><span class="p">:</span><span class="w"> </span><span class="s2">"src"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"prefix"</span><span class="p">:</span><span class="w"> </span><span class="s2">"app"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"architect"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"build"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"builder"</span><span class="p">:</span><span class="w"> </span><span class="s2">"@angular-devkit/build-angular:browser"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"options"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"outputPath"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dist/my-app"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"index"</span><span class="p">:</span><span class="w"> </span><span class="s2">"src/index.html"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"main"</span><span class="p">:</span><span class="w"> </span><span class="s2">"src/main.ts"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"polyfills"</span><span class="p">:</span><span class="w"> </span><span class="s2">"src/polyfills.ts"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"tsConfig"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tsconfig.app.json"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"assets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+              </span><span class="s2">"src/favicon.ico"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"src/assets"</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="nl">"styles"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+              </span><span class="s2">"src/styles.scss"</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="nl">"scripts"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<hr />
+
+<h2 id="-component-typing">🧩 <strong>Component Typing</strong></h2>
+
+<h3 id="basic-component"><strong>Basic Component</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// user.component.ts</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Component</span><span class="p">,</span> <span class="nx">Input</span><span class="p">,</span> <span class="nx">Output</span><span class="p">,</span> <span class="nx">EventEmitter</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@angular/core</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kr">interface</span> <span class="nx">User</span> <span class="p">{</span>
+  <span class="nl">id</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span>
+  <span class="nl">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">email</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">age</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">@</span><span class="nd">Component</span><span class="p">({</span>
+  <span class="na">selector</span><span class="p">:</span> <span class="dl">'</span><span class="s1">app-user</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">template</span><span class="p">:</span> <span class="s2">`
+    &lt;div class="user-card"&gt;
+      &lt;h3&gt;{{#123;{{#123; user.name }}#125;}}#125;&lt;/h3&gt;
+      &lt;p&gt;{{#123;{{#123; user.email }}#125;}}#125;&lt;/p&gt;
+      &lt;p&gt;Age: {{#123;{{#123; user.age }}#125;}}#125;&lt;/p&gt;
+      &lt;button (click)="onEdit()"&gt;Edit&lt;/button&gt;
+      &lt;button (click)="onDelete()"&gt;Delete&lt;/button&gt;
+    &lt;/div&gt;
+  `</span><span class="p">,</span>
+  <span class="na">styleUrls</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">./user.component.scss</span><span class="dl">'</span><span class="p">]</span>
+<span class="p">})</span>
+<span class="k">export</span> <span class="kd">class</span> <span class="nx">UserComponent</span> <span class="p">{</span>
+  <span class="p">@</span><span class="nd">Input</span><span class="p">()</span> <span class="nx">user</span><span class="o">!</span><span class="p">:</span> <span class="nx">User</span><span class="p">;</span>
+  <span class="p">@</span><span class="nd">Output</span><span class="p">()</span> <span class="nx">edit</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">EventEmitter</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span><span class="p">();</span>
+  <span class="p">@</span><span class="nd">Output</span><span class="p">()</span> <span class="k">delete</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">EventEmitter</span><span class="o">&lt;</span><span class="kr">number</span><span class="o">&gt;</span><span class="p">();</span>
+
+  <span class="nx">onEdit</span><span class="p">():</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">edit</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">user</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="nx">onDelete</span><span class="p">():</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="k">delete</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">id</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="component-with-lifecycle-hooks"><strong>Component with Lifecycle Hooks</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// user-list.component.ts</span>
+<span class="k">import</span> <span class="p">{</span> 
+  <span class="nx">Component</span><span class="p">,</span> 
+  <span class="nx">OnInit</span><span class="p">,</span> 
+  <span class="nx">OnDestroy</span><span class="p">,</span> 
+  <span class="nx">OnChanges</span><span class="p">,</span> 
+  <span class="nx">SimpleChanges</span><span class="p">,</span>
+  <span class="nx">Input</span><span class="p">,</span>
+  <span class="nx">Output</span><span class="p">,</span>
+  <span class="nx">EventEmitter</span>
+<span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@angular/core</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Subject</span><span class="p">,</span> <span class="nx">takeUntil</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">rxjs</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kr">interface</span> <span class="nx">User</span> <span class="p">{</span>
+  <span class="nl">id</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span>
+  <span class="nl">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">email</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">age</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">@</span><span class="nd">Component</span><span class="p">({</span>
+  <span class="na">selector</span><span class="p">:</span> <span class="dl">'</span><span class="s1">app-user-list</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">template</span><span class="p">:</span> <span class="s2">`
+    &lt;div class="user-list"&gt;
+      &lt;h2&gt;Users&lt;/h2&gt;
+      &lt;div *ngIf="loading" class="loading"&gt;Loading...&lt;/div&gt;
+      &lt;div *ngIf="error" class="error"&gt;{{#123;{{#123; error }}#125;}}#125;&lt;/div&gt;
+      &lt;div *ngFor="let user of users" class="user-item"&gt;
+        &lt;app-user 
+          [user]="user" 
+          (edit)="onEdit($event)"
+          (delete)="onDelete($event)"&gt;
+        &lt;/app-user&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  `</span><span class="p">,</span>
+  <span class="na">styleUrls</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">./user-list.component.scss</span><span class="dl">'</span><span class="p">]</span>
+<span class="p">})</span>
+<span class="k">export</span> <span class="kd">class</span> <span class="nx">UserListComponent</span> <span class="k">implements</span> <span class="nx">OnInit</span><span class="p">,</span> <span class="nx">OnDestroy</span><span class="p">,</span> <span class="nx">OnChanges</span> <span class="p">{</span>
+  <span class="p">@</span><span class="nd">Input</span><span class="p">()</span> <span class="nx">refreshTrigger</span><span class="p">:</span> <span class="kr">number</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="p">@</span><span class="nd">Output</span><span class="p">()</span> <span class="nx">userEdit</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">EventEmitter</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span><span class="p">();</span>
+  <span class="p">@</span><span class="nd">Output</span><span class="p">()</span> <span class="nx">userDelete</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">EventEmitter</span><span class="o">&lt;</span><span class="kr">number</span><span class="o">&gt;</span><span class="p">();</span>
+
+  <span class="nl">users</span><span class="p">:</span> <span class="nx">User</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[];</span>
+  <span class="nl">loading</span><span class="p">:</span> <span class="nx">boolean</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+  <span class="nl">error</span><span class="p">:</span> <span class="kr">string</span> <span class="o">|</span> <span class="kc">null</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+  <span class="k">private</span> <span class="nx">destroy$</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Subject</span><span class="o">&lt;</span><span class="k">void</span><span class="o">&gt;</span><span class="p">();</span>
+
+  <span class="kd">constructor</span><span class="p">(</span><span class="k">private</span> <span class="nx">userService</span><span class="p">:</span> <span class="nx">UserService</span><span class="p">)</span> <span class="p">{}</span>
+
+  <span class="nx">ngOnInit</span><span class="p">():</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">loadUsers</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="nx">ngOnDestroy</span><span class="p">():</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">destroy$</span><span class="p">.</span><span class="nx">next</span><span class="p">();</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">destroy$</span><span class="p">.</span><span class="nx">complete</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="nx">ngOnChanges</span><span class="p">(</span><span class="nx">changes</span><span class="p">:</span> <span class="nx">SimpleChanges</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">changes</span><span class="p">[</span><span class="dl">'</span><span class="s1">refreshTrigger</span><span class="dl">'</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nx">changes</span><span class="p">[</span><span class="dl">'</span><span class="s1">refreshTrigger</span><span class="dl">'</span><span class="p">].</span><span class="nx">firstChange</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">loadUsers</span><span class="p">();</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="k">private</span> <span class="nx">loadUsers</span><span class="p">():</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">loading</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">error</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="nx">userService</span><span class="p">.</span><span class="nx">getUsers</span><span class="p">()</span>
+      <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">takeUntil</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">destroy$</span><span class="p">))</span>
+      <span class="p">.</span><span class="nx">subscribe</span><span class="p">({</span>
+        <span class="na">next</span><span class="p">:</span> <span class="p">(</span><span class="nx">users</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+          <span class="k">this</span><span class="p">.</span><span class="nx">users</span> <span class="o">=</span> <span class="nx">users</span><span class="p">;</span>
+          <span class="k">this</span><span class="p">.</span><span class="nx">loading</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+        <span class="p">},</span>
+        <span class="na">error</span><span class="p">:</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+          <span class="k">this</span><span class="p">.</span><span class="nx">error</span> <span class="o">=</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">;</span>
+          <span class="k">this</span><span class="p">.</span><span class="nx">loading</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+        <span class="p">}</span>
+      <span class="p">});</span>
+  <span class="p">}</span>
+
+  <span class="nx">onEdit</span><span class="p">(</span><span class="nx">user</span><span class="p">:</span> <span class="nx">User</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">userEdit</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="nx">user</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="nx">onDelete</span><span class="p">(</span><span class="nx">userId</span><span class="p">:</span> <span class="kr">number</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">userDelete</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="nx">userId</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="generic-component"><strong>Generic Component</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// data-table.component.ts</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Component</span><span class="p">,</span> <span class="nx">Input</span><span class="p">,</span> <span class="nx">Output</span><span class="p">,</span> <span class="nx">EventEmitter</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@angular/core</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kr">interface</span> <span class="nx">Column</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="na">key</span><span class="p">:</span> <span class="kr">keyof</span> <span class="nx">T</span><span class="p">;</span>
+  <span class="nl">title</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">sortable</span><span class="p">?:</span> <span class="nx">boolean</span><span class="p">;</span>
+  <span class="nl">width</span><span class="p">?:</span> <span class="kr">string</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">@</span><span class="nd">Component</span><span class="p">({</span>
+  <span class="na">selector</span><span class="p">:</span> <span class="dl">'</span><span class="s1">app-data-table</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">template</span><span class="p">:</span> <span class="s2">`
+    &lt;table class="data-table"&gt;
+      &lt;thead&gt;
+        &lt;tr&gt;
+          &lt;th 
+            *ngFor="let column of columns" 
+            [style.width]="column.width"
+            [class.sortable]="column.sortable"
+            (click)="onSort(column)"&gt;
+            {{#123;{{#123; column.title }}#125;}}#125;
+            &lt;span *ngIf="column.sortable" class="sort-indicator"&gt;
+              {{#123;{{#123; getSortIndicator(column) }}#125;}}#125;
+            &lt;/span&gt;
+          &lt;/th&gt;
+        &lt;/tr&gt;
+      &lt;/thead&gt;
+      &lt;tbody&gt;
+        &lt;tr *ngFor="let item of data; trackBy: trackByFn"&gt;
+          &lt;td *ngFor="let column of columns"&gt;
+            &lt;ng-container [ngSwitch]="column.key"&gt;
+              &lt;ng-container *ngSwitchDefault&gt;
+                {{#123;{{#123; item[column.key] }}#125;}}#125;
+              &lt;/ng-container&gt;
+              &lt;ng-container *ngSwitchCase="'actions'"&gt;
+                &lt;ng-content [select]="'[slot=actions]'" [ngTemplateOutlet]="actionsTemplate" [ngTemplateOutletContext]="{ $implicit: item }"&gt;&lt;/ng-content&gt;
+              &lt;/ng-container&gt;
+            &lt;/ng-container&gt;
+          &lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+  `</span><span class="p">,</span>
+  <span class="na">styleUrls</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">./data-table.component.scss</span><span class="dl">'</span><span class="p">]</span>
+<span class="p">})</span>
+<span class="k">export</span> <span class="kd">class</span> <span class="nx">DataTableComponent</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="p">@</span><span class="nd">Input</span><span class="p">()</span> <span class="na">data</span><span class="p">:</span> <span class="nx">T</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[];</span>
+  <span class="p">@</span><span class="nd">Input</span><span class="p">()</span> <span class="na">columns</span><span class="p">:</span> <span class="nx">Column</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[];</span>
+  <span class="p">@</span><span class="nd">Input</span><span class="p">()</span> <span class="na">keyExtractor</span><span class="p">:</span> <span class="p">(</span><span class="na">item</span><span class="p">:</span> <span class="nx">T</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="kr">any</span> <span class="o">=</span> <span class="p">(</span><span class="na">item</span><span class="p">:</span> <span class="nx">T</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">item</span><span class="p">;</span>
+  <span class="p">@</span><span class="nd">Output</span><span class="p">()</span> <span class="nx">sort</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">EventEmitter</span><span class="o">&lt;</span><span class="p">{</span> <span class="na">column</span><span class="p">:</span> <span class="kr">keyof</span> <span class="nx">T</span><span class="p">;</span> <span class="nl">direction</span><span class="p">:</span> <span class="dl">'</span><span class="s1">asc</span><span class="dl">'</span> <span class="o">|</span> <span class="dl">'</span><span class="s1">desc</span><span class="dl">'</span> <span class="p">}</span><span class="o">&gt;</span><span class="p">();</span>
+
+  <span class="nl">sortColumn</span><span class="p">:</span> <span class="kr">keyof</span> <span class="nx">T</span> <span class="o">|</span> <span class="kc">null</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+  <span class="nl">sortDirection</span><span class="p">:</span> <span class="dl">'</span><span class="s1">asc</span><span class="dl">'</span> <span class="o">|</span> <span class="dl">'</span><span class="s1">desc</span><span class="dl">'</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">asc</span><span class="dl">'</span><span class="p">;</span>
+
+  <span class="nx">trackByFn</span><span class="p">(</span><span class="na">index</span><span class="p">:</span> <span class="kr">number</span><span class="p">,</span> <span class="na">item</span><span class="p">:</span> <span class="nx">T</span><span class="p">):</span> <span class="kr">any</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">keyExtractor</span><span class="p">(</span><span class="nx">item</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="nx">onSort</span><span class="p">(</span><span class="na">column</span><span class="p">:</span> <span class="nx">Column</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">column</span><span class="p">.</span><span class="nx">sortable</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">sortColumn</span> <span class="o">===</span> <span class="nx">column</span><span class="p">.</span><span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">sortDirection</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">sortDirection</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">asc</span><span class="dl">'</span> <span class="p">?</span> <span class="dl">'</span><span class="s1">desc</span><span class="dl">'</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">asc</span><span class="dl">'</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">sortColumn</span> <span class="o">=</span> <span class="nx">column</span><span class="p">.</span><span class="nx">key</span><span class="p">;</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">sortDirection</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">asc</span><span class="dl">'</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="nx">sort</span><span class="p">.</span><span class="nx">emit</span><span class="p">({</span> <span class="na">column</span><span class="p">:</span> <span class="nx">column</span><span class="p">.</span><span class="nx">key</span><span class="p">,</span> <span class="na">direction</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">sortDirection</span> <span class="p">});</span>
+  <span class="p">}</span>
+
+  <span class="nx">getSortIndicator</span><span class="p">(</span><span class="na">column</span><span class="p">:</span> <span class="nx">Column</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">):</span> <span class="kr">string</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">sortColumn</span> <span class="o">!==</span> <span class="nx">column</span><span class="p">.</span><span class="nx">key</span><span class="p">)</span> <span class="k">return</span> <span class="dl">''</span><span class="p">;</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">sortDirection</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">asc</span><span class="dl">'</span> <span class="p">?</span> <span class="dl">'</span><span class="s1">↑</span><span class="dl">'</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">↓</span><span class="dl">'</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-services-and-dependency-injection">🔧 <strong>Services and Dependency Injection</strong></h2>
+
+<h3 id="basic-service"><strong>Basic Service</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// user.service.ts</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Injectable</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@angular/core</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">HttpClient</span><span class="p">,</span> <span class="nx">HttpParams</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@angular/common/http</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Observable</span><span class="p">,</span> <span class="nx">BehaviorSubject</span><span class="p">,</span> <span class="nx">throwError</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">rxjs</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">map</span><span class="p">,</span> <span class="nx">catchError</span><span class="p">,</span> <span class="nx">tap</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">rxjs/operators</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kr">interface</span> <span class="nx">User</span> <span class="p">{</span>
+  <span class="nl">id</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span>
+  <span class="nl">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">email</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">age</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kr">interface</span> <span class="nx">CreateUserRequest</span> <span class="p">{</span>
+  <span class="nl">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">email</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">age</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kr">interface</span> <span class="nx">UpdateUserRequest</span> <span class="p">{</span>
+  <span class="nl">name</span><span class="p">?:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">email</span><span class="p">?:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">age</span><span class="p">?:</span> <span class="kr">number</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kr">interface</span> <span class="nx">UserListResponse</span> <span class="p">{</span>
+  <span class="nl">users</span><span class="p">:</span> <span class="nx">User</span><span class="p">[];</span>
+  <span class="nl">total</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span>
+  <span class="nl">page</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span>
+  <span class="nl">limit</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">@</span><span class="nd">Injectable</span><span class="p">({</span>
+  <span class="na">providedIn</span><span class="p">:</span> <span class="dl">'</span><span class="s1">root</span><span class="dl">'</span>
+<span class="p">})</span>
+<span class="k">export</span> <span class="kd">class</span> <span class="nx">UserService</span> <span class="p">{</span>
+  <span class="k">private</span> <span class="k">readonly</span> <span class="nx">apiUrl</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">/api/users</span><span class="dl">'</span><span class="p">;</span>
+  <span class="k">private</span> <span class="nx">usersSubject</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BehaviorSubject</span><span class="o">&lt;</span><span class="nx">User</span><span class="p">[]</span><span class="o">&gt;</span><span class="p">([]);</span>
+  <span class="k">public</span> <span class="nx">users$</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">usersSubject</span><span class="p">.</span><span class="nx">asObservable</span><span class="p">();</span>
+
+  <span class="kd">constructor</span><span class="p">(</span><span class="k">private</span> <span class="nx">http</span><span class="p">:</span> <span class="nx">HttpClient</span><span class="p">)</span> <span class="p">{}</span>
+
+  <span class="nx">getUsers</span><span class="p">(</span><span class="nx">page</span><span class="p">:</span> <span class="kr">number</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">limit</span><span class="p">:</span> <span class="kr">number</span> <span class="o">=</span> <span class="mi">10</span><span class="p">):</span> <span class="nx">Observable</span><span class="o">&lt;</span><span class="nx">UserListResponse</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">params</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">HttpParams</span><span class="p">()</span>
+      <span class="p">.</span><span class="kd">set</span><span class="p">(</span><span class="dl">'</span><span class="s1">page</span><span class="dl">'</span><span class="p">,</span> <span class="nx">page</span><span class="p">.</span><span class="nx">toString</span><span class="p">())</span>
+      <span class="p">.</span><span class="kd">set</span><span class="p">(</span><span class="dl">'</span><span class="s1">limit</span><span class="dl">'</span><span class="p">,</span> <span class="nx">limit</span><span class="p">.</span><span class="nx">toString</span><span class="p">());</span>
+
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">http</span><span class="p">.</span><span class="kd">get</span><span class="o">&lt;</span><span class="nx">UserListResponse</span><span class="o">&gt;</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">apiUrl</span><span class="p">,</span> <span class="p">{</span> <span class="nx">params</span> <span class="p">})</span>
+      <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span>
+        <span class="nx">tap</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">usersSubject</span><span class="p">.</span><span class="nx">next</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">users</span><span class="p">)),</span>
+        <span class="nx">catchError</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">handleError</span><span class="p">)</span>
+      <span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="nx">getUserById</span><span class="p">(</span><span class="nx">id</span><span class="p">:</span> <span class="kr">number</span><span class="p">):</span> <span class="nx">Observable</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">http</span><span class="p">.</span><span class="kd">get</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="k">this</span><span class="p">.</span><span class="nx">apiUrl</span><span class="p">}</span><span class="s2">/</span><span class="p">${</span><span class="nx">id</span><span class="p">}</span><span class="s2">`</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">catchError</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">handleError</span><span class="p">));</span>
+  <span class="p">}</span>
+
+  <span class="nx">createUser</span><span class="p">(</span><span class="nx">userData</span><span class="p">:</span> <span class="nx">CreateUserRequest</span><span class="p">):</span> <span class="nx">Observable</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">http</span><span class="p">.</span><span class="nx">post</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">apiUrl</span><span class="p">,</span> <span class="nx">userData</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span>
+        <span class="nx">tap</span><span class="p">(</span><span class="nx">user</span> <span class="o">=&gt;</span> <span class="p">{</span>
+          <span class="kd">const</span> <span class="nx">currentUsers</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">usersSubject</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
+          <span class="k">this</span><span class="p">.</span><span class="nx">usersSubject</span><span class="p">.</span><span class="nx">next</span><span class="p">([...</span><span class="nx">currentUsers</span><span class="p">,</span> <span class="nx">user</span><span class="p">]);</span>
+        <span class="p">}),</span>
+        <span class="nx">catchError</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">handleError</span><span class="p">)</span>
+      <span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="nx">updateUser</span><span class="p">(</span><span class="nx">id</span><span class="p">:</span> <span class="kr">number</span><span class="p">,</span> <span class="nx">userData</span><span class="p">:</span> <span class="nx">UpdateUserRequest</span><span class="p">):</span> <span class="nx">Observable</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">http</span><span class="p">.</span><span class="nx">put</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="k">this</span><span class="p">.</span><span class="nx">apiUrl</span><span class="p">}</span><span class="s2">/</span><span class="p">${</span><span class="nx">id</span><span class="p">}</span><span class="s2">`</span><span class="p">,</span> <span class="nx">userData</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span>
+        <span class="nx">tap</span><span class="p">(</span><span class="nx">updatedUser</span> <span class="o">=&gt;</span> <span class="p">{</span>
+          <span class="kd">const</span> <span class="nx">currentUsers</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">usersSubject</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
+          <span class="kd">const</span> <span class="nx">index</span> <span class="o">=</span> <span class="nx">currentUsers</span><span class="p">.</span><span class="nx">findIndex</span><span class="p">(</span><span class="nx">user</span> <span class="o">=&gt;</span> <span class="nx">user</span><span class="p">.</span><span class="nx">id</span> <span class="o">===</span> <span class="nx">id</span><span class="p">);</span>
+          <span class="k">if</span> <span class="p">(</span><span class="nx">index</span> <span class="o">!==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">currentUsers</span><span class="p">[</span><span class="nx">index</span><span class="p">]</span> <span class="o">=</span> <span class="nx">updatedUser</span><span class="p">;</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">usersSubject</span><span class="p">.</span><span class="nx">next</span><span class="p">([...</span><span class="nx">currentUsers</span><span class="p">]);</span>
+          <span class="p">}</span>
+        <span class="p">}),</span>
+        <span class="nx">catchError</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">handleError</span><span class="p">)</span>
+      <span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="nx">deleteUser</span><span class="p">(</span><span class="nx">id</span><span class="p">:</span> <span class="kr">number</span><span class="p">):</span> <span class="nx">Observable</span><span class="o">&lt;</span><span class="k">void</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">http</span><span class="p">.</span><span class="k">delete</span><span class="o">&lt;</span><span class="k">void</span><span class="o">&gt;</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="k">this</span><span class="p">.</span><span class="nx">apiUrl</span><span class="p">}</span><span class="s2">/</span><span class="p">${</span><span class="nx">id</span><span class="p">}</span><span class="s2">`</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span>
+        <span class="nx">tap</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+          <span class="kd">const</span> <span class="nx">currentUsers</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">usersSubject</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
+          <span class="kd">const</span> <span class="nx">filteredUsers</span> <span class="o">=</span> <span class="nx">currentUsers</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">user</span> <span class="o">=&gt;</span> <span class="nx">user</span><span class="p">.</span><span class="nx">id</span> <span class="o">!==</span> <span class="nx">id</span><span class="p">);</span>
+          <span class="k">this</span><span class="p">.</span><span class="nx">usersSubject</span><span class="p">.</span><span class="nx">next</span><span class="p">(</span><span class="nx">filteredUsers</span><span class="p">);</span>
+        <span class="p">}),</span>
+        <span class="nx">catchError</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">handleError</span><span class="p">)</span>
+      <span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">private</span> <span class="nx">handleError</span><span class="p">(</span><span class="nx">error</span><span class="p">:</span> <span class="kr">any</span><span class="p">):</span> <span class="nx">Observable</span><span class="o">&lt;</span><span class="nx">never</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">UserService error:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nx">throwError</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span> <span class="o">||</span> <span class="dl">'</span><span class="s1">An error occurred</span><span class="dl">'</span><span class="p">));</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="custom-injection-token"><strong>Custom Injection Token</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// config.service.ts</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Injectable</span><span class="p">,</span> <span class="nx">InjectionToken</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@angular/core</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="kr">interface</span> <span class="nx">AppConfig</span> <span class="p">{</span>
+  <span class="nl">apiUrl</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">environment</span><span class="p">:</span> <span class="dl">'</span><span class="s1">development</span><span class="dl">'</span> <span class="o">|</span> <span class="dl">'</span><span class="s1">production</span><span class="dl">'</span> <span class="o">|</span> <span class="dl">'</span><span class="s1">test</span><span class="dl">'</span><span class="p">;</span>
+  <span class="nl">version</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">features</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">userManagement</span><span class="p">:</span> <span class="nx">boolean</span><span class="p">;</span>
+    <span class="nl">reporting</span><span class="p">:</span> <span class="nx">boolean</span><span class="p">;</span>
+    <span class="nl">analytics</span><span class="p">:</span> <span class="nx">boolean</span><span class="p">;</span>
+  <span class="p">};</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">APP_CONFIG</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">InjectionToken</span><span class="o">&lt;</span><span class="nx">AppConfig</span><span class="o">&gt;</span><span class="p">(</span><span class="dl">'</span><span class="s1">app.config</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="p">@</span><span class="nd">Injectable</span><span class="p">({</span>
+  <span class="na">providedIn</span><span class="p">:</span> <span class="dl">'</span><span class="s1">root</span><span class="dl">'</span>
+<span class="p">})</span>
+<span class="k">export</span> <span class="kd">class</span> <span class="nx">ConfigService</span> <span class="p">{</span>
+  <span class="kd">constructor</span><span class="p">(@</span><span class="nd">Inject</span><span class="p">(</span><span class="nx">APP_CONFIG</span><span class="p">)</span> <span class="k">private</span> <span class="nx">config</span><span class="p">:</span> <span class="nx">AppConfig</span><span class="p">)</span> <span class="p">{}</span>
+
+  <span class="kd">get</span> <span class="nx">apiUrl</span><span class="p">():</span> <span class="kr">string</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">apiUrl</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kd">get</span> <span class="nx">environment</span><span class="p">():</span> <span class="kr">string</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">environment</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kd">get</span> <span class="nx">version</span><span class="p">():</span> <span class="kr">string</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">version</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="nx">isFeatureEnabled</span><span class="p">(</span><span class="nx">feature</span><span class="p">:</span> <span class="kr">keyof</span> <span class="nx">AppConfig</span><span class="p">[</span><span class="dl">'</span><span class="s1">features</span><span class="dl">'</span><span class="p">]):</span> <span class="nx">boolean</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">features</span><span class="p">[</span><span class="nx">feature</span><span class="p">];</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// app.module.ts</span>
+<span class="p">@</span><span class="nd">NgModule</span><span class="p">({</span>
+  <span class="na">providers</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="na">provide</span><span class="p">:</span> <span class="nx">APP_CONFIG</span><span class="p">,</span>
+      <span class="na">useValue</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">apiUrl</span><span class="p">:</span> <span class="dl">'</span><span class="s1">https://api.example.com</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">environment</span><span class="p">:</span> <span class="dl">'</span><span class="s1">production</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">version</span><span class="p">:</span> <span class="dl">'</span><span class="s1">1.0.0</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">features</span><span class="p">:</span> <span class="p">{</span>
+          <span class="na">userManagement</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+          <span class="na">reporting</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+          <span class="na">analytics</span><span class="p">:</span> <span class="kc">true</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">})</span>
+<span class="k">export</span> <span class="kd">class</span> <span class="nx">AppModule</span> <span class="p">{}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-forms-and-validation">📝 <strong>Forms and Validation</strong></h2>
+
+<h3 id="reactive-forms"><strong>Reactive Forms</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// user-form.component.ts</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Component</span><span class="p">,</span> <span class="nx">OnInit</span><span class="p">,</span> <span class="nx">Input</span><span class="p">,</span> <span class="nx">Output</span><span class="p">,</span> <span class="nx">EventEmitter</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@angular/core</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">FormBuilder</span><span class="p">,</span> <span class="nx">FormGroup</span><span class="p">,</span> <span class="nx">Validators</span><span class="p">,</span> <span class="nx">AbstractControl</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@angular/forms</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kr">interface</span> <span class="nx">User</span> <span class="p">{</span>
+  <span class="nl">id</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span>
+  <span class="nl">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">email</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">age</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">@</span><span class="nd">Component</span><span class="p">({</span>
+  <span class="na">selector</span><span class="p">:</span> <span class="dl">'</span><span class="s1">app-user-form</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">template</span><span class="p">:</span> <span class="s2">`
+    &lt;form [formGroup]="userForm" (ngSubmit)="onSubmit()"&gt;
+      &lt;div class="form-group"&gt;
+        &lt;label for="name"&gt;Name&lt;/label&gt;
+        &lt;input 
+          id="name"
+          type="text" 
+          formControlName="name"
+          [class.error]="isFieldInvalid('name')"&gt;
+        &lt;div *ngIf="isFieldInvalid('name')" class="error-message"&gt;
+          &lt;span *ngIf="userForm.get('name')?.errors?.['required']"&gt;Name is required&lt;/span&gt;
+          &lt;span *ngIf="userForm.get('name')?.errors?.['minlength']"&gt;Name must be at least 2 characters&lt;/span&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div class="form-group"&gt;
+        &lt;label for="email"&gt;Email&lt;/label&gt;
+        &lt;input 
+          id="email"
+          type="email" 
+          formControlName="email"
+          [class.error]="isFieldInvalid('email')"&gt;
+        &lt;div *ngIf="isFieldInvalid('email')" class="error-message"&gt;
+          &lt;span *ngIf="userForm.get('email')?.errors?.['required']"&gt;Email is required&lt;/span&gt;
+          &lt;span *ngIf="userForm.get('email')?.errors?.['email']"&gt;Invalid email format&lt;/span&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div class="form-group"&gt;
+        &lt;label for="age"&gt;Age&lt;/label&gt;
+        &lt;input 
+          id="age"
+          type="number" 
+          formControlName="age"
+          [class.error]="isFieldInvalid('age')"&gt;
+        &lt;div *ngIf="isFieldInvalid('age')" class="error-message"&gt;
+          &lt;span *ngIf="userForm.get('age')?.errors?.['required']"&gt;Age is required&lt;/span&gt;
+          &lt;span *ngIf="userForm.get('age')?.errors?.['min']"&gt;Age must be at least 18&lt;/span&gt;
+          &lt;span *ngIf="userForm.get('age')?.errors?.['max']"&gt;Age must be at most 120&lt;/span&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div class="form-actions"&gt;
+        &lt;button type="submit" [disabled]="userForm.invalid"&gt;Save&lt;/button&gt;
+        &lt;button type="button" (click)="onCancel()"&gt;Cancel&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/form&gt;
+  `</span><span class="p">,</span>
+  <span class="na">styleUrls</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">./user-form.component.scss</span><span class="dl">'</span><span class="p">]</span>
+<span class="p">})</span>
+<span class="k">export</span> <span class="kd">class</span> <span class="nx">UserFormComponent</span> <span class="k">implements</span> <span class="nx">OnInit</span> <span class="p">{</span>
+  <span class="p">@</span><span class="nd">Input</span><span class="p">()</span> <span class="nx">user</span><span class="p">:</span> <span class="nx">User</span> <span class="o">|</span> <span class="kc">null</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+  <span class="p">@</span><span class="nd">Output</span><span class="p">()</span> <span class="nx">save</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">EventEmitter</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span><span class="p">();</span>
+  <span class="p">@</span><span class="nd">Output</span><span class="p">()</span> <span class="nx">cancel</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">EventEmitter</span><span class="o">&lt;</span><span class="k">void</span><span class="o">&gt;</span><span class="p">();</span>
+
+  <span class="nl">userForm</span><span class="p">:</span> <span class="nx">FormGroup</span><span class="p">;</span>
+
+  <span class="kd">constructor</span><span class="p">(</span><span class="k">private</span> <span class="nx">fb</span><span class="p">:</span> <span class="nx">FormBuilder</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">userForm</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">fb</span><span class="p">.</span><span class="nx">group</span><span class="p">({</span>
+      <span class="na">name</span><span class="p">:</span> <span class="p">[</span><span class="dl">''</span><span class="p">,</span> <span class="p">[</span><span class="nx">Validators</span><span class="p">.</span><span class="nx">required</span><span class="p">,</span> <span class="nx">Validators</span><span class="p">.</span><span class="nx">minLength</span><span class="p">(</span><span class="mi">2</span><span class="p">)]],</span>
+      <span class="na">email</span><span class="p">:</span> <span class="p">[</span><span class="dl">''</span><span class="p">,</span> <span class="p">[</span><span class="nx">Validators</span><span class="p">.</span><span class="nx">required</span><span class="p">,</span> <span class="nx">Validators</span><span class="p">.</span><span class="nx">email</span><span class="p">]],</span>
+      <span class="na">age</span><span class="p">:</span> <span class="p">[</span><span class="dl">''</span><span class="p">,</span> <span class="p">[</span><span class="nx">Validators</span><span class="p">.</span><span class="nx">required</span><span class="p">,</span> <span class="nx">Validators</span><span class="p">.</span><span class="nx">min</span><span class="p">(</span><span class="mi">18</span><span class="p">),</span> <span class="nx">Validators</span><span class="p">.</span><span class="nx">max</span><span class="p">(</span><span class="mi">120</span><span class="p">)]]</span>
+    <span class="p">});</span>
+  <span class="p">}</span>
+
+  <span class="nx">ngOnInit</span><span class="p">():</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">user</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">userForm</span><span class="p">.</span><span class="nx">patchValue</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">user</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="nx">onSubmit</span><span class="p">():</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">userForm</span><span class="p">.</span><span class="nx">valid</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">formValue</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">userForm</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
+      <span class="kd">const</span> <span class="na">user</span><span class="p">:</span> <span class="nx">User</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="na">id</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">user</span><span class="p">?.</span><span class="nx">id</span> <span class="o">||</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="p">...</span><span class="nx">formValue</span>
+      <span class="p">};</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">save</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="nx">user</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="nx">onCancel</span><span class="p">():</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">cancel</span><span class="p">.</span><span class="nx">emit</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="nx">isFieldInvalid</span><span class="p">(</span><span class="nx">fieldName</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nx">boolean</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">field</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">userForm</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="nx">fieldName</span><span class="p">);</span>
+    <span class="k">return</span> <span class="o">!!</span><span class="p">(</span><span class="nx">field</span> <span class="o">&amp;&amp;</span> <span class="nx">field</span><span class="p">.</span><span class="nx">invalid</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="nx">field</span><span class="p">.</span><span class="nx">dirty</span> <span class="o">||</span> <span class="nx">field</span><span class="p">.</span><span class="nx">touched</span><span class="p">));</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="custom-validators"><strong>Custom Validators</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// custom-validators.ts</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">AbstractControl</span><span class="p">,</span> <span class="nx">ValidationErrors</span><span class="p">,</span> <span class="nx">ValidatorFn</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@angular/forms</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="kd">class</span> <span class="nx">CustomValidators</span> <span class="p">{</span>
+  <span class="k">static</span> <span class="nx">emailDomain</span><span class="p">(</span><span class="nx">domain</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nx">ValidatorFn</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span><span class="nx">control</span><span class="p">:</span> <span class="nx">AbstractControl</span><span class="p">):</span> <span class="nx">ValidationErrors</span> <span class="o">|</span> <span class="kc">null</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">control</span><span class="p">.</span><span class="nx">value</span><span class="p">)</span> <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+      
+      <span class="kd">const</span> <span class="nx">email</span> <span class="o">=</span> <span class="nx">control</span><span class="p">.</span><span class="nx">value</span> <span class="k">as</span> <span class="kr">string</span><span class="p">;</span>
+      <span class="kd">const</span> <span class="nx">emailDomain</span> <span class="o">=</span> <span class="nx">email</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="dl">'</span><span class="s1">@</span><span class="dl">'</span><span class="p">)[</span><span class="mi">1</span><span class="p">];</span>
+      
+      <span class="k">if</span> <span class="p">(</span><span class="nx">emailDomain</span> <span class="o">!==</span> <span class="nx">domain</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">{</span> <span class="na">emailDomain</span><span class="p">:</span> <span class="p">{</span> <span class="na">requiredDomain</span><span class="p">:</span> <span class="nx">domain</span><span class="p">,</span> <span class="na">actualDomain</span><span class="p">:</span> <span class="nx">emailDomain</span> <span class="p">}</span> <span class="p">};</span>
+      <span class="p">}</span>
+      
+      <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+    <span class="p">};</span>
+  <span class="p">}</span>
+
+  <span class="k">static</span> <span class="nx">passwordStrength</span><span class="p">():</span> <span class="nx">ValidatorFn</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span><span class="nx">control</span><span class="p">:</span> <span class="nx">AbstractControl</span><span class="p">):</span> <span class="nx">ValidationErrors</span> <span class="o">|</span> <span class="kc">null</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">control</span><span class="p">.</span><span class="nx">value</span><span class="p">)</span> <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+      
+      <span class="kd">const</span> <span class="nx">password</span> <span class="o">=</span> <span class="nx">control</span><span class="p">.</span><span class="nx">value</span> <span class="k">as</span> <span class="kr">string</span><span class="p">;</span>
+      <span class="kd">const</span> <span class="nx">hasUpperCase</span> <span class="o">=</span> <span class="sr">/</span><span class="se">[</span><span class="sr">A-Z</span><span class="se">]</span><span class="sr">/</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">password</span><span class="p">);</span>
+      <span class="kd">const</span> <span class="nx">hasLowerCase</span> <span class="o">=</span> <span class="sr">/</span><span class="se">[</span><span class="sr">a-z</span><span class="se">]</span><span class="sr">/</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">password</span><span class="p">);</span>
+      <span class="kd">const</span> <span class="nx">hasNumbers</span> <span class="o">=</span> <span class="sr">/</span><span class="se">\d</span><span class="sr">/</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">password</span><span class="p">);</span>
+      <span class="kd">const</span> <span class="nx">hasSpecialChar</span> <span class="o">=</span> <span class="sr">/</span><span class="se">[</span><span class="sr">!@#$%^&amp;*(),.?":{}|&lt;&gt;</span><span class="se">]</span><span class="sr">/</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">password</span><span class="p">);</span>
+      
+      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">hasUpperCase</span> <span class="o">||</span> <span class="o">!</span><span class="nx">hasLowerCase</span> <span class="o">||</span> <span class="o">!</span><span class="nx">hasNumbers</span> <span class="o">||</span> <span class="o">!</span><span class="nx">hasSpecialChar</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">{</span> 
+          <span class="na">passwordStrength</span><span class="p">:</span> <span class="p">{</span> 
+            <span class="nx">hasUpperCase</span><span class="p">,</span> 
+            <span class="nx">hasLowerCase</span><span class="p">,</span> 
+            <span class="nx">hasNumbers</span><span class="p">,</span> 
+            <span class="nx">hasSpecialChar</span> 
+          <span class="p">}</span> 
+        <span class="p">};</span>
+      <span class="p">}</span>
+      
+      <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+    <span class="p">};</span>
+  <span class="p">}</span>
+
+  <span class="k">static</span> <span class="nx">matchPassword</span><span class="p">(</span><span class="nx">passwordField</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nx">ValidatorFn</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span><span class="nx">control</span><span class="p">:</span> <span class="nx">AbstractControl</span><span class="p">):</span> <span class="nx">ValidationErrors</span> <span class="o">|</span> <span class="kc">null</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">control</span><span class="p">.</span><span class="nx">parent</span><span class="p">)</span> <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+      
+      <span class="kd">const</span> <span class="nx">password</span> <span class="o">=</span> <span class="nx">control</span><span class="p">.</span><span class="nx">parent</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="nx">passwordField</span><span class="p">)?.</span><span class="nx">value</span><span class="p">;</span>
+      <span class="kd">const</span> <span class="nx">confirmPassword</span> <span class="o">=</span> <span class="nx">control</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
+      
+      <span class="k">if</span> <span class="p">(</span><span class="nx">password</span> <span class="o">!==</span> <span class="nx">confirmPassword</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">{</span> <span class="na">passwordMismatch</span><span class="p">:</span> <span class="kc">true</span> <span class="p">};</span>
+      <span class="p">}</span>
+      
+      <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+    <span class="p">};</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-routing-and-navigation">🧭 <strong>Routing and Navigation</strong></h2>
+
+<h3 id="route-configuration"><strong>Route Configuration</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// app-routing.module.ts</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">NgModule</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@angular/core</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">RouterModule</span><span class="p">,</span> <span class="nx">Routes</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@angular/router</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">UserListComponent</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./user-list/user-list.component</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">UserDetailComponent</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./user-detail/user-detail.component</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">UserFormComponent</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./user-form/user-form.component</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">AuthGuard</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./guards/auth.guard</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">routes</span><span class="p">:</span> <span class="nx">Routes</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="p">{</span> <span class="na">path</span><span class="p">:</span> <span class="dl">''</span><span class="p">,</span> <span class="na">redirectTo</span><span class="p">:</span> <span class="dl">'</span><span class="s1">/users</span><span class="dl">'</span><span class="p">,</span> <span class="na">pathMatch</span><span class="p">:</span> <span class="dl">'</span><span class="s1">full</span><span class="dl">'</span> <span class="p">},</span>
+  <span class="p">{</span> 
+    <span class="na">path</span><span class="p">:</span> <span class="dl">'</span><span class="s1">users</span><span class="dl">'</span><span class="p">,</span> 
+    <span class="na">component</span><span class="p">:</span> <span class="nx">UserListComponent</span><span class="p">,</span>
+    <span class="na">canActivate</span><span class="p">:</span> <span class="p">[</span><span class="nx">AuthGuard</span><span class="p">]</span>
+  <span class="p">},</span>
+  <span class="p">{</span> 
+    <span class="na">path</span><span class="p">:</span> <span class="dl">'</span><span class="s1">users/:id</span><span class="dl">'</span><span class="p">,</span> 
+    <span class="na">component</span><span class="p">:</span> <span class="nx">UserDetailComponent</span><span class="p">,</span>
+    <span class="na">canActivate</span><span class="p">:</span> <span class="p">[</span><span class="nx">AuthGuard</span><span class="p">]</span>
+  <span class="p">},</span>
+  <span class="p">{</span> 
+    <span class="na">path</span><span class="p">:</span> <span class="dl">'</span><span class="s1">users/:id/edit</span><span class="dl">'</span><span class="p">,</span> 
+    <span class="na">component</span><span class="p">:</span> <span class="nx">UserFormComponent</span><span class="p">,</span>
+    <span class="na">canActivate</span><span class="p">:</span> <span class="p">[</span><span class="nx">AuthGuard</span><span class="p">]</span>
+  <span class="p">},</span>
+  <span class="p">{</span> 
+    <span class="na">path</span><span class="p">:</span> <span class="dl">'</span><span class="s1">users/new</span><span class="dl">'</span><span class="p">,</span> 
+    <span class="na">component</span><span class="p">:</span> <span class="nx">UserFormComponent</span><span class="p">,</span>
+    <span class="na">canActivate</span><span class="p">:</span> <span class="p">[</span><span class="nx">AuthGuard</span><span class="p">]</span>
+  <span class="p">},</span>
+  <span class="p">{</span> <span class="na">path</span><span class="p">:</span> <span class="dl">'</span><span class="s1">**</span><span class="dl">'</span><span class="p">,</span> <span class="na">redirectTo</span><span class="p">:</span> <span class="dl">'</span><span class="s1">/users</span><span class="dl">'</span> <span class="p">}</span>
+<span class="p">];</span>
+
+<span class="p">@</span><span class="nd">NgModule</span><span class="p">({</span>
+  <span class="na">imports</span><span class="p">:</span> <span class="p">[</span><span class="nx">RouterModule</span><span class="p">.</span><span class="nx">forRoot</span><span class="p">(</span><span class="nx">routes</span><span class="p">)],</span>
+  <span class="na">exports</span><span class="p">:</span> <span class="p">[</span><span class="nx">RouterModule</span><span class="p">]</span>
+<span class="p">})</span>
+<span class="k">export</span> <span class="kd">class</span> <span class="nx">AppRoutingModule</span> <span class="p">{}</span>
+</code></pre></div></div>
+
+<h3 id="route-guards"><strong>Route Guards</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// auth.guard.ts</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Injectable</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@angular/core</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">CanActivate</span><span class="p">,</span> <span class="nx">Router</span><span class="p">,</span> <span class="nx">ActivatedRouteSnapshot</span><span class="p">,</span> <span class="nx">RouterStateSnapshot</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@angular/router</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Observable</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">rxjs</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">map</span><span class="p">,</span> <span class="nx">take</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">rxjs/operators</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">AuthService</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./auth.service</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="p">@</span><span class="nd">Injectable</span><span class="p">({</span>
+  <span class="na">providedIn</span><span class="p">:</span> <span class="dl">'</span><span class="s1">root</span><span class="dl">'</span>
+<span class="p">})</span>
+<span class="k">export</span> <span class="kd">class</span> <span class="nx">AuthGuard</span> <span class="k">implements</span> <span class="nx">CanActivate</span> <span class="p">{</span>
+  <span class="kd">constructor</span><span class="p">(</span>
+    <span class="k">private</span> <span class="nx">authService</span><span class="p">:</span> <span class="nx">AuthService</span><span class="p">,</span>
+    <span class="k">private</span> <span class="nx">router</span><span class="p">:</span> <span class="nx">Router</span>
+  <span class="p">)</span> <span class="p">{}</span>
+
+  <span class="nx">canActivate</span><span class="p">(</span>
+    <span class="nx">route</span><span class="p">:</span> <span class="nx">ActivatedRouteSnapshot</span><span class="p">,</span>
+    <span class="nx">state</span><span class="p">:</span> <span class="nx">RouterStateSnapshot</span>
+  <span class="p">):</span> <span class="nx">Observable</span><span class="o">&lt;</span><span class="nx">boolean</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">authService</span><span class="p">.</span><span class="nx">isAuthenticated$</span><span class="p">.</span><span class="nx">pipe</span><span class="p">(</span>
+      <span class="nx">take</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
+      <span class="nx">map</span><span class="p">(</span><span class="nx">isAuthenticated</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">isAuthenticated</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+          <span class="k">this</span><span class="p">.</span><span class="nx">router</span><span class="p">.</span><span class="nx">navigate</span><span class="p">([</span><span class="dl">'</span><span class="s1">/login</span><span class="dl">'</span><span class="p">],</span> <span class="p">{</span> 
+            <span class="na">queryParams</span><span class="p">:</span> <span class="p">{</span> <span class="na">returnUrl</span><span class="p">:</span> <span class="nx">state</span><span class="p">.</span><span class="nx">url</span> <span class="p">}</span> 
+          <span class="p">});</span>
+          <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+        <span class="p">}</span>
+      <span class="p">})</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="route-resolvers"><strong>Route Resolvers</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// user.resolver.ts</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Injectable</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@angular/core</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Resolve</span><span class="p">,</span> <span class="nx">ActivatedRouteSnapshot</span><span class="p">,</span> <span class="nx">RouterStateSnapshot</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@angular/router</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Observable</span><span class="p">,</span> <span class="k">of</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">rxjs</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">UserService</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./user.service</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">User</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./user.model</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="p">@</span><span class="nd">Injectable</span><span class="p">({</span>
+  <span class="na">providedIn</span><span class="p">:</span> <span class="dl">'</span><span class="s1">root</span><span class="dl">'</span>
+<span class="p">})</span>
+<span class="k">export</span> <span class="kd">class</span> <span class="nx">UserResolver</span> <span class="k">implements</span> <span class="nx">Resolve</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="kd">constructor</span><span class="p">(</span><span class="k">private</span> <span class="na">userService</span><span class="p">:</span> <span class="nx">UserService</span><span class="p">)</span> <span class="p">{}</span>
+
+  <span class="nx">resolve</span><span class="p">(</span>
+    <span class="na">route</span><span class="p">:</span> <span class="nx">ActivatedRouteSnapshot</span><span class="p">,</span>
+    <span class="na">state</span><span class="p">:</span> <span class="nx">RouterStateSnapshot</span>
+  <span class="p">):</span> <span class="nx">Observable</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">id</span> <span class="o">=</span> <span class="nx">route</span><span class="p">.</span><span class="nx">paramMap</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">id</span><span class="dl">'</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">id</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">userService</span><span class="p">.</span><span class="nx">getUserById</span><span class="p">(</span><span class="o">+</span><span class="nx">id</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="k">of</span><span class="p">({}</span> <span class="k">as</span> <span class="nx">User</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-advanced-patterns">🚀 <strong>Advanced Patterns</strong></h2>
+
+<h3 id="state-management-with-ngrx"><strong>State Management with NgRx</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// user.actions.ts</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">createAction</span><span class="p">,</span> <span class="nx">props</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@ngrx/store</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">User</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./user.model</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">loadUsers</span> <span class="o">=</span> <span class="nx">createAction</span><span class="p">(</span><span class="dl">'</span><span class="s1">[User] Load Users</span><span class="dl">'</span><span class="p">);</span>
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">loadUsersSuccess</span> <span class="o">=</span> <span class="nx">createAction</span><span class="p">(</span>
+  <span class="dl">'</span><span class="s1">[User] Load Users Success</span><span class="dl">'</span><span class="p">,</span>
+  <span class="nx">props</span><span class="o">&lt;</span><span class="p">{</span> <span class="na">users</span><span class="p">:</span> <span class="nx">User</span><span class="p">[]</span> <span class="p">}</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="p">);</span>
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">loadUsersFailure</span> <span class="o">=</span> <span class="nx">createAction</span><span class="p">(</span>
+  <span class="dl">'</span><span class="s1">[User] Load Users Failure</span><span class="dl">'</span><span class="p">,</span>
+  <span class="nx">props</span><span class="o">&lt;</span><span class="p">{</span> <span class="na">error</span><span class="p">:</span> <span class="kr">string</span> <span class="p">}</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="p">);</span>
+
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">createUser</span> <span class="o">=</span> <span class="nx">createAction</span><span class="p">(</span>
+  <span class="dl">'</span><span class="s1">[User] Create User</span><span class="dl">'</span><span class="p">,</span>
+  <span class="nx">props</span><span class="o">&lt;</span><span class="p">{</span> <span class="na">user</span><span class="p">:</span> <span class="nx">Omit</span><span class="o">&lt;</span><span class="nx">User</span><span class="p">,</span> <span class="dl">'</span><span class="s1">id</span><span class="dl">'</span><span class="o">&gt;</span> <span class="p">}</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="p">);</span>
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">createUserSuccess</span> <span class="o">=</span> <span class="nx">createAction</span><span class="p">(</span>
+  <span class="dl">'</span><span class="s1">[User] Create User Success</span><span class="dl">'</span><span class="p">,</span>
+  <span class="nx">props</span><span class="o">&lt;</span><span class="p">{</span> <span class="na">user</span><span class="p">:</span> <span class="nx">User</span> <span class="p">}</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="p">);</span>
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">createUserFailure</span> <span class="o">=</span> <span class="nx">createAction</span><span class="p">(</span>
+  <span class="dl">'</span><span class="s1">[User] Create User Failure</span><span class="dl">'</span><span class="p">,</span>
+  <span class="nx">props</span><span class="o">&lt;</span><span class="p">{</span> <span class="na">error</span><span class="p">:</span> <span class="kr">string</span> <span class="p">}</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="p">);</span>
+</code></pre></div></div>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// user.reducer.ts</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">createReducer</span><span class="p">,</span> <span class="nx">on</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@ngrx/store</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">User</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./user.model</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">UserActions</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./user.actions</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="kr">interface</span> <span class="nx">UserState</span> <span class="p">{</span>
+  <span class="nl">users</span><span class="p">:</span> <span class="nx">User</span><span class="p">[];</span>
+  <span class="nl">loading</span><span class="p">:</span> <span class="nx">boolean</span><span class="p">;</span>
+  <span class="nl">error</span><span class="p">:</span> <span class="kr">string</span> <span class="o">|</span> <span class="kc">null</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">initialState</span><span class="p">:</span> <span class="nx">UserState</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">users</span><span class="p">:</span> <span class="p">[],</span>
+  <span class="na">loading</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="na">error</span><span class="p">:</span> <span class="kc">null</span>
+<span class="p">};</span>
+
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">userReducer</span> <span class="o">=</span> <span class="nx">createReducer</span><span class="p">(</span>
+  <span class="nx">initialState</span><span class="p">,</span>
+  <span class="nx">on</span><span class="p">(</span><span class="nx">UserActions</span><span class="p">.</span><span class="nx">loadUsers</span><span class="p">,</span> <span class="p">(</span><span class="nx">state</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">({</span>
+    <span class="p">...</span><span class="nx">state</span><span class="p">,</span>
+    <span class="na">loading</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="na">error</span><span class="p">:</span> <span class="kc">null</span>
+  <span class="p">})),</span>
+  <span class="nx">on</span><span class="p">(</span><span class="nx">UserActions</span><span class="p">.</span><span class="nx">loadUsersSuccess</span><span class="p">,</span> <span class="p">(</span><span class="nx">state</span><span class="p">,</span> <span class="p">{</span> <span class="nx">users</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">({</span>
+    <span class="p">...</span><span class="nx">state</span><span class="p">,</span>
+    <span class="nx">users</span><span class="p">,</span>
+    <span class="na">loading</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="na">error</span><span class="p">:</span> <span class="kc">null</span>
+  <span class="p">})),</span>
+  <span class="nx">on</span><span class="p">(</span><span class="nx">UserActions</span><span class="p">.</span><span class="nx">loadUsersFailure</span><span class="p">,</span> <span class="p">(</span><span class="nx">state</span><span class="p">,</span> <span class="p">{</span> <span class="nx">error</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">({</span>
+    <span class="p">...</span><span class="nx">state</span><span class="p">,</span>
+    <span class="na">loading</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nx">error</span>
+  <span class="p">})),</span>
+  <span class="nx">on</span><span class="p">(</span><span class="nx">UserActions</span><span class="p">.</span><span class="nx">createUserSuccess</span><span class="p">,</span> <span class="p">(</span><span class="nx">state</span><span class="p">,</span> <span class="p">{</span> <span class="nx">user</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">({</span>
+    <span class="p">...</span><span class="nx">state</span><span class="p">,</span>
+    <span class="na">users</span><span class="p">:</span> <span class="p">[...</span><span class="nx">state</span><span class="p">.</span><span class="nx">users</span><span class="p">,</span> <span class="nx">user</span><span class="p">]</span>
+  <span class="p">}))</span>
+<span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="interceptors"><strong>Interceptors</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// auth.interceptor.ts</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Injectable</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@angular/core</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">HttpInterceptor</span><span class="p">,</span> <span class="nx">HttpRequest</span><span class="p">,</span> <span class="nx">HttpHandler</span><span class="p">,</span> <span class="nx">HttpEvent</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@angular/common/http</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Observable</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">rxjs</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">AuthService</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./auth.service</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="p">@</span><span class="nd">Injectable</span><span class="p">()</span>
+<span class="k">export</span> <span class="kd">class</span> <span class="nx">AuthInterceptor</span> <span class="k">implements</span> <span class="nx">HttpInterceptor</span> <span class="p">{</span>
+  <span class="kd">constructor</span><span class="p">(</span><span class="k">private</span> <span class="nx">authService</span><span class="p">:</span> <span class="nx">AuthService</span><span class="p">)</span> <span class="p">{}</span>
+
+  <span class="nx">intercept</span><span class="p">(</span><span class="nx">req</span><span class="p">:</span> <span class="nx">HttpRequest</span><span class="o">&lt;</span><span class="kr">any</span><span class="o">&gt;</span><span class="p">,</span> <span class="nx">next</span><span class="p">:</span> <span class="nx">HttpHandler</span><span class="p">):</span> <span class="nx">Observable</span><span class="o">&lt;</span><span class="nx">HttpEvent</span><span class="o">&lt;</span><span class="kr">any</span><span class="o">&gt;&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">token</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">authService</span><span class="p">.</span><span class="nx">getToken</span><span class="p">();</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="nx">token</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">authReq</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">clone</span><span class="p">({</span>
+        <span class="na">headers</span><span class="p">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">headers</span><span class="p">.</span><span class="kd">set</span><span class="p">(</span><span class="dl">'</span><span class="s1">Authorization</span><span class="dl">'</span><span class="p">,</span> <span class="s2">`Bearer </span><span class="p">${</span><span class="nx">token</span><span class="p">}</span><span class="s2">`</span><span class="p">)</span>
+      <span class="p">});</span>
+      <span class="k">return</span> <span class="nx">next</span><span class="p">.</span><span class="nx">handle</span><span class="p">(</span><span class="nx">authReq</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="nx">next</span><span class="p">.</span><span class="nx">handle</span><span class="p">(</span><span class="nx">req</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-best-practices">✅ <strong>Best Practices</strong></h2>
+
+<h3 id="1-use-strict-type-checking"><strong>1. Use Strict Type Checking</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ✅ Good: Strict typing</span>
+<span class="kr">interface</span> <span class="nx">User</span> <span class="p">{</span>
+  <span class="nl">id</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span>
+  <span class="nl">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">email</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">@</span><span class="nd">Input</span><span class="p">()</span> <span class="nx">user</span><span class="o">!</span><span class="p">:</span> <span class="nx">User</span><span class="p">;</span>
+
+<span class="c1">// ❌ Avoid: Loose typing</span>
+<span class="p">@</span><span class="nd">Input</span><span class="p">()</span> <span class="nx">user</span><span class="p">:</span> <span class="kr">any</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="2-use-onpush-change-detection"><strong>2. Use OnPush Change Detection</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ✅ Good: OnPush change detection</span>
+<span class="p">@</span><span class="nd">Component</span><span class="p">({</span>
+  <span class="na">selector</span><span class="p">:</span> <span class="dl">'</span><span class="s1">app-user</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">changeDetection</span><span class="p">:</span> <span class="nx">ChangeDetectionStrategy</span><span class="p">.</span><span class="nx">OnPush</span><span class="p">,</span>
+  <span class="na">template</span><span class="p">:</span> <span class="s2">`...`</span>
+<span class="p">})</span>
+<span class="k">export</span> <span class="kd">class</span> <span class="nx">UserComponent</span> <span class="p">{</span>
+  <span class="c1">// Component implementation</span>
+<span class="p">}</span>
+
+<span class="c1">// ❌ Avoid: Default change detection</span>
+<span class="p">@</span><span class="nd">Component</span><span class="p">({</span>
+  <span class="na">selector</span><span class="p">:</span> <span class="dl">'</span><span class="s1">app-user</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">template</span><span class="p">:</span> <span class="s2">`...`</span>
+<span class="p">})</span>
+<span class="k">export</span> <span class="kd">class</span> <span class="nx">UserComponent</span> <span class="p">{</span>
+  <span class="c1">// Component implementation</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="3-use-trackby-functions"><strong>3. Use TrackBy Functions</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ✅ Good: TrackBy function</span>
+<span class="nx">trackByUserId</span><span class="p">(</span><span class="nx">index</span><span class="p">:</span> <span class="kr">number</span><span class="p">,</span> <span class="nx">user</span><span class="p">:</span> <span class="nx">User</span><span class="p">):</span> <span class="kr">number</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">user</span><span class="p">.</span><span class="nx">id</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// ❌ Avoid: No trackBy function</span>
+<span class="o">*</span><span class="nx">ngFor</span><span class="o">=</span><span class="dl">"</span><span class="s2">let user of users</span><span class="dl">"</span>
+</code></pre></div></div>
+
+<h3 id="4-use-reactive-forms"><strong>4. Use Reactive Forms</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ✅ Good: Reactive forms</span>
+<span class="nx">userForm</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">fb</span><span class="p">.</span><span class="nx">group</span><span class="p">({</span>
+  <span class="na">name</span><span class="p">:</span> <span class="p">[</span><span class="dl">''</span><span class="p">,</span> <span class="nx">Validators</span><span class="p">.</span><span class="nx">required</span><span class="p">],</span>
+  <span class="na">email</span><span class="p">:</span> <span class="p">[</span><span class="dl">''</span><span class="p">,</span> <span class="p">[</span><span class="nx">Validators</span><span class="p">.</span><span class="nx">required</span><span class="p">,</span> <span class="nx">Validators</span><span class="p">.</span><span class="nx">email</span><span class="p">]]</span>
+<span class="p">});</span>
+
+<span class="c1">// ❌ Avoid: Template-driven forms</span>
+<span class="o">&lt;</span><span class="nx">form</span> <span class="err">#</span><span class="nx">userForm</span><span class="o">=</span><span class="dl">"</span><span class="s2">ngForm</span><span class="dl">"</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="nx">input</span> <span class="nx">name</span><span class="o">=</span><span class="dl">"</span><span class="s2">name</span><span class="dl">"</span> <span class="nx">ngModel</span> <span class="nx">required</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="sr">/form</span><span class="err">&gt;
+</span></code></pre></div></div>
+
+<hr />
+
+<h2 id="-common-interview-questions">❓ <strong>Common Interview Questions</strong></h2>
+
+<h3 id="1-how-do-you-set-up-typescript-with-angular"><strong>1. How do you set up TypeScript with Angular?</strong></h3>
+
+<p><strong>Answer:</strong>
+Angular is built with TypeScript by default. Just use <code class="language-plaintext highlighter-rouge">ng new my-app</code> and TypeScript is automatically configured.</p>
+
+<h3 id="2-what-are-the-benefits-of-using-typescript-with-angular"><strong>2. What are the benefits of using TypeScript with Angular?</strong></h3>
+
+<p><strong>Answer:</strong></p>
+<ul>
+  <li><strong>Type safety</strong>: Catch errors at compile time</li>
+  <li><strong>Better IDE support</strong>: IntelliSense and autocomplete</li>
+  <li><strong>Refactoring</strong>: Safer code changes</li>
+  <li><strong>Documentation</strong>: Self-documenting code</li>
+</ul>
+
+<h3 id="3-how-do-you-type-angular-components"><strong>3. How do you type Angular components?</strong></h3>
+
+<p><strong>Answer:</strong></p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">@</span><span class="nd">Component</span><span class="p">({</span>
+  <span class="na">selector</span><span class="p">:</span> <span class="dl">'</span><span class="s1">app-user</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">template</span><span class="p">:</span> <span class="s2">`...`</span>
+<span class="p">})</span>
+<span class="k">export</span> <span class="kd">class</span> <span class="nx">UserComponent</span> <span class="p">{</span>
+  <span class="p">@</span><span class="nd">Input</span><span class="p">()</span> <span class="nx">user</span><span class="o">!</span><span class="p">:</span> <span class="nx">User</span><span class="p">;</span>
+  <span class="p">@</span><span class="nd">Output</span><span class="p">()</span> <span class="nx">edit</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">EventEmitter</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="4-how-do-you-handle-forms-in-angular-with-typescript"><strong>4. How do you handle forms in Angular with TypeScript?</strong></h3>
+
+<p><strong>Answer:</strong></p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">userForm</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">fb</span><span class="p">.</span><span class="nx">group</span><span class="p">({</span>
+  <span class="na">name</span><span class="p">:</span> <span class="p">[</span><span class="dl">''</span><span class="p">,</span> <span class="nx">Validators</span><span class="p">.</span><span class="nx">required</span><span class="p">],</span>
+  <span class="na">email</span><span class="p">:</span> <span class="p">[</span><span class="dl">''</span><span class="p">,</span> <span class="p">[</span><span class="nx">Validators</span><span class="p">.</span><span class="nx">required</span><span class="p">,</span> <span class="nx">Validators</span><span class="p">.</span><span class="nx">email</span><span class="p">]]</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<h3 id="5-how-do-you-create-services-in-angular-with-typescript"><strong>5. How do you create services in Angular with TypeScript?</strong></h3>
+
+<p><strong>Answer:</strong></p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">@</span><span class="nd">Injectable</span><span class="p">({</span>
+  <span class="na">providedIn</span><span class="p">:</span> <span class="dl">'</span><span class="s1">root</span><span class="dl">'</span>
+<span class="p">})</span>
+<span class="k">export</span> <span class="kd">class</span> <span class="nx">UserService</span> <span class="p">{</span>
+  <span class="kd">constructor</span><span class="p">(</span><span class="k">private</span> <span class="nx">http</span><span class="p">:</span> <span class="nx">HttpClient</span><span class="p">)</span> <span class="p">{}</span>
+  
+  <span class="nx">getUsers</span><span class="p">():</span> <span class="nx">Observable</span><span class="o">&lt;</span><span class="nx">User</span><span class="p">[]</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">http</span><span class="p">.</span><span class="kd">get</span><span class="o">&lt;</span><span class="nx">User</span><span class="p">[]</span><span class="o">&gt;</span><span class="p">(</span><span class="dl">'</span><span class="s1">/api/users</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-navigation">🧭 Navigation</h2>
+
+<div class="navigation">
+  <a href="03-TypeScript-Vuejs.md" class="nav-button">← Previous: TypeScript with Vue.js</a>
+  <a href="../06-TypeScript-Testing-Quality/01-Unit-Testing-TypeScript.md" class="nav-button">Next: Unit Testing with TypeScript →</a>
+</div>
+
+<p><em>Last updated: December 2025</em></p>
+
+        </main>
+        
+        <footer style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #ecf0f1; color: #666; text-align: center;">
+            <p>Interview Prep Documentation - Built with Jekyll</p>
+        </footer>
+    </div>
+</body>
+</html>

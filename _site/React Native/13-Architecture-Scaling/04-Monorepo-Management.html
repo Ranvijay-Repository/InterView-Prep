@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📦 Monorepo Management - Interview Prep Documentation</title>
+    <meta name="description" content="Comprehensive guides for JavaScript, TypeScript, and React Native interview preparation">
+    
+    <!-- GitHub Pages compatible styling -->
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+        }
+        
+        .container {
+            max-width: 100%;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            color: #2c3e50;
+            margin-top: 2em;
+            margin-bottom: 1em;
+        }
+        
+        h1 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            border-bottom: 1px solid #ecf0f1;
+            padding-bottom: 5px;
+        }
+        
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border-left: 4px solid #3498db;
+        }
+        
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+        
+        blockquote {
+            border-left: 4px solid #3498db;
+            margin: 0;
+            padding-left: 20px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1em 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .navigation {
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px 0;
+            margin-bottom: 20px;
+        }
+        
+        .navigation a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+        
+        .navigation a:hover {
+            text-decoration: underline;
+        }
+        
+        .breadcrumb {
+            margin-bottom: 20px;
+            color: #666;
+        }
+        
+        .breadcrumb a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            h2 {
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="navigation">
+            <a href="/">Home</a>
+            <a href="/Javascript/">JavaScript</a>
+            <a href="/TypeScript/">TypeScript</a>
+            <a href="/React-Native/">React Native</a>
+        </nav>
+        
+        
+        
+        <main>
+            <h1 id="-monorepo-management">📦 <strong>Monorepo Management</strong></h1>
+
+<blockquote>
+  <p><strong>Master monorepo management, workspace organization, and build optimization for React Native applications</strong></p>
+</blockquote>
+
+<link rel="stylesheet" href="../../common-styles.css" />
+
+<hr />
+
+<h2 id="-table-of-contents">📚 <strong>Table of Contents</strong></h2>
+
+<ul>
+  <li><a href="#-monorepo-overview">Monorepo Overview</a></li>
+  <li><a href="#-workspace-setup">Workspace Setup</a></li>
+  <li><a href="#-build-optimization">Build Optimization</a></li>
+  <li><a href="#-dependency-management">Dependency Management</a></li>
+  <li><a href="#-cicd-integration">CI/CD Integration</a></li>
+  <li><a href="#-best-practices">Best Practices</a></li>
+  <li><a href="#-interview-questions">Interview Questions</a></li>
+</ul>
+
+<hr />
+
+<h2 id="-monorepo-overview">📦 <strong>Monorepo Overview</strong></h2>
+
+<h3 id="monorepo-structure"><strong>Monorepo Structure</strong></h3>
+
+<pre><code class="language-mermaid">graph TD
+    A[monorepo/] --&gt; B[apps/]
+    A --&gt; C[packages/]
+    A --&gt; D[tools/]
+    
+    B --&gt; E[mobile/]
+    B --&gt; F[web/]
+    B --&gt; G[desktop/]
+    
+    C --&gt; H[shared/]
+    C --&gt; I[ui/]
+    C --&gt; J[utils/]
+    
+    D --&gt; K[build/]
+    D --&gt; L[scripts/]
+    D --&gt; M[config/]
+</code></pre>
+
+<h3 id="benefits"><strong>Benefits</strong></h3>
+<ul>
+  <li><strong>Code Sharing</strong>: Shared components and utilities</li>
+  <li><strong>Consistent Tooling</strong>: Unified build and test processes</li>
+  <li><strong>Atomic Changes</strong>: Cross-package changes in single commit</li>
+  <li><strong>Simplified Dependencies</strong>: Centralized dependency management</li>
+</ul>
+
+<hr />
+
+<h2 id="️-workspace-setup">🏗️ <strong>Workspace Setup</strong></h2>
+
+<h3 id="yarn-workspaces-configuration"><strong>Yarn Workspaces Configuration</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"react-native-monorepo"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0.0"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"private"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"workspaces"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"apps/*"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"packages/*"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"tools/*"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"scripts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"build"</span><span class="p">:</span><span class="w"> </span><span class="s2">"turbo run build"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"test"</span><span class="p">:</span><span class="w"> </span><span class="s2">"turbo run test"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"lint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"turbo run lint"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"dev"</span><span class="p">:</span><span class="w"> </span><span class="s2">"turbo run dev"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"clean"</span><span class="p">:</span><span class="w"> </span><span class="s2">"turbo run clean"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"type-check"</span><span class="p">:</span><span class="w"> </span><span class="s2">"turbo run type-check"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"devDependencies"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"turbo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^1.10.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"typescript"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^5.0.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"@typescript-eslint/eslint-plugin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^6.0.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"@typescript-eslint/parser"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^6.0.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"eslint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^8.0.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"prettier"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^3.0.0"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="turbo-configuration"><strong>Turbo Configuration</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"$schema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://turbo.build/schema.json"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"globalDependencies"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"**/.env.*local"</span><span class="p">],</span><span class="w">
+  </span><span class="nl">"pipeline"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"build"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"dependsOn"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"^build"</span><span class="p">],</span><span class="w">
+      </span><span class="nl">"outputs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"dist/**"</span><span class="p">,</span><span class="w"> </span><span class="s2">"build/**"</span><span class="p">,</span><span class="w"> </span><span class="s2">".next/**"</span><span class="p">,</span><span class="w"> </span><span class="s2">"!.next/cache/**"</span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"test"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"dependsOn"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"^build"</span><span class="p">],</span><span class="w">
+      </span><span class="nl">"outputs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"coverage/**"</span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"lint"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"outputs"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"dev"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"cache"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"persistent"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"clean"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"cache"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"type-check"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"dependsOn"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"^build"</span><span class="p">],</span><span class="w">
+      </span><span class="nl">"outputs"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="package-structure"><strong>Package Structure</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// packages/shared/package.json</span>
+<span class="p">{</span>
+  <span class="dl">"</span><span class="s2">name</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">@monorepo/shared</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">version</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">1.0.0</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">main</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">dist/index.js</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">types</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">dist/index.d.ts</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">scripts</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">build</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">tsc</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">dev</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">tsc --watch</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">test</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">jest</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">lint</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">eslint src/**/*.ts</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">type-check</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">tsc --noEmit</span><span class="dl">"</span>
+  <span class="p">},</span>
+  <span class="dl">"</span><span class="s2">dependencies</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">^18.0.0</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">react-native</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">^0.72.0</span><span class="dl">"</span>
+  <span class="p">},</span>
+  <span class="dl">"</span><span class="s2">devDependencies</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">typescript</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">^5.0.0</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">@types/react</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">^18.0.0</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">@types/react-native</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">^0.72.0</span><span class="dl">"</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// apps/mobile/package.json</span>
+<span class="p">{</span>
+  <span class="dl">"</span><span class="s2">name</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">@monorepo/mobile</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">version</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">1.0.0</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">private</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">scripts</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">android</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">react-native run-android</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">ios</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">react-native run-ios</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">start</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">react-native start</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">test</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">jest</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">lint</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">eslint .</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">build:android</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">cd android &amp;&amp; ./gradlew assembleRelease</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">build:ios</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">cd ios &amp;&amp; xcodebuild -workspace Mobile.xcworkspace -scheme Mobile -configuration Release</span><span class="dl">"</span>
+  <span class="p">},</span>
+  <span class="dl">"</span><span class="s2">dependencies</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">^18.0.0</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">react-native</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">^0.72.0</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">@monorepo/shared</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">workspace:*</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">@monorepo/ui</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">workspace:*</span><span class="dl">"</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-build-optimization">⚡ <strong>Build Optimization</strong></h2>
+
+<h3 id="build-pipeline"><strong>Build Pipeline</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// tools/build/build-pipeline.js</span>
+<span class="kd">const</span> <span class="p">{</span> <span class="nx">execSync</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">child_process</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">path</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">path</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">fs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">fs</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">BuildPipeline</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="c1">// Build all packages</span>
+  <span class="na">buildAll</span><span class="p">:</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">🚀 Starting build pipeline...</span><span class="dl">'</span><span class="p">);</span>
+    
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="c1">// Clean previous builds</span>
+      <span class="k">await</span> <span class="nx">BuildPipeline</span><span class="p">.</span><span class="nx">clean</span><span class="p">();</span>
+      
+      <span class="c1">// Build shared packages first</span>
+      <span class="k">await</span> <span class="nx">BuildPipeline</span><span class="p">.</span><span class="nx">buildPackages</span><span class="p">();</span>
+      
+      <span class="c1">// Build applications</span>
+      <span class="k">await</span> <span class="nx">BuildPipeline</span><span class="p">.</span><span class="nx">buildApps</span><span class="p">();</span>
+      
+      <span class="c1">// Generate build report</span>
+      <span class="k">await</span> <span class="nx">BuildPipeline</span><span class="p">.</span><span class="nx">generateReport</span><span class="p">();</span>
+      
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">✅ Build pipeline completed successfully</span><span class="dl">'</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">❌ Build pipeline failed:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+      <span class="nx">process</span><span class="p">.</span><span class="nx">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  
+  <span class="c1">// Clean build artifacts</span>
+  <span class="na">clean</span><span class="p">:</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">🧹 Cleaning build artifacts...</span><span class="dl">'</span><span class="p">);</span>
+    
+    <span class="kd">const</span> <span class="nx">cleanCommands</span> <span class="o">=</span> <span class="p">[</span>
+      <span class="dl">'</span><span class="s1">turbo run clean</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">rm -rf node_modules/.cache</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">rm -rf apps/*/node_modules/.cache</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">rm -rf packages/*/node_modules/.cache</span><span class="dl">'</span>
+    <span class="p">];</span>
+    
+    <span class="k">for</span> <span class="p">(</span><span class="kd">const</span> <span class="nx">command</span> <span class="k">of</span> <span class="nx">cleanCommands</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">execSync</span><span class="p">(</span><span class="nx">command</span><span class="p">,</span> <span class="p">{</span> <span class="na">stdio</span><span class="p">:</span> <span class="dl">'</span><span class="s1">inherit</span><span class="dl">'</span> <span class="p">});</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  
+  <span class="c1">// Build packages</span>
+  <span class="na">buildPackages</span><span class="p">:</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">📦 Building packages...</span><span class="dl">'</span><span class="p">);</span>
+    
+    <span class="kd">const</span> <span class="nx">packages</span> <span class="o">=</span> <span class="p">[</span>
+      <span class="dl">'</span><span class="s1">@monorepo/shared</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">@monorepo/ui</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">@monorepo/utils</span><span class="dl">'</span>
+    <span class="p">];</span>
+    
+    <span class="k">for</span> <span class="p">(</span><span class="kd">const</span> <span class="nx">packageName</span> <span class="k">of</span> <span class="nx">packages</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`Building </span><span class="p">${</span><span class="nx">packageName</span><span class="p">}</span><span class="s2">...`</span><span class="p">);</span>
+      <span class="nx">execSync</span><span class="p">(</span><span class="s2">`turbo run build --filter=</span><span class="p">${</span><span class="nx">packageName</span><span class="p">}</span><span class="s2">`</span><span class="p">,</span> <span class="p">{</span> <span class="na">stdio</span><span class="p">:</span> <span class="dl">'</span><span class="s1">inherit</span><span class="dl">'</span> <span class="p">});</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  
+  <span class="c1">// Build applications</span>
+  <span class="na">buildApps</span><span class="p">:</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">📱 Building applications...</span><span class="dl">'</span><span class="p">);</span>
+    
+    <span class="kd">const</span> <span class="nx">apps</span> <span class="o">=</span> <span class="p">[</span>
+      <span class="dl">'</span><span class="s1">@monorepo/mobile</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">@monorepo/web</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">@monorepo/desktop</span><span class="dl">'</span>
+    <span class="p">];</span>
+    
+    <span class="k">for</span> <span class="p">(</span><span class="kd">const</span> <span class="nx">appName</span> <span class="k">of</span> <span class="nx">apps</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`Building </span><span class="p">${</span><span class="nx">appName</span><span class="p">}</span><span class="s2">...`</span><span class="p">);</span>
+      <span class="nx">execSync</span><span class="p">(</span><span class="s2">`turbo run build --filter=</span><span class="p">${</span><span class="nx">appName</span><span class="p">}</span><span class="s2">`</span><span class="p">,</span> <span class="p">{</span> <span class="na">stdio</span><span class="p">:</span> <span class="dl">'</span><span class="s1">inherit</span><span class="dl">'</span> <span class="p">});</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  
+  <span class="c1">// Generate build report</span>
+  <span class="na">generateReport</span><span class="p">:</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">📊 Generating build report...</span><span class="dl">'</span><span class="p">);</span>
+    
+    <span class="kd">const</span> <span class="nx">report</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="na">timestamp</span><span class="p">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">toISOString</span><span class="p">(),</span>
+      <span class="na">packages</span><span class="p">:</span> <span class="k">await</span> <span class="nx">BuildPipeline</span><span class="p">.</span><span class="nx">getPackageInfo</span><span class="p">(),</span>
+      <span class="na">buildTime</span><span class="p">:</span> <span class="nx">process</span><span class="p">.</span><span class="nx">uptime</span><span class="p">(),</span>
+      <span class="na">memoryUsage</span><span class="p">:</span> <span class="nx">process</span><span class="p">.</span><span class="nx">memoryUsage</span><span class="p">()</span>
+    <span class="p">};</span>
+    
+    <span class="nx">fs</span><span class="p">.</span><span class="nx">writeFileSync</span><span class="p">(</span>
+      <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">cwd</span><span class="p">(),</span> <span class="dl">'</span><span class="s1">build-report.json</span><span class="dl">'</span><span class="p">),</span>
+      <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">report</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="p">);</span>
+  <span class="p">},</span>
+  
+  <span class="c1">// Get package information</span>
+  <span class="na">getPackageInfo</span><span class="p">:</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">packages</span> <span class="o">=</span> <span class="p">[];</span>
+    <span class="kd">const</span> <span class="nx">packageDirs</span> <span class="o">=</span> <span class="p">[</span><span class="dl">'</span><span class="s1">packages</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">apps</span><span class="dl">'</span><span class="p">];</span>
+    
+    <span class="k">for</span> <span class="p">(</span><span class="kd">const</span> <span class="nx">dir</span> <span class="k">of</span> <span class="nx">packageDirs</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">items</span> <span class="o">=</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">readdirSync</span><span class="p">(</span><span class="nx">dir</span><span class="p">);</span>
+      <span class="k">for</span> <span class="p">(</span><span class="kd">const</span> <span class="nx">item</span> <span class="k">of</span> <span class="nx">items</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">packagePath</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">dir</span><span class="p">,</span> <span class="nx">item</span><span class="p">,</span> <span class="dl">'</span><span class="s1">package.json</span><span class="dl">'</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">fs</span><span class="p">.</span><span class="nx">existsSync</span><span class="p">(</span><span class="nx">packagePath</span><span class="p">))</span> <span class="p">{</span>
+          <span class="kd">const</span> <span class="nx">packageJson</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">fs</span><span class="p">.</span><span class="nx">readFileSync</span><span class="p">(</span><span class="nx">packagePath</span><span class="p">,</span> <span class="dl">'</span><span class="s1">utf8</span><span class="dl">'</span><span class="p">));</span>
+          <span class="nx">packages</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span>
+            <span class="na">name</span><span class="p">:</span> <span class="nx">packageJson</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span>
+            <span class="na">version</span><span class="p">:</span> <span class="nx">packageJson</span><span class="p">.</span><span class="nx">version</span><span class="p">,</span>
+            <span class="na">path</span><span class="p">:</span> <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">dir</span><span class="p">,</span> <span class="nx">item</span><span class="p">)</span>
+          <span class="p">});</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="nx">packages</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">BuildPipeline</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="bundle-analysis"><strong>Bundle Analysis</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// tools/analyze/bundle-analyzer.js</span>
+<span class="kd">const</span> <span class="p">{</span> <span class="nx">execSync</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">child_process</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">path</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">path</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">fs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">fs</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">BundleAnalyzer</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="c1">// Analyze bundle sizes</span>
+  <span class="na">analyze</span><span class="p">:</span> <span class="k">async</span> <span class="p">(</span><span class="nx">appName</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`📊 Analyzing bundle for </span><span class="p">${</span><span class="nx">appName</span><span class="p">}</span><span class="s2">...`</span><span class="p">);</span>
+    
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="c1">// Generate bundle analysis</span>
+      <span class="k">await</span> <span class="nx">BundleAnalyzer</span><span class="p">.</span><span class="nx">generateAnalysis</span><span class="p">(</span><span class="nx">appName</span><span class="p">);</span>
+      
+      <span class="c1">// Compare with previous builds</span>
+      <span class="k">await</span> <span class="nx">BundleAnalyzer</span><span class="p">.</span><span class="nx">compareBuilds</span><span class="p">(</span><span class="nx">appName</span><span class="p">);</span>
+      
+      <span class="c1">// Generate recommendations</span>
+      <span class="k">await</span> <span class="nx">BundleAnalyzer</span><span class="p">.</span><span class="nx">generateRecommendations</span><span class="p">(</span><span class="nx">appName</span><span class="p">);</span>
+      
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">✅ Bundle analysis completed</span><span class="dl">'</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">❌ Bundle analysis failed:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  
+  <span class="c1">// Generate bundle analysis</span>
+  <span class="na">generateAnalysis</span><span class="p">:</span> <span class="k">async</span> <span class="p">(</span><span class="nx">appName</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">analysisPath</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">cwd</span><span class="p">(),</span> <span class="dl">'</span><span class="s1">analysis</span><span class="dl">'</span><span class="p">,</span> <span class="nx">appName</span><span class="p">);</span>
+    
+    <span class="c1">// Create analysis directory</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">fs</span><span class="p">.</span><span class="nx">existsSync</span><span class="p">(</span><span class="nx">analysisPath</span><span class="p">))</span> <span class="p">{</span>
+      <span class="nx">fs</span><span class="p">.</span><span class="nx">mkdirSync</span><span class="p">(</span><span class="nx">analysisPath</span><span class="p">,</span> <span class="p">{</span> <span class="na">recursive</span><span class="p">:</span> <span class="kc">true</span> <span class="p">});</span>
+    <span class="p">}</span>
+    
+    <span class="c1">// Run bundle analysis</span>
+    <span class="nx">execSync</span><span class="p">(</span><span class="s2">`turbo run analyze --filter=</span><span class="p">${</span><span class="nx">appName</span><span class="p">}</span><span class="s2">`</span><span class="p">,</span> <span class="p">{</span> <span class="na">stdio</span><span class="p">:</span> <span class="dl">'</span><span class="s1">inherit</span><span class="dl">'</span> <span class="p">});</span>
+  <span class="p">},</span>
+  
+  <span class="c1">// Compare with previous builds</span>
+  <span class="na">compareBuilds</span><span class="p">:</span> <span class="k">async</span> <span class="p">(</span><span class="nx">appName</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">currentAnalysis</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">cwd</span><span class="p">(),</span> <span class="dl">'</span><span class="s1">analysis</span><span class="dl">'</span><span class="p">,</span> <span class="nx">appName</span><span class="p">,</span> <span class="dl">'</span><span class="s1">current.json</span><span class="dl">'</span><span class="p">);</span>
+    <span class="kd">const</span> <span class="nx">previousAnalysis</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">cwd</span><span class="p">(),</span> <span class="dl">'</span><span class="s1">analysis</span><span class="dl">'</span><span class="p">,</span> <span class="nx">appName</span><span class="p">,</span> <span class="dl">'</span><span class="s1">previous.json</span><span class="dl">'</span><span class="p">);</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="nx">fs</span><span class="p">.</span><span class="nx">existsSync</span><span class="p">(</span><span class="nx">previousAnalysis</span><span class="p">))</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">current</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">fs</span><span class="p">.</span><span class="nx">readFileSync</span><span class="p">(</span><span class="nx">currentAnalysis</span><span class="p">,</span> <span class="dl">'</span><span class="s1">utf8</span><span class="dl">'</span><span class="p">));</span>
+      <span class="kd">const</span> <span class="nx">previous</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">fs</span><span class="p">.</span><span class="nx">readFileSync</span><span class="p">(</span><span class="nx">previousAnalysis</span><span class="p">,</span> <span class="dl">'</span><span class="s1">utf8</span><span class="dl">'</span><span class="p">));</span>
+      
+      <span class="kd">const</span> <span class="nx">comparison</span> <span class="o">=</span> <span class="nx">BundleAnalyzer</span><span class="p">.</span><span class="nx">compareBundles</span><span class="p">(</span><span class="nx">current</span><span class="p">,</span> <span class="nx">previous</span><span class="p">);</span>
+      
+      <span class="nx">fs</span><span class="p">.</span><span class="nx">writeFileSync</span><span class="p">(</span>
+        <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">cwd</span><span class="p">(),</span> <span class="dl">'</span><span class="s1">analysis</span><span class="dl">'</span><span class="p">,</span> <span class="nx">appName</span><span class="p">,</span> <span class="dl">'</span><span class="s1">comparison.json</span><span class="dl">'</span><span class="p">),</span>
+        <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">comparison</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+      <span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  
+  <span class="c1">// Compare bundle sizes</span>
+  <span class="na">compareBundles</span><span class="p">:</span> <span class="p">(</span><span class="nx">current</span><span class="p">,</span> <span class="nx">previous</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">comparison</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="na">totalSize</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">current</span><span class="p">:</span> <span class="nx">current</span><span class="p">.</span><span class="nx">totalSize</span><span class="p">,</span>
+        <span class="na">previous</span><span class="p">:</span> <span class="nx">previous</span><span class="p">.</span><span class="nx">totalSize</span><span class="p">,</span>
+        <span class="na">difference</span><span class="p">:</span> <span class="nx">current</span><span class="p">.</span><span class="nx">totalSize</span> <span class="o">-</span> <span class="nx">previous</span><span class="p">.</span><span class="nx">totalSize</span><span class="p">,</span>
+        <span class="na">percentage</span><span class="p">:</span> <span class="p">((</span><span class="nx">current</span><span class="p">.</span><span class="nx">totalSize</span> <span class="o">-</span> <span class="nx">previous</span><span class="p">.</span><span class="nx">totalSize</span><span class="p">)</span> <span class="o">/</span> <span class="nx">previous</span><span class="p">.</span><span class="nx">totalSize</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+      <span class="p">},</span>
+      <span class="na">modules</span><span class="p">:</span> <span class="p">[]</span>
+    <span class="p">};</span>
+    
+    <span class="c1">// Compare individual modules</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">const</span> <span class="p">[</span><span class="nx">moduleName</span><span class="p">,</span> <span class="nx">currentSize</span><span class="p">]</span> <span class="k">of</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">entries</span><span class="p">(</span><span class="nx">current</span><span class="p">.</span><span class="nx">modules</span><span class="p">))</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">previousSize</span> <span class="o">=</span> <span class="nx">previous</span><span class="p">.</span><span class="nx">modules</span><span class="p">[</span><span class="nx">moduleName</span><span class="p">]</span> <span class="o">||</span> <span class="mi">0</span><span class="p">;</span>
+      <span class="kd">const</span> <span class="nx">difference</span> <span class="o">=</span> <span class="nx">currentSize</span> <span class="o">-</span> <span class="nx">previousSize</span><span class="p">;</span>
+      <span class="kd">const</span> <span class="nx">percentage</span> <span class="o">=</span> <span class="nx">previousSize</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="p">?</span> <span class="p">(</span><span class="nx">difference</span> <span class="o">/</span> <span class="nx">previousSize</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span> <span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
+      
+      <span class="nx">comparison</span><span class="p">.</span><span class="nx">modules</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span>
+        <span class="na">name</span><span class="p">:</span> <span class="nx">moduleName</span><span class="p">,</span>
+        <span class="na">current</span><span class="p">:</span> <span class="nx">currentSize</span><span class="p">,</span>
+        <span class="na">previous</span><span class="p">:</span> <span class="nx">previousSize</span><span class="p">,</span>
+        <span class="nx">difference</span><span class="p">,</span>
+        <span class="nx">percentage</span>
+      <span class="p">});</span>
+    <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="nx">comparison</span><span class="p">;</span>
+  <span class="p">},</span>
+  
+  <span class="c1">// Generate recommendations</span>
+  <span class="na">generateRecommendations</span><span class="p">:</span> <span class="k">async</span> <span class="p">(</span><span class="nx">appName</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">analysisPath</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">cwd</span><span class="p">(),</span> <span class="dl">'</span><span class="s1">analysis</span><span class="dl">'</span><span class="p">,</span> <span class="nx">appName</span><span class="p">);</span>
+    <span class="kd">const</span> <span class="nx">comparisonPath</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">analysisPath</span><span class="p">,</span> <span class="dl">'</span><span class="s1">comparison.json</span><span class="dl">'</span><span class="p">);</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="nx">fs</span><span class="p">.</span><span class="nx">existsSync</span><span class="p">(</span><span class="nx">comparisonPath</span><span class="p">))</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">comparison</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">fs</span><span class="p">.</span><span class="nx">readFileSync</span><span class="p">(</span><span class="nx">comparisonPath</span><span class="p">,</span> <span class="dl">'</span><span class="s1">utf8</span><span class="dl">'</span><span class="p">));</span>
+      <span class="kd">const</span> <span class="nx">recommendations</span> <span class="o">=</span> <span class="nx">BundleAnalyzer</span><span class="p">.</span><span class="nx">generateRecommendationsFromComparison</span><span class="p">(</span><span class="nx">comparison</span><span class="p">);</span>
+      
+      <span class="nx">fs</span><span class="p">.</span><span class="nx">writeFileSync</span><span class="p">(</span>
+        <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">analysisPath</span><span class="p">,</span> <span class="dl">'</span><span class="s1">recommendations.json</span><span class="dl">'</span><span class="p">),</span>
+        <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">recommendations</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+      <span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  
+  <span class="c1">// Generate recommendations from comparison</span>
+  <span class="na">generateRecommendationsFromComparison</span><span class="p">:</span> <span class="p">(</span><span class="nx">comparison</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">recommendations</span> <span class="o">=</span> <span class="p">[];</span>
+    
+    <span class="c1">// Check total size increase</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">comparison</span><span class="p">.</span><span class="nx">totalSize</span><span class="p">.</span><span class="nx">percentage</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">recommendations</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span>
+        <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">warning</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">message</span><span class="p">:</span> <span class="s2">`Bundle size increased by </span><span class="p">${</span><span class="nx">comparison</span><span class="p">.</span><span class="nx">totalSize</span><span class="p">.</span><span class="nx">percentage</span><span class="p">.</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">2</span><span class="p">)}</span><span class="s2">%`</span><span class="p">,</span>
+        <span class="na">suggestion</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Consider code splitting or removing unused dependencies</span><span class="dl">'</span>
+      <span class="p">});</span>
+    <span class="p">}</span>
+    
+    <span class="c1">// Check individual module increases</span>
+    <span class="nx">comparison</span><span class="p">.</span><span class="nx">modules</span>
+      <span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">module</span> <span class="o">=&gt;</span> <span class="nx">module</span><span class="p">.</span><span class="nx">percentage</span> <span class="o">&gt;</span> <span class="mi">20</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">module</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">recommendations</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span>
+          <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">info</span><span class="dl">'</span><span class="p">,</span>
+          <span class="na">message</span><span class="p">:</span> <span class="s2">`Module </span><span class="p">${</span><span class="nx">module</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span><span class="s2"> increased by </span><span class="p">${</span><span class="nx">module</span><span class="p">.</span><span class="nx">percentage</span><span class="p">.</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">2</span><span class="p">)}</span><span class="s2">%`</span><span class="p">,</span>
+          <span class="na">suggestion</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Review this module for optimization opportunities</span><span class="dl">'</span>
+        <span class="p">});</span>
+      <span class="p">});</span>
+    
+    <span class="k">return</span> <span class="nx">recommendations</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">BundleAnalyzer</span><span class="p">;</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-dependency-management">🔧 <strong>Dependency Management</strong></h2>
+
+<h3 id="dependency-management-system"><strong>Dependency Management System</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// tools/deps/dependency-manager.js</span>
+<span class="kd">const</span> <span class="p">{</span> <span class="nx">execSync</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">child_process</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">path</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">path</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">fs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">fs</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">DependencyManager</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="c1">// Update all dependencies</span>
+  <span class="na">updateAll</span><span class="p">:</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">🔄 Updating all dependencies...</span><span class="dl">'</span><span class="p">);</span>
+    
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="c1">// Update root dependencies</span>
+      <span class="k">await</span> <span class="nx">DependencyManager</span><span class="p">.</span><span class="nx">updateRootDependencies</span><span class="p">();</span>
+      
+      <span class="c1">// Update workspace dependencies</span>
+      <span class="k">await</span> <span class="nx">DependencyManager</span><span class="p">.</span><span class="nx">updateWorkspaceDependencies</span><span class="p">();</span>
+      
+      <span class="c1">// Check for security vulnerabilities</span>
+      <span class="k">await</span> <span class="nx">DependencyManager</span><span class="p">.</span><span class="nx">checkSecurity</span><span class="p">();</span>
+      
+      <span class="c1">// Generate dependency report</span>
+      <span class="k">await</span> <span class="nx">DependencyManager</span><span class="p">.</span><span class="nx">generateReport</span><span class="p">();</span>
+      
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">✅ Dependencies updated successfully</span><span class="dl">'</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">❌ Dependency update failed:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  
+  <span class="c1">// Update root dependencies</span>
+  <span class="na">updateRootDependencies</span><span class="p">:</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">📦 Updating root dependencies...</span><span class="dl">'</span><span class="p">);</span>
+    
+    <span class="nx">execSync</span><span class="p">(</span><span class="dl">'</span><span class="s1">yarn upgrade-interactive --latest</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span> <span class="na">stdio</span><span class="p">:</span> <span class="dl">'</span><span class="s1">inherit</span><span class="dl">'</span> <span class="p">});</span>
+  <span class="p">},</span>
+  
+  <span class="c1">// Update workspace dependencies</span>
+  <span class="na">updateWorkspaceDependencies</span><span class="p">:</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">📦 Updating workspace dependencies...</span><span class="dl">'</span><span class="p">);</span>
+    
+    <span class="kd">const</span> <span class="nx">workspaces</span> <span class="o">=</span> <span class="nx">DependencyManager</span><span class="p">.</span><span class="nx">getWorkspaces</span><span class="p">();</span>
+    
+    <span class="k">for</span> <span class="p">(</span><span class="kd">const</span> <span class="nx">workspace</span> <span class="k">of</span> <span class="nx">workspaces</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`Updating </span><span class="p">${</span><span class="nx">workspace</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span><span class="s2">...`</span><span class="p">);</span>
+      <span class="nx">execSync</span><span class="p">(</span><span class="s2">`cd </span><span class="p">${</span><span class="nx">workspace</span><span class="p">.</span><span class="nx">path</span><span class="p">}</span><span class="s2"> &amp;&amp; yarn upgrade-interactive --latest`</span><span class="p">,</span> <span class="p">{</span> <span class="na">stdio</span><span class="p">:</span> <span class="dl">'</span><span class="s1">inherit</span><span class="dl">'</span> <span class="p">});</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  
+  <span class="c1">// Check security vulnerabilities</span>
+  <span class="na">checkSecurity</span><span class="p">:</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">🔒 Checking security vulnerabilities...</span><span class="dl">'</span><span class="p">);</span>
+    
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="nx">execSync</span><span class="p">(</span><span class="dl">'</span><span class="s1">yarn audit</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span> <span class="na">stdio</span><span class="p">:</span> <span class="dl">'</span><span class="s1">inherit</span><span class="dl">'</span> <span class="p">});</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span><span class="dl">'</span><span class="s1">⚠️ Security vulnerabilities found. Run yarn audit --fix to fix them.</span><span class="dl">'</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  
+  <span class="c1">// Generate dependency report</span>
+  <span class="na">generateReport</span><span class="p">:</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">📊 Generating dependency report...</span><span class="dl">'</span><span class="p">);</span>
+    
+    <span class="kd">const</span> <span class="nx">report</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="na">timestamp</span><span class="p">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">toISOString</span><span class="p">(),</span>
+      <span class="na">workspaces</span><span class="p">:</span> <span class="k">await</span> <span class="nx">DependencyManager</span><span class="p">.</span><span class="nx">getWorkspaceInfo</span><span class="p">(),</span>
+      <span class="na">security</span><span class="p">:</span> <span class="k">await</span> <span class="nx">DependencyManager</span><span class="p">.</span><span class="nx">getSecurityInfo</span><span class="p">()</span>
+    <span class="p">};</span>
+    
+    <span class="nx">fs</span><span class="p">.</span><span class="nx">writeFileSync</span><span class="p">(</span>
+      <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">cwd</span><span class="p">(),</span> <span class="dl">'</span><span class="s1">dependency-report.json</span><span class="dl">'</span><span class="p">),</span>
+      <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">report</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="p">);</span>
+  <span class="p">},</span>
+  
+  <span class="c1">// Get workspace information</span>
+  <span class="na">getWorkspaceInfo</span><span class="p">:</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">workspaces</span> <span class="o">=</span> <span class="nx">DependencyManager</span><span class="p">.</span><span class="nx">getWorkspaces</span><span class="p">();</span>
+    <span class="kd">const</span> <span class="nx">workspaceInfo</span> <span class="o">=</span> <span class="p">[];</span>
+    
+    <span class="k">for</span> <span class="p">(</span><span class="kd">const</span> <span class="nx">workspace</span> <span class="k">of</span> <span class="nx">workspaces</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">packagePath</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">workspace</span><span class="p">.</span><span class="nx">path</span><span class="p">,</span> <span class="dl">'</span><span class="s1">package.json</span><span class="dl">'</span><span class="p">);</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">fs</span><span class="p">.</span><span class="nx">existsSync</span><span class="p">(</span><span class="nx">packagePath</span><span class="p">))</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">packageJson</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">fs</span><span class="p">.</span><span class="nx">readFileSync</span><span class="p">(</span><span class="nx">packagePath</span><span class="p">,</span> <span class="dl">'</span><span class="s1">utf8</span><span class="dl">'</span><span class="p">));</span>
+        <span class="nx">workspaceInfo</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span>
+          <span class="na">name</span><span class="p">:</span> <span class="nx">packageJson</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span>
+          <span class="na">version</span><span class="p">:</span> <span class="nx">packageJson</span><span class="p">.</span><span class="nx">version</span><span class="p">,</span>
+          <span class="na">dependencies</span><span class="p">:</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">packageJson</span><span class="p">.</span><span class="nx">dependencies</span> <span class="o">||</span> <span class="p">{}),</span>
+          <span class="na">devDependencies</span><span class="p">:</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">packageJson</span><span class="p">.</span><span class="nx">devDependencies</span> <span class="o">||</span> <span class="p">{})</span>
+        <span class="p">});</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="nx">workspaceInfo</span><span class="p">;</span>
+  <span class="p">},</span>
+  
+  <span class="c1">// Get security information</span>
+  <span class="na">getSecurityInfo</span><span class="p">:</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">auditOutput</span> <span class="o">=</span> <span class="nx">execSync</span><span class="p">(</span><span class="dl">'</span><span class="s1">yarn audit --json</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span> <span class="na">encoding</span><span class="p">:</span> <span class="dl">'</span><span class="s1">utf8</span><span class="dl">'</span> <span class="p">});</span>
+      <span class="kd">const</span> <span class="nx">auditLines</span> <span class="o">=</span> <span class="nx">auditOutput</span><span class="p">.</span><span class="nx">trim</span><span class="p">().</span><span class="nx">split</span><span class="p">(</span><span class="dl">'</span><span class="se">\n</span><span class="dl">'</span><span class="p">);</span>
+      <span class="kd">const</span> <span class="nx">vulnerabilities</span> <span class="o">=</span> <span class="nx">auditLines</span>
+        <span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">line</span> <span class="o">=&gt;</span> <span class="nx">line</span><span class="p">.</span><span class="nx">startsWith</span><span class="p">(</span><span class="dl">'</span><span class="s1">{</span><span class="dl">'</span><span class="p">))</span>
+        <span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">line</span> <span class="o">=&gt;</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">line</span><span class="p">))</span>
+        <span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">entry</span> <span class="o">=&gt;</span> <span class="nx">entry</span><span class="p">.</span><span class="nx">type</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">auditAdvisory</span><span class="dl">'</span><span class="p">);</span>
+      
+      <span class="k">return</span> <span class="p">{</span>
+        <span class="na">total</span><span class="p">:</span> <span class="nx">vulnerabilities</span><span class="p">.</span><span class="nx">length</span><span class="p">,</span>
+        <span class="na">high</span><span class="p">:</span> <span class="nx">vulnerabilities</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">v</span> <span class="o">=&gt;</span> <span class="nx">v</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">severity</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">high</span><span class="dl">'</span><span class="p">).</span><span class="nx">length</span><span class="p">,</span>
+        <span class="na">moderate</span><span class="p">:</span> <span class="nx">vulnerabilities</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">v</span> <span class="o">=&gt;</span> <span class="nx">v</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">severity</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">moderate</span><span class="dl">'</span><span class="p">).</span><span class="nx">length</span><span class="p">,</span>
+        <span class="na">low</span><span class="p">:</span> <span class="nx">vulnerabilities</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">v</span> <span class="o">=&gt;</span> <span class="nx">v</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">severity</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">low</span><span class="dl">'</span><span class="p">).</span><span class="nx">length</span>
+      <span class="p">};</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="p">{</span> <span class="na">total</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="na">high</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="na">moderate</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="na">low</span><span class="p">:</span> <span class="mi">0</span> <span class="p">};</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  
+  <span class="c1">// Get workspaces</span>
+  <span class="na">getWorkspaces</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">workspaces</span> <span class="o">=</span> <span class="p">[];</span>
+    <span class="kd">const</span> <span class="nx">workspaceDirs</span> <span class="o">=</span> <span class="p">[</span><span class="dl">'</span><span class="s1">apps</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">packages</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">tools</span><span class="dl">'</span><span class="p">];</span>
+    
+    <span class="k">for</span> <span class="p">(</span><span class="kd">const</span> <span class="nx">dir</span> <span class="k">of</span> <span class="nx">workspaceDirs</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">fs</span><span class="p">.</span><span class="nx">existsSync</span><span class="p">(</span><span class="nx">dir</span><span class="p">))</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">items</span> <span class="o">=</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">readdirSync</span><span class="p">(</span><span class="nx">dir</span><span class="p">);</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kd">const</span> <span class="nx">item</span> <span class="k">of</span> <span class="nx">items</span><span class="p">)</span> <span class="p">{</span>
+          <span class="kd">const</span> <span class="nx">workspacePath</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">dir</span><span class="p">,</span> <span class="nx">item</span><span class="p">);</span>
+          <span class="k">if</span> <span class="p">(</span><span class="nx">fs</span><span class="p">.</span><span class="nx">statSync</span><span class="p">(</span><span class="nx">workspacePath</span><span class="p">).</span><span class="nx">isDirectory</span><span class="p">())</span> <span class="p">{</span>
+            <span class="nx">workspaces</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span>
+              <span class="na">name</span><span class="p">:</span> <span class="nx">item</span><span class="p">,</span>
+              <span class="na">path</span><span class="p">:</span> <span class="nx">workspacePath</span>
+            <span class="p">});</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="nx">workspaces</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">DependencyManager</span><span class="p">;</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-best-practices">🎯 <strong>Best Practices</strong></h2>
+
+<h3 id="1-monorepo-organization"><strong>1. Monorepo Organization</strong></h3>
+<ul>
+  <li>Use clear naming conventions</li>
+  <li>Implement proper workspace structure</li>
+  <li>Maintain consistent tooling</li>
+  <li>Document workspace policies</li>
+</ul>
+
+<h3 id="2-build-optimization"><strong>2. Build Optimization</strong></h3>
+<ul>
+  <li>Use incremental builds</li>
+  <li>Implement proper caching</li>
+  <li>Optimize bundle sizes</li>
+  <li>Monitor build performance</li>
+</ul>
+
+<h3 id="3-dependency-management"><strong>3. Dependency Management</strong></h3>
+<ul>
+  <li>Keep dependencies up to date</li>
+  <li>Use workspace dependencies</li>
+  <li>Implement security checks</li>
+  <li>Monitor dependency health</li>
+</ul>
+
+<hr />
+
+<h2 id="-interview-questions">❓ <strong>Interview Questions</strong></h2>
+
+<h3 id="basic-questions"><strong>Basic Questions</strong></h3>
+<ol>
+  <li><strong>What is a monorepo?</strong></li>
+  <li><strong>How do you manage dependencies in a monorepo?</strong></li>
+  <li><strong>What are the benefits of monorepo architecture?</strong></li>
+</ol>
+
+<h3 id="advanced-questions"><strong>Advanced Questions</strong></h3>
+<ol>
+  <li><strong>How would you set up a monorepo for React Native?</strong></li>
+  <li><strong>Explain build optimization strategies.</strong></li>
+  <li><strong>How do you handle workspace dependencies?</strong></li>
+</ol>
+
+<h3 id="practical-questions"><strong>Practical Questions</strong></h3>
+<ol>
+  <li><strong>Set up a monorepo with Yarn workspaces.</strong></li>
+  <li><strong>Implement build optimization.</strong></li>
+  <li><strong>Create a dependency management system.</strong></li>
+</ol>
+
+<hr />
+
+<h2 id="-navigation">🧭 Navigation</h2>
+
+<div class="navigation">
+    <a href="./03-Feature-Based-Modules.md" class="nav-link prev">⬅️ Previous: Feature-Based Modules</a>
+    <a href="../14-Expo-vs-Bare-Workflow/01-Expo-Overview.md" class="nav-link next">Next: Expo Overview ➡️</a>
+</div>
+
+<hr />
+
+<script src="../../common-scripts.js"></script>
+
+<p><em>Last updated: December 2024</em></p>
+
+        </main>
+        
+        <footer style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #ecf0f1; color: #666; text-align: center;">
+            <p>Interview Prep Documentation - Built with Jekyll</p>
+        </footer>
+    </div>
+</body>
+</html>

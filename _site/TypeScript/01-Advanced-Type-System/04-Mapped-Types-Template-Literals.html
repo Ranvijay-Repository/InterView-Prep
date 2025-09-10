@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🗺️ Mapped Types &amp; Template Literals - Interview Prep Documentation</title>
+    <meta name="description" content="Comprehensive guides for JavaScript, TypeScript, and React Native interview preparation">
+    
+    <!-- GitHub Pages compatible styling -->
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+        }
+        
+        .container {
+            max-width: 100%;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            color: #2c3e50;
+            margin-top: 2em;
+            margin-bottom: 1em;
+        }
+        
+        h1 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            border-bottom: 1px solid #ecf0f1;
+            padding-bottom: 5px;
+        }
+        
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border-left: 4px solid #3498db;
+        }
+        
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+        
+        blockquote {
+            border-left: 4px solid #3498db;
+            margin: 0;
+            padding-left: 20px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1em 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .navigation {
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px 0;
+            margin-bottom: 20px;
+        }
+        
+        .navigation a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+        
+        .navigation a:hover {
+            text-decoration: underline;
+        }
+        
+        .breadcrumb {
+            margin-bottom: 20px;
+            color: #666;
+        }
+        
+        .breadcrumb a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            h2 {
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="navigation">
+            <a href="/">Home</a>
+            <a href="/Javascript/">JavaScript</a>
+            <a href="/TypeScript/">TypeScript</a>
+            <a href="/React-Native/">React Native</a>
+        </nav>
+        
+        
+        
+        <main>
+            <h1 id="️-mapped-types--template-literals">🗺️ <strong>Mapped Types &amp; Template Literals</strong></h1>
+
+<blockquote>
+  <p><strong>Complete guide to TypeScript mapped types, template literal types, and advanced type transformations</strong></p>
+</blockquote>
+
+<link rel="stylesheet" href="../../common-styles.css" />
+
+<hr />
+
+<h2 id="-table-of-contents">📚 <strong>Table of Contents</strong></h2>
+
+<ul>
+  <li><a href="#introduction-to-mapped-types">Introduction to Mapped Types</a></li>
+  <li><a href="#basic-mapped-types">Basic Mapped Types</a></li>
+  <li><a href="#template-literal-types">Template Literal Types</a></li>
+  <li><a href="#advanced-mapped-patterns">Advanced Mapped Patterns</a></li>
+  <li><a href="#utility-types-with-mapped-types">Utility Types with Mapped Types</a></li>
+  <li><a href="#best-practices">Best Practices</a></li>
+  <li><a href="#common-interview-questions">Common Interview Questions</a></li>
+</ul>
+
+<hr />
+
+<h2 id="-introduction-to-mapped-types">🎯 <strong>Introduction to Mapped Types</strong></h2>
+
+<p>Mapped types allow you to create new types by transforming existing types, providing powerful type-level programming capabilities.</p>
+
+<h3 id="basic-concept"><strong>Basic Concept</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Basic mapped type syntax</span>
+<span class="kd">type</span> <span class="nx">MappedType</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="p">[</span><span class="nx">K</span> <span class="k">in</span> <span class="kr">keyof</span> <span class="nx">T</span><span class="p">]:</span> <span class="nx">T</span><span class="p">[</span><span class="nx">K</span><span class="p">];</span>
+<span class="p">};</span>
+
+<span class="c1">// This is equivalent to the identity type</span>
+<span class="kd">type</span> <span class="nx">Identity</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nx">T</span><span class="p">;</span>
+
+<span class="c1">// Usage</span>
+<span class="kr">interface</span> <span class="nx">User</span> <span class="p">{</span>
+  <span class="nl">id</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">email</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">MappedUser</span> <span class="o">=</span> <span class="nx">MappedType</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// { id: string; name: string; email: string }</span>
+</code></pre></div></div>
+
+<h3 id="why-use-mapped-types"><strong>Why Use Mapped Types?</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Without mapped types - manual type creation</span>
+<span class="kr">interface</span> <span class="nx">PartialUser</span> <span class="p">{</span>
+  <span class="nl">id</span><span class="p">?:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">name</span><span class="p">?:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">email</span><span class="p">?:</span> <span class="kr">string</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// With mapped types - automatic type transformation</span>
+<span class="kd">type</span> <span class="nb">Partial</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="p">[</span><span class="nx">P</span> <span class="k">in</span> <span class="kr">keyof</span> <span class="nx">T</span><span class="p">]?:</span> <span class="nx">T</span><span class="p">[</span><span class="nx">P</span><span class="p">];</span>
+<span class="p">};</span>
+
+<span class="kd">type</span> <span class="nx">PartialUser</span> <span class="o">=</span> <span class="nb">Partial</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// All properties become optional</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-basic-mapped-types">🔧 <strong>Basic Mapped Types</strong></h2>
+
+<h3 id="property-modifiers"><strong>Property Modifiers</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Make all properties optional</span>
+<span class="kd">type</span> <span class="nb">Partial</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="p">[</span><span class="nx">P</span> <span class="k">in</span> <span class="kr">keyof</span> <span class="nx">T</span><span class="p">]?:</span> <span class="nx">T</span><span class="p">[</span><span class="nx">P</span><span class="p">];</span>
+<span class="p">};</span>
+
+<span class="c1">// Make all properties required</span>
+<span class="kd">type</span> <span class="nx">Required</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="p">[</span><span class="nx">P</span> <span class="k">in</span> <span class="kr">keyof</span> <span class="nx">T</span><span class="p">]</span><span class="o">-</span><span class="p">?:</span> <span class="nx">T</span><span class="p">[</span><span class="nx">P</span><span class="p">];</span>
+<span class="p">};</span>
+
+<span class="c1">// Make all properties readonly</span>
+<span class="kd">type</span> <span class="nb">Readonly</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="k">readonly</span> <span class="p">[</span><span class="nx">P</span> <span class="k">in</span> <span class="kr">keyof</span> <span class="nx">T</span><span class="p">]:</span> <span class="nx">T</span><span class="p">[</span><span class="nx">P</span><span class="p">];</span>
+<span class="p">};</span>
+
+<span class="c1">// Remove readonly modifier</span>
+<span class="kd">type</span> <span class="nx">Mutable</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="o">-</span><span class="k">readonly</span> <span class="p">[</span><span class="nx">P</span> <span class="k">in</span> <span class="kr">keyof</span> <span class="nx">T</span><span class="p">]:</span> <span class="nx">T</span><span class="p">[</span><span class="nx">P</span><span class="p">];</span>
+<span class="p">};</span>
+
+<span class="c1">// Usage</span>
+<span class="kr">interface</span> <span class="nx">User</span> <span class="p">{</span>
+  <span class="nl">id</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">email</span><span class="p">?:</span> <span class="kr">string</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">PartialUser</span> <span class="o">=</span> <span class="nb">Partial</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span><span class="p">;</span>     <span class="c1">// All optional</span>
+<span class="kd">type</span> <span class="nx">RequiredUser</span> <span class="o">=</span> <span class="nx">Required</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span><span class="p">;</span>   <span class="c1">// All required</span>
+<span class="kd">type</span> <span class="nx">ReadonlyUser</span> <span class="o">=</span> <span class="nb">Readonly</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span><span class="p">;</span>   <span class="c1">// All readonly</span>
+<span class="kd">type</span> <span class="nx">MutableUser</span> <span class="o">=</span> <span class="nx">Mutable</span><span class="o">&lt;</span><span class="nx">ReadonlyUser</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// Remove readonly</span>
+</code></pre></div></div>
+
+<h3 id="property-type-transformation"><strong>Property Type Transformation</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Transform property types</span>
+<span class="kd">type</span> <span class="nx">Stringify</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="p">[</span><span class="nx">P</span> <span class="k">in</span> <span class="kr">keyof</span> <span class="nx">T</span><span class="p">]:</span> <span class="kr">string</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="kd">type</span> <span class="nx">Numberify</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="p">[</span><span class="nx">P</span> <span class="k">in</span> <span class="kr">keyof</span> <span class="nx">T</span><span class="p">]:</span> <span class="kr">number</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="c1">// Usage</span>
+<span class="kr">interface</span> <span class="nx">User</span> <span class="p">{</span>
+  <span class="nl">id</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">age</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">StringUser</span> <span class="o">=</span> <span class="nx">Stringify</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// { id: string; name: string; age: string }</span>
+<span class="kd">type</span> <span class="nx">NumberUser</span> <span class="o">=</span> <span class="nx">Numberify</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// { id: number; name: number; age: number }</span>
+</code></pre></div></div>
+
+<h3 id="conditional-property-transformation"><strong>Conditional Property Transformation</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Transform properties based on condition</span>
+<span class="kd">type</span> <span class="nx">StringPropertiesOnly</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="p">[</span><span class="nx">P</span> <span class="k">in</span> <span class="kr">keyof</span> <span class="nx">T</span><span class="p">]:</span> <span class="nx">T</span><span class="p">[</span><span class="nx">P</span><span class="p">]</span> <span class="kd">extends</span> <span class="kr">string</span> <span class="p">?</span> <span class="nx">T</span><span class="p">[</span><span class="nx">P</span><span class="p">]</span> <span class="p">:</span> <span class="nx">never</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="kd">type</span> <span class="nx">NonStringProperties</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="p">[</span><span class="nx">P</span> <span class="k">in</span> <span class="kr">keyof</span> <span class="nx">T</span><span class="p">]:</span> <span class="nx">T</span><span class="p">[</span><span class="nx">P</span><span class="p">]</span> <span class="kd">extends</span> <span class="kr">string</span> <span class="p">?</span> <span class="nx">never</span> <span class="p">:</span> <span class="nx">T</span><span class="p">[</span><span class="nx">P</span><span class="p">];</span>
+<span class="p">};</span>
+
+<span class="c1">// Usage</span>
+<span class="kr">interface</span> <span class="nx">Mixed</span> <span class="p">{</span>
+  <span class="nl">id</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">age</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span>
+  <span class="nl">isActive</span><span class="p">:</span> <span class="nx">boolean</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">StringOnly</span> <span class="o">=</span> <span class="nx">StringPropertiesOnly</span><span class="o">&lt;</span><span class="nx">Mixed</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// { id: string; name: string; age: never; isActive: never }</span>
+<span class="kd">type</span> <span class="nx">NonString</span> <span class="o">=</span> <span class="nx">NonStringProperties</span><span class="o">&lt;</span><span class="nx">Mixed</span><span class="o">&gt;</span><span class="p">;</span>   <span class="c1">// { id: never; name: never; age: number; isActive: boolean }</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-template-literal-types">📝 <strong>Template Literal Types</strong></h2>
+
+<p>Template literal types allow you to create string literal types using template syntax.</p>
+
+<h3 id="basic-template-literals"><strong>Basic Template Literals</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Basic template literal types</span>
+<span class="kd">type</span> <span class="nx">Greeting</span><span class="o">&lt;</span><span class="nx">T</span> <span class="kd">extends</span> <span class="kr">string</span><span class="o">&gt;</span> <span class="o">=</span> <span class="s2">`Hello, </span><span class="p">${</span><span class="nx">T</span><span class="p">}</span><span class="s2">!`</span><span class="p">;</span>
+
+<span class="kd">type</span> <span class="nx">Greeting1</span> <span class="o">=</span> <span class="nx">Greeting</span><span class="o">&lt;</span><span class="dl">"</span><span class="s2">World</span><span class="dl">"</span><span class="o">&gt;</span><span class="p">;</span>  <span class="c1">// "Hello, World!"</span>
+<span class="kd">type</span> <span class="nx">Greeting2</span> <span class="o">=</span> <span class="nx">Greeting</span><span class="o">&lt;</span><span class="dl">"</span><span class="s2">TypeScript</span><span class="dl">"</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// "Hello, TypeScript!"</span>
+
+<span class="c1">// Multiple template variables</span>
+<span class="kd">type</span> <span class="nx">Path</span><span class="o">&lt;</span><span class="nx">T</span> <span class="kd">extends</span> <span class="kr">string</span><span class="p">,</span> <span class="nx">U</span> <span class="kd">extends</span> <span class="kr">string</span><span class="o">&gt;</span> <span class="o">=</span> <span class="s2">`/api/</span><span class="p">${</span><span class="nx">T</span><span class="p">}</span><span class="s2">/</span><span class="p">${</span><span class="nx">U</span><span class="p">}</span><span class="s2">`</span><span class="p">;</span>
+
+<span class="kd">type</span> <span class="nx">UserPath</span> <span class="o">=</span> <span class="nx">Path</span><span class="o">&lt;</span><span class="dl">"</span><span class="s2">users</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">profile</span><span class="dl">"</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// "/api/users/profile"</span>
+<span class="kd">type</span> <span class="nx">ProductPath</span> <span class="o">=</span> <span class="nx">Path</span><span class="o">&lt;</span><span class="dl">"</span><span class="s2">products</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">details</span><span class="dl">"</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// "/api/products/details"</span>
+</code></pre></div></div>
+
+<h3 id="template-literal-with-union-types"><strong>Template Literal with Union Types</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Template literals with union types</span>
+<span class="kd">type</span> <span class="nx">HttpMethod</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">GET</span><span class="dl">"</span> <span class="o">|</span> <span class="dl">"</span><span class="s2">POST</span><span class="dl">"</span> <span class="o">|</span> <span class="dl">"</span><span class="s2">PUT</span><span class="dl">"</span> <span class="o">|</span> <span class="dl">"</span><span class="s2">DELETE</span><span class="dl">"</span><span class="p">;</span>
+<span class="kd">type</span> <span class="nx">ApiEndpoint</span><span class="o">&lt;</span><span class="nx">T</span> <span class="kd">extends</span> <span class="kr">string</span><span class="o">&gt;</span> <span class="o">=</span> <span class="s2">`</span><span class="p">${</span><span class="nx">HttpMethod</span><span class="p">}</span><span class="s2"> /api/</span><span class="p">${</span><span class="nx">T</span><span class="p">}</span><span class="s2">`</span><span class="p">;</span>
+
+<span class="kd">type</span> <span class="nx">UserEndpoint</span> <span class="o">=</span> <span class="nx">ApiEndpoint</span><span class="o">&lt;</span><span class="dl">"</span><span class="s2">users</span><span class="dl">"</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// "GET /api/users" | "POST /api/users" | "PUT /api/users" | "DELETE /api/users"</span>
+
+<span class="c1">// More complex example</span>
+<span class="kd">type</span> <span class="nx">EventName</span><span class="o">&lt;</span><span class="nx">T</span> <span class="kd">extends</span> <span class="kr">string</span><span class="o">&gt;</span> <span class="o">=</span> <span class="s2">`on</span><span class="p">${</span><span class="nx">Capitalize</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">}</span><span class="s2">`</span><span class="p">;</span>
+
+<span class="kd">type</span> <span class="nx">ClickEvent</span> <span class="o">=</span> <span class="nx">EventName</span><span class="o">&lt;</span><span class="dl">"</span><span class="s2">click</span><span class="dl">"</span><span class="o">&gt;</span><span class="p">;</span>   <span class="c1">// "onClick"</span>
+<span class="kd">type</span> <span class="nx">ChangeEvent</span> <span class="o">=</span> <span class="nx">EventName</span><span class="o">&lt;</span><span class="dl">"</span><span class="s2">change</span><span class="dl">"</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// "onChange"</span>
+<span class="kd">type</span> <span class="nx">SubmitEvent</span> <span class="o">=</span> <span class="nx">EventName</span><span class="o">&lt;</span><span class="dl">"</span><span class="s2">submit</span><span class="dl">"</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// "onSubmit"</span>
+</code></pre></div></div>
+
+<h3 id="template-literal-utility-types"><strong>Template Literal Utility Types</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Built-in template literal utility types</span>
+<span class="kd">type</span> <span class="nx">Uppercase</span><span class="o">&lt;</span><span class="nx">S</span> <span class="kd">extends</span> <span class="kr">string</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nx">intrinsic</span><span class="p">;</span>
+<span class="kd">type</span> <span class="nx">Lowercase</span><span class="o">&lt;</span><span class="nx">S</span> <span class="kd">extends</span> <span class="kr">string</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nx">intrinsic</span><span class="p">;</span>
+<span class="kd">type</span> <span class="nx">Capitalize</span><span class="o">&lt;</span><span class="nx">S</span> <span class="kd">extends</span> <span class="kr">string</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nx">intrinsic</span><span class="p">;</span>
+<span class="kd">type</span> <span class="nx">Uncapitalize</span><span class="o">&lt;</span><span class="nx">S</span> <span class="kd">extends</span> <span class="kr">string</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nx">intrinsic</span><span class="p">;</span>
+
+<span class="c1">// Usage</span>
+<span class="kd">type</span> <span class="nx">Upper</span> <span class="o">=</span> <span class="nx">Uppercase</span><span class="o">&lt;</span><span class="dl">"</span><span class="s2">hello</span><span class="dl">"</span><span class="o">&gt;</span><span class="p">;</span>     <span class="c1">// "HELLO"</span>
+<span class="kd">type</span> <span class="nx">Lower</span> <span class="o">=</span> <span class="nx">Lowercase</span><span class="o">&lt;</span><span class="dl">"</span><span class="s2">WORLD</span><span class="dl">"</span><span class="o">&gt;</span><span class="p">;</span>     <span class="c1">// "world"</span>
+<span class="kd">type</span> <span class="nx">Cap</span> <span class="o">=</span> <span class="nx">Capitalize</span><span class="o">&lt;</span><span class="dl">"</span><span class="s2">hello</span><span class="dl">"</span><span class="o">&gt;</span><span class="p">;</span>      <span class="c1">// "Hello"</span>
+<span class="kd">type</span> <span class="nx">Uncap</span> <span class="o">=</span> <span class="nx">Uncapitalize</span><span class="o">&lt;</span><span class="dl">"</span><span class="s2">Hello</span><span class="dl">"</span><span class="o">&gt;</span><span class="p">;</span>  <span class="c1">// "hello"</span>
+
+<span class="c1">// Custom template literal utilities</span>
+<span class="kd">type</span> <span class="nx">CamelCase</span><span class="o">&lt;</span><span class="nx">S</span> <span class="kd">extends</span> <span class="kr">string</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nx">S</span> <span class="kd">extends</span> <span class="s2">`</span><span class="p">${</span><span class="nx">infer</span> <span class="nx">P1</span><span class="p">}</span><span class="s2">_</span><span class="p">${</span><span class="nx">infer</span> <span class="nx">P2</span><span class="p">}</span><span class="s2">`</span>
+  <span class="p">?</span> <span class="s2">`</span><span class="p">${</span><span class="nx">P1</span><span class="p">}${</span><span class="nx">Capitalize</span><span class="o">&lt;</span><span class="nx">CamelCase</span><span class="o">&lt;</span><span class="nx">P2</span><span class="o">&gt;&gt;</span><span class="p">}</span><span class="s2">`</span>
+  <span class="p">:</span> <span class="nx">S</span><span class="p">;</span>
+
+<span class="kd">type</span> <span class="nx">Test1</span> <span class="o">=</span> <span class="nx">CamelCase</span><span class="o">&lt;</span><span class="dl">"</span><span class="s2">hello_world</span><span class="dl">"</span><span class="o">&gt;</span><span class="p">;</span>      <span class="c1">// "helloWorld"</span>
+<span class="kd">type</span> <span class="nx">Test2</span> <span class="o">=</span> <span class="nx">CamelCase</span><span class="o">&lt;</span><span class="dl">"</span><span class="s2">my_variable_name</span><span class="dl">"</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// "myVariableName"</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-advanced-mapped-patterns">🚀 <strong>Advanced Mapped Patterns</strong></h2>
+
+<h3 id="key-remapping"><strong>Key Remapping</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Remap keys using template literals</span>
+<span class="kd">type</span> <span class="nx">AddPrefix</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">,</span> <span class="nx">Prefix</span> <span class="kd">extends</span> <span class="kr">string</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="p">[</span><span class="nx">K</span> <span class="k">in</span> <span class="kr">keyof</span> <span class="nx">T</span> <span class="k">as</span> <span class="s2">`</span><span class="p">${</span><span class="nx">Prefix</span><span class="p">}${</span><span class="kr">string</span> <span class="o">&amp;</span> <span class="nx">K</span><span class="p">}</span><span class="s2">`</span><span class="p">]:</span> <span class="nx">T</span><span class="p">[</span><span class="nx">K</span><span class="p">];</span>
+<span class="p">};</span>
+
+<span class="kd">type</span> <span class="nx">AddSuffix</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">,</span> <span class="nx">Suffix</span> <span class="kd">extends</span> <span class="kr">string</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="p">[</span><span class="nx">K</span> <span class="k">in</span> <span class="kr">keyof</span> <span class="nx">T</span> <span class="k">as</span> <span class="s2">`</span><span class="p">${</span><span class="kr">string</span> <span class="o">&amp;</span> <span class="nx">K</span><span class="p">}${</span><span class="nx">Suffix</span><span class="p">}</span><span class="s2">`</span><span class="p">]:</span> <span class="nx">T</span><span class="p">[</span><span class="nx">K</span><span class="p">];</span>
+<span class="p">};</span>
+
+<span class="c1">// Usage</span>
+<span class="kr">interface</span> <span class="nx">User</span> <span class="p">{</span>
+  <span class="nl">id</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">email</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">PrefixedUser</span> <span class="o">=</span> <span class="nx">AddPrefix</span><span class="o">&lt;</span><span class="nx">User</span><span class="p">,</span> <span class="dl">"</span><span class="s2">user_</span><span class="dl">"</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// { user_id: string; user_name: string; user_email: string }</span>
+<span class="kd">type</span> <span class="nx">SuffixedUser</span> <span class="o">=</span> <span class="nx">AddSuffix</span><span class="o">&lt;</span><span class="nx">User</span><span class="p">,</span> <span class="dl">"</span><span class="s2">_field</span><span class="dl">"</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// { id_field: string; name_field: string; email_field: string }</span>
+</code></pre></div></div>
+
+<h3 id="conditional-key-mapping"><strong>Conditional Key Mapping</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Map keys based on conditions</span>
+<span class="kd">type</span> <span class="nx">FilterKeys</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">,</span> <span class="nx">U</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="p">[</span><span class="nx">K</span> <span class="k">in</span> <span class="kr">keyof</span> <span class="nx">T</span> <span class="k">as</span> <span class="nx">T</span><span class="p">[</span><span class="nx">K</span><span class="p">]</span> <span class="kd">extends</span> <span class="nx">U</span> <span class="p">?</span> <span class="nx">K</span> <span class="p">:</span> <span class="nx">never</span><span class="p">]:</span> <span class="nx">T</span><span class="p">[</span><span class="nx">K</span><span class="p">];</span>
+<span class="p">};</span>
+
+<span class="kd">type</span> <span class="nx">RenameKeys</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">,</span> <span class="nx">M</span> <span class="kd">extends</span> <span class="nb">Record</span><span class="o">&lt;</span><span class="kr">keyof</span> <span class="nx">T</span><span class="p">,</span> <span class="kr">string</span><span class="o">&gt;&gt;</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="p">[</span><span class="nx">K</span> <span class="k">in</span> <span class="kr">keyof</span> <span class="nx">T</span> <span class="k">as</span> <span class="nx">M</span><span class="p">[</span><span class="nx">K</span><span class="p">]]:</span> <span class="nx">T</span><span class="p">[</span><span class="nx">K</span><span class="p">];</span>
+<span class="p">};</span>
+
+<span class="c1">// Usage</span>
+<span class="kr">interface</span> <span class="nx">User</span> <span class="p">{</span>
+  <span class="nl">id</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">age</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span>
+  <span class="nl">email</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">StringKeys</span> <span class="o">=</span> <span class="nx">FilterKeys</span><span class="o">&lt;</span><span class="nx">User</span><span class="p">,</span> <span class="kr">string</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// { id: string; name: string; email: string }</span>
+<span class="kd">type</span> <span class="nx">NumberKeys</span> <span class="o">=</span> <span class="nx">FilterKeys</span><span class="o">&lt;</span><span class="nx">User</span><span class="p">,</span> <span class="kr">number</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// { age: number }</span>
+
+<span class="kd">type</span> <span class="nx">RenamedUser</span> <span class="o">=</span> <span class="nx">RenameKeys</span><span class="o">&lt;</span><span class="nx">User</span><span class="p">,</span> <span class="p">{</span>
+  <span class="na">id</span><span class="p">:</span> <span class="dl">"</span><span class="s2">userId</span><span class="dl">"</span><span class="p">;</span>
+  <span class="nl">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">userName</span><span class="dl">"</span><span class="p">;</span>
+  <span class="nl">age</span><span class="p">:</span> <span class="dl">"</span><span class="s2">userAge</span><span class="dl">"</span><span class="p">;</span>
+  <span class="nl">email</span><span class="p">:</span> <span class="dl">"</span><span class="s2">userEmail</span><span class="dl">"</span><span class="p">;</span>
+<span class="p">}</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// { userId: string; userName: string; userAge: number; userEmail: string }</span>
+</code></pre></div></div>
+
+<h3 id="complex-mapped-patterns"><strong>Complex Mapped Patterns</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Deep mapped type</span>
+<span class="kd">type</span> <span class="nx">DeepPartial</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="p">[</span><span class="nx">P</span> <span class="k">in</span> <span class="kr">keyof</span> <span class="nx">T</span><span class="p">]?:</span> <span class="nx">T</span><span class="p">[</span><span class="nx">P</span><span class="p">]</span> <span class="kd">extends</span> <span class="nx">object</span> <span class="p">?</span> <span class="nx">DeepPartial</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">[</span><span class="nx">P</span><span class="p">]</span><span class="o">&gt;</span> <span class="p">:</span> <span class="nx">T</span><span class="p">[</span><span class="nx">P</span><span class="p">];</span>
+<span class="p">};</span>
+
+<span class="c1">// Conditional deep mapping</span>
+<span class="kd">type</span> <span class="nx">DeepReadonly</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="k">readonly</span> <span class="p">[</span><span class="nx">P</span> <span class="k">in</span> <span class="kr">keyof</span> <span class="nx">T</span><span class="p">]:</span> <span class="nx">T</span><span class="p">[</span><span class="nx">P</span><span class="p">]</span> <span class="kd">extends</span> <span class="nx">object</span> <span class="p">?</span> <span class="nx">DeepReadonly</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">[</span><span class="nx">P</span><span class="p">]</span><span class="o">&gt;</span> <span class="p">:</span> <span class="nx">T</span><span class="p">[</span><span class="nx">P</span><span class="p">];</span>
+<span class="p">};</span>
+
+<span class="c1">// Usage</span>
+<span class="kr">interface</span> <span class="nx">NestedUser</span> <span class="p">{</span>
+  <span class="nl">id</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">profile</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+    <span class="nl">settings</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">theme</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+      <span class="nl">notifications</span><span class="p">:</span> <span class="nx">boolean</span><span class="p">;</span>
+    <span class="p">};</span>
+  <span class="p">};</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">PartialNestedUser</span> <span class="o">=</span> <span class="nx">DeepPartial</span><span class="o">&lt;</span><span class="nx">NestedUser</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="kd">type</span> <span class="nx">ReadonlyNestedUser</span> <span class="o">=</span> <span class="nx">DeepReadonly</span><span class="o">&lt;</span><span class="nx">NestedUser</span><span class="o">&gt;</span><span class="p">;</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="️-utility-types-with-mapped-types">🛠️ <strong>Utility Types with Mapped Types</strong></h2>
+
+<h3 id="built-in-utility-types"><strong>Built-in Utility Types</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Pick utility type</span>
+<span class="kd">type</span> <span class="nb">Pick</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">,</span> <span class="nx">K</span> <span class="kd">extends</span> <span class="kr">keyof</span> <span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="p">[</span><span class="nx">P</span> <span class="k">in</span> <span class="nx">K</span><span class="p">]:</span> <span class="nx">T</span><span class="p">[</span><span class="nx">P</span><span class="p">];</span>
+<span class="p">};</span>
+
+<span class="c1">// Omit utility type</span>
+<span class="kd">type</span> <span class="nx">Omit</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">,</span> <span class="nx">K</span> <span class="kd">extends</span> <span class="kr">keyof</span> <span class="kr">any</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nb">Pick</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">,</span> <span class="nx">Exclude</span><span class="o">&lt;</span><span class="kr">keyof</span> <span class="nx">T</span><span class="p">,</span> <span class="nx">K</span><span class="o">&gt;&gt;</span><span class="p">;</span>
+
+<span class="c1">// Record utility type</span>
+<span class="kd">type</span> <span class="nb">Record</span><span class="o">&lt;</span><span class="nx">K</span> <span class="kd">extends</span> <span class="kr">keyof</span> <span class="kr">any</span><span class="p">,</span> <span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="p">[</span><span class="nx">P</span> <span class="k">in</span> <span class="nx">K</span><span class="p">]:</span> <span class="nx">T</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="c1">// Usage</span>
+<span class="kr">interface</span> <span class="nx">User</span> <span class="p">{</span>
+  <span class="nl">id</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">email</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">age</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">UserBasic</span> <span class="o">=</span> <span class="nb">Pick</span><span class="o">&lt;</span><span class="nx">User</span><span class="p">,</span> <span class="dl">"</span><span class="s2">id</span><span class="dl">"</span> <span class="o">|</span> <span class="dl">"</span><span class="s2">name</span><span class="dl">"</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// { id: string; name: string }</span>
+<span class="kd">type</span> <span class="nx">UserWithoutId</span> <span class="o">=</span> <span class="nx">Omit</span><span class="o">&lt;</span><span class="nx">User</span><span class="p">,</span> <span class="dl">"</span><span class="s2">id</span><span class="dl">"</span><span class="o">&gt;</span><span class="p">;</span>      <span class="c1">// { name: string; email: string; age: number }</span>
+<span class="kd">type</span> <span class="nx">UserRecord</span> <span class="o">=</span> <span class="nb">Record</span><span class="o">&lt;</span><span class="dl">"</span><span class="s2">user1</span><span class="dl">"</span> <span class="o">|</span> <span class="dl">"</span><span class="s2">user2</span><span class="dl">"</span><span class="p">,</span> <span class="nx">User</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// { user1: User; user2: User }</span>
+</code></pre></div></div>
+
+<h3 id="custom-utility-types"><strong>Custom Utility Types</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Optional by keys</span>
+<span class="kd">type</span> <span class="nx">OptionalByKeys</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">,</span> <span class="nx">K</span> <span class="kd">extends</span> <span class="kr">keyof</span> <span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nx">Omit</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">,</span> <span class="nx">K</span><span class="o">&gt;</span> <span class="o">&amp;</span> <span class="nb">Partial</span><span class="o">&lt;</span><span class="nb">Pick</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">,</span> <span class="nx">K</span><span class="o">&gt;&gt;</span><span class="p">;</span>
+
+<span class="c1">// Required by keys</span>
+<span class="kd">type</span> <span class="nx">RequiredByKeys</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">,</span> <span class="nx">K</span> <span class="kd">extends</span> <span class="kr">keyof</span> <span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nx">Omit</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">,</span> <span class="nx">K</span><span class="o">&gt;</span> <span class="o">&amp;</span> <span class="nx">Required</span><span class="o">&lt;</span><span class="nb">Pick</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">,</span> <span class="nx">K</span><span class="o">&gt;&gt;</span><span class="p">;</span>
+
+<span class="c1">// Partial by keys</span>
+<span class="kd">type</span> <span class="nx">PartialByKeys</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">,</span> <span class="nx">K</span> <span class="kd">extends</span> <span class="kr">keyof</span> <span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nx">Omit</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">,</span> <span class="nx">K</span><span class="o">&gt;</span> <span class="o">&amp;</span> <span class="nb">Partial</span><span class="o">&lt;</span><span class="nb">Pick</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">,</span> <span class="nx">K</span><span class="o">&gt;&gt;</span><span class="p">;</span>
+
+<span class="c1">// Readonly by keys</span>
+<span class="kd">type</span> <span class="nx">ReadonlyByKeys</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">,</span> <span class="nx">K</span> <span class="kd">extends</span> <span class="kr">keyof</span> <span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nx">Omit</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">,</span> <span class="nx">K</span><span class="o">&gt;</span> <span class="o">&amp;</span> <span class="nb">Readonly</span><span class="o">&lt;</span><span class="nb">Pick</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">,</span> <span class="nx">K</span><span class="o">&gt;&gt;</span><span class="p">;</span>
+
+<span class="c1">// Usage</span>
+<span class="kr">interface</span> <span class="nx">User</span> <span class="p">{</span>
+  <span class="nl">id</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">email</span><span class="p">?:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">age</span><span class="p">?:</span> <span class="kr">number</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">OptionalEmail</span> <span class="o">=</span> <span class="nx">OptionalByKeys</span><span class="o">&lt;</span><span class="nx">User</span><span class="p">,</span> <span class="dl">"</span><span class="s2">email</span><span class="dl">"</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// { id: string; name: string; email?: string; age?: number }</span>
+<span class="kd">type</span> <span class="nx">RequiredEmail</span> <span class="o">=</span> <span class="nx">RequiredByKeys</span><span class="o">&lt;</span><span class="nx">User</span><span class="p">,</span> <span class="dl">"</span><span class="s2">email</span><span class="dl">"</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// { id: string; name: string; email: string; age?: number }</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-best-practices">✅ <strong>Best Practices</strong></h2>
+
+<h3 id="1-use-mapped-types-for-type-transformations"><strong>1. Use Mapped Types for Type Transformations</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ✅ Good: Use mapped types for consistent transformations</span>
+<span class="kd">type</span> <span class="nb">Partial</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="p">[</span><span class="nx">P</span> <span class="k">in</span> <span class="kr">keyof</span> <span class="nx">T</span><span class="p">]?:</span> <span class="nx">T</span><span class="p">[</span><span class="nx">P</span><span class="p">];</span>
+<span class="p">};</span>
+
+<span class="c1">// ❌ Avoid: Manual type definitions</span>
+<span class="kr">interface</span> <span class="nx">PartialUser</span> <span class="p">{</span>
+  <span class="nl">id</span><span class="p">?:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">name</span><span class="p">?:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">email</span><span class="p">?:</span> <span class="kr">string</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="2-leverage-template-literals-for-string-types"><strong>2. Leverage Template Literals for String Types</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ✅ Good: Use template literals for dynamic string types</span>
+<span class="kd">type</span> <span class="nx">ApiEndpoint</span><span class="o">&lt;</span><span class="nx">T</span> <span class="kd">extends</span> <span class="kr">string</span><span class="o">&gt;</span> <span class="o">=</span> <span class="s2">`/api/</span><span class="p">${</span><span class="nx">T</span><span class="p">}</span><span class="s2">`</span><span class="p">;</span>
+
+<span class="c1">// ❌ Avoid: Manual string literal unions</span>
+<span class="kd">type</span> <span class="nx">ApiEndpoint</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">/api/users</span><span class="dl">"</span> <span class="o">|</span> <span class="dl">"</span><span class="s2">/api/products</span><span class="dl">"</span> <span class="o">|</span> <span class="dl">"</span><span class="s2">/api/orders</span><span class="dl">"</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="3-combine-mapped-types-with-conditional-types"><strong>3. Combine Mapped Types with Conditional Types</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ✅ Good: Combine for powerful type transformations</span>
+<span class="kd">type</span> <span class="nx">ConditionalMapped</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="p">[</span><span class="nx">K</span> <span class="k">in</span> <span class="kr">keyof</span> <span class="nx">T</span><span class="p">]:</span> <span class="nx">T</span><span class="p">[</span><span class="nx">K</span><span class="p">]</span> <span class="kd">extends</span> <span class="kr">string</span> <span class="p">?</span> <span class="nx">T</span><span class="p">[</span><span class="nx">K</span><span class="p">]</span> <span class="p">:</span> <span class="nx">never</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="c1">// ❌ Avoid: Separate transformations</span>
+<span class="kd">type</span> <span class="nx">StringOnly</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nx">T</span> <span class="kd">extends</span> <span class="kr">string</span> <span class="p">?</span> <span class="nx">T</span> <span class="p">:</span> <span class="nx">never</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="4-use-key-remapping-for-advanced-transformations"><strong>4. Use Key Remapping for Advanced Transformations</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ✅ Good: Use key remapping for complex transformations</span>
+<span class="kd">type</span> <span class="nx">AddPrefix</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">,</span> <span class="nx">P</span> <span class="kd">extends</span> <span class="kr">string</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="p">[</span><span class="nx">K</span> <span class="k">in</span> <span class="kr">keyof</span> <span class="nx">T</span> <span class="k">as</span> <span class="s2">`</span><span class="p">${</span><span class="nx">P</span><span class="p">}${</span><span class="kr">string</span> <span class="o">&amp;</span> <span class="nx">K</span><span class="p">}</span><span class="s2">`</span><span class="p">]:</span> <span class="nx">T</span><span class="p">[</span><span class="nx">K</span><span class="p">];</span>
+<span class="p">};</span>
+
+<span class="c1">// ❌ Avoid: Manual key transformations</span>
+<span class="kd">type</span> <span class="nx">PrefixedUser</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">user_id</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">user_name</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">user_email</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-common-interview-questions">❓ <strong>Common Interview Questions</strong></h2>
+
+<h3 id="1-what-are-mapped-types-in-typescript"><strong>1. What are mapped types in TypeScript?</strong></h3>
+
+<p><strong>Answer:</strong>
+Mapped types allow you to create new types by transforming existing types. They use the syntax <code class="language-plaintext highlighter-rouge">[K in keyof T]: T[K]</code> to iterate over properties and transform them.</p>
+
+<h3 id="2-how-do-you-create-a-mapped-type"><strong>2. How do you create a mapped type?</strong></h3>
+
+<p><strong>Answer:</strong>
+Use the mapped type syntax with property iteration:</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">type</span> <span class="nb">Partial</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="p">[</span><span class="nx">P</span> <span class="k">in</span> <span class="kr">keyof</span> <span class="nx">T</span><span class="p">]?:</span> <span class="nx">T</span><span class="p">[</span><span class="nx">P</span><span class="p">];</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="3-what-are-template-literal-types"><strong>3. What are template literal types?</strong></h3>
+
+<p><strong>Answer:</strong>
+Template literal types allow you to create string literal types using template syntax with <code class="language-plaintext highlighter-rouge">${}</code> placeholders:</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">type</span> <span class="nx">Greeting</span><span class="o">&lt;</span><span class="nx">T</span> <span class="kd">extends</span> <span class="kr">string</span><span class="o">&gt;</span> <span class="o">=</span> <span class="s2">`Hello, </span><span class="p">${</span><span class="nx">T</span><span class="p">}</span><span class="s2">!`</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="4-how-do-you-use-key-remapping-in-mapped-types"><strong>4. How do you use key remapping in mapped types?</strong></h3>
+
+<p><strong>Answer:</strong>
+Use the <code class="language-plaintext highlighter-rouge">as</code> clause to remap keys:</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">type</span> <span class="nx">AddPrefix</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">,</span> <span class="nx">P</span> <span class="kd">extends</span> <span class="kr">string</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="p">[</span><span class="nx">K</span> <span class="k">in</span> <span class="kr">keyof</span> <span class="nx">T</span> <span class="k">as</span> <span class="s2">`</span><span class="p">${</span><span class="nx">P</span><span class="p">}${</span><span class="kr">string</span> <span class="o">&amp;</span> <span class="nx">K</span><span class="p">}</span><span class="s2">`</span><span class="p">]:</span> <span class="nx">T</span><span class="p">[</span><span class="nx">K</span><span class="p">];</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="5-what-are-the-built-in-template-literal-utility-types"><strong>5. What are the built-in template literal utility types?</strong></h3>
+
+<p><strong>Answer:</strong>
+TypeScript provides:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Uppercase&lt;S&gt;</code>: Convert to uppercase</li>
+  <li><code class="language-plaintext highlighter-rouge">Lowercase&lt;S&gt;</code>: Convert to lowercase</li>
+  <li><code class="language-plaintext highlighter-rouge">Capitalize&lt;S&gt;</code>: Capitalize first letter</li>
+  <li><code class="language-plaintext highlighter-rouge">Uncapitalize&lt;S&gt;</code>: Uncapitalize first letter</li>
+</ul>
+
+<hr />
+
+<h2 id="-navigation">🧭 Navigation</h2>
+
+<div class="navigation">
+  <a href="03-Conditional-Types.md" class="nav-button">← Previous: Conditional Types</a>
+  <a href="../02-TypeScript-Modern-JavaScript/01-ES6-Features-TypeScript.md" class="nav-button">Next: ES6+ Features &amp; TypeScript →</a>
+</div>
+
+<p><em>Last updated: December 2025</em></p>
+
+        </main>
+        
+        <footer style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #ecf0f1; color: #666; text-align: center;">
+            <p>Interview Prep Documentation - Built with Jekyll</p>
+        </footer>
+    </div>
+</body>
+</html>

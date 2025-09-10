@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🛡️ Error Boundaries in React Native - Interview Prep Documentation</title>
+    <meta name="description" content="Comprehensive guides for JavaScript, TypeScript, and React Native interview preparation">
+    
+    <!-- GitHub Pages compatible styling -->
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+        }
+        
+        .container {
+            max-width: 100%;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            color: #2c3e50;
+            margin-top: 2em;
+            margin-bottom: 1em;
+        }
+        
+        h1 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            border-bottom: 1px solid #ecf0f1;
+            padding-bottom: 5px;
+        }
+        
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border-left: 4px solid #3498db;
+        }
+        
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+        
+        blockquote {
+            border-left: 4px solid #3498db;
+            margin: 0;
+            padding-left: 20px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1em 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .navigation {
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px 0;
+            margin-bottom: 20px;
+        }
+        
+        .navigation a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+        
+        .navigation a:hover {
+            text-decoration: underline;
+        }
+        
+        .breadcrumb {
+            margin-bottom: 20px;
+            color: #666;
+        }
+        
+        .breadcrumb a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            h2 {
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="navigation">
+            <a href="/">Home</a>
+            <a href="/Javascript/">JavaScript</a>
+            <a href="/TypeScript/">TypeScript</a>
+            <a href="/React-Native/">React Native</a>
+        </nav>
+        
+        
+        
+        <main>
+            <h1 id="️-error-boundaries-in-react-native">🛡️ <strong>Error Boundaries in React Native</strong></h1>
+
+<blockquote>
+  <p><strong>Comprehensive guide to implementing error boundaries, error handling patterns, and recovery strategies in React Native applications</strong></p>
+</blockquote>
+
+<link rel="stylesheet" href="../../common-styles.css" />
+
+<hr />
+
+<h2 id="-table-of-contents">📚 <strong>Table of Contents</strong></h2>
+
+<ul>
+  <li><a href="#understanding-error-boundaries">Understanding Error Boundaries</a></li>
+  <li><a href="#functional-error-boundary-implementation">Functional Error Boundary Implementation</a></li>
+  <li><a href="#error-boundary-patterns">Error Boundary Patterns</a></li>
+  <li><a href="#error-recovery-strategies">Error Recovery Strategies</a></li>
+  <li><a href="#error-logging-and-monitoring">Error Logging and Monitoring</a></li>
+  <li><a href="#best-practices">Best Practices</a></li>
+  <li><a href="#common-interview-questions">Common Interview Questions</a></li>
+</ul>
+
+<hr />
+
+<h2 id="-understanding-error-boundaries">🎯 <strong>Understanding Error Boundaries</strong></h2>
+
+<p>Error boundaries are React components that catch JavaScript errors anywhere in their child component tree, log those errors, and display a fallback UI instead of the component tree that crashed.</p>
+
+<h3 id="key-concepts"><strong>Key Concepts</strong></h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Error boundaries catch errors in:</span>
+<span class="c1">// - Render methods</span>
+<span class="c1">// - Lifecycle methods</span>
+<span class="c1">// - Constructors of the whole tree below them</span>
+
+<span class="c1">// Error boundaries DON'T catch errors in:</span>
+<span class="c1">// - Event handlers</span>
+<span class="c1">// - Asynchronous code (setTimeout, promises)</span>
+<span class="c1">// - Server-side rendering</span>
+<span class="c1">// - Errors thrown in the error boundary itself</span>
+</code></pre></div></div>
+
+<h3 id="error-boundary-lifecycle"><strong>Error Boundary Lifecycle</strong></h3>
+
+<pre><code class="language-mermaid">graph TD
+    A[Component Renders] --&gt; B{Error Occurs?}
+    B --&gt;|No| C[Normal Render]
+    B --&gt;|Yes| D[Error Boundary Catches]
+    D --&gt; E[getDerivedStateFromError]
+    E --&gt; F[componentDidCatch]
+    F --&gt; G[Fallback UI Rendered]
+    G --&gt; H[Error Logged]
+</code></pre>
+
+<hr />
+
+<h2 id="-functional-error-boundary-implementation">🔧 <strong>Functional Error Boundary Implementation</strong></h2>
+
+<h3 id="basic-error-boundary-with-hooks"><strong>Basic Error Boundary with Hooks</strong></h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useState</span><span class="p">,</span> <span class="nx">useEffect</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">View</span><span class="p">,</span> <span class="nx">Text</span><span class="p">,</span> <span class="nx">TouchableOpacity</span><span class="p">,</span> <span class="nx">StyleSheet</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">ErrorBoundary</span> <span class="o">=</span> <span class="p">({</span> <span class="nx">children</span><span class="p">,</span> <span class="nx">onError</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">hasError</span><span class="p">,</span> <span class="nx">setHasError</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">error</span><span class="p">,</span> <span class="nx">setError</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">errorInfo</span><span class="p">,</span> <span class="nx">setErrorInfo</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">handleError</span> <span class="o">=</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">errorInfo</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">setHasError</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+      <span class="nx">setError</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
+      <span class="nx">setErrorInfo</span><span class="p">(</span><span class="nx">errorInfo</span><span class="p">);</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Error caught by boundary:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">,</span> <span class="nx">errorInfo</span><span class="p">);</span>
+
+      <span class="k">if</span> <span class="p">(</span><span class="nx">onError</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">onError</span><span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">errorInfo</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">};</span>
+
+    <span class="kd">const</span> <span class="nx">originalConsoleError</span> <span class="o">=</span> <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">;</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">error</span> <span class="o">=</span> <span class="p">(...</span><span class="nx">args</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]?.</span><span class="nx">includes</span><span class="p">?.(</span><span class="dl">'</span><span class="s1">Error</span><span class="dl">'</span><span class="p">))</span> <span class="p">{</span>
+        <span class="nx">handleError</span><span class="p">(</span><span class="nx">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nx">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+      <span class="p">}</span>
+      <span class="nx">originalConsoleError</span><span class="p">(...</span><span class="nx">args</span><span class="p">);</span>
+    <span class="p">};</span>
+
+    <span class="k">return</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">error</span> <span class="o">=</span> <span class="nx">originalConsoleError</span><span class="p">;</span>
+    <span class="p">};</span>
+  <span class="p">},</span> <span class="p">[</span><span class="nx">onError</span><span class="p">]);</span>
+
+  <span class="kd">const</span> <span class="nx">handleRetry</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setHasError</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+    <span class="nx">setError</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+    <span class="nx">setErrorInfo</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+  <span class="p">};</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="nx">hasError</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">errorContainer</span><span class="p">}</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">errorTitle</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Something</span> <span class="nx">went</span> <span class="nx">wrong</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">errorMessage</span><span class="p">}</span><span class="o">&gt;</span>
+          <span class="p">{</span><span class="nx">error</span><span class="p">?.</span><span class="nx">message</span> <span class="o">||</span> <span class="dl">'</span><span class="s1">An unexpected error occurred</span><span class="dl">'</span><span class="p">}</span>
+        <span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="nx">TouchableOpacity</span>
+          <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">retryButton</span><span class="p">}</span>
+          <span class="nx">onPress</span><span class="o">=</span><span class="p">{</span><span class="nx">handleRetry</span><span class="p">}</span>
+        <span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">retryButtonText</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Try</span> <span class="nx">Again</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/TouchableOpacity</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>    <span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="nx">children</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">styles</span> <span class="o">=</span> <span class="nx">StyleSheet</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span>
+  <span class="na">errorContainer</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">flex</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="na">justifyContent</span><span class="p">:</span> <span class="dl">'</span><span class="s1">center</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">alignItems</span><span class="p">:</span> <span class="dl">'</span><span class="s1">center</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">padding</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#f8f9fa</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">errorTitle</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">fontSize</span><span class="p">:</span> <span class="mi">24</span><span class="p">,</span>
+    <span class="na">fontWeight</span><span class="p">:</span> <span class="dl">'</span><span class="s1">bold</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#dc3545</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">marginBottom</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">errorMessage</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">fontSize</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+    <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#6c757d</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">textAlign</span><span class="p">:</span> <span class="dl">'</span><span class="s1">center</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">marginBottom</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">retryButton</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#007bff</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">paddingHorizontal</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="na">paddingVertical</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="na">borderRadius</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">retryButtonText</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">white</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">fontSize</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+    <span class="na">fontWeight</span><span class="p">:</span> <span class="dl">'</span><span class="s1">bold</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+<span class="p">});</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">ErrorBoundary</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="advanced-error-boundary-with-context"><strong>Advanced Error Boundary with Context</strong></h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">createContext</span><span class="p">,</span> <span class="nx">useContext</span><span class="p">,</span> <span class="nx">useState</span><span class="p">,</span> <span class="nx">useEffect</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">View</span><span class="p">,</span> <span class="nx">Text</span><span class="p">,</span> <span class="nx">TouchableOpacity</span><span class="p">,</span> <span class="nx">StyleSheet</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">ErrorContext</span> <span class="o">=</span> <span class="nx">createContext</span><span class="p">();</span>
+
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">useError</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">context</span> <span class="o">=</span> <span class="nx">useContext</span><span class="p">(</span><span class="nx">ErrorContext</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">useError must be used within an ErrorProvider</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">context</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">ErrorProvider</span> <span class="o">=</span> <span class="p">({</span> <span class="nx">children</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">errors</span><span class="p">,</span> <span class="nx">setErrors</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">([]);</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">hasError</span><span class="p">,</span> <span class="nx">setHasError</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+
+  <span class="kd">const</span> <span class="nx">addError</span> <span class="o">=</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">errorInfo</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">errorData</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="na">id</span><span class="p">:</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">(),</span>
+      <span class="na">error</span><span class="p">:</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span> <span class="o">||</span> <span class="nx">error</span><span class="p">,</span>
+      <span class="na">stack</span><span class="p">:</span> <span class="nx">error</span><span class="p">.</span><span class="nx">stack</span> <span class="o">||</span> <span class="nx">errorInfo</span><span class="p">?.</span><span class="nx">componentStack</span><span class="p">,</span>
+      <span class="na">timestamp</span><span class="p">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">toISOString</span><span class="p">(),</span>
+    <span class="p">};</span>
+    
+    <span class="nx">setErrors</span><span class="p">(</span><span class="nx">prev</span> <span class="o">=&gt;</span> <span class="p">[...</span><span class="nx">prev</span><span class="p">,</span> <span class="nx">errorData</span><span class="p">]);</span>
+    <span class="nx">setHasError</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+    
+    <span class="c1">// Log to external service</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Error logged:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">errorData</span><span class="p">);</span>
+  <span class="p">};</span>
+
+  <span class="kd">const</span> <span class="nx">clearErrors</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setErrors</span><span class="p">([]);</span>
+    <span class="nx">setHasError</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+  <span class="p">};</span>
+
+  <span class="kd">const</span> <span class="nx">value</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">errors</span><span class="p">,</span>
+    <span class="nx">hasError</span><span class="p">,</span>
+    <span class="nx">addError</span><span class="p">,</span>
+    <span class="nx">clearErrors</span><span class="p">,</span>
+  <span class="p">};</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">ErrorContext</span><span class="p">.</span><span class="nx">Provider</span> <span class="nx">value</span><span class="o">=</span><span class="p">{</span><span class="nx">value</span><span class="p">}</span><span class="o">&gt;</span>
+      <span class="p">{</span><span class="nx">children</span><span class="p">}</span>
+    <span class="o">&lt;</span><span class="sr">/ErrorContext.Provider</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">ErrorBoundary</span> <span class="o">=</span> <span class="p">({</span> <span class="nx">children</span><span class="p">,</span> <span class="na">fallback</span><span class="p">:</span> <span class="nx">FallbackComponent</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">{</span> <span class="nx">addError</span><span class="p">,</span> <span class="nx">clearErrors</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">useError</span><span class="p">();</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">hasError</span><span class="p">,</span> <span class="nx">setHasError</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">handleError</span> <span class="o">=</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">errorInfo</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">setHasError</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+      <span class="nx">addError</span><span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">errorInfo</span><span class="p">);</span>
+    <span class="p">};</span>
+
+    <span class="kd">const</span> <span class="nx">originalConsoleError</span> <span class="o">=</span> <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">;</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">error</span> <span class="o">=</span> <span class="p">(...</span><span class="nx">args</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]?.</span><span class="nx">includes</span><span class="p">?.(</span><span class="dl">'</span><span class="s1">Error</span><span class="dl">'</span><span class="p">))</span> <span class="p">{</span>
+        <span class="nx">handleError</span><span class="p">(</span><span class="nx">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nx">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+      <span class="p">}</span>
+      <span class="nx">originalConsoleError</span><span class="p">(...</span><span class="nx">args</span><span class="p">);</span>
+    <span class="p">};</span>
+
+    <span class="k">return</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">error</span> <span class="o">=</span> <span class="nx">originalConsoleError</span><span class="p">;</span>
+    <span class="p">};</span>
+  <span class="p">},</span> <span class="p">[</span><span class="nx">addError</span><span class="p">]);</span>
+
+  <span class="kd">const</span> <span class="nx">handleRetry</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setHasError</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+    <span class="nx">clearErrors</span><span class="p">();</span>
+  <span class="p">};</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="nx">hasError</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">FallbackComponent</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="o">&lt;</span><span class="nx">FallbackComponent</span> <span class="nx">onRetry</span><span class="o">=</span><span class="p">{</span><span class="nx">handleRetry</span><span class="p">}</span> <span class="sr">/&gt;</span><span class="err">;
+</span>    <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">errorContainer</span><span class="p">}</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">errorTitle</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Something</span> <span class="nx">went</span> <span class="nx">wrong</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="nx">TouchableOpacity</span>
+          <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">retryButton</span><span class="p">}</span>
+          <span class="nx">onPress</span><span class="o">=</span><span class="p">{</span><span class="nx">handleRetry</span><span class="p">}</span>
+        <span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">retryButtonText</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Try</span> <span class="nx">Again</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/TouchableOpacity</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>    <span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="nx">children</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">export</span> <span class="p">{</span> <span class="nx">ErrorProvider</span><span class="p">,</span> <span class="nx">ErrorBoundary</span> <span class="p">};</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-error-boundary-patterns">🎨 <strong>Error Boundary Patterns</strong></h2>
+
+<h3 id="route-level-error-boundaries"><strong>Route-Level Error Boundaries</strong></h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">createStackNavigator</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@react-navigation/stack</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">ErrorBoundary</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">../components/ErrorBoundary</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">Stack</span> <span class="o">=</span> <span class="nx">createStackNavigator</span><span class="p">();</span>
+
+<span class="kd">const</span> <span class="nx">AppNavigator</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">Stack</span><span class="p">.</span><span class="nx">Navigator</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="nx">Stack</span><span class="p">.</span><span class="nx">Screen</span> <span class="nx">name</span><span class="o">=</span><span class="dl">"</span><span class="s2">Home</span><span class="dl">"</span><span class="o">&gt;</span>
+        <span class="p">{()</span> <span class="o">=&gt;</span> <span class="p">(</span>
+          <span class="o">&lt;</span><span class="nx">ErrorBoundary</span><span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="nx">HomeScreen</span> <span class="o">/&gt;</span>
+          <span class="o">&lt;</span><span class="sr">/ErrorBoundary</span><span class="err">&gt;
+</span>        <span class="p">)}</span>
+      <span class="o">&lt;</span><span class="sr">/Stack.Screen</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="nx">Stack</span><span class="p">.</span><span class="nx">Screen</span> <span class="nx">name</span><span class="o">=</span><span class="dl">"</span><span class="s2">Profile</span><span class="dl">"</span><span class="o">&gt;</span>
+        <span class="p">{()</span> <span class="o">=&gt;</span> <span class="p">(</span>
+          <span class="o">&lt;</span><span class="nx">ErrorBoundary</span><span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="nx">ProfileScreen</span> <span class="o">/&gt;</span>
+          <span class="o">&lt;</span><span class="sr">/ErrorBoundary</span><span class="err">&gt;
+</span>        <span class="p">)}</span>
+      <span class="o">&lt;</span><span class="sr">/Stack.Screen</span><span class="err">&gt;
+</span>    <span class="o">&lt;</span><span class="sr">/Stack.Navigator</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="feature-level-error-boundaries"><strong>Feature-Level Error Boundaries</strong></h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">ErrorBoundary</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">../components/ErrorBoundary</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">FeatureWrapper</span> <span class="o">=</span> <span class="p">({</span> <span class="nx">children</span><span class="p">,</span> <span class="nx">featureName</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">handleError</span> <span class="o">=</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">errorInfo</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// Log feature-specific errors</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s2">`Error in </span><span class="p">${</span><span class="nx">featureName</span><span class="p">}</span><span class="s2">:`</span><span class="p">,</span> <span class="nx">error</span><span class="p">,</span> <span class="nx">errorInfo</span><span class="p">);</span>
+    
+    <span class="c1">// Send to analytics</span>
+    <span class="nx">analytics</span><span class="p">.</span><span class="nx">track</span><span class="p">(</span><span class="dl">'</span><span class="s1">Feature Error</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span>
+      <span class="na">feature</span><span class="p">:</span> <span class="nx">featureName</span><span class="p">,</span>
+      <span class="na">error</span><span class="p">:</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">,</span>
+      <span class="na">stack</span><span class="p">:</span> <span class="nx">error</span><span class="p">.</span><span class="nx">stack</span><span class="p">,</span>
+    <span class="p">});</span>
+  <span class="p">};</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">ErrorBoundary</span> <span class="nx">onError</span><span class="o">=</span><span class="p">{</span><span class="nx">handleError</span><span class="p">}</span><span class="o">&gt;</span>
+      <span class="p">{</span><span class="nx">children</span><span class="p">}</span>
+    <span class="o">&lt;</span><span class="sr">/ErrorBoundary</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">};</span>
+
+<span class="c1">// Usage</span>
+<span class="kd">const</span> <span class="nx">App</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">View</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="nx">FeatureWrapper</span> <span class="nx">featureName</span><span class="o">=</span><span class="dl">"</span><span class="s2">UserProfile</span><span class="dl">"</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">UserProfile</span> <span class="o">/&gt;</span>
+      <span class="o">&lt;</span><span class="sr">/FeatureWrapper</span><span class="err">&gt;
+</span>      
+      <span class="o">&lt;</span><span class="nx">FeatureWrapper</span> <span class="nx">featureName</span><span class="o">=</span><span class="dl">"</span><span class="s2">ProductList</span><span class="dl">"</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">ProductList</span> <span class="o">/&gt;</span>
+      <span class="o">&lt;</span><span class="sr">/FeatureWrapper</span><span class="err">&gt;
+</span>    <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="async-error-boundary"><strong>Async Error Boundary</strong></h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useState</span><span class="p">,</span> <span class="nx">useEffect</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">View</span><span class="p">,</span> <span class="nx">Text</span><span class="p">,</span> <span class="nx">TouchableOpacity</span><span class="p">,</span> <span class="nx">StyleSheet</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">AsyncErrorBoundary</span> <span class="o">=</span> <span class="p">({</span> <span class="nx">children</span><span class="p">,</span> <span class="nx">onAsyncError</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">hasError</span><span class="p">,</span> <span class="nx">setHasError</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">error</span><span class="p">,</span> <span class="nx">setError</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">handleUnhandledRejection</span> <span class="o">=</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">setHasError</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+      <span class="nx">setError</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">reason</span><span class="p">);</span>
+      
+      <span class="k">if</span> <span class="p">(</span><span class="nx">onAsyncError</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">onAsyncError</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">reason</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">};</span>
+
+    <span class="kd">const</span> <span class="nx">handleError</span> <span class="o">=</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">setHasError</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+      <span class="nx">setError</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">error</span><span class="p">);</span>
+      
+      <span class="k">if</span> <span class="p">(</span><span class="nx">onAsyncError</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">onAsyncError</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">error</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">};</span>
+
+    <span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">unhandledrejection</span><span class="dl">'</span><span class="p">,</span> <span class="nx">handleUnhandledRejection</span><span class="p">);</span>
+    <span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span> <span class="nx">handleError</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nb">window</span><span class="p">.</span><span class="nx">removeEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">unhandledrejection</span><span class="dl">'</span><span class="p">,</span> <span class="nx">handleUnhandledRejection</span><span class="p">);</span>
+      <span class="nb">window</span><span class="p">.</span><span class="nx">removeEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span> <span class="nx">handleError</span><span class="p">);</span>
+    <span class="p">};</span>
+  <span class="p">},</span> <span class="p">[</span><span class="nx">onAsyncError</span><span class="p">]);</span>
+
+  <span class="kd">const</span> <span class="nx">handleRetry</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setHasError</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+    <span class="nx">setError</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+  <span class="p">};</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="nx">hasError</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">errorContainer</span><span class="p">}</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">errorTitle</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Async</span> <span class="nb">Error</span> <span class="nx">Occurred</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">errorMessage</span><span class="p">}</span><span class="o">&gt;</span>
+          <span class="p">{</span><span class="nx">error</span><span class="p">?.</span><span class="nx">message</span> <span class="o">||</span> <span class="dl">'</span><span class="s1">An unexpected error occurred</span><span class="dl">'</span><span class="p">}</span>
+        <span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="nx">TouchableOpacity</span>
+          <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">retryButton</span><span class="p">}</span>
+          <span class="nx">onPress</span><span class="o">=</span><span class="p">{</span><span class="nx">handleRetry</span><span class="p">}</span>
+        <span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">retryButtonText</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Try</span> <span class="nx">Again</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/TouchableOpacity</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>    <span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="nx">children</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-error-recovery-strategies">🔄 <strong>Error Recovery Strategies</strong></h2>
+
+<h3 id="automatic-retry-with-exponential-backoff"><strong>Automatic Retry with Exponential Backoff</strong></h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useState</span><span class="p">,</span> <span class="nx">useEffect</span><span class="p">,</span> <span class="nx">useCallback</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">useErrorRecovery</span> <span class="o">=</span> <span class="p">(</span><span class="nx">maxRetries</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="nx">baseDelay</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">retryCount</span><span class="p">,</span> <span class="nx">setRetryCount</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">isRetrying</span><span class="p">,</span> <span class="nx">setIsRetrying</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+
+  <span class="kd">const</span> <span class="nx">retry</span> <span class="o">=</span> <span class="nx">useCallback</span><span class="p">(</span><span class="k">async</span> <span class="p">(</span><span class="nx">operation</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">retryCount</span> <span class="o">&gt;=</span> <span class="nx">maxRetries</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Max retries reached</span><span class="dl">'</span><span class="p">);</span>
+      <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="nx">setIsRetrying</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+    
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="k">await</span> <span class="nx">operation</span><span class="p">();</span>
+      <span class="nx">setRetryCount</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+      <span class="nx">setIsRetrying</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+      <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">delay</span> <span class="o">=</span> <span class="nx">baseDelay</span> <span class="o">*</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">pow</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nx">retryCount</span><span class="p">);</span>
+      <span class="nx">setRetryCount</span><span class="p">(</span><span class="nx">prev</span> <span class="o">=&gt;</span> <span class="nx">prev</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+      
+      <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">setIsRetrying</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+      <span class="p">},</span> <span class="nx">delay</span><span class="p">);</span>
+      
+      <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">},</span> <span class="p">[</span><span class="nx">retryCount</span><span class="p">,</span> <span class="nx">maxRetries</span><span class="p">,</span> <span class="nx">baseDelay</span><span class="p">]);</span>
+
+  <span class="kd">const</span> <span class="nx">reset</span> <span class="o">=</span> <span class="nx">useCallback</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setRetryCount</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+    <span class="nx">setIsRetrying</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+  <span class="p">},</span> <span class="p">[]);</span>
+
+  <span class="k">return</span> <span class="p">{</span> <span class="nx">retry</span><span class="p">,</span> <span class="nx">reset</span><span class="p">,</span> <span class="nx">retryCount</span><span class="p">,</span> <span class="nx">isRetrying</span> <span class="p">};</span>
+<span class="p">};</span>
+
+<span class="c1">// Usage in component</span>
+<span class="kd">const</span> <span class="nx">DataComponent</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">data</span><span class="p">,</span> <span class="nx">setData</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">error</span><span class="p">,</span> <span class="nx">setError</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="p">{</span> <span class="nx">retry</span><span class="p">,</span> <span class="nx">reset</span><span class="p">,</span> <span class="nx">retryCount</span><span class="p">,</span> <span class="nx">isRetrying</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">useErrorRecovery</span><span class="p">();</span>
+
+  <span class="kd">const</span> <span class="nx">fetchData</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="dl">'</span><span class="s1">/api/data</span><span class="dl">'</span><span class="p">);</span>
+      <span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+      <span class="nx">setData</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
+      <span class="nx">setError</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+      <span class="nx">reset</span><span class="p">();</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">setError</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+      <span class="kd">const</span> <span class="nx">success</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">retry</span><span class="p">(</span><span class="nx">fetchData</span><span class="p">);</span>
+      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">success</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Failed to fetch data after retries</span><span class="dl">'</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">fetchData</span><span class="p">();</span>
+  <span class="p">},</span> <span class="p">[]);</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="nx">error</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nx">isRetrying</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="o">&lt;</span><span class="nx">View</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">Text</span><span class="o">&gt;</span><span class="na">Error</span><span class="p">:</span> <span class="p">{</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="nx">Text</span><span class="o">&gt;</span><span class="nx">Retry</span> <span class="na">attempts</span><span class="p">:</span> <span class="p">{</span><span class="nx">retryCount</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>    <span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">View</span><span class="o">&gt;</span>
+      <span class="p">{</span><span class="nx">isRetrying</span> <span class="o">&amp;&amp;</span> <span class="o">&lt;</span><span class="nx">Text</span><span class="o">&gt;</span><span class="nx">Retrying</span><span class="p">...</span> <span class="p">({</span><span class="nx">retryCount</span><span class="p">})</span><span class="o">&lt;</span><span class="sr">/Text&gt;</span><span class="err">}
+</span>      <span class="p">{</span><span class="nx">data</span> <span class="o">&amp;&amp;</span> <span class="o">&lt;</span><span class="nx">Text</span><span class="o">&gt;</span><span class="nx">Data</span> <span class="nx">loaded</span> <span class="nx">successfully</span><span class="o">&lt;</span><span class="sr">/Text&gt;</span><span class="err">}
+</span>    <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="graceful-degradation"><strong>Graceful Degradation</strong></h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useState</span><span class="p">,</span> <span class="nx">useEffect</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">View</span><span class="p">,</span> <span class="nx">Text</span><span class="p">,</span> <span class="nx">StyleSheet</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">GracefulDegradation</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">data</span><span class="p">,</span> <span class="nx">setData</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">error</span><span class="p">,</span> <span class="nx">setError</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">fallbackMode</span><span class="p">,</span> <span class="nx">setFallbackMode</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">loadData</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">try</span> <span class="p">{</span>
+        <span class="c1">// Try to load full data</span>
+        <span class="kd">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="dl">'</span><span class="s1">/api/full-data</span><span class="dl">'</span><span class="p">);</span>
+        <span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+        <span class="nx">setData</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
+      <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span><span class="dl">'</span><span class="s1">Full data failed, trying fallback</span><span class="dl">'</span><span class="p">);</span>
+        
+        <span class="k">try</span> <span class="p">{</span>
+          <span class="c1">// Try to load minimal data</span>
+          <span class="kd">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="dl">'</span><span class="s1">/api/minimal-data</span><span class="dl">'</span><span class="p">);</span>
+          <span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+          <span class="nx">setData</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
+          <span class="nx">setFallbackMode</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">fallbackErr</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">setError</span><span class="p">(</span><span class="nx">fallbackErr</span><span class="p">);</span>
+          <span class="nx">setFallbackMode</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">};</span>
+
+    <span class="nx">loadData</span><span class="p">();</span>
+  <span class="p">},</span> <span class="p">[]);</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">container</span><span class="p">}</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">errorText</span><span class="p">}</span><span class="o">&gt;</span>
+          <span class="nx">Unable</span> <span class="nx">to</span> <span class="nx">load</span> <span class="nx">data</span><span class="p">.</span> <span class="nx">Please</span> <span class="nx">check</span> <span class="nx">your</span> <span class="nx">connection</span><span class="p">.</span>
+        <span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>    <span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">container</span><span class="p">}</span><span class="o">&gt;</span>
+      <span class="p">{</span><span class="nx">fallbackMode</span> <span class="o">&amp;&amp;</span> <span class="p">(</span>
+        <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">warningText</span><span class="p">}</span><span class="o">&gt;</span>
+          <span class="nx">Limited</span> <span class="nx">functionality</span> <span class="nx">available</span>
+        <span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>      <span class="p">)}</span>
+      <span class="p">{</span><span class="nx">data</span> <span class="o">&amp;&amp;</span> <span class="p">(</span>
+        <span class="o">&lt;</span><span class="nx">View</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">Text</span><span class="o">&gt;</span><span class="nx">Data</span> <span class="nx">loaded</span> <span class="nx">successfully</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>          <span class="p">{</span><span class="o">!</span><span class="nx">fallbackMode</span> <span class="o">&amp;&amp;</span> <span class="o">&lt;</span><span class="nx">Text</span><span class="o">&gt;</span><span class="nx">Full</span> <span class="nx">functionality</span> <span class="nx">available</span><span class="o">&lt;</span><span class="sr">/Text&gt;</span><span class="err">}
+</span>        <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>      <span class="p">)}</span>
+    <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-error-logging-and-monitoring">📊 <strong>Error Logging and Monitoring</strong></h2>
+
+<h3 id="error-logger-service"><strong>Error Logger Service</strong></h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">ErrorLogger</span> <span class="p">{</span>
+  <span class="kd">constructor</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">errors</span> <span class="o">=</span> <span class="p">[];</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">maxErrors</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">context</span> <span class="o">=</span> <span class="p">{})</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">errorData</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="na">id</span><span class="p">:</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">(),</span>
+      <span class="na">message</span><span class="p">:</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span> <span class="o">||</span> <span class="nx">error</span><span class="p">,</span>
+      <span class="na">stack</span><span class="p">:</span> <span class="nx">error</span><span class="p">.</span><span class="nx">stack</span><span class="p">,</span>
+      <span class="na">timestamp</span><span class="p">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">toISOString</span><span class="p">(),</span>
+      <span class="nx">context</span><span class="p">,</span>
+      <span class="na">userAgent</span><span class="p">:</span> <span class="nb">navigator</span><span class="p">.</span><span class="nx">userAgent</span><span class="p">,</span>
+      <span class="na">url</span><span class="p">:</span> <span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">href</span><span class="p">,</span>
+    <span class="p">};</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="nx">errors</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">errorData</span><span class="p">);</span>
+    
+    <span class="c1">// Keep only recent errors</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">errors</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">maxErrors</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">errors</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">errors</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="o">-</span><span class="k">this</span><span class="p">.</span><span class="nx">maxErrors</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Send to external service</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">sendToExternalService</span><span class="p">(</span><span class="nx">errorData</span><span class="p">);</span>
+    
+    <span class="c1">// Log to console in development</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">__DEV__</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Error logged:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">errorData</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="k">async</span> <span class="nx">sendToExternalService</span><span class="p">(</span><span class="nx">errorData</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="dl">'</span><span class="s1">/api/errors</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span>
+        <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">POST</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">headers</span><span class="p">:</span> <span class="p">{</span>
+          <span class="dl">'</span><span class="s1">Content-Type</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">application/json</span><span class="dl">'</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="na">body</span><span class="p">:</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">errorData</span><span class="p">),</span>
+      <span class="p">});</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Failed to send error to external service:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">err</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="nx">getErrors</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">errors</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="nx">clearErrors</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">errors</span> <span class="o">=</span> <span class="p">[];</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">errorLogger</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ErrorLogger</span><span class="p">();</span>
+</code></pre></div></div>
+
+<h3 id="error-monitoring-hook"><strong>Error Monitoring Hook</strong></h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">useEffect</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">errorLogger</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">../services/ErrorLogger</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">useErrorMonitoring</span> <span class="o">=</span> <span class="p">(</span><span class="nx">componentName</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">handleError</span> <span class="o">=</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">errorLogger</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="p">{</span>
+        <span class="na">component</span><span class="p">:</span> <span class="nx">componentName</span><span class="p">,</span>
+        <span class="na">timestamp</span><span class="p">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">toISOString</span><span class="p">(),</span>
+      <span class="p">});</span>
+    <span class="p">};</span>
+
+    <span class="kd">const</span> <span class="nx">handleUnhandledRejection</span> <span class="o">=</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">errorLogger</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">reason</span><span class="p">,</span> <span class="p">{</span>
+        <span class="na">component</span><span class="p">:</span> <span class="nx">componentName</span><span class="p">,</span>
+        <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">unhandledRejection</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">timestamp</span><span class="p">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">toISOString</span><span class="p">(),</span>
+      <span class="p">});</span>
+    <span class="p">};</span>
+
+    <span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span> <span class="nx">handleError</span><span class="p">);</span>
+    <span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">unhandledrejection</span><span class="dl">'</span><span class="p">,</span> <span class="nx">handleUnhandledRejection</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nb">window</span><span class="p">.</span><span class="nx">removeEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span> <span class="nx">handleError</span><span class="p">);</span>
+      <span class="nb">window</span><span class="p">.</span><span class="nx">removeEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">unhandledrejection</span><span class="dl">'</span><span class="p">,</span> <span class="nx">handleUnhandledRejection</span><span class="p">);</span>
+    <span class="p">};</span>
+  <span class="p">},</span> <span class="p">[</span><span class="nx">componentName</span><span class="p">]);</span>
+<span class="p">};</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">useErrorMonitoring</span><span class="p">;</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-best-practices">✅ <strong>Best Practices</strong></h2>
+
+<h3 id="1-error-boundary-placement"><strong>1. Error Boundary Placement</strong></h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ✅ Good: Place error boundaries at strategic levels</span>
+<span class="kd">const</span> <span class="nx">App</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">ErrorBoundary</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="nx">NavigationContainer</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">Stack</span><span class="p">.</span><span class="nx">Navigator</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">Stack</span><span class="p">.</span><span class="nx">Screen</span> <span class="nx">name</span><span class="o">=</span><span class="dl">"</span><span class="s2">Home</span><span class="dl">"</span><span class="o">&gt;</span>
+            <span class="p">{()</span> <span class="o">=&gt;</span> <span class="p">(</span>
+              <span class="o">&lt;</span><span class="nx">ErrorBoundary</span><span class="o">&gt;</span>
+                <span class="o">&lt;</span><span class="nx">HomeScreen</span> <span class="o">/&gt;</span>
+              <span class="o">&lt;</span><span class="sr">/ErrorBoundary</span><span class="err">&gt;
+</span>            <span class="p">)}</span>
+          <span class="o">&lt;</span><span class="sr">/Stack.Screen</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/Stack.Navigator</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/NavigationContainer</span><span class="err">&gt;
+</span>    <span class="o">&lt;</span><span class="sr">/ErrorBoundary</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">};</span>
+
+<span class="c1">// ❌ Bad: Too many error boundaries</span>
+<span class="kd">const</span> <span class="nx">App</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">ErrorBoundary</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="nx">ErrorBoundary</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">ErrorBoundary</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">HomeScreen</span> <span class="o">/&gt;</span>
+        <span class="o">&lt;</span><span class="sr">/ErrorBoundary</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/ErrorBoundary</span><span class="err">&gt;
+</span>    <span class="o">&lt;</span><span class="sr">/ErrorBoundary</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="2-error-information"><strong>2. Error Information</strong></h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ✅ Good: Provide useful error information</span>
+<span class="kd">const</span> <span class="nx">ErrorBoundary</span> <span class="o">=</span> <span class="p">({</span> <span class="nx">children</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">error</span><span class="p">,</span> <span class="nx">setError</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+
+  <span class="kd">const</span> <span class="nx">handleError</span> <span class="o">=</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">errorInfo</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setError</span><span class="p">({</span>
+      <span class="na">message</span><span class="p">:</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">,</span>
+      <span class="na">stack</span><span class="p">:</span> <span class="nx">error</span><span class="p">.</span><span class="nx">stack</span><span class="p">,</span>
+      <span class="na">componentStack</span><span class="p">:</span> <span class="nx">errorInfo</span><span class="p">.</span><span class="nx">componentStack</span><span class="p">,</span>
+      <span class="na">timestamp</span><span class="p">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">toISOString</span><span class="p">(),</span>
+    <span class="p">});</span>
+  <span class="p">};</span>
+
+  <span class="c1">// ... rest of component</span>
+<span class="p">};</span>
+
+<span class="c1">// ❌ Bad: Generic error handling</span>
+<span class="kd">const</span> <span class="nx">ErrorBoundary</span> <span class="o">=</span> <span class="p">({</span> <span class="nx">children</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">hasError</span><span class="p">,</span> <span class="nx">setHasError</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+
+  <span class="kd">const</span> <span class="nx">handleError</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setHasError</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+  <span class="p">};</span>
+
+  <span class="c1">// ... rest of component</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="3-recovery-mechanisms"><strong>3. Recovery Mechanisms</strong></h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ✅ Good: Provide recovery options</span>
+<span class="kd">const</span> <span class="nx">ErrorFallback</span> <span class="o">=</span> <span class="p">({</span> <span class="nx">error</span><span class="p">,</span> <span class="nx">resetError</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">errorContainer</span><span class="p">}</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">errorTitle</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Something</span> <span class="nx">went</span> <span class="nx">wrong</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">errorMessage</span><span class="p">}</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="nx">TouchableOpacity</span> <span class="nx">onPress</span><span class="o">=</span><span class="p">{</span><span class="nx">resetError</span><span class="p">}</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">Text</span><span class="o">&gt;</span><span class="nx">Try</span> <span class="nx">Again</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/TouchableOpacity</span><span class="err">&gt;
+</span>    <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">};</span>
+
+<span class="c1">// ❌ Bad: No recovery options</span>
+<span class="kd">const</span> <span class="nx">ErrorFallback</span> <span class="o">=</span> <span class="p">({</span> <span class="nx">error</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">errorContainer</span><span class="p">}</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="nx">Text</span><span class="o">&gt;</span><span class="na">Error</span><span class="p">:</span> <span class="p">{</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>    <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-common-interview-questions">❓ <strong>Common Interview Questions</strong></h2>
+
+<h3 id="1-what-are-error-boundaries-and-when-should-you-use-them"><strong>1. What are error boundaries and when should you use them?</strong></h3>
+
+<p><strong>Answer:</strong>
+Error boundaries are React components that catch JavaScript errors anywhere in their child component tree. They should be used to:</p>
+<ul>
+  <li>Prevent the entire app from crashing</li>
+  <li>Provide fallback UI for broken components</li>
+  <li>Log errors for debugging</li>
+  <li>Implement recovery mechanisms</li>
+</ul>
+
+<h3 id="2-what-types-of-errors-do-error-boundaries-catch-and-not-catch"><strong>2. What types of errors do error boundaries catch and not catch?</strong></h3>
+
+<p><strong>Answer:</strong>
+<strong>Catch:</strong></p>
+<ul>
+  <li>Errors in render methods</li>
+  <li>Errors in lifecycle methods</li>
+  <li>Errors in constructors</li>
+</ul>
+
+<p><strong>Don’t Catch:</strong></p>
+<ul>
+  <li>Errors in event handlers</li>
+  <li>Errors in asynchronous code</li>
+  <li>Errors in server-side rendering</li>
+  <li>Errors thrown in the error boundary itself</li>
+</ul>
+
+<h3 id="3-how-would-you-implement-error-boundaries-in-a-react-native-app"><strong>3. How would you implement error boundaries in a React Native app?</strong></h3>
+
+<p><strong>Answer:</strong></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">ErrorBoundary</span> <span class="o">=</span> <span class="p">({</span> <span class="nx">children</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">hasError</span><span class="p">,</span> <span class="nx">setHasError</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">error</span><span class="p">,</span> <span class="nx">setError</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">handleError</span> <span class="o">=</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">errorInfo</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">setHasError</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+      <span class="nx">setError</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
+      <span class="c1">// Log error to monitoring service</span>
+    <span class="p">};</span>
+
+    <span class="c1">// Set up error handling</span>
+    <span class="k">return</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="c1">// Cleanup</span>
+    <span class="p">};</span>
+  <span class="p">},</span> <span class="p">[]);</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="nx">hasError</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="o">&lt;</span><span class="nx">ErrorFallback</span> <span class="nx">error</span><span class="o">=</span><span class="p">{</span><span class="nx">error</span><span class="p">}</span> <span class="sr">/&gt;</span><span class="err">;
+</span>  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="nx">children</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="4-how-would-you-handle-async-errors-in-react-native"><strong>4. How would you handle async errors in React Native?</strong></h3>
+
+<p><strong>Answer:</strong>
+Async errors require additional handling since error boundaries don’t catch them:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">useAsyncError</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">error</span><span class="p">,</span> <span class="nx">setError</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+
+  <span class="kd">const</span> <span class="nx">handleAsyncError</span> <span class="o">=</span> <span class="nx">useCallback</span><span class="p">((</span><span class="nx">error</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setError</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
+  <span class="p">},</span> <span class="p">[]);</span>
+
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">handleUnhandledRejection</span> <span class="o">=</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">handleAsyncError</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">reason</span><span class="p">);</span>
+    <span class="p">};</span>
+
+    <span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">unhandledrejection</span><span class="dl">'</span><span class="p">,</span> <span class="nx">handleUnhandledRejection</span><span class="p">);</span>
+    <span class="k">return</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nb">window</span><span class="p">.</span><span class="nx">removeEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">unhandledrejection</span><span class="dl">'</span><span class="p">,</span> <span class="nx">handleUnhandledRejection</span><span class="p">);</span>
+    <span class="p">};</span>
+  <span class="p">},</span> <span class="p">[</span><span class="nx">handleAsyncError</span><span class="p">]);</span>
+
+  <span class="k">return</span> <span class="p">{</span> <span class="nx">error</span><span class="p">,</span> <span class="nx">handleAsyncError</span> <span class="p">};</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="5-how-would-you-implement-error-recovery-strategies"><strong>5. How would you implement error recovery strategies?</strong></h3>
+
+<p><strong>Answer:</strong>
+Implement retry mechanisms with exponential backoff:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">useErrorRecovery</span> <span class="o">=</span> <span class="p">(</span><span class="nx">maxRetries</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">retryCount</span><span class="p">,</span> <span class="nx">setRetryCount</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+
+  <span class="kd">const</span> <span class="nx">retry</span> <span class="o">=</span> <span class="nx">useCallback</span><span class="p">(</span><span class="k">async</span> <span class="p">(</span><span class="nx">operation</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">retryCount</span> <span class="o">&gt;=</span> <span class="nx">maxRetries</span><span class="p">)</span> <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="k">await</span> <span class="nx">operation</span><span class="p">();</span>
+      <span class="nx">setRetryCount</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+      <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">delay</span> <span class="o">=</span> <span class="mi">1000</span> <span class="o">*</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">pow</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nx">retryCount</span><span class="p">);</span>
+      <span class="nx">setRetryCount</span><span class="p">(</span><span class="nx">prev</span> <span class="o">=&gt;</span> <span class="nx">prev</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+      
+      <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">retry</span><span class="p">(</span><span class="nx">operation</span><span class="p">);</span>
+      <span class="p">},</span> <span class="nx">delay</span><span class="p">);</span>
+      
+      <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">},</span> <span class="p">[</span><span class="nx">retryCount</span><span class="p">,</span> <span class="nx">maxRetries</span><span class="p">]);</span>
+
+  <span class="k">return</span> <span class="p">{</span> <span class="nx">retry</span><span class="p">,</span> <span class="nx">retryCount</span> <span class="p">};</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-navigation">🧭 Navigation</h2>
+
+<div class="navigation">
+  <a href="../14-Expo-vs-Bare-Workflow/04-Migration-Strategies.md" class="nav-button">← Previous: Migration Strategies</a>
+  <a href="02-Error-Handling-Patterns.md" class="nav-button">Next: Error Handling Patterns →</a>
+</div>
+
+<p><em>Last updated: December 2024</em></p>
+
+        </main>
+        
+        <footer style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #ecf0f1; color: #666; text-align: center;">
+            <p>Interview Prep Documentation - Built with Jekyll</p>
+        </footer>
+    </div>
+</body>
+</html>

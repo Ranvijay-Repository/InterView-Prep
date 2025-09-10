@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📷 Camera, Media &amp; File System - Interview Prep Documentation</title>
+    <meta name="description" content="Comprehensive guides for JavaScript, TypeScript, and React Native interview preparation">
+    
+    <!-- GitHub Pages compatible styling -->
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+        }
+        
+        .container {
+            max-width: 100%;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            color: #2c3e50;
+            margin-top: 2em;
+            margin-bottom: 1em;
+        }
+        
+        h1 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            border-bottom: 1px solid #ecf0f1;
+            padding-bottom: 5px;
+        }
+        
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border-left: 4px solid #3498db;
+        }
+        
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+        
+        blockquote {
+            border-left: 4px solid #3498db;
+            margin: 0;
+            padding-left: 20px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1em 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .navigation {
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px 0;
+            margin-bottom: 20px;
+        }
+        
+        .navigation a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+        
+        .navigation a:hover {
+            text-decoration: underline;
+        }
+        
+        .breadcrumb {
+            margin-bottom: 20px;
+            color: #666;
+        }
+        
+        .breadcrumb a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            h2 {
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="navigation">
+            <a href="/">Home</a>
+            <a href="/Javascript/">JavaScript</a>
+            <a href="/TypeScript/">TypeScript</a>
+            <a href="/React-Native/">React Native</a>
+        </nav>
+        
+        
+        
+        <main>
+            <h1 id="-camera-media--file-system">📷 <strong>Camera, Media &amp; File System</strong></h1>
+
+<blockquote>
+  <p><strong>Master camera integration, media handling, and file system operations in React Native applications</strong></p>
+</blockquote>
+
+<link rel="stylesheet" href="../../common-styles.css" />
+
+<hr />
+
+<h2 id="-table-of-contents">📚 <strong>Table of Contents</strong></h2>
+
+<ul>
+  <li><a href="#introduction">Introduction</a></li>
+  <li><a href="#camera-integration">Camera Integration</a></li>
+  <li><a href="#media-handling">Media Handling</a></li>
+  <li><a href="#file-system-operations">File System Operations</a></li>
+  <li><a href="#image-processing">Image Processing</a></li>
+  <li><a href="#common-patterns">Common Patterns</a></li>
+  <li><a href="#interview-questions">Interview Questions</a></li>
+  <li><a href="#best-practices">Best Practices</a></li>
+</ul>
+
+<hr />
+
+<h2 id="-introduction">🎯 <strong>Introduction</strong></h2>
+
+<p>Camera, media, and file system capabilities are essential for many React Native applications. Understanding these platform features enables rich user experiences with photo capture, media playback, and file management.</p>
+
+<h3 id="camera-media--file-system-overview"><strong>Camera, Media &amp; File System Overview</strong></h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>┌─────────────────────────────────────┐
+│        Camera, Media &amp; File System  │
+│  ┌─────────────────────────────────┐│
+│  │        Camera Features          ││
+│  │  - Photo capture                ││
+│  │  - Video recording              ││
+│  │  - Camera controls              ││
+│  │  - Image processing             ││
+│  └─────────────────────────────────┘│
+│  ┌─────────────────────────────────┐│
+│  │        Media Handling           ││
+│  │  - Image display                ││
+│  │  - Video playback               ││
+│  │  - Audio playback               ││
+│  │  - Media compression            ││
+│  └─────────────────────────────────┘│
+│  ┌─────────────────────────────────┐│
+│  │        File System              ││
+│  │  - File operations              ││
+│  │  - Directory management         ││
+│  │  - File sharing                 ││
+│  │  - Storage management           ││
+│  └─────────────────────────────────┘│
+└─────────────────────────────────────┘
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-camera-integration">📷 <strong>Camera Integration</strong></h2>
+
+<h3 id="camera-manager-example"><strong>Camera Manager Example</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useState</span><span class="p">,</span> <span class="nx">useRef</span><span class="p">,</span> <span class="nx">useCallback</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">View</span><span class="p">,</span> <span class="nx">Text</span><span class="p">,</span> <span class="nx">TouchableOpacity</span><span class="p">,</span> <span class="nx">StyleSheet</span><span class="p">,</span> <span class="nx">Alert</span><span class="p">,</span> <span class="nx">Image</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">launchCamera</span><span class="p">,</span> <span class="nx">launchImageLibrary</span><span class="p">,</span> <span class="nx">ImagePickerResponse</span><span class="p">,</span> <span class="nx">MediaType</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native-image-picker</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">CameraManager</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">capturedImage</span><span class="p">,</span> <span class="nx">setCapturedImage</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">selectedImage</span><span class="p">,</span> <span class="nx">setSelectedImage</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">isLoading</span><span class="p">,</span> <span class="nx">setIsLoading</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+  
+  <span class="c1">// Camera options</span>
+  <span class="kd">const</span> <span class="nx">cameraOptions</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">mediaType</span><span class="p">:</span> <span class="dl">'</span><span class="s1">photo</span><span class="dl">'</span> <span class="k">as</span> <span class="nx">MediaType</span><span class="p">,</span>
+    <span class="na">quality</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">,</span>
+    <span class="na">maxWidth</span><span class="p">:</span> <span class="mi">1024</span><span class="p">,</span>
+    <span class="na">maxHeight</span><span class="p">:</span> <span class="mi">1024</span><span class="p">,</span>
+    <span class="na">includeBase64</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="na">saveToPhotos</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="p">};</span>
+  
+  <span class="c1">// Image library options</span>
+  <span class="kd">const</span> <span class="nx">libraryOptions</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">mediaType</span><span class="p">:</span> <span class="dl">'</span><span class="s1">photo</span><span class="dl">'</span> <span class="k">as</span> <span class="nx">MediaType</span><span class="p">,</span>
+    <span class="na">quality</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">,</span>
+    <span class="na">maxWidth</span><span class="p">:</span> <span class="mi">1024</span><span class="p">,</span>
+    <span class="na">maxHeight</span><span class="p">:</span> <span class="mi">1024</span><span class="p">,</span>
+    <span class="na">includeBase64</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="na">selectionLimit</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="p">};</span>
+  
+  <span class="c1">// Launch camera</span>
+  <span class="kd">const</span> <span class="nx">launchCameraCapture</span> <span class="o">=</span> <span class="nx">useCallback</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setIsLoading</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+    
+    <span class="nx">launchCamera</span><span class="p">(</span><span class="nx">cameraOptions</span><span class="p">,</span> <span class="p">(</span><span class="na">response</span><span class="p">:</span> <span class="nx">ImagePickerResponse</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">setIsLoading</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+      
+      <span class="k">if</span> <span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">didCancel</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">User cancelled camera</span><span class="dl">'</span><span class="p">);</span>
+        <span class="k">return</span><span class="p">;</span>
+      <span class="p">}</span>
+      
+      <span class="k">if</span> <span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">errorMessage</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">Alert</span><span class="p">.</span><span class="nx">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">Error</span><span class="dl">'</span><span class="p">,</span> <span class="nx">response</span><span class="p">.</span><span class="nx">errorMessage</span><span class="p">);</span>
+        <span class="k">return</span><span class="p">;</span>
+      <span class="p">}</span>
+      
+      <span class="k">if</span> <span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">assets</span> <span class="o">&amp;&amp;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">assets</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">asset</span> <span class="o">=</span> <span class="nx">response</span><span class="p">.</span><span class="nx">assets</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+        <span class="nx">setCapturedImage</span><span class="p">(</span><span class="nx">asset</span><span class="p">);</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Image captured:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">asset</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">});</span>
+  <span class="p">},</span> <span class="p">[]);</span>
+  
+  <span class="c1">// Launch image library</span>
+  <span class="kd">const</span> <span class="nx">launchImageSelection</span> <span class="o">=</span> <span class="nx">useCallback</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setIsLoading</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+    
+    <span class="nx">launchImageLibrary</span><span class="p">(</span><span class="nx">libraryOptions</span><span class="p">,</span> <span class="p">(</span><span class="na">response</span><span class="p">:</span> <span class="nx">ImagePickerResponse</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">setIsLoading</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+      
+      <span class="k">if</span> <span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">didCancel</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">User cancelled image selection</span><span class="dl">'</span><span class="p">);</span>
+        <span class="k">return</span><span class="p">;</span>
+      <span class="p">}</span>
+      
+      <span class="k">if</span> <span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">errorMessage</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">Alert</span><span class="p">.</span><span class="nx">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">Error</span><span class="dl">'</span><span class="p">,</span> <span class="nx">response</span><span class="p">.</span><span class="nx">errorMessage</span><span class="p">);</span>
+        <span class="k">return</span><span class="p">;</span>
+      <span class="p">}</span>
+      
+      <span class="k">if</span> <span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">assets</span> <span class="o">&amp;&amp;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">assets</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">asset</span> <span class="o">=</span> <span class="nx">response</span><span class="p">.</span><span class="nx">assets</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+        <span class="nx">setSelectedImage</span><span class="p">(</span><span class="nx">asset</span><span class="p">);</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Image selected:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">asset</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">});</span>
+  <span class="p">},</span> <span class="p">[]);</span>
+  
+  <span class="c1">// Capture video</span>
+  <span class="kd">const</span> <span class="nx">captureVideo</span> <span class="o">=</span> <span class="nx">useCallback</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">videoOptions</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="na">mediaType</span><span class="p">:</span> <span class="dl">'</span><span class="s1">video</span><span class="dl">'</span> <span class="k">as</span> <span class="nx">MediaType</span><span class="p">,</span>
+      <span class="na">quality</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">,</span>
+      <span class="na">videoQuality</span><span class="p">:</span> <span class="dl">'</span><span class="s1">high</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">durationLimit</span><span class="p">:</span> <span class="mi">60</span><span class="p">,</span>
+      <span class="na">includeBase64</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="na">saveToPhotos</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="p">};</span>
+    
+    <span class="nx">launchCamera</span><span class="p">(</span><span class="nx">videoOptions</span><span class="p">,</span> <span class="p">(</span><span class="na">response</span><span class="p">:</span> <span class="nx">ImagePickerResponse</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">didCancel</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">User cancelled video capture</span><span class="dl">'</span><span class="p">);</span>
+        <span class="k">return</span><span class="p">;</span>
+      <span class="p">}</span>
+      
+      <span class="k">if</span> <span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">errorMessage</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">Alert</span><span class="p">.</span><span class="nx">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">Error</span><span class="dl">'</span><span class="p">,</span> <span class="nx">response</span><span class="p">.</span><span class="nx">errorMessage</span><span class="p">);</span>
+        <span class="k">return</span><span class="p">;</span>
+      <span class="p">}</span>
+      
+      <span class="k">if</span> <span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">assets</span> <span class="o">&amp;&amp;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">assets</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">asset</span> <span class="o">=</span> <span class="nx">response</span><span class="p">.</span><span class="nx">assets</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Video captured:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">asset</span><span class="p">);</span>
+        <span class="nx">Alert</span><span class="p">.</span><span class="nx">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">Success</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Video captured successfully!</span><span class="dl">'</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">});</span>
+  <span class="p">},</span> <span class="p">[]);</span>
+  
+  <span class="c1">// Clear images</span>
+  <span class="kd">const</span> <span class="nx">clearImages</span> <span class="o">=</span> <span class="nx">useCallback</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setCapturedImage</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+    <span class="nx">setSelectedImage</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+  <span class="p">},</span> <span class="p">[]);</span>
+  
+  <span class="c1">// Get image info</span>
+  <span class="kd">const</span> <span class="nx">getImageInfo</span> <span class="o">=</span> <span class="nx">useCallback</span><span class="p">((</span><span class="nx">image</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">image</span><span class="p">)</span> <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+    
+    <span class="k">return</span> <span class="p">{</span>
+      <span class="na">uri</span><span class="p">:</span> <span class="nx">image</span><span class="p">.</span><span class="nx">uri</span><span class="p">,</span>
+      <span class="na">width</span><span class="p">:</span> <span class="nx">image</span><span class="p">.</span><span class="nx">width</span><span class="p">,</span>
+      <span class="na">height</span><span class="p">:</span> <span class="nx">image</span><span class="p">.</span><span class="nx">height</span><span class="p">,</span>
+      <span class="na">fileSize</span><span class="p">:</span> <span class="nx">image</span><span class="p">.</span><span class="nx">fileSize</span><span class="p">,</span>
+      <span class="na">fileName</span><span class="p">:</span> <span class="nx">image</span><span class="p">.</span><span class="nx">fileName</span><span class="p">,</span>
+      <span class="na">type</span><span class="p">:</span> <span class="nx">image</span><span class="p">.</span><span class="nx">type</span><span class="p">,</span>
+    <span class="p">};</span>
+  <span class="p">},</span> <span class="p">[]);</span>
+  
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">container</span><span class="p">}</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">title</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Camera</span> <span class="o">&amp;</span> <span class="nx">Media</span> <span class="nx">Manager</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>      
+      <span class="p">{</span><span class="cm">/* Image Display */</span><span class="p">}</span>
+      <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">imageContainer</span><span class="p">}</span><span class="o">&gt;</span>
+        <span class="p">{</span><span class="nx">capturedImage</span> <span class="o">&amp;&amp;</span> <span class="p">(</span>
+          <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">imageSection</span><span class="p">}</span><span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">sectionTitle</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Captured</span> <span class="nx">Image</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>            <span class="o">&lt;</span><span class="nx">Image</span> <span class="nx">source</span><span class="o">=</span><span class="p">{{</span><span class="err">#</span><span class="mi">123</span><span class="p">;{{</span><span class="err">#</span><span class="mi">123</span><span class="p">;</span> <span class="nl">uri</span><span class="p">:</span> <span class="nx">capturedImage</span><span class="p">.</span><span class="nx">uri</span> <span class="p">}}</span><span class="err">#</span><span class="mi">125</span><span class="p">;}}</span><span class="err">#</span><span class="mi">125</span><span class="p">;</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">image</span><span class="p">}</span> <span class="sr">/</span><span class="err">&gt;
+</span>            <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">imageInfo</span><span class="p">}</span><span class="o">&gt;</span>
+              <span class="na">Size</span><span class="p">:</span> <span class="p">{</span><span class="nx">capturedImage</span><span class="p">.</span><span class="nx">width</span><span class="p">}</span><span class="nx">x</span><span class="p">{</span><span class="nx">capturedImage</span><span class="p">.</span><span class="nx">height</span><span class="p">}</span>
+            <span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>            <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">imageInfo</span><span class="p">}</span><span class="o">&gt;</span>
+              <span class="nx">File</span> <span class="na">Size</span><span class="p">:</span> <span class="p">{(</span><span class="nx">capturedImage</span><span class="p">.</span><span class="nx">fileSize</span> <span class="o">/</span> <span class="mi">1024</span><span class="p">).</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">2</span><span class="p">)}</span> <span class="nx">KB</span>
+            <span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>          <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>        <span class="p">)}</span>
+        
+        <span class="p">{</span><span class="nx">selectedImage</span> <span class="o">&amp;&amp;</span> <span class="p">(</span>
+          <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">imageSection</span><span class="p">}</span><span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">sectionTitle</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Selected</span> <span class="nx">Image</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>            <span class="o">&lt;</span><span class="nx">Image</span> <span class="nx">source</span><span class="o">=</span><span class="p">{{</span><span class="err">#</span><span class="mi">123</span><span class="p">;{{</span><span class="err">#</span><span class="mi">123</span><span class="p">;</span> <span class="nl">uri</span><span class="p">:</span> <span class="nx">selectedImage</span><span class="p">.</span><span class="nx">uri</span> <span class="p">}}</span><span class="err">#</span><span class="mi">125</span><span class="p">;}}</span><span class="err">#</span><span class="mi">125</span><span class="p">;</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">image</span><span class="p">}</span> <span class="sr">/</span><span class="err">&gt;
+</span>            <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">imageInfo</span><span class="p">}</span><span class="o">&gt;</span>
+              <span class="na">Size</span><span class="p">:</span> <span class="p">{</span><span class="nx">selectedImage</span><span class="p">.</span><span class="nx">width</span><span class="p">}</span><span class="nx">x</span><span class="p">{</span><span class="nx">selectedImage</span><span class="p">.</span><span class="nx">height</span><span class="p">}</span>
+            <span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>            <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">imageInfo</span><span class="p">}</span><span class="o">&gt;</span>
+              <span class="nx">File</span> <span class="na">Size</span><span class="p">:</span> <span class="p">{(</span><span class="nx">selectedImage</span><span class="p">.</span><span class="nx">fileSize</span> <span class="o">/</span> <span class="mi">1024</span><span class="p">).</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">2</span><span class="p">)}</span> <span class="nx">KB</span>
+            <span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>          <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>        <span class="p">)}</span>
+      <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>      
+      <span class="p">{</span><span class="cm">/* Controls */</span><span class="p">}</span>
+      <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">controlsContainer</span><span class="p">}</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">buttonRow</span><span class="p">}</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">TouchableOpacity</span>
+            <span class="nx">style</span><span class="o">=</span><span class="p">{[</span><span class="nx">styles</span><span class="p">.</span><span class="nx">button</span><span class="p">,</span> <span class="nx">styles</span><span class="p">.</span><span class="nx">cameraButton</span><span class="p">]}</span>
+            <span class="nx">onPress</span><span class="o">=</span><span class="p">{</span><span class="nx">launchCameraCapture</span><span class="p">}</span>
+            <span class="nx">disabled</span><span class="o">=</span><span class="p">{</span><span class="nx">isLoading</span><span class="p">}</span>
+          <span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">buttonText</span><span class="p">}</span><span class="o">&gt;</span>
+              <span class="p">{</span><span class="nx">isLoading</span> <span class="p">?</span> <span class="dl">'</span><span class="s1">Loading...</span><span class="dl">'</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">📷 Take Photo</span><span class="dl">'</span><span class="p">}</span>
+            <span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>          <span class="o">&lt;</span><span class="sr">/TouchableOpacity</span><span class="err">&gt;
+</span>          
+          <span class="o">&lt;</span><span class="nx">TouchableOpacity</span>
+            <span class="nx">style</span><span class="o">=</span><span class="p">{[</span><span class="nx">styles</span><span class="p">.</span><span class="nx">button</span><span class="p">,</span> <span class="nx">styles</span><span class="p">.</span><span class="nx">libraryButton</span><span class="p">]}</span>
+            <span class="nx">onPress</span><span class="o">=</span><span class="p">{</span><span class="nx">launchImageSelection</span><span class="p">}</span>
+            <span class="nx">disabled</span><span class="o">=</span><span class="p">{</span><span class="nx">isLoading</span><span class="p">}</span>
+          <span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">buttonText</span><span class="p">}</span><span class="o">&gt;</span>
+              <span class="p">{</span><span class="nx">isLoading</span> <span class="p">?</span> <span class="dl">'</span><span class="s1">Loading...</span><span class="dl">'</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">🖼️ Select Image</span><span class="dl">'</span><span class="p">}</span>
+            <span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>          <span class="o">&lt;</span><span class="sr">/TouchableOpacity</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>        
+        <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">buttonRow</span><span class="p">}</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">TouchableOpacity</span>
+            <span class="nx">style</span><span class="o">=</span><span class="p">{[</span><span class="nx">styles</span><span class="p">.</span><span class="nx">button</span><span class="p">,</span> <span class="nx">styles</span><span class="p">.</span><span class="nx">videoButton</span><span class="p">]}</span>
+            <span class="nx">onPress</span><span class="o">=</span><span class="p">{</span><span class="nx">captureVideo</span><span class="p">}</span>
+          <span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">buttonText</span><span class="p">}</span><span class="o">&gt;</span><span class="err">🎥</span> <span class="nx">Record</span> <span class="nx">Video</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>          <span class="o">&lt;</span><span class="sr">/TouchableOpacity</span><span class="err">&gt;
+</span>          
+          <span class="o">&lt;</span><span class="nx">TouchableOpacity</span>
+            <span class="nx">style</span><span class="o">=</span><span class="p">{[</span><span class="nx">styles</span><span class="p">.</span><span class="nx">button</span><span class="p">,</span> <span class="nx">styles</span><span class="p">.</span><span class="nx">clearButton</span><span class="p">]}</span>
+            <span class="nx">onPress</span><span class="o">=</span><span class="p">{</span><span class="nx">clearImages</span><span class="p">}</span>
+          <span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">buttonText</span><span class="p">}</span><span class="o">&gt;</span><span class="err">🗑️</span> <span class="nx">Clear</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>          <span class="o">&lt;</span><span class="sr">/TouchableOpacity</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>      
+      <span class="p">{</span><span class="cm">/* Image Info */</span><span class="p">}</span>
+      <span class="p">{(</span><span class="nx">capturedImage</span> <span class="o">||</span> <span class="nx">selectedImage</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span>
+        <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">infoContainer</span><span class="p">}</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">infoTitle</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Image</span> <span class="nx">Information</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>          <span class="p">{</span><span class="nx">capturedImage</span> <span class="o">&amp;&amp;</span> <span class="p">(</span>
+            <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">infoSection</span><span class="p">}</span><span class="o">&gt;</span>
+              <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">infoText</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Captured</span> <span class="na">Image</span><span class="p">:</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>              <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">infoText</span><span class="p">}</span><span class="o">&gt;</span><span class="err">•</span> <span class="na">URI</span><span class="p">:</span> <span class="p">{</span><span class="nx">capturedImage</span><span class="p">.</span><span class="nx">uri</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>              <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">infoText</span><span class="p">}</span><span class="o">&gt;</span><span class="err">•</span> <span class="na">Type</span><span class="p">:</span> <span class="p">{</span><span class="nx">capturedImage</span><span class="p">.</span><span class="nx">type</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>              <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">infoText</span><span class="p">}</span><span class="o">&gt;</span><span class="err">•</span> <span class="nx">File</span> <span class="na">Name</span><span class="p">:</span> <span class="p">{</span><span class="nx">capturedImage</span><span class="p">.</span><span class="nx">fileName</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>            <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>          <span class="p">)}</span>
+          <span class="p">{</span><span class="nx">selectedImage</span> <span class="o">&amp;&amp;</span> <span class="p">(</span>
+            <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">infoSection</span><span class="p">}</span><span class="o">&gt;</span>
+              <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">infoText</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Selected</span> <span class="na">Image</span><span class="p">:</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>              <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">infoText</span><span class="p">}</span><span class="o">&gt;</span><span class="err">•</span> <span class="na">URI</span><span class="p">:</span> <span class="p">{</span><span class="nx">selectedImage</span><span class="p">.</span><span class="nx">uri</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>              <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">infoText</span><span class="p">}</span><span class="o">&gt;</span><span class="err">•</span> <span class="na">Type</span><span class="p">:</span> <span class="p">{</span><span class="nx">selectedImage</span><span class="p">.</span><span class="nx">type</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>              <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">infoText</span><span class="p">}</span><span class="o">&gt;</span><span class="err">•</span> <span class="nx">File</span> <span class="na">Name</span><span class="p">:</span> <span class="p">{</span><span class="nx">selectedImage</span><span class="p">.</span><span class="nx">fileName</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>            <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>          <span class="p">)}</span>
+        <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>      <span class="p">)}</span>
+    <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">styles</span> <span class="o">=</span> <span class="nx">StyleSheet</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span>
+  <span class="na">container</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">flex</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="na">padding</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#f5f5f5</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">title</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">fontSize</span><span class="p">:</span> <span class="mi">24</span><span class="p">,</span>
+    <span class="na">fontWeight</span><span class="p">:</span> <span class="dl">'</span><span class="s1">bold</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">textAlign</span><span class="p">:</span> <span class="dl">'</span><span class="s1">center</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">marginBottom</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">imageContainer</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">flex</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="na">justifyContent</span><span class="p">:</span> <span class="dl">'</span><span class="s1">center</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">imageSection</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">alignItems</span><span class="p">:</span> <span class="dl">'</span><span class="s1">center</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">marginBottom</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">sectionTitle</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">fontSize</span><span class="p">:</span> <span class="mi">18</span><span class="p">,</span>
+    <span class="na">fontWeight</span><span class="p">:</span> <span class="dl">'</span><span class="s1">bold</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">marginBottom</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#333</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">image</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">width</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span>
+    <span class="na">height</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span>
+    <span class="na">borderRadius</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="na">marginBottom</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">imageInfo</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">fontSize</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+    <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#666</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">marginBottom</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">controlsContainer</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">white</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">padding</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="na">borderRadius</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="na">marginBottom</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">buttonRow</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">flexDirection</span><span class="p">:</span> <span class="dl">'</span><span class="s1">row</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">justifyContent</span><span class="p">:</span> <span class="dl">'</span><span class="s1">space-around</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">marginBottom</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">button</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">paddingHorizontal</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="na">paddingVertical</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+    <span class="na">borderRadius</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+    <span class="na">minWidth</span><span class="p">:</span> <span class="mi">120</span><span class="p">,</span>
+    <span class="na">alignItems</span><span class="p">:</span> <span class="dl">'</span><span class="s1">center</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">cameraButton</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#007AFF</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">libraryButton</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#34C759</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">videoButton</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#FF9500</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">clearButton</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#FF3B30</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">buttonText</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">white</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">fontWeight</span><span class="p">:</span> <span class="dl">'</span><span class="s1">bold</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">fontSize</span><span class="p">:</span> <span class="mi">14</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">infoContainer</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#E3F2FD</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">padding</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+    <span class="na">borderRadius</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">infoTitle</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">fontSize</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+    <span class="na">fontWeight</span><span class="p">:</span> <span class="dl">'</span><span class="s1">bold</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#1976D2</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">marginBottom</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">infoSection</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">marginBottom</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">infoText</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">fontSize</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+    <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#1976D2</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">marginBottom</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="p">},</span>
+<span class="p">});</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">CameraManager</span><span class="p">;</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-navigation">🧭 Navigation</h2>
+
+<div class="navigation">
+    <a href="./01-Permissions-Security.md" class="nav-link prev">⬅️ Previous: Permissions &amp; Security</a>
+    <a href="./03-Background-Tasks.md" class="nav-link next">Next: Background Tasks ➡️</a>
+</div>
+
+<hr />
+
+<p><em>Last updated: December 2024</em></p>
+
+        </main>
+        
+        <footer style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #ecf0f1; color: #666; text-align: center;">
+            <p>Interview Prep Documentation - Built with Jekyll</p>
+        </footer>
+    </div>
+</body>
+</html>

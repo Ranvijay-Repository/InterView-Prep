@@ -1,0 +1,1253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🛡️ Type Safety Best Practices - Interview Prep Documentation</title>
+    <meta name="description" content="Comprehensive guides for JavaScript, TypeScript, and React Native interview preparation">
+    
+    <!-- GitHub Pages compatible styling -->
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+        }
+        
+        .container {
+            max-width: 100%;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            color: #2c3e50;
+            margin-top: 2em;
+            margin-bottom: 1em;
+        }
+        
+        h1 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            border-bottom: 1px solid #ecf0f1;
+            padding-bottom: 5px;
+        }
+        
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border-left: 4px solid #3498db;
+        }
+        
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+        
+        blockquote {
+            border-left: 4px solid #3498db;
+            margin: 0;
+            padding-left: 20px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1em 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .navigation {
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px 0;
+            margin-bottom: 20px;
+        }
+        
+        .navigation a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+        
+        .navigation a:hover {
+            text-decoration: underline;
+        }
+        
+        .breadcrumb {
+            margin-bottom: 20px;
+            color: #666;
+        }
+        
+        .breadcrumb a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            h2 {
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="navigation">
+            <a href="/">Home</a>
+            <a href="/Javascript/">JavaScript</a>
+            <a href="/TypeScript/">TypeScript</a>
+            <a href="/React-Native/">React Native</a>
+        </nav>
+        
+        
+        
+        <main>
+            <h1 id="️-type-safety-best-practices">🛡️ <strong>Type Safety Best Practices</strong></h1>
+
+<blockquote>
+  <p><strong>Complete guide to TypeScript type safety, strict typing, and defensive programming techniques</strong></p>
+</blockquote>
+
+<link rel="stylesheet" href="../../common-styles.css" />
+
+<hr />
+
+<h2 id="-table-of-contents">📚 <strong>Table of Contents</strong></h2>
+
+<ul>
+  <li><a href="#type-safety-overview">Type Safety Overview</a></li>
+  <li><a href="#strict-type-configuration">Strict Type Configuration</a></li>
+  <li><a href="#type-guards-and-validation">Type Guards and Validation</a></li>
+  <li><a href="#defensive-programming">Defensive Programming</a></li>
+  <li><a href="#error-handling">Error Handling</a></li>
+  <li><a href="#best-practices">Best Practices</a></li>
+  <li><a href="#common-interview-questions">Common Interview Questions</a></li>
+</ul>
+
+<hr />
+
+<h2 id="-type-safety-overview">🎯 <strong>Type Safety Overview</strong></h2>
+
+<p>Type safety is the cornerstone of TypeScript, providing compile-time error detection and runtime reliability.</p>
+
+<h3 id="type-safety-benefits"><strong>Type Safety Benefits</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Type safety benefits</span>
+<span class="kd">const</span> <span class="nx">typeSafetyBenefits</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">compileTimeErrors</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Catch errors at compile time</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">intellisense</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Better IDE support and autocomplete</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">refactoring</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Safer refactoring with type checking</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">documentation</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Types serve as documentation</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">runtimeSafety</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Reduced runtime errors</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">maintainability</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Easier to maintain and debug</span><span class="dl">"</span>
+<span class="p">};</span>
+
+<span class="c1">// Type safety levels</span>
+<span class="kd">const</span> <span class="nx">typeSafetyLevels</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">strict</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Maximum type safety with strict mode</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">moderate</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Balanced type safety and flexibility</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">loose</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Minimal type checking for quick development</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">any</span><span class="p">:</span> <span class="dl">"</span><span class="s2">No type safety (avoid when possible)</span><span class="dl">"</span>
+<span class="p">};</span>
+
+<span class="c1">// Type safety principles</span>
+<span class="kd">const</span> <span class="nx">typeSafetyPrinciples</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">explicitTypes</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Use explicit types instead of 'any'</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">strictNullChecks</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Enable strict null checks</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">noImplicitAny</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Prevent implicit 'any' types</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">strictFunctionTypes</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Enable strict function types</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">noImplicitReturns</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Require explicit returns</span><span class="dl">"</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="type-safety-challenges"><strong>Type Safety Challenges</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Type safety challenges</span>
+<span class="kd">const</span> <span class="nx">typeSafetyChallenges</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">learningCurve</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Learning TypeScript type system</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">complexity</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Managing complex type definitions</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">performance</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Type checking performance impact</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">migration</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Migrating from JavaScript</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">thirdParty</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Third-party library type definitions</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">dynamic</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Handling dynamic content</span><span class="dl">"</span>
+<span class="p">};</span>
+
+<span class="c1">// Common type safety issues</span>
+<span class="kd">const</span> <span class="nx">commonIssues</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">any</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Overuse of 'any' type</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">null</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Null and undefined handling</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">unions</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Complex union types</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">generics</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Generic type constraints</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">inference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Type inference limitations</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">casting</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Unsafe type casting</span><span class="dl">"</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="️-strict-type-configuration">⚙️ <strong>Strict Type Configuration</strong></h2>
+
+<h3 id="strict-mode-configuration"><strong>Strict Mode Configuration</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Strict mode configuration</span>
+<span class="kd">const</span> <span class="nx">strictModeConfig</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="dl">"</span><span class="s2">compilerOptions</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">strict</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">noImplicitAny</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">strictNullChecks</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">strictFunctionTypes</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">strictBindCallApply</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">strictPropertyInitialization</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">noImplicitReturns</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">noFallthroughCasesInSwitch</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">noUncheckedIndexedAccess</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">noImplicitOverride</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">noPropertyAccessFromIndexSignature</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">exactOptionalPropertyTypes</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// Strict mode benefits</span>
+<span class="kd">const</span> <span class="nx">strictModeBenefits</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">noImplicitAny</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Prevents implicit 'any' types</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">strictNullChecks</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Prevents null/undefined errors</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">strictFunctionTypes</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Ensures function type safety</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">strictPropertyInitialization</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Ensures property initialization</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">noImplicitReturns</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Prevents missing return statements</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">noFallthroughCasesInSwitch</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Prevents switch fallthrough</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">noUncheckedIndexedAccess</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Prevents unsafe array access</span><span class="dl">"</span>
+<span class="p">};</span>
+
+<span class="c1">// Strict mode examples</span>
+<span class="kd">function</span> <span class="nx">strictModeExamples</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// ✅ Good: Explicit types</span>
+  <span class="kd">function</span> <span class="nx">add</span><span class="p">(</span><span class="nx">a</span><span class="p">:</span> <span class="kr">number</span><span class="p">,</span> <span class="nx">b</span><span class="p">:</span> <span class="kr">number</span><span class="p">):</span> <span class="kr">number</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span><span class="p">;</span>
+  <span class="p">}</span>
+  
+  <span class="c1">// ❌ Avoid: Implicit any</span>
+  <span class="kd">function</span> <span class="nx">addBad</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span><span class="p">;</span>
+  <span class="p">}</span>
+  
+  <span class="c1">// ✅ Good: Null checks</span>
+  <span class="kd">function</span> <span class="nx">processUser</span><span class="p">(</span><span class="nx">user</span><span class="p">:</span> <span class="nx">User</span> <span class="o">|</span> <span class="kc">null</span><span class="p">):</span> <span class="kr">string</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">user</span> <span class="o">===</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="dl">'</span><span class="s1">No user</span><span class="dl">'</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">user</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
+  <span class="p">}</span>
+  
+  <span class="c1">// ❌ Avoid: No null checks</span>
+  <span class="kd">function</span> <span class="nx">processUserBad</span><span class="p">(</span><span class="nx">user</span><span class="p">:</span> <span class="nx">User</span> <span class="o">|</span> <span class="kc">null</span><span class="p">):</span> <span class="kr">string</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">user</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span> <span class="c1">// Error: Object is possibly 'null'</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="typescript-configuration"><strong>TypeScript Configuration</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// TypeScript configuration for type safety</span>
+<span class="kd">const</span> <span class="nx">tsConfig</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="dl">"</span><span class="s2">compilerOptions</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">target</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">ES2020</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">module</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">ESNext</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">moduleResolution</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">node</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">lib</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span><span class="dl">"</span><span class="s2">ES2020</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">DOM</span><span class="dl">"</span><span class="p">],</span>
+    <span class="dl">"</span><span class="s2">allowJs</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">checkJs</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">declaration</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">declarationMap</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">sourceMap</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">outDir</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">./dist</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">rootDir</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">./src</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">removeComments</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">noEmitOnError</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">preserveConstEnums</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">skipLibCheck</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">forceConsistentCasingInFileNames</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">resolveJsonModule</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">isolatedModules</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">allowSyntheticDefaultImports</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">esModuleInterop</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">experimentalDecorators</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">emitDecoratorMetadata</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">strict</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">noImplicitAny</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">strictNullChecks</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">strictFunctionTypes</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">strictBindCallApply</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">strictPropertyInitialization</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">noImplicitReturns</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">noFallthroughCasesInSwitch</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">noUncheckedIndexedAccess</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">noImplicitOverride</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">noPropertyAccessFromIndexSignature</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">exactOptionalPropertyTypes</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span>
+  <span class="p">},</span>
+  <span class="dl">"</span><span class="s2">include</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span><span class="dl">"</span><span class="s2">src/**/*</span><span class="dl">"</span><span class="p">],</span>
+  <span class="dl">"</span><span class="s2">exclude</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span><span class="dl">"</span><span class="s2">node_modules</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">dist</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">**/*.test.ts</span><span class="dl">"</span><span class="p">]</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="eslint-configuration"><strong>ESLint Configuration</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ESLint configuration for type safety</span>
+<span class="kd">const</span> <span class="nx">eslintConfig</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="dl">"</span><span class="s2">extends</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="dl">"</span><span class="s2">@typescript-eslint/recommended</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">@typescript-eslint/recommended-requiring-type-checking</span><span class="dl">"</span>
+  <span class="p">],</span>
+  <span class="dl">"</span><span class="s2">parser</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">@typescript-eslint/parser</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">parserOptions</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">project</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">./tsconfig.json</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">tsconfigRootDir</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">.</span><span class="dl">"</span>
+  <span class="p">},</span>
+  <span class="dl">"</span><span class="s2">plugins</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span><span class="dl">"</span><span class="s2">@typescript-eslint</span><span class="dl">"</span><span class="p">],</span>
+  <span class="dl">"</span><span class="s2">rules</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">@typescript-eslint/no-explicit-any</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">error</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">@typescript-eslint/no-unsafe-assignment</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">error</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">@typescript-eslint/no-unsafe-call</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">error</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">@typescript-eslint/no-unsafe-member-access</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">error</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">@typescript-eslint/no-unsafe-return</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">error</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">@typescript-eslint/prefer-nullish-coalescing</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">error</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">@typescript-eslint/prefer-optional-chain</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">error</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">@typescript-eslint/no-unnecessary-type-assertion</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">error</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">@typescript-eslint/no-non-null-assertion</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">error</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">@typescript-eslint/strict-boolean-expressions</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">error</span><span class="dl">"</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-type-guards-and-validation">🔍 <strong>Type Guards and Validation</strong></h2>
+
+<h3 id="type-guard-functions"><strong>Type Guard Functions</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Type guard functions</span>
+<span class="kd">const</span> <span class="nx">typeGuardFunctions</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">purpose</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Narrow types at runtime</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">safety</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Provide runtime type safety</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">intellisense</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Enable better IDE support</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">validation</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Validate data from external sources</span><span class="dl">"</span>
+<span class="p">};</span>
+
+<span class="c1">// Basic type guards</span>
+<span class="kd">function</span> <span class="nx">isString</span><span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">):</span> <span class="nx">value</span> <span class="k">is</span> <span class="kr">string</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="k">typeof</span> <span class="nx">value</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">string</span><span class="dl">'</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">isNumber</span><span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">):</span> <span class="nx">value</span> <span class="k">is</span> <span class="kr">number</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="k">typeof</span> <span class="nx">value</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">number</span><span class="dl">'</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nb">isNaN</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">isBoolean</span><span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">):</span> <span class="nx">value</span> <span class="k">is</span> <span class="nx">boolean</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="k">typeof</span> <span class="nx">value</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">boolean</span><span class="dl">'</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">isArray</span><span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">):</span> <span class="nx">value</span> <span class="k">is</span> <span class="kr">any</span><span class="p">[]</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nb">Array</span><span class="p">.</span><span class="nx">isArray</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">isObject</span><span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">):</span> <span class="nx">value</span> <span class="k">is</span> <span class="nx">object</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="k">typeof</span> <span class="nx">value</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">object</span><span class="dl">'</span> <span class="o">&amp;&amp;</span> <span class="nx">value</span> <span class="o">!==</span> <span class="kc">null</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Complex type guards</span>
+<span class="kr">interface</span> <span class="nx">User</span> <span class="p">{</span>
+  <span class="nl">id</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span>
+  <span class="nl">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">email</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">isUser</span><span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">):</span> <span class="nx">value</span> <span class="k">is</span> <span class="nx">User</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="k">typeof</span> <span class="nx">value</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">object</span><span class="dl">'</span> <span class="o">&amp;&amp;</span>
+    <span class="nx">value</span> <span class="o">!==</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span>
+    <span class="dl">'</span><span class="s1">id</span><span class="dl">'</span> <span class="k">in</span> <span class="nx">value</span> <span class="o">&amp;&amp;</span>
+    <span class="dl">'</span><span class="s1">name</span><span class="dl">'</span> <span class="k">in</span> <span class="nx">value</span> <span class="o">&amp;&amp;</span>
+    <span class="dl">'</span><span class="s1">email</span><span class="dl">'</span> <span class="k">in</span> <span class="nx">value</span> <span class="o">&amp;&amp;</span>
+    <span class="k">typeof</span> <span class="p">(</span><span class="nx">value</span> <span class="k">as</span> <span class="kr">any</span><span class="p">).</span><span class="nx">id</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">number</span><span class="dl">'</span> <span class="o">&amp;&amp;</span>
+    <span class="k">typeof</span> <span class="p">(</span><span class="nx">value</span> <span class="k">as</span> <span class="kr">any</span><span class="p">).</span><span class="nx">name</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">string</span><span class="dl">'</span> <span class="o">&amp;&amp;</span>
+    <span class="k">typeof</span> <span class="p">(</span><span class="nx">value</span> <span class="k">as</span> <span class="kr">any</span><span class="p">).</span><span class="nx">email</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">string</span><span class="dl">'</span>
+  <span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Generic type guards</span>
+<span class="kd">function</span> <span class="nx">isArrayOf</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">,</span> <span class="nx">guard</span><span class="p">:</span> <span class="p">(</span><span class="nx">item</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">item</span> <span class="k">is</span> <span class="nx">T</span><span class="p">):</span> <span class="nx">value</span> <span class="k">is</span> <span class="nx">T</span><span class="p">[]</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nb">Array</span><span class="p">.</span><span class="nx">isArray</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">value</span><span class="p">.</span><span class="nx">every</span><span class="p">(</span><span class="nx">guard</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">isObjectOf</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">,</span> <span class="nx">guard</span><span class="p">:</span> <span class="p">(</span><span class="nx">item</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">item</span> <span class="k">is</span> <span class="nx">T</span><span class="p">):</span> <span class="nx">value</span> <span class="k">is</span> <span class="nb">Record</span><span class="o">&lt;</span><span class="kr">string</span><span class="p">,</span> <span class="nx">T</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="k">typeof</span> <span class="nx">value</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">object</span><span class="dl">'</span> <span class="o">&amp;&amp;</span>
+    <span class="nx">value</span> <span class="o">!==</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span>
+    <span class="nb">Object</span><span class="p">.</span><span class="nx">values</span><span class="p">(</span><span class="nx">value</span><span class="p">).</span><span class="nx">every</span><span class="p">(</span><span class="nx">guard</span><span class="p">)</span>
+  <span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Usage examples</span>
+<span class="kd">function</span> <span class="nx">processValue</span><span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">isString</span><span class="p">(</span><span class="nx">value</span><span class="p">))</span> <span class="p">{</span>
+    <span class="c1">// value is string</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">value</span><span class="p">.</span><span class="nx">toUpperCase</span><span class="p">());</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">isNumber</span><span class="p">(</span><span class="nx">value</span><span class="p">))</span> <span class="p">{</span>
+    <span class="c1">// value is number</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">value</span> <span class="o">*</span> <span class="mi">2</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">isUser</span><span class="p">(</span><span class="nx">value</span><span class="p">))</span> <span class="p">{</span>
+    <span class="c1">// value is User</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`User: </span><span class="p">${</span><span class="nx">value</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="runtime-validation"><strong>Runtime Validation</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Runtime validation</span>
+<span class="kd">const</span> <span class="nx">runtimeValidation</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">purpose</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Validate data at runtime</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">safety</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Ensure data integrity</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">errorHandling</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Handle validation errors gracefully</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">types</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Convert validated data to proper types</span><span class="dl">"</span>
+<span class="p">};</span>
+
+<span class="c1">// Validation result type</span>
+<span class="kd">type</span> <span class="nx">ValidationResult</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">success</span><span class="p">:</span> <span class="kc">true</span><span class="p">;</span>
+  <span class="nl">data</span><span class="p">:</span> <span class="nx">T</span><span class="p">;</span>
+<span class="p">}</span> <span class="o">|</span> <span class="p">{</span>
+  <span class="na">success</span><span class="p">:</span> <span class="kc">false</span><span class="p">;</span>
+  <span class="nl">error</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="c1">// Validation functions</span>
+<span class="kd">function</span> <span class="nx">validateString</span><span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">):</span> <span class="nx">ValidationResult</span><span class="o">&lt;</span><span class="kr">string</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">value</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">string</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">{</span> <span class="na">success</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="na">data</span><span class="p">:</span> <span class="nx">value</span> <span class="p">};</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="p">{</span> <span class="na">success</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> <span class="na">error</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Expected string</span><span class="dl">'</span> <span class="p">};</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">validateNumber</span><span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">):</span> <span class="nx">ValidationResult</span><span class="o">&lt;</span><span class="kr">number</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">value</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">number</span><span class="dl">'</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nb">isNaN</span><span class="p">(</span><span class="nx">value</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">{</span> <span class="na">success</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="na">data</span><span class="p">:</span> <span class="nx">value</span> <span class="p">};</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="p">{</span> <span class="na">success</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> <span class="na">error</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Expected number</span><span class="dl">'</span> <span class="p">};</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">validateUser</span><span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">):</span> <span class="nx">ValidationResult</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">isUser</span><span class="p">(</span><span class="nx">value</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">{</span> <span class="na">success</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="na">data</span><span class="p">:</span> <span class="nx">value</span> <span class="p">};</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="p">{</span> <span class="na">success</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> <span class="na">error</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Invalid user object</span><span class="dl">'</span> <span class="p">};</span>
+<span class="p">}</span>
+
+<span class="c1">// Validation utilities</span>
+<span class="kd">function</span> <span class="nx">validateRequired</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="nx">T</span> <span class="o">|</span> <span class="kc">null</span> <span class="o">|</span> <span class="kc">undefined</span><span class="p">):</span> <span class="nx">ValidationResult</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">value</span> <span class="o">===</span> <span class="kc">null</span> <span class="o">||</span> <span class="nx">value</span> <span class="o">===</span> <span class="kc">undefined</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">{</span> <span class="na">success</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> <span class="na">error</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Required field is missing</span><span class="dl">'</span> <span class="p">};</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="p">{</span> <span class="na">success</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="na">data</span><span class="p">:</span> <span class="nx">value</span> <span class="p">};</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">validateMinLength</span><span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="kr">string</span><span class="p">,</span> <span class="nx">minLength</span><span class="p">:</span> <span class="kr">number</span><span class="p">):</span> <span class="nx">ValidationResult</span><span class="o">&lt;</span><span class="kr">string</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">value</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;</span> <span class="nx">minLength</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">{</span> <span class="na">success</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> <span class="na">error</span><span class="p">:</span> <span class="s2">`Minimum length is </span><span class="p">${</span><span class="nx">minLength</span><span class="p">}</span><span class="s2">`</span> <span class="p">};</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="p">{</span> <span class="na">success</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="na">data</span><span class="p">:</span> <span class="nx">value</span> <span class="p">};</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">validateEmail</span><span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nx">ValidationResult</span><span class="o">&lt;</span><span class="kr">string</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">emailRegex</span> <span class="o">=</span> <span class="sr">/^</span><span class="se">[^\s</span><span class="sr">@</span><span class="se">]</span><span class="sr">+@</span><span class="se">[^\s</span><span class="sr">@</span><span class="se">]</span><span class="sr">+</span><span class="se">\.[^\s</span><span class="sr">@</span><span class="se">]</span><span class="sr">+$/</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">emailRegex</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">value</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">{</span> <span class="na">success</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> <span class="na">error</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Invalid email format</span><span class="dl">'</span> <span class="p">};</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="p">{</span> <span class="na">success</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="na">data</span><span class="p">:</span> <span class="nx">value</span> <span class="p">};</span>
+<span class="p">}</span>
+
+<span class="c1">// Usage</span>
+<span class="kd">function</span> <span class="nx">processUserData</span><span class="p">(</span><span class="nx">data</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">userResult</span> <span class="o">=</span> <span class="nx">validateUser</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">userResult</span><span class="p">.</span><span class="nx">success</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="nx">userResult</span><span class="p">.</span><span class="nx">error</span><span class="p">);</span>
+  <span class="p">}</span>
+  
+  <span class="kd">const</span> <span class="nx">user</span> <span class="o">=</span> <span class="nx">userResult</span><span class="p">.</span><span class="nx">data</span><span class="p">;</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`Processing user: </span><span class="p">${</span><span class="nx">user</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="schema-validation"><strong>Schema Validation</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Schema validation</span>
+<span class="kd">const</span> <span class="nx">schemaValidation</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">purpose</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Validate complex data structures</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">libraries</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Use libraries like Zod, Joi, or Yup</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">types</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Generate types from schemas</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">runtime</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Runtime validation with compile-time types</span><span class="dl">"</span>
+<span class="p">};</span>
+
+<span class="c1">// Simple schema validation</span>
+<span class="kr">interface</span> <span class="nx">Schema</span> <span class="p">{</span>
+  <span class="nx">validate</span><span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">):</span> <span class="nx">ValidationResult</span><span class="o">&lt;</span><span class="kr">any</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nx">StringSchema</span> <span class="k">implements</span> <span class="nx">Schema</span> <span class="p">{</span>
+  <span class="kd">constructor</span><span class="p">(</span><span class="k">private</span> <span class="nx">minLength</span><span class="p">?:</span> <span class="kr">number</span><span class="p">,</span> <span class="k">private</span> <span class="nx">maxLength</span><span class="p">?:</span> <span class="kr">number</span><span class="p">)</span> <span class="p">{}</span>
+  
+  <span class="nx">validate</span><span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">):</span> <span class="nx">ValidationResult</span><span class="o">&lt;</span><span class="kr">string</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">value</span> <span class="o">!==</span> <span class="dl">'</span><span class="s1">string</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="p">{</span> <span class="na">success</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> <span class="na">error</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Expected string</span><span class="dl">'</span> <span class="p">};</span>
+    <span class="p">}</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">minLength</span> <span class="o">&amp;&amp;</span> <span class="nx">value</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">minLength</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="p">{</span> <span class="na">success</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> <span class="na">error</span><span class="p">:</span> <span class="s2">`Minimum length is </span><span class="p">${</span><span class="k">this</span><span class="p">.</span><span class="nx">minLength</span><span class="p">}</span><span class="s2">`</span> <span class="p">};</span>
+    <span class="p">}</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">maxLength</span> <span class="o">&amp;&amp;</span> <span class="nx">value</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">maxLength</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="p">{</span> <span class="na">success</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> <span class="na">error</span><span class="p">:</span> <span class="s2">`Maximum length is </span><span class="p">${</span><span class="k">this</span><span class="p">.</span><span class="nx">maxLength</span><span class="p">}</span><span class="s2">`</span> <span class="p">};</span>
+    <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="p">{</span> <span class="na">success</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="na">data</span><span class="p">:</span> <span class="nx">value</span> <span class="p">};</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nx">NumberSchema</span> <span class="k">implements</span> <span class="nx">Schema</span> <span class="p">{</span>
+  <span class="kd">constructor</span><span class="p">(</span><span class="k">private</span> <span class="nx">min</span><span class="p">?:</span> <span class="kr">number</span><span class="p">,</span> <span class="k">private</span> <span class="nx">max</span><span class="p">?:</span> <span class="kr">number</span><span class="p">)</span> <span class="p">{}</span>
+  
+  <span class="nx">validate</span><span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">):</span> <span class="nx">ValidationResult</span><span class="o">&lt;</span><span class="kr">number</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">value</span> <span class="o">!==</span> <span class="dl">'</span><span class="s1">number</span><span class="dl">'</span> <span class="o">||</span> <span class="nb">isNaN</span><span class="p">(</span><span class="nx">value</span><span class="p">))</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="p">{</span> <span class="na">success</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> <span class="na">error</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Expected number</span><span class="dl">'</span> <span class="p">};</span>
+    <span class="p">}</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">min</span> <span class="o">!==</span> <span class="kc">undefined</span> <span class="o">&amp;&amp;</span> <span class="nx">value</span> <span class="o">&lt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">min</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="p">{</span> <span class="na">success</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> <span class="na">error</span><span class="p">:</span> <span class="s2">`Minimum value is </span><span class="p">${</span><span class="k">this</span><span class="p">.</span><span class="nx">min</span><span class="p">}</span><span class="s2">`</span> <span class="p">};</span>
+    <span class="p">}</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">max</span> <span class="o">!==</span> <span class="kc">undefined</span> <span class="o">&amp;&amp;</span> <span class="nx">value</span> <span class="o">&gt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">max</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="p">{</span> <span class="na">success</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> <span class="na">error</span><span class="p">:</span> <span class="s2">`Maximum value is </span><span class="p">${</span><span class="k">this</span><span class="p">.</span><span class="nx">max</span><span class="p">}</span><span class="s2">`</span> <span class="p">};</span>
+    <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="p">{</span> <span class="na">success</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="na">data</span><span class="p">:</span> <span class="nx">value</span> <span class="p">};</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nx">ObjectSchema</span> <span class="k">implements</span> <span class="nx">Schema</span> <span class="p">{</span>
+  <span class="kd">constructor</span><span class="p">(</span><span class="k">private</span> <span class="nx">properties</span><span class="p">:</span> <span class="nb">Record</span><span class="o">&lt;</span><span class="kr">string</span><span class="p">,</span> <span class="nx">Schema</span><span class="o">&gt;</span><span class="p">)</span> <span class="p">{}</span>
+  
+  <span class="nx">validate</span><span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">):</span> <span class="nx">ValidationResult</span><span class="o">&lt;</span><span class="nb">Record</span><span class="o">&lt;</span><span class="kr">string</span><span class="p">,</span> <span class="kr">any</span><span class="o">&gt;&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">value</span> <span class="o">!==</span> <span class="dl">'</span><span class="s1">object</span><span class="dl">'</span> <span class="o">||</span> <span class="nx">value</span> <span class="o">===</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="p">{</span> <span class="na">success</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> <span class="na">error</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Expected object</span><span class="dl">'</span> <span class="p">};</span>
+    <span class="p">}</span>
+    
+    <span class="kd">const</span> <span class="na">result</span><span class="p">:</span> <span class="nb">Record</span><span class="o">&lt;</span><span class="kr">string</span><span class="p">,</span> <span class="kr">any</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{};</span>
+    <span class="kd">const</span> <span class="na">errors</span><span class="p">:</span> <span class="kr">string</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[];</span>
+    
+    <span class="k">for</span> <span class="p">(</span><span class="kd">const</span> <span class="p">[</span><span class="nx">key</span><span class="p">,</span> <span class="nx">schema</span><span class="p">]</span> <span class="k">of</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">entries</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">properties</span><span class="p">))</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">propertyValue</span> <span class="o">=</span> <span class="p">(</span><span class="nx">value</span> <span class="k">as</span> <span class="kr">any</span><span class="p">)[</span><span class="nx">key</span><span class="p">];</span>
+      <span class="kd">const</span> <span class="nx">validation</span> <span class="o">=</span> <span class="nx">schema</span><span class="p">.</span><span class="nx">validate</span><span class="p">(</span><span class="nx">propertyValue</span><span class="p">);</span>
+      
+      <span class="k">if</span> <span class="p">(</span><span class="nx">validation</span><span class="p">.</span><span class="nx">success</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">result</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="nx">validation</span><span class="p">.</span><span class="nx">data</span><span class="p">;</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">errors</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">key</span><span class="p">}</span><span class="s2">: </span><span class="p">${</span><span class="nx">validation</span><span class="p">.</span><span class="nx">error</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="nx">errors</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="p">{</span> <span class="na">success</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> <span class="na">error</span><span class="p">:</span> <span class="nx">errors</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="dl">'</span><span class="s1">, </span><span class="dl">'</span><span class="p">)</span> <span class="p">};</span>
+    <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="p">{</span> <span class="na">success</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="na">data</span><span class="p">:</span> <span class="nx">result</span> <span class="p">};</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Usage</span>
+<span class="kd">const</span> <span class="nx">userSchema</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ObjectSchema</span><span class="p">({</span>
+  <span class="na">id</span><span class="p">:</span> <span class="k">new</span> <span class="nx">NumberSchema</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
+  <span class="na">name</span><span class="p">:</span> <span class="k">new</span> <span class="nx">StringSchema</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span>
+  <span class="na">email</span><span class="p">:</span> <span class="k">new</span> <span class="nx">StringSchema</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
+<span class="p">});</span>
+
+<span class="kd">function</span> <span class="nx">validateUserData</span><span class="p">(</span><span class="nx">data</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">userSchema</span><span class="p">.</span><span class="nx">validate</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">result</span><span class="p">.</span><span class="nx">success</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">error</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">result</span><span class="p">.</span><span class="nx">data</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="️-defensive-programming">🛡️ <strong>Defensive Programming</strong></h2>
+
+<h3 id="null-and-undefined-handling"><strong>Null and Undefined Handling</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Null and undefined handling</span>
+<span class="kd">const</span> <span class="nx">nullUndefinedHandling</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">purpose</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Handle null and undefined safely</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">techniques</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Use optional chaining, nullish coalescing, and type guards</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">patterns</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Defensive programming patterns</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">safety</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Prevent runtime errors</span><span class="dl">"</span>
+<span class="p">};</span>
+
+<span class="c1">// Optional chaining</span>
+<span class="kd">function</span> <span class="nx">optionalChainingExamples</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kr">interface</span> <span class="nx">User</span> <span class="p">{</span>
+    <span class="nl">profile</span><span class="p">?:</span> <span class="p">{</span>
+      <span class="nx">settings</span><span class="p">?:</span> <span class="p">{</span>
+        <span class="nx">theme</span><span class="p">?:</span> <span class="kr">string</span><span class="p">;</span>
+      <span class="p">};</span>
+    <span class="p">};</span>
+  <span class="p">}</span>
+  
+  <span class="kd">const</span> <span class="nx">user</span><span class="p">:</span> <span class="nx">User</span> <span class="o">=</span> <span class="p">{</span> <span class="na">profile</span><span class="p">:</span> <span class="p">{</span> <span class="na">settings</span><span class="p">:</span> <span class="p">{</span> <span class="na">theme</span><span class="p">:</span> <span class="dl">'</span><span class="s1">dark</span><span class="dl">'</span> <span class="p">}</span> <span class="p">}</span> <span class="p">};</span>
+  
+  <span class="c1">// ✅ Good: Optional chaining</span>
+  <span class="kd">const</span> <span class="nx">theme</span> <span class="o">=</span> <span class="nx">user</span><span class="p">.</span><span class="nx">profile</span><span class="p">?.</span><span class="nx">settings</span><span class="p">?.</span><span class="nx">theme</span> <span class="o">??</span> <span class="dl">'</span><span class="s1">light</span><span class="dl">'</span><span class="p">;</span>
+  
+  <span class="c1">// ❌ Avoid: Unsafe property access</span>
+  <span class="kd">const</span> <span class="nx">themeBad</span> <span class="o">=</span> <span class="nx">user</span><span class="p">.</span><span class="nx">profile</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">theme</span><span class="p">;</span> <span class="c1">// Error: Object is possibly 'undefined'</span>
+  
+  <span class="c1">// ✅ Good: Nullish coalescing</span>
+  <span class="kd">const</span> <span class="nx">userName</span> <span class="o">=</span> <span class="nx">user</span><span class="p">.</span><span class="nx">profile</span><span class="p">?.</span><span class="nx">settings</span><span class="p">?.</span><span class="nx">theme</span> <span class="o">??</span> <span class="dl">'</span><span class="s1">default</span><span class="dl">'</span><span class="p">;</span>
+  
+  <span class="c1">// ❌ Avoid: Logical OR for falsy values</span>
+  <span class="kd">const</span> <span class="nx">userNameBad</span> <span class="o">=</span> <span class="nx">user</span><span class="p">.</span><span class="nx">profile</span><span class="p">?.</span><span class="nx">settings</span><span class="p">?.</span><span class="nx">theme</span> <span class="o">||</span> <span class="dl">'</span><span class="s1">default</span><span class="dl">'</span><span class="p">;</span> <span class="c1">// 'default' for empty string</span>
+<span class="p">}</span>
+
+<span class="c1">// Null checks</span>
+<span class="kd">function</span> <span class="nx">nullCheckExamples</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">function</span> <span class="nx">processUser</span><span class="p">(</span><span class="nx">user</span><span class="p">:</span> <span class="nx">User</span> <span class="o">|</span> <span class="kc">null</span><span class="p">):</span> <span class="kr">string</span> <span class="p">{</span>
+    <span class="c1">// ✅ Good: Explicit null check</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">user</span> <span class="o">===</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="dl">'</span><span class="s1">No user</span><span class="dl">'</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">user</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
+  <span class="p">}</span>
+  
+  <span class="kd">function</span> <span class="nx">processUserBad</span><span class="p">(</span><span class="nx">user</span><span class="p">:</span> <span class="nx">User</span> <span class="o">|</span> <span class="kc">null</span><span class="p">):</span> <span class="kr">string</span> <span class="p">{</span>
+    <span class="c1">// ❌ Avoid: No null check</span>
+    <span class="k">return</span> <span class="nx">user</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span> <span class="c1">// Error: Object is possibly 'null'</span>
+  <span class="p">}</span>
+  
+  <span class="c1">// ✅ Good: Type guard</span>
+  <span class="kd">function</span> <span class="nx">isNotNull</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="nx">T</span> <span class="o">|</span> <span class="kc">null</span><span class="p">):</span> <span class="nx">value</span> <span class="k">is</span> <span class="nx">T</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">value</span> <span class="o">!==</span> <span class="kc">null</span><span class="p">;</span>
+  <span class="p">}</span>
+  
+  <span class="kd">function</span> <span class="nx">processUsers</span><span class="p">(</span><span class="nx">users</span><span class="p">:</span> <span class="p">(</span><span class="nx">User</span> <span class="o">|</span> <span class="kc">null</span><span class="p">)[]):</span> <span class="kr">string</span><span class="p">[]</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">users</span>
+      <span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">isNotNull</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">user</span> <span class="o">=&gt;</span> <span class="nx">user</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="input-validation"><strong>Input Validation</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Input validation</span>
+<span class="kd">const</span> <span class="nx">inputValidation</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">purpose</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Validate all inputs</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">techniques</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Type guards, schema validation, sanitization</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">security</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Prevent security vulnerabilities</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">reliability</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Ensure data integrity</span><span class="dl">"</span>
+<span class="p">};</span>
+
+<span class="c1">// Input validation functions</span>
+<span class="kd">function</span> <span class="nx">validateInput</span><span class="p">(</span><span class="nx">input</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">):</span> <span class="nx">ValidationResult</span><span class="o">&lt;</span><span class="kr">any</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">input</span> <span class="o">!==</span> <span class="dl">'</span><span class="s1">object</span><span class="dl">'</span> <span class="o">||</span> <span class="nx">input</span> <span class="o">===</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">{</span> <span class="na">success</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> <span class="na">error</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Expected object</span><span class="dl">'</span> <span class="p">};</span>
+  <span class="p">}</span>
+  
+  <span class="kd">const</span> <span class="nx">obj</span> <span class="o">=</span> <span class="nx">input</span> <span class="k">as</span> <span class="nb">Record</span><span class="o">&lt;</span><span class="kr">string</span><span class="p">,</span> <span class="nx">unknown</span><span class="o">&gt;</span><span class="p">;</span>
+  <span class="kd">const</span> <span class="na">errors</span><span class="p">:</span> <span class="kr">string</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[];</span>
+  
+  <span class="c1">// Validate required fields</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="dl">'</span><span class="s1">id</span><span class="dl">'</span> <span class="k">in</span> <span class="nx">obj</span><span class="p">)</span> <span class="o">||</span> <span class="k">typeof</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">id</span> <span class="o">!==</span> <span class="dl">'</span><span class="s1">number</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">errors</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="dl">'</span><span class="s1">id is required and must be a number</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">}</span>
+  
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="dl">'</span><span class="s1">name</span><span class="dl">'</span> <span class="k">in</span> <span class="nx">obj</span><span class="p">)</span> <span class="o">||</span> <span class="k">typeof</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">name</span> <span class="o">!==</span> <span class="dl">'</span><span class="s1">string</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">errors</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="dl">'</span><span class="s1">name is required and must be a string</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">}</span>
+  
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="dl">'</span><span class="s1">email</span><span class="dl">'</span> <span class="k">in</span> <span class="nx">obj</span><span class="p">)</span> <span class="o">||</span> <span class="k">typeof</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">email</span> <span class="o">!==</span> <span class="dl">'</span><span class="s1">string</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">errors</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="dl">'</span><span class="s1">email is required and must be a string</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">}</span>
+  
+  <span class="k">if</span> <span class="p">(</span><span class="nx">errors</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">{</span> <span class="na">success</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> <span class="na">error</span><span class="p">:</span> <span class="nx">errors</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="dl">'</span><span class="s1">, </span><span class="dl">'</span><span class="p">)</span> <span class="p">};</span>
+  <span class="p">}</span>
+  
+  <span class="k">return</span> <span class="p">{</span> <span class="na">success</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="na">data</span><span class="p">:</span> <span class="nx">obj</span> <span class="p">};</span>
+<span class="p">}</span>
+
+<span class="c1">// Sanitization</span>
+<span class="kd">function</span> <span class="nx">sanitizeInput</span><span class="p">(</span><span class="nx">input</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="kr">string</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">input</span>
+    <span class="p">.</span><span class="nx">trim</span><span class="p">()</span>
+    <span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/</span><span class="se">[</span><span class="sr">&lt;&gt;</span><span class="se">]</span><span class="sr">/g</span><span class="p">,</span> <span class="dl">''</span><span class="p">)</span> <span class="c1">// Remove potential HTML tags</span>
+    <span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/</span><span class="se">[</span><span class="sr">'"</span><span class="se">]</span><span class="sr">/g</span><span class="p">,</span> <span class="dl">''</span><span class="p">)</span> <span class="c1">// Remove quotes</span>
+    <span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1000</span><span class="p">);</span> <span class="c1">// Limit length</span>
+<span class="p">}</span>
+
+<span class="c1">// Input validation with sanitization</span>
+<span class="kd">function</span> <span class="nx">validateAndSanitizeInput</span><span class="p">(</span><span class="nx">input</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">):</span> <span class="nx">ValidationResult</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">validation</span> <span class="o">=</span> <span class="nx">validateInput</span><span class="p">(</span><span class="nx">input</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">validation</span><span class="p">.</span><span class="nx">success</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">validation</span><span class="p">;</span>
+  <span class="p">}</span>
+  
+  <span class="kd">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">validation</span><span class="p">.</span><span class="nx">data</span><span class="p">;</span>
+  <span class="kd">const</span> <span class="na">sanitizedUser</span><span class="p">:</span> <span class="nx">User</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">id</span><span class="p">:</span> <span class="nx">data</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span>
+    <span class="na">name</span><span class="p">:</span> <span class="nx">sanitizeInput</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">name</span><span class="p">),</span>
+    <span class="na">email</span><span class="p">:</span> <span class="nx">sanitizeInput</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">email</span><span class="p">)</span>
+  <span class="p">};</span>
+  
+  <span class="k">return</span> <span class="p">{</span> <span class="na">success</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="na">data</span><span class="p">:</span> <span class="nx">sanitizedUser</span> <span class="p">};</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="error-boundaries"><strong>Error Boundaries</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Error boundaries</span>
+<span class="kd">const</span> <span class="nx">errorBoundaries</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">purpose</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Catch and handle errors gracefully</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">techniques</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Try-catch blocks, error boundaries, fallbacks</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">logging</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Log errors for debugging</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">recovery</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Provide error recovery mechanisms</span><span class="dl">"</span>
+<span class="p">};</span>
+
+<span class="c1">// Error boundary class</span>
+<span class="kd">class</span> <span class="nx">ErrorBoundary</span> <span class="p">{</span>
+  <span class="k">private</span> <span class="nx">error</span><span class="p">:</span> <span class="nb">Error</span> <span class="o">|</span> <span class="kc">null</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+  <span class="k">private</span> <span class="nx">errorInfo</span><span class="p">:</span> <span class="kr">any</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+  
+  <span class="nx">catchError</span><span class="p">(</span><span class="nx">error</span><span class="p">:</span> <span class="nb">Error</span><span class="p">,</span> <span class="nx">errorInfo</span><span class="p">:</span> <span class="kr">any</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">error</span> <span class="o">=</span> <span class="nx">error</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">errorInfo</span> <span class="o">=</span> <span class="nx">errorInfo</span><span class="p">;</span>
+    
+    <span class="c1">// Log error</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Error caught by boundary:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">,</span> <span class="nx">errorInfo</span><span class="p">);</span>
+    
+    <span class="c1">// Report to error tracking service</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">reportError</span><span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">errorInfo</span><span class="p">);</span>
+  <span class="p">}</span>
+  
+  <span class="k">private</span> <span class="nx">reportError</span><span class="p">(</span><span class="nx">error</span><span class="p">:</span> <span class="nb">Error</span><span class="p">,</span> <span class="nx">errorInfo</span><span class="p">:</span> <span class="kr">any</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="c1">// Send to error tracking service</span>
+    <span class="c1">// e.g., Sentry, LogRocket, etc.</span>
+  <span class="p">}</span>
+  
+  <span class="nx">hasError</span><span class="p">():</span> <span class="nx">boolean</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">error</span> <span class="o">!==</span> <span class="kc">null</span><span class="p">;</span>
+  <span class="p">}</span>
+  
+  <span class="nx">getError</span><span class="p">():</span> <span class="nb">Error</span> <span class="o">|</span> <span class="kc">null</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">error</span><span class="p">;</span>
+  <span class="p">}</span>
+  
+  <span class="nx">clearError</span><span class="p">():</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">error</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">errorInfo</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Safe function execution</span>
+<span class="kd">function</span> <span class="nx">safeExecute</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">fn</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">T</span><span class="p">,</span> <span class="nx">fallback</span><span class="p">:</span> <span class="nx">T</span><span class="p">):</span> <span class="nx">T</span> <span class="p">{</span>
+  <span class="k">try</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">fn</span><span class="p">();</span>
+  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Error in safe execution:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nx">fallback</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Safe async function execution</span>
+<span class="k">async</span> <span class="kd">function</span> <span class="nx">safeExecuteAsync</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">fn</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">,</span> <span class="nx">fallback</span><span class="p">:</span> <span class="nx">T</span><span class="p">):</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="k">try</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">await</span> <span class="nx">fn</span><span class="p">();</span>
+  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Error in safe async execution:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nx">fallback</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Usage</span>
+<span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">safeExecute</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// Potentially dangerous operation</span>
+  <span class="k">return</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">userInput</span><span class="p">);</span>
+<span class="p">},</span> <span class="p">{});</span>
+
+<span class="kd">const</span> <span class="nx">asyncResult</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">safeExecuteAsync</span><span class="p">(</span><span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// Potentially dangerous async operation</span>
+  <span class="k">return</span> <span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="dl">'</span><span class="s1">/api/data</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">},</span> <span class="kc">null</span><span class="p">);</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="️-error-handling">⚠️ <strong>Error Handling</strong></h2>
+
+<h3 id="error-types"><strong>Error Types</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Error types</span>
+<span class="kd">const</span> <span class="nx">errorTypes</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">validation</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Validation errors</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">network</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Network errors</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">authentication</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Authentication errors</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">authorization</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Authorization errors</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">notFound</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Not found errors</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">server</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Server errors</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">client</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Client errors</span><span class="dl">"</span>
+<span class="p">};</span>
+
+<span class="c1">// Custom error classes</span>
+<span class="kd">class</span> <span class="nx">ValidationError</span> <span class="kd">extends</span> <span class="nb">Error</span> <span class="p">{</span>
+  <span class="kd">constructor</span><span class="p">(</span><span class="nx">message</span><span class="p">:</span> <span class="kr">string</span><span class="p">,</span> <span class="k">public</span> <span class="nx">field</span><span class="p">?:</span> <span class="kr">string</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">super</span><span class="p">(</span><span class="nx">message</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">ValidationError</span><span class="dl">'</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nx">NetworkError</span> <span class="kd">extends</span> <span class="nb">Error</span> <span class="p">{</span>
+  <span class="kd">constructor</span><span class="p">(</span><span class="nx">message</span><span class="p">:</span> <span class="kr">string</span><span class="p">,</span> <span class="k">public</span> <span class="nx">statusCode</span><span class="p">?:</span> <span class="kr">number</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">super</span><span class="p">(</span><span class="nx">message</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">NetworkError</span><span class="dl">'</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nx">AuthenticationError</span> <span class="kd">extends</span> <span class="nb">Error</span> <span class="p">{</span>
+  <span class="kd">constructor</span><span class="p">(</span><span class="nx">message</span><span class="p">:</span> <span class="kr">string</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">Authentication failed</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">super</span><span class="p">(</span><span class="nx">message</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">AuthenticationError</span><span class="dl">'</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nx">AuthorizationError</span> <span class="kd">extends</span> <span class="nb">Error</span> <span class="p">{</span>
+  <span class="kd">constructor</span><span class="p">(</span><span class="nx">message</span><span class="p">:</span> <span class="kr">string</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">Access denied</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">super</span><span class="p">(</span><span class="nx">message</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">AuthorizationError</span><span class="dl">'</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nx">NotFoundError</span> <span class="kd">extends</span> <span class="nb">Error</span> <span class="p">{</span>
+  <span class="kd">constructor</span><span class="p">(</span><span class="nx">resource</span><span class="p">:</span> <span class="kr">string</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">super</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">resource</span><span class="p">}</span><span class="s2"> not found`</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">NotFoundError</span><span class="dl">'</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Error handling utilities</span>
+<span class="kd">function</span> <span class="nx">isValidationError</span><span class="p">(</span><span class="nx">error</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">):</span> <span class="nx">error</span> <span class="k">is</span> <span class="nx">ValidationError</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">error</span> <span class="k">instanceof</span> <span class="nx">ValidationError</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">isNetworkError</span><span class="p">(</span><span class="nx">error</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">):</span> <span class="nx">error</span> <span class="k">is</span> <span class="nx">NetworkError</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">error</span> <span class="k">instanceof</span> <span class="nx">NetworkError</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">isAuthenticationError</span><span class="p">(</span><span class="nx">error</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">):</span> <span class="nx">error</span> <span class="k">is</span> <span class="nx">AuthenticationError</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">error</span> <span class="k">instanceof</span> <span class="nx">AuthenticationError</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">isAuthorizationError</span><span class="p">(</span><span class="nx">error</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">):</span> <span class="nx">error</span> <span class="k">is</span> <span class="nx">AuthorizationError</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">error</span> <span class="k">instanceof</span> <span class="nx">AuthorizationError</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">isNotFoundError</span><span class="p">(</span><span class="nx">error</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">):</span> <span class="nx">error</span> <span class="k">is</span> <span class="nx">NotFoundError</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">error</span> <span class="k">instanceof</span> <span class="nx">NotFoundError</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="error-handling-patterns"><strong>Error Handling Patterns</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Error handling patterns</span>
+<span class="kd">const</span> <span class="nx">errorHandlingPatterns</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">tryCatch</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Try-catch blocks for synchronous code</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">asyncAwait</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Async-await with try-catch for asynchronous code</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">promises</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Promise chains with catch for asynchronous code</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">errorBoundaries</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Error boundaries for React components</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">globalHandlers</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Global error handlers for unhandled errors</span><span class="dl">"</span>
+<span class="p">};</span>
+
+<span class="c1">// Try-catch pattern</span>
+<span class="kd">function</span> <span class="nx">tryCatchPattern</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">try</span> <span class="p">{</span>
+    <span class="c1">// Potentially dangerous operation</span>
+    <span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">userInput</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nx">result</span><span class="p">;</span>
+  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">error</span> <span class="k">instanceof</span> <span class="nx">SyntaxError</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nx">ValidationError</span><span class="p">(</span><span class="dl">'</span><span class="s1">Invalid JSON format</span><span class="dl">'</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">throw</span> <span class="nx">error</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Async-await pattern</span>
+<span class="k">async</span> <span class="kd">function</span> <span class="nx">asyncAwaitPattern</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">try</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="dl">'</span><span class="s1">/api/data</span><span class="dl">'</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">response</span><span class="p">.</span><span class="nx">ok</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nx">NetworkError</span><span class="p">(</span><span class="dl">'</span><span class="s1">Failed to fetch data</span><span class="dl">'</span><span class="p">,</span> <span class="nx">response</span><span class="p">.</span><span class="nx">status</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="k">await</span> <span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">error</span> <span class="k">instanceof</span> <span class="nx">NetworkError</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// Handle network error</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Network error:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">throw</span> <span class="nx">error</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Promise chain pattern</span>
+<span class="kd">function</span> <span class="nx">promiseChainPattern</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">fetch</span><span class="p">(</span><span class="dl">'</span><span class="s1">/api/data</span><span class="dl">'</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">response</span><span class="p">.</span><span class="nx">ok</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nx">NetworkError</span><span class="p">(</span><span class="dl">'</span><span class="s1">Failed to fetch data</span><span class="dl">'</span><span class="p">,</span> <span class="nx">response</span><span class="p">.</span><span class="nx">status</span><span class="p">);</span>
+      <span class="p">}</span>
+      <span class="k">return</span> <span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+    <span class="p">})</span>
+    <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">error</span> <span class="k">instanceof</span> <span class="nx">NetworkError</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Network error:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+      <span class="p">}</span>
+      <span class="k">throw</span> <span class="nx">error</span><span class="p">;</span>
+    <span class="p">});</span>
+<span class="p">}</span>
+
+<span class="c1">// Error handling middleware</span>
+<span class="kd">function</span> <span class="nx">errorHandlingMiddleware</span><span class="p">(</span><span class="nx">error</span><span class="p">:</span> <span class="nb">Error</span><span class="p">,</span> <span class="nx">req</span><span class="p">:</span> <span class="nx">Request</span><span class="p">,</span> <span class="nx">res</span><span class="p">:</span> <span class="nx">Response</span><span class="p">,</span> <span class="nx">next</span><span class="p">:</span> <span class="nx">NextFunction</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">isValidationError</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span> <span class="p">{</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">400</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span> <span class="na">error</span><span class="p">:</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">,</span> <span class="na">field</span><span class="p">:</span> <span class="nx">error</span><span class="p">.</span><span class="nx">field</span> <span class="p">});</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">isAuthenticationError</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span> <span class="p">{</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">401</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span> <span class="na">error</span><span class="p">:</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span> <span class="p">});</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">isAuthorizationError</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span> <span class="p">{</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">403</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span> <span class="na">error</span><span class="p">:</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span> <span class="p">});</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">isNotFoundError</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span> <span class="p">{</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">404</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span> <span class="na">error</span><span class="p">:</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span> <span class="p">});</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">isNetworkError</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span> <span class="p">{</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="nx">error</span><span class="p">.</span><span class="nx">statusCode</span> <span class="o">||</span> <span class="mi">500</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span> <span class="na">error</span><span class="p">:</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span> <span class="p">});</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">500</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span> <span class="na">error</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Internal server error</span><span class="dl">'</span> <span class="p">});</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="error-recovery"><strong>Error Recovery</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Error recovery</span>
+<span class="kd">const</span> <span class="nx">errorRecovery</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">purpose</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Recover from errors gracefully</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">techniques</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Retry mechanisms, fallbacks, circuit breakers</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">patterns</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Error recovery patterns</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">monitoring</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Monitor error rates and recovery success</span><span class="dl">"</span>
+<span class="p">};</span>
+
+<span class="c1">// Retry mechanism</span>
+<span class="k">async</span> <span class="kd">function</span> <span class="nx">retryOperation</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">(</span>
+  <span class="nx">operation</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="nx">maxRetries</span><span class="p">:</span> <span class="kr">number</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
+  <span class="nx">delay</span><span class="p">:</span> <span class="kr">number</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="p">):</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="na">lastError</span><span class="p">:</span> <span class="nb">Error</span><span class="p">;</span>
+  
+  <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">attempt</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">attempt</span> <span class="o">&lt;=</span> <span class="nx">maxRetries</span><span class="p">;</span> <span class="nx">attempt</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="k">await</span> <span class="nx">operation</span><span class="p">();</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">lastError</span> <span class="o">=</span> <span class="nx">error</span> <span class="k">as</span> <span class="nb">Error</span><span class="p">;</span>
+      
+      <span class="k">if</span> <span class="p">(</span><span class="nx">attempt</span> <span class="o">===</span> <span class="nx">maxRetries</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">throw</span> <span class="nx">lastError</span><span class="p">;</span>
+      <span class="p">}</span>
+      
+      <span class="c1">// Wait before retrying</span>
+      <span class="k">await</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="nx">resolve</span> <span class="o">=&gt;</span> <span class="nx">setTimeout</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">delay</span> <span class="o">*</span> <span class="nx">attempt</span><span class="p">));</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  
+  <span class="k">throw</span> <span class="nx">lastError</span><span class="o">!</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Circuit breaker pattern</span>
+<span class="kd">class</span> <span class="nx">CircuitBreaker</span> <span class="p">{</span>
+  <span class="k">private</span> <span class="nx">failureCount</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">private</span> <span class="nx">lastFailureTime</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">private</span> <span class="nx">state</span><span class="p">:</span> <span class="dl">'</span><span class="s1">CLOSED</span><span class="dl">'</span> <span class="o">|</span> <span class="dl">'</span><span class="s1">OPEN</span><span class="dl">'</span> <span class="o">|</span> <span class="dl">'</span><span class="s1">HALF_OPEN</span><span class="dl">'</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">CLOSED</span><span class="dl">'</span><span class="p">;</span>
+  
+  <span class="kd">constructor</span><span class="p">(</span>
+    <span class="k">private</span> <span class="nx">failureThreshold</span><span class="p">:</span> <span class="kr">number</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
+    <span class="k">private</span> <span class="nx">timeout</span><span class="p">:</span> <span class="kr">number</span> <span class="o">=</span> <span class="mi">60000</span>
+  <span class="p">)</span> <span class="p">{}</span>
+  
+  <span class="k">async</span> <span class="nx">execute</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">operation</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">):</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">OPEN</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">()</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">lastFailureTime</span> <span class="o">&gt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">timeout</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">HALF_OPEN</span><span class="dl">'</span><span class="p">;</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Circuit breaker is OPEN</span><span class="dl">'</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+    
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">operation</span><span class="p">();</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">onSuccess</span><span class="p">();</span>
+      <span class="k">return</span> <span class="nx">result</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">onFailure</span><span class="p">();</span>
+      <span class="k">throw</span> <span class="nx">error</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  
+  <span class="k">private</span> <span class="nx">onSuccess</span><span class="p">():</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">failureCount</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">CLOSED</span><span class="dl">'</span><span class="p">;</span>
+  <span class="p">}</span>
+  
+  <span class="k">private</span> <span class="nx">onFailure</span><span class="p">():</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">failureCount</span><span class="o">++</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">lastFailureTime</span> <span class="o">=</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">failureCount</span> <span class="o">&gt;=</span> <span class="k">this</span><span class="p">.</span><span class="nx">failureThreshold</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">OPEN</span><span class="dl">'</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Fallback mechanism</span>
+<span class="k">async</span> <span class="kd">function</span> <span class="nx">withFallback</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">(</span>
+  <span class="nx">primaryOperation</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="nx">fallbackOperation</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span>
+<span class="p">):</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="k">try</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">await</span> <span class="nx">primaryOperation</span><span class="p">();</span>
+  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span><span class="dl">'</span><span class="s1">Primary operation failed, using fallback:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+    <span class="k">return</span> <span class="k">await</span> <span class="nx">fallbackOperation</span><span class="p">();</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Usage</span>
+<span class="kd">const</span> <span class="nx">circuitBreaker</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CircuitBreaker</span><span class="p">();</span>
+
+<span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">circuitBreaker</span><span class="p">.</span><span class="nx">execute</span><span class="p">(</span><span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="dl">'</span><span class="s1">/api/data</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="kd">const</span> <span class="nx">resultWithFallback</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">withFallback</span><span class="p">(</span>
+  <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="dl">'</span><span class="s1">/api/data</span><span class="dl">'</span><span class="p">),</span>
+  <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="dl">'</span><span class="s1">/api/backup-data</span><span class="dl">'</span><span class="p">)</span>
+<span class="p">);</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-best-practices">✅ <strong>Best Practices</strong></h2>
+
+<h3 id="1-use-strict-type-configuration"><strong>1. Use Strict Type Configuration</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ✅ Good: Strict type configuration</span>
+<span class="kd">const</span> <span class="nx">strictConfig</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="dl">"</span><span class="s2">compilerOptions</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">strict</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">noImplicitAny</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">strictNullChecks</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">strictFunctionTypes</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// ❌ Avoid: Loose type configuration</span>
+<span class="kd">const</span> <span class="nx">looseConfig</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="dl">"</span><span class="s2">compilerOptions</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">strict</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">noImplicitAny</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">strictNullChecks</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="2-use-type-guards"><strong>2. Use Type Guards</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ✅ Good: Type guards</span>
+<span class="kd">function</span> <span class="nx">isString</span><span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">):</span> <span class="nx">value</span> <span class="k">is</span> <span class="kr">string</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="k">typeof</span> <span class="nx">value</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">string</span><span class="dl">'</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">processValue</span><span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">isString</span><span class="p">(</span><span class="nx">value</span><span class="p">))</span> <span class="p">{</span>
+    <span class="c1">// value is string</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">value</span><span class="p">.</span><span class="nx">toUpperCase</span><span class="p">());</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// ❌ Avoid: Type assertions</span>
+<span class="kd">function</span> <span class="nx">processValueBad</span><span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">str</span> <span class="o">=</span> <span class="nx">value</span> <span class="k">as</span> <span class="kr">string</span><span class="p">;</span> <span class="c1">// Unsafe</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">str</span><span class="p">.</span><span class="nx">toUpperCase</span><span class="p">());</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="3-handle-null-and-undefined"><strong>3. Handle Null and Undefined</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ✅ Good: Null and undefined handling</span>
+<span class="kd">function</span> <span class="nx">processUser</span><span class="p">(</span><span class="nx">user</span><span class="p">:</span> <span class="nx">User</span> <span class="o">|</span> <span class="kc">null</span><span class="p">):</span> <span class="kr">string</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">user</span> <span class="o">===</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="dl">'</span><span class="s1">No user</span><span class="dl">'</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">user</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// ❌ Avoid: No null checks</span>
+<span class="kd">function</span> <span class="nx">processUserBad</span><span class="p">(</span><span class="nx">user</span><span class="p">:</span> <span class="nx">User</span> <span class="o">|</span> <span class="kc">null</span><span class="p">):</span> <span class="kr">string</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">user</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span> <span class="c1">// Error: Object is possibly 'null'</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="4-use-defensive-programming"><strong>4. Use Defensive Programming</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ✅ Good: Defensive programming</span>
+<span class="kd">function</span> <span class="nx">safeParseJSON</span><span class="p">(</span><span class="nx">json</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="kr">any</span> <span class="p">{</span>
+  <span class="k">try</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">json</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Invalid JSON:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+    <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// ❌ Avoid: No error handling</span>
+<span class="kd">function</span> <span class="nx">unsafeParseJSON</span><span class="p">(</span><span class="nx">json</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="kr">any</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">json</span><span class="p">);</span> <span class="c1">// Can throw</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-common-interview-questions">❓ <strong>Common Interview Questions</strong></h2>
+
+<h3 id="1-how-do-you-ensure-type-safety-in-typescript"><strong>1. How do you ensure type safety in TypeScript?</strong></h3>
+
+<p><strong>Answer:</strong></p>
+<ul>
+  <li><strong>Strict Mode</strong>: Enable strict mode in TypeScript configuration</li>
+  <li><strong>Type Guards</strong>: Use type guards for runtime type checking</li>
+  <li><strong>Validation</strong>: Validate inputs and external data</li>
+  <li><strong>Error Handling</strong>: Handle errors gracefully</li>
+  <li><strong>Defensive Programming</strong>: Use defensive programming techniques</li>
+</ul>
+
+<h3 id="2-what-are-the-benefits-of-strict-type-checking"><strong>2. What are the benefits of strict type checking?</strong></h3>
+
+<p><strong>Answer:</strong></p>
+<ul>
+  <li><strong>Compile-time Errors</strong>: Catch errors at compile time</li>
+  <li><strong>Better IntelliSense</strong>: Improved IDE support</li>
+  <li><strong>Safer Refactoring</strong>: Refactor with confidence</li>
+  <li><strong>Documentation</strong>: Types serve as documentation</li>
+  <li><strong>Runtime Safety</strong>: Reduced runtime errors</li>
+</ul>
+
+<h3 id="3-how-do-you-handle-null-and-undefined-in-typescript"><strong>3. How do you handle null and undefined in TypeScript?</strong></h3>
+
+<p><strong>Answer:</strong></p>
+<ul>
+  <li><strong>Strict Null Checks</strong>: Enable strict null checks</li>
+  <li><strong>Optional Chaining</strong>: Use optional chaining operator</li>
+  <li><strong>Nullish Coalescing</strong>: Use nullish coalescing operator</li>
+  <li><strong>Type Guards</strong>: Use type guards to check for null/undefined</li>
+  <li><strong>Defensive Programming</strong>: Always check for null/undefined</li>
+</ul>
+
+<h3 id="4-what-are-type-guards-and-how-do-you-use-them"><strong>4. What are type guards and how do you use them?</strong></h3>
+
+<p><strong>Answer:</strong>
+Type guards are functions that narrow types at runtime:</p>
+<ul>
+  <li><strong>Purpose</strong>: Provide runtime type safety</li>
+  <li><strong>Syntax</strong>: Return type predicate <code class="language-plaintext highlighter-rouge">value is Type</code></li>
+  <li><strong>Usage</strong>: Check types before using them</li>
+  <li><strong>Benefits</strong>: Better IntelliSense and type safety</li>
+</ul>
+
+<h3 id="5-how-do-you-handle-errors-in-typescript"><strong>5. How do you handle errors in TypeScript?</strong></h3>
+
+<p><strong>Answer:</strong></p>
+<ul>
+  <li><strong>Custom Error Classes</strong>: Create specific error types</li>
+  <li><strong>Try-Catch Blocks</strong>: Use try-catch for error handling</li>
+  <li><strong>Error Boundaries</strong>: Implement error boundaries</li>
+  <li><strong>Error Recovery</strong>: Implement retry and fallback mechanisms</li>
+  <li><strong>Logging</strong>: Log errors for debugging</li>
+</ul>
+
+<hr />
+
+<h2 id="-navigation">🧭 Navigation</h2>
+
+<div class="navigation">
+  <a href="01-Code-Organization-Architecture.md" class="nav-button">← Previous: Code Organization &amp; Architecture</a>
+  <a href="03-Error-Handling-Strategies.md" class="nav-button">Next: Error Handling Strategies →</a>
+</div>
+
+<p><em>Last updated: December 2025</em></p>
+
+        </main>
+        
+        <footer style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #ecf0f1; color: #666; text-align: center;">
+            <p>Interview Prep Documentation - Built with Jekyll</p>
+        </footer>
+    </div>
+</body>
+</html>

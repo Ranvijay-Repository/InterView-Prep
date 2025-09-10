@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔹 Architecture Patterns - Interview Prep Documentation</title>
+    <meta name="description" content="Comprehensive guides for JavaScript, TypeScript, and React Native interview preparation">
+    
+    <!-- GitHub Pages compatible styling -->
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+        }
+        
+        .container {
+            max-width: 100%;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            color: #2c3e50;
+            margin-top: 2em;
+            margin-bottom: 1em;
+        }
+        
+        h1 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            border-bottom: 1px solid #ecf0f1;
+            padding-bottom: 5px;
+        }
+        
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border-left: 4px solid #3498db;
+        }
+        
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+        
+        blockquote {
+            border-left: 4px solid #3498db;
+            margin: 0;
+            padding-left: 20px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1em 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .navigation {
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px 0;
+            margin-bottom: 20px;
+        }
+        
+        .navigation a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+        
+        .navigation a:hover {
+            text-decoration: underline;
+        }
+        
+        .breadcrumb {
+            margin-bottom: 20px;
+            color: #666;
+        }
+        
+        .breadcrumb a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            h2 {
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="navigation">
+            <a href="/">Home</a>
+            <a href="/Javascript/">JavaScript</a>
+            <a href="/TypeScript/">TypeScript</a>
+            <a href="/React-Native/">React Native</a>
+        </nav>
+        
+        
+        
+        <main>
+            <h1 id="-architecture-patterns">🔹 Architecture Patterns</h1>
+
+<blockquote>
+  <p><strong>Comprehensive coverage of advanced architecture patterns: Micro-frontends, Event Sourcing, and CQRS pattern</strong></p>
+</blockquote>
+
+<link rel="stylesheet" href="../common-styles.css" />
+
+<hr />
+
+<h2 id="-table-of-contents">📚 Table of Contents</h2>
+
+<ul>
+  <li><a href="#architecture-patterns-overview">Architecture Patterns Overview</a></li>
+  <li><a href="#micro-frontends">Micro-frontends</a></li>
+  <li><a href="#event-sourcing">Event Sourcing</a></li>
+  <li><a href="#cqrs-pattern">CQRS Pattern</a></li>
+  <li><a href="#detailed-examples">Detailed Examples</a></li>
+  <li><a href="#common-interview-questions">Common Interview Questions</a></li>
+  <li><a href="#practice-exercises">Practice Exercises</a></li>
+  <li><a href="#additional-resources">Additional Resources</a></li>
+</ul>
+
+<hr />
+
+<h2 id="-architecture-patterns-overview">🎯 Architecture Patterns Overview</h2>
+
+<p><strong>Architecture Patterns</strong> provide high-level structural solutions for building scalable, maintainable, and robust software systems that can handle complex business requirements.</p>
+
+<h3 id="why-architecture-patterns-matter">Why Architecture Patterns Matter:</h3>
+<ul>
+  <li><strong>Scalability</strong>: Handle growing user bases and data volumes</li>
+  <li><strong>Maintainability</strong>: Code that’s easy to understand and modify</li>
+  <li><strong>Performance</strong>: Optimize system performance and resource usage</li>
+  <li><strong>Team Collaboration</strong>: Enable multiple teams to work independently</li>
+  <li><strong>Business Agility</strong>: Adapt quickly to changing requirements</li>
+</ul>
+
+<hr />
+
+<h2 id="-micro-frontends">🧩 Micro-frontends</h2>
+
+<p><strong>Micro-frontends</strong> is an architectural style where frontend applications are composed of independent, loosely coupled micro-applications that can be developed, deployed, and scaled independently.</p>
+
+<h3 id="why-micro-frontends-matter">Why Micro-frontends Matter:</h3>
+<ul>
+  <li><strong>Team Independence</strong>: Different teams can work on different parts</li>
+  <li><strong>Technology Diversity</strong>: Use different frameworks for different features</li>
+  <li><strong>Independent Deployment</strong>: Deploy features without affecting others</li>
+  <li><strong>Scalability</strong>: Scale different parts independently</li>
+  <li><strong>Fault Isolation</strong>: Failures in one part don’t affect others</li>
+</ul>
+
+<h3 id="ascii-diagram-micro-frontends-architecture">ASCII Diagram: Micro-frontends Architecture</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>MICRO-FRONTENDS ARCHITECTURE
+┌─────────────────────────────────┐
+│        SHELL APPLICATION        │
+│  ┌─────────────────────────────┐ │
+│  │ Routing &amp; Orchestration     │ │
+│  │ Shared Dependencies         │ │
+│  │ Common UI Components        │ │
+│  │ State Management            │ │
+│  └─────────────────────────────┘ │
+└─────────────────────────────────┘
+                │
+                ▼
+    ┌─────────────────────┐
+    │  MICRO-FRONTENDS    │
+    │                     │
+    │  ┌─────────────┐   │  ┌─────────────┐
+    │  │ Header      │   │  │ Navigation  │
+    │  │ (React)     │   │  │ (Vue)       │
+    │  └─────────────┘   │  └─────────────┘
+    │                     │
+    │  ┌─────────────┐   │  ┌─────────────┐
+    │  │ Dashboard   │   │  │ Settings    │
+    │  │ (Angular)   │   │  │ (Svelte)    │
+    │  └─────────────┘   │  └─────────────┘
+    │                     │
+    │  ┌─────────────┐   │  ┌─────────────┐
+    │  │ Profile     │   │  │ Analytics   │
+    │  │ (Vanilla)   │   │  │ (Lit)       │
+    │  └─────────────┘   │  └─────────────┘
+    └─────────────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  SHARED       │
+        │  SERVICES     │
+        │               │
+        │  API Gateway  │
+        │  Auth Service │
+        │  Event Bus    │
+        │  State Store  │
+        └───────────────┘
+</code></pre></div></div>
+
+<h3 id="integration-methods">Integration Methods:</h3>
+<ul>
+  <li><strong>Build-time Integration</strong>: Compile all micro-frontends together</li>
+  <li><strong>Runtime Integration</strong>: Load micro-frontends dynamically</li>
+  <li><strong>Server-side Integration</strong>: Compose on the server</li>
+  <li><strong>Edge Integration</strong>: Compose at CDN edge</li>
+</ul>
+
+<hr />
+
+<h2 id="-event-sourcing">📝 Event Sourcing</h2>
+
+<p><strong>Event Sourcing</strong> is an architectural pattern where all changes to application state are stored as a sequence of events, enabling audit trails, temporal queries, and state reconstruction.</p>
+
+<h3 id="why-event-sourcing-matters">Why Event Sourcing Matters:</h3>
+<ul>
+  <li><strong>Audit Trail</strong>: Complete history of all changes</li>
+  <li><strong>Temporal Queries</strong>: Query data at any point in time</li>
+  <li><strong>State Reconstruction</strong>: Rebuild state from events</li>
+  <li><strong>Event Replay</strong>: Replay events for debugging/testing</li>
+  <li><strong>Scalability</strong>: Handle high write volumes efficiently</li>
+</ul>
+
+<h3 id="ascii-diagram-event-sourcing-flow">ASCII Diagram: Event Sourcing Flow</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>EVENT SOURCING FLOW
+┌─────────────────────────────────┐
+│        COMMAND                  │
+│  ┌─────────────────────────────┐ │
+│  │ User Action                 │ │
+│  │ Business Rule               │ │
+│  │ Validation                  │ │
+│  └─────────────────────────────┘ │
+└─────────────────────────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  COMMAND      │
+        │  HANDLER      │
+        │               │
+        │  Validate     │
+        │  Business Logic│
+        │  Generate Event│
+        └───────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  EVENT STORE  │
+        │               │
+        │  Event 1      │
+        │  Event 2      │
+        │  Event 3      │
+        │  Event N      │
+        └───────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  EVENT        │
+        │  HANDLERS     │
+        │               │
+        │  Update State │
+        │  Send Notifications │
+        │  Update Views │
+        └───────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  READ MODELS  │
+        │               │
+        │  Current State│
+        │  Projections  │
+        │  Views        │
+        └───────────────┘
+</code></pre></div></div>
+
+<h3 id="event-types">Event Types:</h3>
+<ul>
+  <li><strong>Domain Events</strong>: Business state changes</li>
+  <li><strong>Integration Events</strong>: Cross-service communication</li>
+  <li><strong>Saga Events</strong>: Long-running process coordination</li>
+  <li><strong>Audit Events</strong>: Security and compliance tracking</li>
+</ul>
+
+<hr />
+
+<h2 id="-cqrs-pattern">📊 CQRS Pattern</h2>
+
+<p><strong>Command Query Responsibility Segregation (CQRS)</strong> is an architectural pattern that separates read and write operations for a data store, optimizing each for their specific purpose.</p>
+
+<h3 id="why-cqrs-matters">Why CQRS Matters:</h3>
+<ul>
+  <li><strong>Performance</strong>: Optimize read and write operations separately</li>
+  <li><strong>Scalability</strong>: Scale read and write independently</li>
+  <li><strong>Flexibility</strong>: Use different data models for different operations</li>
+  <li><strong>Security</strong>: Apply different security policies</li>
+  <li><strong>Maintenance</strong>: Easier to maintain and evolve</li>
+</ul>
+
+<h3 id="ascii-diagram-cqrs-architecture">ASCII Diagram: CQRS Architecture</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CQRS ARCHITECTURE
+┌─────────────────────────────────┐
+│        CLIENT                   │
+│  ┌─────────────────────────────┐ │
+│  │ Read Operations             │ │
+│  │ Write Operations            │ │
+│  │                             │ │
+│  └─────────────────────────────┘ │
+└─────────────────────────────────┘
+                │
+                ▼
+    ┌─────────────────────┐
+    │  COMMAND SIDE       │  │  QUERY SIDE
+    │                     │  │
+    │  ┌─────────────┐   │  │  ┌─────────────┐
+    │  │ Command     │   │  │  │ Query       │
+    │  │ Handlers    │   │  │  │ Handlers    │
+    │  │             │   │  │  │             │
+    │  │ - Create    │   │  │  │ - Get       │
+    │  │ - Update    │   │  │  │ - List      │
+    │  │ - Delete    │   │  │  │ - Search    │
+    │  └─────────────┘   │  │  └─────────────┘
+    │                     │  │
+    │  ┌─────────────┐   │  │  ┌─────────────┐
+    │  │ Write Model │   │  │  │ Read Model  │
+    │  │ (Normalized)│   │  │  │ (Denormalized)│
+    │  │             │   │  │  │             │
+    │  │ - Entities  │   │  │  │ - DTOs      │
+    │  │ - Aggregates│   │  │  │ - Views     │
+    │  │ - Value Objs│   │  │  │ - Projections│
+    │  └─────────────┘   │  │  └─────────────┘
+    └─────────────────────┘  │
+                │            │
+                ▼            ▼
+        ┌───────────────┐  ┌───────────────┐
+        │  WRITE        │  │  READ         │
+        │  DATABASE     │  │  DATABASE     │
+        │               │  │               │
+        │  - ACID       │  │  - Fast Reads │
+        │  - Consistency│  │  - Denormalized│
+        │  - Normalized │  │  - Optimized  │
+        └───────────────┘  └───────────────┘
+</code></pre></div></div>
+
+<h3 id="cqrs-benefits">CQRS Benefits:</h3>
+<ul>
+  <li><strong>Read Optimization</strong>: Denormalized data for fast queries</li>
+  <li><strong>Write Optimization</strong>: Normalized data for consistency</li>
+  <li><strong>Independent Scaling</strong>: Scale read/write separately</li>
+  <li><strong>Different Technologies</strong>: Use different databases for each side</li>
+  <li><strong>Event Sourcing</strong>: Natural fit with event sourcing</li>
+</ul>
+
+<hr />
+
+<h2 id="-copy-code-functionality">📋 Copy Code Functionality</h2>
+
+<script src="../common-scripts.js"></script>
+
+<hr />
+
+<h2 id="-navigation">🧭 Navigation</h2>
+
+<div class="navigation">
+    <a href="02-Functional-Programming-Patterns.md" class="nav-link prev">← Previous: Functional Programming Patterns</a>
+    <a href="../05-Performance-Optimization/01-Performance-Fundamentals.md" class="nav-link next">Next: Performance &amp; Optimization →</a>
+</div>
+
+<p><em>Last updated: December 2024</em></p>
+
+        </main>
+        
+        <footer style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #ecf0f1; color: #666; text-align: center;">
+            <p>Interview Prep Documentation - Built with Jekyll</p>
+        </footer>
+    </div>
+</body>
+</html>

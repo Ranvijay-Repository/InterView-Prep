@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔐 Data Encryption - Interview Prep Documentation</title>
+    <meta name="description" content="Comprehensive guides for JavaScript, TypeScript, and React Native interview preparation">
+    
+    <!-- GitHub Pages compatible styling -->
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+        }
+        
+        .container {
+            max-width: 100%;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            color: #2c3e50;
+            margin-top: 2em;
+            margin-bottom: 1em;
+        }
+        
+        h1 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            border-bottom: 1px solid #ecf0f1;
+            padding-bottom: 5px;
+        }
+        
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border-left: 4px solid #3498db;
+        }
+        
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+        
+        blockquote {
+            border-left: 4px solid #3498db;
+            margin: 0;
+            padding-left: 20px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1em 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .navigation {
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px 0;
+            margin-bottom: 20px;
+        }
+        
+        .navigation a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+        
+        .navigation a:hover {
+            text-decoration: underline;
+        }
+        
+        .breadcrumb {
+            margin-bottom: 20px;
+            color: #666;
+        }
+        
+        .breadcrumb a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            h2 {
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="navigation">
+            <a href="/">Home</a>
+            <a href="/Javascript/">JavaScript</a>
+            <a href="/TypeScript/">TypeScript</a>
+            <a href="/React-Native/">React Native</a>
+        </nav>
+        
+        
+        
+        <main>
+            <h1 id="-data-encryption">🔐 <strong>Data Encryption</strong></h1>
+
+<blockquote>
+  <p><strong>Master data encryption strategies, key management, and secure data handling for React Native applications</strong></p>
+</blockquote>
+
+<link rel="stylesheet" href="../../common-styles.css" />
+
+<hr />
+
+<h2 id="-table-of-contents">📚 <strong>Table of Contents</strong></h2>
+
+<ul>
+  <li><a href="#-data-encryption-overview">Data Encryption Overview</a></li>
+  <li><a href="#-encryption-algorithms">Encryption Algorithms</a></li>
+  <li><a href="#-key-management">Key Management</a></li>
+  <li><a href="#-data-protection-strategies">Data Protection Strategies</a></li>
+  <li><a href="#-secure-communication">Secure Communication</a></li>
+  <li><a href="#-best-practices">Best Practices</a></li>
+  <li><a href="#-interview-questions">Interview Questions</a></li>
+</ul>
+
+<hr />
+
+<h2 id="️-data-encryption-overview">🏗️ <strong>Data Encryption Overview</strong></h2>
+
+<h3 id="encryption-layers"><strong>Encryption Layers</strong></h3>
+
+<pre><code class="language-mermaid">graph TD
+    A[Application Data] --&gt; B[Application Layer Encryption]
+    B --&gt; C[Transport Layer Encryption]
+    C --&gt; D[Storage Encryption]
+    D --&gt; E[Hardware Encryption]
+    
+    F[Key Management] --&gt; B
+    F --&gt; C
+    F --&gt; D
+    F --&gt; E
+</code></pre>
+
+<h3 id="encryption-types"><strong>Encryption Types</strong></h3>
+<ul>
+  <li><strong>Symmetric</strong>: Same key for encryption/decryption</li>
+  <li><strong>Asymmetric</strong>: Public/private key pairs</li>
+  <li><strong>Hybrid</strong>: Combination of both approaches</li>
+  <li><strong>End-to-End</strong>: Client-to-client encryption</li>
+</ul>
+
+<hr />
+
+<h2 id="-encryption-algorithms">🔑 <strong>Encryption Algorithms</strong></h2>
+
+<h3 id="aes-encryption-implementation"><strong>AES Encryption Implementation</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">CryptoJS</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">crypto-js</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="c1">// AES encryption configuration</span>
+<span class="kd">const</span> <span class="nx">AES_CONFIG</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">keySize</span><span class="p">:</span> <span class="mi">256</span><span class="p">,</span>
+  <span class="na">ivSize</span><span class="p">:</span> <span class="mi">128</span><span class="p">,</span>
+  <span class="na">mode</span><span class="p">:</span> <span class="nx">CryptoJS</span><span class="p">.</span><span class="nx">mode</span><span class="p">.</span><span class="nx">CBC</span><span class="p">,</span>
+  <span class="na">padding</span><span class="p">:</span> <span class="nx">CryptoJS</span><span class="p">.</span><span class="nx">pad</span><span class="p">.</span><span class="nx">Pkcs7</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="c1">// Generate encryption key</span>
+<span class="kd">const</span> <span class="nx">generateEncryptionKey</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">CryptoJS</span><span class="p">.</span><span class="nx">lib</span><span class="p">.</span><span class="nx">WordArray</span><span class="p">.</span><span class="nx">random</span><span class="p">(</span><span class="nx">AES_CONFIG</span><span class="p">.</span><span class="nx">keySize</span> <span class="o">/</span> <span class="mi">8</span><span class="p">).</span><span class="nx">toString</span><span class="p">();</span>
+<span class="p">};</span>
+
+<span class="c1">// Generate initialization vector</span>
+<span class="kd">const</span> <span class="nx">generateIV</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">CryptoJS</span><span class="p">.</span><span class="nx">lib</span><span class="p">.</span><span class="nx">WordArray</span><span class="p">.</span><span class="nx">random</span><span class="p">(</span><span class="nx">AES_CONFIG</span><span class="p">.</span><span class="nx">ivSize</span> <span class="o">/</span> <span class="mi">8</span><span class="p">).</span><span class="nx">toString</span><span class="p">();</span>
+<span class="p">};</span>
+
+<span class="c1">// Encrypt data with AES</span>
+<span class="kd">const</span> <span class="nx">encryptData</span> <span class="o">=</span> <span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">key</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">try</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">jsonString</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+    <span class="kd">const</span> <span class="nx">iv</span> <span class="o">=</span> <span class="nx">generateIV</span><span class="p">();</span>
+    
+    <span class="kd">const</span> <span class="nx">encrypted</span> <span class="o">=</span> <span class="nx">CryptoJS</span><span class="p">.</span><span class="nx">AES</span><span class="p">.</span><span class="nx">encrypt</span><span class="p">(</span><span class="nx">jsonString</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="p">{</span>
+      <span class="na">iv</span><span class="p">:</span> <span class="nx">CryptoJS</span><span class="p">.</span><span class="nx">enc</span><span class="p">.</span><span class="nx">Hex</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">iv</span><span class="p">),</span>
+      <span class="na">mode</span><span class="p">:</span> <span class="nx">AES_CONFIG</span><span class="p">.</span><span class="nx">mode</span><span class="p">,</span>
+      <span class="na">padding</span><span class="p">:</span> <span class="nx">AES_CONFIG</span><span class="p">.</span><span class="nx">padding</span><span class="p">,</span>
+    <span class="p">});</span>
+    
+    <span class="k">return</span> <span class="p">{</span>
+      <span class="na">encryptedData</span><span class="p">:</span> <span class="nx">encrypted</span><span class="p">.</span><span class="nx">toString</span><span class="p">(),</span>
+      <span class="na">iv</span><span class="p">:</span> <span class="nx">iv</span><span class="p">,</span>
+    <span class="p">};</span>
+  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Encryption error:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Failed to encrypt data</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// Decrypt data with AES</span>
+<span class="kd">const</span> <span class="nx">decryptData</span> <span class="o">=</span> <span class="p">(</span><span class="nx">encryptedData</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">iv</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">try</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">decrypted</span> <span class="o">=</span> <span class="nx">CryptoJS</span><span class="p">.</span><span class="nx">AES</span><span class="p">.</span><span class="nx">decrypt</span><span class="p">(</span><span class="nx">encryptedData</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="p">{</span>
+      <span class="na">iv</span><span class="p">:</span> <span class="nx">CryptoJS</span><span class="p">.</span><span class="nx">enc</span><span class="p">.</span><span class="nx">Hex</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">iv</span><span class="p">),</span>
+      <span class="na">mode</span><span class="p">:</span> <span class="nx">AES_CONFIG</span><span class="p">.</span><span class="nx">mode</span><span class="p">,</span>
+      <span class="na">padding</span><span class="p">:</span> <span class="nx">AES_CONFIG</span><span class="p">.</span><span class="nx">padding</span><span class="p">,</span>
+    <span class="p">});</span>
+    
+    <span class="kd">const</span> <span class="nx">jsonString</span> <span class="o">=</span> <span class="nx">decrypted</span><span class="p">.</span><span class="nx">toString</span><span class="p">(</span><span class="nx">CryptoJS</span><span class="p">.</span><span class="nx">enc</span><span class="p">.</span><span class="nx">Utf8</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">jsonString</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Decryption error:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Failed to decrypt data</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// Hash data with SHA-256</span>
+<span class="kd">const</span> <span class="nx">hashData</span> <span class="o">=</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">try</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">jsonString</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nx">CryptoJS</span><span class="p">.</span><span class="nx">SHA256</span><span class="p">(</span><span class="nx">jsonString</span><span class="p">).</span><span class="nx">toString</span><span class="p">();</span>
+  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Hashing error:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Failed to hash data</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// Export encryption functions</span>
+<span class="k">export</span> <span class="p">{</span>
+  <span class="nx">generateEncryptionKey</span><span class="p">,</span>
+  <span class="nx">generateIV</span><span class="p">,</span>
+  <span class="nx">encryptData</span><span class="p">,</span>
+  <span class="nx">decryptData</span><span class="p">,</span>
+  <span class="nx">hashData</span><span class="p">,</span>
+  <span class="nx">AES_CONFIG</span><span class="p">,</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="rsa-encryption-implementation"><strong>RSA Encryption Implementation</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">CryptoJS</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">crypto-js</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="c1">// RSA encryption configuration</span>
+<span class="kd">const</span> <span class="nx">RSA_CONFIG</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">keySize</span><span class="p">:</span> <span class="mi">2048</span><span class="p">,</span>
+  <span class="na">padding</span><span class="p">:</span> <span class="nx">CryptoJS</span><span class="p">.</span><span class="nx">pad</span><span class="p">.</span><span class="nx">Pkcs1</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="c1">// Generate RSA key pair</span>
+<span class="kd">const</span> <span class="nx">generateRSAKeyPair</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">try</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">keyPair</span> <span class="o">=</span> <span class="nx">CryptoJS</span><span class="p">.</span><span class="nx">lib</span><span class="p">.</span><span class="nx">WordArray</span><span class="p">.</span><span class="nx">random</span><span class="p">(</span><span class="nx">RSA_CONFIG</span><span class="p">.</span><span class="nx">keySize</span> <span class="o">/</span> <span class="mi">8</span><span class="p">);</span>
+    
+    <span class="c1">// In a real implementation, you would use a proper RSA library</span>
+    <span class="c1">// This is a simplified example</span>
+    <span class="k">return</span> <span class="p">{</span>
+      <span class="na">publicKey</span><span class="p">:</span> <span class="nx">keyPair</span><span class="p">.</span><span class="nx">toString</span><span class="p">(),</span>
+      <span class="na">privateKey</span><span class="p">:</span> <span class="nx">keyPair</span><span class="p">.</span><span class="nx">toString</span><span class="p">(),</span>
+    <span class="p">};</span>
+  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">RSA key generation error:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Failed to generate RSA key pair</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// Encrypt data with RSA public key</span>
+<span class="kd">const</span> <span class="nx">encryptWithRSA</span> <span class="o">=</span> <span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">publicKey</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">try</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">jsonString</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+    
+    <span class="c1">// In a real implementation, you would use proper RSA encryption</span>
+    <span class="c1">// This is a simplified example</span>
+    <span class="kd">const</span> <span class="nx">encrypted</span> <span class="o">=</span> <span class="nx">CryptoJS</span><span class="p">.</span><span class="nx">AES</span><span class="p">.</span><span class="nx">encrypt</span><span class="p">(</span><span class="nx">jsonString</span><span class="p">,</span> <span class="nx">publicKey</span><span class="p">).</span><span class="nx">toString</span><span class="p">();</span>
+    
+    <span class="k">return</span> <span class="nx">encrypted</span><span class="p">;</span>
+  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">RSA encryption error:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Failed to encrypt with RSA</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// Decrypt data with RSA private key</span>
+<span class="kd">const</span> <span class="nx">decryptWithRSA</span> <span class="o">=</span> <span class="p">(</span><span class="nx">encryptedData</span><span class="p">,</span> <span class="nx">privateKey</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">try</span> <span class="p">{</span>
+    <span class="c1">// In a real implementation, you would use proper RSA decryption</span>
+    <span class="c1">// This is a simplified example</span>
+    <span class="kd">const</span> <span class="nx">decrypted</span> <span class="o">=</span> <span class="nx">CryptoJS</span><span class="p">.</span><span class="nx">AES</span><span class="p">.</span><span class="nx">decrypt</span><span class="p">(</span><span class="nx">encryptedData</span><span class="p">,</span> <span class="nx">privateKey</span><span class="p">);</span>
+    <span class="kd">const</span> <span class="nx">jsonString</span> <span class="o">=</span> <span class="nx">decrypted</span><span class="p">.</span><span class="nx">toString</span><span class="p">(</span><span class="nx">CryptoJS</span><span class="p">.</span><span class="nx">enc</span><span class="p">.</span><span class="nx">Utf8</span><span class="p">);</span>
+    
+    <span class="k">return</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">jsonString</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">RSA decryption error:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Failed to decrypt with RSA</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// Export RSA functions</span>
+<span class="k">export</span> <span class="p">{</span>
+  <span class="nx">generateRSAKeyPair</span><span class="p">,</span>
+  <span class="nx">encryptWithRSA</span><span class="p">,</span>
+  <span class="nx">decryptWithRSA</span><span class="p">,</span>
+  <span class="nx">RSA_CONFIG</span><span class="p">,</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-key-management">🔐 <strong>Key Management</strong></h2>
+
+<h3 id="secure-key-storage"><strong>Secure Key Storage</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">Keychain</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native-keychain</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">AsyncStorage</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@react-native-async-storage/async-storage</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">CryptoJS</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">crypto-js</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="c1">// Key management configuration</span>
+<span class="kd">const</span> <span class="nx">KEY_MANAGEMENT_CONFIG</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">masterKeyAlias</span><span class="p">:</span> <span class="dl">'</span><span class="s1">master_encryption_key</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">keyDerivationIterations</span><span class="p">:</span> <span class="mi">10000</span><span class="p">,</span>
+  <span class="na">keySize</span><span class="p">:</span> <span class="mi">256</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="c1">// Generate master key</span>
+<span class="kd">const</span> <span class="nx">generateMasterKey</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">CryptoJS</span><span class="p">.</span><span class="nx">lib</span><span class="p">.</span><span class="nx">WordArray</span><span class="p">.</span><span class="nx">random</span><span class="p">(</span><span class="nx">KEY_MANAGEMENT_CONFIG</span><span class="p">.</span><span class="nx">keySize</span> <span class="o">/</span> <span class="mi">8</span><span class="p">).</span><span class="nx">toString</span><span class="p">();</span>
+<span class="p">};</span>
+
+<span class="c1">// Derive key from password</span>
+<span class="kd">const</span> <span class="nx">deriveKeyFromPassword</span> <span class="o">=</span> <span class="p">(</span><span class="nx">password</span><span class="p">,</span> <span class="nx">salt</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">try</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">key</span> <span class="o">=</span> <span class="nx">CryptoJS</span><span class="p">.</span><span class="nx">PBKDF2</span><span class="p">(</span><span class="nx">password</span><span class="p">,</span> <span class="nx">salt</span><span class="p">,</span> <span class="p">{</span>
+      <span class="na">keySize</span><span class="p">:</span> <span class="nx">KEY_MANAGEMENT_CONFIG</span><span class="p">.</span><span class="nx">keySize</span> <span class="o">/</span> <span class="mi">32</span><span class="p">,</span>
+      <span class="na">iterations</span><span class="p">:</span> <span class="nx">KEY_MANAGEMENT_CONFIG</span><span class="p">.</span><span class="nx">keyDerivationIterations</span><span class="p">,</span>
+    <span class="p">});</span>
+    
+    <span class="k">return</span> <span class="nx">key</span><span class="p">.</span><span class="nx">toString</span><span class="p">();</span>
+  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Key derivation error:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Failed to derive key from password</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// Store master key securely</span>
+<span class="kd">const</span> <span class="nx">storeMasterKey</span> <span class="o">=</span> <span class="k">async</span> <span class="p">(</span><span class="nx">masterKey</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">try</span> <span class="p">{</span>
+    <span class="k">await</span> <span class="nx">Keychain</span><span class="p">.</span><span class="nx">setInternetCredentials</span><span class="p">(</span>
+      <span class="nx">KEY_MANAGEMENT_CONFIG</span><span class="p">.</span><span class="nx">masterKeyAlias</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">master_key</span><span class="dl">'</span><span class="p">,</span>
+      <span class="nx">masterKey</span><span class="p">,</span>
+      <span class="p">{</span>
+        <span class="na">accessControl</span><span class="p">:</span> <span class="nx">Keychain</span><span class="p">.</span><span class="nx">ACCESS_CONTROL</span><span class="p">.</span><span class="nx">BIOMETRY_ANY</span><span class="p">,</span>
+        <span class="na">authenticationType</span><span class="p">:</span> <span class="nx">Keychain</span><span class="p">.</span><span class="nx">AUTHENTICATION_TYPE</span><span class="p">.</span><span class="nx">DEVICE_PASSCODE_OR_BIOMETRICS</span><span class="p">,</span>
+      <span class="p">}</span>
+    <span class="p">);</span>
+    
+    <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Error storing master key:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+    <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// Retrieve master key</span>
+<span class="kd">const</span> <span class="nx">getMasterKey</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">try</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">credentials</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">Keychain</span><span class="p">.</span><span class="nx">getInternetCredentials</span><span class="p">(</span>
+      <span class="nx">KEY_MANAGEMENT_CONFIG</span><span class="p">.</span><span class="nx">masterKeyAlias</span>
+    <span class="p">);</span>
+    
+    <span class="k">return</span> <span class="nx">credentials</span> <span class="p">?</span> <span class="nx">credentials</span><span class="p">.</span><span class="nx">password</span> <span class="p">:</span> <span class="kc">null</span><span class="p">;</span>
+  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Error retrieving master key:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+    <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// Generate data encryption key</span>
+<span class="kd">const</span> <span class="nx">generateDataEncryptionKey</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">CryptoJS</span><span class="p">.</span><span class="nx">lib</span><span class="p">.</span><span class="nx">WordArray</span><span class="p">.</span><span class="nx">random</span><span class="p">(</span><span class="nx">KEY_MANAGEMENT_CONFIG</span><span class="p">.</span><span class="nx">keySize</span> <span class="o">/</span> <span class="mi">8</span><span class="p">).</span><span class="nx">toString</span><span class="p">();</span>
+<span class="p">};</span>
+
+<span class="c1">// Encrypt data encryption key with master key</span>
+<span class="kd">const</span> <span class="nx">encryptDataEncryptionKey</span> <span class="o">=</span> <span class="p">(</span><span class="nx">dataKey</span><span class="p">,</span> <span class="nx">masterKey</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">try</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">encrypted</span> <span class="o">=</span> <span class="nx">CryptoJS</span><span class="p">.</span><span class="nx">AES</span><span class="p">.</span><span class="nx">encrypt</span><span class="p">(</span><span class="nx">dataKey</span><span class="p">,</span> <span class="nx">masterKey</span><span class="p">).</span><span class="nx">toString</span><span class="p">();</span>
+    <span class="k">return</span> <span class="nx">encrypted</span><span class="p">;</span>
+  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Error encrypting data key:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Failed to encrypt data key</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// Decrypt data encryption key with master key</span>
+<span class="kd">const</span> <span class="nx">decryptDataEncryptionKey</span> <span class="o">=</span> <span class="p">(</span><span class="nx">encryptedDataKey</span><span class="p">,</span> <span class="nx">masterKey</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">try</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">decrypted</span> <span class="o">=</span> <span class="nx">CryptoJS</span><span class="p">.</span><span class="nx">AES</span><span class="p">.</span><span class="nx">decrypt</span><span class="p">(</span><span class="nx">encryptedDataKey</span><span class="p">,</span> <span class="nx">masterKey</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nx">decrypted</span><span class="p">.</span><span class="nx">toString</span><span class="p">(</span><span class="nx">CryptoJS</span><span class="p">.</span><span class="nx">enc</span><span class="p">.</span><span class="nx">Utf8</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Error decrypting data key:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Failed to decrypt data key</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// Store encrypted data key</span>
+<span class="kd">const</span> <span class="nx">storeEncryptedDataKey</span> <span class="o">=</span> <span class="k">async</span> <span class="p">(</span><span class="nx">keyId</span><span class="p">,</span> <span class="nx">encryptedDataKey</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">try</span> <span class="p">{</span>
+    <span class="k">await</span> <span class="nx">AsyncStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="s2">`encrypted_key_</span><span class="p">${</span><span class="nx">keyId</span><span class="p">}</span><span class="s2">`</span><span class="p">,</span> <span class="nx">encryptedDataKey</span><span class="p">);</span>
+    <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Error storing encrypted data key:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+    <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// Retrieve encrypted data key</span>
+<span class="kd">const</span> <span class="nx">getEncryptedDataKey</span> <span class="o">=</span> <span class="k">async</span> <span class="p">(</span><span class="nx">keyId</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">try</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">await</span> <span class="nx">AsyncStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="s2">`encrypted_key_</span><span class="p">${</span><span class="nx">keyId</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Error retrieving encrypted data key:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+    <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// Export key management functions</span>
+<span class="k">export</span> <span class="p">{</span>
+  <span class="nx">generateMasterKey</span><span class="p">,</span>
+  <span class="nx">deriveKeyFromPassword</span><span class="p">,</span>
+  <span class="nx">storeMasterKey</span><span class="p">,</span>
+  <span class="nx">getMasterKey</span><span class="p">,</span>
+  <span class="nx">generateDataEncryptionKey</span><span class="p">,</span>
+  <span class="nx">encryptDataEncryptionKey</span><span class="p">,</span>
+  <span class="nx">decryptDataEncryptionKey</span><span class="p">,</span>
+  <span class="nx">storeEncryptedDataKey</span><span class="p">,</span>
+  <span class="nx">getEncryptedDataKey</span><span class="p">,</span>
+  <span class="nx">KEY_MANAGEMENT_CONFIG</span><span class="p">,</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="key-rotation-strategy"><strong>Key Rotation Strategy</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">generateMasterKey</span><span class="p">,</span> <span class="nx">storeMasterKey</span><span class="p">,</span> <span class="nx">getMasterKey</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./KeyManagement</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="c1">// Key rotation configuration</span>
+<span class="kd">const</span> <span class="nx">KEY_ROTATION_CONFIG</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">rotationInterval</span><span class="p">:</span> <span class="mi">30</span> <span class="o">*</span> <span class="mi">24</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">,</span> <span class="c1">// 30 days in milliseconds</span>
+  <span class="na">keyVersionPrefix</span><span class="p">:</span> <span class="dl">'</span><span class="s1">key_version_</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">currentVersionKey</span><span class="p">:</span> <span class="dl">'</span><span class="s1">current_key_version</span><span class="dl">'</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="c1">// Check if key rotation is needed</span>
+<span class="kd">const</span> <span class="nx">isKeyRotationNeeded</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">try</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">lastRotation</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">AsyncStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="dl">'</span><span class="s1">last_key_rotation</span><span class="dl">'</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">lastRotation</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="kc">true</span><span class="p">;</span> <span class="c1">// First time, need to generate key</span>
+    <span class="p">}</span>
+    
+    <span class="kd">const</span> <span class="nx">lastRotationTime</span> <span class="o">=</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">lastRotation</span><span class="p">);</span>
+    <span class="kd">const</span> <span class="nx">currentTime</span> <span class="o">=</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
+    
+    <span class="k">return</span> <span class="p">(</span><span class="nx">currentTime</span> <span class="o">-</span> <span class="nx">lastRotationTime</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nx">KEY_ROTATION_CONFIG</span><span class="p">.</span><span class="nx">rotationInterval</span><span class="p">;</span>
+  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Error checking key rotation:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+    <span class="k">return</span> <span class="kc">true</span><span class="p">;</span> <span class="c1">// Default to rotation needed on error</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// Rotate encryption key</span>
+<span class="kd">const</span> <span class="nx">rotateEncryptionKey</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">try</span> <span class="p">{</span>
+    <span class="c1">// Generate new master key</span>
+    <span class="kd">const</span> <span class="nx">newMasterKey</span> <span class="o">=</span> <span class="nx">generateMasterKey</span><span class="p">();</span>
+    
+    <span class="c1">// Store new master key</span>
+    <span class="kd">const</span> <span class="nx">stored</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">storeMasterKey</span><span class="p">(</span><span class="nx">newMasterKey</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">stored</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Failed to store new master key</span><span class="dl">'</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="c1">// Update rotation timestamp</span>
+    <span class="k">await</span> <span class="nx">AsyncStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="dl">'</span><span class="s1">last_key_rotation</span><span class="dl">'</span><span class="p">,</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">().</span><span class="nx">toString</span><span class="p">());</span>
+    
+    <span class="c1">// Increment key version</span>
+    <span class="kd">const</span> <span class="nx">currentVersion</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">getCurrentKeyVersion</span><span class="p">();</span>
+    <span class="kd">const</span> <span class="nx">newVersion</span> <span class="o">=</span> <span class="nx">currentVersion</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">await</span> <span class="nx">AsyncStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="nx">KEY_ROTATION_CONFIG</span><span class="p">.</span><span class="nx">currentVersionKey</span><span class="p">,</span> <span class="nx">newVersion</span><span class="p">.</span><span class="nx">toString</span><span class="p">());</span>
+    
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`Key rotated to version </span><span class="p">${</span><span class="nx">newVersion</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+    <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Error rotating encryption key:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+    <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// Get current key version</span>
+<span class="kd">const</span> <span class="nx">getCurrentKeyVersion</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">try</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">version</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">AsyncStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="nx">KEY_ROTATION_CONFIG</span><span class="p">.</span><span class="nx">currentVersionKey</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nx">version</span> <span class="p">?</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">version</span><span class="p">)</span> <span class="p">:</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Error getting current key version:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// Initialize key rotation</span>
+<span class="kd">const</span> <span class="nx">initializeKeyRotation</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">try</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">rotationNeeded</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">isKeyRotationNeeded</span><span class="p">();</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="nx">rotationNeeded</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Key rotation needed, rotating...</span><span class="dl">'</span><span class="p">);</span>
+      <span class="k">await</span> <span class="nx">rotateEncryptionKey</span><span class="p">();</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Key rotation not needed</span><span class="dl">'</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Error initializing key rotation:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+    <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// Export key rotation functions</span>
+<span class="k">export</span> <span class="p">{</span>
+  <span class="nx">isKeyRotationNeeded</span><span class="p">,</span>
+  <span class="nx">rotateEncryptionKey</span><span class="p">,</span>
+  <span class="nx">getCurrentKeyVersion</span><span class="p">,</span>
+  <span class="nx">initializeKeyRotation</span><span class="p">,</span>
+  <span class="nx">KEY_ROTATION_CONFIG</span><span class="p">,</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="️-data-protection-strategies">🛡️ <strong>Data Protection Strategies</strong></h2>
+
+<h3 id="data-classification-service"><strong>Data Classification Service</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Data classification levels</span>
+<span class="kd">const</span> <span class="nx">DATA_CLASSIFICATION</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">PUBLIC</span><span class="p">:</span> <span class="dl">'</span><span class="s1">public</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">INTERNAL</span><span class="p">:</span> <span class="dl">'</span><span class="s1">internal</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">CONFIDENTIAL</span><span class="p">:</span> <span class="dl">'</span><span class="s1">confidential</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">RESTRICTED</span><span class="p">:</span> <span class="dl">'</span><span class="s1">restricted</span><span class="dl">'</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="c1">// Data protection policies</span>
+<span class="kd">const</span> <span class="nx">DATA_PROTECTION_POLICIES</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="p">[</span><span class="nx">DATA_CLASSIFICATION</span><span class="p">.</span><span class="nx">PUBLIC</span><span class="p">]:</span> <span class="p">{</span>
+    <span class="na">encryption</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="na">keyRotation</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="na">accessControl</span><span class="p">:</span> <span class="dl">'</span><span class="s1">none</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">retention</span><span class="p">:</span> <span class="dl">'</span><span class="s1">indefinite</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="p">[</span><span class="nx">DATA_CLASSIFICATION</span><span class="p">.</span><span class="nx">INTERNAL</span><span class="p">]:</span> <span class="p">{</span>
+    <span class="na">encryption</span><span class="p">:</span> <span class="dl">'</span><span class="s1">AES-256</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">keyRotation</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="na">accessControl</span><span class="p">:</span> <span class="dl">'</span><span class="s1">app-level</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">retention</span><span class="p">:</span> <span class="dl">'</span><span class="s1">1 year</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="p">[</span><span class="nx">DATA_CLASSIFICATION</span><span class="p">.</span><span class="nx">CONFIDENTIAL</span><span class="p">]:</span> <span class="p">{</span>
+    <span class="na">encryption</span><span class="p">:</span> <span class="dl">'</span><span class="s1">AES-256</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">keyRotation</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="na">accessControl</span><span class="p">:</span> <span class="dl">'</span><span class="s1">biometric</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">retention</span><span class="p">:</span> <span class="dl">'</span><span class="s1">6 months</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="p">[</span><span class="nx">DATA_CLASSIFICATION</span><span class="p">.</span><span class="nx">RESTRICTED</span><span class="p">]:</span> <span class="p">{</span>
+    <span class="na">encryption</span><span class="p">:</span> <span class="dl">'</span><span class="s1">AES-256 + RSA</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">keyRotation</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="na">accessControl</span><span class="p">:</span> <span class="dl">'</span><span class="s1">biometric + pin</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">retention</span><span class="p">:</span> <span class="dl">'</span><span class="s1">3 months</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+<span class="p">};</span>
+
+<span class="c1">// Classify data</span>
+<span class="kd">const</span> <span class="nx">classifyData</span> <span class="o">=</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// Simple classification logic - in real app, this would be more sophisticated</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">creditCard</span> <span class="o">||</span> <span class="nx">data</span><span class="p">.</span><span class="nx">ssn</span> <span class="o">||</span> <span class="nx">data</span><span class="p">.</span><span class="nx">passport</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">DATA_CLASSIFICATION</span><span class="p">.</span><span class="nx">RESTRICTED</span><span class="p">;</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">email</span> <span class="o">||</span> <span class="nx">data</span><span class="p">.</span><span class="nx">phone</span> <span class="o">||</span> <span class="nx">data</span><span class="p">.</span><span class="nx">address</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">DATA_CLASSIFICATION</span><span class="p">.</span><span class="nx">CONFIDENTIAL</span><span class="p">;</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">preferences</span> <span class="o">||</span> <span class="nx">data</span><span class="p">.</span><span class="nx">settings</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">DATA_CLASSIFICATION</span><span class="p">.</span><span class="nx">INTERNAL</span><span class="p">;</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">DATA_CLASSIFICATION</span><span class="p">.</span><span class="nx">PUBLIC</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// Get protection policy for data</span>
+<span class="kd">const</span> <span class="nx">getProtectionPolicy</span> <span class="o">=</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">classification</span> <span class="o">=</span> <span class="nx">classifyData</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+  <span class="k">return</span> <span class="nx">DATA_PROTECTION_POLICIES</span><span class="p">[</span><span class="nx">classification</span><span class="p">];</span>
+<span class="p">};</span>
+
+<span class="c1">// Apply data protection</span>
+<span class="kd">const</span> <span class="nx">applyDataProtection</span> <span class="o">=</span> <span class="k">async</span> <span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">classification</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">policy</span> <span class="o">=</span> <span class="nx">DATA_PROTECTION_POLICIES</span><span class="p">[</span><span class="nx">classification</span><span class="p">];</span>
+  
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">policy</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">`Unknown data classification: </span><span class="p">${</span><span class="nx">classification</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+  <span class="p">}</span>
+  
+  <span class="kd">let</span> <span class="nx">protectedData</span> <span class="o">=</span> <span class="p">{</span> <span class="p">...</span><span class="nx">data</span> <span class="p">};</span>
+  
+  <span class="c1">// Apply encryption if required</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">policy</span><span class="p">.</span><span class="nx">encryption</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">masterKey</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">getMasterKey</span><span class="p">();</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">masterKey</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Master key not available</span><span class="dl">'</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="kd">const</span> <span class="nx">encrypted</span> <span class="o">=</span> <span class="nx">encryptData</span><span class="p">(</span><span class="nx">protectedData</span><span class="p">,</span> <span class="nx">masterKey</span><span class="p">);</span>
+    <span class="nx">protectedData</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="na">encryptedData</span><span class="p">:</span> <span class="nx">encrypted</span><span class="p">.</span><span class="nx">encryptedData</span><span class="p">,</span>
+      <span class="na">iv</span><span class="p">:</span> <span class="nx">encrypted</span><span class="p">.</span><span class="nx">iv</span><span class="p">,</span>
+      <span class="na">encrypted</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="p">};</span>
+  <span class="p">}</span>
+  
+  <span class="c1">// Add metadata</span>
+  <span class="nx">protectedData</span><span class="p">.</span><span class="nx">metadata</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">classification</span><span class="p">,</span>
+    <span class="na">encrypted</span><span class="p">:</span> <span class="nx">policy</span><span class="p">.</span><span class="nx">encryption</span> <span class="p">?</span> <span class="kc">true</span> <span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="na">timestamp</span><span class="p">:</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">(),</span>
+    <span class="na">version</span><span class="p">:</span> <span class="k">await</span> <span class="nx">getCurrentKeyVersion</span><span class="p">(),</span>
+  <span class="p">};</span>
+  
+  <span class="k">return</span> <span class="nx">protectedData</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="c1">// Remove data protection</span>
+<span class="kd">const</span> <span class="nx">removeDataProtection</span> <span class="o">=</span> <span class="k">async</span> <span class="p">(</span><span class="nx">protectedData</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">protectedData</span><span class="p">.</span><span class="nx">encrypted</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">protectedData</span><span class="p">;</span>
+  <span class="p">}</span>
+  
+  <span class="kd">const</span> <span class="nx">masterKey</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">getMasterKey</span><span class="p">();</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">masterKey</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Master key not available</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">}</span>
+  
+  <span class="kd">const</span> <span class="nx">decrypted</span> <span class="o">=</span> <span class="nx">decryptData</span><span class="p">(</span>
+    <span class="nx">protectedData</span><span class="p">.</span><span class="nx">encryptedData</span><span class="p">,</span>
+    <span class="nx">masterKey</span><span class="p">,</span>
+    <span class="nx">protectedData</span><span class="p">.</span><span class="nx">iv</span>
+  <span class="p">);</span>
+  
+  <span class="k">return</span> <span class="nx">decrypted</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="c1">// Export data protection functions</span>
+<span class="k">export</span> <span class="p">{</span>
+  <span class="nx">DATA_CLASSIFICATION</span><span class="p">,</span>
+  <span class="nx">DATA_PROTECTION_POLICIES</span><span class="p">,</span>
+  <span class="nx">classifyData</span><span class="p">,</span>
+  <span class="nx">getProtectionPolicy</span><span class="p">,</span>
+  <span class="nx">applyDataProtection</span><span class="p">,</span>
+  <span class="nx">removeDataProtection</span><span class="p">,</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-secure-communication">🔒 <strong>Secure Communication</strong></h2>
+
+<h3 id="end-to-end-encryption"><strong>End-to-End Encryption</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">generateRSAKeyPair</span><span class="p">,</span> <span class="nx">encryptWithRSA</span><span class="p">,</span> <span class="nx">decryptWithRSA</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./RSAEncryption</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">encryptData</span><span class="p">,</span> <span class="nx">decryptData</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./AESEncryption</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="c1">// End-to-end encryption service</span>
+<span class="kd">const</span> <span class="nx">createE2EEncryptionService</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">publicKey</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+  <span class="kd">let</span> <span class="nx">privateKey</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+  <span class="kd">let</span> <span class="nx">sessionKey</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+  
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="c1">// Initialize E2E encryption</span>
+    <span class="na">initialize</span><span class="p">:</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">try</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">keyPair</span> <span class="o">=</span> <span class="nx">generateRSAKeyPair</span><span class="p">();</span>
+        <span class="nx">publicKey</span> <span class="o">=</span> <span class="nx">keyPair</span><span class="p">.</span><span class="nx">publicKey</span><span class="p">;</span>
+        <span class="nx">privateKey</span> <span class="o">=</span> <span class="nx">keyPair</span><span class="p">.</span><span class="nx">privateKey</span><span class="p">;</span>
+        
+        <span class="c1">// Generate session key for symmetric encryption</span>
+        <span class="nx">sessionKey</span> <span class="o">=</span> <span class="nx">generateEncryptionKey</span><span class="p">();</span>
+        
+        <span class="k">return</span> <span class="p">{</span>
+          <span class="nx">publicKey</span><span class="p">,</span>
+          <span class="na">sessionKey</span><span class="p">:</span> <span class="nx">encryptWithRSA</span><span class="p">(</span><span class="nx">sessionKey</span><span class="p">,</span> <span class="nx">publicKey</span><span class="p">),</span>
+        <span class="p">};</span>
+      <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">E2E initialization error:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+        <span class="k">throw</span> <span class="nx">error</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
+    
+    <span class="c1">// Encrypt message for recipient</span>
+    <span class="na">encryptMessage</span><span class="p">:</span> <span class="p">(</span><span class="nx">message</span><span class="p">,</span> <span class="nx">recipientPublicKey</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">try</span> <span class="p">{</span>
+        <span class="c1">// Encrypt message with session key</span>
+        <span class="kd">const</span> <span class="nx">encryptedMessage</span> <span class="o">=</span> <span class="nx">encryptData</span><span class="p">(</span><span class="nx">message</span><span class="p">,</span> <span class="nx">sessionKey</span><span class="p">);</span>
+        
+        <span class="c1">// Encrypt session key with recipient's public key</span>
+        <span class="kd">const</span> <span class="nx">encryptedSessionKey</span> <span class="o">=</span> <span class="nx">encryptWithRSA</span><span class="p">(</span><span class="nx">sessionKey</span><span class="p">,</span> <span class="nx">recipientPublicKey</span><span class="p">);</span>
+        
+        <span class="k">return</span> <span class="p">{</span>
+          <span class="na">encryptedMessage</span><span class="p">:</span> <span class="nx">encryptedMessage</span><span class="p">.</span><span class="nx">encryptedData</span><span class="p">,</span>
+          <span class="na">iv</span><span class="p">:</span> <span class="nx">encryptedMessage</span><span class="p">.</span><span class="nx">iv</span><span class="p">,</span>
+          <span class="nx">encryptedSessionKey</span><span class="p">,</span>
+        <span class="p">};</span>
+      <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Message encryption error:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+        <span class="k">throw</span> <span class="nx">error</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
+    
+    <span class="c1">// Decrypt received message</span>
+    <span class="na">decryptMessage</span><span class="p">:</span> <span class="p">(</span><span class="nx">encryptedMessage</span><span class="p">,</span> <span class="nx">encryptedSessionKey</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">try</span> <span class="p">{</span>
+        <span class="c1">// Decrypt session key with private key</span>
+        <span class="kd">const</span> <span class="nx">decryptedSessionKey</span> <span class="o">=</span> <span class="nx">decryptWithRSA</span><span class="p">(</span><span class="nx">encryptedSessionKey</span><span class="p">,</span> <span class="nx">privateKey</span><span class="p">);</span>
+        
+        <span class="c1">// Decrypt message with session key</span>
+        <span class="kd">const</span> <span class="nx">decryptedMessage</span> <span class="o">=</span> <span class="nx">decryptData</span><span class="p">(</span>
+          <span class="nx">encryptedMessage</span><span class="p">.</span><span class="nx">encryptedMessage</span><span class="p">,</span>
+          <span class="nx">decryptedSessionKey</span><span class="p">,</span>
+          <span class="nx">encryptedMessage</span><span class="p">.</span><span class="nx">iv</span>
+        <span class="p">);</span>
+        
+        <span class="k">return</span> <span class="nx">decryptedMessage</span><span class="p">;</span>
+      <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Message decryption error:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+        <span class="k">throw</span> <span class="nx">error</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
+    
+    <span class="c1">// Get public key</span>
+    <span class="na">getPublicKey</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">publicKey</span><span class="p">,</span>
+    
+    <span class="c1">// Update session key</span>
+    <span class="na">updateSessionKey</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">sessionKey</span> <span class="o">=</span> <span class="nx">generateEncryptionKey</span><span class="p">();</span>
+      <span class="k">return</span> <span class="nx">encryptWithRSA</span><span class="p">(</span><span class="nx">sessionKey</span><span class="p">,</span> <span class="nx">publicKey</span><span class="p">);</span>
+    <span class="p">},</span>
+  <span class="p">};</span>
+<span class="p">};</span>
+
+<span class="c1">// Export E2E encryption service</span>
+<span class="k">export</span> <span class="p">{</span> <span class="nx">createE2EEncryptionService</span> <span class="p">};</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-best-practices">🎯 <strong>Best Practices</strong></h2>
+
+<h3 id="1-encryption-strategy"><strong>1. Encryption Strategy</strong></h3>
+<ul>
+  <li>Use AES-256 for symmetric encryption</li>
+  <li>Use RSA-2048+ for asymmetric encryption</li>
+  <li>Implement proper key management</li>
+  <li>Use hardware security when available</li>
+</ul>
+
+<h3 id="2-key-management"><strong>2. Key Management</strong></h3>
+<ul>
+  <li>Store keys securely (Keychain/Keystore)</li>
+  <li>Implement key rotation</li>
+  <li>Use different keys for different data types</li>
+  <li>Monitor key usage</li>
+</ul>
+
+<h3 id="3-data-protection"><strong>3. Data Protection</strong></h3>
+<ul>
+  <li>Classify data by sensitivity</li>
+  <li>Apply appropriate protection levels</li>
+  <li>Implement data retention policies</li>
+  <li>Regular security audits</li>
+</ul>
+
+<hr />
+
+<h2 id="-interview-questions">❓ <strong>Interview Questions</strong></h2>
+
+<h3 id="basic-questions"><strong>Basic Questions</strong></h3>
+<ol>
+  <li><strong>What is the difference between symmetric and asymmetric encryption?</strong></li>
+  <li><strong>How do you implement data encryption in React Native?</strong></li>
+  <li><strong>What are the benefits of key rotation?</strong></li>
+</ol>
+
+<h3 id="advanced-questions"><strong>Advanced Questions</strong></h3>
+<ol>
+  <li><strong>How would you implement end-to-end encryption?</strong></li>
+  <li><strong>Explain the key management strategy for mobile apps.</strong></li>
+  <li><strong>How do you handle encryption performance in mobile apps?</strong></li>
+</ol>
+
+<h3 id="practical-questions"><strong>Practical Questions</strong></h3>
+<ol>
+  <li><strong>Implement AES encryption with key management.</strong></li>
+  <li><strong>Create a data classification system with encryption.</strong></li>
+  <li><strong>Set up end-to-end encryption for messaging.</strong></li>
+</ol>
+
+<hr />
+
+<h2 id="-navigation">🧭 Navigation</h2>
+
+<div class="navigation">
+    <a href="./02-Network-Security.md" class="nav-link prev">⬅️ Previous: Network Security</a>
+    <a href="./04-Security-Best-Practices.md" class="nav-link next">Next: Security Best Practices ➡️</a>
+</div>
+
+<hr />
+
+<script src="../../common-scripts.js"></script>
+
+<p><em>Last updated: December 2024</em></p>
+
+        </main>
+        
+        <footer style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #ecf0f1; color: #666; text-align: center;">
+            <p>Interview Prep Documentation - Built with Jekyll</p>
+        </footer>
+    </div>
+</body>
+</html>

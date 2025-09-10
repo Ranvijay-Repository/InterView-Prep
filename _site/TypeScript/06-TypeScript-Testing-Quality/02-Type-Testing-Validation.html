@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔍 Type Testing &amp; Validation - Interview Prep Documentation</title>
+    <meta name="description" content="Comprehensive guides for JavaScript, TypeScript, and React Native interview preparation">
+    
+    <!-- GitHub Pages compatible styling -->
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+        }
+        
+        .container {
+            max-width: 100%;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            color: #2c3e50;
+            margin-top: 2em;
+            margin-bottom: 1em;
+        }
+        
+        h1 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            border-bottom: 1px solid #ecf0f1;
+            padding-bottom: 5px;
+        }
+        
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border-left: 4px solid #3498db;
+        }
+        
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+        
+        blockquote {
+            border-left: 4px solid #3498db;
+            margin: 0;
+            padding-left: 20px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1em 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .navigation {
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px 0;
+            margin-bottom: 20px;
+        }
+        
+        .navigation a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+        
+        .navigation a:hover {
+            text-decoration: underline;
+        }
+        
+        .breadcrumb {
+            margin-bottom: 20px;
+            color: #666;
+        }
+        
+        .breadcrumb a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            h2 {
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="navigation">
+            <a href="/">Home</a>
+            <a href="/Javascript/">JavaScript</a>
+            <a href="/TypeScript/">TypeScript</a>
+            <a href="/React-Native/">React Native</a>
+        </nav>
+        
+        
+        
+        <main>
+            <h1 id="-type-testing--validation">🔍 <strong>Type Testing &amp; Validation</strong></h1>
+
+<blockquote>
+  <p><strong>Complete guide to testing TypeScript types, runtime validation, and ensuring type safety in production</strong></p>
+</blockquote>
+
+<link rel="stylesheet" href="../../common-styles.css" />
+
+<hr />
+
+<h2 id="-table-of-contents">📚 <strong>Table of Contents</strong></h2>
+
+<ul>
+  <li><a href="#type-testing-overview">Type Testing Overview</a></li>
+  <li><a href="#compile-time-type-testing">Compile-Time Type Testing</a></li>
+  <li><a href="#runtime-type-validation">Runtime Type Validation</a></li>
+  <li><a href="#schema-validation">Schema Validation</a></li>
+  <li><a href="#type-guards-and-assertions">Type Guards and Assertions</a></li>
+  <li><a href="#advanced-type-testing">Advanced Type Testing</a></li>
+  <li><a href="#best-practices">Best Practices</a></li>
+  <li><a href="#common-interview-questions">Common Interview Questions</a></li>
+</ul>
+
+<hr />
+
+<h2 id="-type-testing-overview">🎯 <strong>Type Testing Overview</strong></h2>
+
+<p>Type testing ensures that TypeScript types work correctly at both compile-time and runtime.</p>
+
+<h3 id="type-testing-categories"><strong>Type Testing Categories</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Type testing categories</span>
+<span class="kd">const</span> <span class="nx">typeTestingCategories</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">compileTime</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Testing types during compilation</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">runtime</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Testing types at runtime</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">schema</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Validating data against schemas</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">guards</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Type guards and assertions</span><span class="dl">"</span>
+<span class="p">};</span>
+
+<span class="c1">// Benefits of type testing</span>
+<span class="kd">const</span> <span class="nx">benefits</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">typeSafety</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Ensure types work as expected</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">documentation</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Types serve as documentation</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">refactoring</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Safe refactoring with type changes</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">validation</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Runtime data validation</span><span class="dl">"</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="type-testing-tools"><strong>Type Testing Tools</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Popular type testing tools</span>
+<span class="kd">const</span> <span class="nx">typeTestingTools</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">dtslint</span><span class="p">:</span> <span class="dl">"</span><span class="s2">TypeScript definition testing</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">tsd</span><span class="p">:</span> <span class="dl">"</span><span class="s2">TypeScript definition testing</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">zod</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Runtime schema validation</span><span class="dl">"</span><span class="p">,</span>
+  <span class="nx">io</span><span class="o">-</span><span class="na">ts</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Runtime type validation</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">yup</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Schema validation</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">joi</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Schema validation</span><span class="dl">"</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-compile-time-type-testing">🔧 <strong>Compile-Time Type Testing</strong></h2>
+
+<h3 id="type-definition-testing"><strong>Type Definition Testing</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// type-tests.ts</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">expectType</span><span class="p">,</span> <span class="nx">expectError</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">tsd</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="c1">// Test successful type inference</span>
+<span class="nx">expectType</span><span class="o">&lt;</span><span class="kr">string</span><span class="o">&gt;</span><span class="p">(</span><span class="dl">'</span><span class="s1">hello</span><span class="dl">'</span><span class="p">);</span>
+<span class="nx">expectType</span><span class="o">&lt;</span><span class="kr">number</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">42</span><span class="p">);</span>
+<span class="nx">expectType</span><span class="o">&lt;</span><span class="nx">boolean</span><span class="o">&gt;</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+
+<span class="c1">// Test function return types</span>
+<span class="kd">function</span> <span class="nx">add</span><span class="p">(</span><span class="nx">a</span><span class="p">:</span> <span class="kr">number</span><span class="p">,</span> <span class="nx">b</span><span class="p">:</span> <span class="kr">number</span><span class="p">):</span> <span class="kr">number</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nx">expectType</span><span class="o">&lt;</span><span class="kr">number</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">));</span>
+
+<span class="c1">// Test generic types</span>
+<span class="kd">function</span> <span class="nx">identity</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="nx">T</span><span class="p">):</span> <span class="nx">T</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">value</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nx">expectType</span><span class="o">&lt;</span><span class="kr">string</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">identity</span><span class="p">(</span><span class="dl">'</span><span class="s1">hello</span><span class="dl">'</span><span class="p">));</span>
+<span class="nx">expectType</span><span class="o">&lt;</span><span class="kr">number</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">identity</span><span class="p">(</span><span class="mi">42</span><span class="p">));</span>
+
+<span class="c1">// Test error cases</span>
+<span class="nx">expectError</span><span class="p">(</span><span class="nx">identity</span><span class="p">(</span><span class="dl">'</span><span class="s1">hello</span><span class="dl">'</span><span class="p">));</span> <span class="c1">// Should error if type doesn't match</span>
+<span class="nx">expectError</span><span class="p">(</span><span class="nx">add</span><span class="p">(</span><span class="dl">'</span><span class="s1">1</span><span class="dl">'</span><span class="p">,</span> <span class="mi">2</span><span class="p">));</span> <span class="c1">// Should error with wrong argument types</span>
+</code></pre></div></div>
+
+<h3 id="advanced-type-testing"><strong>Advanced Type Testing</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// advanced-type-tests.ts</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">expectType</span><span class="p">,</span> <span class="nx">expectError</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">tsd</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="c1">// Test utility types</span>
+<span class="kd">type</span> <span class="nx">User</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">id</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span>
+  <span class="nl">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">email</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="kd">type</span> <span class="nx">PartialUser</span> <span class="o">=</span> <span class="nb">Partial</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="nx">expectType</span><span class="o">&lt;</span><span class="nx">PartialUser</span><span class="o">&gt;</span><span class="p">({</span> <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">John</span><span class="dl">'</span> <span class="p">});</span>
+
+<span class="kd">type</span> <span class="nx">RequiredUser</span> <span class="o">=</span> <span class="nx">Required</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="nx">expectType</span><span class="o">&lt;</span><span class="nx">RequiredUser</span><span class="o">&gt;</span><span class="p">({</span> <span class="na">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">John</span><span class="dl">'</span><span class="p">,</span> <span class="na">email</span><span class="p">:</span> <span class="dl">'</span><span class="s1">john@example.com</span><span class="dl">'</span> <span class="p">});</span>
+
+<span class="c1">// Test conditional types</span>
+<span class="kd">type</span> <span class="nx">IsString</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nx">T</span> <span class="kd">extends</span> <span class="kr">string</span> <span class="p">?</span> <span class="kc">true</span> <span class="p">:</span> <span class="kc">false</span><span class="p">;</span>
+<span class="nx">expectType</span><span class="o">&lt;</span><span class="kc">true</span><span class="o">&gt;</span><span class="p">({}</span> <span class="k">as</span> <span class="nx">IsString</span><span class="o">&lt;</span><span class="kr">string</span><span class="o">&gt;</span><span class="p">);</span>
+<span class="nx">expectType</span><span class="o">&lt;</span><span class="kc">false</span><span class="o">&gt;</span><span class="p">({}</span> <span class="k">as</span> <span class="nx">IsString</span><span class="o">&lt;</span><span class="kr">number</span><span class="o">&gt;</span><span class="p">);</span>
+
+<span class="c1">// Test mapped types</span>
+<span class="kd">type</span> <span class="nx">ReadonlyUser</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="k">readonly</span> <span class="p">[</span><span class="nx">K</span> <span class="k">in</span> <span class="kr">keyof</span> <span class="nx">User</span><span class="p">]:</span> <span class="nx">User</span><span class="p">[</span><span class="nx">K</span><span class="p">];</span>
+<span class="p">};</span>
+<span class="nx">expectType</span><span class="o">&lt;</span><span class="nx">ReadonlyUser</span><span class="o">&gt;</span><span class="p">({</span> <span class="na">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">John</span><span class="dl">'</span><span class="p">,</span> <span class="na">email</span><span class="p">:</span> <span class="dl">'</span><span class="s1">john@example.com</span><span class="dl">'</span> <span class="p">});</span>
+
+<span class="c1">// Test template literal types</span>
+<span class="kd">type</span> <span class="nx">EventName</span><span class="o">&lt;</span><span class="nx">T</span> <span class="kd">extends</span> <span class="kr">string</span><span class="o">&gt;</span> <span class="o">=</span> <span class="s2">`on</span><span class="p">${</span><span class="nx">Capitalize</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">}</span><span class="s2">`</span><span class="p">;</span>
+<span class="nx">expectType</span><span class="o">&lt;</span><span class="dl">'</span><span class="s1">onClick</span><span class="dl">'</span><span class="o">&gt;</span><span class="p">({}</span> <span class="k">as</span> <span class="nx">EventName</span><span class="o">&lt;</span><span class="dl">'</span><span class="s1">click</span><span class="dl">'</span><span class="o">&gt;</span><span class="p">);</span>
+<span class="nx">expectType</span><span class="o">&lt;</span><span class="dl">'</span><span class="s1">onSubmit</span><span class="dl">'</span><span class="o">&gt;</span><span class="p">({}</span> <span class="k">as</span> <span class="nx">EventName</span><span class="o">&lt;</span><span class="dl">'</span><span class="s1">submit</span><span class="dl">'</span><span class="o">&gt;</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="type-definition-testing-with-dtslint"><strong>Type Definition Testing with dtslint</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// types/__tests__/my-library.test.ts</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">expectType</span><span class="p">,</span> <span class="nx">expectError</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">tsd</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">MyLibrary</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">../index</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="c1">// Test exported types</span>
+<span class="nx">expectType</span><span class="o">&lt;</span><span class="nx">MyLibrary</span><span class="o">&gt;</span><span class="p">(</span><span class="k">new</span> <span class="nx">MyLibrary</span><span class="p">());</span>
+
+<span class="c1">// Test method signatures</span>
+<span class="kd">const</span> <span class="nx">lib</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyLibrary</span><span class="p">();</span>
+<span class="nx">expectType</span><span class="o">&lt;</span><span class="nb">Promise</span><span class="o">&lt;</span><span class="kr">string</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="nx">lib</span><span class="p">.</span><span class="nx">fetchData</span><span class="p">());</span>
+<span class="nx">expectType</span><span class="o">&lt;</span><span class="k">void</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">lib</span><span class="p">.</span><span class="nx">setConfig</span><span class="p">({</span> <span class="na">apiUrl</span><span class="p">:</span> <span class="dl">'</span><span class="s1">https://api.example.com</span><span class="dl">'</span> <span class="p">}));</span>
+
+<span class="c1">// Test error cases</span>
+<span class="nx">expectError</span><span class="p">(</span><span class="nx">lib</span><span class="p">.</span><span class="nx">setConfig</span><span class="p">(</span><span class="dl">'</span><span class="s1">invalid</span><span class="dl">'</span><span class="p">));</span> <span class="c1">// Should error with wrong type</span>
+<span class="nx">expectError</span><span class="p">(</span><span class="nx">lib</span><span class="p">.</span><span class="nx">fetchData</span><span class="p">(</span><span class="dl">'</span><span class="s1">extra-arg</span><span class="dl">'</span><span class="p">));</span> <span class="c1">// Should error with extra arguments</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="️-runtime-type-validation">🛡️ <strong>Runtime Type Validation</strong></h2>
+
+<h3 id="basic-runtime-validation"><strong>Basic Runtime Validation</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// runtime-validation.ts</span>
+<span class="kr">interface</span> <span class="nx">User</span> <span class="p">{</span>
+  <span class="nl">id</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span>
+  <span class="nl">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">email</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">age</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Basic type checking functions</span>
+<span class="kd">const</span> <span class="nx">isString</span> <span class="o">=</span> <span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">):</span> <span class="nx">value</span> <span class="k">is</span> <span class="kr">string</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="k">typeof</span> <span class="nx">value</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">string</span><span class="dl">'</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">isNumber</span> <span class="o">=</span> <span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">):</span> <span class="nx">value</span> <span class="k">is</span> <span class="kr">number</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="k">typeof</span> <span class="nx">value</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">number</span><span class="dl">'</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nb">isNaN</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">isObject</span> <span class="o">=</span> <span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">):</span> <span class="nx">value</span> <span class="k">is</span> <span class="nb">Record</span><span class="o">&lt;</span><span class="kr">string</span><span class="p">,</span> <span class="nx">unknown</span><span class="o">&gt;</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="k">typeof</span> <span class="nx">value</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">object</span><span class="dl">'</span> <span class="o">&amp;&amp;</span> <span class="nx">value</span> <span class="o">!==</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nb">Array</span><span class="p">.</span><span class="nx">isArray</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="c1">// User validation</span>
+<span class="kd">const</span> <span class="nx">isValidUser</span> <span class="o">=</span> <span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">):</span> <span class="nx">value</span> <span class="k">is</span> <span class="nx">User</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">isObject</span><span class="p">(</span><span class="nx">value</span><span class="p">))</span> <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+  
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="nx">isNumber</span><span class="p">(</span><span class="nx">value</span><span class="p">.</span><span class="nx">id</span><span class="p">)</span> <span class="o">&amp;&amp;</span>
+    <span class="nx">isString</span><span class="p">(</span><span class="nx">value</span><span class="p">.</span><span class="nx">name</span><span class="p">)</span> <span class="o">&amp;&amp;</span>
+    <span class="nx">isString</span><span class="p">(</span><span class="nx">value</span><span class="p">.</span><span class="nx">email</span><span class="p">)</span> <span class="o">&amp;&amp;</span>
+    <span class="nx">isNumber</span><span class="p">(</span><span class="nx">value</span><span class="p">.</span><span class="nx">age</span><span class="p">)</span>
+  <span class="p">);</span>
+<span class="p">};</span>
+
+<span class="c1">// Usage</span>
+<span class="kd">const</span> <span class="nx">validateUser</span> <span class="o">=</span> <span class="p">(</span><span class="nx">data</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">):</span> <span class="nx">User</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">isValidUser</span><span class="p">(</span><span class="nx">data</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">data</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Invalid user data</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="c1">// Test</span>
+<span class="k">try</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">user</span> <span class="o">=</span> <span class="nx">validateUser</span><span class="p">({</span> <span class="na">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">John</span><span class="dl">'</span><span class="p">,</span> <span class="na">email</span><span class="p">:</span> <span class="dl">'</span><span class="s1">john@example.com</span><span class="dl">'</span><span class="p">,</span> <span class="na">age</span><span class="p">:</span> <span class="mi">30</span> <span class="p">});</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Valid user:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">user</span><span class="p">);</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Validation error:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="advanced-runtime-validation"><strong>Advanced Runtime Validation</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// advanced-runtime-validation.ts</span>
+<span class="kr">interface</span> <span class="nx">ValidationResult</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="na">success</span><span class="p">:</span> <span class="kc">true</span><span class="p">;</span>
+  <span class="nl">data</span><span class="p">:</span> <span class="nx">T</span><span class="p">;</span>
+<span class="p">}</span> <span class="o">|</span> <span class="p">{</span>
+  <span class="na">success</span><span class="p">:</span> <span class="kc">false</span><span class="p">;</span>
+  <span class="nl">errors</span><span class="p">:</span> <span class="kr">string</span><span class="p">[];</span>
+<span class="p">};</span>
+
+<span class="kd">class</span> <span class="nx">TypeValidator</span> <span class="p">{</span>
+  <span class="k">private</span> <span class="nx">errors</span><span class="p">:</span> <span class="kr">string</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[];</span>
+
+  <span class="nx">validate</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">,</span> <span class="nx">validator</span><span class="p">:</span> <span class="p">(</span><span class="nx">val</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">val</span> <span class="k">is</span> <span class="nx">T</span><span class="p">):</span> <span class="nx">ValidationResult</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">errors</span> <span class="o">=</span> <span class="p">[];</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="nx">validator</span><span class="p">(</span><span class="nx">value</span><span class="p">))</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="p">{</span> <span class="na">success</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="na">data</span><span class="p">:</span> <span class="nx">value</span> <span class="p">};</span>
+    <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="p">{</span> <span class="na">success</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> <span class="na">errors</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">errors</span> <span class="p">};</span>
+  <span class="p">}</span>
+
+  <span class="nx">addError</span><span class="p">(</span><span class="nx">message</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">errors</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">message</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="c1">// String validators</span>
+  <span class="kr">string</span><span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">):</span> <span class="nx">value</span> <span class="k">is</span> <span class="kr">string</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">value</span> <span class="o">!==</span> <span class="dl">'</span><span class="s1">string</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">addError</span><span class="p">(</span><span class="dl">'</span><span class="s1">Expected string</span><span class="dl">'</span><span class="p">);</span>
+      <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="nx">stringMinLength</span><span class="p">(</span><span class="nx">minLength</span><span class="p">:</span> <span class="kr">number</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">):</span> <span class="nx">value</span> <span class="k">is</span> <span class="kr">string</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="kr">string</span><span class="p">(</span><span class="nx">value</span><span class="p">))</span> <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">value</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;</span> <span class="nx">minLength</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">addError</span><span class="p">(</span><span class="s2">`String must be at least </span><span class="p">${</span><span class="nx">minLength</span><span class="p">}</span><span class="s2"> characters`</span><span class="p">);</span>
+        <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+    <span class="p">};</span>
+  <span class="p">}</span>
+
+  <span class="nx">email</span><span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">):</span> <span class="nx">value</span> <span class="k">is</span> <span class="kr">string</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="kr">string</span><span class="p">(</span><span class="nx">value</span><span class="p">))</span> <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="kd">const</span> <span class="nx">emailRegex</span> <span class="o">=</span> <span class="sr">/^</span><span class="se">[^\s</span><span class="sr">@</span><span class="se">]</span><span class="sr">+@</span><span class="se">[^\s</span><span class="sr">@</span><span class="se">]</span><span class="sr">+</span><span class="se">\.[^\s</span><span class="sr">@</span><span class="se">]</span><span class="sr">+$/</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">emailRegex</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">value</span><span class="p">))</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">addError</span><span class="p">(</span><span class="dl">'</span><span class="s1">Invalid email format</span><span class="dl">'</span><span class="p">);</span>
+      <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Number validators</span>
+  <span class="kr">number</span><span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">):</span> <span class="nx">value</span> <span class="k">is</span> <span class="kr">number</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">value</span> <span class="o">!==</span> <span class="dl">'</span><span class="s1">number</span><span class="dl">'</span> <span class="o">||</span> <span class="nb">isNaN</span><span class="p">(</span><span class="nx">value</span><span class="p">))</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">addError</span><span class="p">(</span><span class="dl">'</span><span class="s1">Expected number</span><span class="dl">'</span><span class="p">);</span>
+      <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="nx">numberRange</span><span class="p">(</span><span class="nx">min</span><span class="p">:</span> <span class="kr">number</span><span class="p">,</span> <span class="nx">max</span><span class="p">:</span> <span class="kr">number</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">):</span> <span class="nx">value</span> <span class="k">is</span> <span class="kr">number</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="kr">number</span><span class="p">(</span><span class="nx">value</span><span class="p">))</span> <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">value</span> <span class="o">&lt;</span> <span class="nx">min</span> <span class="o">||</span> <span class="nx">value</span> <span class="o">&gt;</span> <span class="nx">max</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">addError</span><span class="p">(</span><span class="s2">`Number must be between </span><span class="p">${</span><span class="nx">min</span><span class="p">}</span><span class="s2"> and </span><span class="p">${</span><span class="nx">max</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+        <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+    <span class="p">};</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Object validators</span>
+  <span class="nx">object</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">shape</span><span class="p">:</span> <span class="nb">Record</span><span class="o">&lt;</span><span class="kr">string</span><span class="p">,</span> <span class="p">(</span><span class="nx">val</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">boolean</span><span class="o">&gt;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">):</span> <span class="nx">value</span> <span class="k">is</span> <span class="nx">T</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">value</span> <span class="o">!==</span> <span class="dl">'</span><span class="s1">object</span><span class="dl">'</span> <span class="o">||</span> <span class="nx">value</span> <span class="o">===</span> <span class="kc">null</span> <span class="o">||</span> <span class="nb">Array</span><span class="p">.</span><span class="nx">isArray</span><span class="p">(</span><span class="nx">value</span><span class="p">))</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">addError</span><span class="p">(</span><span class="dl">'</span><span class="s1">Expected object</span><span class="dl">'</span><span class="p">);</span>
+        <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+      <span class="p">}</span>
+
+      <span class="kd">const</span> <span class="nx">obj</span> <span class="o">=</span> <span class="nx">value</span> <span class="k">as</span> <span class="nb">Record</span><span class="o">&lt;</span><span class="kr">string</span><span class="p">,</span> <span class="nx">unknown</span><span class="o">&gt;</span><span class="p">;</span>
+      <span class="k">for</span> <span class="p">(</span><span class="kd">const</span> <span class="p">[</span><span class="nx">key</span><span class="p">,</span> <span class="nx">validator</span><span class="p">]</span> <span class="k">of</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">entries</span><span class="p">(</span><span class="nx">shape</span><span class="p">))</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">validator</span><span class="p">(</span><span class="nx">obj</span><span class="p">[</span><span class="nx">key</span><span class="p">]))</span> <span class="p">{</span>
+          <span class="k">this</span><span class="p">.</span><span class="nx">addError</span><span class="p">(</span><span class="s2">`Invalid property: </span><span class="p">${</span><span class="nx">key</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+          <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+
+      <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+    <span class="p">};</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Usage</span>
+<span class="kd">const</span> <span class="nx">validator</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">TypeValidator</span><span class="p">();</span>
+
+<span class="kd">const</span> <span class="nx">userValidator</span> <span class="o">=</span> <span class="nx">validator</span><span class="p">.</span><span class="nx">object</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span><span class="p">({</span>
+  <span class="na">id</span><span class="p">:</span> <span class="nx">validator</span><span class="p">.</span><span class="kr">number</span><span class="p">,</span>
+  <span class="na">name</span><span class="p">:</span> <span class="nx">validator</span><span class="p">.</span><span class="nx">stringMinLength</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
+  <span class="na">email</span><span class="p">:</span> <span class="nx">validator</span><span class="p">.</span><span class="nx">email</span><span class="p">,</span>
+  <span class="na">age</span><span class="p">:</span> <span class="nx">validator</span><span class="p">.</span><span class="nx">numberRange</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">120</span><span class="p">)</span>
+<span class="p">});</span>
+
+<span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">validator</span><span class="p">.</span><span class="nx">validate</span><span class="p">(</span><span class="nx">userData</span><span class="p">,</span> <span class="nx">userValidator</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">success</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Valid user:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">result</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Validation errors:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">result</span><span class="p">.</span><span class="nx">errors</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-schema-validation">📋 <strong>Schema Validation</strong></h2>
+
+<h3 id="zod-schema-validation"><strong>Zod Schema Validation</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// zod-validation.ts</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">z</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">zod</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="c1">// Basic schema</span>
+<span class="kd">const</span> <span class="nx">UserSchema</span> <span class="o">=</span> <span class="nx">z</span><span class="p">.</span><span class="nx">object</span><span class="p">({</span>
+  <span class="na">id</span><span class="p">:</span> <span class="nx">z</span><span class="p">.</span><span class="kr">number</span><span class="p">(),</span>
+  <span class="na">name</span><span class="p">:</span> <span class="nx">z</span><span class="p">.</span><span class="kr">string</span><span class="p">().</span><span class="nx">min</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
+  <span class="na">email</span><span class="p">:</span> <span class="nx">z</span><span class="p">.</span><span class="kr">string</span><span class="p">().</span><span class="nx">email</span><span class="p">(),</span>
+  <span class="na">age</span><span class="p">:</span> <span class="nx">z</span><span class="p">.</span><span class="kr">number</span><span class="p">().</span><span class="nx">min</span><span class="p">(</span><span class="mi">18</span><span class="p">).</span><span class="nx">max</span><span class="p">(</span><span class="mi">120</span><span class="p">),</span>
+  <span class="na">createdAt</span><span class="p">:</span> <span class="nx">z</span><span class="p">.</span><span class="nx">date</span><span class="p">().</span><span class="nx">optional</span><span class="p">(),</span>
+<span class="p">});</span>
+
+<span class="c1">// Infer TypeScript type from schema</span>
+<span class="kd">type</span> <span class="nx">User</span> <span class="o">=</span> <span class="nx">z</span><span class="p">.</span><span class="nx">infer</span><span class="o">&lt;</span><span class="k">typeof</span> <span class="nx">UserSchema</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="c1">// Validation functions</span>
+<span class="kd">const</span> <span class="nx">validateUser</span> <span class="o">=</span> <span class="p">(</span><span class="nx">data</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">):</span> <span class="nx">User</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">UserSchema</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">safeValidateUser</span> <span class="o">=</span> <span class="p">(</span><span class="nx">data</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">UserSchema</span><span class="p">.</span><span class="nx">safeParse</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="c1">// Usage</span>
+<span class="k">try</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">user</span> <span class="o">=</span> <span class="nx">validateUser</span><span class="p">({</span>
+    <span class="na">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">John Doe</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">email</span><span class="p">:</span> <span class="dl">'</span><span class="s1">john@example.com</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">age</span><span class="p">:</span> <span class="mi">30</span>
+  <span class="p">});</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Valid user:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">user</span><span class="p">);</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Validation error:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Safe validation</span>
+<span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">safeValidateUser</span><span class="p">(</span><span class="nx">invalidData</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">success</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Valid user:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">result</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Validation errors:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">result</span><span class="p">.</span><span class="nx">error</span><span class="p">.</span><span class="nx">errors</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="advanced-zod-schemas"><strong>Advanced Zod Schemas</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// advanced-zod-schemas.ts</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">z</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">zod</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="c1">// Union types</span>
+<span class="kd">const</span> <span class="nx">StatusSchema</span> <span class="o">=</span> <span class="nx">z</span><span class="p">.</span><span class="kr">enum</span><span class="p">([</span><span class="dl">'</span><span class="s1">pending</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">approved</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">rejected</span><span class="dl">'</span><span class="p">]);</span>
+<span class="kd">type</span> <span class="nx">Status</span> <span class="o">=</span> <span class="nx">z</span><span class="p">.</span><span class="nx">infer</span><span class="o">&lt;</span><span class="k">typeof</span> <span class="nx">StatusSchema</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="c1">// Discriminated unions</span>
+<span class="kd">const</span> <span class="nx">EventSchema</span> <span class="o">=</span> <span class="nx">z</span><span class="p">.</span><span class="nx">discriminatedUnion</span><span class="p">(</span><span class="dl">'</span><span class="s1">type</span><span class="dl">'</span><span class="p">,</span> <span class="p">[</span>
+  <span class="nx">z</span><span class="p">.</span><span class="nx">object</span><span class="p">({</span>
+    <span class="na">type</span><span class="p">:</span> <span class="nx">z</span><span class="p">.</span><span class="nx">literal</span><span class="p">(</span><span class="dl">'</span><span class="s1">user_created</span><span class="dl">'</span><span class="p">),</span>
+    <span class="na">userId</span><span class="p">:</span> <span class="nx">z</span><span class="p">.</span><span class="kr">number</span><span class="p">(),</span>
+    <span class="na">timestamp</span><span class="p">:</span> <span class="nx">z</span><span class="p">.</span><span class="nx">date</span><span class="p">(),</span>
+  <span class="p">}),</span>
+  <span class="nx">z</span><span class="p">.</span><span class="nx">object</span><span class="p">({</span>
+    <span class="na">type</span><span class="p">:</span> <span class="nx">z</span><span class="p">.</span><span class="nx">literal</span><span class="p">(</span><span class="dl">'</span><span class="s1">user_updated</span><span class="dl">'</span><span class="p">),</span>
+    <span class="na">userId</span><span class="p">:</span> <span class="nx">z</span><span class="p">.</span><span class="kr">number</span><span class="p">(),</span>
+    <span class="na">changes</span><span class="p">:</span> <span class="nx">z</span><span class="p">.</span><span class="nx">record</span><span class="p">(</span><span class="nx">z</span><span class="p">.</span><span class="nx">unknown</span><span class="p">()),</span>
+    <span class="na">timestamp</span><span class="p">:</span> <span class="nx">z</span><span class="p">.</span><span class="nx">date</span><span class="p">(),</span>
+  <span class="p">}),</span>
+  <span class="nx">z</span><span class="p">.</span><span class="nx">object</span><span class="p">({</span>
+    <span class="na">type</span><span class="p">:</span> <span class="nx">z</span><span class="p">.</span><span class="nx">literal</span><span class="p">(</span><span class="dl">'</span><span class="s1">user_deleted</span><span class="dl">'</span><span class="p">),</span>
+    <span class="na">userId</span><span class="p">:</span> <span class="nx">z</span><span class="p">.</span><span class="kr">number</span><span class="p">(),</span>
+    <span class="na">timestamp</span><span class="p">:</span> <span class="nx">z</span><span class="p">.</span><span class="nx">date</span><span class="p">(),</span>
+  <span class="p">}),</span>
+<span class="p">]);</span>
+
+<span class="kd">type</span> <span class="nx">Event</span> <span class="o">=</span> <span class="nx">z</span><span class="p">.</span><span class="nx">infer</span><span class="o">&lt;</span><span class="k">typeof</span> <span class="nx">EventSchema</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="c1">// Custom validators</span>
+<span class="kd">const</span> <span class="nx">PasswordSchema</span> <span class="o">=</span> <span class="nx">z</span><span class="p">.</span><span class="kr">string</span><span class="p">()</span>
+  <span class="p">.</span><span class="nx">min</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Password must be at least 8 characters</span><span class="dl">'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">regex</span><span class="p">(</span><span class="sr">/</span><span class="se">[</span><span class="sr">A-Z</span><span class="se">]</span><span class="sr">/</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Password must contain uppercase letter</span><span class="dl">'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">regex</span><span class="p">(</span><span class="sr">/</span><span class="se">[</span><span class="sr">a-z</span><span class="se">]</span><span class="sr">/</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Password must contain lowercase letter</span><span class="dl">'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">regex</span><span class="p">(</span><span class="sr">/</span><span class="se">\d</span><span class="sr">/</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Password must contain number</span><span class="dl">'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">regex</span><span class="p">(</span><span class="sr">/</span><span class="se">[</span><span class="sr">!@#$%^&amp;*(),.?":{}|&lt;&gt;</span><span class="se">]</span><span class="sr">/</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Password must contain special character</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="c1">// Transform and refine</span>
+<span class="kd">const</span> <span class="nx">UserSchema</span> <span class="o">=</span> <span class="nx">z</span><span class="p">.</span><span class="nx">object</span><span class="p">({</span>
+  <span class="na">id</span><span class="p">:</span> <span class="nx">z</span><span class="p">.</span><span class="kr">number</span><span class="p">(),</span>
+  <span class="na">name</span><span class="p">:</span> <span class="nx">z</span><span class="p">.</span><span class="kr">string</span><span class="p">().</span><span class="nx">transform</span><span class="p">(</span><span class="nx">name</span> <span class="o">=&gt;</span> <span class="nx">name</span><span class="p">.</span><span class="nx">trim</span><span class="p">()),</span>
+  <span class="na">email</span><span class="p">:</span> <span class="nx">z</span><span class="p">.</span><span class="kr">string</span><span class="p">().</span><span class="nx">email</span><span class="p">().</span><span class="nx">transform</span><span class="p">(</span><span class="nx">email</span> <span class="o">=&gt;</span> <span class="nx">email</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()),</span>
+  <span class="na">age</span><span class="p">:</span> <span class="nx">z</span><span class="p">.</span><span class="kr">number</span><span class="p">().</span><span class="nx">refine</span><span class="p">(</span><span class="nx">age</span> <span class="o">=&gt;</span> <span class="nx">age</span> <span class="o">&gt;=</span> <span class="mi">18</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Must be at least 18 years old</span><span class="dl">'</span><span class="p">),</span>
+  <span class="na">password</span><span class="p">:</span> <span class="nx">PasswordSchema</span><span class="p">,</span>
+<span class="p">}).</span><span class="nx">refine</span><span class="p">(</span><span class="nx">data</span> <span class="o">=&gt;</span> <span class="nx">data</span><span class="p">.</span><span class="nx">name</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Name cannot be empty</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="c1">// Partial and pick</span>
+<span class="kd">const</span> <span class="nx">CreateUserSchema</span> <span class="o">=</span> <span class="nx">UserSchema</span><span class="p">.</span><span class="nx">omit</span><span class="p">({</span> <span class="na">id</span><span class="p">:</span> <span class="kc">true</span> <span class="p">});</span>
+<span class="kd">const</span> <span class="nx">UpdateUserSchema</span> <span class="o">=</span> <span class="nx">UserSchema</span><span class="p">.</span><span class="nx">partial</span><span class="p">().</span><span class="nx">omit</span><span class="p">({</span> <span class="na">id</span><span class="p">:</span> <span class="kc">true</span> <span class="p">});</span>
+
+<span class="c1">// Array validation</span>
+<span class="kd">const</span> <span class="nx">UserListSchema</span> <span class="o">=</span> <span class="nx">z</span><span class="p">.</span><span class="nx">array</span><span class="p">(</span><span class="nx">UserSchema</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">PaginatedUsersSchema</span> <span class="o">=</span> <span class="nx">z</span><span class="p">.</span><span class="nx">object</span><span class="p">({</span>
+  <span class="na">users</span><span class="p">:</span> <span class="nx">UserListSchema</span><span class="p">,</span>
+  <span class="na">total</span><span class="p">:</span> <span class="nx">z</span><span class="p">.</span><span class="kr">number</span><span class="p">(),</span>
+  <span class="na">page</span><span class="p">:</span> <span class="nx">z</span><span class="p">.</span><span class="kr">number</span><span class="p">(),</span>
+  <span class="na">limit</span><span class="p">:</span> <span class="nx">z</span><span class="p">.</span><span class="kr">number</span><span class="p">(),</span>
+<span class="p">});</span>
+
+<span class="c1">// Usage</span>
+<span class="kd">const</span> <span class="nx">createUser</span> <span class="o">=</span> <span class="p">(</span><span class="nx">data</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">CreateUserSchema</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">updateUser</span> <span class="o">=</span> <span class="p">(</span><span class="nx">data</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">UpdateUserSchema</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">validateUserList</span> <span class="o">=</span> <span class="p">(</span><span class="nx">data</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">UserListSchema</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="io-ts-runtime-validation"><strong>io-ts Runtime Validation</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// io-ts-validation.ts</span>
+<span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">t</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">io-ts</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">isRight</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">fp-ts/Either</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="c1">// Basic types</span>
+<span class="kd">const</span> <span class="nx">UserCodec</span> <span class="o">=</span> <span class="nx">t</span><span class="p">.</span><span class="kd">type</span><span class="p">({</span>
+  <span class="na">id</span><span class="p">:</span> <span class="nx">t</span><span class="p">.</span><span class="kr">number</span><span class="p">,</span>
+  <span class="na">name</span><span class="p">:</span> <span class="nx">t</span><span class="p">.</span><span class="kr">string</span><span class="p">,</span>
+  <span class="na">email</span><span class="p">:</span> <span class="nx">t</span><span class="p">.</span><span class="kr">string</span><span class="p">,</span>
+  <span class="na">age</span><span class="p">:</span> <span class="nx">t</span><span class="p">.</span><span class="kr">number</span><span class="p">,</span>
+<span class="p">});</span>
+
+<span class="c1">// Infer TypeScript type</span>
+<span class="kd">type</span> <span class="nx">User</span> <span class="o">=</span> <span class="nx">t</span><span class="p">.</span><span class="nx">TypeOf</span><span class="o">&lt;</span><span class="k">typeof</span> <span class="nx">UserCodec</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="c1">// Validation</span>
+<span class="kd">const</span> <span class="nx">validateUser</span> <span class="o">=</span> <span class="p">(</span><span class="nx">data</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">):</span> <span class="nx">User</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">UserCodec</span><span class="p">.</span><span class="nx">decode</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">isRight</span><span class="p">(</span><span class="nx">result</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">result</span><span class="p">.</span><span class="nx">right</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Invalid user data</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="c1">// Safe validation</span>
+<span class="kd">const</span> <span class="nx">safeValidateUser</span> <span class="o">=</span> <span class="p">(</span><span class="nx">data</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">UserCodec</span><span class="p">.</span><span class="nx">decode</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="c1">// Usage</span>
+<span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">safeValidateUser</span><span class="p">(</span><span class="nx">userData</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">isRight</span><span class="p">(</span><span class="nx">result</span><span class="p">))</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Valid user:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">result</span><span class="p">.</span><span class="nx">right</span><span class="p">);</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Validation errors:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">result</span><span class="p">.</span><span class="nx">left</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-type-guards-and-assertions">🔒 <strong>Type Guards and Assertions</strong></h2>
+
+<h3 id="basic-type-guards"><strong>Basic Type Guards</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// type-guards.ts</span>
+<span class="kr">interface</span> <span class="nx">User</span> <span class="p">{</span>
+  <span class="nl">id</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span>
+  <span class="nl">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">email</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kr">interface</span> <span class="nx">Admin</span> <span class="p">{</span>
+  <span class="nl">id</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span>
+  <span class="nl">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">email</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">permissions</span><span class="p">:</span> <span class="kr">string</span><span class="p">[];</span>
+<span class="p">}</span>
+
+<span class="c1">// Type guard functions</span>
+<span class="kd">const</span> <span class="nx">isUser</span> <span class="o">=</span> <span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">):</span> <span class="nx">value</span> <span class="k">is</span> <span class="nx">User</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="k">typeof</span> <span class="nx">value</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">object</span><span class="dl">'</span> <span class="o">&amp;&amp;</span>
+    <span class="nx">value</span> <span class="o">!==</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span>
+    <span class="dl">'</span><span class="s1">id</span><span class="dl">'</span> <span class="k">in</span> <span class="nx">value</span> <span class="o">&amp;&amp;</span>
+    <span class="dl">'</span><span class="s1">name</span><span class="dl">'</span> <span class="k">in</span> <span class="nx">value</span> <span class="o">&amp;&amp;</span>
+    <span class="dl">'</span><span class="s1">email</span><span class="dl">'</span> <span class="k">in</span> <span class="nx">value</span> <span class="o">&amp;&amp;</span>
+    <span class="k">typeof</span> <span class="p">(</span><span class="nx">value</span> <span class="k">as</span> <span class="kr">any</span><span class="p">).</span><span class="nx">id</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">number</span><span class="dl">'</span> <span class="o">&amp;&amp;</span>
+    <span class="k">typeof</span> <span class="p">(</span><span class="nx">value</span> <span class="k">as</span> <span class="kr">any</span><span class="p">).</span><span class="nx">name</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">string</span><span class="dl">'</span> <span class="o">&amp;&amp;</span>
+    <span class="k">typeof</span> <span class="p">(</span><span class="nx">value</span> <span class="k">as</span> <span class="kr">any</span><span class="p">).</span><span class="nx">email</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">string</span><span class="dl">'</span>
+  <span class="p">);</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">isAdmin</span> <span class="o">=</span> <span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">):</span> <span class="nx">value</span> <span class="k">is</span> <span class="nx">Admin</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="nx">isUser</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="o">&amp;&amp;</span>
+    <span class="dl">'</span><span class="s1">permissions</span><span class="dl">'</span> <span class="k">in</span> <span class="nx">value</span> <span class="o">&amp;&amp;</span>
+    <span class="nb">Array</span><span class="p">.</span><span class="nx">isArray</span><span class="p">((</span><span class="nx">value</span> <span class="k">as</span> <span class="kr">any</span><span class="p">).</span><span class="nx">permissions</span><span class="p">)</span>
+  <span class="p">);</span>
+<span class="p">};</span>
+
+<span class="c1">// Usage</span>
+<span class="kd">const</span> <span class="nx">processUser</span> <span class="o">=</span> <span class="p">(</span><span class="nx">data</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">isUser</span><span class="p">(</span><span class="nx">data</span><span class="p">))</span> <span class="p">{</span>
+    <span class="c1">// TypeScript knows data is User here</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`User: </span><span class="p">${</span><span class="nx">data</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span><span class="s2"> (</span><span class="p">${</span><span class="nx">data</span><span class="p">.</span><span class="nx">email</span><span class="p">}</span><span class="s2">)`</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">isAdmin</span><span class="p">(</span><span class="nx">data</span><span class="p">))</span> <span class="p">{</span>
+    <span class="c1">// TypeScript knows data is Admin here</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`Admin: </span><span class="p">${</span><span class="nx">data</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span><span class="s2"> with </span><span class="p">${</span><span class="nx">data</span><span class="p">.</span><span class="nx">permissions</span><span class="p">.</span><span class="nx">length</span><span class="p">}</span><span class="s2"> permissions`</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Invalid user data</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="advanced-type-guards"><strong>Advanced Type Guards</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// advanced-type-guards.ts</span>
+<span class="kr">interface</span> <span class="nx">ApiResponse</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="na">success</span><span class="p">:</span> <span class="kc">true</span><span class="p">;</span>
+  <span class="nl">data</span><span class="p">:</span> <span class="nx">T</span><span class="p">;</span>
+<span class="p">}</span> <span class="o">|</span> <span class="p">{</span>
+  <span class="na">success</span><span class="p">:</span> <span class="kc">false</span><span class="p">;</span>
+  <span class="nl">error</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="c1">// Generic type guard</span>
+<span class="kd">const</span> <span class="nx">isApiResponse</span> <span class="o">=</span> <span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">):</span> <span class="nx">value</span> <span class="k">is</span> <span class="nx">ApiResponse</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="k">typeof</span> <span class="nx">value</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">object</span><span class="dl">'</span> <span class="o">&amp;&amp;</span>
+    <span class="nx">value</span> <span class="o">!==</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span>
+    <span class="dl">'</span><span class="s1">success</span><span class="dl">'</span> <span class="k">in</span> <span class="nx">value</span> <span class="o">&amp;&amp;</span>
+    <span class="k">typeof</span> <span class="p">(</span><span class="nx">value</span> <span class="k">as</span> <span class="kr">any</span><span class="p">).</span><span class="nx">success</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">boolean</span><span class="dl">'</span>
+  <span class="p">);</span>
+<span class="p">};</span>
+
+<span class="c1">// Success response type guard</span>
+<span class="kd">const</span> <span class="nx">isSuccessResponse</span> <span class="o">=</span> <span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">response</span><span class="p">:</span> <span class="nx">ApiResponse</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">):</span> <span class="nx">response</span> <span class="k">is</span> <span class="p">{</span> <span class="na">success</span><span class="p">:</span> <span class="kc">true</span><span class="p">;</span> <span class="nl">data</span><span class="p">:</span> <span class="nx">T</span> <span class="p">}</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">response</span><span class="p">.</span><span class="nx">success</span> <span class="o">===</span> <span class="kc">true</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="c1">// Error response type guard</span>
+<span class="kd">const</span> <span class="nx">isErrorResponse</span> <span class="o">=</span> <span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">response</span><span class="p">:</span> <span class="nx">ApiResponse</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">):</span> <span class="nx">response</span> <span class="k">is</span> <span class="p">{</span> <span class="na">success</span><span class="p">:</span> <span class="kc">false</span><span class="p">;</span> <span class="nl">error</span><span class="p">:</span> <span class="kr">string</span> <span class="p">}</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">response</span><span class="p">.</span><span class="nx">success</span> <span class="o">===</span> <span class="kc">false</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="c1">// Usage</span>
+<span class="kd">const</span> <span class="nx">handleApiResponse</span> <span class="o">=</span> <span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">response</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">isApiResponse</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">response</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">isSuccessResponse</span><span class="p">(</span><span class="nx">response</span><span class="p">))</span> <span class="p">{</span>
+      <span class="c1">// TypeScript knows response.data exists</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Success:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">isErrorResponse</span><span class="p">(</span><span class="nx">response</span><span class="p">))</span> <span class="p">{</span>
+      <span class="c1">// TypeScript knows response.error exists</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Error:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">response</span><span class="p">.</span><span class="nx">error</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Invalid API response format</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="type-assertions"><strong>Type Assertions</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// type-assertions.ts</span>
+<span class="kr">interface</span> <span class="nx">User</span> <span class="p">{</span>
+  <span class="nl">id</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span>
+  <span class="nl">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">email</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Type assertion function</span>
+<span class="kd">const</span> <span class="nx">assertIsUser</span> <span class="o">=</span> <span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">):</span> <span class="nx">asserts</span> <span class="nx">value</span> <span class="k">is</span> <span class="nx">User</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">isUser</span><span class="p">(</span><span class="nx">value</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Value is not a valid User</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// Usage</span>
+<span class="kd">const</span> <span class="nx">processUserData</span> <span class="o">=</span> <span class="p">(</span><span class="nx">data</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">assertIsUser</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+  <span class="c1">// TypeScript knows data is User here</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`Processing user: </span><span class="p">${</span><span class="nx">data</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="c1">// Custom assertion with validation</span>
+<span class="kd">const</span> <span class="nx">assertIsValidUser</span> <span class="o">=</span> <span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">):</span> <span class="nx">asserts</span> <span class="nx">value</span> <span class="k">is</span> <span class="nx">User</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">isUser</span><span class="p">(</span><span class="nx">value</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Value is not a valid User</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">}</span>
+  
+  <span class="k">if</span> <span class="p">(</span><span class="nx">value</span><span class="p">.</span><span class="nx">name</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">User name cannot be empty</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">}</span>
+  
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">value</span><span class="p">.</span><span class="nx">email</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="dl">'</span><span class="s1">@</span><span class="dl">'</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">User email must be valid</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-advanced-type-testing">🚀 <strong>Advanced Type Testing</strong></h2>
+
+<h3 id="type-level-testing"><strong>Type-Level Testing</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// type-level-tests.ts</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">expectType</span><span class="p">,</span> <span class="nx">expectError</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">tsd</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="c1">// Test utility types</span>
+<span class="kd">type</span> <span class="nx">TestUtilityTypes</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="c1">// Test Partial</span>
+  <span class="na">partial</span><span class="p">:</span> <span class="nb">Partial</span><span class="o">&lt;</span><span class="p">{</span> <span class="na">a</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span> <span class="nl">b</span><span class="p">:</span> <span class="kr">string</span> <span class="p">}</span><span class="o">&gt;</span><span class="p">;</span>
+  <span class="c1">// Test Required</span>
+  <span class="nl">required</span><span class="p">:</span> <span class="nx">Required</span><span class="o">&lt;</span><span class="p">{</span> <span class="nx">a</span><span class="p">?:</span> <span class="kr">number</span><span class="p">;</span> <span class="nl">b</span><span class="p">?:</span> <span class="kr">string</span> <span class="p">}</span><span class="o">&gt;</span><span class="p">;</span>
+  <span class="c1">// Test Pick</span>
+  <span class="nl">picked</span><span class="p">:</span> <span class="nb">Pick</span><span class="o">&lt;</span><span class="p">{</span> <span class="na">a</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span> <span class="nl">b</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span> <span class="nl">c</span><span class="p">:</span> <span class="nx">boolean</span> <span class="p">},</span> <span class="dl">'</span><span class="s1">a</span><span class="dl">'</span> <span class="o">|</span> <span class="dl">'</span><span class="s1">b</span><span class="dl">'</span><span class="o">&gt;</span><span class="p">;</span>
+  <span class="c1">// Test Omit</span>
+  <span class="nl">omitted</span><span class="p">:</span> <span class="nx">Omit</span><span class="o">&lt;</span><span class="p">{</span> <span class="na">a</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span> <span class="nl">b</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span> <span class="nl">c</span><span class="p">:</span> <span class="nx">boolean</span> <span class="p">},</span> <span class="dl">'</span><span class="s1">c</span><span class="dl">'</span><span class="o">&gt;</span><span class="p">;</span>
+  <span class="c1">// Test Record</span>
+  <span class="nl">record</span><span class="p">:</span> <span class="nb">Record</span><span class="o">&lt;</span><span class="kr">string</span><span class="p">,</span> <span class="kr">number</span><span class="o">&gt;</span><span class="p">;</span>
+  <span class="c1">// Test Exclude</span>
+  <span class="nl">excluded</span><span class="p">:</span> <span class="nx">Exclude</span><span class="o">&lt;</span><span class="dl">'</span><span class="s1">a</span><span class="dl">'</span> <span class="o">|</span> <span class="dl">'</span><span class="s1">b</span><span class="dl">'</span> <span class="o">|</span> <span class="dl">'</span><span class="s1">c</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">b</span><span class="dl">'</span><span class="o">&gt;</span><span class="p">;</span>
+  <span class="c1">// Test Extract</span>
+  <span class="nl">extracted</span><span class="p">:</span> <span class="nx">Extract</span><span class="o">&lt;</span><span class="dl">'</span><span class="s1">a</span><span class="dl">'</span> <span class="o">|</span> <span class="dl">'</span><span class="s1">b</span><span class="dl">'</span> <span class="o">|</span> <span class="dl">'</span><span class="s1">c</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">a</span><span class="dl">'</span> <span class="o">|</span> <span class="dl">'</span><span class="s1">b</span><span class="dl">'</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="c1">// Test conditional types</span>
+<span class="kd">type</span> <span class="nx">TestConditionalTypes</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="c1">// Test conditional type</span>
+  <span class="na">isString</span><span class="p">:</span> <span class="kr">string</span> <span class="kd">extends</span> <span class="kr">string</span> <span class="p">?</span> <span class="kc">true</span> <span class="p">:</span> <span class="kc">false</span><span class="p">;</span>
+  <span class="nl">isNumber</span><span class="p">:</span> <span class="kr">number</span> <span class="kd">extends</span> <span class="kr">string</span> <span class="p">?</span> <span class="kc">true</span> <span class="p">:</span> <span class="kc">false</span><span class="p">;</span>
+  <span class="c1">// Test infer</span>
+  <span class="nl">inferArray</span><span class="p">:</span> <span class="kr">string</span><span class="p">[]</span> <span class="kd">extends</span> <span class="p">(</span><span class="nx">infer</span> <span class="nx">T</span><span class="p">)[]</span> <span class="p">?</span> <span class="nx">T</span> <span class="p">:</span> <span class="nx">never</span><span class="p">;</span>
+  <span class="c1">// Test distributive conditional types</span>
+  <span class="nl">distributive</span><span class="p">:</span> <span class="dl">'</span><span class="s1">a</span><span class="dl">'</span> <span class="o">|</span> <span class="dl">'</span><span class="s1">b</span><span class="dl">'</span> <span class="kd">extends</span> <span class="kr">string</span> <span class="p">?</span> <span class="kc">true</span> <span class="p">:</span> <span class="kc">false</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="c1">// Test mapped types</span>
+<span class="kd">type</span> <span class="nx">TestMappedTypes</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="c1">// Test mapped type</span>
+  <span class="na">readonly</span><span class="p">:</span> <span class="p">{</span> <span class="k">readonly</span> <span class="p">[</span><span class="nx">K</span> <span class="k">in</span> <span class="kr">keyof</span> <span class="p">{</span> <span class="na">a</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span> <span class="nl">b</span><span class="p">:</span> <span class="kr">string</span> <span class="p">}]:</span> <span class="p">{</span> <span class="na">a</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span> <span class="nl">b</span><span class="p">:</span> <span class="kr">string</span> <span class="p">}[</span><span class="nx">K</span><span class="p">]</span> <span class="p">};</span>
+  <span class="c1">// Test key remapping</span>
+  <span class="nl">prefixed</span><span class="p">:</span> <span class="p">{</span> <span class="p">[</span><span class="nx">K</span> <span class="k">in</span> <span class="kr">keyof</span> <span class="p">{</span> <span class="na">a</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span> <span class="nl">b</span><span class="p">:</span> <span class="kr">string</span> <span class="p">}</span> <span class="k">as</span> <span class="s2">`get</span><span class="p">${</span><span class="nx">Capitalize</span><span class="o">&lt;</span><span class="nx">K</span><span class="o">&gt;</span><span class="p">}</span><span class="s2">`</span><span class="p">]:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="na">a</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span> <span class="nl">b</span><span class="p">:</span> <span class="kr">string</span> <span class="p">}[</span><span class="nx">K</span><span class="p">]</span> <span class="p">};</span>
+  <span class="c1">// Test conditional mapped types</span>
+  <span class="nl">conditional</span><span class="p">:</span> <span class="p">{</span> <span class="p">[</span><span class="nx">K</span> <span class="k">in</span> <span class="kr">keyof</span> <span class="p">{</span> <span class="na">a</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span> <span class="nl">b</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span> <span class="nl">c</span><span class="p">:</span> <span class="nx">boolean</span> <span class="p">}]:</span> <span class="p">{</span> <span class="na">a</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span> <span class="nl">b</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span> <span class="nl">c</span><span class="p">:</span> <span class="nx">boolean</span> <span class="p">}[</span><span class="nx">K</span><span class="p">]</span> <span class="kd">extends</span> <span class="kr">string</span> <span class="p">?</span> <span class="kc">true</span> <span class="p">:</span> <span class="kc">false</span> <span class="p">};</span>
+<span class="p">};</span>
+
+<span class="c1">// Test template literal types</span>
+<span class="kd">type</span> <span class="nx">TestTemplateLiterals</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="c1">// Test template literals</span>
+  <span class="na">event</span><span class="p">:</span> <span class="s2">`on</span><span class="p">${</span><span class="nx">Capitalize</span><span class="o">&lt;</span><span class="dl">'</span><span class="s1">click</span><span class="dl">'</span><span class="o">&gt;</span><span class="p">}</span><span class="s2">`</span><span class="p">;</span>
+  <span class="c1">// Test template literal inference</span>
+  <span class="nl">inferTemplate</span><span class="p">:</span> <span class="s2">`on</span><span class="p">${</span><span class="nx">infer</span> <span class="nx">T</span><span class="p">}</span><span class="s2">`</span> <span class="kd">extends</span> <span class="s2">`on</span><span class="p">${</span><span class="kr">string</span><span class="p">}</span><span class="s2">`</span> <span class="p">?</span> <span class="nx">T</span> <span class="p">:</span> <span class="nx">never</span><span class="p">;</span>
+  <span class="c1">// Test template literal unions</span>
+  <span class="nl">union</span><span class="p">:</span> <span class="s2">`on</span><span class="p">${</span><span class="dl">'</span><span class="s1">click</span><span class="dl">'</span> <span class="o">|</span> <span class="dl">'</span><span class="s1">submit</span><span class="dl">'</span> <span class="o">|</span> <span class="dl">'</span><span class="s1">change</span><span class="dl">'</span><span class="p">}</span><span class="s2">`</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="runtime-type-testing"><strong>Runtime Type Testing</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// runtime-type-tests.ts</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">z</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">zod</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="c1">// Test schema validation</span>
+<span class="kd">const</span> <span class="nx">TestSchema</span> <span class="o">=</span> <span class="nx">z</span><span class="p">.</span><span class="nx">object</span><span class="p">({</span>
+  <span class="na">id</span><span class="p">:</span> <span class="nx">z</span><span class="p">.</span><span class="kr">number</span><span class="p">(),</span>
+  <span class="na">name</span><span class="p">:</span> <span class="nx">z</span><span class="p">.</span><span class="kr">string</span><span class="p">(),</span>
+  <span class="na">email</span><span class="p">:</span> <span class="nx">z</span><span class="p">.</span><span class="kr">string</span><span class="p">().</span><span class="nx">email</span><span class="p">(),</span>
+<span class="p">});</span>
+
+<span class="c1">// Test valid data</span>
+<span class="kd">const</span> <span class="nx">validData</span> <span class="o">=</span> <span class="p">{</span> <span class="na">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">John</span><span class="dl">'</span><span class="p">,</span> <span class="na">email</span><span class="p">:</span> <span class="dl">'</span><span class="s1">john@example.com</span><span class="dl">'</span> <span class="p">};</span>
+<span class="kd">const</span> <span class="nx">validResult</span> <span class="o">=</span> <span class="nx">TestSchema</span><span class="p">.</span><span class="nx">safeParse</span><span class="p">(</span><span class="nx">validData</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">assert</span><span class="p">(</span><span class="nx">validResult</span><span class="p">.</span><span class="nx">success</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Valid data should pass validation</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="c1">// Test invalid data</span>
+<span class="kd">const</span> <span class="nx">invalidData</span> <span class="o">=</span> <span class="p">{</span> <span class="na">id</span><span class="p">:</span> <span class="dl">'</span><span class="s1">1</span><span class="dl">'</span><span class="p">,</span> <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">John</span><span class="dl">'</span><span class="p">,</span> <span class="na">email</span><span class="p">:</span> <span class="dl">'</span><span class="s1">invalid-email</span><span class="dl">'</span> <span class="p">};</span>
+<span class="kd">const</span> <span class="nx">invalidResult</span> <span class="o">=</span> <span class="nx">TestSchema</span><span class="p">.</span><span class="nx">safeParse</span><span class="p">(</span><span class="nx">invalidData</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">assert</span><span class="p">(</span><span class="o">!</span><span class="nx">invalidResult</span><span class="p">.</span><span class="nx">success</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Invalid data should fail validation</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="c1">// Test type inference</span>
+<span class="kd">type</span> <span class="nx">InferredType</span> <span class="o">=</span> <span class="nx">z</span><span class="p">.</span><span class="nx">infer</span><span class="o">&lt;</span><span class="k">typeof</span> <span class="nx">TestSchema</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">testType</span><span class="p">:</span> <span class="nx">InferredType</span> <span class="o">=</span> <span class="p">{</span> <span class="na">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">John</span><span class="dl">'</span><span class="p">,</span> <span class="na">email</span><span class="p">:</span> <span class="dl">'</span><span class="s1">john@example.com</span><span class="dl">'</span> <span class="p">};</span>
+
+<span class="c1">// Test runtime type checking</span>
+<span class="kd">const</span> <span class="nx">isTestType</span> <span class="o">=</span> <span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">):</span> <span class="nx">value</span> <span class="k">is</span> <span class="nx">InferredType</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">TestSchema</span><span class="p">.</span><span class="nx">safeParse</span><span class="p">(</span><span class="nx">value</span><span class="p">).</span><span class="nx">success</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">assert</span><span class="p">(</span><span class="nx">isTestType</span><span class="p">(</span><span class="nx">validData</span><span class="p">),</span> <span class="dl">'</span><span class="s1">Valid data should pass type check</span><span class="dl">'</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">assert</span><span class="p">(</span><span class="o">!</span><span class="nx">isTestType</span><span class="p">(</span><span class="nx">invalidData</span><span class="p">),</span> <span class="dl">'</span><span class="s1">Invalid data should fail type check</span><span class="dl">'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-best-practices">✅ <strong>Best Practices</strong></h2>
+
+<h3 id="1-use-type-testing-for-critical-types"><strong>1. Use Type Testing for Critical Types</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ✅ Good: Test critical types</span>
+<span class="kd">type</span> <span class="nx">ApiResponse</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">success</span><span class="p">:</span> <span class="kc">true</span><span class="p">;</span>
+  <span class="nl">data</span><span class="p">:</span> <span class="nx">T</span><span class="p">;</span>
+<span class="p">}</span> <span class="o">|</span> <span class="p">{</span>
+  <span class="na">success</span><span class="p">:</span> <span class="kc">false</span><span class="p">;</span>
+  <span class="nl">error</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="c1">// Test the type</span>
+<span class="nx">expectType</span><span class="o">&lt;</span><span class="nx">ApiResponse</span><span class="o">&lt;</span><span class="kr">string</span><span class="o">&gt;&gt;</span><span class="p">({</span> <span class="na">success</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="na">data</span><span class="p">:</span> <span class="dl">'</span><span class="s1">hello</span><span class="dl">'</span> <span class="p">});</span>
+<span class="nx">expectType</span><span class="o">&lt;</span><span class="nx">ApiResponse</span><span class="o">&lt;</span><span class="kr">string</span><span class="o">&gt;&gt;</span><span class="p">({</span> <span class="na">success</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> <span class="na">error</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Not found</span><span class="dl">'</span> <span class="p">});</span>
+
+<span class="c1">// ❌ Avoid: Not testing complex types</span>
+<span class="kd">type</span> <span class="nx">ComplexType</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="c1">// Complex type without testing</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="2-use-runtime-validation-for-external-data"><strong>2. Use Runtime Validation for External Data</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ✅ Good: Validate external data</span>
+<span class="kd">const</span> <span class="nx">validateApiResponse</span> <span class="o">=</span> <span class="p">(</span><span class="nx">data</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">):</span> <span class="nx">ApiResponse</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">ApiResponseSchema</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="c1">// ❌ Avoid: Trusting external data</span>
+<span class="kd">const</span> <span class="nx">processApiResponse</span> <span class="o">=</span> <span class="p">(</span><span class="nx">data</span><span class="p">:</span> <span class="kr">any</span><span class="p">):</span> <span class="nx">User</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">data</span><span class="p">.</span><span class="nx">data</span><span class="p">;</span> <span class="c1">// Unsafe!</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="3-use-type-guards-for-runtime-safety"><strong>3. Use Type Guards for Runtime Safety</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ✅ Good: Use type guards</span>
+<span class="kd">const</span> <span class="nx">isUser</span> <span class="o">=</span> <span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">):</span> <span class="nx">value</span> <span class="k">is</span> <span class="nx">User</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="k">typeof</span> <span class="nx">value</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">object</span><span class="dl">'</span> <span class="o">&amp;&amp;</span> <span class="nx">value</span> <span class="o">!==</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="dl">'</span><span class="s1">id</span><span class="dl">'</span> <span class="k">in</span> <span class="nx">value</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nx">isUser</span><span class="p">(</span><span class="nx">data</span><span class="p">))</span> <span class="p">{</span>
+  <span class="c1">// Safe to use data as User</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// ❌ Avoid: Type assertions without validation</span>
+<span class="kd">const</span> <span class="nx">user</span> <span class="o">=</span> <span class="nx">data</span> <span class="k">as</span> <span class="nx">User</span><span class="p">;</span> <span class="c1">// Unsafe!</span>
+</code></pre></div></div>
+
+<h3 id="4-test-type-transformations"><strong>4. Test Type Transformations</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ✅ Good: Test type transformations</span>
+<span class="kd">type</span> <span class="nx">Original</span> <span class="o">=</span> <span class="p">{</span> <span class="na">a</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span> <span class="nl">b</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span> <span class="nl">c</span><span class="p">:</span> <span class="nx">boolean</span> <span class="p">};</span>
+<span class="kd">type</span> <span class="nx">Transformed</span> <span class="o">=</span> <span class="nb">Pick</span><span class="o">&lt;</span><span class="nx">Original</span><span class="p">,</span> <span class="dl">'</span><span class="s1">a</span><span class="dl">'</span> <span class="o">|</span> <span class="dl">'</span><span class="s1">b</span><span class="dl">'</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="nx">expectType</span><span class="o">&lt;</span><span class="nx">Transformed</span><span class="o">&gt;</span><span class="p">({</span> <span class="na">a</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">b</span><span class="p">:</span> <span class="dl">'</span><span class="s1">hello</span><span class="dl">'</span> <span class="p">});</span>
+
+<span class="c1">// ❌ Avoid: Not testing type transformations</span>
+<span class="kd">type</span> <span class="nx">UntestedTransformation</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="c1">// Complex transformation without testing</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-common-interview-questions">❓ <strong>Common Interview Questions</strong></h2>
+
+<h3 id="1-whats-the-difference-between-compile-time-and-runtime-type-checking"><strong>1. What’s the difference between compile-time and runtime type checking?</strong></h3>
+
+<p><strong>Answer:</strong></p>
+<ul>
+  <li><strong>Compile-time</strong>: TypeScript checks types during compilation</li>
+  <li><strong>Runtime</strong>: JavaScript has no type checking, need validation libraries</li>
+  <li><strong>Compile-time</strong>: Catches errors before deployment</li>
+  <li><strong>Runtime</strong>: Validates data from external sources</li>
+</ul>
+
+<h3 id="2-how-do-you-test-typescript-types"><strong>2. How do you test TypeScript types?</strong></h3>
+
+<p><strong>Answer:</strong></p>
+<ul>
+  <li>Use <code class="language-plaintext highlighter-rouge">tsd</code> or <code class="language-plaintext highlighter-rouge">dtslint</code> for type definition testing</li>
+  <li>Use <code class="language-plaintext highlighter-rouge">expectType</code> and <code class="language-plaintext highlighter-rouge">expectError</code> for type testing</li>
+  <li>Test utility types and conditional types</li>
+  <li>Validate type transformations</li>
+</ul>
+
+<h3 id="3-what-are-type-guards-and-when-do-you-use-them"><strong>3. What are type guards and when do you use them?</strong></h3>
+
+<p><strong>Answer:</strong>
+Type guards are functions that narrow types at runtime:</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">isString</span> <span class="o">=</span> <span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">):</span> <span class="nx">value</span> <span class="k">is</span> <span class="kr">string</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="k">typeof</span> <span class="nx">value</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">string</span><span class="dl">'</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>Use them for runtime type checking and validation.</p>
+
+<h3 id="4-how-do-you-validate-external-data-in-typescript"><strong>4. How do you validate external data in TypeScript?</strong></h3>
+
+<p><strong>Answer:</strong></p>
+<ul>
+  <li>Use schema validation libraries like Zod or io-ts</li>
+  <li>Create type guards for runtime validation</li>
+  <li>Use type assertions with validation</li>
+  <li>Implement proper error handling</li>
+</ul>
+
+<h3 id="5-whats-the-difference-between-type-assertions-and-type-guards"><strong>5. What’s the difference between type assertions and type guards?</strong></h3>
+
+<p><strong>Answer:</strong></p>
+<ul>
+  <li><strong>Type assertions</strong>: Tell TypeScript the type without runtime checking</li>
+  <li><strong>Type guards</strong>: Check types at runtime and narrow the type</li>
+  <li><strong>Type assertions</strong>: <code class="language-plaintext highlighter-rouge">value as Type</code> (unsafe)</li>
+  <li><strong>Type guards</strong>: <code class="language-plaintext highlighter-rouge">value is Type</code> (safe)</li>
+</ul>
+
+<hr />
+
+<h2 id="-navigation">🧭 Navigation</h2>
+
+<div class="navigation">
+  <a href="01-Unit-Testing-TypeScript.md" class="nav-button">← Previous: Unit Testing with TypeScript</a>
+  <a href="03-Code-Quality-Linting.md" class="nav-button">Next: Code Quality &amp; Linting →</a>
+</div>
+
+<p><em>Last updated: December 2025</em></p>
+
+        </main>
+        
+        <footer style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #ecf0f1; color: #666; text-align: center;">
+            <p>Interview Prep Documentation - Built with Jekyll</p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,1428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔄 Error Recovery Strategies - Interview Prep Documentation</title>
+    <meta name="description" content="Comprehensive guides for JavaScript, TypeScript, and React Native interview preparation">
+    
+    <!-- GitHub Pages compatible styling -->
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+        }
+        
+        .container {
+            max-width: 100%;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            color: #2c3e50;
+            margin-top: 2em;
+            margin-bottom: 1em;
+        }
+        
+        h1 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            border-bottom: 1px solid #ecf0f1;
+            padding-bottom: 5px;
+        }
+        
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border-left: 4px solid #3498db;
+        }
+        
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+        
+        blockquote {
+            border-left: 4px solid #3498db;
+            margin: 0;
+            padding-left: 20px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1em 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .navigation {
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px 0;
+            margin-bottom: 20px;
+        }
+        
+        .navigation a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+        
+        .navigation a:hover {
+            text-decoration: underline;
+        }
+        
+        .breadcrumb {
+            margin-bottom: 20px;
+            color: #666;
+        }
+        
+        .breadcrumb a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            h2 {
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="navigation">
+            <a href="/">Home</a>
+            <a href="/Javascript/">JavaScript</a>
+            <a href="/TypeScript/">TypeScript</a>
+            <a href="/React-Native/">React Native</a>
+        </nav>
+        
+        
+        
+        <main>
+            <h1 id="-error-recovery-strategies">🔄 <strong>Error Recovery Strategies</strong></h1>
+
+<blockquote>
+  <p><strong>Master error recovery strategies, resilience patterns, and fault tolerance for React Native applications</strong></p>
+</blockquote>
+
+<link rel="stylesheet" href="../../common-styles.css" />
+
+<hr />
+
+<h2 id="-table-of-contents">📚 <strong>Table of Contents</strong></h2>
+
+<ul>
+  <li><a href="#-error-recovery-overview">Error Recovery Overview</a></li>
+  <li><a href="#-resilience-patterns">Resilience Patterns</a></li>
+  <li><a href="#-fault-tolerance">Fault Tolerance</a></li>
+  <li><a href="#-recovery-mechanisms">Recovery Mechanisms</a></li>
+  <li><a href="#-monitoring-and-alerting">Monitoring and Alerting</a></li>
+  <li><a href="#-best-practices">Best Practices</a></li>
+  <li><a href="#-interview-questions">Interview Questions</a></li>
+</ul>
+
+<hr />
+
+<h2 id="-error-recovery-overview">🔄 <strong>Error Recovery Overview</strong></h2>
+
+<h3 id="recovery-strategy-architecture"><strong>Recovery Strategy Architecture</strong></h3>
+
+<pre><code class="language-mermaid">graph TD
+    A[Error Occurs] --&gt; B[Error Detection]
+    B --&gt; C[Error Classification]
+    C --&gt; D[Recovery Strategy]
+    D --&gt; E[Retry Mechanism]
+    D --&gt; F[Fallback Strategy]
+    D --&gt; G[Circuit Breaker]
+    E --&gt; H[Success]
+    F --&gt; H
+    G --&gt; H
+    H --&gt; I[Monitor &amp; Learn]
+</code></pre>
+
+<h3 id="recovery-principles"><strong>Recovery Principles</strong></h3>
+<ul>
+  <li><strong>Fail Fast</strong>: Detect errors quickly</li>
+  <li><strong>Fail Safe</strong>: Provide fallback mechanisms</li>
+  <li><strong>Self-Healing</strong>: Automatically recover from errors</li>
+  <li><strong>Graceful Degradation</strong>: Maintain partial functionality</li>
+</ul>
+
+<hr />
+
+<h2 id="️-resilience-patterns">🛡️ <strong>Resilience Patterns</strong></h2>
+
+<h3 id="circuit-breaker-pattern"><strong>Circuit Breaker Pattern</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useState</span><span class="p">,</span> <span class="nx">useCallback</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">View</span><span class="p">,</span> <span class="nx">Text</span><span class="p">,</span> <span class="nx">TouchableOpacity</span><span class="p">,</span> <span class="nx">StyleSheet</span><span class="p">,</span> <span class="nx">Alert</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="c1">// Circuit breaker implementation</span>
+<span class="kd">const</span> <span class="nx">CircuitBreaker</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">create</span><span class="p">:</span> <span class="p">(</span><span class="nx">fn</span><span class="p">,</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="p">{</span>
+      <span class="nx">failureThreshold</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
+      <span class="nx">timeout</span> <span class="o">=</span> <span class="mi">60000</span><span class="p">,</span>
+      <span class="nx">resetTimeout</span> <span class="o">=</span> <span class="mi">30000</span>
+    <span class="p">}</span> <span class="o">=</span> <span class="nx">options</span><span class="p">;</span>
+
+    <span class="kd">let</span> <span class="nx">state</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">CLOSED</span><span class="dl">'</span><span class="p">;</span> <span class="c1">// CLOSED, OPEN, HALF_OPEN</span>
+    <span class="kd">let</span> <span class="nx">failureCount</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kd">let</span> <span class="nx">lastFailureTime</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+    <span class="kd">let</span> <span class="nx">nextAttemptTime</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="p">{</span>
+      <span class="k">async</span> <span class="nx">execute</span><span class="p">(...</span><span class="nx">args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// Check if circuit is open</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">state</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">OPEN</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">if</span> <span class="p">(</span><span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">()</span> <span class="o">&lt;</span> <span class="nx">nextAttemptTime</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Circuit breaker is OPEN</span><span class="dl">'</span><span class="p">);</span>
+          <span class="p">}</span>
+          <span class="nx">state</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">HALF_OPEN</span><span class="dl">'</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">try</span> <span class="p">{</span>
+          <span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fn</span><span class="p">(...</span><span class="nx">args</span><span class="p">);</span>
+          
+          <span class="c1">// Success - reset failure count and close circuit</span>
+          <span class="k">if</span> <span class="p">(</span><span class="nx">state</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">HALF_OPEN</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">state</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">CLOSED</span><span class="dl">'</span><span class="p">;</span>
+            <span class="nx">failureCount</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+          <span class="p">}</span>
+          
+          <span class="k">return</span> <span class="nx">result</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">failureCount</span><span class="o">++</span><span class="p">;</span>
+          <span class="nx">lastFailureTime</span> <span class="o">=</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
+          
+          <span class="c1">// Check if we should open the circuit</span>
+          <span class="k">if</span> <span class="p">(</span><span class="nx">failureCount</span> <span class="o">&gt;=</span> <span class="nx">failureThreshold</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">state</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">OPEN</span><span class="dl">'</span><span class="p">;</span>
+            <span class="nx">nextAttemptTime</span> <span class="o">=</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">()</span> <span class="o">+</span> <span class="nx">resetTimeout</span><span class="p">;</span>
+          <span class="p">}</span>
+          
+          <span class="k">throw</span> <span class="nx">error</span><span class="p">;</span>
+        <span class="p">}</span>
+      <span class="p">},</span>
+      
+      <span class="nx">getState</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">{</span>
+          <span class="nx">state</span><span class="p">,</span>
+          <span class="nx">failureCount</span><span class="p">,</span>
+          <span class="nx">lastFailureTime</span><span class="p">,</span>
+          <span class="nx">nextAttemptTime</span>
+        <span class="p">};</span>
+      <span class="p">},</span>
+      
+      <span class="nx">reset</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">state</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">CLOSED</span><span class="dl">'</span><span class="p">;</span>
+        <span class="nx">failureCount</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="nx">lastFailureTime</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+        <span class="nx">nextAttemptTime</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">};</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// Bulkhead pattern</span>
+<span class="kd">const</span> <span class="nx">Bulkhead</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">create</span><span class="p">:</span> <span class="p">(</span><span class="nx">fn</span><span class="p">,</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="p">{</span>
+      <span class="nx">maxConcurrent</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+      <span class="nx">timeout</span> <span class="o">=</span> <span class="mi">5000</span>
+    <span class="p">}</span> <span class="o">=</span> <span class="nx">options</span><span class="p">;</span>
+
+    <span class="kd">let</span> <span class="nx">activeRequests</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kd">const</span> <span class="nx">queue</span> <span class="o">=</span> <span class="p">[];</span>
+
+    <span class="k">return</span> <span class="p">{</span>
+      <span class="k">async</span> <span class="nx">execute</span><span class="p">(...</span><span class="nx">args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+          <span class="kd">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">args</span><span class="p">,</span> <span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">,</span> <span class="na">timestamp</span><span class="p">:</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">()</span> <span class="p">};</span>
+          
+          <span class="k">if</span> <span class="p">(</span><span class="nx">activeRequests</span> <span class="o">&lt;</span> <span class="nx">maxConcurrent</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">processRequest</span><span class="p">(</span><span class="nx">request</span><span class="p">);</span>
+          <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="nx">queue</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">request</span><span class="p">);</span>
+          <span class="p">}</span>
+        <span class="p">});</span>
+      <span class="p">},</span>
+      
+      <span class="k">async</span> <span class="nx">processRequest</span><span class="p">(</span><span class="nx">request</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">activeRequests</span><span class="o">++</span><span class="p">;</span>
+        
+        <span class="k">try</span> <span class="p">{</span>
+          <span class="kd">const</span> <span class="nx">timeoutPromise</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">_</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="o">=&gt;</span> 
+            <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nx">reject</span><span class="p">(</span><span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Request timeout</span><span class="dl">'</span><span class="p">)),</span> <span class="nx">timeout</span><span class="p">)</span>
+          <span class="p">);</span>
+          
+          <span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">race</span><span class="p">([</span>
+            <span class="nx">fn</span><span class="p">(...</span><span class="nx">request</span><span class="p">.</span><span class="nx">args</span><span class="p">),</span>
+            <span class="nx">timeoutPromise</span>
+          <span class="p">]);</span>
+          
+          <span class="nx">request</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
+        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">request</span><span class="p">.</span><span class="nx">reject</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
+        <span class="p">}</span> <span class="k">finally</span> <span class="p">{</span>
+          <span class="nx">activeRequests</span><span class="o">--</span><span class="p">;</span>
+          
+          <span class="c1">// Process next request in queue</span>
+          <span class="k">if</span> <span class="p">(</span><span class="nx">queue</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kd">const</span> <span class="nx">nextRequest</span> <span class="o">=</span> <span class="nx">queue</span><span class="p">.</span><span class="nx">shift</span><span class="p">();</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">processRequest</span><span class="p">(</span><span class="nx">nextRequest</span><span class="p">);</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+      <span class="p">},</span>
+      
+      <span class="nx">getStats</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">{</span>
+          <span class="nx">activeRequests</span><span class="p">,</span>
+          <span class="na">queuedRequests</span><span class="p">:</span> <span class="nx">queue</span><span class="p">.</span><span class="nx">length</span><span class="p">,</span>
+          <span class="nx">maxConcurrent</span>
+        <span class="p">};</span>
+      <span class="p">}</span>
+    <span class="p">};</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// Timeout pattern</span>
+<span class="kd">const</span> <span class="nx">Timeout</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">create</span><span class="p">:</span> <span class="p">(</span><span class="nx">fn</span><span class="p">,</span> <span class="nx">timeoutMs</span> <span class="o">=</span> <span class="mi">5000</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">{</span>
+      <span class="k">async</span> <span class="nx">execute</span><span class="p">(...</span><span class="nx">args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">timeoutPromise</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">_</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="o">=&gt;</span> 
+          <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nx">reject</span><span class="p">(</span><span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Operation timeout</span><span class="dl">'</span><span class="p">)),</span> <span class="nx">timeoutMs</span><span class="p">)</span>
+        <span class="p">);</span>
+        
+        <span class="k">return</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">race</span><span class="p">([</span>
+          <span class="nx">fn</span><span class="p">(...</span><span class="nx">args</span><span class="p">),</span>
+          <span class="nx">timeoutPromise</span>
+        <span class="p">]);</span>
+      <span class="p">}</span>
+    <span class="p">};</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// Resilience patterns demo component</span>
+<span class="kd">const</span> <span class="nx">ResiliencePatternsDemo</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">loading</span><span class="p">,</span> <span class="nx">setLoading</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">result</span><span class="p">,</span> <span class="nx">setResult</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">error</span><span class="p">,</span> <span class="nx">setError</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">circuitState</span><span class="p">,</span> <span class="nx">setCircuitState</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+
+  <span class="c1">// Simulate API call that might fail</span>
+  <span class="kd">const</span> <span class="nx">simulateAPICall</span> <span class="o">=</span> <span class="k">async</span> <span class="p">(</span><span class="nx">shouldFail</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span> <span class="nx">delay</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">await</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="nx">resolve</span> <span class="o">=&gt;</span> <span class="nx">setTimeout</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">delay</span><span class="p">));</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="nx">shouldFail</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">API call failed</span><span class="dl">'</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="p">{</span> <span class="na">data</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Success!</span><span class="dl">'</span><span class="p">,</span> <span class="na">timestamp</span><span class="p">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">toISOString</span><span class="p">()</span> <span class="p">};</span>
+  <span class="p">};</span>
+
+  <span class="c1">// Circuit breaker demo</span>
+  <span class="kd">const</span> <span class="nx">circuitBreaker</span> <span class="o">=</span> <span class="nx">CircuitBreaker</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span>
+    <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">simulateAPICall</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mf">0.3</span><span class="p">),</span> <span class="c1">// 70% success rate</span>
+    <span class="p">{</span> <span class="na">failureThreshold</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="na">resetTimeout</span><span class="p">:</span> <span class="mi">5000</span> <span class="p">}</span>
+  <span class="p">);</span>
+
+  <span class="kd">const</span> <span class="nx">handleCircuitBreaker</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setLoading</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+    <span class="nx">setError</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+    
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">circuitBreaker</span><span class="p">.</span><span class="nx">execute</span><span class="p">();</span>
+      <span class="nx">setResult</span><span class="p">({</span> <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">circuit-breaker</span><span class="dl">'</span><span class="p">,</span> <span class="na">data</span><span class="p">:</span> <span class="nx">result</span> <span class="p">});</span>
+      <span class="nx">setCircuitState</span><span class="p">(</span><span class="nx">circuitBreaker</span><span class="p">.</span><span class="nx">getState</span><span class="p">());</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">setError</span><span class="p">(</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+      <span class="nx">setCircuitState</span><span class="p">(</span><span class="nx">circuitBreaker</span><span class="p">.</span><span class="nx">getState</span><span class="p">());</span>
+    <span class="p">}</span> <span class="k">finally</span> <span class="p">{</span>
+      <span class="nx">setLoading</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+
+  <span class="c1">// Bulkhead demo</span>
+  <span class="kd">const</span> <span class="nx">bulkhead</span> <span class="o">=</span> <span class="nx">Bulkhead</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span>
+    <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">simulateAPICall</span><span class="p">(</span><span class="kc">false</span><span class="p">,</span> <span class="mi">2000</span><span class="p">),</span>
+    <span class="p">{</span> <span class="na">maxConcurrent</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="na">timeout</span><span class="p">:</span> <span class="mi">5000</span> <span class="p">}</span>
+  <span class="p">);</span>
+
+  <span class="kd">const</span> <span class="nx">handleBulkhead</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setLoading</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+    <span class="nx">setError</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+    
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">promises</span> <span class="o">=</span> <span class="nb">Array</span><span class="p">.</span><span class="k">from</span><span class="p">({</span> <span class="na">length</span><span class="p">:</span> <span class="mi">5</span> <span class="p">},</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">bulkhead</span><span class="p">.</span><span class="nx">execute</span><span class="p">());</span>
+      <span class="kd">const</span> <span class="nx">results</span> <span class="o">=</span> <span class="k">await</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">allSettled</span><span class="p">(</span><span class="nx">promises</span><span class="p">);</span>
+      
+      <span class="nx">setResult</span><span class="p">({</span> 
+        <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">bulkhead</span><span class="dl">'</span><span class="p">,</span> 
+        <span class="na">data</span><span class="p">:</span> <span class="nx">results</span><span class="p">,</span>
+        <span class="na">stats</span><span class="p">:</span> <span class="nx">bulkhead</span><span class="p">.</span><span class="nx">getStats</span><span class="p">()</span>
+      <span class="p">});</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">setError</span><span class="p">(</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">finally</span> <span class="p">{</span>
+      <span class="nx">setLoading</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+
+  <span class="c1">// Timeout demo</span>
+  <span class="kd">const</span> <span class="nx">timeout</span> <span class="o">=</span> <span class="nx">Timeout</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span>
+    <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">simulateAPICall</span><span class="p">(</span><span class="kc">false</span><span class="p">,</span> <span class="mi">3000</span><span class="p">),</span>
+    <span class="mi">2000</span> <span class="c1">// 2 second timeout</span>
+  <span class="p">);</span>
+
+  <span class="kd">const</span> <span class="nx">handleTimeout</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setLoading</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+    <span class="nx">setError</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+    
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">timeout</span><span class="p">.</span><span class="nx">execute</span><span class="p">();</span>
+      <span class="nx">setResult</span><span class="p">({</span> <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">timeout</span><span class="dl">'</span><span class="p">,</span> <span class="na">data</span><span class="p">:</span> <span class="nx">result</span> <span class="p">});</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">setError</span><span class="p">(</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">finally</span> <span class="p">{</span>
+      <span class="nx">setLoading</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+
+  <span class="c1">// Reset circuit breaker</span>
+  <span class="kd">const</span> <span class="nx">handleResetCircuitBreaker</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">circuitBreaker</span><span class="p">.</span><span class="nx">reset</span><span class="p">();</span>
+    <span class="nx">setCircuitState</span><span class="p">(</span><span class="nx">circuitBreaker</span><span class="p">.</span><span class="nx">getState</span><span class="p">());</span>
+    <span class="nx">setError</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+    <span class="nx">setResult</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+  <span class="p">};</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">container</span><span class="p">}</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">title</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Resilience</span> <span class="nx">Patterns</span> <span class="nx">Demo</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>      
+      <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">buttonContainer</span><span class="p">}</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">TouchableOpacity</span> 
+          <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">button</span><span class="p">}</span>
+          <span class="nx">onPress</span><span class="o">=</span><span class="p">{</span><span class="nx">handleCircuitBreaker</span><span class="p">}</span>
+          <span class="nx">disabled</span><span class="o">=</span><span class="p">{</span><span class="nx">loading</span><span class="p">}</span>
+        <span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">buttonText</span><span class="p">}</span><span class="o">&gt;</span>
+            <span class="p">{</span><span class="nx">loading</span> <span class="p">?</span> <span class="dl">'</span><span class="s1">Loading...</span><span class="dl">'</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">Circuit Breaker</span><span class="dl">'</span><span class="p">}</span>
+          <span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/TouchableOpacity</span><span class="err">&gt;
+</span>
+        <span class="o">&lt;</span><span class="nx">TouchableOpacity</span> 
+          <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">button</span><span class="p">}</span>
+          <span class="nx">onPress</span><span class="o">=</span><span class="p">{</span><span class="nx">handleBulkhead</span><span class="p">}</span>
+          <span class="nx">disabled</span><span class="o">=</span><span class="p">{</span><span class="nx">loading</span><span class="p">}</span>
+        <span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">buttonText</span><span class="p">}</span><span class="o">&gt;</span>
+            <span class="p">{</span><span class="nx">loading</span> <span class="p">?</span> <span class="dl">'</span><span class="s1">Loading...</span><span class="dl">'</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">Bulkhead</span><span class="dl">'</span><span class="p">}</span>
+          <span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/TouchableOpacity</span><span class="err">&gt;
+</span>
+        <span class="o">&lt;</span><span class="nx">TouchableOpacity</span> 
+          <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">button</span><span class="p">}</span>
+          <span class="nx">onPress</span><span class="o">=</span><span class="p">{</span><span class="nx">handleTimeout</span><span class="p">}</span>
+          <span class="nx">disabled</span><span class="o">=</span><span class="p">{</span><span class="nx">loading</span><span class="p">}</span>
+        <span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">buttonText</span><span class="p">}</span><span class="o">&gt;</span>
+            <span class="p">{</span><span class="nx">loading</span> <span class="p">?</span> <span class="dl">'</span><span class="s1">Loading...</span><span class="dl">'</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">Timeout</span><span class="dl">'</span><span class="p">}</span>
+          <span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/TouchableOpacity</span><span class="err">&gt;
+</span>
+        <span class="o">&lt;</span><span class="nx">TouchableOpacity</span> 
+          <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">resetButton</span><span class="p">}</span>
+          <span class="nx">onPress</span><span class="o">=</span><span class="p">{</span><span class="nx">handleResetCircuitBreaker</span><span class="p">}</span>
+        <span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">buttonText</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Reset</span> <span class="nx">Circuit</span> <span class="nx">Breaker</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/TouchableOpacity</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>
+      <span class="p">{</span><span class="nx">circuitState</span> <span class="o">&amp;&amp;</span> <span class="p">(</span>
+        <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">stateContainer</span><span class="p">}</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">stateTitle</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Circuit</span> <span class="nx">Breaker</span> <span class="na">State</span><span class="p">:</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>          <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">stateText</span><span class="p">}</span><span class="o">&gt;</span><span class="na">State</span><span class="p">:</span> <span class="p">{</span><span class="nx">circuitState</span><span class="p">.</span><span class="nx">state</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>          <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">stateText</span><span class="p">}</span><span class="o">&gt;</span><span class="na">Failures</span><span class="p">:</span> <span class="p">{</span><span class="nx">circuitState</span><span class="p">.</span><span class="nx">failureCount</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>          <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">stateText</span><span class="p">}</span><span class="o">&gt;</span>
+            <span class="nx">Next</span> <span class="na">Attempt</span><span class="p">:</span> <span class="p">{</span><span class="nx">circuitState</span><span class="p">.</span><span class="nx">nextAttemptTime</span> <span class="p">?</span> 
+              <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="nx">circuitState</span><span class="p">.</span><span class="nx">nextAttemptTime</span><span class="p">).</span><span class="nx">toLocaleTimeString</span><span class="p">()</span> <span class="p">:</span> 
+              <span class="dl">'</span><span class="s1">N/A</span><span class="dl">'</span>
+            <span class="p">}</span>
+          <span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>      <span class="p">)}</span>
+
+      <span class="p">{</span><span class="nx">result</span> <span class="o">&amp;&amp;</span> <span class="p">(</span>
+        <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">resultContainer</span><span class="p">}</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">resultTitle</span><span class="p">}</span><span class="o">&gt;</span><span class="na">Result</span><span class="p">:</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>          <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">resultText</span><span class="p">}</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">result</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="mi">2</span><span class="p">)}</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>      <span class="p">)}</span>
+
+      <span class="p">{</span><span class="nx">error</span> <span class="o">&amp;&amp;</span> <span class="p">(</span>
+        <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">errorContainer</span><span class="p">}</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">errorText</span><span class="p">}</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">error</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>      <span class="p">)}</span>
+    <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">styles</span> <span class="o">=</span> <span class="nx">StyleSheet</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span>
+  <span class="na">container</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">flex</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="na">padding</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#fff</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">title</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">fontSize</span><span class="p">:</span> <span class="mi">24</span><span class="p">,</span>
+    <span class="na">fontWeight</span><span class="p">:</span> <span class="dl">'</span><span class="s1">bold</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">marginBottom</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#333</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">buttonContainer</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">marginBottom</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">button</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#007bff</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">padding</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+    <span class="na">borderRadius</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+    <span class="na">marginBottom</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="na">alignItems</span><span class="p">:</span> <span class="dl">'</span><span class="s1">center</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">resetButton</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#6c757d</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">padding</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+    <span class="na">borderRadius</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+    <span class="na">marginBottom</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="na">alignItems</span><span class="p">:</span> <span class="dl">'</span><span class="s1">center</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">buttonText</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#fff</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">fontSize</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+    <span class="na">fontWeight</span><span class="p">:</span> <span class="dl">'</span><span class="s1">bold</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">stateContainer</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#e3f2fd</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">padding</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+    <span class="na">borderRadius</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+    <span class="na">marginBottom</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">stateTitle</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">fontSize</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+    <span class="na">fontWeight</span><span class="p">:</span> <span class="dl">'</span><span class="s1">bold</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#1976d2</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">marginBottom</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">stateText</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">fontSize</span><span class="p">:</span> <span class="mi">14</span><span class="p">,</span>
+    <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#1976d2</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">marginBottom</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">resultContainer</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#d4edda</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">padding</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+    <span class="na">borderRadius</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+    <span class="na">marginBottom</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">resultTitle</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">fontSize</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+    <span class="na">fontWeight</span><span class="p">:</span> <span class="dl">'</span><span class="s1">bold</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#155724</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">marginBottom</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">resultText</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">fontSize</span><span class="p">:</span> <span class="mi">14</span><span class="p">,</span>
+    <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#155724</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">fontFamily</span><span class="p">:</span> <span class="dl">'</span><span class="s1">monospace</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">errorContainer</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#f8d7da</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">padding</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+    <span class="na">borderRadius</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">errorText</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#721c24</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">fontSize</span><span class="p">:</span> <span class="mi">14</span><span class="p">,</span>
+  <span class="p">},</span>
+<span class="p">});</span>
+
+<span class="k">export</span> <span class="p">{</span> <span class="nx">CircuitBreaker</span><span class="p">,</span> <span class="nx">Bulkhead</span><span class="p">,</span> <span class="nx">Timeout</span><span class="p">,</span> <span class="nx">ResiliencePatternsDemo</span> <span class="p">};</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="️-fault-tolerance">🛡️ <strong>Fault Tolerance</strong></h2>
+
+<h3 id="fault-tolerance-patterns"><strong>Fault Tolerance Patterns</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useState</span><span class="p">,</span> <span class="nx">useCallback</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">View</span><span class="p">,</span> <span class="nx">Text</span><span class="p">,</span> <span class="nx">TouchableOpacity</span><span class="p">,</span> <span class="nx">StyleSheet</span><span class="p">,</span> <span class="nx">Alert</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="c1">// Fault tolerance patterns</span>
+<span class="kd">const</span> <span class="nx">FaultTolerance</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="c1">// Retry with exponential backoff</span>
+  <span class="na">retryWithBackoff</span><span class="p">:</span> <span class="k">async</span> <span class="p">(</span><span class="nx">fn</span><span class="p">,</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="p">{</span>
+      <span class="nx">maxRetries</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
+      <span class="nx">baseDelay</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span>
+      <span class="nx">maxDelay</span> <span class="o">=</span> <span class="mi">10000</span><span class="p">,</span>
+      <span class="nx">backoffFactor</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+      <span class="nx">jitter</span> <span class="o">=</span> <span class="kc">true</span>
+    <span class="p">}</span> <span class="o">=</span> <span class="nx">options</span><span class="p">;</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">attempt</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">attempt</span> <span class="o">&lt;=</span> <span class="nx">maxRetries</span><span class="p">;</span> <span class="nx">attempt</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">try</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="nx">fn</span><span class="p">();</span>
+      <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">attempt</span> <span class="o">===</span> <span class="nx">maxRetries</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">throw</span> <span class="nx">error</span><span class="p">;</span>
+        <span class="p">}</span>
+        
+        <span class="kd">let</span> <span class="nx">delay</span> <span class="o">=</span> <span class="nx">baseDelay</span> <span class="o">*</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">pow</span><span class="p">(</span><span class="nx">backoffFactor</span><span class="p">,</span> <span class="nx">attempt</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+        <span class="nx">delay</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">min</span><span class="p">(</span><span class="nx">delay</span><span class="p">,</span> <span class="nx">maxDelay</span><span class="p">);</span>
+        
+        <span class="k">if</span> <span class="p">(</span><span class="nx">jitter</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">delay</span> <span class="o">=</span> <span class="nx">delay</span> <span class="o">*</span> <span class="p">(</span><span class="mf">0.5</span> <span class="o">+</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">*</span> <span class="mf">0.5</span><span class="p">);</span>
+        <span class="p">}</span>
+        
+        <span class="k">await</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="nx">resolve</span> <span class="o">=&gt;</span> <span class="nx">setTimeout</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">delay</span><span class="p">));</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+
+  <span class="c1">// Retry with fixed delay</span>
+  <span class="na">retryWithFixedDelay</span><span class="p">:</span> <span class="k">async</span> <span class="p">(</span><span class="nx">fn</span><span class="p">,</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="p">{</span> <span class="nx">maxRetries</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="nx">delay</span> <span class="o">=</span> <span class="mi">1000</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">options</span><span class="p">;</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">attempt</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">attempt</span> <span class="o">&lt;=</span> <span class="nx">maxRetries</span><span class="p">;</span> <span class="nx">attempt</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">try</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="nx">fn</span><span class="p">();</span>
+      <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">attempt</span> <span class="o">===</span> <span class="nx">maxRetries</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">throw</span> <span class="nx">error</span><span class="p">;</span>
+        <span class="p">}</span>
+        
+        <span class="k">await</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="nx">resolve</span> <span class="o">=&gt;</span> <span class="nx">setTimeout</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">delay</span><span class="p">));</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+
+  <span class="c1">// Retry with linear backoff</span>
+  <span class="na">retryWithLinearBackoff</span><span class="p">:</span> <span class="k">async</span> <span class="p">(</span><span class="nx">fn</span><span class="p">,</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="p">{</span> <span class="nx">maxRetries</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="nx">baseDelay</span> <span class="o">=</span> <span class="mi">1000</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">options</span><span class="p">;</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">attempt</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">attempt</span> <span class="o">&lt;=</span> <span class="nx">maxRetries</span><span class="p">;</span> <span class="nx">attempt</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">try</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="nx">fn</span><span class="p">();</span>
+      <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">attempt</span> <span class="o">===</span> <span class="nx">maxRetries</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">throw</span> <span class="nx">error</span><span class="p">;</span>
+        <span class="p">}</span>
+        
+        <span class="kd">const</span> <span class="nx">delay</span> <span class="o">=</span> <span class="nx">baseDelay</span> <span class="o">*</span> <span class="nx">attempt</span><span class="p">;</span>
+        <span class="k">await</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="nx">resolve</span> <span class="o">=&gt;</span> <span class="nx">setTimeout</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">delay</span><span class="p">));</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+
+  <span class="c1">// Fallback mechanism</span>
+  <span class="na">withFallback</span><span class="p">:</span> <span class="p">(</span><span class="nx">primaryFn</span><span class="p">,</span> <span class="nx">fallbackFn</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">async</span> <span class="p">(...</span><span class="nx">args</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">try</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="nx">primaryFn</span><span class="p">(...</span><span class="nx">args</span><span class="p">);</span>
+      <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span><span class="dl">'</span><span class="s1">Primary function failed, using fallback:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="nx">fallbackFn</span><span class="p">(...</span><span class="nx">args</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">};</span>
+  <span class="p">},</span>
+
+  <span class="c1">// Timeout with fallback</span>
+  <span class="na">withTimeoutAndFallback</span><span class="p">:</span> <span class="p">(</span><span class="nx">fn</span><span class="p">,</span> <span class="nx">timeoutMs</span><span class="p">,</span> <span class="nx">fallbackFn</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">async</span> <span class="p">(...</span><span class="nx">args</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">try</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">timeoutPromise</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">_</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="o">=&gt;</span> 
+          <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nx">reject</span><span class="p">(</span><span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Operation timeout</span><span class="dl">'</span><span class="p">)),</span> <span class="nx">timeoutMs</span><span class="p">)</span>
+        <span class="p">);</span>
+        
+        <span class="k">return</span> <span class="k">await</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">race</span><span class="p">([</span>
+          <span class="nx">fn</span><span class="p">(...</span><span class="nx">args</span><span class="p">),</span>
+          <span class="nx">timeoutPromise</span>
+        <span class="p">]);</span>
+      <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span><span class="dl">'</span><span class="s1">Operation failed or timed out, using fallback:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="nx">fallbackFn</span><span class="p">(...</span><span class="nx">args</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">};</span>
+  <span class="p">},</span>
+
+  <span class="c1">// Health check</span>
+  <span class="na">withHealthCheck</span><span class="p">:</span> <span class="p">(</span><span class="nx">fn</span><span class="p">,</span> <span class="nx">healthCheckFn</span><span class="p">,</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="p">{</span> <span class="nx">checkInterval</span> <span class="o">=</span> <span class="mi">30000</span><span class="p">,</span> <span class="nx">maxFailures</span> <span class="o">=</span> <span class="mi">3</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">options</span><span class="p">;</span>
+    <span class="kd">let</span> <span class="nx">failureCount</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kd">let</span> <span class="nx">lastHealthCheck</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="k">async</span> <span class="p">(...</span><span class="nx">args</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">now</span> <span class="o">=</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
+      
+      <span class="c1">// Check if we need to perform a health check</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">now</span> <span class="o">-</span> <span class="nx">lastHealthCheck</span> <span class="o">&gt;</span> <span class="nx">checkInterval</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">try</span> <span class="p">{</span>
+          <span class="k">await</span> <span class="nx">healthCheckFn</span><span class="p">();</span>
+          <span class="nx">failureCount</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+          <span class="nx">lastHealthCheck</span> <span class="o">=</span> <span class="nx">now</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">failureCount</span><span class="o">++</span><span class="p">;</span>
+          <span class="nx">lastHealthCheck</span> <span class="o">=</span> <span class="nx">now</span><span class="p">;</span>
+          
+          <span class="k">if</span> <span class="p">(</span><span class="nx">failureCount</span> <span class="o">&gt;=</span> <span class="nx">maxFailures</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Service is unhealthy</span><span class="dl">'</span><span class="p">);</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+      
+      <span class="k">return</span> <span class="k">await</span> <span class="nx">fn</span><span class="p">(...</span><span class="nx">args</span><span class="p">);</span>
+    <span class="p">};</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// Fault tolerance demo component</span>
+<span class="kd">const</span> <span class="nx">FaultToleranceDemo</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">loading</span><span class="p">,</span> <span class="nx">setLoading</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">result</span><span class="p">,</span> <span class="nx">setResult</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">error</span><span class="p">,</span> <span class="nx">setError</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+
+  <span class="c1">// Simulate API call that might fail</span>
+  <span class="kd">const</span> <span class="nx">simulateAPICall</span> <span class="o">=</span> <span class="k">async</span> <span class="p">(</span><span class="nx">shouldFail</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span> <span class="nx">delay</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">await</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="nx">resolve</span> <span class="o">=&gt;</span> <span class="nx">setTimeout</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">delay</span><span class="p">));</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="nx">shouldFail</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">API call failed</span><span class="dl">'</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="p">{</span> <span class="na">data</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Success!</span><span class="dl">'</span><span class="p">,</span> <span class="na">timestamp</span><span class="p">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">toISOString</span><span class="p">()</span> <span class="p">};</span>
+  <span class="p">};</span>
+
+  <span class="c1">// Simulate fallback function</span>
+  <span class="kd">const</span> <span class="nx">simulateFallback</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">await</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="nx">resolve</span> <span class="o">=&gt;</span> <span class="nx">setTimeout</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="mi">500</span><span class="p">));</span>
+    <span class="k">return</span> <span class="p">{</span> <span class="na">data</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Fallback success!</span><span class="dl">'</span><span class="p">,</span> <span class="na">timestamp</span><span class="p">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">toISOString</span><span class="p">()</span> <span class="p">};</span>
+  <span class="p">};</span>
+
+  <span class="c1">// Simulate health check</span>
+  <span class="kd">const</span> <span class="nx">simulateHealthCheck</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">await</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="nx">resolve</span> <span class="o">=&gt;</span> <span class="nx">setTimeout</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="mi">100</span><span class="p">));</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mf">0.8</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Health check failed</span><span class="dl">'</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="p">{</span> <span class="na">status</span><span class="p">:</span> <span class="dl">'</span><span class="s1">healthy</span><span class="dl">'</span> <span class="p">};</span>
+  <span class="p">};</span>
+
+  <span class="c1">// Retry with exponential backoff</span>
+  <span class="kd">const</span> <span class="nx">handleExponentialBackoff</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setLoading</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+    <span class="nx">setError</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+    
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">FaultTolerance</span><span class="p">.</span><span class="nx">retryWithBackoff</span><span class="p">(</span>
+        <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">simulateAPICall</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mf">0.4</span><span class="p">),</span> <span class="c1">// 60% success rate</span>
+        <span class="p">{</span> <span class="na">maxRetries</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="na">baseDelay</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span> <span class="na">backoffFactor</span><span class="p">:</span> <span class="mi">2</span> <span class="p">}</span>
+      <span class="p">);</span>
+      <span class="nx">setResult</span><span class="p">({</span> <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">exponential-backoff</span><span class="dl">'</span><span class="p">,</span> <span class="na">data</span><span class="p">:</span> <span class="nx">result</span> <span class="p">});</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">setError</span><span class="p">(</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">finally</span> <span class="p">{</span>
+      <span class="nx">setLoading</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+
+  <span class="c1">// Retry with fixed delay</span>
+  <span class="kd">const</span> <span class="nx">handleFixedDelay</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setLoading</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+    <span class="nx">setError</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+    
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">FaultTolerance</span><span class="p">.</span><span class="nx">retryWithFixedDelay</span><span class="p">(</span>
+        <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">simulateAPICall</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">),</span> <span class="c1">// 50% success rate</span>
+        <span class="p">{</span> <span class="na">maxRetries</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="na">delay</span><span class="p">:</span> <span class="mi">1000</span> <span class="p">}</span>
+      <span class="p">);</span>
+      <span class="nx">setResult</span><span class="p">({</span> <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">fixed-delay</span><span class="dl">'</span><span class="p">,</span> <span class="na">data</span><span class="p">:</span> <span class="nx">result</span> <span class="p">});</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">setError</span><span class="p">(</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">finally</span> <span class="p">{</span>
+      <span class="nx">setLoading</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+
+  <span class="c1">// Fallback mechanism</span>
+  <span class="kd">const</span> <span class="nx">handleFallback</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setLoading</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+    <span class="nx">setError</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+    
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">FaultTolerance</span><span class="p">.</span><span class="nx">withFallback</span><span class="p">(</span>
+        <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">simulateAPICall</span><span class="p">(</span><span class="kc">true</span><span class="p">),</span> <span class="c1">// Primary will fail</span>
+        <span class="nx">simulateFallback</span> <span class="c1">// Fallback will succeed</span>
+      <span class="p">)();</span>
+      <span class="nx">setResult</span><span class="p">({</span> <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">fallback</span><span class="dl">'</span><span class="p">,</span> <span class="na">data</span><span class="p">:</span> <span class="nx">result</span> <span class="p">});</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">setError</span><span class="p">(</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">finally</span> <span class="p">{</span>
+      <span class="nx">setLoading</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+
+  <span class="c1">// Timeout with fallback</span>
+  <span class="kd">const</span> <span class="nx">handleTimeoutWithFallback</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setLoading</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+    <span class="nx">setError</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+    
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">FaultTolerance</span><span class="p">.</span><span class="nx">withTimeoutAndFallback</span><span class="p">(</span>
+        <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">simulateAPICall</span><span class="p">(</span><span class="kc">false</span><span class="p">,</span> <span class="mi">3000</span><span class="p">),</span> <span class="c1">// Will timeout</span>
+        <span class="mi">2000</span><span class="p">,</span> <span class="c1">// 2 second timeout</span>
+        <span class="nx">simulateFallback</span>
+      <span class="p">)();</span>
+      <span class="nx">setResult</span><span class="p">({</span> <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">timeout-fallback</span><span class="dl">'</span><span class="p">,</span> <span class="na">data</span><span class="p">:</span> <span class="nx">result</span> <span class="p">});</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">setError</span><span class="p">(</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">finally</span> <span class="p">{</span>
+      <span class="nx">setLoading</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+
+  <span class="c1">// Health check</span>
+  <span class="kd">const</span> <span class="nx">handleHealthCheck</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setLoading</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+    <span class="nx">setError</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+    
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">FaultTolerance</span><span class="p">.</span><span class="nx">withHealthCheck</span><span class="p">(</span>
+        <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">simulateAPICall</span><span class="p">(</span><span class="kc">false</span><span class="p">),</span>
+        <span class="nx">simulateHealthCheck</span><span class="p">,</span>
+        <span class="p">{</span> <span class="na">checkInterval</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span> <span class="na">maxFailures</span><span class="p">:</span> <span class="mi">2</span> <span class="p">}</span>
+      <span class="p">)();</span>
+      <span class="nx">setResult</span><span class="p">({</span> <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">health-check</span><span class="dl">'</span><span class="p">,</span> <span class="na">data</span><span class="p">:</span> <span class="nx">result</span> <span class="p">});</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">setError</span><span class="p">(</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">finally</span> <span class="p">{</span>
+      <span class="nx">setLoading</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">container</span><span class="p">}</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">title</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Fault</span> <span class="nx">Tolerance</span> <span class="nx">Patterns</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>      
+      <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">buttonContainer</span><span class="p">}</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">TouchableOpacity</span> 
+          <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">button</span><span class="p">}</span>
+          <span class="nx">onPress</span><span class="o">=</span><span class="p">{</span><span class="nx">handleExponentialBackoff</span><span class="p">}</span>
+          <span class="nx">disabled</span><span class="o">=</span><span class="p">{</span><span class="nx">loading</span><span class="p">}</span>
+        <span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">buttonText</span><span class="p">}</span><span class="o">&gt;</span>
+            <span class="p">{</span><span class="nx">loading</span> <span class="p">?</span> <span class="dl">'</span><span class="s1">Loading...</span><span class="dl">'</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">Exponential Backoff</span><span class="dl">'</span><span class="p">}</span>
+          <span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/TouchableOpacity</span><span class="err">&gt;
+</span>
+        <span class="o">&lt;</span><span class="nx">TouchableOpacity</span> 
+          <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">button</span><span class="p">}</span>
+          <span class="nx">onPress</span><span class="o">=</span><span class="p">{</span><span class="nx">handleFixedDelay</span><span class="p">}</span>
+          <span class="nx">disabled</span><span class="o">=</span><span class="p">{</span><span class="nx">loading</span><span class="p">}</span>
+        <span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">buttonText</span><span class="p">}</span><span class="o">&gt;</span>
+            <span class="p">{</span><span class="nx">loading</span> <span class="p">?</span> <span class="dl">'</span><span class="s1">Loading...</span><span class="dl">'</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">Fixed Delay</span><span class="dl">'</span><span class="p">}</span>
+          <span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/TouchableOpacity</span><span class="err">&gt;
+</span>
+        <span class="o">&lt;</span><span class="nx">TouchableOpacity</span> 
+          <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">button</span><span class="p">}</span>
+          <span class="nx">onPress</span><span class="o">=</span><span class="p">{</span><span class="nx">handleFallback</span><span class="p">}</span>
+          <span class="nx">disabled</span><span class="o">=</span><span class="p">{</span><span class="nx">loading</span><span class="p">}</span>
+        <span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">buttonText</span><span class="p">}</span><span class="o">&gt;</span>
+            <span class="p">{</span><span class="nx">loading</span> <span class="p">?</span> <span class="dl">'</span><span class="s1">Loading...</span><span class="dl">'</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">Fallback</span><span class="dl">'</span><span class="p">}</span>
+          <span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/TouchableOpacity</span><span class="err">&gt;
+</span>
+        <span class="o">&lt;</span><span class="nx">TouchableOpacity</span> 
+          <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">button</span><span class="p">}</span>
+          <span class="nx">onPress</span><span class="o">=</span><span class="p">{</span><span class="nx">handleTimeoutWithFallback</span><span class="p">}</span>
+          <span class="nx">disabled</span><span class="o">=</span><span class="p">{</span><span class="nx">loading</span><span class="p">}</span>
+        <span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">buttonText</span><span class="p">}</span><span class="o">&gt;</span>
+            <span class="p">{</span><span class="nx">loading</span> <span class="p">?</span> <span class="dl">'</span><span class="s1">Loading...</span><span class="dl">'</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">Timeout + Fallback</span><span class="dl">'</span><span class="p">}</span>
+          <span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/TouchableOpacity</span><span class="err">&gt;
+</span>
+        <span class="o">&lt;</span><span class="nx">TouchableOpacity</span> 
+          <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">button</span><span class="p">}</span>
+          <span class="nx">onPress</span><span class="o">=</span><span class="p">{</span><span class="nx">handleHealthCheck</span><span class="p">}</span>
+          <span class="nx">disabled</span><span class="o">=</span><span class="p">{</span><span class="nx">loading</span><span class="p">}</span>
+        <span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">buttonText</span><span class="p">}</span><span class="o">&gt;</span>
+            <span class="p">{</span><span class="nx">loading</span> <span class="p">?</span> <span class="dl">'</span><span class="s1">Loading...</span><span class="dl">'</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">Health Check</span><span class="dl">'</span><span class="p">}</span>
+          <span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/TouchableOpacity</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>
+      <span class="p">{</span><span class="nx">result</span> <span class="o">&amp;&amp;</span> <span class="p">(</span>
+        <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">resultContainer</span><span class="p">}</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">resultTitle</span><span class="p">}</span><span class="o">&gt;</span><span class="na">Result</span><span class="p">:</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>          <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">resultText</span><span class="p">}</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">result</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="mi">2</span><span class="p">)}</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>      <span class="p">)}</span>
+
+      <span class="p">{</span><span class="nx">error</span> <span class="o">&amp;&amp;</span> <span class="p">(</span>
+        <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">errorContainer</span><span class="p">}</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">errorText</span><span class="p">}</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">error</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>      <span class="p">)}</span>
+    <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">styles</span> <span class="o">=</span> <span class="nx">StyleSheet</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span>
+  <span class="na">container</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">flex</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="na">padding</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#fff</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">title</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">fontSize</span><span class="p">:</span> <span class="mi">24</span><span class="p">,</span>
+    <span class="na">fontWeight</span><span class="p">:</span> <span class="dl">'</span><span class="s1">bold</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">marginBottom</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#333</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">buttonContainer</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">marginBottom</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">button</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#007bff</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">padding</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+    <span class="na">borderRadius</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+    <span class="na">marginBottom</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="na">alignItems</span><span class="p">:</span> <span class="dl">'</span><span class="s1">center</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">buttonText</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#fff</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">fontSize</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+    <span class="na">fontWeight</span><span class="p">:</span> <span class="dl">'</span><span class="s1">bold</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">resultContainer</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#d4edda</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">padding</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+    <span class="na">borderRadius</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+    <span class="na">marginBottom</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">resultTitle</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">fontSize</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+    <span class="na">fontWeight</span><span class="p">:</span> <span class="dl">'</span><span class="s1">bold</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#155724</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">marginBottom</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">resultText</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">fontSize</span><span class="p">:</span> <span class="mi">14</span><span class="p">,</span>
+    <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#155724</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">fontFamily</span><span class="p">:</span> <span class="dl">'</span><span class="s1">monospace</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">errorContainer</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#f8d7da</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">padding</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+    <span class="na">borderRadius</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">errorText</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#721c24</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">fontSize</span><span class="p">:</span> <span class="mi">14</span><span class="p">,</span>
+  <span class="p">},</span>
+<span class="p">});</span>
+
+<span class="k">export</span> <span class="p">{</span> <span class="nx">FaultTolerance</span><span class="p">,</span> <span class="nx">FaultToleranceDemo</span> <span class="p">};</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-monitoring-and-alerting">📊 <strong>Monitoring and Alerting</strong></h2>
+
+<h3 id="error-monitoring-system"><strong>Error Monitoring System</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useState</span><span class="p">,</span> <span class="nx">useCallback</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">View</span><span class="p">,</span> <span class="nx">Text</span><span class="p">,</span> <span class="nx">TouchableOpacity</span><span class="p">,</span> <span class="nx">StyleSheet</span><span class="p">,</span> <span class="nx">Alert</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="c1">// Error monitoring system</span>
+<span class="kd">const</span> <span class="nx">ErrorMonitoring</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="c1">// Error metrics</span>
+  <span class="na">metrics</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">totalErrors</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="na">errorsByType</span><span class="p">:</span> <span class="p">{},</span>
+    <span class="na">errorsByTime</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="na">recoveryAttempts</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="na">successfulRecoveries</span><span class="p">:</span> <span class="mi">0</span>
+  <span class="p">},</span>
+
+  <span class="c1">// Record error</span>
+  <span class="na">recordError</span><span class="p">:</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">context</span> <span class="o">=</span> <span class="p">{})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">errorRecord</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="na">id</span><span class="p">:</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">(),</span>
+      <span class="na">message</span><span class="p">:</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">,</span>
+      <span class="na">stack</span><span class="p">:</span> <span class="nx">error</span><span class="p">.</span><span class="nx">stack</span><span class="p">,</span>
+      <span class="na">type</span><span class="p">:</span> <span class="nx">error</span><span class="p">.</span><span class="nx">name</span> <span class="o">||</span> <span class="dl">'</span><span class="s1">Unknown</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">timestamp</span><span class="p">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">toISOString</span><span class="p">(),</span>
+      <span class="nx">context</span><span class="p">,</span>
+      <span class="na">resolved</span><span class="p">:</span> <span class="kc">false</span>
+    <span class="p">};</span>
+
+    <span class="c1">// Update metrics</span>
+    <span class="nx">ErrorMonitoring</span><span class="p">.</span><span class="nx">metrics</span><span class="p">.</span><span class="nx">totalErrors</span><span class="o">++</span><span class="p">;</span>
+    <span class="nx">ErrorMonitoring</span><span class="p">.</span><span class="nx">metrics</span><span class="p">.</span><span class="nx">errorsByType</span><span class="p">[</span><span class="nx">errorRecord</span><span class="p">.</span><span class="nx">type</span><span class="p">]</span> <span class="o">=</span> 
+      <span class="p">(</span><span class="nx">ErrorMonitoring</span><span class="p">.</span><span class="nx">metrics</span><span class="p">.</span><span class="nx">errorsByType</span><span class="p">[</span><span class="nx">errorRecord</span><span class="p">.</span><span class="nx">type</span><span class="p">]</span> <span class="o">||</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+    
+    <span class="nx">ErrorMonitoring</span><span class="p">.</span><span class="nx">metrics</span><span class="p">.</span><span class="nx">errorsByTime</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span>
+      <span class="na">timestamp</span><span class="p">:</span> <span class="nx">errorRecord</span><span class="p">.</span><span class="nx">timestamp</span><span class="p">,</span>
+      <span class="na">type</span><span class="p">:</span> <span class="nx">errorRecord</span><span class="p">.</span><span class="nx">type</span>
+    <span class="p">});</span>
+
+    <span class="c1">// Keep only last 100 errors</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">ErrorMonitoring</span><span class="p">.</span><span class="nx">metrics</span><span class="p">.</span><span class="nx">errorsByTime</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">ErrorMonitoring</span><span class="p">.</span><span class="nx">metrics</span><span class="p">.</span><span class="nx">errorsByTime</span> <span class="o">=</span> 
+        <span class="nx">ErrorMonitoring</span><span class="p">.</span><span class="nx">metrics</span><span class="p">.</span><span class="nx">errorsByTime</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="o">-</span><span class="mi">100</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Check for error patterns</span>
+    <span class="nx">ErrorMonitoring</span><span class="p">.</span><span class="nx">checkErrorPatterns</span><span class="p">();</span>
+
+    <span class="k">return</span> <span class="nx">errorRecord</span><span class="p">;</span>
+  <span class="p">},</span>
+
+  <span class="c1">// Record recovery attempt</span>
+  <span class="na">recordRecoveryAttempt</span><span class="p">:</span> <span class="p">(</span><span class="nx">success</span> <span class="o">=</span> <span class="kc">false</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">ErrorMonitoring</span><span class="p">.</span><span class="nx">metrics</span><span class="p">.</span><span class="nx">recoveryAttempts</span><span class="o">++</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">success</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">ErrorMonitoring</span><span class="p">.</span><span class="nx">metrics</span><span class="p">.</span><span class="nx">successfulRecoveries</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+
+  <span class="c1">// Check for error patterns</span>
+  <span class="na">checkErrorPatterns</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">recentErrors</span> <span class="o">=</span> <span class="nx">ErrorMonitoring</span><span class="p">.</span><span class="nx">metrics</span><span class="p">.</span><span class="nx">errorsByTime</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">);</span>
+    <span class="kd">const</span> <span class="nx">errorTypes</span> <span class="o">=</span> <span class="nx">recentErrors</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">e</span> <span class="o">=&gt;</span> <span class="nx">e</span><span class="p">.</span><span class="nx">type</span><span class="p">);</span>
+    
+    <span class="c1">// Check for repeated errors</span>
+    <span class="kd">const</span> <span class="nx">errorCounts</span> <span class="o">=</span> <span class="p">{};</span>
+    <span class="nx">errorTypes</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">type</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">errorCounts</span><span class="p">[</span><span class="nx">type</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="nx">errorCounts</span><span class="p">[</span><span class="nx">type</span><span class="p">]</span> <span class="o">||</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">});</span>
+
+    <span class="c1">// Alert if same error occurs 3+ times in last 10 errors</span>
+    <span class="nb">Object</span><span class="p">.</span><span class="nx">entries</span><span class="p">(</span><span class="nx">errorCounts</span><span class="p">).</span><span class="nx">forEach</span><span class="p">(([</span><span class="nx">type</span><span class="p">,</span> <span class="nx">count</span><span class="p">])</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">count</span> <span class="o">&gt;=</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">ErrorMonitoring</span><span class="p">.</span><span class="nx">triggerAlert</span><span class="p">(</span><span class="dl">'</span><span class="s1">repeated_error</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span>
+          <span class="nx">type</span><span class="p">,</span>
+          <span class="nx">count</span><span class="p">,</span>
+          <span class="na">message</span><span class="p">:</span> <span class="s2">`Error type "</span><span class="p">${</span><span class="nx">type</span><span class="p">}</span><span class="s2">" occurred </span><span class="p">${</span><span class="nx">count</span><span class="p">}</span><span class="s2"> times recently`</span>
+        <span class="p">});</span>
+      <span class="p">}</span>
+    <span class="p">});</span>
+  <span class="p">},</span>
+
+  <span class="c1">// Trigger alert</span>
+  <span class="na">triggerAlert</span><span class="p">:</span> <span class="p">(</span><span class="nx">type</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">alert</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="na">id</span><span class="p">:</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">(),</span>
+      <span class="nx">type</span><span class="p">,</span>
+      <span class="nx">data</span><span class="p">,</span>
+      <span class="na">timestamp</span><span class="p">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">toISOString</span><span class="p">(),</span>
+      <span class="na">acknowledged</span><span class="p">:</span> <span class="kc">false</span>
+    <span class="p">};</span>
+
+    <span class="nx">console</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span><span class="dl">'</span><span class="s1">Error monitoring alert:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">alert</span><span class="p">);</span>
+    
+    <span class="c1">// In a real app, you would send this to a monitoring service</span>
+    <span class="c1">// Example: Sentry.captureMessage(alert.message, { level: 'warning' });</span>
+  <span class="p">},</span>
+
+  <span class="c1">// Get error statistics</span>
+  <span class="na">getStatistics</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">totalErrors</span> <span class="o">=</span> <span class="nx">ErrorMonitoring</span><span class="p">.</span><span class="nx">metrics</span><span class="p">.</span><span class="nx">totalErrors</span><span class="p">;</span>
+    <span class="kd">const</span> <span class="nx">recoveryRate</span> <span class="o">=</span> <span class="nx">ErrorMonitoring</span><span class="p">.</span><span class="nx">metrics</span><span class="p">.</span><span class="nx">recoveryAttempts</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="p">?</span> 
+      <span class="p">(</span><span class="nx">ErrorMonitoring</span><span class="p">.</span><span class="nx">metrics</span><span class="p">.</span><span class="nx">successfulRecoveries</span> <span class="o">/</span> <span class="nx">ErrorMonitoring</span><span class="p">.</span><span class="nx">metrics</span><span class="p">.</span><span class="nx">recoveryAttempts</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span> <span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="p">{</span>
+      <span class="nx">totalErrors</span><span class="p">,</span>
+      <span class="na">errorsByType</span><span class="p">:</span> <span class="nx">ErrorMonitoring</span><span class="p">.</span><span class="nx">metrics</span><span class="p">.</span><span class="nx">errorsByType</span><span class="p">,</span>
+      <span class="na">recoveryAttempts</span><span class="p">:</span> <span class="nx">ErrorMonitoring</span><span class="p">.</span><span class="nx">metrics</span><span class="p">.</span><span class="nx">recoveryAttempts</span><span class="p">,</span>
+      <span class="na">successfulRecoveries</span><span class="p">:</span> <span class="nx">ErrorMonitoring</span><span class="p">.</span><span class="nx">metrics</span><span class="p">.</span><span class="nx">successfulRecoveries</span><span class="p">,</span>
+      <span class="na">recoveryRate</span><span class="p">:</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">round</span><span class="p">(</span><span class="nx">recoveryRate</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span> <span class="o">/</span> <span class="mi">100</span><span class="p">,</span>
+      <span class="na">recentErrors</span><span class="p">:</span> <span class="nx">ErrorMonitoring</span><span class="p">.</span><span class="nx">metrics</span><span class="p">.</span><span class="nx">errorsByTime</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">)</span>
+    <span class="p">};</span>
+  <span class="p">},</span>
+
+  <span class="c1">// Reset metrics</span>
+  <span class="na">resetMetrics</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">ErrorMonitoring</span><span class="p">.</span><span class="nx">metrics</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="na">totalErrors</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="na">errorsByType</span><span class="p">:</span> <span class="p">{},</span>
+      <span class="na">errorsByTime</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="na">recoveryAttempts</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="na">successfulRecoveries</span><span class="p">:</span> <span class="mi">0</span>
+    <span class="p">};</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// Error monitoring demo component</span>
+<span class="kd">const</span> <span class="nx">ErrorMonitoringDemo</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">loading</span><span class="p">,</span> <span class="nx">setLoading</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">statistics</span><span class="p">,</span> <span class="nx">setStatistics</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">result</span><span class="p">,</span> <span class="nx">setResult</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+
+  <span class="c1">// Simulate different types of errors</span>
+  <span class="kd">const</span> <span class="nx">simulateError</span> <span class="o">=</span> <span class="p">(</span><span class="nx">type</span><span class="p">,</span> <span class="nx">message</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">error</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="nx">message</span><span class="p">);</span>
+    <span class="nx">error</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">type</span><span class="p">;</span>
+    <span class="k">return</span> <span class="nx">error</span><span class="p">;</span>
+  <span class="p">};</span>
+
+  <span class="c1">// Generate random error</span>
+  <span class="kd">const</span> <span class="nx">generateRandomError</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">errorTypes</span> <span class="o">=</span> <span class="p">[</span><span class="dl">'</span><span class="s1">NetworkError</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">ValidationError</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">TimeoutError</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">UnknownError</span><span class="dl">'</span><span class="p">];</span>
+    <span class="kd">const</span> <span class="nx">messages</span> <span class="o">=</span> <span class="p">[</span>
+      <span class="dl">'</span><span class="s1">Network connection failed</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">Invalid input data</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">Operation timed out</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">Unexpected error occurred</span><span class="dl">'</span>
+    <span class="p">];</span>
+    
+    <span class="kd">const</span> <span class="nx">randomIndex</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">*</span> <span class="nx">errorTypes</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nx">simulateError</span><span class="p">(</span><span class="nx">errorTypes</span><span class="p">[</span><span class="nx">randomIndex</span><span class="p">],</span> <span class="nx">messages</span><span class="p">[</span><span class="nx">randomIndex</span><span class="p">]);</span>
+  <span class="p">};</span>
+
+  <span class="c1">// Record error</span>
+  <span class="kd">const</span> <span class="nx">handleRecordError</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">error</span> <span class="o">=</span> <span class="nx">generateRandomError</span><span class="p">();</span>
+    <span class="kd">const</span> <span class="nx">errorRecord</span> <span class="o">=</span> <span class="nx">ErrorMonitoring</span><span class="p">.</span><span class="nx">recordError</span><span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="p">{</span>
+      <span class="na">userId</span><span class="p">:</span> <span class="dl">'</span><span class="s1">demo-user</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">action</span><span class="p">:</span> <span class="dl">'</span><span class="s1">button-click</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">screen</span><span class="p">:</span> <span class="dl">'</span><span class="s1">ErrorMonitoringDemo</span><span class="dl">'</span>
+    <span class="p">});</span>
+    
+    <span class="nx">setResult</span><span class="p">({</span> <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">error-recorded</span><span class="dl">'</span><span class="p">,</span> <span class="na">data</span><span class="p">:</span> <span class="nx">errorRecord</span> <span class="p">});</span>
+    <span class="nx">setStatistics</span><span class="p">(</span><span class="nx">ErrorMonitoring</span><span class="p">.</span><span class="nx">getStatistics</span><span class="p">());</span>
+  <span class="p">};</span>
+
+  <span class="c1">// Record recovery attempt</span>
+  <span class="kd">const</span> <span class="nx">handleRecordRecovery</span> <span class="o">=</span> <span class="p">(</span><span class="nx">success</span> <span class="o">=</span> <span class="kc">false</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">ErrorMonitoring</span><span class="p">.</span><span class="nx">recordRecoveryAttempt</span><span class="p">(</span><span class="nx">success</span><span class="p">);</span>
+    <span class="nx">setResult</span><span class="p">({</span> 
+      <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">recovery-recorded</span><span class="dl">'</span><span class="p">,</span> 
+      <span class="na">data</span><span class="p">:</span> <span class="p">{</span> <span class="nx">success</span><span class="p">,</span> <span class="na">timestamp</span><span class="p">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">toISOString</span><span class="p">()</span> <span class="p">}</span>
+    <span class="p">});</span>
+    <span class="nx">setStatistics</span><span class="p">(</span><span class="nx">ErrorMonitoring</span><span class="p">.</span><span class="nx">getStatistics</span><span class="p">());</span>
+  <span class="p">};</span>
+
+  <span class="c1">// Get statistics</span>
+  <span class="kd">const</span> <span class="nx">handleGetStatistics</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">stats</span> <span class="o">=</span> <span class="nx">ErrorMonitoring</span><span class="p">.</span><span class="nx">getStatistics</span><span class="p">();</span>
+    <span class="nx">setStatistics</span><span class="p">(</span><span class="nx">stats</span><span class="p">);</span>
+    <span class="nx">setResult</span><span class="p">({</span> <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">statistics</span><span class="dl">'</span><span class="p">,</span> <span class="na">data</span><span class="p">:</span> <span class="nx">stats</span> <span class="p">});</span>
+  <span class="p">};</span>
+
+  <span class="c1">// Reset metrics</span>
+  <span class="kd">const</span> <span class="nx">handleResetMetrics</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">ErrorMonitoring</span><span class="p">.</span><span class="nx">resetMetrics</span><span class="p">();</span>
+    <span class="nx">setStatistics</span><span class="p">(</span><span class="nx">ErrorMonitoring</span><span class="p">.</span><span class="nx">getStatistics</span><span class="p">());</span>
+    <span class="nx">setResult</span><span class="p">({</span> <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">metrics-reset</span><span class="dl">'</span><span class="p">,</span> <span class="na">data</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Metrics reset successfully</span><span class="dl">'</span> <span class="p">});</span>
+  <span class="p">};</span>
+
+  <span class="c1">// Simulate error pattern</span>
+  <span class="kd">const</span> <span class="nx">handleSimulatePattern</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// Generate 5 NetworkError errors to trigger pattern alert</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">error</span> <span class="o">=</span> <span class="nx">simulateError</span><span class="p">(</span><span class="dl">'</span><span class="s1">NetworkError</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Network connection failed</span><span class="dl">'</span><span class="p">);</span>
+      <span class="nx">ErrorMonitoring</span><span class="p">.</span><span class="nx">recordError</span><span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="p">{</span> <span class="na">attempt</span><span class="p">:</span> <span class="nx">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">});</span>
+    <span class="p">}</span>
+    
+    <span class="nx">setStatistics</span><span class="p">(</span><span class="nx">ErrorMonitoring</span><span class="p">.</span><span class="nx">getStatistics</span><span class="p">());</span>
+    <span class="nx">setResult</span><span class="p">({</span> 
+      <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">pattern-simulated</span><span class="dl">'</span><span class="p">,</span> 
+      <span class="na">data</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Generated 5 NetworkError errors to trigger pattern alert</span><span class="dl">'</span>
+    <span class="p">});</span>
+  <span class="p">};</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">container</span><span class="p">}</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">title</span><span class="p">}</span><span class="o">&gt;</span><span class="nb">Error</span> <span class="nx">Monitoring</span> <span class="nx">Demo</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>      
+      <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">buttonContainer</span><span class="p">}</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">TouchableOpacity</span> 
+          <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">button</span><span class="p">}</span>
+          <span class="nx">onPress</span><span class="o">=</span><span class="p">{</span><span class="nx">handleRecordError</span><span class="p">}</span>
+        <span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">buttonText</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Record</span> <span class="nx">Random</span> <span class="nb">Error</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/TouchableOpacity</span><span class="err">&gt;
+</span>
+        <span class="o">&lt;</span><span class="nx">TouchableOpacity</span> 
+          <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">button</span><span class="p">}</span>
+          <span class="nx">onPress</span><span class="o">=</span><span class="p">{()</span> <span class="o">=&gt;</span> <span class="nx">handleRecordRecovery</span><span class="p">(</span><span class="kc">true</span><span class="p">)}</span>
+        <span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">buttonText</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Record</span> <span class="nx">Successful</span> <span class="nx">Recovery</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/TouchableOpacity</span><span class="err">&gt;
+</span>
+        <span class="o">&lt;</span><span class="nx">TouchableOpacity</span> 
+          <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">button</span><span class="p">}</span>
+          <span class="nx">onPress</span><span class="o">=</span><span class="p">{()</span> <span class="o">=&gt;</span> <span class="nx">handleRecordRecovery</span><span class="p">(</span><span class="kc">false</span><span class="p">)}</span>
+        <span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">buttonText</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Record</span> <span class="nx">Failed</span> <span class="nx">Recovery</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/TouchableOpacity</span><span class="err">&gt;
+</span>
+        <span class="o">&lt;</span><span class="nx">TouchableOpacity</span> 
+          <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">button</span><span class="p">}</span>
+          <span class="nx">onPress</span><span class="o">=</span><span class="p">{</span><span class="nx">handleGetStatistics</span><span class="p">}</span>
+        <span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">buttonText</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Get</span> <span class="nx">Statistics</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/TouchableOpacity</span><span class="err">&gt;
+</span>
+        <span class="o">&lt;</span><span class="nx">TouchableOpacity</span> 
+          <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">button</span><span class="p">}</span>
+          <span class="nx">onPress</span><span class="o">=</span><span class="p">{</span><span class="nx">handleSimulatePattern</span><span class="p">}</span>
+        <span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">buttonText</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Simulate</span> <span class="nb">Error</span> <span class="nx">Pattern</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/TouchableOpacity</span><span class="err">&gt;
+</span>
+        <span class="o">&lt;</span><span class="nx">TouchableOpacity</span> 
+          <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">resetButton</span><span class="p">}</span>
+          <span class="nx">onPress</span><span class="o">=</span><span class="p">{</span><span class="nx">handleResetMetrics</span><span class="p">}</span>
+        <span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">buttonText</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Reset</span> <span class="nx">Metrics</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/TouchableOpacity</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>
+      <span class="p">{</span><span class="nx">statistics</span> <span class="o">&amp;&amp;</span> <span class="p">(</span>
+        <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">statisticsContainer</span><span class="p">}</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">statisticsTitle</span><span class="p">}</span><span class="o">&gt;</span><span class="na">Statistics</span><span class="p">:</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>          <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">statisticsText</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Total</span> <span class="na">Errors</span><span class="p">:</span> <span class="p">{</span><span class="nx">statistics</span><span class="p">.</span><span class="nx">totalErrors</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>          <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">statisticsText</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Recovery</span> <span class="na">Rate</span><span class="p">:</span> <span class="p">{</span><span class="nx">statistics</span><span class="p">.</span><span class="nx">recoveryRate</span><span class="p">}</span><span class="o">%&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>          <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">statisticsText</span><span class="p">}</span><span class="o">&gt;</span>
+            <span class="nx">Errors</span> <span class="nx">by</span> <span class="na">Type</span><span class="p">:</span> <span class="p">{</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">statistics</span><span class="p">.</span><span class="nx">errorsByType</span><span class="p">)}</span>
+          <span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>      <span class="p">)}</span>
+
+      <span class="p">{</span><span class="nx">result</span> <span class="o">&amp;&amp;</span> <span class="p">(</span>
+        <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">resultContainer</span><span class="p">}</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">resultTitle</span><span class="p">}</span><span class="o">&gt;</span><span class="na">Result</span><span class="p">:</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>          <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">resultText</span><span class="p">}</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">result</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="mi">2</span><span class="p">)}</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>      <span class="p">)}</span>
+    <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">styles</span> <span class="o">=</span> <span class="nx">StyleSheet</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span>
+  <span class="na">container</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">flex</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="na">padding</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#fff</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">title</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">fontSize</span><span class="p">:</span> <span class="mi">24</span><span class="p">,</span>
+    <span class="na">fontWeight</span><span class="p">:</span> <span class="dl">'</span><span class="s1">bold</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">marginBottom</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#333</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">buttonContainer</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">marginBottom</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">button</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#007bff</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">padding</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+    <span class="na">borderRadius</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+    <span class="na">marginBottom</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="na">alignItems</span><span class="p">:</span> <span class="dl">'</span><span class="s1">center</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">resetButton</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#6c757d</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">padding</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+    <span class="na">borderRadius</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+    <span class="na">marginBottom</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="na">alignItems</span><span class="p">:</span> <span class="dl">'</span><span class="s1">center</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">buttonText</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#fff</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">fontSize</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+    <span class="na">fontWeight</span><span class="p">:</span> <span class="dl">'</span><span class="s1">bold</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">statisticsContainer</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#e3f2fd</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">padding</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+    <span class="na">borderRadius</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+    <span class="na">marginBottom</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">statisticsTitle</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">fontSize</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+    <span class="na">fontWeight</span><span class="p">:</span> <span class="dl">'</span><span class="s1">bold</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#1976d2</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">marginBottom</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">statisticsText</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">fontSize</span><span class="p">:</span> <span class="mi">14</span><span class="p">,</span>
+    <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#1976d2</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">marginBottom</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">resultContainer</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#d4edda</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">padding</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+    <span class="na">borderRadius</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+    <span class="na">marginBottom</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">resultTitle</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">fontSize</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+    <span class="na">fontWeight</span><span class="p">:</span> <span class="dl">'</span><span class="s1">bold</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#155724</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">marginBottom</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">resultText</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">fontSize</span><span class="p">:</span> <span class="mi">14</span><span class="p">,</span>
+    <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#155724</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">fontFamily</span><span class="p">:</span> <span class="dl">'</span><span class="s1">monospace</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+<span class="p">});</span>
+
+<span class="k">export</span> <span class="p">{</span> <span class="nx">ErrorMonitoring</span><span class="p">,</span> <span class="nx">ErrorMonitoringDemo</span> <span class="p">};</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-best-practices">🎯 <strong>Best Practices</strong></h2>
+
+<h3 id="1-error-recovery-design"><strong>1. Error Recovery Design</strong></h3>
+<ul>
+  <li>Implement multiple recovery strategies</li>
+  <li>Use appropriate patterns for different scenarios</li>
+  <li>Monitor recovery success rates</li>
+  <li>Learn from failure patterns</li>
+</ul>
+
+<h3 id="2-resilience-implementation"><strong>2. Resilience Implementation</strong></h3>
+<ul>
+  <li>Use circuit breakers for external services</li>
+  <li>Implement bulkheads for resource isolation</li>
+  <li>Set appropriate timeouts</li>
+  <li>Provide fallback mechanisms</li>
+</ul>
+
+<h3 id="3-monitoring-and-alerting"><strong>3. Monitoring and Alerting</strong></h3>
+<ul>
+  <li>Track error metrics and patterns</li>
+  <li>Set up appropriate alerts</li>
+  <li>Monitor recovery success rates</li>
+  <li>Use professional monitoring services</li>
+</ul>
+
+<hr />
+
+<h2 id="-interview-questions">❓ <strong>Interview Questions</strong></h2>
+
+<h3 id="basic-questions"><strong>Basic Questions</strong></h3>
+<ol>
+  <li><strong>What are error recovery strategies?</strong></li>
+  <li><strong>How do you implement fault tolerance?</strong></li>
+  <li><strong>What is the circuit breaker pattern?</strong></li>
+</ol>
+
+<h3 id="advanced-questions"><strong>Advanced Questions</strong></h3>
+<ol>
+  <li><strong>How would you implement resilience patterns?</strong></li>
+  <li><strong>Explain different retry strategies.</strong></li>
+  <li><strong>How do you monitor error recovery success?</strong></li>
+</ol>
+
+<h3 id="practical-questions"><strong>Practical Questions</strong></h3>
+<ol>
+  <li><strong>Implement a circuit breaker pattern.</strong></li>
+  <li><strong>Create an error monitoring system.</strong></li>
+  <li><strong>Design a fault-tolerant API client.</strong></li>
+</ol>
+
+<hr />
+
+<h2 id="-navigation">🧭 Navigation</h2>
+
+<div class="navigation">
+    <a href="./02-Error-Handling-Patterns.md" class="nav-link prev">⬅️ Previous: Error Handling Patterns</a>
+    <a href="./04-Error-Reporting-Analytics.md" class="nav-link next">Next: Error Reporting &amp; Analytics ➡️</a>
+</div>
+
+<hr />
+
+<script src="../../common-scripts.js"></script>
+
+<p><em>Last updated: December 2024</em></p>
+
+
+        </main>
+        
+        <footer style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #ecf0f1; color: #666; text-align: center;">
+            <p>Interview Prep Documentation - Built with Jekyll</p>
+        </footer>
+    </div>
+</body>
+</html>

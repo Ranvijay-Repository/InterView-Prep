@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏗️ Clean Architecture - Interview Prep Documentation</title>
+    <meta name="description" content="Comprehensive guides for JavaScript, TypeScript, and React Native interview preparation">
+    
+    <!-- GitHub Pages compatible styling -->
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+        }
+        
+        .container {
+            max-width: 100%;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            color: #2c3e50;
+            margin-top: 2em;
+            margin-bottom: 1em;
+        }
+        
+        h1 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            border-bottom: 1px solid #ecf0f1;
+            padding-bottom: 5px;
+        }
+        
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border-left: 4px solid #3498db;
+        }
+        
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+        
+        blockquote {
+            border-left: 4px solid #3498db;
+            margin: 0;
+            padding-left: 20px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1em 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .navigation {
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px 0;
+            margin-bottom: 20px;
+        }
+        
+        .navigation a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+        
+        .navigation a:hover {
+            text-decoration: underline;
+        }
+        
+        .breadcrumb {
+            margin-bottom: 20px;
+            color: #666;
+        }
+        
+        .breadcrumb a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            h2 {
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="navigation">
+            <a href="/">Home</a>
+            <a href="/Javascript/">JavaScript</a>
+            <a href="/TypeScript/">TypeScript</a>
+            <a href="/React-Native/">React Native</a>
+        </nav>
+        
+        
+        
+        <main>
+            <h1 id="️-clean-architecture">🏗️ <strong>Clean Architecture</strong></h1>
+
+<blockquote>
+  <p><strong>Master clean architecture principles, patterns, and implementation for React Native applications</strong></p>
+</blockquote>
+
+<link rel="stylesheet" href="../../common-styles.css" />
+
+<hr />
+
+<h2 id="-table-of-contents">📚 <strong>Table of Contents</strong></h2>
+
+<ul>
+  <li><a href="#-clean-architecture-overview">Clean Architecture Overview</a></li>
+  <li><a href="#-architecture-layers">Architecture Layers</a></li>
+  <li><a href="#-dependency-injection">Dependency Injection</a></li>
+  <li><a href="#-repository-pattern">Repository Pattern</a></li>
+  <li><a href="#-use-cases">Use Cases</a></li>
+  <li><a href="#-best-practices">Best Practices</a></li>
+  <li><a href="#-interview-questions">Interview Questions</a></li>
+</ul>
+
+<hr />
+
+<h2 id="️-clean-architecture-overview">🏗️ <strong>Clean Architecture Overview</strong></h2>
+
+<h3 id="architecture-principles"><strong>Architecture Principles</strong></h3>
+
+<pre><code class="language-mermaid">graph TD
+    A[Presentation Layer] --&gt; B[Domain Layer]
+    B --&gt; C[Data Layer]
+    
+    D[Use Cases] --&gt; B
+    E[Entities] --&gt; B
+    F[Repositories] --&gt; C
+    G[Data Sources] --&gt; C
+</code></pre>
+
+<h3 id="key-principles"><strong>Key Principles</strong></h3>
+<ul>
+  <li><strong>Dependency Inversion</strong>: Depend on abstractions, not concretions</li>
+  <li><strong>Separation of Concerns</strong>: Each layer has a single responsibility</li>
+  <li><strong>Testability</strong>: Easy to test in isolation</li>
+  <li><strong>Maintainability</strong>: Easy to modify and extend</li>
+</ul>
+
+<hr />
+
+<h2 id="-architecture-layers">🎯 <strong>Architecture Layers</strong></h2>
+
+<h3 id="domain-layer-implementation"><strong>Domain Layer Implementation</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Domain entities</span>
+<span class="kd">const</span> <span class="nx">User</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">id</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="na">name</span><span class="p">:</span> <span class="dl">''</span><span class="p">,</span>
+  <span class="na">email</span><span class="p">:</span> <span class="dl">''</span><span class="p">,</span>
+  <span class="na">createdAt</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+  
+  <span class="na">create</span><span class="p">:</span> <span class="p">(</span><span class="nx">userData</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">({</span>
+    <span class="na">id</span><span class="p">:</span> <span class="nx">userData</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span>
+    <span class="na">name</span><span class="p">:</span> <span class="nx">userData</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span>
+    <span class="na">email</span><span class="p">:</span> <span class="nx">userData</span><span class="p">.</span><span class="nx">email</span><span class="p">,</span>
+    <span class="na">createdAt</span><span class="p">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(),</span>
+  <span class="p">}),</span>
+  
+  <span class="na">validate</span><span class="p">:</span> <span class="p">(</span><span class="nx">user</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">errors</span> <span class="o">=</span> <span class="p">[];</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">user</span><span class="p">.</span><span class="nx">name</span> <span class="o">||</span> <span class="nx">user</span><span class="p">.</span><span class="nx">name</span><span class="p">.</span><span class="nx">trim</span><span class="p">().</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">errors</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="dl">'</span><span class="s1">Name is required</span><span class="dl">'</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">user</span><span class="p">.</span><span class="nx">email</span> <span class="o">||</span> <span class="o">!</span><span class="nx">isValidEmail</span><span class="p">(</span><span class="nx">user</span><span class="p">.</span><span class="nx">email</span><span class="p">))</span> <span class="p">{</span>
+      <span class="nx">errors</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="dl">'</span><span class="s1">Valid email is required</span><span class="dl">'</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="nx">errors</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// Domain repositories (interfaces)</span>
+<span class="kd">const</span> <span class="nx">UserRepository</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">findById</span><span class="p">:</span> <span class="k">async</span> <span class="p">(</span><span class="nx">id</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Method must be implemented</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">},</span>
+  
+  <span class="na">findByEmail</span><span class="p">:</span> <span class="k">async</span> <span class="p">(</span><span class="nx">email</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Method must be implemented</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">},</span>
+  
+  <span class="na">save</span><span class="p">:</span> <span class="k">async</span> <span class="p">(</span><span class="nx">user</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Method must be implemented</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">},</span>
+  
+  <span class="na">delete</span><span class="p">:</span> <span class="k">async</span> <span class="p">(</span><span class="nx">id</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Method must be implemented</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// Use cases</span>
+<span class="kd">const</span> <span class="nx">CreateUserUseCase</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">execute</span><span class="p">:</span> <span class="k">async</span> <span class="p">(</span><span class="nx">userData</span><span class="p">,</span> <span class="nx">userRepository</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="c1">// Validate user data</span>
+      <span class="kd">const</span> <span class="nx">user</span> <span class="o">=</span> <span class="nx">User</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">userData</span><span class="p">);</span>
+      <span class="kd">const</span> <span class="nx">validationErrors</span> <span class="o">=</span> <span class="nx">User</span><span class="p">.</span><span class="nx">validate</span><span class="p">(</span><span class="nx">user</span><span class="p">);</span>
+      
+      <span class="k">if</span> <span class="p">(</span><span class="nx">validationErrors</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">`Validation failed: </span><span class="p">${</span><span class="nx">validationErrors</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="dl">'</span><span class="s1">, </span><span class="dl">'</span><span class="p">)}</span><span class="s2">`</span><span class="p">);</span>
+      <span class="p">}</span>
+      
+      <span class="c1">// Check if user already exists</span>
+      <span class="kd">const</span> <span class="nx">existingUser</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">userRepository</span><span class="p">.</span><span class="nx">findByEmail</span><span class="p">(</span><span class="nx">user</span><span class="p">.</span><span class="nx">email</span><span class="p">);</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">existingUser</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">User with this email already exists</span><span class="dl">'</span><span class="p">);</span>
+      <span class="p">}</span>
+      
+      <span class="c1">// Save user</span>
+      <span class="kd">const</span> <span class="nx">savedUser</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">userRepository</span><span class="p">.</span><span class="nx">save</span><span class="p">(</span><span class="nx">user</span><span class="p">);</span>
+      <span class="k">return</span> <span class="nx">savedUser</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">`Failed to create user: </span><span class="p">${</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">GetUserUseCase</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">execute</span><span class="p">:</span> <span class="k">async</span> <span class="p">(</span><span class="nx">userId</span><span class="p">,</span> <span class="nx">userRepository</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">userId</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">User ID is required</span><span class="dl">'</span><span class="p">);</span>
+      <span class="p">}</span>
+      
+      <span class="kd">const</span> <span class="nx">user</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">userRepository</span><span class="p">.</span><span class="nx">findById</span><span class="p">(</span><span class="nx">userId</span><span class="p">);</span>
+      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">user</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">User not found</span><span class="dl">'</span><span class="p">);</span>
+      <span class="p">}</span>
+      
+      <span class="k">return</span> <span class="nx">user</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">`Failed to get user: </span><span class="p">${</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// Utility functions</span>
+<span class="kd">const</span> <span class="nx">isValidEmail</span> <span class="o">=</span> <span class="p">(</span><span class="nx">email</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">emailRegex</span> <span class="o">=</span> <span class="sr">/^</span><span class="se">[^\s</span><span class="sr">@</span><span class="se">]</span><span class="sr">+@</span><span class="se">[^\s</span><span class="sr">@</span><span class="se">]</span><span class="sr">+</span><span class="se">\.[^\s</span><span class="sr">@</span><span class="se">]</span><span class="sr">+$/</span><span class="p">;</span>
+  <span class="k">return</span> <span class="nx">emailRegex</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">email</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="k">export</span> <span class="p">{</span> <span class="nx">User</span><span class="p">,</span> <span class="nx">UserRepository</span><span class="p">,</span> <span class="nx">CreateUserUseCase</span><span class="p">,</span> <span class="nx">GetUserUseCase</span> <span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="data-layer-implementation"><strong>Data Layer Implementation</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">AsyncStorage</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@react-native-async-storage/async-storage</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="c1">// Data models</span>
+<span class="kd">const</span> <span class="nx">UserDataModel</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">id</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="na">name</span><span class="p">:</span> <span class="dl">''</span><span class="p">,</span>
+  <span class="na">email</span><span class="p">:</span> <span class="dl">''</span><span class="p">,</span>
+  <span class="na">createdAt</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+  
+  <span class="na">fromDomain</span><span class="p">:</span> <span class="p">(</span><span class="nx">user</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">({</span>
+    <span class="na">id</span><span class="p">:</span> <span class="nx">user</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span>
+    <span class="na">name</span><span class="p">:</span> <span class="nx">user</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span>
+    <span class="na">email</span><span class="p">:</span> <span class="nx">user</span><span class="p">.</span><span class="nx">email</span><span class="p">,</span>
+    <span class="na">createdAt</span><span class="p">:</span> <span class="nx">user</span><span class="p">.</span><span class="nx">createdAt</span><span class="p">?.</span><span class="nx">toISOString</span><span class="p">(),</span>
+  <span class="p">}),</span>
+  
+  <span class="na">toDomain</span><span class="p">:</span> <span class="p">(</span><span class="nx">userData</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">({</span>
+    <span class="na">id</span><span class="p">:</span> <span class="nx">userData</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span>
+    <span class="na">name</span><span class="p">:</span> <span class="nx">userData</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span>
+    <span class="na">email</span><span class="p">:</span> <span class="nx">userData</span><span class="p">.</span><span class="nx">email</span><span class="p">,</span>
+    <span class="na">createdAt</span><span class="p">:</span> <span class="nx">userData</span><span class="p">.</span><span class="nx">createdAt</span> <span class="p">?</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="nx">userData</span><span class="p">.</span><span class="nx">createdAt</span><span class="p">)</span> <span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="p">})</span>
+<span class="p">};</span>
+
+<span class="c1">// Local data source</span>
+<span class="kd">const</span> <span class="nx">LocalUserDataSource</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="k">async</span> <span class="nx">findById</span><span class="p">(</span><span class="nx">id</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">users</span> <span class="o">=</span> <span class="k">await</span> <span class="k">this</span><span class="p">.</span><span class="nx">getAllUsers</span><span class="p">();</span>
+      <span class="k">return</span> <span class="nx">users</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="nx">user</span> <span class="o">=&gt;</span> <span class="nx">user</span><span class="p">.</span><span class="nx">id</span> <span class="o">===</span> <span class="nx">id</span><span class="p">)</span> <span class="o">||</span> <span class="kc">null</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">`Failed to find user by ID: </span><span class="p">${</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  
+  <span class="k">async</span> <span class="nx">findByEmail</span><span class="p">(</span><span class="nx">email</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">users</span> <span class="o">=</span> <span class="k">await</span> <span class="k">this</span><span class="p">.</span><span class="nx">getAllUsers</span><span class="p">();</span>
+      <span class="k">return</span> <span class="nx">users</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="nx">user</span> <span class="o">=&gt;</span> <span class="nx">user</span><span class="p">.</span><span class="nx">email</span> <span class="o">===</span> <span class="nx">email</span><span class="p">)</span> <span class="o">||</span> <span class="kc">null</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">`Failed to find user by email: </span><span class="p">${</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  
+  <span class="k">async</span> <span class="nx">save</span><span class="p">(</span><span class="nx">user</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">users</span> <span class="o">=</span> <span class="k">await</span> <span class="k">this</span><span class="p">.</span><span class="nx">getAllUsers</span><span class="p">();</span>
+      <span class="kd">const</span> <span class="nx">userData</span> <span class="o">=</span> <span class="nx">UserDataModel</span><span class="p">.</span><span class="nx">fromDomain</span><span class="p">(</span><span class="nx">user</span><span class="p">);</span>
+      
+      <span class="kd">const</span> <span class="nx">existingIndex</span> <span class="o">=</span> <span class="nx">users</span><span class="p">.</span><span class="nx">findIndex</span><span class="p">(</span><span class="nx">u</span> <span class="o">=&gt;</span> <span class="nx">u</span><span class="p">.</span><span class="nx">id</span> <span class="o">===</span> <span class="nx">user</span><span class="p">.</span><span class="nx">id</span><span class="p">);</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">existingIndex</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">users</span><span class="p">[</span><span class="nx">existingIndex</span><span class="p">]</span> <span class="o">=</span> <span class="nx">userData</span><span class="p">;</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">users</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">userData</span><span class="p">);</span>
+      <span class="p">}</span>
+      
+      <span class="k">await</span> <span class="nx">AsyncStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="dl">'</span><span class="s1">users</span><span class="dl">'</span><span class="p">,</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">users</span><span class="p">));</span>
+      <span class="k">return</span> <span class="nx">UserDataModel</span><span class="p">.</span><span class="nx">toDomain</span><span class="p">(</span><span class="nx">userData</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">`Failed to save user: </span><span class="p">${</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  
+  <span class="k">async</span> <span class="k">delete</span><span class="p">(</span><span class="nx">id</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">users</span> <span class="o">=</span> <span class="k">await</span> <span class="k">this</span><span class="p">.</span><span class="nx">getAllUsers</span><span class="p">();</span>
+      <span class="kd">const</span> <span class="nx">filteredUsers</span> <span class="o">=</span> <span class="nx">users</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">user</span> <span class="o">=&gt;</span> <span class="nx">user</span><span class="p">.</span><span class="nx">id</span> <span class="o">!==</span> <span class="nx">id</span><span class="p">);</span>
+      <span class="k">await</span> <span class="nx">AsyncStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="dl">'</span><span class="s1">users</span><span class="dl">'</span><span class="p">,</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">filteredUsers</span><span class="p">));</span>
+      <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">`Failed to delete user: </span><span class="p">${</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  
+  <span class="k">async</span> <span class="nx">getAllUsers</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">usersJson</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">AsyncStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="dl">'</span><span class="s1">users</span><span class="dl">'</span><span class="p">);</span>
+      <span class="k">return</span> <span class="nx">usersJson</span> <span class="p">?</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">usersJson</span><span class="p">)</span> <span class="p">:</span> <span class="p">[];</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">`Failed to get users: </span><span class="p">${</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// Remote data source</span>
+<span class="kd">const</span> <span class="nx">RemoteUserDataSource</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="k">async</span> <span class="nx">findById</span><span class="p">(</span><span class="nx">id</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="s2">`/api/users/</span><span class="p">${</span><span class="nx">id</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">response</span><span class="p">.</span><span class="nx">ok</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">`HTTP error! status: </span><span class="p">${</span><span class="nx">response</span><span class="p">.</span><span class="nx">status</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+      <span class="p">}</span>
+      <span class="kd">const</span> <span class="nx">userData</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+      <span class="k">return</span> <span class="nx">UserDataModel</span><span class="p">.</span><span class="nx">toDomain</span><span class="p">(</span><span class="nx">userData</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">`Failed to fetch user: </span><span class="p">${</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  
+  <span class="k">async</span> <span class="nx">findByEmail</span><span class="p">(</span><span class="nx">email</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="s2">`/api/users?email=</span><span class="p">${</span><span class="nx">email</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">response</span><span class="p">.</span><span class="nx">ok</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">`HTTP error! status: </span><span class="p">${</span><span class="nx">response</span><span class="p">.</span><span class="nx">status</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+      <span class="p">}</span>
+      <span class="kd">const</span> <span class="nx">users</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+      <span class="k">return</span> <span class="nx">users</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="p">?</span> <span class="nx">UserDataModel</span><span class="p">.</span><span class="nx">toDomain</span><span class="p">(</span><span class="nx">users</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="p">:</span> <span class="kc">null</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">`Failed to fetch user by email: </span><span class="p">${</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  
+  <span class="k">async</span> <span class="nx">save</span><span class="p">(</span><span class="nx">user</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">userData</span> <span class="o">=</span> <span class="nx">UserDataModel</span><span class="p">.</span><span class="nx">fromDomain</span><span class="p">(</span><span class="nx">user</span><span class="p">);</span>
+      <span class="kd">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="dl">'</span><span class="s1">/api/users</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span>
+        <span class="na">method</span><span class="p">:</span> <span class="nx">user</span><span class="p">.</span><span class="nx">id</span> <span class="p">?</span> <span class="dl">'</span><span class="s1">PUT</span><span class="dl">'</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">POST</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">headers</span><span class="p">:</span> <span class="p">{</span>
+          <span class="dl">'</span><span class="s1">Content-Type</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">application/json</span><span class="dl">'</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="na">body</span><span class="p">:</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">userData</span><span class="p">),</span>
+      <span class="p">});</span>
+      
+      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">response</span><span class="p">.</span><span class="nx">ok</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">`HTTP error! status: </span><span class="p">${</span><span class="nx">response</span><span class="p">.</span><span class="nx">status</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+      <span class="p">}</span>
+      
+      <span class="kd">const</span> <span class="nx">savedUserData</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+      <span class="k">return</span> <span class="nx">UserDataModel</span><span class="p">.</span><span class="nx">toDomain</span><span class="p">(</span><span class="nx">savedUserData</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">`Failed to save user: </span><span class="p">${</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  
+  <span class="k">async</span> <span class="k">delete</span><span class="p">(</span><span class="nx">id</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="s2">`/api/users/</span><span class="p">${</span><span class="nx">id</span><span class="p">}</span><span class="s2">`</span><span class="p">,</span> <span class="p">{</span>
+        <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">DELETE</span><span class="dl">'</span><span class="p">,</span>
+      <span class="p">});</span>
+      
+      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">response</span><span class="p">.</span><span class="nx">ok</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">`HTTP error! status: </span><span class="p">${</span><span class="nx">response</span><span class="p">.</span><span class="nx">status</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+      <span class="p">}</span>
+      
+      <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">`Failed to delete user: </span><span class="p">${</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">export</span> <span class="p">{</span> <span class="nx">UserDataModel</span><span class="p">,</span> <span class="nx">LocalUserDataSource</span><span class="p">,</span> <span class="nx">RemoteUserDataSource</span> <span class="p">};</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-dependency-injection">💉 <strong>Dependency Injection</strong></h2>
+
+<h3 id="di-container-implementation"><strong>DI Container Implementation</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Dependency injection container</span>
+<span class="kd">const</span> <span class="nx">createDIContainer</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">services</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Map</span><span class="p">();</span>
+  <span class="kd">const</span> <span class="nx">factories</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Map</span><span class="p">();</span>
+  
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="c1">// Register a service instance</span>
+    <span class="na">register</span><span class="p">:</span> <span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">instance</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">services</span><span class="p">.</span><span class="kd">set</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">instance</span><span class="p">);</span>
+    <span class="p">},</span>
+    
+    <span class="c1">// Register a factory function</span>
+    <span class="na">registerFactory</span><span class="p">:</span> <span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">factory</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">factories</span><span class="p">.</span><span class="kd">set</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">factory</span><span class="p">);</span>
+    <span class="p">},</span>
+    
+    <span class="c1">// Get a service instance</span>
+    <span class="na">get</span><span class="p">:</span> <span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">services</span><span class="p">.</span><span class="nx">has</span><span class="p">(</span><span class="nx">name</span><span class="p">))</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">services</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
+      <span class="p">}</span>
+      
+      <span class="k">if</span> <span class="p">(</span><span class="nx">factories</span><span class="p">.</span><span class="nx">has</span><span class="p">(</span><span class="nx">name</span><span class="p">))</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">factory</span> <span class="o">=</span> <span class="nx">factories</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
+        <span class="kd">const</span> <span class="nx">instance</span> <span class="o">=</span> <span class="nx">factory</span><span class="p">();</span>
+        <span class="nx">services</span><span class="p">.</span><span class="kd">set</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">instance</span><span class="p">);</span>
+        <span class="k">return</span> <span class="nx">instance</span><span class="p">;</span>
+      <span class="p">}</span>
+      
+      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">`Service '</span><span class="p">${</span><span class="nx">name</span><span class="p">}</span><span class="s2">' not found`</span><span class="p">);</span>
+    <span class="p">},</span>
+    
+    <span class="c1">// Check if service is registered</span>
+    <span class="na">has</span><span class="p">:</span> <span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">services</span><span class="p">.</span><span class="nx">has</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="o">||</span> <span class="nx">factories</span><span class="p">.</span><span class="nx">has</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
+    <span class="p">},</span>
+    
+    <span class="c1">// Clear all services</span>
+    <span class="na">clear</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">services</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
+      <span class="nx">factories</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+<span class="p">};</span>
+
+<span class="c1">// Repository implementation with DI</span>
+<span class="kd">const</span> <span class="nx">UserRepositoryImpl</span> <span class="o">=</span> <span class="p">(</span><span class="nx">localDataSource</span><span class="p">,</span> <span class="nx">remoteDataSource</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="k">async</span> <span class="nx">findById</span><span class="p">(</span><span class="nx">id</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">try</span> <span class="p">{</span>
+        <span class="c1">// Try remote first, fallback to local</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="nx">remoteDataSource</span><span class="p">.</span><span class="nx">findById</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
+      <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span><span class="dl">'</span><span class="s1">Remote fetch failed, trying local:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="nx">localDataSource</span><span class="p">.</span><span class="nx">findById</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
+    
+    <span class="k">async</span> <span class="nx">findByEmail</span><span class="p">(</span><span class="nx">email</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">try</span> <span class="p">{</span>
+        <span class="c1">// Try remote first, fallback to local</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="nx">remoteDataSource</span><span class="p">.</span><span class="nx">findByEmail</span><span class="p">(</span><span class="nx">email</span><span class="p">);</span>
+      <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span><span class="dl">'</span><span class="s1">Remote fetch failed, trying local:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="nx">localDataSource</span><span class="p">.</span><span class="nx">findByEmail</span><span class="p">(</span><span class="nx">email</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
+    
+    <span class="k">async</span> <span class="nx">save</span><span class="p">(</span><span class="nx">user</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">try</span> <span class="p">{</span>
+        <span class="c1">// Save to remote first</span>
+        <span class="kd">const</span> <span class="nx">savedUser</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">remoteDataSource</span><span class="p">.</span><span class="nx">save</span><span class="p">(</span><span class="nx">user</span><span class="p">);</span>
+        <span class="c1">// Then save to local cache</span>
+        <span class="k">await</span> <span class="nx">localDataSource</span><span class="p">.</span><span class="nx">save</span><span class="p">(</span><span class="nx">savedUser</span><span class="p">);</span>
+        <span class="k">return</span> <span class="nx">savedUser</span><span class="p">;</span>
+      <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span><span class="dl">'</span><span class="s1">Remote save failed, saving locally:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="nx">localDataSource</span><span class="p">.</span><span class="nx">save</span><span class="p">(</span><span class="nx">user</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
+    
+    <span class="k">async</span> <span class="k">delete</span><span class="p">(</span><span class="nx">id</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">try</span> <span class="p">{</span>
+        <span class="c1">// Delete from remote first</span>
+        <span class="k">await</span> <span class="nx">remoteDataSource</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
+        <span class="c1">// Then delete from local</span>
+        <span class="k">await</span> <span class="nx">localDataSource</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
+        <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+      <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span><span class="dl">'</span><span class="s1">Remote delete failed, deleting locally:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="nx">localDataSource</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+<span class="p">};</span>
+
+<span class="c1">// Service factory</span>
+<span class="kd">const</span> <span class="nx">createUserService</span> <span class="o">=</span> <span class="p">(</span><span class="nx">container</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">userRepository</span> <span class="o">=</span> <span class="nx">container</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">userRepository</span><span class="dl">'</span><span class="p">);</span>
+  
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="k">async</span> <span class="nx">createUser</span><span class="p">(</span><span class="nx">userData</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="k">await</span> <span class="nx">CreateUserUseCase</span><span class="p">.</span><span class="nx">execute</span><span class="p">(</span><span class="nx">userData</span><span class="p">,</span> <span class="nx">userRepository</span><span class="p">);</span>
+    <span class="p">},</span>
+    
+    <span class="k">async</span> <span class="nx">getUser</span><span class="p">(</span><span class="nx">userId</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="k">await</span> <span class="nx">GetUserUseCase</span><span class="p">.</span><span class="nx">execute</span><span class="p">(</span><span class="nx">userId</span><span class="p">,</span> <span class="nx">userRepository</span><span class="p">);</span>
+    <span class="p">},</span>
+    
+    <span class="k">async</span> <span class="nx">updateUser</span><span class="p">(</span><span class="nx">userId</span><span class="p">,</span> <span class="nx">userData</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">existingUser</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">userRepository</span><span class="p">.</span><span class="nx">findById</span><span class="p">(</span><span class="nx">userId</span><span class="p">);</span>
+      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">existingUser</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">User not found</span><span class="dl">'</span><span class="p">);</span>
+      <span class="p">}</span>
+      
+      <span class="kd">const</span> <span class="nx">updatedUser</span> <span class="o">=</span> <span class="p">{</span> <span class="p">...</span><span class="nx">existingUser</span><span class="p">,</span> <span class="p">...</span><span class="nx">userData</span> <span class="p">};</span>
+      <span class="k">return</span> <span class="k">await</span> <span class="nx">userRepository</span><span class="p">.</span><span class="nx">save</span><span class="p">(</span><span class="nx">updatedUser</span><span class="p">);</span>
+    <span class="p">},</span>
+    
+    <span class="k">async</span> <span class="nx">deleteUser</span><span class="p">(</span><span class="nx">userId</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="k">await</span> <span class="nx">userRepository</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="nx">userId</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+<span class="p">};</span>
+
+<span class="c1">// Initialize DI container</span>
+<span class="kd">const</span> <span class="nx">initializeContainer</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">container</span> <span class="o">=</span> <span class="nx">createDIContainer</span><span class="p">();</span>
+  
+  <span class="c1">// Register data sources</span>
+  <span class="nx">container</span><span class="p">.</span><span class="nx">register</span><span class="p">(</span><span class="dl">'</span><span class="s1">localUserDataSource</span><span class="dl">'</span><span class="p">,</span> <span class="nx">LocalUserDataSource</span><span class="p">);</span>
+  <span class="nx">container</span><span class="p">.</span><span class="nx">register</span><span class="p">(</span><span class="dl">'</span><span class="s1">remoteUserDataSource</span><span class="dl">'</span><span class="p">,</span> <span class="nx">RemoteUserDataSource</span><span class="p">);</span>
+  
+  <span class="c1">// Register repository</span>
+  <span class="nx">container</span><span class="p">.</span><span class="nx">registerFactory</span><span class="p">(</span><span class="dl">'</span><span class="s1">userRepository</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">localDataSource</span> <span class="o">=</span> <span class="nx">container</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">localUserDataSource</span><span class="dl">'</span><span class="p">);</span>
+    <span class="kd">const</span> <span class="nx">remoteDataSource</span> <span class="o">=</span> <span class="nx">container</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">remoteUserDataSource</span><span class="dl">'</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nx">UserRepositoryImpl</span><span class="p">(</span><span class="nx">localDataSource</span><span class="p">,</span> <span class="nx">remoteDataSource</span><span class="p">);</span>
+  <span class="p">});</span>
+  
+  <span class="c1">// Register services</span>
+  <span class="nx">container</span><span class="p">.</span><span class="nx">registerFactory</span><span class="p">(</span><span class="dl">'</span><span class="s1">userService</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">createUserService</span><span class="p">(</span><span class="nx">container</span><span class="p">));</span>
+  
+  <span class="k">return</span> <span class="nx">container</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">export</span> <span class="p">{</span> <span class="nx">createDIContainer</span><span class="p">,</span> <span class="nx">UserRepositoryImpl</span><span class="p">,</span> <span class="nx">createUserService</span><span class="p">,</span> <span class="nx">initializeContainer</span> <span class="p">};</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-best-practices">🎯 <strong>Best Practices</strong></h2>
+
+<h3 id="1-architecture-design"><strong>1. Architecture Design</strong></h3>
+<ul>
+  <li>Follow SOLID principles</li>
+  <li>Use dependency injection</li>
+  <li>Separate concerns properly</li>
+  <li>Keep layers independent</li>
+</ul>
+
+<h3 id="2-implementation"><strong>2. Implementation</strong></h3>
+<ul>
+  <li>Use interfaces for contracts</li>
+  <li>Implement proper error handling</li>
+  <li>Add comprehensive logging</li>
+  <li>Write unit tests</li>
+</ul>
+
+<h3 id="3-maintenance"><strong>3. Maintenance</strong></h3>
+<ul>
+  <li>Regular code reviews</li>
+  <li>Refactor when needed</li>
+  <li>Monitor performance</li>
+  <li>Update dependencies</li>
+</ul>
+
+<hr />
+
+<h2 id="-interview-questions">❓ <strong>Interview Questions</strong></h2>
+
+<h3 id="basic-questions"><strong>Basic Questions</strong></h3>
+<ol>
+  <li><strong>What is clean architecture?</strong></li>
+  <li><strong>How do you implement dependency injection?</strong></li>
+  <li><strong>What is the repository pattern?</strong></li>
+</ol>
+
+<h3 id="advanced-questions"><strong>Advanced Questions</strong></h3>
+<ol>
+  <li><strong>How would you design a scalable React Native architecture?</strong></li>
+  <li><strong>Explain the benefits of clean architecture.</strong></li>
+  <li><strong>How do you handle data synchronization between layers?</strong></li>
+</ol>
+
+<h3 id="practical-questions"><strong>Practical Questions</strong></h3>
+<ol>
+  <li><strong>Implement a clean architecture for a user management system.</strong></li>
+  <li><strong>Create a dependency injection container.</strong></li>
+  <li><strong>Design a repository pattern for data access.</strong></li>
+</ol>
+
+<hr />
+
+<h2 id="-navigation">🧭 Navigation</h2>
+
+<div class="navigation">
+    <a href="../12-Accessibility-Internationalization/04-Accessibility-Best-Practices.md" class="nav-link prev">⬅️ Previous: Accessibility Best Practices</a>
+    <a href="./02-MVVM-Pattern.md" class="nav-link next">Next: MVVM Pattern ➡️</a>
+</div>
+
+<hr />
+
+<script src="../../common-scripts.js"></script>
+
+<p><em>Last updated: December 2024</em></p>
+
+        </main>
+        
+        <footer style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #ecf0f1; color: #666; text-align: center;">
+            <p>Interview Prep Documentation - Built with Jekyll</p>
+        </footer>
+    </div>
+</body>
+</html>

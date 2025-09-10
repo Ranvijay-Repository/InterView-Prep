@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CI/CD Setup Summary - Interview Prep Documentation</title>
+    <meta name="description" content="Comprehensive guides for JavaScript, TypeScript, and React Native interview preparation">
+    
+    <!-- GitHub Pages compatible styling -->
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+        }
+        
+        .container {
+            max-width: 100%;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            color: #2c3e50;
+            margin-top: 2em;
+            margin-bottom: 1em;
+        }
+        
+        h1 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            border-bottom: 1px solid #ecf0f1;
+            padding-bottom: 5px;
+        }
+        
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border-left: 4px solid #3498db;
+        }
+        
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+        
+        blockquote {
+            border-left: 4px solid #3498db;
+            margin: 0;
+            padding-left: 20px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1em 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .navigation {
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px 0;
+            margin-bottom: 20px;
+        }
+        
+        .navigation a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+        
+        .navigation a:hover {
+            text-decoration: underline;
+        }
+        
+        .breadcrumb {
+            margin-bottom: 20px;
+            color: #666;
+        }
+        
+        .breadcrumb a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            h2 {
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="navigation">
+            <a href="/">Home</a>
+            <a href="/Javascript/">JavaScript</a>
+            <a href="/TypeScript/">TypeScript</a>
+            <a href="/React-Native/">React Native</a>
+        </nav>
+        
+        
+        
+        <main>
+            <h1 id="cicd-setup-summary">CI/CD Setup Summary</h1>
+
+<h2 id="-whats-been-configured">🎯 What’s Been Configured</h2>
+
+<p>Your repository now has a complete CI/CD pipeline that ensures:</p>
+
+<h3 id="-deployment-only-on-pr-merges">✅ <strong>Deployment Only on PR Merges</strong></h3>
+<ul>
+  <li><strong>NO direct pushes</strong> to production branch will deploy</li>
+  <li><strong>ONLY PR merges</strong> trigger automatic deployment</li>
+  <li><strong>Verification step</strong> confirms the commit is a PR merge commit</li>
+</ul>
+
+<h3 id="-branch-protection">✅ <strong>Branch Protection</strong></h3>
+<ul>
+  <li>Production branch is protected from direct pushes</li>
+  <li>All changes must go through Pull Request process</li>
+  <li>Required status checks must pass before merging</li>
+</ul>
+
+<h3 id="-automated-workflows">✅ <strong>Automated Workflows</strong></h3>
+<ul>
+  <li><strong>Lint &amp; Test</strong>: Runs on all PRs to production</li>
+  <li><strong>Build &amp; Deploy</strong>: Runs only on PR merges to production</li>
+  <li><strong>Status Checks</strong>: Prevents merging if checks fail</li>
+</ul>
+
+<h2 id="-how-it-works">🚀 How It Works</h2>
+
+<h3 id="1-development-workflow">1. <strong>Development Workflow</strong></h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Create feature branch</span>
+git checkout <span class="nt">-b</span> feature/my-feature
+
+<span class="c"># Make changes and commit</span>
+git add <span class="nb">.</span>
+git commit <span class="nt">-m</span> <span class="s2">"Add new feature"</span>
+git push origin feature/my-feature
+
+<span class="c"># Create PR to production branch</span>
+<span class="c"># → Triggers lint workflow</span>
+<span class="c"># → Shows build status in PR</span>
+</code></pre></div></div>
+
+<h3 id="2-deployment-workflow">2. <strong>Deployment Workflow</strong></h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># When PR is approved and merged:</span>
+<span class="c"># → Triggers deploy workflow</span>
+<span class="c"># → Verifies it's a PR merge commit</span>
+<span class="c"># → Builds Jekyll site</span>
+<span class="c"># → Deploys to GitHub Pages</span>
+</code></pre></div></div>
+
+<h3 id="3-security-features">3. <strong>Security Features</strong></h3>
+<ul>
+  <li><strong>Branch Protection</strong>: Blocks direct pushes to production</li>
+  <li><strong>Merge Verification</strong>: Only PR merge commits can deploy</li>
+  <li><strong>Status Checks</strong>: All tests must pass before merge</li>
+  <li><strong>Signed Commits</strong>: Ensures commit authenticity</li>
+</ul>
+
+<h2 id="-files-created">📁 Files Created</h2>
+
+<h3 id="github-actions-workflows">GitHub Actions Workflows</h3>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">.github/workflows/deploy.yml</code> - Main deployment workflow</li>
+  <li><code class="language-plaintext highlighter-rouge">.github/workflows/lint.yml</code> - Linting and validation workflow</li>
+</ul>
+
+<h3 id="jekyll-configuration">Jekyll Configuration</h3>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">_config.yml</code> - Jekyll site configuration</li>
+  <li><code class="language-plaintext highlighter-rouge">_layouts/default.html</code> - Site layout template</li>
+  <li><code class="language-plaintext highlighter-rouge">Gemfile</code> - Ruby dependencies</li>
+  <li><code class="language-plaintext highlighter-rouge">.jekyllignore</code> - Files to ignore during build</li>
+</ul>
+
+<h3 id="setup-scripts">Setup Scripts</h3>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">scripts/setup-production-branch.sh</code> - Automated branch setup</li>
+  <li><code class="language-plaintext highlighter-rouge">BRANCH-PROTECTION-SETUP.md</code> - Detailed setup guide</li>
+</ul>
+
+<h2 id="-next-steps">🔧 Next Steps</h2>
+
+<h3 id="1-run-the-setup-script">1. <strong>Run the Setup Script</strong></h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./scripts/setup-production-branch.sh
+</code></pre></div></div>
+
+<h3 id="2-configure-branch-protection">2. <strong>Configure Branch Protection</strong></h3>
+<p>Follow the instructions in <code class="language-plaintext highlighter-rouge">BRANCH-PROTECTION-SETUP.md</code> to:</p>
+<ul>
+  <li>Enable branch protection rules</li>
+  <li>Configure required status checks</li>
+  <li>Set up GitHub Pages</li>
+</ul>
+
+<h3 id="3-test-the-pipeline">3. <strong>Test the Pipeline</strong></h3>
+<ol>
+  <li>Create a feature branch</li>
+  <li>Make a small change</li>
+  <li>Create PR to production</li>
+  <li>Verify linting runs</li>
+  <li>Merge PR and verify deployment</li>
+</ol>
+
+<h2 id="️-security-features">🛡️ Security Features</h2>
+
+<h3 id="branch-protection-rules">Branch Protection Rules</h3>
+<ul>
+  <li>✅ Require pull request reviews</li>
+  <li>✅ Require status checks to pass</li>
+  <li>✅ Require conversation resolution</li>
+  <li>✅ Require signed commits</li>
+  <li>✅ Require linear history</li>
+  <li>❌ Block force pushes</li>
+  <li>❌ Block branch deletion</li>
+</ul>
+
+<h3 id="deployment-security">Deployment Security</h3>
+<ul>
+  <li>✅ Only PR merges can deploy</li>
+  <li>✅ Commit message verification</li>
+  <li>✅ Environment protection</li>
+  <li>✅ Artifact validation</li>
+</ul>
+
+<h2 id="-monitoring">📊 Monitoring</h2>
+
+<h3 id="check-deployment-status">Check Deployment Status</h3>
+<ul>
+  <li>Go to <strong>Actions</strong> tab in GitHub</li>
+  <li>Look for <strong>Deploy to GitHub Pages</strong> workflow</li>
+  <li>Green ✅ = successful deployment</li>
+  <li>Red ❌ = deployment failed</li>
+</ul>
+
+<h3 id="view-live-site">View Live Site</h3>
+<ul>
+  <li><strong>URL</strong>: <code class="language-plaintext highlighter-rouge">https://yourusername.github.io/your-repo-name</code></li>
+  <li><strong>Custom Domain</strong>: Configure in Settings → Pages</li>
+</ul>
+
+<h2 id="-troubleshooting">🚨 Troubleshooting</h2>
+
+<h3 id="common-issues">Common Issues</h3>
+
+<p><strong>“Workflow not triggering”</strong></p>
+<ul>
+  <li>Ensure you’re merging PRs to production branch</li>
+  <li>Check that branch protection is properly configured</li>
+</ul>
+
+<p><strong>“Deployment blocked”</strong></p>
+<ul>
+  <li>Verify the commit message contains “Merge pull request”</li>
+  <li>Check that all required status checks have passed</li>
+</ul>
+
+<p><strong>“Can’t push to production”</strong></p>
+<ul>
+  <li>This is expected! Use PRs instead</li>
+  <li>Create feature branch and submit PR</li>
+</ul>
+
+<p><strong>“Build failing”</strong></p>
+<ul>
+  <li>Check Actions tab for error logs</li>
+  <li>Ensure Jekyll configuration is correct</li>
+  <li>Verify all dependencies are in Gemfile</li>
+</ul>
+
+<h2 id="-verification-checklist">✅ Verification Checklist</h2>
+
+<p>After setup, verify these work:</p>
+
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Can’t push directly to production branch</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />PR to production triggers lint workflow</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />PR merge to production triggers deployment</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Direct push to production doesn’t deploy</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Site deploys successfully to GitHub Pages</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Failed checks block PR merge</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />All required status checks are configured</li>
+</ul>
+
+<hr />
+
+<p><strong>🎉 Your CI/CD pipeline is now ready!</strong></p>
+
+<p>The system ensures that only properly reviewed code changes (via PR merges) can deploy to production, providing a secure and reliable deployment process.</p>
+
+        </main>
+        
+        <footer style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #ecf0f1; color: #666; text-align: center;">
+            <p>Interview Prep Documentation - Built with Jekyll</p>
+        </footer>
+    </div>
+</body>
+</html>

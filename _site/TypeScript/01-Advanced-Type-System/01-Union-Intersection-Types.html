@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔗 Union &amp; Intersection Types - Interview Prep Documentation</title>
+    <meta name="description" content="Comprehensive guides for JavaScript, TypeScript, and React Native interview preparation">
+    
+    <!-- GitHub Pages compatible styling -->
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+        }
+        
+        .container {
+            max-width: 100%;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            color: #2c3e50;
+            margin-top: 2em;
+            margin-bottom: 1em;
+        }
+        
+        h1 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            border-bottom: 1px solid #ecf0f1;
+            padding-bottom: 5px;
+        }
+        
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border-left: 4px solid #3498db;
+        }
+        
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+        
+        blockquote {
+            border-left: 4px solid #3498db;
+            margin: 0;
+            padding-left: 20px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1em 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .navigation {
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px 0;
+            margin-bottom: 20px;
+        }
+        
+        .navigation a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+        
+        .navigation a:hover {
+            text-decoration: underline;
+        }
+        
+        .breadcrumb {
+            margin-bottom: 20px;
+            color: #666;
+        }
+        
+        .breadcrumb a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            h2 {
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="navigation">
+            <a href="/">Home</a>
+            <a href="/Javascript/">JavaScript</a>
+            <a href="/TypeScript/">TypeScript</a>
+            <a href="/React-Native/">React Native</a>
+        </nav>
+        
+        
+        
+        <main>
+            <h1 id="-union--intersection-types">🔗 <strong>Union &amp; Intersection Types</strong></h1>
+
+<blockquote>
+  <p><strong>Complete guide to TypeScript union types, intersection types, and advanced type combinations</strong></p>
+</blockquote>
+
+<link rel="stylesheet" href="../../common-styles.css" />
+
+<hr />
+
+<h2 id="-table-of-contents">📚 <strong>Table of Contents</strong></h2>
+
+<ul>
+  <li><a href="#union-types">Union Types</a></li>
+  <li><a href="#intersection-types">Intersection Types</a></li>
+  <li><a href="#type-guards">Type Guards</a></li>
+  <li><a href="#discriminated-unions">Discriminated Unions</a></li>
+  <li><a href="#advanced-patterns">Advanced Patterns</a></li>
+  <li><a href="#best-practices">Best Practices</a></li>
+  <li><a href="#common-interview-questions">Common Interview Questions</a></li>
+</ul>
+
+<hr />
+
+<h2 id="-union-types">🎯 <strong>Union Types</strong></h2>
+
+<p>Union types allow a value to be one of several types, providing flexibility while maintaining type safety.</p>
+
+<h3 id="basic-union-types"><strong>Basic Union Types</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Union of primitive types</span>
+<span class="kd">let</span> <span class="nx">id</span><span class="p">:</span> <span class="kr">string</span> <span class="o">|</span> <span class="kr">number</span><span class="p">;</span>
+<span class="nx">id</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">123</span><span class="dl">"</span><span class="p">;</span> <span class="c1">// ✅ Valid</span>
+<span class="nx">id</span> <span class="o">=</span> <span class="mi">456</span><span class="p">;</span>   <span class="c1">// ✅ Valid</span>
+<span class="c1">// id = true; // ❌ Error: Type 'boolean' is not assignable to type 'string | number'</span>
+
+<span class="c1">// Union of different types</span>
+<span class="kd">let</span> <span class="nx">value</span><span class="p">:</span> <span class="kr">string</span> <span class="o">|</span> <span class="kr">number</span> <span class="o">|</span> <span class="nx">boolean</span><span class="p">;</span>
+<span class="nx">value</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">hello</span><span class="dl">"</span><span class="p">;</span>
+<span class="nx">value</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
+<span class="nx">value</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="function-parameters-with-union-types"><strong>Function Parameters with Union Types</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Function accepting multiple types</span>
+<span class="kd">function</span> <span class="nx">formatValue</span><span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="kr">string</span> <span class="o">|</span> <span class="kr">number</span><span class="p">):</span> <span class="kr">string</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">value</span> <span class="o">===</span> <span class="dl">"</span><span class="s2">string</span><span class="dl">"</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">value</span><span class="p">.</span><span class="nx">toUpperCase</span><span class="p">();</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">value</span><span class="p">.</span><span class="nx">toString</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="c1">// Usage</span>
+<span class="nx">formatValue</span><span class="p">(</span><span class="dl">"</span><span class="s2">hello</span><span class="dl">"</span><span class="p">);</span> <span class="c1">// "HELLO"</span>
+<span class="nx">formatValue</span><span class="p">(</span><span class="mi">42</span><span class="p">);</span>      <span class="c1">// "42"</span>
+</code></pre></div></div>
+
+<h3 id="array-union-types"><strong>Array Union Types</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Array that can contain strings or numbers</span>
+<span class="kd">let</span> <span class="nx">mixedArray</span><span class="p">:</span> <span class="p">(</span><span class="kr">string</span> <span class="o">|</span> <span class="kr">number</span><span class="p">)[]</span> <span class="o">=</span> <span class="p">[</span><span class="dl">"</span><span class="s2">hello</span><span class="dl">"</span><span class="p">,</span> <span class="mi">42</span><span class="p">,</span> <span class="dl">"</span><span class="s2">world</span><span class="dl">"</span><span class="p">,</span> <span class="mi">100</span><span class="p">];</span>
+
+<span class="c1">// Union of array types</span>
+<span class="kd">let</span> <span class="nx">stringOrNumberArray</span><span class="p">:</span> <span class="kr">string</span><span class="p">[]</span> <span class="o">|</span> <span class="kr">number</span><span class="p">[];</span>
+<span class="nx">stringOrNumberArray</span> <span class="o">=</span> <span class="p">[</span><span class="dl">"</span><span class="s2">a</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">b</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">c</span><span class="dl">"</span><span class="p">];</span> <span class="c1">// ✅ Valid</span>
+<span class="nx">stringOrNumberArray</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">];</span>       <span class="c1">// ✅ Valid</span>
+<span class="c1">// stringOrNumberArray = ["a", 1, "b"]; // ❌ Error: Mixed types not allowed</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-intersection-types">🔗 <strong>Intersection Types</strong></h2>
+
+<p>Intersection types combine multiple types into one, requiring all properties from each type.</p>
+
+<h3 id="basic-intersection-types"><strong>Basic Intersection Types</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Intersection of object types</span>
+<span class="kr">interface</span> <span class="nx">Person</span> <span class="p">{</span>
+  <span class="nl">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">age</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kr">interface</span> <span class="nx">Employee</span> <span class="p">{</span>
+  <span class="nl">employeeId</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">department</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Intersection type</span>
+<span class="kd">type</span> <span class="nx">EmployeePerson</span> <span class="o">=</span> <span class="nx">Person</span> <span class="o">&amp;</span> <span class="nx">Employee</span><span class="p">;</span>
+
+<span class="c1">// Usage</span>
+<span class="kd">const</span> <span class="nx">employee</span><span class="p">:</span> <span class="nx">EmployeePerson</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">John Doe</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">age</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
+  <span class="na">employeeId</span><span class="p">:</span> <span class="dl">"</span><span class="s2">EMP001</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">department</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Engineering</span><span class="dl">"</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="function-intersection-types"><strong>Function Intersection Types</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Intersection of function types</span>
+<span class="kd">type</span> <span class="nx">LogFunction</span> <span class="o">=</span> <span class="p">(</span><span class="nx">message</span><span class="p">:</span> <span class="kr">string</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span>
+<span class="kd">type</span> <span class="nx">TimestampFunction</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="kr">string</span><span class="p">;</span>
+
+<span class="kd">type</span> <span class="nx">LogWithTimestamp</span> <span class="o">=</span> <span class="nx">LogFunction</span> <span class="o">&amp;</span> <span class="nx">TimestampFunction</span><span class="p">;</span>
+
+<span class="c1">// Implementation</span>
+<span class="kd">const</span> <span class="nx">logWithTimestamp</span><span class="p">:</span> <span class="nx">LogWithTimestamp</span> <span class="o">=</span> <span class="p">(</span><span class="nx">message</span><span class="p">:</span> <span class="kr">string</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">timestamp</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">toISOString</span><span class="p">();</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`[</span><span class="p">${</span><span class="nx">timestamp</span><span class="p">}</span><span class="s2">] </span><span class="p">${</span><span class="nx">message</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="c1">// Add timestamp method</span>
+<span class="p">(</span><span class="nx">logWithTimestamp</span> <span class="k">as</span> <span class="kr">any</span><span class="p">).</span><span class="nx">timestamp</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">toISOString</span><span class="p">();</span>
+</code></pre></div></div>
+
+<h3 id="complex-intersection-types"><strong>Complex Intersection Types</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Intersection with optional properties</span>
+<span class="kr">interface</span> <span class="nx">BaseConfig</span> <span class="p">{</span>
+  <span class="nl">apiUrl</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">timeout</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kr">interface</span> <span class="nx">AuthConfig</span> <span class="p">{</span>
+  <span class="nl">apiKey</span><span class="p">?:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">token</span><span class="p">?:</span> <span class="kr">string</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kr">interface</span> <span class="nx">CacheConfig</span> <span class="p">{</span>
+  <span class="nl">cacheEnabled</span><span class="p">:</span> <span class="nx">boolean</span><span class="p">;</span>
+  <span class="nl">cacheTimeout</span><span class="p">?:</span> <span class="kr">number</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Intersection combining all configs</span>
+<span class="kd">type</span> <span class="nx">AppConfig</span> <span class="o">=</span> <span class="nx">BaseConfig</span> <span class="o">&amp;</span> <span class="nx">AuthConfig</span> <span class="o">&amp;</span> <span class="nx">CacheConfig</span><span class="p">;</span>
+
+<span class="c1">// Usage</span>
+<span class="kd">const</span> <span class="nx">config</span><span class="p">:</span> <span class="nx">AppConfig</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">apiUrl</span><span class="p">:</span> <span class="dl">"</span><span class="s2">https://api.example.com</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">timeout</span><span class="p">:</span> <span class="mi">5000</span><span class="p">,</span>
+  <span class="na">cacheEnabled</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="na">apiKey</span><span class="p">:</span> <span class="dl">"</span><span class="s2">secret-key</span><span class="dl">"</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="️-type-guards">🛡️ <strong>Type Guards</strong></h2>
+
+<p>Type guards help narrow down union types to specific types at runtime.</p>
+
+<h3 id="typeof-type-guards"><strong>Typeof Type Guards</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">processValue</span><span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="kr">string</span> <span class="o">|</span> <span class="kr">number</span> <span class="o">|</span> <span class="nx">boolean</span><span class="p">):</span> <span class="kr">string</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">value</span> <span class="o">===</span> <span class="dl">"</span><span class="s2">string</span><span class="dl">"</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// TypeScript knows value is string here</span>
+    <span class="k">return</span> <span class="nx">value</span><span class="p">.</span><span class="nx">toUpperCase</span><span class="p">();</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">value</span> <span class="o">===</span> <span class="dl">"</span><span class="s2">number</span><span class="dl">"</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// TypeScript knows value is number here</span>
+    <span class="k">return</span> <span class="nx">value</span><span class="p">.</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="c1">// TypeScript knows value is boolean here</span>
+    <span class="k">return</span> <span class="nx">value</span> <span class="p">?</span> <span class="dl">"</span><span class="s2">true</span><span class="dl">"</span> <span class="p">:</span> <span class="dl">"</span><span class="s2">false</span><span class="dl">"</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="instanceof-type-guards"><strong>Instanceof Type Guards</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">Dog</span> <span class="p">{</span>
+  <span class="nl">breed</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="kd">constructor</span><span class="p">(</span><span class="nx">breed</span><span class="p">:</span> <span class="kr">string</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">breed</span> <span class="o">=</span> <span class="nx">breed</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nx">Cat</span> <span class="p">{</span>
+  <span class="nl">color</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="kd">constructor</span><span class="p">(</span><span class="nx">color</span><span class="p">:</span> <span class="kr">string</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">color</span> <span class="o">=</span> <span class="nx">color</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">handlePet</span><span class="p">(</span><span class="nx">pet</span><span class="p">:</span> <span class="nx">Dog</span> <span class="o">|</span> <span class="nx">Cat</span><span class="p">):</span> <span class="kr">string</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">pet</span> <span class="k">instanceof</span> <span class="nx">Dog</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// TypeScript knows pet is Dog here</span>
+    <span class="k">return</span> <span class="s2">`Dog breed: </span><span class="p">${</span><span class="nx">pet</span><span class="p">.</span><span class="nx">breed</span><span class="p">}</span><span class="s2">`</span><span class="p">;</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="c1">// TypeScript knows pet is Cat here</span>
+    <span class="k">return</span> <span class="s2">`Cat color: </span><span class="p">${</span><span class="nx">pet</span><span class="p">.</span><span class="nx">color</span><span class="p">}</span><span class="s2">`</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="custom-type-guards"><strong>Custom Type Guards</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Custom type guard function</span>
+<span class="kd">function</span> <span class="nx">isString</span><span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">):</span> <span class="nx">value</span> <span class="k">is</span> <span class="kr">string</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="k">typeof</span> <span class="nx">value</span> <span class="o">===</span> <span class="dl">"</span><span class="s2">string</span><span class="dl">"</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">isNumber</span><span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">):</span> <span class="nx">value</span> <span class="k">is</span> <span class="kr">number</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="k">typeof</span> <span class="nx">value</span> <span class="o">===</span> <span class="dl">"</span><span class="s2">number</span><span class="dl">"</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nb">isNaN</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Usage</span>
+<span class="kd">function</span> <span class="nx">processUnknownValue</span><span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">):</span> <span class="kr">string</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">isString</span><span class="p">(</span><span class="nx">value</span><span class="p">))</span> <span class="p">{</span>
+    <span class="c1">// TypeScript knows value is string</span>
+    <span class="k">return</span> <span class="nx">value</span><span class="p">.</span><span class="nx">toUpperCase</span><span class="p">();</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">isNumber</span><span class="p">(</span><span class="nx">value</span><span class="p">))</span> <span class="p">{</span>
+    <span class="c1">// TypeScript knows value is number</span>
+    <span class="k">return</span> <span class="nx">value</span><span class="p">.</span><span class="nx">toString</span><span class="p">();</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="dl">"</span><span class="s2">Unknown type</span><span class="dl">"</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-discriminated-unions">🎭 <strong>Discriminated Unions</strong></h2>
+
+<p>Discriminated unions use a common property to distinguish between different types in a union.</p>
+
+<h3 id="basic-discriminated-union"><strong>Basic Discriminated Union</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Discriminated union with 'type' property</span>
+<span class="kd">type</span> <span class="nx">Shape</span> <span class="o">=</span> 
+  <span class="o">|</span> <span class="p">{</span> <span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">circle</span><span class="dl">"</span><span class="p">;</span> <span class="nl">radius</span><span class="p">:</span> <span class="kr">number</span> <span class="p">}</span>
+  <span class="o">|</span> <span class="p">{</span> <span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">rectangle</span><span class="dl">"</span><span class="p">;</span> <span class="nl">width</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span> <span class="nl">height</span><span class="p">:</span> <span class="kr">number</span> <span class="p">}</span>
+  <span class="o">|</span> <span class="p">{</span> <span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">triangle</span><span class="dl">"</span><span class="p">;</span> <span class="nl">base</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span> <span class="nl">height</span><span class="p">:</span> <span class="kr">number</span> <span class="p">};</span>
+
+<span class="kd">function</span> <span class="nx">calculateArea</span><span class="p">(</span><span class="nx">shape</span><span class="p">:</span> <span class="nx">Shape</span><span class="p">):</span> <span class="kr">number</span> <span class="p">{</span>
+  <span class="k">switch</span> <span class="p">(</span><span class="nx">shape</span><span class="p">.</span><span class="kd">type</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="dl">"</span><span class="s2">circle</span><span class="dl">"</span><span class="p">:</span>
+      <span class="c1">// TypeScript knows shape has radius property</span>
+      <span class="k">return</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span> <span class="o">*</span> <span class="nx">shape</span><span class="p">.</span><span class="nx">radius</span> <span class="o">*</span> <span class="nx">shape</span><span class="p">.</span><span class="nx">radius</span><span class="p">;</span>
+    <span class="k">case</span> <span class="dl">"</span><span class="s2">rectangle</span><span class="dl">"</span><span class="p">:</span>
+      <span class="c1">// TypeScript knows shape has width and height properties</span>
+      <span class="k">return</span> <span class="nx">shape</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="nx">shape</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span>
+    <span class="k">case</span> <span class="dl">"</span><span class="s2">triangle</span><span class="dl">"</span><span class="p">:</span>
+      <span class="c1">// TypeScript knows shape has base and height properties</span>
+      <span class="k">return</span> <span class="p">(</span><span class="nx">shape</span><span class="p">.</span><span class="nx">base</span> <span class="o">*</span> <span class="nx">shape</span><span class="p">.</span><span class="nx">height</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="nl">default</span><span class="p">:</span>
+      <span class="c1">// Exhaustiveness check</span>
+      <span class="kd">const</span> <span class="nx">_exhaustiveCheck</span><span class="p">:</span> <span class="nx">never</span> <span class="o">=</span> <span class="nx">shape</span><span class="p">;</span>
+      <span class="k">return</span> <span class="nx">_exhaustiveCheck</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="complex-discriminated-union"><strong>Complex Discriminated Union</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// API response discriminated union</span>
+<span class="kd">type</span> <span class="nx">ApiResponse</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> 
+  <span class="o">|</span> <span class="p">{</span> <span class="na">status</span><span class="p">:</span> <span class="dl">"</span><span class="s2">success</span><span class="dl">"</span><span class="p">;</span> <span class="nl">data</span><span class="p">:</span> <span class="nx">T</span><span class="p">;</span> <span class="nl">timestamp</span><span class="p">:</span> <span class="kr">string</span> <span class="p">}</span>
+  <span class="o">|</span> <span class="p">{</span> <span class="na">status</span><span class="p">:</span> <span class="dl">"</span><span class="s2">error</span><span class="dl">"</span><span class="p">;</span> <span class="nl">error</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span> <span class="nl">code</span><span class="p">:</span> <span class="kr">number</span> <span class="p">}</span>
+  <span class="o">|</span> <span class="p">{</span> <span class="na">status</span><span class="p">:</span> <span class="dl">"</span><span class="s2">loading</span><span class="dl">"</span> <span class="p">};</span>
+
+<span class="kd">function</span> <span class="nx">handleApiResponse</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">response</span><span class="p">:</span> <span class="nx">ApiResponse</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">):</span> <span class="kr">string</span> <span class="p">{</span>
+  <span class="k">switch</span> <span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">status</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="dl">"</span><span class="s2">success</span><span class="dl">"</span><span class="p">:</span>
+      <span class="k">return</span> <span class="s2">`Success: </span><span class="p">${</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">)}</span><span class="s2">`</span><span class="p">;</span>
+    <span class="k">case</span> <span class="dl">"</span><span class="s2">error</span><span class="dl">"</span><span class="p">:</span>
+      <span class="k">return</span> <span class="s2">`Error </span><span class="p">${</span><span class="nx">response</span><span class="p">.</span><span class="nx">code</span><span class="p">}</span><span class="s2">: </span><span class="p">${</span><span class="nx">response</span><span class="p">.</span><span class="nx">error</span><span class="p">}</span><span class="s2">`</span><span class="p">;</span>
+    <span class="k">case</span> <span class="dl">"</span><span class="s2">loading</span><span class="dl">"</span><span class="p">:</span>
+      <span class="k">return</span> <span class="dl">"</span><span class="s2">Loading...</span><span class="dl">"</span><span class="p">;</span>
+    <span class="nl">default</span><span class="p">:</span>
+      <span class="kd">const</span> <span class="nx">_exhaustiveCheck</span><span class="p">:</span> <span class="nx">never</span> <span class="o">=</span> <span class="nx">response</span><span class="p">;</span>
+      <span class="k">return</span> <span class="nx">_exhaustiveCheck</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-advanced-patterns">🚀 <strong>Advanced Patterns</strong></h2>
+
+<h3 id="union-of-function-types"><strong>Union of Function Types</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Union of different function signatures</span>
+<span class="kd">type</span> <span class="nx">EventHandler</span> <span class="o">=</span> 
+  <span class="o">|</span> <span class="p">((</span><span class="nx">event</span><span class="p">:</span> <span class="nx">MouseEvent</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">)</span>
+  <span class="o">|</span> <span class="p">((</span><span class="nx">event</span><span class="p">:</span> <span class="nx">KeyboardEvent</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">)</span>
+  <span class="o">|</span> <span class="p">((</span><span class="nx">event</span><span class="p">:</span> <span class="nx">TouchEvent</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">);</span>
+
+<span class="kd">function</span> <span class="nx">addEventListener</span><span class="p">(</span><span class="nx">handler</span><span class="p">:</span> <span class="nx">EventHandler</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+  <span class="c1">// Implementation</span>
+<span class="p">}</span>
+
+<span class="c1">// Usage</span>
+<span class="nx">addEventListener</span><span class="p">((</span><span class="nx">event</span><span class="p">:</span> <span class="nx">MouseEvent</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Mouse event:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">event</span><span class="p">.</span><span class="nx">clientX</span><span class="p">,</span> <span class="nx">event</span><span class="p">.</span><span class="nx">clientY</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<h3 id="conditional-union-types"><strong>Conditional Union Types</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Union based on condition</span>
+<span class="kd">type</span> <span class="nx">ApiEndpoint</span><span class="o">&lt;</span><span class="nx">T</span> <span class="kd">extends</span> <span class="dl">"</span><span class="s2">GET</span><span class="dl">"</span> <span class="o">|</span> <span class="dl">"</span><span class="s2">POST</span><span class="dl">"</span><span class="o">&gt;</span> <span class="o">=</span> 
+  <span class="nx">T</span> <span class="kd">extends</span> <span class="dl">"</span><span class="s2">GET</span><span class="dl">"</span> 
+    <span class="p">?</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="dl">"</span><span class="s2">GET</span><span class="dl">"</span><span class="p">;</span> <span class="nl">params</span><span class="p">:</span> <span class="nb">Record</span><span class="o">&lt;</span><span class="kr">string</span><span class="p">,</span> <span class="kr">string</span><span class="o">&gt;</span> <span class="p">}</span>
+    <span class="p">:</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="dl">"</span><span class="s2">POST</span><span class="dl">"</span><span class="p">;</span> <span class="nl">body</span><span class="p">:</span> <span class="nb">Record</span><span class="o">&lt;</span><span class="kr">string</span><span class="p">,</span> <span class="kr">any</span><span class="o">&gt;</span> <span class="p">};</span>
+
+<span class="kd">function</span> <span class="nx">makeRequest</span><span class="o">&lt;</span><span class="nx">T</span> <span class="kd">extends</span> <span class="dl">"</span><span class="s2">GET</span><span class="dl">"</span> <span class="o">|</span> <span class="dl">"</span><span class="s2">POST</span><span class="dl">"</span><span class="o">&gt;</span><span class="p">(</span>
+  <span class="nx">endpoint</span><span class="p">:</span> <span class="nx">ApiEndpoint</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span>
+<span class="p">):</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="kr">any</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">endpoint</span><span class="p">.</span><span class="nx">method</span> <span class="o">===</span> <span class="dl">"</span><span class="s2">GET</span><span class="dl">"</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// TypeScript knows endpoint has params</span>
+    <span class="k">return</span> <span class="nx">fetch</span><span class="p">(</span><span class="s2">`/api?</span><span class="p">${</span><span class="k">new</span> <span class="nx">URLSearchParams</span><span class="p">(</span><span class="nx">endpoint</span><span class="p">.</span><span class="nx">params</span><span class="p">)}</span><span class="s2">`</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="c1">// TypeScript knows endpoint has body</span>
+    <span class="k">return</span> <span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">/api</span><span class="dl">"</span><span class="p">,</span> <span class="p">{</span>
+      <span class="na">method</span><span class="p">:</span> <span class="dl">"</span><span class="s2">POST</span><span class="dl">"</span><span class="p">,</span>
+      <span class="na">body</span><span class="p">:</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">endpoint</span><span class="p">.</span><span class="nx">body</span><span class="p">)</span>
+    <span class="p">});</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="intersection-with-generics"><strong>Intersection with Generics</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Intersection type with generics</span>
+<span class="kr">interface</span> <span class="nx">Timestamped</span> <span class="p">{</span>
+  <span class="nl">createdAt</span><span class="p">:</span> <span class="nb">Date</span><span class="p">;</span>
+  <span class="nl">updatedAt</span><span class="p">:</span> <span class="nb">Date</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kr">interface</span> <span class="nx">Identifiable</span> <span class="p">{</span>
+  <span class="nl">id</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">TimestampedEntity</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nx">T</span> <span class="o">&amp;</span> <span class="nx">Timestamped</span> <span class="o">&amp;</span> <span class="nx">Identifiable</span><span class="p">;</span>
+
+<span class="c1">// Usage</span>
+<span class="kr">interface</span> <span class="nx">User</span> <span class="p">{</span>
+  <span class="nl">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">email</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">TimestampedUser</span> <span class="o">=</span> <span class="nx">TimestampedEntity</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">user</span><span class="p">:</span> <span class="nx">TimestampedUser</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">id</span><span class="p">:</span> <span class="dl">"</span><span class="s2">1</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">John Doe</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">email</span><span class="p">:</span> <span class="dl">"</span><span class="s2">john@example.com</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">createdAt</span><span class="p">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(),</span>
+  <span class="na">updatedAt</span><span class="p">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">()</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-best-practices">✅ <strong>Best Practices</strong></h2>
+
+<h3 id="1-use-discriminated-unions-for-state-management"><strong>1. Use Discriminated Unions for State Management</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ✅ Good: Clear state representation</span>
+<span class="kd">type</span> <span class="nx">LoadingState</span> <span class="o">=</span> 
+  <span class="o">|</span> <span class="p">{</span> <span class="na">status</span><span class="p">:</span> <span class="dl">"</span><span class="s2">idle</span><span class="dl">"</span> <span class="p">}</span>
+  <span class="o">|</span> <span class="p">{</span> <span class="na">status</span><span class="p">:</span> <span class="dl">"</span><span class="s2">loading</span><span class="dl">"</span> <span class="p">}</span>
+  <span class="o">|</span> <span class="p">{</span> <span class="na">status</span><span class="p">:</span> <span class="dl">"</span><span class="s2">success</span><span class="dl">"</span><span class="p">;</span> <span class="nl">data</span><span class="p">:</span> <span class="kr">any</span> <span class="p">}</span>
+  <span class="o">|</span> <span class="p">{</span> <span class="na">status</span><span class="p">:</span> <span class="dl">"</span><span class="s2">error</span><span class="dl">"</span><span class="p">;</span> <span class="nl">error</span><span class="p">:</span> <span class="kr">string</span> <span class="p">};</span>
+
+<span class="c1">// ❌ Avoid: Ambiguous state</span>
+<span class="kd">type</span> <span class="nx">BadState</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">isLoading</span><span class="p">?:</span> <span class="nx">boolean</span><span class="p">;</span>
+  <span class="nl">data</span><span class="p">?:</span> <span class="kr">any</span><span class="p">;</span>
+  <span class="nl">error</span><span class="p">?:</span> <span class="kr">string</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="2-prefer-union-types-over-any"><strong>2. Prefer Union Types Over Any</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ✅ Good: Specific union type</span>
+<span class="kd">function</span> <span class="nx">processInput</span><span class="p">(</span><span class="nx">input</span><span class="p">:</span> <span class="kr">string</span> <span class="o">|</span> <span class="kr">number</span> <span class="o">|</span> <span class="nx">boolean</span><span class="p">):</span> <span class="kr">string</span> <span class="p">{</span>
+  <span class="c1">// Type-safe handling</span>
+<span class="p">}</span>
+
+<span class="c1">// ❌ Avoid: Using any</span>
+<span class="kd">function</span> <span class="nx">processInput</span><span class="p">(</span><span class="nx">input</span><span class="p">:</span> <span class="kr">any</span><span class="p">):</span> <span class="kr">string</span> <span class="p">{</span>
+  <span class="c1">// No type safety</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="3-use-type-guards-for-runtime-safety"><strong>3. Use Type Guards for Runtime Safety</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ✅ Good: Type guard with runtime check</span>
+<span class="kd">function</span> <span class="nx">isUser</span><span class="p">(</span><span class="nx">obj</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">):</span> <span class="nx">obj</span> <span class="k">is</span> <span class="nx">User</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="k">typeof</span> <span class="nx">obj</span> <span class="o">===</span> <span class="dl">"</span><span class="s2">object</span><span class="dl">"</span> <span class="o">&amp;&amp;</span> 
+         <span class="nx">obj</span> <span class="o">!==</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> 
+         <span class="dl">"</span><span class="s2">id</span><span class="dl">"</span> <span class="k">in</span> <span class="nx">obj</span> <span class="o">&amp;&amp;</span> 
+         <span class="dl">"</span><span class="s2">name</span><span class="dl">"</span> <span class="k">in</span> <span class="nx">obj</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Usage</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">isUser</span><span class="p">(</span><span class="nx">data</span><span class="p">))</span> <span class="p">{</span>
+  <span class="c1">// TypeScript knows data is User</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="4-leverage-exhaustiveness-checking"><strong>4. Leverage Exhaustiveness Checking</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ✅ Good: Exhaustiveness check</span>
+<span class="kd">function</span> <span class="nx">handleStatus</span><span class="p">(</span><span class="nx">status</span><span class="p">:</span> <span class="dl">"</span><span class="s2">pending</span><span class="dl">"</span> <span class="o">|</span> <span class="dl">"</span><span class="s2">approved</span><span class="dl">"</span> <span class="o">|</span> <span class="dl">"</span><span class="s2">rejected</span><span class="dl">"</span><span class="p">):</span> <span class="kr">string</span> <span class="p">{</span>
+  <span class="k">switch</span> <span class="p">(</span><span class="nx">status</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="dl">"</span><span class="s2">pending</span><span class="dl">"</span><span class="p">:</span>
+      <span class="k">return</span> <span class="dl">"</span><span class="s2">Processing...</span><span class="dl">"</span><span class="p">;</span>
+    <span class="k">case</span> <span class="dl">"</span><span class="s2">approved</span><span class="dl">"</span><span class="p">:</span>
+      <span class="k">return</span> <span class="dl">"</span><span class="s2">Approved!</span><span class="dl">"</span><span class="p">;</span>
+    <span class="k">case</span> <span class="dl">"</span><span class="s2">rejected</span><span class="dl">"</span><span class="p">:</span>
+      <span class="k">return</span> <span class="dl">"</span><span class="s2">Rejected.</span><span class="dl">"</span><span class="p">;</span>
+    <span class="nl">default</span><span class="p">:</span>
+      <span class="c1">// This ensures all cases are handled</span>
+      <span class="kd">const</span> <span class="nx">_exhaustiveCheck</span><span class="p">:</span> <span class="nx">never</span> <span class="o">=</span> <span class="nx">status</span><span class="p">;</span>
+      <span class="k">return</span> <span class="nx">_exhaustiveCheck</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-common-interview-questions">❓ <strong>Common Interview Questions</strong></h2>
+
+<h3 id="1-whats-the-difference-between-union-and-intersection-types"><strong>1. What’s the difference between union and intersection types?</strong></h3>
+
+<p><strong>Answer:</strong></p>
+<ul>
+  <li><strong>Union types (<code class="language-plaintext highlighter-rouge">|</code>)</strong>: A value can be one of several types</li>
+  <li><strong>Intersection types (<code class="language-plaintext highlighter-rouge">&amp;</code>)</strong>: A value must satisfy all types simultaneously</li>
+</ul>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Union: can be string OR number</span>
+<span class="kd">let</span> <span class="nx">id</span><span class="p">:</span> <span class="kr">string</span> <span class="o">|</span> <span class="kr">number</span><span class="p">;</span>
+
+<span class="c1">// Intersection: must have both Person AND Employee properties</span>
+<span class="kd">type</span> <span class="nx">EmployeePerson</span> <span class="o">=</span> <span class="nx">Person</span> <span class="o">&amp;</span> <span class="nx">Employee</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="2-how-do-type-guards-work-in-typescript"><strong>2. How do type guards work in TypeScript?</strong></h3>
+
+<p><strong>Answer:</strong>
+Type guards narrow down union types to specific types:</p>
+<ul>
+  <li><strong><code class="language-plaintext highlighter-rouge">typeof</code></strong>: For primitive types</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">instanceof</code></strong>: For class instances</li>
+  <li><strong>Custom guards</strong>: User-defined functions that return <code class="language-plaintext highlighter-rouge">value is Type</code></li>
+</ul>
+
+<h3 id="3-what-are-discriminated-unions-and-why-are-they-useful"><strong>3. What are discriminated unions and why are they useful?</strong></h3>
+
+<p><strong>Answer:</strong>
+Discriminated unions use a common property to distinguish between types:</p>
+<ul>
+  <li>Provide type safety in switch statements</li>
+  <li>Enable exhaustive checking</li>
+  <li>Make code more maintainable and less error-prone</li>
+</ul>
+
+<h3 id="4-how-do-you-handle-exhaustiveness-checking-with-union-types"><strong>4. How do you handle exhaustiveness checking with union types?</strong></h3>
+
+<p><strong>Answer:</strong>
+Use the <code class="language-plaintext highlighter-rouge">never</code> type in the default case to ensure all union members are handled:</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">handleShape</span><span class="p">(</span><span class="nx">shape</span><span class="p">:</span> <span class="nx">Circle</span> <span class="o">|</span> <span class="nx">Rectangle</span><span class="p">):</span> <span class="kr">number</span> <span class="p">{</span>
+  <span class="k">switch</span> <span class="p">(</span><span class="nx">shape</span><span class="p">.</span><span class="kd">type</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="dl">"</span><span class="s2">circle</span><span class="dl">"</span><span class="p">:</span>
+      <span class="k">return</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span> <span class="o">*</span> <span class="nx">shape</span><span class="p">.</span><span class="nx">radius</span> <span class="o">**</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="k">case</span> <span class="dl">"</span><span class="s2">rectangle</span><span class="dl">"</span><span class="p">:</span>
+      <span class="k">return</span> <span class="nx">shape</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="nx">shape</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span>
+    <span class="nl">default</span><span class="p">:</span>
+      <span class="kd">const</span> <span class="nx">_exhaustiveCheck</span><span class="p">:</span> <span class="nx">never</span> <span class="o">=</span> <span class="nx">shape</span><span class="p">;</span>
+      <span class="k">return</span> <span class="nx">_exhaustiveCheck</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="5-when-would-you-use-intersection-types-over-inheritance"><strong>5. When would you use intersection types over inheritance?</strong></h3>
+
+<p><strong>Answer:</strong>
+Use intersection types when:</p>
+<ul>
+  <li>You need to combine multiple interfaces</li>
+  <li>You want to avoid deep inheritance hierarchies</li>
+  <li>You need to mix in functionality from multiple sources</li>
+  <li>You’re working with composition over inheritance</li>
+</ul>
+
+<hr />
+
+<h2 id="-navigation">🧭 Navigation</h2>
+
+<div class="navigation">
+  <a href="../00-TypeScript-Fundamentals/03-Classes-Objects.md" class="nav-button">← Previous: Classes &amp; Objects</a>
+  <a href="02-Generics-Type-Parameters.md" class="nav-button">Next: Generics &amp; Type Parameters →</a>
+</div>
+
+<p><em>Last updated: December 2025</em></p>
+
+        </main>
+        
+        <footer style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #ecf0f1; color: #666; text-align: center;">
+            <p>Interview Prep Documentation - Built with Jekyll</p>
+        </footer>
+    </div>
+</body>
+</html>

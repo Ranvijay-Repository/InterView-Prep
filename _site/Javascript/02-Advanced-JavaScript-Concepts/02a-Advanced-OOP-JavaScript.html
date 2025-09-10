@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔹 Advanced Object-Oriented JavaScript - Interview Prep Documentation</title>
+    <meta name="description" content="Comprehensive guides for JavaScript, TypeScript, and React Native interview preparation">
+    
+    <!-- GitHub Pages compatible styling -->
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+        }
+        
+        .container {
+            max-width: 100%;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            color: #2c3e50;
+            margin-top: 2em;
+            margin-bottom: 1em;
+        }
+        
+        h1 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            border-bottom: 1px solid #ecf0f1;
+            padding-bottom: 5px;
+        }
+        
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border-left: 4px solid #3498db;
+        }
+        
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+        
+        blockquote {
+            border-left: 4px solid #3498db;
+            margin: 0;
+            padding-left: 20px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1em 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .navigation {
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px 0;
+            margin-bottom: 20px;
+        }
+        
+        .navigation a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+        
+        .navigation a:hover {
+            text-decoration: underline;
+        }
+        
+        .breadcrumb {
+            margin-bottom: 20px;
+            color: #666;
+        }
+        
+        .breadcrumb a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            h2 {
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="navigation">
+            <a href="/">Home</a>
+            <a href="/Javascript/">JavaScript</a>
+            <a href="/TypeScript/">TypeScript</a>
+            <a href="/React-Native/">React Native</a>
+        </nav>
+        
+        
+        
+        <main>
+            <h1 id="-advanced-object-oriented-javascript">🔹 Advanced Object-Oriented JavaScript</h1>
+
+<blockquote>
+  <p><strong>Senior-level OOP concepts: Private fields, static blocks, decorators, metadata, and Proxy &amp; Reflect API</strong></p>
+</blockquote>
+
+<link rel="stylesheet" href="../common-styles.css" />
+
+<hr />
+
+<h2 id="-table-of-contents">📚 Table of Contents</h2>
+
+<ul>
+  <li><a href="#private-fields--methods">Private Fields &amp; Methods</a></li>
+  <li><a href="#static-blocks">Static Blocks</a></li>
+  <li><a href="#decorators--metadata">Decorators &amp; Metadata</a></li>
+  <li><a href="#proxy--reflect-api">Proxy &amp; Reflect API</a></li>
+  <li><a href="#advanced-design-patterns">Advanced Design Patterns</a></li>
+  <li><a href="#detailed-examples">Detailed Examples</a></li>
+  <li><a href="#common-interview-questions">Common Interview Questions</a></li>
+  <li><a href="#practice-exercises">Practice Exercises</a></li>
+  <li><a href="#additional-resources">Additional Resources</a></li>
+</ul>
+
+<hr />
+
+<h2 id="-private-fields--methods">🔒 Private Fields &amp; Methods</h2>
+
+<p><strong>Private fields</strong> (introduced in ES2022) provide true encapsulation by making class members inaccessible from outside the class.</p>
+
+<h3 id="why-private-fields-matter">Why Private Fields Matter:</h3>
+<ul>
+  <li><strong>True Encapsulation</strong>: Real privacy, not just naming conventions</li>
+  <li><strong>Better Security</strong>: Prevent external modification of internal state</li>
+  <li><strong>Cleaner APIs</strong>: Expose only what’s necessary</li>
+  <li><strong>Modern JavaScript</strong>: Use the latest language features</li>
+</ul>
+
+<hr />
+
+<h2 id="-static-blocks">🧱 Static Blocks</h2>
+
+<p><strong>Static blocks</strong> allow you to perform complex initialization logic for static members when a class is defined.</p>
+
+<h3 id="use-cases">Use Cases:</h3>
+<ul>
+  <li><strong>Complex Initialization</strong>: Multi-step setup for static properties</li>
+  <li><strong>Async Setup</strong>: Initialize static members that require async operations</li>
+  <li><strong>Conditional Logic</strong>: Set up static members based on environment</li>
+  <li><strong>Cross-Reference Setup</strong>: Initialize static members that reference each other</li>
+</ul>
+
+<h3 id="ascii-diagram-static-block-execution">ASCII Diagram: Static Block Execution</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>STATIC BLOCK EXECUTION
+┌─────────────────────────────────┐
+│        CLASS DEFINITION         │
+│  ┌─────────────────────────────┐ │
+│  │ class MyClass {             │ │
+│  │   static {                  │ │
+│  │     // Static block         │ │
+│  │     // Executes once        │ │
+│  │     // When class loads     │ │
+│  │   }                         │ │
+│  │ }                           │ │
+│  └─────────────────────────────┘ │
+└─────────────────────────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  Class Loads  │
+        │  Static Block │
+        │  Executes     │
+        │  Once         │
+        └───────────────┘
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-decorators--metadata">🎭 Decorators &amp; Metadata</h2>
+
+<p><strong>Decorators</strong> are functions that can be used to modify classes, methods, properties, or parameters at design time.</p>
+
+<h3 id="why-decorators-matter">Why Decorators Matter:</h3>
+<ul>
+  <li><strong>Aspect-Oriented Programming</strong>: Add cross-cutting concerns cleanly</li>
+  <li><strong>Validation</strong>: Automatically validate method parameters</li>
+  <li><strong>Logging</strong>: Add logging without cluttering business logic</li>
+  <li><strong>Caching</strong>: Implement caching strategies declaratively</li>
+  <li><strong>Dependency Injection</strong>: Configure dependencies automatically</li>
+</ul>
+
+<h3 id="ascii-diagram-decorator-pattern">ASCII Diagram: Decorator Pattern</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DECORATOR PATTERN
+┌─────────────────────────────────┐
+│        ORIGINAL CLASS           │
+│  ┌─────────────────────────────┐ │
+│  │ class User {                │ │
+│  │   @validate                 │
+│  │   @log                      │
+│  │   save() { ... }            │
+│  │ }                           │ │
+│  └─────────────────────────────┘ │
+└─────────────────────────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  DECORATORS   │
+        │  @validate    │
+        │  @log         │
+        │  @cache       │
+        └───────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │ ENHANCED CLASS│
+        │ With additional│
+        │ functionality │
+        └───────────────┘
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-proxy--reflect-api">🔍 Proxy &amp; Reflect API</h2>
+
+<p><strong>Proxy</strong> objects enable you to intercept and customize operations performed on objects (like property lookup, assignment, enumeration, function invocation, etc.).</p>
+
+<h3 id="why-proxy--reflect-matter">Why Proxy &amp; Reflect Matter:</h3>
+<ul>
+  <li><strong>Virtualization</strong>: Create virtual objects that don’t exist</li>
+  <li><strong>Validation</strong>: Intercept property assignments for validation</li>
+  <li><strong>Logging</strong>: Track all property access and modifications</li>
+  <li><strong>Default Values</strong>: Provide default values for missing properties</li>
+  <li><strong>Security</strong>: Control access to sensitive properties</li>
+</ul>
+
+<h3 id="ascii-diagram-proxy-interception">ASCII Diagram: Proxy Interception</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PROXY INTERCEPTION
+┌─────────────────────────────────┐
+│        PROXY OBJECT             │
+│  ┌─────────────────────────────┐ │
+│  │ const proxy = new Proxy(    │ │
+│  │   target,                   │ │
+│  │   handler                    │ │
+│  │ );                          │ │
+│  └─────────────────────────────┘ │
+└─────────────────────────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  OPERATIONS   │
+        │  get          │
+        │  set          │
+        │  delete       │
+        │  apply        │
+        └───────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │   HANDLER     │
+        │  Intercepts   │
+        │  Operations   │
+        │  Customizes   │
+        └───────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │   TARGET      │
+        │  Original     │
+        │  Object       │
+        └───────────────┘
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="️-advanced-design-patterns">🏗️ Advanced Design Patterns</h2>
+
+<h3 id="1-factory-pattern-with-private-fields">1. <strong>Factory Pattern with Private Fields</strong></h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">UserFactory</span> <span class="p">{</span>
+    <span class="kd">static</span> <span class="err">#</span><span class="nx">userCount</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    
+    <span class="kd">static</span> <span class="nx">createUser</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">email</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="err">#</span><span class="nx">userCount</span><span class="o">++</span><span class="p">;</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nx">User</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">email</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="err">#</span><span class="nx">userCount</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="kd">static</span> <span class="nx">getUserCount</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="err">#</span><span class="nx">userCount</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="2-singleton-with-private-constructor">2. <strong>Singleton with Private Constructor</strong></h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">DatabaseConnection</span> <span class="p">{</span>
+    <span class="kd">static</span> <span class="err">#</span><span class="nx">instance</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+    <span class="err">#</span><span class="nx">connectionString</span><span class="p">;</span>
+    
+    <span class="kd">constructor</span><span class="p">(</span><span class="nx">connectionString</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">DatabaseConnection</span><span class="p">.</span><span class="err">#</span><span class="nx">instance</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">"</span><span class="s2">Use getInstance() method</span><span class="dl">"</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">this</span><span class="p">.</span><span class="err">#</span><span class="nx">connectionString</span> <span class="o">=</span> <span class="nx">connectionString</span><span class="p">;</span>
+    <span class="p">}</span>
+    
+    <span class="kd">static</span> <span class="nx">getInstance</span><span class="p">(</span><span class="nx">connectionString</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">DatabaseConnection</span><span class="p">.</span><span class="err">#</span><span class="nx">instance</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">DatabaseConnection</span><span class="p">.</span><span class="err">#</span><span class="nx">instance</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DatabaseConnection</span><span class="p">(</span><span class="nx">connectionString</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="nx">DatabaseConnection</span><span class="p">.</span><span class="err">#</span><span class="nx">instance</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-detailed-examples">💻 Detailed Examples</h2>
+
+<h3 id="example-1-private-fields-implementation">Example 1: Private Fields Implementation</h3>
+<div style="position: relative;">
+<button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+<pre><code>class BankAccount {
+    #balance = 0;
+    #accountNumber;
+    #transactions = [];
+    
+    constructor(accountNumber, initialBalance = 0) {
+        this.#accountNumber = accountNumber;
+        this.#balance = initialBalance;
+    }
+    
+    deposit(amount) {
+        if (amount &gt; 0) {
+            this.#balance += amount;
+            this.#transactions.push({
+                type: 'deposit',
+                amount,
+                timestamp: new Date()
+            });
+            return true;
+        }
+        return false;
+    }
+    
+    withdraw(amount) {
+        if (amount &gt; 0 &amp;&amp; amount &lt;= this.#balance) {
+            this.#balance -= amount;
+            this.#transactions.push({
+                type: 'withdraw',
+                amount,
+                timestamp: new Date()
+            });
+            return true;
+        }
+        return false;
+    }
+    
+    getBalance() {
+        return this.#balance;
+    }
+    
+    getAccountNumber() {
+        return this.#accountNumber;
+    }
+    
+    getTransactionHistory() {
+        return [...this.#transactions]; // Return copy, not reference
+    }
+}
+
+// Usage
+const account = new BankAccount("12345", 1000);
+account.deposit(500);
+console.log(account.getBalance()); // 1500
+
+// Private fields are truly private
+// console.log(account.#balance); // SyntaxError: Private field
+</code></pre>
+</div>
+
+<h3 id="example-2-static-blocks-for-complex-initialization">Example 2: Static Blocks for Complex Initialization</h3>
+<div style="position: relative;">
+<button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+<pre><code>class Configuration {
+    static #config;
+    static #isInitialized = false;
+    
+    static {
+        // Static block for complex initialization
+        try {
+            // Load environment-specific config
+            const env = process.env.NODE_ENV || 'development';
+            const configPath = `./config.${env}.json`;
+            
+            // Simulate async config loading
+            this.#config = this.#loadConfig(configPath);
+            this.#isInitialized = true;
+            
+            console.log(`Configuration loaded for ${env} environment`);
+        } catch (error) {
+            console.error('Failed to load configuration:', error);
+            // Fallback to default config
+            this.#config = this.#getDefaultConfig();
+            this.#isInitialized = true;
+        }
+    }
+    
+    static #loadConfig(path) {
+        // Simulate config loading
+        const configs = {
+            'development': { port: 3000, debug: true },
+            'production': { port: 80, debug: false },
+            'test': { port: 3001, debug: true }
+        };
+        
+        const env = path.match(/config\.(\w+)\.json/)[1];
+        return configs[env] || configs.development;
+    }
+    
+    static #getDefaultConfig() {
+        return { port: 3000, debug: true };
+    }
+    
+    static get(key) {
+        if (!this.#isInitialized) {
+            throw new Error('Configuration not initialized');
+        }
+        return this.#config[key];
+    }
+    
+    static getAll() {
+        if (!this.#isInitialized) {
+            throw new Error('Configuration not initialized');
+        }
+        return { ...this.#config };
+    }
+}
+
+// Usage
+console.log(Configuration.get('port')); // 3000 (or env-specific)
+console.log(Configuration.getAll()); // Full config object
+</code></pre>
+</div>
+
+<h3 id="example-3-decorators-implementation">Example 3: Decorators Implementation</h3>
+<div style="position: relative;">
+<button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+<pre><code>// Simple decorator factory
+function log(target, propertyKey, descriptor) {
+    const originalMethod = descriptor.value;
+    
+    descriptor.value = function(...args) {
+        console.log(`Calling ${propertyKey} with:`, args);
+        const result = originalMethod.apply(this, args);
+        console.log(`${propertyKey} returned:`, result);
+        return result;
+    };
+    
+    return descriptor;
+}
+
+function validate(target, propertyKey, descriptor) {
+    const originalMethod = descriptor.value;
+    
+    descriptor.value = function(...args) {
+        // Simple validation - check if first argument is positive
+        if (args[0] &lt;= 0) {
+            throw new Error(`${propertyKey}: First argument must be positive`);
+        }
+        return originalMethod.apply(this, args);
+    };
+    
+    return descriptor;
+}
+
+class Calculator {
+    @log
+    @validate
+    multiply(a, b) {
+        return a * b;
+    }
+    
+    @log
+    divide(a, b) {
+        if (b === 0) {
+            throw new Error('Division by zero');
+        }
+        return a / b;
+    }
+}
+
+// Usage
+const calc = new Calculator();
+try {
+    console.log(calc.multiply(5, 3)); // Logs the call and result
+    console.log(calc.multiply(-1, 3)); // Throws validation error
+} catch (error) {
+    console.error('Error:', error.message);
+}
+</code></pre>
+</div>
+
+<h3 id="example-4-proxy--reflect-api">Example 4: Proxy &amp; Reflect API</h3>
+<div style="position: relative;">
+<button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+<pre><code>// Validation Proxy
+function createValidatedObject(target, validators) {
+    return new Proxy(target, {
+        set(target, property, value, receiver) {
+            // Check if validator exists for this property
+            if (validators[property]) {
+                const isValid = validators[property](value);
+                if (!isValid) {
+                    throw new Error(`Invalid value for ${property}: ${value}`);
+                }
+            }
+            
+            // Use Reflect to set the property
+            return Reflect.set(target, property, value, receiver);
+        },
+        
+        get(target, property, receiver) {
+            // Log property access
+            console.log(`Accessing property: ${property}`);
+            
+            // Use Reflect to get the property
+            return Reflect.get(target, property, receiver);
+        },
+        
+        deleteProperty(target, property) {
+            // Prevent deletion of certain properties
+            if (property === 'id') {
+                throw new Error('Cannot delete id property');
+            }
+            
+            // Use Reflect to delete the property
+            return Reflect.deleteProperty(target, property);
+        }
+    });
+}
+
+// Validators
+const validators = {
+    age: (value) =&gt; typeof value === 'number' &amp;&amp; value &gt;= 0 &amp;&amp; value &lt;= 150,
+    email: (value) =&gt; /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value),
+    name: (value) =&gt; typeof value === 'string' &amp;&amp; value.length &gt; 0
+};
+
+// Create validated user object
+const user = createValidatedObject({}, validators);
+
+// Usage
+try {
+    user.name = "John Doe";     // Valid
+    user.age = 30;              // Valid
+    user.email = "john@example.com"; // Valid
+    
+    console.log(user.name);     // Logs access, returns "John Doe"
+    
+    user.age = -5;              // Throws validation error
+} catch (error) {
+    console.error('Validation error:', error.message);
+}
+
+// Try to delete protected property
+try {
+    delete user.id;              // Throws error
+} catch (error) {
+    console.error('Deletion error:', error.message);
+}
+</code></pre>
+</div>
+
+<hr />
+
+<h2 id="-common-interview-questions">❓ Common Interview Questions</h2>
+
+<h3 id="q1-what-are-private-fields-in-javascript-and-how-do-they-differ-from-closures">Q1: What are private fields in JavaScript and how do they differ from closures?</h3>
+<p><strong>A:</strong> Private fields (introduced in ES2022) use the <code class="language-plaintext highlighter-rouge">#</code> prefix and provide true encapsulation at the class level. They’re different from closures because they’re scoped to the class instance, not to the function that creates them. Private fields are truly inaccessible from outside the class, while closures can be accessed if you have a reference to the function.</p>
+
+<h3 id="q2-how-do-static-blocks-work-and-when-would-you-use-them">Q2: How do static blocks work and when would you use them?</h3>
+<p><strong>A:</strong> Static blocks execute once when the class is defined, allowing you to perform complex initialization logic for static members. They’re useful for async setup, conditional logic, cross-referencing static properties, or any initialization that requires multiple steps or error handling.</p>
+
+<h3 id="q3-what-are-decorators-and-how-do-they-work">Q3: What are decorators and how do they work?</h3>
+<p><strong>A:</strong> Decorators are functions that can modify classes, methods, properties, or parameters at design time. They use the <code class="language-plaintext highlighter-rouge">@</code> syntax and are executed when the class is defined. Decorators are useful for adding cross-cutting concerns like validation, logging, caching, or dependency injection without cluttering the business logic.</p>
+
+<h3 id="q4-how-does-the-proxy-api-work-and-what-are-its-use-cases">Q4: How does the Proxy API work and what are its use cases?</h3>
+<p><strong>A:</strong> Proxy objects intercept operations performed on objects (like property access, assignment, deletion) and allow you to customize these operations. Use cases include validation, logging, default values, security (controlling access), virtualization (creating objects that don’t exist), and implementing reactive patterns.</p>
+
+<h3 id="q5-whats-the-difference-between-proxy-and-reflect">Q5: What’s the difference between Proxy and Reflect?</h3>
+<p><strong>A:</strong> Proxy is used to intercept and customize operations on objects, while Reflect provides methods to perform these operations programmatically. Reflect methods mirror the operations that Proxy can intercept. They’re often used together - Proxy for interception, Reflect for performing the actual operation.</p>
+
+<hr />
+
+<h2 id="️-practice-exercises">🏋️ Practice Exercises</h2>
+
+<h3 id="exercise-1-implement-a-caching-decorator">Exercise 1: Implement a Caching Decorator</h3>
+<p>Create a decorator that caches method results based on input parameters. The decorator should handle different parameter types and provide cache invalidation options.</p>
+
+<h3 id="exercise-2-build-a-validation-proxy">Exercise 2: Build a Validation Proxy</h3>
+<p>Implement a Proxy that validates object properties based on schema definitions. Support different validation rules for different property types.</p>
+
+<h3 id="exercise-3-create-a-singleton-with-private-fields">Exercise 3: Create a Singleton with Private Fields</h3>
+<p>Implement a Singleton pattern using private fields and static blocks. Ensure thread safety and provide a way to reset the instance if needed.</p>
+
+<hr />
+
+<h2 id="-additional-resources">📚 Additional Resources</h2>
+
+<ul>
+  <li><strong>Private Fields</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Private_class_fields">MDN Private Class Fields</a></li>
+  <li><strong>Decorators</strong>: <a href="https://github.com/tc39/proposal-decorators">TC39 Decorators Proposal</a></li>
+  <li><strong>Proxy &amp; Reflect</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy">MDN Proxy</a></li>
+  <li><strong>Advanced OOP Patterns</strong>: <a href="https://addyosmani.com/resources/essentialjsdesignpatterns/book/">JavaScript Design Patterns</a></li>
+</ul>
+
+<hr />
+
+<h2 id="-copy-code-functionality">📋 Copy Code Functionality</h2>
+
+<script src="../common-scripts.js"></script>
+
+<hr />
+
+<h2 id="-navigation">🧭 Navigation</h2>
+
+<div class="navigation">
+    <a href="02-Object-Oriented-JavaScript.md" class="nav-link prev">← Previous: Object-Oriented JavaScript Basics</a>
+    <a href="03-Asynchronous-JavaScript.md" class="nav-link next">Next: Asynchronous JavaScript →</a>
+</div>
+
+<p><em>Last updated: December 2024</em></p>
+
+        </main>
+        
+        <footer style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #ecf0f1; color: #666; text-align: center;">
+            <p>Interview Prep Documentation - Built with Jekyll</p>
+        </footer>
+    </div>
+</body>
+</html>

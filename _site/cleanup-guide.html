@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧹 Cleanup Guide for Existing Files - Interview Prep Documentation</title>
+    <meta name="description" content="Comprehensive guides for JavaScript, TypeScript, and React Native interview preparation">
+    
+    <!-- GitHub Pages compatible styling -->
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+        }
+        
+        .container {
+            max-width: 100%;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            color: #2c3e50;
+            margin-top: 2em;
+            margin-bottom: 1em;
+        }
+        
+        h1 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            border-bottom: 1px solid #ecf0f1;
+            padding-bottom: 5px;
+        }
+        
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border-left: 4px solid #3498db;
+        }
+        
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+        
+        blockquote {
+            border-left: 4px solid #3498db;
+            margin: 0;
+            padding-left: 20px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1em 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .navigation {
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px 0;
+            margin-bottom: 20px;
+        }
+        
+        .navigation a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+        
+        .navigation a:hover {
+            text-decoration: underline;
+        }
+        
+        .breadcrumb {
+            margin-bottom: 20px;
+            color: #666;
+        }
+        
+        .breadcrumb a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            h2 {
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="navigation">
+            <a href="/">Home</a>
+            <a href="/Javascript/">JavaScript</a>
+            <a href="/TypeScript/">TypeScript</a>
+            <a href="/React-Native/">React Native</a>
+        </nav>
+        
+        
+        
+        <main>
+            <h1 id="-cleanup-guide-for-existing-files">🧹 Cleanup Guide for Existing Files</h1>
+
+<p>This guide will help you clean up all your existing documentation files to use the new common structure.</p>
+
+<h2 id="-what-weve-created">🎯 What We’ve Created</h2>
+
+<ol>
+  <li><strong><code class="language-plaintext highlighter-rouge">common-styles.css</code></strong> - All your styles in one place</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">common-scripts.js</code></strong> - All your JavaScript functionality</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">template-structure.md</code></strong> - Template for new files</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">cleanup-guide.md</code></strong> - This cleanup guide</li>
+</ol>
+
+<h2 id="-step-by-step-cleanup-process">🔧 Step-by-Step Cleanup Process</h2>
+
+<h3 id="step-1-add-css-link">Step 1: Add CSS Link</h3>
+<p>Add this line at the top of each file (after the title):</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"../common-styles.css"</span><span class="nt">&gt;</span>
+</code></pre></div></div>
+
+<h3 id="step-2-remove-duplicate-css">Step 2: Remove Duplicate CSS</h3>
+<p>Delete all <code class="language-plaintext highlighter-rouge">&lt;style&gt;</code> blocks from your files. They’re now in <code class="language-plaintext highlighter-rouge">common-styles.css</code>.</p>
+
+<h3 id="step-3-remove-duplicate-javascript">Step 3: Remove Duplicate JavaScript</h3>
+<p>Delete all <code class="language-plaintext highlighter-rouge">&lt;script&gt;</code> blocks (except the one linking to common-scripts.js).</p>
+
+<h3 id="step-4-update-button-classes">Step 4: Update Button Classes</h3>
+<p>Change these class names:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">show-solution-btn</code> → <code class="language-plaintext highlighter-rouge">solution-toggle-btn</code></li>
+  <li>Remove <code class="language-plaintext highlighter-rouge">style="display: none;"</code> from solution divs</li>
+</ul>
+
+<h3 id="step-5-update-copy-buttons">Step 5: Update Copy Buttons</h3>
+<p>Replace inline styles with the common class:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- OLD --&gt;</span>
+<span class="nt">&lt;button</span> <span class="na">onclick=</span><span class="s">"copyCode(this)"</span> <span class="na">style=</span><span class="s">"position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;"</span><span class="nt">&gt;</span>📋 Copy<span class="nt">&lt;/button&gt;</span>
+
+<span class="c">&lt;!-- NEW --&gt;</span>
+<span class="nt">&lt;button</span> <span class="na">onclick=</span><span class="s">"copyCode(this)"</span> <span class="na">class=</span><span class="s">"copy-btn"</span><span class="nt">&gt;</span>📋 Copy<span class="nt">&lt;/button&gt;</span>
+</code></pre></div></div>
+
+<h3 id="step-6-update-navigation">Step 6: Update Navigation</h3>
+<p>Replace navigation sections with:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"navigation"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"previous-file.md"</span> <span class="na">class=</span><span class="s">"nav-link prev"</span><span class="nt">&gt;</span>← Previous: Previous Topic<span class="nt">&lt;/a&gt;</span>
+    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"next-file.md"</span> <span class="na">class=</span><span class="s">"nav-link next"</span><span class="nt">&gt;</span>Next: Next Topic →<span class="nt">&lt;/a&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre></div></div>
+
+<h3 id="step-7-add-javascript-link">Step 7: Add JavaScript Link</h3>
+<p>Replace the old script tag with:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"../common-scripts.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+</code></pre></div></div>
+
+<h2 id="-files-to-clean-up">📁 Files to Clean Up</h2>
+
+<h3 id="javascript-core-folder">JavaScript Core Folder</h3>
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" /><code class="language-plaintext highlighter-rouge">01-Execution-Context-Call-Stack.md</code> ✅ (Just cleaned up)</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" /><code class="language-plaintext highlighter-rouge">02-Hoisting.md</code> ✅ (Just cleaned up)</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" /><code class="language-plaintext highlighter-rouge">03-Scope-Lexical-Scope.md</code> ✅ (Just cleaned up)</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" /><code class="language-plaintext highlighter-rouge">04-Closures.md</code> ✅ (Just cleaned up)</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" /><code class="language-plaintext highlighter-rouge">05-Temporal-Dead-Zone.md</code> ✅ (Just cleaned up)</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" /><code class="language-plaintext highlighter-rouge">06-Primitive-vs-Reference-Types.md</code> ✅ (Just cleaned up)</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" /><code class="language-plaintext highlighter-rouge">07-Deep-Copy-vs-Shallow-Copy.md</code> ✅ (Just cleaned up)</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" /><code class="language-plaintext highlighter-rouge">08-Pass-by-Value-vs-Pass-by-Reference.md</code> ✅ (Just cleaned up)</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" /><code class="language-plaintext highlighter-rouge">09-Type-Coercion.md</code> ✅ (Just cleaned up)</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" /><code class="language-plaintext highlighter-rouge">10-The-this-Keyword.md</code> ✅ (Just cleaned up)</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" /><code class="language-plaintext highlighter-rouge">11-Prototype-Prototypal-Inheritance.md</code> ✅ (Just cleaned up)</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" /><code class="language-plaintext highlighter-rouge">12-Event-Loop-Concurrency.md</code> ✅ (Just cleaned up)</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" /><code class="language-plaintext highlighter-rouge">13-Garbage-Collection.md</code> ✅ (Just cleaned up)</li>
+</ul>
+
+<h3 id="advanced-javascript-concepts-folder">Advanced JavaScript Concepts Folder</h3>
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" /><code class="language-plaintext highlighter-rouge">04-Modules.md</code> ✅ (Already cleaned up)</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" /><code class="language-plaintext highlighter-rouge">03-Asynchronous-JavaScript.md</code> ✅ (Just cleaned up)</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" /><code class="language-plaintext highlighter-rouge">01-Functional-Programming.md</code> ✅ (Just cleaned up)</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" /><code class="language-plaintext highlighter-rouge">02-Object-Oriented-JavaScript.md</code> ✅ (Just cleaned up)</li>
+</ul>
+
+<h3 id="advanced-javascript-concepts---enhanced-topics-completed">Advanced JavaScript Concepts - Enhanced Topics (COMPLETED!)</h3>
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" /><code class="language-plaintext highlighter-rouge">01a-Advanced-Functional-Programming.md</code> ✅ (Fully populated with Monads, Functors, Applicatives)</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" /><code class="language-plaintext highlighter-rouge">02a-Advanced-OOP-JavaScript.md</code> ✅ (Fully populated with Private fields, Decorators, Proxy API)</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" /><code class="language-plaintext highlighter-rouge">03a-Advanced-Asynchronous-JavaScript.md</code> ✅ (Fully populated with AbortController, Top-level await, Promise.withResolvers)</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" /><code class="language-plaintext highlighter-rouge">04a-Advanced-Modules.md</code> ✅ (Fully populated with Dynamic imports, Code splitting, Module Federation)</li>
+</ul>
+
+<h3 id="modern-javascript-features---new-section-completed-">Modern JavaScript Features - NEW SECTION (COMPLETED!) 🆕</h3>
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" /><code class="language-plaintext highlighter-rouge">05-ES2020-Features.md</code> ✅ (Fully populated with Optional Chaining, Nullish Coalescing, BigInt, Top-level await, Array.prototype.at)</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" /><code class="language-plaintext highlighter-rouge">06-ES2021-Features.md</code> ✅ (Fully populated with Promise.any(), Logical Assignment, WeakRef, FinalizationRegistry)</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" /><code class="language-plaintext highlighter-rouge">07-ES2022-Features.md</code> ✅ (Fully populated with Class fields &amp; private methods, Top-level await in modules, Error.cause)</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" /><code class="language-plaintext highlighter-rouge">08-ES2023-Features.md</code> ✅ (Fully populated with Array grouping methods, Hashbang syntax, Symbol as WeakMap keys)</li>
+</ul>
+
+<h3 id="browser--runtime-internals---new-section-completed-">Browser &amp; Runtime Internals - NEW SECTION (COMPLETED!) 🆕</h3>
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" /><code class="language-plaintext highlighter-rouge">01-DOM-Events-Advanced.md</code> ✅ (Fully populated with Event Propagation, Event Delegation patterns, Custom Events &amp; EventTarget)</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" /><code class="language-plaintext highlighter-rouge">02-Web-APIs-Performance.md</code> ✅ (Fully populated with Intersection Observer API, Resize Observer API, Performance API &amp; User Timing, Web Animations API)</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" /><code class="language-plaintext highlighter-rouge">03-Advanced-Browser-Features.md</code> ✅ (Fully populated with WebAssembly basics, WebGL &amp; Canvas optimization, IndexedDB &amp; advanced storage)</li>
+</ul>
+
+<h3 id="advanced-patterns--architecture---new-section-completed-">Advanced Patterns &amp; Architecture - NEW SECTION (COMPLETED!) 🆕</h3>
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" /><code class="language-plaintext highlighter-rouge">01-Design-Patterns-Advanced.md</code> ✅ (Fully populated with Revealing Module Pattern, Factory Pattern variations, Command Pattern, Chain of Responsibility)</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" /><code class="language-plaintext highlighter-rouge">02-Functional-Programming-Patterns.md</code> ✅ (Fully populated with Railway Oriented Programming, Either/Maybe monads, Lens pattern)</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" /><code class="language-plaintext highlighter-rouge">03-Architecture-Patterns.md</code> ✅ (Fully populated with Micro-frontends, Event Sourcing, CQRS pattern)</li>
+</ul>
+
+<h3 id="performance--optimization---new-section-completed-">Performance &amp; Optimization - NEW SECTION (COMPLETED!) 🆕</h3>
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" /><code class="language-plaintext highlighter-rouge">01-JavaScript-Performance.md</code> ✅ (Fully populated with V8 optimization techniques, Hidden classes &amp; inline caching, Garbage collection optimization)</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" /><code class="language-plaintext highlighter-rouge">02-Browser-Performance.md</code> ✅ (Fully populated with Critical rendering path optimization, Resource hints, Service Worker caching strategies)</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" /><code class="language-plaintext highlighter-rouge">03-Advanced-Optimization.md</code> ✅ (Fully populated with Memory management, Algorithm optimization, Performance monitoring)</li>
+</ul>
+
+<h3 id="testing--quality-assurance---new-section-completed-">Testing &amp; Quality Assurance - NEW SECTION (COMPLETED!) 🆕</h3>
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" /><code class="language-plaintext highlighter-rouge">01-Testing-Strategies.md</code> ✅ (Fully populated with Property-based testing, Mutation testing, Visual regression testing)</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" /><code class="language-plaintext highlighter-rouge">02-Code-Quality.md</code> ✅ (Fully populated with SonarQube &amp; code smells, Bundle analysis tools, Performance budgets)</li>
+</ul>
+
+<h3 id="security--best-practices---new-section-completed-">Security &amp; Best Practices - NEW SECTION (COMPLETED!) 🆕</h3>
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" /><code class="language-plaintext highlighter-rouge">01-JavaScript-Security.md</code> ✅ (Fully populated with Content Security Policy (CSP), Subresource Integrity (SRI), Trusted Types API)</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" /><code class="language-plaintext highlighter-rouge">02-Code-Security.md</code> ✅ (Fully populated with Dependency vulnerability scanning, Secure coding practices, OWASP Top 10 for JavaScript)</li>
+</ul>
+
+<h3 id="interview-preparation---new-section-completed-">Interview Preparation - NEW SECTION (COMPLETED!) 🆕</h3>
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" /><code class="language-plaintext highlighter-rouge">01-Common-Interview-Scenarios.md</code> ✅ (Fully populated with Live coding challenges, System design questions, Debugging scenarios, Code review exercises)</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" /><code class="language-plaintext highlighter-rouge">02-Behavioral-Questions.md</code> ✅ (Fully populated with JavaScript-specific behavioral questions, Technical leadership scenarios, Code quality discussions)</li>
+</ul>
+
+<h3 id="real-world-applications---new-section-completed-">Real-World Applications - NEW SECTION (COMPLETED!) 🆕</h3>
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" /><code class="language-plaintext highlighter-rouge">01-Industry-Specific-JavaScript.md</code> ✅ (Fully populated with E-commerce JavaScript patterns, Financial applications, Gaming &amp; interactive media, IoT &amp; embedded JavaScript)</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" /><code class="language-plaintext highlighter-rouge">02-Production-Ready-Patterns.md</code> ✅ (Fully populated with Error handling, Logging, Monitoring, Deployment strategies, DevOps integration)</li>
+</ul>
+
+<h2 id="-quick-script-to-check-all-files">🚀 Quick Script to Check All Files</h2>
+
+<p>You can run this command to see which files still have duplicate CSS/JS:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Check for files with &lt;style&gt; tags</span>
+<span class="nb">grep</span> <span class="nt">-r</span> <span class="s2">"&lt;style&gt;"</span> <span class="s2">"01 JavaScript Core/"</span> <span class="s2">"02-Advanced-JavaScript-Concepts/"</span>
+
+<span class="c"># Check for files with &lt;script&gt; tags (excluding common-scripts.js)</span>
+<span class="nb">grep</span> <span class="nt">-r</span> <span class="s2">"&lt;script&gt;"</span> <span class="s2">"01 JavaScript Core/"</span> <span class="s2">"02-Advanced-JavaScript-Concepts/"</span> | <span class="nb">grep</span> <span class="nt">-v</span> <span class="s2">"common-scripts.js"</span>
+</code></pre></div></div>
+
+<h2 id="-benefits-after-cleanup">✅ Benefits After Cleanup</h2>
+
+<ol>
+  <li><strong>Smaller file sizes</strong> - No more duplicate CSS/JS</li>
+  <li><strong>Faster loading</strong> - CSS and JS are cached</li>
+  <li><strong>Easier maintenance</strong> - Update one file to change everything</li>
+  <li><strong>Consistent appearance</strong> - All files look the same</li>
+  <li><strong>Better performance</strong> - No duplicate code execution</li>
+</ol>
+
+<h2 id="-youre-done">🎉 You’re Done!</h2>
+
+<p>After following this guide, all your files will be clean and use the common structure. The copy buttons, solution toggles, and all styling will work automatically!</p>
+
+<h2 id="-need-help">🔍 Need Help?</h2>
+
+<p>If you run into any issues during cleanup:</p>
+<ol>
+  <li>Check the <code class="language-plaintext highlighter-rouge">template-structure.md</code> file for examples</li>
+  <li>Compare with the cleaned <code class="language-plaintext highlighter-rouge">04-Modules.md</code> file</li>
+  <li>Make sure the file paths in your links are correct</li>
+</ol>
+
+        </main>
+        
+        <footer style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #ecf0f1; color: #666; text-align: center;">
+            <p>Interview Prep Documentation - Built with Jekyll</p>
+        </footer>
+    </div>
+</body>
+</html>

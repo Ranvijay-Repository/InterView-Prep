@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🖼️ Image Optimization &amp; Caching - Interview Prep Documentation</title>
+    <meta name="description" content="Comprehensive guides for JavaScript, TypeScript, and React Native interview preparation">
+    
+    <!-- GitHub Pages compatible styling -->
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+        }
+        
+        .container {
+            max-width: 100%;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            color: #2c3e50;
+            margin-top: 2em;
+            margin-bottom: 1em;
+        }
+        
+        h1 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            border-bottom: 1px solid #ecf0f1;
+            padding-bottom: 5px;
+        }
+        
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border-left: 4px solid #3498db;
+        }
+        
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+        
+        blockquote {
+            border-left: 4px solid #3498db;
+            margin: 0;
+            padding-left: 20px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1em 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .navigation {
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px 0;
+            margin-bottom: 20px;
+        }
+        
+        .navigation a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+        
+        .navigation a:hover {
+            text-decoration: underline;
+        }
+        
+        .breadcrumb {
+            margin-bottom: 20px;
+            color: #666;
+        }
+        
+        .breadcrumb a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            h2 {
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="navigation">
+            <a href="/">Home</a>
+            <a href="/Javascript/">JavaScript</a>
+            <a href="/TypeScript/">TypeScript</a>
+            <a href="/React-Native/">React Native</a>
+        </nav>
+        
+        
+        
+        <main>
+            <h1 id="️-image-optimization--caching">🖼️ <strong>Image Optimization &amp; Caching</strong></h1>
+
+<blockquote>
+  <p><strong>Master image optimization and caching strategies to improve performance and reduce memory usage in React Native applications</strong></p>
+</blockquote>
+
+<link rel="stylesheet" href="../../common-styles.css" />
+
+<hr />
+
+<h2 id="-table-of-contents">📚 <strong>Table of Contents</strong></h2>
+
+<ul>
+  <li><a href="#introduction">Introduction</a></li>
+  <li><a href="#image-optimization-techniques">Image Optimization Techniques</a></li>
+  <li><a href="#caching-strategies">Caching Strategies</a></li>
+  <li><a href="#memory-management">Memory Management</a></li>
+  <li><a href="#performance-monitoring">Performance Monitoring</a></li>
+  <li><a href="#common-patterns">Common Patterns</a></li>
+  <li><a href="#interview-questions">Interview Questions</a></li>
+  <li><a href="#best-practices">Best Practices</a></li>
+</ul>
+
+<hr />
+
+<h2 id="-introduction">🎯 <strong>Introduction</strong></h2>
+
+<p>Image optimization is crucial for React Native performance. Proper image handling, caching, and memory management can significantly improve app performance and user experience.</p>
+
+<h3 id="image-optimization-overview"><strong>Image Optimization Overview</strong></h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>┌─────────────────────────────────────┐
+│        Image Optimization           │
+│  ┌─────────────────────────────────┐│
+│  │        Optimization Techniques  ││
+│  │  - Image resizing               ││
+│  │  - Format selection             ││
+│  │  - Compression                  ││
+│  │  - Lazy loading                 ││
+│  └─────────────────────────────────┘│
+│  ┌─────────────────────────────────┐│
+│  │        Caching Strategies       ││
+│  │  - Memory cache                 ││
+│  │  - Disk cache                   ││
+│  │  - Network cache                ││
+│  │  - Cache invalidation           ││
+│  └─────────────────────────────────┘│
+│  ┌─────────────────────────────────┐│
+│  │        Memory Management        ││
+│  │  - Image cleanup                ││
+│  │  - Memory monitoring            ││
+│  │  - Leak prevention              ││
+│  │  - Performance optimization     ││
+│  └─────────────────────────────────┘│
+└─────────────────────────────────────┘
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="️-image-optimization-techniques">🖼️ <strong>Image Optimization Techniques</strong></h2>
+
+<h3 id="optimized-image-component"><strong>Optimized Image Component</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useState</span><span class="p">,</span> <span class="nx">useCallback</span><span class="p">,</span> <span class="nx">useRef</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">View</span><span class="p">,</span> <span class="nx">Text</span><span class="p">,</span> <span class="nx">Image</span><span class="p">,</span> <span class="nx">StyleSheet</span><span class="p">,</span> <span class="nx">TouchableOpacity</span><span class="p">,</span> <span class="nx">ActivityIndicator</span><span class="p">,</span> <span class="nx">Alert</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">OptimizedImage</span> <span class="o">=</span> <span class="p">({</span> 
+  <span class="nx">source</span><span class="p">,</span> 
+  <span class="nx">style</span><span class="p">,</span> 
+  <span class="nx">placeholder</span><span class="p">,</span> 
+  <span class="nx">errorImage</span><span class="p">,</span>
+  <span class="nx">onLoad</span><span class="p">,</span>
+  <span class="nx">onError</span><span class="p">,</span>
+  <span class="nx">resizeMode</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">cover</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">...</span><span class="nx">props</span> 
+<span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">loading</span><span class="p">,</span> <span class="nx">setLoading</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">error</span><span class="p">,</span> <span class="nx">setError</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">imageLoaded</span><span class="p">,</span> <span class="nx">setImageLoaded</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+  
+  <span class="kd">const</span> <span class="nx">handleLoadStart</span> <span class="o">=</span> <span class="nx">useCallback</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setLoading</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+    <span class="nx">setError</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+  <span class="p">},</span> <span class="p">[]);</span>
+  
+  <span class="kd">const</span> <span class="nx">handleLoadEnd</span> <span class="o">=</span> <span class="nx">useCallback</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setLoading</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+    <span class="nx">setImageLoaded</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+    <span class="nx">onLoad</span><span class="p">?.();</span>
+  <span class="p">},</span> <span class="p">[</span><span class="nx">onLoad</span><span class="p">]);</span>
+  
+  <span class="kd">const</span> <span class="nx">handleError</span> <span class="o">=</span> <span class="nx">useCallback</span><span class="p">((</span><span class="nx">error</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setLoading</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+    <span class="nx">setError</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+    <span class="nx">onError</span><span class="p">?.(</span><span class="nx">error</span><span class="p">);</span>
+  <span class="p">},</span> <span class="p">[</span><span class="nx">onError</span><span class="p">]);</span>
+  
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{[</span><span class="nx">styles</span><span class="p">.</span><span class="nx">container</span><span class="p">,</span> <span class="nx">style</span><span class="p">]}</span><span class="o">&gt;</span>
+      <span class="p">{</span><span class="nx">loading</span> <span class="o">&amp;&amp;</span> <span class="p">(</span>
+        <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">loadingContainer</span><span class="p">}</span><span class="o">&gt;</span>
+          <span class="p">{</span><span class="nx">placeholder</span> <span class="o">||</span> <span class="o">&lt;</span><span class="nx">ActivityIndicator</span> <span class="nx">size</span><span class="o">=</span><span class="dl">"</span><span class="s2">small</span><span class="dl">"</span> <span class="nx">color</span><span class="o">=</span><span class="dl">"</span><span class="s2">#007AFF</span><span class="dl">"</span> <span class="o">/&gt;</span><span class="p">}</span>
+        <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>      <span class="p">)}</span>
+      
+      <span class="p">{</span><span class="nx">error</span> <span class="o">&amp;&amp;</span> <span class="p">(</span>
+        <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">errorContainer</span><span class="p">}</span><span class="o">&gt;</span>
+          <span class="p">{</span><span class="nx">errorImage</span> <span class="o">||</span> <span class="p">(</span>
+            <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">defaultError</span><span class="p">}</span><span class="o">&gt;</span>
+              <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">errorText</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Failed</span> <span class="nx">to</span> <span class="nx">load</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>            <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>          <span class="p">)}</span>
+        <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>      <span class="p">)}</span>
+      
+      <span class="o">&lt;</span><span class="nx">Image</span>
+        <span class="nx">source</span><span class="o">=</span><span class="p">{</span><span class="nx">source</span><span class="p">}</span>
+        <span class="nx">style</span><span class="o">=</span><span class="p">{[</span><span class="nx">styles</span><span class="p">.</span><span class="nx">image</span><span class="p">,</span> <span class="nx">imageLoaded</span> <span class="o">&amp;&amp;</span> <span class="nx">styles</span><span class="p">.</span><span class="nx">loadedImage</span><span class="p">]}</span>
+        <span class="nx">resizeMode</span><span class="o">=</span><span class="p">{</span><span class="nx">resizeMode</span><span class="p">}</span>
+        <span class="nx">onLoadStart</span><span class="o">=</span><span class="p">{</span><span class="nx">handleLoadStart</span><span class="p">}</span>
+        <span class="nx">onLoadEnd</span><span class="o">=</span><span class="p">{</span><span class="nx">handleLoadEnd</span><span class="p">}</span>
+        <span class="nx">onError</span><span class="o">=</span><span class="p">{</span><span class="nx">handleError</span><span class="p">}</span>
+        <span class="p">{...</span><span class="nx">props</span><span class="p">}</span>
+      <span class="sr">/</span><span class="err">&gt;
+</span>    <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">styles</span> <span class="o">=</span> <span class="nx">StyleSheet</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span>
+  <span class="na">container</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">position</span><span class="p">:</span> <span class="dl">'</span><span class="s1">relative</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">overflow</span><span class="p">:</span> <span class="dl">'</span><span class="s1">hidden</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">image</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">width</span><span class="p">:</span> <span class="dl">'</span><span class="s1">100%</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">height</span><span class="p">:</span> <span class="dl">'</span><span class="s1">100%</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">opacity</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">loadedImage</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">opacity</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">loadingContainer</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">position</span><span class="p">:</span> <span class="dl">'</span><span class="s1">absolute</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">top</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="na">left</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="na">right</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="na">bottom</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="na">justifyContent</span><span class="p">:</span> <span class="dl">'</span><span class="s1">center</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">alignItems</span><span class="p">:</span> <span class="dl">'</span><span class="s1">center</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#f0f0f0</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">errorContainer</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">position</span><span class="p">:</span> <span class="dl">'</span><span class="s1">absolute</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">top</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="na">left</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="na">right</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="na">bottom</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="na">justifyContent</span><span class="p">:</span> <span class="dl">'</span><span class="s1">center</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">alignItems</span><span class="p">:</span> <span class="dl">'</span><span class="s1">center</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#f0f0f0</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">defaultError</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">padding</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="na">alignItems</span><span class="p">:</span> <span class="dl">'</span><span class="s1">center</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">errorText</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#666</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">fontSize</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+  <span class="p">},</span>
+<span class="p">});</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">OptimizedImage</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="image-gallery-with-optimization"><strong>Image Gallery with Optimization</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useState</span><span class="p">,</span> <span class="nx">useCallback</span><span class="p">,</span> <span class="nx">useMemo</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">View</span><span class="p">,</span> <span class="nx">Text</span><span class="p">,</span> <span class="nx">FlatList</span><span class="p">,</span> <span class="nx">StyleSheet</span><span class="p">,</span> <span class="nx">TouchableOpacity</span><span class="p">,</span> <span class="nx">Dimensions</span><span class="p">,</span> <span class="nx">Alert</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">OptimizedImage</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./OptimizedImage</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="p">{</span> <span class="na">width</span><span class="p">:</span> <span class="nx">screenWidth</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">Dimensions</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">window</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">ITEM_WIDTH</span> <span class="o">=</span> <span class="nx">screenWidth</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">20</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">ImageGallery</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">images</span><span class="p">,</span> <span class="nx">setImages</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">([]);</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">selectedImage</span><span class="p">,</span> <span class="nx">setSelectedImage</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">loading</span><span class="p">,</span> <span class="nx">setLoading</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+  
+  <span class="c1">// Generate sample images with different sizes and formats</span>
+  <span class="kd">const</span> <span class="nx">generateImages</span> <span class="o">=</span> <span class="nx">useCallback</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">imageList</span> <span class="o">=</span> <span class="p">[];</span>
+    <span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">https://picsum.photos</span><span class="dl">'</span><span class="p">;</span>
+    
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">50</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">imageList</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span>
+        <span class="na">id</span><span class="p">:</span> <span class="nx">i</span><span class="p">,</span>
+        <span class="na">url</span><span class="p">:</span> <span class="s2">`</span><span class="p">${</span><span class="nx">baseUrl</span><span class="p">}</span><span class="s2">/</span><span class="p">${</span><span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">*</span> <span class="mi">800</span><span class="p">)</span> <span class="o">+</span> <span class="mi">200</span><span class="p">}</span><span class="s2">/</span><span class="p">${</span><span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">*</span> <span class="mi">600</span><span class="p">)</span> <span class="o">+</span> <span class="mi">200</span><span class="p">}</span><span class="s2">`</span><span class="p">,</span>
+        <span class="na">thumbnail</span><span class="p">:</span> <span class="s2">`</span><span class="p">${</span><span class="nx">baseUrl</span><span class="p">}</span><span class="s2">/100/100?random=</span><span class="p">${</span><span class="nx">i</span><span class="p">}</span><span class="s2">`</span><span class="p">,</span>
+        <span class="na">title</span><span class="p">:</span> <span class="s2">`Image </span><span class="p">${</span><span class="nx">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">}</span><span class="s2">`</span><span class="p">,</span>
+        <span class="na">category</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">Nature</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">City</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">People</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Abstract</span><span class="dl">'</span><span class="p">][</span><span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">*</span> <span class="mi">4</span><span class="p">)],</span>
+        <span class="na">size</span><span class="p">:</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">*</span> <span class="mi">1000000</span><span class="p">)</span> <span class="o">+</span> <span class="mi">100000</span><span class="p">,</span> <span class="c1">// Simulated file size</span>
+      <span class="p">});</span>
+    <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="nx">imageList</span><span class="p">;</span>
+  <span class="p">},</span> <span class="p">[]);</span>
+  
+  <span class="c1">// Load images</span>
+  <span class="kd">const</span> <span class="nx">loadImages</span> <span class="o">=</span> <span class="nx">useCallback</span><span class="p">(</span><span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setLoading</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="c1">// Simulate API call</span>
+      <span class="k">await</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="nx">resolve</span> <span class="o">=&gt;</span> <span class="nx">setTimeout</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="mi">1000</span><span class="p">));</span>
+      <span class="kd">const</span> <span class="nx">imageList</span> <span class="o">=</span> <span class="nx">generateImages</span><span class="p">();</span>
+      <span class="nx">setImages</span><span class="p">(</span><span class="nx">imageList</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">Alert</span><span class="p">.</span><span class="nx">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">Error</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Failed to load images</span><span class="dl">'</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">finally</span> <span class="p">{</span>
+      <span class="nx">setLoading</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">},</span> <span class="p">[</span><span class="nx">generateImages</span><span class="p">]);</span>
+  
+  <span class="c1">// Render image item</span>
+  <span class="kd">const</span> <span class="nx">renderImageItem</span> <span class="o">=</span> <span class="nx">useCallback</span><span class="p">(({</span> <span class="nx">item</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">TouchableOpacity</span>
+      <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">imageItem</span><span class="p">}</span>
+      <span class="nx">onPress</span><span class="o">=</span><span class="p">{()</span> <span class="o">=&gt;</span> <span class="nx">setSelectedImage</span><span class="p">(</span><span class="nx">item</span><span class="p">)}</span>
+      <span class="nx">activeOpacity</span><span class="o">=</span><span class="p">{</span><span class="mf">0.8</span><span class="p">}</span>
+    <span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="nx">OptimizedImage</span>
+        <span class="nx">source</span><span class="o">=</span><span class="p">{{</span><span class="err">#</span><span class="mi">123</span><span class="p">;{{</span><span class="err">#</span><span class="mi">123</span><span class="p">;</span> <span class="nl">uri</span><span class="p">:</span> <span class="nx">item</span><span class="p">.</span><span class="nx">thumbnail</span> <span class="p">}}</span><span class="err">#</span><span class="mi">125</span><span class="p">;}}</span><span class="err">#</span><span class="mi">125</span><span class="p">;</span>
+        <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">thumbnail</span><span class="p">}</span>
+        <span class="nx">placeholder</span><span class="o">=</span><span class="p">{</span>
+          <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">placeholder</span><span class="p">}</span><span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">placeholderText</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Loading</span><span class="p">...</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>          <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>        <span class="p">}</span>
+        <span class="nx">errorImage</span><span class="o">=</span><span class="p">{</span>
+          <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">errorPlaceholder</span><span class="p">}</span><span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">errorText</span><span class="p">}</span><span class="o">&gt;</span><span class="nb">Error</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>          <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>        <span class="p">}</span>
+      <span class="sr">/</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">imageInfo</span><span class="p">}</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">imageTitle</span><span class="p">}</span> <span class="nx">numberOfLines</span><span class="o">=</span><span class="p">{</span><span class="mi">1</span><span class="p">}</span><span class="o">&gt;</span>
+          <span class="p">{</span><span class="nx">item</span><span class="p">.</span><span class="nx">title</span><span class="p">}</span>
+        <span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">imageCategory</span><span class="p">}</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">item</span><span class="p">.</span><span class="nx">category</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">imageSize</span><span class="p">}</span><span class="o">&gt;</span>
+          <span class="p">{(</span><span class="nx">item</span><span class="p">.</span><span class="nx">size</span> <span class="o">/</span> <span class="mi">1024</span><span class="p">).</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">1</span><span class="p">)}</span> <span class="nx">KB</span>
+        <span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>    <span class="o">&lt;</span><span class="sr">/TouchableOpacity</span><span class="err">&gt;
+</span>  <span class="p">),</span> <span class="p">[]);</span>
+  
+  <span class="c1">// Memoized key extractor</span>
+  <span class="kd">const</span> <span class="nx">keyExtractor</span> <span class="o">=</span> <span class="nx">useCallback</span><span class="p">((</span><span class="nx">item</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">item</span><span class="p">.</span><span class="nx">id</span><span class="p">.</span><span class="nx">toString</span><span class="p">(),</span> <span class="p">[]);</span>
+  
+  <span class="c1">// Get item layout for better performance</span>
+  <span class="kd">const</span> <span class="nx">getItemLayout</span> <span class="o">=</span> <span class="nx">useCallback</span><span class="p">((</span><span class="nx">data</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">({</span>
+    <span class="na">length</span><span class="p">:</span> <span class="nx">ITEM_WIDTH</span> <span class="o">+</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="na">offset</span><span class="p">:</span> <span class="p">(</span><span class="nx">ITEM_WIDTH</span> <span class="o">+</span> <span class="mi">10</span><span class="p">)</span> <span class="o">*</span> <span class="nx">index</span><span class="p">,</span>
+    <span class="nx">index</span><span class="p">,</span>
+  <span class="p">}),</span> <span class="p">[]);</span>
+  
+  <span class="c1">// Clear images</span>
+  <span class="kd">const</span> <span class="nx">clearImages</span> <span class="o">=</span> <span class="nx">useCallback</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setImages</span><span class="p">([]);</span>
+    <span class="nx">setSelectedImage</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+  <span class="p">},</span> <span class="p">[]);</span>
+  
+  <span class="c1">// Memoized performance info</span>
+  <span class="kd">const</span> <span class="nx">performanceInfo</span> <span class="o">=</span> <span class="nx">useMemo</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">performanceContainer</span><span class="p">}</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">performanceTitle</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Image</span> <span class="nx">Gallery</span> <span class="nx">Performance</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">performanceText</span><span class="p">}</span><span class="o">&gt;</span><span class="na">Images</span><span class="p">:</span> <span class="p">{</span><span class="nx">images</span><span class="p">.</span><span class="nx">length</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">performanceText</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Memory</span> <span class="na">Usage</span><span class="p">:</span> <span class="p">{</span><span class="nx">images</span><span class="p">.</span><span class="nx">length</span> <span class="o">*</span> <span class="mf">0.5</span><span class="p">}</span> <span class="nx">MB</span> <span class="p">(</span><span class="nx">estimated</span><span class="p">)</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>    <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>  <span class="p">),</span> <span class="p">[</span><span class="nx">images</span><span class="p">.</span><span class="nx">length</span><span class="p">]);</span>
+  
+  <span class="nx">React</span><span class="p">.</span><span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">loadImages</span><span class="p">();</span>
+  <span class="p">},</span> <span class="p">[</span><span class="nx">loadImages</span><span class="p">]);</span>
+  
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">container</span><span class="p">}</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">title</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Optimized</span> <span class="nx">Image</span> <span class="nx">Gallery</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>      
+      <span class="p">{</span><span class="nx">performanceInfo</span><span class="p">}</span>
+      
+      <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">controlsContainer</span><span class="p">}</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">TouchableOpacity</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">controlButton</span><span class="p">}</span> <span class="nx">onPress</span><span class="o">=</span><span class="p">{</span><span class="nx">loadImages</span><span class="p">}</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">controlButtonText</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Load</span> <span class="nx">Images</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/TouchableOpacity</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="nx">TouchableOpacity</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">controlButton</span><span class="p">}</span> <span class="nx">onPress</span><span class="o">=</span><span class="p">{</span><span class="nx">clearImages</span><span class="p">}</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">controlButtonText</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Clear</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/TouchableOpacity</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>      
+      <span class="o">&lt;</span><span class="nx">FlatList</span>
+        <span class="nx">data</span><span class="o">=</span><span class="p">{</span><span class="nx">images</span><span class="p">}</span>
+        <span class="nx">renderItem</span><span class="o">=</span><span class="p">{</span><span class="nx">renderImageItem</span><span class="p">}</span>
+        <span class="nx">keyExtractor</span><span class="o">=</span><span class="p">{</span><span class="nx">keyExtractor</span><span class="p">}</span>
+        <span class="nx">numColumns</span><span class="o">=</span><span class="p">{</span><span class="mi">2</span><span class="p">}</span>
+        <span class="nx">getItemLayout</span><span class="o">=</span><span class="p">{</span><span class="nx">getItemLayout</span><span class="p">}</span>
+        <span class="nx">removeClippedSubviews</span><span class="o">=</span><span class="p">{</span><span class="kc">true</span><span class="p">}</span>
+        <span class="nx">maxToRenderPerBatch</span><span class="o">=</span><span class="p">{</span><span class="mi">10</span><span class="p">}</span>
+        <span class="nx">windowSize</span><span class="o">=</span><span class="p">{</span><span class="mi">10</span><span class="p">}</span>
+        <span class="nx">initialNumToRender</span><span class="o">=</span><span class="p">{</span><span class="mi">10</span><span class="p">}</span>
+        <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">list</span><span class="p">}</span>
+        <span class="nx">contentContainerStyle</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">listContent</span><span class="p">}</span>
+      <span class="sr">/</span><span class="err">&gt;
+</span>      
+      <span class="p">{</span><span class="nx">selectedImage</span> <span class="o">&amp;&amp;</span> <span class="p">(</span>
+        <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">modalContainer</span><span class="p">}</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">TouchableOpacity</span>
+            <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">modalBackground</span><span class="p">}</span>
+            <span class="nx">onPress</span><span class="o">=</span><span class="p">{()</span> <span class="o">=&gt;</span> <span class="nx">setSelectedImage</span><span class="p">(</span><span class="kc">null</span><span class="p">)}</span>
+          <span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">modalContent</span><span class="p">}</span><span class="o">&gt;</span>
+              <span class="o">&lt;</span><span class="nx">OptimizedImage</span>
+                <span class="nx">source</span><span class="o">=</span><span class="p">{{</span><span class="err">#</span><span class="mi">123</span><span class="p">;{{</span><span class="err">#</span><span class="mi">123</span><span class="p">;</span> <span class="nl">uri</span><span class="p">:</span> <span class="nx">selectedImage</span><span class="p">.</span><span class="nx">url</span> <span class="p">}}</span><span class="err">#</span><span class="mi">125</span><span class="p">;}}</span><span class="err">#</span><span class="mi">125</span><span class="p">;</span>
+                <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">fullImage</span><span class="p">}</span>
+                <span class="nx">resizeMode</span><span class="o">=</span><span class="dl">"</span><span class="s2">contain</span><span class="dl">"</span>
+              <span class="o">/&gt;</span>
+              <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">modalTitle</span><span class="p">}</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">selectedImage</span><span class="p">.</span><span class="nx">title</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>              <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">modalCategory</span><span class="p">}</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">selectedImage</span><span class="p">.</span><span class="nx">category</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>            <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>          <span class="o">&lt;</span><span class="sr">/TouchableOpacity</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>      <span class="p">)}</span>
+    <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">styles</span> <span class="o">=</span> <span class="nx">StyleSheet</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span>
+  <span class="na">container</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">flex</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#f5f5f5</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">title</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">fontSize</span><span class="p">:</span> <span class="mi">24</span><span class="p">,</span>
+    <span class="na">fontWeight</span><span class="p">:</span> <span class="dl">'</span><span class="s1">bold</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">textAlign</span><span class="p">:</span> <span class="dl">'</span><span class="s1">center</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">padding</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">white</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">borderBottomWidth</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="na">borderBottomColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#eee</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">performanceContainer</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#E3F2FD</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">padding</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+    <span class="na">margin</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="na">borderRadius</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">performanceTitle</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">fontSize</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+    <span class="na">fontWeight</span><span class="p">:</span> <span class="dl">'</span><span class="s1">bold</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#1976D2</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">marginBottom</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">performanceText</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">fontSize</span><span class="p">:</span> <span class="mi">14</span><span class="p">,</span>
+    <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#1976D2</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">marginBottom</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">controlsContainer</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">flexDirection</span><span class="p">:</span> <span class="dl">'</span><span class="s1">row</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">justifyContent</span><span class="p">:</span> <span class="dl">'</span><span class="s1">space-around</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">padding</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">white</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">borderBottomWidth</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="na">borderBottomColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#eee</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">controlButton</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#007AFF</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">paddingHorizontal</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="na">paddingVertical</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="na">borderRadius</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">controlButtonText</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">white</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">fontSize</span><span class="p">:</span> <span class="mi">14</span><span class="p">,</span>
+    <span class="na">fontWeight</span><span class="p">:</span> <span class="dl">'</span><span class="s1">bold</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">list</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">flex</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">listContent</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">padding</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">imageItem</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">width</span><span class="p">:</span> <span class="nx">ITEM_WIDTH</span><span class="p">,</span>
+    <span class="na">margin</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+    <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">white</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">borderRadius</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="na">overflow</span><span class="p">:</span> <span class="dl">'</span><span class="s1">hidden</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">shadowColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#000</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">shadowOffset</span><span class="p">:</span> <span class="p">{</span> <span class="na">width</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="na">height</span><span class="p">:</span> <span class="mi">2</span> <span class="p">},</span>
+    <span class="na">shadowOpacity</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+    <span class="na">shadowRadius</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+    <span class="na">elevation</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">thumbnail</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">width</span><span class="p">:</span> <span class="dl">'</span><span class="s1">100%</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">height</span><span class="p">:</span> <span class="nx">ITEM_WIDTH</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">placeholder</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">width</span><span class="p">:</span> <span class="dl">'</span><span class="s1">100%</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">height</span><span class="p">:</span> <span class="nx">ITEM_WIDTH</span><span class="p">,</span>
+    <span class="na">justifyContent</span><span class="p">:</span> <span class="dl">'</span><span class="s1">center</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">alignItems</span><span class="p">:</span> <span class="dl">'</span><span class="s1">center</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#f0f0f0</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">placeholderText</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#666</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">fontSize</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">errorPlaceholder</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">width</span><span class="p">:</span> <span class="dl">'</span><span class="s1">100%</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">height</span><span class="p">:</span> <span class="nx">ITEM_WIDTH</span><span class="p">,</span>
+    <span class="na">justifyContent</span><span class="p">:</span> <span class="dl">'</span><span class="s1">center</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">alignItems</span><span class="p">:</span> <span class="dl">'</span><span class="s1">center</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#ffebee</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">errorText</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#c62828</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">fontSize</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">imageInfo</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">padding</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">imageTitle</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">fontSize</span><span class="p">:</span> <span class="mi">14</span><span class="p">,</span>
+    <span class="na">fontWeight</span><span class="p">:</span> <span class="dl">'</span><span class="s1">bold</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#333</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">marginBottom</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">imageCategory</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">fontSize</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+    <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#007AFF</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">marginBottom</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">imageSize</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">fontSize</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#666</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">modalContainer</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">position</span><span class="p">:</span> <span class="dl">'</span><span class="s1">absolute</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">top</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="na">left</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="na">right</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="na">bottom</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">rgba(0,0,0,0.9)</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">justifyContent</span><span class="p">:</span> <span class="dl">'</span><span class="s1">center</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">alignItems</span><span class="p">:</span> <span class="dl">'</span><span class="s1">center</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">modalBackground</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">flex</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="na">width</span><span class="p">:</span> <span class="dl">'</span><span class="s1">100%</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">justifyContent</span><span class="p">:</span> <span class="dl">'</span><span class="s1">center</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">alignItems</span><span class="p">:</span> <span class="dl">'</span><span class="s1">center</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">modalContent</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">width</span><span class="p">:</span> <span class="dl">'</span><span class="s1">90%</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">alignItems</span><span class="p">:</span> <span class="dl">'</span><span class="s1">center</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">fullImage</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">width</span><span class="p">:</span> <span class="dl">'</span><span class="s1">100%</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">height</span><span class="p">:</span> <span class="mi">300</span><span class="p">,</span>
+    <span class="na">marginBottom</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">modalTitle</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">fontSize</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="na">fontWeight</span><span class="p">:</span> <span class="dl">'</span><span class="s1">bold</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">white</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">marginBottom</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">modalCategory</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">fontSize</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+    <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#ccc</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+<span class="p">});</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">ImageGallery</span><span class="p">;</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-navigation">🧭 Navigation</h2>
+
+<div class="navigation">
+    <a href="./02-Virtualization-Optimization.md" class="nav-link prev">⬅️ Previous: Virtualization &amp; Optimization</a>
+    <a href="./04-Performance-Profiling.md" class="nav-link next">Next: Performance Profiling ➡️</a>
+</div>
+
+<hr />
+
+<p><em>Last updated: December 2024</em></p>
+
+        </main>
+        
+        <footer style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #ecf0f1; color: #666; text-align: center;">
+            <p>Interview Prep Documentation - Built with Jekyll</p>
+        </footer>
+    </div>
+</body>
+</html>

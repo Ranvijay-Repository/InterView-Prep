@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔹 Temporal Dead Zone (TDZ) - Interview Prep Documentation</title>
+    <meta name="description" content="Comprehensive guides for JavaScript, TypeScript, and React Native interview preparation">
+    
+    <!-- GitHub Pages compatible styling -->
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+        }
+        
+        .container {
+            max-width: 100%;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            color: #2c3e50;
+            margin-top: 2em;
+            margin-bottom: 1em;
+        }
+        
+        h1 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            border-bottom: 1px solid #ecf0f1;
+            padding-bottom: 5px;
+        }
+        
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border-left: 4px solid #3498db;
+        }
+        
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+        
+        blockquote {
+            border-left: 4px solid #3498db;
+            margin: 0;
+            padding-left: 20px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1em 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .navigation {
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px 0;
+            margin-bottom: 20px;
+        }
+        
+        .navigation a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+        
+        .navigation a:hover {
+            text-decoration: underline;
+        }
+        
+        .breadcrumb {
+            margin-bottom: 20px;
+            color: #666;
+        }
+        
+        .breadcrumb a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            h2 {
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="navigation">
+            <a href="/">Home</a>
+            <a href="/Javascript/">JavaScript</a>
+            <a href="/TypeScript/">TypeScript</a>
+            <a href="/React-Native/">React Native</a>
+        </nav>
+        
+        
+        
+        <main>
+            <h1 id="-temporal-dead-zone-tdz">🔹 Temporal Dead Zone (TDZ)</h1>
+
+<p><em>Understanding the Period Between Scope Entry and Variable Declaration</em></p>
+
+<link rel="stylesheet" href="../common-styles.css" />
+
+<hr />
+
+<h2 id="-table-of-contents">📚 Table of Contents</h2>
+<ul>
+  <li><a href="#what-is-the-temporal-dead-zone">What is the Temporal Dead Zone?</a></li>
+  <li><a href="#how-tdz-works">How TDZ Works</a></li>
+  <li><a href="#tdz-visualization">TDZ Visualization</a></li>
+  <li><a href="#tdz-vs-hoisting">TDZ vs Hoisting</a></li>
+  <li><a href="#detailed-examples">Detailed Examples</a></li>
+  <li><a href="#common-tdz-scenarios">Common TDZ Scenarios</a></li>
+  <li><a href="#best-practices">Best Practices</a></li>
+  <li><a href="#key-points-for-interviews">Key Points for Interviews</a></li>
+  <li><a href="#common-interview-questions">Common Interview Questions</a></li>
+</ul>
+
+<hr />
+
+<h2 id="-what-is-the-temporal-dead-zone">🎯 What is the Temporal Dead Zone?</h2>
+
+<p>The Temporal Dead Zone (TDZ) is the period between entering a scope and the actual declaration of a <code class="language-plaintext highlighter-rouge">let</code> or <code class="language-plaintext highlighter-rouge">const</code> variable, during which the variable exists but cannot be accessed. Attempting to access a variable in the TDZ results in a <code class="language-plaintext highlighter-rouge">ReferenceError</code>.</p>
+
+<h3 id="-simple-analogy">🔍 Simple Analogy</h3>
+<p>Think of TDZ like a construction zone:</p>
+<ul>
+  <li><strong>Scope Entry</strong> = Entering the construction area</li>
+  <li><strong>Variable Declaration</strong> = Building completion</li>
+  <li><strong>TDZ Period</strong> = Construction zone (dangerous to enter)</li>
+  <li><strong>Access Attempt</strong> = Trying to use incomplete building (causes error)</li>
+</ul>
+
+<hr />
+
+<h2 id="️-how-tdz-works">⚙️ How TDZ Works</h2>
+
+<h3 id="-core-mechanism">🔑 Core Mechanism</h3>
+<ol>
+  <li><strong>Scope Entry</strong>: Function or block scope begins</li>
+  <li><strong>Variable Hoisting</strong>: <code class="language-plaintext highlighter-rouge">let</code>/<code class="language-plaintext highlighter-rouge">const</code> declarations are hoisted but not initialized</li>
+  <li><strong>TDZ Period</strong>: Variable exists but cannot be accessed</li>
+  <li><strong>Declaration Line</strong>: Variable gets initialized and becomes accessible</li>
+  <li><strong>Normal Usage</strong>: Variable can be used normally</li>
+</ol>
+
+<h3 id="-tdz-lifecycle">🔄 TDZ Lifecycle</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>┌─────────────────────────────────────────────────────────────┐
+│                    TDZ LIFECYCLE                            │
+├─────────────────────────────────────────────────────────────┤
+│  1. 🟢 Enter scope (function/block)                       │
+│  2. 🟡 let/const declarations hoisted (uninitialized)     │
+│  3. 🔴 TDZ begins - variables exist but inaccessible      │
+│  4. 🟡 Execution reaches declaration line                  │
+│  5. 🟢 Variable initialized and accessible                 │
+│  6. 🟡 TDZ ends - normal variable usage                    │
+└─────────────────────────────────────────────────────────────┘
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="️-tdz-visualization">🗂️ TDZ Visualization</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>┌─────────────────────────────────────────────────────────────┐
+│                    TEMPORAL DEAD ZONE                       │
+├─────────────────────────────────────────────────────────────┤
+│  🌍 Global Scope                                           │
+│  ├─ globalVar (accessible)                                │
+│  └─ function test() {                                      │
+│                                                             │
+│  🏠 Function Scope                                         │
+│  ├─ console.log("Start");                                  │
+│  ├─ console.log(x); ← ❌ TDZ ERROR                         │
+│  ├─ let x = 5; ← 🟢 TDZ ENDS HERE                         │
+│  ├─ console.log(x); ← ✅ WORKS FINE                        │
+│  └─ }                                                      │
+│                                                             │
+│  🔴 TDZ PERIOD: Between scope entry and let x = 5         │
+│  🟢 SAFE PERIOD: After let x = 5                          │
+└─────────────────────────────────────────────────────────────┘
+</code></pre></div></div>
+
+<h3 id="-tdz-vs-hoisting-comparison">🔍 TDZ vs Hoisting Comparison</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>┌─────────────────────────────────────────────────────────────┐
+│                TDZ VS HOISTING COMPARISON                   │
+├─────────────────────────────────────────────────────────────┤
+│  var (Traditional Hoisting)                                │
+│  ├─ Declaration hoisted                                    │
+│  ├─ Initialized with undefined                             │
+│  ├─ Accessible before declaration                          │
+│  └─ Returns undefined                                      │
+│                                                             │
+│  let/const (TDZ)                                           │
+│  ├─ Declaration hoisted                                    │
+│  ├─ NOT initialized                                        │
+│  ├─ NOT accessible before declaration                      │
+│  └─ Throws ReferenceError                                 │
+└─────────────────────────────────────────────────────────────┘
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-tdz-vs-hoisting">🔄 TDZ vs Hoisting</h2>
+
+<h3 id="key-differences">Key Differences</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Aspect</th>
+      <th><code class="language-plaintext highlighter-rouge">var</code> (Hoisting)</th>
+      <th><code class="language-plaintext highlighter-rouge">let</code>/<code class="language-plaintext highlighter-rouge">const</code> (TDZ)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Declaration</strong></td>
+      <td>Hoisted</td>
+      <td>Hoisted</td>
+    </tr>
+    <tr>
+      <td><strong>Initialization</strong></td>
+      <td><code class="language-plaintext highlighter-rouge">undefined</code></td>
+      <td>Uninitialized</td>
+    </tr>
+    <tr>
+      <td><strong>Access</strong></td>
+      <td>Allowed (returns <code class="language-plaintext highlighter-rouge">undefined</code>)</td>
+      <td>Blocked (ReferenceError)</td>
+    </tr>
+    <tr>
+      <td><strong>Behavior</strong></td>
+      <td>Silent failure</td>
+      <td>Explicit error</td>
+    </tr>
+    <tr>
+      <td><strong>Debugging</strong></td>
+      <td>Hard to detect</td>
+      <td>Easy to detect</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="why-tdz-exists">Why TDZ Exists</h3>
+<ol>
+  <li><strong>Prevent Silent Bugs</strong>: <code class="language-plaintext highlighter-rouge">var</code> hoisting can lead to unexpected behavior</li>
+  <li><strong>Better Error Detection</strong>: TDZ makes issues obvious at runtime</li>
+  <li><strong>Consistent Behavior</strong>: Variables behave more predictably</li>
+  <li><strong>Modern JavaScript</strong>: Aligns with block-scoping principles</li>
+</ol>
+
+<hr />
+
+<h2 id="-detailed-examples">💻 Detailed Examples</h2>
+
+<h3 id="example-1-basic-tdz-demonstration">Example 1: Basic TDZ Demonstration</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">=== BASIC TDZ DEMONSTRATION ===</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="c1">// 🌍 Global scope</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">1. Global scope starts</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">2. globalVar before declaration:</span><span class="dl">"</span><span class="p">,</span> <span class="k">typeof</span> <span class="nx">globalVar</span><span class="p">);</span> <span class="c1">// undefined (hoisted)</span>
+
+<span class="kd">var</span> <span class="nx">globalVar</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">I'm var</span><span class="dl">"</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">globalLet</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">I'm let</span><span class="dl">"</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">globalConst</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">I'm const</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">3. After declarations:</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">   globalVar:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">globalVar</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">   globalLet:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">globalLet</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">   globalConst:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">globalConst</span><span class="p">);</span>
+
+<span class="kd">function</span> <span class="nx">testTDZ</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// 🏠 Function scope</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">4. Function scope starts</span><span class="dl">"</span><span class="p">);</span>
+    
+    <span class="c1">// var is hoisted and initialized with undefined</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">5. localVar before declaration:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">localVar</span><span class="p">);</span> <span class="c1">// undefined</span>
+    
+    <span class="c1">// let is hoisted but not initialized (TDZ)</span>
+    <span class="k">try</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">6. localLet before declaration:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">localLet</span><span class="p">);</span> <span class="c1">// ReferenceError</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">6. localLet TDZ error:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="c1">// const is also hoisted but not initialized (TDZ)</span>
+    <span class="k">try</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">7. localConst before declaration:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">localConst</span><span class="p">);</span> <span class="c1">// ReferenceError</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">7. localConst TDZ error:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="c1">// Declare variables</span>
+    <span class="kd">var</span> <span class="nx">localVar</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">I'm local var</span><span class="dl">"</span><span class="p">;</span>
+    <span class="kd">let</span> <span class="nx">localLet</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">I'm local let</span><span class="dl">"</span><span class="p">;</span>
+    <span class="kd">const</span> <span class="nx">localConst</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">I'm local const</span><span class="dl">"</span><span class="p">;</span>
+    
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">8. After declarations:</span><span class="dl">"</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">   localVar:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">localVar</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">   localLet:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">localLet</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">   localConst:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">localConst</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nx">testTDZ</span><span class="p">();</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">9. Back to global scope</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">   globalVar:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">globalVar</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">   globalLet:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">globalLet</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">   globalConst:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">globalConst</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="example-2-tdz-in-different-scopes">Example 2: TDZ in Different Scopes</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">=== TDZ IN DIFFERENT SCOPES ===</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="c1">// 🌍 Global scope TDZ</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">1. Global scope TDZ test</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="k">try</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">globalLet before declaration:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">globalLet</span><span class="p">);</span> <span class="c1">// ReferenceError</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Global TDZ error:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">let</span> <span class="nx">globalLet</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Global let</span><span class="dl">"</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">globalLet after declaration:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">globalLet</span><span class="p">);</span>
+
+<span class="c1">// 🏠 Function scope TDZ</span>
+<span class="kd">function</span> <span class="nx">functionScopeTDZ</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">2. Function scope TDZ test</span><span class="dl">"</span><span class="p">);</span>
+    
+    <span class="k">try</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">funcLet before declaration:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">funcLet</span><span class="p">);</span> <span class="c1">// ReferenceError</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Function TDZ error:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="kd">let</span> <span class="nx">funcLet</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Function let</span><span class="dl">"</span><span class="p">;</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">funcLet after declaration:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">funcLet</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nx">functionScopeTDZ</span><span class="p">();</span>
+
+<span class="c1">// 🚪 Block scope TDZ</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">3. Block scope TDZ test</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">blockLet before declaration:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">blockLet</span><span class="p">);</span> <span class="c1">// ReferenceError</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Block TDZ error:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="kd">let</span> <span class="nx">blockLet</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Block let</span><span class="dl">"</span><span class="p">;</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">blockLet after declaration:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">blockLet</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Block-scoped variables are not accessible outside</span>
+<span class="k">try</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">blockLet outside block:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">blockLet</span><span class="p">);</span> <span class="c1">// ReferenceError</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Outside block error:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="example-3-tdz-with-function-parameters">Example 3: TDZ with Function Parameters</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">=== TDZ WITH FUNCTION PARAMETERS ===</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="c1">// Function parameters are in their own scope</span>
+<span class="kd">function</span> <span class="nx">parameterTDZ</span><span class="p">(</span><span class="nx">param1</span><span class="p">,</span> <span class="nx">param2</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">=== Function Parameters ===</span><span class="dl">"</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">param1:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">param1</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">param2:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">param2</span><span class="p">);</span>
+    
+    <span class="c1">// Parameters are accessible immediately</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Parameters are accessible from function start</span><span class="dl">"</span><span class="p">);</span>
+    
+    <span class="c1">// But local let/const declarations still have TDZ</span>
+    <span class="k">try</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">localLet before declaration:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">localLet</span><span class="p">);</span> <span class="c1">// ReferenceError</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Local variable TDZ error:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="kd">let</span> <span class="nx">localLet</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Local variable</span><span class="dl">"</span><span class="p">;</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">localLet after declaration:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">localLet</span><span class="p">);</span>
+    
+    <span class="c1">// Parameters and local variables can have same names</span>
+    <span class="kd">let</span> <span class="nx">param1</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Local param1</span><span class="dl">"</span><span class="p">;</span> <span class="c1">// This shadows the parameter</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Local param1:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">param1</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Original param1:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">arguments</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span> <span class="c1">// Access original parameter</span>
+<span class="p">}</span>
+
+<span class="nx">parameterTDZ</span><span class="p">(</span><span class="dl">"</span><span class="s2">First</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Second</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="c1">// Arrow functions also have TDZ</span>
+<span class="kd">const</span> <span class="nx">arrowTDZ</span> <span class="o">=</span> <span class="p">(</span><span class="nx">param</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">=== Arrow Function TDZ ===</span><span class="dl">"</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">param:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">param</span><span class="p">);</span>
+    
+    <span class="k">try</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">arrowLet before declaration:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">arrowLet</span><span class="p">);</span> <span class="c1">// ReferenceError</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Arrow function TDZ error:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="kd">let</span> <span class="nx">arrowLet</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Arrow local variable</span><span class="dl">"</span><span class="p">;</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">arrowLet after declaration:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">arrowLet</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="nx">arrowTDZ</span><span class="p">(</span><span class="dl">"</span><span class="s2">Arrow parameter</span><span class="dl">"</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="example-4-tdz-in-loops-and-blocks">Example 4: TDZ in Loops and Blocks</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">=== TDZ IN LOOPS AND BLOCKS ===</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="c1">// 🚪 if block TDZ</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">1. if block TDZ</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">ifLet before declaration:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">ifLet</span><span class="p">);</span> <span class="c1">// ReferenceError</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">if block TDZ error:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="kd">let</span> <span class="nx">ifLet</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">if block variable</span><span class="dl">"</span><span class="p">;</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">ifLet after declaration:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">ifLet</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// 🔄 for loop TDZ</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">2. for loop TDZ</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">loopLet before declaration:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">loopLet</span><span class="p">);</span> <span class="c1">// ReferenceError</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Loop TDZ error:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="kd">let</span> <span class="nx">loopLet</span> <span class="o">=</span> <span class="s2">`Loop iteration </span><span class="p">${</span><span class="nx">i</span><span class="p">}</span><span class="s2">`</span><span class="p">;</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">loopLet after declaration:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">loopLet</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// 🔄 while loop TDZ</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">3. while loop TDZ</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">let</span> <span class="nx">counter</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="k">while</span> <span class="p">(</span><span class="nx">counter</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">whileLet before declaration:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">whileLet</span><span class="p">);</span> <span class="c1">// ReferenceError</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">While loop TDZ error:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="kd">let</span> <span class="nx">whileLet</span> <span class="o">=</span> <span class="s2">`While iteration </span><span class="p">${</span><span class="nx">counter</span><span class="p">}</span><span class="s2">`</span><span class="p">;</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">whileLet after declaration:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">whileLet</span><span class="p">);</span>
+    <span class="nx">counter</span><span class="o">++</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// 🔄 switch statement TDZ</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">4. switch statement TDZ</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="k">switch</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">try</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">switchLet before declaration:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">switchLet</span><span class="p">);</span> <span class="c1">// ReferenceError</span>
+        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Switch TDZ error:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+        <span class="p">}</span>
+        
+        <span class="kd">let</span> <span class="nx">switchLet</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Switch case variable</span><span class="dl">"</span><span class="p">;</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">switchLet after declaration:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">switchLet</span><span class="p">);</span>
+        <span class="k">break</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="example-5-tdz-with-const-and-destructuring">Example 5: TDZ with const and Destructuring</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">=== TDZ WITH CONST AND DESTRUCTURING ===</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="c1">// const TDZ behavior</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">1. const TDZ behavior</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="k">try</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">constVar before declaration:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">constVar</span><span class="p">);</span> <span class="c1">// ReferenceError</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">const TDZ error:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">constVar</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">I'm const</span><span class="dl">"</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">constVar after declaration:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">constVar</span><span class="p">);</span>
+
+<span class="c1">// Destructuring TDZ</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">2. Destructuring TDZ</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">John</span><span class="dl">"</span><span class="p">,</span> <span class="na">age</span><span class="p">:</span> <span class="mi">30</span> <span class="p">};</span>
+
+<span class="k">try</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">destructuredName before destructuring:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">destructuredName</span><span class="p">);</span> <span class="c1">// ReferenceError</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Destructuring TDZ error:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="nx">destructuredName</span><span class="p">,</span> <span class="na">age</span><span class="p">:</span> <span class="nx">destructuredAge</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">obj</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">After destructuring:</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">destructuredName:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">destructuredName</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">destructuredAge:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">destructuredAge</span><span class="p">);</span>
+
+<span class="c1">// Array destructuring TDZ</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">3. Array destructuring TDZ</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">];</span>
+
+<span class="k">try</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">first before destructuring:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">first</span><span class="p">);</span> <span class="c1">// ReferenceError</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Array destructuring TDZ error:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="p">[</span><span class="nx">first</span><span class="p">,</span> <span class="nx">second</span><span class="p">,</span> <span class="nx">third</span><span class="p">]</span> <span class="o">=</span> <span class="nx">arr</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">After array destructuring:</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">first:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">first</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">second:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">second</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">third:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">third</span><span class="p">);</span>
+
+<span class="c1">// Nested destructuring TDZ</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">4. Nested destructuring TDZ</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">nestedObj</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">user</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">profile</span><span class="p">:</span> <span class="p">{</span>
+            <span class="na">firstName</span><span class="p">:</span> <span class="dl">"</span><span class="s2">John</span><span class="dl">"</span><span class="p">,</span>
+            <span class="na">lastName</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Doe</span><span class="dl">"</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">try</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">firstName before destructuring:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">firstName</span><span class="p">);</span> <span class="c1">// ReferenceError</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Nested destructuring TDZ error:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="p">{</span> <span class="na">user</span><span class="p">:</span> <span class="p">{</span> <span class="na">profile</span><span class="p">:</span> <span class="p">{</span> <span class="nx">firstName</span><span class="p">,</span> <span class="nx">lastName</span> <span class="p">}</span> <span class="p">}</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">nestedObj</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">After nested destructuring:</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">firstName:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">firstName</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">lastName:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">lastName</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="example-6-complex-tdz-scenarios">Example 6: Complex TDZ Scenarios</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">=== COMPLEX TDZ SCENARIOS ===</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="c1">// Scenario 1: Function declaration vs let declaration</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">1. Function vs let declaration TDZ</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="c1">// Function declarations are fully hoisted</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">functionDeclaration type:</span><span class="dl">"</span><span class="p">,</span> <span class="k">typeof</span> <span class="nx">functionDeclaration</span><span class="p">);</span> <span class="c1">// "function"</span>
+<span class="nx">functionDeclaration</span><span class="p">();</span> <span class="c1">// ✅ Works fine</span>
+
+<span class="kd">function</span> <span class="nx">functionDeclaration</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="dl">"</span><span class="s2">I'm a function declaration</span><span class="dl">"</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// let declarations are hoisted but not initialized</span>
+<span class="k">try</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">letFunction type:</span><span class="dl">"</span><span class="p">,</span> <span class="k">typeof</span> <span class="nx">letFunction</span><span class="p">);</span> <span class="c1">// ReferenceError</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">let function TDZ error:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">let</span> <span class="nx">letFunction</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="dl">"</span><span class="s2">I'm a let function</span><span class="dl">"</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">letFunction type after declaration:</span><span class="dl">"</span><span class="p">,</span> <span class="k">typeof</span> <span class="nx">letFunction</span><span class="p">);</span>
+
+<span class="c1">// Scenario 2: TDZ with class declarations</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">2. Class declaration TDZ</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="k">try</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">instance</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyClass</span><span class="p">();</span> <span class="c1">// ReferenceError</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Class TDZ error:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nx">MyClass</span> <span class="p">{</span>
+    <span class="kd">constructor</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">MyClass</span><span class="dl">"</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">instance</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyClass</span><span class="p">();</span> <span class="c1">// ✅ Works fine</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Class instance:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">instance</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+
+<span class="c1">// Scenario 3: TDZ in try-catch blocks</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">3. try-catch TDZ</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="k">try</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">tryLet before declaration:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">tryLet</span><span class="p">);</span> <span class="c1">// ReferenceError</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Inner try TDZ error:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="kd">let</span> <span class="nx">tryLet</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Try block variable</span><span class="dl">"</span><span class="p">;</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">tryLet after declaration:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">tryLet</span><span class="p">);</span>
+    
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">"</span><span class="s2">Test error</span><span class="dl">"</span><span class="p">);</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Caught error:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+    
+    <span class="k">try</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">catchLet before declaration:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">catchLet</span><span class="p">);</span> <span class="c1">// ReferenceError</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">tdzError</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Catch block TDZ error:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">tdzError</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="kd">let</span> <span class="nx">catchLet</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Catch block variable</span><span class="dl">"</span><span class="p">;</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">catchLet after declaration:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">catchLet</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Scenario 4: TDZ with async functions</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">4. Async function TDZ</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="k">async</span> <span class="kd">function</span> <span class="nx">asyncTDZ</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Async function starts</span><span class="dl">"</span><span class="p">);</span>
+    
+    <span class="k">try</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">asyncLet before declaration:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">asyncLet</span><span class="p">);</span> <span class="c1">// ReferenceError</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Async function TDZ error:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="kd">let</span> <span class="nx">asyncLet</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Async local variable</span><span class="dl">"</span><span class="p">;</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">asyncLet after declaration:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">asyncLet</span><span class="p">);</span>
+    
+    <span class="c1">// Simulate async operation</span>
+    <span class="k">await</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="nx">resolve</span> <span class="o">=&gt;</span> <span class="nx">setTimeout</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="mi">100</span><span class="p">));</span>
+    
+    <span class="k">return</span> <span class="nx">asyncLet</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Call async function</span>
+<span class="nx">asyncTDZ</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="nx">result</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Async function result:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">result</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="️-common-tdz-scenarios">⚠️ Common TDZ Scenarios</h2>
+
+<h3 id="scenario-1-function-hoisting-vs-variable-hoisting">Scenario 1: Function Hoisting vs Variable Hoisting</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">=== SCENARIO 1: FUNCTION VS VARIABLE HOISTING ===</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="c1">// Function declarations are fully hoisted</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">functionType:</span><span class="dl">"</span><span class="p">,</span> <span class="k">typeof</span> <span class="nx">functionDeclaration</span><span class="p">);</span> <span class="c1">// "function"</span>
+<span class="nx">functionDeclaration</span><span class="p">();</span> <span class="c1">// ✅ Works</span>
+
+<span class="kd">function</span> <span class="nx">functionDeclaration</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="dl">"</span><span class="s2">Function declaration</span><span class="dl">"</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Variable declarations (var) are hoisted but initialized with undefined</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">varType:</span><span class="dl">"</span><span class="p">,</span> <span class="k">typeof</span> <span class="nx">varDeclaration</span><span class="p">);</span> <span class="c1">// "undefined"</span>
+<span class="c1">// varDeclaration(); // ❌ TypeError: varDeclaration is not a function</span>
+
+<span class="kd">var</span> <span class="nx">varDeclaration</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="dl">"</span><span class="s2">Variable declaration</span><span class="dl">"</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="c1">// let/const declarations are hoisted but not initialized (TDZ)</span>
+<span class="k">try</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">letType:</span><span class="dl">"</span><span class="p">,</span> <span class="k">typeof</span> <span class="nx">letDeclaration</span><span class="p">);</span> <span class="c1">// ReferenceError</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">let TDZ error:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">let</span> <span class="nx">letDeclaration</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="dl">"</span><span class="s2">Let declaration</span><span class="dl">"</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="scenario-2-tdz-in-different-environments">Scenario 2: TDZ in Different Environments</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">=== SCENARIO 2: TDZ IN DIFFERENT ENVIRONMENTS ===</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="c1">// Browser environment</span>
+<span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nb">window</span> <span class="o">!==</span> <span class="dl">'</span><span class="s1">undefined</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Running in browser</span><span class="dl">"</span><span class="p">);</span>
+    
+    <span class="c1">// Global variables in browser</span>
+    <span class="k">try</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">windowVar before declaration:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">windowVar</span><span class="p">);</span> <span class="c1">// ReferenceError</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Browser global TDZ error:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="kd">let</span> <span class="nx">windowVar</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Browser global</span><span class="dl">"</span><span class="p">;</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">windowVar after declaration:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">windowVar</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Node.js environment</span>
+<span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nb">global</span> <span class="o">!==</span> <span class="dl">'</span><span class="s1">undefined</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Running in Node.js</span><span class="dl">"</span><span class="p">);</span>
+    
+    <span class="c1">// Global variables in Node.js</span>
+    <span class="k">try</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">globalVar before declaration:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">globalVar</span><span class="p">);</span> <span class="c1">// ReferenceError</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Node.js global TDZ error:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="kd">let</span> <span class="nx">globalVar</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Node.js global</span><span class="dl">"</span><span class="p">;</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">globalVar after declaration:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">globalVar</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-best-practices">✅ Best Practices</h2>
+
+<h3 id="1-declare-variables-at-the-top">1. Declare Variables at the Top</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">=== BEST PRACTICE 1: DECLARE AT TOP ===</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">function</span> <span class="nx">goodPractice</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// ✅ Declare all variables at the top</span>
+    <span class="kd">let</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">age</span><span class="p">,</span> <span class="nx">email</span><span class="p">;</span>
+    
+    <span class="c1">// Initialize them</span>
+    <span class="nx">name</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">John</span><span class="dl">"</span><span class="p">;</span>
+    <span class="nx">age</span> <span class="o">=</span> <span class="mi">30</span><span class="p">;</span>
+    <span class="nx">email</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">john@example.com</span><span class="dl">"</span><span class="p">;</span>
+    
+    <span class="c1">// Use them</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">age</span><span class="p">,</span> <span class="nx">email</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// ❌ Don't declare variables in the middle</span>
+<span class="kd">function</span> <span class="nx">badPractice</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Start</span><span class="dl">"</span><span class="p">);</span>
+    
+    <span class="kd">let</span> <span class="nx">name</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">John</span><span class="dl">"</span><span class="p">;</span> <span class="c1">// Declaration in middle</span>
+    
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Middle</span><span class="dl">"</span><span class="p">);</span>
+    
+    <span class="kd">let</span> <span class="nx">age</span> <span class="o">=</span> <span class="mi">30</span><span class="p">;</span> <span class="c1">// Another declaration in middle</span>
+    
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">End</span><span class="dl">"</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="2-use-const-by-default">2. Use const by Default</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">=== BEST PRACTICE 2: USE CONST BY DEFAULT ===</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="c1">// ✅ Use const for values that won't change</span>
+<span class="kd">const</span> <span class="nx">PI</span> <span class="o">=</span> <span class="mf">3.14159</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">API_URL</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://api.example.com</span><span class="dl">"</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">DEFAULT_CONFIG</span> <span class="o">=</span> <span class="p">{</span> <span class="na">theme</span><span class="p">:</span> <span class="dl">"</span><span class="s2">dark</span><span class="dl">"</span> <span class="p">};</span>
+
+<span class="c1">// ✅ Use let only when you need to reassign</span>
+<span class="kd">let</span> <span class="nx">counter</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">currentUser</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+
+<span class="c1">// ✅ Use var only in legacy code or specific cases</span>
+<span class="kd">var</span> <span class="nx">legacyVar</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">old way</span><span class="dl">"</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="3-understand-hoisting-behavior">3. Understand Hoisting Behavior</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">=== BEST PRACTICE 3: UNDERSTAND HOISTING ===</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="c1">// ✅ Know what gets hoisted and what doesn't</span>
+<span class="kd">function</span> <span class="nx">hoistingExample</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// Function declarations: fully hoisted</span>
+    <span class="nx">functionDeclaration</span><span class="p">();</span> <span class="c1">// ✅ Works</span>
+    
+    <span class="c1">// Variable declarations (var): hoisted, initialized with undefined</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">varDeclaration</span><span class="p">);</span> <span class="c1">// undefined</span>
+    
+    <span class="c1">// let/const: hoisted, not initialized (TDZ)</span>
+    <span class="c1">// console.log(letDeclaration); // ReferenceError</span>
+    
+    <span class="kd">function</span> <span class="nx">functionDeclaration</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="dl">"</span><span class="s2">I'm hoisted</span><span class="dl">"</span><span class="p">;</span>
+    <span class="p">}</span>
+    
+    <span class="kd">var</span> <span class="nx">varDeclaration</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">I'm hoisted but undefined</span><span class="dl">"</span><span class="p">;</span>
+    <span class="kd">let</span> <span class="nx">letDeclaration</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">I'm hoisted but in TDZ</span><span class="dl">"</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-key-points-for-interviews">🎯 Key Points for Interviews</h2>
+
+<h3 id="-core-concepts">🔑 Core Concepts</h3>
+<ol>
+  <li><strong>TDZ Definition</strong>: Period between scope entry and variable declaration</li>
+  <li><strong>Hoisting vs Initialization</strong>: Variables are hoisted but not initialized</li>
+  <li><strong>ReferenceError</strong>: Attempting to access TDZ variables causes errors</li>
+  <li><strong>Scope Specific</strong>: TDZ exists in function, block, and global scopes</li>
+  <li><strong>let/const Only</strong>: TDZ only affects <code class="language-plaintext highlighter-rouge">let</code> and <code class="language-plaintext highlighter-rouge">const</code> declarations</li>
+</ol>
+
+<h3 id="-common-mistakes">🚨 Common Mistakes</h3>
+<ol>
+  <li><strong>Expecting let/const to behave like var</strong></li>
+  <li><strong>Not understanding that TDZ is different from hoisting</strong></li>
+  <li><strong>Trying to access variables before declaration</strong></li>
+  <li><strong>Confusing TDZ with undefined values</strong></li>
+</ol>
+
+<h3 id="-advanced-concepts">💡 Advanced Concepts</h3>
+<ol>
+  <li><strong>Function Declaration Hoisting</strong>: Functions are fully hoisted</li>
+  <li><strong>Class Declaration TDZ</strong>: Classes are not hoisted</li>
+  <li><strong>Parameter Scope</strong>: Function parameters have their own scope</li>
+  <li><strong>Destructuring TDZ</strong>: Destructuring assignments also have TDZ</li>
+</ol>
+
+<hr />
+
+<h2 id="-common-interview-questions">❓ Common Interview Questions</h2>
+
+<h3 id="q-what-is-the-temporal-dead-zone-tdz">Q: What is the Temporal Dead Zone (TDZ)?</h3>
+<p><strong>A:</strong> The Temporal Dead Zone is the period between entering a scope and the actual declaration of a <code class="language-plaintext highlighter-rouge">let</code> or <code class="language-plaintext highlighter-rouge">const</code> variable, during which the variable exists but cannot be accessed.</p>
+
+<p><strong>Key Points:</strong></p>
+<ul>
+  <li>Only affects <code class="language-plaintext highlighter-rouge">let</code> and <code class="language-plaintext highlighter-rouge">const</code> declarations</li>
+  <li>Variables are hoisted but not initialized</li>
+  <li>Accessing variables in TDZ throws ReferenceError</li>
+  <li>TDZ exists in all scopes (global, function, block)</li>
+</ul>
+
+<h3 id="q-how-does-tdz-differ-from-traditional-hoisting">Q: How does TDZ differ from traditional hoisting?</h3>
+<p><strong>A:</strong></p>
+
+<p><strong>Traditional Hoisting (var):</strong></p>
+<ul>
+  <li>Variables are hoisted to top of scope</li>
+  <li>Variables are initialized with <code class="language-plaintext highlighter-rouge">undefined</code></li>
+  <li>Can be accessed before declaration (returns <code class="language-plaintext highlighter-rouge">undefined</code>)</li>
+  <li>Silent failure (hard to debug)</li>
+</ul>
+
+<p><strong>TDZ (let/const):</strong></p>
+<ul>
+  <li>Variables are hoisted to top of scope</li>
+  <li>Variables are NOT initialized</li>
+  <li>Cannot be accessed before declaration (ReferenceError)</li>
+  <li>Explicit error (easy to debug)</li>
+</ul>
+
+<h3 id="q-why-does-tdz-exist-in-javascript">Q: Why does TDZ exist in JavaScript?</h3>
+<p><strong>A:</strong> TDZ exists for several important reasons:</p>
+
+<p><strong>1. Prevent Silent Bugs:</strong></p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">var</code> hoisting can lead to unexpected behavior</li>
+  <li>Variables returning <code class="language-plaintext highlighter-rouge">undefined</code> before declaration is confusing</li>
+</ul>
+
+<p><strong>2. Better Error Detection:</strong></p>
+<ul>
+  <li>Makes issues obvious at runtime</li>
+  <li>Easier to debug and fix problems</li>
+</ul>
+
+<p><strong>3. Consistent Behavior:</strong></p>
+<ul>
+  <li>Variables behave more predictably</li>
+  <li>Aligns with block-scoping principles</li>
+</ul>
+
+<p><strong>4. Modern JavaScript:</strong></p>
+<ul>
+  <li>Part of ES6 improvements</li>
+  <li>Better language design</li>
+</ul>
+
+<h3 id="q-how-do-you-avoid-tdz-errors">Q: How do you avoid TDZ errors?</h3>
+<p><strong>A:</strong> To avoid TDZ errors:</p>
+
+<p><strong>1. Declare Variables at the Top:</strong></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">goodPractice</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">age</span><span class="p">,</span> <span class="nx">email</span><span class="p">;</span> <span class="c1">// Declare all variables first</span>
+    
+    <span class="c1">// Then initialize and use them</span>
+    <span class="nx">name</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">John</span><span class="dl">"</span><span class="p">;</span>
+    <span class="nx">age</span> <span class="o">=</span> <span class="mi">30</span><span class="p">;</span>
+    <span class="nx">email</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">john@example.com</span><span class="dl">"</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>2. Use const by Default:</strong></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">PI</span> <span class="o">=</span> <span class="mf">3.14159</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">API_URL</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://api.example.com</span><span class="dl">"</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">counter</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// Only use let when reassignment is needed</span>
+</code></pre></div></div>
+
+<p><strong>3. Understand Hoisting:</strong></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Know that let/const are hoisted but not initialized</span>
+<span class="c1">// Don't try to access them before declaration</span>
+</code></pre></div></div>
+
+<h3 id="q-what-happens-when-you-try-to-access-a-variable-in-tdz">Q: What happens when you try to access a variable in TDZ?</h3>
+<p><strong>A:</strong> When you try to access a variable in the Temporal Dead Zone:</p>
+
+<p><strong>Result:</strong></p>
+<ul>
+  <li>JavaScript throws a <code class="language-plaintext highlighter-rouge">ReferenceError</code></li>
+  <li>Error message: “Cannot access ‘variableName’ before initialization”</li>
+  <li>Program execution stops (unless error is caught)</li>
+</ul>
+
+<p><strong>Example:</strong></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">test</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span> <span class="c1">// ReferenceError: Cannot access 'x' before initialization</span>
+    <span class="kd">let</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nx">test</span><span class="p">();</span> <span class="c1">// Function throws error and stops</span>
+</code></pre></div></div>
+
+<p><strong>Why This Happens:</strong></p>
+<ul>
+  <li>Variable exists in scope (hoisted)</li>
+  <li>Variable is not initialized yet</li>
+  <li>JavaScript prevents access to uninitialized variables</li>
+  <li>This is a safety feature, not a bug</li>
+</ul>
+
+<hr />
+
+<h2 id="-practice-exercises">🧪 Practice Exercises</h2>
+
+<h3 id="exercise-1-tdz-prediction">Exercise 1: TDZ Prediction</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Exercise 1: Predict the output</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">function</span> <span class="nx">test</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">x</span><span class="p">);</span> <span class="c1">// What will this print?</span>
+    
+    <span class="kd">let</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+    
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span> <span class="c1">// What will this print?</span>
+<span class="p">}</span>
+
+<span class="c1">// test(); // What will happen when this is called?</span>
+</code></pre></div></div>
+
+<h3 id="exercise-2-hoisting-vs-tdz">Exercise 2: Hoisting vs TDZ</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Exercise 2: Compare hoisting behaviors</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">1. var variable:</span><span class="dl">"</span><span class="p">,</span> <span class="k">typeof</span> <span class="nx">varVar</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">2. let variable:</span><span class="dl">"</span><span class="p">,</span> <span class="k">typeof</span> <span class="nx">letVar</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">3. function:</span><span class="dl">"</span><span class="p">,</span> <span class="k">typeof</span> <span class="nx">functionDeclaration</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">varVar</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">I'm var</span><span class="dl">"</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">letVar</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">I'm let</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">function</span> <span class="nx">functionDeclaration</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="dl">"</span><span class="s2">I'm a function</span><span class="dl">"</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="exercise-3-tdz-in-different-scopes">Exercise 3: TDZ in Different Scopes</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Exercise 3: TDZ in different scopes</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="c1">// Test TDZ in global scope</span>
+<span class="c1">// Test TDZ in function scope</span>
+<span class="c1">// Test TDZ in block scope</span>
+
+<span class="c1">// Your code here...</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-additional-resources">📚 Additional Resources</h2>
+
+<ul>
+  <li><strong>MDN Web Docs</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let">let</a></li>
+  <li><strong>JavaScript.info</strong>: <a href="https://javascript.info/var">Variable Scope and Closure</a></li>
+  <li><strong>ECMAScript Specification</strong>: <a href="https://tc39.es/ecma262/#sec-blockdeclarationinstantiation">Block Declaration Instantiation</a></li>
+</ul>
+
+<hr />
+
+<h2 id="-navigation">🧭 Navigation</h2>
+
+<div class="navigation">
+    <a href="./04-Closures.md" class="nav-link prev">⬅️ Previous: Closures</a>
+    <a href="./06-Primitive-vs-Reference-Types.md" class="nav-link next">Next: Primitive vs Reference Types ➡️</a>
+</div>
+
+<hr />
+
+<h2 id="-copy-code-functionality">📋 Copy Code Functionality</h2>
+
+<script src="../common-scripts.js"></script>
+
+<p><em>Last updated: December 2024</em></p>
+
+        </main>
+        
+        <footer style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #ecf0f1; color: #666; text-align: center;">
+            <p>Interview Prep Documentation - Built with Jekyll</p>
+        </footer>
+    </div>
+</body>
+</html>

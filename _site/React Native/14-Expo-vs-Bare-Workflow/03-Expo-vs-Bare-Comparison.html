@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⚖️ Expo vs Bare Comparison - Interview Prep Documentation</title>
+    <meta name="description" content="Comprehensive guides for JavaScript, TypeScript, and React Native interview preparation">
+    
+    <!-- GitHub Pages compatible styling -->
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+        }
+        
+        .container {
+            max-width: 100%;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            color: #2c3e50;
+            margin-top: 2em;
+            margin-bottom: 1em;
+        }
+        
+        h1 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            border-bottom: 1px solid #ecf0f1;
+            padding-bottom: 5px;
+        }
+        
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border-left: 4px solid #3498db;
+        }
+        
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+        
+        blockquote {
+            border-left: 4px solid #3498db;
+            margin: 0;
+            padding-left: 20px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1em 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .navigation {
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px 0;
+            margin-bottom: 20px;
+        }
+        
+        .navigation a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+        
+        .navigation a:hover {
+            text-decoration: underline;
+        }
+        
+        .breadcrumb {
+            margin-bottom: 20px;
+            color: #666;
+        }
+        
+        .breadcrumb a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            h2 {
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="navigation">
+            <a href="/">Home</a>
+            <a href="/Javascript/">JavaScript</a>
+            <a href="/TypeScript/">TypeScript</a>
+            <a href="/React-Native/">React Native</a>
+        </nav>
+        
+        
+        
+        <main>
+            <h1 id="️-expo-vs-bare-comparison">⚖️ <strong>Expo vs Bare Comparison</strong></h1>
+
+<blockquote>
+  <p><strong>Master the comparison between Expo and Bare React Native workflows, trade-offs, and decision criteria</strong></p>
+</blockquote>
+
+<link rel="stylesheet" href="../../common-styles.css" />
+
+<hr />
+
+<h2 id="-table-of-contents">📚 <strong>Table of Contents</strong></h2>
+
+<ul>
+  <li><a href="#-workflow-comparison">Workflow Comparison</a></li>
+  <li><a href="#-feature-comparison">Feature Comparison</a></li>
+  <li><a href="#-performance-comparison">Performance Comparison</a></li>
+  <li><a href="#-development-experience">Development Experience</a></li>
+  <li><a href="#-migration-strategies">Migration Strategies</a></li>
+  <li><a href="#-decision-matrix">Decision Matrix</a></li>
+  <li><a href="#-interview-questions">Interview Questions</a></li>
+</ul>
+
+<hr />
+
+<h2 id="️-workflow-comparison">⚖️ <strong>Workflow Comparison</strong></h2>
+
+<h3 id="development-workflow-comparison"><strong>Development Workflow Comparison</strong></h3>
+
+<pre><code class="language-mermaid">graph TD
+    A[Project Setup] --&gt; B[Expo: npx create-expo-app]
+    A --&gt; C[Bare: npx react-native init]
+    
+    B --&gt; D[Expo Go Development]
+    C --&gt; E[Simulator/Emulator]
+    
+    D --&gt; F[Expo Build Service]
+    E --&gt; G[Local Build Process]
+    
+    F --&gt; H[Expo Updates]
+    G --&gt; I[Custom CI/CD]
+</code></pre>
+
+<h3 id="key-differences"><strong>Key Differences</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Workflow comparison data</span>
+<span class="kd">const</span> <span class="nx">WorkflowComparison</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">setup</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">expo</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">time</span><span class="p">:</span> <span class="dl">'</span><span class="s1">2-5 minutes</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">complexity</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Low</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">requirements</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">Node.js</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Expo CLI</span><span class="dl">'</span><span class="p">],</span>
+      <span class="na">steps</span><span class="p">:</span> <span class="p">[</span>
+        <span class="dl">'</span><span class="s1">npx create-expo-app MyApp</span><span class="dl">'</span><span class="p">,</span>
+        <span class="dl">'</span><span class="s1">cd MyApp</span><span class="dl">'</span><span class="p">,</span>
+        <span class="dl">'</span><span class="s1">npx expo start</span><span class="dl">'</span>
+      <span class="p">]</span>
+    <span class="p">},</span>
+    <span class="na">bare</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">time</span><span class="p">:</span> <span class="dl">'</span><span class="s1">15-30 minutes</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">complexity</span><span class="p">:</span> <span class="dl">'</span><span class="s1">High</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">requirements</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">Node.js</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Android Studio</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Xcode</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Java</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">CocoaPods</span><span class="dl">'</span><span class="p">],</span>
+      <span class="na">steps</span><span class="p">:</span> <span class="p">[</span>
+        <span class="dl">'</span><span class="s1">npx react-native init MyApp</span><span class="dl">'</span><span class="p">,</span>
+        <span class="dl">'</span><span class="s1">cd MyApp</span><span class="dl">'</span><span class="p">,</span>
+        <span class="dl">'</span><span class="s1">cd android &amp;&amp; ./gradlew clean</span><span class="dl">'</span><span class="p">,</span>
+        <span class="dl">'</span><span class="s1">cd ios &amp;&amp; pod install</span><span class="dl">'</span><span class="p">,</span>
+        <span class="dl">'</span><span class="s1">npx react-native run-android/ios</span><span class="dl">'</span>
+      <span class="p">]</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+
+  <span class="na">development</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">expo</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">hotReload</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Instant</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">debugging</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Expo DevTools</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">testing</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Expo Go app</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">limitations</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Expo SDK only</span><span class="dl">'</span>
+    <span class="p">},</span>
+    <span class="na">bare</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">hotReload</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Fast</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">debugging</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Flipper, Chrome DevTools</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">testing</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Simulator/Emulator</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">limitations</span><span class="p">:</span> <span class="dl">'</span><span class="s1">None</span><span class="dl">'</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+
+  <span class="na">building</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">expo</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">process</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Cloud-based</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">time</span><span class="p">:</span> <span class="dl">'</span><span class="s1">10-20 minutes</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">control</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Limited</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">cost</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Free tier available</span><span class="dl">'</span>
+    <span class="p">},</span>
+    <span class="na">bare</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">process</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Local</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">time</span><span class="p">:</span> <span class="dl">'</span><span class="s1">5-15 minutes</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">control</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Full</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">cost</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Free</span><span class="dl">'</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// Development experience comparison</span>
+<span class="kd">const</span> <span class="nx">DevelopmentExperience</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">expo</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">pros</span><span class="p">:</span> <span class="p">[</span>
+      <span class="dl">'</span><span class="s1">Rapid prototyping</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">No native setup required</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">Built-in services</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">Easy sharing and testing</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">Automatic updates</span><span class="dl">'</span>
+    <span class="p">],</span>
+    <span class="na">cons</span><span class="p">:</span> <span class="p">[</span>
+      <span class="dl">'</span><span class="s1">Limited native access</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">Bundle size overhead</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">Expo SDK dependency</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">Less control over build process</span><span class="dl">'</span>
+    <span class="p">]</span>
+  <span class="p">},</span>
+  <span class="na">bare</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">pros</span><span class="p">:</span> <span class="p">[</span>
+      <span class="dl">'</span><span class="s1">Full native access</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">Custom native modules</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">Complete build control</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">Better performance</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">No vendor lock-in</span><span class="dl">'</span>
+    <span class="p">],</span>
+    <span class="na">cons</span><span class="p">:</span> <span class="p">[</span>
+      <span class="dl">'</span><span class="s1">Complex setup</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">Native development required</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">Manual updates</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">Platform-specific knowledge needed</span><span class="dl">'</span>
+    <span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">export</span> <span class="p">{</span> <span class="nx">WorkflowComparison</span><span class="p">,</span> <span class="nx">DevelopmentExperience</span> <span class="p">};</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-feature-comparison">🎯 <strong>Feature Comparison</strong></h2>
+
+<h3 id="feature-availability-matrix"><strong>Feature Availability Matrix</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Feature comparison matrix</span>
+<span class="kd">const</span> <span class="nx">FeatureComparison</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="c1">// Core React Native features</span>
+  <span class="na">coreFeatures</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">'</span><span class="s1">React Native Core</span><span class="dl">'</span><span class="p">:</span> <span class="p">{</span> <span class="na">expo</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="na">bare</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="na">notes</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Both support full React Native</span><span class="dl">'</span> <span class="p">},</span>
+    <span class="dl">'</span><span class="s1">JavaScript Bridge</span><span class="dl">'</span><span class="p">:</span> <span class="p">{</span> <span class="na">expo</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="na">bare</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="na">notes</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Native bridge available in both</span><span class="dl">'</span> <span class="p">},</span>
+    <span class="dl">'</span><span class="s1">Hot Reload</span><span class="dl">'</span><span class="p">:</span> <span class="p">{</span> <span class="na">expo</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="na">bare</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="na">notes</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Both support fast refresh</span><span class="dl">'</span> <span class="p">},</span>
+    <span class="dl">'</span><span class="s1">Debugging</span><span class="dl">'</span><span class="p">:</span> <span class="p">{</span> <span class="na">expo</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="na">bare</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="na">notes</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Different tools available</span><span class="dl">'</span> <span class="p">},</span>
+  <span class="p">},</span>
+
+  <span class="c1">// Native APIs</span>
+  <span class="na">nativeAPIs</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">'</span><span class="s1">Camera</span><span class="dl">'</span><span class="p">:</span> <span class="p">{</span> <span class="na">expo</span><span class="p">:</span> <span class="dl">'</span><span class="s1">expo-camera</span><span class="dl">'</span><span class="p">,</span> <span class="na">bare</span><span class="p">:</span> <span class="dl">'</span><span class="s1">react-native-camera</span><span class="dl">'</span><span class="p">,</span> <span class="na">notes</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Different implementations</span><span class="dl">'</span> <span class="p">},</span>
+    <span class="dl">'</span><span class="s1">Location</span><span class="dl">'</span><span class="p">:</span> <span class="p">{</span> <span class="na">expo</span><span class="p">:</span> <span class="dl">'</span><span class="s1">expo-location</span><span class="dl">'</span><span class="p">,</span> <span class="na">bare</span><span class="p">:</span> <span class="dl">'</span><span class="s1">react-native-geolocation</span><span class="dl">'</span><span class="p">,</span> <span class="na">notes</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Similar functionality</span><span class="dl">'</span> <span class="p">},</span>
+    <span class="dl">'</span><span class="s1">Push Notifications</span><span class="dl">'</span><span class="p">:</span> <span class="p">{</span> <span class="na">expo</span><span class="p">:</span> <span class="dl">'</span><span class="s1">expo-notifications</span><span class="dl">'</span><span class="p">,</span> <span class="na">bare</span><span class="p">:</span> <span class="dl">'</span><span class="s1">react-native-push-notification</span><span class="dl">'</span><span class="p">,</span> <span class="na">notes</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Expo has built-in service</span><span class="dl">'</span> <span class="p">},</span>
+    <span class="dl">'</span><span class="s1">File System</span><span class="dl">'</span><span class="p">:</span> <span class="p">{</span> <span class="na">expo</span><span class="p">:</span> <span class="dl">'</span><span class="s1">expo-file-system</span><span class="dl">'</span><span class="p">,</span> <span class="na">bare</span><span class="p">:</span> <span class="dl">'</span><span class="s1">react-native-fs</span><span class="dl">'</span><span class="p">,</span> <span class="na">notes</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Different APIs</span><span class="dl">'</span> <span class="p">},</span>
+    <span class="dl">'</span><span class="s1">Secure Storage</span><span class="dl">'</span><span class="p">:</span> <span class="p">{</span> <span class="na">expo</span><span class="p">:</span> <span class="dl">'</span><span class="s1">expo-secure-store</span><span class="dl">'</span><span class="p">,</span> <span class="na">bare</span><span class="p">:</span> <span class="dl">'</span><span class="s1">react-native-keychain</span><span class="dl">'</span><span class="p">,</span> <span class="na">notes</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Similar functionality</span><span class="dl">'</span> <span class="p">},</span>
+    <span class="dl">'</span><span class="s1">Biometrics</span><span class="dl">'</span><span class="p">:</span> <span class="p">{</span> <span class="na">expo</span><span class="p">:</span> <span class="dl">'</span><span class="s1">expo-local-authentication</span><span class="dl">'</span><span class="p">,</span> <span class="na">bare</span><span class="p">:</span> <span class="dl">'</span><span class="s1">react-native-touch-id</span><span class="dl">'</span><span class="p">,</span> <span class="na">notes</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Different implementations</span><span class="dl">'</span> <span class="p">},</span>
+  <span class="p">},</span>
+
+  <span class="c1">// Build and deployment</span>
+  <span class="na">buildDeployment</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">'</span><span class="s1">OTA Updates</span><span class="dl">'</span><span class="p">:</span> <span class="p">{</span> <span class="na">expo</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Built-in</span><span class="dl">'</span><span class="p">,</span> <span class="na">bare</span><span class="p">:</span> <span class="dl">'</span><span class="s1">CodePush</span><span class="dl">'</span><span class="p">,</span> <span class="na">notes</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Expo has native support</span><span class="dl">'</span> <span class="p">},</span>
+    <span class="dl">'</span><span class="s1">App Store Builds</span><span class="dl">'</span><span class="p">:</span> <span class="p">{</span> <span class="na">expo</span><span class="p">:</span> <span class="dl">'</span><span class="s1">EAS Build</span><span class="dl">'</span><span class="p">,</span> <span class="na">bare</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Local/Xcode</span><span class="dl">'</span><span class="p">,</span> <span class="na">notes</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Different processes</span><span class="dl">'</span> <span class="p">},</span>
+    <span class="dl">'</span><span class="s1">Custom Native Code</span><span class="dl">'</span><span class="p">:</span> <span class="p">{</span> <span class="na">expo</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Limited</span><span class="dl">'</span><span class="p">,</span> <span class="na">bare</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Full</span><span class="dl">'</span><span class="p">,</span> <span class="na">notes</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Bare has complete control</span><span class="dl">'</span> <span class="p">},</span>
+    <span class="dl">'</span><span class="s1">Third-party Libraries</span><span class="dl">'</span><span class="p">:</span> <span class="p">{</span> <span class="na">expo</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Expo-compatible only</span><span class="dl">'</span><span class="p">,</span> <span class="na">bare</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Any React Native library</span><span class="dl">'</span><span class="p">,</span> <span class="na">notes</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Bare has more options</span><span class="dl">'</span> <span class="p">},</span>
+  <span class="p">},</span>
+
+  <span class="c1">// Development tools</span>
+  <span class="na">developmentTools</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">'</span><span class="s1">Expo Go</span><span class="dl">'</span><span class="p">:</span> <span class="p">{</span> <span class="na">expo</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="na">bare</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> <span class="na">notes</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Expo-specific development app</span><span class="dl">'</span> <span class="p">},</span>
+    <span class="dl">'</span><span class="s1">Flipper</span><span class="dl">'</span><span class="p">:</span> <span class="p">{</span> <span class="na">expo</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> <span class="na">bare</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="na">notes</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Advanced debugging tool</span><span class="dl">'</span> <span class="p">},</span>
+    <span class="dl">'</span><span class="s1">Metro</span><span class="dl">'</span><span class="p">:</span> <span class="p">{</span> <span class="na">expo</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="na">bare</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="na">notes</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Both use Metro bundler</span><span class="dl">'</span> <span class="p">},</span>
+    <span class="dl">'</span><span class="s1">Fastlane</span><span class="dl">'</span><span class="p">:</span> <span class="p">{</span> <span class="na">expo</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Limited</span><span class="dl">'</span><span class="p">,</span> <span class="na">bare</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Full</span><span class="dl">'</span><span class="p">,</span> <span class="na">notes</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Bare has more automation options</span><span class="dl">'</span> <span class="p">},</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// Feature implementation examples</span>
+<span class="kd">const</span> <span class="nx">FeatureImplementation</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="c1">// Camera implementation comparison</span>
+  <span class="na">camera</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">expo</span><span class="p">:</span> <span class="s2">`
+import { Camera } from 'expo-camera';
+
+const ExpoCamera = () =&gt; {
+  const [hasPermission, setHasPermission] = useState(null);
+  
+  useEffect(() =&gt; {
+    (async () =&gt; {
+      const { status } = await Camera.requestCameraPermissionsAsync();
+      setHasPermission(status === 'granted');
+    })();
+  }, []);
+
+  if (hasPermission === null) {
+    return &lt;View /&gt;;
+  }
+  if (hasPermission === false) {
+    return &lt;Text&gt;No access to camera&lt;/Text&gt;;
+  }
+  
+  return (
+    &lt;Camera style={{#123;{{#123; flex: 1 }}#125;}}#125; type={Camera.Constants.Type.back}&gt;
+      &lt;View style={{#123;{{#123; flex: 1, backgroundColor: 'transparent', flexDirection: 'row' }}#125;}}#125;&gt;
+        &lt;TouchableOpacity
+          style={{#123;{{#123; flex: 0.1, alignSelf: 'flex-end', alignItems: 'center' }}#125;}}#125;
+          onPress={() =&gt; {
+            setType(
+              type === Camera.Constants.Type.back
+                ? Camera.Constants.Type.front
+                : Camera.Constants.Type.back
+            );
+          }}#125;}}#125;&gt;
+          &lt;Text style={{#123;{{#123; fontSize: 18, marginBottom: 10, color: 'white' }}#125;}}#125;&gt; Flip &lt;/Text&gt;
+        &lt;/TouchableOpacity&gt;
+      &lt;/View&gt;
+    &lt;/Camera&gt;
+  );
+};`</span><span class="p">,</span>
+
+    <span class="na">bare</span><span class="p">:</span> <span class="s2">`
+import { RNCamera } from 'react-native-camera';
+
+const BareCamera = () =&gt; {
+  const [hasPermission, setHasPermission] = useState(null);
+  
+  useEffect(() =&gt; {
+    (async () =&gt; {
+      const { status } = await RNCamera.requestCameraPermission();
+      setHasPermission(status === 'authorized');
+    })();
+  }, []);
+
+  if (hasPermission === null) {
+    return &lt;View /&gt;;
+  }
+  if (hasPermission === false) {
+    return &lt;Text&gt;No access to camera&lt;/Text&gt;;
+  }
+  
+  return (
+    &lt;RNCamera
+      style={{#123;{{#123; flex: 1 }}#125;}}#125;
+      type={RNCamera.Constants.Type.back}
+      flashMode={RNCamera.Constants.FlashMode.on}
+      androidCameraPermissionOptions={{#123;{{#123;
+        title: 'Permission to use camera',
+        message: 'We need your permission to use your camera',
+        buttonPositive: 'Ok',
+        buttonNegative: 'Cancel',
+      }}#125;}}#125;
+    &gt;
+      &lt;View style={{#123;{{#123; flex: 1, backgroundColor: 'transparent', flexDirection: 'row' }}#125;}}#125;&gt;
+        &lt;TouchableOpacity
+          style={{#123;{{#123; flex: 0.1, alignSelf: 'flex-end', alignItems: 'center' }}#125;}}#125;
+          onPress={() =&gt; {
+            setType(
+              type === RNCamera.Constants.Type.back
+                ? RNCamera.Constants.Type.front
+                : RNCamera.Constants.Type.back
+            );
+          }}#125;}}#125;&gt;
+          &lt;Text style={{#123;{{#123; fontSize: 18, marginBottom: 10, color: 'white' }}#125;}}#125;&gt; Flip &lt;/Text&gt;
+        &lt;/TouchableOpacity&gt;
+      &lt;/View&gt;
+    &lt;/RNCamera&gt;
+  );
+};`</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">export</span> <span class="p">{</span> <span class="nx">FeatureComparison</span><span class="p">,</span> <span class="nx">FeatureImplementation</span> <span class="p">};</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-performance-comparison">⚡ <strong>Performance Comparison</strong></h2>
+
+<h3 id="performance-metrics"><strong>Performance Metrics</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Performance comparison data</span>
+<span class="kd">const</span> <span class="nx">PerformanceComparison</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="c1">// Bundle size comparison</span>
+  <span class="na">bundleSize</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">expo</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">baseSize</span><span class="p">:</span> <span class="dl">'</span><span class="s1">15-25 MB</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">withExpoSDK</span><span class="p">:</span> <span class="dl">'</span><span class="s1">20-30 MB</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">overhead</span><span class="p">:</span> <span class="dl">'</span><span class="s1">5-10 MB</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">factors</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">Expo SDK</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Built-in modules</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Development tools</span><span class="dl">'</span><span class="p">]</span>
+    <span class="p">},</span>
+    <span class="na">bare</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">baseSize</span><span class="p">:</span> <span class="dl">'</span><span class="s1">8-15 MB</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">withLibraries</span><span class="p">:</span> <span class="dl">'</span><span class="s1">10-20 MB</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">overhead</span><span class="p">:</span> <span class="dl">'</span><span class="s1">2-5 MB</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">factors</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">Only required libraries</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Custom optimizations</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Tree shaking</span><span class="dl">'</span><span class="p">]</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+
+  <span class="c1">// Startup time comparison</span>
+  <span class="na">startupTime</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">expo</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">coldStart</span><span class="p">:</span> <span class="dl">'</span><span class="s1">2-4 seconds</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">warmStart</span><span class="p">:</span> <span class="dl">'</span><span class="s1">1-2 seconds</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">factors</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">Expo SDK initialization</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Module loading</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Bundle parsing</span><span class="dl">'</span><span class="p">]</span>
+    <span class="p">},</span>
+    <span class="na">bare</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">coldStart</span><span class="p">:</span> <span class="dl">'</span><span class="s1">1-3 seconds</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">warmStart</span><span class="p">:</span> <span class="dl">'</span><span class="s1">0.5-1 second</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">factors</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">Direct native initialization</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Optimized bundle</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Custom loading</span><span class="dl">'</span><span class="p">]</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+
+  <span class="c1">// Runtime performance</span>
+  <span class="na">runtimePerformance</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">expo</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">jsExecution</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Good</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">nativeBridge</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Standard</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">memoryUsage</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Higher</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">factors</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">Expo SDK overhead</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Additional abstractions</span><span class="dl">'</span><span class="p">]</span>
+    <span class="p">},</span>
+    <span class="na">bare</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">jsExecution</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Excellent</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">nativeBridge</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Optimized</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">memoryUsage</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Lower</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">factors</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">Direct native calls</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Custom optimizations</span><span class="dl">'</span><span class="p">]</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+
+  <span class="c1">// Build performance</span>
+  <span class="na">buildPerformance</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">expo</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">buildTime</span><span class="p">:</span> <span class="dl">'</span><span class="s1">10-20 minutes</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">buildLocation</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Cloud</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">parallelBuilds</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Limited</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">factors</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">Queue time</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Network latency</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Shared resources</span><span class="dl">'</span><span class="p">]</span>
+    <span class="p">},</span>
+    <span class="na">bare</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">buildTime</span><span class="p">:</span> <span class="dl">'</span><span class="s1">5-15 minutes</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">buildLocation</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Local</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">parallelBuilds</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Unlimited</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">factors</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">Local resources</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Custom configuration</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Incremental builds</span><span class="dl">'</span><span class="p">]</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// Performance testing utilities</span>
+<span class="kd">const</span> <span class="nx">PerformanceTesting</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="c1">// Bundle size analysis</span>
+  <span class="na">analyzeBundleSize</span><span class="p">:</span> <span class="k">async</span> <span class="p">(</span><span class="nx">projectPath</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">bundleAnalyzer</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">@react-native-community/cli-plugin-metro/build/commands/bundle/bundleCommand</span><span class="dl">'</span><span class="p">);</span>
+    
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">bundleAnalyzer</span><span class="p">({</span>
+        <span class="na">platform</span><span class="p">:</span> <span class="dl">'</span><span class="s1">android</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">dev</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="na">minify</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="na">bundleOutput</span><span class="p">:</span> <span class="dl">'</span><span class="s1">bundle-analysis.json</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">sourcemapOutput</span><span class="p">:</span> <span class="dl">'</span><span class="s1">bundle-analysis.map</span><span class="dl">'</span><span class="p">,</span>
+      <span class="p">});</span>
+      
+      <span class="k">return</span> <span class="p">{</span>
+        <span class="na">bundleSize</span><span class="p">:</span> <span class="nx">result</span><span class="p">.</span><span class="nx">bundleSize</span><span class="p">,</span>
+        <span class="na">gzipSize</span><span class="p">:</span> <span class="nx">result</span><span class="p">.</span><span class="nx">gzipSize</span><span class="p">,</span>
+        <span class="na">modules</span><span class="p">:</span> <span class="nx">result</span><span class="p">.</span><span class="nx">modules</span><span class="p">,</span>
+        <span class="na">chunks</span><span class="p">:</span> <span class="nx">result</span><span class="p">.</span><span class="nx">chunks</span>
+      <span class="p">};</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Bundle analysis failed:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+      <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+
+  <span class="c1">// Startup time measurement</span>
+  <span class="na">measureStartupTime</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">startTime</span> <span class="o">=</span> <span class="nx">performance</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
+    
+    <span class="k">return</span> <span class="p">{</span>
+      <span class="na">start</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">startTime</span> <span class="o">=</span> <span class="nx">performance</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
+      <span class="p">},</span>
+      <span class="na">end</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">endTime</span> <span class="o">=</span> <span class="nx">performance</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
+        <span class="k">return</span> <span class="nx">endTime</span> <span class="o">-</span> <span class="nx">startTime</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">};</span>
+  <span class="p">},</span>
+
+  <span class="c1">// Memory usage monitoring</span>
+  <span class="na">monitorMemoryUsage</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">memoryInfo</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="na">jsHeapSizeLimit</span><span class="p">:</span> <span class="nx">performance</span><span class="p">.</span><span class="nx">memory</span><span class="p">?.</span><span class="nx">jsHeapSizeLimit</span> <span class="o">||</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="na">totalJSHeapSize</span><span class="p">:</span> <span class="nx">performance</span><span class="p">.</span><span class="nx">memory</span><span class="p">?.</span><span class="nx">totalJSHeapSize</span> <span class="o">||</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="na">usedJSHeapSize</span><span class="p">:</span> <span class="nx">performance</span><span class="p">.</span><span class="nx">memory</span><span class="p">?.</span><span class="nx">usedJSHeapSize</span> <span class="o">||</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="p">};</span>
+    
+    <span class="k">return</span> <span class="p">{</span>
+      <span class="na">getCurrentUsage</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">memoryInfo</span><span class="p">,</span>
+      <span class="na">getUsagePercentage</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">(</span><span class="nx">memoryInfo</span><span class="p">.</span><span class="nx">usedJSHeapSize</span> <span class="o">/</span> <span class="nx">memoryInfo</span><span class="p">.</span><span class="nx">jsHeapSizeLimit</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">};</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">export</span> <span class="p">{</span> <span class="nx">PerformanceComparison</span><span class="p">,</span> <span class="nx">PerformanceTesting</span> <span class="p">};</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-migration-strategies">🔄 <strong>Migration Strategies</strong></h2>
+
+<h3 id="expo-to-bare-migration"><strong>Expo to Bare Migration</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Migration strategies and tools</span>
+<span class="kd">const</span> <span class="nx">MigrationStrategies</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="c1">// Expo to Bare migration</span>
+  <span class="na">expoToBare</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">steps</span><span class="p">:</span> <span class="p">[</span>
+      <span class="dl">'</span><span class="s1">Run expo eject command</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">Install native dependencies</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">Update build configurations</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">Test on both platforms</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">Update CI/CD pipelines</span><span class="dl">'</span>
+    <span class="p">],</span>
+    
+    <span class="na">commands</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">eject</span><span class="p">:</span> <span class="dl">'</span><span class="s1">npx expo eject</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">installDeps</span><span class="p">:</span> <span class="dl">'</span><span class="s1">cd ios &amp;&amp; pod install</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">cleanBuild</span><span class="p">:</span> <span class="dl">'</span><span class="s1">cd android &amp;&amp; ./gradlew clean</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">testBuild</span><span class="p">:</span> <span class="dl">'</span><span class="s1">npx react-native run-android &amp;&amp; npx react-native run-ios</span><span class="dl">'</span>
+    <span class="p">},</span>
+    
+    <span class="na">considerations</span><span class="p">:</span> <span class="p">[</span>
+      <span class="dl">'</span><span class="s1">Backup project before migration</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">Test all features after migration</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">Update documentation</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">Train team on new workflow</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">Update deployment processes</span><span class="dl">'</span>
+    <span class="p">]</span>
+  <span class="p">},</span>
+
+  <span class="c1">// Bare to Expo migration</span>
+  <span class="na">bareToExpo</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">steps</span><span class="p">:</span> <span class="p">[</span>
+      <span class="dl">'</span><span class="s1">Create new Expo project</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">Migrate source code</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">Replace native modules with Expo equivalents</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">Update dependencies</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">Test functionality</span><span class="dl">'</span>
+    <span class="p">],</span>
+    
+    <span class="na">commands</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">createProject</span><span class="p">:</span> <span class="dl">'</span><span class="s1">npx create-expo-app MyApp</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">installDeps</span><span class="p">:</span> <span class="dl">'</span><span class="s1">npx expo install</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">start</span><span class="p">:</span> <span class="dl">'</span><span class="s1">npx expo start</span><span class="dl">'</span>
+    <span class="p">},</span>
+    
+    <span class="na">considerations</span><span class="p">:</span> <span class="p">[</span>
+      <span class="dl">'</span><span class="s1">Check Expo SDK compatibility</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">Replace incompatible libraries</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">Update native code to Expo modules</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">Test all features</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">Update build processes</span><span class="dl">'</span>
+    <span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// Migration helper utilities</span>
+<span class="kd">const</span> <span class="nx">MigrationHelpers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="c1">// Check Expo compatibility</span>
+  <span class="na">checkExpoCompatibility</span><span class="p">:</span> <span class="p">(</span><span class="nx">packageJson</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">incompatiblePackages</span> <span class="o">=</span> <span class="p">[];</span>
+    <span class="kd">const</span> <span class="nx">expoCompatiblePackages</span> <span class="o">=</span> <span class="p">[];</span>
+    
+    <span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">packageJson</span><span class="p">.</span><span class="nx">dependencies</span> <span class="o">||</span> <span class="p">{}).</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">packageName</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">packageName</span><span class="p">.</span><span class="nx">startsWith</span><span class="p">(</span><span class="dl">'</span><span class="s1">react-native-</span><span class="dl">'</span><span class="p">))</span> <span class="p">{</span>
+        <span class="c1">// Check if package is Expo compatible</span>
+        <span class="kd">const</span> <span class="nx">isExpoCompatible</span> <span class="o">=</span> <span class="nx">checkExpoCompatibility</span><span class="p">(</span><span class="nx">packageName</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">isExpoCompatible</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">expoCompatiblePackages</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">packageName</span><span class="p">);</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+          <span class="nx">incompatiblePackages</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">packageName</span><span class="p">);</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">});</span>
+    
+    <span class="k">return</span> <span class="p">{</span>
+      <span class="na">compatible</span><span class="p">:</span> <span class="nx">expoCompatiblePackages</span><span class="p">,</span>
+      <span class="na">incompatible</span><span class="p">:</span> <span class="nx">incompatiblePackages</span><span class="p">,</span>
+      <span class="na">recommendations</span><span class="p">:</span> <span class="nx">generateMigrationRecommendations</span><span class="p">(</span><span class="nx">incompatiblePackages</span><span class="p">)</span>
+    <span class="p">};</span>
+  <span class="p">},</span>
+
+  <span class="c1">// Generate migration recommendations</span>
+  <span class="na">generateMigrationRecommendations</span><span class="p">:</span> <span class="p">(</span><span class="nx">incompatiblePackages</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">recommendations</span> <span class="o">=</span> <span class="p">[];</span>
+    
+    <span class="nx">incompatiblePackages</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">packageName</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">recommendation</span> <span class="o">=</span> <span class="nx">getExpoAlternative</span><span class="p">(</span><span class="nx">packageName</span><span class="p">);</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">recommendation</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">recommendations</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span>
+          <span class="na">original</span><span class="p">:</span> <span class="nx">packageName</span><span class="p">,</span>
+          <span class="na">alternative</span><span class="p">:</span> <span class="nx">recommendation</span><span class="p">.</span><span class="nx">alternative</span><span class="p">,</span>
+          <span class="na">migrationSteps</span><span class="p">:</span> <span class="nx">recommendation</span><span class="p">.</span><span class="nx">steps</span>
+        <span class="p">});</span>
+      <span class="p">}</span>
+    <span class="p">});</span>
+    
+    <span class="k">return</span> <span class="nx">recommendations</span><span class="p">;</span>
+  <span class="p">},</span>
+
+  <span class="c1">// Get Expo alternatives</span>
+  <span class="na">getExpoAlternative</span><span class="p">:</span> <span class="p">(</span><span class="nx">packageName</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">alternatives</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="dl">'</span><span class="s1">react-native-camera</span><span class="dl">'</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">alternative</span><span class="p">:</span> <span class="dl">'</span><span class="s1">expo-camera</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">steps</span><span class="p">:</span> <span class="p">[</span>
+          <span class="dl">'</span><span class="s1">Remove react-native-camera</span><span class="dl">'</span><span class="p">,</span>
+          <span class="dl">'</span><span class="s1">Install expo-camera</span><span class="dl">'</span><span class="p">,</span>
+          <span class="dl">'</span><span class="s1">Update import statements</span><span class="dl">'</span><span class="p">,</span>
+          <span class="dl">'</span><span class="s1">Update API calls</span><span class="dl">'</span>
+        <span class="p">]</span>
+      <span class="p">},</span>
+      <span class="dl">'</span><span class="s1">react-native-geolocation</span><span class="dl">'</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">alternative</span><span class="p">:</span> <span class="dl">'</span><span class="s1">expo-location</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">steps</span><span class="p">:</span> <span class="p">[</span>
+          <span class="dl">'</span><span class="s1">Remove react-native-geolocation</span><span class="dl">'</span><span class="p">,</span>
+          <span class="dl">'</span><span class="s1">Install expo-location</span><span class="dl">'</span><span class="p">,</span>
+          <span class="dl">'</span><span class="s1">Update import statements</span><span class="dl">'</span><span class="p">,</span>
+          <span class="dl">'</span><span class="s1">Update API calls</span><span class="dl">'</span>
+        <span class="p">]</span>
+      <span class="p">},</span>
+      <span class="dl">'</span><span class="s1">react-native-push-notification</span><span class="dl">'</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">alternative</span><span class="p">:</span> <span class="dl">'</span><span class="s1">expo-notifications</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">steps</span><span class="p">:</span> <span class="p">[</span>
+          <span class="dl">'</span><span class="s1">Remove react-native-push-notification</span><span class="dl">'</span><span class="p">,</span>
+          <span class="dl">'</span><span class="s1">Install expo-notifications</span><span class="dl">'</span><span class="p">,</span>
+          <span class="dl">'</span><span class="s1">Update import statements</span><span class="dl">'</span><span class="p">,</span>
+          <span class="dl">'</span><span class="s1">Update API calls</span><span class="dl">'</span>
+        <span class="p">]</span>
+      <span class="p">}</span>
+    <span class="p">};</span>
+    
+    <span class="k">return</span> <span class="nx">alternatives</span><span class="p">[</span><span class="nx">packageName</span><span class="p">]</span> <span class="o">||</span> <span class="kc">null</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">export</span> <span class="p">{</span> <span class="nx">MigrationStrategies</span><span class="p">,</span> <span class="nx">MigrationHelpers</span> <span class="p">};</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-decision-matrix">🎯 <strong>Decision Matrix</strong></h2>
+
+<h3 id="decision-criteria"><strong>Decision Criteria</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Decision matrix for choosing between Expo and Bare</span>
+<span class="kd">const</span> <span class="nx">DecisionMatrix</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="c1">// Project requirements</span>
+  <span class="na">projectRequirements</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">rapidPrototyping</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">expo</span><span class="p">:</span> <span class="mi">9</span><span class="p">,</span>
+      <span class="na">bare</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+      <span class="na">weight</span><span class="p">:</span> <span class="mf">0.15</span><span class="p">,</span>
+      <span class="na">description</span><span class="p">:</span> <span class="dl">'</span><span class="s1">How quickly can you build and test ideas?</span><span class="dl">'</span>
+    <span class="p">},</span>
+    <span class="na">nativeCustomization</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">expo</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+      <span class="na">bare</span><span class="p">:</span> <span class="mi">9</span><span class="p">,</span>
+      <span class="na">weight</span><span class="p">:</span> <span class="mf">0.20</span><span class="p">,</span>
+      <span class="na">description</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Need for custom native functionality</span><span class="dl">'</span>
+    <span class="p">},</span>
+    <span class="na">teamExpertise</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">expo</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+      <span class="na">bare</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+      <span class="na">weight</span><span class="p">:</span> <span class="mf">0.15</span><span class="p">,</span>
+      <span class="na">description</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Team familiarity with React Native</span><span class="dl">'</span>
+    <span class="p">},</span>
+    <span class="na">performance</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">expo</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+      <span class="na">bare</span><span class="p">:</span> <span class="mi">9</span><span class="p">,</span>
+      <span class="na">weight</span><span class="p">:</span> <span class="mf">0.15</span><span class="p">,</span>
+      <span class="na">description</span><span class="p">:</span> <span class="dl">'</span><span class="s1">App performance requirements</span><span class="dl">'</span>
+    <span class="p">},</span>
+    <span class="na">budget</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">expo</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+      <span class="na">bare</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+      <span class="na">weight</span><span class="p">:</span> <span class="mf">0.10</span><span class="p">,</span>
+      <span class="na">description</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Development and maintenance costs</span><span class="dl">'</span>
+    <span class="p">},</span>
+    <span class="na">timeToMarket</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">expo</span><span class="p">:</span> <span class="mi">9</span><span class="p">,</span>
+      <span class="na">bare</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+      <span class="na">weight</span><span class="p">:</span> <span class="mf">0.15</span><span class="p">,</span>
+      <span class="na">description</span><span class="p">:</span> <span class="dl">'</span><span class="s1">How quickly do you need to launch?</span><span class="dl">'</span>
+    <span class="p">},</span>
+    <span class="na">scalability</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">expo</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+      <span class="na">bare</span><span class="p">:</span> <span class="mi">9</span><span class="p">,</span>
+      <span class="na">weight</span><span class="p">:</span> <span class="mf">0.10</span><span class="p">,</span>
+      <span class="na">description</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Long-term scalability needs</span><span class="dl">'</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+
+  <span class="c1">// Calculate weighted score</span>
+  <span class="na">calculateScore</span><span class="p">:</span> <span class="p">(</span><span class="nx">requirements</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">expoScore</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kd">let</span> <span class="nx">bareScore</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    
+    <span class="nb">Object</span><span class="p">.</span><span class="nx">entries</span><span class="p">(</span><span class="nx">requirements</span><span class="p">).</span><span class="nx">forEach</span><span class="p">(([</span><span class="nx">criterion</span><span class="p">,</span> <span class="nx">data</span><span class="p">])</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">expoScore</span> <span class="o">+=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">expo</span> <span class="o">*</span> <span class="nx">data</span><span class="p">.</span><span class="nx">weight</span><span class="p">;</span>
+      <span class="nx">bareScore</span> <span class="o">+=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">bare</span> <span class="o">*</span> <span class="nx">data</span><span class="p">.</span><span class="nx">weight</span><span class="p">;</span>
+    <span class="p">});</span>
+    
+    <span class="k">return</span> <span class="p">{</span>
+      <span class="na">expo</span><span class="p">:</span> <span class="nx">expoScore</span><span class="p">,</span>
+      <span class="na">bare</span><span class="p">:</span> <span class="nx">bareScore</span><span class="p">,</span>
+      <span class="na">recommendation</span><span class="p">:</span> <span class="nx">expoScore</span> <span class="o">&gt;</span> <span class="nx">bareScore</span> <span class="p">?</span> <span class="dl">'</span><span class="s1">Expo</span><span class="dl">'</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">Bare</span><span class="dl">'</span>
+    <span class="p">};</span>
+  <span class="p">},</span>
+
+  <span class="c1">// Use case recommendations</span>
+  <span class="na">useCaseRecommendations</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">'</span><span class="s1">MVP/Prototype</span><span class="dl">'</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">recommendation</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Expo</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">reasoning</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Fast development, easy testing, built-in services</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">score</span><span class="p">:</span> <span class="p">{</span> <span class="na">expo</span><span class="p">:</span> <span class="mf">8.5</span><span class="p">,</span> <span class="na">bare</span><span class="p">:</span> <span class="mf">4.5</span> <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="dl">'</span><span class="s1">Enterprise App</span><span class="dl">'</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">recommendation</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Bare</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">reasoning</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Full control, custom native modules, performance</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">score</span><span class="p">:</span> <span class="p">{</span> <span class="na">expo</span><span class="p">:</span> <span class="mf">5.5</span><span class="p">,</span> <span class="na">bare</span><span class="p">:</span> <span class="mf">8.5</span> <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="dl">'</span><span class="s1">Consumer App</span><span class="dl">'</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">recommendation</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Expo</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">reasoning</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Rapid iteration, easy updates, good performance</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">score</span><span class="p">:</span> <span class="p">{</span> <span class="na">expo</span><span class="p">:</span> <span class="mf">7.5</span><span class="p">,</span> <span class="na">bare</span><span class="p">:</span> <span class="mf">6.5</span> <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="dl">'</span><span class="s1">Gaming App</span><span class="dl">'</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">recommendation</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Bare</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">reasoning</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Performance critical, custom native code needed</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">score</span><span class="p">:</span> <span class="p">{</span> <span class="na">expo</span><span class="p">:</span> <span class="mf">4.0</span><span class="p">,</span> <span class="na">bare</span><span class="p">:</span> <span class="mf">9.0</span> <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="dl">'</span><span class="s1">E-commerce App</span><span class="dl">'</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">recommendation</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Expo</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">reasoning</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Standard features, fast development, easy maintenance</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">score</span><span class="p">:</span> <span class="p">{</span> <span class="na">expo</span><span class="p">:</span> <span class="mf">7.0</span><span class="p">,</span> <span class="na">bare</span><span class="p">:</span> <span class="mf">6.0</span> <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// Decision helper</span>
+<span class="kd">const</span> <span class="nx">DecisionHelper</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="c1">// Get recommendation based on project details</span>
+  <span class="na">getRecommendation</span><span class="p">:</span> <span class="p">(</span><span class="nx">projectDetails</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="p">{</span> <span class="nx">type</span><span class="p">,</span> <span class="nx">teamSize</span><span class="p">,</span> <span class="nx">timeline</span><span class="p">,</span> <span class="nx">budget</span><span class="p">,</span> <span class="nx">requirements</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">projectDetails</span><span class="p">;</span>
+    
+    <span class="c1">// Calculate scores based on project details</span>
+    <span class="kd">const</span> <span class="nx">scores</span> <span class="o">=</span> <span class="nx">DecisionMatrix</span><span class="p">.</span><span class="nx">calculateScore</span><span class="p">(</span><span class="nx">DecisionMatrix</span><span class="p">.</span><span class="nx">projectRequirements</span><span class="p">);</span>
+    
+    <span class="c1">// Adjust scores based on project details</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">type</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">MVP</span><span class="dl">'</span> <span class="o">||</span> <span class="nx">type</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">Prototype</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">scores</span><span class="p">.</span><span class="nx">expo</span> <span class="o">+=</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">type</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">Enterprise</span><span class="dl">'</span> <span class="o">||</span> <span class="nx">type</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">Gaming</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">scores</span><span class="p">.</span><span class="nx">bare</span> <span class="o">+=</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="p">}</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="nx">teamSize</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">scores</span><span class="p">.</span><span class="nx">expo</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">teamSize</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">scores</span><span class="p">.</span><span class="nx">bare</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="nx">timeline</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">urgent</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">scores</span><span class="p">.</span><span class="nx">expo</span> <span class="o">+=</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="p">{</span>
+      <span class="na">recommendation</span><span class="p">:</span> <span class="nx">scores</span><span class="p">.</span><span class="nx">expo</span> <span class="o">&gt;</span> <span class="nx">scores</span><span class="p">.</span><span class="nx">bare</span> <span class="p">?</span> <span class="dl">'</span><span class="s1">Expo</span><span class="dl">'</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">Bare</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">confidence</span><span class="p">:</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">abs</span><span class="p">(</span><span class="nx">scores</span><span class="p">.</span><span class="nx">expo</span> <span class="o">-</span> <span class="nx">scores</span><span class="p">.</span><span class="nx">bare</span><span class="p">)</span> <span class="o">/</span> <span class="mi">10</span><span class="p">,</span>
+      <span class="nx">scores</span><span class="p">,</span>
+      <span class="na">reasoning</span><span class="p">:</span> <span class="nx">generateReasoning</span><span class="p">(</span><span class="nx">scores</span><span class="p">,</span> <span class="nx">projectDetails</span><span class="p">)</span>
+    <span class="p">};</span>
+  <span class="p">},</span>
+
+  <span class="c1">// Generate reasoning for recommendation</span>
+  <span class="na">generateReasoning</span><span class="p">:</span> <span class="p">(</span><span class="nx">scores</span><span class="p">,</span> <span class="nx">projectDetails</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">reasons</span> <span class="o">=</span> <span class="p">[];</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="nx">scores</span><span class="p">.</span><span class="nx">expo</span> <span class="o">&gt;</span> <span class="nx">scores</span><span class="p">.</span><span class="nx">bare</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">reasons</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="dl">'</span><span class="s1">Expo provides faster development and easier maintenance</span><span class="dl">'</span><span class="p">);</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">projectDetails</span><span class="p">.</span><span class="nx">timeline</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">urgent</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">reasons</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="dl">'</span><span class="s1">Expo is better for tight deadlines</span><span class="dl">'</span><span class="p">);</span>
+      <span class="p">}</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">projectDetails</span><span class="p">.</span><span class="nx">teamSize</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">reasons</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="dl">'</span><span class="s1">Expo requires less native development expertise</span><span class="dl">'</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="nx">reasons</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="dl">'</span><span class="s1">Bare React Native provides more control and flexibility</span><span class="dl">'</span><span class="p">);</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">projectDetails</span><span class="p">.</span><span class="nx">requirements</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="dl">'</span><span class="s1">custom-native</span><span class="dl">'</span><span class="p">))</span> <span class="p">{</span>
+        <span class="nx">reasons</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="dl">'</span><span class="s1">Bare allows custom native module development</span><span class="dl">'</span><span class="p">);</span>
+      <span class="p">}</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">projectDetails</span><span class="p">.</span><span class="nx">requirements</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="dl">'</span><span class="s1">performance</span><span class="dl">'</span><span class="p">))</span> <span class="p">{</span>
+        <span class="nx">reasons</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="dl">'</span><span class="s1">Bare provides better performance optimization</span><span class="dl">'</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="nx">reasons</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">export</span> <span class="p">{</span> <span class="nx">DecisionMatrix</span><span class="p">,</span> <span class="nx">DecisionHelper</span> <span class="p">};</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-best-practices">🎯 <strong>Best Practices</strong></h2>
+
+<h3 id="1-choosing-the-right-workflow"><strong>1. Choosing the Right Workflow</strong></h3>
+<ul>
+  <li>Evaluate project requirements</li>
+  <li>Consider team expertise</li>
+  <li>Plan for long-term maintenance</li>
+  <li>Test both approaches</li>
+</ul>
+
+<h3 id="2-migration-planning"><strong>2. Migration Planning</strong></h3>
+<ul>
+  <li>Backup existing projects</li>
+  <li>Test thoroughly after migration</li>
+  <li>Update documentation</li>
+  <li>Train team members</li>
+</ul>
+
+<h3 id="3-hybrid-approach"><strong>3. Hybrid Approach</strong></h3>
+<ul>
+  <li>Use Expo for rapid prototyping</li>
+  <li>Migrate to Bare for production</li>
+  <li>Leverage both workflows</li>
+  <li>Plan migration strategy</li>
+</ul>
+
+<hr />
+
+<h2 id="-interview-questions">❓ <strong>Interview Questions</strong></h2>
+
+<h3 id="basic-questions"><strong>Basic Questions</strong></h3>
+<ol>
+  <li><strong>What are the main differences between Expo and Bare React Native?</strong></li>
+  <li><strong>When would you choose Expo over Bare workflow?</strong></li>
+  <li><strong>What are the limitations of Expo?</strong></li>
+</ol>
+
+<h3 id="advanced-questions"><strong>Advanced Questions</strong></h3>
+<ol>
+  <li><strong>How would you migrate from Expo to Bare React Native?</strong></li>
+  <li><strong>Explain the performance differences between Expo and Bare.</strong></li>
+  <li><strong>How do you decide between Expo and Bare for a new project?</strong></li>
+</ol>
+
+<h3 id="practical-questions"><strong>Practical Questions</strong></h3>
+<ol>
+  <li><strong>Create a decision matrix for choosing between Expo and Bare.</strong></li>
+  <li><strong>Implement a migration strategy from Expo to Bare.</strong></li>
+  <li><strong>Compare the development experience of both workflows.</strong></li>
+</ol>
+
+<hr />
+
+<h2 id="-navigation">🧭 Navigation</h2>
+
+<div class="navigation">
+    <a href="./02-Bare-Workflow.md" class="nav-link prev">⬅️ Previous: Bare Workflow</a>
+    <a href="./04-Migration-Strategies.md" class="nav-link next">Next: Migration Strategies ➡️</a>
+</div>
+
+<hr />
+
+<script src="../../common-scripts.js"></script>
+
+<p><em>Last updated: December 2024</em></p>
+
+        </main>
+        
+        <footer style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #ecf0f1; color: #666; text-align: center;">
+            <p>Interview Prep Documentation - Built with Jekyll</p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧠 Memory Debugging - Interview Prep Documentation</title>
+    <meta name="description" content="Comprehensive guides for JavaScript, TypeScript, and React Native interview preparation">
+    
+    <!-- GitHub Pages compatible styling -->
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+        }
+        
+        .container {
+            max-width: 100%;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            color: #2c3e50;
+            margin-top: 2em;
+            margin-bottom: 1em;
+        }
+        
+        h1 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            border-bottom: 1px solid #ecf0f1;
+            padding-bottom: 5px;
+        }
+        
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border-left: 4px solid #3498db;
+        }
+        
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+        
+        blockquote {
+            border-left: 4px solid #3498db;
+            margin: 0;
+            padding-left: 20px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1em 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .navigation {
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px 0;
+            margin-bottom: 20px;
+        }
+        
+        .navigation a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+        
+        .navigation a:hover {
+            text-decoration: underline;
+        }
+        
+        .breadcrumb {
+            margin-bottom: 20px;
+            color: #666;
+        }
+        
+        .breadcrumb a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            h2 {
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="navigation">
+            <a href="/">Home</a>
+            <a href="/Javascript/">JavaScript</a>
+            <a href="/TypeScript/">TypeScript</a>
+            <a href="/React-Native/">React Native</a>
+        </nav>
+        
+        
+        
+        <main>
+            <h1 id="-memory-debugging">🧠 <strong>Memory Debugging</strong></h1>
+
+<blockquote>
+  <p><strong>Master memory debugging techniques for React Native applications, including leak detection, memory profiling, and optimization strategies</strong></p>
+</blockquote>
+
+<link rel="stylesheet" href="../../common-styles.css" />
+
+<hr />
+
+<h2 id="-table-of-contents">📚 <strong>Table of Contents</strong></h2>
+
+<ul>
+  <li><a href="#memory-debugging-overview">Memory Debugging Overview</a></li>
+  <li><a href="#memory-leak-detection">Memory Leak Detection</a></li>
+  <li><a href="#memory-profiling">Memory Profiling</a></li>
+  <li><a href="#javascript-memory">JavaScript Memory</a></li>
+  <li><a href="#native-memory">Native Memory</a></li>
+  <li><a href="#memory-optimization">Memory Optimization</a></li>
+  <li><a href="#memory-monitoring">Memory Monitoring</a></li>
+  <li><a href="#best-practices">Best Practices</a></li>
+  <li><a href="#interview-questions">Interview Questions</a></li>
+</ul>
+
+<hr />
+
+<h2 id="-memory-debugging-overview">🎯 <strong>Memory Debugging Overview</strong></h2>
+
+<p>Memory debugging involves identifying memory leaks, monitoring memory usage, and optimizing memory consumption in React Native applications.</p>
+
+<h3 id="memory-debugging-framework"><strong>Memory Debugging Framework</strong></h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>┌─────────────────────────────────────┐
+│        Memory Debugging            │
+│  ┌─────────────────────────────────┐│
+│  │        Detection Tools         ││
+│  │  - Chrome DevTools Memory      ││
+│  │  - Flipper Memory Plugin       ││
+│  │  - Native Memory Profilers     ││
+│  │  - Custom Memory Monitors      ││
+│  └─────────────────────────────────┘│
+│  ┌─────────────────────────────────┐│
+│  │        Memory Types            ││
+│  │  - JavaScript Heap             ││
+│  │  - Native Memory               ││
+│  │  - Image Memory                ││
+│  │  - Cache Memory                ││
+│  └─────────────────────────────────┘│
+│  ┌─────────────────────────────────┐│
+│  │        Optimization            ││
+│  │  - Garbage Collection          ││
+│  │  - Memory Pooling              ││
+│  │  - Weak References             ││
+│  │  - Memory Cleanup              ││
+│  └─────────────────────────────────┘│
+└─────────────────────────────────────┘
+</code></pre></div></div>
+
+<h3 id="key-memory-metrics"><strong>Key Memory Metrics</strong></h3>
+<ul>
+  <li><strong>Heap Size</strong>: Total JavaScript memory usage</li>
+  <li><strong>Memory Growth</strong>: Rate of memory increase over time</li>
+  <li><strong>Garbage Collection</strong>: Frequency and duration of GC cycles</li>
+  <li><strong>Memory Leaks</strong>: Objects that aren’t garbage collected</li>
+  <li><strong>Peak Memory</strong>: Maximum memory usage during app lifecycle</li>
+</ul>
+
+<hr />
+
+<h2 id="-memory-leak-detection">🔍 <strong>Memory Leak Detection</strong></h2>
+
+<h3 id="memory-leak-detection-tools"><strong>Memory Leak Detection Tools</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Memory leak detection utilities</span>
+<span class="kd">const</span> <span class="nx">MemoryLeakDetector</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="c1">// Track object creation and destruction</span>
+  <span class="na">trackObject</span><span class="p">:</span> <span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">obj</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">__DEV__</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">id</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">().</span><span class="nx">toString</span><span class="p">(</span><span class="mi">36</span><span class="p">).</span><span class="nx">substr</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">9</span><span class="p">);</span>
+      <span class="nx">obj</span><span class="p">.</span><span class="nx">_memoryTrackerId</span> <span class="o">=</span> <span class="nx">id</span><span class="p">;</span>
+      <span class="nx">obj</span><span class="p">.</span><span class="nx">_memoryTrackerName</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
+      
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`[Memory] Created </span><span class="p">${</span><span class="nx">name</span><span class="p">}</span><span class="s2"> (</span><span class="p">${</span><span class="nx">id</span><span class="p">}</span><span class="s2">)`</span><span class="p">);</span>
+      
+      <span class="c1">// Track when object is garbage collected</span>
+      <span class="kd">const</span> <span class="nx">weakRef</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">WeakRef</span><span class="p">(</span><span class="nx">obj</span><span class="p">);</span>
+      <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">weakRef</span><span class="p">.</span><span class="nx">deref</span><span class="p">())</span> <span class="p">{</span>
+          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`[Memory] </span><span class="p">${</span><span class="nx">name</span><span class="p">}</span><span class="s2"> (</span><span class="p">${</span><span class="nx">id</span><span class="p">}</span><span class="s2">) still alive after 5 seconds`</span><span class="p">);</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`[Memory] </span><span class="p">${</span><span class="nx">name</span><span class="p">}</span><span class="s2"> (</span><span class="p">${</span><span class="nx">id</span><span class="p">}</span><span class="s2">) garbage collected`</span><span class="p">);</span>
+        <span class="p">}</span>
+      <span class="p">},</span> <span class="mi">5000</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">obj</span><span class="p">;</span>
+  <span class="p">},</span>
+  
+  <span class="c1">// Monitor memory growth</span>
+  <span class="na">monitorMemoryGrowth</span><span class="p">:</span> <span class="p">(</span><span class="nx">interval</span> <span class="o">=</span> <span class="mi">10000</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">previousMemory</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+    
+    <span class="kd">const</span> <span class="nx">checkMemory</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">currentMemory</span> <span class="o">=</span> <span class="nx">performance</span><span class="p">.</span><span class="nx">memory</span><span class="p">;</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">currentMemory</span> <span class="o">&amp;&amp;</span> <span class="nx">previousMemory</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">growth</span> <span class="o">=</span> <span class="nx">currentMemory</span><span class="p">.</span><span class="nx">usedJSHeapSize</span> <span class="o">-</span> <span class="nx">previousMemory</span><span class="p">.</span><span class="nx">usedJSHeapSize</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">growth</span> <span class="o">&gt;</span> <span class="mi">10</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// 10MB growth</span>
+          <span class="nx">console</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span><span class="s2">`[Memory Leak] Memory grew by </span><span class="p">${(</span><span class="nx">growth</span> <span class="o">/</span> <span class="mi">1024</span> <span class="o">/</span> <span class="mi">1024</span><span class="p">).</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">2</span><span class="p">)}</span><span class="s2"> MB`</span><span class="p">);</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+      <span class="nx">previousMemory</span> <span class="o">=</span> <span class="nx">currentMemory</span><span class="p">;</span>
+    <span class="p">};</span>
+    
+    <span class="k">return</span> <span class="nx">setInterval</span><span class="p">(</span><span class="nx">checkMemory</span><span class="p">,</span> <span class="nx">interval</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="common-memory-leak-patterns"><strong>Common Memory Leak Patterns</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Common memory leak patterns and fixes</span>
+
+<span class="c1">// ❌ Memory leak: Event listeners not removed</span>
+<span class="kd">class</span> <span class="nx">LeakyComponent</span> <span class="kd">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span> <span class="p">{</span>
+  <span class="nx">componentDidMount</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// This creates a memory leak</span>
+    <span class="nx">DeviceEventEmitter</span><span class="p">.</span><span class="nx">addListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">event</span><span class="dl">'</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">handleEvent</span><span class="p">);</span>
+  <span class="p">}</span>
+  
+  <span class="nx">handleEvent</span> <span class="o">=</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Event received:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">data</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// ✅ Fixed: Proper cleanup</span>
+<span class="kd">class</span> <span class="nx">FixedComponent</span> <span class="kd">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span> <span class="p">{</span>
+  <span class="nx">componentDidMount</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">eventListener</span> <span class="o">=</span> <span class="nx">DeviceEventEmitter</span><span class="p">.</span><span class="nx">addListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">event</span><span class="dl">'</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">handleEvent</span><span class="p">);</span>
+  <span class="p">}</span>
+  
+  <span class="nx">componentWillUnmount</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// Proper cleanup</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">eventListener</span><span class="p">?.</span><span class="nx">remove</span><span class="p">();</span>
+  <span class="p">}</span>
+  
+  <span class="nx">handleEvent</span> <span class="o">=</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Event received:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">data</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="memory-leak-detection-in-lists"><strong>Memory Leak Detection in Lists</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Memory leak detection for FlatList</span>
+<span class="kd">const</span> <span class="nx">MemoryLeakAwareFlatList</span> <span class="o">=</span> <span class="p">({</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">renderItem</span><span class="p">,</span> <span class="p">...</span><span class="nx">props</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">memoryStats</span><span class="p">,</span> <span class="nx">setMemoryStats</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+  
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">interval</span> <span class="o">=</span> <span class="nx">setInterval</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">performance</span><span class="p">.</span><span class="nx">memory</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">setMemoryStats</span><span class="p">({</span>
+          <span class="na">used</span><span class="p">:</span> <span class="nx">performance</span><span class="p">.</span><span class="nx">memory</span><span class="p">.</span><span class="nx">usedJSHeapSize</span><span class="p">,</span>
+          <span class="na">total</span><span class="p">:</span> <span class="nx">performance</span><span class="p">.</span><span class="nx">memory</span><span class="p">.</span><span class="nx">totalJSHeapSize</span><span class="p">,</span>
+          <span class="na">limit</span><span class="p">:</span> <span class="nx">performance</span><span class="p">.</span><span class="nx">memory</span><span class="p">.</span><span class="nx">jsHeapSizeLimit</span>
+        <span class="p">});</span>
+      <span class="p">}</span>
+    <span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
+    
+    <span class="k">return</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">clearInterval</span><span class="p">(</span><span class="nx">interval</span><span class="p">);</span>
+  <span class="p">},</span> <span class="p">[]);</span>
+  
+  <span class="kd">const</span> <span class="nx">optimizedRenderItem</span> <span class="o">=</span> <span class="nx">useCallback</span><span class="p">(({</span> <span class="nx">item</span><span class="p">,</span> <span class="nx">index</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// Track item rendering</span>
+    <span class="nx">MemoryLeakDetector</span><span class="p">.</span><span class="nx">trackObject</span><span class="p">(</span><span class="s2">`ListItem-</span><span class="p">${</span><span class="nx">index</span><span class="p">}</span><span class="s2">`</span><span class="p">,</span> <span class="nx">item</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nx">renderItem</span><span class="p">({</span> <span class="nx">item</span><span class="p">,</span> <span class="nx">index</span> <span class="p">});</span>
+  <span class="p">},</span> <span class="p">[</span><span class="nx">renderItem</span><span class="p">]);</span>
+  
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">View</span><span class="o">&gt;</span>
+      <span class="p">{</span><span class="nx">memoryStats</span> <span class="o">&amp;&amp;</span> <span class="p">(</span>
+        <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">memoryStats</span><span class="p">}</span><span class="o">&gt;</span>
+          <span class="na">Memory</span><span class="p">:</span> <span class="p">{(</span><span class="nx">memoryStats</span><span class="p">.</span><span class="nx">used</span> <span class="o">/</span> <span class="mi">1024</span> <span class="o">/</span> <span class="mi">1024</span><span class="p">).</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">2</span><span class="p">)}</span> <span class="nx">MB</span>
+        <span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>      <span class="p">)}</span>
+      <span class="o">&lt;</span><span class="nx">FlatList</span>
+        <span class="nx">data</span><span class="o">=</span><span class="p">{</span><span class="nx">data</span><span class="p">}</span>
+        <span class="nx">renderItem</span><span class="o">=</span><span class="p">{</span><span class="nx">optimizedRenderItem</span><span class="p">}</span>
+        <span class="p">{...</span><span class="nx">props</span><span class="p">}</span>
+      <span class="sr">/</span><span class="err">&gt;
+</span>    <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-memory-profiling">📊 <strong>Memory Profiling</strong></h2>
+
+<h3 id="chrome-devtools-memory-profiling"><strong>Chrome DevTools Memory Profiling</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Memory profiling utilities</span>
+<span class="kd">const</span> <span class="nx">MemoryProfiler</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="c1">// Take heap snapshots</span>
+  <span class="na">takeHeapSnapshot</span><span class="p">:</span> <span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">__DEV__</span> <span class="o">&amp;&amp;</span> <span class="nx">performance</span><span class="p">.</span><span class="nx">memory</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">snapshot</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="nx">name</span><span class="p">,</span>
+        <span class="na">timestamp</span><span class="p">:</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">(),</span>
+        <span class="na">memory</span><span class="p">:</span> <span class="p">{</span>
+          <span class="na">used</span><span class="p">:</span> <span class="nx">performance</span><span class="p">.</span><span class="nx">memory</span><span class="p">.</span><span class="nx">usedJSHeapSize</span><span class="p">,</span>
+          <span class="na">total</span><span class="p">:</span> <span class="nx">performance</span><span class="p">.</span><span class="nx">memory</span><span class="p">.</span><span class="nx">totalJSHeapSize</span><span class="p">,</span>
+          <span class="na">limit</span><span class="p">:</span> <span class="nx">performance</span><span class="p">.</span><span class="nx">memory</span><span class="p">.</span><span class="nx">jsHeapSizeLimit</span>
+        <span class="p">}</span>
+      <span class="p">};</span>
+      
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`[Memory Snapshot] </span><span class="p">${</span><span class="nx">name</span><span class="p">}</span><span class="s2">:`</span><span class="p">,</span> <span class="nx">snapshot</span><span class="p">);</span>
+      <span class="k">return</span> <span class="nx">snapshot</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  
+  <span class="c1">// Compare snapshots</span>
+  <span class="na">compareSnapshots</span><span class="p">:</span> <span class="p">(</span><span class="nx">snapshot1</span><span class="p">,</span> <span class="nx">snapshot2</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">memoryDiff</span> <span class="o">=</span> <span class="nx">snapshot2</span><span class="p">.</span><span class="nx">memory</span><span class="p">.</span><span class="nx">used</span> <span class="o">-</span> <span class="nx">snapshot1</span><span class="p">.</span><span class="nx">memory</span><span class="p">.</span><span class="nx">used</span><span class="p">;</span>
+    <span class="kd">const</span> <span class="nx">timeDiff</span> <span class="o">=</span> <span class="nx">snapshot2</span><span class="p">.</span><span class="nx">timestamp</span> <span class="o">-</span> <span class="nx">snapshot1</span><span class="p">.</span><span class="nx">timestamp</span><span class="p">;</span>
+    
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`[Memory Comparison] </span><span class="p">${</span><span class="nx">snapshot1</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span><span class="s2"> vs </span><span class="p">${</span><span class="nx">snapshot2</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span><span class="s2">:`</span><span class="p">,</span> <span class="p">{</span>
+      <span class="na">memoryDifference</span><span class="p">:</span> <span class="s2">`</span><span class="p">${(</span><span class="nx">memoryDiff</span> <span class="o">/</span> <span class="mi">1024</span> <span class="o">/</span> <span class="mi">1024</span><span class="p">).</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">2</span><span class="p">)}</span><span class="s2"> MB`</span><span class="p">,</span>
+      <span class="na">timeDifference</span><span class="p">:</span> <span class="s2">`</span><span class="p">${</span><span class="nx">timeDiff</span><span class="p">}</span><span class="s2">ms`</span><span class="p">,</span>
+      <span class="na">memoryGrowthRate</span><span class="p">:</span> <span class="s2">`</span><span class="p">${(</span><span class="nx">memoryDiff</span> <span class="o">/</span> <span class="nx">timeDiff</span> <span class="o">*</span> <span class="mi">1000</span> <span class="o">/</span> <span class="mi">1024</span> <span class="o">/</span> <span class="mi">1024</span><span class="p">).</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">2</span><span class="p">)}</span><span class="s2"> MB/s`</span>
+    <span class="p">});</span>
+    
+    <span class="k">return</span> <span class="p">{</span> <span class="nx">memoryDiff</span><span class="p">,</span> <span class="nx">timeDiff</span> <span class="p">};</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="custom-memory-profiler"><strong>Custom Memory Profiler</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Custom memory profiler</span>
+<span class="kd">class</span> <span class="nx">CustomMemoryProfiler</span> <span class="p">{</span>
+  <span class="kd">constructor</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">snapshots</span> <span class="o">=</span> <span class="p">[];</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">monitoring</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+  <span class="p">}</span>
+  
+  <span class="nx">startMonitoring</span><span class="p">(</span><span class="nx">interval</span> <span class="o">=</span> <span class="mi">5000</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">monitoring</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">monitorInterval</span> <span class="o">=</span> <span class="nx">setInterval</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">takeSnapshot</span><span class="p">(</span><span class="s2">`Auto-</span><span class="p">${</span><span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">()}</span><span class="s2">`</span><span class="p">);</span>
+    <span class="p">},</span> <span class="nx">interval</span><span class="p">);</span>
+  <span class="p">}</span>
+  
+  <span class="nx">stopMonitoring</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">monitoring</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">monitorInterval</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">clearInterval</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">monitorInterval</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  
+  <span class="nx">takeSnapshot</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">performance</span><span class="p">.</span><span class="nx">memory</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">snapshot</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="nx">name</span><span class="p">,</span>
+        <span class="na">timestamp</span><span class="p">:</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">(),</span>
+        <span class="na">memory</span><span class="p">:</span> <span class="p">{</span>
+          <span class="na">used</span><span class="p">:</span> <span class="nx">performance</span><span class="p">.</span><span class="nx">memory</span><span class="p">.</span><span class="nx">usedJSHeapSize</span><span class="p">,</span>
+          <span class="na">total</span><span class="p">:</span> <span class="nx">performance</span><span class="p">.</span><span class="nx">memory</span><span class="p">.</span><span class="nx">totalJSHeapSize</span><span class="p">,</span>
+          <span class="na">limit</span><span class="p">:</span> <span class="nx">performance</span><span class="p">.</span><span class="nx">memory</span><span class="p">.</span><span class="nx">jsHeapSizeLimit</span>
+        <span class="p">}</span>
+      <span class="p">};</span>
+      
+      <span class="k">this</span><span class="p">.</span><span class="nx">snapshots</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">snapshot</span><span class="p">);</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`[Memory Profiler] Snapshot: </span><span class="p">${</span><span class="nx">name</span><span class="p">}</span><span class="s2">`</span><span class="p">,</span> <span class="nx">snapshot</span><span class="p">);</span>
+      <span class="k">return</span> <span class="nx">snapshot</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  
+  <span class="nx">getMemoryTrend</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">snapshots</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">)</span> <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+    
+    <span class="kd">const</span> <span class="nx">first</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">snapshots</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+    <span class="kd">const</span> <span class="nx">last</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">snapshots</span><span class="p">[</span><span class="k">this</span><span class="p">.</span><span class="nx">snapshots</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
+    
+    <span class="k">return</span> <span class="p">{</span>
+      <span class="na">totalGrowth</span><span class="p">:</span> <span class="nx">last</span><span class="p">.</span><span class="nx">memory</span><span class="p">.</span><span class="nx">used</span> <span class="o">-</span> <span class="nx">first</span><span class="p">.</span><span class="nx">memory</span><span class="p">.</span><span class="nx">used</span><span class="p">,</span>
+      <span class="na">averageGrowth</span><span class="p">:</span> <span class="p">(</span><span class="nx">last</span><span class="p">.</span><span class="nx">memory</span><span class="p">.</span><span class="nx">used</span> <span class="o">-</span> <span class="nx">first</span><span class="p">.</span><span class="nx">memory</span><span class="p">.</span><span class="nx">used</span><span class="p">)</span> <span class="o">/</span> <span class="k">this</span><span class="p">.</span><span class="nx">snapshots</span><span class="p">.</span><span class="nx">length</span><span class="p">,</span>
+      <span class="na">timeSpan</span><span class="p">:</span> <span class="nx">last</span><span class="p">.</span><span class="nx">timestamp</span> <span class="o">-</span> <span class="nx">first</span><span class="p">.</span><span class="nx">timestamp</span>
+    <span class="p">};</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Global profiler instance</span>
+<span class="kd">const</span> <span class="nx">memoryProfiler</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CustomMemoryProfiler</span><span class="p">();</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-javascript-memory">🚀 <strong>JavaScript Memory</strong></h2>
+
+<h3 id="javascript-memory-management"><strong>JavaScript Memory Management</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// JavaScript memory management utilities</span>
+<span class="kd">const</span> <span class="nx">JavaScriptMemoryManager</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="c1">// Force garbage collection (if available)</span>
+  <span class="na">forceGC</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">global</span><span class="p">.</span><span class="nx">gc</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nb">global</span><span class="p">.</span><span class="nx">gc</span><span class="p">();</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">[Memory] Forced garbage collection</span><span class="dl">'</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span><span class="dl">'</span><span class="s1">[Memory] Garbage collection not available</span><span class="dl">'</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  
+  <span class="c1">// Monitor garbage collection</span>
+  <span class="na">monitorGC</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">performance</span><span class="p">.</span><span class="nx">memory</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">let</span> <span class="nx">lastUsed</span> <span class="o">=</span> <span class="nx">performance</span><span class="p">.</span><span class="nx">memory</span><span class="p">.</span><span class="nx">usedJSHeapSize</span><span class="p">;</span>
+      
+      <span class="kd">const</span> <span class="nx">checkGC</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">currentUsed</span> <span class="o">=</span> <span class="nx">performance</span><span class="p">.</span><span class="nx">memory</span><span class="p">.</span><span class="nx">usedJSHeapSize</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">currentUsed</span> <span class="o">&lt;</span> <span class="nx">lastUsed</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`[Memory] Garbage collection freed </span><span class="p">${(</span><span class="nx">lastUsed</span> <span class="o">-</span> <span class="nx">currentUsed</span><span class="p">)</span> <span class="o">/</span> <span class="mi">1024</span> <span class="o">/</span> <span class="mi">1024</span><span class="p">}</span><span class="s2"> MB`</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="nx">lastUsed</span> <span class="o">=</span> <span class="nx">currentUsed</span><span class="p">;</span>
+      <span class="p">};</span>
+      
+      <span class="k">return</span> <span class="nx">setInterval</span><span class="p">(</span><span class="nx">checkGC</span><span class="p">,</span> <span class="mi">1000</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  
+  <span class="c1">// Memory usage by component</span>
+  <span class="na">trackComponentMemory</span><span class="p">:</span> <span class="p">(</span><span class="nx">componentName</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">startMemory</span> <span class="o">=</span> <span class="nx">performance</span><span class="p">.</span><span class="nx">memory</span><span class="p">?.</span><span class="nx">usedJSHeapSize</span> <span class="o">||</span> <span class="mi">0</span><span class="p">;</span>
+    
+    <span class="k">return</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">endMemory</span> <span class="o">=</span> <span class="nx">performance</span><span class="p">.</span><span class="nx">memory</span><span class="p">?.</span><span class="nx">usedJSHeapSize</span> <span class="o">||</span> <span class="mi">0</span><span class="p">;</span>
+      <span class="kd">const</span> <span class="nx">memoryDelta</span> <span class="o">=</span> <span class="nx">endMemory</span> <span class="o">-</span> <span class="nx">startMemory</span><span class="p">;</span>
+      
+      <span class="k">if</span> <span class="p">(</span><span class="nx">memoryDelta</span> <span class="o">&gt;</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// 1MB</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span><span class="s2">`[Memory] </span><span class="p">${</span><span class="nx">componentName</span><span class="p">}</span><span class="s2"> used </span><span class="p">${(</span><span class="nx">memoryDelta</span> <span class="o">/</span> <span class="mi">1024</span> <span class="o">/</span> <span class="mi">1024</span><span class="p">).</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">2</span><span class="p">)}</span><span class="s2"> MB`</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">};</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="memory-efficient-data-structures"><strong>Memory-Efficient Data Structures</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Memory-efficient data structures</span>
+<span class="kd">const</span> <span class="nx">MemoryEfficientStructures</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="c1">// WeakMap for automatic cleanup</span>
+  <span class="na">createWeakCache</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">cache</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">WeakMap</span><span class="p">();</span>
+    <span class="k">return</span> <span class="p">{</span>
+      <span class="na">set</span><span class="p">:</span> <span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">cache</span><span class="p">.</span><span class="kd">set</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">),</span>
+      <span class="na">get</span><span class="p">:</span> <span class="p">(</span><span class="nx">key</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">cache</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="nx">key</span><span class="p">),</span>
+      <span class="na">has</span><span class="p">:</span> <span class="p">(</span><span class="nx">key</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">cache</span><span class="p">.</span><span class="nx">has</span><span class="p">(</span><span class="nx">key</span><span class="p">)</span>
+    <span class="p">};</span>
+  <span class="p">},</span>
+  
+  <span class="c1">// Object pool for reusing objects</span>
+  <span class="na">createObjectPool</span><span class="p">:</span> <span class="p">(</span><span class="nx">createFn</span><span class="p">,</span> <span class="nx">resetFn</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">pool</span> <span class="o">=</span> <span class="p">[];</span>
+    
+    <span class="k">return</span> <span class="p">{</span>
+      <span class="na">acquire</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">pool</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+          <span class="kd">const</span> <span class="nx">obj</span> <span class="o">=</span> <span class="nx">pool</span><span class="p">.</span><span class="nx">pop</span><span class="p">();</span>
+          <span class="nx">resetFn</span><span class="p">(</span><span class="nx">obj</span><span class="p">);</span>
+          <span class="k">return</span> <span class="nx">obj</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="nx">createFn</span><span class="p">();</span>
+      <span class="p">},</span>
+      
+      <span class="na">release</span><span class="p">:</span> <span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">pool</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// Limit pool size</span>
+          <span class="nx">pool</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">obj</span><span class="p">);</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">};</span>
+  <span class="p">},</span>
+  
+  <span class="c1">// Lazy loading for large datasets</span>
+  <span class="na">createLazyLoader</span><span class="p">:</span> <span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">chunkSize</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">currentIndex</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    
+    <span class="k">return</span> <span class="p">{</span>
+      <span class="na">loadNext</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">chunk</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="nx">currentIndex</span><span class="p">,</span> <span class="nx">currentIndex</span> <span class="o">+</span> <span class="nx">chunkSize</span><span class="p">);</span>
+        <span class="nx">currentIndex</span> <span class="o">+=</span> <span class="nx">chunkSize</span><span class="p">;</span>
+        <span class="k">return</span> <span class="nx">chunk</span><span class="p">;</span>
+      <span class="p">},</span>
+      
+      <span class="na">hasMore</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">currentIndex</span> <span class="o">&lt;</span> <span class="nx">data</span><span class="p">.</span><span class="nx">length</span><span class="p">,</span>
+      
+      <span class="na">reset</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">currentIndex</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">};</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-native-memory">📱 <strong>Native Memory</strong></h2>
+
+<h3 id="native-memory-monitoring"><strong>Native Memory Monitoring</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Native memory monitoring</span>
+<span class="kd">const</span> <span class="nx">NativeMemoryMonitor</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="c1">// Get native memory info</span>
+  <span class="na">getNativeMemoryInfo</span><span class="p">:</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="p">{</span> <span class="nx">NativeModules</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">react-native</span><span class="dl">'</span><span class="p">);</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">NativeModules</span><span class="p">.</span><span class="nx">MemoryMonitor</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="nx">NativeModules</span><span class="p">.</span><span class="nx">MemoryMonitor</span><span class="p">.</span><span class="nx">getMemoryInfo</span><span class="p">();</span>
+      <span class="p">}</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span><span class="dl">'</span><span class="s1">[Memory] Native memory monitoring not available:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+  <span class="p">},</span>
+  
+  <span class="c1">// Monitor native memory usage</span>
+  <span class="na">monitorNativeMemory</span><span class="p">:</span> <span class="p">(</span><span class="nx">interval</span> <span class="o">=</span> <span class="mi">10000</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">setInterval</span><span class="p">(</span><span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">memoryInfo</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">NativeMemoryMonitor</span><span class="p">.</span><span class="nx">getNativeMemoryInfo</span><span class="p">();</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">memoryInfo</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">[Native Memory]</span><span class="dl">'</span><span class="p">,</span> <span class="nx">memoryInfo</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">},</span> <span class="nx">interval</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="image-memory-optimization"><strong>Image Memory Optimization</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Image memory optimization</span>
+<span class="kd">const</span> <span class="nx">ImageMemoryOptimizer</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="c1">// Optimize image loading</span>
+  <span class="na">optimizeImage</span><span class="p">:</span> <span class="p">(</span><span class="nx">source</span><span class="p">,</span> <span class="nx">style</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="o">&lt;</span><span class="nx">Image</span>
+        <span class="nx">source</span><span class="o">=</span><span class="p">{</span><span class="nx">source</span><span class="p">}</span>
+        <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">style</span><span class="p">}</span>
+        <span class="nx">resizeMode</span><span class="o">=</span><span class="dl">"</span><span class="s2">cover</span><span class="dl">"</span>
+        <span class="nx">fadeDuration</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">}</span>
+        <span class="nx">onLoadStart</span><span class="o">=</span><span class="p">{()</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">[Image] Load started</span><span class="dl">'</span><span class="p">)}</span>
+        <span class="nx">onLoad</span><span class="o">=</span><span class="p">{()</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">[Image] Load completed</span><span class="dl">'</span><span class="p">)}</span>
+        <span class="nx">onError</span><span class="o">=</span><span class="p">{(</span><span class="nx">error</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">[Image] Load error:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">)}</span>
+      <span class="sr">/</span><span class="err">&gt;
+</span>    <span class="p">);</span>
+  <span class="p">},</span>
+  
+  <span class="c1">// Lazy load images</span>
+  <span class="na">createLazyImage</span><span class="p">:</span> <span class="p">(</span><span class="nx">source</span><span class="p">,</span> <span class="nx">style</span><span class="p">,</span> <span class="nx">placeholder</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="p">[</span><span class="nx">loaded</span><span class="p">,</span> <span class="nx">setLoaded</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+    
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">style</span><span class="p">}</span><span class="o">&gt;</span>
+        <span class="p">{</span><span class="o">!</span><span class="nx">loaded</span> <span class="o">&amp;&amp;</span> <span class="nx">placeholder</span><span class="p">}</span>
+        <span class="o">&lt;</span><span class="nx">Image</span>
+          <span class="nx">source</span><span class="o">=</span><span class="p">{</span><span class="nx">source</span><span class="p">}</span>
+          <span class="nx">style</span><span class="o">=</span><span class="p">{[</span><span class="nx">style</span><span class="p">,</span> <span class="p">{</span> <span class="na">opacity</span><span class="p">:</span> <span class="nx">loaded</span> <span class="p">?</span> <span class="mi">1</span> <span class="p">:</span> <span class="mi">0</span> <span class="p">}]}</span>
+          <span class="nx">onLoad</span><span class="o">=</span><span class="p">{()</span> <span class="o">=&gt;</span> <span class="nx">setLoaded</span><span class="p">(</span><span class="kc">true</span><span class="p">)}</span>
+        <span class="sr">/</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>    <span class="p">);</span>
+  <span class="p">},</span>
+  
+  <span class="c1">// Image caching</span>
+  <span class="na">createImageCache</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">cache</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Map</span><span class="p">();</span>
+    <span class="kd">const</span> <span class="nx">maxSize</span> <span class="o">=</span> <span class="mi">50</span><span class="p">;</span> <span class="c1">// Maximum cached images</span>
+    
+    <span class="k">return</span> <span class="p">{</span>
+      <span class="na">get</span><span class="p">:</span> <span class="p">(</span><span class="nx">key</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">cache</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="nx">key</span><span class="p">),</span>
+      
+      <span class="na">set</span><span class="p">:</span> <span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">cache</span><span class="p">.</span><span class="nx">size</span> <span class="o">&gt;=</span> <span class="nx">maxSize</span><span class="p">)</span> <span class="p">{</span>
+          <span class="kd">const</span> <span class="nx">firstKey</span> <span class="o">=</span> <span class="nx">cache</span><span class="p">.</span><span class="nx">keys</span><span class="p">().</span><span class="nx">next</span><span class="p">().</span><span class="nx">value</span><span class="p">;</span>
+          <span class="nx">cache</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="nx">firstKey</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="nx">cache</span><span class="p">.</span><span class="kd">set</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
+      <span class="p">},</span>
+      
+      <span class="na">clear</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">cache</span><span class="p">.</span><span class="nx">clear</span><span class="p">()</span>
+    <span class="p">};</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-memory-optimization">🔧 <strong>Memory Optimization</strong></h2>
+
+<h3 id="memory-optimization-strategies"><strong>Memory Optimization Strategies</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Memory optimization strategies</span>
+<span class="kd">const</span> <span class="nx">MemoryOptimizer</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="c1">// Debounce memory-intensive operations</span>
+  <span class="na">debounce</span><span class="p">:</span> <span class="p">(</span><span class="nx">func</span><span class="p">,</span> <span class="nx">delay</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">timeoutId</span><span class="p">;</span>
+    <span class="k">return</span> <span class="p">(...</span><span class="nx">args</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">clearTimeout</span><span class="p">(</span><span class="nx">timeoutId</span><span class="p">);</span>
+      <span class="nx">timeoutId</span> <span class="o">=</span> <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nx">func</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">args</span><span class="p">),</span> <span class="nx">delay</span><span class="p">);</span>
+    <span class="p">};</span>
+  <span class="p">},</span>
+  
+  <span class="c1">// Throttle memory-intensive operations</span>
+  <span class="na">throttle</span><span class="p">:</span> <span class="p">(</span><span class="nx">func</span><span class="p">,</span> <span class="nx">limit</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">inThrottle</span><span class="p">;</span>
+    <span class="k">return</span> <span class="p">(...</span><span class="nx">args</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">inThrottle</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">func</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">args</span><span class="p">);</span>
+        <span class="nx">inThrottle</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+        <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nx">inThrottle</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span> <span class="nx">limit</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">};</span>
+  <span class="p">},</span>
+  
+  <span class="c1">// Cleanup subscriptions</span>
+  <span class="na">createSubscriptionManager</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">subscriptions</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Set</span><span class="p">();</span>
+    
+    <span class="k">return</span> <span class="p">{</span>
+      <span class="na">add</span><span class="p">:</span> <span class="p">(</span><span class="nx">subscription</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">subscriptions</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">subscription</span><span class="p">);</span>
+        <span class="k">return</span> <span class="nx">subscription</span><span class="p">;</span>
+      <span class="p">},</span>
+      
+      <span class="na">remove</span><span class="p">:</span> <span class="p">(</span><span class="nx">subscription</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">subscriptions</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="nx">subscription</span><span class="p">);</span>
+      <span class="p">},</span>
+      
+      <span class="na">cleanup</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">subscriptions</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">subscription</span> <span class="o">=&gt;</span> <span class="p">{</span>
+          <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">subscription</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">function</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">subscription</span><span class="p">();</span>
+          <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">subscription</span> <span class="o">&amp;&amp;</span> <span class="k">typeof</span> <span class="nx">subscription</span><span class="p">.</span><span class="nx">unsubscribe</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">function</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">subscription</span><span class="p">.</span><span class="nx">unsubscribe</span><span class="p">();</span>
+          <span class="p">}</span>
+        <span class="p">});</span>
+        <span class="nx">subscriptions</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
+      <span class="p">}</span>
+    <span class="p">};</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="component-memory-optimization"><strong>Component Memory Optimization</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Memory-optimized component</span>
+<span class="kd">const</span> <span class="nx">MemoryOptimizedComponent</span> <span class="o">=</span> <span class="p">({</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">onItemPress</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">subscriptionManager</span> <span class="o">=</span> <span class="nx">useRef</span><span class="p">(</span><span class="nx">MemoryOptimizer</span><span class="p">.</span><span class="nx">createSubscriptionManager</span><span class="p">());</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">visibleItems</span><span class="p">,</span> <span class="nx">setVisibleItems</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">([]);</span>
+  
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// Cleanup on unmount</span>
+    <span class="k">return</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">subscriptionManager</span><span class="p">.</span><span class="nx">current</span><span class="p">.</span><span class="nx">cleanup</span><span class="p">();</span>
+    <span class="p">};</span>
+  <span class="p">},</span> <span class="p">[]);</span>
+  
+  <span class="c1">// Memoize expensive calculations</span>
+  <span class="kd">const</span> <span class="nx">processedData</span> <span class="o">=</span> <span class="nx">useMemo</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">data</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">item</span> <span class="o">=&gt;</span> <span class="p">({</span>
+      <span class="p">...</span><span class="nx">item</span><span class="p">,</span>
+      <span class="na">processed</span><span class="p">:</span> <span class="kc">true</span>
+    <span class="p">}));</span>
+  <span class="p">},</span> <span class="p">[</span><span class="nx">data</span><span class="p">]);</span>
+  
+  <span class="c1">// Memoize callbacks</span>
+  <span class="kd">const</span> <span class="nx">handleItemPress</span> <span class="o">=</span> <span class="nx">useCallback</span><span class="p">((</span><span class="nx">item</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">onItemPress</span><span class="p">(</span><span class="nx">item</span><span class="p">);</span>
+  <span class="p">},</span> <span class="p">[</span><span class="nx">onItemPress</span><span class="p">]);</span>
+  
+  <span class="c1">// Optimize rendering</span>
+  <span class="kd">const</span> <span class="nx">renderItem</span> <span class="o">=</span> <span class="nx">useCallback</span><span class="p">(({</span> <span class="nx">item</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="o">&lt;</span><span class="nx">TouchableOpacity</span> <span class="nx">onPress</span><span class="o">=</span><span class="p">{()</span> <span class="o">=&gt;</span> <span class="nx">handleItemPress</span><span class="p">(</span><span class="nx">item</span><span class="p">)}</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">Text</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">item</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/TouchableOpacity</span><span class="err">&gt;
+</span>    <span class="p">);</span>
+  <span class="p">},</span> <span class="p">[</span><span class="nx">handleItemPress</span><span class="p">]);</span>
+  
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">FlatList</span>
+      <span class="nx">data</span><span class="o">=</span><span class="p">{</span><span class="nx">processedData</span><span class="p">}</span>
+      <span class="nx">renderItem</span><span class="o">=</span><span class="p">{</span><span class="nx">renderItem</span><span class="p">}</span>
+      <span class="nx">keyExtractor</span><span class="o">=</span><span class="p">{(</span><span class="nx">item</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">item</span><span class="p">.</span><span class="nx">id</span><span class="p">.</span><span class="nx">toString</span><span class="p">()}</span>
+      <span class="nx">removeClippedSubviews</span><span class="o">=</span><span class="p">{</span><span class="kc">true</span><span class="p">}</span>
+      <span class="nx">maxToRenderPerBatch</span><span class="o">=</span><span class="p">{</span><span class="mi">10</span><span class="p">}</span>
+      <span class="nx">windowSize</span><span class="o">=</span><span class="p">{</span><span class="mi">10</span><span class="p">}</span>
+    <span class="sr">/</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-memory-monitoring">📈 <strong>Memory Monitoring</strong></h2>
+
+<h3 id="real-time-memory-monitoring"><strong>Real-time Memory Monitoring</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Real-time memory monitoring</span>
+<span class="kd">const</span> <span class="nx">MemoryMonitor</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="c1">// Memory usage display</span>
+  <span class="na">MemoryUsageDisplay</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="p">[</span><span class="nx">memoryInfo</span><span class="p">,</span> <span class="nx">setMemoryInfo</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+    
+    <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">updateMemoryInfo</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">performance</span><span class="p">.</span><span class="nx">memory</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">setMemoryInfo</span><span class="p">({</span>
+            <span class="na">used</span><span class="p">:</span> <span class="nx">performance</span><span class="p">.</span><span class="nx">memory</span><span class="p">.</span><span class="nx">usedJSHeapSize</span><span class="p">,</span>
+            <span class="na">total</span><span class="p">:</span> <span class="nx">performance</span><span class="p">.</span><span class="nx">memory</span><span class="p">.</span><span class="nx">totalJSHeapSize</span><span class="p">,</span>
+            <span class="na">limit</span><span class="p">:</span> <span class="nx">performance</span><span class="p">.</span><span class="nx">memory</span><span class="p">.</span><span class="nx">jsHeapSizeLimit</span>
+          <span class="p">});</span>
+        <span class="p">}</span>
+      <span class="p">};</span>
+      
+      <span class="nx">updateMemoryInfo</span><span class="p">();</span>
+      <span class="kd">const</span> <span class="nx">interval</span> <span class="o">=</span> <span class="nx">setInterval</span><span class="p">(</span><span class="nx">updateMemoryInfo</span><span class="p">,</span> <span class="mi">1000</span><span class="p">);</span>
+      
+      <span class="k">return</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">clearInterval</span><span class="p">(</span><span class="nx">interval</span><span class="p">);</span>
+    <span class="p">},</span> <span class="p">[]);</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">memoryInfo</span><span class="p">)</span> <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+    
+    <span class="kd">const</span> <span class="nx">usedMB</span> <span class="o">=</span> <span class="p">(</span><span class="nx">memoryInfo</span><span class="p">.</span><span class="nx">used</span> <span class="o">/</span> <span class="mi">1024</span> <span class="o">/</span> <span class="mi">1024</span><span class="p">).</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+    <span class="kd">const</span> <span class="nx">totalMB</span> <span class="o">=</span> <span class="p">(</span><span class="nx">memoryInfo</span><span class="p">.</span><span class="nx">total</span> <span class="o">/</span> <span class="mi">1024</span> <span class="o">/</span> <span class="mi">1024</span><span class="p">).</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+    <span class="kd">const</span> <span class="nx">limitMB</span> <span class="o">=</span> <span class="p">(</span><span class="nx">memoryInfo</span><span class="p">.</span><span class="nx">limit</span> <span class="o">/</span> <span class="mi">1024</span> <span class="o">/</span> <span class="mi">1024</span><span class="p">).</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+    
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">memoryDisplay</span><span class="p">}</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">memoryText</span><span class="p">}</span><span class="o">&gt;</span>
+          <span class="na">Memory</span><span class="p">:</span> <span class="p">{</span><span class="nx">usedMB</span><span class="p">}</span> <span class="nx">MB</span> <span class="o">/</span> <span class="p">{</span><span class="nx">totalMB</span><span class="p">}</span> <span class="nx">MB</span> <span class="p">(</span><span class="na">Limit</span><span class="p">:</span> <span class="p">{</span><span class="nx">limitMB</span><span class="p">}</span> <span class="nx">MB</span><span class="p">)</span>
+        <span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">memoryBar</span><span class="p">}</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">View</span> 
+            <span class="nx">style</span><span class="o">=</span><span class="p">{[</span>
+              <span class="nx">styles</span><span class="p">.</span><span class="nx">memoryBarFill</span><span class="p">,</span> 
+              <span class="p">{</span> <span class="na">width</span><span class="p">:</span> <span class="s2">`</span><span class="p">${(</span><span class="nx">memoryInfo</span><span class="p">.</span><span class="nx">used</span> <span class="o">/</span> <span class="nx">memoryInfo</span><span class="p">.</span><span class="nx">limit</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="p">}</span><span class="s2">%`</span> <span class="p">}</span>
+            <span class="p">]}</span> 
+          <span class="sr">/</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>    <span class="p">);</span>
+  <span class="p">},</span>
+  
+  <span class="c1">// Memory alert system</span>
+  <span class="na">createMemoryAlert</span><span class="p">:</span> <span class="p">(</span><span class="nx">threshold</span> <span class="o">=</span> <span class="mf">0.8</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">performance</span><span class="p">.</span><span class="nx">memory</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">usage</span> <span class="o">=</span> <span class="nx">performance</span><span class="p">.</span><span class="nx">memory</span><span class="p">.</span><span class="nx">usedJSHeapSize</span> <span class="o">/</span> <span class="nx">performance</span><span class="p">.</span><span class="nx">memory</span><span class="p">.</span><span class="nx">jsHeapSizeLimit</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">usage</span> <span class="o">&gt;</span> <span class="nx">threshold</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">console</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span><span class="s2">`[Memory Alert] Memory usage at </span><span class="p">${(</span><span class="nx">usage</span> <span class="o">*</span> <span class="mi">100</span><span class="p">).</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">1</span><span class="p">)}</span><span class="s2">%`</span><span class="p">);</span>
+          <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+      <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="p">};</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-best-practices">✅ <strong>Best Practices</strong></h2>
+
+<h3 id="1-memory-management-best-practices"><strong>1. Memory Management Best Practices</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Memory management best practices</span>
+<span class="kd">const</span> <span class="nx">MemoryBestPractices</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="c1">// Proper cleanup in useEffect</span>
+  <span class="na">useCleanup</span><span class="p">:</span> <span class="p">(</span><span class="nx">cleanupFn</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">cleanupFn</span><span class="p">;</span>
+    <span class="p">},</span> <span class="p">[]);</span>
+  <span class="p">},</span>
+  
+  <span class="c1">// Weak references for large objects</span>
+  <span class="na">useWeakRef</span><span class="p">:</span> <span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">weakRef</span> <span class="o">=</span> <span class="nx">useRef</span><span class="p">(</span><span class="k">new</span> <span class="nx">WeakRef</span><span class="p">(</span><span class="nx">obj</span><span class="p">));</span>
+    <span class="k">return</span> <span class="nx">weakRef</span><span class="p">.</span><span class="nx">current</span><span class="p">;</span>
+  <span class="p">},</span>
+  
+  <span class="c1">// Object pooling for frequent allocations</span>
+  <span class="na">useObjectPool</span><span class="p">:</span> <span class="p">(</span><span class="nx">createFn</span><span class="p">,</span> <span class="nx">resetFn</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">pool</span> <span class="o">=</span> <span class="nx">useRef</span><span class="p">([]);</span>
+    
+    <span class="kd">const</span> <span class="nx">acquire</span> <span class="o">=</span> <span class="nx">useCallback</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">pool</span><span class="p">.</span><span class="nx">current</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">obj</span> <span class="o">=</span> <span class="nx">pool</span><span class="p">.</span><span class="nx">current</span><span class="p">.</span><span class="nx">pop</span><span class="p">();</span>
+        <span class="nx">resetFn</span><span class="p">(</span><span class="nx">obj</span><span class="p">);</span>
+        <span class="k">return</span> <span class="nx">obj</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="k">return</span> <span class="nx">createFn</span><span class="p">();</span>
+    <span class="p">},</span> <span class="p">[</span><span class="nx">createFn</span><span class="p">,</span> <span class="nx">resetFn</span><span class="p">]);</span>
+    
+    <span class="kd">const</span> <span class="nx">release</span> <span class="o">=</span> <span class="nx">useCallback</span><span class="p">((</span><span class="nx">obj</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">pool</span><span class="p">.</span><span class="nx">current</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">pool</span><span class="p">.</span><span class="nx">current</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">obj</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">},</span> <span class="p">[]);</span>
+    
+    <span class="k">return</span> <span class="p">{</span> <span class="nx">acquire</span><span class="p">,</span> <span class="nx">release</span> <span class="p">};</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="2-memory-testing"><strong>2. Memory Testing</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Memory testing utilities</span>
+<span class="kd">const</span> <span class="nx">MemoryTester</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="c1">// Test for memory leaks</span>
+  <span class="na">testMemoryLeak</span><span class="p">:</span> <span class="k">async</span> <span class="p">(</span><span class="nx">testFn</span><span class="p">,</span> <span class="nx">duration</span> <span class="o">=</span> <span class="mi">30000</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">startMemory</span> <span class="o">=</span> <span class="nx">performance</span><span class="p">.</span><span class="nx">memory</span><span class="p">?.</span><span class="nx">usedJSHeapSize</span> <span class="o">||</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kd">const</span> <span class="nx">startTime</span> <span class="o">=</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
+    
+    <span class="c1">// Run test function repeatedly</span>
+    <span class="kd">const</span> <span class="nx">interval</span> <span class="o">=</span> <span class="nx">setInterval</span><span class="p">(</span><span class="nx">testFn</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span>
+    
+    <span class="c1">// Wait for duration</span>
+    <span class="k">await</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="nx">resolve</span> <span class="o">=&gt;</span> <span class="nx">setTimeout</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">duration</span><span class="p">));</span>
+    
+    <span class="nx">clearInterval</span><span class="p">(</span><span class="nx">interval</span><span class="p">);</span>
+    
+    <span class="c1">// Force garbage collection</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">global</span><span class="p">.</span><span class="nx">gc</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nb">global</span><span class="p">.</span><span class="nx">gc</span><span class="p">();</span>
+    <span class="p">}</span>
+    
+    <span class="kd">const</span> <span class="nx">endMemory</span> <span class="o">=</span> <span class="nx">performance</span><span class="p">.</span><span class="nx">memory</span><span class="p">?.</span><span class="nx">usedJSHeapSize</span> <span class="o">||</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kd">const</span> <span class="nx">memoryGrowth</span> <span class="o">=</span> <span class="nx">endMemory</span> <span class="o">-</span> <span class="nx">startMemory</span><span class="p">;</span>
+    
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`[Memory Test] Growth: </span><span class="p">${(</span><span class="nx">memoryGrowth</span> <span class="o">/</span> <span class="mi">1024</span> <span class="o">/</span> <span class="mi">1024</span><span class="p">).</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">2</span><span class="p">)}</span><span class="s2"> MB`</span><span class="p">);</span>
+    
+    <span class="k">return</span> <span class="nx">memoryGrowth</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-interview-questions">🎯 <strong>Interview Questions</strong></h2>
+
+<h3 id="basic-questions"><strong>Basic Questions</strong></h3>
+<ol>
+  <li><strong>How do you detect memory leaks in React Native?</strong>
+    <ul>
+      <li>Use Chrome DevTools Memory tab</li>
+      <li>Monitor memory usage over time</li>
+      <li>Check for retained references</li>
+      <li>Use memory profilers</li>
+      <li>Implement custom memory tracking</li>
+    </ul>
+  </li>
+  <li><strong>What are common causes of memory leaks?</strong>
+    <ul>
+      <li>Event listeners not removed</li>
+      <li>Timers not cleared</li>
+      <li>Closures holding references</li>
+      <li>Large objects not released</li>
+      <li>Circular references</li>
+    </ul>
+  </li>
+  <li><strong>How do you optimize memory usage?</strong>
+    <ul>
+      <li>Use WeakMap and WeakSet</li>
+      <li>Implement object pooling</li>
+      <li>Clean up subscriptions</li>
+      <li>Optimize image loading</li>
+      <li>Use lazy loading</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="intermediate-questions"><strong>Intermediate Questions</strong></h3>
+<ol>
+  <li><strong>How do you profile memory usage in production?</strong>
+    <ul>
+      <li>Implement memory monitoring</li>
+      <li>Use crash reporting services</li>
+      <li>Monitor memory trends</li>
+      <li>Set memory alerts</li>
+      <li>Collect memory metrics</li>
+    </ul>
+  </li>
+  <li><strong>What’s the difference between JavaScript and native memory?</strong>
+    <ul>
+      <li>JavaScript memory: Managed by V8 engine</li>
+      <li>Native memory: Managed by platform</li>
+      <li>Different garbage collection strategies</li>
+      <li>Different monitoring tools</li>
+      <li>Different optimization techniques</li>
+    </ul>
+  </li>
+  <li><strong>How do you handle memory pressure on low-end devices?</strong>
+    <ul>
+      <li>Implement memory budgets</li>
+      <li>Use adaptive quality settings</li>
+      <li>Optimize asset loading</li>
+      <li>Implement memory cleanup</li>
+      <li>Monitor device capabilities</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="advanced-questions"><strong>Advanced Questions</strong></h3>
+<ol>
+  <li><strong>How do you implement custom memory management?</strong>
+    <ul>
+      <li>Create object pools</li>
+      <li>Implement weak references</li>
+      <li>Use memory-efficient data structures</li>
+      <li>Implement custom garbage collection</li>
+      <li>Monitor memory allocation patterns</li>
+    </ul>
+  </li>
+  <li><strong>What’s your strategy for debugging complex memory issues?</strong>
+    <ul>
+      <li>Use multiple profiling tools</li>
+      <li>Implement systematic testing</li>
+      <li>Monitor memory trends</li>
+      <li>Use memory snapshots</li>
+      <li>Implement custom tracking</li>
+    </ul>
+  </li>
+  <li><strong>How do you optimize memory for large datasets?</strong>
+    <ul>
+      <li>Implement virtual scrolling</li>
+      <li>Use lazy loading</li>
+      <li>Implement data pagination</li>
+      <li>Use memory-efficient data structures</li>
+      <li>Implement data compression</li>
+    </ul>
+  </li>
+</ol>
+
+<hr />
+
+<h2 id="-related-topics">🔗 <strong>Related Topics</strong></h2>
+
+<ul>
+  <li><a href="/React%20Native/19-Advanced-Debugging/01-Debugging-Tools.html">Debugging Tools</a></li>
+  <li><a href="/React%20Native/19-Advanced-Debugging/02-Performance-Debugging.html">Performance Debugging</a></li>
+  <li><a href="/React%20Native/19-Advanced-Debugging/04-Native-Debugging.html">Native Debugging</a></li>
+  <li><a href="../16-Memory-Management/01-Memory-Leaks.md">Memory Management</a></li>
+  <li><a href="/React%20Native/05-Lists-Performance-Optimization/01-FlatList-SectionList.html">Performance Optimization</a></li>
+</ul>
+
+<hr />
+
+<h2 id="-navigation">🧭 Navigation</h2>
+
+<div class="navigation">
+    <a href="./02-Performance-Debugging.md" class="nav-link prev">⬅️ Previous: Performance Debugging</a>
+    <a href="./04-Native-Debugging.md" class="nav-link next">Next: Native Debugging ➡️</a>
+</div>
+
+<hr />
+
+<script src="../../common-scripts.js"></script>
+
+<p><em>Last updated: December 2024</em></p>
+
+        </main>
+        
+        <footer style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #ecf0f1; color: #666; text-align: center;">
+            <p>Interview Prep Documentation - Built with Jekyll</p>
+        </footer>
+    </div>
+</body>
+</html>

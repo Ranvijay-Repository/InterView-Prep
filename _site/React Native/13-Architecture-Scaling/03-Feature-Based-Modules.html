@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏗️ Feature-Based Modules - Interview Prep Documentation</title>
+    <meta name="description" content="Comprehensive guides for JavaScript, TypeScript, and React Native interview preparation">
+    
+    <!-- GitHub Pages compatible styling -->
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+        }
+        
+        .container {
+            max-width: 100%;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            color: #2c3e50;
+            margin-top: 2em;
+            margin-bottom: 1em;
+        }
+        
+        h1 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            border-bottom: 1px solid #ecf0f1;
+            padding-bottom: 5px;
+        }
+        
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border-left: 4px solid #3498db;
+        }
+        
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+        
+        blockquote {
+            border-left: 4px solid #3498db;
+            margin: 0;
+            padding-left: 20px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1em 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .navigation {
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px 0;
+            margin-bottom: 20px;
+        }
+        
+        .navigation a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+        
+        .navigation a:hover {
+            text-decoration: underline;
+        }
+        
+        .breadcrumb {
+            margin-bottom: 20px;
+            color: #666;
+        }
+        
+        .breadcrumb a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            h2 {
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="navigation">
+            <a href="/">Home</a>
+            <a href="/Javascript/">JavaScript</a>
+            <a href="/TypeScript/">TypeScript</a>
+            <a href="/React-Native/">React Native</a>
+        </nav>
+        
+        
+        
+        <main>
+            <h1 id="️-feature-based-modules">🏗️ <strong>Feature-Based Modules</strong></h1>
+
+<blockquote>
+  <p><strong>Master feature-based architecture, module organization, and scalable project structure for React Native applications</strong></p>
+</blockquote>
+
+<link rel="stylesheet" href="../../common-styles.css" />
+
+<hr />
+
+<h2 id="-table-of-contents">📚 <strong>Table of Contents</strong></h2>
+
+<ul>
+  <li><a href="#-feature-based-architecture">Feature-Based Architecture</a></li>
+  <li><a href="#-module-organization">Module Organization</a></li>
+  <li><a href="#-shared-components">Shared Components</a></li>
+  <li><a href="#-navigation-structure">Navigation Structure</a></li>
+  <li><a href="#-state-management">State Management</a></li>
+  <li><a href="#-best-practices">Best Practices</a></li>
+  <li><a href="#-interview-questions">Interview Questions</a></li>
+</ul>
+
+<hr />
+
+<h2 id="️-feature-based-architecture">🏗️ <strong>Feature-Based Architecture</strong></h2>
+
+<h3 id="project-structure"><strong>Project Structure</strong></h3>
+
+<pre><code class="language-mermaid">graph TD
+    A[src/] --&gt; B[features/]
+    A --&gt; C[shared/]
+    A --&gt; D[core/]
+    
+    B --&gt; E[authentication/]
+    B --&gt; F[profile/]
+    B --&gt; G[dashboard/]
+    
+    C --&gt; H[components/]
+    C --&gt; I[utils/]
+    C --&gt; J[services/]
+    
+    D --&gt; K[navigation/]
+    D --&gt; L[store/]
+    D --&gt; M[config/]
+</code></pre>
+
+<h3 id="key-principles"><strong>Key Principles</strong></h3>
+<ul>
+  <li><strong>Feature Isolation</strong>: Each feature is self-contained</li>
+  <li><strong>Shared Resources</strong>: Common components and utilities</li>
+  <li><strong>Core Infrastructure</strong>: Navigation, state, configuration</li>
+  <li><strong>Scalability</strong>: Easy to add new features</li>
+</ul>
+
+<hr />
+
+<h2 id="-module-organization">📁 <strong>Module Organization</strong></h2>
+
+<h3 id="feature-module-structure"><strong>Feature Module Structure</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Feature module structure</span>
+<span class="kd">const</span> <span class="nx">FeatureModule</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="c1">// Components</span>
+  <span class="na">components</span><span class="p">:</span> <span class="p">{</span>
+    <span class="c1">// Feature-specific components</span>
+    <span class="na">UserProfile</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">import</span><span class="p">(</span><span class="dl">'</span><span class="s1">./components/UserProfile</span><span class="dl">'</span><span class="p">),</span>
+    <span class="na">UserSettings</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">import</span><span class="p">(</span><span class="dl">'</span><span class="s1">./components/UserSettings</span><span class="dl">'</span><span class="p">),</span>
+    <span class="na">UserAvatar</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">import</span><span class="p">(</span><span class="dl">'</span><span class="s1">./components/UserAvatar</span><span class="dl">'</span><span class="p">),</span>
+  <span class="p">},</span>
+  
+  <span class="c1">// Screens</span>
+  <span class="na">screens</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">ProfileScreen</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">import</span><span class="p">(</span><span class="dl">'</span><span class="s1">./screens/ProfileScreen</span><span class="dl">'</span><span class="p">),</span>
+    <span class="na">SettingsScreen</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">import</span><span class="p">(</span><span class="dl">'</span><span class="s1">./screens/SettingsScreen</span><span class="dl">'</span><span class="p">),</span>
+    <span class="na">EditProfileScreen</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">import</span><span class="p">(</span><span class="dl">'</span><span class="s1">./screens/EditProfileScreen</span><span class="dl">'</span><span class="p">),</span>
+  <span class="p">},</span>
+  
+  <span class="c1">// Services</span>
+  <span class="na">services</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">ProfileService</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">import</span><span class="p">(</span><span class="dl">'</span><span class="s1">./services/ProfileService</span><span class="dl">'</span><span class="p">),</span>
+    <span class="na">UserService</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">import</span><span class="p">(</span><span class="dl">'</span><span class="s1">./services/UserService</span><span class="dl">'</span><span class="p">),</span>
+  <span class="p">},</span>
+  
+  <span class="c1">// Hooks</span>
+  <span class="na">hooks</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">useProfile</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">import</span><span class="p">(</span><span class="dl">'</span><span class="s1">./hooks/useProfile</span><span class="dl">'</span><span class="p">),</span>
+    <span class="na">useUserSettings</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">import</span><span class="p">(</span><span class="dl">'</span><span class="s1">./hooks/useUserSettings</span><span class="dl">'</span><span class="p">),</span>
+  <span class="p">},</span>
+  
+  <span class="c1">// Utils</span>
+  <span class="na">utils</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">profileUtils</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">import</span><span class="p">(</span><span class="dl">'</span><span class="s1">./utils/profileUtils</span><span class="dl">'</span><span class="p">),</span>
+    <span class="na">validationUtils</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">import</span><span class="p">(</span><span class="dl">'</span><span class="s1">./utils/validationUtils</span><span class="dl">'</span><span class="p">),</span>
+  <span class="p">},</span>
+  
+  <span class="c1">// Types</span>
+  <span class="na">types</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">ProfileTypes</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">import</span><span class="p">(</span><span class="dl">'</span><span class="s1">./types/ProfileTypes</span><span class="dl">'</span><span class="p">),</span>
+    <span class="na">UserTypes</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">import</span><span class="p">(</span><span class="dl">'</span><span class="s1">./types/UserTypes</span><span class="dl">'</span><span class="p">),</span>
+  <span class="p">},</span>
+  
+  <span class="c1">// Constants</span>
+  <span class="na">constants</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">ProfileConstants</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">import</span><span class="p">(</span><span class="dl">'</span><span class="s1">./constants/ProfileConstants</span><span class="dl">'</span><span class="p">),</span>
+  <span class="p">},</span>
+  
+  <span class="c1">// Navigation</span>
+  <span class="na">navigation</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">ProfileNavigator</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">import</span><span class="p">(</span><span class="dl">'</span><span class="s1">./navigation/ProfileNavigator</span><span class="dl">'</span><span class="p">),</span>
+  <span class="p">},</span>
+  
+  <span class="c1">// Store</span>
+  <span class="na">store</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">ProfileStore</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">import</span><span class="p">(</span><span class="dl">'</span><span class="s1">./store/ProfileStore</span><span class="dl">'</span><span class="p">),</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">FeatureModule</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="feature-module-implementation"><strong>Feature Module Implementation</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Profile feature module</span>
+<span class="kd">const</span> <span class="nx">ProfileFeature</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="c1">// Feature metadata</span>
+  <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">profile</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">version</span><span class="p">:</span> <span class="dl">'</span><span class="s1">1.0.0</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">dependencies</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">authentication</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">shared</span><span class="dl">'</span><span class="p">],</span>
+  
+  <span class="c1">// Feature configuration</span>
+  <span class="na">config</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">enableAvatarUpload</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="na">enableSocialLinks</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="na">maxAvatarSize</span><span class="p">:</span> <span class="mi">5</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">,</span> <span class="c1">// 5MB</span>
+  <span class="p">},</span>
+  
+  <span class="c1">// Feature initialization</span>
+  <span class="na">initialize</span><span class="p">:</span> <span class="k">async</span> <span class="p">(</span><span class="nx">dependencies</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="p">{</span> <span class="nx">authService</span><span class="p">,</span> <span class="nx">navigationService</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">dependencies</span><span class="p">;</span>
+    
+    <span class="c1">// Initialize feature services</span>
+    <span class="kd">const</span> <span class="nx">profileService</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ProfileService</span><span class="p">(</span><span class="nx">authService</span><span class="p">);</span>
+    <span class="kd">const</span> <span class="nx">userService</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">UserService</span><span class="p">(</span><span class="nx">authService</span><span class="p">);</span>
+    
+    <span class="c1">// Register feature routes</span>
+    <span class="nx">navigationService</span><span class="p">.</span><span class="nx">registerRoutes</span><span class="p">({</span>
+      <span class="dl">'</span><span class="s1">Profile</span><span class="dl">'</span><span class="p">:</span> <span class="nx">ProfileScreen</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">EditProfile</span><span class="dl">'</span><span class="p">:</span> <span class="nx">EditProfileScreen</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">UserSettings</span><span class="dl">'</span><span class="p">:</span> <span class="nx">SettingsScreen</span><span class="p">,</span>
+    <span class="p">});</span>
+    
+    <span class="c1">// Initialize feature store</span>
+    <span class="kd">const</span> <span class="nx">profileStore</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ProfileStore</span><span class="p">(</span><span class="nx">profileService</span><span class="p">);</span>
+    
+    <span class="k">return</span> <span class="p">{</span>
+      <span class="nx">profileService</span><span class="p">,</span>
+      <span class="nx">userService</span><span class="p">,</span>
+      <span class="nx">profileStore</span><span class="p">,</span>
+    <span class="p">};</span>
+  <span class="p">},</span>
+  
+  <span class="c1">// Feature cleanup</span>
+  <span class="na">cleanup</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// Cleanup resources</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Profile feature cleanup</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">},</span>
+  
+  <span class="c1">// Feature exports</span>
+  <span class="na">exports</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nx">ProfileScreen</span><span class="p">,</span>
+    <span class="nx">EditProfileScreen</span><span class="p">,</span>
+    <span class="nx">SettingsScreen</span><span class="p">,</span>
+    <span class="nx">ProfileService</span><span class="p">,</span>
+    <span class="nx">UserService</span><span class="p">,</span>
+    <span class="nx">useProfile</span><span class="p">,</span>
+    <span class="nx">useUserSettings</span><span class="p">,</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// Feature registry</span>
+<span class="kd">const</span> <span class="nx">FeatureRegistry</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">features</span><span class="p">:</span> <span class="k">new</span> <span class="nb">Map</span><span class="p">(),</span>
+  
+  <span class="na">register</span><span class="p">:</span> <span class="p">(</span><span class="nx">feature</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">FeatureRegistry</span><span class="p">.</span><span class="nx">features</span><span class="p">.</span><span class="kd">set</span><span class="p">(</span><span class="nx">feature</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span> <span class="nx">feature</span><span class="p">);</span>
+  <span class="p">},</span>
+  
+  <span class="na">get</span><span class="p">:</span> <span class="p">(</span><span class="nx">featureName</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">FeatureRegistry</span><span class="p">.</span><span class="nx">features</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="nx">featureName</span><span class="p">);</span>
+  <span class="p">},</span>
+  
+  <span class="na">getAll</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nb">Array</span><span class="p">.</span><span class="k">from</span><span class="p">(</span><span class="nx">FeatureRegistry</span><span class="p">.</span><span class="nx">features</span><span class="p">.</span><span class="nx">values</span><span class="p">());</span>
+  <span class="p">},</span>
+  
+  <span class="na">initialize</span><span class="p">:</span> <span class="k">async</span> <span class="p">(</span><span class="nx">dependencies</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">initializedFeatures</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Map</span><span class="p">();</span>
+    
+    <span class="k">for</span> <span class="p">(</span><span class="kd">const</span> <span class="p">[</span><span class="nx">name</span><span class="p">,</span> <span class="nx">feature</span><span class="p">]</span> <span class="k">of</span> <span class="nx">FeatureRegistry</span><span class="p">.</span><span class="nx">features</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">try</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">initializedFeature</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">feature</span><span class="p">.</span><span class="nx">initialize</span><span class="p">(</span><span class="nx">dependencies</span><span class="p">);</span>
+        <span class="nx">initializedFeatures</span><span class="p">.</span><span class="kd">set</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">initializedFeature</span><span class="p">);</span>
+      <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s2">`Failed to initialize feature </span><span class="p">${</span><span class="nx">name</span><span class="p">}</span><span class="s2">:`</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="nx">initializedFeatures</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">export</span> <span class="p">{</span> <span class="nx">ProfileFeature</span><span class="p">,</span> <span class="nx">FeatureRegistry</span> <span class="p">};</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-shared-components">🔄 <strong>Shared Components</strong></h2>
+
+<h3 id="shared-component-library"><strong>Shared Component Library</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Shared components index</span>
+<span class="kd">const</span> <span class="nx">SharedComponents</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="c1">// UI Components</span>
+  <span class="na">Button</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">import</span><span class="p">(</span><span class="dl">'</span><span class="s1">./ui/Button</span><span class="dl">'</span><span class="p">),</span>
+  <span class="na">Input</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">import</span><span class="p">(</span><span class="dl">'</span><span class="s1">./ui/Input</span><span class="dl">'</span><span class="p">),</span>
+  <span class="na">Modal</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">import</span><span class="p">(</span><span class="dl">'</span><span class="s1">./ui/Modal</span><span class="dl">'</span><span class="p">),</span>
+  <span class="na">LoadingSpinner</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">import</span><span class="p">(</span><span class="dl">'</span><span class="s1">./ui/LoadingSpinner</span><span class="dl">'</span><span class="p">),</span>
+  
+  <span class="c1">// Layout Components</span>
+  <span class="na">Container</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">import</span><span class="p">(</span><span class="dl">'</span><span class="s1">./layout/Container</span><span class="dl">'</span><span class="p">),</span>
+  <span class="na">Row</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">import</span><span class="p">(</span><span class="dl">'</span><span class="s1">./layout/Row</span><span class="dl">'</span><span class="p">),</span>
+  <span class="na">Column</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">import</span><span class="p">(</span><span class="dl">'</span><span class="s1">./layout/Column</span><span class="dl">'</span><span class="p">),</span>
+  <span class="na">Grid</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">import</span><span class="p">(</span><span class="dl">'</span><span class="s1">./layout/Grid</span><span class="dl">'</span><span class="p">),</span>
+  
+  <span class="c1">// Form Components</span>
+  <span class="na">Form</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">import</span><span class="p">(</span><span class="dl">'</span><span class="s1">./forms/Form</span><span class="dl">'</span><span class="p">),</span>
+  <span class="na">FormField</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">import</span><span class="p">(</span><span class="dl">'</span><span class="s1">./forms/FormField</span><span class="dl">'</span><span class="p">),</span>
+  <span class="na">FormValidation</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">import</span><span class="p">(</span><span class="dl">'</span><span class="s1">./forms/FormValidation</span><span class="dl">'</span><span class="p">),</span>
+  
+  <span class="c1">// Navigation Components</span>
+  <span class="na">TabBar</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">import</span><span class="p">(</span><span class="dl">'</span><span class="s1">./navigation/TabBar</span><span class="dl">'</span><span class="p">),</span>
+  <span class="na">Header</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">import</span><span class="p">(</span><span class="dl">'</span><span class="s1">./navigation/Header</span><span class="dl">'</span><span class="p">),</span>
+  <span class="na">Drawer</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">import</span><span class="p">(</span><span class="dl">'</span><span class="s1">./navigation/Drawer</span><span class="dl">'</span><span class="p">),</span>
+  
+  <span class="c1">// Data Components</span>
+  <span class="na">List</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">import</span><span class="p">(</span><span class="dl">'</span><span class="s1">./data/List</span><span class="dl">'</span><span class="p">),</span>
+  <span class="na">Card</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">import</span><span class="p">(</span><span class="dl">'</span><span class="s1">./data/Card</span><span class="dl">'</span><span class="p">),</span>
+  <span class="na">Table</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">import</span><span class="p">(</span><span class="dl">'</span><span class="s1">./data/Table</span><span class="dl">'</span><span class="p">),</span>
+  
+  <span class="c1">// Media Components</span>
+  <span class="na">Image</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">import</span><span class="p">(</span><span class="dl">'</span><span class="s1">./media/Image</span><span class="dl">'</span><span class="p">),</span>
+  <span class="na">Video</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">import</span><span class="p">(</span><span class="dl">'</span><span class="s1">./media/Video</span><span class="dl">'</span><span class="p">),</span>
+  <span class="na">Audio</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">import</span><span class="p">(</span><span class="dl">'</span><span class="s1">./media/Audio</span><span class="dl">'</span><span class="p">),</span>
+<span class="p">};</span>
+
+<span class="c1">// Shared component factory</span>
+<span class="kd">const</span> <span class="nx">createSharedComponent</span> <span class="o">=</span> <span class="p">(</span><span class="nx">componentName</span><span class="p">,</span> <span class="nx">props</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">Component</span> <span class="o">=</span> <span class="nx">SharedComponents</span><span class="p">[</span><span class="nx">componentName</span><span class="p">];</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">Component</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">`Shared component </span><span class="p">${</span><span class="nx">componentName</span><span class="p">}</span><span class="s2"> not found`</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="o">&lt;</span><span class="nx">Component</span> <span class="p">{...</span><span class="nx">props</span><span class="p">}</span> <span class="sr">/&gt;</span><span class="err">;
+</span><span class="p">};</span>
+
+<span class="c1">// Shared component registry</span>
+<span class="kd">const</span> <span class="nx">SharedComponentRegistry</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">components</span><span class="p">:</span> <span class="k">new</span> <span class="nb">Map</span><span class="p">(),</span>
+  
+  <span class="na">register</span><span class="p">:</span> <span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">component</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">SharedComponentRegistry</span><span class="p">.</span><span class="nx">components</span><span class="p">.</span><span class="kd">set</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">component</span><span class="p">);</span>
+  <span class="p">},</span>
+  
+  <span class="na">get</span><span class="p">:</span> <span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">SharedComponentRegistry</span><span class="p">.</span><span class="nx">components</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
+  <span class="p">},</span>
+  
+  <span class="na">create</span><span class="p">:</span> <span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">props</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">Component</span> <span class="o">=</span> <span class="nx">SharedComponentRegistry</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">Component</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">`Component </span><span class="p">${</span><span class="nx">name</span><span class="p">}</span><span class="s2"> not found`</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="o">&lt;</span><span class="nx">Component</span> <span class="p">{...</span><span class="nx">props</span><span class="p">}</span> <span class="sr">/&gt;</span><span class="err">;
+</span>  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">export</span> <span class="p">{</span> <span class="nx">SharedComponents</span><span class="p">,</span> <span class="nx">createSharedComponent</span><span class="p">,</span> <span class="nx">SharedComponentRegistry</span> <span class="p">};</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-navigation-structure">🧭 <strong>Navigation Structure</strong></h2>
+
+<h3 id="feature-based-navigation"><strong>Feature-Based Navigation</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">createStackNavigator</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@react-navigation/stack</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">createBottomTabNavigator</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@react-navigation/bottom-tabs</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="c1">// Feature navigation structure</span>
+<span class="kd">const</span> <span class="nx">FeatureNavigation</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="c1">// Authentication feature navigation</span>
+  <span class="na">AuthNavigator</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">Stack</span> <span class="o">=</span> <span class="nx">createStackNavigator</span><span class="p">();</span>
+    
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="o">&lt;</span><span class="nx">Stack</span><span class="p">.</span><span class="nx">Navigator</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">Stack</span><span class="p">.</span><span class="nx">Screen</span> <span class="nx">name</span><span class="o">=</span><span class="dl">"</span><span class="s2">Login</span><span class="dl">"</span> <span class="nx">component</span><span class="o">=</span><span class="p">{</span><span class="nx">LoginScreen</span><span class="p">}</span> <span class="sr">/</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="nx">Stack</span><span class="p">.</span><span class="nx">Screen</span> <span class="nx">name</span><span class="o">=</span><span class="dl">"</span><span class="s2">Register</span><span class="dl">"</span> <span class="nx">component</span><span class="o">=</span><span class="p">{</span><span class="nx">RegisterScreen</span><span class="p">}</span> <span class="sr">/</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="nx">Stack</span><span class="p">.</span><span class="nx">Screen</span> <span class="nx">name</span><span class="o">=</span><span class="dl">"</span><span class="s2">ForgotPassword</span><span class="dl">"</span> <span class="nx">component</span><span class="o">=</span><span class="p">{</span><span class="nx">ForgotPasswordScreen</span><span class="p">}</span> <span class="sr">/</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/Stack.Navigator</span><span class="err">&gt;
+</span>    <span class="p">);</span>
+  <span class="p">},</span>
+  
+  <span class="c1">// Profile feature navigation</span>
+  <span class="na">ProfileNavigator</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">Stack</span> <span class="o">=</span> <span class="nx">createStackNavigator</span><span class="p">();</span>
+    
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="o">&lt;</span><span class="nx">Stack</span><span class="p">.</span><span class="nx">Navigator</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">Stack</span><span class="p">.</span><span class="nx">Screen</span> <span class="nx">name</span><span class="o">=</span><span class="dl">"</span><span class="s2">Profile</span><span class="dl">"</span> <span class="nx">component</span><span class="o">=</span><span class="p">{</span><span class="nx">ProfileScreen</span><span class="p">}</span> <span class="sr">/</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="nx">Stack</span><span class="p">.</span><span class="nx">Screen</span> <span class="nx">name</span><span class="o">=</span><span class="dl">"</span><span class="s2">EditProfile</span><span class="dl">"</span> <span class="nx">component</span><span class="o">=</span><span class="p">{</span><span class="nx">EditProfileScreen</span><span class="p">}</span> <span class="sr">/</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="nx">Stack</span><span class="p">.</span><span class="nx">Screen</span> <span class="nx">name</span><span class="o">=</span><span class="dl">"</span><span class="s2">UserSettings</span><span class="dl">"</span> <span class="nx">component</span><span class="o">=</span><span class="p">{</span><span class="nx">SettingsScreen</span><span class="p">}</span> <span class="sr">/</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/Stack.Navigator</span><span class="err">&gt;
+</span>    <span class="p">);</span>
+  <span class="p">},</span>
+  
+  <span class="c1">// Dashboard feature navigation</span>
+  <span class="na">DashboardNavigator</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">Stack</span> <span class="o">=</span> <span class="nx">createStackNavigator</span><span class="p">();</span>
+    
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="o">&lt;</span><span class="nx">Stack</span><span class="p">.</span><span class="nx">Navigator</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">Stack</span><span class="p">.</span><span class="nx">Screen</span> <span class="nx">name</span><span class="o">=</span><span class="dl">"</span><span class="s2">Dashboard</span><span class="dl">"</span> <span class="nx">component</span><span class="o">=</span><span class="p">{</span><span class="nx">DashboardScreen</span><span class="p">}</span> <span class="sr">/</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="nx">Stack</span><span class="p">.</span><span class="nx">Screen</span> <span class="nx">name</span><span class="o">=</span><span class="dl">"</span><span class="s2">Analytics</span><span class="dl">"</span> <span class="nx">component</span><span class="o">=</span><span class="p">{</span><span class="nx">AnalyticsScreen</span><span class="p">}</span> <span class="sr">/</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="nx">Stack</span><span class="p">.</span><span class="nx">Screen</span> <span class="nx">name</span><span class="o">=</span><span class="dl">"</span><span class="s2">Reports</span><span class="dl">"</span> <span class="nx">component</span><span class="o">=</span><span class="p">{</span><span class="nx">ReportsScreen</span><span class="p">}</span> <span class="sr">/</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/Stack.Navigator</span><span class="err">&gt;
+</span>    <span class="p">);</span>
+  <span class="p">},</span>
+  
+  <span class="c1">// Main app navigation</span>
+  <span class="na">MainNavigator</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">Tab</span> <span class="o">=</span> <span class="nx">createBottomTabNavigator</span><span class="p">();</span>
+    
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="o">&lt;</span><span class="nx">Tab</span><span class="p">.</span><span class="nx">Navigator</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">Tab</span><span class="p">.</span><span class="nx">Screen</span> 
+          <span class="nx">name</span><span class="o">=</span><span class="dl">"</span><span class="s2">Dashboard</span><span class="dl">"</span> 
+          <span class="nx">component</span><span class="o">=</span><span class="p">{</span><span class="nx">DashboardNavigator</span><span class="p">}</span>
+          <span class="nx">options</span><span class="o">=</span><span class="p">{{</span><span class="err">#</span><span class="mi">123</span><span class="p">;{{</span><span class="err">#</span><span class="mi">123</span><span class="p">;</span> <span class="nl">tabBarIcon</span><span class="p">:</span> <span class="p">({</span> <span class="nx">color</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="o">&lt;</span><span class="nx">DashboardIcon</span> <span class="nx">color</span><span class="o">=</span><span class="p">{</span><span class="nx">color</span><span class="p">}</span> <span class="sr">/&gt; }}#125;}}#125</span><span class="err">;
+</span>        <span class="o">/&gt;</span>
+        <span class="o">&lt;</span><span class="nx">Tab</span><span class="p">.</span><span class="nx">Screen</span> 
+          <span class="nx">name</span><span class="o">=</span><span class="dl">"</span><span class="s2">Profile</span><span class="dl">"</span> 
+          <span class="nx">component</span><span class="o">=</span><span class="p">{</span><span class="nx">ProfileNavigator</span><span class="p">}</span>
+          <span class="nx">options</span><span class="o">=</span><span class="p">{{</span><span class="err">#</span><span class="mi">123</span><span class="p">;{{</span><span class="err">#</span><span class="mi">123</span><span class="p">;</span> <span class="nl">tabBarIcon</span><span class="p">:</span> <span class="p">({</span> <span class="nx">color</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="o">&lt;</span><span class="nx">ProfileIcon</span> <span class="nx">color</span><span class="o">=</span><span class="p">{</span><span class="nx">color</span><span class="p">}</span> <span class="sr">/&gt; }}#125;}}#125</span><span class="err">;
+</span>        <span class="o">/&gt;</span>
+        <span class="o">&lt;</span><span class="nx">Tab</span><span class="p">.</span><span class="nx">Screen</span> 
+          <span class="nx">name</span><span class="o">=</span><span class="dl">"</span><span class="s2">Settings</span><span class="dl">"</span> 
+          <span class="nx">component</span><span class="o">=</span><span class="p">{</span><span class="nx">SettingsNavigator</span><span class="p">}</span>
+          <span class="nx">options</span><span class="o">=</span><span class="p">{{</span><span class="err">#</span><span class="mi">123</span><span class="p">;{{</span><span class="err">#</span><span class="mi">123</span><span class="p">;</span> <span class="nl">tabBarIcon</span><span class="p">:</span> <span class="p">({</span> <span class="nx">color</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="o">&lt;</span><span class="nx">SettingsIcon</span> <span class="nx">color</span><span class="o">=</span><span class="p">{</span><span class="nx">color</span><span class="p">}</span> <span class="sr">/&gt; }}#125;}}#125</span><span class="err">;
+</span>        <span class="o">/&gt;</span>
+      <span class="o">&lt;</span><span class="sr">/Tab.Navigator</span><span class="err">&gt;
+</span>    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// Navigation service</span>
+<span class="kd">const</span> <span class="nx">NavigationService</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">navigator</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+  
+  <span class="na">setNavigator</span><span class="p">:</span> <span class="p">(</span><span class="nb">navigator</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">NavigationService</span><span class="p">.</span><span class="nb">navigator</span> <span class="o">=</span> <span class="nb">navigator</span><span class="p">;</span>
+  <span class="p">},</span>
+  
+  <span class="na">navigate</span><span class="p">:</span> <span class="p">(</span><span class="nx">routeName</span><span class="p">,</span> <span class="nx">params</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">NavigationService</span><span class="p">.</span><span class="nb">navigator</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">NavigationService</span><span class="p">.</span><span class="nb">navigator</span><span class="p">.</span><span class="nx">navigate</span><span class="p">(</span><span class="nx">routeName</span><span class="p">,</span> <span class="nx">params</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  
+  <span class="na">goBack</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">NavigationService</span><span class="p">.</span><span class="nb">navigator</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">NavigationService</span><span class="p">.</span><span class="nb">navigator</span><span class="p">.</span><span class="nx">goBack</span><span class="p">();</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  
+  <span class="na">reset</span><span class="p">:</span> <span class="p">(</span><span class="nx">routeName</span><span class="p">,</span> <span class="nx">params</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">NavigationService</span><span class="p">.</span><span class="nb">navigator</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">NavigationService</span><span class="p">.</span><span class="nb">navigator</span><span class="p">.</span><span class="nx">reset</span><span class="p">({</span>
+        <span class="na">index</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="na">routes</span><span class="p">:</span> <span class="p">[{</span> <span class="na">name</span><span class="p">:</span> <span class="nx">routeName</span><span class="p">,</span> <span class="nx">params</span> <span class="p">}],</span>
+      <span class="p">});</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">export</span> <span class="p">{</span> <span class="nx">FeatureNavigation</span><span class="p">,</span> <span class="nx">NavigationService</span> <span class="p">};</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-best-practices">🎯 <strong>Best Practices</strong></h2>
+
+<h3 id="1-feature-organization"><strong>1. Feature Organization</strong></h3>
+<ul>
+  <li>Keep features self-contained</li>
+  <li>Use clear naming conventions</li>
+  <li>Implement proper dependency management</li>
+  <li>Follow consistent structure</li>
+</ul>
+
+<h3 id="2-shared-resources"><strong>2. Shared Resources</strong></h3>
+<ul>
+  <li>Create reusable components</li>
+  <li>Implement proper abstractions</li>
+  <li>Use composition over inheritance</li>
+  <li>Maintain backward compatibility</li>
+</ul>
+
+<h3 id="3-scalability"><strong>3. Scalability</strong></h3>
+<ul>
+  <li>Plan for future growth</li>
+  <li>Use lazy loading</li>
+  <li>Implement proper caching</li>
+  <li>Monitor performance</li>
+</ul>
+
+<hr />
+
+<h2 id="-interview-questions">❓ <strong>Interview Questions</strong></h2>
+
+<h3 id="basic-questions"><strong>Basic Questions</strong></h3>
+<ol>
+  <li><strong>What is feature-based architecture?</strong></li>
+  <li><strong>How do you organize modules in a large app?</strong></li>
+  <li><strong>What are the benefits of feature-based structure?</strong></li>
+</ol>
+
+<h3 id="advanced-questions"><strong>Advanced Questions</strong></h3>
+<ol>
+  <li><strong>How would you implement feature-based architecture?</strong></li>
+  <li><strong>Explain the relationship between features and shared components.</strong></li>
+  <li><strong>How do you handle feature dependencies?</strong></li>
+</ol>
+
+<h3 id="practical-questions"><strong>Practical Questions</strong></h3>
+<ol>
+  <li><strong>Design a feature-based project structure.</strong></li>
+  <li><strong>Implement a feature module system.</strong></li>
+  <li><strong>Create a shared component library.</strong></li>
+</ol>
+
+<hr />
+
+<h2 id="-navigation">🧭 Navigation</h2>
+
+<div class="navigation">
+    <a href="./02-MVVM-Pattern.md" class="nav-link prev">⬅️ Previous: MVVM Pattern</a>
+    <a href="./04-Monorepo-Management.md" class="nav-link next">Next: Monorepo Management ➡️</a>
+</div>
+
+<hr />
+
+<script src="../../common-scripts.js"></script>
+
+<p><em>Last updated: December 2024</em></p>
+
+        </main>
+        
+        <footer style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #ecf0f1; color: #666; text-align: center;">
+            <p>Interview Prep Documentation - Built with Jekyll</p>
+        </footer>
+    </div>
+</body>
+</html>

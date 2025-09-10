@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔹 Functional Programming Patterns - Interview Prep Documentation</title>
+    <meta name="description" content="Comprehensive guides for JavaScript, TypeScript, and React Native interview preparation">
+    
+    <!-- GitHub Pages compatible styling -->
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+        }
+        
+        .container {
+            max-width: 100%;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            color: #2c3e50;
+            margin-top: 2em;
+            margin-bottom: 1em;
+        }
+        
+        h1 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            border-bottom: 1px solid #ecf0f1;
+            padding-bottom: 5px;
+        }
+        
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border-left: 4px solid #3498db;
+        }
+        
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+        
+        blockquote {
+            border-left: 4px solid #3498db;
+            margin: 0;
+            padding-left: 20px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1em 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .navigation {
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px 0;
+            margin-bottom: 20px;
+        }
+        
+        .navigation a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+        
+        .navigation a:hover {
+            text-decoration: underline;
+        }
+        
+        .breadcrumb {
+            margin-bottom: 20px;
+            color: #666;
+        }
+        
+        .breadcrumb a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            h2 {
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="navigation">
+            <a href="/">Home</a>
+            <a href="/Javascript/">JavaScript</a>
+            <a href="/TypeScript/">TypeScript</a>
+            <a href="/React-Native/">React Native</a>
+        </nav>
+        
+        
+        
+        <main>
+            <h1 id="-functional-programming-patterns">🔹 Functional Programming Patterns</h1>
+
+<blockquote>
+  <p><strong>Comprehensive coverage of advanced functional programming patterns: Railway Oriented Programming, Either/Maybe monads, and Lens pattern</strong></p>
+</blockquote>
+
+<link rel="stylesheet" href="../common-styles.css" />
+
+<hr />
+
+<h2 id="-table-of-contents">📚 Table of Contents</h2>
+
+<ul>
+  <li><a href="#functional-programming-patterns-overview">Functional Programming Patterns Overview</a></li>
+  <li><a href="#railway-oriented-programming">Railway Oriented Programming</a></li>
+  <li><a href="#eithermaybe-monads">Either/Maybe Monads</a></li>
+  <li><a href="#lens-pattern">Lens Pattern</a></li>
+  <li><a href="#detailed-examples">Detailed Examples</a></li>
+  <li><a href="#common-interview-questions">Common Interview Questions</a></li>
+  <li><a href="#practice-exercises">Practice Exercises</a></li>
+  <li><a href="#additional-resources">Additional Resources</a></li>
+</ul>
+
+<hr />
+
+<h2 id="-functional-programming-patterns-overview">🎯 Functional Programming Patterns Overview</h2>
+
+<p><strong>Functional Programming Patterns</strong> provide elegant solutions for handling complex data transformations, error handling, and immutable data manipulation in a functional style.</p>
+
+<h3 id="why-functional-programming-patterns-matter">Why Functional Programming Patterns Matter:</h3>
+<ul>
+  <li><strong>Error Handling</strong>: Graceful failure handling without exceptions</li>
+  <li><strong>Data Transformation</strong>: Clean, composable data pipelines</li>
+  <li><strong>Immutability</strong>: Safe data manipulation without side effects</li>
+  <li><strong>Composability</strong>: Build complex operations from simple functions</li>
+  <li><strong>Testing</strong>: Easier to test pure functions</li>
+</ul>
+
+<hr />
+
+<h2 id="-railway-oriented-programming">🚂 Railway Oriented Programming</h2>
+
+<p><strong>Railway Oriented Programming</strong> is a functional approach to error handling that treats success and failure as parallel “railways” that can be composed together.</p>
+
+<h3 id="why-railway-oriented-programming-matters">Why Railway Oriented Programming Matters:</h3>
+<ul>
+  <li><strong>Error Handling</strong>: Explicit error paths without exceptions</li>
+  <li><strong>Composability</strong>: Chain operations with automatic error propagation</li>
+  <li><strong>Readability</strong>: Clear success and failure paths</li>
+  <li><strong>Debugging</strong>: Easy to trace error flow</li>
+  <li><strong>Type Safety</strong>: Compile-time error handling guarantees</li>
+</ul>
+
+<h3 id="ascii-diagram-railway-oriented-programming-flow">ASCII Diagram: Railway Oriented Programming Flow</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>RAILWAY ORIENTED PROGRAMMING
+┌─────────────────────────────────┐
+│        INPUT                    │
+│  ┌─────────────────────────────┐ │
+│  │ Data/Request                │ │
+│  │                             │ │
+│  └─────────────────────────────┘ │
+└─────────────────────────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  VALIDATION   │
+        │               │
+        │  Success →    │
+        │  Failure →    │
+        └───────────────┘
+                │
+                ▼
+    ┌─────────────────────┐
+    │  SUCCESS RAILWAY    │  │  FAILURE RAILWAY
+    │                     │  │
+    │  Process Data       │  │  Error Handling
+    │  Transform          │  │  Logging
+    │  Business Logic     │  │  User Feedback
+    │                     │  │  Fallback
+    └─────────────────────┘  │
+                │            │
+                ▼            ▼
+        ┌───────────────┐  ┌───────────────┐
+        │  SUCCESS      │  │  FAILURE      │
+        │  OUTPUT       │  │  OUTPUT       │
+        │               │  │               │
+        │  Result       │  │  Error        │
+        │  Data         │  │  Message      │
+        └───────────────┘  └───────────────┘
+</code></pre></div></div>
+
+<h3 id="use-cases">Use Cases:</h3>
+<ul>
+  <li><strong>API Validation</strong>: Input validation and error handling</li>
+  <li><strong>Data Processing</strong>: Pipeline operations with error handling</li>
+  <li><strong>Form Validation</strong>: User input validation</li>
+  <li><strong>Business Logic</strong>: Complex operations with multiple failure points</li>
+  <li><strong>Configuration</strong>: Settings validation and processing</li>
+</ul>
+
+<hr />
+
+<h2 id="-eithermaybe-monads">🎭 Either/Maybe Monads</h2>
+
+<p><strong>Either/Maybe Monads</strong> are functional data types that represent computations that can either succeed or fail, providing a clean way to handle errors and optional values.</p>
+
+<h3 id="why-eithermaybe-monads-matter">Why Either/Maybe Monads Matter:</h3>
+<ul>
+  <li><strong>Error Handling</strong>: Explicit error representation</li>
+  <li><strong>Null Safety</strong>: Eliminate null/undefined issues</li>
+  <li><strong>Composability</strong>: Chain operations safely</li>
+  <li><strong>Type Safety</strong>: Compile-time error handling</li>
+  <li><strong>Functional Style</strong>: Pure error handling without exceptions</li>
+</ul>
+
+<h3 id="ascii-diagram-eithermaybe-monad-structure">ASCII Diagram: Either/Maybe Monad Structure</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>EITHER/MAYBE MONAD STRUCTURE
+┌─────────────────────────────────┐
+│        EITHER MONAD             │
+│  ┌─────────────────────────────┐ │
+│  │ Left(Error)                 │ │
+│  │ Right(Success)              │ │
+│  │                             │ │
+│  │ map() → Transform success   │ │
+│  │ flatMap() → Chain operations│ │
+│  │ fold() → Handle both cases  │ │
+│  └─────────────────────────────┘ │
+└─────────────────────────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  MAYBE MONAD  │
+        │               │
+        │  Just(Value)  │
+        │  Nothing      │
+        │               │
+        │  map() → Transform │
+        │  flatMap() → Chain │
+        │  getOrElse() → Default │
+        └───────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  OPERATIONS   │
+        │               │
+        │  Validation   │
+        │  Transformation│
+        │  Error Handling│
+        │  Fallbacks    │
+        └───────────────┘
+</code></pre></div></div>
+
+<h3 id="monad-operations">Monad Operations:</h3>
+<ul>
+  <li><strong>map()</strong>: Transform success values</li>
+  <li><strong>flatMap()</strong>: Chain operations</li>
+  <li><strong>fold()</strong>: Handle both success and failure</li>
+  <li><strong>getOrElse()</strong>: Provide default values</li>
+  <li><strong>orElse()</strong>: Alternative error handling</li>
+</ul>
+
+<hr />
+
+<h2 id="-lens-pattern">🔍 Lens Pattern</h2>
+
+<p><strong>Lens Pattern</strong> provides a way to access and modify deeply nested data structures immutably, making data manipulation safe and composable.</p>
+
+<h3 id="why-lens-pattern-matters">Why Lens Pattern Matters:</h3>
+<ul>
+  <li><strong>Immutability</strong>: Safe data updates without mutation</li>
+  <li><strong>Deep Access</strong>: Navigate complex nested structures</li>
+  <li><strong>Composability</strong>: Combine multiple lenses</li>
+  <li><strong>Type Safety</strong>: Compile-time property access validation</li>
+  <li><strong>Performance</strong>: Efficient immutable updates</li>
+</ul>
+
+<h3 id="ascii-diagram-lens-pattern-structure">ASCII Diagram: Lens Pattern Structure</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>LENS PATTERN STRUCTURE
+┌─────────────────────────────────┐
+│        DATA STRUCTURE           │
+│  ┌─────────────────────────────┐ │
+│  │ user: {                     │ │
+│  │   profile: {                │ │
+│  │     name: "John",           │ │
+│  │     address: {              │ │
+│  │       city: "NYC"           │ │
+│  │     }                       │ │
+│  │   }                         │ │
+│  │ }                           │ │
+│  └─────────────────────────────┘ │
+└─────────────────────────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  LENS         │
+        │               │
+        │  get() → Read │
+        │  set() → Write│
+        │  over() → Transform │
+        └───────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  COMPOSED     │
+        │  LENSES       │
+        │               │
+        │  userLens     │
+        │  .profileLens │
+        │  .addressLens │
+        │  .cityLens    │
+        └───────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  OPERATIONS   │
+        │               │
+        │  Read city    │
+        │  Update city  │
+        │  Transform    │
+        └───────────────┘
+</code></pre></div></div>
+
+<h3 id="lens-operations">Lens Operations:</h3>
+<ul>
+  <li><strong>get()</strong>: Read values from nested structures</li>
+  <li><strong>set()</strong>: Set values immutably</li>
+  <li><strong>over()</strong>: Transform values with functions</li>
+  <li><strong>compose()</strong>: Combine multiple lenses</li>
+  <li><strong>view()</strong>: Read-only access</li>
+</ul>
+
+<hr />
+
+<h2 id="-detailed-examples">💻 Detailed Examples</h2>
+
+<h3 id="example-1-railway-oriented-programming-implementation">Example 1: Railway Oriented Programming Implementation</h3>
+<div style="position: relative;">
+<button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+<pre><code>// Railway Oriented Programming with comprehensive error handling
+class Result {
+    constructor(isSuccess, value, error) {
+        this.isSuccess = isSuccess;
+        this.value = value;
+        this.error = error;
+    }
+    
+    static success(value) {
+        return new Result(true, value, null);
+    }
+    
+    static failure(error) {
+        return new Result(false, null, error);
+    }
+    
+    // Railway functions
+    map(fn) {
+        return this.isSuccess 
+            ? Result.success(fn(this.value))
+            : Result.failure(this.error);
+    }
+    
+    flatMap(fn) {
+        return this.isSuccess 
+            ? fn(this.value)
+            : Result.failure(this.error);
+    }
+    
+    fold(onSuccess, onFailure) {
+        return this.isSuccess 
+            ? onSuccess(this.value)
+            : onFailure(this.error);
+    }
+    
+    // Utility methods
+    getOrElse(defaultValue) {
+        return this.isSuccess ? this.value : defaultValue;
+    }
+    
+    orElse(fn) {
+        return this.isSuccess ? this : fn(this.error);
+    }
+    
+    // Error handling
+    tap(fn) {
+        if (this.isSuccess) {
+            fn(this.value);
+        }
+        return this;
+    }
+    
+    tapError(fn) {
+        if (!this.isSuccess) {
+            fn(this.error);
+        }
+        return this;
+    }
+}
+
+// Railway functions for composition
+const railway = {
+    // Success railway
+    success: (value) =&gt; Result.success(value),
+    
+    // Failure railway
+    failure: (error) =&gt; Result.failure(error),
+    
+    // Try-catch wrapper
+    try: (fn) =&gt; {
+        try {
+            return Result.success(fn());
+        } catch (error) {
+            return Result.failure(error);
+        }
+    },
+    
+    // Async try-catch wrapper
+    tryAsync: async (fn) =&gt; {
+        try {
+            const result = await fn();
+            return Result.success(result);
+        } catch (error) {
+            return Result.failure(error);
+        }
+    },
+    
+    // Validation railway
+    validate: (predicate, error) =&gt; (value) =&gt; 
+        predicate(value) ? Result.success(value) : Result.failure(error),
+    
+    // Pipeline composition
+    pipe: (...functions) =&gt; (initialValue) =&gt; 
+        functions.reduce((result, fn) =&gt; 
+            result.flatMap(fn), Result.success(initialValue)),
+    
+    // Parallel execution
+    all: async (results) =&gt; {
+        try {
+            const values = await Promise.all(
+                results.map(r =&gt; r.isSuccess ? r.value : Promise.reject(r.error))
+            );
+            return Result.success(values);
+        } catch (error) {
+            return Result.failure(error);
+        }
+    }
+};
+
+// Validation functions
+const validators = {
+    required: (fieldName) =&gt; railway.validate(
+        value =&gt; value != null &amp;&amp; value !== '',
+        `${fieldName} is required`
+    ),
+    
+    email: railway.validate(
+        email =&gt; /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email),
+        'Invalid email format'
+    ),
+    
+    minLength: (min) =&gt; (fieldName) =&gt; railway.validate(
+        value =&gt; String(value).length &gt;= min,
+        `${fieldName} must be at least ${min} characters`
+    ),
+    
+    maxLength: (max) =&gt; (fieldName) =&gt; railway.validate(
+        value =&gt; String(value).length &lt;= max,
+        `${fieldName} must be no more than ${max} characters`
+    ),
+    
+    range: (min, max) =&gt; (fieldName) =&gt; railway.validate(
+        value =&gt; Number(value) &gt;= min &amp;&amp; Number(value) &lt;= max,
+        `${fieldName} must be between ${min} and ${max}`
+    ),
+    
+    pattern: (regex, message) =&gt; railway.validate(
+        value =&gt; regex.test(String(value)),
+        message
+    )
+};
+
+// Business logic functions
+const businessLogic = {
+    // User registration pipeline
+    registerUser: railway.pipe(
+        // Validate input
+        (data) =&gt; railway.pipe(
+            validators.required('username')(data.username),
+            validators.required('email')(data.email),
+            validators.required('password')(data.password),
+            validators.email(data.email),
+            validators.minLength(8)('password')(data.password),
+            validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/, 'Password must contain lowercase, uppercase, and number')(data.password)
+        ).map(() =&gt; data),
+        
+        // Check if user exists
+        async (data) =&gt; {
+            const exists = await checkUserExists(data.email);
+            return exists 
+                ? Result.failure('User already exists')
+                : Result.success(data);
+        },
+        
+        // Hash password
+        async (data) =&gt; {
+            const hashedPassword = await hashPassword(data.password);
+            return Result.success({ ...data, password: hashedPassword });
+        },
+        
+        // Save user
+        async (data) =&gt; {
+            const user = await saveUser(data);
+            return Result.success(user);
+        },
+        
+        // Send welcome email
+        async (user) =&gt; {
+            await sendWelcomeEmail(user.email);
+            return Result.success(user);
+        }
+    ),
+    
+    // Order processing pipeline
+    processOrder: railway.pipe(
+        // Validate order
+        (order) =&gt; railway.pipe(
+            validators.required('items')(order.items),
+            validators.required('customerId')(order.customerId),
+            validators.range(0.01, 10000)('total')(order.total)
+        ).map(() =&gt; order),
+        
+        // Check inventory
+        async (order) =&gt; {
+            const inventoryCheck = await checkInventory(order.items);
+            return inventoryCheck.success 
+                ? Result.success(order)
+                : Result.failure(`Insufficient inventory: ${inventoryCheck.missingItems.join(', ')}`);
+        },
+        
+        // Process payment
+        async (order) =&gt; {
+            const payment = await processPayment(order.total, order.paymentMethod);
+            return payment.success 
+                ? Result.success({ ...order, paymentId: payment.paymentId })
+                : Result.failure(`Payment failed: ${payment.error}`);
+        },
+        
+        // Create order
+        async (order) =&gt; {
+            const createdOrder = await createOrder(order);
+            return Result.success(createdOrder);
+        },
+        
+        // Update inventory
+        async (order) =&gt; {
+            await updateInventory(order.items);
+            return Result.success(order);
+        },
+        
+        // Send confirmation
+        async (order) =&gt; {
+            await sendOrderConfirmation(order.customerId, order.id);
+            return Result.success(order);
+        }
+    )
+};
+
+// Mock functions for demonstration
+async function checkUserExists(email) {
+    // Simulate API call
+    return email === 'existing@example.com';
+}
+
+async function hashPassword(password) {
+    // Simulate password hashing
+    return `hashed_${password}`;
+}
+
+async function saveUser(userData) {
+    // Simulate saving user
+    return { id: Date.now(), ...userData };
+}
+
+async function sendWelcomeEmail(email) {
+    // Simulate sending email
+    console.log(`Welcome email sent to ${email}`);
+}
+
+async function checkInventory(items) {
+    // Simulate inventory check
+    const missingItems = items.filter(item =&gt; item.id === 'out-of-stock');
+    return {
+        success: missingItems.length === 0,
+        missingItems
+    };
+}
+
+async function processPayment(amount, method) {
+    // Simulate payment processing
+    if (method === 'invalid') {
+        return { success: false, error: 'Invalid payment method' };
+    }
+    return { success: true, paymentId: `pay_${Date.now()}` };
+}
+
+async function createOrder(orderData) {
+    // Simulate order creation
+    return { id: `order_${Date.now()}`, ...orderData };
+}
+
+async function updateInventory(items) {
+    // Simulate inventory update
+    console.log('Inventory updated for items:', items);
+}
+
+async function sendOrderConfirmation(customerId, orderId) {
+    // Simulate sending confirmation
+    console.log(`Order confirmation sent to customer ${customerId} for order ${orderId}`);
+}
+
+// Usage examples
+const userRegistration = async () =&gt; {
+    const userData = {
+        username: 'john_doe',
+        email: 'john@example.com',
+        password: 'SecurePass123'
+    };
+    
+    const result = await businessLogic.registerUser(userData);
+    
+    return result.fold(
+        (user) =&gt; ({ success: true, user }),
+        (error) =&gt; ({ success: false, error })
+    );
+};
+
+const orderProcessing = async () =&gt; {
+    const order = {
+        items: [{ id: 'item1', quantity: 2 }],
+        customerId: 'cust123',
+        total: 99.99,
+        paymentMethod: 'credit_card'
+    };
+    
+    const result = await businessLogic.processOrder(order);
+    
+    return result.fold(
+        (processedOrder) =&gt; ({ success: true, order: processedOrder }),
+        (error) =&gt; ({ success: false, error })
+    );
+};
+
+// Test the pipelines
+console.log('=== User Registration ===');
+userRegistration().then(console.log);
+
+console.log('\n=== Order Processing ===');
+orderProcessing().then(console.log);
+</code></pre>
+</div>
+
+<h3 id="example-2-eithermaybe-monads-with-advanced-operations">Example 2: Either/Maybe Monads with Advanced Operations</h3>
+<div style="position: relative;">
+<button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+<pre><code>// Advanced Either and Maybe monads with comprehensive operations
+class Either {
+    constructor(left, right, isLeft) {
+        this.left = left;
+        this.right = right;
+        this.isLeft = isLeft;
+    }
+    
+    static Left(value) {
+        return new Either(value, null, true);
+    }
+    
+    static Right(value) {
+        return new Either(null, value, false);
+    }
+    
+    // Functor operations
+    map(fn) {
+        return this.isLeft 
+            ? Either.Left(this.left)
+            : Either.Right(fn(this.right));
+    }
+    
+    // Monad operations
+    flatMap(fn) {
+        return this.isLeft 
+            ? Either.Left(this.left)
+            : fn(this.right);
+    }
+    
+    // Applicative operations
+    ap(other) {
+        return this.isLeft 
+            ? Either.Left(this.left)
+            : other.isLeft 
+                ? Either.Left(other.left)
+                : Either.Right(this.right(other.right));
+    }
+    
+    // Utility methods
+    fold(onLeft, onRight) {
+        return this.isLeft ? onLeft(this.left) : onRight(this.right);
+    }
+    
+    getOrElse(defaultValue) {
+        return this.isLeft ? defaultValue : this.right;
+    }
+    
+    orElse(fn) {
+        return this.isLeft ? fn(this.left) : this;
+    }
+    
+    // Error handling
+    tap(fn) {
+        if (!this.isLeft) {
+            fn(this.right);
+        }
+        return this;
+    }
+    
+    tapError(fn) {
+        if (this.isLeft) {
+            fn(this.left);
+        }
+        return this;
+    }
+    
+    // Conversion
+    toMaybe() {
+        return this.isLeft ? Maybe.Nothing() : Maybe.Just(this.right);
+    }
+    
+    // Pattern matching
+    match(patterns) {
+        return this.fold(
+            patterns.Left || (() =&gt; {}),
+            patterns.Right || (() =&gt; {})
+        );
+    }
+}
+
+class Maybe {
+    constructor(value, isJust) {
+        this.value = value;
+        this.isJust = isJust;
+    }
+    
+    static Just(value) {
+        return new Maybe(value, true);
+    }
+    
+    static Nothing() {
+        return new Maybe(null, false);
+    }
+    
+    // Functor operations
+    map(fn) {
+        return this.isJust 
+            ? Maybe.Just(fn(this.value))
+            : Maybe.Nothing();
+    }
+    
+    // Monad operations
+    flatMap(fn) {
+        return this.isJust 
+            ? fn(this.value)
+            : Maybe.Nothing();
+    }
+    
+    // Applicative operations
+    ap(other) {
+        return this.isJust &amp;&amp; other.isJust
+            ? Maybe.Just(this.value(other.value))
+            : Maybe.Nothing();
+    }
+    
+    // Utility methods
+    getOrElse(defaultValue) {
+        return this.isJust ? this.value : defaultValue;
+    }
+    
+    orElse(fn) {
+        return this.isJust ? this : fn();
+    }
+    
+    // Safe operations
+    filter(predicate) {
+        return this.isJust &amp;&amp; predicate(this.value)
+            ? this
+            : Maybe.Nothing();
+    }
+    
+    // Conversion
+    toEither(error) {
+        return this.isJust 
+            ? Either.Right(this.value)
+            : Either.Left(error);
+    }
+    
+    // Pattern matching
+    match(patterns) {
+        return this.isJust
+            ? (patterns.Just || (() =&gt; {}))(this.value)
+            : (patterns.Nothing || (() =&gt; {}))();
+    }
+}
+
+// Utility functions for working with monads
+const monadUtils = {
+    // Sequence operations
+    sequence: (monads) =&gt; {
+        if (monads.length === 0) {
+            return Maybe.Just([]);
+        }
+        
+        return monads.reduce((acc, monad) =&gt; 
+            acc.flatMap(values =&gt; 
+                monad.map(value =&gt; [...values, value])
+            ), Maybe.Just([])
+        );
+    },
+    
+    // Traverse operations
+    traverse: (fn, monads) =&gt; {
+        return monadUtils.sequence(monads.map(fn));
+    },
+    
+    // Lift operations
+    lift2: (fn) =&gt; (ma, mb) =&gt; 
+        ma.flatMap(a =&gt; mb.map(b =&gt; fn(a, b))),
+    
+    lift3: (fn) =&gt; (ma, mb, mc) =&gt; 
+        ma.flatMap(a =&gt; 
+            mb.flatMap(b =&gt; 
+                mc.map(c =&gt; fn(a, b, c))
+            )
+        ),
+    
+    // Safe operations
+    safe: (fn) =&gt; (...args) =&gt; {
+        try {
+            return Either.Right(fn(...args));
+        } catch (error) {
+            return Either.Left(error);
+        }
+    },
+    
+    safeAsync: (fn) =&gt; async (...args) =&gt; {
+        try {
+            const result = await fn(...args);
+            return Either.Right(result);
+        } catch (error) {
+            return Either.Left(error);
+        }
+    }
+};
+
+// Example: User service with monads
+class UserService {
+    constructor() {
+        this.users = new Map();
+        this.nextId = 1;
+    }
+    
+    // Create user with validation
+    createUser(userData) {
+        return Either.Right(userData)
+            .flatMap(this.validateUser)
+            .flatMap(this.generateId)
+            .flatMap(this.saveUser)
+            .map(user =&gt; ({ ...user, createdAt: new Date() }));
+    }
+    
+    // Validate user data
+    validateUser(userData) {
+        const validations = [
+            this.validateRequired('name', userData.name),
+            this.validateRequired('email', userData.email),
+            this.validateEmail(userData.email),
+            this.validateAge(userData.age)
+        ];
+        
+        // Combine all validations
+        const results = validations.map(v =&gt; v.toEither());
+        const combined = monadUtils.sequence(results);
+        
+        return combined.map(() =&gt; userData);
+    }
+    
+    validateRequired(fieldName, value) {
+        return value != null &amp;&amp; value !== ''
+            ? Maybe.Just(value)
+            : Maybe.Nothing();
+    }
+    
+    validateEmail(email) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+            ? Maybe.Just(email)
+            : Maybe.Nothing();
+    }
+    
+    validateAge(age) {
+        if (age == null) return Maybe.Just(age); // Optional field
+        return age &gt;= 0 &amp;&amp; age &lt;= 150
+            ? Maybe.Just(age)
+            : Maybe.Nothing();
+    }
+    
+    generateId(userData) {
+        return Either.Right({ ...userData, id: this.nextId++ });
+    }
+    
+    saveUser(userData) {
+        this.users.set(userData.id, userData);
+        return Either.Right(userData);
+    }
+    
+    // Get user with error handling
+    getUser(id) {
+        const user = this.users.get(id);
+        return user 
+            ? Either.Right(user)
+            : Either.Left(`User with id ${id} not found`);
+    }
+    
+    // Update user safely
+    updateUser(id, updates) {
+        return this.getUser(id)
+            .flatMap(user =&gt; {
+                const updatedUser = { ...user, ...updates };
+                return this.validateUser(updatedUser)
+                    .flatMap(() =&gt; {
+                        this.users.set(id, updatedUser);
+                        return Either.Right(updatedUser);
+                    });
+            });
+    }
+    
+    // Delete user
+    deleteUser(id) {
+        return this.getUser(id)
+            .flatMap(user =&gt; {
+                this.users.delete(id);
+                return Either.Right(user);
+            });
+    }
+    
+    // Search users with monadic operations
+    searchUsers(criteria) {
+        const users = Array.from(this.users.values());
+        
+        return Either.Right(users)
+            .map(users =&gt; users.filter(user =&gt; {
+                if (criteria.name &amp;&amp; !user.name.includes(criteria.name)) return false;
+                if (criteria.email &amp;&amp; !user.email.includes(criteria.email)) return false;
+                if (criteria.minAge &amp;&amp; user.age &lt; criteria.minAge) return false;
+                if (criteria.maxAge &amp;&amp; user.age &gt; criteria.maxAge) return false;
+                return true;
+            }))
+            .map(users =&gt; users.sort((a, b) =&gt; a.name.localeCompare(b.name)));
+    }
+}
+
+// Example: Order processing with monads
+class OrderService {
+    constructor() {
+        this.orders = new Map();
+        this.nextOrderId = 1;
+    }
+    
+    // Process order with comprehensive validation
+    processOrder(orderData) {
+        return Either.Right(orderData)
+            .flatMap(this.validateOrder)
+            .flatMap(this.checkInventory)
+            .flatMap(this.processPayment)
+            .flatMap(this.createOrder)
+            .flatMap(this.updateInventory)
+            .flatMap(this.sendConfirmation);
+    }
+    
+    validateOrder(orderData) {
+        const validations = [
+            this.validateItems(orderData.items),
+            this.validateCustomer(orderData.customerId),
+            this.validateAmount(orderData.amount)
+        ];
+        
+        return monadUtils.sequence(validations.map(v =&gt; v.toEither()))
+            .map(() =&gt; orderData);
+    }
+    
+    validateItems(items) {
+        return items &amp;&amp; items.length &gt; 0
+            ? Maybe.Just(items)
+            : Maybe.Nothing();
+    }
+    
+    validateCustomer(customerId) {
+        return customerId &amp;&amp; customerId.length &gt; 0
+            ? Maybe.Just(customerId)
+            : Maybe.Nothing();
+    }
+    
+    validateAmount(amount) {
+        return amount &gt; 0 &amp;&amp; amount &lt;= 10000
+            ? Maybe.Just(amount)
+            : Maybe.Nothing();
+    }
+    
+    checkInventory(orderData) {
+        // Simulate inventory check
+        const available = orderData.items.every(item =&gt; item.id !== 'out-of-stock');
+        return available
+            ? Either.Right(orderData)
+            : Either.Left('Some items are out of stock');
+    }
+    
+    processPayment(orderData) {
+        // Simulate payment processing
+        if (orderData.paymentMethod === 'invalid') {
+            return Either.Left('Invalid payment method');
+        }
+        
+        return Either.Right({
+            ...orderData,
+            paymentId: `pay_${Date.now()}`,
+            status: 'paid'
+        });
+    }
+    
+    createOrder(orderData) {
+        const order = {
+            id: this.nextOrderId++,
+            ...orderData,
+            createdAt: new Date()
+        };
+        
+        this.orders.set(order.id, order);
+        return Either.Right(order);
+    }
+    
+    updateInventory(orderData) {
+        // Simulate inventory update
+        console.log('Inventory updated for order:', orderData.id);
+        return Either.Right(orderData);
+    }
+    
+    sendConfirmation(orderData) {
+        // Simulate sending confirmation
+        console.log(`Confirmation sent for order ${orderData.id}`);
+        return Either.Right(orderData);
+    }
+}
+
+// Usage examples
+const userService = new UserService();
+const orderService = new OrderService();
+
+// Create user with monadic operations
+const createUserResult = userService.createUser({
+    name: 'John Doe',
+    email: 'john@example.com',
+    age: 30
+});
+
+createUserResult.fold(
+    error =&gt; console.error('User creation failed:', error),
+    user =&gt; console.log('User created:', user)
+);
+
+// Process order with monadic operations
+const orderResult = orderService.processOrder({
+    items: [{ id: 'item1', quantity: 2 }],
+    customerId: 'cust123',
+    amount: 99.99,
+    paymentMethod: 'credit_card'
+});
+
+orderResult.fold(
+    error =&gt; console.error('Order processing failed:', error),
+    order =&gt; console.log('Order processed:', order)
+);
+
+// Search users with monadic operations
+const searchResult = userService.searchUsers({
+    name: 'John',
+    minAge: 25
+});
+
+searchResult.fold(
+    error =&gt; console.error('Search failed:', error),
+    users =&gt; console.log('Search results:', users)
+);
+</code></pre>
+</div>
+
+<hr />
+
+<h2 id="-copy-code-functionality">📋 Copy Code Functionality</h2>
+
+<script src="../common-scripts.js"></script>
+
+<hr />
+
+<h2 id="-navigation">🧭 Navigation</h2>
+
+<div class="navigation">
+    <a href="01-Design-Patterns-Advanced.md" class="nav-link prev">← Previous: Advanced Design Patterns</a>
+    <a href="03-Architecture-Patterns.md" class="nav-link next">Next: Architecture Patterns →</a>
+</div>
+
+<p><em>Last updated: December 2024</em></p>
+
+        </main>
+        
+        <footer style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #ecf0f1; color: #666; text-align: center;">
+            <p>Interview Prep Documentation - Built with Jekyll</p>
+        </footer>
+    </div>
+</body>
+</html>

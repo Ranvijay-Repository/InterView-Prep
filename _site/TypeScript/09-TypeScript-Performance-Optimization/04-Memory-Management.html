@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧠 Memory Management - Interview Prep Documentation</title>
+    <meta name="description" content="Comprehensive guides for JavaScript, TypeScript, and React Native interview preparation">
+    
+    <!-- GitHub Pages compatible styling -->
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+        }
+        
+        .container {
+            max-width: 100%;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            color: #2c3e50;
+            margin-top: 2em;
+            margin-bottom: 1em;
+        }
+        
+        h1 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            border-bottom: 1px solid #ecf0f1;
+            padding-bottom: 5px;
+        }
+        
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border-left: 4px solid #3498db;
+        }
+        
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+        
+        blockquote {
+            border-left: 4px solid #3498db;
+            margin: 0;
+            padding-left: 20px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1em 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .navigation {
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px 0;
+            margin-bottom: 20px;
+        }
+        
+        .navigation a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+        
+        .navigation a:hover {
+            text-decoration: underline;
+        }
+        
+        .breadcrumb {
+            margin-bottom: 20px;
+            color: #666;
+        }
+        
+        .breadcrumb a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            h2 {
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="navigation">
+            <a href="/">Home</a>
+            <a href="/Javascript/">JavaScript</a>
+            <a href="/TypeScript/">TypeScript</a>
+            <a href="/React-Native/">React Native</a>
+        </nav>
+        
+        
+        
+        <main>
+            <h1 id="-memory-management">🧠 <strong>Memory Management</strong></h1>
+
+<blockquote>
+  <p><strong>Complete guide to TypeScript memory management, garbage collection optimization, and memory leak prevention</strong></p>
+</blockquote>
+
+<link rel="stylesheet" href="../../common-styles.css" />
+
+<hr />
+
+<h2 id="-table-of-contents">📚 <strong>Table of Contents</strong></h2>
+
+<ul>
+  <li><a href="#memory-management-overview">Memory Management Overview</a></li>
+  <li><a href="#garbage-collection">Garbage Collection</a></li>
+  <li><a href="#memory-leak-prevention">Memory Leak Prevention</a></li>
+  <li><a href="#memory-optimization">Memory Optimization</a></li>
+  <li><a href="#memory-monitoring">Memory Monitoring</a></li>
+  <li><a href="#best-practices">Best Practices</a></li>
+  <li><a href="#common-interview-questions">Common Interview Questions</a></li>
+</ul>
+
+<hr />
+
+<h2 id="-memory-management-overview">🎯 <strong>Memory Management Overview</strong></h2>
+
+<p>Memory management in TypeScript applications is crucial for performance, stability, and user experience.</p>
+
+<h3 id="memory-management-concepts"><strong>Memory Management Concepts</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Memory management concepts</span>
+<span class="kd">const</span> <span class="nx">memoryConcepts</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">heap</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Memory area for dynamic allocation</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">stack</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Memory area for function calls and local variables</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">garbageCollection</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Automatic memory cleanup</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">memoryLeaks</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Memory that's not released</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">memoryFragmentation</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Fragmented memory allocation</span><span class="dl">"</span>
+<span class="p">};</span>
+
+<span class="c1">// Memory lifecycle</span>
+<span class="kd">const</span> <span class="nx">memoryLifecycle</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">allocation</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Memory allocation for objects</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">usage</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Object usage and manipulation</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">deallocation</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Memory deallocation and cleanup</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">garbageCollection</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Automatic memory cleanup</span><span class="dl">"</span>
+<span class="p">};</span>
+
+<span class="c1">// Memory management goals</span>
+<span class="kd">const</span> <span class="nx">memoryGoals</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">efficientAllocation</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Efficient memory allocation</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">preventLeaks</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Prevent memory leaks</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">optimizeGC</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Optimize garbage collection</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">monitorUsage</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Monitor memory usage</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">performance</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Maintain good performance</span><span class="dl">"</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="javascript-memory-model"><strong>JavaScript Memory Model</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// JavaScript memory model</span>
+<span class="kd">const</span> <span class="nx">memoryModel</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">primitiveTypes</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Stored in stack memory</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">referenceTypes</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Stored in heap memory</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">references</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Stack stores references to heap objects</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">garbageCollection</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Automatic cleanup of unused objects</span><span class="dl">"</span>
+<span class="p">};</span>
+
+<span class="c1">// Memory allocation examples</span>
+<span class="kd">function</span> <span class="nx">memoryAllocation</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// Primitive types (stack)</span>
+  <span class="kd">const</span> <span class="kr">number</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
+  <span class="kd">const</span> <span class="kr">string</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">hello</span><span class="dl">'</span><span class="p">;</span>
+  <span class="kd">const</span> <span class="nx">boolean</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+  
+  <span class="c1">// Reference types (heap)</span>
+  <span class="kd">const</span> <span class="nx">object</span> <span class="o">=</span> <span class="p">{</span> <span class="na">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">John</span><span class="dl">'</span> <span class="p">};</span>
+  <span class="kd">const</span> <span class="nx">array</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">];</span>
+  <span class="kd">const</span> <span class="kd">function</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">hello</span><span class="dl">'</span><span class="p">);</span>
+  
+  <span class="c1">// References (stack)</span>
+  <span class="kd">const</span> <span class="nx">objectRef</span> <span class="o">=</span> <span class="nx">object</span><span class="p">;</span>
+  <span class="kd">const</span> <span class="nx">arrayRef</span> <span class="o">=</span> <span class="nx">array</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Memory deallocation</span>
+<span class="kd">function</span> <span class="nx">memoryDeallocation</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">object</span> <span class="o">=</span> <span class="p">{</span> <span class="na">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">John</span><span class="dl">'</span> <span class="p">};</span>
+  
+  <span class="c1">// Object is eligible for garbage collection</span>
+  <span class="nx">object</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+  
+  <span class="c1">// Or when function ends, local variables are cleaned up</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="️-garbage-collection">🗑️ <strong>Garbage Collection</strong></h2>
+
+<h3 id="garbage-collection-process"><strong>Garbage Collection Process</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Garbage collection process</span>
+<span class="kd">const</span> <span class="nx">gcProcess</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">mark</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Mark reachable objects</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">sweep</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Sweep unreachable objects</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">compact</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Compact memory to reduce fragmentation</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">generational</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Use generational garbage collection</span><span class="dl">"</span>
+<span class="p">};</span>
+
+<span class="c1">// Garbage collection types</span>
+<span class="kd">const</span> <span class="nx">gcTypes</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">markAndSweep</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Mark and sweep algorithm</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">generational</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Generational garbage collection</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">incremental</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Incremental garbage collection</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">concurrent</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Concurrent garbage collection</span><span class="dl">"</span>
+<span class="p">};</span>
+
+<span class="c1">// Garbage collection optimization</span>
+<span class="kd">const</span> <span class="nx">gcOptimization</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">objectLifetime</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Minimize object lifetime</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">memoryLeaks</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Avoid memory leaks</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">weakReferences</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Use weak references</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">objectPools</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Use object pools</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">stringOptimization</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Optimize string operations</span><span class="dl">"</span>
+<span class="p">};</span>
+
+<span class="c1">// Object lifetime optimization</span>
+<span class="kd">function</span> <span class="nx">optimizeObjectLifetime</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// ✅ Good: Short object lifetime</span>
+  <span class="kd">function</span> <span class="nx">processData</span><span class="p">(</span><span class="nx">data</span><span class="p">:</span> <span class="kr">any</span><span class="p">[])</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">result</span><span class="p">:</span> <span class="kr">any</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[];</span>
+    
+    <span class="k">for</span> <span class="p">(</span><span class="kd">const</span> <span class="nx">item</span> <span class="k">of</span> <span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">processed</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="na">id</span><span class="p">:</span> <span class="nx">item</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span>
+        <span class="na">name</span><span class="p">:</span> <span class="nx">item</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span>
+        <span class="na">processed</span><span class="p">:</span> <span class="kc">true</span>
+      <span class="p">};</span>
+      <span class="nx">result</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">processed</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="nx">result</span><span class="p">;</span>
+  <span class="p">}</span>
+  
+  <span class="c1">// ❌ Avoid: Long object lifetime</span>
+  <span class="kd">class</span> <span class="nx">DataProcessor</span> <span class="p">{</span>
+    <span class="k">private</span> <span class="nx">cache</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Map</span><span class="p">();</span>
+    
+    <span class="nx">processData</span><span class="p">(</span><span class="nx">data</span><span class="p">:</span> <span class="kr">any</span><span class="p">[])</span> <span class="p">{</span>
+      <span class="c1">// Objects stay in cache longer than needed</span>
+      <span class="k">return</span> <span class="nx">data</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">item</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">processed</span> <span class="o">=</span> <span class="p">{</span> <span class="p">...</span><span class="nx">item</span><span class="p">,</span> <span class="na">processed</span><span class="p">:</span> <span class="kc">true</span> <span class="p">};</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="kd">set</span><span class="p">(</span><span class="nx">item</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span> <span class="nx">processed</span><span class="p">);</span>
+        <span class="k">return</span> <span class="nx">processed</span><span class="p">;</span>
+      <span class="p">});</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="garbage-collection-monitoring"><strong>Garbage Collection Monitoring</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Garbage collection monitoring</span>
+<span class="kd">class</span> <span class="nx">GCMonitor</span> <span class="p">{</span>
+  <span class="k">private</span> <span class="nx">measurements</span><span class="p">:</span> <span class="nb">Array</span><span class="o">&lt;</span><span class="p">{</span> <span class="na">timestamp</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span> <span class="nl">memory</span><span class="p">:</span> <span class="kr">any</span> <span class="p">}</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">[];</span>
+  
+  <span class="nx">startMonitoring</span><span class="p">():</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="dl">'</span><span class="s1">memory</span><span class="dl">'</span> <span class="k">in</span> <span class="nx">performance</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">setInterval</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">measureMemory</span><span class="p">();</span>
+      <span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  
+  <span class="nx">measureMemory</span><span class="p">():</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="dl">'</span><span class="s1">memory</span><span class="dl">'</span> <span class="k">in</span> <span class="nx">performance</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">memory</span> <span class="o">=</span> <span class="p">(</span><span class="nx">performance</span> <span class="k">as</span> <span class="kr">any</span><span class="p">).</span><span class="nx">memory</span><span class="p">;</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">measurements</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span>
+        <span class="na">timestamp</span><span class="p">:</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">(),</span>
+        <span class="na">memory</span><span class="p">:</span> <span class="p">{</span>
+          <span class="na">used</span><span class="p">:</span> <span class="nx">memory</span><span class="p">.</span><span class="nx">usedJSHeapSize</span><span class="p">,</span>
+          <span class="na">total</span><span class="p">:</span> <span class="nx">memory</span><span class="p">.</span><span class="nx">totalJSHeapSize</span><span class="p">,</span>
+          <span class="na">limit</span><span class="p">:</span> <span class="nx">memory</span><span class="p">.</span><span class="nx">jsHeapSizeLimit</span>
+        <span class="p">}</span>
+      <span class="p">});</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  
+  <span class="nx">getMemoryStats</span><span class="p">():</span> <span class="p">{</span> <span class="nl">min</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span> <span class="nl">max</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span> <span class="nl">avg</span><span class="p">:</span> <span class="kr">number</span> <span class="p">}</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">usedMemory</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">measurements</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">m</span> <span class="o">=&gt;</span> <span class="nx">m</span><span class="p">.</span><span class="nx">memory</span><span class="p">.</span><span class="nx">used</span><span class="p">);</span>
+    <span class="k">return</span> <span class="p">{</span>
+      <span class="na">min</span><span class="p">:</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">min</span><span class="p">(...</span><span class="nx">usedMemory</span><span class="p">),</span>
+      <span class="na">max</span><span class="p">:</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">max</span><span class="p">(...</span><span class="nx">usedMemory</span><span class="p">),</span>
+      <span class="na">avg</span><span class="p">:</span> <span class="nx">usedMemory</span><span class="p">.</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">sum</span><span class="p">,</span> <span class="nx">val</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">sum</span> <span class="o">+</span> <span class="nx">val</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">/</span> <span class="nx">usedMemory</span><span class="p">.</span><span class="nx">length</span>
+    <span class="p">};</span>
+  <span class="p">}</span>
+  
+  <span class="nx">detectMemoryLeaks</span><span class="p">():</span> <span class="nx">boolean</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">stats</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getMemoryStats</span><span class="p">();</span>
+    <span class="kd">const</span> <span class="nx">recent</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">measurements</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">);</span>
+    <span class="kd">const</span> <span class="nx">recentAvg</span> <span class="o">=</span> <span class="nx">recent</span><span class="p">.</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">sum</span><span class="p">,</span> <span class="nx">m</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">sum</span> <span class="o">+</span> <span class="nx">m</span><span class="p">.</span><span class="nx">memory</span><span class="p">.</span><span class="nx">used</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">/</span> <span class="nx">recent</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+    
+    <span class="k">return</span> <span class="nx">recentAvg</span> <span class="o">&gt;</span> <span class="nx">stats</span><span class="p">.</span><span class="nx">avg</span> <span class="o">*</span> <span class="mf">1.5</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Usage</span>
+<span class="kd">const</span> <span class="nx">gcMonitor</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">GCMonitor</span><span class="p">();</span>
+<span class="nx">gcMonitor</span><span class="p">.</span><span class="nx">startMonitoring</span><span class="p">();</span>
+</code></pre></div></div>
+
+<h3 id="garbage-collection-optimization"><strong>Garbage Collection Optimization</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Garbage collection optimization techniques</span>
+<span class="kd">const</span> <span class="nx">gcOptimizationTechniques</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">objectReuse</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Reuse objects when possible</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">arrayReuse</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Reuse arrays when possible</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">stringOptimization</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Optimize string operations</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">closureManagement</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Manage closures carefully</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">eventListenerCleanup</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Clean up event listeners</span><span class="dl">"</span>
+<span class="p">};</span>
+
+<span class="c1">// Object reuse</span>
+<span class="kd">class</span> <span class="nx">ObjectPool</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="k">private</span> <span class="na">pool</span><span class="p">:</span> <span class="nx">T</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[];</span>
+  
+  <span class="kd">constructor</span><span class="p">(</span><span class="k">private</span> <span class="na">createFn</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">T</span><span class="p">)</span> <span class="p">{}</span>
+  
+  <span class="kd">get</span><span class="p">():</span> <span class="nx">T</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">pool</span><span class="p">.</span><span class="nx">pop</span><span class="p">()</span> <span class="o">||</span> <span class="k">this</span><span class="p">.</span><span class="nx">createFn</span><span class="p">();</span>
+  <span class="p">}</span>
+  
+  <span class="nx">release</span><span class="p">(</span><span class="na">obj</span><span class="p">:</span> <span class="nx">T</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">pool</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">obj</span><span class="p">);</span>
+  <span class="p">}</span>
+  
+  <span class="nx">clear</span><span class="p">():</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">pool</span><span class="p">.</span><span class="nx">length</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Array reuse</span>
+<span class="kd">class</span> <span class="nx">ArrayPool</span> <span class="p">{</span>
+  <span class="k">private</span> <span class="nx">pools</span><span class="p">:</span> <span class="nb">Map</span><span class="o">&lt;</span><span class="kr">number</span><span class="p">,</span> <span class="kr">any</span><span class="p">[][]</span><span class="o">&gt;</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Map</span><span class="p">();</span>
+  
+  <span class="nx">getArray</span><span class="p">(</span><span class="nx">size</span><span class="p">:</span> <span class="kr">number</span><span class="p">):</span> <span class="kr">any</span><span class="p">[]</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">pool</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">pools</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="nx">size</span><span class="p">)</span> <span class="o">||</span> <span class="p">[];</span>
+    <span class="k">return</span> <span class="nx">pool</span><span class="p">.</span><span class="nx">pop</span><span class="p">()</span> <span class="o">||</span> <span class="k">new</span> <span class="nb">Array</span><span class="p">(</span><span class="nx">size</span><span class="p">);</span>
+  <span class="p">}</span>
+  
+  <span class="nx">releaseArray</span><span class="p">(</span><span class="nx">arr</span><span class="p">:</span> <span class="kr">any</span><span class="p">[]):</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">size</span> <span class="o">=</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+    <span class="kd">const</span> <span class="nx">pool</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">pools</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="nx">size</span><span class="p">)</span> <span class="o">||</span> <span class="p">[];</span>
+    <span class="nx">arr</span><span class="p">.</span><span class="nx">length</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// Clear array</span>
+    <span class="nx">pool</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">arr</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">pools</span><span class="p">.</span><span class="kd">set</span><span class="p">(</span><span class="nx">size</span><span class="p">,</span> <span class="nx">pool</span><span class="p">);</span>
+  <span class="p">}</span>
+  
+  <span class="nx">clear</span><span class="p">():</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">pools</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// String optimization</span>
+<span class="kd">function</span> <span class="nx">optimizeStringOperations</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// ✅ Good: Use template literals</span>
+  <span class="kd">function</span> <span class="nx">createMessage</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">,</span> <span class="nx">age</span><span class="p">:</span> <span class="kr">number</span><span class="p">):</span> <span class="kr">string</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="s2">`Hello </span><span class="p">${</span><span class="nx">name</span><span class="p">}</span><span class="s2">, you are </span><span class="p">${</span><span class="nx">age</span><span class="p">}</span><span class="s2"> years old`</span><span class="p">;</span>
+  <span class="p">}</span>
+  
+  <span class="c1">// ❌ Avoid: String concatenation</span>
+  <span class="kd">function</span> <span class="nx">createMessageBad</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">,</span> <span class="nx">age</span><span class="p">:</span> <span class="kr">number</span><span class="p">):</span> <span class="kr">string</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="dl">'</span><span class="s1">Hello </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">name</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">, you are </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">age</span> <span class="o">+</span> <span class="dl">'</span><span class="s1"> years old</span><span class="dl">'</span><span class="p">;</span>
+  <span class="p">}</span>
+  
+  <span class="c1">// ✅ Good: Use StringBuilder for many concatenations</span>
+  <span class="kd">class</span> <span class="nx">StringBuilder</span> <span class="p">{</span>
+    <span class="k">private</span> <span class="nx">parts</span><span class="p">:</span> <span class="kr">string</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[];</span>
+    
+    <span class="nx">append</span><span class="p">(</span><span class="nx">str</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nx">StringBuilder</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">parts</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">str</span><span class="p">);</span>
+      <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+    <span class="p">}</span>
+    
+    <span class="nx">toString</span><span class="p">():</span> <span class="kr">string</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">parts</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="dl">''</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-memory-leak-prevention">🚫 <strong>Memory Leak Prevention</strong></h2>
+
+<h3 id="common-memory-leak-sources"><strong>Common Memory Leak Sources</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Common memory leak sources</span>
+<span class="kd">const</span> <span class="nx">memoryLeakSources</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">eventListeners</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Event listeners not removed</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">timers</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Timers and intervals not cleared</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">closures</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Circular references in closures</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">domReferences</span><span class="p">:</span> <span class="dl">"</span><span class="s2">DOM references not cleared</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">caches</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Unbounded caches</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">globalVariables</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Global variables holding references</span><span class="dl">"</span>
+<span class="p">};</span>
+
+<span class="c1">// Event listener cleanup</span>
+<span class="kd">class</span> <span class="nx">EventManager</span> <span class="p">{</span>
+  <span class="k">private</span> <span class="nx">listeners</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Map</span><span class="o">&lt;</span><span class="kr">string</span><span class="p">,</span> <span class="nx">EventListener</span><span class="p">[]</span><span class="o">&gt;</span><span class="p">();</span>
+  
+  <span class="nx">addEventListener</span><span class="p">(</span><span class="nx">element</span><span class="p">:</span> <span class="nx">HTMLElement</span><span class="p">,</span> <span class="nx">event</span><span class="p">:</span> <span class="kr">string</span><span class="p">,</span> <span class="nx">listener</span><span class="p">:</span> <span class="nx">EventListener</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="nx">element</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="nx">listener</span><span class="p">);</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">listeners</span><span class="p">.</span><span class="nx">has</span><span class="p">(</span><span class="nx">event</span><span class="p">))</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">listeners</span><span class="p">.</span><span class="kd">set</span><span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="p">[]);</span>
+    <span class="p">}</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">listeners</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span><span class="o">!</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">listener</span><span class="p">);</span>
+  <span class="p">}</span>
+  
+  <span class="nx">removeEventListener</span><span class="p">(</span><span class="nx">element</span><span class="p">:</span> <span class="nx">HTMLElement</span><span class="p">,</span> <span class="nx">event</span><span class="p">:</span> <span class="kr">string</span><span class="p">,</span> <span class="nx">listener</span><span class="p">:</span> <span class="nx">EventListener</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="nx">element</span><span class="p">.</span><span class="nx">removeEventListener</span><span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="nx">listener</span><span class="p">);</span>
+    
+    <span class="kd">const</span> <span class="nx">listeners</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">listeners</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="o">||</span> <span class="p">[];</span>
+    <span class="kd">const</span> <span class="nx">index</span> <span class="o">=</span> <span class="nx">listeners</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">listener</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">index</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">listeners</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  
+  <span class="nx">removeAllListeners</span><span class="p">(</span><span class="nx">element</span><span class="p">:</span> <span class="nx">HTMLElement</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">const</span> <span class="p">[</span><span class="nx">event</span><span class="p">,</span> <span class="nx">listeners</span><span class="p">]</span> <span class="k">of</span> <span class="k">this</span><span class="p">.</span><span class="nx">listeners</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">for</span> <span class="p">(</span><span class="kd">const</span> <span class="nx">listener</span> <span class="k">of</span> <span class="nx">listeners</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">element</span><span class="p">.</span><span class="nx">removeEventListener</span><span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="nx">listener</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">listeners</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Timer cleanup</span>
+<span class="kd">class</span> <span class="nx">TimerManager</span> <span class="p">{</span>
+  <span class="k">private</span> <span class="nx">timers</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Set</span><span class="o">&lt;</span><span class="kr">number</span><span class="o">&gt;</span><span class="p">();</span>
+  
+  <span class="nx">setTimeout</span><span class="p">(</span><span class="nx">callback</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">,</span> <span class="nx">delay</span><span class="p">:</span> <span class="kr">number</span><span class="p">):</span> <span class="kr">number</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">id</span> <span class="o">=</span> <span class="nx">setTimeout</span><span class="p">(</span><span class="nx">callback</span><span class="p">,</span> <span class="nx">delay</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">timers</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nx">id</span><span class="p">;</span>
+  <span class="p">}</span>
+  
+  <span class="nx">setInterval</span><span class="p">(</span><span class="nx">callback</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">,</span> <span class="nx">delay</span><span class="p">:</span> <span class="kr">number</span><span class="p">):</span> <span class="kr">number</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">id</span> <span class="o">=</span> <span class="nx">setInterval</span><span class="p">(</span><span class="nx">callback</span><span class="p">,</span> <span class="nx">delay</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">timers</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nx">id</span><span class="p">;</span>
+  <span class="p">}</span>
+  
+  <span class="nx">clearTimer</span><span class="p">(</span><span class="nx">id</span><span class="p">:</span> <span class="kr">number</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="nx">clearTimeout</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
+    <span class="nx">clearInterval</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">timers</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
+  <span class="p">}</span>
+  
+  <span class="nx">clearAllTimers</span><span class="p">():</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">const</span> <span class="nx">id</span> <span class="k">of</span> <span class="k">this</span><span class="p">.</span><span class="nx">timers</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">clearTimeout</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
+      <span class="nx">clearInterval</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">timers</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="closure-memory-leaks"><strong>Closure Memory Leaks</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Closure memory leak prevention</span>
+<span class="kd">const</span> <span class="nx">closureLeakPrevention</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">avoidCircularReferences</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Avoid circular references</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">weakReferences</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Use weak references when appropriate</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">cleanup</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Clean up closures when done</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">eventHandlers</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Remove event handlers properly</span><span class="dl">"</span>
+<span class="p">};</span>
+
+<span class="c1">// ✅ Good: Proper closure cleanup</span>
+<span class="kd">class</span> <span class="nx">Component</span> <span class="p">{</span>
+  <span class="k">private</span> <span class="nx">eventHandlers</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Map</span><span class="o">&lt;</span><span class="kr">string</span><span class="p">,</span> <span class="nx">EventListener</span><span class="o">&gt;</span><span class="p">();</span>
+  
+  <span class="nx">addEventListener</span><span class="p">(</span><span class="nx">element</span><span class="p">:</span> <span class="nx">HTMLElement</span><span class="p">,</span> <span class="nx">event</span><span class="p">:</span> <span class="kr">string</span><span class="p">,</span> <span class="nx">handler</span><span class="p">:</span> <span class="nx">EventListener</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="nx">element</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="nx">handler</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">eventHandlers</span><span class="p">.</span><span class="kd">set</span><span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="nx">handler</span><span class="p">);</span>
+  <span class="p">}</span>
+  
+  <span class="nx">destroy</span><span class="p">():</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="c1">// Clean up event handlers</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">const</span> <span class="p">[</span><span class="nx">event</span><span class="p">,</span> <span class="nx">handler</span><span class="p">]</span> <span class="k">of</span> <span class="k">this</span><span class="p">.</span><span class="nx">eventHandlers</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// Remove event listeners</span>
+    <span class="p">}</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">eventHandlers</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// ❌ Avoid: Circular references</span>
+<span class="kd">class</span> <span class="nx">BadComponent</span> <span class="p">{</span>
+  <span class="k">private</span> <span class="nx">parent</span><span class="p">:</span> <span class="kr">any</span><span class="p">;</span>
+  
+  <span class="kd">constructor</span><span class="p">(</span><span class="nx">parent</span><span class="p">:</span> <span class="kr">any</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">parent</span> <span class="o">=</span> <span class="nx">parent</span><span class="p">;</span>
+    <span class="nx">parent</span><span class="p">.</span><span class="nx">addChild</span><span class="p">(</span><span class="k">this</span><span class="p">);</span> <span class="c1">// Circular reference</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Weak references</span>
+<span class="kd">class</span> <span class="nx">WeakReferenceExample</span> <span class="p">{</span>
+  <span class="k">private</span> <span class="nx">weakMap</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">WeakMap</span><span class="p">();</span>
+  
+  <span class="nx">setReference</span><span class="p">(</span><span class="nx">key</span><span class="p">:</span> <span class="nx">object</span><span class="p">,</span> <span class="nx">value</span><span class="p">:</span> <span class="kr">any</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">weakMap</span><span class="p">.</span><span class="kd">set</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
+  <span class="p">}</span>
+  
+  <span class="nx">getReference</span><span class="p">(</span><span class="nx">key</span><span class="p">:</span> <span class="nx">object</span><span class="p">):</span> <span class="kr">any</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">weakMap</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="dom-reference-cleanup"><strong>DOM Reference Cleanup</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// DOM reference cleanup</span>
+<span class="kd">const</span> <span class="nx">domReferenceCleanup</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">clearReferences</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Clear DOM references when done</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">removeEventListeners</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Remove event listeners</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">cleanup</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Clean up DOM manipulation</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">memoryLeaks</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Prevent DOM-related memory leaks</span><span class="dl">"</span>
+<span class="p">};</span>
+
+<span class="c1">// DOM cleanup utility</span>
+<span class="kd">class</span> <span class="nx">DOMCleanup</span> <span class="p">{</span>
+  <span class="k">private</span> <span class="nx">elements</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Set</span><span class="o">&lt;</span><span class="nx">HTMLElement</span><span class="o">&gt;</span><span class="p">();</span>
+  <span class="k">private</span> <span class="nx">eventListeners</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Map</span><span class="o">&lt;</span><span class="nx">HTMLElement</span><span class="p">,</span> <span class="nx">EventListener</span><span class="p">[]</span><span class="o">&gt;</span><span class="p">();</span>
+  
+  <span class="nx">trackElement</span><span class="p">(</span><span class="nx">element</span><span class="p">:</span> <span class="nx">HTMLElement</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">elements</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">element</span><span class="p">);</span>
+  <span class="p">}</span>
+  
+  <span class="nx">addEventListener</span><span class="p">(</span><span class="nx">element</span><span class="p">:</span> <span class="nx">HTMLElement</span><span class="p">,</span> <span class="nx">event</span><span class="p">:</span> <span class="kr">string</span><span class="p">,</span> <span class="nx">listener</span><span class="p">:</span> <span class="nx">EventListener</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="nx">element</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="nx">listener</span><span class="p">);</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">eventListeners</span><span class="p">.</span><span class="nx">has</span><span class="p">(</span><span class="nx">element</span><span class="p">))</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">eventListeners</span><span class="p">.</span><span class="kd">set</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="p">[]);</span>
+    <span class="p">}</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">eventListeners</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="nx">element</span><span class="p">)</span><span class="o">!</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">listener</span><span class="p">);</span>
+  <span class="p">}</span>
+  
+  <span class="nx">cleanup</span><span class="p">():</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="c1">// Remove event listeners</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">const</span> <span class="p">[</span><span class="nx">element</span><span class="p">,</span> <span class="nx">listeners</span><span class="p">]</span> <span class="k">of</span> <span class="k">this</span><span class="p">.</span><span class="nx">eventListeners</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">for</span> <span class="p">(</span><span class="kd">const</span> <span class="nx">listener</span> <span class="k">of</span> <span class="nx">listeners</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">element</span><span class="p">.</span><span class="nx">removeEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">click</span><span class="dl">'</span><span class="p">,</span> <span class="nx">listener</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+    
+    <span class="c1">// Clear references</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">elements</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">eventListeners</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Usage</span>
+<span class="kd">const</span> <span class="nx">domCleanup</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DOMCleanup</span><span class="p">();</span>
+<span class="kd">const</span> <span class="nx">button</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">button</span><span class="dl">'</span><span class="p">)</span> <span class="k">as</span> <span class="nx">HTMLButtonElement</span><span class="p">;</span>
+
+<span class="nx">domCleanup</span><span class="p">.</span><span class="nx">trackElement</span><span class="p">(</span><span class="nx">button</span><span class="p">);</span>
+<span class="nx">domCleanup</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="nx">button</span><span class="p">,</span> <span class="dl">'</span><span class="s1">click</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">clicked</span><span class="dl">'</span><span class="p">));</span>
+
+<span class="c1">// Clean up when done</span>
+<span class="nx">domCleanup</span><span class="p">.</span><span class="nx">cleanup</span><span class="p">();</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-memory-optimization">⚡ <strong>Memory Optimization</strong></h2>
+
+<h3 id="memory-efficient-data-structures"><strong>Memory-Efficient Data Structures</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Memory-efficient data structures</span>
+<span class="kd">const</span> <span class="nx">memoryEfficientStructures</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">typedArrays</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Use typed arrays for numeric data</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">objectPools</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Use object pools for frequent allocations</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">weakMaps</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Use weak maps for object keys</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">stringOptimization</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Optimize string operations</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">arrayOptimization</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Optimize array operations</span><span class="dl">"</span>
+<span class="p">};</span>
+
+<span class="c1">// Typed arrays</span>
+<span class="kd">function</span> <span class="nx">useTypedArrays</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// ✅ Good: Typed arrays for numeric data</span>
+  <span class="kd">const</span> <span class="nx">numbers</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Float32Array</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="nx">integers</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Int32Array</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
+  
+  <span class="c1">// ❌ Avoid: Regular arrays for numeric data</span>
+  <span class="kd">const</span> <span class="nx">numbersBad</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Array</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="nx">integersBad</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Array</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Object pools</span>
+<span class="kd">class</span> <span class="nx">MemoryEfficientPool</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="k">private</span> <span class="na">pool</span><span class="p">:</span> <span class="nx">T</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[];</span>
+  <span class="k">private</span> <span class="na">createFn</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">T</span><span class="p">;</span>
+  
+  <span class="kd">constructor</span><span class="p">(</span><span class="na">createFn</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">T</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">createFn</span> <span class="o">=</span> <span class="nx">createFn</span><span class="p">;</span>
+  <span class="p">}</span>
+  
+  <span class="kd">get</span><span class="p">():</span> <span class="nx">T</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">pool</span><span class="p">.</span><span class="nx">pop</span><span class="p">()</span> <span class="o">||</span> <span class="k">this</span><span class="p">.</span><span class="nx">createFn</span><span class="p">();</span>
+  <span class="p">}</span>
+  
+  <span class="nx">release</span><span class="p">(</span><span class="na">obj</span><span class="p">:</span> <span class="nx">T</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">pool</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">obj</span><span class="p">);</span>
+  <span class="p">}</span>
+  
+  <span class="nx">clear</span><span class="p">():</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">pool</span><span class="p">.</span><span class="nx">length</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Weak maps</span>
+<span class="kd">class</span> <span class="nx">WeakMapExample</span> <span class="p">{</span>
+  <span class="k">private</span> <span class="nx">weakMap</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">WeakMap</span><span class="p">();</span>
+  
+  <span class="kd">set</span><span class="p">(</span><span class="nx">key</span><span class="p">:</span> <span class="nx">object</span><span class="p">,</span> <span class="nx">value</span><span class="p">:</span> <span class="kr">any</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">weakMap</span><span class="p">.</span><span class="kd">set</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
+  <span class="p">}</span>
+  
+  <span class="kd">get</span><span class="p">(</span><span class="nx">key</span><span class="p">:</span> <span class="nx">object</span><span class="p">):</span> <span class="kr">any</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">weakMap</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+  <span class="p">}</span>
+  
+  <span class="nx">has</span><span class="p">(</span><span class="nx">key</span><span class="p">:</span> <span class="nx">object</span><span class="p">):</span> <span class="nx">boolean</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">weakMap</span><span class="p">.</span><span class="nx">has</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+  <span class="p">}</span>
+  
+  <span class="k">delete</span><span class="p">(</span><span class="nx">key</span><span class="p">:</span> <span class="nx">object</span><span class="p">):</span> <span class="nx">boolean</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">weakMap</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="memory-efficient-algorithms"><strong>Memory-Efficient Algorithms</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Memory-efficient algorithms</span>
+<span class="kd">const</span> <span class="nx">memoryEfficientAlgorithms</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">inPlace</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Use in-place algorithms when possible</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">streaming</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Use streaming algorithms for large datasets</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">lazyEvaluation</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Use lazy evaluation</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">memoization</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Use memoization for expensive operations</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">caching</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Implement efficient caching strategies</span><span class="dl">"</span>
+<span class="p">};</span>
+
+<span class="c1">// In-place algorithms</span>
+<span class="kd">function</span> <span class="nx">inPlaceSort</span><span class="p">(</span><span class="nx">arr</span><span class="p">:</span> <span class="kr">number</span><span class="p">[]):</span> <span class="k">void</span> <span class="p">{</span>
+  <span class="c1">// ✅ Good: In-place sorting</span>
+  <span class="nx">arr</span><span class="p">.</span><span class="nx">sort</span><span class="p">((</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">a</span> <span class="o">-</span> <span class="nx">b</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">inPlaceReverse</span><span class="p">(</span><span class="nx">arr</span><span class="p">:</span> <span class="kr">any</span><span class="p">[]):</span> <span class="k">void</span> <span class="p">{</span>
+  <span class="c1">// ✅ Good: In-place reversal</span>
+  <span class="kd">let</span> <span class="nx">left</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="kd">let</span> <span class="nx">right</span> <span class="o">=</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+  
+  <span class="k">while</span> <span class="p">(</span><span class="nx">left</span> <span class="o">&lt;</span> <span class="nx">right</span><span class="p">)</span> <span class="p">{</span>
+    <span class="p">[</span><span class="nx">arr</span><span class="p">[</span><span class="nx">left</span><span class="p">],</span> <span class="nx">arr</span><span class="p">[</span><span class="nx">right</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[</span><span class="nx">arr</span><span class="p">[</span><span class="nx">right</span><span class="p">],</span> <span class="nx">arr</span><span class="p">[</span><span class="nx">left</span><span class="p">]];</span>
+    <span class="nx">left</span><span class="o">++</span><span class="p">;</span>
+    <span class="nx">right</span><span class="o">--</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Streaming algorithms</span>
+<span class="kd">function</span><span class="o">*</span> <span class="nx">streamProcess</span><span class="p">(</span><span class="nx">data</span><span class="p">:</span> <span class="kr">any</span><span class="p">[]):</span> <span class="nx">Generator</span><span class="o">&lt;</span><span class="kr">any</span><span class="p">,</span> <span class="k">void</span><span class="p">,</span> <span class="nx">unknown</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kd">const</span> <span class="nx">item</span> <span class="k">of</span> <span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">yield</span> <span class="nx">processItem</span><span class="p">(</span><span class="nx">item</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">processItem</span><span class="p">(</span><span class="nx">item</span><span class="p">:</span> <span class="kr">any</span><span class="p">):</span> <span class="kr">any</span> <span class="p">{</span>
+  <span class="c1">// Process item</span>
+  <span class="k">return</span> <span class="p">{</span> <span class="p">...</span><span class="nx">item</span><span class="p">,</span> <span class="na">processed</span><span class="p">:</span> <span class="kc">true</span> <span class="p">};</span>
+<span class="p">}</span>
+
+<span class="c1">// Lazy evaluation</span>
+<span class="kd">class</span> <span class="nx">LazyArray</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="k">private</span> <span class="na">data</span><span class="p">:</span> <span class="nx">T</span><span class="p">[];</span>
+  <span class="k">private</span> <span class="na">operations</span><span class="p">:</span> <span class="nb">Array</span><span class="o">&lt;</span><span class="p">(</span><span class="na">item</span><span class="p">:</span> <span class="nx">T</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">[];</span>
+  
+  <span class="kd">constructor</span><span class="p">(</span><span class="na">data</span><span class="p">:</span> <span class="nx">T</span><span class="p">[])</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">data</span> <span class="o">=</span> <span class="nx">data</span><span class="p">;</span>
+  <span class="p">}</span>
+  
+  <span class="nx">map</span><span class="p">(</span><span class="na">fn</span><span class="p">:</span> <span class="p">(</span><span class="na">item</span><span class="p">:</span> <span class="nx">T</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">T</span><span class="p">):</span> <span class="nx">LazyArray</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">operations</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">fn</span><span class="p">);</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+  <span class="p">}</span>
+  
+  <span class="nx">filter</span><span class="p">(</span><span class="na">predicate</span><span class="p">:</span> <span class="p">(</span><span class="na">item</span><span class="p">:</span> <span class="nx">T</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">boolean</span><span class="p">):</span> <span class="nx">LazyArray</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">operations</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">item</span> <span class="o">=&gt;</span> <span class="nx">predicate</span><span class="p">(</span><span class="nx">item</span><span class="p">)</span> <span class="p">?</span> <span class="nx">item</span> <span class="p">:</span> <span class="kc">null</span> <span class="k">as</span> <span class="kr">any</span><span class="p">);</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+  <span class="p">}</span>
+  
+  <span class="nx">toArray</span><span class="p">():</span> <span class="nx">T</span><span class="p">[]</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">result</span> <span class="o">=</span> <span class="p">[...</span><span class="k">this</span><span class="p">.</span><span class="nx">data</span><span class="p">];</span>
+    
+    <span class="k">for</span> <span class="p">(</span><span class="kd">const</span> <span class="nx">operation</span> <span class="k">of</span> <span class="k">this</span><span class="p">.</span><span class="nx">operations</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">result</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">operation</span><span class="p">).</span><span class="nx">filter</span><span class="p">(</span><span class="nx">item</span> <span class="o">=&gt;</span> <span class="nx">item</span> <span class="o">!==</span> <span class="kc">null</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="nx">result</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="memory-efficient-patterns"><strong>Memory-Efficient Patterns</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Memory-efficient patterns</span>
+<span class="kd">const</span> <span class="nx">memoryEfficientPatterns</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">flyweight</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Use flyweight pattern for shared state</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">objectPool</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Use object pool pattern</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">lazyLoading</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Use lazy loading pattern</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">caching</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Use efficient caching patterns</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">streaming</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Use streaming patterns</span><span class="dl">"</span>
+<span class="p">};</span>
+
+<span class="c1">// Flyweight pattern</span>
+<span class="kd">class</span> <span class="nx">FlyweightFactory</span> <span class="p">{</span>
+  <span class="k">private</span> <span class="nx">flyweights</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Map</span><span class="o">&lt;</span><span class="kr">string</span><span class="p">,</span> <span class="kr">any</span><span class="o">&gt;</span><span class="p">();</span>
+  
+  <span class="nx">getFlyweight</span><span class="p">(</span><span class="nx">key</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="kr">any</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">flyweights</span><span class="p">.</span><span class="nx">has</span><span class="p">(</span><span class="nx">key</span><span class="p">))</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">flyweights</span><span class="p">.</span><span class="kd">set</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">createFlyweight</span><span class="p">(</span><span class="nx">key</span><span class="p">));</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">flyweights</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+  <span class="p">}</span>
+  
+  <span class="k">private</span> <span class="nx">createFlyweight</span><span class="p">(</span><span class="nx">key</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="kr">any</span> <span class="p">{</span>
+    <span class="c1">// Create flyweight object</span>
+    <span class="k">return</span> <span class="p">{</span> <span class="nx">key</span><span class="p">,</span> <span class="na">shared</span><span class="p">:</span> <span class="kc">true</span> <span class="p">};</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Object pool pattern</span>
+<span class="kd">class</span> <span class="nx">ObjectPool</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="k">private</span> <span class="na">pool</span><span class="p">:</span> <span class="nx">T</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[];</span>
+  <span class="k">private</span> <span class="na">createFn</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">T</span><span class="p">;</span>
+  <span class="k">private</span> <span class="na">resetFn</span><span class="p">:</span> <span class="p">(</span><span class="na">obj</span><span class="p">:</span> <span class="nx">T</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span>
+  
+  <span class="kd">constructor</span><span class="p">(</span><span class="na">createFn</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">T</span><span class="p">,</span> <span class="na">resetFn</span><span class="p">:</span> <span class="p">(</span><span class="na">obj</span><span class="p">:</span> <span class="nx">T</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">createFn</span> <span class="o">=</span> <span class="nx">createFn</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">resetFn</span> <span class="o">=</span> <span class="nx">resetFn</span><span class="p">;</span>
+  <span class="p">}</span>
+  
+  <span class="kd">get</span><span class="p">():</span> <span class="nx">T</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">obj</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">pool</span><span class="p">.</span><span class="nx">pop</span><span class="p">()</span> <span class="o">||</span> <span class="k">this</span><span class="p">.</span><span class="nx">createFn</span><span class="p">();</span>
+    <span class="k">return</span> <span class="nx">obj</span><span class="p">;</span>
+  <span class="p">}</span>
+  
+  <span class="nx">release</span><span class="p">(</span><span class="na">obj</span><span class="p">:</span> <span class="nx">T</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">resetFn</span><span class="p">(</span><span class="nx">obj</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">pool</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">obj</span><span class="p">);</span>
+  <span class="p">}</span>
+  
+  <span class="nx">clear</span><span class="p">():</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">pool</span><span class="p">.</span><span class="nx">length</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Lazy loading pattern</span>
+<span class="kd">class</span> <span class="nx">LazyLoader</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="k">private</span> <span class="na">value</span><span class="p">:</span> <span class="nx">T</span> <span class="o">|</span> <span class="kc">null</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+  <span class="k">private</span> <span class="na">loader</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">T</span><span class="p">;</span>
+  
+  <span class="kd">constructor</span><span class="p">(</span><span class="na">loader</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">T</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">loader</span> <span class="o">=</span> <span class="nx">loader</span><span class="p">;</span>
+  <span class="p">}</span>
+  
+  <span class="kd">get</span><span class="p">():</span> <span class="nx">T</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">value</span> <span class="o">===</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">loader</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
+  <span class="p">}</span>
+  
+  <span class="nx">reset</span><span class="p">():</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-memory-monitoring">📊 <strong>Memory Monitoring</strong></h2>
+
+<h3 id="memory-usage-monitoring"><strong>Memory Usage Monitoring</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Memory usage monitoring</span>
+<span class="kd">class</span> <span class="nx">MemoryMonitor</span> <span class="p">{</span>
+  <span class="k">private</span> <span class="nx">measurements</span><span class="p">:</span> <span class="nb">Array</span><span class="o">&lt;</span><span class="p">{</span> <span class="na">timestamp</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span> <span class="nl">memory</span><span class="p">:</span> <span class="kr">any</span> <span class="p">}</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">[];</span>
+  <span class="k">private</span> <span class="nx">intervalId</span><span class="p">:</span> <span class="kr">number</span> <span class="o">|</span> <span class="kc">null</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+  
+  <span class="nx">startMonitoring</span><span class="p">(</span><span class="nx">interval</span><span class="p">:</span> <span class="kr">number</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="dl">'</span><span class="s1">memory</span><span class="dl">'</span> <span class="k">in</span> <span class="nx">performance</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">intervalId</span> <span class="o">=</span> <span class="nx">setInterval</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">measureMemory</span><span class="p">();</span>
+      <span class="p">},</span> <span class="nx">interval</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  
+  <span class="nx">stopMonitoring</span><span class="p">():</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">intervalId</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">clearInterval</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">intervalId</span><span class="p">);</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">intervalId</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  
+  <span class="nx">measureMemory</span><span class="p">():</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="dl">'</span><span class="s1">memory</span><span class="dl">'</span> <span class="k">in</span> <span class="nx">performance</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">memory</span> <span class="o">=</span> <span class="p">(</span><span class="nx">performance</span> <span class="k">as</span> <span class="kr">any</span><span class="p">).</span><span class="nx">memory</span><span class="p">;</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">measurements</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span>
+        <span class="na">timestamp</span><span class="p">:</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">(),</span>
+        <span class="na">memory</span><span class="p">:</span> <span class="p">{</span>
+          <span class="na">used</span><span class="p">:</span> <span class="nx">memory</span><span class="p">.</span><span class="nx">usedJSHeapSize</span><span class="p">,</span>
+          <span class="na">total</span><span class="p">:</span> <span class="nx">memory</span><span class="p">.</span><span class="nx">totalJSHeapSize</span><span class="p">,</span>
+          <span class="na">limit</span><span class="p">:</span> <span class="nx">memory</span><span class="p">.</span><span class="nx">jsHeapSizeLimit</span>
+        <span class="p">}</span>
+      <span class="p">});</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  
+  <span class="nx">getMemoryUsage</span><span class="p">():</span> <span class="kr">any</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="dl">'</span><span class="s1">memory</span><span class="dl">'</span> <span class="k">in</span> <span class="nx">performance</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="p">(</span><span class="nx">performance</span> <span class="k">as</span> <span class="kr">any</span><span class="p">).</span><span class="nx">memory</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+  <span class="p">}</span>
+  
+  <span class="nx">getMemoryStats</span><span class="p">():</span> <span class="p">{</span> <span class="nl">min</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span> <span class="nl">max</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span> <span class="nl">avg</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span> <span class="nl">current</span><span class="p">:</span> <span class="kr">number</span> <span class="p">}</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">usedMemory</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">measurements</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">m</span> <span class="o">=&gt;</span> <span class="nx">m</span><span class="p">.</span><span class="nx">memory</span><span class="p">.</span><span class="nx">used</span><span class="p">);</span>
+    <span class="kd">const</span> <span class="nx">current</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">measurements</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="p">?</span> <span class="k">this</span><span class="p">.</span><span class="nx">measurements</span><span class="p">[</span><span class="k">this</span><span class="p">.</span><span class="nx">measurements</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">].</span><span class="nx">memory</span><span class="p">.</span><span class="nx">used</span> <span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
+    
+    <span class="k">return</span> <span class="p">{</span>
+      <span class="na">min</span><span class="p">:</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">min</span><span class="p">(...</span><span class="nx">usedMemory</span><span class="p">),</span>
+      <span class="na">max</span><span class="p">:</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">max</span><span class="p">(...</span><span class="nx">usedMemory</span><span class="p">),</span>
+      <span class="na">avg</span><span class="p">:</span> <span class="nx">usedMemory</span><span class="p">.</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">sum</span><span class="p">,</span> <span class="nx">val</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">sum</span> <span class="o">+</span> <span class="nx">val</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">/</span> <span class="nx">usedMemory</span><span class="p">.</span><span class="nx">length</span><span class="p">,</span>
+      <span class="nx">current</span>
+    <span class="p">};</span>
+  <span class="p">}</span>
+  
+  <span class="nx">detectMemoryLeaks</span><span class="p">():</span> <span class="nx">boolean</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">stats</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getMemoryStats</span><span class="p">();</span>
+    <span class="kd">const</span> <span class="nx">recent</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">measurements</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">);</span>
+    <span class="kd">const</span> <span class="nx">recentAvg</span> <span class="o">=</span> <span class="nx">recent</span><span class="p">.</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">sum</span><span class="p">,</span> <span class="nx">m</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">sum</span> <span class="o">+</span> <span class="nx">m</span><span class="p">.</span><span class="nx">memory</span><span class="p">.</span><span class="nx">used</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">/</span> <span class="nx">recent</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+    
+    <span class="k">return</span> <span class="nx">recentAvg</span> <span class="o">&gt;</span> <span class="nx">stats</span><span class="p">.</span><span class="nx">avg</span> <span class="o">*</span> <span class="mf">1.5</span><span class="p">;</span>
+  <span class="p">}</span>
+  
+  <span class="nx">getMemoryTrend</span><span class="p">():</span> <span class="dl">'</span><span class="s1">increasing</span><span class="dl">'</span> <span class="o">|</span> <span class="dl">'</span><span class="s1">decreasing</span><span class="dl">'</span> <span class="o">|</span> <span class="dl">'</span><span class="s1">stable</span><span class="dl">'</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">measurements</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">)</span> <span class="k">return</span> <span class="dl">'</span><span class="s1">stable</span><span class="dl">'</span><span class="p">;</span>
+    
+    <span class="kd">const</span> <span class="nx">recent</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">measurements</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">);</span>
+    <span class="kd">const</span> <span class="nx">first</span> <span class="o">=</span> <span class="nx">recent</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">memory</span><span class="p">.</span><span class="nx">used</span><span class="p">;</span>
+    <span class="kd">const</span> <span class="nx">last</span> <span class="o">=</span> <span class="nx">recent</span><span class="p">[</span><span class="nx">recent</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">].</span><span class="nx">memory</span><span class="p">.</span><span class="nx">used</span><span class="p">;</span>
+    
+    <span class="kd">const</span> <span class="nx">threshold</span> <span class="o">=</span> <span class="nx">first</span> <span class="o">*</span> <span class="mf">0.1</span><span class="p">;</span> <span class="c1">// 10% threshold</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="nx">last</span> <span class="o">&gt;</span> <span class="nx">first</span> <span class="o">+</span> <span class="nx">threshold</span><span class="p">)</span> <span class="k">return</span> <span class="dl">'</span><span class="s1">increasing</span><span class="dl">'</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">last</span> <span class="o">&lt;</span> <span class="nx">first</span> <span class="o">-</span> <span class="nx">threshold</span><span class="p">)</span> <span class="k">return</span> <span class="dl">'</span><span class="s1">decreasing</span><span class="dl">'</span><span class="p">;</span>
+    <span class="k">return</span> <span class="dl">'</span><span class="s1">stable</span><span class="dl">'</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Usage</span>
+<span class="kd">const</span> <span class="nx">memoryMonitor</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MemoryMonitor</span><span class="p">();</span>
+<span class="nx">memoryMonitor</span><span class="p">.</span><span class="nx">startMonitoring</span><span class="p">(</span><span class="mi">5000</span><span class="p">);</span> <span class="c1">// Monitor every 5 seconds</span>
+
+<span class="c1">// Check for memory leaks</span>
+<span class="nx">setInterval</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">memoryMonitor</span><span class="p">.</span><span class="nx">detectMemoryLeaks</span><span class="p">())</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span><span class="dl">'</span><span class="s1">Potential memory leak detected</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">}</span>
+  
+  <span class="kd">const</span> <span class="nx">trend</span> <span class="o">=</span> <span class="nx">memoryMonitor</span><span class="p">.</span><span class="nx">getMemoryTrend</span><span class="p">();</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`Memory trend: </span><span class="p">${</span><span class="nx">trend</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+<span class="p">},</span> <span class="mi">30000</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="memory-leak-detection"><strong>Memory Leak Detection</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Memory leak detection</span>
+<span class="kd">class</span> <span class="nx">MemoryLeakDetector</span> <span class="p">{</span>
+  <span class="k">private</span> <span class="nx">baseline</span><span class="p">:</span> <span class="kr">number</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">private</span> <span class="nx">measurements</span><span class="p">:</span> <span class="kr">number</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[];</span>
+  
+  <span class="nx">setBaseline</span><span class="p">():</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="dl">'</span><span class="s1">memory</span><span class="dl">'</span> <span class="k">in</span> <span class="nx">performance</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">baseline</span> <span class="o">=</span> <span class="p">(</span><span class="nx">performance</span> <span class="k">as</span> <span class="kr">any</span><span class="p">).</span><span class="nx">memory</span><span class="p">.</span><span class="nx">usedJSHeapSize</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  
+  <span class="nx">measure</span><span class="p">():</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="dl">'</span><span class="s1">memory</span><span class="dl">'</span> <span class="k">in</span> <span class="nx">performance</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">current</span> <span class="o">=</span> <span class="p">(</span><span class="nx">performance</span> <span class="k">as</span> <span class="kr">any</span><span class="p">).</span><span class="nx">memory</span><span class="p">.</span><span class="nx">usedJSHeapSize</span><span class="p">;</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">measurements</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">current</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  
+  <span class="nx">detectLeak</span><span class="p">():</span> <span class="nx">boolean</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">measurements</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">)</span> <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+    
+    <span class="kd">const</span> <span class="nx">recent</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">measurements</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">);</span>
+    <span class="kd">const</span> <span class="nx">trend</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">calculateTrend</span><span class="p">(</span><span class="nx">recent</span><span class="p">);</span>
+    
+    <span class="c1">// If memory is consistently increasing</span>
+    <span class="k">return</span> <span class="nx">trend</span> <span class="o">&gt;</span> <span class="mf">0.1</span><span class="p">;</span> <span class="c1">// 10% increase threshold</span>
+  <span class="p">}</span>
+  
+  <span class="k">private</span> <span class="nx">calculateTrend</span><span class="p">(</span><span class="nx">values</span><span class="p">:</span> <span class="kr">number</span><span class="p">[]):</span> <span class="kr">number</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">values</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">)</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+    
+    <span class="kd">const</span> <span class="nx">first</span> <span class="o">=</span> <span class="nx">values</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+    <span class="kd">const</span> <span class="nx">last</span> <span class="o">=</span> <span class="nx">values</span><span class="p">[</span><span class="nx">values</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
+    
+    <span class="k">return</span> <span class="p">(</span><span class="nx">last</span> <span class="o">-</span> <span class="nx">first</span><span class="p">)</span> <span class="o">/</span> <span class="nx">first</span><span class="p">;</span>
+  <span class="p">}</span>
+  
+  <span class="nx">getMemoryGrowth</span><span class="p">():</span> <span class="kr">number</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">measurements</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">)</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+    
+    <span class="kd">const</span> <span class="nx">first</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">measurements</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+    <span class="kd">const</span> <span class="nx">last</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">measurements</span><span class="p">[</span><span class="k">this</span><span class="p">.</span><span class="nx">measurements</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
+    
+    <span class="k">return</span> <span class="p">(</span><span class="nx">last</span> <span class="o">-</span> <span class="nx">first</span><span class="p">)</span> <span class="o">/</span> <span class="nx">first</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Usage</span>
+<span class="kd">const</span> <span class="nx">leakDetector</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MemoryLeakDetector</span><span class="p">();</span>
+<span class="nx">leakDetector</span><span class="p">.</span><span class="nx">setBaseline</span><span class="p">();</span>
+
+<span class="c1">// Measure memory periodically</span>
+<span class="nx">setInterval</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">leakDetector</span><span class="p">.</span><span class="nx">measure</span><span class="p">();</span>
+  
+  <span class="k">if</span> <span class="p">(</span><span class="nx">leakDetector</span><span class="p">.</span><span class="nx">detectLeak</span><span class="p">())</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span><span class="dl">'</span><span class="s1">Memory leak detected!</span><span class="dl">'</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`Memory growth: </span><span class="p">${(</span><span class="nx">leakDetector</span><span class="p">.</span><span class="nx">getMemoryGrowth</span><span class="p">()</span> <span class="o">*</span> <span class="mi">100</span><span class="p">).</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">2</span><span class="p">)}</span><span class="s2">%`</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">},</span> <span class="mi">10000</span><span class="p">);</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-best-practices">✅ <strong>Best Practices</strong></h2>
+
+<h3 id="1-prevent-memory-leaks"><strong>1. Prevent Memory Leaks</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ✅ Good: Clean up event listeners</span>
+<span class="kd">class</span> <span class="nx">Component</span> <span class="p">{</span>
+  <span class="k">private</span> <span class="nx">eventHandlers</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Map</span><span class="o">&lt;</span><span class="kr">string</span><span class="p">,</span> <span class="nx">EventListener</span><span class="o">&gt;</span><span class="p">();</span>
+  
+  <span class="nx">addEventListener</span><span class="p">(</span><span class="nx">element</span><span class="p">:</span> <span class="nx">HTMLElement</span><span class="p">,</span> <span class="nx">event</span><span class="p">:</span> <span class="kr">string</span><span class="p">,</span> <span class="nx">handler</span><span class="p">:</span> <span class="nx">EventListener</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="nx">element</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="nx">handler</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">eventHandlers</span><span class="p">.</span><span class="kd">set</span><span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="nx">handler</span><span class="p">);</span>
+  <span class="p">}</span>
+  
+  <span class="nx">destroy</span><span class="p">():</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">const</span> <span class="p">[</span><span class="nx">event</span><span class="p">,</span> <span class="nx">handler</span><span class="p">]</span> <span class="k">of</span> <span class="k">this</span><span class="p">.</span><span class="nx">eventHandlers</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// Remove event listeners</span>
+    <span class="p">}</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">eventHandlers</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// ❌ Avoid: Not cleaning up event listeners</span>
+<span class="kd">class</span> <span class="nx">BadComponent</span> <span class="p">{</span>
+  <span class="nx">addEventListener</span><span class="p">(</span><span class="nx">element</span><span class="p">:</span> <span class="nx">HTMLElement</span><span class="p">,</span> <span class="nx">event</span><span class="p">:</span> <span class="kr">string</span><span class="p">,</span> <span class="nx">handler</span><span class="p">:</span> <span class="nx">EventListener</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="nx">element</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="nx">handler</span><span class="p">);</span>
+    <span class="c1">// No cleanup</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="2-use-object-pools"><strong>2. Use Object Pools</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ✅ Good: Use object pools</span>
+<span class="kd">class</span> <span class="nx">ObjectPool</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="k">private</span> <span class="na">pool</span><span class="p">:</span> <span class="nx">T</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[];</span>
+  
+  <span class="kd">get</span><span class="p">():</span> <span class="nx">T</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">pool</span><span class="p">.</span><span class="nx">pop</span><span class="p">()</span> <span class="o">||</span> <span class="k">this</span><span class="p">.</span><span class="nx">createFn</span><span class="p">();</span>
+  <span class="p">}</span>
+  
+  <span class="nx">release</span><span class="p">(</span><span class="na">obj</span><span class="p">:</span> <span class="nx">T</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">pool</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">obj</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// ❌ Avoid: Creating objects frequently</span>
+<span class="kd">function</span> <span class="nx">processData</span><span class="p">(</span><span class="nx">data</span><span class="p">:</span> <span class="kr">any</span><span class="p">[])</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">data</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">item</span> <span class="o">=&gt;</span> <span class="p">({</span>
+    <span class="na">id</span><span class="p">:</span> <span class="nx">item</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span>
+    <span class="na">name</span><span class="p">:</span> <span class="nx">item</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span>
+    <span class="na">processed</span><span class="p">:</span> <span class="kc">true</span>
+  <span class="p">}));</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="3-optimize-memory-usage"><strong>3. Optimize Memory Usage</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ✅ Good: Use typed arrays for numeric data</span>
+<span class="kd">const</span> <span class="nx">numbers</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Float32Array</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
+
+<span class="c1">// ❌ Avoid: Regular arrays for numeric data</span>
+<span class="kd">const</span> <span class="nx">numbersBad</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Array</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="4-monitor-memory-usage"><strong>4. Monitor Memory Usage</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ✅ Good: Monitor memory usage</span>
+<span class="kd">const</span> <span class="nx">memoryMonitor</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MemoryMonitor</span><span class="p">();</span>
+<span class="nx">memoryMonitor</span><span class="p">.</span><span class="nx">startMonitoring</span><span class="p">();</span>
+
+<span class="c1">// ❌ Avoid: No memory monitoring</span>
+<span class="c1">// No monitoring</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-common-interview-questions">❓ <strong>Common Interview Questions</strong></h2>
+
+<h3 id="1-how-do-you-prevent-memory-leaks-in-typescript"><strong>1. How do you prevent memory leaks in TypeScript?</strong></h3>
+
+<p><strong>Answer:</strong></p>
+<ul>
+  <li><strong>Event Listeners</strong>: Remove event listeners when no longer needed</li>
+  <li><strong>Timers</strong>: Clear timers and intervals</li>
+  <li><strong>Closures</strong>: Avoid circular references in closures</li>
+  <li><strong>DOM References</strong>: Clear DOM references</li>
+  <li><strong>Caches</strong>: Limit cache size and implement cleanup</li>
+</ul>
+
+<h3 id="2-what-are-the-common-sources-of-memory-leaks"><strong>2. What are the common sources of memory leaks?</strong></h3>
+
+<p><strong>Answer:</strong></p>
+<ul>
+  <li><strong>Event Listeners</strong>: Not removing event listeners</li>
+  <li><strong>Timers</strong>: Not clearing timers and intervals</li>
+  <li><strong>Closures</strong>: Circular references in closures</li>
+  <li><strong>DOM References</strong>: Holding references to DOM elements</li>
+  <li><strong>Caches</strong>: Unbounded caches</li>
+  <li><strong>Global Variables</strong>: Global variables holding references</li>
+</ul>
+
+<h3 id="3-how-do-you-optimize-memory-usage-in-typescript"><strong>3. How do you optimize memory usage in TypeScript?</strong></h3>
+
+<p><strong>Answer:</strong></p>
+<ul>
+  <li><strong>Object Pools</strong>: Reuse objects when possible</li>
+  <li><strong>Typed Arrays</strong>: Use typed arrays for numeric data</li>
+  <li><strong>Weak References</strong>: Use weak references when appropriate</li>
+  <li><strong>Lazy Loading</strong>: Load data only when needed</li>
+  <li><strong>Memory Monitoring</strong>: Monitor memory usage</li>
+</ul>
+
+<h3 id="4-what-is-garbage-collection-and-how-does-it-work"><strong>4. What is garbage collection and how does it work?</strong></h3>
+
+<p><strong>Answer:</strong>
+Garbage collection is the automatic memory management process that:</p>
+<ul>
+  <li><strong>Marks</strong>: Identifies reachable objects</li>
+  <li><strong>Sweeps</strong>: Removes unreachable objects</li>
+  <li><strong>Compacts</strong>: Compacts memory to reduce fragmentation</li>
+  <li><strong>Generational</strong>: Uses generational garbage collection</li>
+</ul>
+
+<h3 id="5-how-do-you-monitor-memory-usage-in-typescript-applications"><strong>5. How do you monitor memory usage in TypeScript applications?</strong></h3>
+
+<p><strong>Answer:</strong></p>
+<ul>
+  <li><strong>Performance API</strong>: Use performance.memory</li>
+  <li><strong>Memory Monitoring</strong>: Implement custom memory monitoring</li>
+  <li><strong>Leak Detection</strong>: Detect memory leaks</li>
+  <li><strong>Trend Analysis</strong>: Analyze memory trends</li>
+  <li><strong>Profiling</strong>: Use memory profiling tools</li>
+</ul>
+
+<hr />
+
+<h2 id="-navigation">🧭 Navigation</h2>
+
+<div class="navigation">
+  <a href="03-Bundle-Size-Optimization.md" class="nav-button">← Previous: Bundle Size Optimization</a>
+  <a href="../10-TypeScript-Best-Practices/01-Code-Organization-Architecture.md" class="nav-button">Next: TypeScript Best Practices →</a>
+</div>
+
+<p><em>Last updated: December 2025</em></p>
+
+        </main>
+        
+        <footer style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #ecf0f1; color: #666; text-align: center;">
+            <p>Interview Prep Documentation - Built with Jekyll</p>
+        </footer>
+    </div>
+</body>
+</html>

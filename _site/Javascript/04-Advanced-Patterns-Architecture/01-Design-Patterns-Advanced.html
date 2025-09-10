@@ -1,0 +1,1538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔹 Advanced Design Patterns - Interview Prep Documentation</title>
+    <meta name="description" content="Comprehensive guides for JavaScript, TypeScript, and React Native interview preparation">
+    
+    <!-- GitHub Pages compatible styling -->
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+        }
+        
+        .container {
+            max-width: 100%;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            color: #2c3e50;
+            margin-top: 2em;
+            margin-bottom: 1em;
+        }
+        
+        h1 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            border-bottom: 1px solid #ecf0f1;
+            padding-bottom: 5px;
+        }
+        
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border-left: 4px solid #3498db;
+        }
+        
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+        
+        blockquote {
+            border-left: 4px solid #3498db;
+            margin: 0;
+            padding-left: 20px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1em 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .navigation {
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px 0;
+            margin-bottom: 20px;
+        }
+        
+        .navigation a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+        
+        .navigation a:hover {
+            text-decoration: underline;
+        }
+        
+        .breadcrumb {
+            margin-bottom: 20px;
+            color: #666;
+        }
+        
+        .breadcrumb a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            h2 {
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="navigation">
+            <a href="/">Home</a>
+            <a href="/Javascript/">JavaScript</a>
+            <a href="/TypeScript/">TypeScript</a>
+            <a href="/React-Native/">React Native</a>
+        </nav>
+        
+        
+        
+        <main>
+            <h1 id="-advanced-design-patterns">🔹 Advanced Design Patterns</h1>
+
+<blockquote>
+  <p><strong>Comprehensive coverage of advanced design patterns: Revealing Module Pattern, Factory Pattern variations, Command Pattern, and Chain of Responsibility</strong></p>
+</blockquote>
+
+<link rel="stylesheet" href="../common-styles.css" />
+
+<hr />
+
+<h2 id="-table-of-contents">📚 Table of Contents</h2>
+
+<ul>
+  <li><a href="#advanced-design-patterns-overview">Advanced Design Patterns Overview</a></li>
+  <li><a href="#revealing-module-pattern">Revealing Module Pattern</a></li>
+  <li><a href="#factory-pattern-variations">Factory Pattern Variations</a></li>
+  <li><a href="#command-pattern">Command Pattern</a></li>
+  <li><a href="#chain-of-responsibility">Chain of Responsibility</a></li>
+  <li><a href="#detailed-examples">Detailed Examples</a></li>
+  <li><a href="#common-interview-questions">Common Interview Questions</a></li>
+  <li><a href="#practice-exercises">Practice Exercises</a></li>
+  <li><a href="#additional-resources">Additional Resources</a></li>
+</ul>
+
+<hr />
+
+<h2 id="-advanced-design-patterns-overview">🎯 Advanced Design Patterns Overview</h2>
+
+<p><strong>Advanced Design Patterns</strong> provide sophisticated solutions to complex software design problems, enabling scalable, maintainable, and flexible code architecture.</p>
+
+<h3 id="why-advanced-design-patterns-matter">Why Advanced Design Patterns Matter:</h3>
+<ul>
+  <li><strong>Scalability</strong>: Handle complex systems with clear structure</li>
+  <li><strong>Maintainability</strong>: Code that’s easy to understand and modify</li>
+  <li><strong>Flexibility</strong>: Adapt to changing requirements gracefully</li>
+  <li><strong>Team Collaboration</strong>: Standardized approaches for team development</li>
+  <li><strong>Performance</strong>: Optimized solutions for specific use cases</li>
+</ul>
+
+<hr />
+
+<h2 id="-revealing-module-pattern">📦 Revealing Module Pattern</h2>
+
+<p><strong>Revealing Module Pattern</strong> is an advanced module pattern that provides better encapsulation and control over what’s exposed from a module.</p>
+
+<h3 id="why-revealing-module-pattern-matters">Why Revealing Module Pattern Matters:</h3>
+<ul>
+  <li><strong>Encapsulation</strong>: Hide internal implementation details</li>
+  <li><strong>API Control</strong>: Expose only what’s necessary</li>
+  <li><strong>Testing</strong>: Easier to test private vs public methods</li>
+  <li><strong>Refactoring</strong>: Safe internal changes without breaking API</li>
+  <li><strong>Performance</strong>: Optimize internal operations</li>
+</ul>
+
+<h3 id="ascii-diagram-revealing-module-pattern-structure">ASCII Diagram: Revealing Module Pattern Structure</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>REVEALING MODULE PATTERN
+┌─────────────────────────────────┐
+│        PRIVATE SCOPE            │
+│  ┌─────────────────────────────┐ │
+│  │ Private Variables           │ │
+│  │ Private Functions           │ │
+│  │ Internal Logic              │ │
+│  └─────────────────────────────┘ │
+└─────────────────────────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  PUBLIC API   │
+        │  (Revealed)   │
+        │               │
+        │  - method1()  │
+        │  - method2()  │
+        │  - property   │
+        └───────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  EXTERNAL     │
+        │  USAGE        │
+        │               │
+        │  module.method1() │
+        │  module.property  │
+        └───────────────┘
+</code></pre></div></div>
+
+<h3 id="use-cases">Use Cases:</h3>
+<ul>
+  <li><strong>Library Development</strong>: Control public API surface</li>
+  <li><strong>Plugin Systems</strong>: Expose only necessary functionality</li>
+  <li><strong>Service Modules</strong>: Hide internal implementation</li>
+  <li><strong>Configuration Objects</strong>: Manage complex settings</li>
+  <li><strong>Utility Libraries</strong>: Organize helper functions</li>
+</ul>
+
+<hr />
+
+<h2 id="-factory-pattern-variations">🏭 Factory Pattern Variations</h2>
+
+<p><strong>Factory Pattern Variations</strong> extend the basic factory pattern to handle more complex object creation scenarios.</p>
+
+<h3 id="why-factory-pattern-variations-matter">Why Factory Pattern Variations Matter:</h3>
+<ul>
+  <li><strong>Complex Creation</strong>: Handle objects with complex initialization</li>
+  <li><strong>Dependency Injection</strong>: Manage object dependencies</li>
+  <li><strong>Configuration</strong>: Support different object configurations</li>
+  <li><strong>Caching</strong>: Optimize object creation and reuse</li>
+  <li><strong>Validation</strong>: Ensure object creation requirements</li>
+</ul>
+
+<h3 id="ascii-diagram-factory-pattern-variations">ASCII Diagram: Factory Pattern Variations</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FACTORY PATTERN VARIATIONS
+┌─────────────────────────────────┐
+│        ABSTRACT FACTORY         │
+│  ┌─────────────────────────────┐ │
+│  │ createProductA()            │ │
+│  │ createProductB()            │ │
+│  │ createProductC()            │ │
+│  └─────────────────────────────┘ │
+└─────────────────────────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  CONCRETE     │
+        │  FACTORIES    │
+        │               │
+        │  Factory1     │
+        │  Factory2     │
+        │  Factory3     │
+        └───────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  PRODUCTS     │
+        │               │
+        │  ProductA1    │
+        │  ProductB1    │
+        │  ProductC1    │
+        └───────────────┘
+</code></pre></div></div>
+
+<h3 id="factory-types">Factory Types:</h3>
+<ul>
+  <li><strong>Simple Factory</strong>: Basic object creation</li>
+  <li><strong>Factory Method</strong>: Subclass-based creation</li>
+  <li><strong>Abstract Factory</strong>: Family of related objects</li>
+  <li><strong>Builder Pattern</strong>: Complex object construction</li>
+  <li><strong>Object Pool</strong>: Reuse expensive objects</li>
+</ul>
+
+<hr />
+
+<h2 id="-command-pattern">🎯 Command Pattern</h2>
+
+<p><strong>Command Pattern</strong> encapsulates a request as an object, allowing you to parameterize clients with different requests, queue operations, and support undo operations.</p>
+
+<h3 id="why-command-pattern-matters">Why Command Pattern Matters:</h3>
+<ul>
+  <li><strong>Decoupling</strong>: Separate request sender from receiver</li>
+  <li><strong>Undo/Redo</strong>: Support for reversible operations</li>
+  <li><strong>Queue Operations</strong>: Batch and schedule commands</li>
+  <li><strong>Logging</strong>: Track all operations for audit</li>
+  <li><strong>Macro Commands</strong>: Combine multiple commands</li>
+</ul>
+
+<h3 id="ascii-diagram-command-pattern-flow">ASCII Diagram: Command Pattern Flow</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>COMMAND PATTERN FLOW
+┌─────────────────────────────────┐
+│        CLIENT                   │
+│  ┌─────────────────────────────┐ │
+│  │ Creates Commands            │ │
+│  │ Sets Receivers              │ │
+│  │ Executes Commands           │ │
+│  └─────────────────────────────┘ │
+└─────────────────────────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  COMMAND      │
+        │  INTERFACE    │
+        │               │
+        │  execute()    │
+        │  undo()       │
+        └───────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  CONCRETE     │
+        │  COMMANDS     │
+        │               │
+        │  CopyCommand  │
+        │  PasteCommand │
+        │  DeleteCommand│
+        └───────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  RECEIVER     │
+        │               │
+        │  Action       │
+        │  Execution    │
+        │  State Change │
+        └───────────────┘
+</code></pre></div></div>
+
+<h3 id="use-cases-1">Use Cases:</h3>
+<ul>
+  <li><strong>Text Editors</strong>: Copy, paste, undo operations</li>
+  <li><strong>Game Systems</strong>: Player actions and commands</li>
+  <li><strong>GUI Applications</strong>: Button clicks and menu actions</li>
+  <li><strong>Transaction Systems</strong>: Database operations</li>
+  <li><strong>Remote Control</strong>: API command execution</li>
+</ul>
+
+<hr />
+
+<h2 id="-chain-of-responsibility">🔗 Chain of Responsibility</h2>
+
+<p><strong>Chain of Responsibility</strong> passes requests along a chain of handlers, with each handler deciding whether to process the request or pass it to the next handler.</p>
+
+<h3 id="why-chain-of-responsibility-matters">Why Chain of Responsibility Matters:</h3>
+<ul>
+  <li><strong>Request Processing</strong>: Handle requests through multiple handlers</li>
+  <li><strong>Flexibility</strong>: Dynamic handler chains</li>
+  <li><strong>Single Responsibility</strong>: Each handler has one job</li>
+  <li><strong>Extensibility</strong>: Easy to add new handlers</li>
+  <li><strong>Fallback Handling</strong>: Graceful degradation</li>
+</ul>
+
+<h3 id="ascii-diagram-chain-of-responsibility">ASCII Diagram: Chain of Responsibility</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CHAIN OF RESPONSIBILITY
+┌─────────────────────────────────┐
+│        CLIENT                   │
+│  ┌─────────────────────────────┐ │
+│  │ Creates Request             │ │
+│  │ Sends to First Handler      │ │
+│  └─────────────────────────────┘ │
+└─────────────────────────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  HANDLER 1    │
+        │               │
+        │  Can Handle?  │
+        │  Yes → Process│
+        │  No → Next    │
+        └───────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  HANDLER 2    │
+        │               │
+        │  Can Handle?  │
+        │  Yes → Process│
+        │  No → Next    │
+        └───────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  HANDLER N    │
+        │               │
+        │  Can Handle?  │
+        │  Yes → Process│
+        │  No → Default │
+        └───────────────┘
+</code></pre></div></div>
+
+<h3 id="use-cases-2">Use Cases:</h3>
+<ul>
+  <li><strong>Request Processing</strong>: HTTP middleware chains</li>
+  <li><strong>Event Handling</strong>: DOM event propagation</li>
+  <li><strong>Logging Systems</strong>: Multiple log handlers</li>
+  <li><strong>Authentication</strong>: Multiple auth providers</li>
+  <li><strong>Error Handling</strong>: Cascading error processors</li>
+</ul>
+
+<hr />
+
+<h2 id="-detailed-examples">💻 Detailed Examples</h2>
+
+<h3 id="example-1-revealing-module-pattern-implementation">Example 1: Revealing Module Pattern Implementation</h3>
+<div style="position: relative;">
+<button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+<pre><code>// Advanced Revealing Module Pattern with performance optimization
+const UserService = (function() {
+    // Private variables and state
+    let userCache = new Map();
+    let cacheExpiry = new Map();
+    const CACHE_TTL = 5 * 60 * 1000; // 5 minutes
+    
+    // Private helper functions
+    function isCacheValid(userId) {
+        const expiry = cacheExpiry.get(userId);
+        return expiry &amp;&amp; Date.now() &lt; expiry;
+    }
+    
+    function updateCache(userId, userData) {
+        userCache.set(userId, userData);
+        cacheExpiry.set(userId, Date.now() + CACHE_TTL);
+    }
+    
+    function clearExpiredCache() {
+        const now = Date.now();
+        for (const [userId, expiry] of cacheExpiry.entries()) {
+            if (now &gt;= expiry) {
+                userCache.delete(userId);
+                cacheExpiry.delete(userId);
+            }
+        }
+    }
+    
+    // Private API methods
+    async function fetchUserFromAPI(userId) {
+        try {
+            const response = await fetch(`/api/users/${userId}`);
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+            }
+            return await response.json();
+        } catch (error) {
+            console.error(`Failed to fetch user ${userId}:`, error);
+            throw error;
+        }
+    }
+    
+    function validateUserData(userData) {
+        const required = ['id', 'name', 'email'];
+        const missing = required.filter(field =&gt; !userData[field]);
+        
+        if (missing.length &gt; 0) {
+            throw new Error(`Missing required fields: ${missing.join(', ')}`);
+        }
+        
+        if (!userData.email.includes('@')) {
+            throw new Error('Invalid email format');
+        }
+        
+        return true;
+    }
+    
+    // Public API (revealed)
+    return {
+        // User management
+        async getUser(userId) {
+            try {
+                // Check cache first
+                if (isCacheValid(userId)) {
+                    return userCache.get(userId);
+                }
+                
+                // Fetch from API
+                const userData = await fetchUserFromAPI(userId);
+                validateUserData(userData);
+                
+                // Update cache
+                updateCache(userId, userData);
+                
+                return userData;
+            } catch (error) {
+                console.error(`Error getting user ${userId}:`, error);
+                throw error;
+            }
+        },
+        
+        async updateUser(userId, updates) {
+            try {
+                // Validate updates
+                if (updates.email &amp;&amp; !updates.email.includes('@')) {
+                    throw new Error('Invalid email format');
+                }
+                
+                // Update via API
+                const response = await fetch(`/api/users/${userId}`, {
+                    method: 'PATCH',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(updates)
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const updatedUser = await response.json();
+                
+                // Update cache
+                updateCache(userId, updatedUser);
+                
+                return updatedUser;
+            } catch (error) {
+                console.error(`Error updating user ${userId}:`, error);
+                throw error;
+            }
+        },
+        
+        // Cache management
+        clearCache() {
+            userCache.clear();
+            cacheExpiry.clear();
+        },
+        
+        getCacheStats() {
+            return {
+                size: userCache.size,
+                keys: Array.from(userCache.keys()),
+                expiries: Object.fromEntries(cacheExpiry)
+            };
+        },
+        
+        // Maintenance
+        startCacheCleanup() {
+            setInterval(clearExpiredCache, 60000); // Clean every minute
+        }
+    };
+})();
+
+// Usage example
+UserService.startCacheCleanup();
+
+// Get user with caching
+UserService.getUser(123).then(user =&gt; {
+    console.log('User:', user);
+    
+    // Update user
+    return UserService.updateUser(123, { name: 'John Updated' });
+}).then(updatedUser =&gt; {
+    console.log('Updated user:', updatedUser);
+    
+    // Check cache stats
+    console.log('Cache stats:', UserService.getCacheStats());
+}).catch(error =&gt; {
+    console.error('Error:', error);
+});
+</code></pre>
+</div>
+
+<h3 id="example-2-advanced-factory-pattern-with-caching-and-validation">Example 2: Advanced Factory Pattern with Caching and Validation</h3>
+
+<h3 id="example-3-command-pattern-with-undoredo-and-logging">Example 3: Command Pattern with Undo/Redo and Logging</h3>
+<div style="position: relative;">
+<button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+<pre><code>// Advanced Command Pattern with undo/redo, logging, and macro commands
+class CommandManager {
+    constructor() {
+        this.commandHistory = [];
+        this.redoStack = [];
+        this.maxHistorySize = 100;
+        this.logger = new CommandLogger();
+    }
+    
+    executeCommand(command) {
+        try {
+            // Execute the command
+            const result = command.execute();
+            
+            // Log the execution
+            this.logger.log('EXECUTE', command.constructor.name, result);
+            
+            // Add to history
+            this.commandHistory.push(command);
+            
+            // Clear redo stack when new command is executed
+            this.redoStack = [];
+            
+            // Maintain history size
+            if (this.commandHistory.length &gt; this.maxHistorySize) {
+                this.commandHistory.shift();
+            }
+            
+            return result;
+        } catch (error) {
+            this.logger.log('ERROR', command.constructor.name, error.message);
+            throw error;
+        }
+    }
+    
+    undo() {
+        if (this.commandHistory.length === 0) {
+            throw new Error('No commands to undo');
+        }
+        
+        const command = this.commandHistory.pop();
+        
+        try {
+            const result = command.undo();
+            this.logger.log('UNDO', command.constructor.name, result);
+            
+            // Add to redo stack
+            this.redoStack.push(command);
+            
+            return result;
+        } catch (error) {
+            this.logger.log('UNDO_ERROR', command.constructor.name, error.message);
+            throw error;
+        }
+    }
+    
+    redo() {
+        if (this.redoStack.length === 0) {
+            throw new Error('No commands to redo');
+        }
+        
+        const command = this.redoStack.pop();
+        
+        try {
+            const result = command.execute();
+            this.logger.log('REDO', command.constructor.name, result);
+            
+            // Add back to history
+            this.commandHistory.push(command);
+            
+            return result;
+        } catch (error) {
+            this.logger.log('REDO_ERROR', command.constructor.name, error.message);
+            throw error;
+        }
+    }
+    
+    // Macro command for executing multiple commands
+    executeMacro(commands) {
+        const macroCommand = new MacroCommand(commands);
+        return this.executeCommand(macroCommand);
+    }
+    
+    // Get command history
+    getHistory() {
+        return this.commandHistory.map((cmd, index) =&gt; ({
+            index,
+            command: cmd.constructor.name,
+            timestamp: cmd.timestamp,
+            description: cmd.description
+        }));
+    }
+    
+    // Clear history
+    clearHistory() {
+        this.commandHistory = [];
+        this.redoStack = [];
+        this.logger.clear();
+    }
+}
+
+// Command interface
+class Command {
+    constructor(description = '') {
+        this.description = description;
+        this.timestamp = new Date();
+    }
+    
+    execute() {
+        throw new Error('execute() method must be implemented');
+    }
+    
+    undo() {
+        throw new Error('undo() method must be implemented');
+    }
+}
+
+// Concrete commands
+class CopyCommand extends Command {
+    constructor(receiver, text) {
+        super(`Copy text: "${text.substring(0, 20)}..."`);
+        this.receiver = receiver;
+        this.text = text;
+        this.previousClipboard = '';
+    }
+    
+    execute() {
+        this.previousClipboard = this.receiver.getClipboard();
+        this.receiver.setClipboard(this.text);
+        return `Copied: ${this.text}`;
+    }
+    
+    undo() {
+        this.receiver.setClipboard(this.previousClipboard);
+        return `Restored clipboard: ${this.previousClipboard}`;
+    }
+}
+
+class PasteCommand extends Command {
+    constructor(receiver, position) {
+        super(`Paste at position ${position}`);
+        this.receiver = receiver;
+        this.position = position;
+        this.previousContent = '';
+        this.clipboardContent = '';
+    }
+    
+    execute() {
+        this.previousContent = this.receiver.getContent();
+        this.clipboardContent = this.receiver.getClipboard();
+        
+        const newContent = this.receiver.getContent().slice(0, this.position) +
+                          this.clipboardContent +
+                          this.receiver.getContent().slice(this.position);
+        
+        this.receiver.setContent(newContent);
+        return `Pasted at position ${this.position}`;
+    }
+    
+    undo() {
+        this.receiver.setContent(this.previousContent);
+        return `Restored content`;
+    }
+}
+
+class DeleteCommand extends Command {
+    constructor(receiver, start, end) {
+        super(`Delete from ${start} to ${end}`);
+        this.receiver = receiver;
+        this.start = start;
+        this.end = end;
+        this.deletedContent = '';
+    }
+    
+    execute() {
+        this.deletedContent = this.receiver.getContent().slice(this.start, this.end);
+        const newContent = this.receiver.getContent().slice(0, this.start) +
+                          this.receiver.getContent().slice(this.end);
+        this.receiver.setContent(newContent);
+        return `Deleted: "${this.deletedContent}"`;
+    }
+    
+    undo() {
+        const currentContent = this.receiver.getContent();
+        const newContent = currentContent.slice(0, this.start) +
+                          this.deletedContent +
+                          currentContent.slice(this.start);
+        this.receiver.setContent(newContent);
+        return `Restored deleted content`;
+    }
+}
+
+// Macro command for combining multiple commands
+class MacroCommand extends Command {
+    constructor(commands) {
+        super(`Macro: ${commands.length} commands`);
+        this.commands = commands;
+    }
+    
+    execute() {
+        const results = [];
+        for (const command of this.commands) {
+            results.push(command.execute());
+        }
+        return `Macro executed: ${results.join(', ')}`;
+    }
+    
+    undo() {
+        const results = [];
+        // Undo in reverse order
+        for (let i = this.commands.length - 1; i &gt;= 0; i--) {
+            results.push(this.commands[i].undo());
+        }
+        return `Macro undone: ${results.join(', ')}`;
+    }
+}
+
+// Receiver class
+class TextEditor {
+    constructor() {
+        this.content = '';
+        this.clipboard = '';
+        this.selection = { start: 0, end: 0 };
+    }
+    
+    getContent() {
+        return this.content;
+    }
+    
+    setContent(content) {
+        this.content = content;
+    }
+    
+    getClipboard() {
+        return this.clipboard;
+    }
+    
+    setClipboard(text) {
+        this.clipboard = text;
+    }
+    
+    setSelection(start, end) {
+        this.selection = { start, end };
+    }
+    
+    getSelection() {
+        return this.content.slice(this.selection.start, this.selection.end);
+    }
+}
+
+// Command logger
+class CommandLogger {
+    constructor() {
+        this.logs = [];
+        this.maxLogs = 1000;
+    }
+    
+    log(action, commandName, result) {
+        const logEntry = {
+            timestamp: new Date(),
+            action,
+            command: commandName,
+            result: typeof result === 'string' ? result : JSON.stringify(result)
+        };
+        
+        this.logs.push(logEntry);
+        
+        if (this.logs.length &gt; this.maxLogs) {
+            this.logs.shift();
+        }
+        
+        console.log(`[${logEntry.timestamp.toISOString()}] ${action}: ${commandName} - ${logEntry.result}`);
+    }
+    
+    getLogs() {
+        return this.logs;
+    }
+    
+    clear() {
+        this.logs = [];
+    }
+}
+
+// Usage example
+const editor = new TextEditor();
+const commandManager = new CommandManager();
+
+// Set initial content
+editor.setContent('Hello World! This is a test document.');
+
+// Execute commands
+commandManager.executeCommand(new CopyCommand(editor, 'Hello World!'));
+commandManager.executeCommand(new PasteCommand(editor, 25));
+commandManager.executeCommand(new DeleteCommand(editor, 0, 12));
+
+console.log('Current content:', editor.getContent());
+
+// Undo last command
+commandManager.undo();
+console.log('After undo:', editor.getContent());
+
+// Redo
+commandManager.redo();
+console.log('After redo:', editor.getContent());
+
+// Execute macro
+const macroCommands = [
+    new CopyCommand(editor, 'Macro Test'),
+    new PasteCommand(editor, 0),
+    new DeleteCommand(editor, 30, 40)
+];
+
+commandManager.executeMacro(macroCommands);
+console.log('After macro:', editor.getContent());
+
+// View history
+console.log('Command history:', commandManager.getHistory());
+</code></pre>
+</div>
+
+<h3 id="example-4-chain-of-responsibility-with-dynamic-handler-management">Example 4: Chain of Responsibility with Dynamic Handler Management</h3>
+<div style="position: relative;">
+<button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+<pre><code>// Advanced Chain of Responsibility with dynamic handler management
+class Request {
+    constructor(type, data, priority = 'normal') {
+        this.type = type;
+        this.data = data;
+        this.priority = priority;
+        this.handled = false;
+        this.handlerChain = [];
+        this.timestamp = new Date();
+    }
+    
+    markHandled(handlerName) {
+        this.handled = true;
+        this.handlerChain.push(handlerName);
+    }
+    
+    getHandlerChain() {
+        return this.handlerChain;
+    }
+}
+
+// Abstract handler
+class Handler {
+    constructor(name, priority = 0) {
+        this.name = name;
+        this.priority = priority;
+        this.nextHandler = null;
+        this.canHandle = null;
+        this.processRequest = null;
+    }
+    
+    setNext(handler) {
+        this.nextHandler = handler;
+        return handler;
+    }
+    
+    handle(request) {
+        // Check if this handler can process the request
+        if (this.canHandle &amp;&amp; this.canHandle(request)) {
+            try {
+                const result = this.processRequest(request);
+                request.markHandled(this.name);
+                return result;
+            } catch (error) {
+                console.error(`Handler ${this.name} failed:`, error);
+                // Continue to next handler even if this one fails
+            }
+        }
+        
+        // Pass to next handler
+        if (this.nextHandler) {
+            return this.nextHandler.handle(request);
+        }
+        
+        // No handler could process the request
+        throw new Error(`No handler found for request type: ${request.type}`);
+    }
+    
+    // Set custom canHandle function
+    setCanHandle(predicate) {
+        this.canHandle = predicate;
+        return this;
+    }
+    
+    // Set custom processRequest function
+    setProcessRequest(processor) {
+        this.processRequest = processor;
+        return this;
+    }
+}
+
+// Concrete handlers
+class AuthenticationHandler extends Handler {
+    constructor() {
+        super('Authentication', 100);
+        
+        this.setCanHandle(request =&gt; 
+            request.type === 'api' || 
+            request.type === 'secure' ||
+            request.data.requiresAuth
+        );
+        
+        this.setProcessRequest(request =&gt; {
+            // Simulate authentication check
+            if (!request.data.token || request.data.token === 'invalid') {
+                throw new Error('Authentication failed: Invalid token');
+            }
+            
+            if (request.data.token === 'expired') {
+                throw new Error('Authentication failed: Token expired');
+            }
+            
+            console.log(`[${this.name}] Authenticated request: ${request.type}`);
+            return { ...request.data, authenticated: true };
+        });
+    }
+}
+
+class ValidationHandler extends Handler {
+    constructor() {
+        super('Validation', 200);
+        
+        this.setCanHandle(request =&gt; 
+            request.type === 'api' || 
+            request.type === 'form' ||
+            request.data.requiresValidation
+        );
+        
+        this.setProcessRequest(request =&gt; {
+            const { data } = request;
+            
+            // Validate required fields
+            if (data.requiredFields) {
+                for (const field of data.requiredFields) {
+                    if (!data[field]) {
+                        throw new Error(`Validation failed: Missing required field: ${field}`);
+                    }
+                }
+            }
+            
+            // Validate data types
+            if (data.email &amp;&amp; !this.isValidEmail(data.email)) {
+                throw new Error('Validation failed: Invalid email format');
+            }
+            
+            if (data.age &amp;&amp; (typeof data.age !== 'number' || data.age &lt; 0)) {
+                throw new Error('Validation failed: Invalid age');
+            }
+            
+            console.log(`[${this.name}] Validated request: ${request.type}`);
+            return { ...request.data, validated: true };
+        });
+    }
+    
+    isValidEmail(email) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+}
+
+class RateLimitHandler extends Handler {
+    constructor() {
+        super('RateLimit', 300);
+        this.requestCounts = new Map();
+        this.limits = new Map();
+    }
+    
+    setLimit(identifier, maxRequests, timeWindow) {
+        this.limits.set(identifier, { maxRequests, timeWindow, resetTime: Date.now() + timeWindow });
+    }
+    
+    setCanHandle(request =&gt; 
+        request.type === 'api' || 
+        request.data.requiresRateLimit
+    );
+    
+    setProcessRequest(request =&gt; {
+        const identifier = request.data.userId || request.data.ip || 'default';
+        const limit = this.limits.get(identifier) || { maxRequests: 100, timeWindow: 60000 };
+        
+        // Reset counter if time window has passed
+        if (Date.now() &gt; limit.resetTime) {
+            this.requestCounts.set(identifier, 0);
+            limit.resetTime = Date.now() + limit.timeWindow;
+        }
+        
+        const currentCount = this.requestCounts.get(identifier) || 0;
+        
+        if (currentCount &gt;= limit.maxRequests) {
+            throw new Error(`Rate limit exceeded: ${limit.maxRequests} requests per ${limit.timeWindow}ms`);
+        }
+        
+        this.requestCounts.set(identifier, currentCount + 1);
+        console.log(`[${this.name}] Rate limit check passed for ${identifier}: ${currentCount + 1}/${limit.maxRequests}`);
+        return request.data;
+    });
+}
+
+class LoggingHandler extends Handler {
+    constructor() {
+        super('Logging', 400);
+        this.logs = [];
+    }
+    
+    setCanHandle(() =&gt; true); // Log all requests
+    
+    setProcessRequest(request =&gt; {
+        const logEntry = {
+            timestamp: new Date(),
+            type: request.type,
+            data: request.data,
+            priority: request.priority,
+            handlerChain: request.getHandlerChain()
+        };
+        
+        this.logs.push(logEntry);
+        console.log(`[${this.name}] Logged request:`, logEntry);
+        return request.data;
+    });
+    
+    getLogs() {
+        return this.logs;
+    }
+    
+    clearLogs() {
+        this.logs = [];
+    }
+}
+
+class BusinessLogicHandler extends Handler {
+    constructor() {
+        super('BusinessLogic', 500);
+        
+        this.setCanHandle(request =&gt; 
+            request.type === 'api' || 
+            request.type === 'business'
+        );
+        
+        this.setProcessRequest(request =&gt; {
+            const { data } = request;
+            
+            // Apply business rules
+            if (data.type === 'order' &amp;&amp; data.amount &gt; 1000) {
+                data.requiresApproval = true;
+                data.approvalLevel = 'manager';
+            }
+            
+            if (data.type === 'user' &amp;&amp; data.role === 'admin') {
+                data.permissions = ['read', 'write', 'delete', 'admin'];
+            }
+            
+            console.log(`[${this.name}] Applied business logic: ${request.type}`);
+            return { ...data, processed: true };
+        });
+    }
+}
+
+// Chain builder for easy setup
+class HandlerChainBuilder {
+    constructor() {
+        this.handlers = [];
+    }
+    
+    addHandler(handler) {
+        this.handlers.push(handler);
+        return this;
+    }
+    
+    build() {
+        if (this.handlers.length === 0) {
+            throw new Error('No handlers added to chain');
+        }
+        
+        // Sort handlers by priority
+        this.handlers.sort((a, b) =&gt; a.priority - b.priority);
+        
+        // Link handlers
+        for (let i = 0; i &lt; this.handlers.length - 1; i++) {
+            this.handlers[i].setNext(this.handlers[i + 1]);
+        }
+        
+        return this.handlers[0]; // Return first handler
+    }
+}
+
+// Usage example
+const chain = new HandlerChainBuilder()
+    .addHandler(new AuthenticationHandler())
+    .addHandler(new ValidationHandler())
+    .addHandler(new RateLimitHandler())
+    .addHandler(new BusinessLogicHandler())
+    .addHandler(new LoggingHandler())
+    .build();
+
+// Set rate limits
+const rateLimitHandler = chain.nextHandler.nextHandler; // Get RateLimitHandler
+rateLimitHandler.setLimit('user123', 10, 60000); // 10 requests per minute
+
+// Create and process requests
+const requests = [
+    new Request('api', { 
+        token: 'valid_token_123', 
+        userId: 'user123', 
+        email: 'test@example.com',
+        age: 25,
+        type: 'order',
+        amount: 1500,
+        requiresAuth: true,
+        requiresValidation: true,
+        requiresRateLimit: true
+    }),
+    
+    new Request('form', { 
+        email: 'invalid-email',
+        age: -5,
+        requiresValidation: true
+    }),
+    
+    new Request('api', { 
+        token: 'expired',
+        userId: 'user123',
+        requiresAuth: true
+    })
+];
+
+// Process requests
+requests.forEach((request, index) =&gt; {
+    try {
+        console.log(`\n--- Processing Request ${index + 1} ---`);
+        const result = chain.handle(request);
+        console.log('Result:', result);
+    } catch (error) {
+        console.error('Error:', error.message);
+    }
+});
+
+// Get logs from logging handler
+const loggingHandler = chain.nextHandler.nextHandler.nextHandler.nextHandler;
+console.log('\n--- Request Logs ---');
+console.log(loggingHandler.getLogs());
+</code></pre>
+</div>
+
+<hr />
+
+<h2 id="-common-interview-questions">❓ Common Interview Questions</h2>
+
+<h3 id="q1-what-are-the-key-benefits-of-the-revealing-module-pattern-over-traditional-module-patterns">Q1: What are the key benefits of the Revealing Module Pattern over traditional module patterns?</h3>
+<p><strong>A:</strong> The Revealing Module Pattern provides better encapsulation by hiding internal implementation details, offers precise control over the public API surface, makes testing easier by clearly separating private vs public methods, enables safe internal refactoring without breaking external contracts, and allows for performance optimization of internal operations.</p>
+
+<h3 id="q2-how-does-the-factory-pattern-handle-complex-object-creation-scenarios">Q2: How does the Factory Pattern handle complex object creation scenarios?</h3>
+<p><strong>A:</strong> Factory Pattern variations handle complex creation through validation layers, dependency injection, configuration management, object caching for performance, and support for different object types. Advanced factories can create product families, support builder patterns, implement object pooling, and provide fallback creation strategies.</p>
+
+<h3 id="q3-what-are-the-main-advantages-of-implementing-the-command-pattern-with-undoredo-functionality">Q3: What are the main advantages of implementing the Command Pattern with undo/redo functionality?</h3>
+<p><strong>A:</strong> Command Pattern with undo/redo provides complete operation history, enables user experience improvements through reversible actions, supports macro commands for batch operations, provides audit trails for compliance, enables debugging through command replay, and allows for command queuing and scheduling.</p>
+
+<h3 id="q4-how-does-chain-of-responsibility-improve-system-flexibility-and-maintainability">Q4: How does Chain of Responsibility improve system flexibility and maintainability?</h3>
+<p><strong>A:</strong> Chain of Responsibility improves flexibility by allowing dynamic handler chains, enables easy addition of new handlers without modifying existing code, provides single responsibility for each handler, supports graceful degradation through fallback handling, and allows for conditional processing based on request characteristics.</p>
+
+<h3 id="q5-what-are-the-performance-considerations-when-implementing-these-design-patterns">Q5: What are the performance considerations when implementing these design patterns?</h3>
+<p><strong>A:</strong> Performance considerations include caching strategies for factory patterns, command history size limits, handler chain optimization, memory management for command objects, efficient validation in chain handlers, and proper resource cleanup for long-running command chains.</p>
+
+<hr />
+
+<h2 id="️-practice-exercises">🏋️ Practice Exercises</h2>
+
+<h3 id="exercise-1-build-a-plugin-system-with-revealing-module-pattern">Exercise 1: Build a Plugin System with Revealing Module Pattern</h3>
+<p>Create a plugin architecture where plugins can register themselves, expose only necessary APIs, and be loaded/unloaded dynamically while maintaining encapsulation.</p>
+
+<h3 id="exercise-2-implement-a-smart-factory-with-validation-and-caching">Exercise 2: Implement a Smart Factory with Validation and Caching</h3>
+<p>Build a factory system that can create different types of objects with automatic validation, caching, and fallback strategies for different creation scenarios.</p>
+
+<h3 id="exercise-3-create-a-command-system-with-persistence">Exercise 3: Create a Command System with Persistence</h3>
+<p>Implement a command system that can persist commands to storage, support remote execution, and provide command analytics and reporting.</p>
+
+<h3 id="exercise-4-design-a-dynamic-handler-chain">Exercise 4: Design a Dynamic Handler Chain</h3>
+<p>Build a chain of responsibility system that can dynamically add/remove handlers, support conditional processing, and provide performance monitoring and metrics.</p>
+
+<hr />
+
+<h2 id="-additional-resources">📚 Additional Resources</h2>
+
+<ul>
+  <li><strong>Design Patterns</strong>: <a href="https://en.wikipedia.org/wiki/Design_Patterns">Gang of Four Patterns</a></li>
+  <li><strong>JavaScript Patterns</strong>: <a href="https://addyosmani.com/resources/essentialjsdesignpatterns/book/">JavaScript Design Patterns</a></li>
+  <li><strong>Module Patterns</strong>: <a href="https://www.adequatelygood.com/JavaScript-Module-Pattern-In-Depth.html">JavaScript Module Patterns</a></li>
+  <li><strong>Command Pattern</strong>: <a href="https://refactoring.guru/design-patterns/command">Command Pattern Tutorial</a></li>
+  <li><strong>Chain of Responsibility</strong>: <a href="https://refactoring.guru/design-patterns/chain-of-responsibility">Chain of Responsibility Pattern</a></li>
+</ul>
+
+<hr />
+
+<h2 id="-copy-code-functionality">📋 Copy Code Functionality</h2>
+<div style="position: relative;">
+<button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+<pre><code>// Advanced Factory Pattern with multiple variations and caching
+class ProductFactory {
+    constructor() {
+        this.cache = new Map();
+        this.validators = new Map();
+        this.creators = new Map();
+        this.setupValidators();
+        this.setupCreators();
+    }
+    
+    setupValidators() {
+        // Product type validators
+        this.validators.set('electronics', (config) =&gt; {
+            const required = ['name', 'price', 'warranty'];
+            const missing = required.filter(field =&gt; !config[field]);
+            
+            if (missing.length &gt; 0) {
+                throw new Error(`Missing required fields: ${missing.join(', ')}`);
+            }
+            
+            if (config.price &lt;= 0) {
+                throw new Error('Price must be positive');
+            }
+            
+            if (config.warranty &lt; 0) {
+                throw new Error('Warranty cannot be negative');
+            }
+            
+            return true;
+        });
+        
+        this.validators.set('clothing', (config) =&gt; {
+            const required = ['name', 'price', 'size', 'material'];
+            const missing = required.filter(field =&gt; !config[field]);
+            
+            if (missing.length &gt; 0) {
+                throw new Error(`Missing required fields: ${missing.join(', ')}`);
+            }
+            
+            const validSizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
+            if (!validSizes.includes(config.size)) {
+                throw new Error(`Invalid size. Must be one of: ${validSizes.join(', ')}`);
+            }
+            
+            return true;
+        });
+        
+        this.validators.set('books', (config) =&gt; {
+            const required = ['title', 'author', 'price', 'isbn'];
+            const missing = required.filter(field =&gt; !config[field]);
+            
+            if (missing.length &gt; 0) {
+                throw new Error(`Missing required fields: ${missing.join(', ')}`);
+            }
+            
+            if (config.isbn.length !== 13) {
+                throw new Error('ISBN must be 13 characters long');
+            }
+            
+            return true;
+        });
+    }
+    
+    setupCreators() {
+        // Product creators for different types
+        this.creators.set('electronics', (config) =&gt; ({
+            id: this.generateId(),
+            type: 'electronics',
+            name: config.name,
+            price: config.price,
+            warranty: config.warranty,
+            features: config.features || [],
+            createdAt: new Date(),
+            getWarrantyInfo() {
+                return `${this.warranty} months warranty`;
+            },
+            getPriceWithTax() {
+                return this.price * 1.1; // 10% tax
+            }
+        }));
+        
+        this.creators.set('clothing', (config) =&gt; ({
+            id: this.generateId(),
+            type: 'clothing',
+            name: config.name,
+            price: config.price,
+            size: config.size,
+            material: config.material,
+            colors: config.colors || ['black'],
+            createdAt: new Date(),
+            getSizeInfo() {
+                return `Size: ${this.size}`;
+            },
+            getPriceWithTax() {
+                return this.price * 1.08; // 8% tax
+            }
+        }));
+        
+        this.creators.set('books', (config) =&gt; ({
+            id: this.generateId(),
+            type: 'books',
+            title: config.title,
+            author: config.author,
+            price: config.price,
+            isbn: config.isbn,
+            genre: config.genre || 'General',
+            pages: config.pages || 0,
+            createdAt: new Date(),
+            getBookInfo() {
+                return `${this.title} by ${this.author}`;
+            },
+            getPriceWithTax() {
+                return this.price * 1.05; // 5% tax
+            }
+        }));
+    }
+    
+    generateId() {
+        return Date.now().toString(36) + Math.random().toString(36).substr(2);
+    }
+    
+    // Main factory method
+    createProduct(type, config) {
+        try {
+            // Validate input
+            if (!this.validators.has(type)) {
+                throw new Error(`Unknown product type: ${type}`);
+            }
+            
+            // Validate configuration
+            this.validators.get(type)(config);
+            
+            // Check cache
+            const cacheKey = `${type}-${JSON.stringify(config)}`;
+            if (this.cache.has(cacheKey)) {
+                return this.cache.get(cacheKey);
+            }
+            
+            // Create product
+            const creator = this.creators.get(type);
+            const product = creator(config);
+            
+            // Cache the product
+            this.cache.set(cacheKey, product);
+            
+            return product;
+        } catch (error) {
+            console.error(`Error creating ${type} product:`, error);
+            throw error;
+        }
+    }
+    
+    // Factory method for creating multiple products
+    createProducts(type, configs) {
+        return configs.map(config =&gt; this.createProduct(type, config));
+    }
+    
+    // Abstract factory for creating product families
+    createProductFamily(familyType) {
+        const families = {
+            'gaming': {
+                electronics: { name: 'Gaming Console', price: 499, warranty: 24, features: ['4K', 'VR Ready'] },
+                clothing: { name: 'Gaming T-Shirt', price: 25, size: 'L', material: 'Cotton', colors: ['Black', 'Red'] },
+                books: { title: 'Game Development Guide', author: 'Game Dev Pro', price: 39, isbn: '1234567890123', genre: 'Technology' }
+            },
+            'professional': {
+                electronics: { name: 'Laptop', price: 1299, warranty: 36, features: ['16GB RAM', '512GB SSD'] },
+                clothing: { name: 'Business Suit', price: 299, size: 'M', material: 'Wool', colors: ['Navy', 'Charcoal'] },
+                books: { title: 'Business Strategy', author: 'Business Expert', price: 49, isbn: '9876543210987', genre: 'Business' }
+            }
+        };
+        
+        if (!families[familyType]) {
+            throw new Error(`Unknown family type: ${familyType}`);
+        }
+        
+        const family = families[familyType];
+        return {
+            electronics: this.createProduct('electronics', family.electronics),
+            clothing: this.createProduct('clothing', family.clothing),
+            books: this.createProduct('books', family.books)
+        };
+    }
+    
+    // Cache management
+    clearCache() {
+        this.cache.clear();
+    }
+    
+    getCacheStats() {
+        return {
+            size: this.cache.size,
+            keys: Array.from(this.cache.keys())
+        };
+    }
+}
+
+// Usage example
+const factory = new ProductFactory();
+
+// Create individual products
+const laptop = factory.createProduct('electronics', {
+    name: 'High-Performance Laptop',
+    price: 1499,
+    warranty: 36,
+    features: ['32GB RAM', '1TB SSD', 'RTX 4080']
+});
+
+const tshirt = factory.createProduct('clothing', {
+    name: 'Premium T-Shirt',
+    price: 35,
+    size: 'L',
+    material: 'Organic Cotton',
+    colors: ['White', 'Black', 'Navy']
+});
+
+// Create product family
+const gamingFamily = factory.createProductFamily('gaming');
+console.log('Gaming family:', gamingFamily);
+
+// Check cache stats
+console.log('Cache stats:', factory.getCacheStats());
+</code></pre>
+</div>
+
+<hr />
+
+<h2 id="-copy-code-functionality-1">📋 Copy Code Functionality</h2>
+
+<script src="../common-scripts.js"></script>
+
+<hr />
+
+<h2 id="-navigation">🧭 Navigation</h2>
+
+<div class="navigation">
+    <a href="../02-Advanced-JavaScript-Concepts/08-ES2023-Features.md" class="nav-link prev">← Previous: ES2023 Features</a>
+    <a href="02-Functional-Programming-Patterns.md" class="nav-link next">Next: Functional Programming Patterns →</a>
+</div>
+
+<p><em>Last updated: December 2024</em></p>
+
+        </main>
+        
+        <footer style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #ecf0f1; color: #666; text-align: center;">
+            <p>Interview Prep Documentation - Built with Jekyll</p>
+        </footer>
+    </div>
+</body>
+</html>

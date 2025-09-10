@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏗️ Code Organization &amp; Architecture - Interview Prep Documentation</title>
+    <meta name="description" content="Comprehensive guides for JavaScript, TypeScript, and React Native interview preparation">
+    
+    <!-- GitHub Pages compatible styling -->
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+        }
+        
+        .container {
+            max-width: 100%;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            color: #2c3e50;
+            margin-top: 2em;
+            margin-bottom: 1em;
+        }
+        
+        h1 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            border-bottom: 1px solid #ecf0f1;
+            padding-bottom: 5px;
+        }
+        
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border-left: 4px solid #3498db;
+        }
+        
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+        
+        blockquote {
+            border-left: 4px solid #3498db;
+            margin: 0;
+            padding-left: 20px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1em 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .navigation {
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px 0;
+            margin-bottom: 20px;
+        }
+        
+        .navigation a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+        
+        .navigation a:hover {
+            text-decoration: underline;
+        }
+        
+        .breadcrumb {
+            margin-bottom: 20px;
+            color: #666;
+        }
+        
+        .breadcrumb a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            h2 {
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="navigation">
+            <a href="/">Home</a>
+            <a href="/Javascript/">JavaScript</a>
+            <a href="/TypeScript/">TypeScript</a>
+            <a href="/React-Native/">React Native</a>
+        </nav>
+        
+        
+        
+        <main>
+            <h1 id="️-code-organization--architecture">🏗️ <strong>Code Organization &amp; Architecture</strong></h1>
+
+<blockquote>
+  <p><strong>Complete guide to TypeScript code organization, architecture patterns, and project structure best practices</strong></p>
+</blockquote>
+
+<link rel="stylesheet" href="../../common-styles.css" />
+
+<hr />
+
+<h2 id="-table-of-contents">📚 <strong>Table of Contents</strong></h2>
+
+<ul>
+  <li><a href="#code-organization-overview">Code Organization Overview</a></li>
+  <li><a href="#project-structure">Project Structure</a></li>
+  <li><a href="#architecture-patterns">Architecture Patterns</a></li>
+  <li><a href="#module-organization">Module Organization</a></li>
+  <li><a href="#naming-conventions">Naming Conventions</a></li>
+  <li><a href="#best-practices">Best Practices</a></li>
+  <li><a href="#common-interview-questions">Common Interview Questions</a></li>
+</ul>
+
+<hr />
+
+<h2 id="-code-organization-overview">🎯 <strong>Code Organization Overview</strong></h2>
+
+<p>Proper code organization is essential for maintainable, scalable, and collaborative TypeScript projects.</p>
+
+<h3 id="organization-principles"><strong>Organization Principles</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Code organization principles</span>
+<span class="kd">const</span> <span class="nx">organizationPrinciples</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">separationOfConcerns</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Separate different concerns into different modules</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">singleResponsibility</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Each module should have a single responsibility</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">dependencyInversion</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Depend on abstractions, not concretions</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">openClosed</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Open for extension, closed for modification</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">interfaceSegregation</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Use specific interfaces instead of general ones</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">dependencyInjection</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Inject dependencies rather than creating them</span><span class="dl">"</span>
+<span class="p">};</span>
+
+<span class="c1">// Organization benefits</span>
+<span class="kd">const</span> <span class="nx">organizationBenefits</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">maintainability</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Easier to maintain and update code</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">scalability</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Easier to scale and extend functionality</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">testability</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Easier to test individual components</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">reusability</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Components can be reused across projects</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">collaboration</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Easier for teams to work together</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">debugging</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Easier to debug and troubleshoot issues</span><span class="dl">"</span>
+<span class="p">};</span>
+
+<span class="c1">// Organization challenges</span>
+<span class="kd">const</span> <span class="nx">organizationChallenges</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">complexity</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Managing complexity in large projects</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">dependencies</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Managing dependencies between modules</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">consistency</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Maintaining consistency across the codebase</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">documentation</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Keeping documentation up to date</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">refactoring</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Refactoring without breaking existing code</span><span class="dl">"</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="code-organization-goals"><strong>Code Organization Goals</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Code organization goals</span>
+<span class="kd">const</span> <span class="nx">organizationGoals</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">clarity</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Code should be clear and easy to understand</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">modularity</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Code should be modular and loosely coupled</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">consistency</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Code should follow consistent patterns</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">documentation</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Code should be well-documented</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">testing</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Code should be easily testable</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">performance</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Code should be performant and efficient</span><span class="dl">"</span>
+<span class="p">};</span>
+
+<span class="c1">// Organization metrics</span>
+<span class="kd">const</span> <span class="nx">organizationMetrics</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">cyclomaticComplexity</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Measure of code complexity</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">coupling</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Degree of coupling between modules</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">cohesion</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Degree of cohesion within modules</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">testCoverage</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Percentage of code covered by tests</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">documentationCoverage</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Percentage of code documented</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">codeDuplication</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Amount of duplicated code</span><span class="dl">"</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-project-structure">📁 <strong>Project Structure</strong></h2>
+
+<h3 id="basic-project-structure"><strong>Basic Project Structure</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Basic TypeScript project structure</span>
+<span class="kd">const</span> <span class="nx">basicProjectStructure</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">src</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Source code directory</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">dist</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Compiled output directory</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">tests</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Test files directory</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">docs</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Documentation directory</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">config</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Configuration files directory</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">scripts</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Build and utility scripts</span><span class="dl">"</span>
+<span class="p">};</span>
+
+<span class="c1">// Example project structure</span>
+<span class="kd">const</span> <span class="nx">exampleProjectStructure</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="dl">"</span><span class="s2">src/</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">components/</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">React components</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">services/</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Business logic services</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">utils/</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Utility functions</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">types/</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Type definitions</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">hooks/</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Custom React hooks</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">constants/</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Application constants</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">assets/</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Static assets</span><span class="dl">"</span>
+  <span class="p">},</span>
+  <span class="dl">"</span><span class="s2">tests/</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">unit/</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Unit tests</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">integration/</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Integration tests</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">e2e/</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">End-to-end tests</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">fixtures/</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Test fixtures</span><span class="dl">"</span>
+  <span class="p">},</span>
+  <span class="dl">"</span><span class="s2">docs/</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">api/</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">API documentation</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">guides/</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">User guides</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">examples/</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Code examples</span><span class="dl">"</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="advanced-project-structure"><strong>Advanced Project Structure</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Advanced project structure for large applications</span>
+<span class="kd">const</span> <span class="nx">advancedProjectStructure</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="dl">"</span><span class="s2">src/</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">app/</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Application-specific code</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">shared/</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Shared code across features</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">features/</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Feature-based organization</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">core/</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Core application logic</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">infrastructure/</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Infrastructure code</span><span class="dl">"</span>
+  <span class="p">},</span>
+  <span class="dl">"</span><span class="s2">features/</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">user-management/</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">User management feature</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">product-catalog/</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Product catalog feature</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">order-processing/</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Order processing feature</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">reporting/</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Reporting feature</span><span class="dl">"</span>
+  <span class="p">},</span>
+  <span class="dl">"</span><span class="s2">shared/</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">components/</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Shared UI components</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">services/</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Shared services</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">utils/</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Shared utilities</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">types/</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Shared type definitions</span><span class="dl">"</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// Feature-based organization</span>
+<span class="kd">const</span> <span class="nx">featureBasedOrganization</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="dl">"</span><span class="s2">features/user-management/</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">components/</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">User management components</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">services/</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">User management services</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">types/</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">User management types</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">hooks/</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">User management hooks</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">utils/</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">User management utilities</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">tests/</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">User management tests</span><span class="dl">"</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="monorepo-structure"><strong>Monorepo Structure</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Monorepo structure</span>
+<span class="kd">const</span> <span class="nx">monorepoStructure</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="dl">"</span><span class="s2">packages/</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">core/</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Core package</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">ui/</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">UI component library</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">utils/</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Utility package</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">types/</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Type definitions package</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">config/</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Configuration package</span><span class="dl">"</span>
+  <span class="p">},</span>
+  <span class="dl">"</span><span class="s2">apps/</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">web/</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Web application</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">mobile/</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Mobile application</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">desktop/</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Desktop application</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">admin/</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Admin application</span><span class="dl">"</span>
+  <span class="p">},</span>
+  <span class="dl">"</span><span class="s2">tools/</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">build/</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Build tools</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">scripts/</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Utility scripts</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">config/</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Shared configuration</span><span class="dl">"</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// Package structure</span>
+<span class="kd">const</span> <span class="nx">packageStructure</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="dl">"</span><span class="s2">src/</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Source code</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">dist/</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Compiled output</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">tests/</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Test files</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">docs/</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Documentation</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">package.json</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Package configuration</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">tsconfig.json</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">TypeScript configuration</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">README.md</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Package documentation</span><span class="dl">"</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="️-architecture-patterns">🏛️ <strong>Architecture Patterns</strong></h2>
+
+<h3 id="layered-architecture"><strong>Layered Architecture</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Layered architecture pattern</span>
+<span class="kd">const</span> <span class="nx">layeredArchitecture</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">presentation</span><span class="p">:</span> <span class="dl">"</span><span class="s2">UI layer (components, views)</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">business</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Business logic layer (services, use cases)</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">data</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Data access layer (repositories, APIs)</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">infrastructure</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Infrastructure layer (external services)</span><span class="dl">"</span>
+<span class="p">};</span>
+
+<span class="c1">// Presentation layer</span>
+<span class="kr">interface</span> <span class="nx">UserView</span> <span class="p">{</span>
+  <span class="nx">displayUser</span><span class="p">(</span><span class="nx">user</span><span class="p">:</span> <span class="nx">User</span><span class="p">):</span> <span class="k">void</span><span class="p">;</span>
+  <span class="nx">showError</span><span class="p">(</span><span class="nx">message</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="k">void</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nx">UserComponent</span> <span class="k">implements</span> <span class="nx">UserView</span> <span class="p">{</span>
+  <span class="nx">displayUser</span><span class="p">(</span><span class="nx">user</span><span class="p">:</span> <span class="nx">User</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`User: </span><span class="p">${</span><span class="nx">user</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+  <span class="p">}</span>
+  
+  <span class="nx">showError</span><span class="p">(</span><span class="nx">message</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">message</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Business layer</span>
+<span class="kr">interface</span> <span class="nx">UserService</span> <span class="p">{</span>
+  <span class="nx">getUser</span><span class="p">(</span><span class="nx">id</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span><span class="p">;</span>
+  <span class="nx">createUser</span><span class="p">(</span><span class="nx">userData</span><span class="p">:</span> <span class="nx">CreateUserRequest</span><span class="p">):</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nx">UserServiceImpl</span> <span class="k">implements</span> <span class="nx">UserService</span> <span class="p">{</span>
+  <span class="kd">constructor</span><span class="p">(</span><span class="k">private</span> <span class="nx">userRepository</span><span class="p">:</span> <span class="nx">UserRepository</span><span class="p">)</span> <span class="p">{}</span>
+  
+  <span class="k">async</span> <span class="nx">getUser</span><span class="p">(</span><span class="nx">id</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">userRepository</span><span class="p">.</span><span class="nx">findById</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
+  <span class="p">}</span>
+  
+  <span class="k">async</span> <span class="nx">createUser</span><span class="p">(</span><span class="nx">userData</span><span class="p">:</span> <span class="nx">CreateUserRequest</span><span class="p">):</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="c1">// Business logic</span>
+    <span class="kd">const</span> <span class="nx">user</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">User</span><span class="p">(</span><span class="nx">userData</span><span class="p">);</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">userRepository</span><span class="p">.</span><span class="nx">save</span><span class="p">(</span><span class="nx">user</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Data layer</span>
+<span class="kr">interface</span> <span class="nx">UserRepository</span> <span class="p">{</span>
+  <span class="nx">findById</span><span class="p">(</span><span class="nx">id</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span><span class="p">;</span>
+  <span class="nx">save</span><span class="p">(</span><span class="nx">user</span><span class="p">:</span> <span class="nx">User</span><span class="p">):</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nx">UserRepositoryImpl</span> <span class="k">implements</span> <span class="nx">UserRepository</span> <span class="p">{</span>
+  <span class="k">async</span> <span class="nx">findById</span><span class="p">(</span><span class="nx">id</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="c1">// Database access</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="nx">User</span><span class="p">({</span> <span class="nx">id</span><span class="p">,</span> <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">John Doe</span><span class="dl">'</span> <span class="p">});</span>
+  <span class="p">}</span>
+  
+  <span class="k">async</span> <span class="nx">save</span><span class="p">(</span><span class="nx">user</span><span class="p">:</span> <span class="nx">User</span><span class="p">):</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="c1">// Database save</span>
+    <span class="k">return</span> <span class="nx">user</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="clean-architecture"><strong>Clean Architecture</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Clean architecture pattern</span>
+<span class="kd">const</span> <span class="nx">cleanArchitecture</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">entities</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Business entities</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">useCases</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Application use cases</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">interfaces</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Interface adapters</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">frameworks</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Frameworks and drivers</span><span class="dl">"</span>
+<span class="p">};</span>
+
+<span class="c1">// Entities</span>
+<span class="kd">class</span> <span class="nx">User</span> <span class="p">{</span>
+  <span class="kd">constructor</span><span class="p">(</span>
+    <span class="k">public</span> <span class="nx">id</span><span class="p">:</span> <span class="kr">string</span><span class="p">,</span>
+    <span class="k">public</span> <span class="nx">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">,</span>
+    <span class="k">public</span> <span class="nx">email</span><span class="p">:</span> <span class="kr">string</span>
+  <span class="p">)</span> <span class="p">{}</span>
+  
+  <span class="nx">isValid</span><span class="p">():</span> <span class="nx">boolean</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="k">this</span><span class="p">.</span><span class="nx">email</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="dl">'</span><span class="s1">@</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Use cases</span>
+<span class="kr">interface</span> <span class="nx">GetUserUseCase</span> <span class="p">{</span>
+  <span class="nx">execute</span><span class="p">(</span><span class="nx">id</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nx">GetUserUseCaseImpl</span> <span class="k">implements</span> <span class="nx">GetUserUseCase</span> <span class="p">{</span>
+  <span class="kd">constructor</span><span class="p">(</span><span class="k">private</span> <span class="nx">userRepository</span><span class="p">:</span> <span class="nx">UserRepository</span><span class="p">)</span> <span class="p">{}</span>
+  
+  <span class="k">async</span> <span class="nx">execute</span><span class="p">(</span><span class="nx">id</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">user</span> <span class="o">=</span> <span class="k">await</span> <span class="k">this</span><span class="p">.</span><span class="nx">userRepository</span><span class="p">.</span><span class="nx">findById</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">user</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">User not found</span><span class="dl">'</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">user</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Interface adapters</span>
+<span class="kd">class</span> <span class="nx">UserController</span> <span class="p">{</span>
+  <span class="kd">constructor</span><span class="p">(</span><span class="k">private</span> <span class="nx">getUserUseCase</span><span class="p">:</span> <span class="nx">GetUserUseCase</span><span class="p">)</span> <span class="p">{}</span>
+  
+  <span class="k">async</span> <span class="nx">getUser</span><span class="p">(</span><span class="nx">req</span><span class="p">:</span> <span class="nx">Request</span><span class="p">,</span> <span class="nx">res</span><span class="p">:</span> <span class="nx">Response</span><span class="p">):</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="k">void</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">user</span> <span class="o">=</span> <span class="k">await</span> <span class="k">this</span><span class="p">.</span><span class="nx">getUserUseCase</span><span class="p">.</span><span class="nx">execute</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">id</span><span class="p">);</span>
+      <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">(</span><span class="nx">user</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">404</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span> <span class="na">error</span><span class="p">:</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span> <span class="p">});</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Frameworks and drivers</span>
+<span class="kd">class</span> <span class="nx">UserRepositoryImpl</span> <span class="k">implements</span> <span class="nx">UserRepository</span> <span class="p">{</span>
+  <span class="k">async</span> <span class="nx">findById</span><span class="p">(</span><span class="nx">id</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="c1">// Database implementation</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="nx">User</span><span class="p">(</span><span class="nx">id</span><span class="p">,</span> <span class="dl">'</span><span class="s1">John Doe</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">john@example.com</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="hexagonal-architecture"><strong>Hexagonal Architecture</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Hexagonal architecture pattern</span>
+<span class="kd">const</span> <span class="nx">hexagonalArchitecture</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">domain</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Core business logic</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">ports</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Interfaces for external communication</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">adapters</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Implementations of ports</span><span class="dl">"</span>
+<span class="p">};</span>
+
+<span class="c1">// Domain</span>
+<span class="kd">class</span> <span class="nx">Order</span> <span class="p">{</span>
+  <span class="kd">constructor</span><span class="p">(</span>
+    <span class="k">public</span> <span class="nx">id</span><span class="p">:</span> <span class="kr">string</span><span class="p">,</span>
+    <span class="k">public</span> <span class="nx">customerId</span><span class="p">:</span> <span class="kr">string</span><span class="p">,</span>
+    <span class="k">public</span> <span class="nx">items</span><span class="p">:</span> <span class="nx">OrderItem</span><span class="p">[],</span>
+    <span class="k">public</span> <span class="nx">status</span><span class="p">:</span> <span class="nx">OrderStatus</span>
+  <span class="p">)</span> <span class="p">{}</span>
+  
+  <span class="nx">calculateTotal</span><span class="p">():</span> <span class="kr">number</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">items</span><span class="p">.</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">total</span><span class="p">,</span> <span class="nx">item</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">total</span> <span class="o">+</span> <span class="nx">item</span><span class="p">.</span><span class="nx">price</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+  <span class="p">}</span>
+  
+  <span class="nx">canBeCancelled</span><span class="p">():</span> <span class="nx">boolean</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">status</span> <span class="o">===</span> <span class="nx">OrderStatus</span><span class="p">.</span><span class="nx">PENDING</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Ports</span>
+<span class="kr">interface</span> <span class="nx">OrderRepository</span> <span class="p">{</span>
+  <span class="nx">save</span><span class="p">(</span><span class="nx">order</span><span class="p">:</span> <span class="nx">Order</span><span class="p">):</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="k">void</span><span class="o">&gt;</span><span class="p">;</span>
+  <span class="nx">findById</span><span class="p">(</span><span class="nx">id</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">Order</span> <span class="o">|</span> <span class="kc">null</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kr">interface</span> <span class="nx">PaymentService</span> <span class="p">{</span>
+  <span class="nx">processPayment</span><span class="p">(</span><span class="nx">amount</span><span class="p">:</span> <span class="kr">number</span><span class="p">,</span> <span class="nx">customerId</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">PaymentResult</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kr">interface</span> <span class="nx">NotificationService</span> <span class="p">{</span>
+  <span class="nx">sendOrderConfirmation</span><span class="p">(</span><span class="nx">order</span><span class="p">:</span> <span class="nx">Order</span><span class="p">):</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="k">void</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Adapters</span>
+<span class="kd">class</span> <span class="nx">OrderRepositoryImpl</span> <span class="k">implements</span> <span class="nx">OrderRepository</span> <span class="p">{</span>
+  <span class="k">async</span> <span class="nx">save</span><span class="p">(</span><span class="nx">order</span><span class="p">:</span> <span class="nx">Order</span><span class="p">):</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="k">void</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="c1">// Database implementation</span>
+  <span class="p">}</span>
+  
+  <span class="k">async</span> <span class="nx">findById</span><span class="p">(</span><span class="nx">id</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">Order</span> <span class="o">|</span> <span class="kc">null</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="c1">// Database implementation</span>
+    <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nx">PaymentServiceImpl</span> <span class="k">implements</span> <span class="nx">PaymentService</span> <span class="p">{</span>
+  <span class="k">async</span> <span class="nx">processPayment</span><span class="p">(</span><span class="nx">amount</span><span class="p">:</span> <span class="kr">number</span><span class="p">,</span> <span class="nx">customerId</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">PaymentResult</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="c1">// Payment gateway implementation</span>
+    <span class="k">return</span> <span class="p">{</span> <span class="na">success</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="na">transactionId</span><span class="p">:</span> <span class="dl">'</span><span class="s1">txn_123</span><span class="dl">'</span> <span class="p">};</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nx">NotificationServiceImpl</span> <span class="k">implements</span> <span class="nx">NotificationService</span> <span class="p">{</span>
+  <span class="k">async</span> <span class="nx">sendOrderConfirmation</span><span class="p">(</span><span class="nx">order</span><span class="p">:</span> <span class="nx">Order</span><span class="p">):</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="k">void</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="c1">// Email/SMS implementation</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-module-organization">📦 <strong>Module Organization</strong></h2>
+
+<h3 id="module-design-principles"><strong>Module Design Principles</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Module design principles</span>
+<span class="kd">const</span> <span class="nx">moduleDesignPrinciples</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">singleResponsibility</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Each module should have one reason to change</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">openClosed</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Open for extension, closed for modification</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">dependencyInversion</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Depend on abstractions, not concretions</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">interfaceSegregation</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Use specific interfaces</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">cohesion</span><span class="p">:</span> <span class="dl">"</span><span class="s2">High cohesion within modules</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">coupling</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Low coupling between modules</span><span class="dl">"</span>
+<span class="p">};</span>
+
+<span class="c1">// High cohesion example</span>
+<span class="c1">// ✅ Good: High cohesion</span>
+<span class="kd">class</span> <span class="nx">UserService</span> <span class="p">{</span>
+  <span class="nx">createUser</span><span class="p">(</span><span class="nx">userData</span><span class="p">:</span> <span class="nx">CreateUserRequest</span><span class="p">):</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="c1">// User creation logic</span>
+  <span class="p">}</span>
+  
+  <span class="nx">updateUser</span><span class="p">(</span><span class="nx">id</span><span class="p">:</span> <span class="kr">string</span><span class="p">,</span> <span class="nx">userData</span><span class="p">:</span> <span class="nx">UpdateUserRequest</span><span class="p">):</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="c1">// User update logic</span>
+  <span class="p">}</span>
+  
+  <span class="nx">deleteUser</span><span class="p">(</span><span class="nx">id</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="k">void</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="c1">// User deletion logic</span>
+  <span class="p">}</span>
+  
+  <span class="nx">getUser</span><span class="p">(</span><span class="nx">id</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="c1">// User retrieval logic</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// ❌ Avoid: Low cohesion</span>
+<span class="kd">class</span> <span class="nx">UserService</span> <span class="p">{</span>
+  <span class="nx">createUser</span><span class="p">(</span><span class="nx">userData</span><span class="p">:</span> <span class="nx">CreateUserRequest</span><span class="p">):</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="c1">// User creation logic</span>
+  <span class="p">}</span>
+  
+  <span class="nx">sendEmail</span><span class="p">(</span><span class="nx">to</span><span class="p">:</span> <span class="kr">string</span><span class="p">,</span> <span class="nx">subject</span><span class="p">:</span> <span class="kr">string</span><span class="p">,</span> <span class="nx">body</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="k">void</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="c1">// Email logic (not related to users)</span>
+  <span class="p">}</span>
+  
+  <span class="nx">processPayment</span><span class="p">(</span><span class="nx">amount</span><span class="p">:</span> <span class="kr">number</span><span class="p">):</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">PaymentResult</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="c1">// Payment logic (not related to users)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="module-dependencies"><strong>Module Dependencies</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Module dependency management</span>
+<span class="kd">const</span> <span class="nx">moduleDependencies</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">dependencyInjection</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Inject dependencies rather than creating them</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">interfaces</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Use interfaces to define contracts</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">factories</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Use factories to create objects</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">singletons</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Use singletons for shared resources</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">observers</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Use observer pattern for loose coupling</span><span class="dl">"</span>
+<span class="p">};</span>
+
+<span class="c1">// Dependency injection</span>
+<span class="kr">interface</span> <span class="nx">UserRepository</span> <span class="p">{</span>
+  <span class="nx">findById</span><span class="p">(</span><span class="nx">id</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span><span class="p">;</span>
+  <span class="nx">save</span><span class="p">(</span><span class="nx">user</span><span class="p">:</span> <span class="nx">User</span><span class="p">):</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nx">UserService</span> <span class="p">{</span>
+  <span class="kd">constructor</span><span class="p">(</span><span class="k">private</span> <span class="nx">userRepository</span><span class="p">:</span> <span class="nx">UserRepository</span><span class="p">)</span> <span class="p">{}</span>
+  
+  <span class="k">async</span> <span class="nx">getUser</span><span class="p">(</span><span class="nx">id</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">userRepository</span><span class="p">.</span><span class="nx">findById</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
+  <span class="p">}</span>
+  
+  <span class="k">async</span> <span class="nx">createUser</span><span class="p">(</span><span class="nx">userData</span><span class="p">:</span> <span class="nx">CreateUserRequest</span><span class="p">):</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">user</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">User</span><span class="p">(</span><span class="nx">userData</span><span class="p">);</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">userRepository</span><span class="p">.</span><span class="nx">save</span><span class="p">(</span><span class="nx">user</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Factory pattern</span>
+<span class="kd">class</span> <span class="nx">UserServiceFactory</span> <span class="p">{</span>
+  <span class="k">static</span> <span class="nx">create</span><span class="p">():</span> <span class="nx">UserService</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">userRepository</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">UserRepositoryImpl</span><span class="p">();</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="nx">UserService</span><span class="p">(</span><span class="nx">userRepository</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Observer pattern</span>
+<span class="kr">interface</span> <span class="nx">UserObserver</span> <span class="p">{</span>
+  <span class="nx">onUserCreated</span><span class="p">(</span><span class="nx">user</span><span class="p">:</span> <span class="nx">User</span><span class="p">):</span> <span class="k">void</span><span class="p">;</span>
+  <span class="nx">onUserUpdated</span><span class="p">(</span><span class="nx">user</span><span class="p">:</span> <span class="nx">User</span><span class="p">):</span> <span class="k">void</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nx">UserService</span> <span class="p">{</span>
+  <span class="k">private</span> <span class="nx">observers</span><span class="p">:</span> <span class="nx">UserObserver</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[];</span>
+  
+  <span class="nx">addObserver</span><span class="p">(</span><span class="nx">observer</span><span class="p">:</span> <span class="nx">UserObserver</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">observers</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">observer</span><span class="p">);</span>
+  <span class="p">}</span>
+  
+  <span class="nx">removeObserver</span><span class="p">(</span><span class="nx">observer</span><span class="p">:</span> <span class="nx">UserObserver</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">index</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">observers</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">observer</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">index</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">observers</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  
+  <span class="k">private</span> <span class="nx">notifyUserCreated</span><span class="p">(</span><span class="nx">user</span><span class="p">:</span> <span class="nx">User</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">observers</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">observer</span> <span class="o">=&gt;</span> <span class="nx">observer</span><span class="p">.</span><span class="nx">onUserCreated</span><span class="p">(</span><span class="nx">user</span><span class="p">));</span>
+  <span class="p">}</span>
+  
+  <span class="k">private</span> <span class="nx">notifyUserUpdated</span><span class="p">(</span><span class="nx">user</span><span class="p">:</span> <span class="nx">User</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">observers</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">observer</span> <span class="o">=&gt;</span> <span class="nx">observer</span><span class="p">.</span><span class="nx">onUserUpdated</span><span class="p">(</span><span class="nx">user</span><span class="p">));</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="module-communication"><strong>Module Communication</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Module communication patterns</span>
+<span class="kd">const</span> <span class="nx">moduleCommunication</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">events</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Use events for loose coupling</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">messages</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Use message passing</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">sharedState</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Use shared state management</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">callbacks</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Use callbacks for async communication</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">promises</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Use promises for async operations</span><span class="dl">"</span>
+<span class="p">};</span>
+
+<span class="c1">// Event-based communication</span>
+<span class="kd">class</span> <span class="nx">EventBus</span> <span class="p">{</span>
+  <span class="k">private</span> <span class="nx">listeners</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Map</span><span class="o">&lt;</span><span class="kr">string</span><span class="p">,</span> <span class="nb">Function</span><span class="p">[]</span><span class="o">&gt;</span><span class="p">();</span>
+  
+  <span class="nx">on</span><span class="p">(</span><span class="nx">event</span><span class="p">:</span> <span class="kr">string</span><span class="p">,</span> <span class="nx">listener</span><span class="p">:</span> <span class="nb">Function</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">listeners</span><span class="p">.</span><span class="nx">has</span><span class="p">(</span><span class="nx">event</span><span class="p">))</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">listeners</span><span class="p">.</span><span class="kd">set</span><span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="p">[]);</span>
+    <span class="p">}</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">listeners</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span><span class="o">!</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">listener</span><span class="p">);</span>
+  <span class="p">}</span>
+  
+  <span class="nx">off</span><span class="p">(</span><span class="nx">event</span><span class="p">:</span> <span class="kr">string</span><span class="p">,</span> <span class="nx">listener</span><span class="p">:</span> <span class="nb">Function</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">listeners</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">listeners</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="o">||</span> <span class="p">[];</span>
+    <span class="kd">const</span> <span class="nx">index</span> <span class="o">=</span> <span class="nx">listeners</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">listener</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">index</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">listeners</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  
+  <span class="nx">emit</span><span class="p">(</span><span class="nx">event</span><span class="p">:</span> <span class="kr">string</span><span class="p">,</span> <span class="nx">data</span><span class="p">:</span> <span class="kr">any</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">listeners</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">listeners</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="o">||</span> <span class="p">[];</span>
+    <span class="nx">listeners</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">listener</span> <span class="o">=&gt;</span> <span class="nx">listener</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Message passing</span>
+<span class="kr">interface</span> <span class="nx">Message</span> <span class="p">{</span>
+  <span class="nl">type</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">payload</span><span class="p">:</span> <span class="kr">any</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nx">MessageBus</span> <span class="p">{</span>
+  <span class="k">private</span> <span class="nx">handlers</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Map</span><span class="o">&lt;</span><span class="kr">string</span><span class="p">,</span> <span class="nb">Function</span><span class="p">[]</span><span class="o">&gt;</span><span class="p">();</span>
+  
+  <span class="nx">subscribe</span><span class="p">(</span><span class="nx">messageType</span><span class="p">:</span> <span class="kr">string</span><span class="p">,</span> <span class="nx">handler</span><span class="p">:</span> <span class="nb">Function</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">handlers</span><span class="p">.</span><span class="nx">has</span><span class="p">(</span><span class="nx">messageType</span><span class="p">))</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">handlers</span><span class="p">.</span><span class="kd">set</span><span class="p">(</span><span class="nx">messageType</span><span class="p">,</span> <span class="p">[]);</span>
+    <span class="p">}</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">handlers</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="nx">messageType</span><span class="p">)</span><span class="o">!</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">handler</span><span class="p">);</span>
+  <span class="p">}</span>
+  
+  <span class="nx">publish</span><span class="p">(</span><span class="nx">message</span><span class="p">:</span> <span class="nx">Message</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">handlers</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">handlers</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="kd">type</span><span class="p">)</span> <span class="o">||</span> <span class="p">[];</span>
+    <span class="nx">handlers</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">handler</span> <span class="o">=&gt;</span> <span class="nx">handler</span><span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">payload</span><span class="p">));</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Shared state management</span>
+<span class="kd">class</span> <span class="nx">StateManager</span> <span class="p">{</span>
+  <span class="k">private</span> <span class="nx">state</span><span class="p">:</span> <span class="kr">any</span> <span class="o">=</span> <span class="p">{};</span>
+  <span class="k">private</span> <span class="nx">listeners</span><span class="p">:</span> <span class="nb">Function</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[];</span>
+  
+  <span class="nx">getState</span><span class="p">():</span> <span class="kr">any</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">;</span>
+  <span class="p">}</span>
+  
+  <span class="nx">setState</span><span class="p">(</span><span class="nx">newState</span><span class="p">:</span> <span class="kr">any</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="p">{</span> <span class="p">...</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">,</span> <span class="p">...</span><span class="nx">newState</span> <span class="p">};</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">listeners</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">listener</span> <span class="o">=&gt;</span> <span class="nx">listener</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">));</span>
+  <span class="p">}</span>
+  
+  <span class="nx">subscribe</span><span class="p">(</span><span class="nx">listener</span><span class="p">:</span> <span class="nb">Function</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">listeners</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">listener</span><span class="p">);</span>
+  <span class="p">}</span>
+  
+  <span class="nx">unsubscribe</span><span class="p">(</span><span class="nx">listener</span><span class="p">:</span> <span class="nb">Function</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">index</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">listeners</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">listener</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">index</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">listeners</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-naming-conventions">📝 <strong>Naming Conventions</strong></h2>
+
+<h3 id="file-and-directory-naming"><strong>File and Directory Naming</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// File and directory naming conventions</span>
+<span class="kd">const</span> <span class="nx">namingConventions</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">files</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Use kebab-case for files</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">directories</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Use kebab-case for directories</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">components</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Use PascalCase for component files</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">utilities</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Use camelCase for utility files</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">constants</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Use UPPER_SNAKE_CASE for constants</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">types</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Use PascalCase for type files</span><span class="dl">"</span>
+<span class="p">};</span>
+
+<span class="c1">// File naming examples</span>
+<span class="kd">const</span> <span class="nx">fileNamingExamples</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">components</span><span class="p">:</span> <span class="dl">"</span><span class="s2">UserProfile.tsx</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">services</span><span class="p">:</span> <span class="dl">"</span><span class="s2">userService.ts</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">utilities</span><span class="p">:</span> <span class="dl">"</span><span class="s2">dateUtils.ts</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">constants</span><span class="p">:</span> <span class="dl">"</span><span class="s2">API_CONSTANTS.ts</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">types</span><span class="p">:</span> <span class="dl">"</span><span class="s2">UserTypes.ts</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">hooks</span><span class="p">:</span> <span class="dl">"</span><span class="s2">useUserData.ts</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">tests</span><span class="p">:</span> <span class="dl">"</span><span class="s2">userService.test.ts</span><span class="dl">"</span>
+<span class="p">};</span>
+
+<span class="c1">// Directory naming examples</span>
+<span class="kd">const</span> <span class="nx">directoryNamingExamples</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">features</span><span class="p">:</span> <span class="dl">"</span><span class="s2">user-management/</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">components</span><span class="p">:</span> <span class="dl">"</span><span class="s2">ui-components/</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">services</span><span class="p">:</span> <span class="dl">"</span><span class="s2">business-services/</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">utilities</span><span class="p">:</span> <span class="dl">"</span><span class="s2">shared-utils/</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">types</span><span class="p">:</span> <span class="dl">"</span><span class="s2">type-definitions/</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">tests</span><span class="p">:</span> <span class="dl">"</span><span class="s2">unit-tests/</span><span class="dl">"</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="variable-and-function-naming"><strong>Variable and Function Naming</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Variable and function naming conventions</span>
+<span class="kd">const</span> <span class="nx">variableNaming</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">variables</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Use camelCase for variables</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">functions</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Use camelCase for functions</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">constants</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Use UPPER_SNAKE_CASE for constants</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">private</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Use underscore prefix for private members</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">interfaces</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Use PascalCase for interfaces</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">types</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Use PascalCase for types</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">enums</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Use PascalCase for enums</span><span class="dl">"</span>
+<span class="p">};</span>
+
+<span class="c1">// Variable naming examples</span>
+<span class="kd">const</span> <span class="nx">variableExamples</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">variables</span><span class="p">:</span> <span class="dl">"</span><span class="s2">userName, isLoggedIn, userCount</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">functions</span><span class="p">:</span> <span class="dl">"</span><span class="s2">getUserData, createUser, validateEmail</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">constants</span><span class="p">:</span> <span class="dl">"</span><span class="s2">API_BASE_URL, MAX_RETRY_ATTEMPTS</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">private</span><span class="p">:</span> <span class="dl">"</span><span class="s2">_privateMethod, _internalState</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">interfaces</span><span class="p">:</span> <span class="dl">"</span><span class="s2">User, UserService, UserRepository</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">types</span><span class="p">:</span> <span class="dl">"</span><span class="s2">UserStatus, CreateUserRequest</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">enums</span><span class="p">:</span> <span class="dl">"</span><span class="s2">OrderStatus, PaymentMethod</span><span class="dl">"</span>
+<span class="p">};</span>
+
+<span class="c1">// Function naming examples</span>
+<span class="kd">const</span> <span class="nx">functionExamples</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">getters</span><span class="p">:</span> <span class="dl">"</span><span class="s2">getUserById, getUserName, getUserEmail</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">setters</span><span class="p">:</span> <span class="dl">"</span><span class="s2">setUserName, setUserEmail, setUserStatus</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">validators</span><span class="p">:</span> <span class="dl">"</span><span class="s2">isValidEmail, isUserActive, canUserAccess</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">creators</span><span class="p">:</span> <span class="dl">"</span><span class="s2">createUser, createOrder, createPayment</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">updaters</span><span class="p">:</span> <span class="dl">"</span><span class="s2">updateUser, updateOrder, updatePayment</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">deleters</span><span class="p">:</span> <span class="dl">"</span><span class="s2">deleteUser, deleteOrder, deletePayment</span><span class="dl">"</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="class-and-interface-naming"><strong>Class and Interface Naming</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Class and interface naming conventions</span>
+<span class="kd">const</span> <span class="nx">classNaming</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">classes</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Use PascalCase for classes</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">interfaces</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Use PascalCase for interfaces</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">abstract</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Use Abstract prefix for abstract classes</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">base</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Use Base suffix for base classes</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">implementation</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Use Impl suffix for implementations</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">factory</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Use Factory suffix for factories</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">builder</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Use Builder suffix for builders</span><span class="dl">"</span>
+<span class="p">};</span>
+
+<span class="c1">// Class naming examples</span>
+<span class="kd">const</span> <span class="nx">classExamples</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">classes</span><span class="p">:</span> <span class="dl">"</span><span class="s2">User, Order, Payment, UserService</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">interfaces</span><span class="p">:</span> <span class="dl">"</span><span class="s2">UserRepository, PaymentService, NotificationService</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">abstract</span><span class="p">:</span> <span class="dl">"</span><span class="s2">AbstractUserService, AbstractRepository</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">base</span><span class="p">:</span> <span class="dl">"</span><span class="s2">BaseEntity, BaseService, BaseRepository</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">implementation</span><span class="p">:</span> <span class="dl">"</span><span class="s2">UserServiceImpl, UserRepositoryImpl</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">factory</span><span class="p">:</span> <span class="dl">"</span><span class="s2">UserServiceFactory, PaymentServiceFactory</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">builder</span><span class="p">:</span> <span class="dl">"</span><span class="s2">UserBuilder, OrderBuilder, PaymentBuilder</span><span class="dl">"</span>
+<span class="p">};</span>
+
+<span class="c1">// Interface naming examples</span>
+<span class="kd">const</span> <span class="nx">interfaceExamples</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">repositories</span><span class="p">:</span> <span class="dl">"</span><span class="s2">UserRepository, OrderRepository, PaymentRepository</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">services</span><span class="p">:</span> <span class="dl">"</span><span class="s2">UserService, OrderService, PaymentService</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">controllers</span><span class="p">:</span> <span class="dl">"</span><span class="s2">UserController, OrderController, PaymentController</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">models</span><span class="p">:</span> <span class="dl">"</span><span class="s2">User, Order, Payment, Product</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">requests</span><span class="p">:</span> <span class="dl">"</span><span class="s2">CreateUserRequest, UpdateUserRequest, DeleteUserRequest</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">responses</span><span class="p">:</span> <span class="dl">"</span><span class="s2">UserResponse, OrderResponse, PaymentResponse</span><span class="dl">"</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-best-practices">✅ <strong>Best Practices</strong></h2>
+
+<h3 id="1-follow-single-responsibility-principle"><strong>1. Follow Single Responsibility Principle</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ✅ Good: Single responsibility</span>
+<span class="kd">class</span> <span class="nx">UserService</span> <span class="p">{</span>
+  <span class="k">async</span> <span class="nx">getUser</span><span class="p">(</span><span class="nx">id</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="c1">// Only user-related operations</span>
+  <span class="p">}</span>
+  
+  <span class="k">async</span> <span class="nx">createUser</span><span class="p">(</span><span class="nx">userData</span><span class="p">:</span> <span class="nx">CreateUserRequest</span><span class="p">):</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="c1">// Only user-related operations</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// ❌ Avoid: Multiple responsibilities</span>
+<span class="kd">class</span> <span class="nx">UserService</span> <span class="p">{</span>
+  <span class="k">async</span> <span class="nx">getUser</span><span class="p">(</span><span class="nx">id</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="c1">// User operations</span>
+  <span class="p">}</span>
+  
+  <span class="k">async</span> <span class="nx">sendEmail</span><span class="p">(</span><span class="nx">to</span><span class="p">:</span> <span class="kr">string</span><span class="p">,</span> <span class="nx">subject</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="k">void</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="c1">// Email operations (not user-related)</span>
+  <span class="p">}</span>
+  
+  <span class="k">async</span> <span class="nx">processPayment</span><span class="p">(</span><span class="nx">amount</span><span class="p">:</span> <span class="kr">number</span><span class="p">):</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">PaymentResult</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="c1">// Payment operations (not user-related)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="2-use-dependency-injection"><strong>2. Use Dependency Injection</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ✅ Good: Dependency injection</span>
+<span class="kd">class</span> <span class="nx">UserService</span> <span class="p">{</span>
+  <span class="kd">constructor</span><span class="p">(</span><span class="k">private</span> <span class="nx">userRepository</span><span class="p">:</span> <span class="nx">UserRepository</span><span class="p">)</span> <span class="p">{}</span>
+  
+  <span class="k">async</span> <span class="nx">getUser</span><span class="p">(</span><span class="nx">id</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">userRepository</span><span class="p">.</span><span class="nx">findById</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// ❌ Avoid: Direct dependency creation</span>
+<span class="kd">class</span> <span class="nx">UserService</span> <span class="p">{</span>
+  <span class="k">async</span> <span class="nx">getUser</span><span class="p">(</span><span class="nx">id</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">userRepository</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">UserRepositoryImpl</span><span class="p">();</span> <span class="c1">// Hard dependency</span>
+    <span class="k">return</span> <span class="nx">userRepository</span><span class="p">.</span><span class="nx">findById</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="3-organize-by-feature"><strong>3. Organize by Feature</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ✅ Good: Feature-based organization</span>
+<span class="kd">const</span> <span class="nx">featureOrganization</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="dl">"</span><span class="s2">features/user-management/</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">components/</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">User components</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">services/</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">User services</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">types/</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">User types</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">tests/</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">User tests</span><span class="dl">"</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// ❌ Avoid: Technical-based organization</span>
+<span class="kd">const</span> <span class="nx">technicalOrganization</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="dl">"</span><span class="s2">components/</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">All components mixed together</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">services/</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">All services mixed together</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">types/</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">All types mixed together</span><span class="dl">"</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="4-use-consistent-naming"><strong>4. Use Consistent Naming</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ✅ Good: Consistent naming</span>
+<span class="kd">const</span> <span class="nx">consistentNaming</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">files</span><span class="p">:</span> <span class="dl">"</span><span class="s2">userService.ts, userTypes.ts, userUtils.ts</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">classes</span><span class="p">:</span> <span class="dl">"</span><span class="s2">UserService, UserRepository, UserController</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">interfaces</span><span class="p">:</span> <span class="dl">"</span><span class="s2">User, UserService, UserRepository</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">functions</span><span class="p">:</span> <span class="dl">"</span><span class="s2">getUser, createUser, updateUser, deleteUser</span><span class="dl">"</span>
+<span class="p">};</span>
+
+<span class="c1">// ❌ Avoid: Inconsistent naming</span>
+<span class="kd">const</span> <span class="nx">inconsistentNaming</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">files</span><span class="p">:</span> <span class="dl">"</span><span class="s2">userService.ts, UserTypes.ts, user_utils.ts</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">classes</span><span class="p">:</span> <span class="dl">"</span><span class="s2">UserService, userRepository, User_Controller</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">interfaces</span><span class="p">:</span> <span class="dl">"</span><span class="s2">User, userService, User_Repository</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">functions</span><span class="p">:</span> <span class="dl">"</span><span class="s2">getUser, CreateUser, update_user, deleteUser</span><span class="dl">"</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-common-interview-questions">❓ <strong>Common Interview Questions</strong></h2>
+
+<h3 id="1-how-do-you-organize-typescript-code-in-large-projects"><strong>1. How do you organize TypeScript code in large projects?</strong></h3>
+
+<p><strong>Answer:</strong></p>
+<ul>
+  <li><strong>Feature-based</strong>: Organize by business features</li>
+  <li><strong>Layered Architecture</strong>: Separate presentation, business, and data layers</li>
+  <li><strong>Module Design</strong>: Use single responsibility and dependency injection</li>
+  <li><strong>Consistent Naming</strong>: Follow consistent naming conventions</li>
+  <li><strong>Documentation</strong>: Maintain clear documentation</li>
+</ul>
+
+<h3 id="2-what-are-the-benefits-of-good-code-organization"><strong>2. What are the benefits of good code organization?</strong></h3>
+
+<p><strong>Answer:</strong></p>
+<ul>
+  <li><strong>Maintainability</strong>: Easier to maintain and update</li>
+  <li><strong>Scalability</strong>: Easier to scale and extend</li>
+  <li><strong>Testability</strong>: Easier to test individual components</li>
+  <li><strong>Reusability</strong>: Components can be reused</li>
+  <li><strong>Collaboration</strong>: Easier for teams to work together</li>
+</ul>
+
+<h3 id="3-how-do-you-handle-dependencies-between-modules"><strong>3. How do you handle dependencies between modules?</strong></h3>
+
+<p><strong>Answer:</strong></p>
+<ul>
+  <li><strong>Dependency Injection</strong>: Inject dependencies rather than creating them</li>
+  <li><strong>Interfaces</strong>: Use interfaces to define contracts</li>
+  <li><strong>Factories</strong>: Use factories to create objects</li>
+  <li><strong>Events</strong>: Use events for loose coupling</li>
+  <li><strong>Shared State</strong>: Use shared state management</li>
+</ul>
+
+<h3 id="4-what-architecture-patterns-do-you-use-in-typescript"><strong>4. What architecture patterns do you use in TypeScript?</strong></h3>
+
+<p><strong>Answer:</strong></p>
+<ul>
+  <li><strong>Layered Architecture</strong>: Separate concerns into layers</li>
+  <li><strong>Clean Architecture</strong>: Use cases and entities</li>
+  <li><strong>Hexagonal Architecture</strong>: Ports and adapters</li>
+  <li><strong>MVC</strong>: Model-View-Controller</li>
+  <li><strong>MVVM</strong>: Model-View-ViewModel</li>
+</ul>
+
+<h3 id="5-how-do-you-ensure-code-consistency-across-a-team"><strong>5. How do you ensure code consistency across a team?</strong></h3>
+
+<p><strong>Answer:</strong></p>
+<ul>
+  <li><strong>Naming Conventions</strong>: Establish clear naming conventions</li>
+  <li><strong>Code Style</strong>: Use ESLint and Prettier</li>
+  <li><strong>Documentation</strong>: Maintain clear documentation</li>
+  <li><strong>Code Reviews</strong>: Regular code reviews</li>
+  <li><strong>Training</strong>: Team training on best practices</li>
+</ul>
+
+<hr />
+
+<h2 id="-navigation">🧭 Navigation</h2>
+
+<div class="navigation">
+  <a href="../09-TypeScript-Performance-Optimization/04-Memory-Management.md" class="nav-button">← Previous: Memory Management</a>
+  <a href="02-Type-Safety-Best-Practices.md" class="nav-button">Next: Type Safety Best Practices →</a>
+</div>
+
+<p><em>Last updated: December 2025</em></p>
+
+        </main>
+        
+        <footer style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #ecf0f1; color: #666; text-align: center;">
+            <p>Interview Prep Documentation - Built with Jekyll</p>
+        </footer>
+    </div>
+</body>
+</html>

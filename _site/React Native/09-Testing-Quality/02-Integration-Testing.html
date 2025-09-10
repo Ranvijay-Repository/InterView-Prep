@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔗 Integration Testing - Interview Prep Documentation</title>
+    <meta name="description" content="Comprehensive guides for JavaScript, TypeScript, and React Native interview preparation">
+    
+    <!-- GitHub Pages compatible styling -->
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+        }
+        
+        .container {
+            max-width: 100%;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            color: #2c3e50;
+            margin-top: 2em;
+            margin-bottom: 1em;
+        }
+        
+        h1 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            border-bottom: 1px solid #ecf0f1;
+            padding-bottom: 5px;
+        }
+        
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border-left: 4px solid #3498db;
+        }
+        
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+        
+        blockquote {
+            border-left: 4px solid #3498db;
+            margin: 0;
+            padding-left: 20px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1em 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .navigation {
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px 0;
+            margin-bottom: 20px;
+        }
+        
+        .navigation a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+        
+        .navigation a:hover {
+            text-decoration: underline;
+        }
+        
+        .breadcrumb {
+            margin-bottom: 20px;
+            color: #666;
+        }
+        
+        .breadcrumb a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            h2 {
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="navigation">
+            <a href="/">Home</a>
+            <a href="/Javascript/">JavaScript</a>
+            <a href="/TypeScript/">TypeScript</a>
+            <a href="/React-Native/">React Native</a>
+        </nav>
+        
+        
+        
+        <main>
+            <h1 id="-integration-testing">🔗 <strong>Integration Testing</strong></h1>
+
+<blockquote>
+  <p><strong>Master integration testing strategies, API testing, and component integration testing in React Native applications</strong></p>
+</blockquote>
+
+<link rel="stylesheet" href="../../common-styles.css" />
+
+<hr />
+
+<h2 id="-table-of-contents">📚 <strong>Table of Contents</strong></h2>
+
+<ul>
+  <li><a href="#introduction">Introduction</a></li>
+  <li><a href="#api-integration-testing">API Integration Testing</a></li>
+  <li><a href="#component-integration-testing">Component Integration Testing</a></li>
+  <li><a href="#navigation-testing">Navigation Testing</a></li>
+  <li><a href="#state-management-testing">State Management Testing</a></li>
+  <li><a href="#common-patterns">Common Patterns</a></li>
+  <li><a href="#interview-questions">Interview Questions</a></li>
+  <li><a href="#best-practices">Best Practices</a></li>
+</ul>
+
+<hr />
+
+<h2 id="-introduction">🎯 <strong>Introduction</strong></h2>
+
+<p>Integration testing ensures that different parts of your React Native application work together correctly. It tests the interaction between components, services, and external dependencies.</p>
+
+<h3 id="integration-testing-overview"><strong>Integration Testing Overview</strong></h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>┌─────────────────────────────────────┐
+│        Integration Testing          │
+│  ┌─────────────────────────────────┐│
+│  │        Testing Levels           ││
+│  │  - Component integration        ││
+│  │  - API integration              ││
+│  │  - Navigation integration       ││
+│  │  - State management integration ││
+│  └─────────────────────────────────┘│
+│  ┌─────────────────────────────────┐│
+│  │        Testing Tools            ││
+│  │  - React Testing Library        ││
+│  │  - MSW (Mock Service Worker)    ││
+│  │  - Supertest                    ││
+│  │  - Detox                        ││
+│  └─────────────────────────────────┘│
+│  ┌─────────────────────────────────┐│
+│  │        Testing Strategies       ││
+│  │  - Mock external dependencies   ││
+│  │  - Test real interactions       ││
+│  │  - End-to-end scenarios         ││
+│  │  - Error handling               ││
+│  └─────────────────────────────────┘│
+└─────────────────────────────────────┘
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-api-integration-testing">🔗 <strong>API Integration Testing</strong></h2>
+
+<h3 id="api-testing-setup"><strong>API Testing Setup</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// __tests__/integration/api.test.js</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">rest</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">msw</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">setupServer</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">msw/node</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">render</span><span class="p">,</span> <span class="nx">screen</span><span class="p">,</span> <span class="nx">waitFor</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@testing-library/react-native</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">ApiService</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">../services/ApiService</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">UserProfile</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">../components/UserProfile</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="c1">// Mock server setup</span>
+<span class="kd">const</span> <span class="nx">server</span> <span class="o">=</span> <span class="nx">setupServer</span><span class="p">(</span>
+  <span class="nx">rest</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://api.example.com/users/:id</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">ctx</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="p">{</span> <span class="nx">id</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">;</span>
+    <span class="k">return</span> <span class="nx">res</span><span class="p">(</span>
+      <span class="nx">ctx</span><span class="p">.</span><span class="nx">json</span><span class="p">({</span>
+        <span class="na">id</span><span class="p">:</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">id</span><span class="p">),</span>
+        <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">John Doe</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">email</span><span class="p">:</span> <span class="dl">'</span><span class="s1">john@example.com</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">avatar</span><span class="p">:</span> <span class="dl">'</span><span class="s1">https://example.com/avatar.jpg</span><span class="dl">'</span><span class="p">,</span>
+      <span class="p">})</span>
+    <span class="p">);</span>
+  <span class="p">}),</span>
+  
+  <span class="nx">rest</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://api.example.com/users</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">ctx</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">res</span><span class="p">(</span>
+      <span class="nx">ctx</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">201</span><span class="p">),</span>
+      <span class="nx">ctx</span><span class="p">.</span><span class="nx">json</span><span class="p">({</span>
+        <span class="na">id</span><span class="p">:</span> <span class="mi">123</span><span class="p">,</span>
+        <span class="p">...</span><span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">,</span>
+        <span class="na">createdAt</span><span class="p">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">toISOString</span><span class="p">(),</span>
+      <span class="p">})</span>
+    <span class="p">);</span>
+  <span class="p">}),</span>
+  
+  <span class="nx">rest</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://api.example.com/users/:id</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">ctx</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="p">{</span> <span class="nx">id</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">;</span>
+    <span class="k">return</span> <span class="nx">res</span><span class="p">(</span>
+      <span class="nx">ctx</span><span class="p">.</span><span class="nx">json</span><span class="p">({</span>
+        <span class="na">id</span><span class="p">:</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">id</span><span class="p">),</span>
+        <span class="p">...</span><span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">,</span>
+        <span class="na">updatedAt</span><span class="p">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">toISOString</span><span class="p">(),</span>
+      <span class="p">})</span>
+    <span class="p">);</span>
+  <span class="p">}),</span>
+  
+  <span class="nx">rest</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://api.example.com/users/:id</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">ctx</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">res</span><span class="p">(</span><span class="nx">ctx</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">204</span><span class="p">));</span>
+  <span class="p">})</span>
+<span class="p">);</span>
+
+<span class="c1">// Setup and teardown</span>
+<span class="nx">beforeAll</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nx">server</span><span class="p">.</span><span class="nx">listen</span><span class="p">());</span>
+<span class="nx">afterEach</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nx">server</span><span class="p">.</span><span class="nx">resetHandlers</span><span class="p">());</span>
+<span class="nx">afterAll</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nx">server</span><span class="p">.</span><span class="nx">close</span><span class="p">());</span>
+
+<span class="nx">describe</span><span class="p">(</span><span class="dl">'</span><span class="s1">API Integration Tests</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">describe</span><span class="p">(</span><span class="dl">'</span><span class="s1">User API</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">it</span><span class="p">(</span><span class="dl">'</span><span class="s1">should fetch user profile successfully</span><span class="dl">'</span><span class="p">,</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">user</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">ApiService</span><span class="p">.</span><span class="nx">getUser</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+      
+      <span class="nx">expect</span><span class="p">(</span><span class="nx">user</span><span class="p">).</span><span class="nx">toEqual</span><span class="p">({</span>
+        <span class="na">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">John Doe</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">email</span><span class="p">:</span> <span class="dl">'</span><span class="s1">john@example.com</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">avatar</span><span class="p">:</span> <span class="dl">'</span><span class="s1">https://example.com/avatar.jpg</span><span class="dl">'</span><span class="p">,</span>
+      <span class="p">});</span>
+    <span class="p">});</span>
+    
+    <span class="nx">it</span><span class="p">(</span><span class="dl">'</span><span class="s1">should create new user successfully</span><span class="dl">'</span><span class="p">,</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">newUser</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Jane Doe</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">email</span><span class="p">:</span> <span class="dl">'</span><span class="s1">jane@example.com</span><span class="dl">'</span><span class="p">,</span>
+      <span class="p">};</span>
+      
+      <span class="kd">const</span> <span class="nx">createdUser</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">ApiService</span><span class="p">.</span><span class="nx">createUser</span><span class="p">(</span><span class="nx">newUser</span><span class="p">);</span>
+      
+      <span class="nx">expect</span><span class="p">(</span><span class="nx">createdUser</span><span class="p">).</span><span class="nx">toMatchObject</span><span class="p">({</span>
+        <span class="na">id</span><span class="p">:</span> <span class="nx">expect</span><span class="p">.</span><span class="nx">any</span><span class="p">(</span><span class="nb">Number</span><span class="p">),</span>
+        <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Jane Doe</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">email</span><span class="p">:</span> <span class="dl">'</span><span class="s1">jane@example.com</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">createdAt</span><span class="p">:</span> <span class="nx">expect</span><span class="p">.</span><span class="nx">any</span><span class="p">(</span><span class="nb">String</span><span class="p">),</span>
+      <span class="p">});</span>
+    <span class="p">});</span>
+    
+    <span class="nx">it</span><span class="p">(</span><span class="dl">'</span><span class="s1">should update user successfully</span><span class="dl">'</span><span class="p">,</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">updates</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">John Updated</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">email</span><span class="p">:</span> <span class="dl">'</span><span class="s1">john.updated@example.com</span><span class="dl">'</span><span class="p">,</span>
+      <span class="p">};</span>
+      
+      <span class="kd">const</span> <span class="nx">updatedUser</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">ApiService</span><span class="p">.</span><span class="nx">updateUser</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nx">updates</span><span class="p">);</span>
+      
+      <span class="nx">expect</span><span class="p">(</span><span class="nx">updatedUser</span><span class="p">).</span><span class="nx">toMatchObject</span><span class="p">({</span>
+        <span class="na">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">John Updated</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">email</span><span class="p">:</span> <span class="dl">'</span><span class="s1">john.updated@example.com</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">updatedAt</span><span class="p">:</span> <span class="nx">expect</span><span class="p">.</span><span class="nx">any</span><span class="p">(</span><span class="nb">String</span><span class="p">),</span>
+      <span class="p">});</span>
+    <span class="p">});</span>
+    
+    <span class="nx">it</span><span class="p">(</span><span class="dl">'</span><span class="s1">should delete user successfully</span><span class="dl">'</span><span class="p">,</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">ApiService</span><span class="p">.</span><span class="nx">deleteUser</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+      
+      <span class="nx">expect</span><span class="p">(</span><span class="nx">result</span><span class="p">).</span><span class="nx">toBe</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+    <span class="p">});</span>
+    
+    <span class="nx">it</span><span class="p">(</span><span class="dl">'</span><span class="s1">should handle API errors gracefully</span><span class="dl">'</span><span class="p">,</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">server</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span>
+        <span class="nx">rest</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://api.example.com/users/:id</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">ctx</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+          <span class="k">return</span> <span class="nx">res</span><span class="p">(</span><span class="nx">ctx</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">500</span><span class="p">),</span> <span class="nx">ctx</span><span class="p">.</span><span class="nx">json</span><span class="p">({</span> <span class="na">error</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Internal Server Error</span><span class="dl">'</span> <span class="p">}));</span>
+        <span class="p">})</span>
+      <span class="p">);</span>
+      
+      <span class="k">await</span> <span class="nx">expect</span><span class="p">(</span><span class="nx">ApiService</span><span class="p">.</span><span class="nx">getUser</span><span class="p">(</span><span class="mi">1</span><span class="p">)).</span><span class="nx">rejects</span><span class="p">.</span><span class="nx">toThrow</span><span class="p">(</span><span class="dl">'</span><span class="s1">Internal Server Error</span><span class="dl">'</span><span class="p">);</span>
+    <span class="p">});</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<h3 id="component-integration-testing"><strong>Component Integration Testing</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// __tests__/integration/UserProfile.test.js</span>
+<span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">render</span><span class="p">,</span> <span class="nx">screen</span><span class="p">,</span> <span class="nx">fireEvent</span><span class="p">,</span> <span class="nx">waitFor</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@testing-library/react-native</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">rest</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">msw</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">setupServer</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">msw/node</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">UserProfile</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">../components/UserProfile</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">UserProvider</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">../contexts/UserContext</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="c1">// Mock server</span>
+<span class="kd">const</span> <span class="nx">server</span> <span class="o">=</span> <span class="nx">setupServer</span><span class="p">(</span>
+  <span class="nx">rest</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://api.example.com/users/:id</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">ctx</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">res</span><span class="p">(</span>
+      <span class="nx">ctx</span><span class="p">.</span><span class="nx">json</span><span class="p">({</span>
+        <span class="na">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">John Doe</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">email</span><span class="p">:</span> <span class="dl">'</span><span class="s1">john@example.com</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">avatar</span><span class="p">:</span> <span class="dl">'</span><span class="s1">https://example.com/avatar.jpg</span><span class="dl">'</span><span class="p">,</span>
+      <span class="p">})</span>
+    <span class="p">);</span>
+  <span class="p">}),</span>
+  
+  <span class="nx">rest</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://api.example.com/users/:id</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">ctx</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">res</span><span class="p">(</span>
+      <span class="nx">ctx</span><span class="p">.</span><span class="nx">json</span><span class="p">({</span>
+        <span class="na">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="p">...</span><span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">,</span>
+        <span class="na">updatedAt</span><span class="p">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">toISOString</span><span class="p">(),</span>
+      <span class="p">})</span>
+    <span class="p">);</span>
+  <span class="p">})</span>
+<span class="p">);</span>
+
+<span class="nx">beforeAll</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nx">server</span><span class="p">.</span><span class="nx">listen</span><span class="p">());</span>
+<span class="nx">afterEach</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nx">server</span><span class="p">.</span><span class="nx">resetHandlers</span><span class="p">());</span>
+<span class="nx">afterAll</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nx">server</span><span class="p">.</span><span class="nx">close</span><span class="p">());</span>
+
+<span class="nx">describe</span><span class="p">(</span><span class="dl">'</span><span class="s1">UserProfile Integration Tests</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">renderWithProvider</span> <span class="o">=</span> <span class="p">(</span><span class="nx">component</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">render</span><span class="p">(</span>
+      <span class="o">&lt;</span><span class="nx">UserProvider</span><span class="o">&gt;</span>
+        <span class="p">{</span><span class="nx">component</span><span class="p">}</span>
+      <span class="o">&lt;</span><span class="sr">/UserProvider</span><span class="err">&gt;
+</span>    <span class="p">);</span>
+  <span class="p">};</span>
+  
+  <span class="nx">it</span><span class="p">(</span><span class="dl">'</span><span class="s1">should load and display user profile</span><span class="dl">'</span><span class="p">,</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">renderWithProvider</span><span class="p">(</span><span class="o">&lt;</span><span class="nx">UserProfile</span> <span class="nx">userId</span><span class="o">=</span><span class="p">{</span><span class="mi">1</span><span class="p">}</span> <span class="sr">/&gt;</span><span class="se">)</span><span class="err">;
+</span>    
+    <span class="c1">// Wait for loading to complete</span>
+    <span class="k">await</span> <span class="nx">waitFor</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">expect</span><span class="p">(</span><span class="nx">screen</span><span class="p">.</span><span class="nx">getByText</span><span class="p">(</span><span class="dl">'</span><span class="s1">John Doe</span><span class="dl">'</span><span class="p">)).</span><span class="nx">toBeTruthy</span><span class="p">();</span>
+    <span class="p">});</span>
+    
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">screen</span><span class="p">.</span><span class="nx">getByText</span><span class="p">(</span><span class="dl">'</span><span class="s1">john@example.com</span><span class="dl">'</span><span class="p">)).</span><span class="nx">toBeTruthy</span><span class="p">();</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">screen</span><span class="p">.</span><span class="nx">getByTestId</span><span class="p">(</span><span class="dl">'</span><span class="s1">user-avatar</span><span class="dl">'</span><span class="p">)).</span><span class="nx">toBeTruthy</span><span class="p">();</span>
+  <span class="p">});</span>
+  
+  <span class="nx">it</span><span class="p">(</span><span class="dl">'</span><span class="s1">should update user profile successfully</span><span class="dl">'</span><span class="p">,</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">renderWithProvider</span><span class="p">(</span><span class="o">&lt;</span><span class="nx">UserProfile</span> <span class="nx">userId</span><span class="o">=</span><span class="p">{</span><span class="mi">1</span><span class="p">}</span> <span class="sr">/&gt;</span><span class="se">)</span><span class="err">;
+</span>    
+    <span class="c1">// Wait for initial load</span>
+    <span class="k">await</span> <span class="nx">waitFor</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">expect</span><span class="p">(</span><span class="nx">screen</span><span class="p">.</span><span class="nx">getByText</span><span class="p">(</span><span class="dl">'</span><span class="s1">John Doe</span><span class="dl">'</span><span class="p">)).</span><span class="nx">toBeTruthy</span><span class="p">();</span>
+    <span class="p">});</span>
+    
+    <span class="c1">// Click edit button</span>
+    <span class="nx">fireEvent</span><span class="p">.</span><span class="nx">press</span><span class="p">(</span><span class="nx">screen</span><span class="p">.</span><span class="nx">getByTestId</span><span class="p">(</span><span class="dl">'</span><span class="s1">edit-button</span><span class="dl">'</span><span class="p">));</span>
+    
+    <span class="c1">// Update name</span>
+    <span class="kd">const</span> <span class="nx">nameInput</span> <span class="o">=</span> <span class="nx">screen</span><span class="p">.</span><span class="nx">getByTestId</span><span class="p">(</span><span class="dl">'</span><span class="s1">name-input</span><span class="dl">'</span><span class="p">);</span>
+    <span class="nx">fireEvent</span><span class="p">.</span><span class="nx">changeText</span><span class="p">(</span><span class="nx">nameInput</span><span class="p">,</span> <span class="dl">'</span><span class="s1">John Updated</span><span class="dl">'</span><span class="p">);</span>
+    
+    <span class="c1">// Save changes</span>
+    <span class="nx">fireEvent</span><span class="p">.</span><span class="nx">press</span><span class="p">(</span><span class="nx">screen</span><span class="p">.</span><span class="nx">getByTestId</span><span class="p">(</span><span class="dl">'</span><span class="s1">save-button</span><span class="dl">'</span><span class="p">));</span>
+    
+    <span class="c1">// Wait for update to complete</span>
+    <span class="k">await</span> <span class="nx">waitFor</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">expect</span><span class="p">(</span><span class="nx">screen</span><span class="p">.</span><span class="nx">getByText</span><span class="p">(</span><span class="dl">'</span><span class="s1">John Updated</span><span class="dl">'</span><span class="p">)).</span><span class="nx">toBeTruthy</span><span class="p">();</span>
+    <span class="p">});</span>
+  <span class="p">});</span>
+  
+  <span class="nx">it</span><span class="p">(</span><span class="dl">'</span><span class="s1">should handle loading state</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">renderWithProvider</span><span class="p">(</span><span class="o">&lt;</span><span class="nx">UserProfile</span> <span class="nx">userId</span><span class="o">=</span><span class="p">{</span><span class="mi">1</span><span class="p">}</span> <span class="sr">/&gt;</span><span class="se">)</span><span class="err">;
+</span>    
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">screen</span><span class="p">.</span><span class="nx">getByTestId</span><span class="p">(</span><span class="dl">'</span><span class="s1">loading-indicator</span><span class="dl">'</span><span class="p">)).</span><span class="nx">toBeTruthy</span><span class="p">();</span>
+  <span class="p">});</span>
+  
+  <span class="nx">it</span><span class="p">(</span><span class="dl">'</span><span class="s1">should handle error state</span><span class="dl">'</span><span class="p">,</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">server</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span>
+      <span class="nx">rest</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://api.example.com/users/:id</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">ctx</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">res</span><span class="p">(</span><span class="nx">ctx</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">500</span><span class="p">),</span> <span class="nx">ctx</span><span class="p">.</span><span class="nx">json</span><span class="p">({</span> <span class="na">error</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Server Error</span><span class="dl">'</span> <span class="p">}));</span>
+      <span class="p">})</span>
+    <span class="p">);</span>
+    
+    <span class="nx">renderWithProvider</span><span class="p">(</span><span class="o">&lt;</span><span class="nx">UserProfile</span> <span class="nx">userId</span><span class="o">=</span><span class="p">{</span><span class="mi">1</span><span class="p">}</span> <span class="sr">/&gt;</span><span class="se">)</span><span class="err">;
+</span>    
+    <span class="k">await</span> <span class="nx">waitFor</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">expect</span><span class="p">(</span><span class="nx">screen</span><span class="p">.</span><span class="nx">getByText</span><span class="p">(</span><span class="dl">'</span><span class="s1">Error loading profile</span><span class="dl">'</span><span class="p">)).</span><span class="nx">toBeTruthy</span><span class="p">();</span>
+    <span class="p">});</span>
+  <span class="p">});</span>
+  
+  <span class="nx">it</span><span class="p">(</span><span class="dl">'</span><span class="s1">should handle network connectivity issues</span><span class="dl">'</span><span class="p">,</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">server</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span>
+      <span class="nx">rest</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://api.example.com/users/:id</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">ctx</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">networkError</span><span class="p">(</span><span class="dl">'</span><span class="s1">Network error</span><span class="dl">'</span><span class="p">);</span>
+      <span class="p">})</span>
+    <span class="p">);</span>
+    
+    <span class="nx">renderWithProvider</span><span class="p">(</span><span class="o">&lt;</span><span class="nx">UserProfile</span> <span class="nx">userId</span><span class="o">=</span><span class="p">{</span><span class="mi">1</span><span class="p">}</span> <span class="sr">/&gt;</span><span class="se">)</span><span class="err">;
+</span>    
+    <span class="k">await</span> <span class="nx">waitFor</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">expect</span><span class="p">(</span><span class="nx">screen</span><span class="p">.</span><span class="nx">getByText</span><span class="p">(</span><span class="dl">'</span><span class="s1">Network error</span><span class="dl">'</span><span class="p">)).</span><span class="nx">toBeTruthy</span><span class="p">();</span>
+    <span class="p">});</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-navigation">🧭 Navigation</h2>
+
+<div class="navigation">
+    <a href="./01-Unit-Testing.md" class="nav-link prev">⬅️ Previous: Unit Testing</a>
+    <a href="./03-E2E-Testing.md" class="nav-link next">Next: E2E Testing ➡️</a>
+</div>
+
+<hr />
+
+<p><em>Last updated: December 2024</em></p>
+
+        </main>
+        
+        <footer style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #ecf0f1; color: #666; text-align: center;">
+            <p>Interview Prep Documentation - Built with Jekyll</p>
+        </footer>
+    </div>
+</body>
+</html>

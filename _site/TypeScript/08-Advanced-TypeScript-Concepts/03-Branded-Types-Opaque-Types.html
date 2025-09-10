@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏷️ Branded Types &amp; Opaque Types - Interview Prep Documentation</title>
+    <meta name="description" content="Comprehensive guides for JavaScript, TypeScript, and React Native interview preparation">
+    
+    <!-- GitHub Pages compatible styling -->
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+        }
+        
+        .container {
+            max-width: 100%;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            color: #2c3e50;
+            margin-top: 2em;
+            margin-bottom: 1em;
+        }
+        
+        h1 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            border-bottom: 1px solid #ecf0f1;
+            padding-bottom: 5px;
+        }
+        
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border-left: 4px solid #3498db;
+        }
+        
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+        
+        blockquote {
+            border-left: 4px solid #3498db;
+            margin: 0;
+            padding-left: 20px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1em 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .navigation {
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px 0;
+            margin-bottom: 20px;
+        }
+        
+        .navigation a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+        
+        .navigation a:hover {
+            text-decoration: underline;
+        }
+        
+        .breadcrumb {
+            margin-bottom: 20px;
+            color: #666;
+        }
+        
+        .breadcrumb a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            h2 {
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="navigation">
+            <a href="/">Home</a>
+            <a href="/Javascript/">JavaScript</a>
+            <a href="/TypeScript/">TypeScript</a>
+            <a href="/React-Native/">React Native</a>
+        </nav>
+        
+        
+        
+        <main>
+            <h1 id="️-branded-types--opaque-types">🏷️ <strong>Branded Types &amp; Opaque Types</strong></h1>
+
+<blockquote>
+  <p><strong>Complete guide to TypeScript branded types, opaque types, and advanced type safety techniques</strong></p>
+</blockquote>
+
+<link rel="stylesheet" href="../../common-styles.css" />
+
+<hr />
+
+<h2 id="-table-of-contents">📚 <strong>Table of Contents</strong></h2>
+
+<ul>
+  <li><a href="#branded-types-overview">Branded Types Overview</a></li>
+  <li><a href="#basic-branded-types">Basic Branded Types</a></li>
+  <li><a href="#opaque-types">Opaque Types</a></li>
+  <li><a href="#advanced-patterns">Advanced Patterns</a></li>
+  <li><a href="#real-world-examples">Real-World Examples</a></li>
+  <li><a href="#best-practices">Best Practices</a></li>
+  <li><a href="#common-interview-questions">Common Interview Questions</a></li>
+</ul>
+
+<hr />
+
+<h2 id="-branded-types-overview">🎯 <strong>Branded Types Overview</strong></h2>
+
+<p>Branded types are a TypeScript technique for creating distinct types from primitive types, preventing accidental mixing of different kinds of values.</p>
+
+<h3 id="what-are-branded-types"><strong>What are Branded Types?</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Branded types create distinct types from primitives</span>
+<span class="kd">const</span> <span class="nx">brandedTypes</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">purpose</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Prevent accidental mixing of different value types</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">safety</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Compile-time type safety</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">clarity</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Make code more self-documenting</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">prevention</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Prevent bugs from type confusion</span><span class="dl">"</span>
+<span class="p">};</span>
+
+<span class="c1">// Basic branded type</span>
+<span class="kd">type</span> <span class="nx">Brand</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">,</span> <span class="nx">B</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nx">T</span> <span class="o">&amp;</span> <span class="p">{</span> <span class="na">__brand</span><span class="p">:</span> <span class="nx">B</span> <span class="p">};</span>
+<span class="kd">type</span> <span class="nx">UserId</span> <span class="o">=</span> <span class="nx">Brand</span><span class="o">&lt;</span><span class="kr">number</span><span class="p">,</span> <span class="dl">'</span><span class="s1">UserId</span><span class="dl">'</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="kd">type</span> <span class="nx">ProductId</span> <span class="o">=</span> <span class="nx">Brand</span><span class="o">&lt;</span><span class="kr">number</span><span class="p">,</span> <span class="dl">'</span><span class="s1">ProductId</span><span class="dl">'</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="c1">// These are different types even though they're both numbers</span>
+<span class="kd">function</span> <span class="nx">processUser</span><span class="p">(</span><span class="nx">userId</span><span class="p">:</span> <span class="nx">UserId</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Processing user:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">userId</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">processProduct</span><span class="p">(</span><span class="nx">productId</span><span class="p">:</span> <span class="nx">ProductId</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Processing product:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">productId</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// TypeScript prevents mixing them</span>
+<span class="kd">const</span> <span class="nx">userId</span><span class="p">:</span> <span class="nx">UserId</span> <span class="o">=</span> <span class="mi">123</span> <span class="k">as</span> <span class="nx">UserId</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">productId</span><span class="p">:</span> <span class="nx">ProductId</span> <span class="o">=</span> <span class="mi">456</span> <span class="k">as</span> <span class="nx">ProductId</span><span class="p">;</span>
+
+<span class="c1">// processUser(productId); // ❌ Error: Argument of type 'ProductId' is not assignable to parameter of type 'UserId'</span>
+</code></pre></div></div>
+
+<h3 id="benefits-of-branded-types"><strong>Benefits of Branded Types</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Benefits of branded types</span>
+<span class="kd">const</span> <span class="nx">benefits</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">typeSafety</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Prevent accidental type mixing</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">clarity</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Make code more self-documenting</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">refactoring</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Safer refactoring</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">debugging</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Easier debugging</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">maintenance</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Better code maintenance</span><span class="dl">"</span>
+<span class="p">};</span>
+
+<span class="c1">// Without branded types</span>
+<span class="kd">function</span> <span class="nx">processUser</span><span class="p">(</span><span class="nx">id</span><span class="p">:</span> <span class="kr">number</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Processing user:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">id</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">processProduct</span><span class="p">(</span><span class="nx">id</span><span class="p">:</span> <span class="kr">number</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Processing product:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">id</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Easy to mix up</span>
+<span class="kd">const</span> <span class="nx">userId</span> <span class="o">=</span> <span class="mi">123</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">productId</span> <span class="o">=</span> <span class="mi">456</span><span class="p">;</span>
+<span class="nx">processUser</span><span class="p">(</span><span class="nx">productId</span><span class="p">);</span> <span class="c1">// ❌ Bug: Wrong ID type</span>
+
+<span class="c1">// With branded types</span>
+<span class="kd">type</span> <span class="nx">UserId</span> <span class="o">=</span> <span class="nx">Brand</span><span class="o">&lt;</span><span class="kr">number</span><span class="p">,</span> <span class="dl">'</span><span class="s1">UserId</span><span class="dl">'</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="kd">type</span> <span class="nx">ProductId</span> <span class="o">=</span> <span class="nx">Brand</span><span class="o">&lt;</span><span class="kr">number</span><span class="p">,</span> <span class="dl">'</span><span class="s1">ProductId</span><span class="dl">'</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="kd">function</span> <span class="nx">processUser</span><span class="p">(</span><span class="nx">id</span><span class="p">:</span> <span class="nx">UserId</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Processing user:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">id</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">processProduct</span><span class="p">(</span><span class="nx">id</span><span class="p">:</span> <span class="nx">ProductId</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Processing product:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">id</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// TypeScript prevents mixing</span>
+<span class="kd">const</span> <span class="nx">userId</span><span class="p">:</span> <span class="nx">UserId</span> <span class="o">=</span> <span class="mi">123</span> <span class="k">as</span> <span class="nx">UserId</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">productId</span><span class="p">:</span> <span class="nx">ProductId</span> <span class="o">=</span> <span class="mi">456</span> <span class="k">as</span> <span class="nx">ProductId</span><span class="p">;</span>
+<span class="c1">// processUser(productId); // ❌ Compile error: Type 'ProductId' is not assignable to parameter of type 'UserId'</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-basic-branded-types">🔧 <strong>Basic Branded Types</strong></h2>
+
+<h3 id="simple-branded-types"><strong>Simple Branded Types</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Simple branded types</span>
+<span class="kd">type</span> <span class="nx">Brand</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">,</span> <span class="nx">B</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nx">T</span> <span class="o">&amp;</span> <span class="p">{</span> <span class="na">__brand</span><span class="p">:</span> <span class="nx">B</span> <span class="p">};</span>
+
+<span class="c1">// Common branded types</span>
+<span class="kd">type</span> <span class="nx">UserId</span> <span class="o">=</span> <span class="nx">Brand</span><span class="o">&lt;</span><span class="kr">number</span><span class="p">,</span> <span class="dl">'</span><span class="s1">UserId</span><span class="dl">'</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="kd">type</span> <span class="nx">ProductId</span> <span class="o">=</span> <span class="nx">Brand</span><span class="o">&lt;</span><span class="kr">number</span><span class="p">,</span> <span class="dl">'</span><span class="s1">ProductId</span><span class="dl">'</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="kd">type</span> <span class="nx">OrderId</span> <span class="o">=</span> <span class="nx">Brand</span><span class="o">&lt;</span><span class="kr">number</span><span class="p">,</span> <span class="dl">'</span><span class="s1">OrderId</span><span class="dl">'</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="kd">type</span> <span class="nx">Email</span> <span class="o">=</span> <span class="nx">Brand</span><span class="o">&lt;</span><span class="kr">string</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Email</span><span class="dl">'</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="kd">type</span> <span class="nx">PhoneNumber</span> <span class="o">=</span> <span class="nx">Brand</span><span class="o">&lt;</span><span class="kr">string</span><span class="p">,</span> <span class="dl">'</span><span class="s1">PhoneNumber</span><span class="dl">'</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="kd">type</span> <span class="nx">URL</span> <span class="o">=</span> <span class="nx">Brand</span><span class="o">&lt;</span><span class="kr">string</span><span class="p">,</span> <span class="dl">'</span><span class="s1">URL</span><span class="dl">'</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="c1">// Factory functions</span>
+<span class="kd">function</span> <span class="nx">createUserId</span><span class="p">(</span><span class="nx">id</span><span class="p">:</span> <span class="kr">number</span><span class="p">):</span> <span class="nx">UserId</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">id</span> <span class="k">as</span> <span class="nx">UserId</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">createProductId</span><span class="p">(</span><span class="nx">id</span><span class="p">:</span> <span class="kr">number</span><span class="p">):</span> <span class="nx">ProductId</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">id</span> <span class="k">as</span> <span class="nx">ProductId</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">createEmail</span><span class="p">(</span><span class="nx">email</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nx">Email</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">email</span> <span class="k">as</span> <span class="nx">Email</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">createPhoneNumber</span><span class="p">(</span><span class="nx">phone</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nx">PhoneNumber</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">phone</span> <span class="k">as</span> <span class="nx">PhoneNumber</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Usage</span>
+<span class="kd">const</span> <span class="nx">userId</span> <span class="o">=</span> <span class="nx">createUserId</span><span class="p">(</span><span class="mi">123</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">productId</span> <span class="o">=</span> <span class="nx">createProductId</span><span class="p">(</span><span class="mi">456</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">email</span> <span class="o">=</span> <span class="nx">createEmail</span><span class="p">(</span><span class="dl">'</span><span class="s1">user@example.com</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">phone</span> <span class="o">=</span> <span class="nx">createPhoneNumber</span><span class="p">(</span><span class="dl">'</span><span class="s1">+1234567890</span><span class="dl">'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="branded-types-with-validation"><strong>Branded Types with Validation</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Branded types with validation</span>
+<span class="kd">type</span> <span class="nx">ValidatedEmail</span> <span class="o">=</span> <span class="nx">Brand</span><span class="o">&lt;</span><span class="kr">string</span><span class="p">,</span> <span class="dl">'</span><span class="s1">ValidatedEmail</span><span class="dl">'</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="kd">type</span> <span class="nx">ValidatedPhone</span> <span class="o">=</span> <span class="nx">Brand</span><span class="o">&lt;</span><span class="kr">string</span><span class="p">,</span> <span class="dl">'</span><span class="s1">ValidatedPhone</span><span class="dl">'</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="c1">// Validation functions</span>
+<span class="kd">function</span> <span class="nx">isValidEmail</span><span class="p">(</span><span class="nx">email</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nx">boolean</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="sr">/^</span><span class="se">[^\s</span><span class="sr">@</span><span class="se">]</span><span class="sr">+@</span><span class="se">[^\s</span><span class="sr">@</span><span class="se">]</span><span class="sr">+</span><span class="se">\.[^\s</span><span class="sr">@</span><span class="se">]</span><span class="sr">+$/</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">email</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">isValidPhone</span><span class="p">(</span><span class="nx">phone</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nx">boolean</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="sr">/^</span><span class="se">\+?[\d\s</span><span class="sr">-()</span><span class="se">]</span><span class="sr">+$/</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">phone</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Factory functions with validation</span>
+<span class="kd">function</span> <span class="nx">createValidatedEmail</span><span class="p">(</span><span class="nx">email</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nx">ValidatedEmail</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">isValidEmail</span><span class="p">(</span><span class="nx">email</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Invalid email format</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">email</span> <span class="k">as</span> <span class="nx">ValidatedEmail</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">createValidatedPhone</span><span class="p">(</span><span class="nx">phone</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nx">ValidatedPhone</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">isValidPhone</span><span class="p">(</span><span class="nx">phone</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Invalid phone format</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">phone</span> <span class="k">as</span> <span class="nx">ValidatedPhone</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Usage</span>
+<span class="k">try</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">email</span> <span class="o">=</span> <span class="nx">createValidatedEmail</span><span class="p">(</span><span class="dl">'</span><span class="s1">user@example.com</span><span class="dl">'</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="nx">phone</span> <span class="o">=</span> <span class="nx">createValidatedPhone</span><span class="p">(</span><span class="dl">'</span><span class="s1">+1234567890</span><span class="dl">'</span><span class="p">);</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Valid email:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">email</span><span class="p">);</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Valid phone:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">phone</span><span class="p">);</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Validation error:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="branded-types-with-constraints"><strong>Branded Types with Constraints</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Branded types with constraints</span>
+<span class="kd">type</span> <span class="nx">PositiveNumber</span> <span class="o">=</span> <span class="nx">Brand</span><span class="o">&lt;</span><span class="kr">number</span><span class="p">,</span> <span class="dl">'</span><span class="s1">PositiveNumber</span><span class="dl">'</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="kd">type</span> <span class="nx">NonEmptyString</span> <span class="o">=</span> <span class="nx">Brand</span><span class="o">&lt;</span><span class="kr">string</span><span class="p">,</span> <span class="dl">'</span><span class="s1">NonEmptyString</span><span class="dl">'</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="kd">type</span> <span class="nx">UppercaseString</span> <span class="o">=</span> <span class="nx">Brand</span><span class="o">&lt;</span><span class="kr">string</span><span class="p">,</span> <span class="dl">'</span><span class="s1">UppercaseString</span><span class="dl">'</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="c1">// Constraint functions</span>
+<span class="kd">function</span> <span class="nx">isPositive</span><span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="kr">number</span><span class="p">):</span> <span class="nx">boolean</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">value</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">isNonEmpty</span><span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nx">boolean</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">value</span><span class="p">.</span><span class="nx">trim</span><span class="p">().</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">isUppercase</span><span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nx">boolean</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">value</span> <span class="o">===</span> <span class="nx">value</span><span class="p">.</span><span class="nx">toUpperCase</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="c1">// Factory functions with constraints</span>
+<span class="kd">function</span> <span class="nx">createPositiveNumber</span><span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="kr">number</span><span class="p">):</span> <span class="nx">PositiveNumber</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">isPositive</span><span class="p">(</span><span class="nx">value</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Number must be positive</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">value</span> <span class="k">as</span> <span class="nx">PositiveNumber</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">createNonEmptyString</span><span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nx">NonEmptyString</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">isNonEmpty</span><span class="p">(</span><span class="nx">value</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">String must not be empty</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">value</span> <span class="k">as</span> <span class="nx">NonEmptyString</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">createUppercaseString</span><span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nx">UppercaseString</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">isUppercase</span><span class="p">(</span><span class="nx">value</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">String must be uppercase</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">value</span> <span class="k">as</span> <span class="nx">UppercaseString</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-opaque-types">🔒 <strong>Opaque Types</strong></h2>
+
+<h3 id="basic-opaque-types"><strong>Basic Opaque Types</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Opaque types using unique symbol</span>
+<span class="kr">declare</span> <span class="kd">const</span> <span class="nx">__opaque</span><span class="p">:</span> <span class="nx">unique</span> <span class="nx">symbol</span><span class="p">;</span>
+<span class="kd">type</span> <span class="nx">Opaque</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">,</span> <span class="nx">K</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nx">T</span> <span class="o">&amp;</span> <span class="p">{</span> <span class="k">readonly</span> <span class="p">[</span><span class="nx">__opaque</span><span class="p">]:</span> <span class="nx">K</span> <span class="p">};</span>
+
+<span class="c1">// Opaque type definitions</span>
+<span class="kd">type</span> <span class="nx">UserId</span> <span class="o">=</span> <span class="nx">Opaque</span><span class="o">&lt;</span><span class="kr">number</span><span class="p">,</span> <span class="dl">'</span><span class="s1">UserId</span><span class="dl">'</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="kd">type</span> <span class="nx">ProductId</span> <span class="o">=</span> <span class="nx">Opaque</span><span class="o">&lt;</span><span class="kr">number</span><span class="p">,</span> <span class="dl">'</span><span class="s1">ProductId</span><span class="dl">'</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="kd">type</span> <span class="nx">Email</span> <span class="o">=</span> <span class="nx">Opaque</span><span class="o">&lt;</span><span class="kr">string</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Email</span><span class="dl">'</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="kd">type</span> <span class="nx">PhoneNumber</span> <span class="o">=</span> <span class="nx">Opaque</span><span class="o">&lt;</span><span class="kr">string</span><span class="p">,</span> <span class="dl">'</span><span class="s1">PhoneNumber</span><span class="dl">'</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="c1">// Factory functions</span>
+<span class="kd">function</span> <span class="nx">createUserId</span><span class="p">(</span><span class="nx">id</span><span class="p">:</span> <span class="kr">number</span><span class="p">):</span> <span class="nx">UserId</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">id</span> <span class="k">as</span> <span class="nx">UserId</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">createProductId</span><span class="p">(</span><span class="nx">id</span><span class="p">:</span> <span class="kr">number</span><span class="p">):</span> <span class="nx">ProductId</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">id</span> <span class="k">as</span> <span class="nx">ProductId</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">createEmail</span><span class="p">(</span><span class="nx">email</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nx">Email</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">email</span> <span class="k">as</span> <span class="nx">Email</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">createPhoneNumber</span><span class="p">(</span><span class="nx">phone</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nx">PhoneNumber</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">phone</span> <span class="k">as</span> <span class="nx">PhoneNumber</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Usage</span>
+<span class="kd">const</span> <span class="nx">userId</span> <span class="o">=</span> <span class="nx">createUserId</span><span class="p">(</span><span class="mi">123</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">productId</span> <span class="o">=</span> <span class="nx">createProductId</span><span class="p">(</span><span class="mi">456</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">email</span> <span class="o">=</span> <span class="nx">createEmail</span><span class="p">(</span><span class="dl">'</span><span class="s1">user@example.com</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">phone</span> <span class="o">=</span> <span class="nx">createPhoneNumber</span><span class="p">(</span><span class="dl">'</span><span class="s1">+1234567890</span><span class="dl">'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="opaque-types-with-validation"><strong>Opaque Types with Validation</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Opaque types with validation</span>
+<span class="kd">type</span> <span class="nx">ValidatedEmail</span> <span class="o">=</span> <span class="nx">Opaque</span><span class="o">&lt;</span><span class="kr">string</span><span class="p">,</span> <span class="dl">'</span><span class="s1">ValidatedEmail</span><span class="dl">'</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="kd">type</span> <span class="nx">ValidatedPhone</span> <span class="o">=</span> <span class="nx">Opaque</span><span class="o">&lt;</span><span class="kr">string</span><span class="p">,</span> <span class="dl">'</span><span class="s1">ValidatedPhone</span><span class="dl">'</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="kd">type</span> <span class="nx">ValidatedURL</span> <span class="o">=</span> <span class="nx">Opaque</span><span class="o">&lt;</span><span class="kr">string</span><span class="p">,</span> <span class="dl">'</span><span class="s1">ValidatedURL</span><span class="dl">'</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="c1">// Validation functions</span>
+<span class="kd">function</span> <span class="nx">isValidEmail</span><span class="p">(</span><span class="nx">email</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nx">boolean</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="sr">/^</span><span class="se">[^\s</span><span class="sr">@</span><span class="se">]</span><span class="sr">+@</span><span class="se">[^\s</span><span class="sr">@</span><span class="se">]</span><span class="sr">+</span><span class="se">\.[^\s</span><span class="sr">@</span><span class="se">]</span><span class="sr">+$/</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">email</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">isValidPhone</span><span class="p">(</span><span class="nx">phone</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nx">boolean</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="sr">/^</span><span class="se">\+?[\d\s</span><span class="sr">-()</span><span class="se">]</span><span class="sr">+$/</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">phone</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">isValidURL</span><span class="p">(</span><span class="nx">url</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nx">boolean</span> <span class="p">{</span>
+  <span class="k">try</span> <span class="p">{</span>
+    <span class="k">new</span> <span class="nx">URL</span><span class="p">(</span><span class="nx">url</span><span class="p">);</span>
+    <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+  <span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Factory functions with validation</span>
+<span class="kd">function</span> <span class="nx">createValidatedEmail</span><span class="p">(</span><span class="nx">email</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nx">ValidatedEmail</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">isValidEmail</span><span class="p">(</span><span class="nx">email</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Invalid email format</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">email</span> <span class="k">as</span> <span class="nx">ValidatedEmail</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">createValidatedPhone</span><span class="p">(</span><span class="nx">phone</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nx">ValidatedPhone</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">isValidPhone</span><span class="p">(</span><span class="nx">phone</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Invalid phone format</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">phone</span> <span class="k">as</span> <span class="nx">ValidatedPhone</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">createValidatedURL</span><span class="p">(</span><span class="nx">url</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nx">ValidatedURL</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">isValidURL</span><span class="p">(</span><span class="nx">url</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Invalid URL format</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">url</span> <span class="k">as</span> <span class="nx">ValidatedURL</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="opaque-types-with-constraints"><strong>Opaque Types with Constraints</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Opaque types with constraints</span>
+<span class="kd">type</span> <span class="nx">PositiveNumber</span> <span class="o">=</span> <span class="nx">Opaque</span><span class="o">&lt;</span><span class="kr">number</span><span class="p">,</span> <span class="dl">'</span><span class="s1">PositiveNumber</span><span class="dl">'</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="kd">type</span> <span class="nx">NonEmptyString</span> <span class="o">=</span> <span class="nx">Opaque</span><span class="o">&lt;</span><span class="kr">string</span><span class="p">,</span> <span class="dl">'</span><span class="s1">NonEmptyString</span><span class="dl">'</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="kd">type</span> <span class="nx">UppercaseString</span> <span class="o">=</span> <span class="nx">Opaque</span><span class="o">&lt;</span><span class="kr">string</span><span class="p">,</span> <span class="dl">'</span><span class="s1">UppercaseString</span><span class="dl">'</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="kd">type</span> <span class="nx">LowercaseString</span> <span class="o">=</span> <span class="nx">Opaque</span><span class="o">&lt;</span><span class="kr">string</span><span class="p">,</span> <span class="dl">'</span><span class="s1">LowercaseString</span><span class="dl">'</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="c1">// Constraint functions</span>
+<span class="kd">function</span> <span class="nx">isPositive</span><span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="kr">number</span><span class="p">):</span> <span class="nx">boolean</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">value</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">isNonEmpty</span><span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nx">boolean</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">value</span><span class="p">.</span><span class="nx">trim</span><span class="p">().</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">isUppercase</span><span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nx">boolean</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">value</span> <span class="o">===</span> <span class="nx">value</span><span class="p">.</span><span class="nx">toUpperCase</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">isLowercase</span><span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nx">boolean</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">value</span> <span class="o">===</span> <span class="nx">value</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="c1">// Factory functions with constraints</span>
+<span class="kd">function</span> <span class="nx">createPositiveNumber</span><span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="kr">number</span><span class="p">):</span> <span class="nx">PositiveNumber</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">isPositive</span><span class="p">(</span><span class="nx">value</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Number must be positive</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">value</span> <span class="k">as</span> <span class="nx">PositiveNumber</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">createNonEmptyString</span><span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nx">NonEmptyString</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">isNonEmpty</span><span class="p">(</span><span class="nx">value</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">String must not be empty</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">value</span> <span class="k">as</span> <span class="nx">NonEmptyString</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">createUppercaseString</span><span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nx">UppercaseString</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">isUppercase</span><span class="p">(</span><span class="nx">value</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">String must be uppercase</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">value</span> <span class="k">as</span> <span class="nx">UppercaseString</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">createLowercaseString</span><span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nx">LowercaseString</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">isLowercase</span><span class="p">(</span><span class="nx">value</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">String must be lowercase</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">value</span> <span class="k">as</span> <span class="nx">LowercaseString</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-advanced-patterns">🚀 <strong>Advanced Patterns</strong></h2>
+
+<h3 id="branded-types-with-methods"><strong>Branded Types with Methods</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Branded types with methods</span>
+<span class="kd">type</span> <span class="nx">BrandedNumber</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nx">T</span> <span class="o">&amp;</span> <span class="p">{</span> <span class="na">__brand</span><span class="p">:</span> <span class="nx">T</span> <span class="p">};</span>
+
+<span class="kd">type</span> <span class="nx">UserId</span> <span class="o">=</span> <span class="nx">BrandedNumber</span><span class="o">&lt;</span><span class="kr">number</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="kd">type</span> <span class="nx">ProductId</span> <span class="o">=</span> <span class="nx">BrandedNumber</span><span class="o">&lt;</span><span class="kr">number</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="c1">// Factory functions</span>
+<span class="kd">function</span> <span class="nx">createUserId</span><span class="p">(</span><span class="nx">id</span><span class="p">:</span> <span class="kr">number</span><span class="p">):</span> <span class="nx">UserId</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">id</span> <span class="k">as</span> <span class="nx">UserId</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">createProductId</span><span class="p">(</span><span class="nx">id</span><span class="p">:</span> <span class="kr">number</span><span class="p">):</span> <span class="nx">ProductId</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">id</span> <span class="k">as</span> <span class="nx">ProductId</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Utility functions</span>
+<span class="kd">function</span> <span class="nx">isUserId</span><span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">):</span> <span class="nx">value</span> <span class="k">is</span> <span class="nx">UserId</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="k">typeof</span> <span class="nx">value</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">number</span><span class="dl">'</span> <span class="o">&amp;&amp;</span> <span class="nx">value</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">isProductId</span><span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">):</span> <span class="nx">value</span> <span class="k">is</span> <span class="nx">ProductId</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="k">typeof</span> <span class="nx">value</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">number</span><span class="dl">'</span> <span class="o">&amp;&amp;</span> <span class="nx">value</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Comparison functions</span>
+<span class="kd">function</span> <span class="nx">compareUserIds</span><span class="p">(</span><span class="nx">a</span><span class="p">:</span> <span class="nx">UserId</span><span class="p">,</span> <span class="nx">b</span><span class="p">:</span> <span class="nx">UserId</span><span class="p">):</span> <span class="kr">number</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">a</span> <span class="o">-</span> <span class="nx">b</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">compareProductIds</span><span class="p">(</span><span class="nx">a</span><span class="p">:</span> <span class="nx">ProductId</span><span class="p">,</span> <span class="nx">b</span><span class="p">:</span> <span class="nx">ProductId</span><span class="p">):</span> <span class="kr">number</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">a</span> <span class="o">-</span> <span class="nx">b</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Usage</span>
+<span class="kd">const</span> <span class="nx">userId1</span> <span class="o">=</span> <span class="nx">createUserId</span><span class="p">(</span><span class="mi">123</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">userId2</span> <span class="o">=</span> <span class="nx">createUserId</span><span class="p">(</span><span class="mi">456</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">productId</span> <span class="o">=</span> <span class="nx">createProductId</span><span class="p">(</span><span class="mi">789</span><span class="p">);</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">User ID comparison:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">compareUserIds</span><span class="p">(</span><span class="nx">userId1</span><span class="p">,</span> <span class="nx">userId2</span><span class="p">));</span>
+<span class="c1">// console.log('Mixed comparison:', compareUserIds(userId1, productId)); // ❌ Error</span>
+</code></pre></div></div>
+
+<h3 id="branded-types-with-generics"><strong>Branded Types with Generics</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Branded types with generics</span>
+<span class="kd">type</span> <span class="nx">Branded</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">,</span> <span class="nx">B</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nx">T</span> <span class="o">&amp;</span> <span class="p">{</span> <span class="na">__brand</span><span class="p">:</span> <span class="nx">B</span> <span class="p">};</span>
+
+<span class="c1">// Generic branded types</span>
+<span class="kd">type</span> <span class="nx">ID</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nx">Branded</span><span class="o">&lt;</span><span class="kr">number</span><span class="p">,</span> <span class="nx">T</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="kd">type</span> <span class="nx">StringValue</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nx">Branded</span><span class="o">&lt;</span><span class="kr">string</span><span class="p">,</span> <span class="nx">T</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="c1">// Specific branded types</span>
+<span class="kd">type</span> <span class="nx">UserId</span> <span class="o">=</span> <span class="nx">ID</span><span class="o">&lt;</span><span class="dl">'</span><span class="s1">UserId</span><span class="dl">'</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="kd">type</span> <span class="nx">ProductId</span> <span class="o">=</span> <span class="nx">ID</span><span class="o">&lt;</span><span class="dl">'</span><span class="s1">ProductId</span><span class="dl">'</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="kd">type</span> <span class="nx">Email</span> <span class="o">=</span> <span class="nx">StringValue</span><span class="o">&lt;</span><span class="dl">'</span><span class="s1">Email</span><span class="dl">'</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="kd">type</span> <span class="nx">PhoneNumber</span> <span class="o">=</span> <span class="nx">StringValue</span><span class="o">&lt;</span><span class="dl">'</span><span class="s1">PhoneNumber</span><span class="dl">'</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="c1">// Generic factory functions</span>
+<span class="kd">function</span> <span class="nx">createID</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="kr">number</span><span class="p">):</span> <span class="nx">ID</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">value</span> <span class="k">as</span> <span class="nx">ID</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">createStringValue</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nx">StringValue</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">value</span> <span class="k">as</span> <span class="nx">StringValue</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Specific factory functions</span>
+<span class="kd">function</span> <span class="nx">createUserId</span><span class="p">(</span><span class="nx">id</span><span class="p">:</span> <span class="kr">number</span><span class="p">):</span> <span class="nx">UserId</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">createID</span><span class="o">&lt;</span><span class="dl">'</span><span class="s1">UserId</span><span class="dl">'</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">createProductId</span><span class="p">(</span><span class="nx">id</span><span class="p">:</span> <span class="kr">number</span><span class="p">):</span> <span class="nx">ProductId</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">createID</span><span class="o">&lt;</span><span class="dl">'</span><span class="s1">ProductId</span><span class="dl">'</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">createEmail</span><span class="p">(</span><span class="nx">email</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nx">Email</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">createStringValue</span><span class="o">&lt;</span><span class="dl">'</span><span class="s1">Email</span><span class="dl">'</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">email</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">createPhoneNumber</span><span class="p">(</span><span class="nx">phone</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nx">PhoneNumber</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">createStringValue</span><span class="o">&lt;</span><span class="dl">'</span><span class="s1">PhoneNumber</span><span class="dl">'</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">phone</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="branded-types-with-validation-1"><strong>Branded Types with Validation</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Branded types with validation</span>
+<span class="kd">type</span> <span class="nx">ValidatedBrand</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">,</span> <span class="nx">B</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nx">T</span> <span class="o">&amp;</span> <span class="p">{</span> <span class="na">__brand</span><span class="p">:</span> <span class="nx">B</span><span class="p">;</span> <span class="nl">__validated</span><span class="p">:</span> <span class="kc">true</span> <span class="p">};</span>
+
+<span class="c1">// Validated branded types</span>
+<span class="kd">type</span> <span class="nx">ValidatedEmail</span> <span class="o">=</span> <span class="nx">ValidatedBrand</span><span class="o">&lt;</span><span class="kr">string</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Email</span><span class="dl">'</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="kd">type</span> <span class="nx">ValidatedPhone</span> <span class="o">=</span> <span class="nx">ValidatedBrand</span><span class="o">&lt;</span><span class="kr">string</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Phone</span><span class="dl">'</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="kd">type</span> <span class="nx">ValidatedURL</span> <span class="o">=</span> <span class="nx">ValidatedBrand</span><span class="o">&lt;</span><span class="kr">string</span><span class="p">,</span> <span class="dl">'</span><span class="s1">URL</span><span class="dl">'</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="c1">// Validation functions</span>
+<span class="kd">function</span> <span class="nx">isValidEmail</span><span class="p">(</span><span class="nx">email</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nx">boolean</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="sr">/^</span><span class="se">[^\s</span><span class="sr">@</span><span class="se">]</span><span class="sr">+@</span><span class="se">[^\s</span><span class="sr">@</span><span class="se">]</span><span class="sr">+</span><span class="se">\.[^\s</span><span class="sr">@</span><span class="se">]</span><span class="sr">+$/</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">email</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">isValidPhone</span><span class="p">(</span><span class="nx">phone</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nx">boolean</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="sr">/^</span><span class="se">\+?[\d\s</span><span class="sr">-()</span><span class="se">]</span><span class="sr">+$/</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">phone</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">isValidURL</span><span class="p">(</span><span class="nx">url</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nx">boolean</span> <span class="p">{</span>
+  <span class="k">try</span> <span class="p">{</span>
+    <span class="k">new</span> <span class="nx">URL</span><span class="p">(</span><span class="nx">url</span><span class="p">);</span>
+    <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+  <span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Factory functions with validation</span>
+<span class="kd">function</span> <span class="nx">createValidatedEmail</span><span class="p">(</span><span class="nx">email</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nx">ValidatedEmail</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">isValidEmail</span><span class="p">(</span><span class="nx">email</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Invalid email format</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">email</span> <span class="k">as</span> <span class="nx">ValidatedEmail</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">createValidatedPhone</span><span class="p">(</span><span class="nx">phone</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nx">ValidatedPhone</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">isValidPhone</span><span class="p">(</span><span class="nx">phone</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Invalid phone format</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">phone</span> <span class="k">as</span> <span class="nx">ValidatedPhone</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">createValidatedURL</span><span class="p">(</span><span class="nx">url</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nx">ValidatedURL</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">isValidURL</span><span class="p">(</span><span class="nx">url</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Invalid URL format</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">url</span> <span class="k">as</span> <span class="nx">ValidatedURL</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-real-world-examples">🌍 <strong>Real-World Examples</strong></h2>
+
+<h3 id="database-ids"><strong>Database IDs</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Database IDs with branded types</span>
+<span class="kd">type</span> <span class="nx">DatabaseId</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nx">Brand</span><span class="o">&lt;</span><span class="kr">number</span><span class="p">,</span> <span class="nx">T</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="kd">type</span> <span class="nx">UserId</span> <span class="o">=</span> <span class="nx">DatabaseId</span><span class="o">&lt;</span><span class="dl">'</span><span class="s1">User</span><span class="dl">'</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="kd">type</span> <span class="nx">ProductId</span> <span class="o">=</span> <span class="nx">DatabaseId</span><span class="o">&lt;</span><span class="dl">'</span><span class="s1">Product</span><span class="dl">'</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="kd">type</span> <span class="nx">OrderId</span> <span class="o">=</span> <span class="nx">DatabaseId</span><span class="o">&lt;</span><span class="dl">'</span><span class="s1">Order</span><span class="dl">'</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="kd">type</span> <span class="nx">CategoryId</span> <span class="o">=</span> <span class="nx">DatabaseId</span><span class="o">&lt;</span><span class="dl">'</span><span class="s1">Category</span><span class="dl">'</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="c1">// Factory functions</span>
+<span class="kd">function</span> <span class="nx">createUserId</span><span class="p">(</span><span class="nx">id</span><span class="p">:</span> <span class="kr">number</span><span class="p">):</span> <span class="nx">UserId</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">id</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">User ID must be positive</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">id</span> <span class="k">as</span> <span class="nx">UserId</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">createProductId</span><span class="p">(</span><span class="nx">id</span><span class="p">:</span> <span class="kr">number</span><span class="p">):</span> <span class="nx">ProductId</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">id</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Product ID must be positive</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">id</span> <span class="k">as</span> <span class="nx">ProductId</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Database operations</span>
+<span class="kr">interface</span> <span class="nx">User</span> <span class="p">{</span>
+  <span class="nl">id</span><span class="p">:</span> <span class="nx">UserId</span><span class="p">;</span>
+  <span class="nl">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">email</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kr">interface</span> <span class="nx">Product</span> <span class="p">{</span>
+  <span class="nl">id</span><span class="p">:</span> <span class="nx">ProductId</span><span class="p">;</span>
+  <span class="nl">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">price</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Type-safe database operations</span>
+<span class="kd">function</span> <span class="nx">getUser</span><span class="p">(</span><span class="nx">id</span><span class="p">:</span> <span class="nx">UserId</span><span class="p">):</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">fetch</span><span class="p">(</span><span class="s2">`/api/users/</span><span class="p">${</span><span class="nx">id</span><span class="p">}</span><span class="s2">`</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">());</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">getProduct</span><span class="p">(</span><span class="nx">id</span><span class="p">:</span> <span class="nx">ProductId</span><span class="p">):</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">Product</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">fetch</span><span class="p">(</span><span class="s2">`/api/products/</span><span class="p">${</span><span class="nx">id</span><span class="p">}</span><span class="s2">`</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">());</span>
+<span class="p">}</span>
+
+<span class="c1">// Usage</span>
+<span class="kd">const</span> <span class="nx">userId</span> <span class="o">=</span> <span class="nx">createUserId</span><span class="p">(</span><span class="mi">123</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">productId</span> <span class="o">=</span> <span class="nx">createProductId</span><span class="p">(</span><span class="mi">456</span><span class="p">);</span>
+
+<span class="nx">getUser</span><span class="p">(</span><span class="nx">userId</span><span class="p">);</span> <span class="c1">// ✅ Correct</span>
+<span class="nx">getProduct</span><span class="p">(</span><span class="nx">productId</span><span class="p">);</span> <span class="c1">// ✅ Correct</span>
+<span class="c1">// getUser(productId); // ❌ Error: Type 'ProductId' is not assignable to parameter of type 'UserId'</span>
+</code></pre></div></div>
+
+<h3 id="api-endpoints"><strong>API Endpoints</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// API endpoints with branded types</span>
+<span class="kd">type</span> <span class="nx">APIEndpoint</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nx">Brand</span><span class="o">&lt;</span><span class="kr">string</span><span class="p">,</span> <span class="nx">T</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="kd">type</span> <span class="nx">UserEndpoint</span> <span class="o">=</span> <span class="nx">APIEndpoint</span><span class="o">&lt;</span><span class="dl">'</span><span class="s1">User</span><span class="dl">'</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="kd">type</span> <span class="nx">ProductEndpoint</span> <span class="o">=</span> <span class="nx">APIEndpoint</span><span class="o">&lt;</span><span class="dl">'</span><span class="s1">Product</span><span class="dl">'</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="kd">type</span> <span class="nx">OrderEndpoint</span> <span class="o">=</span> <span class="nx">APIEndpoint</span><span class="o">&lt;</span><span class="dl">'</span><span class="s1">Order</span><span class="dl">'</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="c1">// Factory functions</span>
+<span class="kd">function</span> <span class="nx">createUserEndpoint</span><span class="p">(</span><span class="nx">path</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nx">UserEndpoint</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">path</span><span class="p">.</span><span class="nx">startsWith</span><span class="p">(</span><span class="dl">'</span><span class="s1">/users/</span><span class="dl">'</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">User endpoint must start with /users/</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">path</span> <span class="k">as</span> <span class="nx">UserEndpoint</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">createProductEndpoint</span><span class="p">(</span><span class="nx">path</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nx">ProductEndpoint</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">path</span><span class="p">.</span><span class="nx">startsWith</span><span class="p">(</span><span class="dl">'</span><span class="s1">/products/</span><span class="dl">'</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Product endpoint must start with /products/</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">path</span> <span class="k">as</span> <span class="nx">ProductEndpoint</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// API operations</span>
+<span class="kd">function</span> <span class="nx">callUserAPI</span><span class="p">(</span><span class="nx">endpoint</span><span class="p">:</span> <span class="nx">UserEndpoint</span><span class="p">):</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="kr">any</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">fetch</span><span class="p">(</span><span class="nx">endpoint</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">());</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">callProductAPI</span><span class="p">(</span><span class="nx">endpoint</span><span class="p">:</span> <span class="nx">ProductEndpoint</span><span class="p">):</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="kr">any</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">fetch</span><span class="p">(</span><span class="nx">endpoint</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">());</span>
+<span class="p">}</span>
+
+<span class="c1">// Usage</span>
+<span class="kd">const</span> <span class="nx">userEndpoint</span> <span class="o">=</span> <span class="nx">createUserEndpoint</span><span class="p">(</span><span class="dl">'</span><span class="s1">/users/123</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">productEndpoint</span> <span class="o">=</span> <span class="nx">createProductEndpoint</span><span class="p">(</span><span class="dl">'</span><span class="s1">/products/456</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="nx">callUserAPI</span><span class="p">(</span><span class="nx">userEndpoint</span><span class="p">);</span> <span class="c1">// ✅ Correct</span>
+<span class="nx">callProductAPI</span><span class="p">(</span><span class="nx">productEndpoint</span><span class="p">);</span> <span class="c1">// ✅ Correct</span>
+<span class="c1">// callUserAPI(productEndpoint); // ❌ Error: Type 'ProductEndpoint' is not assignable to parameter of type 'UserEndpoint'</span>
+</code></pre></div></div>
+
+<h3 id="configuration-values"><strong>Configuration Values</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Configuration values with branded types</span>
+<span class="kd">type</span> <span class="nx">ConfigValue</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nx">Brand</span><span class="o">&lt;</span><span class="kr">string</span><span class="p">,</span> <span class="nx">T</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="kd">type</span> <span class="nx">DatabaseURL</span> <span class="o">=</span> <span class="nx">ConfigValue</span><span class="o">&lt;</span><span class="dl">'</span><span class="s1">DatabaseURL</span><span class="dl">'</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="kd">type</span> <span class="nx">APIKey</span> <span class="o">=</span> <span class="nx">ConfigValue</span><span class="o">&lt;</span><span class="dl">'</span><span class="s1">APIKey</span><span class="dl">'</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="kd">type</span> <span class="nx">SecretKey</span> <span class="o">=</span> <span class="nx">ConfigValue</span><span class="o">&lt;</span><span class="dl">'</span><span class="s1">SecretKey</span><span class="dl">'</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="c1">// Factory functions</span>
+<span class="kd">function</span> <span class="nx">createDatabaseURL</span><span class="p">(</span><span class="nx">url</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nx">DatabaseURL</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">url</span><span class="p">.</span><span class="nx">startsWith</span><span class="p">(</span><span class="dl">'</span><span class="s1">postgres://</span><span class="dl">'</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nx">url</span><span class="p">.</span><span class="nx">startsWith</span><span class="p">(</span><span class="dl">'</span><span class="s1">mysql://</span><span class="dl">'</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Invalid database URL format</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">url</span> <span class="k">as</span> <span class="nx">DatabaseURL</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">createAPIKey</span><span class="p">(</span><span class="nx">key</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nx">APIKey</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">key</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;</span> <span class="mi">32</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">API key must be at least 32 characters</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">key</span> <span class="k">as</span> <span class="nx">APIKey</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">createSecretKey</span><span class="p">(</span><span class="nx">key</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nx">SecretKey</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">key</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;</span> <span class="mi">64</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Secret key must be at least 64 characters</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">key</span> <span class="k">as</span> <span class="nx">SecretKey</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Configuration usage</span>
+<span class="kr">interface</span> <span class="nx">AppConfig</span> <span class="p">{</span>
+  <span class="nl">databaseURL</span><span class="p">:</span> <span class="nx">DatabaseURL</span><span class="p">;</span>
+  <span class="nl">apiKey</span><span class="p">:</span> <span class="nx">APIKey</span><span class="p">;</span>
+  <span class="nl">secretKey</span><span class="p">:</span> <span class="nx">SecretKey</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">createAppConfig</span><span class="p">(</span><span class="nx">config</span><span class="p">:</span> <span class="p">{</span>
+  <span class="nl">databaseURL</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">apiKey</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">secretKey</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+<span class="p">}):</span> <span class="nx">AppConfig</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="na">databaseURL</span><span class="p">:</span> <span class="nx">createDatabaseURL</span><span class="p">(</span><span class="nx">config</span><span class="p">.</span><span class="nx">databaseURL</span><span class="p">),</span>
+    <span class="na">apiKey</span><span class="p">:</span> <span class="nx">createAPIKey</span><span class="p">(</span><span class="nx">config</span><span class="p">.</span><span class="nx">apiKey</span><span class="p">),</span>
+    <span class="na">secretKey</span><span class="p">:</span> <span class="nx">createSecretKey</span><span class="p">(</span><span class="nx">config</span><span class="p">.</span><span class="nx">secretKey</span><span class="p">)</span>
+  <span class="p">};</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-best-practices">✅ <strong>Best Practices</strong></h2>
+
+<h3 id="1-use-descriptive-brand-names"><strong>1. Use Descriptive Brand Names</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ✅ Good: Descriptive brand names</span>
+<span class="kd">type</span> <span class="nx">UserId</span> <span class="o">=</span> <span class="nx">Brand</span><span class="o">&lt;</span><span class="kr">number</span><span class="p">,</span> <span class="dl">'</span><span class="s1">UserId</span><span class="dl">'</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="kd">type</span> <span class="nx">ProductId</span> <span class="o">=</span> <span class="nx">Brand</span><span class="o">&lt;</span><span class="kr">number</span><span class="p">,</span> <span class="dl">'</span><span class="s1">ProductId</span><span class="dl">'</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="kd">type</span> <span class="nx">Email</span> <span class="o">=</span> <span class="nx">Brand</span><span class="o">&lt;</span><span class="kr">string</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Email</span><span class="dl">'</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="c1">// ❌ Avoid: Unclear brand names</span>
+<span class="kd">type</span> <span class="nx">ID1</span> <span class="o">=</span> <span class="nx">Brand</span><span class="o">&lt;</span><span class="kr">number</span><span class="p">,</span> <span class="dl">'</span><span class="s1">ID1</span><span class="dl">'</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="kd">type</span> <span class="nx">ID2</span> <span class="o">=</span> <span class="nx">Brand</span><span class="o">&lt;</span><span class="kr">number</span><span class="p">,</span> <span class="dl">'</span><span class="s1">ID2</span><span class="dl">'</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="kd">type</span> <span class="nx">Str</span> <span class="o">=</span> <span class="nx">Brand</span><span class="o">&lt;</span><span class="kr">string</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Str</span><span class="dl">'</span><span class="o">&gt;</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="2-provide-factory-functions"><strong>2. Provide Factory Functions</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ✅ Good: Factory functions</span>
+<span class="kd">function</span> <span class="nx">createUserId</span><span class="p">(</span><span class="nx">id</span><span class="p">:</span> <span class="kr">number</span><span class="p">):</span> <span class="nx">UserId</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">id</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">User ID must be positive</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">id</span> <span class="k">as</span> <span class="nx">UserId</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// ❌ Avoid: Direct casting</span>
+<span class="kd">const</span> <span class="nx">userId</span> <span class="o">=</span> <span class="mi">123</span> <span class="k">as</span> <span class="nx">UserId</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="3-add-validation"><strong>3. Add Validation</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ✅ Good: Validation in factory functions</span>
+<span class="kd">function</span> <span class="nx">createEmail</span><span class="p">(</span><span class="nx">email</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nx">Email</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">isValidEmail</span><span class="p">(</span><span class="nx">email</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Invalid email format</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">email</span> <span class="k">as</span> <span class="nx">Email</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// ❌ Avoid: No validation</span>
+<span class="kd">function</span> <span class="nx">createEmail</span><span class="p">(</span><span class="nx">email</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nx">Email</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">email</span> <span class="k">as</span> <span class="nx">Email</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="4-use-opaque-types-for-better-encapsulation"><strong>4. Use Opaque Types for Better Encapsulation</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ✅ Good: Opaque types</span>
+<span class="kr">declare</span> <span class="kd">const</span> <span class="nx">__opaque</span><span class="p">:</span> <span class="nx">unique</span> <span class="nx">symbol</span><span class="p">;</span>
+<span class="kd">type</span> <span class="nx">Opaque</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">,</span> <span class="nx">K</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nx">T</span> <span class="o">&amp;</span> <span class="p">{</span> <span class="k">readonly</span> <span class="p">[</span><span class="nx">__opaque</span><span class="p">]:</span> <span class="nx">K</span> <span class="p">};</span>
+
+<span class="kd">type</span> <span class="nx">UserId</span> <span class="o">=</span> <span class="nx">Opaque</span><span class="o">&lt;</span><span class="kr">number</span><span class="p">,</span> <span class="dl">'</span><span class="s1">UserId</span><span class="dl">'</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="c1">// ❌ Avoid: Branded types when you need better encapsulation</span>
+<span class="kd">type</span> <span class="nx">UserId</span> <span class="o">=</span> <span class="nx">Brand</span><span class="o">&lt;</span><span class="kr">number</span><span class="p">,</span> <span class="dl">'</span><span class="s1">UserId</span><span class="dl">'</span><span class="o">&gt;</span><span class="p">;</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-common-interview-questions">❓ <strong>Common Interview Questions</strong></h2>
+
+<h3 id="1-what-are-branded-types-in-typescript"><strong>1. What are branded types in TypeScript?</strong></h3>
+
+<p><strong>Answer:</strong>
+Branded types are a TypeScript technique for creating distinct types from primitive types by adding a brand property. They prevent accidental mixing of different kinds of values and provide compile-time type safety.</p>
+
+<h3 id="2-whats-the-difference-between-branded-types-and-opaque-types"><strong>2. What’s the difference between branded types and opaque types?</strong></h3>
+
+<p><strong>Answer:</strong></p>
+<ul>
+  <li><strong>Branded Types</strong>: Use a <code class="language-plaintext highlighter-rouge">__brand</code> property that can be accessed</li>
+  <li><strong>Opaque Types</strong>: Use a unique symbol that cannot be accessed, providing better encapsulation</li>
+  <li>Opaque types are generally preferred for better type safety</li>
+</ul>
+
+<h3 id="3-when-should-you-use-branded-types"><strong>3. When should you use branded types?</strong></h3>
+
+<p><strong>Answer:</strong></p>
+<ul>
+  <li><strong>Prevent type confusion</strong>: When you have multiple types that use the same primitive</li>
+  <li><strong>API safety</strong>: When you want to prevent mixing different ID types</li>
+  <li><strong>Configuration</strong>: When you want to ensure correct configuration values</li>
+  <li><strong>Domain modeling</strong>: When you want to model domain concepts more precisely</li>
+</ul>
+
+<h3 id="4-how-do-you-create-branded-types"><strong>4. How do you create branded types?</strong></h3>
+
+<p><strong>Answer:</strong></p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">type</span> <span class="nx">Brand</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">,</span> <span class="nx">B</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nx">T</span> <span class="o">&amp;</span> <span class="p">{</span> <span class="na">__brand</span><span class="p">:</span> <span class="nx">B</span> <span class="p">};</span>
+<span class="kd">type</span> <span class="nx">UserId</span> <span class="o">=</span> <span class="nx">Brand</span><span class="o">&lt;</span><span class="kr">number</span><span class="p">,</span> <span class="dl">'</span><span class="s1">UserId</span><span class="dl">'</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="kd">function</span> <span class="nx">createUserId</span><span class="p">(</span><span class="nx">id</span><span class="p">:</span> <span class="kr">number</span><span class="p">):</span> <span class="nx">UserId</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">id</span> <span class="k">as</span> <span class="nx">UserId</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="5-what-are-the-benefits-of-branded-types"><strong>5. What are the benefits of branded types?</strong></h3>
+
+<p><strong>Answer:</strong></p>
+<ul>
+  <li><strong>Type Safety</strong>: Prevent accidental type mixing</li>
+  <li><strong>Clarity</strong>: Make code more self-documenting</li>
+  <li><strong>Refactoring</strong>: Safer refactoring with compile-time checks</li>
+  <li><strong>Debugging</strong>: Easier debugging with distinct types</li>
+  <li><strong>Maintenance</strong>: Better code maintenance and understanding</li>
+</ul>
+
+<hr />
+
+<h2 id="-navigation">🧭 Navigation</h2>
+
+<div class="navigation">
+  <a href="02-Discriminated-Unions.md" class="nav-button">← Previous: Discriminated Unions</a>
+  <a href="04-Recursive-Types-Advanced-Patterns.md" class="nav-button">Next: Recursive Types &amp; Advanced Patterns →</a>
+</div>
+
+<p><em>Last updated: December 2025</em></p>
+
+        </main>
+        
+        <footer style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #ecf0f1; color: #666; text-align: center;">
+            <p>Interview Prep Documentation - Built with Jekyll</p>
+        </footer>
+    </div>
+</body>
+</html>

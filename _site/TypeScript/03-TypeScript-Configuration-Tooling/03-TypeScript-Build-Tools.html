@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🛠️ TypeScript with Build Tools - Interview Prep Documentation</title>
+    <meta name="description" content="Comprehensive guides for JavaScript, TypeScript, and React Native interview preparation">
+    
+    <!-- GitHub Pages compatible styling -->
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+        }
+        
+        .container {
+            max-width: 100%;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            color: #2c3e50;
+            margin-top: 2em;
+            margin-bottom: 1em;
+        }
+        
+        h1 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            border-bottom: 1px solid #ecf0f1;
+            padding-bottom: 5px;
+        }
+        
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border-left: 4px solid #3498db;
+        }
+        
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+        
+        blockquote {
+            border-left: 4px solid #3498db;
+            margin: 0;
+            padding-left: 20px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1em 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .navigation {
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px 0;
+            margin-bottom: 20px;
+        }
+        
+        .navigation a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+        
+        .navigation a:hover {
+            text-decoration: underline;
+        }
+        
+        .breadcrumb {
+            margin-bottom: 20px;
+            color: #666;
+        }
+        
+        .breadcrumb a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            h2 {
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="navigation">
+            <a href="/">Home</a>
+            <a href="/Javascript/">JavaScript</a>
+            <a href="/TypeScript/">TypeScript</a>
+            <a href="/React-Native/">React Native</a>
+        </nav>
+        
+        
+        
+        <main>
+            <h1 id="️-typescript-with-build-tools">🛠️ <strong>TypeScript with Build Tools</strong></h1>
+
+<blockquote>
+  <p><strong>Complete guide to integrating TypeScript with popular build tools like Webpack, Vite, Rollup, and Parcel</strong></p>
+</blockquote>
+
+<link rel="stylesheet" href="../../common-styles.css" />
+
+<hr />
+
+<h2 id="-table-of-contents">📚 <strong>Table of Contents</strong></h2>
+
+<ul>
+  <li><a href="#build-tools-overview">Build Tools Overview</a></li>
+  <li><a href="#webpack-integration">Webpack Integration</a></li>
+  <li><a href="#vite-integration">Vite Integration</a></li>
+  <li><a href="#rollup-integration">Rollup Integration</a></li>
+  <li><a href="#parcel-integration">Parcel Integration</a></li>
+  <li><a href="#custom-build-scripts">Custom Build Scripts</a></li>
+  <li><a href="#best-practices">Best Practices</a></li>
+  <li><a href="#common-interview-questions">Common Interview Questions</a></li>
+</ul>
+
+<hr />
+
+<h2 id="-build-tools-overview">🎯 <strong>Build Tools Overview</strong></h2>
+
+<p>Build tools help compile, bundle, and optimize TypeScript code for production deployment.</p>
+
+<h3 id="popular-build-tools"><strong>Popular Build Tools</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Build tool comparison</span>
+<span class="kd">const</span> <span class="nx">buildTools</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">webpack</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">pros</span><span class="p">:</span> <span class="p">[</span><span class="dl">"</span><span class="s2">Mature ecosystem</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Extensive plugins</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Code splitting</span><span class="dl">"</span><span class="p">],</span>
+    <span class="na">cons</span><span class="p">:</span> <span class="p">[</span><span class="dl">"</span><span class="s2">Complex configuration</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Slow builds</span><span class="dl">"</span><span class="p">]</span>
+  <span class="p">},</span>
+  <span class="na">vite</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">pros</span><span class="p">:</span> <span class="p">[</span><span class="dl">"</span><span class="s2">Fast development</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">ES modules</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Simple config</span><span class="dl">"</span><span class="p">],</span>
+    <span class="na">cons</span><span class="p">:</span> <span class="p">[</span><span class="dl">"</span><span class="s2">Newer tool</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Limited ecosystem</span><span class="dl">"</span><span class="p">]</span>
+  <span class="p">},</span>
+  <span class="na">rollup</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">pros</span><span class="p">:</span> <span class="p">[</span><span class="dl">"</span><span class="s2">Tree shaking</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Small bundles</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Library focused</span><span class="dl">"</span><span class="p">],</span>
+    <span class="na">cons</span><span class="p">:</span> <span class="p">[</span><span class="dl">"</span><span class="s2">Limited for apps</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Complex setup</span><span class="dl">"</span><span class="p">]</span>
+  <span class="p">},</span>
+  <span class="na">parcel</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">pros</span><span class="p">:</span> <span class="p">[</span><span class="dl">"</span><span class="s2">Zero config</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Fast builds</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Built-in optimizations</span><span class="dl">"</span><span class="p">],</span>
+    <span class="na">cons</span><span class="p">:</span> <span class="p">[</span><span class="dl">"</span><span class="s2">Less control</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Limited customization</span><span class="dl">"</span><span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="build-tool-selection-criteria"><strong>Build Tool Selection Criteria</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// When to use each tool</span>
+<span class="kd">const</span> <span class="nx">selectionCriteria</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">webpack</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Large applications, complex requirements, extensive plugin needs</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">vite</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Modern applications, fast development, simple setup</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">rollup</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Libraries, small bundles, tree shaking important</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">parcel</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Quick prototyping, zero configuration, simple projects</span><span class="dl">"</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-webpack-integration">📦 <strong>Webpack Integration</strong></h2>
+
+<p>Webpack is a powerful module bundler with extensive TypeScript support.</p>
+
+<h3 id="basic-webpack-configuration"><strong>Basic Webpack Configuration</strong></h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// webpack.config.js</span>
+<span class="kd">const</span> <span class="nx">path</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">path</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">entry</span><span class="p">:</span> <span class="dl">'</span><span class="s1">./src/index.ts</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">module</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">rules</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="na">test</span><span class="p">:</span> <span class="sr">/</span><span class="se">\.</span><span class="sr">tsx</span><span class="se">?</span><span class="sr">$/</span><span class="p">,</span>
+        <span class="na">use</span><span class="p">:</span> <span class="dl">'</span><span class="s1">ts-loader</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">exclude</span><span class="p">:</span> <span class="sr">/node_modules/</span><span class="p">,</span>
+      <span class="p">},</span>
+    <span class="p">],</span>
+  <span class="p">},</span>
+  <span class="na">resolve</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">extensions</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">.tsx</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">.ts</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">.js</span><span class="dl">'</span><span class="p">],</span>
+  <span class="p">},</span>
+  <span class="na">output</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">filename</span><span class="p">:</span> <span class="dl">'</span><span class="s1">bundle.js</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">path</span><span class="p">:</span> <span class="nx">path</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="dl">'</span><span class="s1">dist</span><span class="dl">'</span><span class="p">),</span>
+  <span class="p">},</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="advanced-webpack-configuration"><strong>Advanced Webpack Configuration</strong></h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// webpack.config.js</span>
+<span class="kd">const</span> <span class="nx">path</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">path</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">HtmlWebpackPlugin</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">html-webpack-plugin</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">MiniCssExtractPlugin</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">mini-css-extract-plugin</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">entry</span><span class="p">:</span> <span class="dl">'</span><span class="s1">./src/index.ts</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">module</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">rules</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="na">test</span><span class="p">:</span> <span class="sr">/</span><span class="se">\.</span><span class="sr">tsx</span><span class="se">?</span><span class="sr">$/</span><span class="p">,</span>
+        <span class="na">use</span><span class="p">:</span> <span class="p">[</span>
+          <span class="p">{</span>
+            <span class="na">loader</span><span class="p">:</span> <span class="dl">'</span><span class="s1">ts-loader</span><span class="dl">'</span><span class="p">,</span>
+            <span class="na">options</span><span class="p">:</span> <span class="p">{</span>
+              <span class="na">transpileOnly</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+              <span class="na">experimentalWatchApi</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+            <span class="p">},</span>
+          <span class="p">},</span>
+        <span class="p">],</span>
+        <span class="na">exclude</span><span class="p">:</span> <span class="sr">/node_modules/</span><span class="p">,</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="na">test</span><span class="p">:</span> <span class="sr">/</span><span class="se">\.</span><span class="sr">css$/</span><span class="p">,</span>
+        <span class="na">use</span><span class="p">:</span> <span class="p">[</span><span class="nx">MiniCssExtractPlugin</span><span class="p">.</span><span class="nx">loader</span><span class="p">,</span> <span class="dl">'</span><span class="s1">css-loader</span><span class="dl">'</span><span class="p">],</span>
+      <span class="p">},</span>
+    <span class="p">],</span>
+  <span class="p">},</span>
+  <span class="na">resolve</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">extensions</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">.tsx</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">.ts</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">.js</span><span class="dl">'</span><span class="p">],</span>
+    <span class="na">alias</span><span class="p">:</span> <span class="p">{</span>
+      <span class="dl">'</span><span class="s1">@</span><span class="dl">'</span><span class="p">:</span> <span class="nx">path</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="dl">'</span><span class="s1">src</span><span class="dl">'</span><span class="p">),</span>
+    <span class="p">},</span>
+  <span class="p">},</span>
+  <span class="na">plugins</span><span class="p">:</span> <span class="p">[</span>
+    <span class="k">new</span> <span class="nx">HtmlWebpackPlugin</span><span class="p">({</span>
+      <span class="na">template</span><span class="p">:</span> <span class="dl">'</span><span class="s1">./src/index.html</span><span class="dl">'</span><span class="p">,</span>
+    <span class="p">}),</span>
+    <span class="k">new</span> <span class="nx">MiniCssExtractPlugin</span><span class="p">({</span>
+      <span class="na">filename</span><span class="p">:</span> <span class="dl">'</span><span class="s1">[name].[contenthash].css</span><span class="dl">'</span><span class="p">,</span>
+    <span class="p">}),</span>
+  <span class="p">],</span>
+  <span class="na">output</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">filename</span><span class="p">:</span> <span class="dl">'</span><span class="s1">[name].[contenthash].js</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">path</span><span class="p">:</span> <span class="nx">path</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="dl">'</span><span class="s1">dist</span><span class="dl">'</span><span class="p">),</span>
+    <span class="na">clean</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">optimization</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">splitChunks</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">chunks</span><span class="p">:</span> <span class="dl">'</span><span class="s1">all</span><span class="dl">'</span><span class="p">,</span>
+    <span class="p">},</span>
+  <span class="p">},</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="webpack-with-typescript-loaders"><strong>Webpack with TypeScript Loaders</strong></h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// webpack.config.js</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">module</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">rules</span><span class="p">:</span> <span class="p">[</span>
+      <span class="c1">// TypeScript loader</span>
+      <span class="p">{</span>
+        <span class="na">test</span><span class="p">:</span> <span class="sr">/</span><span class="se">\.</span><span class="sr">tsx</span><span class="se">?</span><span class="sr">$/</span><span class="p">,</span>
+        <span class="na">use</span><span class="p">:</span> <span class="dl">'</span><span class="s1">ts-loader</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">exclude</span><span class="p">:</span> <span class="sr">/node_modules/</span><span class="p">,</span>
+      <span class="p">},</span>
+      <span class="c1">// Babel loader (alternative)</span>
+      <span class="p">{</span>
+        <span class="na">test</span><span class="p">:</span> <span class="sr">/</span><span class="se">\.</span><span class="sr">tsx</span><span class="se">?</span><span class="sr">$/</span><span class="p">,</span>
+        <span class="na">use</span><span class="p">:</span> <span class="p">{</span>
+          <span class="na">loader</span><span class="p">:</span> <span class="dl">'</span><span class="s1">babel-loader</span><span class="dl">'</span><span class="p">,</span>
+          <span class="na">options</span><span class="p">:</span> <span class="p">{</span>
+            <span class="na">presets</span><span class="p">:</span> <span class="p">[</span>
+              <span class="dl">'</span><span class="s1">@babel/preset-env</span><span class="dl">'</span><span class="p">,</span>
+              <span class="dl">'</span><span class="s1">@babel/preset-typescript</span><span class="dl">'</span><span class="p">,</span>
+            <span class="p">],</span>
+          <span class="p">},</span>
+        <span class="p">},</span>
+        <span class="na">exclude</span><span class="p">:</span> <span class="sr">/node_modules/</span><span class="p">,</span>
+      <span class="p">},</span>
+    <span class="p">],</span>
+  <span class="p">},</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-vite-integration">⚡ <strong>Vite Integration</strong></h2>
+
+<p>Vite provides fast development and optimized production builds for TypeScript.</p>
+
+<h3 id="basic-vite-configuration"><strong>Basic Vite Configuration</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// vite.config.ts</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">defineConfig</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">vite</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">resolve</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">path</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">defineConfig</span><span class="p">({</span>
+  <span class="na">resolve</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">alias</span><span class="p">:</span> <span class="p">{</span>
+      <span class="dl">'</span><span class="s1">@</span><span class="dl">'</span><span class="p">:</span> <span class="nx">resolve</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="dl">'</span><span class="s1">src</span><span class="dl">'</span><span class="p">),</span>
+    <span class="p">},</span>
+  <span class="p">},</span>
+  <span class="na">build</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">outDir</span><span class="p">:</span> <span class="dl">'</span><span class="s1">dist</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">sourcemap</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">server</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">port</span><span class="p">:</span> <span class="mi">3000</span><span class="p">,</span>
+    <span class="na">open</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="p">},</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<h3 id="advanced-vite-configuration"><strong>Advanced Vite Configuration</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// vite.config.ts</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">defineConfig</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">vite</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">resolve</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">path</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">react</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@vitejs/plugin-react</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">defineConfig</span><span class="p">({</span>
+  <span class="na">plugins</span><span class="p">:</span> <span class="p">[</span><span class="nx">react</span><span class="p">()],</span>
+  <span class="na">resolve</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">alias</span><span class="p">:</span> <span class="p">{</span>
+      <span class="dl">'</span><span class="s1">@</span><span class="dl">'</span><span class="p">:</span> <span class="nx">resolve</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="dl">'</span><span class="s1">src</span><span class="dl">'</span><span class="p">),</span>
+      <span class="dl">'</span><span class="s1">@/components</span><span class="dl">'</span><span class="p">:</span> <span class="nx">resolve</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="dl">'</span><span class="s1">src/components</span><span class="dl">'</span><span class="p">),</span>
+      <span class="dl">'</span><span class="s1">@/utils</span><span class="dl">'</span><span class="p">:</span> <span class="nx">resolve</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="dl">'</span><span class="s1">src/utils</span><span class="dl">'</span><span class="p">),</span>
+    <span class="p">},</span>
+  <span class="p">},</span>
+  <span class="na">build</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">outDir</span><span class="p">:</span> <span class="dl">'</span><span class="s1">dist</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">sourcemap</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="na">rollupOptions</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">output</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">manualChunks</span><span class="p">:</span> <span class="p">{</span>
+          <span class="na">vendor</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">react-dom</span><span class="dl">'</span><span class="p">],</span>
+          <span class="na">utils</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">lodash</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">date-fns</span><span class="dl">'</span><span class="p">],</span>
+        <span class="p">},</span>
+      <span class="p">},</span>
+    <span class="p">},</span>
+  <span class="p">},</span>
+  <span class="na">server</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">port</span><span class="p">:</span> <span class="mi">3000</span><span class="p">,</span>
+    <span class="na">open</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="na">proxy</span><span class="p">:</span> <span class="p">{</span>
+      <span class="dl">'</span><span class="s1">/api</span><span class="dl">'</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">target</span><span class="p">:</span> <span class="dl">'</span><span class="s1">http://localhost:8080</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">changeOrigin</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+      <span class="p">},</span>
+    <span class="p">},</span>
+  <span class="p">},</span>
+  <span class="na">define</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">__APP_VERSION__</span><span class="p">:</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">npm_package_version</span><span class="p">),</span>
+  <span class="p">},</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<h3 id="vite-with-typescript"><strong>Vite with TypeScript</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// vite.config.ts</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">defineConfig</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">vite</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">resolve</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">path</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">defineConfig</span><span class="p">({</span>
+  <span class="na">resolve</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">alias</span><span class="p">:</span> <span class="p">{</span>
+      <span class="dl">'</span><span class="s1">@</span><span class="dl">'</span><span class="p">:</span> <span class="nx">resolve</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="dl">'</span><span class="s1">src</span><span class="dl">'</span><span class="p">),</span>
+    <span class="p">},</span>
+  <span class="p">},</span>
+  <span class="na">esbuild</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">target</span><span class="p">:</span> <span class="dl">'</span><span class="s1">es2020</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">build</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">target</span><span class="p">:</span> <span class="dl">'</span><span class="s1">es2020</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">minify</span><span class="p">:</span> <span class="dl">'</span><span class="s1">terser</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">terserOptions</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">compress</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">drop_console</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="na">drop_debugger</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+      <span class="p">},</span>
+    <span class="p">},</span>
+  <span class="p">},</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-rollup-integration">📦 <strong>Rollup Integration</strong></h2>
+
+<p>Rollup is excellent for building libraries and applications with tree shaking.</p>
+
+<h3 id="basic-rollup-configuration"><strong>Basic Rollup Configuration</strong></h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// rollup.config.js</span>
+<span class="k">import</span> <span class="nx">typescript</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@rollup/plugin-typescript</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">resolve</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">path</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="p">{</span>
+  <span class="na">input</span><span class="p">:</span> <span class="dl">'</span><span class="s1">src/index.ts</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">output</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="na">file</span><span class="p">:</span> <span class="dl">'</span><span class="s1">dist/index.js</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">format</span><span class="p">:</span> <span class="dl">'</span><span class="s1">cjs</span><span class="dl">'</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="na">file</span><span class="p">:</span> <span class="dl">'</span><span class="s1">dist/index.esm.js</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">format</span><span class="p">:</span> <span class="dl">'</span><span class="s1">esm</span><span class="dl">'</span><span class="p">,</span>
+    <span class="p">},</span>
+  <span class="p">],</span>
+  <span class="na">plugins</span><span class="p">:</span> <span class="p">[</span>
+    <span class="nx">typescript</span><span class="p">({</span>
+      <span class="na">tsconfig</span><span class="p">:</span> <span class="dl">'</span><span class="s1">./tsconfig.json</span><span class="dl">'</span><span class="p">,</span>
+    <span class="p">}),</span>
+  <span class="p">],</span>
+  <span class="na">external</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">react-dom</span><span class="dl">'</span><span class="p">],</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="advanced-rollup-configuration"><strong>Advanced Rollup Configuration</strong></h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// rollup.config.js</span>
+<span class="k">import</span> <span class="nx">typescript</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@rollup/plugin-typescript</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">nodeResolve</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@rollup/plugin-node-resolve</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">commonjs</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@rollup/plugin-commonjs</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">terser</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">rollup-plugin-terser</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">resolve</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">path</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="p">{</span>
+  <span class="na">input</span><span class="p">:</span> <span class="dl">'</span><span class="s1">src/index.ts</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">output</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="na">file</span><span class="p">:</span> <span class="dl">'</span><span class="s1">dist/index.js</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">format</span><span class="p">:</span> <span class="dl">'</span><span class="s1">cjs</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">sourcemap</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="na">file</span><span class="p">:</span> <span class="dl">'</span><span class="s1">dist/index.esm.js</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">format</span><span class="p">:</span> <span class="dl">'</span><span class="s1">esm</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">sourcemap</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="na">file</span><span class="p">:</span> <span class="dl">'</span><span class="s1">dist/index.umd.js</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">format</span><span class="p">:</span> <span class="dl">'</span><span class="s1">umd</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">MyLibrary</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">sourcemap</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="p">},</span>
+  <span class="p">],</span>
+  <span class="na">plugins</span><span class="p">:</span> <span class="p">[</span>
+    <span class="nx">nodeResolve</span><span class="p">({</span>
+      <span class="na">preferBuiltins</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="p">}),</span>
+    <span class="nx">commonjs</span><span class="p">(),</span>
+    <span class="nx">typescript</span><span class="p">({</span>
+      <span class="na">tsconfig</span><span class="p">:</span> <span class="dl">'</span><span class="s1">./tsconfig.json</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">declaration</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+      <span class="na">declarationDir</span><span class="p">:</span> <span class="dl">'</span><span class="s1">./dist</span><span class="dl">'</span><span class="p">,</span>
+    <span class="p">}),</span>
+    <span class="nx">terser</span><span class="p">(),</span>
+  <span class="p">],</span>
+  <span class="na">external</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">react-dom</span><span class="dl">'</span><span class="p">],</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-parcel-integration">📦 <strong>Parcel Integration</strong></h2>
+
+<p>Parcel provides zero-configuration builds with built-in TypeScript support.</p>
+
+<h3 id="basic-parcel-configuration"><strong>Basic Parcel Configuration</strong></h3>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">//</span><span class="w"> </span><span class="err">package.json</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="nl">"scripts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"dev"</span><span class="p">:</span><span class="w"> </span><span class="s2">"parcel src/index.html"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"build"</span><span class="p">:</span><span class="w"> </span><span class="s2">"parcel build src/index.html"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"devDependencies"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"parcel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^2.0.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"typescript"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^4.0.0"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="parcel-with-typescript"><strong>Parcel with TypeScript</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// src/index.ts</span>
+<span class="k">import</span> <span class="dl">'</span><span class="s1">./styles.css</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kr">interface</span> <span class="nx">User</span> <span class="p">{</span>
+  <span class="nl">id</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span>
+  <span class="nl">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">email</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">user</span><span class="p">:</span> <span class="nx">User</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">John Doe</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">email</span><span class="p">:</span> <span class="dl">'</span><span class="s1">john@example.com</span><span class="dl">'</span>
+<span class="p">};</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">user</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="parcel-configuration-file"><strong>Parcel Configuration File</strong></h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// .parcelrc</span>
+<span class="p">{</span>
+  <span class="dl">"</span><span class="s2">extends</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">@parcel/config-default</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">transformers</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">*.{ts,tsx}</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span><span class="dl">"</span><span class="s2">@parcel/transformer-typescript-tsc</span><span class="dl">"</span><span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-custom-build-scripts">🔧 <strong>Custom Build Scripts</strong></h2>
+
+<p>Custom build scripts provide fine-grained control over the build process.</p>
+
+<h3 id="basic-build-script"><strong>Basic Build Script</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// scripts/build.ts</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">execSync</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">child_process</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">readFileSync</span><span class="p">,</span> <span class="nx">writeFileSync</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">fs</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">resolve</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">path</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">build</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Building TypeScript...</span><span class="dl">'</span><span class="p">);</span>
+  
+  <span class="c1">// Compile TypeScript</span>
+  <span class="nx">execSync</span><span class="p">(</span><span class="dl">'</span><span class="s1">tsc</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span> <span class="na">stdio</span><span class="p">:</span> <span class="dl">'</span><span class="s1">inherit</span><span class="dl">'</span> <span class="p">});</span>
+  
+  <span class="c1">// Copy assets</span>
+  <span class="nx">execSync</span><span class="p">(</span><span class="dl">'</span><span class="s1">cp -r src/assets dist/</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span> <span class="na">stdio</span><span class="p">:</span> <span class="dl">'</span><span class="s1">inherit</span><span class="dl">'</span> <span class="p">});</span>
+  
+  <span class="c1">// Generate bundle info</span>
+  <span class="kd">const</span> <span class="nx">packageJson</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">readFileSync</span><span class="p">(</span><span class="dl">'</span><span class="s1">package.json</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">utf8</span><span class="dl">'</span><span class="p">));</span>
+  <span class="kd">const</span> <span class="nx">bundleInfo</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">version</span><span class="p">:</span> <span class="nx">packageJson</span><span class="p">.</span><span class="nx">version</span><span class="p">,</span>
+    <span class="na">buildTime</span><span class="p">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">toISOString</span><span class="p">(),</span>
+    <span class="na">buildId</span><span class="p">:</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">().</span><span class="nx">toString</span><span class="p">(</span><span class="mi">36</span><span class="p">).</span><span class="nx">substr</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
+  <span class="p">};</span>
+  
+  <span class="nx">writeFileSync</span><span class="p">(</span>
+    <span class="nx">resolve</span><span class="p">(</span><span class="dl">'</span><span class="s1">dist</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">bundle-info.json</span><span class="dl">'</span><span class="p">),</span>
+    <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">bundleInfo</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+  <span class="p">);</span>
+  
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Build completed successfully!</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="nx">build</span><span class="p">().</span><span class="k">catch</span><span class="p">(</span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="advanced-build-script"><strong>Advanced Build Script</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// scripts/build.ts</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">execSync</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">child_process</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">readFileSync</span><span class="p">,</span> <span class="nx">writeFileSync</span><span class="p">,</span> <span class="nx">existsSync</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">fs</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">resolve</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">path</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">glob</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">glob</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kr">interface</span> <span class="nx">BuildConfig</span> <span class="p">{</span>
+  <span class="nl">entry</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">output</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">target</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">format</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">buildConfigs</span><span class="p">:</span> <span class="nx">BuildConfig</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="p">{</span>
+    <span class="na">entry</span><span class="p">:</span> <span class="dl">'</span><span class="s1">src/index.ts</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">output</span><span class="p">:</span> <span class="dl">'</span><span class="s1">dist/index.js</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">target</span><span class="p">:</span> <span class="dl">'</span><span class="s1">es2020</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">format</span><span class="p">:</span> <span class="dl">'</span><span class="s1">cjs</span><span class="dl">'</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="na">entry</span><span class="p">:</span> <span class="dl">'</span><span class="s1">src/index.ts</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">output</span><span class="p">:</span> <span class="dl">'</span><span class="s1">dist/index.esm.js</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">target</span><span class="p">:</span> <span class="dl">'</span><span class="s1">es2020</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">format</span><span class="p">:</span> <span class="dl">'</span><span class="s1">esm</span><span class="dl">'</span>
+  <span class="p">}</span>
+<span class="p">];</span>
+
+<span class="kd">const</span> <span class="nx">build</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Starting build process...</span><span class="dl">'</span><span class="p">);</span>
+  
+  <span class="c1">// Clean dist directory</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">existsSync</span><span class="p">(</span><span class="dl">'</span><span class="s1">dist</span><span class="dl">'</span><span class="p">))</span> <span class="p">{</span>
+    <span class="nx">execSync</span><span class="p">(</span><span class="dl">'</span><span class="s1">rm -rf dist</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span> <span class="na">stdio</span><span class="p">:</span> <span class="dl">'</span><span class="s1">inherit</span><span class="dl">'</span> <span class="p">});</span>
+  <span class="p">}</span>
+  
+  <span class="c1">// Create dist directory</span>
+  <span class="nx">execSync</span><span class="p">(</span><span class="dl">'</span><span class="s1">mkdir -p dist</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span> <span class="na">stdio</span><span class="p">:</span> <span class="dl">'</span><span class="s1">inherit</span><span class="dl">'</span> <span class="p">});</span>
+  
+  <span class="c1">// Build each configuration</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kd">const</span> <span class="nx">config</span> <span class="k">of</span> <span class="nx">buildConfigs</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`Building </span><span class="p">${</span><span class="nx">config</span><span class="p">.</span><span class="nx">format</span><span class="p">}</span><span class="s2">...`</span><span class="p">);</span>
+    
+    <span class="kd">const</span> <span class="nx">tscCommand</span> <span class="o">=</span> <span class="p">[</span>
+      <span class="dl">'</span><span class="s1">tsc</span><span class="dl">'</span><span class="p">,</span>
+      <span class="s2">`--outDir </span><span class="p">${</span><span class="nx">config</span><span class="p">.</span><span class="nx">output</span><span class="p">}</span><span class="s2">`</span><span class="p">,</span>
+      <span class="s2">`--target </span><span class="p">${</span><span class="nx">config</span><span class="p">.</span><span class="nx">target</span><span class="p">}</span><span class="s2">`</span><span class="p">,</span>
+      <span class="s2">`--module </span><span class="p">${</span><span class="nx">config</span><span class="p">.</span><span class="nx">format</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">esm</span><span class="dl">'</span> <span class="p">?</span> <span class="dl">'</span><span class="s1">esnext</span><span class="dl">'</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">commonjs</span><span class="dl">'</span><span class="p">}</span><span class="s2">`</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">--declaration</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">--sourceMap</span><span class="dl">'</span>
+    <span class="p">].</span><span class="nx">join</span><span class="p">(</span><span class="dl">'</span><span class="s1"> </span><span class="dl">'</span><span class="p">);</span>
+    
+    <span class="nx">execSync</span><span class="p">(</span><span class="nx">tscCommand</span><span class="p">,</span> <span class="p">{</span> <span class="na">stdio</span><span class="p">:</span> <span class="dl">'</span><span class="s1">inherit</span><span class="dl">'</span> <span class="p">});</span>
+  <span class="p">}</span>
+  
+  <span class="c1">// Copy type definitions</span>
+  <span class="nx">execSync</span><span class="p">(</span><span class="dl">'</span><span class="s1">cp -r dist/types/* dist/</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span> <span class="na">stdio</span><span class="p">:</span> <span class="dl">'</span><span class="s1">inherit</span><span class="dl">'</span> <span class="p">});</span>
+  
+  <span class="c1">// Generate build info</span>
+  <span class="kd">const</span> <span class="nx">packageJson</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">readFileSync</span><span class="p">(</span><span class="dl">'</span><span class="s1">package.json</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">utf8</span><span class="dl">'</span><span class="p">));</span>
+  <span class="kd">const</span> <span class="nx">buildInfo</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">version</span><span class="p">:</span> <span class="nx">packageJson</span><span class="p">.</span><span class="nx">version</span><span class="p">,</span>
+    <span class="na">buildTime</span><span class="p">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">toISOString</span><span class="p">(),</span>
+    <span class="na">buildId</span><span class="p">:</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">().</span><span class="nx">toString</span><span class="p">(</span><span class="mi">36</span><span class="p">).</span><span class="nx">substr</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span>
+    <span class="na">configs</span><span class="p">:</span> <span class="nx">buildConfigs</span>
+  <span class="p">};</span>
+  
+  <span class="nx">writeFileSync</span><span class="p">(</span>
+    <span class="nx">resolve</span><span class="p">(</span><span class="dl">'</span><span class="s1">dist</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">build-info.json</span><span class="dl">'</span><span class="p">),</span>
+    <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">buildInfo</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+  <span class="p">);</span>
+  
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Build completed successfully!</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="nx">build</span><span class="p">().</span><span class="k">catch</span><span class="p">(</span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">);</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-best-practices">✅ <strong>Best Practices</strong></h2>
+
+<h3 id="1-choose-the-right-build-tool"><strong>1. Choose the Right Build Tool</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ✅ Good: Choose based on project needs</span>
+<span class="kd">const</span> <span class="nx">buildToolSelection</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">webpack</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Large apps, complex requirements</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">vite</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Modern apps, fast development</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">rollup</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Libraries, tree shaking</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">parcel</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Quick prototyping, zero config</span><span class="dl">"</span>
+<span class="p">};</span>
+
+<span class="c1">// ❌ Avoid: Using wrong tool for the job</span>
+<span class="kd">const</span> <span class="nx">wrongChoice</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">rollup</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Large applications with complex requirements</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">webpack</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Simple libraries with minimal dependencies</span><span class="dl">"</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="2-optimize-build-performance"><strong>2. Optimize Build Performance</strong></h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ✅ Good: Optimize build performance</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">module</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">rules</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="na">test</span><span class="p">:</span> <span class="sr">/</span><span class="se">\.</span><span class="sr">tsx</span><span class="se">?</span><span class="sr">$/</span><span class="p">,</span>
+        <span class="na">use</span><span class="p">:</span> <span class="p">{</span>
+          <span class="na">loader</span><span class="p">:</span> <span class="dl">'</span><span class="s1">ts-loader</span><span class="dl">'</span><span class="p">,</span>
+          <span class="na">options</span><span class="p">:</span> <span class="p">{</span>
+            <span class="na">transpileOnly</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="c1">// Skip type checking during build</span>
+            <span class="na">experimentalWatchApi</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="c1">// Use watch API for faster rebuilds</span>
+          <span class="p">},</span>
+        <span class="p">},</span>
+      <span class="p">},</span>
+    <span class="p">],</span>
+  <span class="p">},</span>
+  <span class="na">optimization</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">splitChunks</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">chunks</span><span class="p">:</span> <span class="dl">'</span><span class="s1">all</span><span class="dl">'</span><span class="p">,</span> <span class="c1">// Enable code splitting</span>
+    <span class="p">},</span>
+  <span class="p">},</span>
+<span class="p">};</span>
+
+<span class="c1">// ❌ Avoid: Slow build configurations</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">module</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">rules</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="na">test</span><span class="p">:</span> <span class="sr">/</span><span class="se">\.</span><span class="sr">tsx</span><span class="se">?</span><span class="sr">$/</span><span class="p">,</span>
+        <span class="na">use</span><span class="p">:</span> <span class="dl">'</span><span class="s1">ts-loader</span><span class="dl">'</span><span class="p">,</span> <span class="c1">// No optimization options</span>
+      <span class="p">},</span>
+    <span class="p">],</span>
+  <span class="p">},</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="3-use-source-maps-for-debugging"><strong>3. Use Source Maps for Debugging</strong></h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ✅ Good: Enable source maps</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">devtool</span><span class="p">:</span> <span class="dl">'</span><span class="s1">source-map</span><span class="dl">'</span><span class="p">,</span> <span class="c1">// Generate source maps</span>
+  <span class="na">output</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">sourceMapFilename</span><span class="p">:</span> <span class="dl">'</span><span class="s1">[name].js.map</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+<span class="p">};</span>
+
+<span class="c1">// ❌ Avoid: Disabling source maps</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">devtool</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> <span class="c1">// No source maps</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="4-configure-path-mapping"><strong>4. Configure Path Mapping</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ✅ Good: Configure path mapping</span>
+<span class="k">export</span> <span class="k">default</span> <span class="nx">defineConfig</span><span class="p">({</span>
+  <span class="na">resolve</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">alias</span><span class="p">:</span> <span class="p">{</span>
+      <span class="dl">'</span><span class="s1">@</span><span class="dl">'</span><span class="p">:</span> <span class="nx">resolve</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="dl">'</span><span class="s1">src</span><span class="dl">'</span><span class="p">),</span>
+      <span class="dl">'</span><span class="s1">@/components</span><span class="dl">'</span><span class="p">:</span> <span class="nx">resolve</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="dl">'</span><span class="s1">src/components</span><span class="dl">'</span><span class="p">),</span>
+    <span class="p">},</span>
+  <span class="p">},</span>
+<span class="p">});</span>
+
+<span class="c1">// ❌ Avoid: Relative imports</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Button</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">../../../components/Button</span><span class="dl">'</span><span class="p">;</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-common-interview-questions">❓ <strong>Common Interview Questions</strong></h2>
+
+<h3 id="1-what-are-the-main-differences-between-webpack-and-vite"><strong>1. What are the main differences between Webpack and Vite?</strong></h3>
+
+<p><strong>Answer:</strong></p>
+<ul>
+  <li><strong>Webpack</strong>: Mature ecosystem, complex configuration, slower development builds</li>
+  <li><strong>Vite</strong>: Fast development, simple configuration, ES modules, newer tool</li>
+</ul>
+
+<h3 id="2-how-do-you-optimize-typescript-builds"><strong>2. How do you optimize TypeScript builds?</strong></h3>
+
+<p><strong>Answer:</strong></p>
+<ul>
+  <li>Use <code class="language-plaintext highlighter-rouge">transpileOnly: true</code> for faster builds</li>
+  <li>Enable incremental compilation</li>
+  <li>Use code splitting</li>
+  <li>Optimize bundle size with tree shaking</li>
+</ul>
+
+<h3 id="3-whats-the-difference-between-rollup-and-webpack"><strong>3. What’s the difference between Rollup and Webpack?</strong></h3>
+
+<p><strong>Answer:</strong></p>
+<ul>
+  <li><strong>Rollup</strong>: Better for libraries, excellent tree shaking, smaller bundles</li>
+  <li><strong>Webpack</strong>: Better for applications, extensive ecosystem, code splitting</li>
+</ul>
+
+<h3 id="4-how-do-you-configure-path-mapping-in-build-tools"><strong>4. How do you configure path mapping in build tools?</strong></h3>
+
+<p><strong>Answer:</strong></p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Vite</span>
+<span class="k">export</span> <span class="k">default</span> <span class="nx">defineConfig</span><span class="p">({</span>
+  <span class="na">resolve</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">alias</span><span class="p">:</span> <span class="p">{</span>
+      <span class="dl">'</span><span class="s1">@</span><span class="dl">'</span><span class="p">:</span> <span class="nx">resolve</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="dl">'</span><span class="s1">src</span><span class="dl">'</span><span class="p">),</span>
+    <span class="p">},</span>
+  <span class="p">},</span>
+<span class="p">});</span>
+
+<span class="c1">// Webpack</span>
+<span class="kr">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">resolve</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">alias</span><span class="p">:</span> <span class="p">{</span>
+      <span class="dl">'</span><span class="s1">@</span><span class="dl">'</span><span class="p">:</span> <span class="nx">path</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="dl">'</span><span class="s1">src</span><span class="dl">'</span><span class="p">),</span>
+    <span class="p">},</span>
+  <span class="p">},</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="5-what-are-the-benefits-of-using-build-tools-with-typescript"><strong>5. What are the benefits of using build tools with TypeScript?</strong></h3>
+
+<p><strong>Answer:</strong></p>
+<ul>
+  <li><strong>Compilation</strong>: Convert TypeScript to JavaScript</li>
+  <li><strong>Bundling</strong>: Combine multiple files into optimized bundles</li>
+  <li><strong>Optimization</strong>: Minification, tree shaking, code splitting</li>
+  <li><strong>Development</strong>: Hot reloading, source maps, dev server</li>
+</ul>
+
+<hr />
+
+<h2 id="-navigation">🧭 Navigation</h2>
+
+<div class="navigation">
+  <a href="02-Compiler-Options-Strict-Mode.md" class="nav-button">← Previous: Compiler Options &amp; Strict Mode</a>
+  <a href="04-IDE-Integration-Debugging.md" class="nav-button">Next: IDE Integration &amp; Debugging →</a>
+</div>
+
+<p><em>Last updated: December 2025</em></p>
+
+        </main>
+        
+        <footer style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #ecf0f1; color: #666; text-align: center;">
+            <p>Interview Prep Documentation - Built with Jekyll</p>
+        </footer>
+    </div>
+</body>
+</html>

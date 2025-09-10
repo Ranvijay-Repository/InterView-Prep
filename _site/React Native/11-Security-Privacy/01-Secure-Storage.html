@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔐 Secure Storage - Interview Prep Documentation</title>
+    <meta name="description" content="Comprehensive guides for JavaScript, TypeScript, and React Native interview preparation">
+    
+    <!-- GitHub Pages compatible styling -->
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+        }
+        
+        .container {
+            max-width: 100%;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            color: #2c3e50;
+            margin-top: 2em;
+            margin-bottom: 1em;
+        }
+        
+        h1 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            border-bottom: 1px solid #ecf0f1;
+            padding-bottom: 5px;
+        }
+        
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border-left: 4px solid #3498db;
+        }
+        
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+        
+        blockquote {
+            border-left: 4px solid #3498db;
+            margin: 0;
+            padding-left: 20px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1em 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .navigation {
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px 0;
+            margin-bottom: 20px;
+        }
+        
+        .navigation a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+        
+        .navigation a:hover {
+            text-decoration: underline;
+        }
+        
+        .breadcrumb {
+            margin-bottom: 20px;
+            color: #666;
+        }
+        
+        .breadcrumb a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            h2 {
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="navigation">
+            <a href="/">Home</a>
+            <a href="/Javascript/">JavaScript</a>
+            <a href="/TypeScript/">TypeScript</a>
+            <a href="/React-Native/">React Native</a>
+        </nav>
+        
+        
+        
+        <main>
+            <h1 id="-secure-storage">🔐 <strong>Secure Storage</strong></h1>
+
+<blockquote>
+  <p><strong>Master secure storage solutions, encryption, and data protection for React Native applications</strong></p>
+</blockquote>
+
+<link rel="stylesheet" href="../../common-styles.css" />
+
+<hr />
+
+<h2 id="-table-of-contents">📚 <strong>Table of Contents</strong></h2>
+
+<ul>
+  <li><a href="#-secure-storage-overview">Secure Storage Overview</a></li>
+  <li><a href="#-keychain--keystore">Keychain &amp; Keystore</a></li>
+  <li><a href="#-encryption-strategies">Encryption Strategies</a></li>
+  <li><a href="#-biometric-authentication">Biometric Authentication</a></li>
+  <li><a href="#-data-protection">Data Protection</a></li>
+  <li><a href="#-best-practices">Best Practices</a></li>
+  <li><a href="#-interview-questions">Interview Questions</a></li>
+</ul>
+
+<hr />
+
+<h2 id="️-secure-storage-overview">🏗️ <strong>Secure Storage Overview</strong></h2>
+
+<h3 id="storage-security-levels"><strong>Storage Security Levels</strong></h3>
+
+<pre><code class="language-mermaid">graph TD
+    A[Data Sensitivity] --&gt; B{Storage Type}
+    B --&gt;|Low| C[AsyncStorage]
+    B --&gt;|Medium| D[Encrypted Storage]
+    B --&gt;|High| E[Keychain/Keystore]
+    B --&gt;|Critical| F[Hardware Security]
+    
+    C --&gt; G[Plain Text]
+    D --&gt; H[Software Encryption]
+    E --&gt; I[OS Keychain]
+    F --&gt; J[Secure Enclave]
+</code></pre>
+
+<h3 id="security-considerations"><strong>Security Considerations</strong></h3>
+<ul>
+  <li><strong>Data Classification</strong>: Categorize data by sensitivity</li>
+  <li><strong>Encryption</strong>: Use appropriate encryption methods</li>
+  <li><strong>Access Control</strong>: Implement proper authentication</li>
+  <li><strong>Key Management</strong>: Secure key storage and rotation</li>
+</ul>
+
+<hr />
+
+<h2 id="-keychain--keystore">🔑 <strong>Keychain &amp; Keystore</strong></h2>
+
+<h3 id="react-native-keychain"><strong>React Native Keychain</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useState</span><span class="p">,</span> <span class="nx">useEffect</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">View</span><span class="p">,</span> <span class="nx">Text</span><span class="p">,</span> <span class="nx">TextInput</span><span class="p">,</span> <span class="nx">TouchableOpacity</span><span class="p">,</span> <span class="nx">Alert</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">Keychain</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native-keychain</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">SecureStorageExample</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">username</span><span class="p">,</span> <span class="nx">setUsername</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="dl">''</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">password</span><span class="p">,</span> <span class="nx">setPassword</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="dl">''</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">storedCredentials</span><span class="p">,</span> <span class="nx">setStoredCredentials</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+
+  <span class="c1">// Store credentials securely</span>
+  <span class="kd">const</span> <span class="nx">storeCredentials</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="k">await</span> <span class="nx">Keychain</span><span class="p">.</span><span class="nx">setInternetCredentials</span><span class="p">(</span>
+        <span class="dl">'</span><span class="s1">myapp.com</span><span class="dl">'</span><span class="p">,</span>
+        <span class="nx">username</span><span class="p">,</span>
+        <span class="nx">password</span><span class="p">,</span>
+        <span class="p">{</span>
+          <span class="na">accessControl</span><span class="p">:</span> <span class="nx">Keychain</span><span class="p">.</span><span class="nx">ACCESS_CONTROL</span><span class="p">.</span><span class="nx">BIOMETRY_ANY</span><span class="p">,</span>
+          <span class="na">accessGroup</span><span class="p">:</span> <span class="dl">'</span><span class="s1">com.yourapp.shared</span><span class="dl">'</span><span class="p">,</span>
+          <span class="na">authenticationType</span><span class="p">:</span> <span class="nx">Keychain</span><span class="p">.</span><span class="nx">AUTHENTICATION_TYPE</span><span class="p">.</span><span class="nx">DEVICE_PASSCODE_OR_BIOMETRICS</span><span class="p">,</span>
+          <span class="na">showPrompt</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Authenticate to save credentials</span><span class="dl">'</span><span class="p">,</span>
+        <span class="p">}</span>
+      <span class="p">);</span>
+      
+      <span class="nx">Alert</span><span class="p">.</span><span class="nx">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">Success</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Credentials stored securely</span><span class="dl">'</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Error storing credentials:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+      <span class="nx">Alert</span><span class="p">.</span><span class="nx">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">Error</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Failed to store credentials</span><span class="dl">'</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+
+  <span class="c1">// Retrieve credentials</span>
+  <span class="kd">const</span> <span class="nx">getCredentials</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">credentials</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">Keychain</span><span class="p">.</span><span class="nx">getInternetCredentials</span><span class="p">(</span><span class="dl">'</span><span class="s1">myapp.com</span><span class="dl">'</span><span class="p">);</span>
+      
+      <span class="k">if</span> <span class="p">(</span><span class="nx">credentials</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">setStoredCredentials</span><span class="p">(</span><span class="nx">credentials</span><span class="p">);</span>
+        <span class="nx">Alert</span><span class="p">.</span><span class="nx">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">Success</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Credentials retrieved</span><span class="dl">'</span><span class="p">);</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">Alert</span><span class="p">.</span><span class="nx">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">Info</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">No credentials found</span><span class="dl">'</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Error retrieving credentials:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+      <span class="nx">Alert</span><span class="p">.</span><span class="nx">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">Error</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Failed to retrieve credentials</span><span class="dl">'</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+
+  <span class="c1">// Delete credentials</span>
+  <span class="kd">const</span> <span class="nx">deleteCredentials</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="k">await</span> <span class="nx">Keychain</span><span class="p">.</span><span class="nx">resetInternetCredentials</span><span class="p">(</span><span class="dl">'</span><span class="s1">myapp.com</span><span class="dl">'</span><span class="p">);</span>
+      <span class="nx">setStoredCredentials</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+      <span class="nx">Alert</span><span class="p">.</span><span class="nx">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">Success</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Credentials deleted</span><span class="dl">'</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Error deleting credentials:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+      <span class="nx">Alert</span><span class="p">.</span><span class="nx">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">Error</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Failed to delete credentials</span><span class="dl">'</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">container</span><span class="p">}</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">title</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Secure</span> <span class="nx">Storage</span> <span class="nx">Example</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>      
+      <span class="o">&lt;</span><span class="nx">TextInput</span>
+        <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">input</span><span class="p">}</span>
+        <span class="nx">placeholder</span><span class="o">=</span><span class="dl">"</span><span class="s2">Username</span><span class="dl">"</span>
+        <span class="nx">value</span><span class="o">=</span><span class="p">{</span><span class="nx">username</span><span class="p">}</span>
+        <span class="nx">onChangeText</span><span class="o">=</span><span class="p">{</span><span class="nx">setUsername</span><span class="p">}</span>
+      <span class="sr">/</span><span class="err">&gt;
+</span>      
+      <span class="o">&lt;</span><span class="nx">TextInput</span>
+        <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">input</span><span class="p">}</span>
+        <span class="nx">placeholder</span><span class="o">=</span><span class="dl">"</span><span class="s2">Password</span><span class="dl">"</span>
+        <span class="nx">value</span><span class="o">=</span><span class="p">{</span><span class="nx">password</span><span class="p">}</span>
+        <span class="nx">onChangeText</span><span class="o">=</span><span class="p">{</span><span class="nx">setPassword</span><span class="p">}</span>
+        <span class="nx">secureTextEntry</span>
+      <span class="o">/&gt;</span>
+      
+      <span class="o">&lt;</span><span class="nx">TouchableOpacity</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">button</span><span class="p">}</span> <span class="nx">onPress</span><span class="o">=</span><span class="p">{</span><span class="nx">storeCredentials</span><span class="p">}</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">buttonText</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Store</span> <span class="nx">Credentials</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/TouchableOpacity</span><span class="err">&gt;
+</span>      
+      <span class="o">&lt;</span><span class="nx">TouchableOpacity</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">button</span><span class="p">}</span> <span class="nx">onPress</span><span class="o">=</span><span class="p">{</span><span class="nx">getCredentials</span><span class="p">}</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">buttonText</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Get</span> <span class="nx">Credentials</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/TouchableOpacity</span><span class="err">&gt;
+</span>      
+      <span class="o">&lt;</span><span class="nx">TouchableOpacity</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">button</span><span class="p">}</span> <span class="nx">onPress</span><span class="o">=</span><span class="p">{</span><span class="nx">deleteCredentials</span><span class="p">}</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">buttonText</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Delete</span> <span class="nx">Credentials</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/TouchableOpacity</span><span class="err">&gt;
+</span>      
+      <span class="p">{</span><span class="nx">storedCredentials</span> <span class="o">&amp;&amp;</span> <span class="p">(</span>
+        <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">credentialsContainer</span><span class="p">}</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">credentialsTitle</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Stored</span> <span class="na">Credentials</span><span class="p">:</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>          <span class="o">&lt;</span><span class="nx">Text</span><span class="o">&gt;</span><span class="na">Username</span><span class="p">:</span> <span class="p">{</span><span class="nx">storedCredentials</span><span class="p">.</span><span class="nx">username</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>          <span class="o">&lt;</span><span class="nx">Text</span><span class="o">&gt;</span><span class="na">Password</span><span class="p">:</span> <span class="p">{</span><span class="nx">storedCredentials</span><span class="p">.</span><span class="nx">password</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>      <span class="p">)}</span>
+    <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">styles</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">container</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">flex</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="na">padding</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="na">justifyContent</span><span class="p">:</span> <span class="dl">'</span><span class="s1">center</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">title</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">fontSize</span><span class="p">:</span> <span class="mi">24</span><span class="p">,</span>
+    <span class="na">fontWeight</span><span class="p">:</span> <span class="dl">'</span><span class="s1">bold</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">marginBottom</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="na">textAlign</span><span class="p">:</span> <span class="dl">'</span><span class="s1">center</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">input</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">borderWidth</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="na">borderColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#ccc</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">padding</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="na">marginBottom</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="na">borderRadius</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">button</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#007bff</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">padding</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+    <span class="na">borderRadius</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+    <span class="na">marginBottom</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">buttonText</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">white</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">textAlign</span><span class="p">:</span> <span class="dl">'</span><span class="s1">center</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">fontWeight</span><span class="p">:</span> <span class="dl">'</span><span class="s1">bold</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">credentialsContainer</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">marginTop</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="na">padding</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+    <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#f8f9fa</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">borderRadius</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">credentialsTitle</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">fontWeight</span><span class="p">:</span> <span class="dl">'</span><span class="s1">bold</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">marginBottom</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+  <span class="p">},</span>
+<span class="p">};</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">SecureStorageExample</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="android-keystore-integration"><strong>Android Keystore Integration</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// android/app/src/main/java/com/yourapp/KeystoreModule.java</span>
+<span class="kr">package</span> <span class="nx">com</span><span class="p">.</span><span class="nx">yourapp</span><span class="p">;</span>
+
+<span class="k">import</span> <span class="nx">android</span><span class="p">.</span><span class="nx">security</span><span class="p">.</span><span class="nx">keystore</span><span class="p">.</span><span class="nx">KeyGenParameterSpec</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">android</span><span class="p">.</span><span class="nx">security</span><span class="p">.</span><span class="nx">keystore</span><span class="p">.</span><span class="nx">KeyProperties</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">android</span><span class="p">.</span><span class="nx">util</span><span class="p">.</span><span class="nx">Base64</span><span class="p">;</span>
+
+<span class="k">import</span> <span class="nx">com</span><span class="p">.</span><span class="nx">facebook</span><span class="p">.</span><span class="nx">react</span><span class="p">.</span><span class="nx">bridge</span><span class="p">.</span><span class="nx">ReactApplicationContext</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">com</span><span class="p">.</span><span class="nx">facebook</span><span class="p">.</span><span class="nx">react</span><span class="p">.</span><span class="nx">bridge</span><span class="p">.</span><span class="nx">ReactContextBaseJavaModule</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">com</span><span class="p">.</span><span class="nx">facebook</span><span class="p">.</span><span class="nx">react</span><span class="p">.</span><span class="nx">bridge</span><span class="p">.</span><span class="nx">ReactMethod</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">com</span><span class="p">.</span><span class="nx">facebook</span><span class="p">.</span><span class="nx">react</span><span class="p">.</span><span class="nx">bridge</span><span class="p">.</span><span class="nb">Promise</span><span class="p">;</span>
+
+<span class="k">import</span> <span class="nx">java</span><span class="p">.</span><span class="nx">security</span><span class="p">.</span><span class="nx">KeyStore</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">javax</span><span class="p">.</span><span class="nx">crypto</span><span class="p">.</span><span class="nx">Cipher</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">javax</span><span class="p">.</span><span class="nx">crypto</span><span class="p">.</span><span class="nx">KeyGenerator</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">javax</span><span class="p">.</span><span class="nx">crypto</span><span class="p">.</span><span class="nx">SecretKey</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">javax</span><span class="p">.</span><span class="nx">crypto</span><span class="p">.</span><span class="nx">spec</span><span class="p">.</span><span class="nx">GCMParameterSpec</span><span class="p">;</span>
+
+<span class="kr">public</span> <span class="kd">class</span> <span class="nx">KeystoreModule</span> <span class="kd">extends</span> <span class="nx">ReactContextBaseJavaModule</span> <span class="p">{</span>
+    <span class="kr">private</span> <span class="kd">static</span> <span class="nx">final</span> <span class="nb">String</span> <span class="nx">KEY_ALIAS</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">MyAppKey</span><span class="dl">"</span><span class="p">;</span>
+    <span class="kr">private</span> <span class="kd">static</span> <span class="nx">final</span> <span class="nb">String</span> <span class="nx">ANDROID_KEYSTORE</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">AndroidKeyStore</span><span class="dl">"</span><span class="p">;</span>
+    <span class="kr">private</span> <span class="kd">static</span> <span class="nx">final</span> <span class="nb">String</span> <span class="nx">TRANSFORMATION</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">AES/GCM/NoPadding</span><span class="dl">"</span><span class="p">;</span>
+    <span class="kr">private</span> <span class="kd">static</span> <span class="nx">final</span> <span class="nx">int</span> <span class="nx">GCM_IV_LENGTH</span> <span class="o">=</span> <span class="mi">12</span><span class="p">;</span>
+
+    <span class="kr">public</span> <span class="nx">KeystoreModule</span><span class="p">(</span><span class="nx">ReactApplicationContext</span> <span class="nx">reactContext</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">super</span><span class="p">(</span><span class="nx">reactContext</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="p">@</span><span class="nd">Override</span>
+    <span class="kr">public</span> <span class="nb">String</span> <span class="nx">getName</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="dl">"</span><span class="s2">KeystoreModule</span><span class="dl">"</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="p">@</span><span class="nd">ReactMethod</span>
+    <span class="kr">public</span> <span class="k">void</span> <span class="nx">generateKey</span><span class="p">(</span><span class="nb">Promise</span> <span class="nx">promise</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">try</span> <span class="p">{</span>
+            <span class="nx">KeyGenerator</span> <span class="nx">keyGenerator</span> <span class="o">=</span> <span class="nx">KeyGenerator</span><span class="p">.</span><span class="nx">getInstance</span><span class="p">(</span><span class="nx">KeyProperties</span><span class="p">.</span><span class="nx">KEY_ALGORITHM_AES</span><span class="p">,</span> <span class="nx">ANDROID_KEYSTORE</span><span class="p">);</span>
+            <span class="nx">KeyGenParameterSpec</span> <span class="nx">keyGenParameterSpec</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">KeyGenParameterSpec</span><span class="p">.</span><span class="nx">Builder</span><span class="p">(</span><span class="nx">KEY_ALIAS</span><span class="p">,</span>
+                    <span class="nx">KeyProperties</span><span class="p">.</span><span class="nx">PURPOSE_ENCRYPT</span> <span class="o">|</span> <span class="nx">KeyProperties</span><span class="p">.</span><span class="nx">PURPOSE_DECRYPT</span><span class="p">)</span>
+                    <span class="p">.</span><span class="nx">setBlockModes</span><span class="p">(</span><span class="nx">KeyProperties</span><span class="p">.</span><span class="nx">BLOCK_MODE_GCM</span><span class="p">)</span>
+                    <span class="p">.</span><span class="nx">setEncryptionPaddings</span><span class="p">(</span><span class="nx">KeyProperties</span><span class="p">.</span><span class="nx">ENCRYPTION_PADDING_NONE</span><span class="p">)</span>
+                    <span class="p">.</span><span class="nx">setUserAuthenticationRequired</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
+                    <span class="p">.</span><span class="nx">setUserAuthenticationValidityDurationSeconds</span><span class="p">(</span><span class="mi">300</span><span class="p">)</span> <span class="c1">// 5 minutes</span>
+                    <span class="p">.</span><span class="nx">build</span><span class="p">();</span>
+            
+            <span class="nx">keyGenerator</span><span class="p">.</span><span class="nx">init</span><span class="p">(</span><span class="nx">keyGenParameterSpec</span><span class="p">);</span>
+            <span class="nx">keyGenerator</span><span class="p">.</span><span class="nx">generateKey</span><span class="p">();</span>
+            
+            <span class="nx">promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="dl">"</span><span class="s2">Key generated successfully</span><span class="dl">"</span><span class="p">);</span>
+        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">Exception</span> <span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">promise</span><span class="p">.</span><span class="nx">reject</span><span class="p">(</span><span class="dl">"</span><span class="s2">KEY_GENERATION_ERROR</span><span class="dl">"</span><span class="p">,</span> <span class="nx">e</span><span class="p">.</span><span class="nx">getMessage</span><span class="p">());</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="p">@</span><span class="nd">ReactMethod</span>
+    <span class="kr">public</span> <span class="k">void</span> <span class="nx">encrypt</span><span class="p">(</span><span class="nb">String</span> <span class="nx">plaintext</span><span class="p">,</span> <span class="nb">Promise</span> <span class="nx">promise</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">try</span> <span class="p">{</span>
+            <span class="nx">KeyStore</span> <span class="nx">keyStore</span> <span class="o">=</span> <span class="nx">KeyStore</span><span class="p">.</span><span class="nx">getInstance</span><span class="p">(</span><span class="nx">ANDROID_KEYSTORE</span><span class="p">);</span>
+            <span class="nx">keyStore</span><span class="p">.</span><span class="nx">load</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+            <span class="nx">SecretKey</span> <span class="nx">secretKey</span> <span class="o">=</span> <span class="p">(</span><span class="nx">SecretKey</span><span class="p">)</span> <span class="nx">keyStore</span><span class="p">.</span><span class="nx">getKey</span><span class="p">(</span><span class="nx">KEY_ALIAS</span><span class="p">,</span> <span class="kc">null</span><span class="p">);</span>
+            
+            <span class="nx">Cipher</span> <span class="nx">cipher</span> <span class="o">=</span> <span class="nx">Cipher</span><span class="p">.</span><span class="nx">getInstance</span><span class="p">(</span><span class="nx">TRANSFORMATION</span><span class="p">);</span>
+            <span class="nx">cipher</span><span class="p">.</span><span class="nx">init</span><span class="p">(</span><span class="nx">Cipher</span><span class="p">.</span><span class="nx">ENCRYPT_MODE</span><span class="p">,</span> <span class="nx">secretKey</span><span class="p">);</span>
+            
+            <span class="nx">byte</span><span class="p">[]</span> <span class="nx">iv</span> <span class="o">=</span> <span class="nx">cipher</span><span class="p">.</span><span class="nx">getIV</span><span class="p">();</span>
+            <span class="nx">byte</span><span class="p">[]</span> <span class="nx">ciphertext</span> <span class="o">=</span> <span class="nx">cipher</span><span class="p">.</span><span class="nx">doFinal</span><span class="p">(</span><span class="nx">plaintext</span><span class="p">.</span><span class="nx">getBytes</span><span class="p">(</span><span class="dl">"</span><span class="s2">UTF-8</span><span class="dl">"</span><span class="p">));</span>
+            
+            <span class="c1">// Combine IV and ciphertext</span>
+            <span class="nx">byte</span><span class="p">[]</span> <span class="nx">encryptedData</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">byte</span><span class="p">[</span><span class="nx">GCM_IV_LENGTH</span> <span class="o">+</span> <span class="nx">ciphertext</span><span class="p">.</span><span class="nx">length</span><span class="p">];</span>
+            <span class="nx">System</span><span class="p">.</span><span class="nx">arraycopy</span><span class="p">(</span><span class="nx">iv</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">encryptedData</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">GCM_IV_LENGTH</span><span class="p">);</span>
+            <span class="nx">System</span><span class="p">.</span><span class="nx">arraycopy</span><span class="p">(</span><span class="nx">ciphertext</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">encryptedData</span><span class="p">,</span> <span class="nx">GCM_IV_LENGTH</span><span class="p">,</span> <span class="nx">ciphertext</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span>
+            
+            <span class="nb">String</span> <span class="nx">encryptedString</span> <span class="o">=</span> <span class="nx">Base64</span><span class="p">.</span><span class="nx">encodeToString</span><span class="p">(</span><span class="nx">encryptedData</span><span class="p">,</span> <span class="nx">Base64</span><span class="p">.</span><span class="nx">DEFAULT</span><span class="p">);</span>
+            <span class="nx">promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">encryptedString</span><span class="p">);</span>
+        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">Exception</span> <span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">promise</span><span class="p">.</span><span class="nx">reject</span><span class="p">(</span><span class="dl">"</span><span class="s2">ENCRYPTION_ERROR</span><span class="dl">"</span><span class="p">,</span> <span class="nx">e</span><span class="p">.</span><span class="nx">getMessage</span><span class="p">());</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="p">@</span><span class="nd">ReactMethod</span>
+    <span class="kr">public</span> <span class="k">void</span> <span class="nx">decrypt</span><span class="p">(</span><span class="nb">String</span> <span class="nx">encryptedData</span><span class="p">,</span> <span class="nb">Promise</span> <span class="nx">promise</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">try</span> <span class="p">{</span>
+            <span class="nx">KeyStore</span> <span class="nx">keyStore</span> <span class="o">=</span> <span class="nx">KeyStore</span><span class="p">.</span><span class="nx">getInstance</span><span class="p">(</span><span class="nx">ANDROID_KEYSTORE</span><span class="p">);</span>
+            <span class="nx">keyStore</span><span class="p">.</span><span class="nx">load</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+            <span class="nx">SecretKey</span> <span class="nx">secretKey</span> <span class="o">=</span> <span class="p">(</span><span class="nx">SecretKey</span><span class="p">)</span> <span class="nx">keyStore</span><span class="p">.</span><span class="nx">getKey</span><span class="p">(</span><span class="nx">KEY_ALIAS</span><span class="p">,</span> <span class="kc">null</span><span class="p">);</span>
+            
+            <span class="nx">byte</span><span class="p">[]</span> <span class="nx">encryptedBytes</span> <span class="o">=</span> <span class="nx">Base64</span><span class="p">.</span><span class="nx">decode</span><span class="p">(</span><span class="nx">encryptedData</span><span class="p">,</span> <span class="nx">Base64</span><span class="p">.</span><span class="nx">DEFAULT</span><span class="p">);</span>
+            
+            <span class="c1">// Extract IV and ciphertext</span>
+            <span class="nx">byte</span><span class="p">[]</span> <span class="nx">iv</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">byte</span><span class="p">[</span><span class="nx">GCM_IV_LENGTH</span><span class="p">];</span>
+            <span class="nx">byte</span><span class="p">[]</span> <span class="nx">ciphertext</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">byte</span><span class="p">[</span><span class="nx">encryptedBytes</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="nx">GCM_IV_LENGTH</span><span class="p">];</span>
+            <span class="nx">System</span><span class="p">.</span><span class="nx">arraycopy</span><span class="p">(</span><span class="nx">encryptedBytes</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">iv</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">GCM_IV_LENGTH</span><span class="p">);</span>
+            <span class="nx">System</span><span class="p">.</span><span class="nx">arraycopy</span><span class="p">(</span><span class="nx">encryptedBytes</span><span class="p">,</span> <span class="nx">GCM_IV_LENGTH</span><span class="p">,</span> <span class="nx">ciphertext</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">ciphertext</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span>
+            
+            <span class="nx">Cipher</span> <span class="nx">cipher</span> <span class="o">=</span> <span class="nx">Cipher</span><span class="p">.</span><span class="nx">getInstance</span><span class="p">(</span><span class="nx">TRANSFORMATION</span><span class="p">);</span>
+            <span class="nx">GCMParameterSpec</span> <span class="nx">spec</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">GCMParameterSpec</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="nx">iv</span><span class="p">);</span>
+            <span class="nx">cipher</span><span class="p">.</span><span class="nx">init</span><span class="p">(</span><span class="nx">Cipher</span><span class="p">.</span><span class="nx">DECRYPT_MODE</span><span class="p">,</span> <span class="nx">secretKey</span><span class="p">,</span> <span class="nx">spec</span><span class="p">);</span>
+            
+            <span class="nx">byte</span><span class="p">[]</span> <span class="nx">plaintext</span> <span class="o">=</span> <span class="nx">cipher</span><span class="p">.</span><span class="nx">doFinal</span><span class="p">(</span><span class="nx">ciphertext</span><span class="p">);</span>
+            <span class="nx">promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="k">new</span> <span class="nb">String</span><span class="p">(</span><span class="nx">plaintext</span><span class="p">,</span> <span class="dl">"</span><span class="s2">UTF-8</span><span class="dl">"</span><span class="p">));</span>
+        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">Exception</span> <span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">promise</span><span class="p">.</span><span class="nx">reject</span><span class="p">(</span><span class="dl">"</span><span class="s2">DECRYPTION_ERROR</span><span class="dl">"</span><span class="p">,</span> <span class="nx">e</span><span class="p">.</span><span class="nx">getMessage</span><span class="p">());</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-encryption-strategies">🔐 <strong>Encryption Strategies</strong></h2>
+
+<h3 id="aes-encryption-implementation"><strong>AES Encryption Implementation</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">CryptoJS</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">crypto-js</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="c1">// Encryption utility class</span>
+<span class="kd">class</span> <span class="nx">EncryptionService</span> <span class="p">{</span>
+  <span class="kd">constructor</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">secretKey</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">generateSecretKey</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Generate a secure secret key</span>
+  <span class="nx">generateSecretKey</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">timestamp</span> <span class="o">=</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">().</span><span class="nx">toString</span><span class="p">();</span>
+    <span class="kd">const</span> <span class="nx">random</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">().</span><span class="nx">toString</span><span class="p">(</span><span class="mi">36</span><span class="p">).</span><span class="nx">substring</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nx">CryptoJS</span><span class="p">.</span><span class="nx">SHA256</span><span class="p">(</span><span class="nx">timestamp</span> <span class="o">+</span> <span class="nx">random</span><span class="p">).</span><span class="nx">toString</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Encrypt data</span>
+  <span class="nx">encrypt</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">jsonString</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+      <span class="kd">const</span> <span class="nx">encrypted</span> <span class="o">=</span> <span class="nx">CryptoJS</span><span class="p">.</span><span class="nx">AES</span><span class="p">.</span><span class="nx">encrypt</span><span class="p">(</span><span class="nx">jsonString</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">secretKey</span><span class="p">).</span><span class="nx">toString</span><span class="p">();</span>
+      <span class="k">return</span> <span class="nx">encrypted</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Encryption error:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Failed to encrypt data</span><span class="dl">'</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Decrypt data</span>
+  <span class="nx">decrypt</span><span class="p">(</span><span class="nx">encryptedData</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">decrypted</span> <span class="o">=</span> <span class="nx">CryptoJS</span><span class="p">.</span><span class="nx">AES</span><span class="p">.</span><span class="nx">decrypt</span><span class="p">(</span><span class="nx">encryptedData</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">secretKey</span><span class="p">);</span>
+      <span class="kd">const</span> <span class="nx">jsonString</span> <span class="o">=</span> <span class="nx">decrypted</span><span class="p">.</span><span class="nx">toString</span><span class="p">(</span><span class="nx">CryptoJS</span><span class="p">.</span><span class="nx">enc</span><span class="p">.</span><span class="nx">Utf8</span><span class="p">);</span>
+      <span class="k">return</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">jsonString</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Decryption error:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Failed to decrypt data</span><span class="dl">'</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Hash password with salt</span>
+  <span class="nx">hashPassword</span><span class="p">(</span><span class="nx">password</span><span class="p">,</span> <span class="nx">salt</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">hash</span> <span class="o">=</span> <span class="nx">CryptoJS</span><span class="p">.</span><span class="nx">PBKDF2</span><span class="p">(</span><span class="nx">password</span><span class="p">,</span> <span class="nx">salt</span><span class="p">,</span> <span class="p">{</span>
+        <span class="na">keySize</span><span class="p">:</span> <span class="mi">512</span><span class="o">/</span><span class="mi">32</span><span class="p">,</span>
+        <span class="na">iterations</span><span class="p">:</span> <span class="mi">10000</span>
+      <span class="p">});</span>
+      <span class="k">return</span> <span class="nx">hash</span><span class="p">.</span><span class="nx">toString</span><span class="p">();</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Hashing error:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Failed to hash password</span><span class="dl">'</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Generate salt</span>
+  <span class="nx">generateSalt</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">CryptoJS</span><span class="p">.</span><span class="nx">lib</span><span class="p">.</span><span class="nx">WordArray</span><span class="p">.</span><span class="nx">random</span><span class="p">(</span><span class="mi">128</span><span class="o">/</span><span class="mi">8</span><span class="p">).</span><span class="nx">toString</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Verify password</span>
+  <span class="nx">verifyPassword</span><span class="p">(</span><span class="nx">password</span><span class="p">,</span> <span class="nx">hash</span><span class="p">,</span> <span class="nx">salt</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">hashToVerify</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">hashPassword</span><span class="p">(</span><span class="nx">password</span><span class="p">,</span> <span class="nx">salt</span><span class="p">);</span>
+      <span class="k">return</span> <span class="nx">hashToVerify</span> <span class="o">===</span> <span class="nx">hash</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Verification error:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+      <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Usage example</span>
+<span class="kd">const</span> <span class="nx">encryptionService</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">EncryptionService</span><span class="p">();</span>
+
+<span class="c1">// Encrypt sensitive data</span>
+<span class="kd">const</span> <span class="nx">sensitiveData</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">creditCard</span><span class="p">:</span> <span class="dl">'</span><span class="s1">1234-5678-9012-3456</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">ssn</span><span class="p">:</span> <span class="dl">'</span><span class="s1">123-45-6789</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">personalInfo</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">John Doe</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">email</span><span class="p">:</span> <span class="dl">'</span><span class="s1">john@example.com</span><span class="dl">'</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">encryptedData</span> <span class="o">=</span> <span class="nx">encryptionService</span><span class="p">.</span><span class="nx">encrypt</span><span class="p">(</span><span class="nx">sensitiveData</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Encrypted data:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">encryptedData</span><span class="p">);</span>
+
+<span class="c1">// Decrypt data</span>
+<span class="kd">const</span> <span class="nx">decryptedData</span> <span class="o">=</span> <span class="nx">encryptionService</span><span class="p">.</span><span class="nx">decrypt</span><span class="p">(</span><span class="nx">encryptedData</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Decrypted data:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">decryptedData</span><span class="p">);</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">EncryptionService</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="secure-data-storage-hook"><strong>Secure Data Storage Hook</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">useState</span><span class="p">,</span> <span class="nx">useEffect</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">AsyncStorage</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@react-native-async-storage/async-storage</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">Keychain</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native-keychain</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">EncryptionService</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./EncryptionService</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">useSecureStorage</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">encryptionService</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="k">new</span> <span class="nx">EncryptionService</span><span class="p">());</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">isLoading</span><span class="p">,</span> <span class="nx">setIsLoading</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+
+  <span class="c1">// Store data securely</span>
+  <span class="kd">const</span> <span class="nx">storeSecureData</span> <span class="o">=</span> <span class="k">async</span> <span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">useKeychain</span> <span class="o">=</span> <span class="kc">false</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setIsLoading</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">useKeychain</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// Use keychain for highly sensitive data</span>
+        <span class="k">await</span> <span class="nx">Keychain</span><span class="p">.</span><span class="nx">setInternetCredentials</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="dl">'</span><span class="s1">data</span><span class="dl">'</span><span class="p">,</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">),</span> <span class="p">{</span>
+          <span class="na">accessControl</span><span class="p">:</span> <span class="nx">Keychain</span><span class="p">.</span><span class="nx">ACCESS_CONTROL</span><span class="p">.</span><span class="nx">BIOMETRY_ANY</span><span class="p">,</span>
+          <span class="na">authenticationType</span><span class="p">:</span> <span class="nx">Keychain</span><span class="p">.</span><span class="nx">AUTHENTICATION_TYPE</span><span class="p">.</span><span class="nx">DEVICE_PASSCODE_OR_BIOMETRICS</span><span class="p">,</span>
+        <span class="p">});</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="c1">// Use encrypted AsyncStorage for moderately sensitive data</span>
+        <span class="kd">const</span> <span class="nx">encryptedData</span> <span class="o">=</span> <span class="nx">encryptionService</span><span class="p">.</span><span class="nx">encrypt</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+        <span class="k">await</span> <span class="nx">AsyncStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="s2">`secure_</span><span class="p">${</span><span class="nx">key</span><span class="p">}</span><span class="s2">`</span><span class="p">,</span> <span class="nx">encryptedData</span><span class="p">);</span>
+      <span class="p">}</span>
+      <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Error storing secure data:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+      <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">finally</span> <span class="p">{</span>
+      <span class="nx">setIsLoading</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+
+  <span class="c1">// Retrieve data securely</span>
+  <span class="kd">const</span> <span class="nx">getSecureData</span> <span class="o">=</span> <span class="k">async</span> <span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">useKeychain</span> <span class="o">=</span> <span class="kc">false</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setIsLoading</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">useKeychain</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">credentials</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">Keychain</span><span class="p">.</span><span class="nx">getInternetCredentials</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">credentials</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">return</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">credentials</span><span class="p">.</span><span class="nx">password</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">encryptedData</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">AsyncStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="s2">`secure_</span><span class="p">${</span><span class="nx">key</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">encryptedData</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">return</span> <span class="nx">encryptionService</span><span class="p">.</span><span class="nx">decrypt</span><span class="p">(</span><span class="nx">encryptedData</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Error retrieving secure data:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+      <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">finally</span> <span class="p">{</span>
+      <span class="nx">setIsLoading</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+
+  <span class="c1">// Delete secure data</span>
+  <span class="kd">const</span> <span class="nx">deleteSecureData</span> <span class="o">=</span> <span class="k">async</span> <span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">useKeychain</span> <span class="o">=</span> <span class="kc">false</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setIsLoading</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">useKeychain</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">await</span> <span class="nx">Keychain</span><span class="p">.</span><span class="nx">resetInternetCredentials</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">await</span> <span class="nx">AsyncStorage</span><span class="p">.</span><span class="nx">removeItem</span><span class="p">(</span><span class="s2">`secure_</span><span class="p">${</span><span class="nx">key</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+      <span class="p">}</span>
+      <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Error deleting secure data:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+      <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">finally</span> <span class="p">{</span>
+      <span class="nx">setIsLoading</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+
+  <span class="c1">// Clear all secure data</span>
+  <span class="kd">const</span> <span class="nx">clearAllSecureData</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setIsLoading</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="c1">// Clear AsyncStorage secure data</span>
+      <span class="kd">const</span> <span class="nx">keys</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">AsyncStorage</span><span class="p">.</span><span class="nx">getAllKeys</span><span class="p">();</span>
+      <span class="kd">const</span> <span class="nx">secureKeys</span> <span class="o">=</span> <span class="nx">keys</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">key</span> <span class="o">=&gt;</span> <span class="nx">key</span><span class="p">.</span><span class="nx">startsWith</span><span class="p">(</span><span class="dl">'</span><span class="s1">secure_</span><span class="dl">'</span><span class="p">));</span>
+      <span class="k">await</span> <span class="nx">AsyncStorage</span><span class="p">.</span><span class="nx">multiRemove</span><span class="p">(</span><span class="nx">secureKeys</span><span class="p">);</span>
+
+      <span class="c1">// Clear keychain data (you'd need to track keychain keys)</span>
+      <span class="c1">// This is a simplified example</span>
+      <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Error clearing secure data:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+      <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">finally</span> <span class="p">{</span>
+      <span class="nx">setIsLoading</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="nx">storeSecureData</span><span class="p">,</span>
+    <span class="nx">getSecureData</span><span class="p">,</span>
+    <span class="nx">deleteSecureData</span><span class="p">,</span>
+    <span class="nx">clearAllSecureData</span><span class="p">,</span>
+    <span class="nx">isLoading</span><span class="p">,</span>
+  <span class="p">};</span>
+<span class="p">};</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">useSecureStorage</span><span class="p">;</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-biometric-authentication">👆 <strong>Biometric Authentication</strong></h2>
+
+<h3 id="biometric-setup"><strong>Biometric Setup</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useState</span><span class="p">,</span> <span class="nx">useEffect</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">View</span><span class="p">,</span> <span class="nx">Text</span><span class="p">,</span> <span class="nx">TouchableOpacity</span><span class="p">,</span> <span class="nx">Alert</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">TouchID</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native-touch-id</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">Keychain</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native-keychain</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">BiometricAuth</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">isBiometricAvailable</span><span class="p">,</span> <span class="nx">setIsBiometricAvailable</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">biometricType</span><span class="p">,</span> <span class="nx">setBiometricType</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="dl">''</span><span class="p">);</span>
+
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">checkBiometricAvailability</span><span class="p">();</span>
+  <span class="p">},</span> <span class="p">[]);</span>
+
+  <span class="c1">// Check if biometric authentication is available</span>
+  <span class="kd">const</span> <span class="nx">checkBiometricAvailability</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">biometryType</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">TouchID</span><span class="p">.</span><span class="nx">isSupported</span><span class="p">();</span>
+      <span class="nx">setIsBiometricAvailable</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+      <span class="nx">setBiometricType</span><span class="p">(</span><span class="nx">biometryType</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">setIsBiometricAvailable</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Biometric not available:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+
+  <span class="c1">// Authenticate with biometrics</span>
+  <span class="kd">const</span> <span class="nx">authenticateWithBiometrics</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">TouchID</span><span class="p">.</span><span class="nx">authenticate</span><span class="p">(</span><span class="dl">'</span><span class="s1">Authenticate to access secure data</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span>
+        <span class="na">title</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Biometric Authentication</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">subTitle</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Use your biometric to authenticate</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">description</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Place your finger on the sensor</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">fallbackLabel</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Use Passcode</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">cancelLabel</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Cancel</span><span class="dl">'</span><span class="p">,</span>
+      <span class="p">});</span>
+
+      <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">Alert</span><span class="p">.</span><span class="nx">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">Success</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Biometric authentication successful</span><span class="dl">'</span><span class="p">);</span>
+        <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Biometric authentication failed:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+      <span class="nx">Alert</span><span class="p">.</span><span class="nx">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">Error</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Biometric authentication failed</span><span class="dl">'</span><span class="p">);</span>
+      <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+
+  <span class="c1">// Store data with biometric protection</span>
+  <span class="kd">const</span> <span class="nx">storeDataWithBiometrics</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">authenticated</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">authenticateWithBiometrics</span><span class="p">();</span>
+      
+      <span class="k">if</span> <span class="p">(</span><span class="nx">authenticated</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">sensitiveData</span> <span class="o">=</span> <span class="p">{</span>
+          <span class="na">creditCard</span><span class="p">:</span> <span class="dl">'</span><span class="s1">1234-5678-9012-3456</span><span class="dl">'</span><span class="p">,</span>
+          <span class="na">pin</span><span class="p">:</span> <span class="dl">'</span><span class="s1">1234</span><span class="dl">'</span><span class="p">,</span>
+        <span class="p">};</span>
+
+        <span class="k">await</span> <span class="nx">Keychain</span><span class="p">.</span><span class="nx">setInternetCredentials</span><span class="p">(</span>
+          <span class="dl">'</span><span class="s1">biometric_protected_data</span><span class="dl">'</span><span class="p">,</span>
+          <span class="dl">'</span><span class="s1">data</span><span class="dl">'</span><span class="p">,</span>
+          <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">sensitiveData</span><span class="p">),</span>
+          <span class="p">{</span>
+            <span class="na">accessControl</span><span class="p">:</span> <span class="nx">Keychain</span><span class="p">.</span><span class="nx">ACCESS_CONTROL</span><span class="p">.</span><span class="nx">BIOMETRY_ANY</span><span class="p">,</span>
+            <span class="na">authenticationType</span><span class="p">:</span> <span class="nx">Keychain</span><span class="p">.</span><span class="nx">AUTHENTICATION_TYPE</span><span class="p">.</span><span class="nx">DEVICE_PASSCODE_OR_BIOMETRICS</span><span class="p">,</span>
+            <span class="na">showPrompt</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Authenticate to store sensitive data</span><span class="dl">'</span><span class="p">,</span>
+          <span class="p">}</span>
+        <span class="p">);</span>
+
+        <span class="nx">Alert</span><span class="p">.</span><span class="nx">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">Success</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Data stored with biometric protection</span><span class="dl">'</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Error storing data:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+      <span class="nx">Alert</span><span class="p">.</span><span class="nx">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">Error</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Failed to store data</span><span class="dl">'</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+
+  <span class="c1">// Retrieve data with biometric protection</span>
+  <span class="kd">const</span> <span class="nx">retrieveDataWithBiometrics</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">credentials</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">Keychain</span><span class="p">.</span><span class="nx">getInternetCredentials</span><span class="p">(</span><span class="dl">'</span><span class="s1">biometric_protected_data</span><span class="dl">'</span><span class="p">);</span>
+      
+      <span class="k">if</span> <span class="p">(</span><span class="nx">credentials</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">credentials</span><span class="p">.</span><span class="nx">password</span><span class="p">);</span>
+        <span class="nx">Alert</span><span class="p">.</span><span class="nx">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">Retrieved Data</span><span class="dl">'</span><span class="p">,</span> <span class="s2">`Credit Card: </span><span class="p">${</span><span class="nx">data</span><span class="p">.</span><span class="nx">creditCard</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">Alert</span><span class="p">.</span><span class="nx">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">Info</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">No data found</span><span class="dl">'</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Error retrieving data:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+      <span class="nx">Alert</span><span class="p">.</span><span class="nx">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">Error</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Failed to retrieve data</span><span class="dl">'</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">View</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">container</span><span class="p">}</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">title</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Biometric</span> <span class="nx">Authentication</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>      
+      <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">status</span><span class="p">}</span><span class="o">&gt;</span>
+        <span class="nx">Biometric</span> <span class="na">Available</span><span class="p">:</span> <span class="p">{</span><span class="nx">isBiometricAvailable</span> <span class="p">?</span> <span class="dl">'</span><span class="s1">Yes</span><span class="dl">'</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">No</span><span class="dl">'</span><span class="p">}</span>
+      <span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>      
+      <span class="p">{</span><span class="nx">isBiometricAvailable</span> <span class="o">&amp;&amp;</span> <span class="p">(</span>
+        <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">status</span><span class="p">}</span><span class="o">&gt;</span>
+          <span class="na">Type</span><span class="p">:</span> <span class="p">{</span><span class="nx">biometricType</span><span class="p">}</span>
+        <span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>      <span class="p">)}</span>
+      
+      <span class="o">&lt;</span><span class="nx">TouchableOpacity</span> 
+        <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">button</span><span class="p">}</span> 
+        <span class="nx">onPress</span><span class="o">=</span><span class="p">{</span><span class="nx">authenticateWithBiometrics</span><span class="p">}</span>
+        <span class="nx">disabled</span><span class="o">=</span><span class="p">{</span><span class="o">!</span><span class="nx">isBiometricAvailable</span><span class="p">}</span>
+      <span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">buttonText</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Authenticate</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/TouchableOpacity</span><span class="err">&gt;
+</span>      
+      <span class="o">&lt;</span><span class="nx">TouchableOpacity</span> 
+        <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">button</span><span class="p">}</span> 
+        <span class="nx">onPress</span><span class="o">=</span><span class="p">{</span><span class="nx">storeDataWithBiometrics</span><span class="p">}</span>
+        <span class="nx">disabled</span><span class="o">=</span><span class="p">{</span><span class="o">!</span><span class="nx">isBiometricAvailable</span><span class="p">}</span>
+      <span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">buttonText</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Store</span> <span class="nx">Data</span> <span class="kd">with</span> <span class="nx">Biometrics</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/TouchableOpacity</span><span class="err">&gt;
+</span>      
+      <span class="o">&lt;</span><span class="nx">TouchableOpacity</span> 
+        <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">button</span><span class="p">}</span> 
+        <span class="nx">onPress</span><span class="o">=</span><span class="p">{</span><span class="nx">retrieveDataWithBiometrics</span><span class="p">}</span>
+        <span class="nx">disabled</span><span class="o">=</span><span class="p">{</span><span class="o">!</span><span class="nx">isBiometricAvailable</span><span class="p">}</span>
+      <span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">buttonText</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Retrieve</span> <span class="nx">Data</span><span class="o">&lt;</span><span class="sr">/Text</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/TouchableOpacity</span><span class="err">&gt;
+</span>    <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">styles</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">container</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">flex</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="na">padding</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="na">justifyContent</span><span class="p">:</span> <span class="dl">'</span><span class="s1">center</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">title</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">fontSize</span><span class="p">:</span> <span class="mi">24</span><span class="p">,</span>
+    <span class="na">fontWeight</span><span class="p">:</span> <span class="dl">'</span><span class="s1">bold</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">marginBottom</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="na">textAlign</span><span class="p">:</span> <span class="dl">'</span><span class="s1">center</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">status</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">fontSize</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+    <span class="na">marginBottom</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="na">textAlign</span><span class="p">:</span> <span class="dl">'</span><span class="s1">center</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">button</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#007bff</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">padding</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+    <span class="na">borderRadius</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+    <span class="na">marginBottom</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">buttonText</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">white</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">textAlign</span><span class="p">:</span> <span class="dl">'</span><span class="s1">center</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">fontWeight</span><span class="p">:</span> <span class="dl">'</span><span class="s1">bold</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+<span class="p">};</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">BiometricAuth</span><span class="p">;</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="️-data-protection">🛡️ <strong>Data Protection</strong></h2>
+
+<h3 id="data-classification-system"><strong>Data Classification System</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Data classification levels</span>
+<span class="kd">const</span> <span class="nx">DATA_CLASSIFICATION</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">PUBLIC</span><span class="p">:</span> <span class="dl">'</span><span class="s1">public</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">INTERNAL</span><span class="p">:</span> <span class="dl">'</span><span class="s1">internal</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">CONFIDENTIAL</span><span class="p">:</span> <span class="dl">'</span><span class="s1">confidential</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">RESTRICTED</span><span class="p">:</span> <span class="dl">'</span><span class="s1">restricted</span><span class="dl">'</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="c1">// Data protection policies</span>
+<span class="kd">const</span> <span class="nx">DATA_PROTECTION_POLICIES</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="p">[</span><span class="nx">DATA_CLASSIFICATION</span><span class="p">.</span><span class="nx">PUBLIC</span><span class="p">]:</span> <span class="p">{</span>
+    <span class="na">storage</span><span class="p">:</span> <span class="dl">'</span><span class="s1">AsyncStorage</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">encryption</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="na">accessControl</span><span class="p">:</span> <span class="dl">'</span><span class="s1">none</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">retention</span><span class="p">:</span> <span class="dl">'</span><span class="s1">indefinite</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="p">[</span><span class="nx">DATA_CLASSIFICATION</span><span class="p">.</span><span class="nx">INTERNAL</span><span class="p">]:</span> <span class="p">{</span>
+    <span class="na">storage</span><span class="p">:</span> <span class="dl">'</span><span class="s1">EncryptedAsyncStorage</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">encryption</span><span class="p">:</span> <span class="dl">'</span><span class="s1">AES-256</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">accessControl</span><span class="p">:</span> <span class="dl">'</span><span class="s1">app-level</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">retention</span><span class="p">:</span> <span class="dl">'</span><span class="s1">1 year</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="p">[</span><span class="nx">DATA_CLASSIFICATION</span><span class="p">.</span><span class="nx">CONFIDENTIAL</span><span class="p">]:</span> <span class="p">{</span>
+    <span class="na">storage</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Keychain</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">encryption</span><span class="p">:</span> <span class="dl">'</span><span class="s1">AES-256</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">accessControl</span><span class="p">:</span> <span class="dl">'</span><span class="s1">biometric</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">retention</span><span class="p">:</span> <span class="dl">'</span><span class="s1">6 months</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="p">[</span><span class="nx">DATA_CLASSIFICATION</span><span class="p">.</span><span class="nx">RESTRICTED</span><span class="p">]:</span> <span class="p">{</span>
+    <span class="na">storage</span><span class="p">:</span> <span class="dl">'</span><span class="s1">HardwareSecurity</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">encryption</span><span class="p">:</span> <span class="dl">'</span><span class="s1">AES-256</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">accessControl</span><span class="p">:</span> <span class="dl">'</span><span class="s1">biometric + pin</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">retention</span><span class="p">:</span> <span class="dl">'</span><span class="s1">3 months</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+<span class="p">};</span>
+
+<span class="c1">// Data protection service</span>
+<span class="kd">class</span> <span class="nx">DataProtectionService</span> <span class="p">{</span>
+  <span class="kd">constructor</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">encryptionService</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">EncryptionService</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Store data with appropriate protection</span>
+  <span class="k">async</span> <span class="nx">storeData</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">classification</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">policy</span> <span class="o">=</span> <span class="nx">DATA_PROTECTION_POLICIES</span><span class="p">[</span><span class="nx">classification</span><span class="p">];</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">policy</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">`Unknown data classification: </span><span class="p">${</span><span class="nx">classification</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">switch</span> <span class="p">(</span><span class="nx">policy</span><span class="p">.</span><span class="nx">storage</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">case</span> <span class="dl">'</span><span class="s1">AsyncStorage</span><span class="dl">'</span><span class="p">:</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="k">this</span><span class="p">.</span><span class="nx">storeInAsyncStorage</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">data</span><span class="p">);</span>
+      
+      <span class="k">case</span> <span class="dl">'</span><span class="s1">EncryptedAsyncStorage</span><span class="dl">'</span><span class="p">:</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="k">this</span><span class="p">.</span><span class="nx">storeInEncryptedAsyncStorage</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">data</span><span class="p">);</span>
+      
+      <span class="k">case</span> <span class="dl">'</span><span class="s1">Keychain</span><span class="dl">'</span><span class="p">:</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="k">this</span><span class="p">.</span><span class="nx">storeInKeychain</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">policy</span><span class="p">.</span><span class="nx">accessControl</span><span class="p">);</span>
+      
+      <span class="k">case</span> <span class="dl">'</span><span class="s1">HardwareSecurity</span><span class="dl">'</span><span class="p">:</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="k">this</span><span class="p">.</span><span class="nx">storeInHardwareSecurity</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">policy</span><span class="p">.</span><span class="nx">accessControl</span><span class="p">);</span>
+      
+      <span class="nl">default</span><span class="p">:</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">`Unsupported storage type: </span><span class="p">${</span><span class="nx">policy</span><span class="p">.</span><span class="nx">storage</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Store in AsyncStorage (no encryption)</span>
+  <span class="k">async</span> <span class="nx">storeInAsyncStorage</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">await</span> <span class="nx">AsyncStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Store in encrypted AsyncStorage</span>
+  <span class="k">async</span> <span class="nx">storeInEncryptedAsyncStorage</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">encryptedData</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">encryptionService</span><span class="p">.</span><span class="nx">encrypt</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+    <span class="k">await</span> <span class="nx">AsyncStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="s2">`encrypted_</span><span class="p">${</span><span class="nx">key</span><span class="p">}</span><span class="s2">`</span><span class="p">,</span> <span class="nx">encryptedData</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Store in Keychain with access control</span>
+  <span class="k">async</span> <span class="nx">storeInKeychain</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">accessControl</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">accessControlOptions</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getAccessControlOptions</span><span class="p">(</span><span class="nx">accessControl</span><span class="p">);</span>
+    
+    <span class="k">await</span> <span class="nx">Keychain</span><span class="p">.</span><span class="nx">setInternetCredentials</span><span class="p">(</span>
+      <span class="nx">key</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">data</span><span class="dl">'</span><span class="p">,</span>
+      <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">),</span>
+      <span class="nx">accessControlOptions</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Store in hardware security module</span>
+  <span class="k">async</span> <span class="nx">storeInHardwareSecurity</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">accessControl</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// This would integrate with hardware security modules</span>
+    <span class="c1">// For now, we'll use enhanced keychain with additional security</span>
+    <span class="kd">const</span> <span class="nx">accessControlOptions</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="p">...</span><span class="k">this</span><span class="p">.</span><span class="nx">getAccessControlOptions</span><span class="p">(</span><span class="nx">accessControl</span><span class="p">),</span>
+      <span class="na">accessGroup</span><span class="p">:</span> <span class="dl">'</span><span class="s1">com.yourapp.hardware</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">synchronizable</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="p">};</span>
+    
+    <span class="k">await</span> <span class="nx">Keychain</span><span class="p">.</span><span class="nx">setInternetCredentials</span><span class="p">(</span>
+      <span class="nx">key</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">data</span><span class="dl">'</span><span class="p">,</span>
+      <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">),</span>
+      <span class="nx">accessControlOptions</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Get access control options</span>
+  <span class="nx">getAccessControlOptions</span><span class="p">(</span><span class="nx">accessControl</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">switch</span> <span class="p">(</span><span class="nx">accessControl</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">case</span> <span class="dl">'</span><span class="s1">biometric</span><span class="dl">'</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">{</span>
+          <span class="na">accessControl</span><span class="p">:</span> <span class="nx">Keychain</span><span class="p">.</span><span class="nx">ACCESS_CONTROL</span><span class="p">.</span><span class="nx">BIOMETRY_ANY</span><span class="p">,</span>
+          <span class="na">authenticationType</span><span class="p">:</span> <span class="nx">Keychain</span><span class="p">.</span><span class="nx">AUTHENTICATION_TYPE</span><span class="p">.</span><span class="nx">DEVICE_PASSCODE_OR_BIOMETRICS</span><span class="p">,</span>
+        <span class="p">};</span>
+      
+      <span class="k">case</span> <span class="dl">'</span><span class="s1">biometric + pin</span><span class="dl">'</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">{</span>
+          <span class="na">accessControl</span><span class="p">:</span> <span class="nx">Keychain</span><span class="p">.</span><span class="nx">ACCESS_CONTROL</span><span class="p">.</span><span class="nx">BIOMETRY_CURRENT_SET</span><span class="p">,</span>
+          <span class="na">authenticationType</span><span class="p">:</span> <span class="nx">Keychain</span><span class="p">.</span><span class="nx">AUTHENTICATION_TYPE</span><span class="p">.</span><span class="nx">DEVICE_PASSCODE_OR_BIOMETRICS</span><span class="p">,</span>
+        <span class="p">};</span>
+      
+      <span class="nl">default</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">{};</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Retrieve data with appropriate protection</span>
+  <span class="k">async</span> <span class="nx">getData</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">classification</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">policy</span> <span class="o">=</span> <span class="nx">DATA_PROTECTION_POLICIES</span><span class="p">[</span><span class="nx">classification</span><span class="p">];</span>
+    
+    <span class="k">switch</span> <span class="p">(</span><span class="nx">policy</span><span class="p">.</span><span class="nx">storage</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">case</span> <span class="dl">'</span><span class="s1">AsyncStorage</span><span class="dl">'</span><span class="p">:</span>
+        <span class="kd">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">AsyncStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+        <span class="k">return</span> <span class="nx">data</span> <span class="p">?</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">:</span> <span class="kc">null</span><span class="p">;</span>
+      
+      <span class="k">case</span> <span class="dl">'</span><span class="s1">EncryptedAsyncStorage</span><span class="dl">'</span><span class="p">:</span>
+        <span class="kd">const</span> <span class="nx">encryptedData</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">AsyncStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="s2">`encrypted_</span><span class="p">${</span><span class="nx">key</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+        <span class="k">return</span> <span class="nx">encryptedData</span> <span class="p">?</span> <span class="k">this</span><span class="p">.</span><span class="nx">encryptionService</span><span class="p">.</span><span class="nx">decrypt</span><span class="p">(</span><span class="nx">encryptedData</span><span class="p">)</span> <span class="p">:</span> <span class="kc">null</span><span class="p">;</span>
+      
+      <span class="k">case</span> <span class="dl">'</span><span class="s1">Keychain</span><span class="dl">'</span><span class="p">:</span>
+      <span class="k">case</span> <span class="dl">'</span><span class="s1">HardwareSecurity</span><span class="dl">'</span><span class="p">:</span>
+        <span class="kd">const</span> <span class="nx">credentials</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">Keychain</span><span class="p">.</span><span class="nx">getInternetCredentials</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+        <span class="k">return</span> <span class="nx">credentials</span> <span class="p">?</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">credentials</span><span class="p">.</span><span class="nx">password</span><span class="p">)</span> <span class="p">:</span> <span class="kc">null</span><span class="p">;</span>
+      
+      <span class="nl">default</span><span class="p">:</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">`Unsupported storage type: </span><span class="p">${</span><span class="nx">policy</span><span class="p">.</span><span class="nx">storage</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">DataProtectionService</span><span class="p">;</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-best-practices">🎯 <strong>Best Practices</strong></h2>
+
+<h3 id="1-data-classification"><strong>1. Data Classification</strong></h3>
+<ul>
+  <li>Classify data by sensitivity level</li>
+  <li>Apply appropriate protection measures</li>
+  <li>Implement data retention policies</li>
+  <li>Regular security audits</li>
+</ul>
+
+<h3 id="2-encryption"><strong>2. Encryption</strong></h3>
+<ul>
+  <li>Use strong encryption algorithms</li>
+  <li>Implement proper key management</li>
+  <li>Use hardware security when available</li>
+  <li>Regular key rotation</li>
+</ul>
+
+<h3 id="3-access-control"><strong>3. Access Control</strong></h3>
+<ul>
+  <li>Implement biometric authentication</li>
+  <li>Use multi-factor authentication</li>
+  <li>Apply principle of least privilege</li>
+  <li>Monitor access patterns</li>
+</ul>
+
+<hr />
+
+<h2 id="-interview-questions">❓ <strong>Interview Questions</strong></h2>
+
+<h3 id="basic-questions"><strong>Basic Questions</strong></h3>
+<ol>
+  <li><strong>What is the difference between AsyncStorage and Keychain?</strong></li>
+  <li><strong>How do you implement secure storage in React Native?</strong></li>
+  <li><strong>What are the benefits of biometric authentication?</strong></li>
+</ol>
+
+<h3 id="advanced-questions"><strong>Advanced Questions</strong></h3>
+<ol>
+  <li><strong>How would you implement a data classification system?</strong></li>
+  <li><strong>Explain the encryption strategies for mobile apps.</strong></li>
+  <li><strong>How do you handle key management in secure storage?</strong></li>
+</ol>
+
+<h3 id="practical-questions"><strong>Practical Questions</strong></h3>
+<ol>
+  <li><strong>Implement secure storage with biometric protection.</strong></li>
+  <li><strong>Create a data protection service with classification levels.</strong></li>
+  <li><strong>Set up encryption for sensitive user data.</strong></li>
+</ol>
+
+<hr />
+
+<h2 id="-navigation">🧭 Navigation</h2>
+
+<div class="navigation">
+    <a href="../10-Build-Release-CICD/04-CICD-Pipelines.md" class="nav-link prev">⬅️ Previous: CI/CD Pipelines</a>
+    <a href="./02-Network-Security.md" class="nav-link next">Next: Network Security ➡️</a>
+</div>
+
+<hr />
+
+<script src="../../common-scripts.js"></script>
+
+<p><em>Last updated: December 2024</em></p>
+
+        </main>
+        
+        <footer style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #ecf0f1; color: #666; text-align: center;">
+            <p>Interview Prep Documentation - Built with Jekyll</p>
+        </footer>
+    </div>
+</body>
+</html>

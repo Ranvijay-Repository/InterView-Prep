@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📦 Modules &amp; Imports - Interview Prep Documentation</title>
+    <meta name="description" content="Comprehensive guides for JavaScript, TypeScript, and React Native interview preparation">
+    
+    <!-- GitHub Pages compatible styling -->
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+        }
+        
+        .container {
+            max-width: 100%;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            color: #2c3e50;
+            margin-top: 2em;
+            margin-bottom: 1em;
+        }
+        
+        h1 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            border-bottom: 1px solid #ecf0f1;
+            padding-bottom: 5px;
+        }
+        
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border-left: 4px solid #3498db;
+        }
+        
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+        
+        blockquote {
+            border-left: 4px solid #3498db;
+            margin: 0;
+            padding-left: 20px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1em 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .navigation {
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px 0;
+            margin-bottom: 20px;
+        }
+        
+        .navigation a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+        
+        .navigation a:hover {
+            text-decoration: underline;
+        }
+        
+        .breadcrumb {
+            margin-bottom: 20px;
+            color: #666;
+        }
+        
+        .breadcrumb a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            h2 {
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="navigation">
+            <a href="/">Home</a>
+            <a href="/Javascript/">JavaScript</a>
+            <a href="/TypeScript/">TypeScript</a>
+            <a href="/React-Native/">React Native</a>
+        </nav>
+        
+        
+        
+        <main>
+            <h1 id="-modules--imports">📦 <strong>Modules &amp; Imports</strong></h1>
+
+<blockquote>
+  <p><strong>Complete guide to TypeScript modules, import/export syntax, module resolution, and advanced module patterns</strong></p>
+</blockquote>
+
+<link rel="stylesheet" href="../../common-styles.css" />
+
+<hr />
+
+<h2 id="-table-of-contents">📚 <strong>Table of Contents</strong></h2>
+
+<ul>
+  <li><a href="#module-system-overview">Module System Overview</a></li>
+  <li><a href="#export-syntax">Export Syntax</a></li>
+  <li><a href="#import-syntax">Import Syntax</a></li>
+  <li><a href="#module-resolution">Module Resolution</a></li>
+  <li><a href="#type-only-imports">Type-Only Imports</a></li>
+  <li><a href="#dynamic-imports">Dynamic Imports</a></li>
+  <li><a href="#best-practices">Best Practices</a></li>
+  <li><a href="#common-interview-questions">Common Interview Questions</a></li>
+</ul>
+
+<hr />
+
+<h2 id="-module-system-overview">🎯 <strong>Module System Overview</strong></h2>
+
+<p>TypeScript supports both CommonJS and ES6 module systems, providing flexibility for different environments.</p>
+
+<h3 id="module-types"><strong>Module Types</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ES6 Modules (recommended)</span>
+<span class="k">export</span> <span class="kr">interface</span> <span class="nx">User</span> <span class="p">{</span>
+  <span class="nl">id</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span>
+  <span class="nl">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="kd">class</span> <span class="nx">UserService</span> <span class="p">{</span>
+  <span class="c1">// Implementation</span>
+<span class="p">}</span>
+
+<span class="c1">// CommonJS (Node.js style)</span>
+<span class="kr">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">User</span><span class="p">:</span> <span class="kd">class</span> <span class="nx">User</span> <span class="p">{</span> <span class="p">},</span>
+  <span class="na">UserService</span><span class="p">:</span> <span class="kd">class</span> <span class="nx">UserService</span> <span class="p">{</span> <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="module-vs-script"><strong>Module vs Script</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Script file (no imports/exports)</span>
+<span class="kd">const</span> <span class="nx">message</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Hello World</span><span class="dl">"</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">message</span><span class="p">);</span>
+
+<span class="c1">// Module file (has imports/exports)</span>
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">message</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Hello World</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">message</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./script</span><span class="dl">"</span><span class="p">;</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-export-syntax">📤 <strong>Export Syntax</strong></h2>
+
+<p>TypeScript provides multiple ways to export values, types, and interfaces.</p>
+
+<h3 id="named-exports"><strong>Named Exports</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Export individual items</span>
+<span class="k">export</span> <span class="kr">interface</span> <span class="nx">User</span> <span class="p">{</span>
+  <span class="nl">id</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span>
+  <span class="nl">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">email</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="kd">class</span> <span class="nx">UserService</span> <span class="p">{</span>
+  <span class="k">private</span> <span class="nx">users</span><span class="p">:</span> <span class="nx">User</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[];</span>
+
+  <span class="nx">addUser</span><span class="p">(</span><span class="nx">user</span><span class="p">:</span> <span class="nx">User</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">user</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="nx">getUser</span><span class="p">(</span><span class="nx">id</span><span class="p">:</span> <span class="kr">number</span><span class="p">):</span> <span class="nx">User</span> <span class="o">|</span> <span class="kc">undefined</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="nx">user</span> <span class="o">=&gt;</span> <span class="nx">user</span><span class="p">.</span><span class="nx">id</span> <span class="o">===</span> <span class="nx">id</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Export constants and functions</span>
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">API_URL</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://api.example.com</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">MAX_USERS</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="kd">function</span> <span class="nx">validateUser</span><span class="p">(</span><span class="nx">user</span><span class="p">:</span> <span class="nx">User</span><span class="p">):</span> <span class="nx">boolean</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">user</span><span class="p">.</span><span class="nx">name</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="nx">user</span><span class="p">.</span><span class="nx">email</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="dl">"</span><span class="s2">@</span><span class="dl">"</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Export type aliases</span>
+<span class="k">export</span> <span class="kd">type</span> <span class="nx">UserId</span> <span class="o">=</span> <span class="kr">number</span><span class="p">;</span>
+<span class="k">export</span> <span class="kd">type</span> <span class="nx">UserStatus</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">active</span><span class="dl">"</span> <span class="o">|</span> <span class="dl">"</span><span class="s2">inactive</span><span class="dl">"</span> <span class="o">|</span> <span class="dl">"</span><span class="s2">pending</span><span class="dl">"</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="default-exports"><strong>Default Exports</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Default export (one per module)</span>
+<span class="k">export</span> <span class="k">default</span> <span class="kd">class</span> <span class="nx">UserRepository</span> <span class="p">{</span>
+  <span class="k">private</span> <span class="nx">users</span><span class="p">:</span> <span class="nx">User</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[];</span>
+
+  <span class="nx">save</span><span class="p">(</span><span class="nx">user</span><span class="p">:</span> <span class="nx">User</span><span class="p">):</span> <span class="nx">User</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">user</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nx">user</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="nx">findById</span><span class="p">(</span><span class="nx">id</span><span class="p">:</span> <span class="kr">number</span><span class="p">):</span> <span class="nx">User</span> <span class="o">|</span> <span class="kc">undefined</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="nx">user</span> <span class="o">=&gt;</span> <span class="nx">user</span><span class="p">.</span><span class="nx">id</span> <span class="o">===</span> <span class="nx">id</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Default export with function</span>
+<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">createUser</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">,</span> <span class="nx">email</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nx">User</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="na">id</span><span class="p">:</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">(),</span>
+    <span class="nx">name</span><span class="p">,</span>
+    <span class="nx">email</span>
+  <span class="p">};</span>
+<span class="p">}</span>
+
+<span class="c1">// Default export with object</span>
+<span class="k">export</span> <span class="k">default</span> <span class="p">{</span>
+  <span class="na">API_URL</span><span class="p">:</span> <span class="dl">"</span><span class="s2">https://api.example.com</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">VERSION</span><span class="p">:</span> <span class="dl">"</span><span class="s2">1.0.0</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">getEndpoint</span><span class="p">:</span> <span class="p">(</span><span class="na">path</span><span class="p">:</span> <span class="kr">string</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="s2">`</span><span class="p">${</span><span class="nx">API_URL</span><span class="p">}${</span><span class="nx">path</span><span class="p">}</span><span class="s2">`</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="re-exports"><strong>Re-exports</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Re-export from another module</span>
+<span class="k">export</span> <span class="p">{</span> <span class="nx">User</span><span class="p">,</span> <span class="nx">UserService</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./user</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">export</span> <span class="p">{</span> <span class="nx">Product</span><span class="p">,</span> <span class="nx">ProductService</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./product</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="c1">// Re-export with renaming</span>
+<span class="k">export</span> <span class="p">{</span> <span class="nx">User</span> <span class="k">as</span> <span class="nx">UserType</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./user</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">export</span> <span class="p">{</span> <span class="nx">Product</span> <span class="k">as</span> <span class="nx">ProductType</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./product</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="c1">// Re-export everything</span>
+<span class="k">export</span> <span class="o">*</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./user</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">export</span> <span class="o">*</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./product</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="c1">// Re-export with namespace</span>
+<span class="k">export</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">UserModule</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./user</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">export</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">ProductModule</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./product</span><span class="dl">"</span><span class="p">;</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-import-syntax">📥 <strong>Import Syntax</strong></h2>
+
+<p>TypeScript provides flexible import syntax for different use cases.</p>
+
+<h3 id="named-imports"><strong>Named Imports</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Import specific items</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">User</span><span class="p">,</span> <span class="nx">UserService</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./user</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">API_URL</span><span class="p">,</span> <span class="nx">MAX_USERS</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./constants</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="c1">// Import with renaming</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">User</span> <span class="k">as</span> <span class="nx">UserType</span><span class="p">,</span> <span class="nx">UserService</span> <span class="k">as</span> <span class="nx">Service</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./user</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="c1">// Import everything into namespace</span>
+<span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">UserModule</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./user</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="c1">// Usage</span>
+<span class="kd">const</span> <span class="nx">user</span><span class="p">:</span> <span class="nx">UserType</span> <span class="o">=</span> <span class="p">{</span> <span class="na">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">John</span><span class="dl">"</span><span class="p">,</span> <span class="na">email</span><span class="p">:</span> <span class="dl">"</span><span class="s2">john@example.com</span><span class="dl">"</span> <span class="p">};</span>
+<span class="kd">const</span> <span class="nx">service</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Service</span><span class="p">();</span>
+<span class="kd">const</span> <span class="nx">apiUrl</span> <span class="o">=</span> <span class="nx">UserModule</span><span class="p">.</span><span class="nx">API_URL</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="default-imports"><strong>Default Imports</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Import default export</span>
+<span class="k">import</span> <span class="nx">UserRepository</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./user-repository</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">createUser</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./user-factory</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="c1">// Import default with renaming</span>
+<span class="k">import</span> <span class="nx">UserRepo</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./user-repository</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="c1">// Usage</span>
+<span class="kd">const</span> <span class="nx">repository</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">UserRepository</span><span class="p">();</span>
+<span class="kd">const</span> <span class="nx">user</span> <span class="o">=</span> <span class="nx">createUser</span><span class="p">(</span><span class="dl">"</span><span class="s2">John</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">john@example.com</span><span class="dl">"</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="mixed-imports"><strong>Mixed Imports</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Import both default and named exports</span>
+<span class="k">import</span> <span class="nx">UserRepository</span><span class="p">,</span> <span class="p">{</span> <span class="nx">User</span><span class="p">,</span> <span class="nx">UserService</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./user</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="c1">// Import default with namespace</span>
+<span class="k">import</span> <span class="nx">UserRepo</span><span class="p">,</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">UserTypes</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./user</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="c1">// Usage</span>
+<span class="kd">const</span> <span class="nx">repository</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">UserRepo</span><span class="p">();</span>
+<span class="kd">const</span> <span class="nx">user</span><span class="p">:</span> <span class="nx">UserTypes</span><span class="p">.</span><span class="nx">User</span> <span class="o">=</span> <span class="p">{</span> <span class="na">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">John</span><span class="dl">"</span><span class="p">,</span> <span class="na">email</span><span class="p">:</span> <span class="dl">"</span><span class="s2">john@example.com</span><span class="dl">"</span> <span class="p">};</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-module-resolution">🔍 <strong>Module Resolution</strong></h2>
+
+<p>TypeScript uses different module resolution strategies based on configuration.</p>
+
+<h3 id="module-resolution-strategies"><strong>Module Resolution Strategies</strong></h3>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">//</span><span class="w"> </span><span class="err">tsconfig.json</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="nl">"compilerOptions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"moduleResolution"</span><span class="p">:</span><span class="w"> </span><span class="s2">"node"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">or</span><span class="w"> </span><span class="s2">"classic"</span><span class="w">
+    </span><span class="nl">"baseUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"./src"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"paths"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"@/*"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"*"</span><span class="p">],</span><span class="w">
+      </span><span class="nl">"@/components/*"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"components/*"</span><span class="p">],</span><span class="w">
+      </span><span class="nl">"@/utils/*"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"utils/*"</span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="path-mapping"><strong>Path Mapping</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Using path mapping</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">User</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">@/types/user</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">UserService</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">@/services/user-service</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Button</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">@/components/Button</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="c1">// Without path mapping</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">User</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">../../types/user</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">UserService</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">../services/user-service</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Button</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./components/Button</span><span class="dl">"</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="module-resolution-examples"><strong>Module Resolution Examples</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Relative imports</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">User</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./user</span><span class="dl">"</span><span class="p">;</span>           <span class="c1">// Same directory</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">User</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">../user</span><span class="dl">"</span><span class="p">;</span>          <span class="c1">// Parent directory</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">User</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">../../user</span><span class="dl">"</span><span class="p">;</span>       <span class="c1">// Grandparent directory</span>
+
+<span class="c1">// Absolute imports (with baseUrl)</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">User</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">types/user</span><span class="dl">"</span><span class="p">;</span>       <span class="c1">// From baseUrl</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">User</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">src/types/user</span><span class="dl">"</span><span class="p">;</span>   <span class="c1">// From project root</span>
+
+<span class="c1">// Node modules</span>
+<span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">useState</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">_</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">lodash</span><span class="dl">"</span><span class="p">;</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-type-only-imports">🎭 <strong>Type-Only Imports</strong></h2>
+
+<p>TypeScript provides type-only imports for better performance and clarity.</p>
+
+<h3 id="type-only-import-syntax"><strong>Type-Only Import Syntax</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Type-only imports</span>
+<span class="k">import</span> <span class="kd">type</span> <span class="p">{</span> <span class="nx">User</span><span class="p">,</span> <span class="nx">UserService</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./user</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="kd">type</span> <span class="p">{</span> <span class="nx">ComponentProps</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="c1">// Mixed imports (value + type)</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">UserService</span><span class="p">,</span> <span class="kd">type</span> <span class="nx">User</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./user</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="kd">type</span> <span class="nx">ComponentProps</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="c1">// Type-only default import</span>
+<span class="k">import</span> <span class="kd">type</span> <span class="nx">UserRepository</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./user-repository</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="c1">// Usage</span>
+<span class="kd">const</span> <span class="nx">service</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">UserService</span><span class="p">();</span> <span class="c1">// Runtime import</span>
+<span class="kd">const</span> <span class="nx">user</span><span class="p">:</span> <span class="nx">User</span> <span class="o">=</span> <span class="p">{</span> <span class="na">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">John</span><span class="dl">"</span><span class="p">,</span> <span class="na">email</span><span class="p">:</span> <span class="dl">"</span><span class="s2">john@example.com</span><span class="dl">"</span> <span class="p">};</span> <span class="c1">// Type-only</span>
+</code></pre></div></div>
+
+<h3 id="when-to-use-type-only-imports"><strong>When to Use Type-Only Imports</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ✅ Good: Use type-only for interfaces and types</span>
+<span class="k">import</span> <span class="kd">type</span> <span class="p">{</span> <span class="nx">User</span><span class="p">,</span> <span class="nx">UserStatus</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./user</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="kd">type</span> <span class="p">{</span> <span class="nx">ComponentProps</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="c1">// ✅ Good: Use type-only for default exports that are types</span>
+<span class="k">import</span> <span class="kd">type</span> <span class="nx">UserRepository</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./user-repository</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="c1">// ❌ Avoid: Type-only for runtime values</span>
+<span class="k">import</span> <span class="kd">type</span> <span class="p">{</span> <span class="nx">UserService</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./user</span><span class="dl">"</span><span class="p">;</span> <span class="c1">// UserService is a class, not a type</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-dynamic-imports">⚡ <strong>Dynamic Imports</strong></h2>
+
+<p>Dynamic imports allow you to load modules at runtime, enabling code splitting and lazy loading.</p>
+
+<h3 id="basic-dynamic-imports"><strong>Basic Dynamic Imports</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Dynamic import with async/await</span>
+<span class="kd">const</span> <span class="nx">loadUserModule</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">{</span> <span class="nx">User</span><span class="p">,</span> <span class="nx">UserService</span> <span class="p">}</span> <span class="o">=</span> <span class="k">await</span> <span class="k">import</span><span class="p">(</span><span class="dl">"</span><span class="s2">./user</span><span class="dl">"</span><span class="p">);</span>
+  <span class="k">return</span> <span class="p">{</span> <span class="nx">User</span><span class="p">,</span> <span class="nx">UserService</span> <span class="p">};</span>
+<span class="p">};</span>
+
+<span class="c1">// Dynamic import with Promise</span>
+<span class="kd">const</span> <span class="nx">loadUserModule</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="k">import</span><span class="p">(</span><span class="dl">"</span><span class="s2">./user</span><span class="dl">"</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="kr">module</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">{</span> <span class="na">User</span><span class="p">:</span> <span class="kr">module</span><span class="p">.</span><span class="nx">User</span><span class="p">,</span> <span class="na">UserService</span><span class="p">:</span> <span class="kr">module</span><span class="p">.</span><span class="nx">UserService</span> <span class="p">};</span>
+  <span class="p">});</span>
+<span class="p">};</span>
+
+<span class="c1">// Usage</span>
+<span class="kd">const</span> <span class="nx">initializeApp</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">{</span> <span class="nx">UserService</span> <span class="p">}</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">loadUserModule</span><span class="p">();</span>
+  <span class="kd">const</span> <span class="nx">userService</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">UserService</span><span class="p">();</span>
+  <span class="c1">// Use userService</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="dynamic-imports-with-type-safety"><strong>Dynamic Imports with Type Safety</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Dynamic import with type assertion</span>
+<span class="kd">const</span> <span class="nx">loadUserService</span> <span class="o">=</span> <span class="k">async</span> <span class="p">():</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="k">typeof</span> <span class="k">import</span><span class="p">(</span><span class="dl">"</span><span class="s2">./user</span><span class="dl">"</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="k">import</span><span class="p">(</span><span class="dl">"</span><span class="s2">./user</span><span class="dl">"</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="c1">// Dynamic import with generic type</span>
+<span class="kd">const</span> <span class="nx">loadModule</span> <span class="o">=</span> <span class="k">async</span> <span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">modulePath</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="k">import</span><span class="p">(</span><span class="nx">modulePath</span><span class="p">)</span> <span class="k">as</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="c1">// Usage</span>
+<span class="kd">const</span> <span class="nx">userModule</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">loadUserService</span><span class="p">();</span>
+<span class="kd">const</span> <span class="nx">userService</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">userModule</span><span class="p">.</span><span class="nx">UserService</span><span class="p">();</span>
+
+<span class="c1">// Or with generic</span>
+<span class="kd">const</span> <span class="nx">userModule</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">loadModule</span><span class="o">&lt;</span><span class="k">typeof</span> <span class="k">import</span><span class="p">(</span><span class="dl">"</span><span class="s2">./user</span><span class="dl">"</span><span class="p">)</span><span class="o">&gt;</span><span class="p">(</span><span class="dl">"</span><span class="s2">./user</span><span class="dl">"</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="dynamic-imports-in-react"><strong>Dynamic Imports in React</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Lazy loading React components</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">lazy</span><span class="p">,</span> <span class="nx">Suspense</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">UserProfile</span> <span class="o">=</span> <span class="nx">lazy</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="k">import</span><span class="p">(</span><span class="dl">"</span><span class="s2">./UserProfile</span><span class="dl">"</span><span class="p">));</span>
+<span class="kd">const</span> <span class="nx">UserSettings</span> <span class="o">=</span> <span class="nx">lazy</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="k">import</span><span class="p">(</span><span class="dl">"</span><span class="s2">./UserSettings</span><span class="dl">"</span><span class="p">));</span>
+
+<span class="kd">const</span> <span class="nx">App</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">Suspense</span> <span class="nx">fallback</span><span class="o">=</span><span class="p">{</span><span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span><span class="nx">Loading</span><span class="p">...</span><span class="o">&lt;</span><span class="sr">/div&gt;}</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="nx">UserProfile</span> <span class="o">/&gt;</span>
+      <span class="o">&lt;</span><span class="nx">UserSettings</span> <span class="o">/&gt;</span>
+    <span class="o">&lt;</span><span class="sr">/Suspense</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-best-practices">✅ <strong>Best Practices</strong></h2>
+
+<h3 id="1-use-named-exports-for-multiple-items"><strong>1. Use Named Exports for Multiple Items</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ✅ Good: Named exports for multiple related items</span>
+<span class="k">export</span> <span class="kr">interface</span> <span class="nx">User</span> <span class="p">{</span>
+  <span class="nl">id</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span>
+  <span class="nl">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="kd">class</span> <span class="nx">UserService</span> <span class="p">{</span>
+  <span class="c1">// Implementation</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">API_URL</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://api.example.com</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="c1">// ❌ Avoid: Default export for multiple items</span>
+<span class="k">export</span> <span class="k">default</span> <span class="p">{</span>
+  <span class="na">User</span><span class="p">:</span> <span class="kr">interface</span> <span class="nx">User</span> <span class="p">{</span> <span class="p">},</span>
+  <span class="na">UserService</span><span class="p">:</span> <span class="kd">class</span> <span class="nx">UserService</span> <span class="p">{</span> <span class="p">},</span>
+  <span class="na">API_URL</span><span class="p">:</span> <span class="dl">"</span><span class="s2">https://api.example.com</span><span class="dl">"</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="2-use-default-exports-for-single-main-item"><strong>2. Use Default Exports for Single Main Item</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ✅ Good: Default export for main class/function</span>
+<span class="k">export</span> <span class="k">default</span> <span class="kd">class</span> <span class="nx">UserRepository</span> <span class="p">{</span>
+  <span class="c1">// Implementation</span>
+<span class="p">}</span>
+
+<span class="c1">// ❌ Avoid: Default export for multiple items</span>
+<span class="k">export</span> <span class="k">default</span> <span class="p">{</span>
+  <span class="na">UserRepository</span><span class="p">:</span> <span class="kd">class</span> <span class="nx">UserRepository</span> <span class="p">{</span> <span class="p">},</span>
+  <span class="na">UserService</span><span class="p">:</span> <span class="kd">class</span> <span class="nx">UserService</span> <span class="p">{</span> <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="3-use-type-only-imports-for-types"><strong>3. Use Type-Only Imports for Types</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ✅ Good: Type-only imports for interfaces and types</span>
+<span class="k">import</span> <span class="kd">type</span> <span class="p">{</span> <span class="nx">User</span><span class="p">,</span> <span class="nx">UserStatus</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./user</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">UserService</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./user</span><span class="dl">"</span><span class="p">;</span> <span class="c1">// Runtime import</span>
+
+<span class="c1">// ❌ Avoid: Regular imports for types only</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">User</span><span class="p">,</span> <span class="nx">UserStatus</span><span class="p">,</span> <span class="nx">UserService</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./user</span><span class="dl">"</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="4-use-path-mapping-for-clean-imports"><strong>4. Use Path Mapping for Clean Imports</strong></h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ✅ Good: Path mapping for clean imports</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">User</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">@/types/user</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">UserService</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">@/services/user-service</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="c1">// ❌ Avoid: Relative imports for deep nesting</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">User</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">../../../types/user</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">UserService</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">../../services/user-service</span><span class="dl">"</span><span class="p">;</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-common-interview-questions">❓ <strong>Common Interview Questions</strong></h2>
+
+<h3 id="1-whats-the-difference-between-named-and-default-exports"><strong>1. What’s the difference between named and default exports?</strong></h3>
+
+<p><strong>Answer:</strong></p>
+<ul>
+  <li><strong>Named exports</strong>: Export multiple items with specific names, imported with <code class="language-plaintext highlighter-rouge">{ }</code></li>
+  <li><strong>Default exports</strong>: Export one main item, imported without <code class="language-plaintext highlighter-rouge">{ }</code></li>
+</ul>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Named export</span>
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">name</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">John</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">name</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./module</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="c1">// Default export</span>
+<span class="k">export</span> <span class="k">default</span> <span class="kd">class</span> <span class="nx">User</span> <span class="p">{</span> <span class="p">}</span>
+<span class="k">import</span> <span class="nx">User</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./module</span><span class="dl">"</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="2-how-do-you-handle-circular-dependencies-in-typescript"><strong>2. How do you handle circular dependencies in TypeScript?</strong></h3>
+
+<p><strong>Answer:</strong></p>
+<ul>
+  <li>Use dynamic imports</li>
+  <li>Restructure code to avoid circular references</li>
+  <li>Use dependency injection</li>
+  <li>Split shared code into separate modules</li>
+</ul>
+
+<h3 id="3-what-are-type-only-imports-and-when-should-you-use-them"><strong>3. What are type-only imports and when should you use them?</strong></h3>
+
+<p><strong>Answer:</strong>
+Type-only imports are removed at runtime and only used for type checking:</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="kd">type</span> <span class="p">{</span> <span class="nx">User</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./user</span><span class="dl">"</span><span class="p">;</span> <span class="c1">// Removed at compile time</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">UserService</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./user</span><span class="dl">"</span><span class="p">;</span> <span class="c1">// Included at runtime</span>
+</code></pre></div></div>
+
+<h3 id="4-how-do-you-configure-module-resolution-in-typescript"><strong>4. How do you configure module resolution in TypeScript?</strong></h3>
+
+<p><strong>Answer:</strong>
+Configure in <code class="language-plaintext highlighter-rouge">tsconfig.json</code>:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"compilerOptions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"moduleResolution"</span><span class="p">:</span><span class="w"> </span><span class="s2">"node"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"baseUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"./src"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"paths"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"@/*"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"*"</span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="5-whats-the-difference-between-es6-modules-and-commonjs"><strong>5. What’s the difference between ES6 modules and CommonJS?</strong></h3>
+
+<p><strong>Answer:</strong></p>
+<ul>
+  <li><strong>ES6 modules</strong>: Static imports/exports, tree-shaking, better optimization</li>
+  <li><strong>CommonJS</strong>: Dynamic imports/exports, runtime resolution, Node.js standard</li>
+</ul>
+
+<hr />
+
+<h2 id="-navigation">🧭 Navigation</h2>
+
+<div class="navigation">
+  <a href="01-ES6-Features-TypeScript.md" class="nav-button">← Previous: ES6+ Features &amp; TypeScript</a>
+  <a href="03-Async-Await-Promises.md" class="nav-button">Next: Async/Await &amp; Promises →</a>
+</div>
+
+<p><em>Last updated: December 2025</em></p>
+
+        </main>
+        
+        <footer style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #ecf0f1; color: #666; text-align: center;">
+            <p>Interview Prep Documentation - Built with Jekyll</p>
+        </footer>
+    </div>
+</body>
+</html>

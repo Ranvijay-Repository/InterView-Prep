@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Device Capabilities Detection in React Native - Interview Prep Documentation</title>
+    <meta name="description" content="Comprehensive guides for JavaScript, TypeScript, and React Native interview preparation">
+    
+    <!-- GitHub Pages compatible styling -->
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+        }
+        
+        .container {
+            max-width: 100%;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            color: #2c3e50;
+            margin-top: 2em;
+            margin-bottom: 1em;
+        }
+        
+        h1 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            border-bottom: 1px solid #ecf0f1;
+            padding-bottom: 5px;
+        }
+        
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border-left: 4px solid #3498db;
+        }
+        
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+        
+        blockquote {
+            border-left: 4px solid #3498db;
+            margin: 0;
+            padding-left: 20px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1em 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .navigation {
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px 0;
+            margin-bottom: 20px;
+        }
+        
+        .navigation a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+        
+        .navigation a:hover {
+            text-decoration: underline;
+        }
+        
+        .breadcrumb {
+            margin-bottom: 20px;
+            color: #666;
+        }
+        
+        .breadcrumb a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            h2 {
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="navigation">
+            <a href="/">Home</a>
+            <a href="/Javascript/">JavaScript</a>
+            <a href="/TypeScript/">TypeScript</a>
+            <a href="/React-Native/">React Native</a>
+        </nav>
+        
+        
+        
+        <main>
+            <h1 id="device-capabilities-detection-in-react-native">Device Capabilities Detection in React Native</h1>
+
+<h2 id="overview">Overview</h2>
+
+<p>Device capabilities detection is crucial for creating adaptive React Native applications that can leverage different hardware features and provide appropriate fallbacks. This guide covers comprehensive techniques for detecting and handling various device capabilities.</p>
+
+<h2 id="hardware-detection">Hardware Detection</h2>
+
+<h3 id="1-basic-device-information">1. Basic Device Information</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Platform</span><span class="p">,</span> <span class="nx">Dimensions</span><span class="p">,</span> <span class="nx">PixelRatio</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">DeviceInfo</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native-device-info</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">useDeviceInfo</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">deviceInfo</span><span class="p">,</span> <span class="nx">setDeviceInfo</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">getDeviceInfo</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">try</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">info</span> <span class="o">=</span> <span class="p">{</span>
+          <span class="c1">// Basic device info</span>
+          <span class="na">brand</span><span class="p">:</span> <span class="k">await</span> <span class="nx">DeviceInfo</span><span class="p">.</span><span class="nx">getBrand</span><span class="p">(),</span>
+          <span class="na">model</span><span class="p">:</span> <span class="k">await</span> <span class="nx">DeviceInfo</span><span class="p">.</span><span class="nx">getModel</span><span class="p">(),</span>
+          <span class="na">systemName</span><span class="p">:</span> <span class="k">await</span> <span class="nx">DeviceInfo</span><span class="p">.</span><span class="nx">getSystemName</span><span class="p">(),</span>
+          <span class="na">systemVersion</span><span class="p">:</span> <span class="k">await</span> <span class="nx">DeviceInfo</span><span class="p">.</span><span class="nx">getSystemVersion</span><span class="p">(),</span>
+          <span class="na">deviceId</span><span class="p">:</span> <span class="k">await</span> <span class="nx">DeviceInfo</span><span class="p">.</span><span class="nx">getDeviceId</span><span class="p">(),</span>
+          <span class="na">deviceName</span><span class="p">:</span> <span class="k">await</span> <span class="nx">DeviceInfo</span><span class="p">.</span><span class="nx">getDeviceName</span><span class="p">(),</span>
+          
+          <span class="c1">// Screen info</span>
+          <span class="na">screenWidth</span><span class="p">:</span> <span class="nx">Dimensions</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">window</span><span class="dl">'</span><span class="p">).</span><span class="nx">width</span><span class="p">,</span>
+          <span class="na">screenHeight</span><span class="p">:</span> <span class="nx">Dimensions</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">window</span><span class="dl">'</span><span class="p">).</span><span class="nx">height</span><span class="p">,</span>
+          <span class="na">pixelRatio</span><span class="p">:</span> <span class="nx">PixelRatio</span><span class="p">.</span><span class="kd">get</span><span class="p">(),</span>
+          <span class="na">fontScale</span><span class="p">:</span> <span class="nx">PixelRatio</span><span class="p">.</span><span class="nx">getFontScale</span><span class="p">(),</span>
+          
+          <span class="c1">// Device type</span>
+          <span class="na">isTablet</span><span class="p">:</span> <span class="k">await</span> <span class="nx">DeviceInfo</span><span class="p">.</span><span class="nx">isTablet</span><span class="p">(),</span>
+          <span class="na">isEmulator</span><span class="p">:</span> <span class="k">await</span> <span class="nx">DeviceInfo</span><span class="p">.</span><span class="nx">isEmulator</span><span class="p">(),</span>
+          <span class="na">isPhysicalDevice</span><span class="p">:</span> <span class="k">await</span> <span class="nx">DeviceInfo</span><span class="p">.</span><span class="nx">isPhysicalDevice</span><span class="p">(),</span>
+          
+          <span class="c1">// Platform specific</span>
+          <span class="na">platform</span><span class="p">:</span> <span class="nx">Platform</span><span class="p">.</span><span class="nx">OS</span><span class="p">,</span>
+          <span class="na">platformVersion</span><span class="p">:</span> <span class="nx">Platform</span><span class="p">.</span><span class="nx">Version</span><span class="p">,</span>
+        <span class="p">};</span>
+        
+        <span class="nx">setDeviceInfo</span><span class="p">(</span><span class="nx">info</span><span class="p">);</span>
+      <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Error getting device info:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">};</span>
+
+    <span class="nx">getDeviceInfo</span><span class="p">();</span>
+  <span class="p">},</span> <span class="p">[]);</span>
+
+  <span class="k">return</span> <span class="nx">deviceInfo</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="2-advanced-device-classification">2. Advanced Device Classification</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Dimensions</span><span class="p">,</span> <span class="nx">PixelRatio</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">DeviceInfo</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native-device-info</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">classifyDevice</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">{</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">Dimensions</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">window</span><span class="dl">'</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="nx">pixelRatio</span> <span class="o">=</span> <span class="nx">PixelRatio</span><span class="p">.</span><span class="kd">get</span><span class="p">();</span>
+  <span class="kd">const</span> <span class="nx">diagonal</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">sqrt</span><span class="p">(</span><span class="nx">width</span> <span class="o">*</span> <span class="nx">width</span> <span class="o">+</span> <span class="nx">height</span> <span class="o">*</span> <span class="nx">height</span><span class="p">)</span> <span class="o">/</span> <span class="nx">PixelRatio</span><span class="p">.</span><span class="kd">get</span><span class="p">();</span>
+  
+  <span class="c1">// Device size classification</span>
+  <span class="kd">let</span> <span class="nx">deviceSize</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">phone</span><span class="dl">'</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">diagonal</span> <span class="o">&gt;=</span> <span class="mi">7</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">deviceSize</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">tablet</span><span class="dl">'</span><span class="p">;</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">diagonal</span> <span class="o">&gt;=</span> <span class="mi">6</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">deviceSize</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">phablet</span><span class="dl">'</span><span class="p">;</span>
+  <span class="p">}</span>
+  
+  <span class="c1">// Performance classification based on device model</span>
+  <span class="kd">const</span> <span class="nx">model</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">DeviceInfo</span><span class="p">.</span><span class="nx">getModel</span><span class="p">();</span>
+  <span class="kd">const</span> <span class="nx">systemVersion</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">DeviceInfo</span><span class="p">.</span><span class="nx">getSystemVersion</span><span class="p">();</span>
+  
+  <span class="kd">let</span> <span class="nx">performanceTier</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">low</span><span class="dl">'</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">model</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="dl">'</span><span class="s1">iPhone 12</span><span class="dl">'</span><span class="p">)</span> <span class="o">||</span> <span class="nx">model</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="dl">'</span><span class="s1">iPhone 13</span><span class="dl">'</span><span class="p">)</span> <span class="o">||</span> <span class="nx">model</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="dl">'</span><span class="s1">iPhone 14</span><span class="dl">'</span><span class="p">))</span> <span class="p">{</span>
+    <span class="nx">performanceTier</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">high</span><span class="dl">'</span><span class="p">;</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">model</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="dl">'</span><span class="s1">iPhone 11</span><span class="dl">'</span><span class="p">)</span> <span class="o">||</span> <span class="nx">model</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="dl">'</span><span class="s1">iPhone X</span><span class="dl">'</span><span class="p">))</span> <span class="p">{</span>
+    <span class="nx">performanceTier</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">medium</span><span class="dl">'</span><span class="p">;</span>
+  <span class="p">}</span>
+  
+  <span class="c1">// Android performance classification</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">Platform</span><span class="p">.</span><span class="nx">OS</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">android</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">brand</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">DeviceInfo</span><span class="p">.</span><span class="nx">getBrand</span><span class="p">();</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">brand</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">Samsung</span><span class="dl">'</span> <span class="o">&amp;&amp;</span> <span class="nx">model</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="dl">'</span><span class="s1">Galaxy S2</span><span class="dl">'</span><span class="p">))</span> <span class="p">{</span>
+      <span class="nx">performanceTier</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">high</span><span class="dl">'</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">brand</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">Samsung</span><span class="dl">'</span> <span class="o">&amp;&amp;</span> <span class="nx">model</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="dl">'</span><span class="s1">Galaxy S</span><span class="dl">'</span><span class="p">))</span> <span class="p">{</span>
+      <span class="nx">performanceTier</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">medium</span><span class="dl">'</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="nx">deviceSize</span><span class="p">,</span>
+    <span class="nx">performanceTier</span><span class="p">,</span>
+    <span class="nx">diagonal</span><span class="p">,</span>
+    <span class="nx">pixelRatio</span><span class="p">,</span>
+    <span class="na">isHighPerformance</span><span class="p">:</span> <span class="nx">performanceTier</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">high</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">isLowPerformance</span><span class="p">:</span> <span class="nx">performanceTier</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">low</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">};</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">useDeviceClassification</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">classification</span><span class="p">,</span> <span class="nx">setClassification</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">classifyDevice</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="nx">setClassification</span><span class="p">);</span>
+  <span class="p">},</span> <span class="p">[]);</span>
+
+  <span class="k">return</span> <span class="nx">classification</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h2 id="camera-and-media-capabilities">Camera and Media Capabilities</h2>
+
+<h3 id="1-camera-detection">1. Camera Detection</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Platform</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Camera</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native-camera</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">useCameraCapabilities</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">cameraInfo</span><span class="p">,</span> <span class="nx">setCameraInfo</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">checkCameraCapabilities</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">try</span> <span class="p">{</span>
+        <span class="c1">// Check if camera is available</span>
+        <span class="kd">const</span> <span class="nx">isAvailable</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">Camera</span><span class="p">.</span><span class="nx">checkDeviceAuthorizationStatus</span><span class="p">();</span>
+        
+        <span class="k">if</span> <span class="p">(</span><span class="nx">isAvailable</span><span class="p">)</span> <span class="p">{</span>
+          <span class="c1">// Get available camera types</span>
+          <span class="kd">const</span> <span class="nx">cameraTypes</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">Camera</span><span class="p">.</span><span class="nx">getAvailableCameraTypes</span><span class="p">();</span>
+          
+          <span class="c1">// Check for specific camera features</span>
+          <span class="kd">const</span> <span class="nx">hasFlash</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">Camera</span><span class="p">.</span><span class="nx">hasFlash</span><span class="p">();</span>
+          <span class="kd">const</span> <span class="nx">hasTorch</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">Camera</span><span class="p">.</span><span class="nx">hasTorch</span><span class="p">();</span>
+          
+          <span class="nx">setCameraInfo</span><span class="p">({</span>
+            <span class="na">isAvailable</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+            <span class="nx">cameraTypes</span><span class="p">,</span>
+            <span class="nx">hasFlash</span><span class="p">,</span>
+            <span class="nx">hasTorch</span><span class="p">,</span>
+            <span class="na">canTakePhotos</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+            <span class="na">canRecordVideo</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+          <span class="p">});</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+          <span class="nx">setCameraInfo</span><span class="p">({</span>
+            <span class="na">isAvailable</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="na">cameraTypes</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="na">hasFlash</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="na">hasTorch</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="na">canTakePhotos</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="na">canRecordVideo</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+          <span class="p">});</span>
+        <span class="p">}</span>
+      <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Error checking camera capabilities:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+        <span class="nx">setCameraInfo</span><span class="p">({</span>
+          <span class="na">isAvailable</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+          <span class="na">error</span><span class="p">:</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">,</span>
+        <span class="p">});</span>
+      <span class="p">}</span>
+    <span class="p">};</span>
+
+    <span class="nx">checkCameraCapabilities</span><span class="p">();</span>
+  <span class="p">},</span> <span class="p">[]);</span>
+
+  <span class="k">return</span> <span class="nx">cameraInfo</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="2-media-library-detection">2. Media Library Detection</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Platform</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">MediaLibrary</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">expo-media-library</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">useMediaLibraryCapabilities</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">mediaInfo</span><span class="p">,</span> <span class="nx">setMediaInfo</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">checkMediaCapabilities</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">try</span> <span class="p">{</span>
+        <span class="c1">// Check media library permissions</span>
+        <span class="kd">const</span> <span class="p">{</span> <span class="nx">status</span> <span class="p">}</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">MediaLibrary</span><span class="p">.</span><span class="nx">requestPermissionsAsync</span><span class="p">();</span>
+        
+        <span class="k">if</span> <span class="p">(</span><span class="nx">status</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">granted</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+          <span class="c1">// Get available media types</span>
+          <span class="kd">const</span> <span class="nx">mediaTypes</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">MediaLibrary</span><span class="p">.</span><span class="nx">getMediaTypesAsync</span><span class="p">();</span>
+          
+          <span class="c1">// Check for specific capabilities</span>
+          <span class="kd">const</span> <span class="nx">canCreateAlbum</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">MediaLibrary</span><span class="p">.</span><span class="nx">canCreateAlbumAsync</span><span class="p">();</span>
+          <span class="kd">const</span> <span class="nx">canDeleteAssets</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">MediaLibrary</span><span class="p">.</span><span class="nx">canDeleteAssetsAsync</span><span class="p">();</span>
+          
+          <span class="nx">setMediaInfo</span><span class="p">({</span>
+            <span class="na">hasPermission</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+            <span class="nx">mediaTypes</span><span class="p">,</span>
+            <span class="nx">canCreateAlbum</span><span class="p">,</span>
+            <span class="nx">canDeleteAssets</span><span class="p">,</span>
+            <span class="na">canAccessPhotos</span><span class="p">:</span> <span class="nx">mediaTypes</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="dl">'</span><span class="s1">photo</span><span class="dl">'</span><span class="p">),</span>
+            <span class="na">canAccessVideos</span><span class="p">:</span> <span class="nx">mediaTypes</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="dl">'</span><span class="s1">video</span><span class="dl">'</span><span class="p">),</span>
+            <span class="na">canAccessAudio</span><span class="p">:</span> <span class="nx">mediaTypes</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="dl">'</span><span class="s1">audio</span><span class="dl">'</span><span class="p">),</span>
+          <span class="p">});</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+          <span class="nx">setMediaInfo</span><span class="p">({</span>
+            <span class="na">hasPermission</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="na">mediaTypes</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="na">canCreateAlbum</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="na">canDeleteAssets</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="na">canAccessPhotos</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="na">canAccessVideos</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="na">canAccessAudio</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+          <span class="p">});</span>
+        <span class="p">}</span>
+      <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Error checking media capabilities:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+        <span class="nx">setMediaInfo</span><span class="p">({</span>
+          <span class="na">hasPermission</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+          <span class="na">error</span><span class="p">:</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">,</span>
+        <span class="p">});</span>
+      <span class="p">}</span>
+    <span class="p">};</span>
+
+    <span class="nx">checkMediaCapabilities</span><span class="p">();</span>
+  <span class="p">},</span> <span class="p">[]);</span>
+
+  <span class="k">return</span> <span class="nx">mediaInfo</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h2 id="network-and-connectivity">Network and Connectivity</h2>
+
+<h3 id="1-network-capabilities">1. Network Capabilities</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">NetInfo</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@react-native-netinfo/netinfo</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">useNetworkCapabilities</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">networkInfo</span><span class="p">,</span> <span class="nx">setNetworkInfo</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">checkNetworkCapabilities</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">try</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">state</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">NetInfo</span><span class="p">.</span><span class="nx">fetch</span><span class="p">();</span>
+        
+        <span class="kd">const</span> <span class="nx">capabilities</span> <span class="o">=</span> <span class="p">{</span>
+          <span class="na">isConnected</span><span class="p">:</span> <span class="nx">state</span><span class="p">.</span><span class="nx">isConnected</span><span class="p">,</span>
+          <span class="na">type</span><span class="p">:</span> <span class="nx">state</span><span class="p">.</span><span class="nx">type</span><span class="p">,</span>
+          <span class="na">isInternetReachable</span><span class="p">:</span> <span class="nx">state</span><span class="p">.</span><span class="nx">isInternetReachable</span><span class="p">,</span>
+          <span class="na">isWifiEnabled</span><span class="p">:</span> <span class="nx">state</span><span class="p">.</span><span class="nx">type</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">wifi</span><span class="dl">'</span><span class="p">,</span>
+          <span class="na">isCellularEnabled</span><span class="p">:</span> <span class="nx">state</span><span class="p">.</span><span class="nx">type</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">cellular</span><span class="dl">'</span><span class="p">,</span>
+          <span class="na">isEthernetEnabled</span><span class="p">:</span> <span class="nx">state</span><span class="p">.</span><span class="nx">type</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">ethernet</span><span class="dl">'</span><span class="p">,</span>
+          <span class="na">isBluetoothEnabled</span><span class="p">:</span> <span class="nx">state</span><span class="p">.</span><span class="nx">type</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">bluetooth</span><span class="dl">'</span><span class="p">,</span>
+          <span class="na">isWimaxEnabled</span><span class="p">:</span> <span class="nx">state</span><span class="p">.</span><span class="nx">type</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">wimax</span><span class="dl">'</span><span class="p">,</span>
+          <span class="na">isVpnEnabled</span><span class="p">:</span> <span class="nx">state</span><span class="p">.</span><span class="nx">type</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">vpn</span><span class="dl">'</span><span class="p">,</span>
+          <span class="na">isWifiConnected</span><span class="p">:</span> <span class="nx">state</span><span class="p">.</span><span class="nx">type</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">wifi</span><span class="dl">'</span> <span class="o">&amp;&amp;</span> <span class="nx">state</span><span class="p">.</span><span class="nx">isConnected</span><span class="p">,</span>
+          <span class="na">isCellularConnected</span><span class="p">:</span> <span class="nx">state</span><span class="p">.</span><span class="nx">type</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">cellular</span><span class="dl">'</span> <span class="o">&amp;&amp;</span> <span class="nx">state</span><span class="p">.</span><span class="nx">isConnected</span><span class="p">,</span>
+        <span class="p">};</span>
+        
+        <span class="nx">setNetworkInfo</span><span class="p">(</span><span class="nx">capabilities</span><span class="p">);</span>
+      <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Error checking network capabilities:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+        <span class="nx">setNetworkInfo</span><span class="p">({</span>
+          <span class="na">isConnected</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+          <span class="na">error</span><span class="p">:</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">,</span>
+        <span class="p">});</span>
+      <span class="p">}</span>
+    <span class="p">};</span>
+
+    <span class="nx">checkNetworkCapabilities</span><span class="p">();</span>
+    
+    <span class="kd">const</span> <span class="nx">unsubscribe</span> <span class="o">=</span> <span class="nx">NetInfo</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="nx">state</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">setNetworkInfo</span><span class="p">(</span><span class="nx">prev</span> <span class="o">=&gt;</span> <span class="p">({</span>
+        <span class="p">...</span><span class="nx">prev</span><span class="p">,</span>
+        <span class="na">isConnected</span><span class="p">:</span> <span class="nx">state</span><span class="p">.</span><span class="nx">isConnected</span><span class="p">,</span>
+        <span class="na">type</span><span class="p">:</span> <span class="nx">state</span><span class="p">.</span><span class="nx">type</span><span class="p">,</span>
+        <span class="na">isInternetReachable</span><span class="p">:</span> <span class="nx">state</span><span class="p">.</span><span class="nx">isInternetReachable</span><span class="p">,</span>
+      <span class="p">}));</span>
+    <span class="p">});</span>
+
+    <span class="k">return</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">unsubscribe</span><span class="p">();</span>
+  <span class="p">},</span> <span class="p">[]);</span>
+
+  <span class="k">return</span> <span class="nx">networkInfo</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="2-network-speed-detection">2. Network Speed Detection</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">NetInfo</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@react-native-netinfo/netinfo</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">useNetworkSpeed</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">networkSpeed</span><span class="p">,</span> <span class="nx">setNetworkSpeed</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">measureNetworkSpeed</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">try</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">startTime</span> <span class="o">=</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
+        
+        <span class="c1">// Simple speed test by fetching a small resource</span>
+        <span class="kd">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://httpbin.org/bytes/1024</span><span class="dl">'</span><span class="p">);</span>
+        <span class="kd">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">response</span><span class="p">.</span><span class="nx">blob</span><span class="p">();</span>
+        
+        <span class="kd">const</span> <span class="nx">endTime</span> <span class="o">=</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
+        <span class="kd">const</span> <span class="nx">duration</span> <span class="o">=</span> <span class="nx">endTime</span> <span class="o">-</span> <span class="nx">startTime</span><span class="p">;</span>
+        <span class="kd">const</span> <span class="nx">bytesPerSecond</span> <span class="o">=</span> <span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">size</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">)</span> <span class="o">/</span> <span class="nx">duration</span><span class="p">;</span>
+        <span class="kd">const</span> <span class="nx">kbps</span> <span class="o">=</span> <span class="nx">bytesPerSecond</span> <span class="o">/</span> <span class="mi">1024</span><span class="p">;</span>
+        <span class="kd">const</span> <span class="nx">mbps</span> <span class="o">=</span> <span class="nx">kbps</span> <span class="o">/</span> <span class="mi">1024</span><span class="p">;</span>
+        
+        <span class="kd">let</span> <span class="nx">speedCategory</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">slow</span><span class="dl">'</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">mbps</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">speedCategory</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">fast</span><span class="dl">'</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">mbps</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">speedCategory</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">medium</span><span class="dl">'</span><span class="p">;</span>
+        <span class="p">}</span>
+        
+        <span class="nx">setNetworkSpeed</span><span class="p">({</span>
+          <span class="na">kbps</span><span class="p">:</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">round</span><span class="p">(</span><span class="nx">kbps</span><span class="p">),</span>
+          <span class="na">mbps</span><span class="p">:</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">round</span><span class="p">(</span><span class="nx">mbps</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span> <span class="o">/</span> <span class="mi">100</span><span class="p">,</span>
+          <span class="nx">speedCategory</span><span class="p">,</span>
+          <span class="na">isFast</span><span class="p">:</span> <span class="nx">speedCategory</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">fast</span><span class="dl">'</span><span class="p">,</span>
+          <span class="na">isMedium</span><span class="p">:</span> <span class="nx">speedCategory</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">medium</span><span class="dl">'</span><span class="p">,</span>
+          <span class="na">isSlow</span><span class="p">:</span> <span class="nx">speedCategory</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">slow</span><span class="dl">'</span><span class="p">,</span>
+        <span class="p">});</span>
+      <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Error measuring network speed:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+        <span class="nx">setNetworkSpeed</span><span class="p">({</span>
+          <span class="na">kbps</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+          <span class="na">mbps</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+          <span class="na">speedCategory</span><span class="p">:</span> <span class="dl">'</span><span class="s1">unknown</span><span class="dl">'</span><span class="p">,</span>
+          <span class="na">error</span><span class="p">:</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">,</span>
+        <span class="p">});</span>
+      <span class="p">}</span>
+    <span class="p">};</span>
+
+    <span class="nx">measureNetworkSpeed</span><span class="p">();</span>
+  <span class="p">},</span> <span class="p">[]);</span>
+
+  <span class="k">return</span> <span class="nx">networkSpeed</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h2 id="sensor-capabilities">Sensor Capabilities</h2>
+
+<h3 id="1-motion-sensors">1. Motion Sensors</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Accelerometer</span><span class="p">,</span> <span class="nx">Gyroscope</span><span class="p">,</span> <span class="nx">Magnetometer</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native-sensors</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">useMotionSensors</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">sensorInfo</span><span class="p">,</span> <span class="nx">setSensorInfo</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">checkMotionSensors</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">try</span> <span class="p">{</span>
+        <span class="c1">// Check accelerometer</span>
+        <span class="kd">const</span> <span class="nx">accelerometerAvailable</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">Accelerometer</span><span class="p">.</span><span class="nx">isAvailable</span><span class="p">();</span>
+        
+        <span class="c1">// Check gyroscope</span>
+        <span class="kd">const</span> <span class="nx">gyroscopeAvailable</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">Gyroscope</span><span class="p">.</span><span class="nx">isAvailable</span><span class="p">();</span>
+        
+        <span class="c1">// Check magnetometer</span>
+        <span class="kd">const</span> <span class="nx">magnetometerAvailable</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">Magnetometer</span><span class="p">.</span><span class="nx">isAvailable</span><span class="p">();</span>
+        
+        <span class="nx">setSensorInfo</span><span class="p">({</span>
+          <span class="na">hasAccelerometer</span><span class="p">:</span> <span class="nx">accelerometerAvailable</span><span class="p">,</span>
+          <span class="na">hasGyroscope</span><span class="p">:</span> <span class="nx">gyroscopeAvailable</span><span class="p">,</span>
+          <span class="na">hasMagnetometer</span><span class="p">:</span> <span class="nx">magnetometerAvailable</span><span class="p">,</span>
+          <span class="na">hasMotionSensors</span><span class="p">:</span> <span class="nx">accelerometerAvailable</span> <span class="o">||</span> <span class="nx">gyroscopeAvailable</span><span class="p">,</span>
+          <span class="na">hasCompass</span><span class="p">:</span> <span class="nx">magnetometerAvailable</span><span class="p">,</span>
+        <span class="p">});</span>
+      <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Error checking motion sensors:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+        <span class="nx">setSensorInfo</span><span class="p">({</span>
+          <span class="na">hasAccelerometer</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+          <span class="na">hasGyroscope</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+          <span class="na">hasMagnetometer</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+          <span class="na">hasMotionSensors</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+          <span class="na">hasCompass</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+          <span class="na">error</span><span class="p">:</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">,</span>
+        <span class="p">});</span>
+      <span class="p">}</span>
+    <span class="p">};</span>
+
+    <span class="nx">checkMotionSensors</span><span class="p">();</span>
+  <span class="p">},</span> <span class="p">[]);</span>
+
+  <span class="k">return</span> <span class="nx">sensorInfo</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="2-biometric-sensors">2. Biometric Sensors</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">TouchID</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native-touch-id</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Platform</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">useBiometricCapabilities</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">biometricInfo</span><span class="p">,</span> <span class="nx">setBiometricInfo</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">checkBiometricCapabilities</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">try</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">Platform</span><span class="p">.</span><span class="nx">OS</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">ios</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+          <span class="c1">// Check Touch ID availability</span>
+          <span class="kd">const</span> <span class="nx">touchIdAvailable</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">TouchID</span><span class="p">.</span><span class="nx">isSupported</span><span class="p">();</span>
+          
+          <span class="c1">// Check Face ID availability</span>
+          <span class="kd">const</span> <span class="nx">faceIdAvailable</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">TouchID</span><span class="p">.</span><span class="nx">isSupported</span><span class="p">({</span> <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">FaceID</span><span class="dl">'</span> <span class="p">});</span>
+          
+          <span class="nx">setBiometricInfo</span><span class="p">({</span>
+            <span class="na">hasTouchID</span><span class="p">:</span> <span class="nx">touchIdAvailable</span><span class="p">,</span>
+            <span class="na">hasFaceID</span><span class="p">:</span> <span class="nx">faceIdAvailable</span><span class="p">,</span>
+            <span class="na">hasBiometrics</span><span class="p">:</span> <span class="nx">touchIdAvailable</span> <span class="o">||</span> <span class="nx">faceIdAvailable</span><span class="p">,</span>
+            <span class="na">biometricType</span><span class="p">:</span> <span class="nx">faceIdAvailable</span> <span class="p">?</span> <span class="dl">'</span><span class="s1">FaceID</span><span class="dl">'</span> <span class="p">:</span> <span class="nx">touchIdAvailable</span> <span class="p">?</span> <span class="dl">'</span><span class="s1">TouchID</span><span class="dl">'</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">none</span><span class="dl">'</span><span class="p">,</span>
+          <span class="p">});</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">Platform</span><span class="p">.</span><span class="nx">OS</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">android</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+          <span class="c1">// Check fingerprint availability</span>
+          <span class="kd">const</span> <span class="nx">fingerprintAvailable</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">TouchID</span><span class="p">.</span><span class="nx">isSupported</span><span class="p">();</span>
+          
+          <span class="nx">setBiometricInfo</span><span class="p">({</span>
+            <span class="na">hasFingerprint</span><span class="p">:</span> <span class="nx">fingerprintAvailable</span><span class="p">,</span>
+            <span class="na">hasBiometrics</span><span class="p">:</span> <span class="nx">fingerprintAvailable</span><span class="p">,</span>
+            <span class="na">biometricType</span><span class="p">:</span> <span class="nx">fingerprintAvailable</span> <span class="p">?</span> <span class="dl">'</span><span class="s1">Fingerprint</span><span class="dl">'</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">none</span><span class="dl">'</span><span class="p">,</span>
+          <span class="p">});</span>
+        <span class="p">}</span>
+      <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Error checking biometric capabilities:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+        <span class="nx">setBiometricInfo</span><span class="p">({</span>
+          <span class="na">hasBiometrics</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+          <span class="na">biometricType</span><span class="p">:</span> <span class="dl">'</span><span class="s1">none</span><span class="dl">'</span><span class="p">,</span>
+          <span class="na">error</span><span class="p">:</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">,</span>
+        <span class="p">});</span>
+      <span class="p">}</span>
+    <span class="p">};</span>
+
+    <span class="nx">checkBiometricCapabilities</span><span class="p">();</span>
+  <span class="p">},</span> <span class="p">[]);</span>
+
+  <span class="k">return</span> <span class="nx">biometricInfo</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h2 id="storage-capabilities">Storage Capabilities</h2>
+
+<h3 id="1-storage-detection">1. Storage Detection</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Platform</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">RNFS</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native-fs</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">useStorageCapabilities</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">storageInfo</span><span class="p">,</span> <span class="nx">setStorageInfo</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">checkStorageCapabilities</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">try</span> <span class="p">{</span>
+        <span class="c1">// Get available storage paths</span>
+        <span class="kd">const</span> <span class="nx">paths</span> <span class="o">=</span> <span class="p">{</span>
+          <span class="na">mainBundle</span><span class="p">:</span> <span class="nx">RNFS</span><span class="p">.</span><span class="nx">MainBundlePath</span><span class="p">,</span>
+          <span class="na">cachesDirectory</span><span class="p">:</span> <span class="nx">RNFS</span><span class="p">.</span><span class="nx">CachesDirectoryPath</span><span class="p">,</span>
+          <span class="na">documentDirectory</span><span class="p">:</span> <span class="nx">RNFS</span><span class="p">.</span><span class="nx">DocumentDirectoryPath</span><span class="p">,</span>
+          <span class="na">externalDirectory</span><span class="p">:</span> <span class="nx">RNFS</span><span class="p">.</span><span class="nx">ExternalDirectoryPath</span><span class="p">,</span>
+          <span class="na">externalCachesDirectory</span><span class="p">:</span> <span class="nx">RNFS</span><span class="p">.</span><span class="nx">ExternalCachesDirectoryPath</span><span class="p">,</span>
+          <span class="na">externalStorageDirectory</span><span class="p">:</span> <span class="nx">RNFS</span><span class="p">.</span><span class="nx">ExternalStorageDirectoryPath</span><span class="p">,</span>
+        <span class="p">};</span>
+        
+        <span class="c1">// Check available storage space</span>
+        <span class="kd">const</span> <span class="nx">availableSpace</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">RNFS</span><span class="p">.</span><span class="nx">getFSInfo</span><span class="p">();</span>
+        
+        <span class="c1">// Check if external storage is available</span>
+        <span class="kd">const</span> <span class="nx">externalStorageAvailable</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">RNFS</span><span class="p">.</span><span class="nx">exists</span><span class="p">(</span><span class="nx">RNFS</span><span class="p">.</span><span class="nx">ExternalStorageDirectoryPath</span><span class="p">);</span>
+        
+        <span class="nx">setStorageInfo</span><span class="p">({</span>
+          <span class="nx">paths</span><span class="p">,</span>
+          <span class="nx">availableSpace</span><span class="p">,</span>
+          <span class="nx">externalStorageAvailable</span><span class="p">,</span>
+          <span class="na">canWriteToExternal</span><span class="p">:</span> <span class="nx">externalStorageAvailable</span><span class="p">,</span>
+          <span class="na">canWriteToInternal</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+          <span class="na">totalSpace</span><span class="p">:</span> <span class="nx">availableSpace</span><span class="p">.</span><span class="nx">totalSpace</span><span class="p">,</span>
+          <span class="na">freeSpace</span><span class="p">:</span> <span class="nx">availableSpace</span><span class="p">.</span><span class="nx">freeSpace</span><span class="p">,</span>
+        <span class="p">});</span>
+      <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Error checking storage capabilities:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+        <span class="nx">setStorageInfo</span><span class="p">({</span>
+          <span class="na">error</span><span class="p">:</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">,</span>
+        <span class="p">});</span>
+      <span class="p">}</span>
+    <span class="p">};</span>
+
+    <span class="nx">checkStorageCapabilities</span><span class="p">();</span>
+  <span class="p">},</span> <span class="p">[]);</span>
+
+  <span class="k">return</span> <span class="nx">storageInfo</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="2-database-capabilities">2. Database Capabilities</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">SQLite</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native-sqlite-storage</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">useDatabaseCapabilities</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">dbInfo</span><span class="p">,</span> <span class="nx">setDbInfo</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">checkDatabaseCapabilities</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">try</span> <span class="p">{</span>
+        <span class="c1">// Check if SQLite is available</span>
+        <span class="kd">const</span> <span class="nx">isAvailable</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">SQLite</span><span class="p">.</span><span class="nx">isAvailable</span><span class="p">();</span>
+        
+        <span class="k">if</span> <span class="p">(</span><span class="nx">isAvailable</span><span class="p">)</span> <span class="p">{</span>
+          <span class="c1">// Test database creation</span>
+          <span class="kd">const</span> <span class="nx">db</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">SQLite</span><span class="p">.</span><span class="nx">openDatabase</span><span class="p">({</span>
+            <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">test.db</span><span class="dl">'</span><span class="p">,</span>
+            <span class="na">location</span><span class="p">:</span> <span class="dl">'</span><span class="s1">default</span><span class="dl">'</span><span class="p">,</span>
+          <span class="p">});</span>
+          
+          <span class="c1">// Test basic operations</span>
+          <span class="k">await</span> <span class="nx">db</span><span class="p">.</span><span class="nx">transaction</span><span class="p">(</span><span class="nx">tx</span> <span class="o">=&gt;</span> <span class="p">{</span>
+            <span class="nx">tx</span><span class="p">.</span><span class="nx">executeSql</span><span class="p">(</span>
+              <span class="dl">'</span><span class="s1">CREATE TABLE IF NOT EXISTS test (id INTEGER PRIMARY KEY, name TEXT)</span><span class="dl">'</span><span class="p">,</span>
+              <span class="p">[],</span>
+              <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Table created successfully</span><span class="dl">'</span><span class="p">),</span>
+              <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Error creating table:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">)</span>
+            <span class="p">);</span>
+          <span class="p">});</span>
+          
+          <span class="k">await</span> <span class="nx">db</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
+          
+          <span class="nx">setDbInfo</span><span class="p">({</span>
+            <span class="na">isAvailable</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+            <span class="na">canCreateTables</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+            <span class="na">canExecuteQueries</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+            <span class="na">canHandleTransactions</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+          <span class="p">});</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+          <span class="nx">setDbInfo</span><span class="p">({</span>
+            <span class="na">isAvailable</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="na">canCreateTables</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="na">canExecuteQueries</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="na">canHandleTransactions</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+          <span class="p">});</span>
+        <span class="p">}</span>
+      <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Error checking database capabilities:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+        <span class="nx">setDbInfo</span><span class="p">({</span>
+          <span class="na">isAvailable</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+          <span class="na">error</span><span class="p">:</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">,</span>
+        <span class="p">});</span>
+      <span class="p">}</span>
+    <span class="p">};</span>
+
+    <span class="nx">checkDatabaseCapabilities</span><span class="p">();</span>
+  <span class="p">},</span> <span class="p">[]);</span>
+
+  <span class="k">return</span> <span class="nx">dbInfo</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h2 id="performance-capabilities">Performance Capabilities</h2>
+
+<h3 id="1-performance-detection">1. Performance Detection</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Platform</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">DeviceInfo</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native-device-info</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">usePerformanceCapabilities</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">performanceInfo</span><span class="p">,</span> <span class="nx">setPerformanceInfo</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">checkPerformanceCapabilities</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">try</span> <span class="p">{</span>
+        <span class="c1">// Get device model and system info</span>
+        <span class="kd">const</span> <span class="nx">model</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">DeviceInfo</span><span class="p">.</span><span class="nx">getModel</span><span class="p">();</span>
+        <span class="kd">const</span> <span class="nx">systemVersion</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">DeviceInfo</span><span class="p">.</span><span class="nx">getSystemVersion</span><span class="p">();</span>
+        <span class="kd">const</span> <span class="nx">brand</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">DeviceInfo</span><span class="p">.</span><span class="nx">getBrand</span><span class="p">();</span>
+        
+        <span class="c1">// Determine performance tier based on device</span>
+        <span class="kd">let</span> <span class="nx">performanceTier</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">low</span><span class="dl">'</span><span class="p">;</span>
+        <span class="kd">let</span> <span class="nx">canHandleHeavyAnimations</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+        <span class="kd">let</span> <span class="nx">canHandleLargeImages</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+        <span class="kd">let</span> <span class="nx">canHandleVideoProcessing</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+        
+        <span class="k">if</span> <span class="p">(</span><span class="nx">Platform</span><span class="p">.</span><span class="nx">OS</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">ios</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">if</span> <span class="p">(</span><span class="nx">model</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="dl">'</span><span class="s1">iPhone 12</span><span class="dl">'</span><span class="p">)</span> <span class="o">||</span> <span class="nx">model</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="dl">'</span><span class="s1">iPhone 13</span><span class="dl">'</span><span class="p">)</span> <span class="o">||</span> <span class="nx">model</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="dl">'</span><span class="s1">iPhone 14</span><span class="dl">'</span><span class="p">))</span> <span class="p">{</span>
+            <span class="nx">performanceTier</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">high</span><span class="dl">'</span><span class="p">;</span>
+            <span class="nx">canHandleHeavyAnimations</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+            <span class="nx">canHandleLargeImages</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+            <span class="nx">canHandleVideoProcessing</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+          <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">model</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="dl">'</span><span class="s1">iPhone 11</span><span class="dl">'</span><span class="p">)</span> <span class="o">||</span> <span class="nx">model</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="dl">'</span><span class="s1">iPhone X</span><span class="dl">'</span><span class="p">))</span> <span class="p">{</span>
+            <span class="nx">performanceTier</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">medium</span><span class="dl">'</span><span class="p">;</span>
+            <span class="nx">canHandleHeavyAnimations</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+            <span class="nx">canHandleLargeImages</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+            <span class="nx">canHandleVideoProcessing</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+          <span class="p">}</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">Platform</span><span class="p">.</span><span class="nx">OS</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">android</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">if</span> <span class="p">(</span><span class="nx">brand</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">Samsung</span><span class="dl">'</span> <span class="o">&amp;&amp;</span> <span class="nx">model</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="dl">'</span><span class="s1">Galaxy S2</span><span class="dl">'</span><span class="p">))</span> <span class="p">{</span>
+            <span class="nx">performanceTier</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">high</span><span class="dl">'</span><span class="p">;</span>
+            <span class="nx">canHandleHeavyAnimations</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+            <span class="nx">canHandleLargeImages</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+            <span class="nx">canHandleVideoProcessing</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+          <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">brand</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">Samsung</span><span class="dl">'</span> <span class="o">&amp;&amp;</span> <span class="nx">model</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="dl">'</span><span class="s1">Galaxy S</span><span class="dl">'</span><span class="p">))</span> <span class="p">{</span>
+            <span class="nx">performanceTier</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">medium</span><span class="dl">'</span><span class="p">;</span>
+            <span class="nx">canHandleHeavyAnimations</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+            <span class="nx">canHandleLargeImages</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+            <span class="nx">canHandleVideoProcessing</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+        
+        <span class="nx">setPerformanceInfo</span><span class="p">({</span>
+          <span class="nx">performanceTier</span><span class="p">,</span>
+          <span class="nx">canHandleHeavyAnimations</span><span class="p">,</span>
+          <span class="nx">canHandleLargeImages</span><span class="p">,</span>
+          <span class="nx">canHandleVideoProcessing</span><span class="p">,</span>
+          <span class="na">isHighPerformance</span><span class="p">:</span> <span class="nx">performanceTier</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">high</span><span class="dl">'</span><span class="p">,</span>
+          <span class="na">isMediumPerformance</span><span class="p">:</span> <span class="nx">performanceTier</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">medium</span><span class="dl">'</span><span class="p">,</span>
+          <span class="na">isLowPerformance</span><span class="p">:</span> <span class="nx">performanceTier</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">low</span><span class="dl">'</span><span class="p">,</span>
+        <span class="p">});</span>
+      <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Error checking performance capabilities:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+        <span class="nx">setPerformanceInfo</span><span class="p">({</span>
+          <span class="na">performanceTier</span><span class="p">:</span> <span class="dl">'</span><span class="s1">unknown</span><span class="dl">'</span><span class="p">,</span>
+          <span class="na">error</span><span class="p">:</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">,</span>
+        <span class="p">});</span>
+      <span class="p">}</span>
+    <span class="p">};</span>
+
+    <span class="nx">checkPerformanceCapabilities</span><span class="p">();</span>
+  <span class="p">},</span> <span class="p">[]);</span>
+
+  <span class="k">return</span> <span class="nx">performanceInfo</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="2-memory-capabilities">2. Memory Capabilities</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Platform</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">DeviceInfo</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native-device-info</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">useMemoryCapabilities</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">memoryInfo</span><span class="p">,</span> <span class="nx">setMemoryInfo</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">checkMemoryCapabilities</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">try</span> <span class="p">{</span>
+        <span class="c1">// Get total memory</span>
+        <span class="kd">const</span> <span class="nx">totalMemory</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">DeviceInfo</span><span class="p">.</span><span class="nx">getTotalMemory</span><span class="p">();</span>
+        
+        <span class="c1">// Get used memory</span>
+        <span class="kd">const</span> <span class="nx">usedMemory</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">DeviceInfo</span><span class="p">.</span><span class="nx">getUsedMemory</span><span class="p">();</span>
+        
+        <span class="c1">// Calculate available memory</span>
+        <span class="kd">const</span> <span class="nx">availableMemory</span> <span class="o">=</span> <span class="nx">totalMemory</span> <span class="o">-</span> <span class="nx">usedMemory</span><span class="p">;</span>
+        
+        <span class="c1">// Determine memory tier</span>
+        <span class="kd">let</span> <span class="nx">memoryTier</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">low</span><span class="dl">'</span><span class="p">;</span>
+        <span class="kd">let</span> <span class="nx">canHandleLargeDatasets</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+        <span class="kd">let</span> <span class="nx">canHandleImageCaching</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+        <span class="kd">let</span> <span class="nx">canHandleVideoCaching</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+        
+        <span class="k">if</span> <span class="p">(</span><span class="nx">totalMemory</span> <span class="o">&gt;=</span> <span class="mi">4000000000</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// 4GB</span>
+          <span class="nx">memoryTier</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">high</span><span class="dl">'</span><span class="p">;</span>
+          <span class="nx">canHandleLargeDatasets</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+          <span class="nx">canHandleImageCaching</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+          <span class="nx">canHandleVideoCaching</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">totalMemory</span> <span class="o">&gt;=</span> <span class="mi">2000000000</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// 2GB</span>
+          <span class="nx">memoryTier</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">medium</span><span class="dl">'</span><span class="p">;</span>
+          <span class="nx">canHandleLargeDatasets</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+          <span class="nx">canHandleImageCaching</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+          <span class="nx">canHandleVideoCaching</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+        <span class="p">}</span>
+        
+        <span class="nx">setMemoryInfo</span><span class="p">({</span>
+          <span class="nx">totalMemory</span><span class="p">,</span>
+          <span class="nx">usedMemory</span><span class="p">,</span>
+          <span class="nx">availableMemory</span><span class="p">,</span>
+          <span class="nx">memoryTier</span><span class="p">,</span>
+          <span class="nx">canHandleLargeDatasets</span><span class="p">,</span>
+          <span class="nx">canHandleImageCaching</span><span class="p">,</span>
+          <span class="nx">canHandleVideoCaching</span><span class="p">,</span>
+          <span class="na">isHighMemory</span><span class="p">:</span> <span class="nx">memoryTier</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">high</span><span class="dl">'</span><span class="p">,</span>
+          <span class="na">isMediumMemory</span><span class="p">:</span> <span class="nx">memoryTier</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">medium</span><span class="dl">'</span><span class="p">,</span>
+          <span class="na">isLowMemory</span><span class="p">:</span> <span class="nx">memoryTier</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">low</span><span class="dl">'</span><span class="p">,</span>
+        <span class="p">});</span>
+      <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Error checking memory capabilities:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+        <span class="nx">setMemoryInfo</span><span class="p">({</span>
+          <span class="na">error</span><span class="p">:</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">,</span>
+        <span class="p">});</span>
+      <span class="p">}</span>
+    <span class="p">};</span>
+
+    <span class="nx">checkMemoryCapabilities</span><span class="p">();</span>
+  <span class="p">},</span> <span class="p">[]);</span>
+
+  <span class="k">return</span> <span class="nx">memoryInfo</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h2 id="capability-based-feature-toggles">Capability-Based Feature Toggles</h2>
+
+<h3 id="1-feature-toggle-system">1. Feature Toggle System</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">useMemo</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">useDeviceInfo</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./useDeviceInfo</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">useCameraCapabilities</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./useCameraCapabilities</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">useNetworkCapabilities</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./useNetworkCapabilities</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">usePerformanceCapabilities</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./usePerformanceCapabilities</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">useFeatureToggles</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">deviceInfo</span> <span class="o">=</span> <span class="nx">useDeviceInfo</span><span class="p">();</span>
+  <span class="kd">const</span> <span class="nx">cameraInfo</span> <span class="o">=</span> <span class="nx">useCameraCapabilities</span><span class="p">();</span>
+  <span class="kd">const</span> <span class="nx">networkInfo</span> <span class="o">=</span> <span class="nx">useNetworkCapabilities</span><span class="p">();</span>
+  <span class="kd">const</span> <span class="nx">performanceInfo</span> <span class="o">=</span> <span class="nx">usePerformanceCapabilities</span><span class="p">();</span>
+  
+  <span class="kd">const</span> <span class="nx">featureToggles</span> <span class="o">=</span> <span class="nx">useMemo</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">deviceInfo</span> <span class="o">||</span> <span class="o">!</span><span class="nx">cameraInfo</span> <span class="o">||</span> <span class="o">!</span><span class="nx">networkInfo</span> <span class="o">||</span> <span class="o">!</span><span class="nx">performanceInfo</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+    <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="p">{</span>
+      <span class="c1">// Camera features</span>
+      <span class="na">canTakePhotos</span><span class="p">:</span> <span class="nx">cameraInfo</span><span class="p">.</span><span class="nx">isAvailable</span> <span class="o">&amp;&amp;</span> <span class="nx">cameraInfo</span><span class="p">.</span><span class="nx">canTakePhotos</span><span class="p">,</span>
+      <span class="na">canRecordVideo</span><span class="p">:</span> <span class="nx">cameraInfo</span><span class="p">.</span><span class="nx">isAvailable</span> <span class="o">&amp;&amp;</span> <span class="nx">cameraInfo</span><span class="p">.</span><span class="nx">canRecordVideo</span><span class="p">,</span>
+      <span class="na">canUseFlash</span><span class="p">:</span> <span class="nx">cameraInfo</span><span class="p">.</span><span class="nx">hasFlash</span><span class="p">,</span>
+      
+      <span class="c1">// Network features</span>
+      <span class="na">canSyncData</span><span class="p">:</span> <span class="nx">networkInfo</span><span class="p">.</span><span class="nx">isConnected</span> <span class="o">&amp;&amp;</span> <span class="nx">networkInfo</span><span class="p">.</span><span class="nx">isInternetReachable</span><span class="p">,</span>
+      <span class="na">canDownloadLargeFiles</span><span class="p">:</span> <span class="nx">networkInfo</span><span class="p">.</span><span class="nx">isConnected</span> <span class="o">&amp;&amp;</span> <span class="nx">networkInfo</span><span class="p">.</span><span class="nx">isWifiConnected</span><span class="p">,</span>
+      <span class="na">canStreamVideo</span><span class="p">:</span> <span class="nx">networkInfo</span><span class="p">.</span><span class="nx">isConnected</span> <span class="o">&amp;&amp;</span> <span class="nx">networkInfo</span><span class="p">.</span><span class="nx">isWifiConnected</span><span class="p">,</span>
+      
+      <span class="c1">// Performance features</span>
+      <span class="na">canShowHeavyAnimations</span><span class="p">:</span> <span class="nx">performanceInfo</span><span class="p">.</span><span class="nx">canHandleHeavyAnimations</span><span class="p">,</span>
+      <span class="na">canProcessLargeImages</span><span class="p">:</span> <span class="nx">performanceInfo</span><span class="p">.</span><span class="nx">canHandleLargeImages</span><span class="p">,</span>
+      <span class="na">canProcessVideo</span><span class="p">:</span> <span class="nx">performanceInfo</span><span class="p">.</span><span class="nx">canHandleVideoProcessing</span><span class="p">,</span>
+      
+      <span class="c1">// Device features</span>
+      <span class="na">canUseHapticFeedback</span><span class="p">:</span> <span class="nx">deviceInfo</span><span class="p">.</span><span class="nx">isPhysicalDevice</span><span class="p">,</span>
+      <span class="na">canUseBiometrics</span><span class="p">:</span> <span class="nx">deviceInfo</span><span class="p">.</span><span class="nx">isPhysicalDevice</span><span class="p">,</span>
+      <span class="na">canUseLocation</span><span class="p">:</span> <span class="nx">deviceInfo</span><span class="p">.</span><span class="nx">isPhysicalDevice</span><span class="p">,</span>
+      
+      <span class="c1">// UI features</span>
+      <span class="na">canShowComplexUI</span><span class="p">:</span> <span class="nx">performanceInfo</span><span class="p">.</span><span class="nx">isHighPerformance</span><span class="p">,</span>
+      <span class="na">canShowLargeImages</span><span class="p">:</span> <span class="nx">performanceInfo</span><span class="p">.</span><span class="nx">canHandleLargeImages</span><span class="p">,</span>
+      <span class="na">canShowVideoThumbnails</span><span class="p">:</span> <span class="nx">performanceInfo</span><span class="p">.</span><span class="nx">canHandleVideoProcessing</span><span class="p">,</span>
+    <span class="p">};</span>
+  <span class="p">},</span> <span class="p">[</span><span class="nx">deviceInfo</span><span class="p">,</span> <span class="nx">cameraInfo</span><span class="p">,</span> <span class="nx">networkInfo</span><span class="p">,</span> <span class="nx">performanceInfo</span><span class="p">]);</span>
+  
+  <span class="k">return</span> <span class="nx">featureToggles</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="2-adaptive-component-rendering">2. Adaptive Component Rendering</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">useFeatureToggles</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./useFeatureToggles</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">AdaptiveComponent</span> <span class="o">=</span> <span class="p">({</span> <span class="nx">children</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">featureToggles</span> <span class="o">=</span> <span class="nx">useFeatureToggles</span><span class="p">();</span>
+  
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">featureToggles</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="o">&lt;</span><span class="nx">LoadingSpinner</span> <span class="o">/&gt;</span><span class="p">;</span>
+  <span class="p">}</span>
+  
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">View</span><span class="o">&gt;</span>
+      <span class="p">{</span><span class="nx">featureToggles</span><span class="p">.</span><span class="nx">canShowHeavyAnimations</span> <span class="o">&amp;&amp;</span> <span class="p">(</span>
+        <span class="o">&lt;</span><span class="nx">AnimatedComponent</span> <span class="o">/&gt;</span>
+      <span class="p">)}</span>
+      
+      <span class="p">{</span><span class="nx">featureToggles</span><span class="p">.</span><span class="nx">canTakePhotos</span> <span class="o">&amp;&amp;</span> <span class="p">(</span>
+        <span class="o">&lt;</span><span class="nx">CameraComponent</span> <span class="o">/&gt;</span>
+      <span class="p">)}</span>
+      
+      <span class="p">{</span><span class="nx">featureToggles</span><span class="p">.</span><span class="nx">canSyncData</span> <span class="o">&amp;&amp;</span> <span class="p">(</span>
+        <span class="o">&lt;</span><span class="nx">SyncComponent</span> <span class="o">/&gt;</span>
+      <span class="p">)}</span>
+      
+      <span class="p">{</span><span class="nx">children</span><span class="p">}</span>
+    <span class="o">&lt;</span><span class="sr">/View</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h2 id="summary">Summary</h2>
+
+<p>Device capabilities detection in React Native includes:</p>
+
+<ol>
+  <li><strong>Hardware Detection</strong>: Device info, classification, performance tiers</li>
+  <li><strong>Camera and Media</strong>: Camera availability, media library access</li>
+  <li><strong>Network and Connectivity</strong>: Network types, speed detection</li>
+  <li><strong>Sensor Capabilities</strong>: Motion sensors, biometric sensors</li>
+  <li><strong>Storage Capabilities</strong>: Storage space, database availability</li>
+  <li><strong>Performance Capabilities</strong>: Performance tiers, memory capabilities</li>
+  <li><strong>Feature Toggles</strong>: Capability-based feature enabling/disabling</li>
+</ol>
+
+<h2 id="key-takeaways">Key Takeaways</h2>
+
+<ul>
+  <li>Use DeviceInfo library for comprehensive device information</li>
+  <li>Implement capability detection for all major hardware features</li>
+  <li>Create feature toggles based on device capabilities</li>
+  <li>Provide appropriate fallbacks for missing capabilities</li>
+  <li>Test on various devices to ensure proper capability detection</li>
+  <li>Use capability detection to optimize app performance</li>
+  <li>Implement adaptive UI based on device capabilities</li>
+  <li>Consider network conditions when enabling features</li>
+  <li>Monitor device performance and adjust features accordingly</li>
+  <li>Provide graceful degradation for unsupported features</li>
+</ul>
+
+
+        </main>
+        
+        <footer style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #ecf0f1; color: #666; text-align: center;">
+            <p>Interview Prep Documentation - Built with Jekyll</p>
+        </footer>
+    </div>
+</body>
+</html>

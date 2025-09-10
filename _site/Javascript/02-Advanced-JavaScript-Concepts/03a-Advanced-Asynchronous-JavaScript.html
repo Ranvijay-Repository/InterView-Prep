@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔹 Advanced Asynchronous JavaScript - Interview Prep Documentation</title>
+    <meta name="description" content="Comprehensive guides for JavaScript, TypeScript, and React Native interview preparation">
+    
+    <!-- GitHub Pages compatible styling -->
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+        }
+        
+        .container {
+            max-width: 100%;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            color: #2c3e50;
+            margin-top: 2em;
+            margin-bottom: 1em;
+        }
+        
+        h1 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            border-bottom: 1px solid #ecf0f1;
+            padding-bottom: 5px;
+        }
+        
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border-left: 4px solid #3498db;
+        }
+        
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+        
+        blockquote {
+            border-left: 4px solid #3498db;
+            margin: 0;
+            padding-left: 20px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1em 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .navigation {
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px 0;
+            margin-bottom: 20px;
+        }
+        
+        .navigation a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+        
+        .navigation a:hover {
+            text-decoration: underline;
+        }
+        
+        .breadcrumb {
+            margin-bottom: 20px;
+            color: #666;
+        }
+        
+        .breadcrumb a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            h2 {
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="navigation">
+            <a href="/">Home</a>
+            <a href="/Javascript/">JavaScript</a>
+            <a href="/TypeScript/">TypeScript</a>
+            <a href="/React-Native/">React Native</a>
+        </nav>
+        
+        
+        
+        <main>
+            <h1 id="-advanced-asynchronous-javascript">🔹 Advanced Asynchronous JavaScript</h1>
+
+<blockquote>
+  <p><strong>Senior-level async concepts: AbortController, top-level await, Promise.withResolvers(), and advanced patterns</strong></p>
+</blockquote>
+
+<link rel="stylesheet" href="../common-styles.css" />
+
+<hr />
+
+<h2 id="-table-of-contents">📚 Table of Contents</h2>
+
+<ul>
+  <li><a href="#abortcontroller--signal-handling">AbortController &amp; Signal Handling</a></li>
+  <li><a href="#top-level-await">Top-Level Await</a></li>
+  <li><a href="#promisewithresolvers">Promise.withResolvers()</a></li>
+  <li><a href="#advanced-async-patterns">Advanced Async Patterns</a></li>
+  <li><a href="#detailed-examples">Detailed Examples</a></li>
+  <li><a href="#common-interview-questions">Common Interview Questions</a></li>
+  <li><a href="#practice-exercises">Practice Exercises</a></li>
+  <li><a href="#additional-resources">Additional Resources</a></li>
+</ul>
+
+<hr />
+
+<h2 id="-abortcontroller--signal-handling">🛑 AbortController &amp; Signal Handling</h2>
+
+<p><strong>AbortController</strong> provides a way to cancel one or more Web API requests. It’s essential for managing long-running operations and preventing unnecessary work.</p>
+
+<h3 id="why-abortcontroller-matters">Why AbortController Matters:</h3>
+<ul>
+  <li><strong>Resource Management</strong>: Cancel requests when they’re no longer needed</li>
+  <li><strong>User Experience</strong>: Stop operations when users navigate away</li>
+  <li><strong>Performance</strong>: Prevent unnecessary network calls and processing</li>
+  <li><strong>Memory Leaks</strong>: Avoid memory leaks from abandoned operations</li>
+</ul>
+
+<hr />
+
+<h2 id="-top-level-await">⚡ Top-Level Await</h2>
+
+<p><strong>Top-level await</strong> allows you to use <code class="language-plaintext highlighter-rouge">await</code> at the top level of modules, making it easier to initialize applications and handle async setup.</p>
+
+<h3 id="use-cases">Use Cases:</h3>
+<ul>
+  <li><strong>Module Initialization</strong>: Async setup when modules load</li>
+  <li><strong>Configuration Loading</strong>: Load config files asynchronously</li>
+  <li><strong>Database Connections</strong>: Establish connections during startup</li>
+  <li><strong>API Initialization</strong>: Set up API clients with async operations</li>
+</ul>
+
+<h3 id="ascii-diagram-top-level-await-flow">ASCII Diagram: Top-Level Await Flow</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>TOP-LEVEL AWAIT FLOW
+┌─────────────────────────────────┐
+│        MODULE LOADING           │
+│  ┌─────────────────────────────┐ │
+│  │ import './config.js'        │ │
+│  │                             │ │
+│  │ const config = await        │ │
+│  │   loadConfig();             │ │
+│  │                             │ │
+│  │ export { config };          │ │
+│  └─────────────────────────────┘ │
+└─────────────────────────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  AWAIT        │
+        │  Execution    │
+        │  Pauses       │
+        │  Module       │
+        └───────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  RESOLUTION   │
+        │  Module       │
+        │  Continues    │
+        │  Loading      │
+        └───────────────┘
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-promisewithresolvers">🔄 Promise.withResolvers()</h2>
+
+<p><strong>Promise.withResolvers()</strong> creates a Promise with external resolve and reject functions, useful for scenarios where you need to control Promise resolution from outside.</p>
+
+<h3 id="why-promisewithresolvers-matters">Why Promise.withResolvers() Matters:</h3>
+<ul>
+  <li><strong>External Control</strong>: Resolve/reject from outside the Promise</li>
+  <li><strong>Event-Based Resolution</strong>: Resolve based on external events</li>
+  <li><strong>Manual Control</strong>: Fine-grained control over Promise lifecycle</li>
+  <li><strong>Testing</strong>: Easier to test async code with external control</li>
+</ul>
+
+<h3 id="ascii-diagram-promisewithresolvers-pattern">ASCII Diagram: Promise.withResolvers Pattern</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PROMISE.WITHRESOLVERS PATTERN
+┌─────────────────────────────────┐
+│    EXTERNAL CONTEXT             │
+│  ┌─────────────────────────────┐ │
+│  │ const { promise,            │ │
+│  │       resolve, reject } =   │ │
+│  │   Promise.withResolvers();  │ │
+│  └─────────────────────────────┘ │
+└─────────────────────────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │   PROMISE     │
+        │  Pending      │
+        │  State        │
+        └───────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  RESOLVE/     │
+        │  REJECT       │
+        │  Functions    │
+        │  Available    │
+        └───────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  EXTERNAL     │
+        │  Control      │
+        │  Over         │
+        │  Resolution   │
+        └───────────────┘
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-advanced-async-patterns">🚀 Advanced Async Patterns</h2>
+
+<h3 id="1-async-iterator-pattern">1. <strong>Async Iterator Pattern</strong></h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">AsyncDataStream</span> <span class="p">{</span>
+    <span class="kd">constructor</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">data</span> <span class="o">=</span> <span class="nx">data</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">index</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+    
+    <span class="k">async</span> <span class="o">*</span><span class="p">[</span><span class="nb">Symbol</span><span class="p">.</span><span class="nx">asyncIterator</span><span class="p">]()</span> <span class="p">{</span>
+        <span class="k">while</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">index</span> <span class="o">&lt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// Simulate async processing</span>
+            <span class="k">await</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="nx">resolve</span> <span class="o">=&gt;</span> <span class="nx">setTimeout</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="mi">100</span><span class="p">));</span>
+            <span class="k">yield</span> <span class="k">this</span><span class="p">.</span><span class="nx">data</span><span class="p">[</span><span class="k">this</span><span class="p">.</span><span class="nx">index</span><span class="o">++</span><span class="p">];</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Usage</span>
+<span class="kd">const</span> <span class="nx">stream</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">AsyncDataStream</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]);</span>
+<span class="k">for</span> <span class="k">await</span> <span class="p">(</span><span class="kd">const</span> <span class="nx">item</span> <span class="k">of</span> <span class="nx">stream</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">item</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="2-async-generator-functions">2. <strong>Async Generator Functions</strong></h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">async</span> <span class="kd">function</span><span class="o">*</span> <span class="nx">asyncGenerator</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">yield</span> <span class="k">await</span> <span class="nx">fetchData</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="k">yield</span> <span class="k">await</span> <span class="nx">fetchData</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+    <span class="k">yield</span> <span class="k">await</span> <span class="nx">fetchData</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Usage</span>
+<span class="k">for</span> <span class="k">await</span> <span class="p">(</span><span class="kd">const</span> <span class="nx">data</span> <span class="k">of</span> <span class="nx">asyncGenerator</span><span class="p">())</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-detailed-examples">💻 Detailed Examples</h2>
+
+<h3 id="example-1-abortcontroller-with-fetch">Example 1: AbortController with Fetch</h3>
+<div style="position: relative;">
+<button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+<pre><code>class APIClient {
+    constructor() {
+        this.controller = null;
+    }
+    
+    async fetchWithTimeout(url, timeout = 5000) {
+        // Abort previous request if it exists
+        if (this.controller) {
+            this.controller.abort();
+        }
+        
+        // Create new AbortController
+        this.controller = new AbortController();
+        
+        // Set timeout
+        const timeoutId = setTimeout(() =&gt; {
+            this.controller.abort();
+        }, timeout);
+        
+        try {
+            const response = await fetch(url, {
+                signal: this.controller.signal
+            });
+            
+            clearTimeout(timeoutId);
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            
+            return await response.json();
+        } catch (error) {
+            if (error.name === 'AbortError') {
+                throw new Error('Request was aborted');
+            }
+            throw error;
+        }
+    }
+    
+    abort() {
+        if (this.controller) {
+            this.controller.abort();
+        }
+    }
+}
+
+// Usage
+const client = new APIClient();
+
+// Start request
+const requestPromise = client.fetchWithTimeout('https://api.example.com/data', 3000);
+
+// Abort after 1 second
+setTimeout(() =&gt; {
+    client.abort();
+    console.log('Request aborted');
+}, 1000);
+
+// Handle result
+try {
+    const data = await requestPromise;
+    console.log('Data received:', data);
+} catch (error) {
+    console.error('Error:', error.message);
+}
+</code></pre>
+</div>
+
+<h3 id="example-2-top-level-await-in-modules">Example 2: Top-Level Await in Modules</h3>
+<div style="position: relative;">
+<button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+<pre><code>// config.js - Module with top-level await
+const config = await loadConfiguration();
+
+async function loadConfiguration() {
+    try {
+        // Load environment-specific config
+        const env = process.env.NODE_ENV || 'development';
+        const configPath = `./config.${env}.json`;
+        
+        const response = await fetch(configPath);
+        if (!response.ok) {
+            throw new Error(`Failed to load config: ${response.status}`);
+        }
+        
+        return await response.json();
+    } catch (error) {
+        console.warn('Using default config:', error.message);
+        return {
+            port: 3000,
+            database: 'localhost',
+            debug: true
+        };
+    }
+}
+
+export { config };
+
+// app.js - Using the config module
+import { config } from './config.js';
+
+console.log('App starting with config:', config);
+
+// The app won't start until config is loaded
+const app = {
+    port: config.port,
+    database: config.database,
+    debug: config.debug
+};
+
+export default app;
+</code></pre>
+</div>
+
+<h3 id="example-3-promisewithresolvers-implementation">Example 3: Promise.withResolvers() Implementation</h3>
+<div style="position: relative;">
+<button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+<pre><code>// Custom implementation of Promise.withResolvers (for older environments)
+function createPromiseWithResolvers() {
+    let resolve, reject;
+    const promise = new Promise((res, rej) =&gt; {
+        resolve = res;
+        reject = rej;
+    });
+    
+    return { promise, resolve, reject };
+}
+
+// Event-based Promise resolution
+class EventPromise {
+    constructor() {
+        const { promise, resolve, reject } = createPromiseWithResolvers();
+        this.promise = promise;
+        this.resolve = resolve;
+        this.reject = reject;
+    }
+}
+
+// Usage: Promise that resolves on button click
+function createClickPromise(button) {
+    const { promise, resolve, reject } = createPromiseWithResolvers();
+    
+    const clickHandler = () =&gt; {
+        resolve('Button clicked!');
+        button.removeEventListener('click', clickHandler);
+    };
+    
+    const timeoutHandler = () =&gt; {
+        reject(new Error('Button click timeout'));
+        button.removeEventListener('click', clickHandler);
+    };
+    
+    button.addEventListener('click', clickHandler);
+    
+    // Set timeout
+    setTimeout(timeoutHandler, 5000);
+    
+    return promise;
+}
+
+// Usage
+const button = document.getElementById('myButton');
+const clickPromise = createClickPromise(button);
+
+try {
+    const result = await clickPromise;
+    console.log(result); // "Button clicked!"
+} catch (error) {
+    console.error('Error:', error.message); // "Button click timeout"
+}
+</code></pre>
+</div>
+
+<h3 id="example-4-advanced-abortcontroller-patterns">Example 4: Advanced AbortController Patterns</h3>
+<div style="position: relative;">
+<button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+<pre><code>// AbortController with multiple operations
+class MultiOperationController {
+    constructor() {
+        this.controller = new AbortController();
+        this.operations = new Set();
+    }
+    
+    // Add operation to track
+    addOperation(operation) {
+        this.operations.add(operation);
+        operation.finally(() =&gt; {
+            this.operations.delete(operation);
+        });
+    }
+    
+    // Abort all operations
+    abortAll() {
+        this.controller.abort();
+        this.operations.forEach(op =&gt; {
+            if (op.abort) op.abort();
+        });
+    }
+    
+    // Create new signal for child operations
+    createSignal() {
+        return this.controller.signal;
+    }
+}
+
+// Usage with multiple fetch operations
+const controller = new MultiOperationController();
+
+async function fetchMultipleData(urls) {
+    const promises = urls.map(async (url) =&gt; {
+        const operation = fetch(url, {
+            signal: controller.createSignal()
+        });
+        
+        controller.addOperation(operation);
+        return operation;
+    });
+    
+    try {
+        const results = await Promise.all(promises);
+        return results.map(r =&gt; r.json());
+    } catch (error) {
+        if (error.name === 'AbortError') {
+            console.log('All operations aborted');
+        }
+        throw error;
+    }
+}
+
+// Start operations
+const dataPromise = fetchMultipleData([
+    'https://api.example.com/users',
+    'https://api.example.com/posts',
+    'https://api.example.com/comments'
+]);
+
+// Abort all after 3 seconds
+setTimeout(() =&gt; {
+    controller.abortAll();
+    console.log('All operations aborted');
+}, 3000);
+
+// Handle results
+try {
+    const data = await dataPromise;
+    console.log('All data received:', data);
+} catch (error) {
+    console.error('Error:', error.message);
+}
+</code></pre>
+</div>
+
+<hr />
+
+<h2 id="-common-interview-questions">❓ Common Interview Questions</h2>
+
+<h3 id="q1-what-is-abortcontroller-and-when-would-you-use-it">Q1: What is AbortController and when would you use it?</h3>
+<p><strong>A:</strong> AbortController provides a way to cancel one or more Web API requests. It’s useful for canceling requests when they’re no longer needed (user navigation, component unmounting), implementing timeouts, or providing user control over long-running operations. It helps prevent memory leaks and unnecessary network calls.</p>
+
+<h3 id="q2-how-does-top-level-await-work-and-what-are-its-limitations">Q2: How does top-level await work and what are its limitations?</h3>
+<p><strong>A:</strong> Top-level await allows you to use <code class="language-plaintext highlighter-rouge">await</code> at the module level, making it easier to initialize applications with async setup. It’s only available in ES modules and the module won’t be considered “loaded” until all top-level awaits resolve. It’s great for configuration loading, database connections, and API initialization.</p>
+
+<h3 id="q3-what-is-promisewithresolvers-and-how-does-it-differ-from-new-promise">Q3: What is Promise.withResolvers() and how does it differ from new Promise()?</h3>
+<p><strong>A:</strong> Promise.withResolvers() creates a Promise with external resolve and reject functions, while new Promise() creates a Promise with internal resolve/reject functions. The external approach is useful when you need to control Promise resolution from outside the Promise constructor, such as in event-based scenarios or when you need manual control over timing.</p>
+
+<h3 id="q4-how-can-you-implement-request-cancellation-in-a-react-component">Q4: How can you implement request cancellation in a React component?</h3>
+<p><strong>A:</strong> Use AbortController in useEffect cleanup or component unmount. Create an AbortController in the component, pass its signal to fetch requests, and call controller.abort() in the cleanup function. This prevents memory leaks and ensures requests are cancelled when the component unmounts.</p>
+
+<h3 id="q5-what-are-the-performance-implications-of-top-level-await">Q5: What are the performance implications of top-level await?</h3>
+<p><strong>A:</strong> Top-level await can delay module loading since the module isn’t considered “ready” until all awaits resolve. This can impact application startup time. However, it provides better error handling and ensures dependencies are properly initialized before the module is used.</p>
+
+<hr />
+
+<h2 id="️-practice-exercises">🏋️ Practice Exercises</h2>
+
+<h3 id="exercise-1-implement-a-request-queue-with-abortcontroller">Exercise 1: Implement a Request Queue with AbortController</h3>
+<p>Create a request queue that can process multiple requests with individual abort capabilities and overall queue control.</p>
+
+<h3 id="exercise-2-build-an-async-data-stream">Exercise 2: Build an Async Data Stream</h3>
+<p>Implement an async iterator that streams data from an API with configurable chunk sizes and abort functionality.</p>
+
+<h3 id="exercise-3-create-a-module-initialization-system">Exercise 3: Create a Module Initialization System</h3>
+<p>Build a system using top-level await that loads configuration, establishes database connections, and initializes services in the correct order.</p>
+
+<hr />
+
+<h2 id="-additional-resources">📚 Additional Resources</h2>
+
+<ul>
+  <li><strong>AbortController</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/API/AbortController">MDN AbortController</a></li>
+  <li><strong>Top-Level Await</strong>: <a href="https://v8.dev/features/top-level-await">V8 Blog - Top-level await</a></li>
+  <li><strong>Promise.withResolvers</strong>: <a href="https://github.com/tc39/proposal-promise-with-resolvers">TC39 Proposal</a></li>
+  <li><strong>Async Patterns</strong>: <a href="https://javascript.info/async">JavaScript Async Patterns</a></li>
+</ul>
+
+<hr />
+
+<h2 id="-copy-code-functionality">📋 Copy Code Functionality</h2>
+
+<script src="../common-scripts.js"></script>
+
+<hr />
+
+<h2 id="-navigation">🧭 Navigation</h2>
+
+<div class="navigation">
+    <a href="03-Asynchronous-JavaScript.md" class="nav-link prev">← Previous: Asynchronous JavaScript Basics</a>
+    <a href="04-Modules.md" class="nav-link next">Next: Modules &amp; Module Systems →</a>
+</div>
+
+<p><em>Last updated: December 2024</em></p>
+
+        </main>
+        
+        <footer style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #ecf0f1; color: #666; text-align: center;">
+            <p>Interview Prep Documentation - Built with Jekyll</p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔹 Scope &amp; Lexical Scope - Interview Prep Documentation</title>
+    <meta name="description" content="Comprehensive guides for JavaScript, TypeScript, and React Native interview preparation">
+    
+    <!-- GitHub Pages compatible styling -->
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+        }
+        
+        .container {
+            max-width: 100%;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            color: #2c3e50;
+            margin-top: 2em;
+            margin-bottom: 1em;
+        }
+        
+        h1 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            border-bottom: 1px solid #ecf0f1;
+            padding-bottom: 5px;
+        }
+        
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border-left: 4px solid #3498db;
+        }
+        
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+        
+        blockquote {
+            border-left: 4px solid #3498db;
+            margin: 0;
+            padding-left: 20px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1em 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .navigation {
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px 0;
+            margin-bottom: 20px;
+        }
+        
+        .navigation a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+        
+        .navigation a:hover {
+            text-decoration: underline;
+        }
+        
+        .breadcrumb {
+            margin-bottom: 20px;
+            color: #666;
+        }
+        
+        .breadcrumb a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            h2 {
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="navigation">
+            <a href="/">Home</a>
+            <a href="/Javascript/">JavaScript</a>
+            <a href="/TypeScript/">TypeScript</a>
+            <a href="/React-Native/">React Native</a>
+        </nav>
+        
+        
+        
+        <main>
+            <h1 id="-scope--lexical-scope">🔹 Scope &amp; Lexical Scope</h1>
+
+<p><em>Understanding Variable Visibility and Access</em></p>
+
+<link rel="stylesheet" href="../common-styles.css" />
+
+<hr />
+
+<h2 id="-table-of-contents">📚 Table of Contents</h2>
+<ul>
+  <li><a href="#what-is-scope">What is Scope?</a></li>
+  <li><a href="#types-of-scope">Types of Scope</a></li>
+  <li><a href="#scope-chain-visualization">Scope Chain Visualization</a></li>
+  <li><a href="#lexical-scope">Lexical Scope</a></li>
+  <li><a href="#detailed-examples">Detailed Examples</a></li>
+  <li><a href="#common-mistakes">Common Mistakes</a></li>
+  <li><a href="#best-practices">Best Practices</a></li>
+  <li><a href="#key-points-for-interviews">Key Points for Interviews</a></li>
+  <li><a href="#common-interview-questions">Common Interview Questions</a></li>
+</ul>
+
+<hr />
+
+<h2 id="-what-is-scope">🎯 What is Scope?</h2>
+
+<p>Scope determines the <strong>accessibility (visibility)</strong> of variables, functions, and objects in your code. It’s like a set of rules that determines where you can access variables and where you can’t. Think of scope as the “visibility radius” of a variable.</p>
+
+<h3 id="-simple-analogy">🔍 Simple Analogy</h3>
+<p>Imagine a building with different floors:</p>
+<ul>
+  <li><strong>Global Scope</strong> = Ground floor (accessible to everyone)</li>
+  <li><strong>Function Scope</strong> = Individual floors (accessible only to people on that floor)</li>
+  <li><strong>Block Scope</strong> = Individual rooms (accessible only to people in that room)</li>
+</ul>
+
+<hr />
+
+<h2 id="️-types-of-scope">🏗️ Types of Scope</h2>
+
+<h3 id="1-global-scope">1. Global Scope</h3>
+<ul>
+  <li><strong>Location</strong>: Outside any function or block</li>
+  <li><strong>Accessibility</strong>: Accessible from anywhere in the code</li>
+  <li><strong>Lifetime</strong>: Lives for the entire duration of the program</li>
+  <li><strong>Variables</strong>: Global variables, functions, and objects</li>
+</ul>
+
+<h3 id="2-function-scope-local-scope">2. Function Scope (Local Scope)</h3>
+<ul>
+  <li><strong>Location</strong>: Inside a function</li>
+  <li><strong>Accessibility</strong>: Only accessible within that function</li>
+  <li><strong>Lifetime</strong>: Destroyed when function execution ends</li>
+  <li><strong>Variables</strong>: Local variables, parameters, and nested functions</li>
+</ul>
+
+<h3 id="3-block-scope">3. Block Scope</h3>
+<ul>
+  <li><strong>Location</strong>: Inside a block (if, for, while, etc.)</li>
+  <li><strong>Accessibility</strong>: Only accessible within that block</li>
+  <li><strong>Lifetime</strong>: Destroyed when block execution ends</li>
+  <li><strong>Variables</strong>: Introduced with ES6 (let and const)</li>
+</ul>
+
+<hr />
+
+<h2 id="-scope-chain-visualization">🔗 Scope Chain Visualization</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>┌─────────────────────────────────────────────────────────────┐
+│                    SCOPE CHAIN                              │
+├─────────────────────────────────────────────────────────────┤
+│  🌍 Global Scope                                           │
+│  ├─ globalVar                                              │
+│  ├─ globalFunction()                                       │
+│  └─ outerFunction()                                        │
+│      ├─ outerVar                                           │
+│      ├─ outerFunction()                                    │
+│      └─ innerFunction()                                    │
+│          ├─ innerVar                                       │
+│          └─ Access to: innerVar, outerVar, globalVar      │
+│                                                             │
+│  🔗 Scope Chain: innerFunction → outerFunction → Global   │
+│  📍 Access Direction: Inner can access outer, not vice versa │
+└─────────────────────────────────────────────────────────────┘
+</code></pre></div></div>
+
+<h3 id="-scope-resolution-process">🔄 Scope Resolution Process</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>┌─────────────────────────────────────────────────────────────┐
+│                SCOPE RESOLUTION PROCESS                     │
+├─────────────────────────────────────────────────────────────┤
+│  1. 🔍 Check current scope for variable                    │
+│  2. 🔍 If not found, check outer scope                     │
+│  3. 🔍 Continue up the scope chain                         │
+│  4. ❌ If not found in global scope → ReferenceError      │
+│  5. ✅ If found, use that variable                         │
+└─────────────────────────────────────────────────────────────┘
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-lexical-scope-static-scope">🧭 Lexical Scope (Static Scope)</h2>
+
+<p>Lexical scope means that the scope of a variable is determined by its <strong>location within the source code</strong>, not by where it’s called from. The scope is “written” (lexical) in the code structure.</p>
+
+<h3 id="-key-points">🔑 Key Points</h3>
+<ul>
+  <li><strong>Determined at write time</strong>: Scope is set when code is written</li>
+  <li><strong>Not affected by call location</strong>: Where you call a function doesn’t change its scope</li>
+  <li><strong>Follows code structure</strong>: Scope follows the physical structure of your code</li>
+  <li><strong>Predictable</strong>: You can always determine scope by looking at the code</li>
+</ul>
+
+<hr />
+
+<h2 id="-detailed-examples">💻 Detailed Examples</h2>
+
+<h3 id="example-1-basic-scope-types">Example 1: Basic Scope Types</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">=== BASIC SCOPE TYPES ===</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="c1">// 🌍 Global Scope</span>
+<span class="kd">let</span> <span class="nx">globalVar</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">I'm global</span><span class="dl">"</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">globalConst</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">I'm also global</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">function</span> <span class="nx">outerFunction</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// 🏠 Function Scope</span>
+    <span class="kd">let</span> <span class="nx">outerVar</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">I'm in outer function</span><span class="dl">"</span><span class="p">;</span>
+    <span class="kd">const</span> <span class="nx">outerConst</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">I'm also in outer function</span><span class="dl">"</span><span class="p">;</span>
+    
+    <span class="kd">function</span> <span class="nx">innerFunction</span><span class="p">()</span> <span class="p">{</span>
+        <span class="c1">// 🏠 Function Scope (nested)</span>
+        <span class="kd">let</span> <span class="nx">innerVar</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">I'm in inner function</span><span class="dl">"</span><span class="p">;</span>
+        
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">=== Inner Function Access ===</span><span class="dl">"</span><span class="p">);</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">innerVar:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">innerVar</span><span class="p">);</span>           <span class="c1">// ✅ Own scope</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">outerVar:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">outerVar</span><span class="p">);</span>           <span class="c1">// ✅ Outer scope</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">globalVar:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">globalVar</span><span class="p">);</span>         <span class="c1">// ✅ Global scope</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">outerConst:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">outerConst</span><span class="p">);</span>       <span class="c1">// ✅ Outer scope</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">globalConst:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">globalConst</span><span class="p">);</span>     <span class="c1">// ✅ Global scope</span>
+    <span class="p">}</span>
+    
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">=== Outer Function Access ===</span><span class="dl">"</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">outerVar:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">outerVar</span><span class="p">);</span>               <span class="c1">// ✅ Own scope</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">globalVar:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">globalVar</span><span class="p">);</span>             <span class="c1">// ✅ Outer scope</span>
+    <span class="c1">// console.log("innerVar:", innerVar);            // ❌ Inner scope not accessible</span>
+    
+    <span class="nx">innerFunction</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">=== Global Access ===</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">globalVar:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">globalVar</span><span class="p">);</span>                 <span class="c1">// ✅ Own scope</span>
+<span class="c1">// console.log("outerVar:", outerVar);                // ❌ Function scope not accessible</span>
+
+<span class="nx">outerFunction</span><span class="p">();</span>
+</code></pre></div></div>
+
+<h3 id="example-2-block-scope-vs-function-scope">Example 2: Block Scope vs Function Scope</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">=== BLOCK SCOPE VS FUNCTION SCOPE ===</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">function</span> <span class="nx">scopeTest</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// 🏠 Function scope</span>
+    <span class="kd">var</span> <span class="nx">functionScopedVar</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">I'm function scoped</span><span class="dl">"</span><span class="p">;</span>
+    <span class="kd">let</span> <span class="nx">blockScopedVar</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">I'm block scoped</span><span class="dl">"</span><span class="p">;</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// 🚪 Block scope</span>
+        <span class="kd">var</span> <span class="nx">functionScopedInBlock</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">I'm function scoped (in block)</span><span class="dl">"</span><span class="p">;</span>
+        <span class="kd">let</span> <span class="nx">blockScopedInBlock</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">I'm block scoped (in block)</span><span class="dl">"</span><span class="p">;</span>
+        
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">=== Inside Block ===</span><span class="dl">"</span><span class="p">);</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">functionScopedVar:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">functionScopedVar</span><span class="p">);</span>           <span class="c1">// ✅ Accessible</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">blockScopedVar:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">blockScopedVar</span><span class="p">);</span>               <span class="c1">// ✅ Accessible</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">functionScopedInBlock:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">functionScopedInBlock</span><span class="p">);</span>  <span class="c1">// ✅ Accessible</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">blockScopedInBlock:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">blockScopedInBlock</span><span class="p">);</span>       <span class="c1">// ✅ Accessible</span>
+    <span class="p">}</span>
+    
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">=== Outside Block ===</span><span class="dl">"</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">functionScopedVar:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">functionScopedVar</span><span class="p">);</span>           <span class="c1">// ✅ Accessible</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">blockScopedVar:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">blockScopedVar</span><span class="p">);</span>               <span class="c1">// ✅ Accessible</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">functionScopedInBlock:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">functionScopedInBlock</span><span class="p">);</span>  <span class="c1">// ✅ Accessible (var is function scoped)</span>
+    <span class="c1">// console.log("blockScopedInBlock:", blockScopedInBlock);    // ❌ Error - let is block scoped</span>
+<span class="p">}</span>
+
+<span class="nx">scopeTest</span><span class="p">();</span>
+
+<span class="c1">// Block scope examples</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">=== BLOCK SCOPE EXAMPLES ===</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="c1">// if block</span>
+<span class="k">if</span> <span class="p">(</span><span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">ifBlockVar</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">I'm in if block</span><span class="dl">"</span><span class="p">;</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">ifBlockVar:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">ifBlockVar</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="c1">// console.log("ifBlockVar:", ifBlockVar); // ❌ ReferenceError</span>
+
+<span class="c1">// for loop block</span>
+<span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">loopVar</span> <span class="o">=</span> <span class="s2">`Loop iteration </span><span class="p">${</span><span class="nx">i</span><span class="p">}</span><span class="s2">`</span><span class="p">;</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">loopVar</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="c1">// console.log("i:", i); // ❌ ReferenceError</span>
+<span class="c1">// console.log("loopVar:", loopVar); // ❌ ReferenceError</span>
+
+<span class="c1">// while loop block</span>
+<span class="kd">let</span> <span class="nx">counter</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="k">while</span> <span class="p">(</span><span class="nx">counter</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">whileVar</span> <span class="o">=</span> <span class="s2">`While iteration </span><span class="p">${</span><span class="nx">counter</span><span class="p">}</span><span class="s2">`</span><span class="p">;</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">whileVar</span><span class="p">);</span>
+    <span class="nx">counter</span><span class="o">++</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">// console.log("whileVar:", whileVar); // ❌ ReferenceError</span>
+</code></pre></div></div>
+
+<h3 id="example-3-variable-shadowing">Example 3: Variable Shadowing</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">=== VARIABLE SHADOWING ===</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="c1">// 🌍 Global scope</span>
+<span class="kd">let</span> <span class="nx">name</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Global Name</span><span class="dl">"</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">age</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+
+<span class="kd">function</span> <span class="nx">outer</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// 🏠 Function scope</span>
+    <span class="kd">let</span> <span class="nx">name</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Outer Name</span><span class="dl">"</span><span class="p">;</span>
+    <span class="kd">const</span> <span class="nx">age</span> <span class="o">=</span> <span class="mi">50</span><span class="p">;</span>
+    
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">=== Outer Function ===</span><span class="dl">"</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">name:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">name</span><span class="p">);</span>        <span class="c1">// "Outer Name" (shadows global)</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">age:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">age</span><span class="p">);</span>          <span class="c1">// 50 (shadows global)</span>
+    
+    <span class="kd">function</span> <span class="nx">inner</span><span class="p">()</span> <span class="p">{</span>
+        <span class="c1">// 🏠 Nested function scope</span>
+        <span class="kd">let</span> <span class="nx">name</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Inner Name</span><span class="dl">"</span><span class="p">;</span>
+        
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">=== Inner Function ===</span><span class="dl">"</span><span class="p">);</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">name:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">name</span><span class="p">);</span>        <span class="c1">// "Inner Name" (shadows outer)</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">age:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">age</span><span class="p">);</span>          <span class="c1">// 50 (from outer, no shadowing)</span>
+        
+        <span class="c1">// Access global variables using window (browser) or global (Node.js)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nb">window</span> <span class="o">!==</span> <span class="dl">'</span><span class="s1">undefined</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Global name:</span><span class="dl">"</span><span class="p">,</span> <span class="nb">window</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span> <span class="c1">// "Global Name"</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Global name:</span><span class="dl">"</span><span class="p">,</span> <span class="nb">global</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span> <span class="c1">// "Global Name"</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    
+    <span class="nx">inner</span><span class="p">();</span>
+    
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">=== Back in Outer Function ===</span><span class="dl">"</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">name:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">name</span><span class="p">);</span>        <span class="c1">// "Outer Name" (still shadowed)</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">age:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">age</span><span class="p">);</span>          <span class="c1">// 50</span>
+<span class="p">}</span>
+
+<span class="nx">outer</span><span class="p">();</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">=== Global Scope ===</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">name:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">name</span><span class="p">);</span>            <span class="c1">// "Global Name" (unchanged)</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">age:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">age</span><span class="p">);</span>              <span class="c1">// 100 (unchanged)</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">=== SHADOWING EXPLANATION ===</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">1. Inner scope variables hide (shadow) outer scope variables</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">2. Outer scope variables remain unchanged</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">3. Shadowing creates a new variable, not modifies existing</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">4. Each scope has its own 'name' variable</span><span class="dl">"</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="example-4-scope-chain-in-practice">Example 4: Scope Chain in Practice</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">=== SCOPE CHAIN IN PRACTICE ===</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="c1">// 🌍 Global scope</span>
+<span class="kd">let</span> <span class="nx">globalValue</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">globalConfig</span> <span class="o">=</span> <span class="p">{</span> <span class="na">theme</span><span class="p">:</span> <span class="dl">"</span><span class="s2">dark</span><span class="dl">"</span> <span class="p">};</span>
+
+<span class="kd">function</span> <span class="nx">firstLevel</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// 🏠 First level function scope</span>
+    <span class="kd">let</span> <span class="nx">firstValue</span> <span class="o">=</span> <span class="mi">200</span><span class="p">;</span>
+    <span class="kd">const</span> <span class="nx">firstConfig</span> <span class="o">=</span> <span class="p">{</span> <span class="na">level</span><span class="p">:</span> <span class="mi">1</span> <span class="p">};</span>
+    
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">=== First Level ===</span><span class="dl">"</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">firstValue:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">firstValue</span><span class="p">);</span>           <span class="c1">// 200 (own)</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">firstConfig:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">firstConfig</span><span class="p">);</span>         <span class="c1">// { level: 1 } (own)</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">globalValue:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">globalValue</span><span class="p">);</span>         <span class="c1">// 100 (global)</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">globalConfig:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">globalConfig</span><span class="p">);</span>       <span class="c1">// { theme: "dark" } (global)</span>
+    
+    <span class="kd">function</span> <span class="nx">secondLevel</span><span class="p">()</span> <span class="p">{</span>
+        <span class="c1">// 🏠 Second level function scope</span>
+        <span class="kd">let</span> <span class="nx">secondValue</span> <span class="o">=</span> <span class="mi">300</span><span class="p">;</span>
+        <span class="kd">const</span> <span class="nx">secondConfig</span> <span class="o">=</span> <span class="p">{</span> <span class="na">level</span><span class="p">:</span> <span class="mi">2</span> <span class="p">};</span>
+        
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">=== Second Level ===</span><span class="dl">"</span><span class="p">);</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">secondValue:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">secondValue</span><span class="p">);</span>     <span class="c1">// 300 (own)</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">secondConfig:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">secondConfig</span><span class="p">);</span>   <span class="c1">// { level: 2 } (own)</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">firstValue:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">firstValue</span><span class="p">);</span>       <span class="c1">// 200 (first level)</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">firstConfig:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">firstConfig</span><span class="p">);</span>     <span class="c1">// { level: 1 } (first level)</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">globalValue:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">globalValue</span><span class="p">);</span>     <span class="c1">// 100 (global)</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">globalConfig:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">globalConfig</span><span class="p">);</span>   <span class="c1">// { theme: "dark" } (global)</span>
+        
+        <span class="kd">function</span> <span class="nx">thirdLevel</span><span class="p">()</span> <span class="p">{</span>
+            <span class="c1">// 🏠 Third level function scope</span>
+            <span class="kd">let</span> <span class="nx">thirdValue</span> <span class="o">=</span> <span class="mi">400</span><span class="p">;</span>
+            <span class="kd">const</span> <span class="nx">thirdConfig</span> <span class="o">=</span> <span class="p">{</span> <span class="na">level</span><span class="p">:</span> <span class="mi">3</span> <span class="p">};</span>
+            
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">=== Third Level ===</span><span class="dl">"</span><span class="p">);</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">thirdValue:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">thirdValue</span><span class="p">);</span>   <span class="c1">// 400 (own)</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">thirdConfig:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">thirdConfig</span><span class="p">);</span> <span class="c1">// { level: 3 } (own)</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">secondValue:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">secondValue</span><span class="p">);</span> <span class="c1">// 300 (second level)</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">secondConfig:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">secondConfig</span><span class="p">);</span> <span class="c1">// { level: 2 } (second level)</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">firstValue:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">firstValue</span><span class="p">);</span>   <span class="c1">// 200 (first level)</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">firstConfig:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">firstConfig</span><span class="p">);</span> <span class="c1">// { level: 1 } (first level)</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">globalValue:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">globalValue</span><span class="p">);</span> <span class="c1">// 100 (global)</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">globalConfig:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">globalConfig</span><span class="p">);</span> <span class="c1">// { theme: "dark" } (global)</span>
+            
+            <span class="c1">// Try to access non-existent variable</span>
+            <span class="k">try</span> <span class="p">{</span>
+                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">nonExistentVar:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">nonExistentVar</span><span class="p">);</span>
+            <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Error accessing nonExistentVar:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        
+        <span class="nx">thirdLevel</span><span class="p">();</span>
+    <span class="p">}</span>
+    
+    <span class="nx">secondLevel</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="nx">firstLevel</span><span class="p">();</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">=== SCOPE CHAIN EXPLANATION ===</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">1. Each function creates its own scope</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">2. Inner functions can access outer function variables</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">3. Outer functions cannot access inner function variables</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">4. Scope chain: inner → outer → global</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">5. Variables are searched up the chain until found</span><span class="dl">"</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="example-5-common-scope-mistakes">Example 5: Common Scope Mistakes</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">=== COMMON SCOPE MISTAKES ===</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="c1">// ❌ Mistake 1: var in loops (function scoped)</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">=== MISTAKE 1: var IN LOOPS ===</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">function</span> <span class="nx">varLoopMistake</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">var i:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">i</span><span class="p">);</span> <span class="c1">// All print 3!</span>
+        <span class="p">},</span> <span class="mi">100</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Final var i:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">i</span><span class="p">);</span> <span class="c1">// 3 (accessible outside loop!)</span>
+<span class="p">}</span>
+
+<span class="nx">varLoopMistake</span><span class="p">();</span>
+
+<span class="c1">// ✅ Solution 1: Use let (block scoped)</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">=== SOLUTION 1: let IN LOOPS ===</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">function</span> <span class="nx">letLoopSolution</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">j</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">;</span> <span class="nx">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">let j:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">j</span><span class="p">);</span> <span class="c1">// 0, 1, 2</span>
+        <span class="p">},</span> <span class="mi">100</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="k">try</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Final let j:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">j</span><span class="p">);</span> <span class="c1">// ReferenceError</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">let j error:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nx">letLoopSolution</span><span class="p">();</span>
+
+<span class="c1">// ❌ Mistake 2: var hoisting in blocks</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">=== MISTAKE 2: var HOISTING IN BLOCKS ===</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">function</span> <span class="nx">varHoistingMistake</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">blockVar</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">I'm in a block</span><span class="dl">"</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">blockVar outside block:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">blockVar</span><span class="p">);</span> <span class="c1">// "I'm in a block" (var is function scoped)</span>
+<span class="p">}</span>
+
+<span class="nx">varHoistingMistake</span><span class="p">();</span>
+
+<span class="c1">// ✅ Solution 2: Use let/const for block scope</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">=== SOLUTION 2: let/const FOR BLOCK SCOPE ===</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">function</span> <span class="nx">letBlockSolution</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">let</span> <span class="nx">blockLet</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">I'm in a block</span><span class="dl">"</span><span class="p">;</span>
+        <span class="kd">const</span> <span class="nx">blockConst</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">I'm also in a block</span><span class="dl">"</span><span class="p">;</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Inside block:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">blockLet</span><span class="p">,</span> <span class="nx">blockConst</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="k">try</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">blockLet outside block:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">blockLet</span><span class="p">);</span> <span class="c1">// ReferenceError</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">blockLet error:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nx">letBlockSolution</span><span class="p">();</span>
+
+<span class="c1">// ❌ Mistake 3: Forgetting function scope</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">=== MISTAKE 3: FORGETTING FUNCTION SCOPE ===</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">let</span> <span class="nx">globalX</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Global X</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">function</span> <span class="nx">scopeMistake</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">x before declaration:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">x</span><span class="p">);</span> <span class="c1">// undefined (not "Global X"!)</span>
+    
+    <span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Local X</span><span class="dl">"</span><span class="p">;</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">x after declaration:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">x</span><span class="p">);</span> <span class="c1">// "Local X"</span>
+<span class="p">}</span>
+
+<span class="nx">scopeMistake</span><span class="p">();</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Global x:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">globalX</span><span class="p">);</span> <span class="c1">// "Global X" (unchanged)</span>
+</code></pre></div></div>
+
+<h3 id="example-6-advanced-scope-patterns">Example 6: Advanced Scope Patterns</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">=== ADVANCED SCOPE PATTERNS ===</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="c1">// Pattern 1: Module Pattern with Scope</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">=== PATTERN 1: MODULE PATTERN ===</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">calculator</span> <span class="o">=</span> <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// 🏠 Private scope (not accessible from outside)</span>
+    <span class="kd">let</span> <span class="nx">privateCounter</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kd">const</span> <span class="nx">privateConfig</span> <span class="o">=</span> <span class="p">{</span> <span class="na">precision</span><span class="p">:</span> <span class="mi">2</span> <span class="p">};</span>
+    
+    <span class="kd">function</span> <span class="nx">privateHelper</span><span class="p">(</span><span class="nx">num</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">round</span><span class="p">(</span><span class="nx">num</span> <span class="o">*</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">pow</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="nx">privateConfig</span><span class="p">.</span><span class="nx">precision</span><span class="p">))</span> <span class="o">/</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">pow</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="nx">privateConfig</span><span class="p">.</span><span class="nx">precision</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="c1">// 🏠 Return public interface</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="na">add</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">num</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">privateCounter</span> <span class="o">=</span> <span class="nx">privateHelper</span><span class="p">(</span><span class="nx">privateCounter</span> <span class="o">+</span> <span class="nx">num</span><span class="p">);</span>
+            <span class="k">return</span> <span class="nx">privateCounter</span><span class="p">;</span>
+        <span class="p">},</span>
+        
+        <span class="na">subtract</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">num</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">privateCounter</span> <span class="o">=</span> <span class="nx">privateHelper</span><span class="p">(</span><span class="nx">privateCounter</span> <span class="o">-</span> <span class="nx">num</span><span class="p">);</span>
+            <span class="k">return</span> <span class="nx">privateCounter</span><span class="p">;</span>
+        <span class="p">},</span>
+        
+        <span class="na">getValue</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nx">privateCounter</span><span class="p">;</span>
+        <span class="p">},</span>
+        
+        <span class="na">reset</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+            <span class="nx">privateCounter</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">};</span>
+<span class="p">})();</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Calculator add 5:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">calculator</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="mi">5</span><span class="p">));</span>      <span class="c1">// 5</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Calculator add 3.14159:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">calculator</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="mf">3.14159</span><span class="p">));</span> <span class="c1">// 8.14</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Calculator getValue:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">calculator</span><span class="p">.</span><span class="nx">getValue</span><span class="p">());</span> <span class="c1">// 8.14</span>
+
+<span class="c1">// Private variables are not accessible</span>
+<span class="c1">// console.log("privateCounter:", calculator.privateCounter); // undefined</span>
+<span class="c1">// console.log("privateHelper:", calculator.privateHelper);   // undefined</span>
+
+<span class="c1">// Pattern 2: Factory Functions with Scope</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">=== PATTERN 2: FACTORY FUNCTIONS ===</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">function</span> <span class="nx">createCounter</span><span class="p">(</span><span class="nx">initialValue</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 🏠 Each counter gets its own scope</span>
+    <span class="kd">let</span> <span class="nx">count</span> <span class="o">=</span> <span class="nx">initialValue</span><span class="p">;</span>
+    
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="na">increment</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+            <span class="nx">count</span><span class="o">++</span><span class="p">;</span>
+            <span class="k">return</span> <span class="nx">count</span><span class="p">;</span>
+        <span class="p">},</span>
+        
+        <span class="na">decrement</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+            <span class="nx">count</span><span class="o">--</span><span class="p">;</span>
+            <span class="k">return</span> <span class="nx">count</span><span class="p">;</span>
+        <span class="p">},</span>
+        
+        <span class="na">getValue</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nx">count</span><span class="p">;</span>
+        <span class="p">},</span>
+        
+        <span class="na">reset</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+            <span class="nx">count</span> <span class="o">=</span> <span class="nx">initialValue</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">};</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">counter1</span> <span class="o">=</span> <span class="nx">createCounter</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">counter2</span> <span class="o">=</span> <span class="nx">createCounter</span><span class="p">(</span><span class="mi">20</span><span class="p">);</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Counter1 increment:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">counter1</span><span class="p">.</span><span class="nx">increment</span><span class="p">());</span> <span class="c1">// 11</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Counter2 increment:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">counter2</span><span class="p">.</span><span class="nx">increment</span><span class="p">());</span> <span class="c1">// 21</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Counter1 getValue:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">counter1</span><span class="p">.</span><span class="nx">getValue</span><span class="p">());</span>   <span class="c1">// 11</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Counter2 getValue:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">counter2</span><span class="p">.</span><span class="nx">getValue</span><span class="p">());</span>   <span class="c1">// 21</span>
+
+<span class="c1">// Each counter has its own count variable</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Each counter has independent state</span><span class="dl">"</span><span class="p">);</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="️-common-mistakes">⚠️ Common Mistakes</h2>
+
+<h3 id="mistake-1-expecting-block-scope-with-var">Mistake 1: Expecting Block Scope with var</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">=== MISTAKE 1: var DOESN'T HAVE BLOCK SCOPE ===</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">blockVar</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">I'm in a block</span><span class="dl">"</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">blockVar outside block:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">blockVar</span><span class="p">);</span> <span class="c1">// "I'm in a block" (not ReferenceError)</span>
+
+<span class="c1">// Solution: Use let/const</span>
+<span class="k">if</span> <span class="p">(</span><span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">blockLet</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">I'm in a block</span><span class="dl">"</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">// console.log("blockLet outside block:", blockLet); // ReferenceError</span>
+</code></pre></div></div>
+
+<h3 id="mistake-2-forgetting-function-scope">Mistake 2: Forgetting Function Scope</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">=== MISTAKE 2: FORGETTING FUNCTION SCOPE ===</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">let</span> <span class="nx">globalVar</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Global</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">function</span> <span class="nx">test</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Before declaration:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">globalVar</span><span class="p">);</span> <span class="c1">// undefined (not "Global")</span>
+    
+    <span class="kd">var</span> <span class="nx">globalVar</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Local</span><span class="dl">"</span><span class="p">;</span> <span class="c1">// This shadows the global variable</span>
+    
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">After declaration:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">globalVar</span><span class="p">);</span> <span class="c1">// "Local"</span>
+<span class="p">}</span>
+
+<span class="nx">test</span><span class="p">();</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Global var:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">globalVar</span><span class="p">);</span> <span class="c1">// "Global" (unchanged)</span>
+</code></pre></div></div>
+
+<h3 id="mistake-3-loop-variable-scope-issues">Mistake 3: Loop Variable Scope Issues</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">=== MISTAKE 3: LOOP VARIABLE SCOPE ===</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="c1">// ❌ Problem with var</span>
+<span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">var i:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">i</span><span class="p">);</span> <span class="c1">// All print 3!</span>
+    <span class="p">},</span> <span class="mi">100</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// ✅ Solution with let</span>
+<span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">j</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">;</span> <span class="nx">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">let j:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">j</span><span class="p">);</span> <span class="c1">// 0, 1, 2</span>
+    <span class="p">},</span> <span class="mi">100</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-best-practices">✅ Best Practices</h2>
+
+<h3 id="1-use-letconst-instead-of-var">1. Use let/const Instead of var</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">=== BEST PRACTICE 1: USE LET/CONST ===</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="c1">// ❌ Avoid var</span>
+<span class="kd">var</span> <span class="nx">oldWay</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">avoid this</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="c1">// ✅ Use let/const</span>
+<span class="kd">let</span> <span class="nx">modernWay</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">use this</span><span class="dl">"</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">constantWay</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">for constants</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Benefits:</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">- Block scope instead of function scope</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">- No hoisting issues</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">- More predictable behavior</span><span class="dl">"</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="2-minimize-global-variables">2. Minimize Global Variables</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">=== BEST PRACTICE 2: MINIMIZE GLOBAL VARIABLES ===</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="c1">// ❌ Avoid global variables</span>
+<span class="nb">window</span><span class="p">.</span><span class="nx">globalVar</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">bad</span><span class="dl">"</span><span class="p">;</span>
+<span class="nb">global</span><span class="p">.</span><span class="nx">globalVar</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">also bad</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="c1">// ✅ Use modules or IIFE</span>
+<span class="kd">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">privateVar</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">private</span><span class="dl">"</span><span class="p">;</span>
+    
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="na">getPrivateVar</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nx">privateVar</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">};</span>
+<span class="p">})();</span>
+</code></pre></div></div>
+
+<h3 id="3-use-descriptive-variable-names">3. Use Descriptive Variable Names</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">=== BEST PRACTICE 3: DESCRIPTIVE NAMES ===</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="c1">// ❌ Unclear names</span>
+<span class="kd">let</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">[];</span>
+
+<span class="c1">// ✅ Clear names</span>
+<span class="kd">let</span> <span class="nx">userCount</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">userList</span> <span class="o">=</span> <span class="p">[];</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Clear names make scope easier to understand</span><span class="dl">"</span><span class="p">);</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-key-points-for-interviews">🎯 Key Points for Interviews</h2>
+
+<h3 id="-core-concepts">🔑 Core Concepts</h3>
+<ol>
+  <li><strong>Scope Definition</strong>: Determines variable accessibility and visibility</li>
+  <li><strong>Three Types</strong>: Global, Function, and Block scope</li>
+  <li><strong>Scope Chain</strong>: Inner functions can access outer variables</li>
+  <li><strong>Lexical Scope</strong>: Scope is determined by code location, not call location</li>
+  <li><strong>Variable Shadowing</strong>: Inner scope variables hide outer scope variables</li>
+</ol>
+
+<h3 id="-common-mistakes">🚨 Common Mistakes</h3>
+<ol>
+  <li><strong>Expecting var to have block scope</strong></li>
+  <li><strong>Forgetting function scope boundaries</strong></li>
+  <li><strong>Loop variable scope issues with var</strong></li>
+  <li><strong>Not understanding variable shadowing</strong></li>
+</ol>
+
+<h3 id="-advanced-concepts">💡 Advanced Concepts</h3>
+<ol>
+  <li><strong>Closure</strong>: Functions that remember their scope</li>
+  <li><strong>Module Pattern</strong>: Using scope for data privacy</li>
+  <li><strong>Factory Functions</strong>: Creating objects with independent scope</li>
+  <li><strong>Scope Chain Resolution</strong>: How JavaScript finds variables</li>
+</ol>
+
+<hr />
+
+<h2 id="-common-interview-questions">❓ Common Interview Questions</h2>
+
+<h3 id="q-what-is-scope-in-javascript">Q: What is scope in JavaScript?</h3>
+<p><strong>A:</strong> Scope determines the accessibility and visibility of variables, functions, and objects in your code. It defines where variables can be accessed and where they cannot.</p>
+
+<p><strong>Types of Scope:</strong></p>
+<ul>
+  <li><strong>Global Scope</strong>: Variables accessible everywhere</li>
+  <li><strong>Function Scope</strong>: Variables accessible only within a function</li>
+  <li><strong>Block Scope</strong>: Variables accessible only within a block (let/const)</li>
+</ul>
+
+<h3 id="q-what-is-lexical-scope">Q: What is lexical scope?</h3>
+<p><strong>A:</strong> Lexical scope means that the scope of a variable is determined by its location within the source code, not by where it’s called from.</p>
+
+<p><strong>Key Points:</strong></p>
+<ul>
+  <li>Scope is “written” in the code structure</li>
+  <li>Inner functions can access outer variables</li>
+  <li>Outer functions cannot access inner variables</li>
+  <li>Scope is determined at write time, not runtime</li>
+</ul>
+
+<h3 id="q-whats-the-difference-between-function-scope-and-block-scope">Q: What’s the difference between function scope and block scope?</h3>
+<p><strong>A:</strong></p>
+
+<p><strong>Function Scope (var):</strong></p>
+<ul>
+  <li>Variables accessible throughout entire function</li>
+  <li>Not limited to blocks within function</li>
+  <li>Can lead to unexpected behavior</li>
+</ul>
+
+<p><strong>Block Scope (let/const):</strong></p>
+<ul>
+  <li>Variables accessible only within specific block</li>
+  <li>More predictable and safer</li>
+  <li>Prevents common scope-related bugs</li>
+</ul>
+
+<p><strong>Example:</strong></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">test</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">functionVar</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">function scoped</span><span class="dl">"</span><span class="p">;</span>
+        <span class="kd">let</span> <span class="nx">blockVar</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">block scoped</span><span class="dl">"</span><span class="p">;</span>
+    <span class="p">}</span>
+    
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">functionVar</span><span class="p">);</span> <span class="c1">// "function scoped" (accessible)</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">blockVar</span><span class="p">);</span>    <span class="c1">// ReferenceError (not accessible)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="q-how-does-the-scope-chain-work">Q: How does the scope chain work?</h3>
+<p><strong>A:</strong> The scope chain is the mechanism JavaScript uses to find variables:</p>
+
+<p><strong>Process:</strong></p>
+<ol>
+  <li>JavaScript first looks for variable in current scope</li>
+  <li>If not found, looks in outer scope (parent function)</li>
+  <li>Continues up the chain until global scope</li>
+  <li>If not found anywhere, throws ReferenceError</li>
+</ol>
+
+<p><strong>Example:</strong></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">globalVar</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">global</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">function</span> <span class="nx">outer</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">outerVar</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">outer</span><span class="dl">"</span><span class="p">;</span>
+    
+    <span class="kd">function</span> <span class="nx">inner</span><span class="p">()</span> <span class="p">{</span>
+        <span class="kd">let</span> <span class="nx">innerVar</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">inner</span><span class="dl">"</span><span class="p">;</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">innerVar</span><span class="p">);</span>    <span class="c1">// ✅ Own scope</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">outerVar</span><span class="p">);</span>    <span class="c1">// ✅ Outer scope</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">globalVar</span><span class="p">);</span>   <span class="c1">// ✅ Global scope</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">undefinedVar</span><span class="p">);</span> <span class="c1">// ❌ ReferenceError</span>
+    <span class="p">}</span>
+    
+    <span class="nx">inner</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="nx">outer</span><span class="p">();</span>
+</code></pre></div></div>
+
+<h3 id="q-what-is-variable-shadowing">Q: What is variable shadowing?</h3>
+<p><strong>A:</strong> Variable shadowing occurs when a variable in an inner scope has the same name as a variable in an outer scope, effectively “hiding” the outer variable within the inner scope.</p>
+
+<p><strong>Characteristics:</strong></p>
+<ul>
+  <li>Inner variable takes precedence</li>
+  <li>Outer variable remains unchanged</li>
+  <li>Can lead to confusion if not understood</li>
+  <li>Useful for creating local variables with same names</li>
+</ul>
+
+<p><strong>Example:</strong></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">name</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Global Name</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">function</span> <span class="nx">test</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">name</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Local Name</span><span class="dl">"</span><span class="p">;</span>  <span class="c1">// Shadows global name</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>         <span class="c1">// "Local Name"</span>
+<span class="p">}</span>
+
+<span class="nx">test</span><span class="p">();</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>             <span class="c1">// "Global Name" (unchanged)</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-practice-exercises">🧪 Practice Exercises</h2>
+
+<h3 id="exercise-1-scope-chain-analysis">Exercise 1: Scope Chain Analysis</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Exercise 1: Predict the output</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">let</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+
+<span class="kd">function</span> <span class="nx">a</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+    
+    <span class="kd">function</span> <span class="nx">b</span><span class="p">()</span> <span class="p">{</span>
+        <span class="kd">let</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">b() x:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">x</span><span class="p">);</span> <span class="c1">// What will this print?</span>
+    <span class="p">}</span>
+    
+    <span class="nx">b</span><span class="p">();</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">a() x:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">x</span><span class="p">);</span> <span class="c1">// What will this print?</span>
+<span class="p">}</span>
+
+<span class="nx">a</span><span class="p">();</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Global x:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">x</span><span class="p">);</span> <span class="c1">// What will this print?</span>
+</code></pre></div></div>
+
+<h3 id="exercise-2-block-scope-understanding">Exercise 2: Block Scope Understanding</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Exercise 2: Block scope analysis</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">function</span> <span class="nx">test</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">let</span> <span class="nx">blockVar</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">I'm in a block</span><span class="dl">"</span><span class="p">;</span>
+        <span class="kd">var</span> <span class="nx">functionVar</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">I'm function scoped</span><span class="dl">"</span><span class="p">;</span>
+    <span class="p">}</span>
+    
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">functionVar:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">functionVar</span><span class="p">);</span> <span class="c1">// What will this print?</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">blockVar:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">blockVar</span><span class="p">);</span>       <span class="c1">// What will this print?</span>
+<span class="p">}</span>
+
+<span class="nx">test</span><span class="p">();</span>
+</code></pre></div></div>
+
+<h3 id="exercise-3-variable-shadowing">Exercise 3: Variable Shadowing</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Exercise 3: Variable shadowing</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">let</span> <span class="nx">name</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Global</span><span class="dl">"</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">value</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+
+<span class="kd">function</span> <span class="nx">outer</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">name</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Outer</span><span class="dl">"</span><span class="p">;</span>
+    
+    <span class="kd">function</span> <span class="nx">inner</span><span class="p">()</span> <span class="p">{</span>
+        <span class="kd">let</span> <span class="nx">name</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Inner</span><span class="dl">"</span><span class="p">;</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Inner name:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">name</span><span class="p">);</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Inner value:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="nx">inner</span><span class="p">();</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Outer name:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">name</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Outer value:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nx">outer</span><span class="p">();</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Global name:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">name</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Global value:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-additional-resources">📚 Additional Resources</h2>
+
+<ul>
+  <li><strong>MDN Web Docs</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Closures">Variable Scope</a></li>
+  <li><strong>JavaScript.info</strong>: <a href="https://javascript.info/closure">Variable Scope and Closure</a></li>
+  <li><strong>ECMAScript Specification</strong>: <a href="https://tc39.es/ecma262/#sec-lexical-environments">Lexical Environments</a></li>
+</ul>
+
+<hr />
+
+<h2 id="-navigation">🧭 Navigation</h2>
+
+<div class="navigation">
+    <a href="./02-Hoisting.md" class="nav-link prev">⬅️ Previous: Hoisting</a>
+    <a href="./04-Closures.md" class="nav-link next">Next: Closures ➡️</a>
+</div>
+
+<hr />
+
+<h2 id="-copy-code-functionality">📋 Copy Code Functionality</h2>
+
+<script src="../common-scripts.js"></script>
+
+<p><em>Last updated: December 2024</em></p>
+
+        </main>
+        
+        <footer style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #ecf0f1; color: #666; text-align: center;">
+            <p>Interview Prep Documentation - Built with Jekyll</p>
+        </footer>
+    </div>
+</body>
+</html>

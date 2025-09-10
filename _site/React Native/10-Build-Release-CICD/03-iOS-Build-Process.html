@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🍎 iOS Build Process - Interview Prep Documentation</title>
+    <meta name="description" content="Comprehensive guides for JavaScript, TypeScript, and React Native interview preparation">
+    
+    <!-- GitHub Pages compatible styling -->
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+        }
+        
+        .container {
+            max-width: 100%;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            color: #2c3e50;
+            margin-top: 2em;
+            margin-bottom: 1em;
+        }
+        
+        h1 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            border-bottom: 1px solid #ecf0f1;
+            padding-bottom: 5px;
+        }
+        
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border-left: 4px solid #3498db;
+        }
+        
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+        
+        blockquote {
+            border-left: 4px solid #3498db;
+            margin: 0;
+            padding-left: 20px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1em 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .navigation {
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px 0;
+            margin-bottom: 20px;
+        }
+        
+        .navigation a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+        
+        .navigation a:hover {
+            text-decoration: underline;
+        }
+        
+        .breadcrumb {
+            margin-bottom: 20px;
+            color: #666;
+        }
+        
+        .breadcrumb a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            h2 {
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="navigation">
+            <a href="/">Home</a>
+            <a href="/Javascript/">JavaScript</a>
+            <a href="/TypeScript/">TypeScript</a>
+            <a href="/React-Native/">React Native</a>
+        </nav>
+        
+        
+        
+        <main>
+            <h1 id="-ios-build-process">🍎 <strong>iOS Build Process</strong></h1>
+
+<blockquote>
+  <p><strong>Master iOS build configuration, Xcode optimization, and App Store release processes for React Native applications</strong></p>
+</blockquote>
+
+<link rel="stylesheet" href="../../common-styles.css" />
+
+<hr />
+
+<h2 id="-table-of-contents">📚 <strong>Table of Contents</strong></h2>
+
+<ul>
+  <li><a href="#-ios-build-overview">iOS Build Overview</a></li>
+  <li><a href="#-xcode-configuration">Xcode Configuration</a></li>
+  <li><a href="#-build-schemes">Build Schemes</a></li>
+  <li><a href="#-code-signing">Code Signing</a></li>
+  <li><a href="#-app-store-optimization">App Store Optimization</a></li>
+  <li><a href="#-release-process">Release Process</a></li>
+  <li><a href="#-best-practices">Best Practices</a></li>
+  <li><a href="#-interview-questions">Interview Questions</a></li>
+</ul>
+
+<hr />
+
+<h2 id="️-ios-build-overview">🏗️ <strong>iOS Build Overview</strong></h2>
+
+<h3 id="build-process-flow"><strong>Build Process Flow</strong></h3>
+
+<pre><code class="language-mermaid">graph TD
+    A[Source Code] --&gt; B[Metro Bundler]
+    B --&gt; C[JavaScript Bundle]
+    C --&gt; D[Xcode Build]
+    D --&gt; E[Swift/ObjC Compilation]
+    E --&gt; F[Asset Processing]
+    F --&gt; G[Code Signing]
+    G --&gt; H[IPA Generation]
+    H --&gt; I[App Store Connect]
+    I --&gt; J[App Store]
+</code></pre>
+
+<h3 id="key-components"><strong>Key Components</strong></h3>
+<ul>
+  <li><strong>Xcode</strong>: Apple’s IDE and build system</li>
+  <li><strong>CocoaPods</strong>: Dependency management</li>
+  <li><strong>Fastlane</strong>: Automation tool</li>
+  <li><strong>App Store Connect</strong>: Distribution platform</li>
+</ul>
+
+<hr />
+
+<h2 id="️-xcode-configuration">⚙️ <strong>Xcode Configuration</strong></h2>
+
+<h3 id="project-settings"><strong>Project Settings</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ios/YourApp.xcodeproj/project.pbxproj</span>
+<span class="c1">// Key build settings for optimization</span>
+
+<span class="dl">"</span><span class="s2">RELEASE</span><span class="dl">"</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1">// Optimization</span>
+    <span class="dl">"</span><span class="s2">GCC_OPTIMIZATION_LEVEL</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">s</span><span class="dl">"</span><span class="p">;</span>
+    <span class="dl">"</span><span class="s2">SWIFT_OPTIMIZATION_LEVEL</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">-O</span><span class="dl">"</span><span class="p">;</span>
+    <span class="dl">"</span><span class="s2">ENABLE_BITCODE</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">NO</span><span class="dl">"</span><span class="p">;</span>
+    
+    <span class="c1">// Code stripping</span>
+    <span class="dl">"</span><span class="s2">STRIP_INSTALLED_PRODUCT</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">YES</span><span class="dl">"</span><span class="p">;</span>
+    <span class="dl">"</span><span class="s2">SEPARATE_STRIP</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">YES</span><span class="dl">"</span><span class="p">;</span>
+    <span class="dl">"</span><span class="s2">COPY_PHASE_STRIP</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">YES</span><span class="dl">"</span><span class="p">;</span>
+    <span class="dl">"</span><span class="s2">DEAD_CODE_STRIPPING</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">YES</span><span class="dl">"</span><span class="p">;</span>
+    <span class="dl">"</span><span class="s2">STRIP_STYLE</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">all</span><span class="dl">"</span><span class="p">;</span>
+    
+    <span class="c1">// Validation</span>
+    <span class="dl">"</span><span class="s2">VALIDATE_PRODUCT</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">YES</span><span class="dl">"</span><span class="p">;</span>
+    <span class="dl">"</span><span class="s2">ONLY_ACTIVE_ARCH</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">YES</span><span class="dl">"</span><span class="p">;</span>
+    
+    <span class="c1">// Swift settings</span>
+    <span class="dl">"</span><span class="s2">SWIFT_COMPILATION_MODE</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">wholemodule</span><span class="dl">"</span><span class="p">;</span>
+    <span class="dl">"</span><span class="s2">SWIFT_OPTIMIZATION_LEVEL</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">-O</span><span class="dl">"</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="dl">"</span><span class="s2">DEBUG</span><span class="dl">"</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">GCC_OPTIMIZATION_LEVEL</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">0</span><span class="dl">"</span><span class="p">;</span>
+    <span class="dl">"</span><span class="s2">SWIFT_OPTIMIZATION_LEVEL</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">-Onone</span><span class="dl">"</span><span class="p">;</span>
+    <span class="dl">"</span><span class="s2">GCC_DYNAMIC_NO_PIC</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">NO</span><span class="dl">"</span><span class="p">;</span>
+    <span class="dl">"</span><span class="s2">GCC_NO_COMMON_BLOCKS</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">YES</span><span class="dl">"</span><span class="p">;</span>
+    <span class="dl">"</span><span class="s2">ENABLE_STRICT_OBJC_MSGSEND</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">YES</span><span class="dl">"</span><span class="p">;</span>
+    <span class="dl">"</span><span class="s2">ENABLE_TESTABILITY</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">YES</span><span class="dl">"</span><span class="p">;</span>
+    <span class="dl">"</span><span class="s2">GCC_C_LANGUAGE_STANDARD</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">gnu11</span><span class="dl">"</span><span class="p">;</span>
+    <span class="dl">"</span><span class="s2">CLANG_CXX_LANGUAGE_STANDARD</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">gnu++14</span><span class="dl">"</span><span class="p">;</span>
+    <span class="dl">"</span><span class="s2">CLANG_CXX_LIBRARY</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">libc++</span><span class="dl">"</span><span class="p">;</span>
+    <span class="dl">"</span><span class="s2">CLANG_ENABLE_MODULES</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">YES</span><span class="dl">"</span><span class="p">;</span>
+    <span class="dl">"</span><span class="s2">CLANG_ENABLE_OBJC_ARC</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">YES</span><span class="dl">"</span><span class="p">;</span>
+    <span class="dl">"</span><span class="s2">CLANG_ENABLE_OBJC_WEAK</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">YES</span><span class="dl">"</span><span class="p">;</span>
+    <span class="dl">"</span><span class="s2">CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">YES</span><span class="dl">"</span><span class="p">;</span>
+    <span class="dl">"</span><span class="s2">CLANG_WARN_BOOL_CONVERSION</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">YES</span><span class="dl">"</span><span class="p">;</span>
+    <span class="dl">"</span><span class="s2">CLANG_WARN_COMMA</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">YES</span><span class="dl">"</span><span class="p">;</span>
+    <span class="dl">"</span><span class="s2">CLANG_WARN_CONSTANT_CONVERSION</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">YES</span><span class="dl">"</span><span class="p">;</span>
+    <span class="dl">"</span><span class="s2">CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">YES</span><span class="dl">"</span><span class="p">;</span>
+    <span class="dl">"</span><span class="s2">CLANG_WARN_DIRECT_OBJC_ISA_USAGE</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">YES_ERROR</span><span class="dl">"</span><span class="p">;</span>
+    <span class="dl">"</span><span class="s2">CLANG_WARN_DOCUMENTATION_COMMENTS</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">YES</span><span class="dl">"</span><span class="p">;</span>
+    <span class="dl">"</span><span class="s2">CLANG_WARN_EMPTY_BODY</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">YES</span><span class="dl">"</span><span class="p">;</span>
+    <span class="dl">"</span><span class="s2">CLANG_WARN_ENUM_CONVERSION</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">YES</span><span class="dl">"</span><span class="p">;</span>
+    <span class="dl">"</span><span class="s2">CLANG_WARN_INFINITE_RECURSION</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">YES</span><span class="dl">"</span><span class="p">;</span>
+    <span class="dl">"</span><span class="s2">CLANG_WARN_INT_CONVERSION</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">YES</span><span class="dl">"</span><span class="p">;</span>
+    <span class="dl">"</span><span class="s2">CLANG_WARN_NON_LITERAL_NULL_CONVERSION</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">YES</span><span class="dl">"</span><span class="p">;</span>
+    <span class="dl">"</span><span class="s2">CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">YES</span><span class="dl">"</span><span class="p">;</span>
+    <span class="dl">"</span><span class="s2">CLANG_WARN_OBJC_LITERAL_CONVERSION</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">YES</span><span class="dl">"</span><span class="p">;</span>
+    <span class="dl">"</span><span class="s2">CLANG_WARN_OBJC_ROOT_CLASS</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">YES_ERROR</span><span class="dl">"</span><span class="p">;</span>
+    <span class="dl">"</span><span class="s2">CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">YES</span><span class="dl">"</span><span class="p">;</span>
+    <span class="dl">"</span><span class="s2">CLANG_WARN_RANGE_LOOP_ANALYSIS</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">YES</span><span class="dl">"</span><span class="p">;</span>
+    <span class="dl">"</span><span class="s2">CLANG_WARN_STRICT_PROTOTYPES</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">YES</span><span class="dl">"</span><span class="p">;</span>
+    <span class="dl">"</span><span class="s2">CLANG_WARN_SUSPICIOUS_MOVE</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">YES</span><span class="dl">"</span><span class="p">;</span>
+    <span class="dl">"</span><span class="s2">CLANG_WARN_UNGUARDED_AVAILABILITY</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">YES_AGGRESSIVE</span><span class="dl">"</span><span class="p">;</span>
+    <span class="dl">"</span><span class="s2">CLANG_WARN_UNREACHABLE_CODE</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">YES</span><span class="dl">"</span><span class="p">;</span>
+    <span class="dl">"</span><span class="s2">CLANG_WARN__DUPLICATE_METHOD_MATCH</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">YES</span><span class="dl">"</span><span class="p">;</span>
+    <span class="dl">"</span><span class="s2">COPY_PHASE_STRIP</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">NO</span><span class="dl">"</span><span class="p">;</span>
+    <span class="dl">"</span><span class="s2">DEBUG_INFORMATION_FORMAT</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">dwarf</span><span class="dl">"</span><span class="p">;</span>
+    <span class="dl">"</span><span class="s2">ENABLE_STRICT_OBJC_MSGSEND</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">YES</span><span class="dl">"</span><span class="p">;</span>
+    <span class="dl">"</span><span class="s2">ENABLE_TESTABILITY</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">YES</span><span class="dl">"</span><span class="p">;</span>
+    <span class="dl">"</span><span class="s2">GCC_C_LANGUAGE_STANDARD</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">gnu11</span><span class="dl">"</span><span class="p">;</span>
+    <span class="dl">"</span><span class="s2">GCC_DYNAMIC_NO_PIC</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">NO</span><span class="dl">"</span><span class="p">;</span>
+    <span class="dl">"</span><span class="s2">GCC_NO_COMMON_BLOCKS</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">YES</span><span class="dl">"</span><span class="p">;</span>
+    <span class="dl">"</span><span class="s2">GCC_OPTIMIZATION_LEVEL</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">0</span><span class="dl">"</span><span class="p">;</span>
+    <span class="dl">"</span><span class="s2">GCC_PREPROCESSOR_DEFINITIONS</span><span class="dl">"</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="dl">"</span><span class="s2">DEBUG=1</span><span class="dl">"</span><span class="p">,</span>
+        <span class="dl">"</span><span class="s2">$(inherited)</span><span class="dl">"</span><span class="p">,</span>
+    <span class="p">);</span>
+    <span class="dl">"</span><span class="s2">GCC_WARN_64_TO_32_BIT_CONVERSION</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">YES</span><span class="dl">"</span><span class="p">;</span>
+    <span class="dl">"</span><span class="s2">GCC_WARN_ABOUT_RETURN_TYPE</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">YES_ERROR</span><span class="dl">"</span><span class="p">;</span>
+    <span class="dl">"</span><span class="s2">GCC_WARN_UNDECLARED_SELECTOR</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">YES</span><span class="dl">"</span><span class="p">;</span>
+    <span class="dl">"</span><span class="s2">GCC_WARN_UNINITIALIZED_AUTOS</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">YES_AGGRESSIVE</span><span class="dl">"</span><span class="p">;</span>
+    <span class="dl">"</span><span class="s2">GCC_WARN_UNUSED_FUNCTION</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">YES</span><span class="dl">"</span><span class="p">;</span>
+    <span class="dl">"</span><span class="s2">GCC_WARN_UNUSED_VARIABLE</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">YES</span><span class="dl">"</span><span class="p">;</span>
+    <span class="dl">"</span><span class="s2">IPHONEOS_DEPLOYMENT_TARGET</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">11.0</span><span class="dl">"</span><span class="p">;</span>
+    <span class="dl">"</span><span class="s2">MTL_ENABLE_DEBUG_INFO</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">INCLUDE_SOURCE</span><span class="dl">"</span><span class="p">;</span>
+    <span class="dl">"</span><span class="s2">MTL_FAST_MATH</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">YES</span><span class="dl">"</span><span class="p">;</span>
+    <span class="dl">"</span><span class="s2">ONLY_ACTIVE_ARCH</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">YES</span><span class="dl">"</span><span class="p">;</span>
+    <span class="dl">"</span><span class="s2">SDKROOT</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">iphoneos</span><span class="dl">"</span><span class="p">;</span>
+    <span class="dl">"</span><span class="s2">SWIFT_ACTIVE_COMPILATION_CONDITIONS</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">DEBUG</span><span class="dl">"</span><span class="p">;</span>
+    <span class="dl">"</span><span class="s2">SWIFT_OPTIMIZATION_LEVEL</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">-Onone</span><span class="dl">"</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="cocoapods-configuration"><strong>CocoaPods Configuration</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># ios/Podfile</span>
+<span class="nb">require_relative</span> <span class="s1">'../node_modules/react-native/scripts/react_native_pods'</span>
+<span class="nb">require_relative</span> <span class="s1">'../node_modules/@react-native-community/cli-platform-ios/native_modules'</span>
+
+<span class="n">platform</span> <span class="ss">:ios</span><span class="p">,</span> <span class="s1">'11.0'</span>
+<span class="n">install!</span> <span class="s1">'cocoapods'</span><span class="p">,</span> <span class="ss">:deterministic_uuids</span> <span class="o">=&gt;</span> <span class="kp">false</span>
+
+<span class="n">target</span> <span class="s1">'YourApp'</span> <span class="k">do</span>
+  <span class="n">config</span> <span class="o">=</span> <span class="n">use_native_modules!</span>
+
+  <span class="c1"># Flags change depending on the env values.</span>
+  <span class="n">flags</span> <span class="o">=</span> <span class="n">get_default_flags</span><span class="p">()</span>
+
+  <span class="n">use_react_native!</span><span class="p">(</span>
+    <span class="ss">:path</span> <span class="o">=&gt;</span> <span class="n">config</span><span class="p">[</span><span class="ss">:reactNativePath</span><span class="p">],</span>
+    <span class="c1"># Hermes is now enabled by default. Disable by setting this flag to false.</span>
+    <span class="ss">:hermes_enabled</span> <span class="o">=&gt;</span> <span class="n">flags</span><span class="p">[</span><span class="ss">:hermes_enabled</span><span class="p">],</span>
+    <span class="ss">:fabric_enabled</span> <span class="o">=&gt;</span> <span class="n">flags</span><span class="p">[</span><span class="ss">:fabric_enabled</span><span class="p">],</span>
+    <span class="c1"># Enables Flipper.</span>
+    <span class="ss">:flipper_configuration</span> <span class="o">=&gt;</span> <span class="no">FlipperConfiguration</span><span class="p">.</span><span class="nf">enabled</span><span class="p">,</span>
+    <span class="c1"># An absolute path to your application root.</span>
+    <span class="ss">:app_path</span> <span class="o">=&gt;</span> <span class="s2">"</span><span class="si">#{</span><span class="no">Pod</span><span class="o">::</span><span class="no">Config</span><span class="p">.</span><span class="nf">instance</span><span class="p">.</span><span class="nf">installation_root</span><span class="si">}</span><span class="s2">/.."</span>
+  <span class="p">)</span>
+
+  <span class="n">target</span> <span class="s1">'YourAppTests'</span> <span class="k">do</span>
+    <span class="n">inherit!</span> <span class="ss">:complete</span>
+    <span class="c1"># Pods for testing</span>
+  <span class="k">end</span>
+
+  <span class="n">post_install</span> <span class="k">do</span> <span class="o">|</span><span class="n">installer</span><span class="o">|</span>
+    <span class="n">react_native_post_install</span><span class="p">(</span>
+      <span class="n">installer</span><span class="p">,</span>
+      <span class="c1"># Set `mac_catalyst_enabled` to `true` in order to apply patches</span>
+      <span class="c1"># necessary for Mac Catalyst builds</span>
+      <span class="ss">:mac_catalyst_enabled</span> <span class="o">=&gt;</span> <span class="kp">false</span>
+    <span class="p">)</span>
+    <span class="n">__apply_Xcode_12_5_M1_post_install_workaround</span><span class="p">(</span><span class="n">installer</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-build-schemes">🎯 <strong>Build Schemes</strong></h2>
+
+<h3 id="scheme-configuration"><strong>Scheme Configuration</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ios/YourApp.xcodeproj/xcshareddata/xcschemes/YourApp.xcscheme</span>
+<span class="c1">// Build configuration for different environments</span>
+
+<span class="kd">const</span> <span class="nx">buildSchemes</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">development</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">buildConfiguration</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Debug</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">archiveConfiguration</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Release</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">runConfiguration</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Debug</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">testConfiguration</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Debug</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">profileConfiguration</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Release</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">analyzeConfiguration</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Debug</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">staging</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">buildConfiguration</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Release</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">archiveConfiguration</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Release</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">runConfiguration</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Release</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">testConfiguration</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Debug</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">profileConfiguration</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Release</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">analyzeConfiguration</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Release</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">production</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">buildConfiguration</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Release</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">archiveConfiguration</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Release</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">runConfiguration</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Release</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">testConfiguration</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Release</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">profileConfiguration</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Release</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">analyzeConfiguration</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Release</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="build-scripts"><strong>Build Scripts</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// scripts/build-ios.js</span>
+<span class="kd">const</span> <span class="p">{</span> <span class="nx">execSync</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">child_process</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">fs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">fs</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">path</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">path</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">buildiOS</span> <span class="o">=</span> <span class="k">async</span> <span class="p">(</span><span class="nx">scheme</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">YourApp</span><span class="dl">'</span><span class="p">,</span> <span class="nx">configuration</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">Release</span><span class="dl">'</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">startTime</span> <span class="o">=</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
+  
+  <span class="k">try</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`Building iOS </span><span class="p">${</span><span class="nx">scheme</span><span class="p">}</span><span class="s2"> </span><span class="p">${</span><span class="nx">configuration</span><span class="p">}</span><span class="s2">...`</span><span class="p">);</span>
+    
+    <span class="c1">// Clean previous build</span>
+    <span class="nx">execSync</span><span class="p">(</span><span class="dl">'</span><span class="s1">cd ios &amp;&amp; xcodebuild clean -workspace YourApp.xcworkspace -scheme YourApp</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span> 
+      <span class="na">stdio</span><span class="p">:</span> <span class="dl">'</span><span class="s1">inherit</span><span class="dl">'</span> 
+    <span class="p">});</span>
+    
+    <span class="c1">// Build the app</span>
+    <span class="kd">const</span> <span class="nx">buildCommand</span> <span class="o">=</span> <span class="s2">`cd ios &amp;&amp; xcodebuild -workspace YourApp.xcworkspace -scheme </span><span class="p">${</span><span class="nx">scheme</span><span class="p">}</span><span class="s2"> -configuration </span><span class="p">${</span><span class="nx">configuration</span><span class="p">}</span><span class="s2"> -destination 'generic/platform=iOS' build`</span><span class="p">;</span>
+    <span class="nx">execSync</span><span class="p">(</span><span class="nx">buildCommand</span><span class="p">,</span> <span class="p">{</span> <span class="na">stdio</span><span class="p">:</span> <span class="dl">'</span><span class="s1">inherit</span><span class="dl">'</span> <span class="p">});</span>
+    
+    <span class="kd">const</span> <span class="nx">buildTime</span> <span class="o">=</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">()</span> <span class="o">-</span> <span class="nx">startTime</span><span class="p">;</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`Build completed in </span><span class="p">${</span><span class="nx">buildTime</span><span class="p">}</span><span class="s2">ms`</span><span class="p">);</span>
+    
+  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Build failed:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+    <span class="nx">process</span><span class="p">.</span><span class="nx">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// Archive for App Store</span>
+<span class="kd">const</span> <span class="nx">archiveiOS</span> <span class="o">=</span> <span class="k">async</span> <span class="p">(</span><span class="nx">scheme</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">YourApp</span><span class="dl">'</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">try</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`Archiving iOS </span><span class="p">${</span><span class="nx">scheme</span><span class="p">}</span><span class="s2">...`</span><span class="p">);</span>
+    
+    <span class="kd">const</span> <span class="nx">archiveCommand</span> <span class="o">=</span> <span class="s2">`cd ios &amp;&amp; xcodebuild -workspace YourApp.xcworkspace -scheme </span><span class="p">${</span><span class="nx">scheme</span><span class="p">}</span><span class="s2"> -configuration Release -destination 'generic/platform=iOS' archive -archivePath build/YourApp.xcarchive`</span><span class="p">;</span>
+    <span class="nx">execSync</span><span class="p">(</span><span class="nx">archiveCommand</span><span class="p">,</span> <span class="p">{</span> <span class="na">stdio</span><span class="p">:</span> <span class="dl">'</span><span class="s1">inherit</span><span class="dl">'</span> <span class="p">});</span>
+    
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Archive completed successfully!</span><span class="dl">'</span><span class="p">);</span>
+    
+  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Archive failed:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+    <span class="nx">process</span><span class="p">.</span><span class="nx">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// Usage</span>
+<span class="kd">const</span> <span class="nx">scheme</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="nx">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">||</span> <span class="dl">'</span><span class="s1">YourApp</span><span class="dl">'</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">configuration</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="nx">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">||</span> <span class="dl">'</span><span class="s1">Release</span><span class="dl">'</span><span class="p">;</span>
+<span class="nx">buildiOS</span><span class="p">(</span><span class="nx">scheme</span><span class="p">,</span> <span class="nx">configuration</span><span class="p">);</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-code-signing">🔐 <strong>Code Signing</strong></h2>
+
+<h3 id="signing-configuration"><strong>Signing Configuration</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ios/YourApp.xcodeproj/project.pbxproj</span>
+<span class="c1">// Code signing settings</span>
+
+<span class="dl">"</span><span class="s2">CODE_SIGN_STYLE</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Automatic</span><span class="dl">"</span><span class="p">;</span>
+<span class="dl">"</span><span class="s2">DEVELOPMENT_TEAM</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">YOUR_TEAM_ID</span><span class="dl">"</span><span class="p">;</span>
+<span class="dl">"</span><span class="s2">CODE_SIGN_IDENTITY</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">iPhone Developer</span><span class="dl">"</span><span class="p">;</span>
+<span class="dl">"</span><span class="s2">PROVISIONING_PROFILE_SPECIFIER</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">""</span><span class="p">;</span>
+
+<span class="c1">// For release builds</span>
+<span class="dl">"</span><span class="s2">RELEASE</span><span class="dl">"</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">CODE_SIGN_STYLE</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Manual</span><span class="dl">"</span><span class="p">;</span>
+    <span class="dl">"</span><span class="s2">CODE_SIGN_IDENTITY</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">iPhone Distribution</span><span class="dl">"</span><span class="p">;</span>
+    <span class="dl">"</span><span class="s2">PROVISIONING_PROFILE_SPECIFIER</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">YourApp Distribution Profile</span><span class="dl">"</span><span class="p">;</span>
+    <span class="dl">"</span><span class="s2">DEVELOPMENT_TEAM</span><span class="dl">"</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">YOUR_TEAM_ID</span><span class="dl">"</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="fastlane-configuration"><strong>Fastlane Configuration</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># ios/fastlane/Fastfile</span>
+<span class="n">default_platform</span><span class="p">(</span><span class="ss">:ios</span><span class="p">)</span>
+
+<span class="n">platform</span> <span class="ss">:ios</span> <span class="k">do</span>
+  <span class="n">desc</span> <span class="s2">"Build and upload to App Store"</span>
+  <span class="n">lane</span> <span class="ss">:release</span> <span class="k">do</span>
+    <span class="c1"># Increment build number</span>
+    <span class="n">increment_build_number</span><span class="p">(</span><span class="ss">xcodeproj: </span><span class="s2">"YourApp.xcodeproj"</span><span class="p">)</span>
+    
+    <span class="c1"># Build the app</span>
+    <span class="n">build_app</span><span class="p">(</span>
+      <span class="ss">workspace: </span><span class="s2">"YourApp.xcworkspace"</span><span class="p">,</span>
+      <span class="ss">scheme: </span><span class="s2">"YourApp"</span><span class="p">,</span>
+      <span class="ss">configuration: </span><span class="s2">"Release"</span><span class="p">,</span>
+      <span class="ss">export_method: </span><span class="s2">"app-store"</span><span class="p">,</span>
+      <span class="ss">export_options: </span><span class="p">{</span>
+        <span class="ss">method: </span><span class="s2">"app-store"</span><span class="p">,</span>
+        <span class="ss">teamID: </span><span class="s2">"YOUR_TEAM_ID"</span><span class="p">,</span>
+        <span class="ss">uploadBitcode: </span><span class="kp">false</span><span class="p">,</span>
+        <span class="ss">uploadSymbols: </span><span class="kp">true</span><span class="p">,</span>
+        <span class="ss">compileBitcode: </span><span class="kp">false</span>
+      <span class="p">}</span>
+    <span class="p">)</span>
+    
+    <span class="c1"># Upload to App Store Connect</span>
+    <span class="n">upload_to_app_store</span><span class="p">(</span>
+      <span class="ss">force: </span><span class="kp">true</span><span class="p">,</span>
+      <span class="ss">skip_metadata: </span><span class="kp">false</span><span class="p">,</span>
+      <span class="ss">skip_screenshots: </span><span class="kp">false</span>
+    <span class="p">)</span>
+  <span class="k">end</span>
+  
+  <span class="n">desc</span> <span class="s2">"Build for TestFlight"</span>
+  <span class="n">lane</span> <span class="ss">:beta</span> <span class="k">do</span>
+    <span class="c1"># Build and upload to TestFlight</span>
+    <span class="n">build_app</span><span class="p">(</span>
+      <span class="ss">workspace: </span><span class="s2">"YourApp.xcworkspace"</span><span class="p">,</span>
+      <span class="ss">scheme: </span><span class="s2">"YourApp"</span><span class="p">,</span>
+      <span class="ss">configuration: </span><span class="s2">"Release"</span><span class="p">,</span>
+      <span class="ss">export_method: </span><span class="s2">"app-store"</span>
+    <span class="p">)</span>
+    
+    <span class="n">upload_to_testflight</span><span class="p">(</span>
+      <span class="ss">skip_waiting_for_build_processing: </span><span class="kp">true</span>
+    <span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-app-store-optimization">📱 <strong>App Store Optimization</strong></h2>
+
+<h3 id="app-store-metadata"><strong>App Store Metadata</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ios/fastlane/metadata/en-US/name.txt</span>
+<span class="nx">Your</span> <span class="nx">App</span> <span class="nx">Name</span>
+
+<span class="c1">// ios/fastlane/metadata/en-US/subtitle.txt</span>
+<span class="nx">Your</span> <span class="nx">App</span> <span class="nx">Subtitle</span>
+
+<span class="c1">// ios/fastlane/metadata/en-US/description.txt</span>
+<span class="nx">Your</span> <span class="nx">app</span> <span class="nx">description</span> <span class="nx">goes</span> <span class="nx">here</span><span class="p">.</span> <span class="nx">This</span> <span class="nx">should</span> <span class="nx">be</span> <span class="nx">compelling</span> <span class="nx">and</span> <span class="nx">describe</span> <span class="nx">what</span> <span class="nx">your</span> <span class="nx">app</span> <span class="nx">does</span><span class="p">.</span>
+
+<span class="nx">Key</span> <span class="nx">features</span><span class="p">:</span>
+<span class="o">-</span> <span class="nx">Feature</span> <span class="mi">1</span>
+<span class="o">-</span> <span class="nx">Feature</span> <span class="mi">2</span>
+<span class="o">-</span> <span class="nx">Feature</span> <span class="mi">3</span>
+
+<span class="c1">// ios/fastlane/metadata/en-US/keywords.txt</span>
+<span class="nx">keyword1</span><span class="p">,</span> <span class="nx">keyword2</span><span class="p">,</span> <span class="nx">keyword3</span><span class="p">,</span> <span class="nx">keyword4</span><span class="p">,</span> <span class="nx">keyword5</span>
+
+<span class="c1">// ios/fastlane/metadata/en-US/release_notes.txt</span>
+<span class="nx">What</span><span class="dl">'</span><span class="s1">s New in Version 1.0.0:
+
+- New feature 1
+- Bug fixes
+- Performance improvements
+- UI enhancements
+</span></code></pre></div></div>
+
+<h3 id="screenshot-automation"><strong>Screenshot Automation</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># ios/fastlane/Fastfile</span>
+<span class="n">desc</span> <span class="s2">"Generate screenshots"</span>
+<span class="n">lane</span> <span class="ss">:screenshots</span> <span class="k">do</span>
+  <span class="c1"># Run UI tests to generate screenshots</span>
+  <span class="n">run_tests</span><span class="p">(</span>
+    <span class="ss">workspace: </span><span class="s2">"YourApp.xcworkspace"</span><span class="p">,</span>
+    <span class="ss">scheme: </span><span class="s2">"YourAppUITests"</span><span class="p">,</span>
+    <span class="ss">device: </span><span class="s2">"iPhone 12 Pro"</span>
+  <span class="p">)</span>
+  
+  <span class="c1"># Collect screenshots</span>
+  <span class="n">collect_screenshots</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-release-process">🚀 <strong>Release Process</strong></h2>
+
+<h3 id="automated-release-script"><strong>Automated Release Script</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// scripts/release-ios.js</span>
+<span class="kd">const</span> <span class="p">{</span> <span class="nx">execSync</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">child_process</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">fs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">fs</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">path</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">path</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">releaseiOS</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">try</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Starting iOS release process...</span><span class="dl">'</span><span class="p">);</span>
+    
+    <span class="c1">// 1. Clean and build</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Cleaning and building...</span><span class="dl">'</span><span class="p">);</span>
+    <span class="nx">execSync</span><span class="p">(</span><span class="dl">'</span><span class="s1">cd ios &amp;&amp; xcodebuild clean -workspace YourApp.xcworkspace -scheme YourApp</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span> 
+      <span class="na">stdio</span><span class="p">:</span> <span class="dl">'</span><span class="s1">inherit</span><span class="dl">'</span> 
+    <span class="p">});</span>
+    
+    <span class="c1">// 2. Archive the app</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Archiving app...</span><span class="dl">'</span><span class="p">);</span>
+    <span class="nx">execSync</span><span class="p">(</span><span class="dl">'</span><span class="s1">cd ios &amp;&amp; xcodebuild -workspace YourApp.xcworkspace -scheme YourApp -configuration Release -destination "generic/platform=iOS" archive -archivePath build/YourApp.xcarchive</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span> 
+      <span class="na">stdio</span><span class="p">:</span> <span class="dl">'</span><span class="s1">inherit</span><span class="dl">'</span> 
+    <span class="p">});</span>
+    
+    <span class="c1">// 3. Export IPA</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Exporting IPA...</span><span class="dl">'</span><span class="p">);</span>
+    <span class="nx">execSync</span><span class="p">(</span><span class="dl">'</span><span class="s1">cd ios &amp;&amp; xcodebuild -exportArchive -archivePath build/YourApp.xcarchive -exportPath build -exportOptionsPlist ExportOptions.plist</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span> 
+      <span class="na">stdio</span><span class="p">:</span> <span class="dl">'</span><span class="s1">inherit</span><span class="dl">'</span> 
+    <span class="p">});</span>
+    
+    <span class="c1">// 4. Get version info</span>
+    <span class="kd">const</span> <span class="nx">packageJson</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">fs</span><span class="p">.</span><span class="nx">readFileSync</span><span class="p">(</span><span class="dl">'</span><span class="s1">package.json</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">utf8</span><span class="dl">'</span><span class="p">));</span>
+    <span class="kd">const</span> <span class="nx">version</span> <span class="o">=</span> <span class="nx">packageJson</span><span class="p">.</span><span class="nx">version</span><span class="p">;</span>
+    
+    <span class="c1">// 5. Copy files to release directory</span>
+    <span class="kd">const</span> <span class="nx">releaseDir</span> <span class="o">=</span> <span class="s2">`releases/ios/v</span><span class="p">${</span><span class="nx">version</span><span class="p">}</span><span class="s2">`</span><span class="p">;</span>
+    <span class="nx">fs</span><span class="p">.</span><span class="nx">mkdirSync</span><span class="p">(</span><span class="nx">releaseDir</span><span class="p">,</span> <span class="p">{</span> <span class="na">recursive</span><span class="p">:</span> <span class="kc">true</span> <span class="p">});</span>
+    
+    <span class="c1">// Copy IPA</span>
+    <span class="kd">const</span> <span class="nx">ipaSource</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">ios/build/YourApp.ipa</span><span class="dl">'</span><span class="p">;</span>
+    <span class="kd">const</span> <span class="nx">ipaDest</span> <span class="o">=</span> <span class="s2">`</span><span class="p">${</span><span class="nx">releaseDir</span><span class="p">}</span><span class="s2">/YourApp.ipa`</span><span class="p">;</span>
+    <span class="nx">fs</span><span class="p">.</span><span class="nx">copyFileSync</span><span class="p">(</span><span class="nx">ipaSource</span><span class="p">,</span> <span class="nx">ipaDest</span><span class="p">);</span>
+    
+    <span class="c1">// 6. Generate release notes</span>
+    <span class="kd">const</span> <span class="nx">releaseNotes</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="na">version</span><span class="p">:</span> <span class="nx">version</span><span class="p">,</span>
+      <span class="na">timestamp</span><span class="p">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">toISOString</span><span class="p">(),</span>
+      <span class="na">files</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">ipa</span><span class="p">:</span> <span class="nx">ipaDest</span><span class="p">,</span>
+      <span class="p">},</span>
+      <span class="na">buildInfo</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">xcodeVersion</span><span class="p">:</span> <span class="dl">'</span><span class="s1">14.0</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">iosDeploymentTarget</span><span class="p">:</span> <span class="dl">'</span><span class="s1">11.0</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">swiftVersion</span><span class="p">:</span> <span class="dl">'</span><span class="s1">5.0</span><span class="dl">'</span><span class="p">,</span>
+      <span class="p">},</span>
+    <span class="p">};</span>
+    
+    <span class="nx">fs</span><span class="p">.</span><span class="nx">writeFileSync</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">releaseDir</span><span class="p">}</span><span class="s2">/release-info.json`</span><span class="p">,</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">releaseNotes</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="mi">2</span><span class="p">));</span>
+    
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`Release completed! Files available in </span><span class="p">${</span><span class="nx">releaseDir</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+    
+  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Release failed:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+    <span class="nx">process</span><span class="p">.</span><span class="nx">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// Run release</span>
+<span class="nx">releaseiOS</span><span class="p">();</span>
+</code></pre></div></div>
+
+<h3 id="app-store-connect-upload"><strong>App Store Connect Upload</strong></h3>
+
+<p><button onclick="copyCode(this)" class="copy-btn">📋 Copy</button></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// scripts/upload-appstore.js</span>
+<span class="kd">const</span> <span class="p">{</span> <span class="nx">execSync</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">child_process</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">uploadToAppStore</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">try</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Uploading to App Store Connect...</span><span class="dl">'</span><span class="p">);</span>
+    
+    <span class="c1">// Check if fastlane is installed</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="nx">execSync</span><span class="p">(</span><span class="dl">'</span><span class="s1">fastlane --version</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span> <span class="na">stdio</span><span class="p">:</span> <span class="dl">'</span><span class="s1">pipe</span><span class="dl">'</span> <span class="p">});</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Fastlane not installed. Please install it first.</span><span class="dl">'</span><span class="p">);</span>
+      <span class="nx">process</span><span class="p">.</span><span class="nx">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="c1">// Upload using fastlane</span>
+    <span class="nx">execSync</span><span class="p">(</span><span class="dl">'</span><span class="s1">cd ios &amp;&amp; fastlane release</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span> 
+      <span class="na">stdio</span><span class="p">:</span> <span class="dl">'</span><span class="s1">inherit</span><span class="dl">'</span> 
+    <span class="p">});</span>
+    
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Upload completed successfully!</span><span class="dl">'</span><span class="p">);</span>
+    
+  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Upload failed:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+    <span class="nx">process</span><span class="p">.</span><span class="nx">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// Run upload</span>
+<span class="nx">uploadToAppStore</span><span class="p">();</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-best-practices">🎯 <strong>Best Practices</strong></h2>
+
+<h3 id="1-build-optimization"><strong>1. Build Optimization</strong></h3>
+<ul>
+  <li>Use Release configuration for production</li>
+  <li>Enable code stripping and dead code elimination</li>
+  <li>Optimize Swift compilation</li>
+  <li>Use bitcode when possible</li>
+</ul>
+
+<h3 id="2-code-signing"><strong>2. Code Signing</strong></h3>
+<ul>
+  <li>Use automatic signing for development</li>
+  <li>Use manual signing for production</li>
+  <li>Store certificates securely</li>
+  <li>Use different provisioning profiles</li>
+</ul>
+
+<h3 id="3-app-store"><strong>3. App Store</strong></h3>
+<ul>
+  <li>Optimize app metadata</li>
+  <li>Use compelling screenshots</li>
+  <li>Write clear release notes</li>
+  <li>Test on multiple devices</li>
+</ul>
+
+<hr />
+
+<h2 id="-interview-questions">❓ <strong>Interview Questions</strong></h2>
+
+<h3 id="basic-questions"><strong>Basic Questions</strong></h3>
+<ol>
+  <li><strong>What is the difference between Debug and Release builds in iOS?</strong></li>
+  <li><strong>How do you configure code signing in Xcode?</strong></li>
+  <li><strong>What is CocoaPods and how does it work?</strong></li>
+</ol>
+
+<h3 id="advanced-questions"><strong>Advanced Questions</strong></h3>
+<ol>
+  <li><strong>How would you optimize iOS build performance?</strong></li>
+  <li><strong>Explain the iOS build process for React Native apps.</strong></li>
+  <li><strong>How do you handle different environments in iOS builds?</strong></li>
+</ol>
+
+<h3 id="practical-questions"><strong>Practical Questions</strong></h3>
+<ol>
+  <li><strong>Configure build schemes for development, staging, and production.</strong></li>
+  <li><strong>Set up automated release process for iOS.</strong></li>
+  <li><strong>Optimize app size and performance for App Store.</strong></li>
+</ol>
+
+<hr />
+
+<h2 id="-navigation">🧭 Navigation</h2>
+
+<div class="navigation">
+    <a href="./02-Android-Build-Process.md" class="nav-link prev">⬅️ Previous: Android Build Process</a>
+    <a href="./04-CICD-Pipelines.md" class="nav-link next">Next: CI/CD Pipelines ➡️</a>
+</div>
+
+<hr />
+
+<script src="../../common-scripts.js"></script>
+
+<p><em>Last updated: December 2024</em></p>
+
+        </main>
+        
+        <footer style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #ecf0f1; color: #666; text-align: center;">
+            <p>Interview Prep Documentation - Built with Jekyll</p>
+        </footer>
+    </div>
+</body>
+</html>

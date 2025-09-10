@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔹 JavaScript Security - Interview Prep Documentation</title>
+    <meta name="description" content="Comprehensive guides for JavaScript, TypeScript, and React Native interview preparation">
+    
+    <!-- GitHub Pages compatible styling -->
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+        }
+        
+        .container {
+            max-width: 100%;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            color: #2c3e50;
+            margin-top: 2em;
+            margin-bottom: 1em;
+        }
+        
+        h1 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            border-bottom: 1px solid #ecf0f1;
+            padding-bottom: 5px;
+        }
+        
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border-left: 4px solid #3498db;
+        }
+        
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+        
+        blockquote {
+            border-left: 4px solid #3498db;
+            margin: 0;
+            padding-left: 20px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1em 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .navigation {
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px 0;
+            margin-bottom: 20px;
+        }
+        
+        .navigation a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+        
+        .navigation a:hover {
+            text-decoration: underline;
+        }
+        
+        .breadcrumb {
+            margin-bottom: 20px;
+            color: #666;
+        }
+        
+        .breadcrumb a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            h2 {
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="navigation">
+            <a href="/">Home</a>
+            <a href="/Javascript/">JavaScript</a>
+            <a href="/TypeScript/">TypeScript</a>
+            <a href="/React-Native/">React Native</a>
+        </nav>
+        
+        
+        
+        <main>
+            <h1 id="-javascript-security">🔹 JavaScript Security</h1>
+
+<blockquote>
+  <p><strong>Comprehensive coverage of JavaScript security practices: Content Security Policy (CSP), Subresource Integrity (SRI), and Trusted Types API</strong></p>
+</blockquote>
+
+<link rel="stylesheet" href="../common-styles.css" />
+
+<hr />
+
+<h2 id="-table-of-contents">📚 Table of Contents</h2>
+
+<ul>
+  <li><a href="#javascript-security-overview">JavaScript Security Overview</a></li>
+  <li><a href="#content-security-policy-csp">Content Security Policy (CSP)</a></li>
+  <li><a href="#subresource-integrity-sri">Subresource Integrity (SRI)</a></li>
+  <li><a href="#trusted-types-api">Trusted Types API</a></li>
+  <li><a href="#detailed-examples">Detailed Examples</a></li>
+  <li><a href="#common-interview-questions">Common Interview Questions</a></li>
+  <li><a href="#practice-exercises">Practice Exercises</a></li>
+  <li><a href="#additional-resources">Additional Resources</a></li>
+</ul>
+
+<hr />
+
+<h2 id="-javascript-security-overview">🎯 JavaScript Security Overview</h2>
+
+<p><strong>JavaScript Security</strong> involves protecting web applications from various security vulnerabilities and attacks through proper coding practices, security headers, and modern security APIs.</p>
+
+<h3 id="why-javascript-security-matters">Why JavaScript Security Matters:</h3>
+<ul>
+  <li><strong>User Protection</strong>: Prevent data theft and privacy violations</li>
+  <li><strong>Application Integrity</strong>: Maintain secure application behavior</li>
+  <li><strong>Compliance</strong>: Meet security standards and regulations</li>
+  <li><strong>Trust</strong>: Build user confidence in application security</li>
+  <li><strong>Business Continuity</strong>: Prevent security incidents and downtime</li>
+</ul>
+
+<hr />
+
+<h2 id="️-content-security-policy-csp">🛡️ Content Security Policy (CSP)</h2>
+
+<p><strong>Content Security Policy (CSP)</strong> is a security standard that helps prevent cross-site scripting (XSS) attacks by controlling which resources can be loaded and executed.</p>
+
+<h3 id="why-csp-matters">Why CSP Matters:</h3>
+<ul>
+  <li><strong>XSS Prevention</strong>: Block malicious script execution</li>
+  <li><strong>Resource Control</strong>: Limit resource loading to trusted sources</li>
+  <li><strong>Attack Mitigation</strong>: Reduce impact of security vulnerabilities</li>
+  <li><strong>Compliance</strong>: Meet security standards and requirements</li>
+  <li><strong>Monitoring</strong>: Detect and report policy violations</li>
+</ul>
+
+<h3 id="ascii-diagram-csp-enforcement-flow">ASCII Diagram: CSP Enforcement Flow</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CSP ENFORCEMENT FLOW
+┌─────────────────────────────────┐
+│        WEB PAGE REQUEST         │
+│  ┌─────────────────────────────┐ │
+│  │ GET /page.html              │ │
+│  │ Host: example.com           │ │
+│  │ User-Agent: Browser         │ │
+│  └─────────────────────────────┘ │
+└─────────────────────────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  SERVER       │
+        │  RESPONSE     │
+        │               │
+        │  HTTP/1.1 200 │
+        │  CSP: default-src 'self'│
+        │  Content-Type: text/html│
+        └───────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  BROWSER      │
+        │  CSP PARSING  │
+        │               │
+        │  Parse CSP    │
+        │  Directives   │
+        │  Build Policy │
+        └───────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  RESOURCE     │
+        │  LOADING      │
+        │               │
+        │  Scripts      │
+        │  Styles       │
+        │  Images       │
+        │  Fonts        │
+        └───────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  POLICY       │
+        │  ENFORCEMENT  │
+        │               │
+        │  Allow/Deny   │
+        │  Resources    │
+        │  Based on     │
+        │  CSP Rules    │
+        └───────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  VIOLATION    │
+        │  REPORTING    │
+        │               │
+        │  Log          │
+        │  Violations   │
+        │  Send Reports │
+        │  To Server    │
+        └───────────────┘
+</code></pre></div></div>
+
+<h3 id="csp-directives">CSP Directives:</h3>
+<ul>
+  <li><strong>default-src</strong>: Default source for all resource types</li>
+  <li><strong>script-src</strong>: Control JavaScript execution sources</li>
+  <li><strong>style-src</strong>: Control CSS loading sources</li>
+  <li><strong>img-src</strong>: Control image loading sources</li>
+  <li><strong>connect-src</strong>: Control AJAX and WebSocket connections</li>
+</ul>
+
+<hr />
+
+<h2 id="-subresource-integrity-sri">🔒 Subresource Integrity (SRI)</h2>
+
+<p><strong>Subresource Integrity (SRI)</strong> allows browsers to verify that resources (scripts, stylesheets) haven’t been tampered with by checking their cryptographic hash.</p>
+
+<h3 id="why-sri-matters">Why SRI Matters:</h3>
+<ul>
+  <li><strong>Integrity Verification</strong>: Ensure resources haven’t been modified</li>
+  <li><strong>CDN Security</strong>: Trust external content delivery networks</li>
+  <li><strong>Attack Prevention</strong>: Block malicious resource modifications</li>
+  <li><strong>Compliance</strong>: Meet security requirements for external resources</li>
+  <li><strong>Trust</strong>: Verify resource authenticity and integrity</li>
+</ul>
+
+<h3 id="ascii-diagram-sri-verification-process">ASCII Diagram: SRI Verification Process</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SRI VERIFICATION PROCESS
+┌─────────────────────────────────┐
+│        HTML DOCUMENT            │
+│  ┌─────────────────────────────┐ │
+│  │ &lt;script src="https://cdn.js │
+│  │   integrity="sha384-..."    │
+│  │   crossorigin="anonymous"&gt;  │
+│  │ &lt;/script&gt;                    │
+│  └─────────────────────────────┘ │
+└─────────────────────────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  BROWSER      │
+        │  RESOURCE     │
+        │  REQUEST      │
+        │               │
+        │  GET /script.js│
+        │  Host: cdn.js │
+        │  Origin: example.com│
+        └───────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  CDN          │
+        │  RESPONSE     │
+        │               │
+        │  HTTP/1.1 200 │
+        │  Content-Type: application/js│
+        │  Body: [JavaScript Code]     │
+        └───────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  BROWSER      │
+        │  HASH         │
+        │  CALCULATION  │
+        │               │
+        │  Calculate    │
+        │  SHA-384      │
+        │  Hash of      │
+        │  Response     │
+        └───────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  INTEGRITY    │
+        │  VERIFICATION │
+        │               │
+        │  Compare      │
+        │  Calculated   │
+        │  Hash with    │
+        │  Expected     │
+        └───────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  RESULT       │
+        │               │
+        │  Hash Match:  │
+        │  Execute      │
+        │  Hash Mismatch:│
+        │  Block        │
+        └───────────────┘
+</code></pre></div></div>
+
+<h3 id="sri-implementation">SRI Implementation:</h3>
+<ul>
+  <li><strong>Hash Generation</strong>: Create cryptographic hashes for resources</li>
+  <li><strong>HTML Integration</strong>: Add integrity attributes to resource tags</li>
+  <li><strong>Cross-Origin</strong>: Handle CORS for external resources</li>
+  <li><strong>Fallback Handling</strong>: Manage SRI failures gracefully</li>
+  <li><strong>Monitoring</strong>: Track SRI verification success/failure rates</li>
+</ul>
+
+<hr />
+
+<h2 id="-trusted-types-api">🎭 Trusted Types API</h2>
+
+<p><strong>Trusted Types API</strong> provides a way to prevent DOM-based XSS attacks by creating a secure API for DOM manipulation that enforces content sanitization.</p>
+
+<h3 id="why-trusted-types-api-matters">Why Trusted Types API Matters:</h3>
+<ul>
+  <li><strong>XSS Prevention</strong>: Block unsafe DOM manipulation</li>
+  <li><strong>Content Sanitization</strong>: Ensure safe content insertion</li>
+  <li><strong>Policy Enforcement</strong>: Enforce security policies at runtime</li>
+  <li><strong>Modern Security</strong>: Use latest web security standards</li>
+  <li><strong>Developer Safety</strong>: Prevent accidental security vulnerabilities</li>
+</ul>
+
+<h3 id="ascii-diagram-trusted-types-flow">ASCII Diagram: Trusted Types Flow</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>TRUSTED TYPES FLOW
+┌─────────────────────────────────┐
+│        TRUSTED TYPES            │
+│        POLICY                   │
+│  ┌─────────────────────────────┐ │
+│  │ TrustedTypePolicy           │
+│  │ - createHTML()              │
+│  │ - createScript()            │
+│  │ - createScriptURL()         │
+│  │ - createURL()               │
+│  └─────────────────────────────┘ │
+└─────────────────────────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  UNSAFE       │
+        │  CONTENT      │
+        │               │
+        │  User Input   │
+        │  API Response │
+        │  External     │
+        │  Data         │
+        └───────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  SANITIZATION │
+        │  PROCESS      │
+        │               │
+        │  HTML         │
+        │  Sanitization │
+        │  Script       │
+        │  Filtering    │
+        └───────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  TRUSTED      │
+        │  TYPE         │
+        │               │
+        │  TrustedHTML  │
+        │  TrustedScript│
+        │  TrustedURL   │
+        │  TrustedScriptURL│
+        └───────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  DOM          │
+        │  INSERTION    │
+        │               │
+        │  Safe         │
+        │  Content      │
+        │  Insertion    │
+        │  No XSS       │
+        └───────────────┘
+</code></pre></div></div>
+
+<h3 id="trusted-types-features">Trusted Types Features:</h3>
+<ul>
+  <li><strong>Policy Creation</strong>: Define security policies for content</li>
+  <li><strong>Content Sanitization</strong>: Clean and validate input content</li>
+  <li><strong>Type Safety</strong>: Ensure only trusted content reaches DOM</li>
+  <li><strong>Policy Enforcement</strong>: Block unsafe DOM operations</li>
+  <li><strong>Monitoring</strong>: Track policy violations and security events</li>
+</ul>
+
+<hr />
+
+<h2 id="-copy-code-functionality">📋 Copy Code Functionality</h2>
+
+<script src="../common-scripts.js"></script>
+
+<hr />
+
+<h2 id="-navigation">🧭 Navigation</h2>
+
+<div class="navigation">
+    <a href="../06-Testing-Quality-Assurance/02-Code-Quality.md" class="nav-link prev">← Previous: Code Quality</a>
+    <a href="02-Code-Security.md" class="nav-link next">Next: Code Security →</a>
+</div>
+
+<p><em>Last updated: December 2024</em></p>
+
+        </main>
+        
+        <footer style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #ecf0f1; color: #666; text-align: center;">
+            <p>Interview Prep Documentation - Built with Jekyll</p>
+        </footer>
+    </div>
+</body>
+</html>

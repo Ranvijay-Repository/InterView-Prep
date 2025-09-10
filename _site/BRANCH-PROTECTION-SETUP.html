@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Branch Protection Setup Guide - Interview Prep Documentation</title>
+    <meta name="description" content="Comprehensive guides for JavaScript, TypeScript, and React Native interview preparation">
+    
+    <!-- GitHub Pages compatible styling -->
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+        }
+        
+        .container {
+            max-width: 100%;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            color: #2c3e50;
+            margin-top: 2em;
+            margin-bottom: 1em;
+        }
+        
+        h1 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            border-bottom: 1px solid #ecf0f1;
+            padding-bottom: 5px;
+        }
+        
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border-left: 4px solid #3498db;
+        }
+        
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+        
+        blockquote {
+            border-left: 4px solid #3498db;
+            margin: 0;
+            padding-left: 20px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1em 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .navigation {
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px 0;
+            margin-bottom: 20px;
+        }
+        
+        .navigation a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+        
+        .navigation a:hover {
+            text-decoration: underline;
+        }
+        
+        .breadcrumb {
+            margin-bottom: 20px;
+            color: #666;
+        }
+        
+        .breadcrumb a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            h2 {
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="navigation">
+            <a href="/">Home</a>
+            <a href="/Javascript/">JavaScript</a>
+            <a href="/TypeScript/">TypeScript</a>
+            <a href="/React-Native/">React Native</a>
+        </nav>
+        
+        
+        
+        <main>
+            <h1 id="branch-protection-setup-guide">Branch Protection Setup Guide</h1>
+
+<p>This guide will help you set up branch protection rules for your repository to ensure that:</p>
+<ul>
+  <li>✅ Only PRs can merge to the production branch</li>
+  <li>✅ Direct pushes to production are blocked</li>
+  <li>✅ All checks must pass before merging</li>
+  <li>✅ Automatic deployment only happens from production branch</li>
+</ul>
+
+<h2 id="️-setting-up-branch-protection-rules">🛡️ Setting Up Branch Protection Rules</h2>
+
+<h3 id="step-1-navigate-to-repository-settings">Step 1: Navigate to Repository Settings</h3>
+
+<ol>
+  <li>Go to your GitHub repository</li>
+  <li>Click on <strong>Settings</strong> tab</li>
+  <li>In the left sidebar, click on <strong>Branches</strong></li>
+</ol>
+
+<h3 id="step-2-add-branch-protection-rule">Step 2: Add Branch Protection Rule</h3>
+
+<ol>
+  <li>Click <strong>Add rule</strong> button</li>
+  <li>In the <strong>Branch name pattern</strong> field, enter: <code class="language-plaintext highlighter-rouge">production</code></li>
+  <li>Configure the following settings:</li>
+</ol>
+
+<h4 id="-required-settings">✅ Required Settings</h4>
+
+<p><strong>Require a pull request before merging:</strong></p>
+<ul>
+  <li>✅ Check this box</li>
+  <li>✅ Require approvals: <code class="language-plaintext highlighter-rouge">1</code> (or more as needed)</li>
+  <li>✅ Dismiss stale PR approvals when new commits are pushed</li>
+  <li>✅ Require review from code owners (if you have a CODEOWNERS file)</li>
+</ul>
+
+<p><strong>Require status checks to pass before merging:</strong></p>
+<ul>
+  <li>✅ Check this box</li>
+  <li>✅ Require branches to be up to date before merging</li>
+  <li>In the search box, add these required status checks:
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">build</code> (from deploy.yml)</li>
+      <li><code class="language-plaintext highlighter-rouge">lint</code> (from lint.yml)</li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>Require conversation resolution before merging:</strong></p>
+<ul>
+  <li>✅ Check this box</li>
+</ul>
+
+<p><strong>Require signed commits:</strong></p>
+<ul>
+  <li>✅ Check this box (recommended for security)</li>
+</ul>
+
+<p><strong>Require linear history:</strong></p>
+<ul>
+  <li>✅ Check this box (keeps git history clean)</li>
+</ul>
+
+<p><strong>Require deployments to succeed before merging:</strong></p>
+<ul>
+  <li>✅ Check this box</li>
+</ul>
+
+<h4 id="️-important-settings">⚠️ Important Settings</h4>
+
+<p><strong>Restrict pushes that create files:</strong></p>
+<ul>
+  <li>✅ Check this box</li>
+</ul>
+
+<p><strong>Allow force pushes:</strong></p>
+<ul>
+  <li>❌ <strong>DO NOT</strong> check this box</li>
+</ul>
+
+<p><strong>Allow deletions:</strong></p>
+<ul>
+  <li>❌ <strong>DO NOT</strong> check this box</li>
+</ul>
+
+<h3 id="step-3-additional-security-settings">Step 3: Additional Security Settings</h3>
+
+<p><strong>Restrict pushes that create files:</strong></p>
+<ul>
+  <li>✅ Check this box</li>
+</ul>
+
+<p><strong>Allow force pushes:</strong></p>
+<ul>
+  <li>❌ <strong>DO NOT</strong> check this box</li>
+</ul>
+
+<p><strong>Allow deletions:</strong></p>
+<ul>
+  <li>❌ <strong>DO NOT</strong> check this box</li>
+</ul>
+
+<h3 id="step-4-save-the-rule">Step 4: Save the Rule</h3>
+
+<ol>
+  <li>Click <strong>Create</strong> button</li>
+  <li>Verify the rule is active</li>
+</ol>
+
+<h2 id="-github-actions-settings">🔧 GitHub Actions Settings</h2>
+
+<h3 id="step-1-enable-github-pages">Step 1: Enable GitHub Pages</h3>
+
+<ol>
+  <li>Go to <strong>Settings</strong> → <strong>Pages</strong></li>
+  <li>Under <strong>Source</strong>, select <strong>GitHub Actions</strong></li>
+  <li>This enables the deployment workflow</li>
+</ol>
+
+<h3 id="step-2-configure-actions-permissions">Step 2: Configure Actions Permissions</h3>
+
+<ol>
+  <li>Go to <strong>Settings</strong> → <strong>Actions</strong> → <strong>General</strong></li>
+  <li>Under <strong>Workflow permissions</strong>, select:
+    <ul>
+      <li>✅ <strong>Read and write permissions</strong></li>
+      <li>✅ <strong>Allow GitHub Actions to create and approve pull requests</strong></li>
+    </ul>
+  </li>
+</ol>
+
+<h2 id="-workflow-summary">📋 Workflow Summary</h2>
+
+<h3 id="what-happens-when-you-merge-pr-to-production">What Happens When You Merge PR to Production:</h3>
+
+<ol>
+  <li><strong>Trigger</strong>: Only when a PR is merged to <code class="language-plaintext highlighter-rouge">production</code> branch (not direct pushes)</li>
+  <li><strong>Verification</strong>: Workflow verifies the commit is a PR merge commit</li>
+  <li><strong>Build</strong>: Jekyll site is built with production settings</li>
+  <li><strong>Deploy</strong>: Site is automatically deployed to GitHub Pages</li>
+  <li><strong>URL</strong>: Your site will be available at <code class="language-plaintext highlighter-rouge">https://yourusername.github.io/your-repo-name</code></li>
+</ol>
+
+<h3 id="what-happens-on-direct-push-to-production">What Happens on Direct Push to Production:</h3>
+
+<ol>
+  <li><strong>Blocked</strong>: Direct pushes to production are blocked by branch protection</li>
+  <li><strong>No Deployment</strong>: Even if somehow pushed, deployment won’t trigger (not a PR merge)</li>
+  <li><strong>Security</strong>: Ensures all changes go through proper review process</li>
+</ol>
+
+<h3 id="what-happens-on-pr-to-production">What Happens on PR to Production:</h3>
+
+<ol>
+  <li><strong>Lint</strong>: Code quality and Jekyll validation checks</li>
+  <li><strong>Test Build</strong>: Dry run build to catch errors early</li>
+  <li><strong>Comment</strong>: PR gets a comment with build status</li>
+  <li><strong>Block Merge</strong>: If checks fail, merge is blocked</li>
+</ol>
+
+<h2 id="-development-workflow">🚀 Development Workflow</h2>
+
+<h3 id="recommended-git-workflow">Recommended Git Workflow:</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 1. Create a feature branch from main/master</span>
+git checkout main
+git pull origin main
+git checkout <span class="nt">-b</span> feature/your-feature-name
+
+<span class="c"># 2. Make your changes</span>
+<span class="c"># ... edit files ...</span>
+
+<span class="c"># 3. Commit and push</span>
+git add <span class="nb">.</span>
+git commit <span class="nt">-m</span> <span class="s2">"Add your feature"</span>
+git push origin feature/your-feature-name
+
+<span class="c"># 4. Create Pull Request</span>
+<span class="c"># Go to GitHub and create PR: feature/your-feature-name → production</span>
+
+<span class="c"># 5. After PR is approved and merged</span>
+<span class="c"># The site will automatically deploy!</span>
+</code></pre></div></div>
+
+<h2 id="-monitoring-deployments">🔍 Monitoring Deployments</h2>
+
+<h3 id="check-deployment-status">Check Deployment Status:</h3>
+
+<ol>
+  <li>Go to <strong>Actions</strong> tab in your repository</li>
+  <li>Look for <strong>Deploy to GitHub Pages</strong> workflow</li>
+  <li>Green checkmark = successful deployment</li>
+  <li>Red X = deployment failed (check logs)</li>
+</ol>
+
+<h3 id="view-your-live-site">View Your Live Site:</h3>
+
+<ul>
+  <li><strong>URL</strong>: <code class="language-plaintext highlighter-rouge">https://yourusername.github.io/your-repo-name</code></li>
+  <li><strong>Custom Domain</strong>: You can add a custom domain in Settings → Pages</li>
+</ul>
+
+<h2 id="️-troubleshooting">🛠️ Troubleshooting</h2>
+
+<h3 id="common-issues">Common Issues:</h3>
+
+<p><strong>“Workflow not triggering”:</strong></p>
+<ul>
+  <li>Ensure you’re pushing to the <code class="language-plaintext highlighter-rouge">production</code> branch</li>
+  <li>Check that the workflow file is in <code class="language-plaintext highlighter-rouge">.github/workflows/</code></li>
+</ul>
+
+<p><strong>“Build failing”:</strong></p>
+<ul>
+  <li>Check the Actions tab for error logs</li>
+  <li>Ensure all Jekyll dependencies are in Gemfile</li>
+  <li>Verify <code class="language-plaintext highlighter-rouge">_config.yml</code> syntax</li>
+</ul>
+
+<p><strong>“Can’t push to production”:</strong></p>
+<ul>
+  <li>This is expected! Use PRs instead</li>
+  <li>Create a feature branch and submit a PR</li>
+</ul>
+
+<p><strong>“Deployment not working”:</strong></p>
+<ul>
+  <li>Check GitHub Pages settings</li>
+  <li>Ensure Actions permissions are enabled</li>
+  <li>Verify the workflow has the correct permissions</li>
+</ul>
+
+<h2 id="-additional-recommendations">📝 Additional Recommendations</h2>
+
+<h3 id="1-create-a-codeowners-file">1. Create a CODEOWNERS file:</h3>
+
+<p>Create <code class="language-plaintext highlighter-rouge">.github/CODEOWNERS</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Global owners
+* @yourusername
+
+# Documentation
+*.md @yourusername
+
+# Jekyll config
+_config.yml @yourusername
+Gemfile @yourusername
+</code></pre></div></div>
+
+<h3 id="2-set-up-branch-naming-conventions">2. Set up branch naming conventions:</h3>
+
+<p>Consider using these branch patterns:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">feature/description</code> - New features</li>
+  <li><code class="language-plaintext highlighter-rouge">fix/description</code> - Bug fixes</li>
+  <li><code class="language-plaintext highlighter-rouge">docs/description</code> - Documentation updates</li>
+  <li><code class="language-plaintext highlighter-rouge">chore/description</code> - Maintenance tasks</li>
+</ul>
+
+<h3 id="3-enable-branch-protection-for-mainmaster-too">3. Enable branch protection for main/master too:</h3>
+
+<p>Apply similar protection rules to your main development branch to prevent direct pushes there as well.</p>
+
+<h2 id="-verification-checklist">✅ Verification Checklist</h2>
+
+<p>After setup, verify these work:</p>
+
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Can’t push directly to production branch</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />PR to production triggers lint workflow</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />PR merge to production triggers deployment</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Site deploys successfully to GitHub Pages</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Failed checks block PR merge</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />All required status checks are configured</li>
+</ul>
+
+<hr />
+
+<p><strong>🎉 Congratulations!</strong> Your repository now has a robust CI/CD pipeline with proper branch protection!</p>
+
+        </main>
+        
+        <footer style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #ecf0f1; color: #666; text-align: center;">
+            <p>Interview Prep Documentation - Built with Jekyll</p>
+        </footer>
+    </div>
+</body>
+</html>

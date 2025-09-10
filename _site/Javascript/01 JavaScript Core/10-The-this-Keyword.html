@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎯 The this Keyword - Interview Prep Documentation</title>
+    <meta name="description" content="Comprehensive guides for JavaScript, TypeScript, and React Native interview preparation">
+    
+    <!-- GitHub Pages compatible styling -->
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+        }
+        
+        .container {
+            max-width: 100%;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            color: #2c3e50;
+            margin-top: 2em;
+            margin-bottom: 1em;
+        }
+        
+        h1 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            border-bottom: 1px solid #ecf0f1;
+            padding-bottom: 5px;
+        }
+        
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border-left: 4px solid #3498db;
+        }
+        
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+        
+        blockquote {
+            border-left: 4px solid #3498db;
+            margin: 0;
+            padding-left: 20px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1em 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .navigation {
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px 0;
+            margin-bottom: 20px;
+        }
+        
+        .navigation a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+        
+        .navigation a:hover {
+            text-decoration: underline;
+        }
+        
+        .breadcrumb {
+            margin-bottom: 20px;
+            color: #666;
+        }
+        
+        .breadcrumb a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            h2 {
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="navigation">
+            <a href="/">Home</a>
+            <a href="/Javascript/">JavaScript</a>
+            <a href="/TypeScript/">TypeScript</a>
+            <a href="/React-Native/">React Native</a>
+        </nav>
+        
+        
+        
+        <main>
+            <h1 id="-the-this-keyword">🎯 The <code class="language-plaintext highlighter-rouge">this</code> Keyword</h1>
+
+<blockquote>
+  <p><strong>Understanding how <code class="language-plaintext highlighter-rouge">this</code> binding works in different contexts and how to control it</strong></p>
+</blockquote>
+
+<link rel="stylesheet" href="../common-styles.css" />
+
+<hr />
+
+<h2 id="-table-of-contents">📋 Table of Contents</h2>
+
+<ul>
+  <li><a href="#what-is-this">What is <code class="language-plaintext highlighter-rouge">this</code>?</a></li>
+  <li><a href="#binding-rules">Binding Rules</a></li>
+  <li><a href="#global-context">Global Context</a></li>
+  <li><a href="#function-context">Function Context</a></li>
+  <li><a href="#method-context">Method Context</a></li>
+  <li><a href="#constructor-context">Constructor Context</a></li>
+  <li><a href="#arrow-functions">Arrow Functions</a></li>
+  <li><a href="#explicit-binding">Explicit Binding</a></li>
+  <li><a href="#binding-priority">Binding Priority</a></li>
+  <li><a href="#detailed-examples">Detailed Examples</a></li>
+  <li><a href="#common-pitfalls">Common Pitfalls</a></li>
+  <li><a href="#best-practices">Best Practices</a></li>
+  <li><a href="#key-points">Key Points</a></li>
+  <li><a href="#common-interview-questions">Common Interview Questions</a></li>
+  <li><a href="#practice-exercises">Practice Exercises</a></li>
+  <li><a href="#additional-resources">Additional Resources</a></li>
+</ul>
+
+<hr />
+
+<h2 id="-what-is-this">🎯 What is <code class="language-plaintext highlighter-rouge">this</code>?</h2>
+
+<p><strong><code class="language-plaintext highlighter-rouge">this</code></strong> is a JavaScript keyword that refers to the object that is currently executing the code. Its value depends on how and where the function is called, not where it’s defined.</p>
+
+<h3 id="why-understanding-this-matters">Why Understanding <code class="language-plaintext highlighter-rouge">this</code> Matters:</h3>
+<ul>
+  <li><strong>Context Awareness</strong>: Know which object you’re working with</li>
+  <li><strong>Method Implementation</strong>: Access object properties correctly</li>
+  <li><strong>Event Handling</strong>: Understand event context</li>
+  <li><strong>Class Design</strong>: Properly implement object-oriented patterns</li>
+  <li><strong>Bug Prevention</strong>: Avoid common <code class="language-plaintext highlighter-rouge">this</code> binding mistakes</li>
+</ul>
+
+<hr />
+
+<h2 id="-binding-rules">🔗 Binding Rules</h2>
+
+<p>JavaScript has <strong>4 main binding rules</strong> that determine what <code class="language-plaintext highlighter-rouge">this</code> refers to:</p>
+
+<ol>
+  <li><strong>Default Binding</strong> - Global object (or undefined in strict mode)</li>
+  <li><strong>Implicit Binding</strong> - Object that owns the method</li>
+  <li><strong>Explicit Binding</strong> - Manually specified using <code class="language-plaintext highlighter-rouge">call()</code>, <code class="language-plaintext highlighter-rouge">apply()</code>, or <code class="language-plaintext highlighter-rouge">bind()</code></li>
+  <li><strong>New Binding</strong> - New instance created with constructor</li>
+</ol>
+
+<hr />
+
+<h2 id="-global-context">🌍 Global Context</h2>
+
+<p>In the global scope, <code class="language-plaintext highlighter-rouge">this</code> refers to the global object:</p>
+
+<h3 id="browser-environment">Browser Environment:</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span> <span class="o">===</span> <span class="nb">window</span><span class="p">);</span>  <span class="c1">// true</span>
+<span class="k">this</span><span class="p">.</span><span class="nx">globalVar</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">I'm global</span><span class="dl">"</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">globalVar</span><span class="p">);</span> <span class="c1">// "I'm global"</span>
+</code></pre></div></div>
+
+<h3 id="nodejs-environment">Node.js Environment:</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span> <span class="o">===</span> <span class="nb">global</span><span class="p">);</span>  <span class="c1">// true</span>
+<span class="k">this</span><span class="p">.</span><span class="nx">nodeVar</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">I'm global</span><span class="dl">"</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">global</span><span class="p">.</span><span class="nx">nodeVar</span><span class="p">);</span>   <span class="c1">// "I'm global"</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-function-context">🏠 Function Context</h2>
+
+<h3 id="default-binding-standalone-functions">Default Binding (Standalone Functions):</h3>
+<p>When a function is called without any context, <code class="language-plaintext highlighter-rouge">this</code> defaults to the global object (or undefined in strict mode).</p>
+
+<h3 id="ascii-diagram-default-binding">ASCII Diagram: Default Binding</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GLOBAL SCOPE
+┌─────────────────────────────────┐
+│ this = global object            │
+│                                 │
+│ function standalone() {         │
+│   console.log(this);            │
+│ }                               │
+│                                 │
+│ standalone();                   │
+│ ↓                               │
+│ this = global object            │
+└─────────────────────────────────┘
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-method-context">🏢 Method Context</h2>
+
+<h3 id="implicit-binding">Implicit Binding:</h3>
+<p>When a function is called as a method of an object, <code class="language-plaintext highlighter-rouge">this</code> refers to that object.</p>
+
+<h3 id="ascii-diagram-implicit-binding">ASCII Diagram: Implicit Binding</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>OBJECT METHOD CALL
+┌─────────────────────────────────┐
+│ const obj = {                   │
+│   name: "John",                 │
+│   greet() {                     │
+│     console.log(this.name);     │
+│   }                             │
+│ };                              │
+│                                 │
+│ obj.greet();                    │
+│ ↓                               │
+│ this = obj                      │
+│ this.name = "John"              │
+└─────────────────────────────────┘
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-constructor-context">🔨 Constructor Context</h2>
+
+<h3 id="new-binding">New Binding:</h3>
+<p>When a function is called with the <code class="language-plaintext highlighter-rouge">new</code> keyword, <code class="language-plaintext highlighter-rouge">this</code> refers to the newly created instance.</p>
+
+<h3 id="ascii-diagram-constructor-binding">ASCII Diagram: Constructor Binding</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CONSTRUCTOR CALL
+┌─────────────────────────────────┐
+│ function Person(name) {         │
+│   this.name = name;             │
+│   this.greet = function() {     │
+│     console.log(this.name);     │
+│   };                            │
+│ }                               │
+│                                 │
+│ const person = new Person("John"); │
+│ ↓                               │
+│ this = new Person instance      │
+│ this.name = "John"              │
+└─────────────────────────────────┘
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-arrow-functions">🏹 Arrow Functions</h2>
+
+<h3 id="lexical-binding">Lexical Binding:</h3>
+<p>Arrow functions don’t have their own <code class="language-plaintext highlighter-rouge">this</code> binding. They inherit <code class="language-plaintext highlighter-rouge">this</code> from the enclosing scope.</p>
+
+<h3 id="ascii-diagram-arrow-function-binding">ASCII Diagram: Arrow Function Binding</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ARROW FUNCTION BINDING
+┌─────────────────────────────────┐
+│ const obj = {                   │
+│   name: "John",                 │
+│   regularMethod() {             │
+│     setTimeout(function() {      │
+│       console.log(this.name);   │
+│     }, 100);                    │
+│   },                            │
+│   arrowMethod() {               │
+│     setTimeout(() =&gt; {           │
+│       console.log(this.name);   │
+│     }, 100);                    │
+│   }                             │
+│ };                              │
+│                                 │
+│ obj.regularMethod(); // undefined │
+│ obj.arrowMethod();  // "John"   │
+└─────────────────────────────────┘
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-explicit-binding">🎭 Explicit Binding</h2>
+
+<h3 id="manual-control">Manual Control:</h3>
+<p>You can explicitly set what <code class="language-plaintext highlighter-rouge">this</code> should refer to using <code class="language-plaintext highlighter-rouge">call()</code>, <code class="language-plaintext highlighter-rouge">apply()</code>, or <code class="language-plaintext highlighter-rouge">bind()</code>.</p>
+
+<h3 id="ascii-diagram-explicit-binding">ASCII Diagram: Explicit Binding</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>EXPLICIT BINDING
+┌─────────────────────────────────┐
+│ function greet() {              │
+│   console.log(this.name);      │
+│ }                               │
+│                                 │
+│ const person1 = { name: "John" }; │
+│ const person2 = { name: "Jane" }; │
+│                                 │
+│ greet.call(person1);            │
+│ ↓                               │
+│ this = person1                  │
+│                                 │
+│ greet.call(person2);            │
+│ ↓                               │
+│ this = person2                  │
+└─────────────────────────────────┘
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-binding-priority">🏆 Binding Priority</h2>
+
+<h3 id="priority-order-highest-to-lowest">Priority Order (Highest to Lowest):</h3>
+<ol>
+  <li><strong>New Binding</strong> - <code class="language-plaintext highlighter-rouge">new Constructor()</code></li>
+  <li><strong>Explicit Binding</strong> - <code class="language-plaintext highlighter-rouge">call()</code>, <code class="language-plaintext highlighter-rouge">apply()</code>, <code class="language-plaintext highlighter-rouge">bind()</code></li>
+  <li><strong>Implicit Binding</strong> - <code class="language-plaintext highlighter-rouge">object.method()</code></li>
+  <li><strong>Default Binding</strong> - <code class="language-plaintext highlighter-rouge">function()</code></li>
+</ol>
+
+<h3 id="ascii-diagram-binding-priority">ASCII Diagram: Binding Priority</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>BINDING PRIORITY CHART
+┌─────────────────────────────────┐
+│ 1. NEW BINDING                 │
+│    new Constructor()            │
+│    ↓                           │
+│    this = new instance         │
+├─────────────────────────────────┤
+│ 2. EXPLICIT BINDING            │
+│    func.call(obj), func.bind(obj) │
+│    ↓                           │
+│    this = specified object     │
+├─────────────────────────────────┤
+│ 3. IMPLICIT BINDING            │
+│    obj.method()                │
+│    ↓                           │
+│    this = obj                  │
+├─────────────────────────────────┤
+│ 4. DEFAULT BINDING             │
+│    function()                   │
+│    ↓                           │
+│    this = global/undefined     │
+└─────────────────────────────────┘
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-detailed-examples">💻 Detailed Examples</h2>
+
+<h3 id="example-1-default-binding">Example 1: Default Binding</h3>
+<div style="position: relative;">
+<button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
+
+
+
+```javascript
+console.log("=== DEFAULT BINDING EXAMPLES ===");
+
+// Global context
+console.log("=== Global Context ===");
+console.log("this in global scope:", this);
+console.log("this === globalThis:", this === globalThis);
+
+// Standalone function (default binding)
+function standaloneFunction() {
+    console.log("=== Inside standaloneFunction ===");
+    console.log("this:", this);
+    console.log("this === globalThis:", this === globalThis);
+    
+    // In non-strict mode: this = global object
+    // In strict mode: this = undefined
+}
+
+console.log("\n=== Calling standalone function ===");
+standaloneFunction();
+
+// Function expression
+const functionExpr = function() {
+    console.log("=== Inside functionExpr ===");
+    console.log("this:", this);
+    console.log("this === globalThis:", this === globalThis);
+};
+
+console.log("\n=== Calling function expression ===");
+functionExpr();
+
+// Arrow function in global scope
+const globalArrow = () =&gt; {
+    console.log("=== Inside globalArrow ===");
+    console.log("this:", this);
+    console.log("this === globalThis:", this === globalThis);
+};
+
+console.log("\n=== Calling global arrow function ===");
+globalArrow();
+
+console.log("\n=== KEY INSIGHT ===");
+console.log("Standalone functions get default binding");
+console.log("In non-strict mode: this = global object");
+console.log("In strict mode: this = undefined");
+```
+
+
+</div>
+
+<h3 id="example-2-implicit-binding">Example 2: Implicit Binding</h3>
+<div style="position: relative;">
+<button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
+
+
+
+```javascript
+console.log("=== IMPLICIT BINDING EXAMPLES ===");
+
+const person = {
+    name: "John Doe",
+    age: 30,
+    
+    // Method with implicit binding
+    greet() {
+        console.log("=== Inside person.greet() ===");
+        console.log("this:", this);
+        console.log("this.name:", this.name);
+        console.log("this.age:", this.age);
+    },
+    
+    // Arrow function method (inherits this from enclosing scope)
+    greetArrow: () =&gt; {
+        console.log("=== Inside person.greetArrow() ===");
+        console.log("this:", this);
+        console.log("this.name:", this.name);  // undefined!
+        console.log("this.age:", this.age);    // undefined!
+    },
+    
+    // Nested method
+    introduce() {
+        console.log("=== Inside person.introduce() ===");
+        console.log("Hello, I'm", this.name);
+        
+        // Nested function (loses this binding)
+        function nestedFunction() {
+            console.log("=== Inside nestedFunction ===");
+            console.log("this:", this);
+            console.log("this.name:", this.name);  // undefined!
+        }
+        
+        // Nested arrow function (inherits this)
+        const nestedArrow = () =&gt; {
+            console.log("=== Inside nestedArrow ===");
+            console.log("this:", this);
+            console.log("this.name:", this.name);  // "John Doe" ✅
+        };
+        
+        nestedFunction();
+        nestedArrow();
+    }
+};
+
+console.log("=== Testing implicit binding ===");
+person.greet();        // this = person ✅
+person.greetArrow();   // this = global (not person!) ❌
+person.introduce();    // Shows nested function behavior
+```
+
+
+</div>
+
+<h3 id="example-3-constructor-binding">Example 3: Constructor Binding</h3>
+<div style="position: relative;">
+<button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
+
+
+
+```javascript
+console.log("=== CONSTRUCTOR BINDING EXAMPLES ===");
+
+// Constructor function
+function Person(name, age) {
+    console.log("=== Inside Person constructor ===");
+    console.log("this before assignment:", this);
+    console.log("this instanceof Person:", this instanceof Person);
+    
+    // 'this' refers to the new instance
+    this.name = name;
+    this.age = age;
+    
+    console.log("this after assignment:", this);
+    
+    // Method defined in constructor
+    this.greet = function() {
+        console.log("=== Inside instance method ===");
+        console.log("this:", this);
+        console.log("Hello, I'm", this.name);
+    };
+}
+
+// Creating instances
+console.log("=== Creating Person instances ===");
+const person1 = new Person("Alice", 25);
+const person2 = new Person("Bob", 30);
+
+console.log("\n=== Testing instances ===");
+console.log("person1:", person1);
+console.log("person2:", person2);
+
+console.log("\n=== Calling instance methods ===");
+person1.greet();  // this = person1
+person2.greet();  // this = person2
+
+// What happens without 'new'?
+console.log("\n=== Calling without 'new' (DANGEROUS!) ===");
+try {
+    const badPerson = Person("Charlie", 35);  // No 'new' keyword
+    console.log("badPerson:", badPerson);     // undefined
+    console.log("Global name:", globalThis.name);  // "Charlie" 😱
+} catch (error) {
+    console.log("Error:", error.message);
+}
+
+console.log("\n=== KEY INSIGHT ===");
+console.log("Constructor functions must be called with 'new'");
+console.log("Without 'new', 'this' refers to global object");
+console.log("This can cause serious bugs and security issues");
+```
+
+
+</div>
+
+<h3 id="example-4-explicit-binding">Example 4: Explicit Binding</h3>
+<div style="position: relative;">
+<button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
+
+
+
+```javascript
+console.log("=== EXPLICIT BINDING EXAMPLES ===");
+
+function introduce() {
+    console.log("=== Inside introduce function ===");
+    console.log("this:", this);
+    console.log("Hello, I'm", this.name, "and I'm", this.age, "years old");
+}
+
+const person1 = { name: "Alice", age: 25 };
+const person2 = { name: "Bob", age: 30 };
+const person3 = { name: "Charlie", age: 35 };
+
+console.log("=== Using call() ===");
+introduce.call(person1);  // this = person1
+introduce.call(person2);  // this = person2
+
+console.log("\n=== Using apply() ===");
+introduce.apply(person3); // this = person3
+
+console.log("\n=== Using bind() ===");
+const boundIntroduce = introduce.bind(person1);
+console.log("Bound function created");
+boundIntroduce();  // this = person1 (permanently bound)
+
+// bind() with parameters
+function greet(greeting, punctuation) {
+    console.log("=== Inside greet function ===");
+    console.log("this:", this);
+    console.log(greeting + ", I'm " + this.name + punctuation);
+}
+
+const boundGreet = greet.bind(person2, "Hi");
+boundGreet("!");  // "Hi, I'm Bob!"
+
+// Partial application with bind
+const sayHello = greet.bind(person3, "Hello", "!");
+sayHello();  // "Hello, I'm Charlie!"
+
+console.log("\n=== KEY INSIGHT ===");
+console.log("call() and apply() execute immediately");
+console.log("bind() returns a new function with bound this");
+console.log("bind() allows partial application of parameters");
+```
+
+
+</div>
+
+<h3 id="example-5-arrow-functions-and-this">Example 5: Arrow Functions and This</h3>
+<div style="position: relative;">
+<button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
+
+
+
+```javascript
+console.log("=== ARROW FUNCTIONS AND THIS ===");
+
+const timer = {
+    name: "Timer",
+    delay: 1000,
+    
+    // Regular method
+    startRegular() {
+        console.log("=== Starting regular timer ===");
+        console.log("this in startRegular:", this);
+        
+        setTimeout(function() {
+            console.log("=== Inside setTimeout callback (regular) ===");
+            console.log("this:", this);
+            console.log("this.name:", this.name);  // undefined! 😱
+        }, this.delay);
+    },
+    
+    // Arrow method
+    startArrow() {
+        console.log("=== Starting arrow timer ===");
+        console.log("this in startArrow:", this);
+        
+        setTimeout(() =&gt; {
+            console.log("=== Inside setTimeout callback (arrow) ===");
+            console.log("this:", this);
+            console.log("this.name:", this.name);  // "Timer" ✅
+        }, this.delay);
+    },
+    
+    // Method that returns arrow function
+    createCallback() {
+        console.log("=== Creating callback function ===");
+        console.log("this in createCallback:", this);
+        
+        return () =&gt; {
+            console.log("=== Inside returned arrow function ===");
+            console.log("this:", this);
+            console.log("this.name:", this.name);  // "Timer" ✅
+        };
+    }
+};
+
+console.log("=== Testing regular method ===");
+timer.startRegular();
+
+console.log("\n=== Testing arrow method ===");
+timer.startArrow();
+
+console.log("\n=== Testing returned arrow function ===");
+const callback = timer.createCallback();
+setTimeout(callback, 2000);
+
+// Arrow functions in event handlers
+console.log("\n=== Arrow functions in event handlers ===");
+const button = {
+    name: "Submit Button",
+    
+    addEventListener() {
+        console.log("=== Adding event listener ===");
+        
+        // Simulate event handler
+        const eventHandler = () =&gt; {
+            console.log("=== Event handler triggered ===");
+            console.log("this:", this);
+            console.log("Button name:", this.name);  // "Submit Button" ✅
+        };
+        
+        // Simulate event trigger
+        setTimeout(eventHandler, 3000);
+    }
+};
+
+button.addEventListener();
+
+console.log("\n=== KEY INSIGHT ===");
+console.log("Arrow functions inherit 'this' from enclosing scope");
+console.log("Regular functions have their own 'this' binding");
+console.log("Use arrow functions when you need to preserve 'this'");
+```
+
+
+</div>
+
+<hr />
+
+<h2 id="️-common-pitfalls">⚠️ Common Pitfalls</h2>
+
+<h3 id="pitfall-1-losing-this-in-callbacks">Pitfall 1: Losing <code class="language-plaintext highlighter-rouge">this</code> in Callbacks</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ❌ WRONG: Losing 'this' in callback</span>
+<span class="kd">const</span> <span class="nx">user</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">John</span><span class="dl">"</span><span class="p">,</span>
+    <span class="nx">greet</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Hello, </span><span class="dl">"</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>  <span class="c1">// undefined!</span>
+        <span class="p">},</span> <span class="mi">100</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// ✅ CORRECT: Using arrow function</span>
+<span class="kd">const</span> <span class="nx">user</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">John</span><span class="dl">"</span><span class="p">,</span>
+    <span class="nx">greet</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Hello, </span><span class="dl">"</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>  <span class="c1">// "John" ✅</span>
+        <span class="p">},</span> <span class="mi">100</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="pitfall-2-method-assignment">Pitfall 2: Method Assignment</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ❌ WRONG: Method loses 'this' when assigned</span>
+<span class="kd">const</span> <span class="nx">user</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">John</span><span class="dl">"</span><span class="p">,</span>
+    <span class="nx">greet</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Hello, </span><span class="dl">"</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">greetFunction</span> <span class="o">=</span> <span class="nx">user</span><span class="p">.</span><span class="nx">greet</span><span class="p">;</span>
+<span class="nx">greetFunction</span><span class="p">();</span>  <span class="c1">// "Hello, undefined" 😱</span>
+
+<span class="c1">// ✅ CORRECT: Bind the method</span>
+<span class="kd">const</span> <span class="nx">boundGreet</span> <span class="o">=</span> <span class="nx">user</span><span class="p">.</span><span class="nx">greet</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">user</span><span class="p">);</span>
+<span class="nx">boundGreet</span><span class="p">();</span>  <span class="c1">// "Hello, John" ✅</span>
+</code></pre></div></div>
+
+<h3 id="pitfall-3-constructor-without-new">Pitfall 3: Constructor without <code class="language-plaintext highlighter-rouge">new</code></h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ❌ WRONG: Forgetting 'new' keyword</span>
+<span class="kd">function</span> <span class="nx">Person</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">person</span> <span class="o">=</span> <span class="nx">Person</span><span class="p">(</span><span class="dl">"</span><span class="s2">John</span><span class="dl">"</span><span class="p">);</span>  <span class="c1">// this = global object!</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">person</span><span class="p">);</span>            <span class="c1">// undefined</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">globalThis</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>   <span class="c1">// "John" 😱</span>
+
+<span class="c1">// ✅ CORRECT: Always use 'new'</span>
+<span class="kd">const</span> <span class="nx">person</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">(</span><span class="dl">"</span><span class="s2">John</span><span class="dl">"</span><span class="p">);</span>  <span class="c1">// this = new instance</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">person</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>           <span class="c1">// "John" ✅</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-best-practices">🎯 Best Practices</h2>
+
+<h3 id="-dos">✅ Do’s:</h3>
+<ul>
+  <li><strong>Use arrow functions</strong> for callbacks to preserve <code class="language-plaintext highlighter-rouge">this</code></li>
+  <li><strong>Always use <code class="language-plaintext highlighter-rouge">new</code></strong> with constructor functions</li>
+  <li><strong>Use <code class="language-plaintext highlighter-rouge">bind()</code></strong> when you need to pass methods as callbacks</li>
+  <li><strong>Understand binding priority</strong> to predict <code class="language-plaintext highlighter-rouge">this</code> value</li>
+  <li><strong>Test <code class="language-plaintext highlighter-rouge">this</code> binding</strong> in different contexts</li>
+</ul>
+
+<h3 id="-donts">❌ Don’ts:</h3>
+<ul>
+  <li><strong>Don’t assume</strong> <code class="language-plaintext highlighter-rouge">this</code> value without understanding context</li>
+  <li><strong>Don’t forget</strong> <code class="language-plaintext highlighter-rouge">new</code> keyword with constructors</li>
+  <li><strong>Don’t use</strong> regular functions in callbacks when you need <code class="language-plaintext highlighter-rouge">this</code></li>
+  <li><strong>Don’t ignore</strong> strict mode effects on <code class="language-plaintext highlighter-rouge">this</code></li>
+</ul>
+
+<hr />
+
+<h2 id="-key-points">🔑 Key Points</h2>
+
+<ul>
+  <li><strong><code class="language-plaintext highlighter-rouge">this</code></strong> refers to the execution context, not the definition context</li>
+  <li><strong>Default binding</strong> - global object (or undefined in strict mode)</li>
+  <li><strong>Implicit binding</strong> - object that owns the method</li>
+  <li><strong>Explicit binding</strong> - manually specified with <code class="language-plaintext highlighter-rouge">call()</code>, <code class="language-plaintext highlighter-rouge">apply()</code>, <code class="language-plaintext highlighter-rouge">bind()</code></li>
+  <li><strong>New binding</strong> - new instance created with constructor</li>
+  <li><strong>Arrow functions</strong> inherit <code class="language-plaintext highlighter-rouge">this</code> from enclosing scope</li>
+  <li><strong>Binding priority</strong> determines which rule applies</li>
+  <li><strong>Always test</strong> <code class="language-plaintext highlighter-rouge">this</code> binding in your specific context</li>
+</ul>
+
+<hr />
+
+<h2 id="-common-interview-questions">❓ Common Interview Questions</h2>
+
+<h3 id="q1-what-is-this-in-javascript-and-how-does-it-work">Q1: What is <code class="language-plaintext highlighter-rouge">this</code> in JavaScript and how does it work?</h3>
+<p><strong>A:</strong> <code class="language-plaintext highlighter-rouge">this</code> is a keyword that refers to the object currently executing the code. Its value depends on how the function is called: default binding (global/undefined), implicit binding (object method), explicit binding (call/apply/bind), or new binding (constructor).</p>
+
+<h3 id="q2-whats-the-difference-between-call-apply-and-bind">Q2: What’s the difference between <code class="language-plaintext highlighter-rouge">call()</code>, <code class="language-plaintext highlighter-rouge">apply()</code>, and <code class="language-plaintext highlighter-rouge">bind()</code>?</h3>
+<p><strong>A:</strong> <code class="language-plaintext highlighter-rouge">call()</code> and <code class="language-plaintext highlighter-rouge">apply()</code> execute the function immediately with the specified <code class="language-plaintext highlighter-rouge">this</code> context, while <code class="language-plaintext highlighter-rouge">bind()</code> returns a new function with the bound <code class="language-plaintext highlighter-rouge">this</code> context. <code class="language-plaintext highlighter-rouge">call()</code> takes arguments separately, <code class="language-plaintext highlighter-rouge">apply()</code> takes them as an array.</p>
+
+<h3 id="q3-how-do-arrow-functions-handle-this">Q3: How do arrow functions handle <code class="language-plaintext highlighter-rouge">this</code>?</h3>
+<p><strong>A:</strong> Arrow functions don’t have their own <code class="language-plaintext highlighter-rouge">this</code> binding. They inherit <code class="language-plaintext highlighter-rouge">this</code> from the enclosing scope (lexical binding), making them useful for callbacks where you want to preserve the original <code class="language-plaintext highlighter-rouge">this</code> context.</p>
+
+<h3 id="q4-what-happens-if-you-call-a-constructor-function-without-new">Q4: What happens if you call a constructor function without <code class="language-plaintext highlighter-rouge">new</code>?</h3>
+<p><strong>A:</strong> Without <code class="language-plaintext highlighter-rouge">new</code>, the function runs in the global context, so <code class="language-plaintext highlighter-rouge">this</code> refers to the global object. This can cause bugs, pollute the global namespace, and create security vulnerabilities.</p>
+
+<h3 id="q5-how-can-you-prevent-losing-this-in-callbacks">Q5: How can you prevent losing <code class="language-plaintext highlighter-rouge">this</code> in callbacks?</h3>
+<p><strong>A:</strong> Use arrow functions (which inherit <code class="language-plaintext highlighter-rouge">this</code>), use <code class="language-plaintext highlighter-rouge">bind()</code> to create bound functions, or store <code class="language-plaintext highlighter-rouge">this</code> in a variable (<code class="language-plaintext highlighter-rouge">const self = this</code>) before the callback.</p>
+
+<hr />
+
+<h2 id="️-practice-exercises">🏋️ Practice Exercises</h2>
+
+<h3 id="exercise-1-this-binding-predictor">Exercise 1: This Binding Predictor</h3>
+<p>Create a function that analyzes code and predicts what <code class="language-plaintext highlighter-rouge">this</code> will refer to in different contexts.</p>
+
+<h3 id="exercise-2-method-binding-utility">Exercise 2: Method Binding Utility</h3>
+<p>Implement utility functions for safely binding methods and creating bound callbacks.</p>
+
+<h3 id="exercise-3-context-preserver">Exercise 3: Context Preserver</h3>
+<p>Create a higher-order function that preserves <code class="language-plaintext highlighter-rouge">this</code> context for any function call.</p>
+
+<hr />
+
+<h2 id="-additional-resources">📚 Additional Resources</h2>
+
+<ul>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this">MDN: this</a></li>
+  <li><a href="https://javascript.info/object-methods">JavaScript.info: Object methods, “this”</a></li>
+  <li><a href="https://github.com/getify/You-Dont-Know-JS">You Don’t Know JS: this &amp; Object Prototypes</a></li>
+  <li><a href="https://eloquentjavascript.net/06_object.html">Eloquent JavaScript: Objects</a></li>
+</ul>
+
+<hr />
+
+<h2 id="-copy-code-functionality">📋 Copy Code Functionality</h2>
+
+<script src="../common-scripts.js"></script>
+
+<hr />
+
+<h2 id="-navigation">🧭 Navigation</h2>
+
+<div class="navigation">
+    <a href="09-Type-Coercion.md" class="nav-link prev">← Previous: Type Coercion</a>
+    <a href="11-Prototype-Prototypal-Inheritance.md" class="nav-link next">Next: Prototype &amp; Prototypal Inheritance →</a>
+</div>
+
+<p><em>Last updated: December 2024</em></p>
+
+        </main>
+        
+        <footer style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #ecf0f1; color: #666; text-align: center;">
+            <p>Interview Prep Documentation - Built with Jekyll</p>
+        </footer>
+    </div>
+</body>
+</html>
