@@ -582,7 +582,7 @@ function Tabs({ children, defaultTab }: TabsProps) {
   const [activeTab, setActiveTab] = useState(defaultTab || '');
   
   return (
-    <TabsContext.Provider value={{#123;{{#123; activeTab, setActiveTab }}#125;}}#125;>
+    <TabsContext.Provider value={{ activeTab, setActiveTab }}>
       {children}
     </TabsContext.Provider>
   );

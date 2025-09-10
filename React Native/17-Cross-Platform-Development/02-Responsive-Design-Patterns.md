@@ -530,12 +530,12 @@ const ResponsiveNavigator = () => {
   if (isMobile) {
     return (
       <Tab.Navigator
-        screenOptions={{#123;{{#123;
+        screenOptions={{
           tabBarStyle: {
             height: 60,
             paddingBottom: 8,
           },
-        }}#125;}}#125;
+        }}
       >
         <Tab.Screen name="Home" component={HomeScreen} />
         <Tab.Screen name="Profile" component={ProfileScreen} />
@@ -546,11 +546,11 @@ const ResponsiveNavigator = () => {
   if (isTablet) {
     return (
       <Drawer.Navigator
-        screenOptions={{#123;{{#123;
+        screenOptions={{
           drawerStyle: {
             width: 280,
           },
-        }}#125;}}#125;
+        }}
       >
         <Drawer.Screen name="Home" component={HomeScreen} />
         <Drawer.Screen name="Profile" component={ProfileScreen} />

@@ -87,8 +87,8 @@ export default defineConfig({
 <!-- UserCard.vue -->
 <template>
   <div class="user-card">
-    <h3>{{#123;{{#123; user.name }}#125;}}#125;</h3>
-    <p>{{#123;{{#123; user.email }}#125;}}#125;</p>
+    <h3>{{ user.name }}</h3>
+    <p>{{ user.email }}</p>
     <button @click="handleEdit">Edit</button>
   </div>
 </template>
@@ -177,11 +177,11 @@ onMounted(() => {
 <!-- GenericList.vue -->
 <template>
   <div class="generic-list">
-    <h3>{{#123;{{#123; title }}#125;}}#125;</h3>
+    <h3>{{ title }}</h3>
     <ul>
       <li v-for="item in items" :key="keyExtractor(item)">
         <slot :item="item" :index="items.indexOf(item)">
-          {{#123;{{#123; item }}#125;}}#125;
+          {{ item }}
         </slot>
       </li>
     </ul>
@@ -410,8 +410,8 @@ const handleSubmit = () => {
 <!-- UserCard.vue -->
 <template>
   <div class="user-card">
-    <h3>{{#123;{{#123; user.name }}#125;}}#125;</h3>
-    <p>{{#123;{{#123; user.email }}#125;}}#125;</p>
+    <h3>{{ user.name }}</h3>
+    <p>{{ user.email }}</p>
     <button @click="handleEdit">Edit</button>
     <button @click="handleDelete">Delete</button>
   </div>
@@ -460,7 +460,7 @@ const handleUpdate = (updatedUser: User) => {
     <thead>
       <tr>
         <th v-for="column in columns" :key="column.key">
-          {{#123;{{#123; column.title }}#125;}}#125;
+          {{ column.title }}
         </th>
       </tr>
     </thead>
@@ -472,7 +472,7 @@ const handleUpdate = (updatedUser: User) => {
             :item="item" 
             :value="item[column.key]"
           >
-            {{#123;{{#123; item[column.key] }}#125;}}#125;
+            {{ item[column.key] }}
           </slot>
         </td>
       </tr>

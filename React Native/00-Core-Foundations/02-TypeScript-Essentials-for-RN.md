@@ -522,7 +522,7 @@ const ProductList: React.FC<{ products: Product[] }> = ({ products }) => {
   
   const renderProduct = (product: Product) => (
     <View style={styles.productItem}>
-      <Image source={{#123;{{#123; uri: product.image }}#125;}}#125; style={styles.productImage} />
+      <Image source={{ uri: product.image }} style={styles.productImage} />
       <Text style={styles.productName}>{product.name}</Text>
       <Text style={styles.productPrice}>${product.price}</Text>
     </View>
@@ -669,16 +669,16 @@ const MyComponent = () => {
     <PlatformButton
       title="Press Me"
       onPress={() => console.log('Pressed')}
-      style={{#123;{{#123;
+      style={{
         ios: { backgroundColor: '#007AFF' },
         android: { backgroundColor: '#2196F3' },
         default: { backgroundColor: '#6C757D' },
-      }}#125;}}#125;
-      textStyle={{#123;{{#123;
+      }}
+      textStyle={{
         ios: { fontSize: 16 },
         android: { fontSize: 14 },
         default: { fontSize: 15 },
-      }}#125;}}#125;
+      }}
     />
   );
 };

@@ -29,6 +29,14 @@ module Jekyll
       page.content = page.content.gsub(/^\{\% raw \%\}$/, '')
       page.content = page.content.gsub(/^\{\% endraw \%\}$/, '')
       
+      # Fix any remaining HTML entity patterns
+      page.content = page.content.gsub(/\{\{#123;\{\{#123;/g, '{{')
+      page.content = page.content.gsub(/\}\}#125;\}\}#125;/g, '}}')
+      page.content = page.content.gsub(/\{\{#123;/g, '{{')
+      page.content = page.content.gsub(/\}\}#125;/g, '}}')
+      page.content = page.content.gsub(/&#123;&#123;/g, '{{')
+      page.content = page.content.gsub(/&#125;&#125;/g, '}}')
+      
       # Escape problematic Liquid syntax in code blocks
       page.content = escape_liquid_in_code_blocks(page.content)
     end

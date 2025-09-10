@@ -227,7 +227,7 @@ const OptimizedFlatList = () => {
         onScrollToIndexFailed={(info) => {
           // Handle scroll to index failure
           console.warn('Scroll to index failed:', info);
-        }}#125;}}#125;
+        }}
         style={styles.list}
       />
     </View>

@@ -68,7 +68,7 @@ defaults:
     values:
       layout: "default"
 
-# Kramdown settings - disable Liquid processing
+# Kramdown settings - disable Liquid processing in code blocks
 # Plugins
 plugins:
   - jekyll-feed

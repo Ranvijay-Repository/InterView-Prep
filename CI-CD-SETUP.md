@@ -64,14 +64,14 @@ git push origin feature/my-feature
 - `.jekyllignore` - Files to ignore during build
 
 ### Setup Scripts
-- `setup-production-branch.sh` - Automated branch setup
+- `scripts/setup-production-branch.sh` - Automated branch setup
 - `BRANCH-PROTECTION-SETUP.md` - Detailed setup guide
 
 ## 🔧 Next Steps
 
 ### 1. **Run the Setup Script**
 ```bash
-./setup-production-branch.sh
+./scripts/setup-production-branch.sh
 ```
 
 ### 2. **Configure Branch Protection**
