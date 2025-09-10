@@ -1,12 +1,10 @@
 name: Lint and Validate
 
-# Run on all pull requests
+# Run only on pull requests to production branch
 on:
   pull_request:
     branches:
       - production
-      - main
-      - master
 
 jobs:
   lint:
@@ -20,6 +18,11 @@ jobs:
         with:
           ruby-version: '3.2'
           bundler-cache: true
+
+      - name: Configure Bundler
+        run: |
+          bundle config set --local frozen false
+          bundle config set --local deployment false
 
       - name: Lint Jekyll files
         run: |
