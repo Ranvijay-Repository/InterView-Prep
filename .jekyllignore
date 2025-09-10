@@ -85,3 +85,6 @@ copy-utility.js
 cleanup-guide.md
 template-structure.md
 PATH-MAPPING-CORRECTED.md
+
+# Scripts directory (contains shell scripts for setup/maintenance)
+scripts/

@@ -324,7 +324,7 @@ const MyComponent = () => {
       <TouchableOpacity onPress={handleApiCall}>
         <Text>Fetch Data</Text>
       </TouchableOpacity>
-      {error && <Text style={{#123;{{#123;color: 'red'}}#125;}}#125;>{error}</Text>}
+      {error && <Text style={{color: 'red'}}>{error}</Text>}
       {data && <Text>{JSON.stringify(data)}</Text>}
     </View>
   );
@@ -385,7 +385,7 @@ const UserCard = ({ user, onPress, style }) => {
   
   return (
     <TouchableOpacity style={style} onPress={onPress}>
-      <Image source={{#123;{{#123; uri: avatar }}#125;}}#125; />
+      <Image source={{ uri: avatar }} />
       <Text>{name}</Text>
       <Text>{email}</Text>
       {isOnline && <View style={styles.onlineIndicator} />}

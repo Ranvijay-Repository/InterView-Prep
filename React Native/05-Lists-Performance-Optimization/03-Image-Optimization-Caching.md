@@ -229,7 +229,7 @@ const ImageGallery = () => {
       activeOpacity={0.8}
     >
       <OptimizedImage
-        source={{#123;{{#123; uri: item.thumbnail }}#125;}}#125;
+        source={{ uri: item.thumbnail }}
         style={styles.thumbnail}
         placeholder={
           <View style={styles.placeholder}>
@@ -320,7 +320,7 @@ const ImageGallery = () => {
           >
             <View style={styles.modalContent}>
               <OptimizedImage
-                source={{#123;{{#123; uri: selectedImage.url }}#125;}}#125;
+                source={{ uri: selectedImage.url }}
                 style={styles.fullImage}
                 resizeMode="contain"
               />

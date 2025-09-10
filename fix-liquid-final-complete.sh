@@ -1,20 +1,31 @@
 #!/bin/bash
 
-echo "🔧 Final Liquid syntax fix..."
+echo "🔧 Final Liquid syntax fix - Complete solution..."
 
-# First, revert all HTML entities back to normal curly braces
-echo "Reverting HTML entities..."
+# First, let's find and fix all the problematic HTML entities
+echo "Step 1: Reverting all HTML entities to normal curly braces..."
+
 find . -name "*.md" -not -path "./_site/*" -not -path "./.git/*" | while read -r file; do
+    echo "Processing: $file"
+    
+    # Fix the specific problematic patterns
+    sed -i '' 's/{{#123;{{#123;/{{/g' "$file"
+    sed -i '' 's/}}#125;}}#125;/}}/g' "$file"
+    sed -i '' 's/{{#123;/{{/g' "$file"
+    sed -i '' 's/}}#125;/}}/g' "$file"
+    
+    # Fix any remaining HTML entity patterns
     sed -i '' 's/&#123;&#123;/{{/g' "$file"
     sed -i '' 's/&#125;&#125;/}}/g' "$file"
+    sed -i '' 's/&#123;/{{/g' "$file"
+    sed -i '' 's/&#125;/}}/g' "$file"
 done
 
 echo "✅ HTML entities reverted"
 
-# Now let's create a comprehensive solution by updating the Jekyll configuration
-echo "Updating Jekyll configuration for better Liquid handling..."
+# Step 2: Create a more robust Jekyll configuration
+echo "Step 2: Creating robust Jekyll configuration..."
 
-# Create a more permissive Jekyll configuration
 cat > _config.yml << 'EOF'
 # Jekyll Configuration for Interview Prep Documentation
 
@@ -86,7 +97,7 @@ defaults:
     values:
       layout: "default"
 
-# Kramdown settings - disable Liquid processing
+# Kramdown settings - disable Liquid processing in code blocks
 kramdown:
   input: GFM
   hard_wrap: false
@@ -161,14 +172,94 @@ EOF
 
 echo "✅ Jekyll configuration updated"
 
-# Test the build
-echo "🧪 Testing Jekyll build..."
+# Step 3: Update the Jekyll plugin to be more aggressive
+echo "Step 3: Updating Jekyll plugin for better Liquid handling..."
+
+cat > _plugins/liquid_syntax_fix.rb << 'EOF'
+# Jekyll Plugin to Fix Liquid Syntax Issues
+# This plugin automatically handles common Liquid syntax conflicts
+
+module Jekyll
+  class LiquidSyntaxFixer < Jekyll::Generator
+    safe true
+    priority :low
+
+    def generate(site)
+      site.pages.each do |page|
+        next unless page.extname == '.md'
+        fix_liquid_syntax(page)
+      end
+
+      site.posts.docs.each do |post|
+        next unless post.extname == '.md'
+        fix_liquid_syntax(post)
+      end
+    end
+
+    private
+
+    def fix_liquid_syntax(page)
+      return unless page.content
+
+      # Remove any malformed raw tags
+      page.content = page.content.gsub(/\{\{\% raw \%\}/, '')
+      page.content = page.content.gsub(/\% endraw \%\}\}/, '')
+      page.content = page.content.gsub(/^\{\% raw \%\}$/, '')
+      page.content = page.content.gsub(/^\{\% endraw \%\}$/, '')
+      
+      # Fix any remaining HTML entity patterns
+      page.content = page.content.gsub(/\{\{#123;\{\{#123;/g, '{{')
+      page.content = page.content.gsub(/\}\}#125;\}\}#125;/g, '}}')
+      page.content = page.content.gsub(/\{\{#123;/g, '{{')
+      page.content = page.content.gsub(/\}\}#125;/g, '}}')
+      page.content = page.content.gsub(/&#123;&#123;/g, '{{')
+      page.content = page.content.gsub(/&#125;&#125;/g, '}}')
+      
+      # Escape problematic Liquid syntax in code blocks
+      page.content = escape_liquid_in_code_blocks(page.content)
+    end
+
+    def escape_liquid_in_code_blocks(content)
+      lines = content.split("\n")
+      result = []
+      in_code_block = false
+      
+      lines.each do |line|
+        # Detect code block boundaries
+        if line.match(/^```/)
+          in_code_block = !in_code_block
+          result << line
+          next
+        end
+        
+        # Inside code blocks, escape problematic Liquid syntax
+        if in_code_block
+          # Escape double curly braces that aren't already escaped
+          if line.match(/\{\{[^%]/) && !line.match(/\{\% raw \%\}/)
+            line = line.gsub(/\{\{/, '&#123;&#123;')
+            line = line.gsub(/\}\}/, '&#125;&#125;')
+          end
+        end
+        
+        result << line
+      end
+      
+      result.join("\n")
+    end
+  end
+end
+EOF
+
+echo "✅ Jekyll plugin updated"
+
+# Step 4: Test the build
+echo "Step 4: Testing Jekyll build..."
 if bundle exec jekyll build 2>/dev/null; then
     echo "✅ Jekyll build successful!"
     echo "🎉 All Liquid syntax issues resolved!"
 else
     echo "❌ Jekyll build still has issues."
-    echo "Let's try one more approach..."
+    echo "Let's try a different approach..."
     
     # Last resort: Use a different markdown processor
     echo "Trying with different markdown settings..."
@@ -185,4 +276,4 @@ else
     fi
 fi
 
-echo "🎯 Liquid syntax fix complete!"
+echo "🎯 Final Liquid syntax fix complete!"

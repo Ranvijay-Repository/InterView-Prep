@@ -515,8 +515,8 @@ const angular15Features = {
   imports: [CommonModule, FormsModule],
   template: `
     <div>
-      <h2>{{#123;{{#123; user.name }}#125;}}#125;</h2>
-      <p>{{#123;{{#123; user.email }}#125;}}#125;</p>
+      <h2>{{ user.name }}</h2>
+      <p>{{ user.email }}</p>
     </div>
   `
 })
@@ -531,8 +531,8 @@ import { signal, computed, effect } from '@angular/core';
   selector: 'app-counter',
   template: `
     <div>
-      <p>Count: {{#123;{{#123; count() }}#125;}}#125;</p>
-      <p>Double: {{#123;{{#123; double() }}#125;}}#125;</p>
+      <p>Count: {{ count() }}</p>
+      <p>Double: {{ double() }}</p>
       <button (click)="increment()">Increment</button>
     </div>
   `

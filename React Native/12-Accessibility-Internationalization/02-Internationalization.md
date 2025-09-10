@@ -194,7 +194,7 @@ const isRTLLanguage = (locale) => {
 const interpolateTranslation = (translation, params) => {
   let result = translation;
   Object.keys(params).forEach(key => {
-    result = result.replace(`{{#123;{{#123;${key}}#125;}}#125;}`, params[key]);
+    result = result.replace(`{{${key}}}`, params[key]);
   });
   return result;
 };
@@ -346,7 +346,7 @@ const LanguageSelector = () => {
                 accessible={true}
                 accessibilityRole="button"
                 accessibilityLabel={`${t('selectLanguage')}: ${getLanguageName(locale)}`}
-                accessibilityState={{#123;{{#123; selected: currentLocale === locale }}#125;}}#125;
+                accessibilityState={{ selected: currentLocale === locale }}
               >
                 <Text style={[
                   styles.languageOptionText,

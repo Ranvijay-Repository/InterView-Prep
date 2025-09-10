@@ -1,0 +1,38 @@
+name: Block Direct Pushes to Production
+
+# This workflow runs on all pushes to production to check if they're direct pushes
+on:
+  push:
+    branches:
+      - production
+
+jobs:
+  block-direct-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check if this is a direct push
+        run: |
+          echo "🔍 Checking commit message..."
+          echo "Commit message: ${{ github.event.head_commit.message }}"
+          
+          if [[ "${{ github.event.head_commit.message }}" == *"Merge pull request"* ]]; then
+            echo "✅ This is a PR merge - allowed"
+            echo "Deployment will proceed via the main deploy workflow"
+          else
+            echo "❌ DIRECT PUSH TO PRODUCTION DETECTED!"
+            echo ""
+            echo "🚫 Direct pushes to the production branch are not allowed."
+            echo "📋 Please follow the proper workflow:"
+            echo "   1. Create a feature branch from master"
+            echo "   2. Make your changes"
+            echo "   3. Create a Pull Request to production"
+            echo "   4. Get the PR reviewed and approved"
+            echo "   5. Merge the PR (this will trigger deployment)"
+            echo ""
+            echo "🔧 To fix this:"
+            echo "   - Revert this commit: git revert ${{ github.sha }}"
+            echo "   - Create a proper PR instead"
+            echo ""
+            echo "❌ This workflow will fail to enforce the policy."
+            exit 1
+          fi

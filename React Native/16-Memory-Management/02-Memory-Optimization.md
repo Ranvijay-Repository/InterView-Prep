@@ -949,7 +949,7 @@ const ImageMemoryManagementDemo = () => {
         {images.map((image, index) => (
           <View key={image.id} style={styles.imageItem}>
             <Image 
-              source={{#123;{{#123; uri: image.uri }}#125;}}#125; 
+              source={{ uri: image.uri }} 
               style={styles.image}
               resizeMode="cover"
             />

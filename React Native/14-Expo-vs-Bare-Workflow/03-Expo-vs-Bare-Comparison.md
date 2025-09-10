@@ -206,18 +206,18 @@ const ExpoCamera = () => {
   }
   
   return (
-    <Camera style={{#123;{{#123; flex: 1 }}#125;}}#125; type={Camera.Constants.Type.back}>
-      <View style={{#123;{{#123; flex: 1, backgroundColor: 'transparent', flexDirection: 'row' }}#125;}}#125;>
+    <Camera style={{ flex: 1 }} type={Camera.Constants.Type.back}>
+      <View style={{ flex: 1, backgroundColor: 'transparent', flexDirection: 'row' }}>
         <TouchableOpacity
-          style={{#123;{{#123; flex: 0.1, alignSelf: 'flex-end', alignItems: 'center' }}#125;}}#125;
+          style={{ flex: 0.1, alignSelf: 'flex-end', alignItems: 'center' }}
           onPress={() => {
             setType(
               type === Camera.Constants.Type.back
                 ? Camera.Constants.Type.front
                 : Camera.Constants.Type.back
             );
-          }}#125;}}#125;>
-          <Text style={{#123;{{#123; fontSize: 18, marginBottom: 10, color: 'white' }}#125;}}#125;> Flip </Text>
+          }}>
+          <Text style={{ fontSize: 18, marginBottom: 10, color: 'white' }}> Flip </Text>
         </TouchableOpacity>
       </View>
     </Camera>
@@ -246,27 +246,27 @@ const BareCamera = () => {
   
   return (
     <RNCamera
-      style={{#123;{{#123; flex: 1 }}#125;}}#125;
+      style={{ flex: 1 }}
       type={RNCamera.Constants.Type.back}
       flashMode={RNCamera.Constants.FlashMode.on}
-      androidCameraPermissionOptions={{#123;{{#123;
+      androidCameraPermissionOptions={{
         title: 'Permission to use camera',
         message: 'We need your permission to use your camera',
         buttonPositive: 'Ok',
         buttonNegative: 'Cancel',
-      }}#125;}}#125;
+      }}
     >
-      <View style={{#123;{{#123; flex: 1, backgroundColor: 'transparent', flexDirection: 'row' }}#125;}}#125;>
+      <View style={{ flex: 1, backgroundColor: 'transparent', flexDirection: 'row' }}>
         <TouchableOpacity
-          style={{#123;{{#123; flex: 0.1, alignSelf: 'flex-end', alignItems: 'center' }}#125;}}#125;
+          style={{ flex: 0.1, alignSelf: 'flex-end', alignItems: 'center' }}
           onPress={() => {
             setType(
               type === RNCamera.Constants.Type.back
                 ? RNCamera.Constants.Type.front
                 : RNCamera.Constants.Type.back
             );
-          }}#125;}}#125;>
-          <Text style={{#123;{{#123; fontSize: 18, marginBottom: 10, color: 'white' }}#125;}}#125;> Flip </Text>
+          }}>
+          <Text style={{ fontSize: 18, marginBottom: 10, color: 'white' }}> Flip </Text>
         </TouchableOpacity>
       </View>
     </RNCamera>
