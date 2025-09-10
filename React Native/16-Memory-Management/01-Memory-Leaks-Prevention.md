@@ -17,6 +17,8 @@ A memory leak occurs when allocated memory is not properly released, causing the
 
 ### Common Memory Leak Sources
 
+
+{% raw %}
 ```javascript
 // ❌ BAD: Event listener not removed
 const MyComponent = () => {
@@ -50,11 +52,15 @@ const MyComponent = () => {
   return <View>Content</View>;
 };
 ```
+{% endraw %}
+
 
 ## Memory Leak Prevention Strategies
 
 ### 1. Event Listener Management
 
+
+{% raw %}
 ```javascript
 import { useEffect, useRef } from 'react';
 import { AppState, Dimensions } from 'react-native';
@@ -92,9 +98,13 @@ const EventListenerExample = () => {
   return <View>Event Listener Example</View>;
 };
 ```
+{% endraw %}
+
 
 ### 2. Timer Management
 
+
+{% raw %}
 ```javascript
 import { useEffect, useRef } from 'react';
 
@@ -127,9 +137,13 @@ const TimerExample = () => {
   return <View>Timer Example</View>;
 };
 ```
+{% endraw %}
+
 
 ### 3. Subscription Management
 
+
+{% raw %}
 ```javascript
 import { useEffect, useRef } from 'react';
 import { NetInfo } from '@react-native-netinfo/netinfo';
@@ -155,9 +169,13 @@ const SubscriptionExample = () => {
   return <View>Subscription Example</View>;
 };
 ```
+{% endraw %}
+
 
 ### 4. Image Memory Management
 
+
+{% raw %}
 ```javascript
 import { useEffect, useState } from 'react';
 import { Image, View } from 'react-native';
@@ -186,8 +204,8 @@ const ImageMemoryExample = () => {
       {images.map((url, index) => (
         <Image
           key={index}
-          source={{ uri: url }}
-          style={{ width: 100, height: 100 }}
+          source={{}}
+          style={{}}
           // Optimize memory usage
           resizeMode="cover"
           // Clear cache if needed
@@ -198,11 +216,15 @@ const ImageMemoryExample = () => {
   );
 };
 ```
+{% endraw %}
+
 
 ## Advanced Memory Management Techniques
 
 ### 1. Weak References
 
+
+{% raw %}
 ```javascript
 import { useEffect, useRef, useCallback } from 'react';
 
@@ -234,9 +256,13 @@ const WeakReferenceExample = () => {
   return <View>Weak Reference Example</View>;
 };
 ```
+{% endraw %}
+
 
 ### 2. Memory-Efficient Data Structures
 
+
+{% raw %}
 ```javascript
 import { useMemo, useCallback } from 'react';
 
@@ -277,9 +303,13 @@ const EfficientDataExample = () => {
   );
 };
 ```
+{% endraw %}
+
 
 ### 3. Lazy Loading and Virtualization
 
+
+{% raw %}
 ```javascript
 import { useMemo } from 'react';
 import { FlatList } from 'react-native';
@@ -289,7 +319,7 @@ const LazyLoadingExample = () => {
 
   // Only render visible items
   const renderItem = useCallback(({ item }) => (
-    <View style={{ height: 100, padding: 10 }}>
+    <View style={{}}>
       <Text>{item.title}</Text>
     </View>
   ), []);
@@ -316,11 +346,15 @@ const LazyLoadingExample = () => {
   );
 };
 ```
+{% endraw %}
+
 
 ## Memory Monitoring and Debugging
 
 ### 1. Memory Usage Monitoring
 
+
+{% raw %}
 ```javascript
 import { useEffect, useState } from 'react';
 import { View, Text } from 'react-native';
@@ -347,7 +381,7 @@ const MemoryMonitor = () => {
   }, []);
 
   return (
-    <View style={{ padding: 20 }}>
+    <View style={{}}>
       <Text>Memory Usage:</Text>
       {memoryInfo && (
         <>
@@ -360,9 +394,13 @@ const MemoryMonitor = () => {
   );
 };
 ```
+{% endraw %}
+
 
 ### 2. Memory Leak Detection
 
+
+{% raw %}
 ```javascript
 import { useEffect, useRef } from 'react';
 
@@ -403,11 +441,15 @@ const MemoryLeakDetector = () => {
   return <View>Memory Leak Detector</View>;
 };
 ```
+{% endraw %}
+
 
 ## Best Practices
 
 ### 1. Component Lifecycle Management
 
+
+{% raw %}
 ```javascript
 import { useEffect, useRef, useCallback } from 'react';
 
@@ -447,9 +489,13 @@ const LifecycleExample = () => {
   return <View>Lifecycle Example</View>;
 };
 ```
+{% endraw %}
+
 
 ### 2. Memory-Efficient State Management
 
+
+{% raw %}
 ```javascript
 import { useReducer, useCallback } from 'react';
 
@@ -494,11 +540,15 @@ const StateManagementExample = () => {
   return <View>State Management Example</View>;
 };
 ```
+{% endraw %}
+
 
 ## Memory Leak Testing
 
 ### 1. Automated Memory Testing
 
+
+{% raw %}
 ```javascript
 import { render, cleanup } from '@testing-library/react-native';
 
@@ -534,6 +584,8 @@ describe('Memory Leak Tests', () => {
   });
 });
 ```
+{% endraw %}
+
 
 ## Summary
 

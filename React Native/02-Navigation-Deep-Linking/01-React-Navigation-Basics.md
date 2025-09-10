@@ -27,6 +27,8 @@ React Navigation is the most popular navigation library for React Native. It pro
 
 ### **Navigation Types Overview**
 
+
+{% raw %}
 ```
 ┌─────────────────────────────────────┐
 │        React Navigation Types       │
@@ -50,6 +52,8 @@ React Navigation is the most popular navigation library for React Native. It pro
 │  └─────────────────────────────────┘│
 └─────────────────────────────────────┘
 ```
+{% endraw %}
+
 
 ---
 
@@ -58,6 +62,8 @@ React Navigation is the most popular navigation library for React Native. It pro
 ### **Basic Installation**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```bash
 # Install React Navigation
 npm install @react-navigation/native
@@ -74,10 +80,14 @@ npm install @react-navigation/bottom-tabs
 # For drawer navigator
 npm install @react-navigation/drawer
 ```
+{% endraw %}
+
 
 ### **Basic App Setup**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```javascript
 // App.js
 import React from 'react';
@@ -95,12 +105,12 @@ const App = () => {
         <Stack.Screen 
           name="Home" 
           component={HomeScreen}
-          options={{ title: 'Home' }}
+          options={{}}
         />
         <Stack.Screen 
           name="Details" 
           component={DetailsScreen}
-          options={{ title: 'Details' }}
+          options={{}}
         />
       </Stack.Navigator>
     </NavigationContainer>
@@ -109,6 +119,8 @@ const App = () => {
 
 export default App;
 ```
+{% endraw %}
+
 
 ---
 
@@ -119,6 +131,8 @@ Stack Navigator provides a way for your app to transition between screens where 
 ### **Basic Stack Navigator**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```javascript
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
@@ -169,17 +183,17 @@ const StackNavigator = () => {
         headerTitleStyle: {
           fontWeight: 'bold',
         },
-      }}
+}}
     >
       <Stack.Screen 
         name="Home" 
         component={HomeScreen}
-        options={{ title: 'Home' }}
+        options={{}}
       />
       <Stack.Screen 
         name="Details" 
         component={DetailsScreen}
-        options={{ title: 'Details' }}
+        options={{}}
       />
     </Stack.Navigator>
   );
@@ -215,10 +229,14 @@ const styles = StyleSheet.create({
 
 export default StackNavigator;
 ```
+{% endraw %}
+
 
 ### **Stack Navigator with Parameters**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```javascript
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, TextInput, useState } from 'react-native';
@@ -290,17 +308,17 @@ const StackNavigatorWithParams = () => {
         headerTitleStyle: {
           fontWeight: 'bold',
         },
-      }}
+}}
     >
       <Stack.Screen 
         name="Home" 
         component={HomeScreen}
-        options={{ title: 'Home' }}
+        options={{}}
       />
       <Stack.Screen 
         name="Profile" 
         component={ProfileScreen}
-        options={{ title: 'Profile' }}
+        options={{}}
       />
     </Stack.Navigator>
   );
@@ -354,6 +372,8 @@ const styles = StyleSheet.create({
 
 export default StackNavigatorWithParams;
 ```
+{% endraw %}
+
 
 ---
 

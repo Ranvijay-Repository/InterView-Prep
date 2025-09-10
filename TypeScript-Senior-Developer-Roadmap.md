@@ -7,6 +7,8 @@ This comprehensive roadmap covers all TypeScript concepts, patterns, and advance
 ## 🎯 **Core TypeScript Fundamentals (Must Know)**
 
 ### 1. **Type System Mastery**
+
+{% raw %}
 ```typescript
 // Basic Types
 type PrimitiveTypes = {
@@ -48,8 +50,12 @@ function processValue(value: string | number) {
   return value.toFixed(2);
 }
 ```
+{% endraw %}
+
 
 ### 2. **Advanced Type Manipulation**
+
+{% raw %}
 ```typescript
 // Utility Types (Built-in)
 type UtilityTypes = {
@@ -99,8 +105,12 @@ type Setters<T> = {
   [K in keyof T as `set${Capitalize<string & K>}`]: (value: T[K]) => void;
 };
 ```
+{% endraw %}
+
 
 ### 3. **Generics Mastery**
+
+{% raw %}
 ```typescript
 // Basic Generics
 function identity<T>(arg: T): T {
@@ -153,10 +163,14 @@ type Curry<T extends (...args: any[]) => any> =
       : (arg: F) => Curry<(...args: R) => Return>
     : never;
 ```
+{% endraw %}
+
 
 ## 🏗️ **Design Patterns & Architecture**
 
 ### 1. **Object-Oriented Patterns**
+
+{% raw %}
 ```typescript
 // Singleton Pattern
 class Singleton {
@@ -246,8 +260,12 @@ class Subject<T> {
   }
 }
 ```
+{% endraw %}
+
 
 ### 2. **Functional Programming Patterns**
+
+{% raw %}
 ```typescript
 // Monad Pattern
 interface Monad<T> {
@@ -298,8 +316,12 @@ const curriedAdd = curry(add);
 const add5 = curriedAdd(5);
 const add5And3 = add5(3);
 ```
+{% endraw %}
+
 
 ### 3. **Architectural Patterns**
+
+{% raw %}
 ```typescript
 // Repository Pattern
 interface Repository<T, ID> {
@@ -369,10 +391,14 @@ class DIContainer implements Container {
   }
 }
 ```
+{% endraw %}
+
 
 ## ⚛️ **React & React Native Specific TypeScript**
 
 ### 1. **React Component Typing**
+
+{% raw %}
 ```typescript
 // Component Props
 interface ButtonProps {
@@ -449,8 +475,12 @@ function useTheme(): ThemeContextType {
   return context;
 }
 ```
+{% endraw %}
+
 
 ### 2. **React Native Specific Types**
+
+{% raw %}
 ```typescript
 // Navigation Types
 type RootStackParamList = {
@@ -529,8 +559,12 @@ function userReducer(state: UserState, action: UserAction): UserState {
 const selectCurrentUser = (state: RootState) => state.user.currentUser;
 const selectUserLoading = (state: RootState) => state.user.loading;
 ```
+{% endraw %}
+
 
 ### 3. **Advanced React Patterns**
+
+{% raw %}
 ```typescript
 // Render Props Pattern
 interface RenderProps<T> {
@@ -582,7 +616,7 @@ function Tabs({ children, defaultTab }: TabsProps) {
   const [activeTab, setActiveTab] = useState(defaultTab || '');
   
   return (
-    <TabsContext.Provider value={{ activeTab, setActiveTab }}>
+    <TabsContext.Provider value={{}}>
       {children}
     </TabsContext.Provider>
   );
@@ -617,10 +651,14 @@ function TabPanel({ id, children }: TabPanelProps) {
   <TabPanel id="tab2">Content 2</TabPanel>
 </Tabs>
 ```
+{% endraw %}
+
 
 ## 🚀 **Backend Development with TypeScript**
 
 ### 1. **Node.js & Express**
+
+{% raw %}
 ```typescript
 // Express with TypeScript
 import express, { Request, Response, NextFunction } from 'express';
@@ -686,8 +724,12 @@ class UserController {
   }
 }
 ```
+{% endraw %}
+
 
 ### 2. **Database Integration**
+
+{% raw %}
 ```typescript
 // TypeORM with TypeScript
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
@@ -753,8 +795,12 @@ class UserRepository implements IUserRepository {
   }
 }
 ```
+{% endraw %}
+
 
 ### 3. **API Design & Validation**
+
+{% raw %}
 ```typescript
 // DTOs (Data Transfer Objects)
 interface CreateUserDto {
@@ -855,10 +901,14 @@ class UserService implements IUserService {
   // Other methods...
 }
 ```
+{% endraw %}
+
 
 ## 🔧 **Advanced TypeScript Features**
 
 ### 1. **Module System & Namespaces**
+
+{% raw %}
 ```typescript
 // Module Declaration
 declare module 'custom-module' {
@@ -902,8 +952,12 @@ declare global {
   }
 }
 ```
+{% endraw %}
+
 
 ### 2. **Decorators & Metadata**
+
+{% raw %}
 ```typescript
 // Class Decorator
 function Controller(path: string) {
@@ -950,8 +1004,12 @@ class UserController {
   }
 }
 ```
+{% endraw %}
+
 
 ### 3. **Advanced Generic Patterns**
+
+{% raw %}
 ```typescript
 // Recursive Type Definitions
 type DeepReadonly<T> = {
@@ -1009,10 +1067,14 @@ function sanitize<T>(input: T): Sanitized<T> {
   return input as Sanitized<T>;
 }
 ```
+{% endraw %}
+
 
 ## 🧪 **Testing with TypeScript**
 
 ### 1. **Unit Testing**
+
+{% raw %}
 ```typescript
 // Jest with TypeScript
 import { UserService } from '../services/UserService';
@@ -1090,8 +1152,12 @@ describe('UserService', () => {
   });
 });
 ```
+{% endraw %}
+
 
 ### 2. **Integration Testing**
+
+{% raw %}
 ```typescript
 // Supertest with TypeScript
 import request from 'supertest';
@@ -1156,10 +1222,14 @@ describe('User API', () => {
   });
 });
 ```
+{% endraw %}
+
 
 ## 📚 **Essential Libraries & Tools**
 
 ### 1. **Development Tools**
+
+{% raw %}
 ```typescript
 // ESLint Configuration
 {
@@ -1217,8 +1287,12 @@ describe('User API', () => {
   }
 }
 ```
+{% endraw %}
+
 
 ### 2. **Utility Libraries**
+
+{% raw %}
 ```typescript
 // Lodash with TypeScript
 import _ from 'lodash';
@@ -1271,6 +1345,8 @@ async function validateDto(dto: CreateUserDto): Promise<void> {
   }
 }
 ```
+{% endraw %}
+
 
 ## 🎯 **Interview Preparation Topics**
 

@@ -22,6 +22,8 @@
 
 ### **Memory Management Architecture**
 
+
+{% raw %}
 ```mermaid
 graph TD
     A[React Native App] --> B[JavaScript Heap]
@@ -37,6 +39,8 @@ graph TD
     D --> K[Image Assets]
     E --> L[Bridge Communication]
 ```
+{% endraw %}
+
 
 ### **Key Areas**
 - **JavaScript Heap**: Component state, closures, event listeners
@@ -51,6 +55,8 @@ graph TD
 ### **Memory Profiling Tools**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```javascript
 import React, { useState, useCallback, useEffect } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native';
@@ -388,6 +394,8 @@ const styles = StyleSheet.create({
 
 export { MemoryProfiler, MemoryProfilingDemo };
 ```
+{% endraw %}
+
 
 ---
 
@@ -396,6 +404,8 @@ export { MemoryProfiler, MemoryProfilingDemo };
 ### **Memory Leak Prevention Patterns**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```javascript
 import React, { useState, useCallback, useEffect, useRef } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native';
@@ -693,6 +703,8 @@ const styles = StyleSheet.create({
 
 export { MemoryLeakPrevention, MemoryLeakPreventionDemo };
 ```
+{% endraw %}
+
 
 ---
 
@@ -701,6 +713,8 @@ export { MemoryLeakPrevention, MemoryLeakPreventionDemo };
 ### **Image Memory Optimization**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```javascript
 import React, { useState, useCallback, useEffect } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Image, Dimensions } from 'react-native';
@@ -949,7 +963,7 @@ const ImageMemoryManagementDemo = () => {
         {images.map((image, index) => (
           <View key={image.id} style={styles.imageItem}>
             <Image 
-              source={{ uri: image.uri }} 
+              source={{}} 
               style={styles.image}
               resizeMode="cover"
             />
@@ -1074,6 +1088,8 @@ const styles = StyleSheet.create({
 
 export { ImageMemoryManager, ImageMemoryManagementDemo };
 ```
+{% endraw %}
+
 
 ---
 

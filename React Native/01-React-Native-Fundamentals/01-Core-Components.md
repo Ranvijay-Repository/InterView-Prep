@@ -29,6 +29,8 @@ React Native provides a set of core components that map to native mobile compone
 
 ### **Core Components Overview**
 
+
+{% raw %}
 ```
 ┌─────────────────────────────────────┐
 │        Core Components              │
@@ -54,6 +56,8 @@ React Native provides a set of core components that map to native mobile compone
 │  └─────────────────────────────────┘│
 └─────────────────────────────────────┘
 ```
+{% endraw %}
+
 
 ---
 
@@ -64,6 +68,8 @@ The `View` component is the most fundamental component in React Native. It's sim
 ### **Basic View Usage**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```javascript
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
@@ -109,10 +115,14 @@ const styles = StyleSheet.create({
 
 export default BasicView;
 ```
+{% endraw %}
+
 
 ### **View with Flexbox Layout**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```javascript
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
@@ -170,6 +180,8 @@ const styles = StyleSheet.create({
 
 export default FlexboxView;
 ```
+{% endraw %}
+
 
 ---
 
@@ -180,6 +192,8 @@ The `Text` component is used to display text content. It's similar to `span` or 
 ### **Basic Text Usage**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```javascript
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
@@ -236,10 +250,14 @@ const styles = StyleSheet.create({
 
 export default BasicText;
 ```
+{% endraw %}
+
 
 ### **Text with Nested Components**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```javascript
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
@@ -300,6 +318,8 @@ const styles = StyleSheet.create({
 
 export default NestedText;
 ```
+{% endraw %}
+
 
 ---
 
@@ -310,6 +330,8 @@ The `Image` component is used to display images from various sources.
 ### **Basic Image Usage**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```javascript
 import React from 'react';
 import { View, Image, Text, StyleSheet } from 'react-native';
@@ -335,7 +357,7 @@ const BasicImage = () => {
         <Image
           source={{
             uri: 'https://picsum.photos/200/200'
-          }}
+}}
           style={styles.image}
           resizeMode="cover"
         />
@@ -347,7 +369,7 @@ const BasicImage = () => {
         <Image
           source={{
             uri: 'https://example.com/image.jpg'
-          }}
+}}
           style={styles.image}
           onLoad={() => console.log('Image loaded successfully')}
           onError={(error) => console.log('Image failed to load:', error)}
@@ -390,10 +412,14 @@ const styles = StyleSheet.create({
 
 export default BasicImage;
 ```
+{% endraw %}
+
 
 ### **Image with Loading States**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```javascript
 import React, { useState } from 'react';
 import { View, Image, Text, ActivityIndicator, StyleSheet } from 'react-native';
@@ -424,7 +450,7 @@ const ImageWithLoading = () => {
         <Image
           source={{
             uri: 'https://picsum.photos/300/300'
-          }}
+}}
           style={styles.image}
           onLoadStart={handleLoadStart}
           onLoadEnd={handleLoadEnd}
@@ -504,6 +530,8 @@ const styles = StyleSheet.create({
 
 export default ImageWithLoading;
 ```
+{% endraw %}
+
 
 ---
 

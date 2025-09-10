@@ -27,6 +27,8 @@ Creating React Native libraries involves building reusable components, modules, 
 
 ### **Library Development Framework**
 
+
+{% raw %}
 ```
 ┌─────────────────────────────────────┐
 │        Library Development         │
@@ -53,6 +55,8 @@ Creating React Native libraries involves building reusable components, modules, 
 │  └─────────────────────────────────┘│
 └─────────────────────────────────────┘
 ```
+{% endraw %}
+
 
 ### **Library Types**
 - **JavaScript Libraries**: Pure JavaScript utilities
@@ -67,6 +71,8 @@ Creating React Native libraries involves building reusable components, modules, 
 ### **Initial Project Structure**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```bash
 # Create library project
 mkdir my-react-native-library
@@ -81,8 +87,12 @@ npm install --save-dev jest @types/jest react-test-renderer
 npm install --save-dev eslint prettier
 npm install --save-dev rollup @rollup/plugin-typescript
 ```
+{% endraw %}
+
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```
 my-react-native-library/
 ├── src/
@@ -105,10 +115,14 @@ my-react-native-library/
 ├── .prettierrc
 └── README.md
 ```
+{% endraw %}
+
 
 ### **Package.json Configuration**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```json
 {
   "name": "my-react-native-library",
@@ -159,10 +173,14 @@ my-react-native-library/
   "homepage": "https://github.com/username/my-react-native-library#readme"
 }
 ```
+{% endraw %}
+
 
 ### **TypeScript Configuration**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```json
 // tsconfig.json
 {
@@ -193,6 +211,8 @@ my-react-native-library/
   ]
 }
 ```
+{% endraw %}
+
 
 ---
 
@@ -201,6 +221,8 @@ my-react-native-library/
 ### **Type Definitions**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```typescript
 // src/types/index.ts
 export interface LibraryConfig {
@@ -224,10 +246,14 @@ export interface LibraryResponse<T = any> {
 
 export type LibraryCallback<T = any> = (response: LibraryResponse<T>) => void;
 ```
+{% endraw %}
+
 
 ### **Main Library Implementation**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```typescript
 // src/index.ts
 import { NativeModules, Platform } from 'react-native';
@@ -305,10 +331,14 @@ class MyLibrary {
 export default MyLibrary;
 export { LibraryConfig, LibraryOptions, LibraryResponse, LibraryCallback };
 ```
+{% endraw %}
+
 
 ### **Component Library**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```typescript
 // src/components/MyComponent.tsx
 import React, { useState, useEffect } from 'react';
@@ -379,6 +409,8 @@ const styles = StyleSheet.create({
   }
 });
 ```
+{% endraw %}
+
 
 ---
 
@@ -387,6 +419,8 @@ const styles = StyleSheet.create({
 ### **Android Native Module**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```java
 // android/src/main/java/com/mylibrary/MyLibraryModule.java
 package com.mylibrary;
@@ -449,10 +483,14 @@ public class MyLibraryModule extends ReactContextBaseJavaModule {
     }
 }
 ```
+{% endraw %}
+
 
 ### **iOS Native Module**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```objc
 // ios/MyLibraryModule.h
 #import <React/RCTBridgeModule.h>
@@ -462,8 +500,12 @@ public class MyLibraryModule extends ReactContextBaseJavaModule {
 
 @end
 ```
+{% endraw %}
+
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```objc
 // ios/MyLibraryModule.m
 #import "MyLibraryModule.h"
@@ -518,10 +560,14 @@ RCT_EXPORT_METHOD(performAction:(NSString *)action
 
 @end
 ```
+{% endraw %}
+
 
 ### **Podspec Configuration**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```ruby
 # ios/MyLibrary.podspec
 require "json"
@@ -544,6 +590,8 @@ Pod::Spec.new do |s|
   s.dependency "React-Core"
 end
 ```
+{% endraw %}
+
 
 ---
 
@@ -552,6 +600,8 @@ end
 ### **Unit Testing Setup**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```json
 // jest.config.js
 module.exports = {
@@ -573,8 +623,12 @@ module.exports = {
   }
 };
 ```
+{% endraw %}
+
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```javascript
 // jest.setup.js
 import 'react-native-gesture-handler/jestSetup';
@@ -597,10 +651,14 @@ jest.mock('react-native', () => {
   };
 });
 ```
+{% endraw %}
+
 
 ### **Unit Tests**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```typescript
 // __tests__/MyLibrary.test.ts
 import MyLibrary from '../src/index';
@@ -658,10 +716,14 @@ describe('MyLibrary', () => {
   });
 });
 ```
+{% endraw %}
+
 
 ### **Component Tests**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```typescript
 // __tests__/MyComponent.test.tsx
 import React from 'react';
@@ -698,6 +760,8 @@ describe('MyComponent', () => {
   });
 });
 ```
+{% endraw %}
+
 
 ---
 
@@ -706,6 +770,8 @@ describe('MyComponent', () => {
 ### **README.md**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```markdown
 # My React Native Library
 
@@ -714,7 +780,11 @@ A powerful React Native library for awesome functionality.
 ## Installation
 
 ```bash
+{% endraw %}
+
 npm install my-react-native-library
+
+{% raw %}
 ```
 
 ### iOS Setup
@@ -722,13 +792,21 @@ npm install my-react-native-library
 Add the following to your `ios/Podfile`:
 
 ```ruby
+{% endraw %}
+
 pod 'MyLibrary', :path => '../node_modules/my-react-native-library/ios'
+
+{% raw %}
 ```
 
 Then run:
 
 ```bash
+{% endraw %}
+
 cd ios && pod install
+
+{% raw %}
 ```
 
 ### Android Setup
@@ -740,6 +818,8 @@ No additional setup required for Android.
 ### Basic Usage
 
 ```typescript
+{% endraw %}
+
 import MyLibrary from 'my-react-native-library';
 
 const library = new MyLibrary({
@@ -756,11 +836,15 @@ if (result.success) {
 
 // Perform an action
 const actionResult = await library.performAction('test', { data: 'value' });
+
+{% raw %}
 ```
 
 ### Component Usage
 
 ```typescript
+{% endraw %}
+
 import { MyComponent } from 'my-react-native-library';
 
 const App = () => {
@@ -771,6 +855,8 @@ const App = () => {
     />
   );
 };
+
+{% raw %}
 ```
 
 ## API Reference
@@ -780,7 +866,11 @@ const App = () => {
 #### Constructor
 
 ```typescript
+{% endraw %}
+
 new MyLibrary(config: LibraryConfig, options?: LibraryOptions)
+
+{% raw %}
 ```
 
 #### Methods
@@ -811,10 +901,14 @@ new MyLibrary(config: LibraryConfig, options?: LibraryOptions)
 
 MIT
 ```
+{% endraw %}
+
 
 ### **API Documentation**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```typescript
 // src/index.ts with JSDoc comments
 /**
@@ -871,6 +965,8 @@ class MyLibrary {
   }
 }
 ```
+{% endraw %}
+
 
 ---
 
@@ -879,6 +975,8 @@ class MyLibrary {
 ### **Build Configuration**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```javascript
 // rollup.config.js
 import typescript from '@rollup/plugin-typescript';
@@ -911,10 +1009,14 @@ export default {
   ]
 };
 ```
+{% endraw %}
+
 
 ### **Publishing Process**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```bash
 # Build the library
 npm run build
@@ -934,10 +1036,14 @@ npm publish --tag beta
 # Publish with access level
 npm publish --access public
 ```
+{% endraw %}
+
 
 ### **Version Management**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```bash
 # Version bumping
 npm version patch    # 1.0.0 -> 1.0.1
@@ -948,6 +1054,8 @@ npm version major    # 1.0.0 -> 2.0.0
 npm version prerelease --preid=beta    # 1.0.0 -> 1.0.1-beta.0
 npm version prerelease --preid=alpha   # 1.0.0 -> 1.0.1-alpha.0
 ```
+{% endraw %}
+
 
 ---
 
@@ -956,6 +1064,8 @@ npm version prerelease --preid=alpha   # 1.0.0 -> 1.0.1-alpha.0
 ### **Automated Testing**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```yaml
 # .github/workflows/test.yml
 name: Test
@@ -977,10 +1087,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Use Node.js ${{}}
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: ${{}}
           cache: 'npm'
           
       - name: Install dependencies
@@ -995,10 +1105,14 @@ jobs:
       - name: Build library
         run: npm run build
 ```
+{% endraw %}
+
 
 ### **Release Automation**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```yaml
 # .github/workflows/release.yml
 name: Release
@@ -1033,8 +1147,10 @@ jobs:
       - name: Publish to npm
         run: npm publish
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{}}
 ```
+{% endraw %}
+
 
 ---
 
@@ -1043,6 +1159,8 @@ jobs:
 ### **1. Library Development Best Practices**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```javascript
 // Library development best practices
 const LibraryBestPractices = {
@@ -1071,10 +1189,14 @@ const LibraryBestPractices = {
   }
 };
 ```
+{% endraw %}
+
 
 ### **2. Testing Best Practices**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```javascript
 // Testing best practices
 const TestingBestPractices = {
@@ -1095,6 +1217,8 @@ const TestingBestPractices = {
   }
 };
 ```
+{% endraw %}
+
 
 ---
 

@@ -22,6 +22,8 @@
 
 ### **Development Workflow Comparison**
 
+
+{% raw %}
 ```mermaid
 graph TD
     A[Project Setup] --> B[Expo: npx create-expo-app]
@@ -36,10 +38,14 @@ graph TD
     F --> H[Expo Updates]
     G --> I[Custom CI/CD]
 ```
+{% endraw %}
+
 
 ### **Key Differences**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```javascript
 // Workflow comparison data
 const WorkflowComparison = {
@@ -135,6 +141,8 @@ const DevelopmentExperience = {
 
 export { WorkflowComparison, DevelopmentExperience };
 ```
+{% endraw %}
+
 
 ---
 
@@ -143,6 +151,8 @@ export { WorkflowComparison, DevelopmentExperience };
 ### **Feature Availability Matrix**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```javascript
 // Feature comparison matrix
 const FeatureComparison = {
@@ -206,18 +216,18 @@ const ExpoCamera = () => {
   }
   
   return (
-    <Camera style={{ flex: 1 }} type={Camera.Constants.Type.back}>
-      <View style={{ flex: 1, backgroundColor: 'transparent', flexDirection: 'row' }}>
+    <Camera style={{}} type={Camera.Constants.Type.back}>
+      <View style={{}}>
         <TouchableOpacity
-          style={{ flex: 0.1, alignSelf: 'flex-end', alignItems: 'center' }}
+          style={{}}
           onPress={() => {
             setType(
               type === Camera.Constants.Type.back
                 ? Camera.Constants.Type.front
                 : Camera.Constants.Type.back
             );
-          }}>
-          <Text style={{ fontSize: 18, marginBottom: 10, color: 'white' }}> Flip </Text>
+}}>
+          <Text style={{}}> Flip </Text>
         </TouchableOpacity>
       </View>
     </Camera>
@@ -246,7 +256,7 @@ const BareCamera = () => {
   
   return (
     <RNCamera
-      style={{ flex: 1 }}
+      style={{}}
       type={RNCamera.Constants.Type.back}
       flashMode={RNCamera.Constants.FlashMode.on}
       androidCameraPermissionOptions={{
@@ -254,19 +264,19 @@ const BareCamera = () => {
         message: 'We need your permission to use your camera',
         buttonPositive: 'Ok',
         buttonNegative: 'Cancel',
-      }}
+}}
     >
-      <View style={{ flex: 1, backgroundColor: 'transparent', flexDirection: 'row' }}>
+      <View style={{}}>
         <TouchableOpacity
-          style={{ flex: 0.1, alignSelf: 'flex-end', alignItems: 'center' }}
+          style={{}}
           onPress={() => {
             setType(
               type === RNCamera.Constants.Type.back
                 ? RNCamera.Constants.Type.front
                 : RNCamera.Constants.Type.back
             );
-          }}>
-          <Text style={{ fontSize: 18, marginBottom: 10, color: 'white' }}> Flip </Text>
+}}>
+          <Text style={{}}> Flip </Text>
         </TouchableOpacity>
       </View>
     </RNCamera>
@@ -277,6 +287,8 @@ const BareCamera = () => {
 
 export { FeatureComparison, FeatureImplementation };
 ```
+{% endraw %}
+
 
 ---
 
@@ -285,6 +297,8 @@ export { FeatureComparison, FeatureImplementation };
 ### **Performance Metrics**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```javascript
 // Performance comparison data
 const PerformanceComparison = {
@@ -412,6 +426,8 @@ const PerformanceTesting = {
 
 export { PerformanceComparison, PerformanceTesting };
 ```
+{% endraw %}
+
 
 ---
 
@@ -420,6 +436,8 @@ export { PerformanceComparison, PerformanceTesting };
 ### **Expo to Bare Migration**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```javascript
 // Migration strategies and tools
 const MigrationStrategies = {
@@ -557,6 +575,8 @@ const MigrationHelpers = {
 
 export { MigrationStrategies, MigrationHelpers };
 ```
+{% endraw %}
+
 
 ---
 
@@ -565,6 +585,8 @@ export { MigrationStrategies, MigrationHelpers };
 ### **Decision Criteria**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```javascript
 // Decision matrix for choosing between Expo and Bare
 const DecisionMatrix = {
@@ -723,6 +745,8 @@ const DecisionHelper = {
 
 export { DecisionMatrix, DecisionHelper };
 ```
+{% endraw %}
+
 
 ---
 

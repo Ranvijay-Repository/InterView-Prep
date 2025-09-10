@@ -41,6 +41,8 @@ React Native is built on top of React, making React knowledge fundamental to Rea
 
 ### **Core Hooks Overview**
 
+
+{% raw %}
 ```
 ┌─────────────────────────────────────┐
 │           React Hooks               │
@@ -62,10 +64,14 @@ React Native is built on top of React, making React knowledge fundamental to Rea
 │  └─────────────────────────────────┘│
 └─────────────────────────────────────┘
 ```
+{% endraw %}
+
 
 ### **useState Hook**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```javascript
 // ✅ Basic useState usage
 const Counter = () => {
@@ -93,10 +99,14 @@ const Counter = () => {
   );
 };
 ```
+{% endraw %}
+
 
 ### **useEffect Hook**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```javascript
 // ✅ useEffect for API calls
 const UserProfile = ({ userId }) => {
@@ -141,9 +151,13 @@ const UserProfile = ({ userId }) => {
   );
 };
 ```
+{% endraw %}
+
 
 ### **useReducer Hook**
 
+
+{% raw %}
 ```javascript
 // ✅ useReducer for complex state
 const initialState = {
@@ -222,6 +236,8 @@ const ItemsList = () => {
   );
 };
 ```
+{% endraw %}
+
 
 ---
 
@@ -229,6 +245,8 @@ const ItemsList = () => {
 
 ### **Creating Context**
 
+
+{% raw %}
 ```javascript
 // ✅ Theme Context
 const ThemeContext = createContext();
@@ -301,9 +319,13 @@ const UserProvider = ({ children }) => {
   );
 };
 ```
+{% endraw %}
+
 
 ### **Using Context**
 
+
+{% raw %}
 ```javascript
 // ✅ Custom hooks for context
 const useTheme = () => {
@@ -353,6 +375,8 @@ const UserProfile = () => {
   );
 };
 ```
+{% endraw %}
+
 
 ---
 
@@ -360,6 +384,8 @@ const UserProfile = () => {
 
 ### **Lifecycle in Functional Components**
 
+
+{% raw %}
 ```javascript
 // ✅ Component lifecycle with hooks
 const LifecycleExample = ({ userId }) => {
@@ -408,9 +434,13 @@ const LifecycleExample = ({ userId }) => {
   );
 };
 ```
+{% endraw %}
+
 
 ### **Lifecycle Diagram**
 
+
+{% raw %}
 ```
 ┌─────────────────────────────────────┐
 │        Component Lifecycle          │
@@ -432,6 +462,8 @@ const LifecycleExample = ({ userId }) => {
 │  └─────────────────────────────────┘│
 └─────────────────────────────────────┘
 ```
+{% endraw %}
+
 
 ---
 
@@ -439,6 +471,8 @@ const LifecycleExample = ({ userId }) => {
 
 ### **useMemo Hook**
 
+
+{% raw %}
 ```javascript
 // ✅ useMemo for expensive calculations
 const ExpensiveComponent = ({ items, filter }) => {
@@ -467,9 +501,13 @@ const ExpensiveComponent = ({ items, filter }) => {
   );
 };
 ```
+{% endraw %}
+
 
 ### **useCallback Hook**
 
+
+{% raw %}
 ```javascript
 // ✅ useCallback for function memoization
 const ParentComponent = () => {
@@ -516,9 +554,13 @@ const ChildComponent = React.memo(({ items, onAddItem }) => {
   );
 });
 ```
+{% endraw %}
+
 
 ### **React.memo**
 
+
+{% raw %}
 ```javascript
 // ✅ React.memo for component memoization
 const ExpensiveChild = React.memo(({ data, onPress }) => {
@@ -555,6 +597,8 @@ const ParentComponent = () => {
   );
 };
 ```
+{% endraw %}
+
 
 ---
 
@@ -562,6 +606,8 @@ const ParentComponent = () => {
 
 ### **Lifting State Up**
 
+
+{% raw %}
 ```javascript
 // ✅ Lifting state up pattern
 const SearchInput = ({ value, onChangeText, placeholder }) => (
@@ -627,6 +673,8 @@ const SearchScreen = () => {
   );
 };
 ```
+{% endraw %}
+
 
 ---
 
@@ -634,6 +682,8 @@ const SearchScreen = () => {
 
 ### **Error Boundaries**
 
+
+{% raw %}
 ```javascript
 // ✅ Error boundary for React Native with functional components
 import React, { useState, useEffect } from 'react';
@@ -699,11 +749,13 @@ const App = () => (
   <ErrorBoundary onError={(error, errorInfo) => {
     // Log to crash reporting service
     console.error('App error:', error, errorInfo);
-  }}>
+}}>
     <MainApp />
   </ErrorBoundary>
 );
 ```
+{% endraw %}
+
 
 ---
 
@@ -711,6 +763,8 @@ const App = () => (
 
 ### **API Hook**
 
+
+{% raw %}
 ```javascript
 // ✅ Custom hook for API calls
 const useApi = (url, options = {}) => {
@@ -765,9 +819,13 @@ const UserProfile = ({ userId }) => {
   );
 };
 ```
+{% endraw %}
+
 
 ### **Local Storage Hook**
 
+
+{% raw %}
 ```javascript
 // ✅ Custom hook for local storage
 const useAsyncStorage = (key, initialValue) => {
@@ -828,6 +886,8 @@ const SettingsScreen = () => {
   );
 };
 ```
+{% endraw %}
+
 
 ---
 
@@ -857,6 +917,8 @@ const SettingsScreen = () => {
 
 ### **1. Use Functional Updates**
 
+
+{% raw %}
 ```javascript
 // ✅ Always use functional updates
 const [count, setCount] = useState(0);
@@ -864,18 +926,26 @@ const [count, setCount] = useState(0);
 // Instead of: setCount(count + 1)
 setCount(prev => prev + 1);
 ```
+{% endraw %}
+
 
 ### **2. Proper Dependency Arrays**
 
+
+{% raw %}
 ```javascript
 // ✅ Be explicit about dependencies
 useEffect(() => {
   fetchData(userId);
 }, [userId]); // Only re-run when userId changes
 ```
+{% endraw %}
+
 
 ### **3. Memoization Strategy**
 
+
+{% raw %}
 ```javascript
 // ✅ Memoize expensive calculations
 const expensiveValue = useMemo(() => {
@@ -887,15 +957,21 @@ const handlePress = useCallback(() => {
   onItemPress(item);
 }, [item, onItemPress]);
 ```
+{% endraw %}
+
 
 ### **4. Error Boundaries**
 
+
+{% raw %}
 ```javascript
 // ✅ Always wrap components in error boundaries
 <ErrorBoundary>
   <MyComponent />
 </ErrorBoundary>
 ```
+{% endraw %}
+
 
 ---
 

@@ -25,6 +25,8 @@ Virtualization is crucial for rendering large lists efficiently in React Native.
 
 ### **Virtualization Overview**
 
+
+{% raw %}
 ```
 ┌─────────────────────────────────────┐
 │        Virtualization System        │
@@ -51,6 +53,8 @@ Virtualization is crucial for rendering large lists efficiently in React Native.
 │  └─────────────────────────────────┘│
 └─────────────────────────────────────┘
 ```
+{% endraw %}
+
 
 ---
 
@@ -59,6 +63,8 @@ Virtualization is crucial for rendering large lists efficiently in React Native.
 ### **Optimized FlatList with Performance Features**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```javascript
 import React, { useState, useCallback, useMemo, useRef } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, FlatList, ActivityIndicator, Alert } from 'react-native';
@@ -227,7 +233,7 @@ const OptimizedFlatList = () => {
         onScrollToIndexFailed={(info) => {
           // Handle scroll to index failure
           console.warn('Scroll to index failed:', info);
-        }}
+}}
         style={styles.list}
       />
     </View>
@@ -386,6 +392,8 @@ const styles = StyleSheet.create({
 
 export default OptimizedFlatList;
 ```
+{% endraw %}
+
 
 ---
 

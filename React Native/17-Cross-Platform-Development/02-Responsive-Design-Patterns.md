@@ -8,6 +8,8 @@ Responsive design in React Native ensures your app looks and functions well acro
 
 ### 1. Basic Screen Size Detection
 
+
+{% raw %}
 ```javascript
 import { Dimensions, PixelRatio, Platform } from 'react-native';
 
@@ -55,9 +57,13 @@ const useScreenInfo = () => {
   return screenInfo;
 };
 ```
+{% endraw %}
+
 
 ### 2. Advanced Screen Classification
 
+
+{% raw %}
 ```javascript
 import { Dimensions, PixelRatio } from 'react-native';
 
@@ -110,11 +116,15 @@ const useDeviceClassification = () => {
   return classification;
 };
 ```
+{% endraw %}
+
 
 ## Responsive Layout Patterns
 
 ### 1. Flexible Grid System
 
+
+{% raw %}
 ```javascript
 import { View, StyleSheet, Dimensions } from 'react-native';
 
@@ -171,9 +181,13 @@ const ProductGrid = ({ products }) => {
   );
 };
 ```
+{% endraw %}
+
 
 ### 2. Adaptive Container Sizes
 
+
+{% raw %}
 ```javascript
 import { StyleSheet, Dimensions } from 'react-native';
 
@@ -224,9 +238,13 @@ const ResponsiveContainer = ({ children }) => {
   );
 };
 ```
+{% endraw %}
+
 
 ### 3. Breakpoint-Based Layouts
 
+
+{% raw %}
 ```javascript
 import { useState, useEffect } from 'react';
 import { Dimensions } from 'react-native';
@@ -292,11 +310,15 @@ const ResponsiveLayout = ({ children }) => {
   );
 };
 ```
+{% endraw %}
+
 
 ## Typography and Spacing
 
 ### 1. Responsive Typography
 
+
+{% raw %}
 ```javascript
 import { StyleSheet, Dimensions, PixelRatio } from 'react-native';
 
@@ -349,9 +371,13 @@ const ResponsiveText = ({ style, children, ...props }) => {
   );
 };
 ```
+{% endraw %}
+
 
 ### 2. Responsive Spacing System
 
+
+{% raw %}
 ```javascript
 import { StyleSheet, Dimensions } from 'react-native';
 
@@ -407,11 +433,15 @@ const ResponsiveSpacing = ({ children, padding, margin }) => {
   );
 };
 ```
+{% endraw %}
+
 
 ## Image and Media Responsiveness
 
 ### 1. Responsive Images
 
+
+{% raw %}
 ```javascript
 import { Image, Dimensions, StyleSheet } from 'react-native';
 
@@ -465,9 +495,13 @@ const styles = StyleSheet.create({
   },
 });
 ```
+{% endraw %}
+
 
 ### 2. Responsive Video Player
 
+
+{% raw %}
 ```javascript
 import { View, Dimensions, StyleSheet } from 'react-native';
 import Video from 'react-native-video';
@@ -511,11 +545,15 @@ const styles = StyleSheet.create({
   },
 });
 ```
+{% endraw %}
+
 
 ## Navigation Responsiveness
 
 ### 1. Responsive Navigation
 
+
+{% raw %}
 ```javascript
 import { useBreakpoint } from './useBreakpoint';
 import { createDrawerNavigator } from '@react-navigation/drawer';
@@ -535,7 +573,7 @@ const ResponsiveNavigator = () => {
             height: 60,
             paddingBottom: 8,
           },
-        }}
+}}
       >
         <Tab.Screen name="Home" component={HomeScreen} />
         <Tab.Screen name="Profile" component={ProfileScreen} />
@@ -550,7 +588,7 @@ const ResponsiveNavigator = () => {
           drawerStyle: {
             width: 280,
           },
-        }}
+}}
       >
         <Drawer.Screen name="Home" component={HomeScreen} />
         <Drawer.Screen name="Profile" component={ProfileScreen} />
@@ -571,9 +609,13 @@ const ResponsiveNavigator = () => {
   );
 };
 ```
+{% endraw %}
+
 
 ### 2. Responsive Modal
 
+
+{% raw %}
 ```javascript
 import { Modal, Dimensions, StyleSheet } from 'react-native';
 
@@ -632,11 +674,15 @@ const styles = StyleSheet.create({
   },
 });
 ```
+{% endraw %}
+
 
 ## Performance Optimization
 
 ### 1. Responsive Performance Hooks
 
+
+{% raw %}
 ```javascript
 import { useMemo, useCallback } from 'react';
 import { useBreakpoint } from './useBreakpoint';
@@ -686,9 +732,13 @@ const ResponsiveFlatList = ({ data, renderItem, ...props }) => {
   );
 };
 ```
+{% endraw %}
+
 
 ### 2. Responsive Image Caching
 
+
+{% raw %}
 ```javascript
 import { useMemo } from 'react';
 import { useBreakpoint } from './useBreakpoint';
@@ -721,11 +771,15 @@ const useResponsiveImageCache = () => {
   };
 };
 ```
+{% endraw %}
+
 
 ## Testing Responsive Design
 
 ### 1. Responsive Testing Utilities
 
+
+{% raw %}
 ```javascript
 // test-utils/responsiveTestUtils.js
 import { Dimensions } from 'react-native';
@@ -785,6 +839,8 @@ describe('ResponsiveComponent', () => {
   );
 });
 ```
+{% endraw %}
+
 
 ## Summary
 

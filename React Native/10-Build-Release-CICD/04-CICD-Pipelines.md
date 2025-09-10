@@ -23,6 +23,8 @@
 
 ### **CI/CD Pipeline Flow**
 
+
+{% raw %}
 ```mermaid
 graph TD
     A[Code Push] --> B[Trigger Pipeline]
@@ -36,6 +38,8 @@ graph TD
     I --> J[Deploy to Production]
     J --> K[Notify Team]
 ```
+{% endraw %}
+
 
 ### **Key Benefits**
 - **Automated Testing**: Catch bugs early
@@ -50,6 +54,8 @@ graph TD
 ### **Basic Workflow**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```yaml
 # .github/workflows/ci.yml
 name: CI/CD Pipeline
@@ -86,10 +92,14 @@ jobs:
     - name: Run type checking
       run: npm run type-check
 ```
+{% endraw %}
+
 
 ### **Android Build Workflow**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```yaml
 # .github/workflows/android.yml
 name: Android Build
@@ -132,9 +142,9 @@ jobs:
         path: |
           ~/.gradle/caches
           ~/.gradle/wrapper
-        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+        key: ${{}}-gradle-${{}}
         restore-keys: |
-          ${{ runner.os }}-gradle-
+          ${{}}-gradle-
           
     - name: Build Android APK
       run: |
@@ -147,10 +157,14 @@ jobs:
         name: android-apk
         path: android/app/build/outputs/apk/release/app-release.apk
 ```
+{% endraw %}
+
 
 ### **iOS Build Workflow**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```yaml
 # .github/workflows/ios.yml
 name: iOS Build
@@ -204,6 +218,8 @@ jobs:
         name: ios-ipa
         path: ios/build/YourApp.ipa
 ```
+{% endraw %}
+
 
 ---
 
@@ -212,6 +228,8 @@ jobs:
 ### **GitLab CI Configuration**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```yaml
 # .gitlab-ci.yml
 stages:
@@ -301,6 +319,8 @@ deploy-production:
     - main
   when: manual
 ```
+{% endraw %}
+
 
 ---
 
@@ -309,6 +329,8 @@ deploy-production:
 ### **Jenkinsfile**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```groovy
 // Jenkinsfile
 pipeline {
@@ -432,6 +454,8 @@ pipeline {
     }
 }
 ```
+{% endraw %}
+
 
 ---
 
@@ -440,6 +464,8 @@ pipeline {
 ### **EAS Configuration**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```json
 // eas.json
 {
@@ -478,10 +504,14 @@ pipeline {
   }
 }
 ```
+{% endraw %}
+
 
 ### **EAS Build Workflow**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```yaml
 # .github/workflows/eas-build.yml
 name: EAS Build
@@ -513,16 +543,18 @@ jobs:
       uses: expo/expo-github-action@v8
       with:
         eas-version: latest
-        token: ${{ secrets.EXPO_TOKEN }}
+        token: ${{}}
         
     - name: Build with EAS
       run: |
-        if [ "${{ github.ref }}" = "refs/heads/main" ]; then
+        if [ "${{}}" = "refs/heads/main" ]; then
           eas build --platform all --profile production
         else
           eas build --platform all --profile preview
         fi
 ```
+{% endraw %}
+
 
 ---
 
@@ -531,6 +563,8 @@ jobs:
 ### **Caching Strategy**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```yaml
 # .github/workflows/optimized.yml
 name: Optimized CI/CD
@@ -561,9 +595,9 @@ jobs:
         path: |
           .metro-cache
           node_modules/.cache
-        key: ${{ runner.os }}-metro-${{ hashFiles('**/package-lock.json') }}
+        key: ${{}}-metro-${{}}
         restore-keys: |
-          ${{ runner.os }}-metro-
+          ${{}}-metro-
           
     - name: Cache Gradle
       uses: actions/cache@v3
@@ -571,9 +605,9 @@ jobs:
         path: |
           ~/.gradle/caches
           ~/.gradle/wrapper
-        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+        key: ${{}}-gradle-${{}}
         restore-keys: |
-          ${{ runner.os }}-gradle-
+          ${{}}-gradle-
           
     - name: Install dependencies
       run: npm ci
@@ -581,10 +615,14 @@ jobs:
     - name: Run tests
       run: npm test
 ```
+{% endraw %}
+
 
 ### **Parallel Builds**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```yaml
 # .github/workflows/parallel.yml
 name: Parallel Builds
@@ -653,6 +691,8 @@ jobs:
     - name: Deploy
       run: echo "Deploying to production"
 ```
+{% endraw %}
+
 
 ---
 

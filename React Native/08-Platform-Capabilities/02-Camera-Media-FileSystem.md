@@ -25,6 +25,8 @@ Camera, media, and file system capabilities are essential for many React Native 
 
 ### **Camera, Media & File System Overview**
 
+
+{% raw %}
 ```
 ┌─────────────────────────────────────┐
 │        Camera, Media & File System  │
@@ -51,6 +53,8 @@ Camera, media, and file system capabilities are essential for many React Native 
 │  └─────────────────────────────────┘│
 └─────────────────────────────────────┘
 ```
+{% endraw %}
+
 
 ---
 
@@ -59,6 +63,8 @@ Camera, media, and file system capabilities are essential for many React Native 
 ### **Camera Manager Example**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```javascript
 import React, { useState, useRef, useCallback } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Alert, Image } from 'react-native';
@@ -198,7 +204,7 @@ const CameraManager = () => {
         {capturedImage && (
           <View style={styles.imageSection}>
             <Text style={styles.sectionTitle}>Captured Image</Text>
-            <Image source={{ uri: capturedImage.uri }} style={styles.image} />
+            <Image source={{}} style={styles.image} />
             <Text style={styles.imageInfo}>
               Size: {capturedImage.width}x{capturedImage.height}
             </Text>
@@ -211,7 +217,7 @@ const CameraManager = () => {
         {selectedImage && (
           <View style={styles.imageSection}>
             <Text style={styles.sectionTitle}>Selected Image</Text>
-            <Image source={{ uri: selectedImage.uri }} style={styles.image} />
+            <Image source={{}} style={styles.image} />
             <Text style={styles.imageInfo}>
               Size: {selectedImage.width}x{selectedImage.height}
             </Text>
@@ -384,6 +390,8 @@ const styles = StyleSheet.create({
 
 export default CameraManager;
 ```
+{% endraw %}
+
 
 ---
 

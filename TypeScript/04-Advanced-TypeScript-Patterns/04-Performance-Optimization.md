@@ -25,6 +25,8 @@ TypeScript performance optimization involves multiple aspects: compilation speed
 
 ### **Performance Areas**
 
+
+{% raw %}
 ```typescript
 // Performance optimization areas
 const performanceAreas = {
@@ -42,9 +44,13 @@ const metrics = {
   memoryUsage: "Memory consumption during execution"
 };
 ```
+{% endraw %}
+
 
 ### **Performance Optimization Strategies**
 
+
+{% raw %}
 ```typescript
 // Optimization strategies
 const strategies = {
@@ -55,6 +61,8 @@ const strategies = {
   lazyLoading: "Load code on demand"
 };
 ```
+{% endraw %}
+
 
 ---
 
@@ -64,6 +72,8 @@ Optimizing TypeScript compilation speed is crucial for developer productivity.
 
 ### **Incremental Compilation**
 
+
+{% raw %}
 ```json
 // tsconfig.json - Enable incremental compilation
 {
@@ -73,7 +83,11 @@ Optimizing TypeScript compilation speed is crucial for developer productivity.
   }
 }
 ```
+{% endraw %}
 
+
+
+{% raw %}
 ```typescript
 // Benefits of incremental compilation
 const incrementalBenefits = {
@@ -82,9 +96,13 @@ const incrementalBenefits = {
   watchMode: "Faster watch mode rebuilds"
 };
 ```
+{% endraw %}
+
 
 ### **Project References**
 
+
+{% raw %}
 ```json
 // tsconfig.json - Root configuration
 {
@@ -106,16 +124,24 @@ const incrementalBenefits = {
   "include": ["src/**/*"]
 }
 ```
+{% endraw %}
 
+
+
+{% raw %}
 ```bash
 # Build with project references
 tsc --build
 tsc --build --force
 tsc --build --clean
 ```
+{% endraw %}
+
 
 ### **Compiler Options for Performance**
 
+
+{% raw %}
 ```json
 // tsconfig.json - Performance-focused options
 {
@@ -129,7 +155,11 @@ tsc --build --clean
   }
 }
 ```
+{% endraw %}
 
+
+
+{% raw %}
 ```typescript
 // Performance-focused compiler options
 const performanceOptions = {
@@ -139,6 +169,8 @@ const performanceOptions = {
   incremental: "Enable incremental compilation"
 };
 ```
+{% endraw %}
+
 
 ---
 
@@ -148,6 +180,8 @@ Optimizing runtime performance involves efficient code generation and execution.
 
 ### **Efficient Type Definitions**
 
+
+{% raw %}
 ```typescript
 // ✅ Good: Efficient type definitions
 interface User {
@@ -175,9 +209,13 @@ interface ComplexUser {
   };
 }
 ```
+{% endraw %}
+
 
 ### **Optimized Function Definitions**
 
+
+{% raw %}
 ```typescript
 // ✅ Good: Optimized function definitions
 const processUsers = (users: User[]): User[] =>
@@ -198,9 +236,13 @@ const processUsersInefficient = (users: User[]): User[] => {
   return result;
 };
 ```
+{% endraw %}
+
 
 ### **Memory-Efficient Data Structures**
 
+
+{% raw %}
 ```typescript
 // ✅ Good: Memory-efficient data structures
 const createUserMap = (users: User[]): Map<number, User> => {
@@ -220,9 +262,13 @@ const createUserObject = (users: User[]): Record<number, User> => {
   return obj;
 };
 ```
+{% endraw %}
+
 
 ### **Lazy Loading and Code Splitting**
 
+
+{% raw %}
 ```typescript
 // Lazy loading with dynamic imports
 const loadUserModule = async (): Promise<typeof import("./user")> => {
@@ -241,6 +287,8 @@ const App = () => (
   </Suspense>
 );
 ```
+{% endraw %}
+
 
 ---
 
@@ -250,6 +298,8 @@ Optimizing bundle size improves loading performance and user experience.
 
 ### **Tree Shaking**
 
+
+{% raw %}
 ```typescript
 // ✅ Good: Tree-shakable exports
 export const add = (a: number, b: number): number => a + b;
@@ -263,9 +313,13 @@ export default {
   multiply: (a: number, b: number): number => a * b
 };
 ```
+{% endraw %}
+
 
 ### **Bundle Analysis**
 
+
+{% raw %}
 ```typescript
 // Bundle analysis with webpack-bundle-analyzer
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
@@ -280,9 +334,13 @@ module.exports = {
   ]
 };
 ```
+{% endraw %}
+
 
 ### **Code Splitting Strategies**
 
+
+{% raw %}
 ```typescript
 // Route-based code splitting
 const routes = [
@@ -308,9 +366,13 @@ const loadFeature = (featureName: string) => {
   }
 };
 ```
+{% endraw %}
+
 
 ### **Dead Code Elimination**
 
+
+{% raw %}
 ```typescript
 // ✅ Good: Dead code elimination
 const isDevelopment = process.env.NODE_ENV === "development";
@@ -325,6 +387,8 @@ if (debug) {
   console.log("Debug mode");
 }
 ```
+{% endraw %}
+
 
 ---
 
@@ -334,6 +398,8 @@ Efficient memory management prevents memory leaks and improves performance.
 
 ### **Memory Leak Prevention**
 
+
+{% raw %}
 ```typescript
 // ✅ Good: Proper cleanup
 class EventManager {
@@ -372,9 +438,13 @@ class EventManagerBad {
   // No cleanup method - memory leak!
 }
 ```
+{% endraw %}
+
 
 ### **Efficient Object Creation**
 
+
+{% raw %}
 ```typescript
 // ✅ Good: Efficient object creation
 const createUser = (id: number, name: string, email: string): User => ({
@@ -392,9 +462,13 @@ const createUserInefficient = (id: number, name: string, email: string): User =>
   return user;
 };
 ```
+{% endraw %}
+
 
 ### **Weak References**
 
+
+{% raw %}
 ```typescript
 // Use WeakMap for memory-efficient caching
 const cache = new WeakMap<object, any>();
@@ -421,6 +495,8 @@ const processObject = (obj: object): void => {
   processedObjects.add(obj);
 };
 ```
+{% endraw %}
+
 
 ---
 
@@ -428,6 +504,8 @@ const processObject = (obj: object): void => {
 
 ### **Web Workers**
 
+
+{% raw %}
 ```typescript
 // Web worker for CPU-intensive tasks
 const worker = new Worker("worker.js");
@@ -456,9 +534,13 @@ self.onmessage = (event) => {
   self.postMessage(processed);
 };
 ```
+{% endraw %}
+
 
 ### **Virtual Scrolling**
 
+
+{% raw %}
 ```typescript
 // Virtual scrolling for large lists
 interface VirtualScrollProps {
@@ -484,13 +566,13 @@ const VirtualScroll: React.FC<VirtualScrollProps> = ({
   
   return (
     <div
-      style={{ height: containerHeight, overflow: "auto" }}
+      style={{}}
       onScroll={(e) => setScrollTop(e.currentTarget.scrollTop)}
     >
-      <div style={{ height: items.length * itemHeight }}>
-        <div style={{ transform: `translateY(${visibleStart * itemHeight}px)` }}>
+      <div style={{}}>
+        <div style={{}}>
           {visibleItems.map((item, index) => (
-            <div key={visibleStart + index} style={{ height: itemHeight }}>
+            <div key={visibleStart + index} style={{}}>
               {item}
             </div>
           ))}
@@ -500,9 +582,13 @@ const VirtualScroll: React.FC<VirtualScrollProps> = ({
   );
 };
 ```
+{% endraw %}
+
 
 ### **Memoization**
 
+
+{% raw %}
 ```typescript
 // Memoization for expensive calculations
 const memoize = <T extends (...args: any[]) => any>(fn: T): T => {
@@ -537,6 +623,8 @@ console.log(expensiveCalculation(1000000));
 // Second call - cached
 console.log(expensiveCalculation(1000000));
 ```
+{% endraw %}
+
 
 ---
 
@@ -544,6 +632,8 @@ console.log(expensiveCalculation(1000000));
 
 ### **1. Use Incremental Compilation**
 
+
+{% raw %}
 ```json
 // ✅ Good: Enable incremental compilation
 {
@@ -560,9 +650,13 @@ console.log(expensiveCalculation(1000000));
   }
 }
 ```
+{% endraw %}
+
 
 ### **2. Optimize Bundle Size**
 
+
+{% raw %}
 ```typescript
 // ✅ Good: Tree-shakable exports
 export const add = (a: number, b: number): number => a + b;
@@ -574,9 +668,13 @@ export default {
   subtract: (a: number, b: number): number => a - b
 };
 ```
+{% endraw %}
+
 
 ### **3. Use Efficient Data Structures**
 
+
+{% raw %}
 ```typescript
 // ✅ Good: Use Map for key-value pairs
 const userMap = new Map<number, User>();
@@ -584,9 +682,13 @@ const userMap = new Map<number, User>();
 // ❌ Avoid: Use object for key-value pairs
 const userObject: Record<number, User> = {};
 ```
+{% endraw %}
+
 
 ### **4. Implement Proper Cleanup**
 
+
+{% raw %}
 ```typescript
 // ✅ Good: Proper cleanup
 class ResourceManager {
@@ -613,6 +715,8 @@ class ResourceManagerBad {
   // No cleanup method - memory leak!
 }
 ```
+{% endraw %}
+
 
 ---
 

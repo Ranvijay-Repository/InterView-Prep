@@ -42,6 +42,8 @@ TypeScript brings static type checking to React Native development, helping catc
 ### **tsconfig.json Setup**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```json
 {
   "compilerOptions": {
@@ -80,9 +82,13 @@ TypeScript brings static type checking to React Native development, helping catc
   ]
 }
 ```
+{% endraw %}
+
 
 ### **Type Definitions Structure**
 
+
+{% raw %}
 ```
 src/
 ├── types/
@@ -95,6 +101,8 @@ src/
 ├── screens/
 └── utils/
 ```
+{% endraw %}
+
 
 ---
 
@@ -103,6 +111,8 @@ src/
 ### **Primitive Types**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```typescript
 // ✅ Basic type annotations
 const userName: string = 'John Doe';
@@ -127,10 +137,14 @@ interface User {
 type EventHandler = (event: any) => void;
 type ApiCall = (url: string) => Promise<any>;
 ```
+{% endraw %}
+
 
 ### **React Native Component Types**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```typescript
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
@@ -183,6 +197,8 @@ const styles = StyleSheet.create({
 
 export default CustomButton;
 ```
+{% endraw %}
+
 
 ---
 
@@ -191,6 +207,8 @@ export default CustomButton;
 ### **User Interface Example**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```typescript
 // ✅ User interface definition
 interface User {
@@ -255,10 +273,14 @@ const UserProfile: React.FC<{ user: User }> = ({ user }) => {
   );
 };
 ```
+{% endraw %}
+
 
 ### **Form Types**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```typescript
 // ✅ Form validation types
 interface LoginForm {
@@ -373,6 +395,8 @@ const LoginForm: React.FC = () => {
   );
 };
 ```
+{% endraw %}
+
 
 ---
 
@@ -381,6 +405,8 @@ const LoginForm: React.FC = () => {
 ### **Generic Hooks**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```typescript
 // ✅ Generic API hook
 interface UseApiState<T> {
@@ -454,10 +480,14 @@ const UserProfile: React.FC<{ userId: number }> = ({ userId }) => {
   );
 };
 ```
+{% endraw %}
+
 
 ### **Generic Components**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```typescript
 // ✅ Generic list component
 interface ListItem {
@@ -522,7 +552,7 @@ const ProductList: React.FC<{ products: Product[] }> = ({ products }) => {
   
   const renderProduct = (product: Product) => (
     <View style={styles.productItem}>
-      <Image source={{ uri: product.image }} style={styles.productImage} />
+      <Image source={{}} style={styles.productImage} />
       <Text style={styles.productName}>{product.name}</Text>
       <Text style={styles.productPrice}>${product.price}</Text>
     </View>
@@ -539,6 +569,8 @@ const ProductList: React.FC<{ products: Product[] }> = ({ products }) => {
   );
 };
 ```
+{% endraw %}
+
 
 ---
 
@@ -547,6 +579,8 @@ const ProductList: React.FC<{ products: Product[] }> = ({ products }) => {
 ### **StyleSheet Types**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```typescript
 import { StyleSheet, ViewStyle, TextStyle, ImageStyle } from 'react-native';
 
@@ -621,10 +655,16 @@ const getDynamicStyles = ({ isActive, theme, size }: DynamicStylesProps) => {
   });
 };
 ```
+{% endraw %}
+
 
 ### **Platform Specific Types**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+
+{% raw %}
+{% raw %}
 ```typescript
 import { Platform, PlatformOSType } from 'react-native';
 
@@ -683,6 +723,9 @@ const MyComponent = () => {
   );
 };
 ```
+{% endraw %}
+
+
 
 ---
 
@@ -691,6 +734,8 @@ const MyComponent = () => {
 ### **Typed Custom Hooks**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```typescript
 // ✅ Typed storage hook
 interface UseStorageReturn<T> {
@@ -779,6 +824,8 @@ const SettingsScreen = () => {
   );
 };
 ```
+{% endraw %}
+
 
 ---
 
@@ -787,6 +834,8 @@ const SettingsScreen = () => {
 ### **React Navigation Types**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```typescript
 import { NavigationProp, RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
@@ -860,6 +909,8 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation, route }) => {
   );
 };
 ```
+{% endraw %}
+
 
 ---
 
@@ -868,6 +919,8 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation, route }) => {
 ### **API Types**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```typescript
 // ✅ API request/response types
 interface ApiRequest {
@@ -983,6 +1036,8 @@ const createUser = async (userData: Omit<User, 'id'>) => {
   return response;
 };
 ```
+{% endraw %}
+
 
 ---
 
@@ -1012,6 +1067,8 @@ const createUser = async (userData: Omit<User, 'id'>) => {
 
 ### **1. Use Strict Type Checking**
 
+
+{% raw %}
 ```typescript
 // ✅ Enable strict mode in tsconfig.json
 {
@@ -1023,9 +1080,13 @@ const createUser = async (userData: Omit<User, 'id'>) => {
   }
 }
 ```
+{% endraw %}
+
 
 ### **2. Define Clear Interfaces**
 
+
+{% raw %}
 ```typescript
 // ✅ Clear, specific interfaces
 interface User {
@@ -1040,9 +1101,13 @@ interface User {
   [key: string]: any;
 }
 ```
+{% endraw %}
+
 
 ### **3. Use Generic Types**
 
+
+{% raw %}
 ```typescript
 // ✅ Generic types for reusability
 interface ApiResponse<T> {
@@ -1054,9 +1119,13 @@ interface ApiResponse<T> {
 const userResponse: ApiResponse<User> = await fetchUser();
 const productResponse: ApiResponse<Product> = await fetchProduct();
 ```
+{% endraw %}
+
 
 ### **4. Type Guards**
 
+
+{% raw %}
 ```typescript
 // ✅ Type guards for runtime type checking
 function isUser(obj: any): obj is User {
@@ -1069,6 +1138,8 @@ if (isUser(data)) {
   console.log(data.name);
 }
 ```
+{% endraw %}
+
 
 ---
 

@@ -25,6 +25,8 @@ Angular is built with TypeScript from the ground up, providing excellent type sa
 
 ### **Basic Setup**
 
+
+{% raw %}
 ```bash
 # Install Angular CLI
 npm install -g @angular/cli
@@ -35,9 +37,13 @@ ng new my-app
 # Or add TypeScript to existing project
 ng add @angular/cli
 ```
+{% endraw %}
+
 
 ### **Angular Configuration**
 
+
+{% raw %}
 ```json
 // tsconfig.json
 {
@@ -73,9 +79,13 @@ ng add @angular/cli
   }
 }
 ```
+{% endraw %}
+
 
 ### **Angular CLI Configuration**
 
+
+{% raw %}
 ```json
 // angular.json
 {
@@ -114,6 +124,8 @@ ng add @angular/cli
   }
 }
 ```
+{% endraw %}
+
 
 ---
 
@@ -121,6 +133,8 @@ ng add @angular/cli
 
 ### **Basic Component**
 
+
+{% raw %}
 ```typescript
 // user.component.ts
 import { Component, Input, Output, EventEmitter } from '@angular/core';
@@ -136,9 +150,9 @@ interface User {
   selector: 'app-user',
   template: `
     <div class="user-card">
-      <h3>{{ user.name }}</h3>
-      <p>{{ user.email }}</p>
-      <p>Age: {{ user.age }}</p>
+      <h3>{{}}</h3>
+      <p>{{}}</p>
+      <p>Age: {{}}</p>
       <button (click)="onEdit()">Edit</button>
       <button (click)="onDelete()">Delete</button>
     </div>
@@ -159,9 +173,13 @@ export class UserComponent {
   }
 }
 ```
+{% endraw %}
+
 
 ### **Component with Lifecycle Hooks**
 
+
+{% raw %}
 ```typescript
 // user-list.component.ts
 import { 
@@ -189,7 +207,7 @@ interface User {
     <div class="user-list">
       <h2>Users</h2>
       <div *ngIf="loading" class="loading">Loading...</div>
-      <div *ngIf="error" class="error">{{ error }}</div>
+      <div *ngIf="error" class="error">{{}}</div>
       <div *ngFor="let user of users" class="user-item">
         <app-user 
           [user]="user" 
@@ -255,9 +273,13 @@ export class UserListComponent implements OnInit, OnDestroy, OnChanges {
   }
 }
 ```
+{% endraw %}
+
 
 ### **Generic Component**
 
+
+{% raw %}
 ```typescript
 // data-table.component.ts
 import { Component, Input, Output, EventEmitter } from '@angular/core';
@@ -280,9 +302,9 @@ interface Column<T> {
             [style.width]="column.width"
             [class.sortable]="column.sortable"
             (click)="onSort(column)">
-            {{ column.title }}
+            {{}}
             <span *ngIf="column.sortable" class="sort-indicator">
-              {{ getSortIndicator(column) }}
+              {{}}
             </span>
           </th>
         </tr>
@@ -292,7 +314,7 @@ interface Column<T> {
           <td *ngFor="let column of columns">
             <ng-container [ngSwitch]="column.key">
               <ng-container *ngSwitchDefault>
-                {{ item[column.key] }}
+                {{}}
               </ng-container>
               <ng-container *ngSwitchCase="'actions'">
                 <ng-content [select]="'[slot=actions]'" [ngTemplateOutlet]="actionsTemplate" [ngTemplateOutletContext]="{ $implicit: item }"></ng-content>
@@ -337,6 +359,8 @@ export class DataTableComponent<T> {
   }
 }
 ```
+{% endraw %}
+
 
 ---
 
@@ -344,6 +368,8 @@ export class DataTableComponent<T> {
 
 ### **Basic Service**
 
+
+{% raw %}
 ```typescript
 // user.service.ts
 import { Injectable } from '@angular/core';
@@ -448,9 +474,13 @@ export class UserService {
   }
 }
 ```
+{% endraw %}
+
 
 ### **Custom Injection Token**
 
+
+{% raw %}
 ```typescript
 // config.service.ts
 import { Injectable, InjectionToken } from '@angular/core';
@@ -511,6 +541,8 @@ export class ConfigService {
 })
 export class AppModule {}
 ```
+{% endraw %}
+
 
 ---
 
@@ -518,6 +550,8 @@ export class AppModule {}
 
 ### **Reactive Forms**
 
+
+{% raw %}
 ```typescript
 // user-form.component.ts
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
@@ -624,9 +658,13 @@ export class UserFormComponent implements OnInit {
   }
 }
 ```
+{% endraw %}
+
 
 ### **Custom Validators**
 
+
+{% raw %}
 ```typescript
 // custom-validators.ts
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
@@ -688,6 +726,8 @@ export class CustomValidators {
   }
 }
 ```
+{% endraw %}
+
 
 ---
 
@@ -695,6 +735,8 @@ export class CustomValidators {
 
 ### **Route Configuration**
 
+
+{% raw %}
 ```typescript
 // app-routing.module.ts
 import { NgModule } from '@angular/core';
@@ -735,9 +777,13 @@ const routes: Routes = [
 })
 export class AppRoutingModule {}
 ```
+{% endraw %}
+
 
 ### **Route Guards**
 
+
+{% raw %}
 ```typescript
 // auth.guard.ts
 import { Injectable } from '@angular/core';
@@ -775,9 +821,13 @@ export class AuthGuard implements CanActivate {
   }
 }
 ```
+{% endraw %}
+
 
 ### **Route Resolvers**
 
+
+{% raw %}
 ```typescript
 // user.resolver.ts
 import { Injectable } from '@angular/core';
@@ -804,6 +854,8 @@ export class UserResolver implements Resolve<User> {
   }
 }
 ```
+{% endraw %}
+
 
 ---
 
@@ -811,6 +863,8 @@ export class UserResolver implements Resolve<User> {
 
 ### **State Management with NgRx**
 
+
+{% raw %}
 ```typescript
 // user.actions.ts
 import { createAction, props } from '@ngrx/store';
@@ -839,7 +893,11 @@ export const createUserFailure = createAction(
   props<{ error: string }>()
 );
 ```
+{% endraw %}
 
+
+
+{% raw %}
 ```typescript
 // user.reducer.ts
 import { createReducer, on } from '@ngrx/store';
@@ -882,9 +940,13 @@ export const userReducer = createReducer(
   }))
 );
 ```
+{% endraw %}
+
 
 ### **Interceptors**
 
+
+{% raw %}
 ```typescript
 // auth.interceptor.ts
 import { Injectable } from '@angular/core';
@@ -910,6 +972,8 @@ export class AuthInterceptor implements HttpInterceptor {
   }
 }
 ```
+{% endraw %}
+
 
 ---
 
@@ -917,6 +981,8 @@ export class AuthInterceptor implements HttpInterceptor {
 
 ### **1. Use Strict Type Checking**
 
+
+{% raw %}
 ```typescript
 // ✅ Good: Strict typing
 interface User {
@@ -930,9 +996,13 @@ interface User {
 // ❌ Avoid: Loose typing
 @Input() user: any;
 ```
+{% endraw %}
+
 
 ### **2. Use OnPush Change Detection**
 
+
+{% raw %}
 ```typescript
 // ✅ Good: OnPush change detection
 @Component({
@@ -953,9 +1023,13 @@ export class UserComponent {
   // Component implementation
 }
 ```
+{% endraw %}
+
 
 ### **3. Use TrackBy Functions**
 
+
+{% raw %}
 ```typescript
 // ✅ Good: TrackBy function
 trackByUserId(index: number, user: User): number {
@@ -965,9 +1039,13 @@ trackByUserId(index: number, user: User): number {
 // ❌ Avoid: No trackBy function
 *ngFor="let user of users"
 ```
+{% endraw %}
+
 
 ### **4. Use Reactive Forms**
 
+
+{% raw %}
 ```typescript
 // ✅ Good: Reactive forms
 userForm = this.fb.group({
@@ -980,6 +1058,8 @@ userForm = this.fb.group({
   <input name="name" ngModel required>
 </form>
 ```
+{% endraw %}
+
 
 ---
 
@@ -1001,6 +1081,8 @@ Angular is built with TypeScript by default. Just use `ng new my-app` and TypeSc
 ### **3. How do you type Angular components?**
 
 **Answer:**
+
+{% raw %}
 ```typescript
 @Component({
   selector: 'app-user',
@@ -1011,20 +1093,28 @@ export class UserComponent {
   @Output() edit = new EventEmitter<User>();
 }
 ```
+{% endraw %}
+
 
 ### **4. How do you handle forms in Angular with TypeScript?**
 
 **Answer:**
+
+{% raw %}
 ```typescript
 userForm = this.fb.group({
   name: ['', Validators.required],
   email: ['', [Validators.required, Validators.email]]
 });
 ```
+{% endraw %}
+
 
 ### **5. How do you create services in Angular with TypeScript?**
 
 **Answer:**
+
+{% raw %}
 ```typescript
 @Injectable({
   providedIn: 'root'
@@ -1037,6 +1127,8 @@ export class UserService {
   }
 }
 ```
+{% endraw %}
+
 
 ---
 

@@ -22,6 +22,8 @@
 
 ### **Accessibility Principles**
 
+
+{% raw %}
 ```mermaid
 graph TD
     A[Perceivable] --> E[Accessible App]
@@ -34,6 +36,8 @@ graph TD
     H[Clear Language] --> C
     I[Standards Compliance] --> D
 ```
+{% endraw %}
+
 
 ### **Accessibility Features**
 - **Screen Reader Support**: VoiceOver (iOS), TalkBack (Android)
@@ -49,6 +53,8 @@ graph TD
 ### **Basic Accessibility Implementation**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```javascript
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, TextInput, StyleSheet } from 'react-native';
@@ -62,7 +68,7 @@ const AccessibleButton = ({ title, onPress, accessibilityLabel, accessibilityHin
       accessibilityRole="button"
       accessibilityLabel={accessibilityLabel || title}
       accessibilityHint={accessibilityHint}
-      accessibilityState={{ disabled: false }}
+      accessibilityState={{}}
     >
       <Text style={styles.buttonText}>{title}</Text>
     </TouchableOpacity>
@@ -95,10 +101,10 @@ const AccessibleInput = ({
         accessibilityRole="text"
         accessibilityLabel={accessibilityLabel || label}
         accessibilityHint={accessibilityHint}
-        accessibilityState={{ 
+        accessibilityState={{
           disabled: false,
           selected: false 
-        }}
+}}
       />
     </View>
   );
@@ -236,10 +242,14 @@ const styles = StyleSheet.create({
 
 export default AccessibilityExample;
 ```
+{% endraw %}
+
 
 ### **Advanced Accessibility Features**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```javascript
 import React, { useState, useRef } from 'react';
 import { 
@@ -279,10 +289,10 @@ const AccessibleList = ({ items, onItemPress }) => {
           accessibilityRole="button"
           accessibilityLabel={item.title}
           accessibilityHint={`Item ${index + 1} of ${items.length}`}
-          accessibilityState={{ 
+          accessibilityState={{
             selected: selectedIndex === index,
             disabled: false 
-          }}
+}}
           accessibilityActions={[
             { name: 'activate', label: 'Select item' },
             { name: 'longpress', label: 'Show item details' }
@@ -297,7 +307,7 @@ const AccessibleList = ({ items, onItemPress }) => {
                 console.log('Long press on item:', item.title);
                 break;
             }
-          }}
+}}
         >
           <Text style={styles.itemTitle}>{item.title}</Text>
           <Text style={styles.itemDescription}>{item.description}</Text>
@@ -565,6 +575,8 @@ const styles = StyleSheet.create({
 
 export default AccessibilityAdvancedExample;
 ```
+{% endraw %}
+
 
 ---
 
@@ -573,6 +585,8 @@ export default AccessibilityAdvancedExample;
 ### **Accessibility Props Reference**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```javascript
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
@@ -587,8 +601,8 @@ const AccessibilityPropsExample = () => {
         accessibilityRole="button" // Defines the role
         accessibilityLabel="Submit form" // Screen reader label
         accessibilityHint="Submits the current form data" // Additional context
-        accessibilityState={{ disabled: false, selected: false }} // Current state
-        accessibilityValue={{ text: "Not submitted" }} // Current value
+        accessibilityState={{}} // Current state
+        accessibilityValue={{}} // Current value
         onPress={() => console.log('Button pressed')}
       >
         <Text style={styles.buttonText}>Submit</Text>
@@ -613,7 +627,7 @@ const AccessibilityPropsExample = () => {
               console.log('Delete options shown');
               break;
           }
-        }}
+}}
       >
         <Text style={styles.buttonText}>Delete</Text>
       </TouchableOpacity>
@@ -752,6 +766,8 @@ const styles = StyleSheet.create({
 
 export default AccessibilityPropsExample;
 ```
+{% endraw %}
+
 
 ---
 
@@ -760,6 +776,8 @@ export default AccessibilityPropsExample;
 ### **Focus Management**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```javascript
 import React, { useRef, useState, useEffect } from 'react';
 import { 
@@ -880,17 +898,17 @@ const FocusManagementExample = () => {
               accessibilityRole="text"
               accessibilityLabel={field.label}
               accessibilityHint={`Field ${index + 1} of ${formFields.length}`}
-              accessibilityState={{ 
+              accessibilityState={{
                 focused: currentFocus === index,
                 disabled: false 
-              }}
+}}
               onSubmitEditing={() => {
                 if (index < formFields.length - 1) {
                   handleNext();
                 } else {
                   handleSubmit();
                 }
-              }}
+}}
               returnKeyType={index < formFields.length - 1 ? 'next' : 'done'}
             />
           </View>
@@ -909,7 +927,7 @@ const FocusManagementExample = () => {
           accessibilityRole="button"
           accessibilityLabel="Previous field"
           accessibilityHint="Move to the previous form field"
-          accessibilityState={{ disabled: currentFocus === 0 }}
+          accessibilityState={{}}
           disabled={currentFocus === 0}
         >
           <Text style={styles.secondaryButtonText}>Previous</Text>
@@ -926,7 +944,7 @@ const FocusManagementExample = () => {
           accessibilityRole="button"
           accessibilityLabel="Next field"
           accessibilityHint="Move to the next form field"
-          accessibilityState={{ disabled: currentFocus === formFields.length - 1 }}
+          accessibilityState={{}}
           disabled={currentFocus === formFields.length - 1}
         >
           <Text style={styles.secondaryButtonText}>Next</Text>
@@ -1062,6 +1080,8 @@ const styles = StyleSheet.create({
 
 export default FocusManagementExample;
 ```
+{% endraw %}
+
 
 ---
 
@@ -1070,6 +1090,8 @@ export default FocusManagementExample;
 ### **Accessibility Testing Utilities**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```javascript
 import React, { useState, useEffect } from 'react';
 import { 
@@ -1268,7 +1290,7 @@ const AccessibilityTestingExample = () => {
         accessibilityRole="button"
         accessibilityLabel="Run accessibility tests"
         accessibilityHint="Run tests to check accessibility features"
-        accessibilityState={{ disabled: isTesting }}
+        accessibilityState={{}}
         disabled={isTesting}
       >
         <Text style={styles.testButtonText}>
@@ -1457,6 +1479,8 @@ const styles = StyleSheet.create({
 
 export default AccessibilityTestingExample;
 ```
+{% endraw %}
+
 
 ---
 

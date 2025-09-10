@@ -22,6 +22,8 @@
 
 ### **i18n Architecture**
 
+
+{% raw %}
 ```mermaid
 graph TD
     A[App Content] --> B[Translation Keys]
@@ -34,6 +36,8 @@ graph TD
     H[Numbers] --> G
     I[Currency] --> G
 ```
+{% endraw %}
+
 
 ### **Key Concepts**
 - **i18n**: Internationalization (preparing app for multiple languages)
@@ -48,6 +52,8 @@ graph TD
 ### **Basic i18n Setup**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```javascript
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, I18nManager } from 'react-native';
@@ -194,7 +200,7 @@ const isRTLLanguage = (locale) => {
 const interpolateTranslation = (translation, params) => {
   let result = translation;
   Object.keys(params).forEach(key => {
-    result = result.replace(`{{${key}}}`, params[key]);
+    result = result.replace(`{{}}}`, params[key]);
   });
   return result;
 };
@@ -202,10 +208,14 @@ const interpolateTranslation = (translation, params) => {
 // Export i18n service
 export { createI18nService, translations };
 ```
+{% endraw %}
+
 
 ### **i18n Hook Implementation**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```javascript
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { createI18nService } from './i18nService';
@@ -275,10 +285,14 @@ const useI18n = () => {
 // Export context and hook
 export { I18nProvider, useI18n };
 ```
+{% endraw %}
+
 
 ### **i18n Component Example**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```javascript
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Modal } from 'react-native';
@@ -346,7 +360,7 @@ const LanguageSelector = () => {
                 accessible={true}
                 accessibilityRole="button"
                 accessibilityLabel={`${t('selectLanguage')}: ${getLanguageName(locale)}`}
-                accessibilityState={{ selected: currentLocale === locale }}
+                accessibilityState={{}}
               >
                 <Text style={[
                   styles.languageOptionText,
@@ -519,6 +533,8 @@ const styles = StyleSheet.create({
 
 export default InternationalizationExample;
 ```
+{% endraw %}
+
 
 ---
 
@@ -527,6 +543,8 @@ export default InternationalizationExample;
 ### **RTL Layout Implementation**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```javascript
 import React from 'react';
 import { View, Text, StyleSheet, I18nManager } from 'react-native';
@@ -786,6 +804,8 @@ const styles = StyleSheet.create({
 
 export default RTLSupportExample;
 ```
+{% endraw %}
+
 
 ---
 
@@ -794,6 +814,8 @@ export default RTLSupportExample;
 ### **Locale-Aware Formatting**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```javascript
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
@@ -1088,6 +1110,8 @@ const styles = StyleSheet.create({
 
 export default LocaleFormattingExample;
 ```
+{% endraw %}
+
 
 ---
 

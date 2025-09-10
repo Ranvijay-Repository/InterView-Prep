@@ -26,6 +26,8 @@ Nested navigators allow you to combine different navigation patterns to create s
 
 ### **Nested Navigation Overview**
 
+
+{% raw %}
 ```
 ┌─────────────────────────────────────┐
 │        Nested Navigation            │
@@ -43,6 +45,8 @@ Nested navigators allow you to combine different navigation patterns to create s
 │  └─────────────────────────────────┘│
 └─────────────────────────────────────┘
 ```
+{% endraw %}
+
 
 ---
 
@@ -51,6 +55,8 @@ Nested navigators allow you to combine different navigation patterns to create s
 ### **Stack + Tab Navigation**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```javascript
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
@@ -69,12 +75,12 @@ const HomeStack = () => {
       <Stack.Screen 
         name="HomeMain" 
         component={HomeScreen}
-        options={{ title: 'Home' }}
+        options={{}}
       />
       <Stack.Screen 
         name="HomeDetails" 
         component={HomeDetailsScreen}
-        options={{ title: 'Home Details' }}
+        options={{}}
       />
     </Stack.Navigator>
   );
@@ -87,12 +93,12 @@ const ProfileStack = () => {
       <Stack.Screen 
         name="ProfileMain" 
         component={ProfileScreen}
-        options={{ title: 'Profile' }}
+        options={{}}
       />
       <Stack.Screen 
         name="ProfileEdit" 
         component={ProfileEditScreen}
-        options={{ title: 'Edit Profile' }}
+        options={{}}
       />
     </Stack.Navigator>
   );
@@ -121,12 +127,12 @@ const TabNavigator = () => {
       <Tab.Screen 
         name="HomeTab" 
         component={HomeStack}
-        options={{ headerShown: false }}
+        options={{}}
       />
       <Tab.Screen 
         name="ProfileTab" 
         component={ProfileStack}
-        options={{ headerShown: false }}
+        options={{}}
       />
     </Tab.Navigator>
   );
@@ -139,15 +145,15 @@ const RootNavigator = () => {
       <Stack.Screen 
         name="MainTabs" 
         component={TabNavigator}
-        options={{ headerShown: false }}
+        options={{}}
       />
       <Stack.Screen 
         name="Modal" 
         component={ModalScreen}
-        options={{ 
+        options={{
           presentation: 'modal',
           title: 'Modal Screen'
-        }}
+}}
       />
     </Stack.Navigator>
   );
@@ -251,6 +257,8 @@ const styles = StyleSheet.create({
 
 export default RootNavigator;
 ```
+{% endraw %}
+
 
 ---
 

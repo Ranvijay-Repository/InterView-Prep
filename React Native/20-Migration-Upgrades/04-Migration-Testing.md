@@ -25,6 +25,8 @@ Migration testing ensures that React Native upgrades, architecture changes, and 
 
 ### **Testing Pyramid for Migrations**
 
+
+{% raw %}
 ```
 ┌─────────────────────────────────────┐
 │        Migration Testing            │
@@ -48,6 +50,8 @@ Migration testing ensures that React Native upgrades, architecture changes, and 
 │  └─────────────────────────────────┘│
 └─────────────────────────────────────┘
 ```
+{% endraw %}
+
 
 ### **Key Testing Areas**
 - **Functionality**: Core features work as expected
@@ -62,6 +66,8 @@ Migration testing ensures that React Native upgrades, architecture changes, and 
 ### **1. Baseline Testing**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```javascript
 // Establish performance baselines
 describe('Pre-Migration Baselines', () => {
@@ -82,10 +88,14 @@ describe('Pre-Migration Baselines', () => {
   });
 });
 ```
+{% endraw %}
+
 
 ### **2. Feature Inventory**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```javascript
 // Document all features to test
 const featuresToTest = [
@@ -99,10 +109,14 @@ const featuresToTest = [
   'File upload/download'
 ];
 ```
+{% endraw %}
+
 
 ### **3. Third-Party Dependencies**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
 ```bash
 # Check library compatibility
 npm list --depth=0
@@ -110,6 +124,8 @@ npm list --depth=0
 # Test critical libraries
 npm test -- --testNamePattern="Library compatibility"
 ```
+{% endraw %}
+
 
 ---
 
@@ -118,6 +134,8 @@ npm test -- --testNamePattern="Library compatibility"
 ### **1. Version Upgrade Testing**
 
 #### **React Native Version Upgrade**
+
+{% raw %}
 ```javascript
 // Test version-specific changes
 describe('React Native 0.70+ Upgrade', () => {
@@ -140,8 +158,12 @@ describe('React Native 0.70+ Upgrade', () => {
   });
 });
 ```
+{% endraw %}
+
 
 #### **Dependency Upgrade Testing**
+
+{% raw %}
 ```javascript
 // Test updated dependencies
 describe('Dependency Upgrades', () => {
@@ -157,10 +179,14 @@ describe('Dependency Upgrades', () => {
   });
 });
 ```
+{% endraw %}
+
 
 ### **2. Architecture Migration Testing**
 
 #### **New Architecture Testing**
+
+{% raw %}
 ```javascript
 // Test New Architecture features
 describe('New Architecture Migration', () => {
@@ -179,8 +205,12 @@ describe('New Architecture Migration', () => {
   });
 });
 ```
+{% endraw %}
+
 
 #### **Fabric Renderer Testing**
+
+{% raw %}
 ```javascript
 // Test Fabric renderer
 describe('Fabric Renderer', () => {
@@ -196,7 +226,7 @@ describe('Fabric Renderer', () => {
 
   it('should handle layout changes', () => {
     const { getByTestId } = render(
-      <View testID="container" style={{ width: 100, height: 100 }}>
+      <View testID="container" style={{}}>
         <Text>Content</Text>
       </View>
     );
@@ -206,12 +236,16 @@ describe('Fabric Renderer', () => {
   });
 });
 ```
+{% endraw %}
+
 
 ---
 
 ## 🤖 **Automated Testing**
 
 ### **1. CI/CD Integration**
+
+{% raw %}
 ```yaml
 # .github/workflows/migration-test.yml
 name: Migration Testing
@@ -243,8 +277,12 @@ jobs:
       - name: Run E2E tests
         run: npm run test:e2e
 ```
+{% endraw %}
+
 
 ### **2. Automated Test Suites**
+
+{% raw %}
 ```javascript
 // migration-test-suite.js
 const migrationTests = {
@@ -261,8 +299,12 @@ const runMigrationTests = async (testType) => {
   }
 };
 ```
+{% endraw %}
+
 
 ### **3. Test Automation Scripts**
+
+{% raw %}
 ```bash
 #!/bin/bash
 # migration-test.sh
@@ -283,12 +325,16 @@ npm run test:report
 
 echo "Migration testing completed!"
 ```
+{% endraw %}
+
 
 ---
 
 ## 📊 **Performance Testing**
 
 ### **1. Performance Benchmarks**
+
+{% raw %}
 ```javascript
 // performance.test.js
 describe('Performance Testing', () => {
@@ -316,8 +362,12 @@ describe('Performance Testing', () => {
   });
 });
 ```
+{% endraw %}
+
 
 ### **2. Bundle Size Testing**
+
+{% raw %}
 ```javascript
 // bundle-size.test.js
 describe('Bundle Size Testing', () => {
@@ -329,8 +379,12 @@ describe('Bundle Size Testing', () => {
   });
 });
 ```
+{% endraw %}
+
 
 ### **3. Render Performance**
+
+{% raw %}
 ```javascript
 // render-performance.test.js
 describe('Render Performance', () => {
@@ -352,12 +406,16 @@ describe('Render Performance', () => {
   });
 });
 ```
+{% endraw %}
+
 
 ---
 
 ## 🔄 **Regression Testing**
 
 ### **1. Feature Regression Testing**
+
+{% raw %}
 ```javascript
 // regression.test.js
 describe('Feature Regression Testing', () => {
@@ -384,8 +442,12 @@ describe('Feature Regression Testing', () => {
   });
 });
 ```
+{% endraw %}
+
 
 ### **2. API Regression Testing**
+
+{% raw %}
 ```javascript
 // api-regression.test.js
 describe('API Regression Testing', () => {
@@ -398,8 +460,12 @@ describe('API Regression Testing', () => {
   });
 });
 ```
+{% endraw %}
+
 
 ### **3. UI Regression Testing**
+
+{% raw %}
 ```javascript
 // ui-regression.test.js
 describe('UI Regression Testing', () => {
@@ -414,12 +480,16 @@ describe('UI Regression Testing', () => {
   });
 });
 ```
+{% endraw %}
+
 
 ---
 
 ## ✅ **Best Practices**
 
 ### **1. Test Coverage**
+
+{% raw %}
 ```javascript
 // Ensure comprehensive test coverage
 const testCoverage = {
@@ -429,8 +499,12 @@ const testCoverage = {
   lines: 90
 };
 ```
+{% endraw %}
+
 
 ### **2. Test Isolation**
+
+{% raw %}
 ```javascript
 // Isolate tests from each other
 beforeEach(() => {
@@ -439,8 +513,12 @@ beforeEach(() => {
   jest.clearAllMocks();
 });
 ```
+{% endraw %}
+
 
 ### **3. Test Data Management**
+
+{% raw %}
 ```javascript
 // Use consistent test data
 const testData = {
@@ -453,8 +531,12 @@ const testData = {
   ]
 };
 ```
+{% endraw %}
+
 
 ### **4. Error Handling Testing**
+
+{% raw %}
 ```javascript
 // Test error scenarios
 describe('Error Handling', () => {
@@ -469,6 +551,8 @@ describe('Error Handling', () => {
   });
 });
 ```
+{% endraw %}
+
 
 ---
 

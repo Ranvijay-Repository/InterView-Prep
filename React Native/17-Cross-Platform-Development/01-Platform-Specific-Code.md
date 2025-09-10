@@ -8,6 +8,8 @@ React Native provides powerful tools for writing platform-specific code while ma
 
 ### 1. Basic Platform Detection
 
+
+{% raw %}
 ```javascript
 import { Platform, StyleSheet, View, Text } from 'react-native';
 
@@ -49,9 +51,13 @@ const styles = StyleSheet.create({
   },
 });
 ```
+{% endraw %}
+
 
 ### 2. Advanced Platform Detection
 
+
+{% raw %}
 ```javascript
 import { Platform, Dimensions } from 'react-native';
 
@@ -95,11 +101,15 @@ const usePlatformInfo = () => {
   return platformInfo;
 };
 ```
+{% endraw %}
+
 
 ## Platform-Specific Styling
 
 ### 1. Platform-Specific Styles
 
+
+{% raw %}
 ```javascript
 import { Platform, StyleSheet } from 'react-native';
 
@@ -136,9 +146,13 @@ const styles = StyleSheet.create({
   },
 });
 ```
+{% endraw %}
+
 
 ### 2. Dynamic Style Generation
 
+
+{% raw %}
 ```javascript
 import { Platform, StyleSheet, Dimensions } from 'react-native';
 
@@ -205,11 +219,15 @@ const baseStyles = {
 
 const styles = createPlatformStyles(baseStyles);
 ```
+{% endraw %}
+
 
 ## Platform-Specific Components
 
 ### 1. Conditional Component Rendering
 
+
+{% raw %}
 ```javascript
 import { Platform, View, Text, TouchableOpacity, TouchableNativeFeedback } from 'react-native';
 
@@ -270,9 +288,13 @@ const PlatformAlert = ({ title, message, buttons }) => {
   );
 };
 ```
+{% endraw %}
+
 
 ### 2. Platform-Specific Hooks
 
+
+{% raw %}
 ```javascript
 import { Platform, useCallback } from 'react';
 import { Alert, Linking } from 'react-native';
@@ -329,11 +351,15 @@ const usePlatformActions = () => {
   };
 };
 ```
+{% endraw %}
+
 
 ## Platform-Specific File Structure
 
 ### 1. File Extension Approach
 
+
+{% raw %}
 ```javascript
 // Button.ios.js
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
@@ -366,7 +392,11 @@ const styles = StyleSheet.create({
 
 export default Button;
 ```
+{% endraw %}
 
+
+
+{% raw %}
 ```javascript
 // Button.android.js
 import { TouchableNativeFeedback, Text, View, StyleSheet } from 'react-native';
@@ -398,9 +428,13 @@ const styles = StyleSheet.create({
 
 export default Button;
 ```
+{% endraw %}
+
 
 ### 2. Platform-Specific Directories
 
+
+{% raw %}
 ```javascript
 // components/Button/index.js
 import { Platform } from 'react-native';
@@ -411,7 +445,11 @@ const Button = Platform.OS === 'ios'
 
 export default Button;
 ```
+{% endraw %}
 
+
+
+{% raw %}
 ```javascript
 // components/Button/Button.ios.js
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
@@ -444,7 +482,11 @@ const styles = StyleSheet.create({
 
 export default Button;
 ```
+{% endraw %}
 
+
+
+{% raw %}
 ```javascript
 // components/Button/Button.android.js
 import { TouchableNativeFeedback, Text, View, StyleSheet } from 'react-native';
@@ -476,11 +518,15 @@ const styles = StyleSheet.create({
 
 export default Button;
 ```
+{% endraw %}
+
 
 ## Platform-Specific APIs
 
 ### 1. Native Module Integration
 
+
+{% raw %}
 ```javascript
 import { Platform, NativeModules } from 'react-native';
 
@@ -510,9 +556,13 @@ const usePlatformAPI = () => {
   };
 };
 ```
+{% endraw %}
+
 
 ### 2. Platform-Specific Permissions
 
+
+{% raw %}
 ```javascript
 import { Platform, PermissionsAndroid, Alert } from 'react-native';
 
@@ -573,11 +623,15 @@ const usePlatformPermissions = () => {
   };
 };
 ```
+{% endraw %}
+
 
 ## Platform-Specific Navigation
 
 ### 1. Platform-Specific Navigation Styles
 
+
+{% raw %}
 ```javascript
 import { Platform, StyleSheet } from 'react-native';
 
@@ -614,9 +668,13 @@ const usePlatformNavigation = () => {
   };
 };
 ```
+{% endraw %}
+
 
 ### 2. Platform-Specific Tab Navigation
 
+
+{% raw %}
 ```javascript
 import { Platform, StyleSheet } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -641,7 +699,7 @@ const PlatformTabNavigator = () => {
         },
         tabBarActiveTintColor: Platform.OS === 'ios' ? '#007AFF' : '#2196F3',
         tabBarInactiveTintColor: Platform.OS === 'ios' ? '#8E8E93' : '#757575',
-      }}
+}}
     >
       <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="Profile" component={ProfileScreen} />
@@ -649,11 +707,15 @@ const PlatformTabNavigator = () => {
   );
 };
 ```
+{% endraw %}
+
 
 ## Platform-Specific Testing
 
 ### 1. Platform-Specific Test Setup
 
+
+{% raw %}
 ```javascript
 // __tests__/PlatformSpecific.test.js
 import { Platform } from 'react-native';
@@ -679,9 +741,13 @@ describe('Platform Specific Component', () => {
   });
 });
 ```
+{% endraw %}
+
 
 ### 2. Platform-Specific Test Utilities
 
+
+{% raw %}
 ```javascript
 // test-utils/platformUtils.js
 import { Platform } from 'react-native';
@@ -715,11 +781,15 @@ export const testOnBothPlatforms = (testFn) => {
   });
 };
 ```
+{% endraw %}
+
 
 ## Best Practices
 
 ### 1. Platform-Specific Code Organization
 
+
+{% raw %}
 ```javascript
 // utils/platform.js
 import { Platform, Dimensions } from 'react-native';
@@ -750,9 +820,13 @@ export const platformSelect = (ios, android, web = null) => {
   return android; // fallback
 };
 ```
+{% endraw %}
+
 
 ### 2. Platform-Specific Constants
 
+
+{% raw %}
 ```javascript
 // constants/platform.js
 import { Platform } from 'react-native';
@@ -771,6 +845,8 @@ export const PLATFORM_CONSTANTS = {
   },
 };
 ```
+{% endraw %}
+
 
 ## Summary
 

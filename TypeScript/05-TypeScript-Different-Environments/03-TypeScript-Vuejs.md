@@ -25,6 +25,8 @@ Setting up TypeScript with Vue.js requires proper configuration and understandin
 
 ### **Basic Setup**
 
+
+{% raw %}
 ```bash
 # Create Vue app with TypeScript
 npm create vue@latest my-app
@@ -34,9 +36,13 @@ npm create vue@latest my-app
 npm install --save-dev typescript @vue/tsconfig
 npm install --save-dev @types/node
 ```
+{% endraw %}
+
 
 ### **TypeScript Configuration**
 
+
+{% raw %}
 ```json
 // tsconfig.json
 {
@@ -58,9 +64,13 @@ npm install --save-dev @types/node
   }
 }
 ```
+{% endraw %}
+
 
 ### **Vite Configuration**
 
+
+{% raw %}
 ```typescript
 // vite.config.ts
 import { defineConfig } from 'vite'
@@ -76,6 +86,8 @@ export default defineConfig({
   }
 })
 ```
+{% endraw %}
+
 
 ---
 
@@ -83,12 +95,14 @@ export default defineConfig({
 
 ### **Options API with TypeScript**
 
+
+{% raw %}
 ```vue
 <!-- UserCard.vue -->
 <template>
   <div class="user-card">
-    <h3>{{ user.name }}</h3>
-    <p>{{ user.email }}</p>
+    <h3>{{}}</h3>
+    <p>{{}}</p>
     <button @click="handleEdit">Edit</button>
   </div>
 </template>
@@ -119,9 +133,13 @@ export default defineComponent({
 })
 </script>
 ```
+{% endraw %}
+
 
 ### **Composition API with TypeScript**
 
+
+{% raw %}
 ```vue
 <!-- UserList.vue -->
 <template>
@@ -170,18 +188,22 @@ onMounted(() => {
 })
 </script>
 ```
+{% endraw %}
+
 
 ### **Generic Components**
 
+
+{% raw %}
 ```vue
 <!-- GenericList.vue -->
 <template>
   <div class="generic-list">
-    <h3>{{ title }}</h3>
+    <h3>{{}}</h3>
     <ul>
       <li v-for="item in items" :key="keyExtractor(item)">
         <slot :item="item" :index="items.indexOf(item)">
-          {{ item }}
+          {{}}
         </slot>
       </li>
     </ul>
@@ -200,6 +222,8 @@ interface Props<T> {
 defineProps<Props<T>>()
 </script>
 ```
+{% endraw %}
+
 
 ---
 
@@ -207,6 +231,8 @@ defineProps<Props<T>>()
 
 ### **Reactive and Ref**
 
+
+{% raw %}
 ```typescript
 // Composition API with TypeScript
 import { ref, reactive, computed, watch } from 'vue'
@@ -253,9 +279,13 @@ watch(
   { deep: true }
 )
 ```
+{% endraw %}
+
 
 ### **Custom Composables**
 
+
+{% raw %}
 ```typescript
 // useApi.ts
 import { ref, Ref } from 'vue'
@@ -307,9 +337,13 @@ onMounted(() => {
 })
 </script>
 ```
+{% endraw %}
+
 
 ### **Lifecycle Hooks**
 
+
+{% raw %}
 ```typescript
 // Lifecycle hooks with TypeScript
 import { 
@@ -354,6 +388,8 @@ export default defineComponent({
   }
 })
 ```
+{% endraw %}
+
 
 ---
 
@@ -361,6 +397,8 @@ export default defineComponent({
 
 ### **Props Typing**
 
+
+{% raw %}
 ```vue
 <!-- UserForm.vue -->
 <template>
@@ -403,15 +441,19 @@ const handleSubmit = () => {
 }
 </script>
 ```
+{% endraw %}
+
 
 ### **Emits Typing**
 
+
+{% raw %}
 ```vue
 <!-- UserCard.vue -->
 <template>
   <div class="user-card">
-    <h3>{{ user.name }}</h3>
-    <p>{{ user.email }}</p>
+    <h3>{{}}</h3>
+    <p>{{}}</p>
     <button @click="handleEdit">Edit</button>
     <button @click="handleDelete">Delete</button>
   </div>
@@ -450,9 +492,13 @@ const handleUpdate = (updatedUser: User) => {
 }
 </script>
 ```
+{% endraw %}
+
 
 ### **Complex Props**
 
+
+{% raw %}
 ```vue
 <!-- DataTable.vue -->
 <template>
@@ -460,7 +506,7 @@ const handleUpdate = (updatedUser: User) => {
     <thead>
       <tr>
         <th v-for="column in columns" :key="column.key">
-          {{ column.title }}
+          {{}}
         </th>
       </tr>
     </thead>
@@ -472,7 +518,7 @@ const handleUpdate = (updatedUser: User) => {
             :item="item" 
             :value="item[column.key]"
           >
-            {{ item[column.key] }}
+            {{}}
           </slot>
         </td>
       </tr>
@@ -497,6 +543,8 @@ interface Props<T> {
 defineProps<Props<T>>()
 </script>
 ```
+{% endraw %}
+
 
 ---
 
@@ -504,6 +552,8 @@ defineProps<Props<T>>()
 
 ### **Reactive Objects**
 
+
+{% raw %}
 ```typescript
 // Reactive objects with TypeScript
 import { reactive, toRefs } from 'vue'
@@ -540,9 +590,13 @@ const fetchUsers = async () => {
   }
 }
 ```
+{% endraw %}
+
 
 ### **Computed Properties**
 
+
+{% raw %}
 ```typescript
 // Computed properties with TypeScript
 import { computed, ref } from 'vue'
@@ -585,9 +639,13 @@ const isAllSelected = computed({
   }
 })
 ```
+{% endraw %}
+
 
 ### **Watchers**
 
+
+{% raw %}
 ```typescript
 // Watchers with TypeScript
 import { watch, watchEffect } from 'vue'
@@ -622,6 +680,8 @@ watchEffect(() => {
   console.log(`Selected users: ${selectedUserIds.value.length}`)
 })
 ```
+{% endraw %}
+
 
 ---
 
@@ -629,6 +689,8 @@ watchEffect(() => {
 
 ### **Provide/Inject**
 
+
+{% raw %}
 ```typescript
 // Provide/Inject with TypeScript
 import { provide, inject, InjectionKey } from 'vue'
@@ -672,9 +734,13 @@ const userService = useUserService()
 const users = await userService.getUsers()
 </script>
 ```
+{% endraw %}
+
 
 ### **Custom Directives**
 
+
+{% raw %}
 ```typescript
 // Custom directive with TypeScript
 import { Directive, DirectiveBinding } from 'vue'
@@ -706,9 +772,13 @@ const vFocus: Directive<HTMLElement, VFocusBinding> = {
   <input v-focus:lazy="shouldFocus" />
 </template>
 ```
+{% endraw %}
+
 
 ### **Plugin Development**
 
+
+{% raw %}
 ```types
 // Plugin with TypeScript
 import { App, Plugin } from 'vue'
@@ -766,6 +836,8 @@ export const apiPlugin: Plugin = {
   }
 }
 ```
+{% endraw %}
+
 
 ---
 
@@ -773,6 +845,8 @@ export const apiPlugin: Plugin = {
 
 ### **1. Use Strict Typing**
 
+
+{% raw %}
 ```typescript
 // ✅ Good: Strict typing
 interface User {
@@ -786,9 +860,13 @@ const users = ref<User[]>([])
 // ❌ Avoid: Loose typing
 const users = ref<any[]>([])
 ```
+{% endraw %}
+
 
 ### **2. Use Composition API**
 
+
+{% raw %}
 ```typescript
 // ✅ Good: Composition API
 <script setup lang="ts">
@@ -812,9 +890,13 @@ export default defineComponent({
 })
 </script>
 ```
+{% endraw %}
+
 
 ### **3. Use Custom Composables**
 
+
+{% raw %}
 ```typescript
 // ✅ Good: Custom composable
 const useCounter = (initialValue: number = 0) => {
@@ -830,9 +912,13 @@ const increment1 = () => count1.value++
 const count2 = ref(0)
 const increment2 = () => count2.value++
 ```
+{% endraw %}
+
 
 ### **4. Use Proper Event Types**
 
+
+{% raw %}
 ```typescript
 // ✅ Good: Proper event types
 const handleClick = (event: MouseEvent) => {
@@ -846,6 +932,8 @@ const handleClick = (event: any) => {
   // Handle click
 }
 ```
+{% endraw %}
+
 
 ---
 
@@ -868,6 +956,8 @@ const handleClick = (event: any) => {
 ### **3. How do you type props in Vue 3 with TypeScript?**
 
 **Answer:**
+
+{% raw %}
 ```typescript
 interface Props {
   title: string
@@ -876,10 +966,14 @@ interface Props {
 
 defineProps<Props>()
 ```
+{% endraw %}
+
 
 ### **4. How do you create custom composables with TypeScript?**
 
 **Answer:**
+
+{% raw %}
 ```typescript
 const useApi = <T>(url: string) => {
   const data = ref<T | null>(null)
@@ -888,10 +982,14 @@ const useApi = <T>(url: string) => {
   return { data, loading }
 }
 ```
+{% endraw %}
+
 
 ### **5. How do you handle emits in Vue 3 with TypeScript?**
 
 **Answer:**
+
+{% raw %}
 ```typescript
 interface Emits {
   update: [value: string]
@@ -900,6 +998,8 @@ interface Emits {
 
 const emit = defineEmits<Emits>()
 ```
+{% endraw %}
+
 
 ---
 

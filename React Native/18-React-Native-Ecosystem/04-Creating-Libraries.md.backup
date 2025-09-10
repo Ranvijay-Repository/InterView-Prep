@@ -1,0 +1,1313 @@
+# 🏗️ **Creating Libraries**
+
+> **Complete guide to creating React Native libraries, including project setup, TypeScript support, testing, documentation, and publishing**
+
+<link rel="stylesheet" href="../../common-styles.css">
+
+---
+
+## 📚 **Table of Contents**
+
+- [Creating Libraries Overview](#creating-libraries-overview)
+- [Project Setup](#project-setup)
+- [TypeScript Support](#typescript-support)
+- [Native Module Development](#native-module-development)
+- [Testing Strategy](#testing-strategy)
+- [Documentation](#documentation)
+- [Publishing](#publishing)
+- [Maintenance](#maintenance)
+- [Best Practices](#best-practices)
+- [Interview Questions](#interview-questions)
+
+---
+
+## 🎯 **Creating Libraries Overview**
+
+Creating React Native libraries involves building reusable components, modules, or utilities that can be shared across projects. Proper library development ensures maintainability, usability, and long-term success.
+
+### **Library Development Framework**
+
+
+{% raw %}
+```
+┌─────────────────────────────────────┐
+│        Library Development         │
+│  ┌─────────────────────────────────┐│
+│  │        Project Setup           ││
+│  │  - Project Structure           ││
+│  │  - Build Configuration         ││
+│  │  - Package Configuration       ││
+│  │  - Development Tools           ││
+│  └─────────────────────────────────┘│
+│  ┌─────────────────────────────────┐│
+│  │        Development             ││
+│  │  - TypeScript Support          ││
+│  │  - Native Modules              ││
+│  │  - Testing                     ││
+│  │  - Documentation               ││
+│  └─────────────────────────────────┘│
+│  ┌─────────────────────────────────┐│
+│  │        Publishing              ││
+│  │  - npm Publishing              ││
+│  │  - Version Management          ││
+│  │  - Distribution                ││
+│  │  - Maintenance                 ││
+│  └─────────────────────────────────┘│
+└─────────────────────────────────────┘
+```
+{% endraw %}
+
+
+### **Library Types**
+- **JavaScript Libraries**: Pure JavaScript utilities
+- **React Components**: Reusable UI components
+- **Native Modules**: Platform-specific functionality
+- **Hybrid Libraries**: JavaScript + Native code
+
+---
+
+## 🚀 **Project Setup**
+
+### **Initial Project Structure**
+
+<button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
+```bash
+# Create library project
+mkdir my-react-native-library
+cd my-react-native-library
+
+# Initialize npm project
+npm init -y
+
+# Install development dependencies
+npm install --save-dev typescript @types/react @types/react-native
+npm install --save-dev jest @types/jest react-test-renderer
+npm install --save-dev eslint prettier
+npm install --save-dev rollup @rollup/plugin-typescript
+```
+{% endraw %}
+
+
+<button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
+```
+my-react-native-library/
+├── src/
+│   ├── index.ts
+│   ├── components/
+│   ├── utils/
+│   └── types/
+├── android/
+│   ├── src/main/java/
+│   └── build.gradle
+├── ios/
+│   ├── MyLibrary/
+│   └── MyLibrary.podspec
+├── __tests__/
+├── docs/
+├── package.json
+├── tsconfig.json
+├── rollup.config.js
+├── .eslintrc.js
+├── .prettierrc
+└── README.md
+```
+{% endraw %}
+
+
+### **Package.json Configuration**
+
+<button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
+```json
+{
+  "name": "my-react-native-library",
+  "version": "1.0.0",
+  "description": "A React Native library for awesome functionality",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "android",
+    "ios",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "rollup -c",
+    "test": "jest",
+    "lint": "eslint src/**/*.ts",
+    "format": "prettier --write src/**/*.ts",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "react-native",
+    "library",
+    "mobile"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "react-native": ">=0.60.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.0",
+    "@types/react-native": "^0.71.0",
+    "typescript": "^4.9.0",
+    "jest": "^29.0.0",
+    "eslint": "^8.0.0",
+    "prettier": "^2.0.0",
+    "rollup": "^3.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/username/my-react-native-library.git"
+  },
+  "bugs": {
+    "url": "https://github.com/username/my-react-native-library/issues"
+  },
+  "homepage": "https://github.com/username/my-react-native-library#readme"
+}
+```
+{% endraw %}
+
+
+### **TypeScript Configuration**
+
+<button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
+```json
+// tsconfig.json
+{
+  "compilerOptions": {
+    "target": "ES2018",
+    "lib": ["ES2018"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": false,
+    "declaration": true,
+    "outDir": "./dist",
+    "rootDir": "./src"
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "**/*.test.ts"
+  ]
+}
+```
+{% endraw %}
+
+
+---
+
+## 📝 **TypeScript Support**
+
+### **Type Definitions**
+
+<button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
+```typescript
+// src/types/index.ts
+export interface LibraryConfig {
+  apiKey: string;
+  environment: 'development' | 'production';
+  debug?: boolean;
+}
+
+export interface LibraryOptions {
+  timeout?: number;
+  retries?: number;
+  headers?: Record<string, string>;
+}
+
+export interface LibraryResponse<T = any> {
+  success: boolean;
+  data?: T;
+  error?: string;
+  statusCode?: number;
+}
+
+export type LibraryCallback<T = any> = (response: LibraryResponse<T>) => void;
+```
+{% endraw %}
+
+
+### **Main Library Implementation**
+
+<button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
+```typescript
+// src/index.ts
+import { NativeModules, Platform } from 'react-native';
+import { LibraryConfig, LibraryOptions, LibraryResponse, LibraryCallback } from './types';
+
+const { MyLibraryModule } = NativeModules;
+
+class MyLibrary {
+  private config: LibraryConfig;
+  private options: LibraryOptions;
+
+  constructor(config: LibraryConfig, options: LibraryOptions = {}) {
+    this.config = config;
+    this.options = {
+      timeout: 5000,
+      retries: 3,
+      headers: {},
+      ...options
+    };
+  }
+
+  /**
+   * Initialize the library
+   */
+  async initialize(): Promise<LibraryResponse> {
+    try {
+      if (!MyLibraryModule) {
+        throw new Error('MyLibraryModule is not available');
+      }
+
+      const result = await MyLibraryModule.initialize(this.config);
+      return { success: true, data: result };
+    } catch (error) {
+      return { 
+        success: false, 
+        error: error instanceof Error ? error.message : 'Unknown error' 
+      };
+    }
+  }
+
+  /**
+   * Perform an action
+   */
+  async performAction(action: string, data?: any): Promise<LibraryResponse> {
+    try {
+      const result = await MyLibraryModule.performAction(action, data);
+      return { success: true, data: result };
+    } catch (error) {
+      return { 
+        success: false, 
+        error: error instanceof Error ? error.message : 'Unknown error' 
+      };
+    }
+  }
+
+  /**
+   * Set up event listener
+   */
+  addEventListener(event: string, callback: LibraryCallback): void {
+    if (MyLibraryModule && MyLibraryModule.addEventListener) {
+      MyLibraryModule.addEventListener(event, callback);
+    }
+  }
+
+  /**
+   * Remove event listener
+   */
+  removeEventListener(event: string, callback: LibraryCallback): void {
+    if (MyLibraryModule && MyLibraryModule.removeEventListener) {
+      MyLibraryModule.removeEventListener(event, callback);
+    }
+  }
+}
+
+export default MyLibrary;
+export { LibraryConfig, LibraryOptions, LibraryResponse, LibraryCallback };
+```
+{% endraw %}
+
+
+### **Component Library**
+
+<button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
+```typescript
+// src/components/MyComponent.tsx
+import React, { useState, useEffect } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+
+export interface MyComponentProps {
+  title: string;
+  onPress?: () => void;
+  disabled?: boolean;
+  style?: any;
+}
+
+export const MyComponent: React.FC<MyComponentProps> = ({
+  title,
+  onPress,
+  disabled = false,
+  style
+}) => {
+  const [isPressed, setIsPressed] = useState(false);
+
+  const handlePress = () => {
+    if (!disabled && onPress) {
+      onPress();
+    }
+  };
+
+  return (
+    <TouchableOpacity
+      style={[
+        styles.container,
+        disabled && styles.disabled,
+        isPressed && styles.pressed,
+        style
+      ]}
+      onPress={handlePress}
+      onPressIn={() => setIsPressed(true)}
+      onPressOut={() => setIsPressed(false)}
+      disabled={disabled}
+    >
+      <Text style={[styles.title, disabled && styles.disabledText]}>
+        {title}
+      </Text>
+    </TouchableOpacity>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: '#007AFF',
+    padding: 12,
+    borderRadius: 8,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  title: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: '600'
+  },
+  disabled: {
+    backgroundColor: '#CCCCCC'
+  },
+  disabledText: {
+    color: '#666666'
+  },
+  pressed: {
+    opacity: 0.8
+  }
+});
+```
+{% endraw %}
+
+
+---
+
+## 📱 **Native Module Development**
+
+### **Android Native Module**
+
+<button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
+```java
+// android/src/main/java/com/mylibrary/MyLibraryModule.java
+package com.mylibrary;
+
+import com.facebook.react.bridge.ReactApplicationContext;
+import com.facebook.react.bridge.ReactContextBaseJavaModule;
+import com.facebook.react.bridge.ReactMethod;
+import com.facebook.react.bridge.Promise;
+import com.facebook.react.bridge.ReadableMap;
+import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.bridge.Arguments;
+
+public class MyLibraryModule extends ReactContextBaseJavaModule {
+    private static final String MODULE_NAME = "MyLibraryModule";
+    private ReactApplicationContext reactContext;
+
+    public MyLibraryModule(ReactApplicationContext reactContext) {
+        super(reactContext);
+        this.reactContext = reactContext;
+    }
+
+    @Override
+    public String getName() {
+        return MODULE_NAME;
+    }
+
+    @ReactMethod
+    public void initialize(ReadableMap config, Promise promise) {
+        try {
+            String apiKey = config.getString("apiKey");
+            String environment = config.getString("environment");
+            boolean debug = config.hasKey("debug") ? config.getBoolean("debug") : false;
+
+            // Initialize your native functionality here
+            // For example, initialize a native SDK
+            
+            WritableMap result = Arguments.createMap();
+            result.putBoolean("success", true);
+            result.putString("message", "Library initialized successfully");
+            
+            promise.resolve(result);
+        } catch (Exception e) {
+            promise.reject("INITIALIZATION_ERROR", e.getMessage());
+        }
+    }
+
+    @ReactMethod
+    public void performAction(String action, ReadableMap data, Promise promise) {
+        try {
+            // Perform the requested action
+            WritableMap result = Arguments.createMap();
+            result.putBoolean("success", true);
+            result.putString("action", action);
+            result.putMap("data", data);
+            
+            promise.resolve(result);
+        } catch (Exception e) {
+            promise.reject("ACTION_ERROR", e.getMessage());
+        }
+    }
+}
+```
+{% endraw %}
+
+
+### **iOS Native Module**
+
+<button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
+```objc
+// ios/MyLibraryModule.h
+#import <React/RCTBridgeModule.h>
+#import <React/RCTEventEmitter.h>
+
+@interface MyLibraryModule : RCTEventEmitter <RCTBridgeModule>
+
+@end
+```
+{% endraw %}
+
+
+<button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
+```objc
+// ios/MyLibraryModule.m
+#import "MyLibraryModule.h"
+
+@implementation MyLibraryModule
+
+RCT_EXPORT_MODULE();
+
+- (NSArray<NSString *> *)supportedEvents {
+    return @[@"MyLibraryEvent"];
+}
+
+RCT_EXPORT_METHOD(initialize:(NSDictionary *)config
+                  resolver:(RCTPromiseResolveBlock)resolve
+                  rejecter:(RCTPromiseRejectBlock)reject) {
+    @try {
+        NSString *apiKey = config[@"apiKey"];
+        NSString *environment = config[@"environment"];
+        BOOL debug = [config[@"debug"] boolValue];
+        
+        // Initialize your native functionality here
+        // For example, initialize a native SDK
+        
+        NSDictionary *result = @{
+            @"success": @YES,
+            @"message": @"Library initialized successfully"
+        };
+        
+        resolve(result);
+    } @catch (NSException *exception) {
+        reject(@"INITIALIZATION_ERROR", exception.reason, nil);
+    }
+}
+
+RCT_EXPORT_METHOD(performAction:(NSString *)action
+                  data:(NSDictionary *)data
+                  resolver:(RCTPromiseResolveBlock)resolve
+                  rejecter:(RCTPromiseRejectBlock)reject) {
+    @try {
+        // Perform the requested action
+        NSDictionary *result = @{
+            @"success": @YES,
+            @"action": action,
+            @"data": data ?: @{}
+        };
+        
+        resolve(result);
+    } @catch (NSException *exception) {
+        reject(@"ACTION_ERROR", exception.reason, nil);
+    }
+}
+
+@end
+```
+{% endraw %}
+
+
+### **Podspec Configuration**
+
+<button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
+```ruby
+# ios/MyLibrary.podspec
+require "json"
+
+package = JSON.parse(File.read(File.join(__dir__, "package.json")))
+
+Pod::Spec.new do |s|
+  s.name         = "MyLibrary"
+  s.version      = package["version"]
+  s.summary      = package["description"]
+  s.homepage     = package["homepage"]
+  s.license      = package["license"]
+  s.authors      = package["author"]
+
+  s.platforms    = { :ios => "11.0" }
+  s.source       = { :git => "https://github.com/username/my-react-native-library.git", :tag => "#{s.version}" }
+
+  s.source_files = "ios/**/*.{h,m,mm,swift}"
+
+  s.dependency "React-Core"
+end
+```
+{% endraw %}
+
+
+---
+
+## 🧪 **Testing Strategy**
+
+### **Unit Testing Setup**
+
+<button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
+```json
+// jest.config.js
+module.exports = {
+  preset: 'react-native',
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
+  testPathIgnorePatterns: ['/node_modules/', '/dist/'],
+  collectCoverageFrom: [
+    'src/**/*.{ts,tsx}',
+    '!src/**/*.d.ts',
+    '!src/**/*.test.{ts,tsx}'
+  ],
+  coverageThreshold: {
+    global: {
+      branches: 80,
+      functions: 80,
+      lines: 80,
+      statements: 80
+    }
+  }
+};
+```
+{% endraw %}
+
+
+<button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
+```javascript
+// jest.setup.js
+import 'react-native-gesture-handler/jestSetup';
+
+// Mock react-native modules
+jest.mock('react-native', () => {
+  const RN = jest.requireActual('react-native');
+  
+  return {
+    ...RN,
+    NativeModules: {
+      ...RN.NativeModules,
+      MyLibraryModule: {
+        initialize: jest.fn(),
+        performAction: jest.fn(),
+        addEventListener: jest.fn(),
+        removeEventListener: jest.fn()
+      }
+    }
+  };
+});
+```
+{% endraw %}
+
+
+### **Unit Tests**
+
+<button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
+```typescript
+// __tests__/MyLibrary.test.ts
+import MyLibrary from '../src/index';
+import { NativeModules } from 'react-native';
+
+const { MyLibraryModule } = NativeModules;
+
+describe('MyLibrary', () => {
+  let library: MyLibrary;
+  const mockConfig = {
+    apiKey: 'test-api-key',
+    environment: 'development' as const,
+    debug: true
+  };
+
+  beforeEach(() => {
+    library = new MyLibrary(mockConfig);
+    jest.clearAllMocks();
+  });
+
+  describe('initialize', () => {
+    it('should initialize successfully', async () => {
+      const mockResult = { success: true, message: 'Initialized' };
+      (MyLibraryModule.initialize as jest.Mock).mockResolvedValue(mockResult);
+
+      const result = await library.initialize();
+
+      expect(result.success).toBe(true);
+      expect(result.data).toEqual(mockResult);
+      expect(MyLibraryModule.initialize).toHaveBeenCalledWith(mockConfig);
+    });
+
+    it('should handle initialization errors', async () => {
+      const mockError = new Error('Initialization failed');
+      (MyLibraryModule.initialize as jest.Mock).mockRejectedValue(mockError);
+
+      const result = await library.initialize();
+
+      expect(result.success).toBe(false);
+      expect(result.error).toBe('Initialization failed');
+    });
+  });
+
+  describe('performAction', () => {
+    it('should perform action successfully', async () => {
+      const mockResult = { success: true, action: 'test', data: {} };
+      (MyLibraryModule.performAction as jest.Mock).mockResolvedValue(mockResult);
+
+      const result = await library.performAction('test', { key: 'value' });
+
+      expect(result.success).toBe(true);
+      expect(result.data).toEqual(mockResult);
+      expect(MyLibraryModule.performAction).toHaveBeenCalledWith('test', { key: 'value' });
+    });
+  });
+});
+```
+{% endraw %}
+
+
+### **Component Tests**
+
+<button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
+```typescript
+// __tests__/MyComponent.test.tsx
+import React from 'react';
+import { render, fireEvent } from '@testing-library/react-native';
+import { MyComponent } from '../src/components/MyComponent';
+
+describe('MyComponent', () => {
+  it('should render correctly', () => {
+    const { getByText } = render(
+      <MyComponent title="Test Button" />
+    );
+
+    expect(getByText('Test Button')).toBeTruthy();
+  });
+
+  it('should call onPress when pressed', () => {
+    const mockOnPress = jest.fn();
+    const { getByText } = render(
+      <MyComponent title="Test Button" onPress={mockOnPress} />
+    );
+
+    fireEvent.press(getByText('Test Button'));
+    expect(mockOnPress).toHaveBeenCalledTimes(1);
+  });
+
+  it('should not call onPress when disabled', () => {
+    const mockOnPress = jest.fn();
+    const { getByText } = render(
+      <MyComponent title="Test Button" onPress={mockOnPress} disabled />
+    );
+
+    fireEvent.press(getByText('Test Button'));
+    expect(mockOnPress).not.toHaveBeenCalled();
+  });
+});
+```
+{% endraw %}
+
+
+---
+
+## 📚 **Documentation**
+
+### **README.md**
+
+<button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
+```markdown
+# My React Native Library
+
+A powerful React Native library for awesome functionality.
+
+## Installation
+
+```bash
+{% endraw %}
+
+npm install my-react-native-library
+
+{% raw %}
+```
+
+### iOS Setup
+
+Add the following to your `ios/Podfile`:
+
+```ruby
+{% endraw %}
+
+pod 'MyLibrary', :path => '../node_modules/my-react-native-library/ios'
+
+{% raw %}
+```
+
+Then run:
+
+```bash
+{% endraw %}
+
+cd ios && pod install
+
+{% raw %}
+```
+
+### Android Setup
+
+No additional setup required for Android.
+
+## Usage
+
+### Basic Usage
+
+```typescript
+{% endraw %}
+
+import MyLibrary from 'my-react-native-library';
+
+const library = new MyLibrary({
+  apiKey: 'your-api-key',
+  environment: 'development',
+  debug: true
+});
+
+// Initialize the library
+const result = await library.initialize();
+if (result.success) {
+  console.log('Library initialized successfully');
+}
+
+// Perform an action
+const actionResult = await library.performAction('test', { data: 'value' });
+
+{% raw %}
+```
+
+### Component Usage
+
+```typescript
+{% endraw %}
+
+import { MyComponent } from 'my-react-native-library';
+
+const App = () => {
+  return (
+    <MyComponent
+      title="Click Me"
+      onPress={() => console.log('Button pressed')}
+    />
+  );
+};
+
+{% raw %}
+```
+
+## API Reference
+
+### MyLibrary
+
+#### Constructor
+
+```typescript
+{% endraw %}
+
+new MyLibrary(config: LibraryConfig, options?: LibraryOptions)
+
+{% raw %}
+```
+
+#### Methods
+
+- `initialize(): Promise<LibraryResponse>`
+- `performAction(action: string, data?: any): Promise<LibraryResponse>`
+- `addEventListener(event: string, callback: LibraryCallback): void`
+- `removeEventListener(event: string, callback: LibraryCallback): void`
+
+### MyComponent
+
+#### Props
+
+- `title: string` - Button title
+- `onPress?: () => void` - Press handler
+- `disabled?: boolean` - Disabled state
+- `style?: any` - Custom styles
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a Pull Request
+
+## License
+
+MIT
+```
+{% endraw %}
+
+
+### **API Documentation**
+
+<button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
+```typescript
+// src/index.ts with JSDoc comments
+/**
+ * My React Native Library
+ * 
+ * A powerful library for React Native applications
+ * 
+ * @example
+ * ```typescript
+ * import MyLibrary from 'my-react-native-library';
+ * 
+ * const library = new MyLibrary({
+ *   apiKey: 'your-api-key',
+ *   environment: 'development'
+ * });
+ * 
+ * await library.initialize();
+ * ```
+ */
+class MyLibrary {
+  /**
+   * Creates an instance of MyLibrary
+   * 
+   * @param config - Library configuration
+   * @param options - Optional library options
+   * 
+   * @example
+   * ```typescript
+   * const library = new MyLibrary({
+   *   apiKey: 'your-api-key',
+   *   environment: 'development'
+   * });
+   * ```
+   */
+  constructor(config: LibraryConfig, options: LibraryOptions = {}) {
+    // Implementation
+  }
+
+  /**
+   * Initialize the library
+   * 
+   * @returns Promise that resolves to initialization result
+   * 
+   * @example
+   * ```typescript
+   * const result = await library.initialize();
+   * if (result.success) {
+   *   console.log('Initialized successfully');
+   * }
+   * ```
+   */
+  async initialize(): Promise<LibraryResponse> {
+    // Implementation
+  }
+}
+```
+{% endraw %}
+
+
+---
+
+## 📦 **Publishing**
+
+### **Build Configuration**
+
+<button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
+```javascript
+// rollup.config.js
+import typescript from '@rollup/plugin-typescript';
+import resolve from '@rollup/plugin-node-resolve';
+import commonjs from '@rollup/plugin-commonjs';
+
+export default {
+  input: 'src/index.ts',
+  output: [
+    {
+      file: 'dist/index.js',
+      format: 'cjs',
+      sourcemap: true
+    },
+    {
+      file: 'dist/index.esm.js',
+      format: 'esm',
+      sourcemap: true
+    }
+  ],
+  external: ['react', 'react-native'],
+  plugins: [
+    resolve(),
+    commonjs(),
+    typescript({
+      tsconfig: './tsconfig.json',
+      declaration: true,
+      declarationDir: './dist'
+    })
+  ]
+};
+```
+{% endraw %}
+
+
+### **Publishing Process**
+
+<button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
+```bash
+# Build the library
+npm run build
+
+# Run tests
+npm test
+
+# Check for issues
+npm run lint
+
+# Publish to npm
+npm publish
+
+# Publish with specific tag
+npm publish --tag beta
+
+# Publish with access level
+npm publish --access public
+```
+{% endraw %}
+
+
+### **Version Management**
+
+<button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
+```bash
+# Version bumping
+npm version patch    # 1.0.0 -> 1.0.1
+npm version minor    # 1.0.0 -> 1.1.0
+npm version major    # 1.0.0 -> 2.0.0
+
+# Pre-release versions
+npm version prerelease --preid=beta    # 1.0.0 -> 1.0.1-beta.0
+npm version prerelease --preid=alpha   # 1.0.0 -> 1.0.1-alpha.0
+```
+{% endraw %}
+
+
+---
+
+## 🔧 **Maintenance**
+
+### **Automated Testing**
+
+<button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
+```yaml
+# .github/workflows/test.yml
+name: Test
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        node-version: [16, 18, 20]
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Use Node.js ${{#123;{{#123; matrix.node-version }}#125;}}#125;
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{#123;{{#123; matrix.node-version }}#125;}}#125;
+          cache: 'npm'
+          
+      - name: Install dependencies
+        run: npm ci
+        
+      - name: Run tests
+        run: npm test
+        
+      - name: Run linting
+        run: npm run lint
+        
+      - name: Build library
+        run: npm run build
+```
+{% endraw %}
+
+
+### **Release Automation**
+
+<button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
+```yaml
+# .github/workflows/release.yml
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+          
+      - name: Install dependencies
+        run: npm ci
+        
+      - name: Run tests
+        run: npm test
+        
+      - name: Build library
+        run: npm run build
+        
+      - name: Publish to npm
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{#123;{{#123; secrets.NPM_TOKEN }}#125;}}#125;
+```
+{% endraw %}
+
+
+---
+
+## ✅ **Best Practices**
+
+### **1. Library Development Best Practices**
+
+<button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
+```javascript
+// Library development best practices
+const LibraryBestPractices = {
+  // Code organization
+  codeOrganization: {
+    structure: 'Organize code in logical modules',
+    naming: 'Use consistent naming conventions',
+    exports: 'Export only what users need',
+    types: 'Provide comprehensive TypeScript types'
+  },
+  
+  // Error handling
+  errorHandling: {
+    validation: 'Validate inputs and provide clear error messages',
+    fallbacks: 'Provide fallback behavior when possible',
+    logging: 'Log errors for debugging but don\'t expose internals',
+    recovery: 'Implement graceful error recovery'
+  },
+  
+  // Performance
+  performance: {
+    bundleSize: 'Keep bundle size minimal',
+    lazyLoading: 'Use lazy loading for heavy features',
+    memoization: 'Use memoization for expensive operations',
+    optimization: 'Optimize for both development and production'
+  }
+};
+```
+{% endraw %}
+
+
+### **2. Testing Best Practices**
+
+<button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+{% raw %}
+```javascript
+// Testing best practices
+const TestingBestPractices = {
+  // Test coverage
+  coverage: {
+    target: 'Aim for 80%+ test coverage',
+    critical: 'Test critical paths thoroughly',
+    edgeCases: 'Test edge cases and error conditions',
+    integration: 'Include integration tests'
+  },
+  
+  // Test organization
+  organization: {
+    structure: 'Organize tests by feature/component',
+    naming: 'Use descriptive test names',
+    setup: 'Use proper test setup and teardown',
+    mocking: 'Mock external dependencies appropriately'
+  }
+};
+```
+{% endraw %}
+
+
+---
+
+## 🎯 **Interview Questions**
+
+### **Basic Questions**
+1. **How do you create a React Native library?**
+   - Set up project structure with TypeScript
+   - Configure build tools (Rollup, Webpack)
+   - Implement library functionality
+   - Add comprehensive testing
+   - Create documentation and publish
+
+2. **What's the difference between a JavaScript library and a native module?**
+   - JavaScript library: Pure JavaScript/TypeScript code
+   - Native module: Platform-specific code (iOS/Android)
+   - Hybrid: Combination of both approaches
+
+3. **How do you handle TypeScript in a React Native library?**
+   - Configure TypeScript with proper types
+   - Provide type definitions for users
+   - Use JSDoc for documentation
+   - Export types for external use
+
+### **Intermediate Questions**
+4. **How do you test a React Native library?**
+   - Unit tests for JavaScript functionality
+   - Component tests for UI components
+   - Integration tests for native modules
+   - Mock external dependencies
+   - Use testing libraries like Jest and React Testing Library
+
+5. **What's your approach to versioning and publishing?**
+   - Use semantic versioning
+   - Automate version bumping
+   - Use CI/CD for publishing
+   - Provide release notes
+   - Handle breaking changes properly
+
+6. **How do you handle backward compatibility?**
+   - Use semantic versioning
+   - Deprecate features gradually
+   - Provide migration guides
+   - Maintain multiple versions
+   - Communicate changes clearly
+
+### **Advanced Questions**
+7. **How do you optimize a React Native library for performance?**
+   - Minimize bundle size
+   - Use lazy loading
+   - Implement memoization
+   - Optimize native code
+   - Profile and benchmark
+
+8. **What's your strategy for maintaining a library long-term?**
+   - Regular updates and bug fixes
+   - Community engagement
+   - Documentation maintenance
+   - Security monitoring
+   - Performance optimization
+
+9. **How do you handle library dependencies and peer dependencies?**
+   - Use peer dependencies for React/React Native
+   - Minimize direct dependencies
+   - Handle version conflicts
+   - Provide clear dependency requirements
+   - Use proper version ranges
+
+---
+
+## 🔗 **Related Topics**
+
+- [Popular Libraries](./01-Popular-Libraries.md)
+- [Library Evaluation](./02-Library-Evaluation.md)
+- [Dependency Management](./03-Dependency-Management.md)
+- [Native Interoperability](../07-Native-Interoperability/01-Old-vs-New-Architecture.md)
+- [Testing Strategies](../09-Testing-Quality/01-Unit-Testing.md)
+
+---
+
+## 🧭 Navigation
+
+<div class="navigation">
+    <a href="./03-Dependency-Management.md" class="nav-link prev">⬅️ Previous: Dependency Management</a>
+    <a href="../19-Advanced-Debugging/01-Debugging-Tools.md" class="nav-link next">Next: Debugging Tools ➡️</a>
+</div>
+
+---
+
+<script src="../../common-scripts.js"></script>
+
+*Last updated: December 2024*

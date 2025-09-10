@@ -8,6 +8,8 @@ Memory profiling tools are essential for identifying memory leaks, optimizing pe
 
 ### 1. Flipper Integration
 
+
+{% raw %}
 ```javascript
 import { useEffect, useState } from 'react';
 import { View, Text, Button } from 'react-native';
@@ -41,7 +43,7 @@ const FlipperMemoryProfiler = () => {
   }, []);
 
   return (
-    <View style={{ padding: 20 }}>
+    <View style={{}}>
       <Text>Flipper Memory Profiler</Text>
       {memoryData && (
         <Text>Memory Data: {JSON.stringify(memoryData, null, 2)}</Text>
@@ -50,9 +52,13 @@ const FlipperMemoryProfiler = () => {
   );
 };
 ```
+{% endraw %}
+
 
 ### 2. React DevTools Profiler
 
+
+{% raw %}
 ```javascript
 import { Profiler } from 'react';
 import { View, Text } from 'react-native';
@@ -78,11 +84,15 @@ const ProfilerExample = () => {
   );
 };
 ```
+{% endraw %}
+
 
 ## Custom Memory Monitoring
 
 ### 1. Memory Usage Tracker
 
+
+{% raw %}
 ```javascript
 import { useEffect, useState, useRef } from 'react';
 import { View, Text, ScrollView } from 'react-native';
@@ -134,11 +144,11 @@ const MemoryTracker = () => {
   };
 
   return (
-    <ScrollView style={{ padding: 20 }}>
-      <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Memory Tracker</Text>
+    <ScrollView style={{}}>
+      <Text style={{}}>Memory Tracker</Text>
       
       {currentMemory && (
-        <View style={{ marginTop: 10 }}>
+        <View style={{}}>
           <Text>Current Memory Usage:</Text>
           <Text>Used: {currentMemory.used} MB</Text>
           <Text>Total: {currentMemory.total} MB</Text>
@@ -148,8 +158,8 @@ const MemoryTracker = () => {
         </View>
       )}
 
-      <View style={{ marginTop: 20 }}>
-        <Text style={{ fontWeight: 'bold' }}>Memory History:</Text>
+      <View style={{}}>
+        <Text style={{}}>Memory History:</Text>
         {memoryHistory.slice(-10).map((entry, index) => (
           <Text key={index}>
             {new Date(entry.timestamp).toLocaleTimeString()}: {entry.used}MB ({entry.percentage}%)
@@ -160,9 +170,13 @@ const MemoryTracker = () => {
   );
 };
 ```
+{% endraw %}
+
 
 ### 2. Component Memory Profiler
 
+
+{% raw %}
 ```javascript
 import { useEffect, useRef, useState } from 'react';
 import { View, Text, Button } from 'react-native';
@@ -221,20 +235,20 @@ const ComponentMemoryProfiler = () => {
   };
 
   return (
-    <View style={{ padding: 20 }}>
+    <View style={{}}>
       <Text>Component Memory Profiler</Text>
       
-      <View style={{ marginTop: 20 }}>
+      <View style={{}}>
         <Button
           title={isProfiling ? "Stop Profiling" : "Start Profiling"}
           onPress={isProfiling ? endProfiling : startProfiling}
         />
       </View>
 
-      <View style={{ marginTop: 20 }}>
+      <View style={{}}>
         {Array.from(components.entries()).map(([name, data]) => (
-          <View key={name} style={{ marginBottom: 10 }}>
-            <Text style={{ fontWeight: 'bold' }}>{name}:</Text>
+          <View key={name} style={{}}>
+            <Text style={{}}>{name}:</Text>
             <Text>Start Memory: {data.startMemory} bytes</Text>
             <Text>End Memory: {data.endMemory || 'N/A'} bytes</Text>
             <Text>Memory Delta: {data.memoryDelta || 'N/A'} bytes</Text>
@@ -246,11 +260,15 @@ const ComponentMemoryProfiler = () => {
   );
 };
 ```
+{% endraw %}
+
 
 ## Advanced Memory Profiling
 
 ### 1. Heap Snapshot Analysis
 
+
+{% raw %}
 ```javascript
 import { useEffect, useRef } from 'react';
 
@@ -301,9 +319,13 @@ const HeapSnapshotProfiler = () => {
   return <View>Heap Snapshot Profiler</View>;
 };
 ```
+{% endraw %}
+
 
 ### 2. Memory Leak Detector
 
+
+{% raw %}
 ```javascript
 import { useEffect, useRef, useState } from 'react';
 import { View, Text, Button } from 'react-native';
@@ -389,17 +411,17 @@ const MemoryLeakDetector = () => {
   };
 
   return (
-    <View style={{ padding: 20 }}>
-      <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Memory Leak Detector</Text>
+    <View style={{}}>
+      <Text style={{}}>Memory Leak Detector</Text>
       
-      <View style={{ marginTop: 20 }}>
+      <View style={{}}>
         <Button title="Detect Leaks" onPress={detectLeaks} />
         <Button title="Clear References" onPress={clearReferences} />
       </View>
 
       {leakReport && (
-        <View style={{ marginTop: 20 }}>
-          <Text style={{ fontWeight: 'bold' }}>Leak Report:</Text>
+        <View style={{}}>
+          <Text style={{}}>Leak Report:</Text>
           <Text>Is Leaking: {leakReport.isLeaking ? 'Yes' : 'No'}</Text>
           <Text>Growth Rate: {leakReport.growthRate}%</Text>
           <Text>Recent Average: {leakReport.recentAverage} MB</Text>
@@ -408,8 +430,8 @@ const MemoryLeakDetector = () => {
           <Text>Timer Refs: {leakReport.timerRefs}</Text>
           
           {leakReport.recommendations.length > 0 && (
-            <View style={{ marginTop: 10 }}>
-              <Text style={{ fontWeight: 'bold' }}>Recommendations:</Text>
+            <View style={{}}>
+              <Text style={{}}>Recommendations:</Text>
               {leakReport.recommendations.map((rec, index) => (
                 <Text key={index}>• {rec}</Text>
               ))}
@@ -421,11 +443,15 @@ const MemoryLeakDetector = () => {
   );
 };
 ```
+{% endraw %}
+
 
 ## Performance Monitoring
 
 ### 1. Frame Rate Monitor
 
+
+{% raw %}
 ```javascript
 import { useEffect, useState, useRef } from 'react';
 import { View, Text } from 'react-native';
@@ -482,18 +508,22 @@ const FrameRateMonitor = () => {
   const performance = getPerformanceStatus();
 
   return (
-    <View style={{ padding: 20 }}>
-      <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Frame Rate Monitor</Text>
-      <Text style={{ color: performance.color }}>FPS: {fps}</Text>
+    <View style={{}}>
+      <Text style={{}}>Frame Rate Monitor</Text>
+      <Text style={{}}>FPS: {fps}</Text>
       <Text>Frame Drops: {frameDrops}</Text>
       <Text>Status: {performance.status}</Text>
     </View>
   );
 };
 ```
+{% endraw %}
+
 
 ### 2. Memory Pressure Monitor
 
+
+{% raw %}
 ```javascript
 import { useEffect, useState } from 'react';
 import { AppState, View, Text } from 'react-native';
@@ -544,19 +574,23 @@ const MemoryPressureMonitor = () => {
   };
 
   return (
-    <View style={{ padding: 20 }}>
-      <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Memory Pressure Monitor</Text>
-      <Text style={{ color: getPressureColor() }}>Pressure Level: {pressureLevel}</Text>
+    <View style={{}}>
+      <Text style={{}}>Memory Pressure Monitor</Text>
+      <Text style={{}}>Pressure Level: {pressureLevel}</Text>
       <Text>Memory Warnings: {memoryWarnings}</Text>
     </View>
   );
 };
 ```
+{% endraw %}
+
 
 ## Integration with Development Tools
 
 ### 1. Metro Bundle Analyzer
 
+
+{% raw %}
 ```javascript
 // metro.config.js
 const { getDefaultConfig } = require('metro-config');
@@ -587,9 +621,13 @@ module.exports = (async () => {
   };
 })();
 ```
+{% endraw %}
+
 
 ### 2. Custom Dev Menu Integration
 
+
+{% raw %}
 ```javascript
 import { DevSettings } from 'react-native';
 
@@ -621,11 +659,15 @@ const DevMenuIntegration = () => {
   return <View>Dev Menu Integration</View>;
 };
 ```
+{% endraw %}
+
 
 ## Testing Memory Profiling
 
 ### 1. Memory Test Suite
 
+
+{% raw %}
 ```javascript
 import { render, cleanup } from '@testing-library/react-native';
 
@@ -671,6 +713,8 @@ describe('Memory Profiling Tests', () => {
   });
 });
 ```
+{% endraw %}
+
 
 ## Summary
 

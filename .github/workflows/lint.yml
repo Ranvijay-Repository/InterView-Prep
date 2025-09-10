@@ -52,15 +52,14 @@ jobs:
           find . -name "*.md" -not -path "./_site/*" -not -path "./.git/*" | while read file; do
             # Check for links to non-existent files
             grep -o '\[.*\]([^)]*)' "$file" | while read link; do
-              if [[ $link =~ \[.*\]\(([^)]+)\) ]]; then
-                target="${BASH_REMATCH[1]}"
-                # Skip external links
-                if [[ ! $target =~ ^https?:// ]]; then
-                  # Remove anchor from target
-                  clean_target="${target%#*}"
-                  if [[ ! -f "$clean_target" && ! -d "$clean_target" ]]; then
-                    echo "⚠️  Broken link in $file: $target"
-                  fi
+              # Extract the target URL from the markdown link
+              target=$(echo "$link" | sed 's/\[.*\](\([^)]*\))/\1/')
+              # Skip external links
+              if [[ ! "$target" =~ ^https?:// ]]; then
+                # Remove anchor from target
+                clean_target="${target%#*}"
+                if [[ ! -f "$clean_target" && ! -d "$clean_target" ]]; then
+                  echo "⚠️  Broken link in $file: $target"
                 fi
               fi
             done

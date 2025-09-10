@@ -25,6 +25,8 @@ Setting up TypeScript with React requires proper configuration and understanding
 
 ### **Basic Setup**
 
+
+{% raw %}
 ```bash
 # Create React app with TypeScript
 npx create-react-app my-app --template typescript
@@ -33,9 +35,13 @@ npx create-react-app my-app --template typescript
 npm install --save-dev typescript @types/react @types/react-dom
 npm install --save-dev @types/node
 ```
+{% endraw %}
+
 
 ### **TypeScript Configuration**
 
+
+{% raw %}
 ```json
 // tsconfig.json
 {
@@ -58,9 +64,13 @@ npm install --save-dev @types/node
   "include": ["src"]
 }
 ```
+{% endraw %}
+
 
 ### **Package.json Scripts**
 
+
+{% raw %}
 ```json
 {
   "scripts": {
@@ -71,6 +81,8 @@ npm install --save-dev @types/node
   }
 }
 ```
+{% endraw %}
+
 
 ---
 
@@ -78,6 +90,8 @@ npm install --save-dev @types/node
 
 ### **Functional Components**
 
+
+{% raw %}
 ```typescript
 // Basic functional component
 import React from 'react';
@@ -98,9 +112,13 @@ const Button: React.FC<ButtonProps> = ({ children, onClick, disabled = false }) 
 
 export default Button;
 ```
+{% endraw %}
+
 
 ### **Class Components**
 
+
+{% raw %}
 ```typescript
 // Class component with TypeScript
 import React, { Component } from 'react';
@@ -139,9 +157,13 @@ class Counter extends Component<CounterProps, CounterState> {
 
 export default Counter;
 ```
+{% endraw %}
+
 
 ### **Component with Children**
 
+
+{% raw %}
 ```typescript
 // Component with children
 import React from 'react';
@@ -165,6 +187,8 @@ const Card: React.FC<CardProps> = ({ title, children, className }) => {
 
 export default Card;
 ```
+{% endraw %}
+
 
 ---
 
@@ -172,6 +196,8 @@ export default Card;
 
 ### **useState Hook**
 
+
+{% raw %}
 ```typescript
 // useState with TypeScript
 import React, { useState } from 'react';
@@ -213,9 +239,13 @@ const UserForm: React.FC = () => {
 
 export default UserForm;
 ```
+{% endraw %}
+
 
 ### **useEffect Hook**
 
+
+{% raw %}
 ```typescript
 // useEffect with TypeScript
 import React, { useState, useEffect } from 'react';
@@ -264,9 +294,13 @@ const UserList: React.FC = () => {
 
 export default UserList;
 ```
+{% endraw %}
+
 
 ### **Custom Hooks**
 
+
+{% raw %}
 ```typescript
 // Custom hook with TypeScript
 import { useState, useEffect } from 'react';
@@ -321,6 +355,8 @@ const UserProfile: React.FC<{ userId: number }> = ({ userId }) => {
   );
 };
 ```
+{% endraw %}
+
 
 ---
 
@@ -328,6 +364,8 @@ const UserProfile: React.FC<{ userId: number }> = ({ userId }) => {
 
 ### **Props Typing**
 
+
+{% raw %}
 ```typescript
 // Props with optional and required properties
 interface UserCardProps {
@@ -359,9 +397,13 @@ const UserCard: React.FC<UserCardProps> = ({
   );
 };
 ```
+{% endraw %}
+
 
 ### **State Typing**
 
+
+{% raw %}
 ```typescript
 // Complex state with TypeScript
 interface FormState {
@@ -442,6 +484,8 @@ const UserForm: React.FC = () => {
   );
 };
 ```
+{% endraw %}
+
 
 ---
 
@@ -449,6 +493,8 @@ const UserForm: React.FC = () => {
 
 ### **Event Types**
 
+
+{% raw %}
 ```typescript
 // Event handling with TypeScript
 import React, { useState } from 'react';
@@ -495,7 +541,7 @@ const EventHandling: React.FC = () => {
       
       <div
         onMouseMove={handleMouseMove}
-        style={{ width: '100%', height: '200px', border: '1px solid #ccc' }}
+        style={{}}
       >
         Mouse position: {mousePosition.x}, {mousePosition.y}
       </div>
@@ -505,9 +551,13 @@ const EventHandling: React.FC = () => {
 
 export default EventHandling;
 ```
+{% endraw %}
+
 
 ### **Generic Event Handlers**
 
+
+{% raw %}
 ```typescript
 // Generic event handlers
 const useForm = <T extends Record<string, any>>(initialValues: T) => {
@@ -575,6 +625,8 @@ const LoginForm: React.FC = () => {
   );
 };
 ```
+{% endraw %}
+
 
 ---
 
@@ -582,6 +634,8 @@ const LoginForm: React.FC = () => {
 
 ### **Higher-Order Components**
 
+
+{% raw %}
 ```typescript
 // Higher-order component with TypeScript
 import React, { ComponentType } from 'react';
@@ -629,9 +683,13 @@ const App: React.FC = () => {
   );
 };
 ```
+{% endraw %}
+
 
 ### **Render Props**
 
+
+{% raw %}
 ```typescript
 // Render props pattern with TypeScript
 interface DataProviderProps<T> {
@@ -685,13 +743,17 @@ const UserProfile: React.FC<{ userId: number }> = ({ userId }) => (
           <button onClick={refetch}>Refresh</button>
         </div>
       );
-    }}
+}}
   </DataProvider>
 );
 ```
+{% endraw %}
+
 
 ### **Context with TypeScript**
 
+
+{% raw %}
 ```typescript
 // Context with TypeScript
 import React, { createContext, useContext, useState, ReactNode } from 'react';
@@ -734,7 +796,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
   };
 
   return (
-    <UserContext.Provider value={{ user, login, logout }}>
+    <UserContext.Provider value={{}}>
       {children}
     </UserContext.Provider>
   );
@@ -757,6 +819,8 @@ const UserProfile: React.FC = () => {
   );
 };
 ```
+{% endraw %}
+
 
 ---
 
@@ -764,6 +828,8 @@ const UserProfile: React.FC = () => {
 
 ### **1. Use Strict Typing**
 
+
+{% raw %}
 ```typescript
 // ✅ Good: Strict typing
 interface ButtonProps {
@@ -789,9 +855,13 @@ const Button: React.FC<any> = ({ children, onClick, disabled }) => {
   );
 };
 ```
+{% endraw %}
+
 
 ### **2. Use Generic Types for Reusable Components**
 
+
+{% raw %}
 ```typescript
 // ✅ Good: Generic types
 interface ListProps<T> {
@@ -819,9 +889,13 @@ interface ListProps {
   keyExtractor: (item: any) => string | number;
 }
 ```
+{% endraw %}
+
 
 ### **3. Use Proper Event Types**
 
+
+{% raw %}
 ```typescript
 // ✅ Good: Proper event types
 const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -833,9 +907,13 @@ const handleInputChange = (e: any) => {
   setValue(e.target.value);
 };
 ```
+{% endraw %}
+
 
 ### **4. Use Custom Hooks for Logic Reuse**
 
+
+{% raw %}
 ```typescript
 // ✅ Good: Custom hook
 const useCounter = (initialValue: number = 0) => {
@@ -861,6 +939,8 @@ const Counter2: React.FC = () => {
   // ... duplicate logic
 };
 ```
+{% endraw %}
+
 
 ---
 
@@ -869,6 +949,8 @@ const Counter2: React.FC = () => {
 ### **1. How do you type React components in TypeScript?**
 
 **Answer:**
+
+{% raw %}
 ```typescript
 interface ComponentProps {
   title: string;
@@ -879,28 +961,40 @@ const Component: React.FC<ComponentProps> = ({ title, onClick }) => {
   return <button onClick={onClick}>{title}</button>;
 };
 ```
+{% endraw %}
+
 
 ### **2. How do you type React hooks?**
 
 **Answer:**
+
+{% raw %}
 ```typescript
 const [count, setCount] = useState<number>(0);
 const [user, setUser] = useState<User | null>(null);
 ```
+{% endraw %}
+
 
 ### **3. How do you handle events in TypeScript React?**
 
 **Answer:**
+
+{% raw %}
 ```typescript
 const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
   e.preventDefault();
   // Handle click
 };
 ```
+{% endraw %}
+
 
 ### **4. How do you create custom hooks with TypeScript?**
 
 **Answer:**
+
+{% raw %}
 ```typescript
 const useApi = <T>(url: string): { data: T | null; loading: boolean } => {
   const [data, setData] = useState<T | null>(null);
@@ -909,10 +1003,14 @@ const useApi = <T>(url: string): { data: T | null; loading: boolean } => {
   return { data, loading };
 };
 ```
+{% endraw %}
+
 
 ### **5. How do you type React context?**
 
 **Answer:**
+
+{% raw %}
 ```typescript
 interface ContextType {
   user: User | null;
@@ -921,6 +1019,8 @@ interface ContextType {
 
 const Context = createContext<ContextType | undefined>(undefined);
 ```
+{% endraw %}
+
 
 ---
 
