@@ -38,6 +38,11 @@ jobs:
           ruby-version: '3.2'
           bundler-cache: true
 
+      - name: Configure Bundler
+        run: |
+          bundle config set --local frozen false
+          bundle config set --local deployment false
+
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v4
@@ -93,6 +98,11 @@ jobs:
         with:
           ruby-version: '3.2'
           bundler-cache: true
+
+      - name: Configure Bundler
+        run: |
+          bundle config set --local frozen false
+          bundle config set --local deployment false
 
       - name: Test Jekyll build
         run: |
