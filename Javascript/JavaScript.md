@@ -9,68 +9,68 @@
 ## 📚 **Master Table of Contents**
 
 ### 🔹 **1. JavaScript Core Foundation**
-- [01. Execution Context & Call Stack](01%20JavaScript%20Core/01-Execution-Context-Call-Stack.md)
-- [02. Hoisting](01%20JavaScript%20Core/02-Hoisting.md)
-- [03. Scope & Lexical Scope](01%20JavaScript%20Core/03-Scope-Lexical-Scope.md)
-- [04. Closures](01%20JavaScript%20Core/04-Closures.md)
-- [05. Temporal Dead Zone (TDZ)](01%20JavaScript%20Core/05-Temporal-Dead-Zone.md)
-- [06. Primitive vs Reference Types](01%20JavaScript%20Core/06-Primitive-vs-Reference-Types.md)
-- [07. Deep Copy vs Shallow Copy](01%20JavaScript%20Core/07-Deep-Copy-vs-Shallow-Copy.md)
-- [08. Pass by Value vs Pass by Reference](01%20JavaScript%20Core/08-Pass-by-Value-vs-Pass-by-Reference.md)
-- [09. Type Coercion](01%20JavaScript%20Core/09-Type-Coercion.md)
-- [10. The `this` Keyword](01%20JavaScript%20Core/10-The-this-Keyword.md)
-- [11. Prototype & Prototypal Inheritance](01%20JavaScript%20Core/11-Prototype-Prototypal-Inheritance.md)
-- [12. Event Loop & Concurrency](01%20JavaScript%20Core/12-Event-Loop-Concurrency.md)
-- [13. Garbage Collection](01%20JavaScript%20Core/13-Garbage-Collection.md)
+- [01. Execution Context & Call Stack](Javascript/01%20JavaScript%20Core/01-Execution-Context-Call-Stack.md)
+- [02. Hoisting](Javascript/01%20JavaScript%20Core/02-Hoisting.md)
+- [03. Scope & Lexical Scope](Javascript/01%20JavaScript%20Core/03-Scope-Lexical-Scope.md)
+- [04. Closures](Javascript/01%20JavaScript%20Core/04-Closures.md)
+- [05. Temporal Dead Zone (TDZ)](Javascript/01%20JavaScript%20Core/05-Temporal-Dead-Zone.md)
+- [06. Primitive vs Reference Types](Javascript/01%20JavaScript%20Core/06-Primitive-vs-Reference-Types.md)
+- [07. Deep Copy vs Shallow Copy](Javascript/01%20JavaScript%20Core/07-Deep-Copy-vs-Shallow-Copy.md)
+- [08. Pass by Value vs Pass by Reference](Javascript/01%20JavaScript%20Core/08-Pass-by-Value-vs-Pass-by-Reference.md)
+- [09. Type Coercion](Javascript/01%20JavaScript%20Core/09-Type-Coercion.md)
+- [10. The `this` Keyword](Javascript/01%20JavaScript%20Core/10-The-this-Keyword.md)
+- [11. Prototype & Prototypal Inheritance](Javascript/01%20JavaScript%20Core/11-Prototype-Prototypal-Inheritance.md)
+- [12. Event Loop & Concurrency](Javascript/01%20JavaScript%20Core/12-Event-Loop-Concurrency.md)
+- [13. Garbage Collection](Javascript/01%20JavaScript%20Core/13-Garbage-Collection.md)
 
 ### 🔹 **2. Advanced JavaScript Concepts**
-- [01. Functional Programming](02-Advanced-JavaScript-Concepts/01-Functional-Programming.md)
-- [02. Object-Oriented JavaScript](02-Advanced-JavaScript-Concepts/02-Object-Oriented-JavaScript.md)
-- [03. Asynchronous JavaScript](02-Advanced-JavaScript-Concepts/03-Asynchronous-JavaScript.md)
-- [04. Modules](02-Advanced-JavaScript-Concepts/04-Modules.md)
+- [01. Functional Programming](Javascript/02-Advanced-JavaScript-Concepts/01-Functional-Programming.md)
+- [02. Object-Oriented JavaScript](Javascript/02-Advanced-JavaScript-Concepts/02-Object-Oriented-JavaScript.md)
+- [03. Asynchronous JavaScript](Javascript/02-Advanced-JavaScript-Concepts/03-Asynchronous-JavaScript.md)
+- [04. Modules](Javascript/02-Advanced-JavaScript-Concepts/04-Modules.md)
 
 ### 🔹 **3. Enhanced Advanced Topics**
-- [01. Advanced Functional Programming](02-Advanced-JavaScript-Concepts/01a-Advanced-Functional-Programming.md)
-- [02. Advanced OOP JavaScript](02-Advanced-JavaScript-Concepts/02a-Advanced-OOP-JavaScript.md)
-- [03. Advanced Asynchronous JavaScript](02-Advanced-JavaScript-Concepts/03a-Advanced-Asynchronous-JavaScript.md)
-- [04. Advanced Modules](02-Advanced-JavaScript-Concepts/04a-Advanced-Modules.md)
+- [01. Advanced Functional Programming](Javascript/02-Advanced-JavaScript-Concepts/01a-Advanced-Functional-Programming.md)
+- [02. Advanced OOP JavaScript](Javascript/02-Advanced-JavaScript-Concepts/02a-Advanced-OOP-JavaScript.md)
+- [03. Advanced Asynchronous JavaScript](Javascript/02-Advanced-JavaScript-Concepts/03a-Advanced-Asynchronous-JavaScript.md)
+- [04. Advanced Modules](Javascript/02-Advanced-JavaScript-Concepts/04a-Advanced-Modules.md)
 
 ### 🔹 **4. Modern JavaScript Features (ES2020+)**
-- [01. ES2020 Features](02-Advanced-JavaScript-Concepts/05-ES2020-Features.md)
-- [02. ES2021 Features](02-Advanced-JavaScript-Concepts/06-ES2021-Features.md)
-- [03. ES2022 Features](02-Advanced-JavaScript-Concepts/07-ES2022-Features.md)
-- [04. ES2023 Features](02-Advanced-JavaScript-Concepts/08-ES2023-Features.md)
+- [01. ES2020 Features](Javascript/02-Advanced-JavaScript-Concepts/05-ES2020-Features.md)
+- [02. ES2021 Features](Javascript/02-Advanced-JavaScript-Concepts/06-ES2021-Features.md)
+- [03. ES2022 Features](Javascript/02-Advanced-JavaScript-Concepts/07-ES2022-Features.md)
+- [04. ES2023 Features](Javascript/02-Advanced-JavaScript-Concepts/08-ES2023-Features.md)
 
 ### 🔹 **5. Browser & Runtime Internals**
-- [01. DOM & Events Advanced](03-Browser-Runtime-Internals/01-DOM-Events-Advanced.md)
-- [02. Web APIs & Performance](03-Browser-Runtime-Internals/02-Web-APIs-Performance.md)
-- [03. Advanced Browser Features](03-Browser-Runtime-Internals/03-Advanced-Browser-Features.md)
+- [01. DOM & Events Advanced](Javascript/03-Browser-Runtime-Internals/01-DOM-Events-Advanced.md)
+- [02. Web APIs & Performance](Javascript/03-Browser-Runtime-Internals/02-Web-APIs-Performance.md)
+- [03. Advanced Browser Features](Javascript/03-Browser-Runtime-Internals/03-Advanced-Browser-Features.md)
 
 ### 🔹 **6. Advanced Patterns & Architecture**
-- [01. Design Patterns Advanced](04-Advanced-Patterns-Architecture/01-Design-Patterns-Advanced.md)
-- [02. Functional Programming Patterns](04-Advanced-Patterns-Architecture/02-Functional-Programming-Patterns.md)
-- [03. Architecture Patterns](04-Advanced-Patterns-Architecture/03-Architecture-Patterns.md)
+- [01. Design Patterns Advanced](Javascript/04-Advanced-Patterns-Architecture/01-Design-Patterns-Advanced.md)
+- [02. Functional Programming Patterns](Javascript/04-Advanced-Patterns-Architecture/02-Functional-Programming-Patterns.md)
+- [03. Architecture Patterns](Javascript/04-Advanced-Patterns-Architecture/03-Architecture-Patterns.md)
 
 ### 🔹 **7. Performance & Optimization**
-- [01. JavaScript Performance](05-Performance-Optimization/01-JavaScript-Performance.md)
-- [02. Browser Performance](05-Performance-Optimization/02-Browser-Performance.md)
-- [03. Advanced Optimization](05-Performance-Optimization/03-Advanced-Optimization.md)
+- [01. JavaScript Performance](Javascript/05-Performance-Optimization/01-JavaScript-Performance.md)
+- [02. Browser Performance](Javascript/05-Performance-Optimization/02-Browser-Performance.md)
+- [03. Advanced Optimization](Javascript/05-Performance-Optimization/03-Advanced-Optimization.md)
 
 ### 🔹 **8. Testing & Quality Assurance**
-- [01. Testing Strategies](06-Testing-Quality-Assurance/01-Testing-Strategies.md)
-- [02. Code Quality](06-Testing-Quality-Assurance/02-Code-Quality.md)
+- [01. Testing Strategies](Javascript/06-Testing-Quality-Assurance/01-Testing-Strategies.md)
+- [02. Code Quality](Javascript/06-Testing-Quality-Assurance/02-Code-Quality.md)
 
 ### 🔹 **9. Security & Best Practices**
-- [01. JavaScript Security](07-Security-Best-Practices/01-JavaScript-Security.md)
-- [02. Code Security](07-Security-Best-Practices/02-Code-Security.md)
+- [01. JavaScript Security](Javascript/07-Security-Best-Practices/01-JavaScript-Security.md)
+- [02. Code Security](Javascript/07-Security-Best-Practices/02-Code-Security.md)
 
 ### 🔹 **10. Interview Preparation**
-- [01. Common Interview Scenarios](08-Interview-Preparation/01-Common-Interview-Scenarios.md)
-- [02. Behavioral Questions](08-Interview-Preparation/02-Behavioral-Questions.md)
+- [01. Common Interview Scenarios](Javascript/08-Interview-Preparation/01-Common-Interview-Scenarios.md)
+- [02. Behavioral Questions](Javascript/08-Interview-Preparation/02-Behavioral-Questions.md)
 
 ### 🔹 **11. Real-World Applications**
-- [01. Industry-Specific JavaScript](09-Real-World-Applications/01-Industry-Specific-JavaScript.md)
-- [02. Production-Ready Patterns](09-Real-World-Applications/02-Production-Ready-Patterns.md)
+- [01. Industry-Specific JavaScript](Javascript/09-Real-World-Applications/01-Industry-Specific-JavaScript.md)
+- [02. Production-Ready Patterns](Javascript/09-Real-World-Applications/02-Production-Ready-Patterns.md)
 
 ---
 
@@ -82,36 +82,36 @@
 - **Memory Management**: [Garbage Collection](01%20JavaScript%20Core/13-Garbage-Collection.md) | [Deep vs Shallow Copy](01%20JavaScript%20Core/07-Deep-Copy-vs-Shallow-Copy.md)
 
 ### **Modern JavaScript Features**
-- **ES2020+**: [Optional Chaining](02-Advanced-JavaScript-Concepts/05-ES2020-Features.md) | [Nullish Coalescing](02-Advanced-JavaScript-Concepts/05-ES2020-Features.md) | [BigInt](02-Advanced-JavaScript-Concepts/05-ES2020-Features.md)
-- **ES2021+**: [Promise.any()](02-Advanced-JavaScript-Concepts/06-ES2021-Features.md) | [Logical Assignment](02-Advanced-JavaScript-Concepts/06-ES2021-Features.md) | [WeakRef](02-Advanced-JavaScript-Concepts/06-ES2021-Features.md)
-- **ES2022+**: [Class Fields](02-Advanced-JavaScript-Concepts/07-ES2022-Features.md) | [Top-level Await](02-Advanced-JavaScript-Concepts/07-ES2022-Features.md) | [Error.cause](02-Advanced-JavaScript-Concepts/07-ES2022-Features.md)
-- **ES2023+**: [Array Grouping](02-Advanced-JavaScript-Concepts/08-ES2023-Features.md) | [Hashbang Syntax](02-Advanced-JavaScript-Concepts/08-ES2023-Features.md)
+- **ES2020+**: [Optional Chaining](Javascript/02-Advanced-JavaScript-Concepts/05-ES2020-Features.md) | [Nullish Coalescing](Javascript/02-Advanced-JavaScript-Concepts/05-ES2020-Features.md) | [BigInt](Javascript/02-Advanced-JavaScript-Concepts/05-ES2020-Features.md)
+- **ES2021+**: [Promise.any()](Javascript/02-Advanced-JavaScript-Concepts/06-ES2021-Features.md) | [Logical Assignment](Javascript/02-Advanced-JavaScript-Concepts/06-ES2021-Features.md) | [WeakRef](Javascript/02-Advanced-JavaScript-Concepts/06-ES2021-Features.md)
+- **ES2022+**: [Class Fields](Javascript/02-Advanced-JavaScript-Concepts/07-ES2022-Features.md) | [Top-level Await](Javascript/02-Advanced-JavaScript-Concepts/07-ES2022-Features.md) | [Error.cause](Javascript/02-Advanced-JavaScript-Concepts/07-ES2022-Features.md)
+- **ES2023+**: [Array Grouping](Javascript/02-Advanced-JavaScript-Concepts/08-ES2023-Features.md) | [Hashbang Syntax](Javascript/02-Advanced-JavaScript-Concepts/08-ES2023-Features.md)
 
 ### **Advanced Patterns & Architecture**
-- **Design Patterns**: [Revealing Module](04-Advanced-Patterns-Architecture/01-Design-Patterns-Advanced.md) | [Factory Variations](04-Advanced-Patterns-Architecture/01-Design-Patterns-Advanced.md) | [Command Pattern](04-Advanced-Patterns-Architecture/01-Design-Patterns-Advanced.md)
-- **Functional Patterns**: [Railway Oriented Programming](04-Advanced-Patterns-Architecture/02-Functional-Programming-Patterns.md) | [Either/Maybe Monads](04-Advanced-Patterns-Architecture/02-Functional-Programming-Patterns.md) | [Lens Pattern](04-Advanced-Patterns-Architecture/02-Functional-Programming-Patterns.md)
-- **Architecture**: [Micro-frontends](04-Advanced-Patterns-Architecture/03-Architecture-Patterns.md) | [Event Sourcing](04-Advanced-Patterns-Architecture/03-Architecture-Patterns.md) | [CQRS](04-Advanced-Patterns-Architecture/03-Architecture-Patterns.md)
+- **Design Patterns**: [Revealing Module](Javascript/04-Advanced-Patterns-Architecture/01-Design-Patterns-Advanced.md) | [Factory Variations](Javascript/04-Advanced-Patterns-Architecture/01-Design-Patterns-Advanced.md) | [Command Pattern](Javascript/04-Advanced-Patterns-Architecture/01-Design-Patterns-Advanced.md)
+- **Functional Patterns**: [Railway Oriented Programming](Javascript/04-Advanced-Patterns-Architecture/02-Functional-Programming-Patterns.md) | [Either/Maybe Monads](Javascript/04-Advanced-Patterns-Architecture/02-Functional-Programming-Patterns.md) | [Lens Pattern](Javascript/04-Advanced-Patterns-Architecture/02-Functional-Programming-Patterns.md)
+- **Architecture**: [Micro-frontends](Javascript/04-Advanced-Patterns-Architecture/03-Architecture-Patterns.md) | [Event Sourcing](Javascript/04-Advanced-Patterns-Architecture/03-Architecture-Patterns.md) | [CQRS](Javascript/04-Advanced-Patterns-Architecture/03-Architecture-Patterns.md)
 
 ### **Performance & Optimization**
-- **JavaScript Performance**: [V8 Optimization](05-Performance-Optimization/01-JavaScript-Performance.md) | [Hidden Classes](05-Performance-Optimization/01-JavaScript-Performance.md) | [Garbage Collection](05-Performance-Optimization/01-JavaScript-Performance.md)
-- **Browser Performance**: [Critical Rendering Path](05-Performance-Optimization/02-Browser-Performance.md) | [Resource Hints](05-Performance-Optimization/02-Browser-Performance.md) | [Service Workers](05-Performance-Optimization/02-Browser-Performance.md)
-- **Advanced Optimization**: [Memory Management](05-Performance-Optimization/03-Advanced-Optimization.md) | [Algorithm Optimization](05-Performance-Optimization/03-Advanced-Optimization.md) | [Performance Monitoring](05-Performance-Optimization/03-Advanced-Optimization.md)
+- **JavaScript Performance**: [V8 Optimization](Javascript/05-Performance-Optimization/01-JavaScript-Performance.md) | [Hidden Classes](Javascript/05-Performance-Optimization/01-JavaScript-Performance.md) | [Garbage Collection](Javascript/05-Performance-Optimization/01-JavaScript-Performance.md)
+- **Browser Performance**: [Critical Rendering Path](Javascript/05-Performance-Optimization/02-Browser-Performance.md) | [Resource Hints](Javascript/05-Performance-Optimization/02-Browser-Performance.md) | [Service Workers](Javascript/05-Performance-Optimization/02-Browser-Performance.md)
+- **Advanced Optimization**: [Memory Management](Javascript/05-Performance-Optimization/03-Advanced-Optimization.md) | [Algorithm Optimization](Javascript/05-Performance-Optimization/03-Advanced-Optimization.md) | [Performance Monitoring](Javascript/05-Performance-Optimization/03-Advanced-Optimization.md)
 
 ### **Testing & Quality**
-- **Testing Strategies**: [Property-Based Testing](06-Testing-Quality-Assurance/01-Testing-Strategies.md) | [Mutation Testing](06-Testing-Quality-Assurance/01-Testing-Strategies.md) | [Visual Regression](06-Testing-Quality-Assurance/01-Testing-Strategies.md)
-- **Code Quality**: [SonarQube](06-Testing-Quality-Assurance/02-Code-Quality.md) | [Bundle Analysis](06-Testing-Quality-Assurance/02-Code-Quality.md) | [Performance Budgets](06-Testing-Quality-Assurance/02-Code-Quality.md)
+- **Testing Strategies**: [Property-Based Testing](Javascript/06-Testing-Quality-Assurance/01-Testing-Strategies.md) | [Mutation Testing](Javascript/06-Testing-Quality-Assurance/01-Testing-Strategies.md) | [Visual Regression](Javascript/06-Testing-Quality-Assurance/01-Testing-Strategies.md)
+- **Code Quality**: [SonarQube](Javascript/06-Testing-Quality-Assurance/02-Code-Quality.md) | [Bundle Analysis](Javascript/06-Testing-Quality-Assurance/02-Code-Quality.md) | [Performance Budgets](Javascript/06-Testing-Quality-Assurance/02-Code-Quality.md)
 
 ### **Security & Best Practices**
-- **JavaScript Security**: [Content Security Policy](07-Security-Best-Practices/01-JavaScript-Security.md) | [Subresource Integrity](07-Security-Best-Practices/01-JavaScript-Security.md) | [Trusted Types](07-Security-Best-Practices/01-JavaScript-Security.md)
-- **Code Security**: [Dependency Scanning](07-Security-Best-Practices/02-Code-Security.md) | [Secure Coding](07-Security-Best-Practices/02-Code-Security.md) | [OWASP Top 10](07-Security-Best-Practices/02-Code-Security.md)
+- **JavaScript Security**: [Content Security Policy](Javascript/07-Security-Best-Practices/01-JavaScript-Security.md) | [Subresource Integrity](Javascript/07-Security-Best-Practices/01-JavaScript-Security.md) | [Trusted Types](Javascript/07-Security-Best-Practices/01-JavaScript-Security.md)
+- **Code Security**: [Dependency Scanning](Javascript/07-Security-Best-Practices/02-Code-Security.md) | [Secure Coding](Javascript/07-Security-Best-Practices/02-Code-Security.md) | [OWASP Top 10](Javascript/07-Security-Best-Practices/02-Code-Security.md)
 
 ### **Interview Preparation**
-- **Interview Scenarios**: [Live Coding](08-Interview-Preparation/01-Common-Interview-Scenarios.md) | [System Design](08-Interview-Preparation/01-Common-Interview-Scenarios.md) | [Debugging](08-Interview-Preparation/01-Common-Interview-Scenarios.md)
-- **Behavioral Questions**: [JavaScript-Specific](08-Interview-Preparation/02-Behavioral-Questions.md) | [Technical Leadership](08-Interview-Preparation/02-Behavioral-Questions.md) | [Code Quality](08-Interview-Preparation/02-Behavioral-Questions.md)
+- **Interview Scenarios**: [Live Coding](Javascript/08-Interview-Preparation/01-Common-Interview-Scenarios.md) | [System Design](Javascript/08-Interview-Preparation/01-Common-Interview-Scenarios.md) | [Debugging](Javascript/08-Interview-Preparation/01-Common-Interview-Scenarios.md)
+- **Behavioral Questions**: [JavaScript-Specific](Javascript/08-Interview-Preparation/02-Behavioral-Questions.md) | [Technical Leadership](Javascript/08-Interview-Preparation/02-Behavioral-Questions.md) | [Code Quality](Javascript/08-Interview-Preparation/02-Behavioral-Questions.md)
 
 ### **Real-World Applications**
-- **Industry Patterns**: [E-commerce](09-Real-World-Applications/01-Industry-Specific-JavaScript.md) | [Financial Apps](09-Real-World-Applications/01-Industry-Specific-JavaScript.md) | [Gaming](09-Real-World-Applications/01-Industry-Specific-JavaScript.md) | [IoT](09-Real-World-Applications/01-Industry-Specific-JavaScript.md)
-- **Production Patterns**: [Error Handling](09-Real-World-Applications/02-Production-Ready-Patterns.md) | [Logging & Monitoring](09-Real-World-Applications/02-Production-Ready-Patterns.md) | [Deployment](09-Real-World-Applications/02-Production-Ready-Patterns.md) | [DevOps](09-Real-World-Applications/02-Production-Ready-Patterns.md)
+- **Industry Patterns**: [E-commerce](Javascript/09-Real-World-Applications/01-Industry-Specific-JavaScript.md) | [Financial Apps](Javascript/09-Real-World-Applications/01-Industry-Specific-JavaScript.md) | [Gaming](Javascript/09-Real-World-Applications/01-Industry-Specific-JavaScript.md) | [IoT](Javascript/09-Real-World-Applications/01-Industry-Specific-JavaScript.md)
+- **Production Patterns**: [Error Handling](Javascript/09-Real-World-Applications/02-Production-Ready-Patterns.md) | [Logging & Monitoring](Javascript/09-Real-World-Applications/02-Production-Ready-Patterns.md) | [Deployment](Javascript/09-Real-World-Applications/02-Production-Ready-Patterns.md) | [DevOps](Javascript/09-Real-World-Applications/02-Production-Ready-Patterns.md)
 
 ---
 
