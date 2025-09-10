@@ -669,16 +669,16 @@ const MyComponent = () => {
     <PlatformButton
       title="Press Me"
       onPress={() => console.log('Pressed')}
-      style={{
+      style={{% raw %}{{
         ios: { backgroundColor: '#007AFF' },
         android: { backgroundColor: '#2196F3' },
         default: { backgroundColor: '#6C757D' },
-      }}
-      textStyle={{
+      }}{% endraw %}}
+      textStyle={{% raw %}{{
         ios: { fontSize: 16 },
         android: { fontSize: 14 },
         default: { fontSize: 15 },
-      }}
+      }}{% endraw %}}
     />
   );
 };

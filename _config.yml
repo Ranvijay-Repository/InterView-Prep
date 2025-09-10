@@ -1,0 +1,138 @@
+# Jekyll Configuration for Interview Prep Documentation
+
+# Site settings
+title: "Interview Prep Documentation"
+description: "Comprehensive guides for JavaScript, TypeScript, and React Native interview preparation"
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "" # the base hostname & protocol for your site
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+theme: minima
+
+# Exclude files from processing
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+  - .sass-cache/
+  - .jekyll-cache/
+  - .jekyll-metadata
+  - .git
+  - .gitignore
+  - .DS_Store
+  - Thumbs.db
+
+# Include files
+include:
+  - _redirects
+
+# Collections
+collections:
+  javascript:
+    output: true
+    permalink: /:collection/:name/
+  typescript:
+    output: true
+    permalink: /:collection/:name/
+  react-native:
+    output: true
+    permalink: /:collection/:name/
+
+# Default front matter
+defaults:
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "default"
+  - scope:
+      path: ""
+      type: "javascript"
+    values:
+      layout: "default"
+  - scope:
+      path: ""
+      type: "typescript"
+    values:
+      layout: "default"
+  - scope:
+      path: ""
+      type: "react-native"
+    values:
+      layout: "default"
+
+# Kramdown settings
+kramdown:
+  input: GFM
+  hard_wrap: false
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    css_class: 'highlight'
+    span:
+      line_numbers: false
+    block:
+      line_numbers: false
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# Liquid settings - disable processing in code blocks
+liquid:
+  error_mode: warn
+  strict_filters: false
+  strict_variables: false
+
+# Safe mode to prevent arbitrary code execution
+safe: true
+
+# Source directory
+source: .
+
+# Destination directory
+destination: ./_site
+
+# Incremental build
+incremental: false
+
+# Show drafts
+show_drafts: false
+
+# Limit posts
+limit_posts: 0
+
+# Future posts
+future: false
+
+# Unpublished posts
+unpublished: false
+
+# Timezone
+timezone: null
+
+# Encoding
+encoding: utf-8
+
+# Markdown extensions
+markdown_ext: "markdown,mkdown,mkdn,mkd,md"
+
+# Textile extensions
+textile_ext: "textile"
+
+# Exclude from processing
+exclude_from_processing:
+  - node_modules
+  - vendor
+  - .git
+  - .sass-cache
+  - .jekyll-cache
+  - .jekyll-metadata

@@ -1,0 +1,131 @@
+name: Deploy to GitHub Pages
+
+# Only run on PR merges to production branch
+on:
+  push:
+    branches:
+      - production
+  # Also trigger on pull request events to production for testing
+  pull_request:
+    branches:
+      - production
+
+# Set permissions for GitHub Pages deployment
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  # Build job (runs on PR merges and PR events)
+  build:
+    if: github.event_name == 'pull_request' || (github.event_name == 'push' && github.ref == 'refs/heads/production' && contains(github.event.head_commit.message, 'Merge pull request'))
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Fetch all history for proper Jekyll processing
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.1'
+          bundler-cache: true
+
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v4
+
+      - name: Build with Jekyll
+        run: |
+          bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
+        env:
+          JEKYLL_ENV: production
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./_site
+
+  # Deploy job (only runs on PR merges to production, not on direct pushes)
+  deploy:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/production' && contains(github.event.head_commit.message, 'Merge pull request')
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Verify PR merge
+        run: |
+          echo "🔍 Verifying this is a PR merge..."
+          echo "Commit message: ${{ github.event.head_commit.message }}"
+          if [[ "${{ github.event.head_commit.message }}" == *"Merge pull request"* ]]; then
+            echo "✅ Confirmed: This is a PR merge commit"
+          else
+            echo "❌ Error: This is not a PR merge commit"
+            echo "Deployment blocked - only PR merges are allowed"
+            exit 1
+          fi
+      
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+  # Test job (runs on PR to production)
+  test:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.1'
+          bundler-cache: true
+
+      - name: Test Jekyll build
+        run: |
+          bundle exec jekyll build --baseurl "/${{ github.event.pull_request.number }}"
+        env:
+          JEKYLL_ENV: production
+
+      - name: Check for broken links
+        run: |
+          # Install htmlproofer if not already available
+          gem install html-proofer
+          # Check for broken links (excluding external links for faster testing)
+          htmlproofer ./_site --disable-external --allow-hash-href --empty-alt-ignore
+
+      - name: Comment PR with build status
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+            
+            // Check if _site directory exists and has content
+            const siteDir = './_site';
+            const hasContent = fs.existsSync(siteDir) && fs.readdirSync(siteDir).length > 0;
+            
+            const status = hasContent ? '✅' : '❌';
+            const message = hasContent 
+              ? 'Jekyll build successful! Ready for deployment.' 
+              : 'Jekyll build failed. Please check the logs.';
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `${status} **Build Status**: ${message}\n\nThis is a test build for PR #${{ github.event.pull_request.number }}. The actual deployment will happen when this PR is merged to production.`
+            });
