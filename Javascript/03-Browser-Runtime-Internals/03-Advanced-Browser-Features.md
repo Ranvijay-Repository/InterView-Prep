@@ -44,6 +44,7 @@
 - **Integration**: Seamless JavaScript interop
 
 ### ASCII Diagram: WebAssembly Execution Flow
+
 ```
 WEBASSEMBLY EXECUTION FLOW
 ┌─────────────────────────────────┐
@@ -79,6 +80,7 @@ WEBASSEMBLY EXECUTION FLOW
         └───────────────┘
 ```
 
+
 ### Use Cases:
 - **Performance-Critical Code**: Complex algorithms and computations
 - **Game Development**: High-performance game engines
@@ -100,6 +102,7 @@ WEBASSEMBLY EXECUTION FLOW
 - **Cross-Platform**: Consistent graphics across devices
 
 ### ASCII Diagram: WebGL Rendering Pipeline
+
 ```
 WEBGL RENDERING PIPELINE
 ┌─────────────────────────────────┐
@@ -132,6 +135,7 @@ WEBGL RENDERING PIPELINE
         └───────────────┘
 ```
 
+
 ### Optimization Techniques:
 - **Batch Rendering**: Group similar draw calls
 - **Texture Atlasing**: Combine multiple textures
@@ -153,6 +157,7 @@ WEBGL RENDERING PIPELINE
 - **Scalability**: Handle growing data requirements
 
 ### ASCII Diagram: IndexedDB Architecture
+
 ```
 INDEXEDDB ARCHITECTURE
 ┌─────────────────────────────────┐
@@ -185,6 +190,7 @@ INDEXEDDB ARCHITECTURE
         │  Persistence  │
         └───────────────┘
 ```
+
 
 ### Storage Features:
 - **Object Stores**: Store JavaScript objects

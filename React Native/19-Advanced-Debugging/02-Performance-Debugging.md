@@ -26,6 +26,7 @@ Performance debugging involves identifying bottlenecks, measuring performance me
 
 ### **Performance Debugging Framework**
 
+
 ```
 ┌─────────────────────────────────────┐
 │        Performance Debugging       │
@@ -54,6 +55,7 @@ Performance debugging involves identifying bottlenecks, measuring performance me
 └─────────────────────────────────────┘
 ```
 
+
 ### **Key Performance Metrics**
 - **Startup Time**: App launch to first screen
 - **Time to Interactive**: When app becomes responsive
@@ -69,6 +71,7 @@ Performance debugging involves identifying bottlenecks, measuring performance me
 ### **Performance Measurement**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Performance measurement utilities
 const performanceUtils = {
@@ -98,9 +101,11 @@ const performanceUtils = {
 };
 ```
 
+
 ### **React Performance Profiling**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // React Profiler for component performance
 import { Profiler } from 'react';
@@ -127,9 +132,11 @@ const MyComponent = () => {
 };
 ```
 
+
 ### **JavaScript Performance Optimization**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Memoization for expensive calculations
 import { useMemo, useCallback } from 'react';
@@ -159,9 +166,11 @@ const ExpensiveComponent = ({ data, filter }) => {
 };
 ```
 
+
 ### **Bundle Analysis**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```bash
 # Analyze bundle size
 npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output android-bundle.js --assets-dest android-assets
@@ -171,6 +180,7 @@ npm install --save-dev react-native-bundle-visualizer
 npx react-native-bundle-visualizer
 ```
 
+
 ---
 
 ## 📱 **Native Performance**
@@ -178,6 +188,7 @@ npx react-native-bundle-visualizer
 ### **Native Performance Monitoring**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Native performance monitoring
 import { NativeModules } from 'react-native';
@@ -207,9 +218,11 @@ const PerformanceMonitor = {
 };
 ```
 
+
 ### **Bridge Performance**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Optimize bridge communication
 const BridgeOptimizer = {
@@ -243,9 +256,11 @@ const BridgeOptimizer = {
 };
 ```
 
+
 ### **Native Module Performance**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Optimize native module calls
 const OptimizedNativeModule = {
@@ -273,6 +288,7 @@ const OptimizedNativeModule = {
 };
 ```
 
+
 ---
 
 ## 🧠 **Memory Performance**
@@ -280,6 +296,7 @@ const OptimizedNativeModule = {
 ### **Memory Monitoring**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Memory monitoring utilities
 const MemoryMonitor = {
@@ -321,9 +338,11 @@ const MemoryMonitor = {
 };
 ```
 
+
 ### **Memory Optimization**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Memory optimization techniques
 const MemoryOptimizer = {
@@ -366,6 +385,7 @@ const MemoryOptimizer = {
 };
 ```
 
+
 ---
 
 ## 🌐 **Network Performance**
@@ -373,6 +393,7 @@ const MemoryOptimizer = {
 ### **Network Performance Monitoring**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Network performance monitoring
 const NetworkMonitor = {
@@ -417,9 +438,11 @@ const NetworkMonitor = {
 };
 ```
 
+
 ### **Network Optimization**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Network optimization strategies
 const NetworkOptimizer = {
@@ -466,6 +489,7 @@ const NetworkOptimizer = {
 };
 ```
 
+
 ---
 
 ## 🎨 **UI Performance**
@@ -473,6 +497,7 @@ const NetworkOptimizer = {
 ### **UI Performance Monitoring**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // UI performance monitoring
 const UIPerformanceMonitor = {
@@ -502,9 +527,11 @@ const UIPerformanceMonitor = {
 };
 ```
 
+
 ### **UI Optimization**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // UI optimization techniques
 const UIOptimizer = {
@@ -544,6 +571,7 @@ const UIOptimizer = {
 };
 ```
 
+
 ---
 
 ## 📊 **Performance Monitoring**
@@ -551,6 +579,7 @@ const UIOptimizer = {
 ### **Performance Metrics Collection**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Performance metrics collection
 const PerformanceMetrics = {
@@ -578,9 +607,11 @@ const PerformanceMetrics = {
 };
 ```
 
+
 ### **Performance Dashboard**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Performance dashboard component
 const PerformanceDashboard = () => {
@@ -608,6 +639,7 @@ const PerformanceDashboard = () => {
 };
 ```
 
+
 ---
 
 ## ✅ **Best Practices**
@@ -615,6 +647,7 @@ const PerformanceDashboard = () => {
 ### **1. Performance Testing**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Performance testing utilities
 const PerformanceTester = {
@@ -643,9 +676,11 @@ const PerformanceTester = {
 };
 ```
 
+
 ### **2. Performance Budgets**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Performance budgets
 const PerformanceBudgets = {
@@ -664,6 +699,7 @@ const PerformanceBudgets = {
   }
 };
 ```
+
 
 ---
 

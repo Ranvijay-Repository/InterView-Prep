@@ -26,6 +26,7 @@ Native debugging involves debugging platform-specific code, native modules, and 
 
 ### **Native Debugging Ecosystem**
 
+
 ```
 ┌─────────────────────────────────────┐
 │        Native Debugging            │
@@ -53,6 +54,7 @@ Native debugging involves debugging platform-specific code, native modules, and 
 └─────────────────────────────────────┘
 ```
 
+
 ### **Key Debugging Areas**
 - **Native Module Issues**: Custom native code problems
 - **Bridge Communication**: JavaScript-Native communication
@@ -67,6 +69,7 @@ Native debugging involves debugging platform-specific code, native modules, and 
 ### **Xcode Debugger Setup**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```bash
 # Open iOS project in Xcode
 cd ios && open YourApp.xcworkspace
@@ -77,9 +80,11 @@ cd ios && open YourApp.xcworkspace
 xcodebuild -workspace YourApp.xcworkspace -scheme YourApp -configuration Debug
 ```
 
+
 ### **iOS Native Module Debugging**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```swift
 // iOS native module with debugging
 import Foundation
@@ -113,9 +118,11 @@ class DebugModule: NSObject {
 }
 ```
 
+
 ### **iOS Console Logging**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```swift
 // iOS console logging utilities
 import Foundation
@@ -153,9 +160,11 @@ func performOperation(_ resolver: @escaping RCTPromiseResolveBlock, rejecter: @e
 }
 ```
 
+
 ### **iOS Instruments Profiling**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```bash
 # Use Instruments for profiling
 # Product -> Profile (Cmd+I) in Xcode
@@ -169,6 +178,7 @@ instruments -t "Allocations" -D memory.trace YourApp.app
 instruments -t "Network" -D network.trace YourApp.app
 ```
 
+
 ---
 
 ## 🤖 **Android Native Debugging**
@@ -176,6 +186,7 @@ instruments -t "Network" -D network.trace YourApp.app
 ### **Android Studio Debugger Setup**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```bash
 # Open Android project in Android Studio
 cd android && ./gradlew assembleDebug
@@ -187,9 +198,11 @@ cd android && ./gradlew assembleDebug
 adb shell am start -n com.yourapp/.MainActivity
 ```
 
+
 ### **Android Native Module Debugging**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```java
 // Android native module with debugging
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -231,9 +244,11 @@ public class DebugModule extends ReactContextBaseJavaModule {
 }
 ```
 
+
 ### **Android Logcat Debugging**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```bash
 # View Android logs
 adb logcat
@@ -253,9 +268,11 @@ adb logcat -c
 adb logcat > debug.log
 ```
 
+
 ### **Android Native Logging**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```java
 // Android native logging utilities
 import android.util.Log;
@@ -307,6 +324,7 @@ public void performOperation(Promise promise) {
 }
 ```
 
+
 ---
 
 ## 🔗 **Native Module Debugging**
@@ -314,6 +332,7 @@ public void performOperation(Promise promise) {
 ### **Native Module Interface Debugging**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // JavaScript side debugging
 import { NativeModules } from 'react-native';
@@ -343,9 +362,11 @@ const debugNativeCall = async (methodName, ...args) => {
 const result = await debugNativeCall('logMessage', 'Hello from JavaScript');
 ```
 
+
 ### **Native Module Error Handling**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Robust native module error handling
 const SafeNativeModule = {
@@ -383,6 +404,7 @@ const SafeNativeModule = {
 };
 ```
 
+
 ---
 
 ## 🌉 **Bridge Debugging**
@@ -390,6 +412,7 @@ const SafeNativeModule = {
 ### **Bridge Communication Debugging**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Bridge communication debugging
 const BridgeDebugger = {
@@ -446,9 +469,11 @@ const BridgeDebugger = {
 };
 ```
 
+
 ### **JSI Debugging (New Architecture)**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // JSI debugging for New Architecture
 const JSIDebugger = {
@@ -483,6 +508,7 @@ const JSIDebugger = {
 };
 ```
 
+
 ---
 
 ## ⚡ **Native Performance**
@@ -490,6 +516,7 @@ const JSIDebugger = {
 ### **Native Performance Monitoring**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Native performance monitoring
 const NativePerformanceMonitor = {
@@ -540,9 +567,11 @@ const NativePerformanceMonitor = {
 };
 ```
 
+
 ### **Native Memory Monitoring**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Native memory monitoring
 const NativeMemoryMonitor = {
@@ -579,6 +608,7 @@ const NativeMemoryMonitor = {
 };
 ```
 
+
 ---
 
 ## 🔄 **Cross-Platform Debugging**
@@ -586,6 +616,7 @@ const NativeMemoryMonitor = {
 ### **Cross-Platform Debugging Strategy**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Cross-platform debugging utilities
 const CrossPlatformDebugger = {
@@ -623,9 +654,11 @@ const CrossPlatformDebugger = {
 };
 ```
 
+
 ### **Cross-Platform Testing**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Cross-platform testing utilities
 const CrossPlatformTester = {
@@ -659,6 +692,7 @@ const CrossPlatformTester = {
 };
 ```
 
+
 ---
 
 ## ✅ **Best Practices**
@@ -666,6 +700,7 @@ const CrossPlatformTester = {
 ### **1. Native Debugging Best Practices**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Native debugging best practices
 const NativeDebuggingBestPractices = {
@@ -710,9 +745,11 @@ const NativeDebuggingBestPractices = {
 };
 ```
 
+
 ### **2. Debugging Tools Integration**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Debugging tools integration
 const DebuggingToolsIntegration = {
@@ -744,6 +781,7 @@ const DebuggingToolsIntegration = {
   }
 };
 ```
+
 
 ---
 

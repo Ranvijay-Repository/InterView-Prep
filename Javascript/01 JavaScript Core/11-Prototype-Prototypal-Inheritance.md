@@ -43,6 +43,7 @@
 The prototype chain is a series of linked objects that JavaScript traverses when looking for properties.
 
 ### ASCII Diagram: Prototype Chain
+
 ```
 PROTOTYPE CHAIN STRUCTURE
 ┌─────────────────────────────────┐
@@ -66,6 +67,7 @@ PROTOTYPE CHAIN STRUCTURE
 └─────────────────────────────────┘
 ```
 
+
 ### How Property Lookup Works:
 1. Check if property exists on the object itself
 2. If not found, check the object's prototype (`__proto__`)
@@ -87,6 +89,7 @@ PROTOTYPE CHAIN STRUCTURE
 - **Read-only** in modern JavaScript (use `Object.getPrototypeOf()`)
 
 ### ASCII Diagram: Prototype vs __proto__
+
 ```
 CONSTRUCTOR FUNCTION          INSTANCE OBJECT
 ┌─────────────────────────┐   ┌─────────────────────────┐
@@ -109,6 +112,7 @@ CONSTRUCTOR FUNCTION          INSTANCE OBJECT
                             └─────────────────────────┘
 ```
 
+
 ---
 
 ## 🏗️ Object.create()
@@ -116,11 +120,14 @@ CONSTRUCTOR FUNCTION          INSTANCE OBJECT
 `Object.create()` creates a new object with a specified prototype.
 
 ### Syntax:
+
 ```javascript
 Object.create(proto, propertiesObject)
 ```
 
+
 ### ASCII Diagram: Object.create()
+
 ```
 OBJECT.CREATE FLOW
 ┌─────────────────────────────────┐
@@ -142,6 +149,7 @@ OBJECT.CREATE FLOW
 └─────────────────────────────────┘
 ```
 
+
 ---
 
 ## 🔨 Constructor Functions
@@ -149,6 +157,7 @@ OBJECT.CREATE FLOW
 Constructor functions create objects with shared behavior through prototypes.
 
 ### ASCII Diagram: Constructor Function
+
 ```
 CONSTRUCTOR FUNCTION PATTERN
 ┌─────────────────────────────────┐
@@ -172,6 +181,7 @@ CONSTRUCTOR FUNCTION PATTERN
 └─────────────────────────────────┘
 ```
 
+
 ---
 
 ## 🎓 ES6 Classes
@@ -179,6 +189,7 @@ CONSTRUCTOR FUNCTION PATTERN
 ES6 classes are syntactic sugar over constructor functions and prototypes.
 
 ### ASCII Diagram: ES6 Class
+
 ```
 ES6 CLASS (SYNTACTIC SUGAR)
 ┌─────────────────────────────────┐
@@ -202,28 +213,35 @@ ES6 CLASS (SYNTACTIC SUGAR)
 └─────────────────────────────────┘
 ```
 
+
 ---
 
 ## 🔄 Inheritance Patterns
 
 ### 1. **Prototypal Inheritance**
+
 ```javascript
 const animal = { makeSound() { return "Sound"; } };
 const dog = Object.create(animal);
 ```
 
+
 ### 2. **Constructor Inheritance**
+
 ```javascript
 function Animal() {}
 function Dog() { Animal.call(this); }
 Dog.prototype = Object.create(Animal.prototype);
 ```
 
+
 ### 3. **Class Inheritance**
+
 ```javascript
 class Animal {}
 class Dog extends Animal {}
 ```
+
 
 ---
 
@@ -232,6 +250,7 @@ class Dog extends Animal {}
 ### Example 1: Basic Prototype Chain
 <div style="position: relative;">
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
+
 
 ```javascript
 console.log("=== BASIC PROTOTYPE CHAIN ===");
@@ -289,11 +308,13 @@ console.log("dog.hasOwnProperty('name'):", dog.hasOwnProperty('name'));         
 console.log("dog.hasOwnProperty('type'):", dog.hasOwnProperty('type'));           // false
 console.log("dog.hasOwnProperty('makeSound'):", dog.hasOwnProperty('makeSound')); // true (overridden)
 ```
+
 </div>
 
 ### Example 2: Constructor Functions and Prototypes
 <div style="position: relative;">
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
+
 
 ```javascript
 console.log("=== CONSTRUCTOR FUNCTIONS AND PROTOTYPES ===");
@@ -355,11 +376,13 @@ const anonymous = Person.createAnonymous();
 console.log("anonymous:", anonymous);
 console.log("anonymous.greet():", anonymous.greet());
 ```
+
 </div>
 
 ### Example 3: Inheritance with Constructor Functions
 <div style="position: relative;">
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
+
 
 ```javascript
 console.log("=== INHERITANCE WITH CONSTRUCTOR FUNCTIONS ===");
@@ -436,11 +459,13 @@ console.log("dog.hasOwnProperty('breed'):", dog.hasOwnProperty('breed'));       
 console.log("dog.hasOwnProperty('makeSound'):", dog.hasOwnProperty('makeSound')); // false (inherited)
 console.log("dog.hasOwnProperty('getInfo'):", dog.hasOwnProperty('getInfo'));     // false (inherited)
 ```
+
 </div>
 
 ### Example 4: ES6 Classes and Inheritance
 <div style="position: relative;">
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
+
 
 ```javascript
 console.log("=== ES6 CLASSES AND INHERITANCE ===");
@@ -536,11 +561,13 @@ console.log("Car.prototype.isPrototypeOf(car):", Car.prototype.isPrototypeOf(car
 console.log("Vehicle.prototype.isPrototypeOf(car):", Vehicle.prototype.isPrototypeOf(car));   // true
 console.log("Object.prototype.isPrototypeOf(car):", Object.prototype.isPrototypeOf(car));     // true
 ```
+
 </div>
 
 ### Example 5: Advanced Prototype Patterns
 <div style="position: relative;">
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
+
 
 ```javascript
 console.log("=== ADVANCED PROTOTYPE PATTERNS ===");
@@ -639,6 +666,7 @@ console.log("safeHasProperty(testObj, 'toString'):", safeHasProperty(testObj, 't
 Object.freeze(Object.prototype);
 console.log("Object.prototype is frozen:", Object.isFrozen(Object.prototype));                // true
 ```
+
 </div>
 
 ---
@@ -646,6 +674,7 @@ console.log("Object.prototype is frozen:", Object.isFrozen(Object.prototype));  
 ## ⚠️ Common Pitfalls
 
 ### Pitfall 1: Forgetting to Set Constructor
+
 ```javascript
 // ❌ WRONG: Constructor reference is wrong
 function Dog() {}
@@ -658,7 +687,9 @@ Dog.prototype = Object.create(Animal.prototype);
 Dog.prototype.constructor = Dog;  // Fix it!
 ```
 
+
 ### Pitfall 2: Modifying Built-in Prototypes
+
 ```javascript
 // ❌ WRONG: Modifying built-in prototypes
 Array.prototype.customMethod = function() { return "custom"; };
@@ -669,7 +700,9 @@ const myArray = Object.create(Array.prototype);
 myArray.customMethod = function() { return "custom"; };
 ```
 
+
 ### Pitfall 3: Prototype Chain Too Deep
+
 ```javascript
 // ❌ WRONG: Very deep inheritance chain
 A → B → C → D → E → F → G
@@ -679,6 +712,7 @@ A → B → C → D → E → F → G
 A → B (shallow)
 A → C (composition)
 ```
+
 
 ---
 

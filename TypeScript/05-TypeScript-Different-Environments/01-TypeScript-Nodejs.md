@@ -25,6 +25,7 @@ Setting up TypeScript for Node.js development requires proper configuration and 
 
 ### **Basic Setup**
 
+
 ```bash
 # Initialize Node.js project
 npm init -y
@@ -37,7 +38,9 @@ npm install --save-dev ts-node nodemon
 npm install --save-dev @types/express @types/cors @types/helmet
 ```
 
+
 ### **Package.json Scripts**
+
 
 ```json
 {
@@ -51,7 +54,9 @@ npm install --save-dev @types/express @types/cors @types/helmet
 }
 ```
 
+
 ### **Basic TypeScript Configuration**
+
 
 ```json
 // tsconfig.json
@@ -74,11 +79,13 @@ npm install --save-dev @types/express @types/cors @types/helmet
 }
 ```
 
+
 ---
 
 ## ⚙️ **Project Configuration**
 
 ### **Advanced TypeScript Configuration**
+
 
 ```json
 // tsconfig.json - Production configuration
@@ -106,7 +113,9 @@ npm install --save-dev @types/express @types/cors @types/helmet
 }
 ```
 
+
 ### **Development Configuration**
+
 
 ```json
 // tsconfig.dev.json
@@ -121,7 +130,9 @@ npm install --save-dev @types/express @types/cors @types/helmet
 }
 ```
 
+
 ### **Nodemon Configuration**
+
 
 ```json
 // nodemon.json
@@ -133,11 +144,13 @@ npm install --save-dev @types/express @types/cors @types/helmet
 }
 ```
 
+
 ---
 
 ## 🔧 **Node.js Specific Types**
 
 ### **Built-in Node.js Types**
+
 
 ```typescript
 // Node.js built-in modules
@@ -173,7 +186,9 @@ server.listen(3000, () => {
 });
 ```
 
+
 ### **Custom Node.js Types**
+
 
 ```typescript
 // Custom types for Node.js applications
@@ -209,7 +224,9 @@ declare global {
 }
 ```
 
+
 ### **Event Emitter Types**
+
 
 ```typescript
 // Custom event emitter with typed events
@@ -243,11 +260,13 @@ appEvents.on('userCreated', (user) => {
 appEvents.emit('userCreated', { id: 1, name: 'John', email: 'john@example.com' });
 ```
 
+
 ---
 
 ## 🚀 **Express.js Integration**
 
 ### **Basic Express Setup**
+
 
 ```typescript
 // src/app.ts
@@ -277,7 +296,9 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
 export default app;
 ```
 
+
 ### **Typed Express Routes**
+
 
 ```typescript
 // src/routes/users.ts
@@ -323,7 +344,9 @@ router.post('/', async (req: Request<{}, User, CreateUserRequest>, res: Response
 export default router;
 ```
 
+
 ### **Custom Request Types**
+
 
 ```typescript
 // src/types/express.d.ts
@@ -358,11 +381,13 @@ export const authenticate = async (req: Request, res: Response, next: NextFuncti
 };
 ```
 
+
 ---
 
 ## 🗄️ **Database Integration**
 
 ### **MongoDB with Mongoose**
+
 
 ```typescript
 // src/models/User.ts
@@ -387,7 +412,9 @@ const UserSchema = new Schema<IUser>({
 export const User = mongoose.model<IUser>('User', UserSchema);
 ```
 
+
 ### **PostgreSQL with TypeORM**
+
 
 ```typescript
 // src/entities/User.ts
@@ -415,7 +442,9 @@ export class User {
 }
 ```
 
+
 ### **Database Service Layer**
+
 
 ```typescript
 // src/services/UserService.ts
@@ -447,11 +476,13 @@ export class UserService {
 }
 ```
 
+
 ---
 
 ## 🧪 **Testing with TypeScript**
 
 ### **Jest Configuration**
+
 
 ```json
 // jest.config.js
@@ -472,7 +503,9 @@ module.exports = {
 };
 ```
 
+
 ### **Unit Tests**
+
 
 ```typescript
 // src/__tests__/UserService.test.ts
@@ -522,7 +555,9 @@ describe('UserService', () => {
 });
 ```
 
+
 ### **Integration Tests**
+
 
 ```typescript
 // src/__tests__/integration/users.test.ts
@@ -569,11 +604,13 @@ describe('Users API', () => {
 });
 ```
 
+
 ---
 
 ## ✅ **Best Practices**
 
 ### **1. Use Strict Type Checking**
+
 
 ```typescript
 // ✅ Good: Strict type checking
@@ -599,7 +636,9 @@ const createUser = (userData: any): any => {
 };
 ```
 
+
 ### **2. Use Environment Variables**
+
 
 ```typescript
 // ✅ Good: Environment variables
@@ -617,7 +656,9 @@ const config = {
 };
 ```
 
+
 ### **3. Use Dependency Injection**
+
 
 ```typescript
 // ✅ Good: Dependency injection
@@ -640,7 +681,9 @@ class UserController {
 }
 ```
 
+
 ### **4. Use Error Handling**
+
 
 ```typescript
 // ✅ Good: Proper error handling
@@ -661,6 +704,7 @@ const getUserById = async (id: string): Promise<User> => {
   return User.findById(id);
 };
 ```
+
 
 ---
 
@@ -685,6 +729,7 @@ const getUserById = async (id: string): Promise<User> => {
 ### **3. How do you handle environment variables in TypeScript?**
 
 **Answer:**
+
 ```typescript
 interface ProcessEnv {
   NODE_ENV: 'development' | 'production' | 'test';
@@ -698,6 +743,7 @@ declare global {
   }
 }
 ```
+
 
 ### **4. How do you test TypeScript Node.js applications?**
 

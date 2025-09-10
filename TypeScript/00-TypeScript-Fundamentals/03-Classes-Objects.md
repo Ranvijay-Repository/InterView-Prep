@@ -26,6 +26,7 @@ TypeScript classes provide a way to define object-oriented structures with type 
 
 ### **Basic Class Declaration**
 
+
 ```typescript
 class Person {
   name: string;
@@ -46,7 +47,9 @@ const person = new Person("John", 30);
 console.log(person.greet()); // "Hello, I'm John and I'm 30 years old."
 ```
 
+
 ### **Class with Optional Properties**
+
 
 ```typescript
 class User {
@@ -67,6 +70,7 @@ const user1 = new User(1, "john_doe");
 const user2 = new User(2, "jane_doe", "jane@example.com");
 ```
 
+
 ---
 
 ## 📊 **Class Properties**
@@ -74,6 +78,7 @@ const user2 = new User(2, "jane_doe", "jane@example.com");
 TypeScript provides several ways to define and initialize class properties.
 
 ### **Property Initialization**
+
 
 ```typescript
 class Rectangle {
@@ -99,7 +104,9 @@ class Rectangle {
 }
 ```
 
+
 ### **Property Parameter Shorthand**
+
 
 ```typescript
 class Point {
@@ -127,6 +134,7 @@ class Point {
 }
 ```
 
+
 ---
 
 ## 🔧 **Class Methods**
@@ -134,6 +142,7 @@ class Point {
 TypeScript classes support various types of methods with full type safety.
 
 ### **Instance Methods**
+
 
 ```typescript
 class Calculator {
@@ -161,7 +170,9 @@ class Calculator {
 }
 ```
 
+
 ### **Static Methods**
+
 
 ```typescript
 class MathUtils {
@@ -181,7 +192,9 @@ const area = MathUtils.circleArea(5);
 const dist = MathUtils.distance(0, 0, 3, 4);
 ```
 
+
 ### **Getter and Setter Methods**
+
 
 ```typescript
 class Temperature {
@@ -213,6 +226,7 @@ temp.celsius = 25;
 console.log(temp.fahrenheit); // 77
 ```
 
+
 ---
 
 ## 🔒 **Access Modifiers**
@@ -220,6 +234,7 @@ console.log(temp.fahrenheit); // 77
 TypeScript provides access modifiers to control visibility of class members.
 
 ### **Public, Private, and Protected**
+
 
 ```typescript
 class BankAccount {
@@ -253,7 +268,9 @@ class BankAccount {
 }
 ```
 
+
 ### **Readonly Modifier**
+
 
 ```typescript
 class Product {
@@ -274,6 +291,7 @@ class Product {
 }
 ```
 
+
 ---
 
 ## 🔄 **Inheritance**
@@ -281,6 +299,7 @@ class Product {
 TypeScript supports class inheritance with the `extends` keyword.
 
 ### **Basic Inheritance**
+
 
 ```typescript
 class Animal {
@@ -324,7 +343,9 @@ console.log(dog.makeSound()); // "Woof!"
 console.log(dog.getInfo()); // "Buddy is 3 years old"
 ```
 
+
 ### **Method Overriding**
+
 
 ```typescript
 class Vehicle {
@@ -353,6 +374,7 @@ class Car extends Vehicle {
 }
 ```
 
+
 ---
 
 ## 🎭 **Abstract Classes**
@@ -360,6 +382,7 @@ class Car extends Vehicle {
 Abstract classes provide a base for other classes but cannot be instantiated directly.
 
 ### **Abstract Class Definition**
+
 
 ```typescript
 abstract class Shape {
@@ -414,6 +437,7 @@ console.log(circle.calculateArea()); // 78.54
 console.log(rectangle.calculateArea()); // 24
 ```
 
+
 ---
 
 ## ⚖️ **Interfaces vs Classes**
@@ -421,6 +445,7 @@ console.log(rectangle.calculateArea()); // 24
 Understanding when to use interfaces vs classes is crucial in TypeScript.
 
 ### **When to Use Classes**
+
 
 ```typescript
 // Use classes when you need:
@@ -452,7 +477,9 @@ class DatabaseConnection {
 }
 ```
 
+
 ### **When to Use Interfaces**
+
 
 ```typescript
 // Use interfaces when you need:
@@ -484,11 +511,13 @@ class Sprite implements Drawable, Movable {
 }
 ```
 
+
 ---
 
 ## ✅ **Best Practices**
 
 ### **1. Use Access Modifiers Appropriately**
+
 
 ```typescript
 // ✅ Good: Proper use of access modifiers
@@ -513,7 +542,9 @@ class UserService {
 }
 ```
 
+
 ### **2. Prefer Composition Over Inheritance**
+
 
 ```typescript
 // ✅ Good: Composition
@@ -542,7 +573,9 @@ class Car extends MotorVehicle { }
 class SportsCar extends Car { }
 ```
 
+
 ### **3. Use Abstract Classes for Common Behavior**
+
 
 ```typescript
 // ✅ Good: Abstract class for shared behavior
@@ -562,6 +595,7 @@ abstract class Repository<T> {
 }
 ```
 
+
 ---
 
 ## ❓ **Common Interview Questions**
@@ -571,6 +605,7 @@ abstract class Repository<T> {
 **Answer:**
 - **Classes**: Provide implementation, can be instantiated, support inheritance, have access modifiers
 - **Interfaces**: Define contracts, cannot be instantiated, support multiple inheritance, are compile-time only
+
 
 ```typescript
 // Interface - contract only
@@ -585,6 +620,7 @@ class Circle implements Drawable {
   }
 }
 ```
+
 
 ### **2. How do access modifiers work in TypeScript?**
 
@@ -618,6 +654,7 @@ Inheritance uses the `extends` keyword:
 - **`const`**: Cannot be reassigned, must be initialized at declaration
 - **`readonly`**: Cannot be modified after initialization, can be initialized in constructor
 
+
 ```typescript
 const PI = 3.14159; // Cannot be reassigned
 
@@ -629,6 +666,7 @@ class Circle {
   }
 }
 ```
+
 
 ---
 

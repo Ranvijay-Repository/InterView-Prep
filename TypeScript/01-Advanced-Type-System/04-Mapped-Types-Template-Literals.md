@@ -24,6 +24,7 @@ Mapped types allow you to create new types by transforming existing types, provi
 
 ### **Basic Concept**
 
+
 ```typescript
 // Basic mapped type syntax
 type MappedType<T> = {
@@ -43,7 +44,9 @@ interface User {
 type MappedUser = MappedType<User>; // { id: string; name: string; email: string }
 ```
 
+
 ### **Why Use Mapped Types?**
+
 
 ```typescript
 // Without mapped types - manual type creation
@@ -61,11 +64,13 @@ type Partial<T> = {
 type PartialUser = Partial<User>; // All properties become optional
 ```
 
+
 ---
 
 ## 🔧 **Basic Mapped Types**
 
 ### **Property Modifiers**
+
 
 ```typescript
 // Make all properties optional
@@ -101,7 +106,9 @@ type ReadonlyUser = Readonly<User>;   // All readonly
 type MutableUser = Mutable<ReadonlyUser>; // Remove readonly
 ```
 
+
 ### **Property Type Transformation**
+
 
 ```typescript
 // Transform property types
@@ -124,7 +131,9 @@ type StringUser = Stringify<User>; // { id: string; name: string; age: string }
 type NumberUser = Numberify<User>; // { id: number; name: number; age: number }
 ```
 
+
 ### **Conditional Property Transformation**
+
 
 ```typescript
 // Transform properties based on condition
@@ -148,6 +157,7 @@ type StringOnly = StringPropertiesOnly<Mixed>; // { id: string; name: string; ag
 type NonString = NonStringProperties<Mixed>;   // { id: never; name: never; age: number; isActive: boolean }
 ```
 
+
 ---
 
 ## 📝 **Template Literal Types**
@@ -155,6 +165,7 @@ type NonString = NonStringProperties<Mixed>;   // { id: never; name: never; age:
 Template literal types allow you to create string literal types using template syntax.
 
 ### **Basic Template Literals**
+
 
 ```typescript
 // Basic template literal types
@@ -170,7 +181,9 @@ type UserPath = Path<"users", "profile">; // "/api/users/profile"
 type ProductPath = Path<"products", "details">; // "/api/products/details"
 ```
 
+
 ### **Template Literal with Union Types**
+
 
 ```typescript
 // Template literals with union types
@@ -187,7 +200,9 @@ type ChangeEvent = EventName<"change">; // "onChange"
 type SubmitEvent = EventName<"submit">; // "onSubmit"
 ```
 
+
 ### **Template Literal Utility Types**
+
 
 ```typescript
 // Built-in template literal utility types
@@ -211,11 +226,13 @@ type Test1 = CamelCase<"hello_world">;      // "helloWorld"
 type Test2 = CamelCase<"my_variable_name">; // "myVariableName"
 ```
 
+
 ---
 
 ## 🚀 **Advanced Mapped Patterns**
 
 ### **Key Remapping**
+
 
 ```typescript
 // Remap keys using template literals
@@ -238,7 +255,9 @@ type PrefixedUser = AddPrefix<User, "user_">; // { user_id: string; user_name: s
 type SuffixedUser = AddSuffix<User, "_field">; // { id_field: string; name_field: string; email_field: string }
 ```
 
+
 ### **Conditional Key Mapping**
+
 
 ```typescript
 // Map keys based on conditions
@@ -269,7 +288,9 @@ type RenamedUser = RenameKeys<User, {
 }>; // { userId: string; userName: string; userAge: number; userEmail: string }
 ```
 
+
 ### **Complex Mapped Patterns**
+
 
 ```typescript
 // Deep mapped type
@@ -298,11 +319,13 @@ type PartialNestedUser = DeepPartial<NestedUser>;
 type ReadonlyNestedUser = DeepReadonly<NestedUser>;
 ```
 
+
 ---
 
 ## 🛠️ **Utility Types with Mapped Types**
 
 ### **Built-in Utility Types**
+
 
 ```typescript
 // Pick utility type
@@ -331,7 +354,9 @@ type UserWithoutId = Omit<User, "id">;      // { name: string; email: string; ag
 type UserRecord = Record<"user1" | "user2", User>; // { user1: User; user2: User }
 ```
 
+
 ### **Custom Utility Types**
+
 
 ```typescript
 // Optional by keys
@@ -358,11 +383,13 @@ type OptionalEmail = OptionalByKeys<User, "email">; // { id: string; name: strin
 type RequiredEmail = RequiredByKeys<User, "email">; // { id: string; name: string; email: string; age?: number }
 ```
 
+
 ---
 
 ## ✅ **Best Practices**
 
 ### **1. Use Mapped Types for Type Transformations**
+
 
 ```typescript
 // ✅ Good: Use mapped types for consistent transformations
@@ -378,7 +405,9 @@ interface PartialUser {
 }
 ```
 
+
 ### **2. Leverage Template Literals for String Types**
+
 
 ```typescript
 // ✅ Good: Use template literals for dynamic string types
@@ -388,7 +417,9 @@ type ApiEndpoint<T extends string> = `/api/${T}`;
 type ApiEndpoint = "/api/users" | "/api/products" | "/api/orders";
 ```
 
+
 ### **3. Combine Mapped Types with Conditional Types**
+
 
 ```typescript
 // ✅ Good: Combine for powerful type transformations
@@ -400,7 +431,9 @@ type ConditionalMapped<T> = {
 type StringOnly<T> = T extends string ? T : never;
 ```
 
+
 ### **4. Use Key Remapping for Advanced Transformations**
+
 
 ```typescript
 // ✅ Good: Use key remapping for complex transformations
@@ -416,6 +449,7 @@ type PrefixedUser = {
 };
 ```
 
+
 ---
 
 ## ❓ **Common Interview Questions**
@@ -430,31 +464,37 @@ Mapped types allow you to create new types by transforming existing types. They 
 **Answer:**
 Use the mapped type syntax with property iteration:
 
+
 ```typescript
 type Partial<T> = {
   [P in keyof T]?: T[P];
 };
 ```
 
+
 ### **3. What are template literal types?**
 
 **Answer:**
 Template literal types allow you to create string literal types using template syntax with `${}` placeholders:
 
+
 ```typescript
 type Greeting<T extends string> = `Hello, ${T}!`;
 ```
+
 
 ### **4. How do you use key remapping in mapped types?**
 
 **Answer:**
 Use the `as` clause to remap keys:
 
+
 ```typescript
 type AddPrefix<T, P extends string> = {
   [K in keyof T as `${P}${string & K}`]: T[K];
 };
 ```
+
 
 ### **5. What are the built-in template literal utility types?**
 

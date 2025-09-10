@@ -26,6 +26,7 @@ Understanding navigation state and parameter management is crucial for building 
 
 ### **Navigation State Overview**
 
+
 ```
 ┌─────────────────────────────────────┐
 │        Navigation State             │
@@ -50,6 +51,7 @@ Understanding navigation state and parameter management is crucial for building 
 └─────────────────────────────────────┘
 ```
 
+
 ---
 
 ## 📊 **Navigation State**
@@ -57,6 +59,7 @@ Understanding navigation state and parameter management is crucial for building 
 ### **Basic Navigation State Management**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, TextInput } from 'react-native';
@@ -351,6 +354,7 @@ const styles = StyleSheet.create({
 
 export default HomeScreen;
 ```
+
 
 ---
 

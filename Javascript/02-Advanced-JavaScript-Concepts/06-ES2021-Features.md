@@ -44,6 +44,7 @@
 - **Resilience**: Continue operation even if some promises fail
 
 ### ASCII Diagram: Promise.any() Flow
+
 ```
 PROMISE.ANY() FLOW
 ┌─────────────────────────────────┐
@@ -72,7 +73,9 @@ PROMISE.ANY() FLOW
         └───────────────┘
 ```
 
+
 ### Comparison with Other Promise Methods:
+
 ```javascript
 // Promise.all() - waits for ALL promises to fulfill
 Promise.all([promise1, promise2, promise3])
@@ -90,6 +93,7 @@ Promise.any([promise1, promise2, promise3])
     .catch(error => console.log('All failed:', error));
 ```
 
+
 ---
 
 ## 🔀 Logical Assignment Operators
@@ -103,6 +107,7 @@ Promise.any([promise1, promise2, promise3])
 - **Consistency**: Follow modern JavaScript patterns
 
 ### ASCII Diagram: Logical Assignment Flow
+
 ```
 LOGICAL ASSIGNMENT FLOW
 ┌─────────────────────────────────┐
@@ -134,6 +139,7 @@ LOGICAL ASSIGNMENT FLOW
         └─────────────┘
 ```
 
+
 ### Available Operators:
 1. **Logical OR Assignment (||=)**: Assigns if left operand is falsy
 2. **Logical AND Assignment (&&=)**: Assigns if left operand is truthy
@@ -152,6 +158,7 @@ LOGICAL ASSIGNMENT FLOW
 - **Resource Control**: Better control over object lifecycle
 
 ### ASCII Diagram: WeakRef Memory Management
+
 ```
 WEAKREF MEMORY MANAGEMENT
 ┌─────────────────────────────────┐
@@ -182,6 +189,7 @@ WEAKREF MEMORY MANAGEMENT
         └───────────────┘
 ```
 
+
 ### Use Cases:
 - **Caching**: Store expensive computations without preventing cleanup
 - **Event Listeners**: Reference DOM elements without preventing removal
@@ -201,6 +209,7 @@ WEAKREF MEMORY MANAGEMENT
 - **System Integration**: Integrate with external systems that need cleanup
 
 ### ASCII Diagram: FinalizationRegistry Flow
+
 ```
 FINALIZATIONREGISTRY FLOW
 ┌─────────────────────────────────┐
@@ -230,6 +239,7 @@ FINALIZATIONREGISTRY FLOW
         │  Performed    │
         └───────────────┘
 ```
+
 
 ### Use Cases:
 - **File Handles**: Close files when objects are destroyed

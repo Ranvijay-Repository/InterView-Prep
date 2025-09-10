@@ -44,6 +44,7 @@
 - **Cumulative Layout Shift**: Stable visual layout
 
 ### ASCII Diagram: Critical Rendering Path
+
 ```
 CRITICAL RENDERING PATH
 ┌─────────────────────────────────┐
@@ -107,6 +108,7 @@ CRITICAL RENDERING PATH
         └───────────────┘
 ```
 
+
 ### Optimization Techniques:
 - **CSS Optimization**: Inline critical CSS, defer non-critical
 - **JavaScript Optimization**: Defer non-critical scripts
@@ -128,6 +130,7 @@ CRITICAL RENDERING PATH
 - **Caching Strategy**: Better cache utilization
 
 ### ASCII Diagram: Resource Hints Flow
+
 ```
 RESOURCE HINTS FLOW
 ┌─────────────────────────────────┐
@@ -180,6 +183,7 @@ RESOURCE HINTS FLOW
         └───────────────┘
 ```
 
+
 ### Resource Hint Types:
 - **preload**: Critical resources for current page
 - **prefetch**: Likely resources for future navigation
@@ -201,6 +205,7 @@ RESOURCE HINTS FLOW
 - **Reliability**: Handle network failures gracefully
 
 ### ASCII Diagram: Service Worker Caching
+
 ```
 SERVICE WORKER CACHING
 ┌─────────────────────────────────┐
@@ -255,6 +260,7 @@ SERVICE WORKER CACHING
         │  Error        │
         └───────────────┘
 ```
+
 
 ### Caching Strategies:
 - **Cache First**: Serve from cache, fallback to network

@@ -67,6 +67,7 @@ JavaScript uses **"Pass by Value"** for all data types, but with a crucial disti
 - **Objects/Arrays**: Passed by value of reference (reference copied, but both point to same data)
 
 ### ASCII Diagram: JavaScript Parameter Passing
+
 ```
 PRIMITIVES (Pass by Value)           OBJECTS (Pass by Value of Reference)
 ┌─────────────────┐                  ┌─────────────────┐
@@ -79,11 +80,13 @@ Function receives: 42                 Function receives: [ref to {x: 1}]
 (completely new copy)                 (copy of reference, same data)
 ```
 
+
 ---
 
 ## 🧠 Memory Visualization
 
 ### Primitive Values in Memory:
+
 ```
 STACK MEMORY
 ┌─────────────┐
@@ -94,7 +97,9 @@ STACK MEMORY
 └─────────────┘
 ```
 
+
 ### Object References in Memory:
+
 ```
 STACK MEMORY          HEAP MEMORY
 ┌─────────────┐       ┌─────────────┐
@@ -105,6 +110,7 @@ STACK MEMORY          HEAP MEMORY
 └─────────────┘       (Same object)
 ```
 
+
 ---
 
 ## 💻 Detailed Examples
@@ -112,6 +118,7 @@ STACK MEMORY          HEAP MEMORY
 ### Example 1: Primitive Values (True Pass by Value)
 <div style="position: relative;">
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
+
 
 ```javascript
 console.log("=== PRIMITIVE VALUES (PASS BY VALUE) ===");
@@ -147,11 +154,13 @@ console.log("\n=== KEY INSIGHT ===");
 console.log("Primitive values are truly passed by value!");
 console.log("Function modifications don't affect the original variables.");
 ```
+
 </div>
 
 ### Example 2: Objects (Pass by Value of Reference)
 <div style="position: relative;">
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
+
 
 ```javascript
 console.log("=== OBJECTS (PASS BY VALUE OF REFERENCE) ===");
@@ -193,11 +202,13 @@ console.log("\n=== KEY INSIGHT ===");
 console.log("Object properties can be modified inside functions");
 console.log("But reassigning the parameter doesn't change the original reference");
 ```
+
 </div>
 
 ### Example 3: Arrays (Same Behavior as Objects)
 <div style="position: relative;">
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
+
 
 ```javascript
 console.log("=== ARRAYS (PASS BY VALUE OF REFERENCE) ===");
@@ -235,11 +246,13 @@ console.log("\n=== KEY INSIGHT ===");
 console.log("Array elements can be modified inside functions");
 console.log("But reassigning the parameter doesn't change the original reference");
 ```
+
 </div>
 
 ### Example 4: Function Parameters and Return Values
 <div style="position: relative;">
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
+
 
 ```javascript
 console.log("=== FUNCTION PARAMETERS AND RETURN VALUES ===");
@@ -298,11 +311,13 @@ console.log("Primitives: Safe, won't be modified");
 console.log("Objects/Arrays: Properties/elements can be modified");
 console.log("Return values provide a way to get modified primitives back");
 ```
+
 </div>
 
 ### Example 5: Preventing Unintended Modifications
 <div style="position: relative;">
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
+
 
 ```javascript
 console.log("=== PREVENTING UNINTENDED MODIFICATIONS ===");
@@ -367,6 +382,7 @@ console.log("Always consider whether your function should modify input");
 console.log("Use defensive copying to prevent unintended side effects");
 console.log("Pure functions are easier to test and reason about");
 ```
+
 </div>
 
 ---
@@ -374,6 +390,7 @@ console.log("Pure functions are easier to test and reason about");
 ## ⚠️ Common Misconceptions
 
 ### Misconception 1: "JavaScript is Pass by Reference"
+
 ```javascript
 // ❌ WRONG: Thinking JavaScript passes objects by reference
 function wrongUnderstanding(obj) {
@@ -385,7 +402,9 @@ wrongUnderstanding(original);
 console.log(original); // Still { value: "original" } ✅
 ```
 
+
 ### Misconception 2: "Primitives are Passed by Reference"
+
 ```javascript
 // ❌ WRONG: Thinking primitives are passed by reference
 function modifyString(str) {
@@ -396,6 +415,7 @@ let message = "hello";
 modifyString(message);
 console.log(message); // Still "hello" ✅
 ```
+
 
 ---
 

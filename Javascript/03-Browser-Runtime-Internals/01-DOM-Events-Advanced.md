@@ -43,6 +43,7 @@
 - **Debugging**: Understand event flow in complex applications
 
 ### ASCII Diagram: Event Propagation Flow
+
 ```
 EVENT PROPAGATION FLOW
 ┌─────────────────────────────────┐
@@ -86,12 +87,14 @@ EVENT PROPAGATION FLOW
         └───────────────┘
 ```
 
+
 ### Event Phases:
 1. **Capturing Phase**: Events travel from root to target (top-down)
 2. **Target Phase**: Event reaches the target element
 3. **Bubbling Phase**: Events travel from target to root (bottom-up)
 
 ### Event Listener Options:
+
 ```javascript
 // Capturing phase (true = capturing, false = bubbling)
 element.addEventListener('click', handler, true);  // Capturing
@@ -107,6 +110,7 @@ element.addEventListener('click', handler, {
 });
 ```
 
+
 ---
 
 ## 🎭 Event Delegation Patterns
@@ -120,6 +124,7 @@ element.addEventListener('click', handler, {
 - **Scalability**: Better performance with many elements
 
 ### ASCII Diagram: Event Delegation Pattern
+
 ```
 EVENT DELEGATION PATTERN
 ┌─────────────────────────────────┐
@@ -155,6 +160,7 @@ EVENT DELEGATION PATTERN
         └───────────────┘
 ```
 
+
 ### Use Cases:
 - **Dynamic Lists**: Handle events from items added/removed
 - **Large Tables**: Efficient event handling for many rows
@@ -174,6 +180,7 @@ EVENT DELEGATION PATTERN
 - **Testing**: Simulate user interactions programmatically
 
 ### ASCII Diagram: Custom Event System
+
 ```
 CUSTOM EVENT SYSTEM
 ┌─────────────────────────────────┐
@@ -202,6 +209,7 @@ CUSTOM EVENT SYSTEM
         │  Custom Event │
         └───────────────┘
 ```
+
 
 ### Custom Event Features:
 - **Custom Data**: Pass data through event.detail

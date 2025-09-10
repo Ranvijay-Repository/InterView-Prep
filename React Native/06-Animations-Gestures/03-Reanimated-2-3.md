@@ -26,6 +26,7 @@ React Native Reanimated is a powerful animation library that runs animations on 
 
 ### **Reanimated Overview**
 
+
 ```
 ┌─────────────────────────────────────┐
 │        Reanimated System            │
@@ -53,6 +54,7 @@ React Native Reanimated is a powerful animation library that runs animations on 
 └─────────────────────────────────────┘
 ```
 
+
 ---
 
 ## 🚀 **Shared Values**
@@ -60,6 +62,7 @@ React Native Reanimated is a powerful animation library that runs animations on 
 ### **Basic Reanimated Example**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
@@ -314,6 +317,7 @@ const styles = StyleSheet.create({
 
 export default BasicReanimatedExample;
 ```
+
 
 ---
 

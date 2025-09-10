@@ -22,6 +22,7 @@
 
 ### **Security Layers**
 
+
 ```mermaid
 graph TD
     A[Application Layer] --> B[Transport Layer Security]
@@ -33,6 +34,7 @@ graph TD
     G[Request Encryption] --> A
     H[Response Validation] --> A
 ```
+
 
 ### **Security Considerations**
 - **Transport Security**: TLS/SSL encryption
@@ -47,6 +49,7 @@ graph TD
 ### **Network Security Configuration**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Network security configuration
 import { Platform } from 'react-native';
@@ -83,9 +86,11 @@ const NetworkSecurityConfig = {
 export default NetworkSecurityConfig;
 ```
 
+
 ### **Secure HTTP Client**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 import axios from 'axios';
 import { Platform } from 'react-native';
@@ -308,6 +313,7 @@ export {
 };
 ```
 
+
 ---
 
 ## 📌 **Certificate Pinning**
@@ -315,6 +321,7 @@ export {
 ### **Certificate Pinning Implementation**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 import { Platform } from 'react-native';
 import { getSystemVersion } from 'react-native-device-info';
@@ -405,9 +412,11 @@ export {
 };
 ```
 
+
 ### **Network Security Manager**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 import { Platform } from 'react-native';
 import CertificatePinning from './CertificatePinning';
@@ -599,6 +608,7 @@ export {
 };
 ```
 
+
 ---
 
 ## 🔐 **API Security**
@@ -606,6 +616,7 @@ export {
 ### **API Authentication Service**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Keychain from 'react-native-keychain';
@@ -816,6 +827,7 @@ export {
 };
 ```
 
+
 ---
 
 ## 🛡️ **Request/Response Security**
@@ -823,6 +835,7 @@ export {
 ### **Secure API Client**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 import { Platform } from 'react-native';
 import APIAuthenticationService from './APIAuthenticationService';
@@ -917,6 +930,7 @@ export {
   uploadFile,
 };
 ```
+
 
 ---
 

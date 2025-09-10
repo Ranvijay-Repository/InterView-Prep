@@ -40,6 +40,7 @@ The New Architecture introduces:
 ### **Old Architecture (Bridge-Based)**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // JavaScript → Bridge → Native
 // Slower communication
@@ -55,9 +56,11 @@ MyNativeModule.doSomething('param', (result) => {
 });
 ```
 
+
 ### **New Architecture (JSI-Based)**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // JavaScript ↔ JSI ↔ Native
 // Direct communication
@@ -70,6 +73,7 @@ import { MyNativeModule } from './MyNativeModule';
 const result = await MyNativeModule.doSomething('param');
 console.log(result);
 ```
+
 
 ### **Key Differences**
 
@@ -87,6 +91,7 @@ console.log(result);
 ## 🔧 **Migration Prerequisites**
 
 ### **1. React Native Version**
+
 ```json
 // package.json
 {
@@ -96,7 +101,9 @@ console.log(result);
 }
 ```
 
+
 ### **2. Platform Requirements**
+
 ```bash
 # iOS
 # Xcode 13+
@@ -108,7 +115,9 @@ console.log(result);
 # compileSdkVersion 31+
 ```
 
+
 ### **3. Dependencies**
+
 ```json
 // package.json
 {
@@ -119,6 +128,7 @@ console.log(result);
 }
 ```
 
+
 ---
 
 ## 🚀 **Step-by-Step Migration**
@@ -128,14 +138,17 @@ console.log(result);
 #### **Android Configuration**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```properties
 # android/gradle.properties
 newArchEnabled=true
 ```
 
+
 #### **iOS Configuration**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```ruby
 # ios/Podfile
 use_frameworks! :linkage => :static
@@ -146,9 +159,11 @@ target 'YourApp' do
 end
 ```
 
+
 ### **Step 2: Update Dependencies**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```bash
 # Update React Native
 npm install react-native@latest
@@ -160,7 +175,9 @@ cd ios && pod install && cd ..
 npx react-native clean
 ```
 
+
 ### **Step 3: Update Metro Configuration**
+
 ```javascript
 // metro.config.js
 const {getDefaultConfig, mergeConfig} = require('@react-native/metro-config');
@@ -174,9 +191,11 @@ const config = {
 module.exports = mergeConfig(getDefaultConfig(__dirname), config);
 ```
 
+
 ### **Step 4: Update Native Code**
 
 #### **Android Updates**
+
 ```gradle
 // android/app/build.gradle
 android {
@@ -193,7 +212,9 @@ dependencies {
 }
 ```
 
+
 #### **iOS Updates**
+
 ```swift
 // ios/YourApp/AppDelegate.mm
 #import <React/RCTBundleURLProvider.h>
@@ -215,9 +236,11 @@ dependencies {
 }
 ```
 
+
 ### **Step 5: Update JavaScript Code**
 
 #### **Remove Bridge Dependencies**
+
 ```javascript
 // ❌ Old way
 import { NativeModules } from 'react-native';
@@ -227,7 +250,9 @@ const { MyModule } = NativeModules;
 import { MyModule } from './MyModule';
 ```
 
+
 #### **Update Event Listeners**
+
 ```javascript
 // ❌ Old way
 import { DeviceEventEmitter } from 'react-native';
@@ -244,11 +269,13 @@ MyModule.addListener('MyEvent', (data) => {
 });
 ```
 
+
 ---
 
 ## 🛠️ **Common Migration Issues**
 
 ### **1. Native Module Compatibility**
+
 ```javascript
 // Check if module supports New Architecture
 const isNewArchEnabled = global.RN$Bridgeless === true;
@@ -262,7 +289,9 @@ if (isNewArchEnabled) {
 }
 ```
 
+
 ### **2. Third-Party Library Issues**
+
 ```bash
 # Check library compatibility
 npm list react-native
@@ -272,7 +301,9 @@ npm list react-native
 # Consider alternatives if not supported
 ```
 
+
 ### **3. Build Issues**
+
 ```bash
 # Clean everything
 npx react-native clean
@@ -284,7 +315,9 @@ npx react-native run-ios
 npx react-native run-android
 ```
 
+
 ### **4. Performance Issues**
+
 ```javascript
 // Monitor performance
 import { Performance } from 'react-native-performance';
@@ -296,11 +329,13 @@ const endTime = Performance.now();
 console.log(`Render time: ${endTime - startTime}ms`);
 ```
 
+
 ---
 
 ## 🧪 **Testing New Architecture**
 
 ### **1. Unit Tests**
+
 ```javascript
 // Test new architecture features
 describe('New Architecture', () => {
@@ -316,7 +351,9 @@ describe('New Architecture', () => {
 });
 ```
 
+
 ### **2. Integration Tests**
+
 ```javascript
 // Test app functionality
 describe('App with New Architecture', () => {
@@ -331,7 +368,9 @@ describe('App with New Architecture', () => {
 });
 ```
 
+
 ### **3. Performance Tests**
+
 ```javascript
 // Test performance improvements
 describe('Performance', () => {
@@ -345,11 +384,13 @@ describe('Performance', () => {
 });
 ```
 
+
 ---
 
 ## ✅ **Best Practices**
 
 ### **1. Gradual Migration**
+
 ```javascript
 // Use feature flags
 const useNewArchitecture = useFeatureFlag('new-architecture');
@@ -362,7 +403,9 @@ const MyComponent = () => {
 };
 ```
 
+
 ### **2. Backward Compatibility**
+
 ```javascript
 // Maintain compatibility
 const MyModule = {
@@ -375,7 +418,9 @@ const MyModule = {
 };
 ```
 
+
 ### **3. Error Handling**
+
 ```javascript
 // Handle new architecture errors
 try {
@@ -388,7 +433,9 @@ try {
 }
 ```
 
+
 ### **4. Monitoring**
+
 ```javascript
 // Monitor new architecture usage
 import { Analytics } from './Analytics';
@@ -401,12 +448,15 @@ const trackNewArchUsage = () => {
 };
 ```
 
+
 ### **5. Documentation**
+
 ```markdown
 # Document migration steps
 # Keep compatibility matrix
 # Update team on changes
 ```
+
 
 ---
 

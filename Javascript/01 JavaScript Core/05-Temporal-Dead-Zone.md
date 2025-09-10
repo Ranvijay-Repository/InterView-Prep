@@ -42,6 +42,7 @@ Think of TDZ like a construction zone:
 5. **Normal Usage**: Variable can be used normally
 
 ### 🔄 TDZ Lifecycle
+
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │                    TDZ LIFECYCLE                            │
@@ -55,9 +56,11 @@ Think of TDZ like a construction zone:
 └─────────────────────────────────────────────────────────────┘
 ```
 
+
 ---
 
 ## 🗂️ TDZ Visualization
+
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -79,7 +82,9 @@ Think of TDZ like a construction zone:
 └─────────────────────────────────────────────────────────────┘
 ```
 
+
 ### 🔍 TDZ vs Hoisting Comparison
+
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -98,6 +103,7 @@ Think of TDZ like a construction zone:
 │  └─ Throws ReferenceError                                 │
 └─────────────────────────────────────────────────────────────┘
 ```
+
 
 ---
 
@@ -124,6 +130,7 @@ Think of TDZ like a construction zone:
 ## 💻 Detailed Examples
 
 ### Example 1: Basic TDZ Demonstration
+
 ```javascript
 console.log("=== BASIC TDZ DEMONSTRATION ===");
 
@@ -180,7 +187,9 @@ console.log("   globalLet:", globalLet);
 console.log("   globalConst:", globalConst);
 ```
 
+
 ### Example 2: TDZ in Different Scopes
+
 ```javascript
 console.log("=== TDZ IN DIFFERENT SCOPES ===");
 
@@ -234,7 +243,9 @@ try {
 }
 ```
 
+
 ### Example 3: TDZ with Function Parameters
+
 ```javascript
 console.log("=== TDZ WITH FUNCTION PARAMETERS ===");
 
@@ -283,7 +294,9 @@ const arrowTDZ = (param) => {
 arrowTDZ("Arrow parameter");
 ```
 
+
 ### Example 4: TDZ in Loops and Blocks
+
 ```javascript
 console.log("=== TDZ IN LOOPS AND BLOCKS ===");
 
@@ -348,7 +361,9 @@ switch (1) {
 }
 ```
 
+
 ### Example 5: TDZ with const and Destructuring
+
 ```javascript
 console.log("=== TDZ WITH CONST AND DESTRUCTURING ===");
 
@@ -421,7 +436,9 @@ console.log("firstName:", firstName);
 console.log("lastName:", lastName);
 ```
 
+
 ### Example 6: Complex TDZ Scenarios
+
 ```javascript
 console.log("=== COMPLEX TDZ SCENARIOS ===");
 
@@ -521,11 +538,13 @@ asyncTDZ().then(result => {
 });
 ```
 
+
 ---
 
 ## ⚠️ Common TDZ Scenarios
 
 ### Scenario 1: Function Hoisting vs Variable Hoisting
+
 ```javascript
 console.log("=== SCENARIO 1: FUNCTION VS VARIABLE HOISTING ===");
 
@@ -557,7 +576,9 @@ let letDeclaration = function() {
 };
 ```
 
+
 ### Scenario 2: TDZ in Different Environments
+
 ```javascript
 console.log("=== SCENARIO 2: TDZ IN DIFFERENT ENVIRONMENTS ===");
 
@@ -592,11 +613,13 @@ if (typeof global !== 'undefined') {
 }
 ```
 
+
 ---
 
 ## ✅ Best Practices
 
 ### 1. Declare Variables at the Top
+
 ```javascript
 console.log("=== BEST PRACTICE 1: DECLARE AT TOP ===");
 
@@ -627,7 +650,9 @@ function badPractice() {
 }
 ```
 
+
 ### 2. Use const by Default
+
 ```javascript
 console.log("=== BEST PRACTICE 2: USE CONST BY DEFAULT ===");
 
@@ -644,7 +669,9 @@ let currentUser = null;
 var legacyVar = "old way";
 ```
 
+
 ### 3. Understand Hoisting Behavior
+
 ```javascript
 console.log("=== BEST PRACTICE 3: UNDERSTAND HOISTING ===");
 
@@ -667,6 +694,7 @@ function hoistingExample() {
     let letDeclaration = "I'm hoisted but in TDZ";
 }
 ```
+
 
 ---
 
@@ -742,6 +770,7 @@ function hoistingExample() {
 **A:** To avoid TDZ errors:
 
 **1. Declare Variables at the Top:**
+
 ```javascript
 function goodPractice() {
     let name, age, email; // Declare all variables first
@@ -753,18 +782,23 @@ function goodPractice() {
 }
 ```
 
+
 **2. Use const by Default:**
+
 ```javascript
 const PI = 3.14159;
 const API_URL = "https://api.example.com";
 let counter = 0; // Only use let when reassignment is needed
 ```
 
+
 **3. Understand Hoisting:**
+
 ```javascript
 // Know that let/const are hoisted but not initialized
 // Don't try to access them before declaration
 ```
+
 
 ### Q: What happens when you try to access a variable in TDZ?
 **A:** When you try to access a variable in the Temporal Dead Zone:
@@ -775,6 +809,7 @@ let counter = 0; // Only use let when reassignment is needed
 - Program execution stops (unless error is caught)
 
 **Example:**
+
 ```javascript
 function test() {
     console.log(x); // ReferenceError: Cannot access 'x' before initialization
@@ -783,6 +818,7 @@ function test() {
 
 test(); // Function throws error and stops
 ```
+
 
 **Why This Happens:**
 - Variable exists in scope (hoisted)
@@ -795,6 +831,7 @@ test(); // Function throws error and stops
 ## 🧪 Practice Exercises
 
 ### Exercise 1: TDZ Prediction
+
 ```javascript
 console.log("Exercise 1: Predict the output");
 
@@ -809,7 +846,9 @@ function test() {
 // test(); // What will happen when this is called?
 ```
 
+
 ### Exercise 2: Hoisting vs TDZ
+
 ```javascript
 console.log("Exercise 2: Compare hoisting behaviors");
 
@@ -825,7 +864,9 @@ function functionDeclaration() {
 }
 ```
 
+
 ### Exercise 3: TDZ in Different Scopes
+
 ```javascript
 console.log("Exercise 3: TDZ in different scopes");
 
@@ -835,6 +876,7 @@ console.log("Exercise 3: TDZ in different scopes");
 
 // Your code here...
 ```
+
 
 ---
 

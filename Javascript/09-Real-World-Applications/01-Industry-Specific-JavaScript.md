@@ -45,6 +45,7 @@
 - **Conversion**: Optimize for sales and user engagement
 
 ### ASCII Diagram: E-commerce Architecture
+
 ```
 E-COMMERCE ARCHITECTURE
 ┌─────────────────────────────────┐
@@ -118,6 +119,7 @@ E-COMMERCE ARCHITECTURE
         └───────────────┘
 ```
 
+
 ### E-commerce Patterns:
 - **Shopping Cart Management**: Add, remove, update items
 - **Product Search & Filtering**: Advanced search with faceted filtering
@@ -139,6 +141,7 @@ E-COMMERCE ARCHITECTURE
 - **User Trust**: Build confidence in financial services
 
 ### ASCII Diagram: Financial Application Architecture
+
 ```
 FINANCIAL APPLICATION ARCHITECTURE
 ┌─────────────────────────────────┐
@@ -203,6 +206,7 @@ FINANCIAL APPLICATION ARCHITECTURE
         └───────────────┘
 ```
 
+
 ### Financial Patterns:
 - **Real-time Data Processing**: Market data and portfolio updates
 - **Risk Calculation**: Complex financial risk models
@@ -224,6 +228,7 @@ FINANCIAL APPLICATION ARCHITECTURE
 - **Monetization**: Create revenue-generating interactive content
 
 ### ASCII Diagram: Gaming Architecture
+
 ```
 GAMING ARCHITECTURE
 ┌─────────────────────────────────┐
@@ -288,6 +293,7 @@ GAMING ARCHITECTURE
         └───────────────┘
 ```
 
+
 ### Gaming Patterns:
 - **Game Loop**: Continuous game state updates
 - **Physics Engine**: Realistic movement and collisions
@@ -309,6 +315,7 @@ GAMING ARCHITECTURE
 - **Scalability**: Manage large numbers of connected devices
 
 ### ASCII Diagram: IoT Architecture
+
 ```
 IOT ARCHITECTURE
 ┌─────────────────────────────────┐
@@ -371,6 +378,7 @@ IOT ARCHITECTURE
         │  Reporting    │
         └───────────────┘
 ```
+
 
 ### IoT Patterns:
 - **Device Communication**: MQTT, HTTP, WebSocket protocols

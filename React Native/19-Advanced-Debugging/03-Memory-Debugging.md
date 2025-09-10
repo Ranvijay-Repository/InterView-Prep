@@ -26,6 +26,7 @@ Memory debugging involves identifying memory leaks, monitoring memory usage, and
 
 ### **Memory Debugging Framework**
 
+
 ```
 ┌─────────────────────────────────────┐
 │        Memory Debugging            │
@@ -53,6 +54,7 @@ Memory debugging involves identifying memory leaks, monitoring memory usage, and
 └─────────────────────────────────────┘
 ```
 
+
 ### **Key Memory Metrics**
 - **Heap Size**: Total JavaScript memory usage
 - **Memory Growth**: Rate of memory increase over time
@@ -67,6 +69,7 @@ Memory debugging involves identifying memory leaks, monitoring memory usage, and
 ### **Memory Leak Detection Tools**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Memory leak detection utilities
 const MemoryLeakDetector = {
@@ -112,9 +115,11 @@ const MemoryLeakDetector = {
 };
 ```
 
+
 ### **Common Memory Leak Patterns**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Common memory leak patterns and fixes
 
@@ -147,9 +152,11 @@ class FixedComponent extends React.Component {
 }
 ```
 
+
 ### **Memory Leak Detection in Lists**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Memory leak detection for FlatList
 const MemoryLeakAwareFlatList = ({ data, renderItem, ...props }) => {
@@ -192,6 +199,7 @@ const MemoryLeakAwareFlatList = ({ data, renderItem, ...props }) => {
 };
 ```
 
+
 ---
 
 ## 📊 **Memory Profiling**
@@ -199,6 +207,7 @@ const MemoryLeakAwareFlatList = ({ data, renderItem, ...props }) => {
 ### **Chrome DevTools Memory Profiling**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Memory profiling utilities
 const MemoryProfiler = {
@@ -236,9 +245,11 @@ const MemoryProfiler = {
 };
 ```
 
+
 ### **Custom Memory Profiler**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Custom memory profiler
 class CustomMemoryProfiler {
@@ -297,6 +308,7 @@ class CustomMemoryProfiler {
 const memoryProfiler = new CustomMemoryProfiler();
 ```
 
+
 ---
 
 ## 🚀 **JavaScript Memory**
@@ -304,6 +316,7 @@ const memoryProfiler = new CustomMemoryProfiler();
 ### **JavaScript Memory Management**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // JavaScript memory management utilities
 const JavaScriptMemoryManager = {
@@ -350,9 +363,11 @@ const JavaScriptMemoryManager = {
 };
 ```
 
+
 ### **Memory-Efficient Data Structures**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Memory-efficient data structures
 const MemoryEfficientStructures = {
@@ -409,6 +424,7 @@ const MemoryEfficientStructures = {
 };
 ```
 
+
 ---
 
 ## 📱 **Native Memory**
@@ -416,6 +432,7 @@ const MemoryEfficientStructures = {
 ### **Native Memory Monitoring**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Native memory monitoring
 const NativeMemoryMonitor = {
@@ -444,9 +461,11 @@ const NativeMemoryMonitor = {
 };
 ```
 
+
 ### **Image Memory Optimization**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Image memory optimization
 const ImageMemoryOptimizer = {
@@ -503,6 +522,7 @@ const ImageMemoryOptimizer = {
 };
 ```
 
+
 ---
 
 ## 🔧 **Memory Optimization**
@@ -510,6 +530,7 @@ const ImageMemoryOptimizer = {
 ### **Memory Optimization Strategies**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Memory optimization strategies
 const MemoryOptimizer = {
@@ -563,9 +584,11 @@ const MemoryOptimizer = {
 };
 ```
 
+
 ### **Component Memory Optimization**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Memory-optimized component
 const MemoryOptimizedComponent = ({ data, onItemPress }) => {
@@ -614,6 +637,7 @@ const MemoryOptimizedComponent = ({ data, onItemPress }) => {
 };
 ```
 
+
 ---
 
 ## 📈 **Memory Monitoring**
@@ -621,6 +645,7 @@ const MemoryOptimizedComponent = ({ data, onItemPress }) => {
 ### **Real-time Memory Monitoring**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Real-time memory monitoring
 const MemoryMonitor = {
@@ -684,6 +709,7 @@ const MemoryMonitor = {
 };
 ```
 
+
 ---
 
 ## ✅ **Best Practices**
@@ -691,6 +717,7 @@ const MemoryMonitor = {
 ### **1. Memory Management Best Practices**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Memory management best practices
 const MemoryBestPractices = {
@@ -731,9 +758,11 @@ const MemoryBestPractices = {
 };
 ```
 
+
 ### **2. Memory Testing**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Memory testing utilities
 const MemoryTester = {
@@ -764,6 +793,7 @@ const MemoryTester = {
   }
 };
 ```
+
 
 ---
 

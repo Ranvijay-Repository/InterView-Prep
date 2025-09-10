@@ -25,6 +25,7 @@ Arrow functions provide a concise syntax for writing functions and have differen
 
 ### **Basic Arrow Function Syntax**
 
+
 ```typescript
 // Traditional function
 function add(a: number, b: number): number {
@@ -46,7 +47,9 @@ const square = (x: number): number => x * x;
 const getCurrentTime = (): Date => new Date();
 ```
 
+
 ### **Arrow Functions with TypeScript**
+
 
 ```typescript
 // Arrow function with explicit return type
@@ -68,7 +71,9 @@ const greet = (name: string, greeting: string = "Hello"): string => {
 };
 ```
 
+
 ### **Arrow Functions in Array Methods**
+
 
 ```typescript
 interface User {
@@ -97,6 +102,7 @@ const totalAge = users.reduce((sum: number, user: User): number => sum + user.ag
 const user = users.find((user: User): boolean => user.id === 2);
 ```
 
+
 ---
 
 ## 🎯 **Destructuring Assignment**
@@ -104,6 +110,7 @@ const user = users.find((user: User): boolean => user.id === 2);
 Destructuring allows you to extract values from arrays and objects into distinct variables.
 
 ### **Array Destructuring**
+
 
 ```typescript
 // Basic array destructuring
@@ -125,7 +132,9 @@ const processCoordinates = ([x, y]: [number, number]): string => {
 };
 ```
 
+
 ### **Object Destructuring**
+
 
 ```typescript
 interface User {
@@ -170,7 +179,9 @@ const createUser = ({ name, email, age }: { name: string; email: string; age: nu
 };
 ```
 
+
 ### **Destructuring with TypeScript**
+
 
 ```typescript
 // Destructuring with explicit types
@@ -195,6 +206,7 @@ const processOptionalUser = ({ name, age = 0 }: { name: string; age?: number }):
 };
 ```
 
+
 ---
 
 ## 📝 **Template Literals**
@@ -202,6 +214,7 @@ const processOptionalUser = ({ name, age = 0 }: { name: string; age?: number }):
 Template literals provide an easy way to create strings with embedded expressions.
 
 ### **Basic Template Literals**
+
 
 ```typescript
 // Basic template literal
@@ -225,7 +238,9 @@ const htmlTemplate = `
 `;
 ```
 
+
 ### **Template Literals with TypeScript**
+
 
 ```typescript
 // Template literal with type safety
@@ -251,6 +266,7 @@ const getStatusMessage = (isOnline: boolean, lastSeen: Date): string => {
 };
 ```
 
+
 ---
 
 ## 🏗️ **Classes and Inheritance**
@@ -258,6 +274,7 @@ const getStatusMessage = (isOnline: boolean, lastSeen: Date): string => {
 TypeScript enhances ES6 classes with type annotations and access modifiers.
 
 ### **Basic Class Syntax**
+
 
 ```typescript
 // Basic class with TypeScript
@@ -286,7 +303,9 @@ class Person {
 }
 ```
 
+
 ### **Class Inheritance**
+
 
 ```typescript
 // Base class
@@ -331,7 +350,9 @@ class Dog extends Animal {
 }
 ```
 
+
 ### **Static Methods and Properties**
+
 
 ```typescript
 class MathUtils {
@@ -355,6 +376,7 @@ const sum = MathUtils.add(5, 3);
 const area = MathUtils.circleArea(5);
 ```
 
+
 ---
 
 ## 📦 **Modules and Imports**
@@ -362,6 +384,7 @@ const area = MathUtils.circleArea(5);
 TypeScript supports ES6 module syntax with type safety.
 
 ### **Export and Import Syntax**
+
 
 ```typescript
 // user.ts - Exporting
@@ -393,7 +416,9 @@ export const API_URL = "https://api.example.com";
 export const MAX_USERS = 100;
 ```
 
+
 ### **Import Syntax**
+
 
 ```typescript
 // Importing named exports
@@ -416,7 +441,9 @@ const user: User = { id: 1, name: "John", email: "john@example.com" };
 const userService = new UserService();
 ```
 
+
 ### **Re-exporting**
+
 
 ```typescript
 // index.ts - Re-exporting
@@ -429,6 +456,7 @@ export { User as UserType } from "./user";
 export { Product as ProductType } from "./product";
 ```
 
+
 ---
 
 ## ⚡ **Promises and Async/Await**
@@ -436,6 +464,7 @@ export { Product as ProductType } from "./product";
 TypeScript provides excellent support for asynchronous programming with Promises and async/await.
 
 ### **Basic Promise Usage**
+
 
 ```typescript
 // Promise with TypeScript
@@ -463,7 +492,9 @@ const processUser = (id: number): Promise<string> => {
 };
 ```
 
+
 ### **Async/Await with TypeScript**
+
 
 ```typescript
 // Async function with TypeScript
@@ -499,7 +530,9 @@ const fetchAllUsers = async (ids: number[]): Promise<User[]> => {
 };
 ```
 
+
 ### **Advanced Async Patterns**
+
 
 ```typescript
 // Async function with timeout
@@ -534,11 +567,13 @@ const fetchUserWithRetry = async (id: number, maxRetries: number = 3): Promise<U
 };
 ```
 
+
 ---
 
 ## ✅ **Best Practices**
 
 ### **1. Use Arrow Functions for Short Functions**
+
 
 ```typescript
 // ✅ Good: Arrow function for short operations
@@ -552,7 +587,9 @@ const complexLogic = (data: any[]) => {
 };
 ```
 
+
 ### **2. Use Destructuring for Clean Code**
+
 
 ```typescript
 // ✅ Good: Destructuring for clean parameter handling
@@ -571,7 +608,9 @@ const createUser = (userInput: UserInput): User => {
 };
 ```
 
+
 ### **3. Use Template Literals for String Building**
+
 
 ```typescript
 // ✅ Good: Template literals
@@ -581,7 +620,9 @@ const message = `Hello ${name}, you have ${count} messages`;
 const message = "Hello " + name + ", you have " + count + " messages";
 ```
 
+
 ### **4. Use Async/Await for Better Readability**
+
 
 ```typescript
 // ✅ Good: Async/await
@@ -604,6 +645,7 @@ const processData = (): Promise<void> => {
 };
 ```
 
+
 ---
 
 ## ❓ **Common Interview Questions**
@@ -621,10 +663,12 @@ const processData = (): Promise<void> => {
 **Answer:**
 Destructuring works the same as JavaScript but with type safety:
 
+
 ```typescript
 const { name, age }: { name: string; age: number } = user;
 const [first, second]: [number, number] = [1, 2];
 ```
+
 
 ### **3. What are the benefits of using async/await over Promises?**
 
@@ -639,6 +683,7 @@ const [first, second]: [number, number] = [1, 2];
 **Answer:**
 Use try/catch blocks:
 
+
 ```typescript
 const fetchData = async (): Promise<void> => {
   try {
@@ -650,16 +695,19 @@ const fetchData = async (): Promise<void> => {
 };
 ```
 
+
 ### **5. What's the difference between import and import type?**
 
 **Answer:**
 - **`import`**: Imports both runtime and type information
 - **`import type`**: Imports only type information, removed at compile time
 
+
 ```typescript
 import { User } from "./user";        // Runtime import
 import type { User } from "./user";   // Type-only import
 ```
+
 
 ---
 

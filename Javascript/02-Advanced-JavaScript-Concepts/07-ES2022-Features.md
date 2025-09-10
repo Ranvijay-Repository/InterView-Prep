@@ -43,6 +43,7 @@
 - **Modern Standards**: Follow current JavaScript best practices
 
 ### ASCII Diagram: Class Fields Structure
+
 ```
 CLASS FIELDS STRUCTURE
 ┌─────────────────────────────────┐
@@ -77,6 +78,7 @@ CLASS FIELDS STRUCTURE
         └───────────────┘
 ```
 
+
 ### Field Types:
 1. **Public Instance Fields**: Accessible from anywhere
 2. **Private Instance Fields (#)**: Only accessible within the class
@@ -97,6 +99,7 @@ CLASS FIELDS STRUCTURE
 - **Better Error Handling**: Handle async errors at module level
 
 ### ASCII Diagram: Top-level await Module Flow
+
 ```
 TOP-LEVEL AWAIT MODULE FLOW
 ┌─────────────────────────────────┐
@@ -128,6 +131,7 @@ TOP-LEVEL AWAIT MODULE FLOW
         └───────────────┘
 ```
 
+
 ### Use Cases:
 - **Environment Configuration**: Load environment-specific settings
 - **Database Connections**: Establish connections during startup
@@ -149,6 +153,7 @@ TOP-LEVEL AWAIT MODULE FLOW
 - **Error Recovery**: Handle errors more intelligently
 
 ### ASCII Diagram: Error.cause Chain
+
 ```
 ERROR.CAUSE CHAIN
 ┌─────────────────────────────────┐
@@ -178,6 +183,7 @@ ERROR.CAUSE CHAIN
         │  Debugging    │
         └───────────────┘
 ```
+
 
 ### Error Chaining Benefits:
 - **Context Preservation**: Maintain error context through the chain

@@ -25,6 +25,7 @@ Advanced debugging tools help developers identify, diagnose, and fix issues in R
 
 ### **Debugging Ecosystem**
 
+
 ```
 ┌─────────────────────────────────────┐
 │        Debugging Tools              │
@@ -52,6 +53,7 @@ Advanced debugging tools help developers identify, diagnose, and fix issues in R
 └─────────────────────────────────────┘
 ```
 
+
 ### **Key Debugging Areas**
 - **JavaScript Errors**: Runtime errors and exceptions
 - **Performance Issues**: Slow renders and memory leaks
@@ -66,6 +68,7 @@ Advanced debugging tools help developers identify, diagnose, and fix issues in R
 ### **Flipper Setup**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```bash
 # Install Flipper
 # Download from: https://fbflipper.com/
@@ -77,9 +80,11 @@ npm install --save-dev react-native-flipper
 cd ios && pod install && cd ..
 ```
 
+
 ### **Flipper Configuration**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // App.js
 import { useEffect } from 'react';
@@ -106,9 +111,11 @@ const App = () => {
 };
 ```
 
+
 ### **Flipper Plugins**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // flipper-config.js
 import { addPlugin } from 'react-native-flipper';
@@ -140,9 +147,11 @@ addPlugin({
 });
 ```
 
+
 ### **Custom Flipper Plugins**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Custom plugin for app state
 import { addPlugin } from 'react-native-flipper';
@@ -176,6 +185,7 @@ const AppStatePlugin = {
 addPlugin(AppStatePlugin);
 ```
 
+
 ---
 
 ## 🌐 **Chrome DevTools**
@@ -183,6 +193,7 @@ addPlugin(AppStatePlugin);
 ### **Chrome DevTools Setup**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```bash
 # Enable Chrome debugging
 npx react-native start
@@ -192,9 +203,11 @@ npx react-native start
 # Android: Cmd+M -> Debug
 ```
 
+
 ### **Chrome DevTools Features**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Console debugging
 console.log('Debug message');
@@ -213,9 +226,11 @@ console.timeEnd('operation');
 console.memory; // Memory usage info
 ```
 
+
 ### **Source Maps and Breakpoints**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Debugging with breakpoints
 const debugFunction = (data) => {
@@ -241,9 +256,11 @@ const debugLog = (message, data) => {
 };
 ```
 
+
 ### **Network Debugging**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Network debugging with Chrome DevTools
 const apiCall = async (url, options) => {
@@ -269,6 +286,7 @@ const apiCall = async (url, options) => {
 };
 ```
 
+
 ---
 
 ## 🐛 **React Native Debugger**
@@ -276,6 +294,7 @@ const apiCall = async (url, options) => {
 ### **React Native Debugger Setup**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```bash
 # Install React Native Debugger
 # Download from: https://github.com/jhen0409/react-native-debugger
@@ -284,9 +303,11 @@ const apiCall = async (url, options) => {
 brew install --cask react-native-debugger
 ```
 
+
 ### **Redux DevTools Integration**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Redux store configuration
 import { createStore, applyMiddleware } from 'redux';
@@ -312,9 +333,11 @@ const userActions = {
 };
 ```
 
+
 ### **Async Storage Debugging**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // AsyncStorage debugging
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -343,6 +366,7 @@ const debugAsyncStorage = {
 };
 ```
 
+
 ---
 
 ## 📱 **Native Debugging**
@@ -350,6 +374,7 @@ const debugAsyncStorage = {
 ### **iOS Debugging with Xcode**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```swift
 // iOS native debugging
 import Foundation
@@ -383,9 +408,11 @@ class DebugModule: NSObject {
 }
 ```
 
+
 ### **Android Debugging with Android Studio**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```java
 // Android native debugging
 import android.util.Log;
@@ -416,9 +443,11 @@ public class DebugModule extends ReactContextBaseJavaModule {
 }
 ```
 
+
 ### **Native Logs**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```bash
 # iOS logs
 xcrun simctl spawn booted log stream --predicate 'process == "YourApp"'
@@ -430,6 +459,7 @@ adb logcat | grep "ReactNativeJS"
 adb logcat -s "ReactNativeJS" "ReactNative" "YourApp"
 ```
 
+
 ---
 
 ## 🌍 **Remote Debugging**
@@ -437,6 +467,7 @@ adb logcat -s "ReactNativeJS" "ReactNative" "YourApp"
 ### **Remote Debugging Setup**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Remote debugging configuration
 const debugConfig = {
@@ -462,9 +493,11 @@ const remoteDebug = {
 };
 ```
 
+
 ### **Production Debugging**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Production debugging with crash reporting
 import crashlytics from '@react-native-firebase/crashlytics';
@@ -489,6 +522,7 @@ const productionDebug = {
 };
 ```
 
+
 ---
 
 ## ✅ **Best Practices**
@@ -496,6 +530,7 @@ const productionDebug = {
 ### **1. Debugging Strategy**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Systematic debugging approach
 const debugStrategy = {
@@ -521,9 +556,11 @@ const debugStrategy = {
 };
 ```
 
+
 ### **2. Performance Debugging**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Performance debugging utilities
 const performanceDebug = {
@@ -551,9 +588,11 @@ const performanceDebug = {
 };
 ```
 
+
 ### **3. Error Boundaries**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Error boundary for debugging
 class DebugErrorBoundary extends React.Component {
@@ -590,6 +629,7 @@ class DebugErrorBoundary extends React.Component {
   }
 }
 ```
+
 
 ---
 

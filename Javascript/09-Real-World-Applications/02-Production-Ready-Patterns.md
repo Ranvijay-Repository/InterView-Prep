@@ -45,6 +45,7 @@
 - **Recovery**: Automatically recover from transient failures
 
 ### ASCII Diagram: Error Handling Flow
+
 ```
 ERROR HANDLING FLOW
 ┌─────────────────────────────────┐
@@ -120,6 +121,7 @@ ERROR HANDLING FLOW
         └───────────────┘
 ```
 
+
 ### Error Handling Strategies:
 - **Graceful Degradation**: Provide fallback functionality
 - **Circuit Breaker**: Prevent cascading failures
@@ -141,6 +143,7 @@ ERROR HANDLING FLOW
 - **Compliance**: Meet regulatory and audit requirements
 
 ### ASCII Diagram: Logging & Monitoring System
+
 ```
 LOGGING & MONITORING SYSTEM
 ┌─────────────────────────────────┐
@@ -214,6 +217,7 @@ LOGGING & MONITORING SYSTEM
         └───────────────┘
 ```
 
+
 ### Monitoring Areas:
 - **Application Metrics**: Response times, error rates, throughput
 - **Infrastructure Metrics**: CPU, memory, disk, network usage
@@ -235,6 +239,7 @@ LOGGING & MONITORING SYSTEM
 - **Reliability**: Ensure consistent, repeatable deployments
 
 ### ASCII Diagram: Deployment Pipeline
+
 ```
 DEPLOYMENT PIPELINE
 ┌─────────────────────────────────┐
@@ -308,6 +313,7 @@ DEPLOYMENT PIPELINE
         └───────────────┘
 ```
 
+
 ### Deployment Strategies:
 - **Blue-Green Deployment**: Zero-downtime deployment with instant rollback
 - **Canary Deployment**: Gradual rollout to minimize risk
@@ -329,6 +335,7 @@ DEPLOYMENT PIPELINE
 - **Reliability**: Consistent, repeatable processes
 
 ### ASCII Diagram: DevOps Pipeline
+
 ```
 DEVOPS PIPELINE
 ┌─────────────────────────────────┐
@@ -407,6 +414,7 @@ DEVOPS PIPELINE
         │  Sharing      │
         └───────────────┘
 ```
+
 
 ### DevOps Practices:
 - **Infrastructure as Code**: Automated infrastructure provisioning

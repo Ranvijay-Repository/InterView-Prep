@@ -22,6 +22,7 @@
 
 ### **Project Structure**
 
+
 ```mermaid
 graph TD
     A[src/] --> B[features/]
@@ -41,6 +42,7 @@ graph TD
     D --> M[config/]
 ```
 
+
 ### **Key Principles**
 - **Feature Isolation**: Each feature is self-contained
 - **Shared Resources**: Common components and utilities
@@ -54,6 +56,7 @@ graph TD
 ### **Feature Module Structure**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Feature module structure
 const FeatureModule = {
@@ -115,9 +118,11 @@ const FeatureModule = {
 export default FeatureModule;
 ```
 
+
 ### **Feature Module Implementation**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Profile feature module
 const ProfileFeature = {
@@ -211,6 +216,7 @@ const FeatureRegistry = {
 export { ProfileFeature, FeatureRegistry };
 ```
 
+
 ---
 
 ## 🔄 **Shared Components**
@@ -218,6 +224,7 @@ export { ProfileFeature, FeatureRegistry };
 ### **Shared Component Library**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Shared components index
 const SharedComponents = {
@@ -287,6 +294,7 @@ const SharedComponentRegistry = {
 export { SharedComponents, createSharedComponent, SharedComponentRegistry };
 ```
 
+
 ---
 
 ## 🧭 **Navigation Structure**
@@ -294,6 +302,7 @@ export { SharedComponents, createSharedComponent, SharedComponentRegistry };
 ### **Feature-Based Navigation**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -348,17 +357,17 @@ const FeatureNavigation = {
         <Tab.Screen 
           name="Dashboard" 
           component={DashboardNavigator}
-          options={{ tabBarIcon: ({ color }) => <DashboardIcon color={color} /> }}
+          options={{#123;{{#123; tabBarIcon: ({ color }) => <DashboardIcon color={color} /> }}#125;}}#125;
         />
         <Tab.Screen 
           name="Profile" 
           component={ProfileNavigator}
-          options={{ tabBarIcon: ({ color }) => <ProfileIcon color={color} /> }}
+          options={{#123;{{#123; tabBarIcon: ({ color }) => <ProfileIcon color={color} /> }}#125;}}#125;
         />
         <Tab.Screen 
           name="Settings" 
           component={SettingsNavigator}
-          options={{ tabBarIcon: ({ color }) => <SettingsIcon color={color} /> }}
+          options={{#123;{{#123; tabBarIcon: ({ color }) => <SettingsIcon color={color} /> }}#125;}}#125;
         />
       </Tab.Navigator>
     );
@@ -397,6 +406,7 @@ const NavigationService = {
 
 export { FeatureNavigation, NavigationService };
 ```
+
 
 ---
 

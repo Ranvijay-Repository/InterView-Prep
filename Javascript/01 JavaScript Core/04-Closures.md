@@ -41,6 +41,7 @@ Think of a closure like a backpack:
 4. **Memory Persistence**: Variables stay in memory as long as closure exists
 
 ### 🔄 Lifecycle
+
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │                    CLOSURE LIFECYCLE                        │
@@ -54,9 +55,11 @@ Think of a closure like a backpack:
 └─────────────────────────────────────────────────────────────┘
 ```
 
+
 ---
 
 ## 🗂️ Closure Visualization
+
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -79,7 +82,9 @@ Think of a closure like a backpack:
 └─────────────────────────────────────────────────────────────┘
 ```
 
+
 ### 🔍 Memory Management
+
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -96,6 +101,7 @@ Think of a closure like a backpack:
 │  └─ Closure only affects what it references               │
 └─────────────────────────────────────────────────────────────┘
 ```
+
 
 ---
 
@@ -133,6 +139,7 @@ Think of a closure like a backpack:
 ### Example 1: Basic Closure
 <div style="position: relative;">
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
+
 
 ```javascript
 console.log("=== BASIC CLOSURE ===");
@@ -172,9 +179,11 @@ console.log("Closure result:", result);
 console.log("=== Closure Memory ===");
 console.log("Closure remembers outer variables even after outer function returned");
 ```
+
 </div>
 
 ### Example 2: Data Privacy with Closures
+
 ```javascript
 console.log("=== DATA PRIVACY WITH CLOSURES ===");
 
@@ -235,7 +244,9 @@ console.log("counter.validateIncrement:", counter.validateIncrement); // undefin
 console.log("Private variables are completely hidden from outside access");
 ```
 
+
 ### Example 3: Function Factory with Closures
+
 ```javascript
 console.log("=== FUNCTION FACTORY WITH CLOSURES ===");
 
@@ -290,7 +301,9 @@ console.log("multiply(4, 6):", multiply(4, 6)); // 24
 console.log("divide(10, 2):", divide(10, 2));   // 5
 ```
 
+
 ### Example 4: Module Pattern with Closures
+
 ```javascript
 console.log("=== MODULE PATTERN WITH CLOSURES ===");
 
@@ -395,7 +408,9 @@ console.log("nextId:", userModule.nextId);         // undefined
 console.log("generateId:", userModule.generateId); // undefined
 ```
 
+
 ### Example 5: Event Handlers and Closures
+
 ```javascript
 console.log("=== EVENT HANDLERS AND CLOSURES ===");
 
@@ -448,7 +463,9 @@ console.log("Each button handler has its own click count");
 console.log("Handler 1 and Handler 2 are completely independent");
 ```
 
+
 ### Example 6: Memoization with Closures
+
 ```javascript
 console.log("=== MEMOIZATION WITH CLOSURES ===");
 
@@ -517,11 +534,13 @@ console.log("3. Cache persists between function calls");
 console.log("4. Memory usage increases with cache size");
 ```
 
+
 ---
 
 ## ⚠️ Common Pitfalls
 
 ### Pitfall 1: Creating Closures in Loops
+
 ```javascript
 console.log("=== PITFALL 1: CLOSURES IN LOOPS ===");
 
@@ -588,7 +607,9 @@ fixedHandlers2.forEach((handler, index) => {
 });
 ```
 
+
 ### Pitfall 2: Memory Leaks
+
 ```javascript
 console.log("=== PITFALL 2: MEMORY LEAKS ===");
 
@@ -619,11 +640,13 @@ function createMemoryEfficient() {
 const efficientClosure = createMemoryEfficient();
 ```
 
+
 ---
 
 ## ✅ Best Practices
 
 ### 1. Only Capture What You Need
+
 ```javascript
 console.log("=== BEST PRACTICE 1: CAPTURE ONLY WHAT YOU NEED ===");
 
@@ -648,7 +671,9 @@ function goodPractice() {
 }
 ```
 
+
 ### 2. Use Closures for Data Privacy
+
 ```javascript
 console.log("=== BEST PRACTICE 2: USE CLOSURES FOR PRIVACY ===");
 
@@ -671,7 +696,9 @@ console.log("Public access:", privateModule.getData());
 // console.log("Private access:", privateModule.privateData); // undefined
 ```
 
+
 ### 3. Be Mindful of Memory
+
 ```javascript
 console.log("=== BEST PRACTICE 3: BE MINDFUL OF MEMORY ===");
 
@@ -693,6 +720,7 @@ function createTemporaryClosure() {
     };
 }
 ```
+
 
 ---
 
@@ -741,6 +769,7 @@ function createTemporaryClosure() {
 5. Variables stay in memory as long as closure exists
 
 **Example:**
+
 ```javascript
 function outer() {
     let x = 10;
@@ -755,6 +784,7 @@ function outer() {
 const closure = outer();
 console.log(closure()); // 10 (x is still accessible)
 ```
+
 
 ### Q: What are the main use cases for closures?
 **A:** Closures are used for:
@@ -788,6 +818,7 @@ console.log(closure()); // 10 (x is still accessible)
 - Large objects captured unnecessarily consume memory
 
 **Examples:**
+
 ```javascript
 // ❌ Memory leak: capturing large object
 function leaky() {
@@ -809,26 +840,32 @@ function efficient() {
 }
 ```
 
+
 ### Q: How do you fix the closure-in-loop problem?
 **A:** The closure-in-loop problem occurs when all closures reference the same variable. Here are solutions:
 
 **Problem:**
+
 ```javascript
 for (var i = 0; i < 3; i++) {
     setTimeout(() => console.log(i), 100); // All print 3
 }
 ```
 
+
 **Solutions:**
 
 **1. Use let (block scope):**
+
 ```javascript
 for (let i = 0; i < 3; i++) {
     setTimeout(() => console.log(i), 100); // 0, 1, 2
 }
 ```
 
+
 **2. IIFE (Immediately Invoked Function Expression):**
+
 ```javascript
 for (var i = 0; i < 3; i++) {
     (function(index) {
@@ -837,7 +874,9 @@ for (var i = 0; i < 3; i++) {
 }
 ```
 
+
 **3. bind() method:**
+
 ```javascript
 for (var i = 0; i < 3; i++) {
     setTimeout(function(index) {
@@ -846,11 +885,13 @@ for (var i = 0; i < 3; i++) {
 }
 ```
 
+
 ---
 
 ## 🧪 Practice Exercises
 
 ### Exercise 1: Basic Closure Understanding
+
 ```javascript
 console.log("Exercise 1: Predict the output");
 
@@ -872,7 +913,9 @@ console.log(counter2()); // What will this print?
 console.log(counter1()); // What will this print?
 ```
 
+
 ### Exercise 2: Closure in Loop Fix
+
 ```javascript
 console.log("Exercise 2: Fix the closure in loop");
 
@@ -892,7 +935,9 @@ function createButtons() {
 // Your fix here...
 ```
 
+
 ### Exercise 3: Module Pattern Implementation
+
 ```javascript
 console.log("Exercise 3: Implement a module pattern");
 
@@ -902,6 +947,7 @@ console.log("Exercise 3: Implement a module pattern");
 
 // Your implementation here...
 ```
+
 
 ---
 

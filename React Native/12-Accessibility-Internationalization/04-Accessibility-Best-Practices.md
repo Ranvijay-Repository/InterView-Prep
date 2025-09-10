@@ -22,6 +22,7 @@
 ### **WCAG Compliance**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
@@ -100,6 +101,7 @@ const styles = StyleSheet.create({
 export default WCAGGuidelines;
 ```
 
+
 ---
 
 ## 🛠️ **Implementation Strategies**
@@ -107,6 +109,7 @@ export default WCAGGuidelines;
 ### **Accessibility-First Development**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
@@ -171,7 +174,7 @@ const AccessibleButton = ({
         if (event.nativeEvent.actionName === 'activate') {
           onPress();
         }
-      }}
+      }}#125;}}#125;
     >
       <Text style={getTextStyle()}>{title}</Text>
     </TouchableOpacity>
@@ -336,6 +339,7 @@ const styles = StyleSheet.create({
 export { AccessibleButton, AccessibleForm, AccessibleInput };
 ```
 
+
 ---
 
 ## ⚡ **Performance Considerations**
@@ -343,6 +347,7 @@ export { AccessibleButton, AccessibleForm, AccessibleInput };
 ### **Accessibility Performance**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 import React, { useMemo, useCallback } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
@@ -440,6 +445,7 @@ const styles = StyleSheet.create({
 export { OptimizedAccessibleList, AccessibilityPerformanceMonitor };
 ```
 
+
 ---
 
 ## 🚫 **Common Pitfalls**
@@ -447,6 +453,7 @@ export { OptimizedAccessibleList, AccessibilityPerformanceMonitor };
 ### **Accessibility Anti-Patterns**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
@@ -518,6 +525,7 @@ const GoodForm = () => {
 
 export { BadButton, GoodButton, BadText, GoodText, BadForm, GoodForm };
 ```
+
 
 ---
 

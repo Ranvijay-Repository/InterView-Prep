@@ -22,6 +22,7 @@ Your repository now has a complete CI/CD pipeline that ensures:
 ## 🚀 How It Works
 
 ### 1. **Development Workflow**
+
 ```bash
 # Create feature branch
 git checkout -b feature/my-feature
@@ -36,7 +37,9 @@ git push origin feature/my-feature
 # → Shows build status in PR
 ```
 
+
 ### 2. **Deployment Workflow**
+
 ```bash
 # When PR is approved and merged:
 # → Triggers deploy workflow
@@ -44,6 +47,7 @@ git push origin feature/my-feature
 # → Builds Jekyll site
 # → Deploys to GitHub Pages
 ```
+
 
 ### 3. **Security Features**
 - **Branch Protection**: Blocks direct pushes to production
@@ -70,9 +74,11 @@ git push origin feature/my-feature
 ## 🔧 Next Steps
 
 ### 1. **Run the Setup Script**
+
 ```bash
 ./scripts/setup-production-branch.sh
 ```
+
 
 ### 2. **Configure Branch Protection**
 Follow the instructions in `BRANCH-PROTECTION-SETUP.md` to:

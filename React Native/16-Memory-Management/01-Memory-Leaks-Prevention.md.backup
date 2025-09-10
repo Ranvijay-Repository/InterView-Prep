@@ -1,0 +1,584 @@
+# Memory Leaks Prevention in React Native
+
+## Overview
+
+Memory leaks in React Native applications can cause performance degradation, crashes, and poor user experience. Understanding how to identify, prevent, and fix memory leaks is crucial for building robust mobile applications.
+
+## Understanding Memory Leaks
+
+### What are Memory Leaks?
+
+A memory leak occurs when allocated memory is not properly released, causing the application to consume increasing amounts of RAM over time. In React Native, this typically happens when:
+
+- Event listeners are not removed
+- Timers/intervals are not cleared
+- References to components are held after unmounting
+- Large objects are kept in memory unnecessarily
+
+### Common Memory Leak Sources
+
+{% raw %}
+```javascript
+// ❌ BAD: Event listener not removed
+const MyComponent = () => {
+  useEffect(() => {
+    const handleResize = () => {
+      // Handle resize
+    };
+    
+    window.addEventListener('resize', handleResize);
+    // Missing cleanup!
+  }, []);
+  
+  return <View>Content</View>;
+};
+
+// ✅ GOOD: Proper cleanup
+const MyComponent = () => {
+  useEffect(() => {
+    const handleResize = () => {
+      // Handle resize
+    };
+    
+    window.addEventListener('resize', handleResize);
+    
+    // Cleanup function
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+  
+  return <View>Content</View>;
+};
+```
+{% endraw %}
+
+## Memory Leak Prevention Strategies
+
+### 1. Event Listener Management
+
+{% raw %}
+```javascript
+import { useEffect, useRef } from 'react';
+import { AppState, Dimensions } from 'react-native';
+
+const EventListenerExample = () => {
+  const appStateRef = useRef(AppState.currentState);
+  const dimensionsRef = useRef(Dimensions.get('window'));
+
+  useEffect(() => {
+    // App State listener
+    const handleAppStateChange = (nextAppState) => {
+      if (appStateRef.current.match(/inactive|background/) && nextAppState === 'active') {
+        console.log('App has come to the foreground!');
+      }
+      appStateRef.current = nextAppState;
+    };
+
+    const appStateSubscription = AppState.addEventListener('change', handleAppStateChange);
+
+    // Dimensions listener
+    const handleDimensionChange = ({ window }) => {
+      dimensionsRef.current = window;
+      console.log('Screen dimensions changed:', window);
+    };
+
+    const dimensionsSubscription = Dimensions.addEventListener('change', handleDimensionChange);
+
+    // Cleanup
+    return () => {
+      appStateSubscription?.remove();
+      dimensionsSubscription?.remove();
+    };
+  }, []);
+
+  return <View>Event Listener Example</View>;
+};
+```
+{% endraw %}
+
+### 2. Timer Management
+
+{% raw %}
+```javascript
+import { useEffect, useRef } from 'react';
+
+const TimerExample = () => {
+  const intervalRef = useRef(null);
+  const timeoutRef = useRef(null);
+
+  useEffect(() => {
+    // Set up interval
+    intervalRef.current = setInterval(() => {
+      console.log('Interval tick');
+    }, 1000);
+
+    // Set up timeout
+    timeoutRef.current = setTimeout(() => {
+      console.log('Timeout completed');
+    }, 5000);
+
+    // Cleanup
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, []);
+
+  return <View>Timer Example</View>;
+};
+```
+{% endraw %}
+
+### 3. Subscription Management
+
+{% raw %}
+```javascript
+import { useEffect, useRef } from 'react';
+import { NetInfo } from '@react-native-netinfo/netinfo';
+
+const SubscriptionExample = () => {
+  const netInfoSubscriptionRef = useRef(null);
+
+  useEffect(() => {
+    // Subscribe to network state changes
+    netInfoSubscriptionRef.current = NetInfo.addEventListener(state => {
+      console.log('Connection type:', state.type);
+      console.log('Is connected:', state.isConnected);
+    });
+
+    // Cleanup
+    return () => {
+      if (netInfoSubscriptionRef.current) {
+        netInfoSubscriptionRef.current();
+      }
+    };
+  }, []);
+
+  return <View>Subscription Example</View>;
+};
+```
+{% endraw %}
+
+### 4. Image Memory Management
+
+{% raw %}
+```javascript
+import { useEffect, useState } from 'react';
+import { Image, View } from 'react-native';
+
+const ImageMemoryExample = () => {
+  const [images, setImages] = useState([]);
+
+  useEffect(() => {
+    // Load images
+    const imageUrls = [
+      'https://example.com/image1.jpg',
+      'https://example.com/image2.jpg',
+      'https://example.com/image3.jpg',
+    ];
+
+    setImages(imageUrls);
+
+    // Cleanup: Clear images when component unmounts
+    return () => {
+      setImages([]);
+    };
+  }, []);
+
+  return (
+    <View>
+      {images.map((url, index) => (
+        <Image
+          key={index}
+          source={{ uri: url }}
+          style={{ width: 100, height: 100 }}
+          // Optimize memory usage
+          resizeMode="cover"
+          // Clear cache if needed
+          onLoad={() => console.log(`Image ${index} loaded`)}
+        />
+      ))}
+    </View>
+  );
+};
+```
+{% endraw %}
+
+## Advanced Memory Management Techniques
+
+### 1. Weak References
+
+{% raw %}
+```javascript
+import { useEffect, useRef, useCallback } from 'react';
+
+const WeakReferenceExample = () => {
+  const dataRef = useRef(new Map());
+  const weakDataRef = useRef(new WeakMap());
+
+  const addData = useCallback((key, value) => {
+    // Regular Map - holds strong references
+    dataRef.current.set(key, value);
+    
+    // WeakMap - holds weak references (better for memory)
+    weakDataRef.current.set(value, { timestamp: Date.now() });
+  }, []);
+
+  const clearData = useCallback(() => {
+    // Clear regular Map
+    dataRef.current.clear();
+    
+    // WeakMap will automatically clean up when objects are garbage collected
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      clearData();
+    };
+  }, [clearData]);
+
+  return <View>Weak Reference Example</View>;
+};
+```
+{% endraw %}
+
+### 2. Memory-Efficient Data Structures
+
+{% raw %}
+```javascript
+import { useMemo, useCallback } from 'react';
+
+const EfficientDataExample = () => {
+  const [items, setItems] = useState([]);
+
+  // Memoize expensive calculations
+  const processedItems = useMemo(() => {
+    return items
+      .filter(item => item.active)
+      .map(item => ({
+        ...item,
+        processed: true,
+        timestamp: Date.now()
+      }));
+  }, [items]);
+
+  // Use callback to prevent unnecessary re-renders
+  const handleItemPress = useCallback((itemId) => {
+    setItems(prev => prev.map(item => 
+      item.id === itemId 
+        ? { ...item, active: !item.active }
+        : item
+    ));
+  }, []);
+
+  return (
+    <View>
+      {processedItems.map(item => (
+        <TouchableOpacity
+          key={item.id}
+          onPress={() => handleItemPress(item.id)}
+        >
+          <Text>{item.name}</Text>
+        </TouchableOpacity>
+      ))}
+    </View>
+  );
+};
+```
+{% endraw %}
+
+### 3. Lazy Loading and Virtualization
+
+{% raw %}
+```javascript
+import { useMemo } from 'react';
+import { FlatList } from 'react-native';
+
+const LazyLoadingExample = () => {
+  const [data, setData] = useState([]);
+
+  // Only render visible items
+  const renderItem = useCallback(({ item }) => (
+    <View style={{ height: 100, padding: 10 }}>
+      <Text>{item.title}</Text>
+    </View>
+  ), []);
+
+  // Optimize memory with getItemLayout
+  const getItemLayout = useCallback((data, index) => ({
+    length: 100,
+    offset: 100 * index,
+    index,
+  }), []);
+
+  return (
+    <FlatList
+      data={data}
+      renderItem={renderItem}
+      getItemLayout={getItemLayout}
+      // Memory optimization props
+      removeClippedSubviews={true}
+      maxToRenderPerBatch={10}
+      windowSize={10}
+      initialNumToRender={10}
+      updateCellsBatchingPeriod={50}
+    />
+  );
+};
+```
+{% endraw %}
+
+## Memory Monitoring and Debugging
+
+### 1. Memory Usage Monitoring
+
+{% raw %}
+```javascript
+import { useEffect, useState } from 'react';
+import { View, Text } from 'react-native';
+
+const MemoryMonitor = () => {
+  const [memoryInfo, setMemoryInfo] = useState(null);
+
+  useEffect(() => {
+    const monitorMemory = () => {
+      if (global.performance && global.performance.memory) {
+        const memory = global.performance.memory;
+        setMemoryInfo({
+          used: Math.round(memory.usedJSHeapSize / 1024 / 1024),
+          total: Math.round(memory.totalJSHeapSize / 1024 / 1024),
+          limit: Math.round(memory.jsHeapSizeLimit / 1024 / 1024),
+        });
+      }
+    };
+
+    const interval = setInterval(monitorMemory, 1000);
+    monitorMemory(); // Initial check
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <View style={{ padding: 20 }}>
+      <Text>Memory Usage:</Text>
+      {memoryInfo && (
+        <>
+          <Text>Used: {memoryInfo.used} MB</Text>
+          <Text>Total: {memoryInfo.total} MB</Text>
+          <Text>Limit: {memoryInfo.limit} MB</Text>
+        </>
+      )}
+    </View>
+  );
+};
+```
+{% endraw %}
+
+### 2. Memory Leak Detection
+
+{% raw %}
+```javascript
+import { useEffect, useRef } from 'react';
+
+const MemoryLeakDetector = () => {
+  const componentRefs = useRef(new Set());
+  const timerRefs = useRef(new Set());
+
+  useEffect(() => {
+    // Track component references
+    const trackRef = (ref) => {
+      componentRefs.current.add(ref);
+    };
+
+    // Track timers
+    const trackTimer = (timer) => {
+      timerRefs.current.add(timer);
+    };
+
+    // Cleanup tracking
+    const cleanup = () => {
+      componentRefs.current.clear();
+      timerRefs.current.forEach(timer => {
+        if (typeof timer === 'number') {
+          clearTimeout(timer);
+        } else {
+          clearInterval(timer);
+        }
+      });
+      timerRefs.current.clear();
+    };
+
+    // Expose cleanup for debugging
+    global.__cleanupMemoryLeaks = cleanup;
+
+    return cleanup;
+  }, []);
+
+  return <View>Memory Leak Detector</View>;
+};
+```
+{% endraw %}
+
+## Best Practices
+
+### 1. Component Lifecycle Management
+
+{% raw %}
+```javascript
+import { useEffect, useRef, useCallback } from 'react';
+
+const LifecycleExample = () => {
+  const isMountedRef = useRef(true);
+  const abortControllerRef = useRef(null);
+
+  useEffect(() => {
+    // Set up abort controller for fetch requests
+    abortControllerRef.current = new AbortController();
+
+    return () => {
+      isMountedRef.current = false;
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort();
+      }
+    };
+  }, []);
+
+  const fetchData = useCallback(async () => {
+    try {
+      const response = await fetch('/api/data', {
+        signal: abortControllerRef.current?.signal
+      });
+      
+      if (isMountedRef.current) {
+        const data = await response.json();
+        // Process data
+      }
+    } catch (error) {
+      if (error.name !== 'AbortError' && isMountedRef.current) {
+        console.error('Fetch error:', error);
+      }
+    }
+  }, []);
+
+  return <View>Lifecycle Example</View>;
+};
+```
+{% endraw %}
+
+### 2. Memory-Efficient State Management
+
+{% raw %}
+```javascript
+import { useReducer, useCallback } from 'react';
+
+const initialState = {
+  items: [],
+  loading: false,
+  error: null,
+};
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'SET_LOADING':
+      return { ...state, loading: action.payload };
+    case 'SET_ITEMS':
+      return { ...state, items: action.payload, loading: false };
+    case 'CLEAR_ITEMS':
+      return { ...state, items: [] };
+    case 'SET_ERROR':
+      return { ...state, error: action.payload, loading: false };
+    default:
+      return state;
+  }
+};
+
+const StateManagementExample = () => {
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  const clearItems = useCallback(() => {
+    dispatch({ type: 'CLEAR_ITEMS' });
+  }, []);
+
+  const loadItems = useCallback(async () => {
+    dispatch({ type: 'SET_LOADING', payload: true });
+    try {
+      const items = await fetchItems();
+      dispatch({ type: 'SET_ITEMS', payload: items });
+    } catch (error) {
+      dispatch({ type: 'SET_ERROR', payload: error.message });
+    }
+  }, []);
+
+  return <View>State Management Example</View>;
+};
+```
+{% endraw %}
+
+## Memory Leak Testing
+
+### 1. Automated Memory Testing
+
+{% raw %}
+```javascript
+import { render, cleanup } from '@testing-library/react-native';
+
+describe('Memory Leak Tests', () => {
+  afterEach(() => {
+    cleanup();
+    // Force garbage collection if available
+    if (global.gc) {
+      global.gc();
+    }
+  });
+
+  it('should not leak memory on component unmount', () => {
+    const { unmount } = render(<MyComponent />);
+    
+    // Simulate component lifecycle
+    unmount();
+    
+    // Check for memory leaks
+    expect(global.performance.memory.usedJSHeapSize).toBeLessThan(
+      initialMemoryUsage
+    );
+  });
+
+  it('should clean up event listeners', () => {
+    const addEventListenerSpy = jest.spyOn(window, 'addEventListener');
+    const removeEventListenerSpy = jest.spyOn(window, 'removeEventListener');
+    
+    const { unmount } = render(<EventListenerComponent />);
+    unmount();
+    
+    expect(removeEventListenerSpy).toHaveBeenCalled();
+  });
+});
+```
+{% endraw %}
+
+## Summary
+
+Memory leak prevention in React Native requires:
+
+1. **Proper cleanup** of event listeners, timers, and subscriptions
+2. **Efficient data structures** and state management
+3. **Lazy loading** and virtualization for large datasets
+4. **Memory monitoring** and debugging tools
+5. **Testing** for memory leaks in development
+
+By following these practices, you can build React Native applications that maintain optimal memory usage and provide a smooth user experience.
+
+## Key Takeaways
+
+- Always provide cleanup functions in useEffect hooks
+- Use WeakMap and WeakSet for automatic garbage collection
+- Implement proper component lifecycle management
+- Monitor memory usage in development and production
+- Test for memory leaks as part of your testing strategy
+- Use memory-efficient rendering techniques like FlatList virtualization
+

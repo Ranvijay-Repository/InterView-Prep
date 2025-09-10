@@ -26,6 +26,7 @@ Creating custom native UI components with Fabric allows you to build high-perfor
 
 ### **Native UI Components Overview**
 
+
 ```
 ┌─────────────────────────────────────┐
 │        Native UI Components         │
@@ -53,6 +54,7 @@ Creating custom native UI components with Fabric allows you to build high-perfor
 └─────────────────────────────────────┘
 ```
 
+
 ---
 
 ## 🎨 **Fabric Component Architecture**
@@ -60,6 +62,7 @@ Creating custom native UI components with Fabric allows you to build high-perfor
 ### **Component Specification Example**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Custom Native Component Specification
 // This file defines the interface for the native component
@@ -124,9 +127,11 @@ export interface Spec extends ComponentSpec<CustomViewProps> {
 export default codegenNativeComponent<CustomViewProps>('CustomView');
 ```
 
+
 ### **Component Usage Example**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Custom Native Component Usage
 import React, { useRef, useState, useCallback } from 'react';
@@ -345,6 +350,7 @@ const styles = StyleSheet.create({
 
 export default CustomViewExample;
 ```
+
 
 ---
 

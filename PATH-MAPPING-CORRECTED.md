@@ -6,6 +6,7 @@
 
 ## 📁 **Repository Structure Overview**
 
+
 ```
 /Users/ranvijaychouhan/Desktop/Personal/Interview-prep/
 ├── 📄 JavaScript Master Index
@@ -22,6 +23,7 @@
     └── React Native/ (80 files across 21 sections)
 ```
 
+
 ---
 
 ## 🔧 **Path Corrections Applied**
@@ -29,28 +31,36 @@
 ### **JavaScript Master Index Corrections**
 
 **❌ Before (Incorrect):**
+
 ```markdown
 - [01. Execution Context & Call Stack](JavaScript/01%20JavaScript%20Core/01-Execution-Context-Call-Stack.md)
 - [01. Functional Programming](JavaScript/02-Advanced-JavaScript-Concepts/01-Functional-Programming.md)
 ```
 
+
 **✅ After (Corrected):**
+
 ```markdown
 - [01. Execution Context & Call Stack](01%20JavaScript%20Core/01-Execution-Context-Call-Stack.md)
 - [01. Functional Programming](02-Advanced-JavaScript-Concepts/01-Functional-Programming.md)
 ```
 
+
 ### **React Native Master Index Corrections**
 
 **❌ Before (Incorrect):**
+
 ```markdown
 | [JavaScript Master Index](../JavaScript.md) |
 ```
 
+
 **✅ After (Corrected):**
+
 ```markdown
 | [JavaScript Master Index](../Javascript/JavaScript.md) |
 ```
+
 
 ---
 

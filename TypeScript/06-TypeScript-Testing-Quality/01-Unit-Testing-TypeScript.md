@@ -25,6 +25,7 @@ Setting up unit testing for TypeScript applications requires proper configuratio
 
 ### **Basic Setup**
 
+
 ```bash
 # Install testing dependencies
 npm install --save-dev jest @types/jest ts-jest
@@ -38,7 +39,9 @@ npm install --save-dev supertest @types/supertest
 npm install --save-dev @testing-library/react @testing-library/user-event
 ```
 
+
 ### **Package.json Scripts**
+
 
 ```json
 {
@@ -51,7 +54,9 @@ npm install --save-dev @testing-library/react @testing-library/user-event
 }
 ```
 
+
 ### **Basic Jest Configuration**
+
 
 ```javascript
 // jest.config.js
@@ -77,11 +82,13 @@ module.exports = {
 };
 ```
 
+
 ---
 
 ## ⚙️ **Jest Configuration**
 
 ### **Advanced Jest Configuration**
+
 
 ```javascript
 // jest.config.js
@@ -121,7 +128,9 @@ module.exports = {
 };
 ```
 
+
 ### **TypeScript Configuration for Testing**
+
 
 ```json
 // tsconfig.test.json
@@ -141,7 +150,9 @@ module.exports = {
 }
 ```
 
+
 ### **Setup Files**
+
 
 ```typescript
 // src/setupTests.ts
@@ -162,11 +173,13 @@ afterEach(() => {
 jest.setTimeout(10000);
 ```
 
+
 ---
 
 ## 🧪 **Basic Testing Patterns**
 
 ### **Function Testing**
+
 
 ```typescript
 // src/utils/math.ts
@@ -242,7 +255,9 @@ describe('Math Utils', () => {
 });
 ```
 
+
 ### **Class Testing**
+
 
 ```typescript
 // src/models/User.ts
@@ -398,11 +413,13 @@ describe('User', () => {
 });
 ```
 
+
 ---
 
 ## 🎭 **Mocking and Stubbing**
 
 ### **Basic Mocking**
+
 
 ```typescript
 // src/services/UserService.ts
@@ -479,7 +496,9 @@ describe('UserService', () => {
 });
 ```
 
+
 ### **Advanced Mocking**
+
 
 ```typescript
 // src/utils/__tests__/dateUtils.test.ts
@@ -525,7 +544,9 @@ describe('Date Utils', () => {
 });
 ```
 
+
 ### **Module Mocking**
+
 
 ```typescript
 // src/services/__tests__/EmailService.test.ts
@@ -566,11 +587,13 @@ describe('EmailService', () => {
 });
 ```
 
+
 ---
 
 ## ⚡ **Async Testing**
 
 ### **Promise Testing**
+
 
 ```typescript
 // src/services/__tests__/ApiService.test.ts
@@ -615,7 +638,9 @@ describe('ApiService', () => {
 });
 ```
 
+
 ### **Callback Testing**
+
 
 ```typescript
 // src/utils/__tests__/asyncUtils.test.ts
@@ -662,11 +687,13 @@ describe('Async Utils', () => {
 });
 ```
 
+
 ---
 
 ## 🚀 **Advanced Testing Patterns**
 
 ### **Test Doubles and Spies**
+
 
 ```typescript
 // src/services/__tests__/OrderService.test.ts
@@ -768,7 +795,9 @@ describe('OrderService', () => {
 });
 ```
 
+
 ### **Integration Testing**
+
 
 ```typescript
 // src/__tests__/integration/userIntegration.test.ts
@@ -854,11 +883,13 @@ describe('User Integration Tests', () => {
 });
 ```
 
+
 ---
 
 ## ✅ **Best Practices**
 
 ### **1. Use Descriptive Test Names**
+
 
 ```typescript
 // ✅ Good: Descriptive test names
@@ -892,7 +923,9 @@ describe('UserService', () => {
 });
 ```
 
+
 ### **2. Use Arrange-Act-Assert Pattern**
+
 
 ```typescript
 // ✅ Good: AAA pattern
@@ -918,7 +951,9 @@ it('should calculate total price correctly', () => {
 });
 ```
 
+
 ### **3. Use Proper Mocking**
+
 
 ```typescript
 // ✅ Good: Proper mocking
@@ -952,7 +987,9 @@ describe('UserService', () => {
 });
 ```
 
+
 ### **4. Test Edge Cases**
+
 
 ```typescript
 // ✅ Good: Test edge cases
@@ -982,6 +1019,7 @@ describe('divide', () => {
 });
 ```
 
+
 ---
 
 ## ❓ **Common Interview Questions**
@@ -1005,6 +1043,7 @@ describe('divide', () => {
 ### **3. How do you mock dependencies in Jest?**
 
 **Answer:**
+
 ```typescript
 // Mock entire module
 jest.mock('./module');
@@ -1017,9 +1056,11 @@ jest.fn().mockReturnValue('value');
 jest.fn().mockResolvedValue('async value');
 ```
 
+
 ### **4. How do you test async code?**
 
 **Answer:**
+
 ```typescript
 // Test promises
 it('should resolve promise', async () => {
@@ -1032,6 +1073,7 @@ it('should reject promise', async () => {
   await expect(asyncFunction()).rejects.toThrow('Error');
 });
 ```
+
 
 ### **5. What's the difference between unit and integration tests?**
 

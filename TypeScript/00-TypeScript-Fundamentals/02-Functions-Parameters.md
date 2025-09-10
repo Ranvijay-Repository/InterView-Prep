@@ -25,6 +25,7 @@ TypeScript enhances JavaScript functions with type annotations for parameters an
 
 ### **Basic Function Declaration**
 
+
 ```typescript
 // Function with typed parameters and return type
 function add(a: number, b: number): number {
@@ -42,7 +43,9 @@ function logMessage(message: string): void {
 }
 ```
 
+
 ### **Function with Optional Parameters**
+
 
 ```typescript
 // Optional parameter with ?
@@ -58,7 +61,9 @@ createUser("John"); // { name: "John" }
 createUser("Alice", 25); // { name: "Alice", age: 25 }
 ```
 
+
 ### **Function with Default Parameters**
+
 
 ```typescript
 // Default parameter values
@@ -71,6 +76,7 @@ greetUser("John"); // "Hello, John!"
 greetUser("Alice", "Hi"); // "Hi, Alice!"
 ```
 
+
 ---
 
 ## 📝 **Function Expressions**
@@ -78,6 +84,7 @@ greetUser("Alice", "Hi"); // "Hi, Alice!"
 Function expressions in TypeScript can be typed using the function type syntax.
 
 ### **Basic Function Expression**
+
 
 ```typescript
 // Function expression with type annotation
@@ -91,7 +98,9 @@ const divide: (a: number, b: number) => number = function(x, y) {
 };
 ```
 
+
 ### **Function Type Aliases**
+
 
 ```typescript
 // Define function type
@@ -107,6 +116,7 @@ function calculate(a: number, b: number, operation: MathOperation): number {
 }
 ```
 
+
 ---
 
 ## 🏹 **Arrow Functions**
@@ -114,6 +124,7 @@ function calculate(a: number, b: number, operation: MathOperation): number {
 Arrow functions in TypeScript provide concise syntax with full type support.
 
 ### **Basic Arrow Functions**
+
 
 ```typescript
 // Simple arrow function
@@ -128,7 +139,9 @@ const formatName = (firstName: string, lastName: string): string => {
 const getCurrentTime = (): Date => new Date();
 ```
 
+
 ### **Arrow Functions with Complex Types**
+
 
 ```typescript
 // Arrow function returning an object
@@ -143,6 +156,7 @@ const getEvenNumbers = (numbers: number[]): number[] => {
 };
 ```
 
+
 ---
 
 ## 📋 **Parameter Types**
@@ -150,6 +164,7 @@ const getEvenNumbers = (numbers: number[]): number[] => {
 TypeScript provides several ways to handle different parameter scenarios.
 
 ### **Required Parameters**
+
 
 ```typescript
 // All parameters are required
@@ -161,7 +176,9 @@ function buildUrl(protocol: string, domain: string, path: string): string {
 buildUrl("https", "example.com", "api/users");
 ```
 
+
 ### **Optional Parameters**
+
 
 ```typescript
 // Optional parameters with ?
@@ -176,7 +193,9 @@ searchUsers("john", 10); // limit = 10, offset is undefined
 searchUsers("john", 10, 20); // limit = 10, offset = 20
 ```
 
+
 ### **Rest Parameters**
+
 
 ```typescript
 // Rest parameters (spread operator)
@@ -189,7 +208,9 @@ sum(1, 2, 3, 4, 5); // 15
 sum(10, 20); // 30
 ```
 
+
 ### **Destructured Parameters**
+
 
 ```typescript
 // Object destructuring in parameters
@@ -203,6 +224,7 @@ function getFirstAndLast([first, ...rest]: string[]): { first: string; last: str
 }
 ```
 
+
 ---
 
 ## 🔄 **Return Types**
@@ -210,6 +232,7 @@ function getFirstAndLast([first, ...rest]: string[]): { first: string; last: str
 TypeScript allows you to specify what a function returns.
 
 ### **Explicit Return Types**
+
 
 ```typescript
 // Function with explicit return type
@@ -234,7 +257,9 @@ function parseId(id: string | number): number {
 }
 ```
 
+
 ### **Void and Never Return Types**
+
 
 ```typescript
 // Void - function doesn't return a value
@@ -255,6 +280,7 @@ function infiniteLoop(): never {
 }
 ```
 
+
 ---
 
 ## 🔀 **Function Overloads**
@@ -262,6 +288,7 @@ function infiniteLoop(): never {
 Function overloads allow you to define multiple function signatures for the same function.
 
 ### **Basic Function Overloads**
+
 
 ```typescript
 // Function overloads
@@ -278,7 +305,9 @@ format(42); // string
 format(true); // string
 ```
 
+
 ### **Complex Function Overloads**
+
 
 ```typescript
 // Overloads for different parameter combinations
@@ -308,11 +337,13 @@ function createElement(
 }
 ```
 
+
 ---
 
 ## ✅ **Best Practices**
 
 ### **1. Use Explicit Return Types for Public APIs**
+
 
 ```typescript
 // ✅ Good: Explicit return type for public function
@@ -326,7 +357,9 @@ export function calculateTotal(items: Item[]) {
 }
 ```
 
+
 ### **2. Use Function Overloads for Complex APIs**
+
 
 ```typescript
 // ✅ Good: Clear overloads for different use cases
@@ -337,7 +370,9 @@ function fetchData(url: string, options?: RequestInit): Promise<Response> {
 }
 ```
 
+
 ### **3. Prefer Arrow Functions for Simple Operations**
+
 
 ```typescript
 // ✅ Good: Arrow function for simple operations
@@ -349,7 +384,9 @@ function double(x: number): number {
 }
 ```
 
+
 ### **4. Use Rest Parameters for Variable Arguments**
+
 
 ```typescript
 // ✅ Good: Rest parameters for variable arguments
@@ -363,6 +400,7 @@ function logMessages(messages: string[]): void {
 }
 ```
 
+
 ---
 
 ## ❓ **Common Interview Questions**
@@ -374,6 +412,7 @@ Function types can be defined using:
 - **Function type syntax**: `(param: type) => returnType`
 - **Function interface**: `interface MyFunction { (param: type): returnType; }`
 - **Type alias**: `type MyFunction = (param: type) => returnType;`
+
 
 ```typescript
 // Function type syntax
@@ -388,11 +427,13 @@ interface MathOperation {
 type MathOp = (a: number, b: number) => number;
 ```
 
+
 ### **2. What's the difference between optional and default parameters?**
 
 **Answer:**
 - **Optional parameters**: Can be omitted, will be `undefined` if not provided
 - **Default parameters**: Have a default value if not provided
+
 
 ```typescript
 // Optional parameter
@@ -406,10 +447,12 @@ function greet(name: string, greeting: string = "Hello"): string {
 }
 ```
 
+
 ### **3. How do function overloads work in TypeScript?**
 
 **Answer:**
 Function overloads allow multiple function signatures for the same function. TypeScript uses the first matching signature:
+
 
 ```typescript
 function process(value: string): string;
@@ -419,11 +462,13 @@ function process(value: string | number): string | number {
 }
 ```
 
+
 ### **4. When should you use `void` vs `never` return types?**
 
 **Answer:**
 - **`void`**: Function completes but doesn't return a value
 - **`never`**: Function never completes (throws error, infinite loop)
+
 
 ```typescript
 function logMessage(msg: string): void {
@@ -435,10 +480,12 @@ function throwError(msg: string): never {
 }
 ```
 
+
 ### **5. How do you handle rest parameters in TypeScript?**
 
 **Answer:**
 Rest parameters collect remaining arguments into an array:
+
 
 ```typescript
 function sum(...numbers: number[]): number {
@@ -447,6 +494,7 @@ function sum(...numbers: number[]): number {
 
 sum(1, 2, 3, 4, 5); // numbers = [1, 2, 3, 4, 5]
 ```
+
 
 ---
 

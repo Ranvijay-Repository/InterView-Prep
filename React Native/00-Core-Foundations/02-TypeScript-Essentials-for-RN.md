@@ -42,6 +42,7 @@ TypeScript brings static type checking to React Native development, helping catc
 ### **tsconfig.json Setup**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```json
 {
   "compilerOptions": {
@@ -81,7 +82,9 @@ TypeScript brings static type checking to React Native development, helping catc
 }
 ```
 
+
 ### **Type Definitions Structure**
+
 
 ```
 src/
@@ -96,6 +99,7 @@ src/
 └── utils/
 ```
 
+
 ---
 
 ## 🔤 **Basic Types in React Native**
@@ -103,6 +107,7 @@ src/
 ### **Primitive Types**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```typescript
 // ✅ Basic type annotations
 const userName: string = 'John Doe';
@@ -128,9 +133,11 @@ type EventHandler = (event: any) => void;
 type ApiCall = (url: string) => Promise<any>;
 ```
 
+
 ### **React Native Component Types**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```typescript
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
@@ -184,6 +191,7 @@ const styles = StyleSheet.create({
 export default CustomButton;
 ```
 
+
 ---
 
 ## 🏗️ **Interfaces & Type Definitions**
@@ -191,6 +199,7 @@ export default CustomButton;
 ### **User Interface Example**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```typescript
 // ✅ User interface definition
 interface User {
@@ -256,9 +265,11 @@ const UserProfile: React.FC<{ user: User }> = ({ user }) => {
 };
 ```
 
+
 ### **Form Types**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```typescript
 // ✅ Form validation types
 interface LoginForm {
@@ -374,6 +385,7 @@ const LoginForm: React.FC = () => {
 };
 ```
 
+
 ---
 
 ## 🔄 **Generics in React Native**
@@ -381,6 +393,7 @@ const LoginForm: React.FC = () => {
 ### **Generic Hooks**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```typescript
 // ✅ Generic API hook
 interface UseApiState<T> {
@@ -455,9 +468,11 @@ const UserProfile: React.FC<{ userId: number }> = ({ userId }) => {
 };
 ```
 
+
 ### **Generic Components**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```typescript
 // ✅ Generic list component
 interface ListItem {
@@ -522,7 +537,7 @@ const ProductList: React.FC<{ products: Product[] }> = ({ products }) => {
   
   const renderProduct = (product: Product) => (
     <View style={styles.productItem}>
-      <Image source={{ uri: product.image }} style={styles.productImage} />
+      <Image source={{#123;{{#123; uri: product.image }}#125;}}#125; style={styles.productImage} />
       <Text style={styles.productName}>{product.name}</Text>
       <Text style={styles.productPrice}>${product.price}</Text>
     </View>
@@ -540,6 +555,7 @@ const ProductList: React.FC<{ products: Product[] }> = ({ products }) => {
 };
 ```
 
+
 ---
 
 ## 📱 **React Native Specific Types**
@@ -547,6 +563,7 @@ const ProductList: React.FC<{ products: Product[] }> = ({ products }) => {
 ### **StyleSheet Types**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```typescript
 import { StyleSheet, ViewStyle, TextStyle, ImageStyle } from 'react-native';
 
@@ -622,9 +639,12 @@ const getDynamicStyles = ({ isActive, theme, size }: DynamicStylesProps) => {
 };
 ```
 
+
 ### **Platform Specific Types**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
+
 ```typescript
 import { Platform, PlatformOSType } from 'react-native';
 
@@ -669,20 +689,22 @@ const MyComponent = () => {
     <PlatformButton
       title="Press Me"
       onPress={() => console.log('Pressed')}
-      style={{
+      style={{#123;{{#123;
         ios: { backgroundColor: '#007AFF' },
         android: { backgroundColor: '#2196F3' },
         default: { backgroundColor: '#6C757D' },
-      }}
-      textStyle={{
+      }}#125;}}#125;
+      textStyle={{#123;{{#123;
         ios: { fontSize: 16 },
         android: { fontSize: 14 },
         default: { fontSize: 15 },
-      }}
+      }}#125;}}#125;
     />
   );
 };
 ```
+
+
 
 ---
 
@@ -691,6 +713,7 @@ const MyComponent = () => {
 ### **Typed Custom Hooks**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```typescript
 // ✅ Typed storage hook
 interface UseStorageReturn<T> {
@@ -780,6 +803,7 @@ const SettingsScreen = () => {
 };
 ```
 
+
 ---
 
 ## 🧭 **Navigation Types**
@@ -787,6 +811,7 @@ const SettingsScreen = () => {
 ### **React Navigation Types**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```typescript
 import { NavigationProp, RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
@@ -861,6 +886,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation, route }) => {
 };
 ```
 
+
 ---
 
 ## 🌐 **API Integration Types**
@@ -868,6 +894,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation, route }) => {
 ### **API Types**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```typescript
 // ✅ API request/response types
 interface ApiRequest {
@@ -984,6 +1011,7 @@ const createUser = async (userData: Omit<User, 'id'>) => {
 };
 ```
 
+
 ---
 
 ## 🎯 **Interview Questions**
@@ -1012,6 +1040,7 @@ const createUser = async (userData: Omit<User, 'id'>) => {
 
 ### **1. Use Strict Type Checking**
 
+
 ```typescript
 // ✅ Enable strict mode in tsconfig.json
 {
@@ -1024,7 +1053,9 @@ const createUser = async (userData: Omit<User, 'id'>) => {
 }
 ```
 
+
 ### **2. Define Clear Interfaces**
+
 
 ```typescript
 // ✅ Clear, specific interfaces
@@ -1041,7 +1072,9 @@ interface User {
 }
 ```
 
+
 ### **3. Use Generic Types**
+
 
 ```typescript
 // ✅ Generic types for reusability
@@ -1055,7 +1088,9 @@ const userResponse: ApiResponse<User> = await fetchUser();
 const productResponse: ApiResponse<Product> = await fetchProduct();
 ```
 
+
 ### **4. Type Guards**
+
 
 ```typescript
 // ✅ Type guards for runtime type checking
@@ -1069,6 +1104,7 @@ if (isUser(data)) {
   console.log(data.name);
 }
 ```
+
 
 ---
 

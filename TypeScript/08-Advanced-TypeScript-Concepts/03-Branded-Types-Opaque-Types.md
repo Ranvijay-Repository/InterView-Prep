@@ -24,6 +24,7 @@ Branded types are a TypeScript technique for creating distinct types from primit
 
 ### **What are Branded Types?**
 
+
 ```typescript
 // Branded types create distinct types from primitives
 const brandedTypes = {
@@ -54,7 +55,9 @@ const productId: ProductId = 456 as ProductId;
 // processUser(productId); // ❌ Error: Argument of type 'ProductId' is not assignable to parameter of type 'UserId'
 ```
 
+
 ### **Benefits of Branded Types**
+
 
 ```typescript
 // Benefits of branded types
@@ -98,11 +101,13 @@ const productId: ProductId = 456 as ProductId;
 // processUser(productId); // ❌ Compile error: Type 'ProductId' is not assignable to parameter of type 'UserId'
 ```
 
+
 ---
 
 ## 🔧 **Basic Branded Types**
 
 ### **Simple Branded Types**
+
 
 ```typescript
 // Simple branded types
@@ -140,7 +145,9 @@ const email = createEmail('user@example.com');
 const phone = createPhoneNumber('+1234567890');
 ```
 
+
 ### **Branded Types with Validation**
+
 
 ```typescript
 // Branded types with validation
@@ -182,7 +189,9 @@ try {
 }
 ```
 
+
 ### **Branded Types with Constraints**
+
 
 ```typescript
 // Branded types with constraints
@@ -226,11 +235,13 @@ function createUppercaseString(value: string): UppercaseString {
 }
 ```
 
+
 ---
 
 ## 🔒 **Opaque Types**
 
 ### **Basic Opaque Types**
+
 
 ```typescript
 // Opaque types using unique symbol
@@ -267,7 +278,9 @@ const email = createEmail('user@example.com');
 const phone = createPhoneNumber('+1234567890');
 ```
 
+
 ### **Opaque Types with Validation**
+
 
 ```typescript
 // Opaque types with validation
@@ -316,7 +329,9 @@ function createValidatedURL(url: string): ValidatedURL {
 }
 ```
 
+
 ### **Opaque Types with Constraints**
+
 
 ```typescript
 // Opaque types with constraints
@@ -372,11 +387,13 @@ function createLowercaseString(value: string): LowercaseString {
 }
 ```
 
+
 ---
 
 ## 🚀 **Advanced Patterns**
 
 ### **Branded Types with Methods**
+
 
 ```typescript
 // Branded types with methods
@@ -421,7 +438,9 @@ console.log('User ID comparison:', compareUserIds(userId1, userId2));
 // console.log('Mixed comparison:', compareUserIds(userId1, productId)); // ❌ Error
 ```
 
+
 ### **Branded Types with Generics**
+
 
 ```typescript
 // Branded types with generics
@@ -464,7 +483,9 @@ function createPhoneNumber(phone: string): PhoneNumber {
 }
 ```
 
+
 ### **Branded Types with Validation**
+
 
 ```typescript
 // Branded types with validation
@@ -516,11 +537,13 @@ function createValidatedURL(url: string): ValidatedURL {
 }
 ```
 
+
 ---
 
 ## 🌍 **Real-World Examples**
 
 ### **Database IDs**
+
 
 ```typescript
 // Database IDs with branded types
@@ -577,7 +600,9 @@ getProduct(productId); // ✅ Correct
 // getUser(productId); // ❌ Error: Type 'ProductId' is not assignable to parameter of type 'UserId'
 ```
 
+
 ### **API Endpoints**
+
 
 ```typescript
 // API endpoints with branded types
@@ -620,7 +645,9 @@ callProductAPI(productEndpoint); // ✅ Correct
 // callUserAPI(productEndpoint); // ❌ Error: Type 'ProductEndpoint' is not assignable to parameter of type 'UserEndpoint'
 ```
 
+
 ### **Configuration Values**
+
 
 ```typescript
 // Configuration values with branded types
@@ -672,11 +699,13 @@ function createAppConfig(config: {
 }
 ```
 
+
 ---
 
 ## ✅ **Best Practices**
 
 ### **1. Use Descriptive Brand Names**
+
 
 ```typescript
 // ✅ Good: Descriptive brand names
@@ -690,7 +719,9 @@ type ID2 = Brand<number, 'ID2'>;
 type Str = Brand<string, 'Str'>;
 ```
 
+
 ### **2. Provide Factory Functions**
+
 
 ```typescript
 // ✅ Good: Factory functions
@@ -705,7 +736,9 @@ function createUserId(id: number): UserId {
 const userId = 123 as UserId;
 ```
 
+
 ### **3. Add Validation**
+
 
 ```typescript
 // ✅ Good: Validation in factory functions
@@ -722,7 +755,9 @@ function createEmail(email: string): Email {
 }
 ```
 
+
 ### **4. Use Opaque Types for Better Encapsulation**
+
 
 ```typescript
 // ✅ Good: Opaque types
@@ -734,6 +769,7 @@ type UserId = Opaque<number, 'UserId'>;
 // ❌ Avoid: Branded types when you need better encapsulation
 type UserId = Brand<number, 'UserId'>;
 ```
+
 
 ---
 
@@ -762,6 +798,7 @@ Branded types are a TypeScript technique for creating distinct types from primit
 ### **4. How do you create branded types?**
 
 **Answer:**
+
 ```typescript
 type Brand<T, B> = T & { __brand: B };
 type UserId = Brand<number, 'UserId'>;
@@ -770,6 +807,7 @@ function createUserId(id: number): UserId {
   return id as UserId;
 }
 ```
+
 
 ### **5. What are the benefits of branded types?**
 

@@ -42,6 +42,7 @@
 - **API Initialization**: Set up API clients with async operations
 
 ### ASCII Diagram: Top-Level Await Flow
+
 ```
 TOP-LEVEL AWAIT FLOW
 ┌─────────────────────────────────┐
@@ -73,6 +74,7 @@ TOP-LEVEL AWAIT FLOW
         └───────────────┘
 ```
 
+
 ---
 
 ## 🔄 Promise.withResolvers()
@@ -86,6 +88,7 @@ TOP-LEVEL AWAIT FLOW
 - **Testing**: Easier to test async code with external control
 
 ### ASCII Diagram: Promise.withResolvers Pattern
+
 ```
 PROMISE.WITHRESOLVERS PATTERN
 ┌─────────────────────────────────┐
@@ -121,11 +124,13 @@ PROMISE.WITHRESOLVERS PATTERN
         └───────────────┘
 ```
 
+
 ---
 
 ## 🚀 Advanced Async Patterns
 
 ### 1. **Async Iterator Pattern**
+
 ```javascript
 class AsyncDataStream {
     constructor(data) {
@@ -149,7 +154,9 @@ for await (const item of stream) {
 }
 ```
 
+
 ### 2. **Async Generator Functions**
+
 ```javascript
 async function* asyncGenerator() {
     yield await fetchData(1);
@@ -162,6 +169,7 @@ for await (const data of asyncGenerator()) {
     console.log(data);
 }
 ```
+
 
 ---
 

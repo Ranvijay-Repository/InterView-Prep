@@ -6,7 +6,7 @@ I've successfully resolved the Liquid syntax errors that were preventing your Je
 
 ## 🔍 **Root Cause**
 
-The errors were occurring because Jekyll (which powers GitHub Pages) was trying to interpret JavaScript object syntax `{{ }}` as Liquid template variables. This happened in several files:
+The errors were occurring because Jekyll (which powers GitHub Pages) was trying to interpret JavaScript object syntax `&#123;&#123; &#125;&#125;` as Liquid template variables. This happened in several files:
 
 1. **React Native/00-Core-Foundations/02-TypeScript-Essentials-for-RN.md** (line 672)
 2. **React Native/00-Core-Foundations/00-JavaScript-Essentials-for-RN.md** (lines 327, 388)
@@ -55,9 +55,11 @@ Your repository now has:
 ## 📋 **Next Steps**
 
 ### 1. **Set Up Production Branch**
+
 ```bash
 ./setup-production-branch.sh
 ```
+
 
 ### 2. **Configure Branch Protection**
 Follow the instructions in `BRANCH-PROTECTION-SETUP.md` to:

@@ -25,6 +25,7 @@ Image optimization is crucial for React Native performance. Proper image handlin
 
 ### **Image Optimization Overview**
 
+
 ```
 ┌─────────────────────────────────────┐
 │        Image Optimization           │
@@ -52,6 +53,7 @@ Image optimization is crucial for React Native performance. Proper image handlin
 └─────────────────────────────────────┘
 ```
 
+
 ---
 
 ## 🖼️ **Image Optimization Techniques**
@@ -59,6 +61,7 @@ Image optimization is crucial for React Native performance. Proper image handlin
 ### **Optimized Image Component**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 import React, { useState, useCallback, useRef } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity, ActivityIndicator, Alert } from 'react-native';
@@ -171,9 +174,11 @@ const styles = StyleSheet.create({
 export default OptimizedImage;
 ```
 
+
 ### **Image Gallery with Optimization**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 import React, { useState, useCallback, useMemo } from 'react';
 import { View, Text, FlatList, StyleSheet, TouchableOpacity, Dimensions, Alert } from 'react-native';
@@ -229,7 +234,7 @@ const ImageGallery = () => {
       activeOpacity={0.8}
     >
       <OptimizedImage
-        source={{ uri: item.thumbnail }}
+        source={{#123;{{#123; uri: item.thumbnail }}#125;}}#125;
         style={styles.thumbnail}
         placeholder={
           <View style={styles.placeholder}>
@@ -320,7 +325,7 @@ const ImageGallery = () => {
           >
             <View style={styles.modalContent}>
               <OptimizedImage
-                source={{ uri: selectedImage.url }}
+                source={{#123;{{#123; uri: selectedImage.url }}#125;}}#125;
                 style={styles.fullImage}
                 resizeMode="contain"
               />
@@ -485,6 +490,7 @@ const styles = StyleSheet.create({
 
 export default ImageGallery;
 ```
+
 
 ---
 

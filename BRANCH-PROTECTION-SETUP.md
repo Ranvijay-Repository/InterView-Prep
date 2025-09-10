@@ -116,6 +116,7 @@ This guide will help you set up branch protection rules for your repository to e
 
 ### Recommended Git Workflow:
 
+
 ```bash
 # 1. Create a feature branch from main/master
 git checkout main
@@ -136,6 +137,7 @@ git push origin feature/your-feature-name
 # 5. After PR is approved and merged
 # The site will automatically deploy!
 ```
+
 
 ## 🔍 Monitoring Deployments
 
@@ -178,6 +180,7 @@ git push origin feature/your-feature-name
 ### 1. Create a CODEOWNERS file:
 
 Create `.github/CODEOWNERS`:
+
 ```
 # Global owners
 * @yourusername
@@ -189,6 +192,7 @@ Create `.github/CODEOWNERS`:
 _config.yml @yourusername
 Gemfile @yourusername
 ```
+
 
 ### 2. Set up branch naming conventions:
 

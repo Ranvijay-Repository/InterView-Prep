@@ -3,6 +3,7 @@
 This template shows the proper structure to use for all documentation files to avoid duplication.
 
 ## 📁 File Structure
+
 ```
 /Users/ranvijaychouhan/Desktop/Personal/Interview-prep/
 ├── common-styles.css          # All common styles
@@ -12,21 +13,27 @@ This template shows the proper structure to use for all documentation files to a
 └── [Your Documentation Files] # All your .md files
 ```
 
+
 ## 🎨 How to Use Common Files
 
 ### 1. **CSS Integration**
 Add this line at the top of your markdown file (after the title):
+
 ```html
 <link rel="stylesheet" href="../common-styles.css">
 ```
 
+
 ### 2. **JavaScript Integration**
 Add this line before the closing `</body>` tag:
+
 ```html
 <script src="../common-scripts.js"></script>
 ```
 
+
 ## 📝 Standard File Structure
+
 
 ```markdown
 # 🔹 Your Title Here
@@ -98,6 +105,7 @@ console.log("Hello World");</code></pre>
 
 *Last updated: December 2024*
 ```
+
 
 ## 🔧 Key Benefits
 

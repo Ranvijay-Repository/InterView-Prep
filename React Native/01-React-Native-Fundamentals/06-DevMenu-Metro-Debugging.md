@@ -27,6 +27,7 @@ React Native provides powerful development tools to help you build, debug, and o
 
 ### **Development Tools Overview**
 
+
 ```
 ┌─────────────────────────────────────┐
 │        Development Tools            │
@@ -54,6 +55,7 @@ React Native provides powerful development tools to help you build, debug, and o
 └─────────────────────────────────────┘
 ```
 
+
 ---
 
 ## 📱 **DevMenu Overview**
@@ -63,6 +65,7 @@ The DevMenu is a powerful debugging interface that provides quick access to deve
 ### **DevMenu Features**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
@@ -242,6 +245,7 @@ const styles = StyleSheet.create({
 export default DevMenuExample;
 ```
 
+
 ---
 
 ## 🚀 **Metro Bundler**
@@ -251,6 +255,7 @@ Metro is the JavaScript bundler for React Native. Understanding its configuratio
 ### **Metro Configuration**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // metro.config.js
 const { getDefaultConfig } = require('metro-config');
@@ -272,9 +277,11 @@ module.exports = (async () => {
 })();
 ```
 
+
 ### **Metro Commands**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```bash
 # Start Metro bundler
 npx react-native start
@@ -291,6 +298,7 @@ npx react-native bundle --platform android --dev false --entry-file index.js --b
 # Analyze bundle size
 npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output bundle.js --sourcemap-output bundle.map
 ```
+
 
 ---
 

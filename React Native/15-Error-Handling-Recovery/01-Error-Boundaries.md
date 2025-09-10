@@ -24,6 +24,7 @@ Error boundaries are React components that catch JavaScript errors anywhere in t
 
 ### **Key Concepts**
 
+
 ```javascript
 // Error boundaries catch errors in:
 // - Render methods
@@ -37,7 +38,9 @@ Error boundaries are React components that catch JavaScript errors anywhere in t
 // - Errors thrown in the error boundary itself
 ```
 
+
 ### **Error Boundary Lifecycle**
+
 
 ```mermaid
 graph TD
@@ -50,11 +53,13 @@ graph TD
     G --> H[Error Logged]
 ```
 
+
 ---
 
 ## 🔧 **Functional Error Boundary Implementation**
 
 ### **Basic Error Boundary with Hooks**
+
 
 ```javascript
 import React, { useState, useEffect } from 'react';
@@ -152,7 +157,9 @@ const styles = StyleSheet.create({
 export default ErrorBoundary;
 ```
 
+
 ### **Advanced Error Boundary with Context**
+
 
 ```javascript
 import React, { createContext, useContext, useState, useEffect } from 'react';
@@ -258,11 +265,13 @@ const ErrorBoundary = ({ children, fallback: FallbackComponent }) => {
 export { ErrorProvider, ErrorBoundary };
 ```
 
+
 ---
 
 ## 🎨 **Error Boundary Patterns**
 
 ### **Route-Level Error Boundaries**
+
 
 ```javascript
 import React from 'react';
@@ -293,7 +302,9 @@ const AppNavigator = () => {
 };
 ```
 
+
 ### **Feature-Level Error Boundaries**
+
 
 ```javascript
 import React from 'react';
@@ -335,7 +346,9 @@ const App = () => {
 };
 ```
 
+
 ### **Async Error Boundary**
+
 
 ```javascript
 import React, { useState, useEffect } from 'react';
@@ -399,11 +412,13 @@ const AsyncErrorBoundary = ({ children, onAsyncError }) => {
 };
 ```
 
+
 ---
 
 ## 🔄 **Error Recovery Strategies**
 
 ### **Automatic Retry with Exponential Backoff**
+
 
 ```javascript
 import React, { useState, useEffect, useCallback } from 'react';
@@ -489,7 +504,9 @@ const DataComponent = () => {
 };
 ```
 
+
 ### **Graceful Degradation**
+
 
 ```javascript
 import React, { useState, useEffect } from 'react';
@@ -554,11 +571,13 @@ const GracefulDegradation = () => {
 };
 ```
 
+
 ---
 
 ## 📊 **Error Logging and Monitoring**
 
 ### **Error Logger Service**
+
 
 ```javascript
 class ErrorLogger {
@@ -620,7 +639,9 @@ class ErrorLogger {
 export const errorLogger = new ErrorLogger();
 ```
 
+
 ### **Error Monitoring Hook**
+
 
 ```javascript
 import { useEffect } from 'react';
@@ -656,11 +677,13 @@ const useErrorMonitoring = (componentName) => {
 export default useErrorMonitoring;
 ```
 
+
 ---
 
 ## ✅ **Best Practices**
 
 ### **1. Error Boundary Placement**
+
 
 ```javascript
 // ✅ Good: Place error boundaries at strategic levels
@@ -696,7 +719,9 @@ const App = () => {
 };
 ```
 
+
 ### **2. Error Information**
+
 
 ```javascript
 // ✅ Good: Provide useful error information
@@ -727,7 +752,9 @@ const ErrorBoundary = ({ children }) => {
 };
 ```
 
+
 ### **3. Recovery Mechanisms**
+
 
 ```javascript
 // ✅ Good: Provide recovery options
@@ -752,6 +779,7 @@ const ErrorFallback = ({ error }) => {
   );
 };
 ```
+
 
 ---
 
@@ -783,6 +811,7 @@ Error boundaries are React components that catch JavaScript errors anywhere in t
 ### **3. How would you implement error boundaries in a React Native app?**
 
 **Answer:**
+
 ```javascript
 const ErrorBoundary = ({ children }) => {
   const [hasError, setHasError] = useState(false);
@@ -809,10 +838,12 @@ const ErrorBoundary = ({ children }) => {
 };
 ```
 
+
 ### **4. How would you handle async errors in React Native?**
 
 **Answer:**
 Async errors require additional handling since error boundaries don't catch them:
+
 
 ```javascript
 const useAsyncError = () => {
@@ -837,10 +868,12 @@ const useAsyncError = () => {
 };
 ```
 
+
 ### **5. How would you implement error recovery strategies?**
 
 **Answer:**
 Implement retry mechanisms with exponential backoff:
+
 
 ```javascript
 const useErrorRecovery = (maxRetries = 3) => {
@@ -868,6 +901,7 @@ const useErrorRecovery = (maxRetries = 3) => {
   return { retry, retryCount };
 };
 ```
+
 
 ---
 

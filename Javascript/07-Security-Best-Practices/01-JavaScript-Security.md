@@ -44,6 +44,7 @@
 - **Monitoring**: Detect and report policy violations
 
 ### ASCII Diagram: CSP Enforcement Flow
+
 ```
 CSP ENFORCEMENT FLOW
 ┌─────────────────────────────────┐
@@ -109,6 +110,7 @@ CSP ENFORCEMENT FLOW
         └───────────────┘
 ```
 
+
 ### CSP Directives:
 - **default-src**: Default source for all resource types
 - **script-src**: Control JavaScript execution sources
@@ -130,6 +132,7 @@ CSP ENFORCEMENT FLOW
 - **Trust**: Verify resource authenticity and integrity
 
 ### ASCII Diagram: SRI Verification Process
+
 ```
 SRI VERIFICATION PROCESS
 ┌─────────────────────────────────┐
@@ -197,6 +200,7 @@ SRI VERIFICATION PROCESS
         └───────────────┘
 ```
 
+
 ### SRI Implementation:
 - **Hash Generation**: Create cryptographic hashes for resources
 - **HTML Integration**: Add integrity attributes to resource tags
@@ -218,6 +222,7 @@ SRI VERIFICATION PROCESS
 - **Developer Safety**: Prevent accidental security vulnerabilities
 
 ### ASCII Diagram: Trusted Types Flow
+
 ```
 TRUSTED TYPES FLOW
 ┌─────────────────────────────────┐
@@ -276,6 +281,7 @@ TRUSTED TYPES FLOW
         │  No XSS       │
         └───────────────┘
 ```
+
 
 ### Trusted Types Features:
 - **Policy Creation**: Define security policies for content

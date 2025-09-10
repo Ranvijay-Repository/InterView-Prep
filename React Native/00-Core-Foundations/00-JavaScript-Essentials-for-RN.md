@@ -44,6 +44,7 @@ A closure is a function that has access to variables in its outer (enclosing) sc
 
 ### **Closure Diagram**
 
+
 ```
 ┌─────────────────────────────────────┐
 │           Outer Function            │
@@ -59,11 +60,13 @@ A closure is a function that has access to variables in its outer (enclosing) sc
 └─────────────────────────────────────┘
 ```
 
+
 ### **Closure Examples in React Native**
 
 #### **1. Event Handlers with Closures**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // ❌ Common mistake - closure capturing wrong value
 const BadExample = () => {
@@ -112,9 +115,11 @@ const GoodExample = () => {
 };
 ```
 
+
 #### **2. API Calls with Closures**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // ✅ Proper closure usage for API calls
 const useApiCall = () => {
@@ -138,6 +143,7 @@ const useApiCall = () => {
 };
 ```
 
+
 ---
 
 ## ⚡ **Event Loop & Asynchronous JavaScript**
@@ -145,6 +151,7 @@ const useApiCall = () => {
 ### **Event Loop in React Native**
 
 React Native uses the same event loop as web JavaScript, but with some mobile-specific considerations:
+
 
 ```
 ┌─────────────────────────────────────┐
@@ -172,9 +179,11 @@ React Native uses the same event loop as web JavaScript, but with some mobile-sp
 └─────────────────────────────────────┘
 ```
 
+
 ### **Asynchronous Patterns in React Native**
 
 #### **1. Promises vs Callbacks**
+
 
 ```javascript
 // ❌ Callback hell
@@ -228,7 +237,9 @@ const fetchUserData = async (userId) => {
 };
 ```
 
+
 #### **2. Async/Await in React Native Components**
+
 
 ```javascript
 // ✅ Proper async/await usage in React Native
@@ -268,11 +279,14 @@ const UserProfile = ({ userId }) => {
 };
 ```
 
+
 ---
 
 ## 🔄 **Async/Await Patterns**
 
 ### **Error Handling Patterns**
+
+
 
 ```javascript
 // ✅ Comprehensive error handling
@@ -324,14 +338,16 @@ const MyComponent = () => {
       <TouchableOpacity onPress={handleApiCall}>
         <Text>Fetch Data</Text>
       </TouchableOpacity>
-      {error && <Text style={{color: 'red'}}>{error}</Text>}
+      {error && <Text style={{#123;{{#123;color: 'red'}}#125;}}#125;>{error}</Text>}
       {data && <Text>{JSON.stringify(data)}</Text>}
     </View>
   );
 };
 ```
 
+
 ### **Cancellation Patterns**
+
 
 ```javascript
 // ✅ Request cancellation with AbortController
@@ -372,11 +388,14 @@ const useApiCall = () => {
 };
 ```
 
+
 ---
 
 ## 🆕 **Modern JavaScript Features**
 
 ### **Destructuring in React Native**
+
+
 
 ```javascript
 // ✅ Object destructuring
@@ -385,7 +404,7 @@ const UserCard = ({ user, onPress, style }) => {
   
   return (
     <TouchableOpacity style={style} onPress={onPress}>
-      <Image source={{ uri: avatar }} />
+      <Image source={{#123;{{#123; uri: avatar }}#125;}}#125; />
       <Text>{name}</Text>
       <Text>{email}</Text>
       {isOnline && <View style={styles.onlineIndicator} />}
@@ -399,7 +418,9 @@ const [loading, setLoading] = useState(false);
 const [data, setData] = useState(null);
 ```
 
+
 ### **Template Literals**
+
 
 ```javascript
 // ✅ Dynamic styling with template literals
@@ -425,7 +446,9 @@ const buildApiUrl = (endpoint, params) => {
 };
 ```
 
+
 ### **Arrow Functions & Higher-Order Functions**
+
 
 ```javascript
 // ✅ Arrow functions in React Native
@@ -464,11 +487,13 @@ const withLoading = (WrappedComponent) => {
 };
 ```
 
+
 ---
 
 ## 🧠 **Memory Management**
 
 ### **Memory Leaks in React Native**
+
 
 ```javascript
 // ❌ Memory leak - not cleaning up subscriptions
@@ -499,7 +524,9 @@ const GoodComponent = () => {
 };
 ```
 
+
 ### **Event Listener Cleanup**
+
 
 ```javascript
 // ✅ Proper event listener cleanup
@@ -522,11 +549,13 @@ const useDeviceOrientation = () => {
 };
 ```
 
+
 ---
 
 ## ⚠️ **Common Pitfalls**
 
 ### **1. Stale Closures**
+
 
 ```javascript
 // ❌ Stale closure problem
@@ -564,7 +593,9 @@ const GoodExample = () => {
 };
 ```
 
+
 ### **2. Infinite Re-renders**
+
 
 ```javascript
 // ❌ Infinite re-render
@@ -590,6 +621,7 @@ const GoodExample = () => {
   return <FlatList data={data} renderItem={renderItem} />;
 };
 ```
+
 
 ---
 
@@ -619,6 +651,7 @@ const GoodExample = () => {
 
 ### **1. Use Functional Updates**
 
+
 ```javascript
 // ✅ Always use functional updates for state
 const [count, setCount] = useState(0);
@@ -627,7 +660,9 @@ const [count, setCount] = useState(0);
 setCount(prevCount => prevCount + 1);
 ```
 
+
 ### **2. Proper Dependency Arrays**
+
 
 ```javascript
 // ✅ Be explicit about dependencies
@@ -636,7 +671,9 @@ useEffect(() => {
 }, [userId]); // Only re-run when userId changes
 ```
 
+
 ### **3. Error Boundaries**
+
 
 ```javascript
 // ✅ Implement error boundaries with functional components
@@ -679,6 +716,7 @@ const ErrorBoundary = ({ children }) => {
 
 export default ErrorBoundary;
 ```
+
 
 ---
 

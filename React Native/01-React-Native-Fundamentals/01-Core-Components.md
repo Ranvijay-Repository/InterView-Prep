@@ -29,6 +29,7 @@ React Native provides a set of core components that map to native mobile compone
 
 ### **Core Components Overview**
 
+
 ```
 ┌─────────────────────────────────────┐
 │        Core Components              │
@@ -55,6 +56,7 @@ React Native provides a set of core components that map to native mobile compone
 └─────────────────────────────────────┘
 ```
 
+
 ---
 
 ## 📦 **View Component**
@@ -64,6 +66,7 @@ The `View` component is the most fundamental component in React Native. It's sim
 ### **Basic View Usage**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
@@ -110,9 +113,11 @@ const styles = StyleSheet.create({
 export default BasicView;
 ```
 
+
 ### **View with Flexbox Layout**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
@@ -171,6 +176,7 @@ const styles = StyleSheet.create({
 export default FlexboxView;
 ```
 
+
 ---
 
 ## 📝 **Text Component**
@@ -180,6 +186,7 @@ The `Text` component is used to display text content. It's similar to `span` or 
 ### **Basic Text Usage**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
@@ -237,9 +244,11 @@ const styles = StyleSheet.create({
 export default BasicText;
 ```
 
+
 ### **Text with Nested Components**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
@@ -301,6 +310,7 @@ const styles = StyleSheet.create({
 export default NestedText;
 ```
 
+
 ---
 
 ## 🖼️ **Image Component**
@@ -310,6 +320,7 @@ The `Image` component is used to display images from various sources.
 ### **Basic Image Usage**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 import React from 'react';
 import { View, Image, Text, StyleSheet } from 'react-native';
@@ -333,9 +344,9 @@ const BasicImage = () => {
       <View style={styles.imageContainer}>
         <Text style={styles.label}>Network Image:</Text>
         <Image
-          source={{
+          source={{#123;{{#123;
             uri: 'https://picsum.photos/200/200'
-          }}
+          }}#125;}}#125;
           style={styles.image}
           resizeMode="cover"
         />
@@ -345,9 +356,9 @@ const BasicImage = () => {
       <View style={styles.imageContainer}>
         <Text style={styles.label}>Image with Error Handling:</Text>
         <Image
-          source={{
+          source={{#123;{{#123;
             uri: 'https://example.com/image.jpg'
-          }}
+          }}#125;}}#125;
           style={styles.image}
           onLoad={() => console.log('Image loaded successfully')}
           onError={(error) => console.log('Image failed to load:', error)}
@@ -391,9 +402,11 @@ const styles = StyleSheet.create({
 export default BasicImage;
 ```
 
+
 ### **Image with Loading States**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 import React, { useState } from 'react';
 import { View, Image, Text, ActivityIndicator, StyleSheet } from 'react-native';
@@ -422,9 +435,9 @@ const ImageWithLoading = () => {
       
       <View style={styles.imageContainer}>
         <Image
-          source={{
+          source={{#123;{{#123;
             uri: 'https://picsum.photos/300/300'
-          }}
+          }}#125;}}#125;
           style={styles.image}
           onLoadStart={handleLoadStart}
           onLoadEnd={handleLoadEnd}
@@ -504,6 +517,7 @@ const styles = StyleSheet.create({
 
 export default ImageWithLoading;
 ```
+
 
 ---
 

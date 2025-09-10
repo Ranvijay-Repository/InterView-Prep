@@ -45,6 +45,7 @@
 - **Communication**: Explain your approach while coding
 
 ### ASCII Diagram: Live Coding Interview Flow
+
 ```
 LIVE CODING INTERVIEW FLOW
 ┌─────────────────────────────────┐
@@ -111,6 +112,7 @@ LIVE CODING INTERVIEW FLOW
         └───────────────┘
 ```
 
+
 ### Common Challenge Types:
 - **Algorithm Problems**: Sorting, searching, data manipulation
 - **Data Structure Implementation**: Stacks, queues, trees, graphs
@@ -132,6 +134,7 @@ LIVE CODING INTERVIEW FLOW
 - **Real-World Application**: Apply design patterns to practical problems
 
 ### ASCII Diagram: System Design Process
+
 ```
 SYSTEM DESIGN PROCESS
 ┌─────────────────────────────────┐
@@ -205,6 +208,7 @@ SYSTEM DESIGN PROCESS
         └───────────────┘
 ```
 
+
 ### Design Areas:
 - **Frontend Architecture**: Component design, state management
 - **API Design**: RESTful APIs, GraphQL, microservices
@@ -226,6 +230,7 @@ SYSTEM DESIGN PROCESS
 - **Real-World Skills**: Handle actual production issues
 
 ### ASCII Diagram: Debugging Process
+
 ```
 DEBUGGING PROCESS
 ┌─────────────────────────────────┐
@@ -300,6 +305,7 @@ DEBUGGING PROCESS
         └───────────────┘
 ```
 
+
 ### Debugging Techniques:
 - **Console Logging**: Strategic logging and debugging
 - **Browser DevTools**: Network, console, and debugging tools
@@ -321,6 +327,7 @@ DEBUGGING PROCESS
 - **Team Collaboration**: Provide constructive feedback
 
 ### ASCII Diagram: Code Review Process
+
 ```
 CODE REVIEW PROCESS
 ┌─────────────────────────────────┐
@@ -393,6 +400,7 @@ CODE REVIEW PROCESS
         │  Approve      │
         └───────────────┘
 ```
+
 
 ### Review Areas:
 - **Functionality**: Does the code work correctly?

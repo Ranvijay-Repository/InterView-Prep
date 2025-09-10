@@ -17,6 +17,7 @@ A memory leak occurs when allocated memory is not properly released, causing the
 
 ### Common Memory Leak Sources
 
+
 ```javascript
 // ❌ BAD: Event listener not removed
 const MyComponent = () => {
@@ -51,9 +52,11 @@ const MyComponent = () => {
 };
 ```
 
+
 ## Memory Leak Prevention Strategies
 
 ### 1. Event Listener Management
+
 
 ```javascript
 import { useEffect, useRef } from 'react';
@@ -93,7 +96,9 @@ const EventListenerExample = () => {
 };
 ```
 
+
 ### 2. Timer Management
+
 
 ```javascript
 import { useEffect, useRef } from 'react';
@@ -128,7 +133,9 @@ const TimerExample = () => {
 };
 ```
 
+
 ### 3. Subscription Management
+
 
 ```javascript
 import { useEffect, useRef } from 'react';
@@ -156,7 +163,9 @@ const SubscriptionExample = () => {
 };
 ```
 
+
 ### 4. Image Memory Management
+
 
 ```javascript
 import { useEffect, useState } from 'react';
@@ -186,8 +195,8 @@ const ImageMemoryExample = () => {
       {images.map((url, index) => (
         <Image
           key={index}
-          source={{ uri: url }}
-          style={{ width: 100, height: 100 }}
+          source={{#123;{{#123; uri: url }}#125;}}#125;
+          style={{#123;{{#123; width: 100, height: 100 }}#125;}}#125;
           // Optimize memory usage
           resizeMode="cover"
           // Clear cache if needed
@@ -199,9 +208,11 @@ const ImageMemoryExample = () => {
 };
 ```
 
+
 ## Advanced Memory Management Techniques
 
 ### 1. Weak References
+
 
 ```javascript
 import { useEffect, useRef, useCallback } from 'react';
@@ -235,7 +246,9 @@ const WeakReferenceExample = () => {
 };
 ```
 
+
 ### 2. Memory-Efficient Data Structures
+
 
 ```javascript
 import { useMemo, useCallback } from 'react';
@@ -278,7 +291,9 @@ const EfficientDataExample = () => {
 };
 ```
 
+
 ### 3. Lazy Loading and Virtualization
+
 
 ```javascript
 import { useMemo } from 'react';
@@ -289,7 +304,7 @@ const LazyLoadingExample = () => {
 
   // Only render visible items
   const renderItem = useCallback(({ item }) => (
-    <View style={{ height: 100, padding: 10 }}>
+    <View style={{#123;{{#123; height: 100, padding: 10 }}#125;}}#125;>
       <Text>{item.title}</Text>
     </View>
   ), []);
@@ -317,9 +332,11 @@ const LazyLoadingExample = () => {
 };
 ```
 
+
 ## Memory Monitoring and Debugging
 
 ### 1. Memory Usage Monitoring
+
 
 ```javascript
 import { useEffect, useState } from 'react';
@@ -347,7 +364,7 @@ const MemoryMonitor = () => {
   }, []);
 
   return (
-    <View style={{ padding: 20 }}>
+    <View style={{#123;{{#123; padding: 20 }}#125;}}#125;>
       <Text>Memory Usage:</Text>
       {memoryInfo && (
         <>
@@ -361,7 +378,9 @@ const MemoryMonitor = () => {
 };
 ```
 
+
 ### 2. Memory Leak Detection
+
 
 ```javascript
 import { useEffect, useRef } from 'react';
@@ -404,9 +423,11 @@ const MemoryLeakDetector = () => {
 };
 ```
 
+
 ## Best Practices
 
 ### 1. Component Lifecycle Management
+
 
 ```javascript
 import { useEffect, useRef, useCallback } from 'react';
@@ -448,7 +469,9 @@ const LifecycleExample = () => {
 };
 ```
 
+
 ### 2. Memory-Efficient State Management
+
 
 ```javascript
 import { useReducer, useCallback } from 'react';
@@ -495,9 +518,11 @@ const StateManagementExample = () => {
 };
 ```
 
+
 ## Memory Leak Testing
 
 ### 1. Automated Memory Testing
+
 
 ```javascript
 import { render, cleanup } from '@testing-library/react-native';
@@ -534,6 +559,7 @@ describe('Memory Leak Tests', () => {
   });
 });
 ```
+
 
 ## Summary
 

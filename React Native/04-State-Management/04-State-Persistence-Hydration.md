@@ -26,6 +26,7 @@ State persistence ensures that user data and application state survive app resta
 
 ### **State Persistence Overview**
 
+
 ```
 ┌─────────────────────────────────────┐
 │        State Persistence            │
@@ -53,6 +54,7 @@ State persistence ensures that user data and application state survive app resta
 └─────────────────────────────────────┘
 ```
 
+
 ---
 
 ## 💾 **AsyncStorage Integration**
@@ -60,6 +62,7 @@ State persistence ensures that user data and application state survive app resta
 ### **Custom Persistence Hook**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 import { useState, useEffect, useCallback } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -127,9 +130,11 @@ const usePersistedState = (key, initialValue) => {
 export default usePersistedState;
 ```
 
+
 ### **Persistence Example Component**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, TextInput, Alert } from 'react-native';
@@ -459,6 +464,7 @@ const styles = StyleSheet.create({
 
 export default PersistenceExample;
 ```
+
 
 ---
 

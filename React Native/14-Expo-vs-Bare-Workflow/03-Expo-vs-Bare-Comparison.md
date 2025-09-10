@@ -22,6 +22,7 @@
 
 ### **Development Workflow Comparison**
 
+
 ```mermaid
 graph TD
     A[Project Setup] --> B[Expo: npx create-expo-app]
@@ -37,9 +38,11 @@ graph TD
     G --> I[Custom CI/CD]
 ```
 
+
 ### **Key Differences**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Workflow comparison data
 const WorkflowComparison = {
@@ -136,6 +139,7 @@ const DevelopmentExperience = {
 export { WorkflowComparison, DevelopmentExperience };
 ```
 
+
 ---
 
 ## 🎯 **Feature Comparison**
@@ -143,6 +147,7 @@ export { WorkflowComparison, DevelopmentExperience };
 ### **Feature Availability Matrix**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Feature comparison matrix
 const FeatureComparison = {
@@ -206,18 +211,18 @@ const ExpoCamera = () => {
   }
   
   return (
-    <Camera style={{ flex: 1 }} type={Camera.Constants.Type.back}>
-      <View style={{ flex: 1, backgroundColor: 'transparent', flexDirection: 'row' }}>
+    <Camera style={{#123;{{#123; flex: 1 }}#125;}}#125; type={Camera.Constants.Type.back}>
+      <View style={{#123;{{#123; flex: 1, backgroundColor: 'transparent', flexDirection: 'row' }}#125;}}#125;>
         <TouchableOpacity
-          style={{ flex: 0.1, alignSelf: 'flex-end', alignItems: 'center' }}
+          style={{#123;{{#123; flex: 0.1, alignSelf: 'flex-end', alignItems: 'center' }}#125;}}#125;
           onPress={() => {
             setType(
               type === Camera.Constants.Type.back
                 ? Camera.Constants.Type.front
                 : Camera.Constants.Type.back
             );
-          }}>
-          <Text style={{ fontSize: 18, marginBottom: 10, color: 'white' }}> Flip </Text>
+          }}#125;}}#125;>
+          <Text style={{#123;{{#123; fontSize: 18, marginBottom: 10, color: 'white' }}#125;}}#125;> Flip </Text>
         </TouchableOpacity>
       </View>
     </Camera>
@@ -246,27 +251,27 @@ const BareCamera = () => {
   
   return (
     <RNCamera
-      style={{ flex: 1 }}
+      style={{#123;{{#123; flex: 1 }}#125;}}#125;
       type={RNCamera.Constants.Type.back}
       flashMode={RNCamera.Constants.FlashMode.on}
-      androidCameraPermissionOptions={{
+      androidCameraPermissionOptions={{#123;{{#123;
         title: 'Permission to use camera',
         message: 'We need your permission to use your camera',
         buttonPositive: 'Ok',
         buttonNegative: 'Cancel',
-      }}
+      }}#125;}}#125;
     >
-      <View style={{ flex: 1, backgroundColor: 'transparent', flexDirection: 'row' }}>
+      <View style={{#123;{{#123; flex: 1, backgroundColor: 'transparent', flexDirection: 'row' }}#125;}}#125;>
         <TouchableOpacity
-          style={{ flex: 0.1, alignSelf: 'flex-end', alignItems: 'center' }}
+          style={{#123;{{#123; flex: 0.1, alignSelf: 'flex-end', alignItems: 'center' }}#125;}}#125;
           onPress={() => {
             setType(
               type === RNCamera.Constants.Type.back
                 ? RNCamera.Constants.Type.front
                 : RNCamera.Constants.Type.back
             );
-          }}>
-          <Text style={{ fontSize: 18, marginBottom: 10, color: 'white' }}> Flip </Text>
+          }}#125;}}#125;>
+          <Text style={{#123;{{#123; fontSize: 18, marginBottom: 10, color: 'white' }}#125;}}#125;> Flip </Text>
         </TouchableOpacity>
       </View>
     </RNCamera>
@@ -278,6 +283,7 @@ const BareCamera = () => {
 export { FeatureComparison, FeatureImplementation };
 ```
 
+
 ---
 
 ## ⚡ **Performance Comparison**
@@ -285,6 +291,7 @@ export { FeatureComparison, FeatureImplementation };
 ### **Performance Metrics**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Performance comparison data
 const PerformanceComparison = {
@@ -413,6 +420,7 @@ const PerformanceTesting = {
 export { PerformanceComparison, PerformanceTesting };
 ```
 
+
 ---
 
 ## 🔄 **Migration Strategies**
@@ -420,6 +428,7 @@ export { PerformanceComparison, PerformanceTesting };
 ### **Expo to Bare Migration**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Migration strategies and tools
 const MigrationStrategies = {
@@ -558,6 +567,7 @@ const MigrationHelpers = {
 export { MigrationStrategies, MigrationHelpers };
 ```
 
+
 ---
 
 ## 🎯 **Decision Matrix**
@@ -565,6 +575,7 @@ export { MigrationStrategies, MigrationHelpers };
 ### **Decision Criteria**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Decision matrix for choosing between Expo and Bare
 const DecisionMatrix = {
@@ -723,6 +734,7 @@ const DecisionHelper = {
 
 export { DecisionMatrix, DecisionHelper };
 ```
+
 
 ---
 

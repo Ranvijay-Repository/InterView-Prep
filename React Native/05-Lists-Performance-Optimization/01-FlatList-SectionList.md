@@ -25,6 +25,7 @@ FlatList and SectionList are the primary components for rendering large lists in
 
 ### **List Components Overview**
 
+
 ```
 ┌─────────────────────────────────────┐
 │        List Components              │
@@ -52,6 +53,7 @@ FlatList and SectionList are the primary components for rendering large lists in
 └─────────────────────────────────────┘
 ```
 
+
 ---
 
 ## 📋 **FlatList Fundamentals**
@@ -59,6 +61,7 @@ FlatList and SectionList are the primary components for rendering large lists in
 ### **Basic FlatList Example**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 import React, { useState, useCallback } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, FlatList, ActivityIndicator, RefreshControl } from 'react-native';
@@ -365,6 +368,7 @@ const styles = StyleSheet.create({
 
 export default FlatListExample;
 ```
+
 
 ---
 

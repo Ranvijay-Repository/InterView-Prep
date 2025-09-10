@@ -25,6 +25,7 @@ Build tools help compile, bundle, and optimize TypeScript code for production de
 
 ### **Popular Build Tools**
 
+
 ```typescript
 // Build tool comparison
 const buildTools = {
@@ -47,7 +48,9 @@ const buildTools = {
 };
 ```
 
+
 ### **Build Tool Selection Criteria**
+
 
 ```typescript
 // When to use each tool
@@ -59,6 +62,7 @@ const selectionCriteria = {
 };
 ```
 
+
 ---
 
 ## 📦 **Webpack Integration**
@@ -66,6 +70,7 @@ const selectionCriteria = {
 Webpack is a powerful module bundler with extensive TypeScript support.
 
 ### **Basic Webpack Configuration**
+
 
 ```javascript
 // webpack.config.js
@@ -92,7 +97,9 @@ module.exports = {
 };
 ```
 
+
 ### **Advanced Webpack Configuration**
+
 
 ```javascript
 // webpack.config.js
@@ -150,7 +157,9 @@ module.exports = {
 };
 ```
 
+
 ### **Webpack with TypeScript Loaders**
+
 
 ```javascript
 // webpack.config.js
@@ -182,6 +191,7 @@ module.exports = {
 };
 ```
 
+
 ---
 
 ## ⚡ **Vite Integration**
@@ -189,6 +199,7 @@ module.exports = {
 Vite provides fast development and optimized production builds for TypeScript.
 
 ### **Basic Vite Configuration**
+
 
 ```typescript
 // vite.config.ts
@@ -212,7 +223,9 @@ export default defineConfig({
 });
 ```
 
+
 ### **Advanced Vite Configuration**
+
 
 ```typescript
 // vite.config.ts
@@ -257,7 +270,9 @@ export default defineConfig({
 });
 ```
 
+
 ### **Vite with TypeScript**
+
 
 ```typescript
 // vite.config.ts
@@ -286,6 +301,7 @@ export default defineConfig({
 });
 ```
 
+
 ---
 
 ## 📦 **Rollup Integration**
@@ -293,6 +309,7 @@ export default defineConfig({
 Rollup is excellent for building libraries and applications with tree shaking.
 
 ### **Basic Rollup Configuration**
+
 
 ```javascript
 // rollup.config.js
@@ -320,7 +337,9 @@ export default {
 };
 ```
 
+
 ### **Advanced Rollup Configuration**
+
 
 ```javascript
 // rollup.config.js
@@ -366,6 +385,7 @@ export default {
 };
 ```
 
+
 ---
 
 ## 📦 **Parcel Integration**
@@ -373,6 +393,7 @@ export default {
 Parcel provides zero-configuration builds with built-in TypeScript support.
 
 ### **Basic Parcel Configuration**
+
 
 ```json
 // package.json
@@ -388,7 +409,9 @@ Parcel provides zero-configuration builds with built-in TypeScript support.
 }
 ```
 
+
 ### **Parcel with TypeScript**
+
 
 ```typescript
 // src/index.ts
@@ -409,7 +432,9 @@ const user: User = {
 console.log(user);
 ```
 
+
 ### **Parcel Configuration File**
+
 
 ```javascript
 // .parcelrc
@@ -421,6 +446,7 @@ console.log(user);
 }
 ```
 
+
 ---
 
 ## 🔧 **Custom Build Scripts**
@@ -428,6 +454,7 @@ console.log(user);
 Custom build scripts provide fine-grained control over the build process.
 
 ### **Basic Build Script**
+
 
 ```typescript
 // scripts/build.ts
@@ -463,7 +490,9 @@ const build = async () => {
 build().catch(console.error);
 ```
 
+
 ### **Advanced Build Script**
+
 
 ```typescript
 // scripts/build.ts
@@ -544,11 +573,13 @@ const build = async () => {
 build().catch(console.error);
 ```
 
+
 ---
 
 ## ✅ **Best Practices**
 
 ### **1. Choose the Right Build Tool**
+
 
 ```typescript
 // ✅ Good: Choose based on project needs
@@ -566,7 +597,9 @@ const wrongChoice = {
 };
 ```
 
+
 ### **2. Optimize Build Performance**
+
 
 ```javascript
 // ✅ Good: Optimize build performance
@@ -605,7 +638,9 @@ module.exports = {
 };
 ```
 
+
 ### **3. Use Source Maps for Debugging**
+
 
 ```javascript
 // ✅ Good: Enable source maps
@@ -622,7 +657,9 @@ module.exports = {
 };
 ```
 
+
 ### **4. Configure Path Mapping**
+
 
 ```typescript
 // ✅ Good: Configure path mapping
@@ -638,6 +675,7 @@ export default defineConfig({
 // ❌ Avoid: Relative imports
 import { Button } from '../../../components/Button';
 ```
+
 
 ---
 
@@ -666,6 +704,7 @@ import { Button } from '../../../components/Button';
 ### **4. How do you configure path mapping in build tools?**
 
 **Answer:**
+
 ```typescript
 // Vite
 export default defineConfig({
@@ -685,6 +724,7 @@ module.exports = {
   },
 };
 ```
+
 
 ### **5. What are the benefits of using build tools with TypeScript?**
 

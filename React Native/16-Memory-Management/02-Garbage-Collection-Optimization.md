@@ -8,6 +8,7 @@ Garbage Collection (GC) is the automatic memory management process that frees up
 
 ### How Garbage Collection Works
 
+
 ```mermaid
 graph TD
     A[Object Created] --> B[Object Referenced]
@@ -20,6 +21,7 @@ graph TD
     G --> I[Memory Available]
 ```
 
+
 ### Types of Garbage Collection
 
 1. **Mark and Sweep**: Marks unreachable objects and sweeps them away
@@ -30,6 +32,7 @@ graph TD
 ## GC Optimization Strategies
 
 ### 1. Object Pooling
+
 
 ```javascript
 import { useRef, useCallback } from 'react';
@@ -102,7 +105,9 @@ const useObjectPool = () => {
 };
 ```
 
+
 ### 2. Efficient Data Structures
+
 
 ```javascript
 import { useMemo, useCallback } from 'react';
@@ -145,7 +150,9 @@ const EfficientDataStructures = () => {
 };
 ```
 
+
 ### 3. Memory-Efficient Rendering
+
 
 ```javascript
 import { memo, useMemo, useCallback } from 'react';
@@ -159,7 +166,7 @@ const ListItem = memo(({ item, onPress }) => {
 
   return (
     <TouchableOpacity onPress={handlePress}>
-      <View style={{ padding: 10 }}>
+      <View style={{#123;{{#123; padding: 10 }}#125;}}#125;>
         <Text>{item.title}</Text>
         <Text>{item.description}</Text>
       </View>
@@ -210,7 +217,9 @@ const OptimizedList = () => {
 };
 ```
 
+
 ### 4. Lazy Initialization
+
 
 ```javascript
 import { useRef, useCallback } from 'react';
@@ -257,9 +266,11 @@ const LazyInitialization = () => {
 };
 ```
 
+
 ## Advanced GC Optimization Techniques
 
 ### 1. Weak References
+
 
 ```javascript
 import { useEffect, useRef } from 'react';
@@ -295,7 +306,9 @@ const WeakReferenceExample = () => {
 };
 ```
 
+
 ### 2. Memory Pressure Handling
+
 
 ```javascript
 import { useEffect, useState } from 'react';
@@ -350,7 +363,9 @@ const MemoryPressureHandler = () => {
 };
 ```
 
+
 ### 3. Efficient Image Management
+
 
 ```javascript
 import { useRef, useCallback } from 'react';
@@ -396,9 +411,11 @@ const ImageManager = () => {
 };
 ```
 
+
 ## GC Monitoring and Profiling
 
 ### 1. Memory Usage Tracking
+
 
 ```javascript
 import { useEffect, useState } from 'react';
@@ -426,7 +443,7 @@ const MemoryTracker = () => {
   }, []);
 
   return (
-    <View style={{ padding: 20 }}>
+    <View style={{#123;{{#123; padding: 20 }}#125;}}#125;>
       <Text>Memory Usage:</Text>
       {memoryStats && (
         <>
@@ -440,7 +457,9 @@ const MemoryTracker = () => {
 };
 ```
 
+
 ### 2. GC Performance Monitoring
+
 
 ```javascript
 import { useEffect, useRef } from 'react';
@@ -492,9 +511,11 @@ const GCPerformanceMonitor = () => {
 };
 ```
 
+
 ## Best Practices for GC Optimization
 
 ### 1. Minimize Object Creation
+
 
 ```javascript
 import { useMemo, useCallback } from 'react';
@@ -530,7 +551,9 @@ const MinimizeObjectCreation = () => {
 };
 ```
 
+
 ### 2. Efficient State Updates
+
 
 ```javascript
 import { useReducer, useCallback } from 'react';
@@ -589,9 +612,11 @@ const EfficientStateUpdates = () => {
 };
 ```
 
+
 ## Testing GC Performance
 
 ### 1. Memory Leak Testing
+
 
 ```javascript
 import { render, cleanup } from '@testing-library/react-native';
@@ -643,6 +668,7 @@ describe('GC Performance Tests', () => {
   });
 });
 ```
+
 
 ## Summary
 

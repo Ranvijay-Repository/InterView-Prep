@@ -30,6 +30,7 @@ Metro is the JavaScript bundler for React Native applications. It's responsible 
 
 ### **Metro Architecture**
 
+
 ```mermaid
 graph TD
     A[Source Files] --> B[Metro Resolver]
@@ -45,6 +46,7 @@ graph TD
     C --> G
 ```
 
+
 ---
 
 ## ⚙️ **Metro Configuration**
@@ -52,6 +54,7 @@ graph TD
 ### **Basic Metro Config**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // metro.config.js
 const { getDefaultConfig } = require('metro-config');
@@ -79,9 +82,11 @@ module.exports = (async () => {
 })();
 ```
 
+
 ### **Advanced Metro Configuration**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // metro.config.js
 const { getDefaultConfig, mergeConfig } = require('metro-config');
@@ -127,6 +132,7 @@ const config = {
 module.exports = mergeConfig(defaultConfig, config);
 ```
 
+
 ---
 
 ## 📦 **Bundle Optimization**
@@ -134,6 +140,7 @@ module.exports = mergeConfig(defaultConfig, config);
 ### **Code Splitting**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Dynamic imports for code splitting
 import React, { useState, useEffect } from 'react';
@@ -169,9 +176,11 @@ const LazyComponent = () => {
 export default LazyComponent;
 ```
 
+
 ### **Bundle Analysis**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Bundle analyzer script
 const fs = require('fs');
@@ -210,6 +219,7 @@ const bundleAnalysis = analyzeBundle('./android/app/build/generated/assets/react
 console.log('Bundle Analysis:', bundleAnalysis);
 ```
 
+
 ---
 
 ## 🔨 **Build Processes**
@@ -217,6 +227,7 @@ console.log('Bundle Analysis:', bundleAnalysis);
 ### **Android Build Configuration**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // android/app/build.gradle
 android {
@@ -258,9 +269,11 @@ android {
 }
 ```
 
+
 ### **iOS Build Configuration**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // ios/YourApp.xcodeproj/project.pbxproj
 // Build settings for optimization
@@ -279,6 +292,7 @@ android {
 };
 ```
 
+
 ---
 
 ## 📊 **Performance Monitoring**
@@ -286,6 +300,7 @@ android {
 ### **Bundle Size Monitoring**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Bundle size monitoring script
 const fs = require('fs');
@@ -320,9 +335,11 @@ const monitorBundleSize = () => {
 monitorBundleSize();
 ```
 
+
 ### **Build Performance Tracking**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Build performance tracker
 const { execSync } = require('child_process');
@@ -366,6 +383,7 @@ const trackBuildPerformance = async () => {
 // Run performance tracking
 trackBuildPerformance();
 ```
+
 
 ---
 

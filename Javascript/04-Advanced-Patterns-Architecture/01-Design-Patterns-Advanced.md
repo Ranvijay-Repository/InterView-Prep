@@ -45,6 +45,7 @@
 - **Performance**: Optimize internal operations
 
 ### ASCII Diagram: Revealing Module Pattern Structure
+
 ```
 REVEALING MODULE PATTERN
 ┌─────────────────────────────────┐
@@ -76,6 +77,7 @@ REVEALING MODULE PATTERN
         └───────────────┘
 ```
 
+
 ### Use Cases:
 - **Library Development**: Control public API surface
 - **Plugin Systems**: Expose only necessary functionality
@@ -97,6 +99,7 @@ REVEALING MODULE PATTERN
 - **Validation**: Ensure object creation requirements
 
 ### ASCII Diagram: Factory Pattern Variations
+
 ```
 FACTORY PATTERN VARIATIONS
 ┌─────────────────────────────────┐
@@ -128,6 +131,7 @@ FACTORY PATTERN VARIATIONS
         └───────────────┘
 ```
 
+
 ### Factory Types:
 - **Simple Factory**: Basic object creation
 - **Factory Method**: Subclass-based creation
@@ -149,6 +153,7 @@ FACTORY PATTERN VARIATIONS
 - **Macro Commands**: Combine multiple commands
 
 ### ASCII Diagram: Command Pattern Flow
+
 ```
 COMMAND PATTERN FLOW
 ┌─────────────────────────────────┐
@@ -189,6 +194,7 @@ COMMAND PATTERN FLOW
         └───────────────┘
 ```
 
+
 ### Use Cases:
 - **Text Editors**: Copy, paste, undo operations
 - **Game Systems**: Player actions and commands
@@ -210,6 +216,7 @@ COMMAND PATTERN FLOW
 - **Fallback Handling**: Graceful degradation
 
 ### ASCII Diagram: Chain of Responsibility
+
 ```
 CHAIN OF RESPONSIBILITY
 ┌─────────────────────────────────┐
@@ -247,6 +254,7 @@ CHAIN OF RESPONSIBILITY
         │  No → Default │
         └───────────────┘
 ```
+
 
 ### Use Cases:
 - **Request Processing**: HTTP middleware chains

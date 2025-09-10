@@ -25,6 +25,7 @@ TypeScript supports both CommonJS and ES6 module systems, providing flexibility 
 
 ### **Module Types**
 
+
 ```typescript
 // ES6 Modules (recommended)
 export interface User {
@@ -43,7 +44,9 @@ module.exports = {
 };
 ```
 
+
 ### **Module vs Script**
+
 
 ```typescript
 // Script file (no imports/exports)
@@ -55,6 +58,7 @@ export const message = "Hello World";
 import { message } from "./script";
 ```
 
+
 ---
 
 ## 📤 **Export Syntax**
@@ -62,6 +66,7 @@ import { message } from "./script";
 TypeScript provides multiple ways to export values, types, and interfaces.
 
 ### **Named Exports**
+
 
 ```typescript
 // Export individual items
@@ -96,7 +101,9 @@ export type UserId = number;
 export type UserStatus = "active" | "inactive" | "pending";
 ```
 
+
 ### **Default Exports**
+
 
 ```typescript
 // Default export (one per module)
@@ -130,7 +137,9 @@ export default {
 };
 ```
 
+
 ### **Re-exports**
+
 
 ```typescript
 // Re-export from another module
@@ -150,6 +159,7 @@ export * as UserModule from "./user";
 export * as ProductModule from "./product";
 ```
 
+
 ---
 
 ## 📥 **Import Syntax**
@@ -157,6 +167,7 @@ export * as ProductModule from "./product";
 TypeScript provides flexible import syntax for different use cases.
 
 ### **Named Imports**
+
 
 ```typescript
 // Import specific items
@@ -175,7 +186,9 @@ const service = new Service();
 const apiUrl = UserModule.API_URL;
 ```
 
+
 ### **Default Imports**
+
 
 ```typescript
 // Import default export
@@ -190,7 +203,9 @@ const repository = new UserRepository();
 const user = createUser("John", "john@example.com");
 ```
 
+
 ### **Mixed Imports**
+
 
 ```typescript
 // Import both default and named exports
@@ -204,6 +219,7 @@ const repository = new UserRepo();
 const user: UserTypes.User = { id: 1, name: "John", email: "john@example.com" };
 ```
 
+
 ---
 
 ## 🔍 **Module Resolution**
@@ -211,6 +227,7 @@ const user: UserTypes.User = { id: 1, name: "John", email: "john@example.com" };
 TypeScript uses different module resolution strategies based on configuration.
 
 ### **Module Resolution Strategies**
+
 
 ```json
 // tsconfig.json
@@ -227,7 +244,9 @@ TypeScript uses different module resolution strategies based on configuration.
 }
 ```
 
+
 ### **Path Mapping**
+
 
 ```typescript
 // Using path mapping
@@ -241,7 +260,9 @@ import { UserService } from "../services/user-service";
 import { Button } from "./components/Button";
 ```
 
+
 ### **Module Resolution Examples**
+
 
 ```typescript
 // Relative imports
@@ -259,6 +280,7 @@ import { useState } from "react";
 import * as _ from "lodash";
 ```
 
+
 ---
 
 ## 🎭 **Type-Only Imports**
@@ -266,6 +288,7 @@ import * as _ from "lodash";
 TypeScript provides type-only imports for better performance and clarity.
 
 ### **Type-Only Import Syntax**
+
 
 ```typescript
 // Type-only imports
@@ -284,7 +307,9 @@ const service = new UserService(); // Runtime import
 const user: User = { id: 1, name: "John", email: "john@example.com" }; // Type-only
 ```
 
+
 ### **When to Use Type-Only Imports**
+
 
 ```typescript
 // ✅ Good: Use type-only for interfaces and types
@@ -298,6 +323,7 @@ import type UserRepository from "./user-repository";
 import type { UserService } from "./user"; // UserService is a class, not a type
 ```
 
+
 ---
 
 ## ⚡ **Dynamic Imports**
@@ -305,6 +331,7 @@ import type { UserService } from "./user"; // UserService is a class, not a type
 Dynamic imports allow you to load modules at runtime, enabling code splitting and lazy loading.
 
 ### **Basic Dynamic Imports**
+
 
 ```typescript
 // Dynamic import with async/await
@@ -328,7 +355,9 @@ const initializeApp = async () => {
 };
 ```
 
+
 ### **Dynamic Imports with Type Safety**
+
 
 ```typescript
 // Dynamic import with type assertion
@@ -349,7 +378,9 @@ const userService = new userModule.UserService();
 const userModule = await loadModule<typeof import("./user")>("./user");
 ```
 
+
 ### **Dynamic Imports in React**
+
 
 ```typescript
 // Lazy loading React components
@@ -368,11 +399,13 @@ const App = () => {
 };
 ```
 
+
 ---
 
 ## ✅ **Best Practices**
 
 ### **1. Use Named Exports for Multiple Items**
+
 
 ```typescript
 // ✅ Good: Named exports for multiple related items
@@ -395,7 +428,9 @@ export default {
 };
 ```
 
+
 ### **2. Use Default Exports for Single Main Item**
+
 
 ```typescript
 // ✅ Good: Default export for main class/function
@@ -410,7 +445,9 @@ export default {
 };
 ```
 
+
 ### **3. Use Type-Only Imports for Types**
+
 
 ```typescript
 // ✅ Good: Type-only imports for interfaces and types
@@ -421,7 +458,9 @@ import { UserService } from "./user"; // Runtime import
 import { User, UserStatus, UserService } from "./user";
 ```
 
+
 ### **4. Use Path Mapping for Clean Imports**
+
 
 ```typescript
 // ✅ Good: Path mapping for clean imports
@@ -433,6 +472,7 @@ import { User } from "../../../types/user";
 import { UserService } from "../../services/user-service";
 ```
 
+
 ---
 
 ## ❓ **Common Interview Questions**
@@ -443,6 +483,7 @@ import { UserService } from "../../services/user-service";
 - **Named exports**: Export multiple items with specific names, imported with `{ }`
 - **Default exports**: Export one main item, imported without `{ }`
 
+
 ```typescript
 // Named export
 export const name = "John";
@@ -452,6 +493,7 @@ import { name } from "./module";
 export default class User { }
 import User from "./module";
 ```
+
 
 ### **2. How do you handle circular dependencies in TypeScript?**
 
@@ -466,15 +508,18 @@ import User from "./module";
 **Answer:**
 Type-only imports are removed at runtime and only used for type checking:
 
+
 ```typescript
 import type { User } from "./user"; // Removed at compile time
 import { UserService } from "./user"; // Included at runtime
 ```
 
+
 ### **4. How do you configure module resolution in TypeScript?**
 
 **Answer:**
 Configure in `tsconfig.json`:
+
 
 ```json
 {
@@ -487,6 +532,7 @@ Configure in `tsconfig.json`:
   }
 }
 ```
+
 
 ### **5. What's the difference between ES6 modules and CommonJS?**
 

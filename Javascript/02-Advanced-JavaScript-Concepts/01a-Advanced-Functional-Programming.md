@@ -41,6 +41,7 @@
 3. **Associativity**: `m.flatMap(f).flatMap(g) === m.flatMap(x => f(x).flatMap(g))`
 
 ### ASCII Diagram: Monad Structure
+
 ```
 MONAD STRUCTURE
 ┌─────────────────────────────────┐
@@ -60,6 +61,7 @@ MONAD STRUCTURE
         └───────────────┘
 ```
 
+
 ### Why Monads Matter:
 - **Error Handling**: Safe chaining of operations that might fail
 - **Null Safety**: Handle undefined/null values gracefully
@@ -77,6 +79,7 @@ MONAD STRUCTURE
 4. **Composition**: `u <*> (v <*> w) === pure(compose) <*> u <*> v <*> w`
 
 ### ASCII Diagram: Applicative Pattern
+
 ```
 APPLICATIVE PATTERN
 ┌─────────────────────────────────┐
@@ -99,6 +102,7 @@ APPLICATIVE PATTERN
         └───────────────┘
 ```
 
+
 ### Use Cases:
 - **Validation**: Apply validation functions to data
 - **Configuration**: Apply config functions to settings
@@ -110,6 +114,7 @@ APPLICATIVE PATTERN
 ## 🔄 Advanced Composition Patterns
 
 ### Function Composition with Monads
+
 ```javascript
 // Monadic composition example
 const composeM = (f, g) => x => 
@@ -125,7 +130,9 @@ const safeSqrt = x =>
 const composed = composeM(safeSqrt, safeDivide);
 ```
 
+
 ### Applicative Composition
+
 ```javascript
 // Applicative composition
 const liftA2 = (f, a, b) => 
@@ -138,6 +145,7 @@ const liftA3 = (f, a, b, c) =>
 const add3 = (a, b, c) => a + b + c;
 const safeAdd3 = liftA3(add3, Maybe.just(1), Maybe.just(2), Maybe.just(3));
 ```
+
 
 ---
 

@@ -25,6 +25,7 @@ Setting up TypeScript with React requires proper configuration and understanding
 
 ### **Basic Setup**
 
+
 ```bash
 # Create React app with TypeScript
 npx create-react-app my-app --template typescript
@@ -34,7 +35,9 @@ npm install --save-dev typescript @types/react @types/react-dom
 npm install --save-dev @types/node
 ```
 
+
 ### **TypeScript Configuration**
+
 
 ```json
 // tsconfig.json
@@ -59,7 +62,9 @@ npm install --save-dev @types/node
 }
 ```
 
+
 ### **Package.json Scripts**
+
 
 ```json
 {
@@ -72,11 +77,13 @@ npm install --save-dev @types/node
 }
 ```
 
+
 ---
 
 ## 🧩 **Component Typing**
 
 ### **Functional Components**
+
 
 ```typescript
 // Basic functional component
@@ -99,7 +106,9 @@ const Button: React.FC<ButtonProps> = ({ children, onClick, disabled = false }) 
 export default Button;
 ```
 
+
 ### **Class Components**
+
 
 ```typescript
 // Class component with TypeScript
@@ -140,7 +149,9 @@ class Counter extends Component<CounterProps, CounterState> {
 export default Counter;
 ```
 
+
 ### **Component with Children**
+
 
 ```typescript
 // Component with children
@@ -166,11 +177,13 @@ const Card: React.FC<CardProps> = ({ title, children, className }) => {
 export default Card;
 ```
 
+
 ---
 
 ## 🎣 **Hooks with TypeScript**
 
 ### **useState Hook**
+
 
 ```typescript
 // useState with TypeScript
@@ -214,7 +227,9 @@ const UserForm: React.FC = () => {
 export default UserForm;
 ```
 
+
 ### **useEffect Hook**
+
 
 ```typescript
 // useEffect with TypeScript
@@ -265,7 +280,9 @@ const UserList: React.FC = () => {
 export default UserList;
 ```
 
+
 ### **Custom Hooks**
+
 
 ```typescript
 // Custom hook with TypeScript
@@ -322,11 +339,13 @@ const UserProfile: React.FC<{ userId: number }> = ({ userId }) => {
 };
 ```
 
+
 ---
 
 ## 📝 **Props and State**
 
 ### **Props Typing**
+
 
 ```typescript
 // Props with optional and required properties
@@ -360,7 +379,9 @@ const UserCard: React.FC<UserCardProps> = ({
 };
 ```
 
+
 ### **State Typing**
+
 
 ```typescript
 // Complex state with TypeScript
@@ -443,11 +464,13 @@ const UserForm: React.FC = () => {
 };
 ```
 
+
 ---
 
 ## 🎯 **Event Handling**
 
 ### **Event Types**
+
 
 ```typescript
 // Event handling with TypeScript
@@ -495,7 +518,7 @@ const EventHandling: React.FC = () => {
       
       <div
         onMouseMove={handleMouseMove}
-        style={{ width: '100%', height: '200px', border: '1px solid #ccc' }}
+        style={{#123;{{#123; width: '100%', height: '200px', border: '1px solid #ccc' }}#125;}}#125;
       >
         Mouse position: {mousePosition.x}, {mousePosition.y}
       </div>
@@ -506,7 +529,9 @@ const EventHandling: React.FC = () => {
 export default EventHandling;
 ```
 
+
 ### **Generic Event Handlers**
+
 
 ```typescript
 // Generic event handlers
@@ -576,11 +601,13 @@ const LoginForm: React.FC = () => {
 };
 ```
 
+
 ---
 
 ## 🚀 **Advanced Patterns**
 
 ### **Higher-Order Components**
+
 
 ```typescript
 // Higher-order component with TypeScript
@@ -630,7 +657,9 @@ const App: React.FC = () => {
 };
 ```
 
+
 ### **Render Props**
+
 
 ```typescript
 // Render props pattern with TypeScript
@@ -685,12 +714,14 @@ const UserProfile: React.FC<{ userId: number }> = ({ userId }) => (
           <button onClick={refetch}>Refresh</button>
         </div>
       );
-    }}
+    }}#125;}}#125;
   </DataProvider>
 );
 ```
 
+
 ### **Context with TypeScript**
+
 
 ```typescript
 // Context with TypeScript
@@ -734,7 +765,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
   };
 
   return (
-    <UserContext.Provider value={{ user, login, logout }}>
+    <UserContext.Provider value={{#123;{{#123; user, login, logout }}#125;}}#125;>
       {children}
     </UserContext.Provider>
   );
@@ -758,11 +789,13 @@ const UserProfile: React.FC = () => {
 };
 ```
 
+
 ---
 
 ## ✅ **Best Practices**
 
 ### **1. Use Strict Typing**
+
 
 ```typescript
 // ✅ Good: Strict typing
@@ -790,7 +823,9 @@ const Button: React.FC<any> = ({ children, onClick, disabled }) => {
 };
 ```
 
+
 ### **2. Use Generic Types for Reusable Components**
+
 
 ```typescript
 // ✅ Good: Generic types
@@ -820,7 +855,9 @@ interface ListProps {
 }
 ```
 
+
 ### **3. Use Proper Event Types**
+
 
 ```typescript
 // ✅ Good: Proper event types
@@ -834,7 +871,9 @@ const handleInputChange = (e: any) => {
 };
 ```
 
+
 ### **4. Use Custom Hooks for Logic Reuse**
+
 
 ```typescript
 // ✅ Good: Custom hook
@@ -862,6 +901,7 @@ const Counter2: React.FC = () => {
 };
 ```
 
+
 ---
 
 ## ❓ **Common Interview Questions**
@@ -869,6 +909,7 @@ const Counter2: React.FC = () => {
 ### **1. How do you type React components in TypeScript?**
 
 **Answer:**
+
 ```typescript
 interface ComponentProps {
   title: string;
@@ -880,17 +921,21 @@ const Component: React.FC<ComponentProps> = ({ title, onClick }) => {
 };
 ```
 
+
 ### **2. How do you type React hooks?**
 
 **Answer:**
+
 ```typescript
 const [count, setCount] = useState<number>(0);
 const [user, setUser] = useState<User | null>(null);
 ```
 
+
 ### **3. How do you handle events in TypeScript React?**
 
 **Answer:**
+
 ```typescript
 const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
   e.preventDefault();
@@ -898,9 +943,11 @@ const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
 };
 ```
 
+
 ### **4. How do you create custom hooks with TypeScript?**
 
 **Answer:**
+
 ```typescript
 const useApi = <T>(url: string): { data: T | null; loading: boolean } => {
   const [data, setData] = useState<T | null>(null);
@@ -910,9 +957,11 @@ const useApi = <T>(url: string): { data: T | null; loading: boolean } => {
 };
 ```
 
+
 ### **5. How do you type React context?**
 
 **Answer:**
+
 ```typescript
 interface ContextType {
   user: User | null;
@@ -921,6 +970,7 @@ interface ContextType {
 
 const Context = createContext<ContextType | undefined>(undefined);
 ```
+
 
 ---
 

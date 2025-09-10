@@ -22,6 +22,7 @@
 
 ### **Memory Management Architecture**
 
+
 ```mermaid
 graph TD
     A[React Native App] --> B[JavaScript Heap]
@@ -38,6 +39,7 @@ graph TD
     E --> L[Bridge Communication]
 ```
 
+
 ### **Key Areas**
 - **JavaScript Heap**: Component state, closures, event listeners
 - **Native Memory**: Native modules, UI components
@@ -51,6 +53,7 @@ graph TD
 ### **Memory Profiling Tools**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 import React, { useState, useCallback, useEffect } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native';
@@ -389,6 +392,7 @@ const styles = StyleSheet.create({
 export { MemoryProfiler, MemoryProfilingDemo };
 ```
 
+
 ---
 
 ## 🔒 **Memory Leak Prevention**
@@ -396,6 +400,7 @@ export { MemoryProfiler, MemoryProfilingDemo };
 ### **Memory Leak Prevention Patterns**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 import React, { useState, useCallback, useEffect, useRef } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native';
@@ -694,6 +699,7 @@ const styles = StyleSheet.create({
 export { MemoryLeakPrevention, MemoryLeakPreventionDemo };
 ```
 
+
 ---
 
 ## 🖼️ **Image Memory Management**
@@ -701,6 +707,7 @@ export { MemoryLeakPrevention, MemoryLeakPreventionDemo };
 ### **Image Memory Optimization**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 import React, { useState, useCallback, useEffect } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Image, Dimensions } from 'react-native';
@@ -949,7 +956,7 @@ const ImageMemoryManagementDemo = () => {
         {images.map((image, index) => (
           <View key={image.id} style={styles.imageItem}>
             <Image 
-              source={{ uri: image.uri }} 
+              source={{#123;{{#123; uri: image.uri }}#125;}}#125; 
               style={styles.image}
               resizeMode="cover"
             />
@@ -1074,6 +1081,7 @@ const styles = StyleSheet.create({
 
 export { ImageMemoryManager, ImageMemoryManagementDemo };
 ```
+
 
 ---
 

@@ -23,6 +23,7 @@
 
 ### **Build Process Flow**
 
+
 ```mermaid
 graph TD
     A[Source Code] --> B[Metro Bundler]
@@ -35,6 +36,7 @@ graph TD
     H --> I[Signing]
     I --> J[Release]
 ```
+
 
 ### **Key Components**
 - **Gradle**: Build automation tool
@@ -49,6 +51,7 @@ graph TD
 ### **Project Level Gradle**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```gradle
 // android/build.gradle
 buildscript {
@@ -74,9 +77,11 @@ allprojects {
 }
 ```
 
+
 ### **App Level Gradle**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```gradle
 // android/app/build.gradle
 apply plugin: "com.android.application"
@@ -132,6 +137,7 @@ android {
 }
 ```
 
+
 ---
 
 ## 🎯 **Build Variants**
@@ -139,6 +145,7 @@ android {
 ### **Flavor Configuration**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```gradle
 // android/app/build.gradle
 android {
@@ -167,9 +174,11 @@ android {
 }
 ```
 
+
 ### **Build Variant Scripts**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // scripts/build-android.js
 const { execSync } = require('child_process');
@@ -207,6 +216,7 @@ const flavor = process.argv[3] || 'development';
 buildAndroid(variant, flavor);
 ```
 
+
 ---
 
 ## 🔒 **Proguard & R8**
@@ -214,6 +224,7 @@ buildAndroid(variant, flavor);
 ### **Proguard Rules**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```proguard
 # android/app/proguard-rules.pro
 
@@ -256,9 +267,11 @@ buildAndroid(variant, flavor);
 }
 ```
 
+
 ### **R8 Configuration**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```gradle
 // android/app/build.gradle
 android {
@@ -281,6 +294,7 @@ android {
 }
 ```
 
+
 ---
 
 ## 📦 **APK & AAB Optimization**
@@ -288,6 +302,7 @@ android {
 ### **APK Splitting**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```gradle
 // android/app/build.gradle
 android {
@@ -308,9 +323,11 @@ android {
 }
 ```
 
+
 ### **AAB Configuration**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```gradle
 // android/app/build.gradle
 android {
@@ -345,6 +362,7 @@ android {
 }
 ```
 
+
 ---
 
 ## 🚀 **Release Process**
@@ -352,6 +370,7 @@ android {
 ### **Automated Release Script**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // scripts/release-android.js
 const { execSync } = require('child_process');
@@ -418,9 +437,11 @@ const releaseAndroid = async () => {
 releaseAndroid();
 ```
 
+
 ### **Play Store Upload**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // scripts/upload-playstore.js
 const { execSync } = require('child_process');
@@ -454,6 +475,7 @@ const uploadToPlayStore = async () => {
 // Run upload
 uploadToPlayStore();
 ```
+
 
 ---
 

@@ -44,6 +44,7 @@
 - **Team Improvement**: Provide feedback for developer growth
 
 ### ASCII Diagram: SonarQube Analysis Flow
+
 ```
 SONARQUBE ANALYSIS FLOW
 ┌─────────────────────────────────┐
@@ -101,6 +102,7 @@ SONARQUBE ANALYSIS FLOW
         └───────────────┘
 ```
 
+
 ### Code Smell Categories:
 - **Long Methods**: Methods that do too many things
 - **Large Classes**: Classes with too many responsibilities
@@ -122,6 +124,7 @@ SONARQUBE ANALYSIS FLOW
 - **Optimization**: Find opportunities for code splitting and lazy loading
 
 ### ASCII Diagram: Bundle Analysis Process
+
 ```
 BUNDLE ANALYSIS PROCESS
 ┌─────────────────────────────────┐
@@ -178,6 +181,7 @@ BUNDLE ANALYSIS PROCESS
         └───────────────┘
 ```
 
+
 ### Analysis Tools:
 - **Webpack Bundle Analyzer**: Visual bundle analysis
 - **Source Map Explorer**: Source code mapping analysis
@@ -199,6 +203,7 @@ BUNDLE ANALYSIS PROCESS
 - **Continuous Monitoring**: Track performance over time
 
 ### ASCII Diagram: Performance Budget Monitoring
+
 ```
 PERFORMANCE BUDGET MONITORING
 ┌─────────────────────────────────┐
@@ -254,6 +259,7 @@ PERFORMANCE BUDGET MONITORING
         │  Compression  │
         └───────────────┘
 ```
+
 
 ### Budget Metrics:
 - **Bundle Size**: Total JavaScript/CSS bundle size

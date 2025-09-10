@@ -25,6 +25,7 @@ Permissions and security are crucial aspects of React Native development. Proper
 
 ### **Permissions & Security Overview**
 
+
 ```
 ┌─────────────────────────────────────┐
 │        Permissions & Security       │
@@ -52,6 +53,7 @@ Permissions and security are crucial aspects of React Native development. Proper
 └─────────────────────────────────────┘
 ```
 
+
 ---
 
 ## 🔐 **Permissions Management**
@@ -59,6 +61,7 @@ Permissions and security are crucial aspects of React Native development. Proper
 ### **Permissions Manager Example**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 import { PermissionsAndroid, Platform, Alert } from 'react-native';
 import { check, request, PERMISSIONS, RESULTS } from 'react-native-permissions';
@@ -239,9 +242,11 @@ export {
 };
 ```
 
+
 ### **Security Manager Example**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 import { Platform } from 'react-native';
 import CryptoJS from 'crypto-js';
@@ -520,6 +525,7 @@ export {
   performSecurityAudit,
 };
 ```
+
 
 ---
 

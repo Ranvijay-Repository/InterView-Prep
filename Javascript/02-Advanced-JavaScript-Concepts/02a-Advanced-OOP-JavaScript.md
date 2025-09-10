@@ -43,6 +43,7 @@
 - **Cross-Reference Setup**: Initialize static members that reference each other
 
 ### ASCII Diagram: Static Block Execution
+
 ```
 STATIC BLOCK EXECUTION
 ┌─────────────────────────────────┐
@@ -67,6 +68,7 @@ STATIC BLOCK EXECUTION
         └───────────────┘
 ```
 
+
 ---
 
 ## 🎭 Decorators & Metadata
@@ -81,6 +83,7 @@ STATIC BLOCK EXECUTION
 - **Dependency Injection**: Configure dependencies automatically
 
 ### ASCII Diagram: Decorator Pattern
+
 ```
 DECORATOR PATTERN
 ┌─────────────────────────────────┐
@@ -110,6 +113,7 @@ DECORATOR PATTERN
         └───────────────┘
 ```
 
+
 ---
 
 ## 🔍 Proxy & Reflect API
@@ -124,6 +128,7 @@ DECORATOR PATTERN
 - **Security**: Control access to sensitive properties
 
 ### ASCII Diagram: Proxy Interception
+
 ```
 PROXY INTERCEPTION
 ┌─────────────────────────────────┐
@@ -161,11 +166,13 @@ PROXY INTERCEPTION
         └───────────────┘
 ```
 
+
 ---
 
 ## 🏗️ Advanced Design Patterns
 
 ### 1. **Factory Pattern with Private Fields**
+
 ```javascript
 class UserFactory {
     static #userCount = 0;
@@ -181,7 +188,9 @@ class UserFactory {
 }
 ```
 
+
 ### 2. **Singleton with Private Constructor**
+
 ```javascript
 class DatabaseConnection {
     static #instance = null;
@@ -202,6 +211,7 @@ class DatabaseConnection {
     }
 }
 ```
+
 
 ---
 

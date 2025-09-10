@@ -25,6 +25,7 @@ Functional programming emphasizes immutability, pure functions, and function com
 
 ### **Core Principles**
 
+
 ```typescript
 // Functional programming principles
 const principles = {
@@ -43,7 +44,9 @@ const typescriptBenefits = {
 };
 ```
 
+
 ### **Functional vs Imperative**
+
 
 ```typescript
 // Imperative approach
@@ -64,6 +67,7 @@ const processUsersFunctional = (users: User[]): string[] =>
     .map(user => user.name.toUpperCase());
 ```
 
+
 ---
 
 ## 🧹 **Pure Functions**
@@ -71,6 +75,7 @@ const processUsersFunctional = (users: User[]): string[] =>
 Pure functions are functions that always return the same output for the same input and have no side effects.
 
 ### **Pure Function Characteristics**
+
 
 ```typescript
 // Pure function example
@@ -94,7 +99,9 @@ const updateUser = (user: User, updates: Partial<User>): User => ({
 });
 ```
 
+
 ### **Impure Functions (Avoid)**
+
 
 ```typescript
 // ❌ Impure function - modifies external state
@@ -116,7 +123,9 @@ const addToArrayImpure = <T>(array: T[], item: T): T[] => {
 };
 ```
 
+
 ### **Pure Function Benefits**
+
 
 ```typescript
 // Pure functions are predictable
@@ -134,6 +143,7 @@ const testMultiply = () => {
 };
 ```
 
+
 ---
 
 ## 🔒 **Immutability**
@@ -141,6 +151,7 @@ const testMultiply = () => {
 Immutability ensures data cannot be changed after creation, preventing bugs and making code more predictable.
 
 ### **Immutable Data Structures**
+
 
 ```typescript
 // Immutable objects
@@ -172,7 +183,9 @@ const removeFromNumbers = (numbers: readonly number[], index: number): number[] 
   numbers.filter((_, i) => i !== index);
 ```
 
+
 ### **Deep Immutability**
+
 
 ```typescript
 // Deep immutable types
@@ -219,7 +232,9 @@ const updateUserTheme = (user: User, theme: string): User => ({
 });
 ```
 
+
 ### **Immutable Update Patterns**
+
 
 ```typescript
 // Update nested objects
@@ -254,6 +269,7 @@ const user = {
 const updatedUser = updateNestedProperty(user, ["profile", "settings", "theme"], "light");
 ```
 
+
 ---
 
 ## 🔄 **Higher-Order Functions**
@@ -261,6 +277,7 @@ const updatedUser = updateNestedProperty(user, ["profile", "settings", "theme"],
 Higher-order functions are functions that take other functions as arguments or return functions.
 
 ### **Basic Higher-Order Functions**
+
 
 ```typescript
 // Function that takes a function as argument
@@ -285,7 +302,9 @@ const loggedDouble = withLogging(double);
 loggedDouble(5); // Logs input and output
 ```
 
+
 ### **Array Higher-Order Functions**
+
 
 ```typescript
 // Custom map implementation
@@ -328,7 +347,9 @@ const evens = filter(numbers, x => x % 2 === 0);
 const sum = reduce(numbers, (acc, x) => acc + x, 0);
 ```
 
+
 ### **Function Currying**
+
 
 ```typescript
 // Curried function
@@ -359,6 +380,7 @@ console.log(curriedMultiply(2, 3)(4)); // 24
 console.log(curriedMultiply(2)(3, 4)); // 24
 ```
 
+
 ---
 
 ## 🎭 **Function Composition**
@@ -366,6 +388,7 @@ console.log(curriedMultiply(2)(3, 4)); // 24
 Function composition is the process of combining simple functions to create more complex ones.
 
 ### **Basic Function Composition**
+
 
 ```typescript
 // Simple composition
@@ -384,7 +407,9 @@ const composed = composeMany(square, multiply2, add1);
 console.log(composed(3)); // ((3 + 1) * 2)² = 64
 ```
 
+
 ### **Advanced Function Composition**
+
 
 ```typescript
 // Generic composition with different types
@@ -410,7 +435,9 @@ const processUsers = pipe(
 console.log(processUsers(users)); // "John, Bob"
 ```
 
+
 ### **Monadic Composition**
+
 
 ```typescript
 // Maybe monad for safe composition
@@ -450,11 +477,13 @@ console.log(processUser(1)); // "JOHN@EXAMPLE.COM"
 console.log(processUser(-1)); // null
 ```
 
+
 ---
 
 ## 🚀 **Advanced Functional Patterns**
 
 ### **Functor Pattern**
+
 
 ```typescript
 // Functor interface
@@ -501,7 +530,9 @@ const result = maybeValue.map(x => x * 2);
 console.log(result.getValue()); // 10
 ```
 
+
 ### **Applicative Functor**
+
 
 ```typescript
 // Applicative functor interface
@@ -547,11 +578,13 @@ const result = maybe5.ap(maybe3.ap(maybeAdd));
 console.log(result.getValue()); // 8
 ```
 
+
 ---
 
 ## ✅ **Best Practices**
 
 ### **1. Prefer Pure Functions**
+
 
 ```typescript
 // ✅ Good: Pure function
@@ -569,7 +602,9 @@ const calculateTotalImpure = (items: Item[]): number => {
 };
 ```
 
+
 ### **2. Use Immutable Data Structures**
+
 
 ```typescript
 // ✅ Good: Immutable updates
@@ -585,7 +620,9 @@ const updateUserImpure = (user: User, updates: Partial<User>): User => {
 };
 ```
 
+
 ### **3. Compose Functions Instead of Nesting**
+
 
 ```typescript
 // ✅ Good: Function composition
@@ -601,7 +638,9 @@ const processDataNested = (data: any[]) =>
   takeFirst(10, sortByDate(transformData(filterValid(data))));
 ```
 
+
 ### **4. Use Higher-Order Functions**
+
 
 ```typescript
 // ✅ Good: Higher-order function
@@ -633,6 +672,7 @@ const fetchProduct = (): Product | null => {
   }
 };
 ```
+
 
 ---
 
@@ -668,9 +708,11 @@ Functional programming is a programming paradigm that emphasizes:
 **Answer:**
 Function composition is combining simple functions to create more complex ones:
 
+
 ```typescript
 const compose = <T>(f: (x: T) => T, g: (x: T) => T) => (x: T): T => f(g(x));
 ```
+
 
 ### **5. What are higher-order functions?**
 

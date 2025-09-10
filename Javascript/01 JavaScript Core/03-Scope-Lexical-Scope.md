@@ -55,6 +55,7 @@ Imagine a building with different floors:
 
 ## 🔗 Scope Chain Visualization
 
+
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │                    SCOPE CHAIN                              │
@@ -74,7 +75,9 @@ Imagine a building with different floors:
 └─────────────────────────────────────────────────────────────┘
 ```
 
+
 ### 🔄 Scope Resolution Process
+
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -87,6 +90,7 @@ Imagine a building with different floors:
 │  5. ✅ If found, use that variable                         │
 └─────────────────────────────────────────────────────────────┘
 ```
+
 
 ---
 
@@ -105,6 +109,7 @@ Lexical scope means that the scope of a variable is determined by its **location
 ## 💻 Detailed Examples
 
 ### Example 1: Basic Scope Types
+
 ```javascript
 console.log("=== BASIC SCOPE TYPES ===");
 
@@ -144,7 +149,9 @@ console.log("globalVar:", globalVar);                 // ✅ Own scope
 outerFunction();
 ```
 
+
 ### Example 2: Block Scope vs Function Scope
+
 ```javascript
 console.log("=== BLOCK SCOPE VS FUNCTION SCOPE ===");
 
@@ -202,7 +209,9 @@ while (counter < 2) {
 // console.log("whileVar:", whileVar); // ❌ ReferenceError
 ```
 
+
 ### Example 3: Variable Shadowing
+
 ```javascript
 console.log("=== VARIABLE SHADOWING ===");
 
@@ -255,7 +264,9 @@ console.log("3. Shadowing creates a new variable, not modifies existing");
 console.log("4. Each scope has its own 'name' variable");
 ```
 
+
 ### Example 4: Scope Chain in Practice
+
 ```javascript
 console.log("=== SCOPE CHAIN IN PRACTICE ===");
 
@@ -326,7 +337,9 @@ console.log("4. Scope chain: inner → outer → global");
 console.log("5. Variables are searched up the chain until found");
 ```
 
+
 ### Example 5: Common Scope Mistakes
+
 ```javascript
 console.log("=== COMMON SCOPE MISTAKES ===");
 
@@ -411,7 +424,9 @@ scopeMistake();
 console.log("Global x:", globalX); // "Global X" (unchanged)
 ```
 
+
 ### Example 6: Advanced Scope Patterns
+
 ```javascript
 console.log("=== ADVANCED SCOPE PATTERNS ===");
 
@@ -497,11 +512,13 @@ console.log("Counter2 getValue:", counter2.getValue());   // 21
 console.log("Each counter has independent state");
 ```
 
+
 ---
 
 ## ⚠️ Common Mistakes
 
 ### Mistake 1: Expecting Block Scope with var
+
 ```javascript
 console.log("=== MISTAKE 1: var DOESN'T HAVE BLOCK SCOPE ===");
 
@@ -517,7 +534,9 @@ if (true) {
 // console.log("blockLet outside block:", blockLet); // ReferenceError
 ```
 
+
 ### Mistake 2: Forgetting Function Scope
+
 ```javascript
 console.log("=== MISTAKE 2: FORGETTING FUNCTION SCOPE ===");
 
@@ -535,7 +554,9 @@ test();
 console.log("Global var:", globalVar); // "Global" (unchanged)
 ```
 
+
 ### Mistake 3: Loop Variable Scope Issues
+
 ```javascript
 console.log("=== MISTAKE 3: LOOP VARIABLE SCOPE ===");
 
@@ -554,11 +575,13 @@ for (let j = 0; j < 3; j++) {
 }
 ```
 
+
 ---
 
 ## ✅ Best Practices
 
 ### 1. Use let/const Instead of var
+
 ```javascript
 console.log("=== BEST PRACTICE 1: USE LET/CONST ===");
 
@@ -575,7 +598,9 @@ console.log("- No hoisting issues");
 console.log("- More predictable behavior");
 ```
 
+
 ### 2. Minimize Global Variables
+
 ```javascript
 console.log("=== BEST PRACTICE 2: MINIMIZE GLOBAL VARIABLES ===");
 
@@ -595,7 +620,9 @@ const app = (function() {
 })();
 ```
 
+
 ### 3. Use Descriptive Variable Names
+
 ```javascript
 console.log("=== BEST PRACTICE 3: DESCRIPTIVE NAMES ===");
 
@@ -609,6 +636,7 @@ let userList = [];
 
 console.log("Clear names make scope easier to understand");
 ```
+
 
 ---
 
@@ -668,6 +696,7 @@ console.log("Clear names make scope easier to understand");
 - Prevents common scope-related bugs
 
 **Example:**
+
 ```javascript
 function test() {
     if (true) {
@@ -680,6 +709,7 @@ function test() {
 }
 ```
 
+
 ### Q: How does the scope chain work?
 **A:** The scope chain is the mechanism JavaScript uses to find variables:
 
@@ -690,6 +720,7 @@ function test() {
 4. If not found anywhere, throws ReferenceError
 
 **Example:**
+
 ```javascript
 let globalVar = "global";
 
@@ -710,6 +741,7 @@ function outer() {
 outer();
 ```
 
+
 ### Q: What is variable shadowing?
 **A:** Variable shadowing occurs when a variable in an inner scope has the same name as a variable in an outer scope, effectively "hiding" the outer variable within the inner scope.
 
@@ -720,6 +752,7 @@ outer();
 - Useful for creating local variables with same names
 
 **Example:**
+
 ```javascript
 let name = "Global Name";
 
@@ -732,11 +765,13 @@ test();
 console.log(name);             // "Global Name" (unchanged)
 ```
 
+
 ---
 
 ## 🧪 Practice Exercises
 
 ### Exercise 1: Scope Chain Analysis
+
 ```javascript
 console.log("Exercise 1: Predict the output");
 
@@ -758,7 +793,9 @@ a();
 console.log("Global x:", x); // What will this print?
 ```
 
+
 ### Exercise 2: Block Scope Understanding
+
 ```javascript
 console.log("Exercise 2: Block scope analysis");
 
@@ -775,7 +812,9 @@ function test() {
 test();
 ```
 
+
 ### Exercise 3: Variable Shadowing
+
 ```javascript
 console.log("Exercise 3: Variable shadowing");
 
@@ -800,6 +839,7 @@ outer();
 console.log("Global name:", name);
 console.log("Global value:", value);
 ```
+
 
 ---
 

@@ -7,6 +7,7 @@ This comprehensive roadmap covers all TypeScript concepts, patterns, and advance
 ## 🎯 **Core TypeScript Fundamentals (Must Know)**
 
 ### 1. **Type System Mastery**
+
 ```typescript
 // Basic Types
 type PrimitiveTypes = {
@@ -49,7 +50,9 @@ function processValue(value: string | number) {
 }
 ```
 
+
 ### 2. **Advanced Type Manipulation**
+
 ```typescript
 // Utility Types (Built-in)
 type UtilityTypes = {
@@ -100,7 +103,9 @@ type Setters<T> = {
 };
 ```
 
+
 ### 3. **Generics Mastery**
+
 ```typescript
 // Basic Generics
 function identity<T>(arg: T): T {
@@ -154,9 +159,11 @@ type Curry<T extends (...args: any[]) => any> =
     : never;
 ```
 
+
 ## 🏗️ **Design Patterns & Architecture**
 
 ### 1. **Object-Oriented Patterns**
+
 ```typescript
 // Singleton Pattern
 class Singleton {
@@ -247,7 +254,9 @@ class Subject<T> {
 }
 ```
 
+
 ### 2. **Functional Programming Patterns**
+
 ```typescript
 // Monad Pattern
 interface Monad<T> {
@@ -299,7 +308,9 @@ const add5 = curriedAdd(5);
 const add5And3 = add5(3);
 ```
 
+
 ### 3. **Architectural Patterns**
+
 ```typescript
 // Repository Pattern
 interface Repository<T, ID> {
@@ -370,9 +381,11 @@ class DIContainer implements Container {
 }
 ```
 
+
 ## ⚛️ **React & React Native Specific TypeScript**
 
 ### 1. **React Component Typing**
+
 ```typescript
 // Component Props
 interface ButtonProps {
@@ -450,7 +463,9 @@ function useTheme(): ThemeContextType {
 }
 ```
 
+
 ### 2. **React Native Specific Types**
+
 ```typescript
 // Navigation Types
 type RootStackParamList = {
@@ -530,7 +545,9 @@ const selectCurrentUser = (state: RootState) => state.user.currentUser;
 const selectUserLoading = (state: RootState) => state.user.loading;
 ```
 
+
 ### 3. **Advanced React Patterns**
+
 ```typescript
 // Render Props Pattern
 interface RenderProps<T> {
@@ -582,7 +599,7 @@ function Tabs({ children, defaultTab }: TabsProps) {
   const [activeTab, setActiveTab] = useState(defaultTab || '');
   
   return (
-    <TabsContext.Provider value={{ activeTab, setActiveTab }}>
+    <TabsContext.Provider value={{#123;{{#123; activeTab, setActiveTab }}#125;}}#125;>
       {children}
     </TabsContext.Provider>
   );
@@ -618,9 +635,11 @@ function TabPanel({ id, children }: TabPanelProps) {
 </Tabs>
 ```
 
+
 ## 🚀 **Backend Development with TypeScript**
 
 ### 1. **Node.js & Express**
+
 ```typescript
 // Express with TypeScript
 import express, { Request, Response, NextFunction } from 'express';
@@ -687,7 +706,9 @@ class UserController {
 }
 ```
 
+
 ### 2. **Database Integration**
+
 ```typescript
 // TypeORM with TypeScript
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
@@ -754,7 +775,9 @@ class UserRepository implements IUserRepository {
 }
 ```
 
+
 ### 3. **API Design & Validation**
+
 ```typescript
 // DTOs (Data Transfer Objects)
 interface CreateUserDto {
@@ -856,9 +879,11 @@ class UserService implements IUserService {
 }
 ```
 
+
 ## 🔧 **Advanced TypeScript Features**
 
 ### 1. **Module System & Namespaces**
+
 ```typescript
 // Module Declaration
 declare module 'custom-module' {
@@ -903,7 +928,9 @@ declare global {
 }
 ```
 
+
 ### 2. **Decorators & Metadata**
+
 ```typescript
 // Class Decorator
 function Controller(path: string) {
@@ -951,7 +978,9 @@ class UserController {
 }
 ```
 
+
 ### 3. **Advanced Generic Patterns**
+
 ```typescript
 // Recursive Type Definitions
 type DeepReadonly<T> = {
@@ -1010,9 +1039,11 @@ function sanitize<T>(input: T): Sanitized<T> {
 }
 ```
 
+
 ## 🧪 **Testing with TypeScript**
 
 ### 1. **Unit Testing**
+
 ```typescript
 // Jest with TypeScript
 import { UserService } from '../services/UserService';
@@ -1091,7 +1122,9 @@ describe('UserService', () => {
 });
 ```
 
+
 ### 2. **Integration Testing**
+
 ```typescript
 // Supertest with TypeScript
 import request from 'supertest';
@@ -1157,9 +1190,11 @@ describe('User API', () => {
 });
 ```
 
+
 ## 📚 **Essential Libraries & Tools**
 
 ### 1. **Development Tools**
+
 ```typescript
 // ESLint Configuration
 {
@@ -1218,7 +1253,9 @@ describe('User API', () => {
 }
 ```
 
+
 ### 2. **Utility Libraries**
+
 ```typescript
 // Lodash with TypeScript
 import _ from 'lodash';
@@ -1271,6 +1308,7 @@ async function validateDto(dto: CreateUserDto): Promise<void> {
   }
 }
 ```
+
 
 ## 🎯 **Interview Preparation Topics**
 

@@ -24,6 +24,7 @@ Union types allow a value to be one of several types, providing flexibility whil
 
 ### **Basic Union Types**
 
+
 ```typescript
 // Union of primitive types
 let id: string | number;
@@ -38,7 +39,9 @@ value = 42;
 value = true;
 ```
 
+
 ### **Function Parameters with Union Types**
+
 
 ```typescript
 // Function accepting multiple types
@@ -54,7 +57,9 @@ formatValue("hello"); // "HELLO"
 formatValue(42);      // "42"
 ```
 
+
 ### **Array Union Types**
+
 
 ```typescript
 // Array that can contain strings or numbers
@@ -67,6 +72,7 @@ stringOrNumberArray = [1, 2, 3];       // ✅ Valid
 // stringOrNumberArray = ["a", 1, "b"]; // ❌ Error: Mixed types not allowed
 ```
 
+
 ---
 
 ## 🔗 **Intersection Types**
@@ -74,6 +80,7 @@ stringOrNumberArray = [1, 2, 3];       // ✅ Valid
 Intersection types combine multiple types into one, requiring all properties from each type.
 
 ### **Basic Intersection Types**
+
 
 ```typescript
 // Intersection of object types
@@ -99,7 +106,9 @@ const employee: EmployeePerson = {
 };
 ```
 
+
 ### **Function Intersection Types**
+
 
 ```typescript
 // Intersection of function types
@@ -118,7 +127,9 @@ const logWithTimestamp: LogWithTimestamp = (message: string) => {
 (logWithTimestamp as any).timestamp = () => new Date().toISOString();
 ```
 
+
 ### **Complex Intersection Types**
+
 
 ```typescript
 // Intersection with optional properties
@@ -149,6 +160,7 @@ const config: AppConfig = {
 };
 ```
 
+
 ---
 
 ## 🛡️ **Type Guards**
@@ -156,6 +168,7 @@ const config: AppConfig = {
 Type guards help narrow down union types to specific types at runtime.
 
 ### **Typeof Type Guards**
+
 
 ```typescript
 function processValue(value: string | number | boolean): string {
@@ -172,7 +185,9 @@ function processValue(value: string | number | boolean): string {
 }
 ```
 
+
 ### **Instanceof Type Guards**
+
 
 ```typescript
 class Dog {
@@ -200,7 +215,9 @@ function handlePet(pet: Dog | Cat): string {
 }
 ```
 
+
 ### **Custom Type Guards**
+
 
 ```typescript
 // Custom type guard function
@@ -225,6 +242,7 @@ function processUnknownValue(value: unknown): string {
 }
 ```
 
+
 ---
 
 ## 🎭 **Discriminated Unions**
@@ -232,6 +250,7 @@ function processUnknownValue(value: unknown): string {
 Discriminated unions use a common property to distinguish between different types in a union.
 
 ### **Basic Discriminated Union**
+
 
 ```typescript
 // Discriminated union with 'type' property
@@ -259,7 +278,9 @@ function calculateArea(shape: Shape): number {
 }
 ```
 
+
 ### **Complex Discriminated Union**
+
 
 ```typescript
 // API response discriminated union
@@ -283,11 +304,13 @@ function handleApiResponse<T>(response: ApiResponse<T>): string {
 }
 ```
 
+
 ---
 
 ## 🚀 **Advanced Patterns**
 
 ### **Union of Function Types**
+
 
 ```typescript
 // Union of different function signatures
@@ -306,7 +329,9 @@ addEventListener((event: MouseEvent) => {
 });
 ```
 
+
 ### **Conditional Union Types**
+
 
 ```typescript
 // Union based on condition
@@ -331,7 +356,9 @@ function makeRequest<T extends "GET" | "POST">(
 }
 ```
 
+
 ### **Intersection with Generics**
+
 
 ```typescript
 // Intersection type with generics
@@ -363,11 +390,13 @@ const user: TimestampedUser = {
 };
 ```
 
+
 ---
 
 ## ✅ **Best Practices**
 
 ### **1. Use Discriminated Unions for State Management**
+
 
 ```typescript
 // ✅ Good: Clear state representation
@@ -385,7 +414,9 @@ type BadState = {
 };
 ```
 
+
 ### **2. Prefer Union Types Over Any**
+
 
 ```typescript
 // ✅ Good: Specific union type
@@ -399,7 +430,9 @@ function processInput(input: any): string {
 }
 ```
 
+
 ### **3. Use Type Guards for Runtime Safety**
+
 
 ```typescript
 // ✅ Good: Type guard with runtime check
@@ -417,7 +450,9 @@ if (isUser(data)) {
 }
 ```
 
+
 ### **4. Leverage Exhaustiveness Checking**
+
 
 ```typescript
 // ✅ Good: Exhaustiveness check
@@ -437,6 +472,7 @@ function handleStatus(status: "pending" | "approved" | "rejected"): string {
 }
 ```
 
+
 ---
 
 ## ❓ **Common Interview Questions**
@@ -447,6 +483,7 @@ function handleStatus(status: "pending" | "approved" | "rejected"): string {
 - **Union types (`|`)**: A value can be one of several types
 - **Intersection types (`&`)**: A value must satisfy all types simultaneously
 
+
 ```typescript
 // Union: can be string OR number
 let id: string | number;
@@ -454,6 +491,7 @@ let id: string | number;
 // Intersection: must have both Person AND Employee properties
 type EmployeePerson = Person & Employee;
 ```
+
 
 ### **2. How do type guards work in TypeScript?**
 
@@ -476,6 +514,7 @@ Discriminated unions use a common property to distinguish between types:
 **Answer:**
 Use the `never` type in the default case to ensure all union members are handled:
 
+
 ```typescript
 function handleShape(shape: Circle | Rectangle): number {
   switch (shape.type) {
@@ -489,6 +528,7 @@ function handleShape(shape: Circle | Rectangle): number {
   }
 }
 ```
+
 
 ### **5. When would you use intersection types over inheritance?**
 

@@ -23,6 +23,7 @@
 
 ### **CI/CD Pipeline Flow**
 
+
 ```mermaid
 graph TD
     A[Code Push] --> B[Trigger Pipeline]
@@ -37,6 +38,7 @@ graph TD
     J --> K[Notify Team]
 ```
 
+
 ### **Key Benefits**
 - **Automated Testing**: Catch bugs early
 - **Consistent Builds**: Reproducible environments
@@ -50,6 +52,7 @@ graph TD
 ### **Basic Workflow**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```yaml
 # .github/workflows/ci.yml
 name: CI/CD Pipeline
@@ -87,9 +90,11 @@ jobs:
       run: npm run type-check
 ```
 
+
 ### **Android Build Workflow**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```yaml
 # .github/workflows/android.yml
 name: Android Build
@@ -132,9 +137,9 @@ jobs:
         path: |
           ~/.gradle/caches
           ~/.gradle/wrapper
-        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+        key: ${{#123;{{#123; runner.os }}#125;}}#125;-gradle-${{#123;{{#123; hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}#125;}}#125;
         restore-keys: |
-          ${{ runner.os }}-gradle-
+          ${{#123;{{#123; runner.os }}#125;}}#125;-gradle-
           
     - name: Build Android APK
       run: |
@@ -148,9 +153,11 @@ jobs:
         path: android/app/build/outputs/apk/release/app-release.apk
 ```
 
+
 ### **iOS Build Workflow**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```yaml
 # .github/workflows/ios.yml
 name: iOS Build
@@ -205,6 +212,7 @@ jobs:
         path: ios/build/YourApp.ipa
 ```
 
+
 ---
 
 ## 🦊 **GitLab CI**
@@ -212,6 +220,7 @@ jobs:
 ### **GitLab CI Configuration**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```yaml
 # .gitlab-ci.yml
 stages:
@@ -302,6 +311,7 @@ deploy-production:
   when: manual
 ```
 
+
 ---
 
 ## 🏗️ **Jenkins**
@@ -309,6 +319,7 @@ deploy-production:
 ### **Jenkinsfile**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```groovy
 // Jenkinsfile
 pipeline {
@@ -433,6 +444,7 @@ pipeline {
 }
 ```
 
+
 ---
 
 ## ⚡ **EAS Build**
@@ -440,6 +452,7 @@ pipeline {
 ### **EAS Configuration**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```json
 // eas.json
 {
@@ -479,9 +492,11 @@ pipeline {
 }
 ```
 
+
 ### **EAS Build Workflow**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```yaml
 # .github/workflows/eas-build.yml
 name: EAS Build
@@ -513,16 +528,17 @@ jobs:
       uses: expo/expo-github-action@v8
       with:
         eas-version: latest
-        token: ${{ secrets.EXPO_TOKEN }}
+        token: ${{#123;{{#123; secrets.EXPO_TOKEN }}#125;}}#125;
         
     - name: Build with EAS
       run: |
-        if [ "${{ github.ref }}" = "refs/heads/main" ]; then
+        if [ "${{#123;{{#123; github.ref }}#125;}}#125;" = "refs/heads/main" ]; then
           eas build --platform all --profile production
         else
           eas build --platform all --profile preview
         fi
 ```
+
 
 ---
 
@@ -531,6 +547,7 @@ jobs:
 ### **Caching Strategy**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```yaml
 # .github/workflows/optimized.yml
 name: Optimized CI/CD
@@ -561,9 +578,9 @@ jobs:
         path: |
           .metro-cache
           node_modules/.cache
-        key: ${{ runner.os }}-metro-${{ hashFiles('**/package-lock.json') }}
+        key: ${{#123;{{#123; runner.os }}#125;}}#125;-metro-${{#123;{{#123; hashFiles('**/package-lock.json') }}#125;}}#125;
         restore-keys: |
-          ${{ runner.os }}-metro-
+          ${{#123;{{#123; runner.os }}#125;}}#125;-metro-
           
     - name: Cache Gradle
       uses: actions/cache@v3
@@ -571,9 +588,9 @@ jobs:
         path: |
           ~/.gradle/caches
           ~/.gradle/wrapper
-        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+        key: ${{#123;{{#123; runner.os }}#125;}}#125;-gradle-${{#123;{{#123; hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}#125;}}#125;
         restore-keys: |
-          ${{ runner.os }}-gradle-
+          ${{#123;{{#123; runner.os }}#125;}}#125;-gradle-
           
     - name: Install dependencies
       run: npm ci
@@ -582,9 +599,11 @@ jobs:
       run: npm test
 ```
 
+
 ### **Parallel Builds**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```yaml
 # .github/workflows/parallel.yml
 name: Parallel Builds
@@ -653,6 +672,7 @@ jobs:
     - name: Deploy
       run: echo "Deploying to production"
 ```
+
 
 ---
 

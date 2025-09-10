@@ -1,0 +1,369 @@
+# 🏗️ **Old vs New Architecture**
+
+> **Understand the differences between React Native's old bridge-based architecture and the new JSI-based architecture**
+
+<link rel="stylesheet" href="../../common-styles.css">
+
+---
+
+## 📚 **Table of Contents**
+
+- [Introduction](#introduction)
+- [Old Architecture (Bridge-based)](#old-architecture-bridge-based)
+- [New Architecture (JSI-based)](#new-architecture-jsi-based)
+- [Key Differences](#key-differences)
+- [Migration Strategies](#migration-strategies)
+- [Performance Comparison](#performance-comparison)
+- [Common Patterns](#common-patterns)
+- [Interview Questions](#interview-questions)
+- [Best Practices](#best-practices)
+
+---
+
+## 🎯 **Introduction**
+
+React Native has evolved from a bridge-based architecture to a more modern JSI-based architecture. Understanding these architectures is crucial for building performant applications and making informed decisions about native module development.
+
+### **Architecture Evolution Overview**
+
+{% raw %}
+```
+┌─────────────────────────────────────┐
+│        Architecture Evolution       │
+│  ┌─────────────────────────────────┐│
+│  │        Old Architecture         ││
+│  │  - Bridge-based communication   ││
+│  │  - Asynchronous messaging       ││
+│  │  - JSON serialization           ││
+│  │  - Legacy components            ││
+│  └─────────────────────────────────┘│
+│  ┌─────────────────────────────────┐│
+│  │        New Architecture         ││
+│  │  - JSI (JavaScript Interface)   ││
+│  │  - Synchronous communication    ││
+│  │  - Direct memory access         ││
+│  │  - Fabric & TurboModules        ││
+│  └─────────────────────────────────┘│
+│  ┌─────────────────────────────────┐│
+│  │        Benefits                 ││
+│  │  - Better performance           ││
+│  │  - Reduced overhead             ││
+│  │  - Type safety                  ││
+│  │  - Future-proof                 ││
+│  └─────────────────────────────────┘│
+└─────────────────────────────────────┘
+```
+{% endraw %}
+
+---
+
+## 🏗️ **Old Architecture (Bridge-based)**
+
+### **Bridge Communication Flow**
+
+<button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+{% raw %}
+```javascript
+// Old Architecture Example - Bridge-based communication
+import { NativeModules, NativeEventEmitter } from 'react-native';
+
+// Old way of calling native modules
+const { OldNativeModule } = NativeModules;
+
+class OldArchitectureExample {
+  constructor() {
+    this.eventEmitter = new NativeEventEmitter(OldNativeModule);
+  }
+  
+  // Asynchronous bridge communication
+  async callNativeMethod(data) {
+    try {
+      // Data is serialized to JSON, sent over bridge, then deserialized
+      const result = await OldNativeModule.performOperation(data);
+      return result;
+    } catch (error) {
+      console.error('Bridge communication error:', error);
+      throw error;
+    }
+  }
+  
+  // Event listening through bridge
+  setupEventListeners() {
+    this.eventEmitter.addListener('NativeEvent', (event) => {
+      console.log('Received event from native:', event);
+    });
+  }
+  
+  // Cleanup
+  cleanup() {
+    this.eventEmitter.removeAllListeners('NativeEvent');
+  }
+}
+
+// Usage example
+const oldArchExample = new OldArchitectureExample();
+oldArchExample.setupEventListeners();
+
+// Call native method
+oldArchExample.callNativeMethod({ 
+  type: 'calculation', 
+  value: 42 
+}).then(result => {
+  console.log('Result:', result);
+});
+```
+{% endraw %}
+
+### **Old Architecture Limitations**
+
+<button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+{% raw %}
+```javascript
+// Old Architecture Limitations Example
+import { NativeModules } from 'react-native';
+
+const { OldNativeModule } = NativeModules;
+
+class OldArchitectureLimitations {
+  // 1. Asynchronous overhead
+  async performMultipleOperations() {
+    const startTime = Date.now();
+    
+    // Each call goes through bridge serialization/deserialization
+    const result1 = await OldNativeModule.operation1();
+    const result2 = await OldNativeModule.operation2();
+    const result3 = await OldNativeModule.operation3();
+    
+    const endTime = Date.now();
+    console.log(`Bridge operations took: ${endTime - startTime}ms`);
+    
+    return { result1, result2, result3 };
+  }
+  
+  // 2. JSON serialization limitations
+  async passComplexData() {
+    const complexData = {
+      nested: {
+        array: [1, 2, 3],
+        object: { key: 'value' },
+        function: () => {}, // This will be lost in serialization
+        date: new Date(), // May lose precision
+        undefined: undefined, // Will be lost
+      }
+    };
+    
+    // Complex data gets serialized to JSON, losing some information
+    const result = await OldNativeModule.processComplexData(complexData);
+    return result;
+  }
+  
+  // 3. No synchronous communication
+  async synchronousLikeOperation() {
+    // Can't do synchronous calls, must use async/await
+    const data = await OldNativeModule.getData();
+    const processed = await OldNativeModule.processData(data);
+    const result = await OldNativeModule.finalizeData(processed);
+    
+    return result;
+  }
+  
+  // 4. Memory overhead
+  async memoryIntensiveOperation() {
+    // Large data structures cause memory overhead due to serialization
+    const largeArray = new Array(10000).fill(0).map((_, i) => ({
+      id: i,
+      data: `item_${i}`,
+      timestamp: Date.now()
+    }));
+    
+    // This creates a copy in memory for serialization
+    const result = await OldNativeModule.processLargeArray(largeArray);
+    return result;
+  }
+}
+
+export default OldArchitectureLimitations;
+```
+{% endraw %}
+
+---
+
+## 🚀 **New Architecture (JSI-based)**
+
+### **JSI Communication Flow**
+
+<button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+{% raw %}
+```javascript
+// New Architecture Example - JSI-based communication
+import { TurboModuleRegistry } from 'react-native';
+
+// New way of calling native modules
+const NewNativeModule = TurboModuleRegistry.get('NewNativeModule');
+
+class NewArchitectureExample {
+  constructor() {
+    this.setupDirectCommunication();
+  }
+  
+  // Synchronous JSI communication
+  callNativeMethodSynchronously(data) {
+    try {
+      // Direct memory access, no serialization overhead
+      const result = NewNativeModule.performOperationSync(data);
+      return result;
+    } catch (error) {
+      console.error('JSI communication error:', error);
+      throw error;
+    }
+  }
+  
+  // Asynchronous when needed
+  async callNativeMethodAsync(data) {
+    try {
+      // Still supports async for operations that need it
+      const result = await NewNativeModule.performOperationAsync(data);
+      return result;
+    } catch (error) {
+      console.error('JSI async communication error:', error);
+      throw error;
+    }
+  }
+  
+  // Direct event handling
+  setupEventListeners() {
+    // Events can be handled more efficiently
+    NewNativeModule.addListener('NativeEvent', (event) => {
+      console.log('Received event from native:', event);
+    });
+  }
+  
+  // Type-safe communication
+  processTypedData(data) {
+    // JSI supports better type safety
+    if (typeof data !== 'object' || data === null) {
+      throw new Error('Expected object data');
+    }
+    
+    return NewNativeModule.processTypedData(data);
+  }
+  
+  // Cleanup
+  cleanup() {
+    NewNativeModule.removeAllListeners('NativeEvent');
+  }
+}
+
+// Usage example
+const newArchExample = new NewArchitectureExample();
+newArchExample.setupEventListeners();
+
+// Synchronous call - much faster
+const result = newArchExample.callNativeMethodSynchronously({ 
+  type: 'calculation', 
+  value: 42 
+});
+console.log('Result:', result);
+```
+{% endraw %}
+
+### **New Architecture Benefits**
+
+<button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+{% raw %}
+```javascript
+// New Architecture Benefits Example
+import { TurboModuleRegistry } from 'react-native';
+
+const NewNativeModule = TurboModuleRegistry.get('NewNativeModule');
+
+class NewArchitectureBenefits {
+  // 1. Synchronous communication
+  performMultipleOperationsSync() {
+    const startTime = Date.now();
+    
+    // Direct calls without bridge overhead
+    const result1 = NewNativeModule.operation1Sync();
+    const result2 = NewNativeModule.operation2Sync();
+    const result3 = NewNativeModule.operation3Sync();
+    
+    const endTime = Date.now();
+    console.log(`JSI operations took: ${endTime - startTime}ms`);
+    
+    return { result1, result2, result3 };
+  }
+  
+  // 2. Better data handling
+  passComplexData() {
+    const complexData = {
+      nested: {
+        array: [1, 2, 3],
+        object: { key: 'value' },
+        date: new Date(), // Better date handling
+        bigInt: BigInt(123456789), // Supports BigInt
+        symbol: Symbol('test'), // Better symbol support
+      }
+    };
+    
+    // No serialization overhead, direct memory access
+    const result = NewNativeModule.processComplexData(complexData);
+    return result;
+  }
+  
+  // 3. Memory efficiency
+  memoryIntensiveOperation() {
+    const largeArray = new Array(10000).fill(0).map((_, i) => ({
+      id: i,
+      data: `item_${i}`,
+      timestamp: Date.now()
+    }));
+    
+    // No additional memory overhead for serialization
+    const result = NewNativeModule.processLargeArray(largeArray);
+    return result;
+  }
+  
+  // 4. Type safety
+  typeSafeOperation(data) {
+    // JSI provides better type checking
+    if (!NewNativeModule.validateData(data)) {
+      throw new Error('Invalid data type');
+    }
+    
+    return NewNativeModule.processData(data);
+  }
+  
+  // 5. Performance monitoring
+  performanceTest() {
+    const iterations = 1000;
+    const startTime = Date.now();
+    
+    for (let i = 0; i < iterations; i++) {
+      NewNativeModule.quickOperation(i);
+    }
+    
+    const endTime = Date.now();
+    const avgTime = (endTime - startTime) / iterations;
+    
+    console.log(`Average operation time: ${avgTime}ms`);
+    return avgTime;
+  }
+}
+
+export default NewArchitectureBenefits;
+```
+{% endraw %}
+
+---
+
+## 🧭 Navigation
+
+<div class="navigation">
+    <a href="../06-Animations-Gestures/04-Physics-Based-Animations.md" class="nav-link prev">⬅️ Previous: Physics-Based Animations</a>
+    <a href="./02-JSI-Fabric-TurboModules.md" class="nav-link next">Next: JSI, Fabric & TurboModules ➡️</a>
+</div>
+
+---
+
+
+*Last updated: December 2024*

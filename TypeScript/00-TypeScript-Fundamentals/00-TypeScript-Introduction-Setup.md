@@ -25,6 +25,7 @@ TypeScript is a strongly typed programming language that builds on JavaScript, g
 
 ### **Key Characteristics**
 
+
 ```typescript
 // TypeScript adds static type checking to JavaScript
 let message: string = "Hello, TypeScript!";
@@ -36,7 +37,9 @@ let userName: string = "John";
 // userName = 123; // ❌ Error: Type 'number' is not assignable to type 'string'
 ```
 
+
 ### **TypeScript Architecture**
+
 
 ```mermaid
 graph TD
@@ -49,11 +52,13 @@ graph TD
     G --> H[IDE Support]
 ```
 
+
 ---
 
 ## 💡 **Why Use TypeScript?**
 
 ### **1. Type Safety**
+
 
 ```typescript
 // JavaScript - Runtime Error
@@ -71,7 +76,9 @@ function calculateArea(width: number, height: number): number {
 // calculateArea("5", "10"); // ❌ Error: Argument of type 'string' is not assignable to parameter of type 'number'
 ```
 
+
 ### **2. Better IDE Support**
+
 
 ```typescript
 interface User {
@@ -92,7 +99,9 @@ const user: User = {
 user. // IDE shows: id, name, email, isActive
 ```
 
+
 ### **3. Refactoring Safety**
+
 
 ```typescript
 // When you rename a property, TypeScript ensures all references are updated
@@ -104,6 +113,7 @@ interface Product {
 
 // TypeScript will show errors for all places using the old property names
 ```
+
 
 ---
 
@@ -121,6 +131,7 @@ interface Product {
 
 ### **Code Comparison**
 
+
 ```javascript
 // JavaScript
 function greet(name) {
@@ -129,6 +140,8 @@ function greet(name) {
 
 greet(123); // Works but unexpected result: "Hello, 123"
 ```
+
+
 
 ```typescript
 // TypeScript
@@ -140,11 +153,13 @@ function greet(name: string): string {
 greet("World"); // ✅ Correct usage
 ```
 
+
 ---
 
 ## 🛠️ **Installation & Setup**
 
 ### **1. Install TypeScript Globally**
+
 
 ```bash
 # Install TypeScript globally
@@ -154,7 +169,9 @@ npm install -g typescript
 tsc --version
 ```
 
+
 ### **2. Install TypeScript in Project**
+
 
 ```bash
 # Initialize npm project
@@ -167,7 +184,9 @@ npm install --save-dev typescript
 npm install --save-dev @types/node
 ```
 
+
 ### **3. Create tsconfig.json**
+
 
 ```json
 {
@@ -186,11 +205,13 @@ npm install --save-dev @types/node
 }
 ```
 
+
 ---
 
 ## 🎯 **First TypeScript Project**
 
 ### **Project Structure**
+
 
 ```
 my-typescript-project/
@@ -204,7 +225,9 @@ my-typescript-project/
 └── README.md
 ```
 
+
 ### **Basic TypeScript File**
+
 
 ```typescript
 // src/index.ts
@@ -226,7 +249,9 @@ const person = createPerson("Alice", 30, "alice@example.com");
 console.log(person);
 ```
 
+
 ### **Compile and Run**
+
 
 ```bash
 # Compile TypeScript to JavaScript
@@ -236,11 +261,13 @@ tsc
 node dist/index.js
 ```
 
+
 ---
 
 ## 🔧 **TypeScript Compiler**
 
 ### **Compiler Options**
+
 
 ```json
 {
@@ -280,7 +307,9 @@ node dist/index.js
 }
 ```
 
+
 ### **Watch Mode**
+
 
 ```bash
 # Compile and watch for changes
@@ -290,11 +319,13 @@ tsc --watch
 tsc -w
 ```
 
+
 ---
 
 ## ✅ **Best Practices**
 
 ### **1. Use Strict Mode**
+
 
 ```json
 {
@@ -311,7 +342,9 @@ tsc -w
 }
 ```
 
+
 ### **2. Organize Your Code**
+
 
 ```typescript
 // ✅ Good: Separate types, interfaces, and implementations
@@ -332,7 +365,9 @@ import { User } from './types';
 import { formatUserName } from './utils';
 ```
 
+
 ### **3. Use Meaningful Type Names**
+
 
 ```typescript
 // ✅ Good: Descriptive type names
@@ -351,6 +386,7 @@ interface Config {
   d: string;
 }
 ```
+
 
 ---
 
@@ -377,6 +413,7 @@ TypeScript is a strongly typed programming language that builds on JavaScript. I
 ### **3. How do you install and set up TypeScript?**
 
 **Answer:**
+
 ```bash
 # Install globally
 npm install -g typescript
@@ -390,6 +427,7 @@ tsc --init
 # Compile
 tsc
 ```
+
 
 ### **4. What is the TypeScript compiler and how does it work?**
 

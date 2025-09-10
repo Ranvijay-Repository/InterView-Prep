@@ -1,0 +1,316 @@
+# 🎬 **Animated API & LayoutAnimation**
+
+> **Master the Animated API and LayoutAnimation for creating smooth animations and transitions in React Native**
+
+<link rel="stylesheet" href="../../common-styles.css">
+
+---
+
+## 📚 **Table of Contents**
+
+- [Introduction](#introduction)
+- [Animated API Basics](#animated-api-basics)
+- [LayoutAnimation](#layoutanimation)
+- [Animation Types](#animation-types)
+- [Performance Considerations](#performance-considerations)
+- [Common Patterns](#common-patterns)
+- [Interview Questions](#interview-questions)
+- [Best Practices](#best-practices)
+
+---
+
+## 🎯 **Introduction**
+
+Animations are crucial for creating engaging user experiences in React Native. The Animated API and LayoutAnimation provide powerful tools for creating smooth, performant animations.
+
+### **Animation System Overview**
+
+{% raw %}
+```
+┌─────────────────────────────────────┐
+│        Animation System             │
+│  ┌─────────────────────────────────┐│
+│  │        Animated API             ││
+│  │  - Animated.Value               ││
+│  │  - Animated.timing              ││
+│  │  - Animated.spring              ││
+│  │  - Animated.sequence            ││
+│  └─────────────────────────────────┘│
+│  ┌─────────────────────────────────┐│
+│  │        LayoutAnimation          ││
+│  │  - Automatic transitions        ││
+│  │  - Layout changes               ││
+│  │  - Spring animations            ││
+│  │  - Ease animations              ││
+│  └─────────────────────────────────┘│
+│  ┌─────────────────────────────────┐│
+│  │        Animation Types          ││
+│  │  - Transform animations         ││
+│  │  - Opacity animations           ││
+│  │  - Layout animations            ││
+│  │  - Color animations             ││
+│  └─────────────────────────────────┘│
+└─────────────────────────────────────┘
+```
+{% endraw %}
+
+---
+
+## 🎬 **Animated API Basics**
+
+### **Basic Animated Component**
+
+<button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+{% raw %}
+```javascript
+import React, { useRef, useEffect } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet, Animated, Dimensions } from 'react-native';
+
+const { width: screenWidth } = Dimensions.get('window');
+
+const BasicAnimatedExample = () => {
+  const fadeAnim = useRef(new Animated.Value(0)).current;
+  const scaleAnim = useRef(new Animated.Value(1)).current;
+  const translateAnim = useRef(new Animated.Value(0)).current;
+  const rotateAnim = useRef(new Animated.Value(0)).current;
+  
+  useEffect(() => {
+    // Initial animation on mount
+    Animated.parallel([
+      Animated.timing(fadeAnim, {
+        toValue: 1,
+        duration: 1000,
+        useNativeDriver: true,
+      }),
+      Animated.spring(scaleAnim, {
+        toValue: 1.2,
+        tension: 100,
+        friction: 3,
+        useNativeDriver: true,
+      }),
+    ]).start();
+  }, []);
+  
+  const fadeIn = () => {
+    Animated.timing(fadeAnim, {
+      toValue: 1,
+      duration: 500,
+      useNativeDriver: true,
+    }).start();
+  };
+  
+  const fadeOut = () => {
+    Animated.timing(fadeAnim, {
+      toValue: 0,
+      duration: 500,
+      useNativeDriver: true,
+    }).start();
+  };
+  
+  const scaleUp = () => {
+    Animated.spring(scaleAnim, {
+      toValue: 1.5,
+      tension: 100,
+      friction: 3,
+      useNativeDriver: true,
+    }).start();
+  };
+  
+  const scaleDown = () => {
+    Animated.spring(scaleAnim, {
+      toValue: 0.8,
+      tension: 100,
+      friction: 3,
+      useNativeDriver: true,
+    }).start();
+  };
+  
+  const slideLeft = () => {
+    Animated.timing(translateAnim, {
+      toValue: -screenWidth / 2,
+      duration: 500,
+      useNativeDriver: true,
+    }).start();
+  };
+  
+  const slideRight = () => {
+    Animated.timing(translateAnim, {
+      toValue: screenWidth / 2,
+      duration: 500,
+      useNativeDriver: true,
+    }).start();
+  };
+  
+  const rotate = () => {
+    Animated.timing(rotateAnim, {
+      toValue: 1,
+      duration: 1000,
+      useNativeDriver: true,
+    }).start(() => {
+      rotateAnim.setValue(0);
+    });
+  };
+  
+  const reset = () => {
+    Animated.parallel([
+      Animated.timing(fadeAnim, {
+        toValue: 1,
+        duration: 300,
+        useNativeDriver: true,
+      }),
+      Animated.spring(scaleAnim, {
+        toValue: 1,
+        tension: 100,
+        friction: 3,
+        useNativeDriver: true,
+      }),
+      Animated.timing(translateAnim, {
+        toValue: 0,
+        duration: 300,
+        useNativeDriver: true,
+      }),
+      Animated.timing(rotateAnim, {
+        toValue: 0,
+        duration: 300,
+        useNativeDriver: true,
+      }),
+    ]).start();
+  };
+  
+  const spin = rotateAnim.interpolate({
+    inputRange: [0, 1],
+    outputRange: ['0deg', '360deg'],
+  });
+  
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>Animated API Examples</Text>
+      
+      <Animated.View
+        style={[
+          styles.animatedBox,
+          {
+            opacity: fadeAnim,
+            transform: [
+              { scale: scaleAnim },
+              { translateX: translateAnim },
+              { rotate: spin },
+            ],
+          },
+        ]}
+      >
+        <Text style={styles.boxText}>Animated Box</Text>
+      </Animated.View>
+      
+      <View style={styles.controlsContainer}>
+        <View style={styles.buttonRow}>
+          <TouchableOpacity style={styles.button} onPress={fadeIn}>
+            <Text style={styles.buttonText}>Fade In</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={fadeOut}>
+            <Text style={styles.buttonText}>Fade Out</Text>
+          </TouchableOpacity>
+        </View>
+        
+        <View style={styles.buttonRow}>
+          <TouchableOpacity style={styles.button} onPress={scaleUp}>
+            <Text style={styles.buttonText}>Scale Up</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={scaleDown}>
+            <Text style={styles.buttonText}>Scale Down</Text>
+          </TouchableOpacity>
+        </View>
+        
+        <View style={styles.buttonRow}>
+          <TouchableOpacity style={styles.button} onPress={slideLeft}>
+            <Text style={styles.buttonText}>Slide Left</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={slideRight}>
+            <Text style={styles.buttonText}>Slide Right</Text>
+          </TouchableOpacity>
+        </View>
+        
+        <View style={styles.buttonRow}>
+          <TouchableOpacity style={styles.button} onPress={rotate}>
+            <Text style={styles.buttonText}>Rotate</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={[styles.button, styles.resetButton]} onPress={reset}>
+            <Text style={styles.buttonText}>Reset</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+    backgroundColor: '#f5f5f5',
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 30,
+  },
+  animatedBox: {
+    width: 200,
+    height: 200,
+    backgroundColor: '#007AFF',
+    borderRadius: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center',
+    marginBottom: 40,
+  },
+  boxText: {
+    color: 'white',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  controlsContainer: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+  buttonRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginBottom: 20,
+  },
+  button: {
+    backgroundColor: '#34C759',
+    paddingHorizontal: 20,
+    paddingVertical: 12,
+    borderRadius: 8,
+    minWidth: 120,
+    alignItems: 'center',
+  },
+  resetButton: {
+    backgroundColor: '#FF9500',
+  },
+  buttonText: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 14,
+  },
+});
+
+export default BasicAnimatedExample;
+```
+{% endraw %}
+
+---
+
+## 🧭 Navigation
+
+<div class="navigation">
+    <a href="../05-Lists-Performance-Optimization/04-Performance-Profiling.md" class="nav-link prev">⬅️ Previous: Performance Profiling</a>
+    <a href="./02-Gesture-Handler.md" class="nav-link next">Next: Gesture Handler ➡️</a>
+</div>
+
+---
+
+
+*Last updated: December 2024*

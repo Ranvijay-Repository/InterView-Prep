@@ -22,6 +22,7 @@
 
 ### **Recovery Strategy Architecture**
 
+
 ```mermaid
 graph TD
     A[Error Occurs] --> B[Error Detection]
@@ -36,6 +37,7 @@ graph TD
     H --> I[Monitor & Learn]
 ```
 
+
 ### **Recovery Principles**
 - **Fail Fast**: Detect errors quickly
 - **Fail Safe**: Provide fallback mechanisms
@@ -49,6 +51,7 @@ graph TD
 ### **Circuit Breaker Pattern**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 import React, { useState, useCallback } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native';
@@ -449,6 +452,7 @@ const styles = StyleSheet.create({
 export { CircuitBreaker, Bulkhead, Timeout, ResiliencePatternsDemo };
 ```
 
+
 ---
 
 ## 🛡️ **Fault Tolerance**
@@ -456,6 +460,7 @@ export { CircuitBreaker, Bulkhead, Timeout, ResiliencePatternsDemo };
 ### **Fault Tolerance Patterns**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 import React, { useState, useCallback } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native';
@@ -844,6 +849,7 @@ const styles = StyleSheet.create({
 export { FaultTolerance, FaultToleranceDemo };
 ```
 
+
 ---
 
 ## 📊 **Monitoring and Alerting**
@@ -851,6 +857,7 @@ export { FaultTolerance, FaultToleranceDemo };
 ### **Error Monitoring System**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 import React, { useState, useCallback } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native';
@@ -1195,6 +1202,7 @@ const styles = StyleSheet.create({
 
 export { ErrorMonitoring, ErrorMonitoringDemo };
 ```
+
 
 ---
 

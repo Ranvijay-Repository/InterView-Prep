@@ -27,6 +27,7 @@ Deep linking allows users to navigate directly to specific content within your a
 
 ### **Deep Linking Overview**
 
+
 ```
 ┌─────────────────────────────────────┐
 │        Deep Linking System          │
@@ -51,6 +52,7 @@ Deep linking allows users to navigate directly to specific content within your a
 └─────────────────────────────────────┘
 ```
 
+
 ---
 
 ## 🔗 **Deep Linking Setup**
@@ -58,6 +60,7 @@ Deep linking allows users to navigate directly to specific content within your a
 ### **Basic Deep Linking Implementation**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native';
@@ -285,6 +288,7 @@ const styles = StyleSheet.create({
 
 export default DeepLinkingExample;
 ```
+
 
 ---
 

@@ -44,6 +44,7 @@
 - **Type Safety**: Compile-time error handling guarantees
 
 ### ASCII Diagram: Railway Oriented Programming Flow
+
 ```
 RAILWAY ORIENTED PROGRAMMING
 ┌─────────────────────────────────┐
@@ -82,6 +83,7 @@ RAILWAY ORIENTED PROGRAMMING
         └───────────────┘  └───────────────┘
 ```
 
+
 ### Use Cases:
 - **API Validation**: Input validation and error handling
 - **Data Processing**: Pipeline operations with error handling
@@ -103,6 +105,7 @@ RAILWAY ORIENTED PROGRAMMING
 - **Functional Style**: Pure error handling without exceptions
 
 ### ASCII Diagram: Either/Maybe Monad Structure
+
 ```
 EITHER/MAYBE MONAD STRUCTURE
 ┌─────────────────────────────────┐
@@ -140,6 +143,7 @@ EITHER/MAYBE MONAD STRUCTURE
         └───────────────┘
 ```
 
+
 ### Monad Operations:
 - **map()**: Transform success values
 - **flatMap()**: Chain operations
@@ -161,6 +165,7 @@ EITHER/MAYBE MONAD STRUCTURE
 - **Performance**: Efficient immutable updates
 
 ### ASCII Diagram: Lens Pattern Structure
+
 ```
 LENS PATTERN STRUCTURE
 ┌─────────────────────────────────┐
@@ -206,6 +211,7 @@ LENS PATTERN STRUCTURE
         │  Transform    │
         └───────────────┘
 ```
+
 
 ### Lens Operations:
 - **get()**: Read values from nested structures

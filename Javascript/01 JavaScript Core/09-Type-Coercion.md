@@ -39,19 +39,23 @@
 
 ### 1. **Implicit Coercion** (Automatic)
 JavaScript automatically converts types during operations:
+
 ```javascript
 "5" + 3        // "53" (string concatenation)
 "5" - 3        // 2 (number subtraction)
 "5" * "3"      // 15 (number multiplication)
 ```
 
+
 ### 2. **Explicit Coercion** (Manual)
 Developer intentionally converts types:
+
 ```javascript
 String(42)     // "42"
 Number("42")   // 42
 Boolean(0)     // false
 ```
+
 
 ---
 
@@ -69,6 +73,7 @@ Boolean(0)     // false
 ## 📋 Coercion Rules
 
 ### ASCII Diagram: Coercion Priority
+
 ```
 COERCION PRIORITY CHART
 ┌─────────────────────────────────────┐
@@ -93,6 +98,7 @@ COERCION PRIORITY CHART
 └─────────────────────────────────────┘
 ```
 
+
 ### String Coercion Rules:
 - **String + Anything** = String concatenation
 - **Template literals** convert everything to string
@@ -113,13 +119,16 @@ COERCION PRIORITY CHART
 ## 🎭 Common Coercion Scenarios
 
 ### 1. **String Concatenation**
+
 ```javascript
 "Hello" + " " + "World"     // "Hello World"
 "5" + 3                     // "53"
 "Price: " + 99.99           // "Price: 99.99"
 ```
 
+
 ### 2. **Arithmetic Operations**
+
 ```javascript
 "5" - 3                     // 2
 "5" * "3"                   // 15
@@ -127,13 +136,16 @@ COERCION PRIORITY CHART
 "5" % "2"                   // 1
 ```
 
+
 ### 3. **Comparison Operations**
+
 ```javascript
 "5" == 5                    // true (loose equality)
 "5" === 5                   // false (strict equality)
 "10" > 5                    // true
 "abc" < "def"               // true (lexicographic)
 ```
+
 
 ---
 
@@ -142,6 +154,7 @@ COERCION PRIORITY CHART
 ### Example 1: String Coercion
 <div style="position: relative;">
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
+
 
 ```javascript
 console.log("=== STRING COERCION EXAMPLES ===");
@@ -182,11 +195,13 @@ console.log("String(null):", String(null));               // "null"
 console.log("String(undefined):", String(undefined));     // "undefined"
 console.log("String({}):", String({}));                   // "[object Object]"
 ```
+
 </div>
 
 ### Example 2: Number Coercion
 <div style="position: relative;">
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
+
 
 ```javascript
 console.log("=== NUMBER COERCION EXAMPLES ===");
@@ -228,11 +243,13 @@ console.log("parseFloat('42.9'):", parseFloat("42.9"));  // 42.9
 console.log("parseInt('42px'):", parseInt("42px"));      // 42
 console.log("parseInt('px42'):", parseInt("px42"));      // NaN
 ```
+
 </div>
 
 ### Example 3: Boolean Coercion
 <div style="position: relative;">
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
+
 
 ```javascript
 console.log("=== BOOLEAN COERCION EXAMPLES ===");
@@ -279,11 +296,13 @@ console.log("'' && 'world':", result2);
 console.log("'hello' || 'world':", result3);
 console.log("'' || 'world':", result4);
 ```
+
 </div>
 
 ### Example 4: Comparison Coercion
 <div style="position: relative;">
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
+
 
 ```javascript
 console.log("=== COMPARISON COERCION EXAMPLES ===");
@@ -330,11 +349,13 @@ console.log("[] == []:", [] == []);                       // false (different re
 console.log("[] == ![]:", [] == ![]);                     // true (![] converts to false, [] converts to 0)
 console.log("[1,2] == '1,2':", [1,2] == "1,2");         // true (array converts to string)
 ```
+
 </div>
 
 ### Example 5: Real-World Coercion Scenarios
 <div style="position: relative;">
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
+
 
 ```javascript
 console.log("=== REAL-WORLD COERCION SCENARIOS ===");
@@ -393,6 +414,7 @@ console.log("Price with tax:", product.price * 1.1);      // 32.989 ✅
 console.log("Is in stock:", product.inStock);              // true ✅
 console.log("Number of tags:", product.tags.length);       // 2 ✅
 ```
+
 </div>
 
 ---
@@ -400,6 +422,7 @@ console.log("Number of tags:", product.tags.length);       // 2 ✅
 ## ⚠️ Common Pitfalls
 
 ### Pitfall 1: String Concatenation vs Addition
+
 ```javascript
 // ❌ WRONG: Unexpected string concatenation
 const price = "10";
@@ -410,7 +433,9 @@ const total = price + quantity;  // "105" instead of 15
 const total = Number(price) + quantity;  // 15
 ```
 
+
 ### Pitfall 2: Loose Equality Confusion
+
 ```javascript
 // ❌ WRONG: Loose equality can be confusing
 console.log([] == false);    // true
@@ -425,7 +450,9 @@ console.log(null === 0);     // false
 console.log(null === undefined); // false
 ```
 
+
 ### Pitfall 3: Boolean Conversion Surprises
+
 ```javascript
 // ❌ WRONG: Surprising boolean conversions
 console.log(Boolean("0"));      // true (string "0" is truthy!)
@@ -437,6 +464,7 @@ console.log("0" === "0");      // true
 console.log("false" === "false"); // true
 console.log([] === []);        // false (different references)
 ```
+
 
 ---
 

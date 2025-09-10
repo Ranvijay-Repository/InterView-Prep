@@ -23,6 +23,7 @@
 
 ### **Build Process Flow**
 
+
 ```mermaid
 graph TD
     A[Source Code] --> B[Metro Bundler]
@@ -35,6 +36,7 @@ graph TD
     H --> I[App Store Connect]
     I --> J[App Store]
 ```
+
 
 ### **Key Components**
 - **Xcode**: Apple's IDE and build system
@@ -49,6 +51,7 @@ graph TD
 ### **Project Settings**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // ios/YourApp.xcodeproj/project.pbxproj
 // Key build settings for optimization
@@ -138,9 +141,11 @@ graph TD
 };
 ```
 
+
 ### **CocoaPods Configuration**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```ruby
 # ios/Podfile
 require_relative '../node_modules/react-native/scripts/react_native_pods'
@@ -183,6 +188,7 @@ target 'YourApp' do
 end
 ```
 
+
 ---
 
 ## 🎯 **Build Schemes**
@@ -190,6 +196,7 @@ end
 ### **Scheme Configuration**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // ios/YourApp.xcodeproj/xcshareddata/xcschemes/YourApp.xcscheme
 // Build configuration for different environments
@@ -222,9 +229,11 @@ const buildSchemes = {
 };
 ```
 
+
 ### **Build Scripts**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // scripts/build-ios.js
 const { execSync } = require('child_process');
@@ -277,6 +286,7 @@ const configuration = process.argv[3] || 'Release';
 buildiOS(scheme, configuration);
 ```
 
+
 ---
 
 ## 🔐 **Code Signing**
@@ -284,6 +294,7 @@ buildiOS(scheme, configuration);
 ### **Signing Configuration**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // ios/YourApp.xcodeproj/project.pbxproj
 // Code signing settings
@@ -302,9 +313,11 @@ buildiOS(scheme, configuration);
 };
 ```
 
+
 ### **Fastlane Configuration**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```ruby
 # ios/fastlane/Fastfile
 default_platform(:ios)
@@ -355,6 +368,7 @@ platform :ios do
 end
 ```
 
+
 ---
 
 ## 📱 **App Store Optimization**
@@ -362,6 +376,7 @@ end
 ### **App Store Metadata**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // ios/fastlane/metadata/en-US/name.txt
 Your App Name
@@ -389,9 +404,11 @@ What's New in Version 1.0.0:
 - UI enhancements
 ```
 
+
 ### **Screenshot Automation**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```ruby
 # ios/fastlane/Fastfile
 desc "Generate screenshots"
@@ -408,6 +425,7 @@ lane :screenshots do
 end
 ```
 
+
 ---
 
 ## 🚀 **Release Process**
@@ -415,6 +433,7 @@ end
 ### **Automated Release Script**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // scripts/release-ios.js
 const { execSync } = require('child_process');
@@ -484,9 +503,11 @@ const releaseiOS = async () => {
 releaseiOS();
 ```
 
+
 ### **App Store Connect Upload**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // scripts/upload-appstore.js
 const { execSync } = require('child_process');
@@ -519,6 +540,7 @@ const uploadToAppStore = async () => {
 // Run upload
 uploadToAppStore();
 ```
+
 
 ---
 

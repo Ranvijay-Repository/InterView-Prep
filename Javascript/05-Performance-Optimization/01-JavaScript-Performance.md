@@ -44,6 +44,7 @@
 - **Modern JavaScript**: Leverage latest V8 features
 
 ### ASCII Diagram: V8 Optimization Pipeline
+
 ```
 V8 OPTIMIZATION PIPELINE
 ┌─────────────────────────────────┐
@@ -97,6 +98,7 @@ V8 OPTIMIZATION PIPELINE
         └───────────────┘
 ```
 
+
 ### Optimization Techniques:
 - **Function Inlining**: Reduce function call overhead
 - **Dead Code Elimination**: Remove unused code paths
@@ -118,6 +120,7 @@ V8 OPTIMIZATION PIPELINE
 - **Optimization Stability**: Maintain performance gains
 
 ### ASCII Diagram: Hidden Classes Structure
+
 ```
 HIDDEN CLASSES STRUCTURE
 ┌─────────────────────────────────┐
@@ -160,6 +163,7 @@ HIDDEN CLASSES STRUCTURE
         └───────────────┘
 ```
 
+
 ### Best Practices:
 - **Consistent Property Order**: Add properties in same order
 - **Avoid Property Deletion**: Use undefined instead of delete
@@ -181,6 +185,7 @@ HIDDEN CLASSES STRUCTURE
 - **Resource Management**: Better system resource utilization
 
 ### ASCII Diagram: Garbage Collection Process
+
 ```
 GARBAGE COLLECTION PROCESS
 ┌─────────────────────────────────┐
@@ -225,6 +230,7 @@ GARBAGE COLLECTION PROCESS
         │  Compact      │
         └───────────────┘
 ```
+
 
 ### Optimization Strategies:
 - **Object Pooling**: Reuse objects instead of creating new ones

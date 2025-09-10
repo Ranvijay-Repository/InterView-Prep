@@ -22,6 +22,7 @@
 
 ### **Expo Platform Architecture**
 
+
 ```mermaid
 graph TD
     A[Expo Platform] --> B[Expo CLI]
@@ -37,6 +38,7 @@ graph TD
     D --> K[Updates]
 ```
 
+
 ### **Key Benefits**
 - **Rapid Development**: Quick setup and development
 - **Cross-Platform**: iOS and Android support
@@ -50,6 +52,7 @@ graph TD
 ### **Core Features**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
@@ -250,6 +253,7 @@ const styles = StyleSheet.create({
 export default ExpoFeaturesDemo;
 ```
 
+
 ---
 
 ## 🛠️ **Expo CLI**
@@ -257,6 +261,7 @@ export default ExpoFeaturesDemo;
 ### **CLI Commands and Usage**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Expo CLI command examples
 const ExpoCLICommands = {
@@ -416,6 +421,7 @@ const executeCommand = async (command) => {
 export { ExpoCLICommands, ExpoCLI };
 ```
 
+
 ---
 
 ## 📱 **Expo SDK**
@@ -423,6 +429,7 @@ export { ExpoCLICommands, ExpoCLI };
 ### **SDK Modules and APIs**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
@@ -586,6 +593,7 @@ const styles = StyleSheet.create({
 
 export default ExpoSDKDemo;
 ```
+
 
 ---
 

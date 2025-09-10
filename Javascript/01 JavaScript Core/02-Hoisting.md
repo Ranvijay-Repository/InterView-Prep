@@ -51,6 +51,7 @@ JavaScript moves the "furniture" (declarations) to the top, but doesn't place it
 
 ## 📊 Hoisting Visualization
 
+
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │                    HOISTING PROCESS                         │
@@ -69,6 +70,7 @@ JavaScript moves the "furniture" (declarations) to the top, but doesn't place it
 └─────────────────────────────────────────────────────────────┘
 ```
 
+
 ---
 
 ## 💻 Detailed Examples
@@ -76,6 +78,7 @@ JavaScript moves the "furniture" (declarations) to the top, but doesn't place it
 ### Example 1: Variable Hoisting - var vs let/const
 <div style="position: relative;">
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 
 ```javascript
 console.log("=== VARIABLE HOISTING COMPARISON ===");
@@ -94,11 +97,13 @@ try {
 let letVariable = "I'm let";
 console.log("4. letVariable after declaration:", letVariable);  // "I'm let"
 ```
+
 </div>
 
 ### Example 2: Function Declaration vs Function Expression
 <div style="position: relative;">
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
+
 
 ```javascript
 console.log("=== FUNCTION HOISTING COMPARISON ===");
@@ -123,6 +128,7 @@ var greetExpr = function(name) {
     return `Hello ${name}!`;
 };
 ```
+
 </div>
 
 ---
@@ -132,6 +138,7 @@ var greetExpr = function(name) {
 ### Pitfall 1: Expecting Initialization to be Hoisted
 <div style="position: relative;">
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
+
 
 ```javascript
 console.log("=== PITFALL 1: INITIALIZATION NOT HOISTED ===");
@@ -143,9 +150,11 @@ var x = 5;
 // What actually happens: undefined
 // Why: Only declaration is hoisted, not initialization
 ```
+
 </div>
 
 ### Pitfall 2: Function Expression vs Function Declaration
+
 ```javascript
 console.log("=== PITFALL 2: FUNCTION EXPRESSION VS DECLARATION ===");
 
@@ -163,11 +172,13 @@ try {
 var sayGoodbye = function() { console.log("Goodbye!"); };
 ```
 
+
 ---
 
 ## ✅ Best Practices
 
 ### 1. Use let/const Instead of var
+
 ```javascript
 console.log("=== BEST PRACTICE 1: USE LET/CONST ===");
 
@@ -179,7 +190,9 @@ let modernWay = "use this";
 const constantWay = "for constants";
 ```
 
+
 ### 2. Declare Functions Before Use
+
 ```javascript
 console.log("=== BEST PRACTICE 2: DECLARE FUNCTIONS FIRST ===");
 
@@ -190,6 +203,7 @@ function someFunction() {
 
 someFunction(); // Clear and predictable
 ```
+
 
 ---
 
@@ -246,6 +260,7 @@ someFunction(); // Clear and predictable
 ## 🧪 Practice Exercises
 
 ### Exercise 1: Hoisting Prediction
+
 ```javascript
 console.log("Exercise 1: Predict the output");
 
@@ -258,6 +273,7 @@ let b = 20;
 console.log(typeof c); // What will this print?
 function c() { return "function"; }
 ```
+
 
 ---
 

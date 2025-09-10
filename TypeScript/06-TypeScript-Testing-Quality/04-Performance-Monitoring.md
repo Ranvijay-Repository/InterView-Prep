@@ -25,6 +25,7 @@ Performance monitoring helps identify bottlenecks, optimize code, and ensure app
 
 ### **Performance Monitoring Areas**
 
+
 ```typescript
 // Performance monitoring areas
 const performanceAreas = {
@@ -44,7 +45,9 @@ const monitoringTools = {
 };
 ```
 
+
 ### **Performance Metrics**
+
 
 ```typescript
 // Key performance metrics
@@ -58,11 +61,13 @@ const performanceMetrics = {
 };
 ```
 
+
 ---
 
 ## 📈 **Performance Metrics**
 
 ### **Web Performance API**
+
 
 ```typescript
 // Performance monitoring with Web Performance API
@@ -175,7 +180,9 @@ const vitals = await monitor.getWebVitals();
 console.log('Web Vitals:', vitals);
 ```
 
+
 ### **Custom Performance Metrics**
+
 
 ```typescript
 // Custom performance metrics
@@ -294,11 +301,13 @@ const averageResponseTime = customMonitor.getAverageMetric('api.response.time');
 console.log('Average response time:', averageResponseTime);
 ```
 
+
 ---
 
 ## 🔍 **Profiling Tools**
 
 ### **Chrome DevTools Profiling**
+
 
 ```typescript
 // Performance profiling utilities
@@ -388,7 +397,9 @@ const stats = profiler.getProfileStats('expensiveFunction');
 console.log('Profile statistics:', stats);
 ```
 
+
 ### **Node.js Profiling**
+
 
 ```typescript
 // Node.js performance profiling
@@ -486,11 +497,13 @@ const stats = nodeProfiler.getStats('dbQuery');
 console.log('Database query statistics:', stats);
 ```
 
+
 ---
 
 ## ⚡ **Runtime Performance**
 
 ### **Memory Monitoring**
+
 
 ```typescript
 // Memory monitoring utilities
@@ -583,7 +596,9 @@ setInterval(() => {
 }, 30000);
 ```
 
+
 ### **Performance Budgets**
+
 
 ```typescript
 // Performance budget monitoring
@@ -681,11 +696,13 @@ const report = budgetMonitor.getBudgetReport();
 console.log(report);
 ```
 
+
 ---
 
 ## 📦 **Bundle Analysis**
 
 ### **Bundle Size Monitoring**
+
 
 ```typescript
 // Bundle size monitoring
@@ -818,11 +835,13 @@ const report = bundleAnalyzer.generateReport();
 console.log(report);
 ```
 
+
 ---
 
 ## 🧪 **Performance Testing**
 
 ### **Load Testing**
+
 
 ```typescript
 // Load testing utilities
@@ -974,11 +993,13 @@ const result = await loadTester.runLoadTest(config, requestFn);
 console.log('Load test results:', result);
 ```
 
+
 ---
 
 ## ✅ **Best Practices**
 
 ### **1. Monitor Key Metrics**
+
 
 ```typescript
 // ✅ Good: Monitor key metrics
@@ -999,7 +1020,9 @@ const userLogin = () => {
 };
 ```
 
+
 ### **2. Set Performance Budgets**
+
 
 ```typescript
 // ✅ Good: Set performance budgets
@@ -1011,7 +1034,9 @@ budgetMonitor.addBudget('bundleSize', 500000, 'bytes');
 // No performance constraints
 ```
 
+
 ### **3. Use Profiling Tools**
+
 
 ```typescript
 // ✅ Good: Use profiling tools
@@ -1024,7 +1049,9 @@ profiler.endProfile('expensiveOperation');
 // Expensive operation without profiling
 ```
 
+
 ### **4. Monitor Memory Usage**
+
 
 ```typescript
 // ✅ Good: Monitor memory usage
@@ -1036,6 +1063,7 @@ const leakInfo = memoryMonitor.detectMemoryLeaks();
 // ❌ Avoid: Ignoring memory usage
 // No memory monitoring
 ```
+
 
 ---
 

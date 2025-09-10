@@ -22,6 +22,7 @@
 
 ### **Storage Security Levels**
 
+
 ```mermaid
 graph TD
     A[Data Sensitivity] --> B{Storage Type}
@@ -36,6 +37,7 @@ graph TD
     F --> J[Secure Enclave]
 ```
 
+
 ### **Security Considerations**
 - **Data Classification**: Categorize data by sensitivity
 - **Encryption**: Use appropriate encryption methods
@@ -49,6 +51,7 @@ graph TD
 ### **React Native Keychain**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
@@ -197,9 +200,11 @@ const styles = {
 export default SecureStorageExample;
 ```
 
+
 ### **Android Keystore Integration**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // android/app/src/main/java/com/yourapp/KeystoreModule.java
 package com.yourapp;
@@ -308,6 +313,7 @@ public class KeystoreModule extends ReactContextBaseJavaModule {
 }
 ```
 
+
 ---
 
 ## 🔐 **Encryption Strategies**
@@ -315,6 +321,7 @@ public class KeystoreModule extends ReactContextBaseJavaModule {
 ### **AES Encryption Implementation**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 import CryptoJS from 'crypto-js';
 
@@ -409,9 +416,11 @@ console.log('Decrypted data:', decryptedData);
 export default EncryptionService;
 ```
 
+
 ### **Secure Data Storage Hook**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 import { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -521,6 +530,7 @@ const useSecureStorage = () => {
 export default useSecureStorage;
 ```
 
+
 ---
 
 ## 👆 **Biometric Authentication**
@@ -528,6 +538,7 @@ export default useSecureStorage;
 ### **Biometric Setup**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, Alert } from 'react-native';
@@ -697,6 +708,7 @@ const styles = {
 export default BiometricAuth;
 ```
 
+
 ---
 
 ## 🛡️ **Data Protection**
@@ -704,6 +716,7 @@ export default BiometricAuth;
 ### **Data Classification System**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Data classification levels
 const DATA_CLASSIFICATION = {
@@ -860,6 +873,7 @@ class DataProtectionService {
 
 export default DataProtectionService;
 ```
+
 
 ---
 

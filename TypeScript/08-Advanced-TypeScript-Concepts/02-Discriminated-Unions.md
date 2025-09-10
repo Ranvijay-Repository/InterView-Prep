@@ -24,6 +24,7 @@ Discriminated unions are a powerful TypeScript feature that combines union types
 
 ### **What are Discriminated Unions?**
 
+
 ```typescript
 // Discriminated unions combine union types with a discriminator
 const discriminatedUnions = {
@@ -66,7 +67,9 @@ function handleState(state: AppState) {
 }
 ```
 
+
 ### **Benefits of Discriminated Unions**
+
 
 ```typescript
 // Benefits of discriminated unions
@@ -107,11 +110,13 @@ function handleGoodState(state: GoodState) {
 }
 ```
 
+
 ---
 
 ## 🔧 **Basic Discriminated Unions**
 
 ### **Simple State Management**
+
 
 ```typescript
 // Simple state management with discriminated unions
@@ -150,7 +155,9 @@ function handleAsyncState(state: AsyncState) {
 }
 ```
 
+
 ### **API Response Handling**
+
 
 ```typescript
 // API response handling with discriminated unions
@@ -191,7 +198,9 @@ const userResponse: ApiResponse<User> = {
 };
 ```
 
+
 ### **Form State Management**
+
 
 ```typescript
 // Form state management with discriminated unions
@@ -250,11 +259,13 @@ function handleFormState(state: FormState) {
 }
 ```
 
+
 ---
 
 ## 🚀 **Advanced Patterns**
 
 ### **Nested Discriminated Unions**
+
 
 ```typescript
 // Nested discriminated unions
@@ -296,7 +307,9 @@ function handleEvent(event: Event) {
 }
 ```
 
+
 ### **Generic Discriminated Unions**
+
 
 ```typescript
 // Generic discriminated unions
@@ -340,7 +353,9 @@ const productResult: Result<Product[]> = {
 };
 ```
 
+
 ### **Conditional Discriminated Unions**
+
 
 ```typescript
 // Conditional discriminated unions
@@ -387,11 +402,13 @@ function handleRequest(request: HttpRequest) {
 }
 ```
 
+
 ---
 
 ## 🎭 **Pattern Matching**
 
 ### **Exhaustive Pattern Matching**
+
 
 ```typescript
 // Exhaustive pattern matching
@@ -428,7 +445,9 @@ function handleColorState(state: ColorState) {
 }
 ```
 
+
 ### **Partial Pattern Matching**
+
 
 ```typescript
 // Partial pattern matching
@@ -459,7 +478,9 @@ function handlePartialOrComplete(state: PartialOrComplete) {
 }
 ```
 
+
 ### **Recursive Pattern Matching**
+
 
 ```typescript
 // Recursive pattern matching
@@ -497,11 +518,13 @@ const tree: TreeNode = {
 };
 ```
 
+
 ---
 
 ## 🌍 **Real-World Examples**
 
 ### **Redux State Management**
+
 
 ```typescript
 // Redux state management with discriminated unions
@@ -542,7 +565,9 @@ function handleReduxState(state: ReduxState) {
 }
 ```
 
+
 ### **WebSocket Message Handling**
+
 
 ```typescript
 // WebSocket message handling with discriminated unions
@@ -583,7 +608,9 @@ function handleWebSocketMessage(message: WebSocketMessage) {
 }
 ```
 
+
 ### **File System Operations**
+
 
 ```typescript
 // File system operations with discriminated unions
@@ -627,11 +654,13 @@ function handleFileOperation(operation: FileOperation) {
 }
 ```
 
+
 ---
 
 ## ✅ **Best Practices**
 
 ### **1. Use Descriptive Discriminators**
+
 
 ```typescript
 // ✅ Good: Descriptive discriminators
@@ -655,7 +684,9 @@ interface SuccessState {
 }
 ```
 
+
 ### **2. Keep Discriminators Simple**
+
 
 ```typescript
 // ✅ Good: Simple string discriminators
@@ -679,7 +710,9 @@ interface SuccessState {
 }
 ```
 
+
 ### **3. Use Exhaustive Checks**
+
 
 ```typescript
 // ✅ Good: Exhaustive checks
@@ -709,7 +742,9 @@ function handleState(state: AppState) {
 }
 ```
 
+
 ### **4. Group Related States**
+
 
 ```typescript
 // ✅ Good: Group related states
@@ -744,6 +779,7 @@ interface UserState {
 type AppState = LoadingState | UserState;
 ```
 
+
 ---
 
 ## ❓ **Common Interview Questions**
@@ -772,6 +808,7 @@ Discriminated unions are union types with a common discriminator property that h
 
 **Answer:**
 Use the `never` type in the default case to ensure all cases are handled:
+
 ```typescript
 function handleState(state: AppState) {
   switch (state.status) {
@@ -785,6 +822,7 @@ function handleState(state: AppState) {
   }
 }
 ```
+
 
 ### **5. When should you use discriminated unions?**
 

@@ -23,6 +23,7 @@ TypeScript provides several basic types that correspond to JavaScript's primitiv
 
 ### **Primitive Types**
 
+
 ```typescript
 // String
 let message: string = "Hello, TypeScript!";
@@ -44,7 +45,9 @@ let nullValue: null = null;
 let undefinedValue: undefined = undefined;
 ```
 
+
 ### **Special Types**
+
 
 ```typescript
 // Any - disables type checking
@@ -67,6 +70,7 @@ let userInput: unknown = getUserInput();
 // userInput.toUpperCase(); // ❌ Error: Object is of type 'unknown'
 ```
 
+
 ---
 
 ## ✍️ **Type Annotations**
@@ -74,6 +78,7 @@ let userInput: unknown = getUserInput();
 Type annotations explicitly specify the type of a variable, function parameter, or return value.
 
 ### **Variable Type Annotations**
+
 
 ```typescript
 // Explicit type annotations
@@ -90,7 +95,9 @@ let scores: Array<number> = [85, 92, 78, 96];
 let colors: Array<string> = ["red", "green", "blue"];
 ```
 
+
 ### **Function Type Annotations**
+
 
 ```typescript
 // Function parameter and return type annotations
@@ -117,6 +124,7 @@ function createUser(name: string, role: string = "user"): object {
 }
 ```
 
+
 ---
 
 ## 🔍 **Type Inference**
@@ -124,6 +132,7 @@ function createUser(name: string, role: string = "user"): object {
 TypeScript can automatically infer types in many cases, reducing the need for explicit annotations.
 
 ### **Basic Type Inference**
+
 
 ```typescript
 // TypeScript infers the type from the value
@@ -143,7 +152,9 @@ let person = {
 }; // Type: { name: string; age: number; isActive: boolean; }
 ```
 
+
 ### **Function Return Type Inference**
+
 
 ```typescript
 // TypeScript infers return type
@@ -157,6 +168,7 @@ function calculateArea(width: number, height: number): number {
 }
 ```
 
+
 ---
 
 ## 🎭 **Type Assertions**
@@ -165,12 +177,15 @@ Type assertions tell TypeScript to treat a value as a specific type.
 
 ### **Angle Bracket Syntax**
 
+
 ```typescript
 let someValue: unknown = "this is a string";
 let strLength: number = (<string>someValue).length;
 ```
 
+
 ### **As Syntax (Preferred)**
+
 
 ```typescript
 let someValue: unknown = "this is a string";
@@ -181,7 +196,9 @@ let inputElement = document.getElementById("username") as HTMLInputElement;
 inputElement.value = "new value";
 ```
 
+
 ### **Type Assertion Examples**
+
 
 ```typescript
 // JSON parsing with type assertion
@@ -199,11 +216,13 @@ let mixedArray = [1, "hello", true];
 let stringArray = mixedArray as string[];
 ```
 
+
 ---
 
 ## ✅ **Best Practices**
 
 ### **1. Use Type Inference When Possible**
+
 
 ```typescript
 // ✅ Good: Let TypeScript infer the type
@@ -215,7 +234,9 @@ let message: string = "Hello, TypeScript!";
 let numbers: number[] = [1, 2, 3, 4, 5];
 ```
 
+
 ### **2. Be Explicit for Function Parameters and Return Types**
+
 
 ```typescript
 // ✅ Good: Explicit parameter and return types
@@ -229,7 +250,9 @@ function calculateTotal(items) {
 }
 ```
 
+
 ### **3. Use Unknown Instead of Any**
+
 
 ```typescript
 // ✅ Good: Use unknown for truly unknown values
@@ -246,7 +269,9 @@ function processUserInput(input: any): string {
 }
 ```
 
+
 ### **4. Prefer Type Assertions Over Type Casting**
+
 
 ```typescript
 // ✅ Good: Type assertion with proper checks
@@ -260,6 +285,7 @@ function getElementById(id: string): HTMLElement {
   return document.getElementById(id) as HTMLElement; // Could be null
 }
 ```
+
 
 ---
 
@@ -281,6 +307,7 @@ TypeScript includes these basic types:
 - **`any`**: Disables type checking completely, allows any operation
 - **`unknown`**: Type-safe top type, requires type checking before use
 
+
 ```typescript
 let anyValue: any = 42;
 anyValue.toUpperCase(); // No error, but runtime error
@@ -291,6 +318,7 @@ if (typeof unknownValue === "string") {
   unknownValue.toUpperCase(); // ✅ Safe to use
 }
 ```
+
 
 ### **3. When should you use type annotations vs type inference?**
 
@@ -313,17 +341,20 @@ Type assertions tell TypeScript to treat a value as a specific type. Use them wh
 - Parsing JSON data
 - Working with third-party libraries
 
+
 ```typescript
 // Example: DOM element
 let input = document.getElementById("username") as HTMLInputElement;
 input.value = "new value";
 ```
 
+
 ### **5. What's the difference between `void` and `never`?**
 
 **Answer:**
 - **`void`**: Used for functions that don't return a value
 - **`never`**: Used for functions that never return (throw errors, infinite loops)
+
 
 ```typescript
 function logMessage(msg: string): void {
@@ -334,6 +365,7 @@ function throwError(msg: string): never {
   throw new Error(msg); // Never returns
 }
 ```
+
 
 ---
 

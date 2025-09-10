@@ -13,9 +13,11 @@ This guide will help you clean up all your existing documentation files to use t
 
 ### Step 1: Add CSS Link
 Add this line at the top of each file (after the title):
+
 ```html
 <link rel="stylesheet" href="../common-styles.css">
 ```
+
 
 ### Step 2: Remove Duplicate CSS
 Delete all `<style>` blocks from your files. They're now in `common-styles.css`.
@@ -30,6 +32,7 @@ Change these class names:
 
 ### Step 5: Update Copy Buttons
 Replace inline styles with the common class:
+
 ```html
 <!-- OLD -->
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
@@ -38,8 +41,10 @@ Replace inline styles with the common class:
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
 ```
 
+
 ### Step 6: Update Navigation
 Replace navigation sections with:
+
 ```html
 <div class="navigation">
     <a href="previous-file.md" class="nav-link prev">← Previous: Previous Topic</a>
@@ -47,11 +52,14 @@ Replace navigation sections with:
 </div>
 ```
 
+
 ### Step 7: Add JavaScript Link
 Replace the old script tag with:
+
 ```html
 <script src="../common-scripts.js"></script>
 ```
+
 
 ## 📁 Files to Clean Up
 
@@ -123,6 +131,7 @@ Replace the old script tag with:
 
 You can run this command to see which files still have duplicate CSS/JS:
 
+
 ```bash
 # Check for files with <style> tags
 grep -r "<style>" "01 JavaScript Core/" "02-Advanced-JavaScript-Concepts/"
@@ -130,6 +139,7 @@ grep -r "<style>" "01 JavaScript Core/" "02-Advanced-JavaScript-Concepts/"
 # Check for files with <script> tags (excluding common-scripts.js)
 grep -r "<script>" "01 JavaScript Core/" "02-Advanced-JavaScript-Concepts/" | grep -v "common-scripts.js"
 ```
+
 
 ## ✅ Benefits After Cleanup
 

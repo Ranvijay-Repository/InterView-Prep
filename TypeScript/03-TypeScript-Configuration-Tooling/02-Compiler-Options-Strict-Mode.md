@@ -25,6 +25,7 @@ TypeScript compiler options control how the TypeScript compiler processes your c
 
 ### **Basic Compiler Options**
 
+
 ```json
 {
   "compilerOptions": {
@@ -49,7 +50,9 @@ TypeScript compiler options control how the TypeScript compiler processes your c
 }
 ```
 
+
 ### **Compiler Option Categories**
+
 
 ```typescript
 // Type checking options
@@ -72,6 +75,7 @@ TypeScript compiler options control how the TypeScript compiler processes your c
 "emitDecoratorMetadata": true
 ```
 
+
 ---
 
 ## 🔒 **Strict Mode Options**
@@ -79,6 +83,7 @@ TypeScript compiler options control how the TypeScript compiler processes your c
 Strict mode enables additional type checking options for better type safety.
 
 ### **Strict Mode Overview**
+
 
 ```json
 {
@@ -98,7 +103,9 @@ Strict mode enables additional type checking options for better type safety.
 }
 ```
 
+
 ### **noImplicitAny**
+
 
 ```typescript
 // ❌ Error with noImplicitAny: true
@@ -117,7 +124,9 @@ function processData(data: string) { // Type inferred as string
 }
 ```
 
+
 ### **strictNullChecks**
+
 
 ```typescript
 // ❌ Error with strictNullChecks: true
@@ -148,7 +157,9 @@ function getUser(id: number): User {
 }
 ```
 
+
 ### **strictFunctionTypes**
+
 
 ```typescript
 // ❌ Error with strictFunctionTypes: true
@@ -173,7 +184,9 @@ let dogHandler: (dog: Dog) => void;
 dogHandler = animalHandler; // OK
 ```
 
+
 ### **strictPropertyInitialization**
+
 
 ```typescript
 // ❌ Error with strictPropertyInitialization: true
@@ -206,11 +219,13 @@ class User {
 }
 ```
 
+
 ---
 
 ## 🔍 **Type Checking Options**
 
 ### **Additional Type Checking Options**
+
 
 ```json
 {
@@ -236,7 +251,9 @@ class User {
 }
 ```
 
+
 ### **noUnreachableCode**
+
 
 ```typescript
 // ❌ Error with noUnreachableCode: true
@@ -257,7 +274,9 @@ function processData(data: string): string {
 }
 ```
 
+
 ### **noUnusedLocals and noUnusedParameters**
+
 
 ```typescript
 // ❌ Error with noUnusedLocals: true
@@ -282,7 +301,9 @@ function processData(data: string, _unusedParam: number): string {
 }
 ```
 
+
 ### **noUncheckedIndexedAccess**
+
 
 ```typescript
 // ❌ Error with noUncheckedIndexedAccess: true
@@ -304,11 +325,13 @@ function getFirstElement<T>(array: T[]): T {
 }
 ```
 
+
 ---
 
 ## 📦 **Module Resolution Options**
 
 ### **Module Resolution Strategy**
+
 
 ```json
 {
@@ -336,7 +359,9 @@ function getFirstElement<T>(array: T[]): T {
 }
 ```
 
+
 ### **Module Resolution Examples**
+
 
 ```typescript
 // With baseUrl: "./src" and paths: { "@/*": ["*"] }
@@ -350,11 +375,13 @@ import { Button } from "../components/Button";
 import { utils } from "../utils/helpers";
 ```
 
+
 ---
 
 ## 📤 **Output Options**
 
 ### **Output Configuration**
+
 
 ```json
 {
@@ -384,7 +411,9 @@ import { utils } from "../utils/helpers";
 }
 ```
 
+
 ### **Source Map Options**
+
 
 ```json
 {
@@ -404,11 +433,13 @@ import { utils } from "../utils/helpers";
 }
 ```
 
+
 ---
 
 ## 🚀 **Advanced Options**
 
 ### **Experimental Features**
+
 
 ```json
 {
@@ -426,7 +457,9 @@ import { utils } from "../utils/helpers";
 }
 ```
 
+
 ### **Incremental Compilation**
+
 
 ```json
 {
@@ -445,7 +478,9 @@ import { utils } from "../utils/helpers";
 }
 ```
 
+
 ### **Advanced Type Checking**
+
 
 ```json
 {
@@ -469,11 +504,13 @@ import { utils } from "../utils/helpers";
 }
 ```
 
+
 ---
 
 ## ✅ **Best Practices**
 
 ### **1. Enable Strict Mode**
+
 
 ```json
 // ✅ Good: Enable strict mode
@@ -491,7 +528,9 @@ import { utils } from "../utils/helpers";
 }
 ```
 
+
 ### **2. Use Specific Strict Options**
+
 
 ```json
 // ✅ Good: Enable specific strict options
@@ -512,7 +551,9 @@ import { utils } from "../utils/helpers";
 }
 ```
 
+
 ### **3. Configure Module Resolution**
+
 
 ```json
 // ✅ Good: Configure module resolution
@@ -534,7 +575,9 @@ import { utils } from "../utils/helpers";
 }
 ```
 
+
 ### **4. Use Incremental Compilation**
+
 
 ```json
 // ✅ Good: Enable incremental compilation
@@ -552,6 +595,7 @@ import { utils } from "../utils/helpers";
   }
 }
 ```
+
 
 ---
 
@@ -593,6 +637,7 @@ Strict mode enables additional type checking options for better type safety. It 
 **Answer:**
 Use `baseUrl` and `paths` in `tsconfig.json`:
 
+
 ```json
 {
   "compilerOptions": {
@@ -604,6 +649,7 @@ Use `baseUrl` and `paths` in `tsconfig.json`:
   }
 }
 ```
+
 
 ---
 

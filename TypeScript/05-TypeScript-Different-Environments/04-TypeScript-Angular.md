@@ -25,6 +25,7 @@ Angular is built with TypeScript from the ground up, providing excellent type sa
 
 ### **Basic Setup**
 
+
 ```bash
 # Install Angular CLI
 npm install -g @angular/cli
@@ -36,7 +37,9 @@ ng new my-app
 ng add @angular/cli
 ```
 
+
 ### **Angular Configuration**
+
 
 ```json
 // tsconfig.json
@@ -74,7 +77,9 @@ ng add @angular/cli
 }
 ```
 
+
 ### **Angular CLI Configuration**
+
 
 ```json
 // angular.json
@@ -115,11 +120,13 @@ ng add @angular/cli
 }
 ```
 
+
 ---
 
 ## 🧩 **Component Typing**
 
 ### **Basic Component**
+
 
 ```typescript
 // user.component.ts
@@ -136,9 +143,9 @@ interface User {
   selector: 'app-user',
   template: `
     <div class="user-card">
-      <h3>{{ user.name }}</h3>
-      <p>{{ user.email }}</p>
-      <p>Age: {{ user.age }}</p>
+      <h3>{{#123;{{#123; user.name }}#125;}}#125;</h3>
+      <p>{{#123;{{#123; user.email }}#125;}}#125;</p>
+      <p>Age: {{#123;{{#123; user.age }}#125;}}#125;</p>
       <button (click)="onEdit()">Edit</button>
       <button (click)="onDelete()">Delete</button>
     </div>
@@ -160,7 +167,9 @@ export class UserComponent {
 }
 ```
 
+
 ### **Component with Lifecycle Hooks**
+
 
 ```typescript
 // user-list.component.ts
@@ -189,7 +198,7 @@ interface User {
     <div class="user-list">
       <h2>Users</h2>
       <div *ngIf="loading" class="loading">Loading...</div>
-      <div *ngIf="error" class="error">{{ error }}</div>
+      <div *ngIf="error" class="error">{{#123;{{#123; error }}#125;}}#125;</div>
       <div *ngFor="let user of users" class="user-item">
         <app-user 
           [user]="user" 
@@ -256,7 +265,9 @@ export class UserListComponent implements OnInit, OnDestroy, OnChanges {
 }
 ```
 
+
 ### **Generic Component**
+
 
 ```typescript
 // data-table.component.ts
@@ -280,9 +291,9 @@ interface Column<T> {
             [style.width]="column.width"
             [class.sortable]="column.sortable"
             (click)="onSort(column)">
-            {{ column.title }}
+            {{#123;{{#123; column.title }}#125;}}#125;
             <span *ngIf="column.sortable" class="sort-indicator">
-              {{ getSortIndicator(column) }}
+              {{#123;{{#123; getSortIndicator(column) }}#125;}}#125;
             </span>
           </th>
         </tr>
@@ -292,7 +303,7 @@ interface Column<T> {
           <td *ngFor="let column of columns">
             <ng-container [ngSwitch]="column.key">
               <ng-container *ngSwitchDefault>
-                {{ item[column.key] }}
+                {{#123;{{#123; item[column.key] }}#125;}}#125;
               </ng-container>
               <ng-container *ngSwitchCase="'actions'">
                 <ng-content [select]="'[slot=actions]'" [ngTemplateOutlet]="actionsTemplate" [ngTemplateOutletContext]="{ $implicit: item }"></ng-content>
@@ -338,11 +349,13 @@ export class DataTableComponent<T> {
 }
 ```
 
+
 ---
 
 ## 🔧 **Services and Dependency Injection**
 
 ### **Basic Service**
+
 
 ```typescript
 // user.service.ts
@@ -449,7 +462,9 @@ export class UserService {
 }
 ```
 
+
 ### **Custom Injection Token**
+
 
 ```typescript
 // config.service.ts
@@ -512,11 +527,13 @@ export class ConfigService {
 export class AppModule {}
 ```
 
+
 ---
 
 ## 📝 **Forms and Validation**
 
 ### **Reactive Forms**
+
 
 ```typescript
 // user-form.component.ts
@@ -625,7 +642,9 @@ export class UserFormComponent implements OnInit {
 }
 ```
 
+
 ### **Custom Validators**
+
 
 ```typescript
 // custom-validators.ts
@@ -689,11 +708,13 @@ export class CustomValidators {
 }
 ```
 
+
 ---
 
 ## 🧭 **Routing and Navigation**
 
 ### **Route Configuration**
+
 
 ```typescript
 // app-routing.module.ts
@@ -736,7 +757,9 @@ const routes: Routes = [
 export class AppRoutingModule {}
 ```
 
+
 ### **Route Guards**
+
 
 ```typescript
 // auth.guard.ts
@@ -776,7 +799,9 @@ export class AuthGuard implements CanActivate {
 }
 ```
 
+
 ### **Route Resolvers**
+
 
 ```typescript
 // user.resolver.ts
@@ -805,11 +830,13 @@ export class UserResolver implements Resolve<User> {
 }
 ```
 
+
 ---
 
 ## 🚀 **Advanced Patterns**
 
 ### **State Management with NgRx**
+
 
 ```typescript
 // user.actions.ts
@@ -839,6 +866,8 @@ export const createUserFailure = createAction(
   props<{ error: string }>()
 );
 ```
+
+
 
 ```typescript
 // user.reducer.ts
@@ -883,7 +912,9 @@ export const userReducer = createReducer(
 );
 ```
 
+
 ### **Interceptors**
+
 
 ```typescript
 // auth.interceptor.ts
@@ -911,11 +942,13 @@ export class AuthInterceptor implements HttpInterceptor {
 }
 ```
 
+
 ---
 
 ## ✅ **Best Practices**
 
 ### **1. Use Strict Type Checking**
+
 
 ```typescript
 // ✅ Good: Strict typing
@@ -931,7 +964,9 @@ interface User {
 @Input() user: any;
 ```
 
+
 ### **2. Use OnPush Change Detection**
+
 
 ```typescript
 // ✅ Good: OnPush change detection
@@ -954,7 +989,9 @@ export class UserComponent {
 }
 ```
 
+
 ### **3. Use TrackBy Functions**
+
 
 ```typescript
 // ✅ Good: TrackBy function
@@ -966,7 +1003,9 @@ trackByUserId(index: number, user: User): number {
 *ngFor="let user of users"
 ```
 
+
 ### **4. Use Reactive Forms**
+
 
 ```typescript
 // ✅ Good: Reactive forms
@@ -980,6 +1019,7 @@ userForm = this.fb.group({
   <input name="name" ngModel required>
 </form>
 ```
+
 
 ---
 
@@ -1001,6 +1041,7 @@ Angular is built with TypeScript by default. Just use `ng new my-app` and TypeSc
 ### **3. How do you type Angular components?**
 
 **Answer:**
+
 ```typescript
 @Component({
   selector: 'app-user',
@@ -1012,9 +1053,11 @@ export class UserComponent {
 }
 ```
 
+
 ### **4. How do you handle forms in Angular with TypeScript?**
 
 **Answer:**
+
 ```typescript
 userForm = this.fb.group({
   name: ['', Validators.required],
@@ -1022,9 +1065,11 @@ userForm = this.fb.group({
 });
 ```
 
+
 ### **5. How do you create services in Angular with TypeScript?**
 
 **Answer:**
+
 ```typescript
 @Injectable({
   providedIn: 'root'
@@ -1037,6 +1082,7 @@ export class UserService {
   }
 }
 ```
+
 
 ---
 

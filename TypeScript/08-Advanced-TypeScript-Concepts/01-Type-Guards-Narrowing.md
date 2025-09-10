@@ -24,6 +24,7 @@ Type guards are TypeScript's way of narrowing down types at runtime, providing t
 
 ### **What are Type Guards?**
 
+
 ```typescript
 // Type guards help TypeScript understand types at runtime
 const typeGuards = {
@@ -49,7 +50,9 @@ function processValue(value: unknown) {
 }
 ```
 
+
 ### **Type Guard Benefits**
+
 
 ```typescript
 // Benefits of using type guards
@@ -76,11 +79,13 @@ function processWithGuard(value: unknown) {
 }
 ```
 
+
 ---
 
 ## 🛡️ **Built-in Type Guards**
 
 ### **typeof Type Guards**
+
 
 ```typescript
 // typeof type guards
@@ -126,7 +131,9 @@ function handleObject(value: unknown) {
 }
 ```
 
+
 ### **instanceof Type Guards**
+
 
 ```typescript
 // instanceof type guards
@@ -172,7 +179,9 @@ function processArray(value: unknown) {
 }
 ```
 
+
 ### **in Operator Type Guards**
+
 
 ```typescript
 // in operator type guards
@@ -221,11 +230,13 @@ function processUser(user: User) {
 }
 ```
 
+
 ---
 
 ## 🔧 **Custom Type Guards**
 
 ### **Basic Custom Type Guards**
+
 
 ```typescript
 // Custom type guard function
@@ -257,7 +268,9 @@ function processValue(value: unknown) {
 }
 ```
 
+
 ### **Complex Type Guards**
+
 
 ```typescript
 // Complex type guards
@@ -299,7 +312,9 @@ function handleApiResponse(response: unknown) {
 }
 ```
 
+
 ### **Generic Type Guards**
+
 
 ```typescript
 // Generic type guards
@@ -333,11 +348,13 @@ function processNumberObject(value: unknown) {
 }
 ```
 
+
 ---
 
 ## 🎯 **Type Narrowing**
 
 ### **Control Flow Analysis**
+
 
 ```typescript
 // Control flow analysis
@@ -366,7 +383,9 @@ function processValue(value: unknown) {
 }
 ```
 
+
 ### **Discriminated Unions**
+
 
 ```typescript
 // Discriminated unions
@@ -405,7 +424,9 @@ function handleState(state: AppState) {
 }
 ```
 
+
 ### **Assertion Functions**
+
 
 ```typescript
 // Assertion functions
@@ -436,11 +457,13 @@ function assertIsArray(value: unknown): asserts value is any[] {
 }
 ```
 
+
 ---
 
 ## 🚀 **Advanced Patterns**
 
 ### **Branded Types**
+
 
 ```typescript
 // Branded types
@@ -477,7 +500,9 @@ function processProduct(productId: ProductId) {
 }
 ```
 
+
 ### **Opaque Types**
+
 
 ```typescript
 // Opaque types
@@ -506,7 +531,9 @@ function isProductId(value: unknown): value is ProductId {
 }
 ```
 
+
 ### **Template Literal Types**
+
 
 ```typescript
 // Template literal types
@@ -528,11 +555,13 @@ function handleEvent(eventName: string) {
 }
 ```
 
+
 ---
 
 ## ✅ **Best Practices**
 
 ### **1. Use Built-in Type Guards When Possible**
+
 
 ```typescript
 // ✅ Good: Use built-in type guards
@@ -560,7 +589,9 @@ function processValue(value: unknown) {
 }
 ```
 
+
 ### **2. Make Type Guards Specific**
+
 
 ```typescript
 // ✅ Good: Specific type guards
@@ -579,7 +610,9 @@ function isObject(value: unknown): value is object {
 }
 ```
 
+
 ### **3. Use Discriminated Unions**
+
 
 ```typescript
 // ✅ Good: Discriminated unions
@@ -598,7 +631,9 @@ type AppState = LoadingState | SuccessState;
 type AppState = { status: string; data?: any };
 ```
 
+
 ### **4. Handle Exhaustive Checks**
+
 
 ```typescript
 // ✅ Good: Exhaustive checks
@@ -624,6 +659,7 @@ function handleState(state: AppState) {
 }
 ```
 
+
 ---
 
 ## ❓ **Common Interview Questions**
@@ -643,11 +679,13 @@ Type guards are functions that help TypeScript narrow down types at runtime. The
 ### **3. How do you create a custom type guard?**
 
 **Answer:**
+
 ```typescript
 function isString(value: unknown): value is string {
   return typeof value === 'string';
 }
 ```
+
 The return type `value is string` is a type predicate that tells TypeScript the value is a string.
 
 ### **4. What are discriminated unions?**
@@ -659,6 +697,7 @@ Discriminated unions are union types with a common property (discriminator) that
 
 **Answer:**
 Use the `never` type to ensure all cases are handled:
+
 ```typescript
 function handleState(state: AppState) {
   switch (state.status) {
@@ -672,6 +711,7 @@ function handleState(state: AppState) {
   }
 }
 ```
+
 
 ---
 

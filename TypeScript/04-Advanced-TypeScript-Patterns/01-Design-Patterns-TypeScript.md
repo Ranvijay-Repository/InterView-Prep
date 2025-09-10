@@ -25,6 +25,7 @@ Design patterns are reusable solutions to common problems in software design. Ty
 
 ### **Pattern Categories**
 
+
 ```typescript
 // Design pattern categories
 interface PatternCategories {
@@ -42,7 +43,9 @@ const typescriptBenefits = {
 };
 ```
 
+
 ### **Pattern Implementation Principles**
+
 
 ```typescript
 // Key principles for TypeScript pattern implementation
@@ -54,6 +57,7 @@ const principles = {
 };
 ```
 
+
 ---
 
 ## 🏗️ **Creational Patterns**
@@ -61,6 +65,7 @@ const principles = {
 Creational patterns deal with object creation mechanisms.
 
 ### **Singleton Pattern**
+
 
 ```typescript
 // Singleton pattern with TypeScript
@@ -90,7 +95,9 @@ const db2 = DatabaseConnection.getInstance();
 console.log(db1 === db2); // true
 ```
 
+
 ### **Factory Pattern**
+
 
 ```typescript
 // Factory pattern with TypeScript
@@ -134,7 +141,9 @@ const dog = AnimalFactory.createAnimal("dog", "Buddy");
 const cat = AnimalFactory.createAnimal("cat", "Whiskers");
 ```
 
+
 ### **Builder Pattern**
+
 
 ```typescript
 // Builder pattern with TypeScript
@@ -198,6 +207,7 @@ const user = new UserBuilder()
   .build();
 ```
 
+
 ---
 
 ## 🏛️ **Structural Patterns**
@@ -205,6 +215,7 @@ const user = new UserBuilder()
 Structural patterns deal with object composition and relationships.
 
 ### **Adapter Pattern**
+
 
 ```typescript
 // Adapter pattern with TypeScript
@@ -245,7 +256,9 @@ const adapter = new APIAdapter(oldAPI);
 const data = await adapter.fetchData();
 ```
 
+
 ### **Decorator Pattern**
+
 
 ```typescript
 // Decorator pattern with TypeScript
@@ -307,7 +320,9 @@ console.log(coffee.description()); // "Simple coffee, milk, sugar"
 console.log(coffee.cost()); // 2.7
 ```
 
+
 ### **Facade Pattern**
+
 
 ```typescript
 // Facade pattern with TypeScript
@@ -363,6 +378,7 @@ const computer = new ComputerFacade();
 computer.start();
 ```
 
+
 ---
 
 ## 🎭 **Behavioral Patterns**
@@ -370,6 +386,7 @@ computer.start();
 Behavioral patterns deal with object interaction and communication.
 
 ### **Observer Pattern**
+
 
 ```typescript
 // Observer pattern with TypeScript
@@ -426,7 +443,9 @@ agency.attach(channel2);
 agency.publishNews("Breaking: TypeScript 5.0 released!");
 ```
 
+
 ### **Strategy Pattern**
+
 
 ```typescript
 // Strategy pattern with TypeScript
@@ -478,7 +497,9 @@ processor.setStrategy(new PayPalPayment("user@example.com"));
 console.log(processor.processPayment(50));
 ```
 
+
 ### **Command Pattern**
+
 
 ```typescript
 // Command pattern with TypeScript
@@ -567,11 +588,13 @@ remote.pressButton(); // Light is off
 remote.pressUndo(); // Light is on
 ```
 
+
 ---
 
 ## 🎯 **TypeScript-Specific Patterns**
 
 ### **Generic Factory Pattern**
+
 
 ```typescript
 // Generic factory pattern
@@ -625,7 +648,9 @@ const user = registry.create<User>("user");
 const product = registry.create<Product>("product");
 ```
 
+
 ### **Type-Safe Builder Pattern**
+
 
 ```typescript
 // Type-safe builder pattern
@@ -682,11 +707,13 @@ const user = new UserBuilder()
   .build();
 ```
 
+
 ---
 
 ## 🚀 **Advanced Pattern Implementations**
 
 ### **Dependency Injection Pattern**
+
 
 ```typescript
 // Dependency injection pattern
@@ -749,7 +776,9 @@ const userService = new UserService(
 console.log(userService.createUser("John"));
 ```
 
+
 ### **Repository Pattern**
+
 
 ```typescript
 // Repository pattern
@@ -795,11 +824,13 @@ const user = await userRepo.save({ id: 1, name: "John", email: "john@example.com
 const foundUser = await userRepo.findById(1);
 ```
 
+
 ---
 
 ## ✅ **Best Practices**
 
 ### **1. Use TypeScript's Type System**
+
 
 ```typescript
 // ✅ Good: Use interfaces for contracts
@@ -815,7 +846,9 @@ class PaymentProcessor {
 }
 ```
 
+
 ### **2. Leverage Generics for Reusability**
+
 
 ```typescript
 // ✅ Good: Use generics for reusable patterns
@@ -831,7 +864,9 @@ interface UserRepository {
 }
 ```
 
+
 ### **3. Prefer Composition Over Inheritance**
+
 
 ```typescript
 // ✅ Good: Use composition
@@ -849,7 +884,9 @@ class CoffeeWithMilk extends Coffee {
 }
 ```
 
+
 ### **4. Use Dependency Injection**
+
 
 ```typescript
 // ✅ Good: Use dependency injection
@@ -862,6 +899,7 @@ class UserService {
   private userRepo = new UserRepository();
 }
 ```
+
 
 ---
 
@@ -879,6 +917,7 @@ Design patterns are reusable solutions to common problems in software design. Th
 ### **2. How do you implement the Singleton pattern in TypeScript?**
 
 **Answer:**
+
 ```typescript
 class Singleton {
   private static instance: Singleton;
@@ -894,6 +933,7 @@ class Singleton {
 }
 ```
 
+
 ### **3. What's the difference between the Factory and Builder patterns?**
 
 **Answer:**
@@ -903,6 +943,7 @@ class Singleton {
 ### **4. How do you implement the Observer pattern in TypeScript?**
 
 **Answer:**
+
 ```typescript
 interface Observer<T> {
   update(data: T): void;
@@ -913,6 +954,7 @@ interface Subject<T> {
   notify(data: T): void;
 }
 ```
+
 
 ### **5. What are the benefits of using design patterns with TypeScript?**
 

@@ -1,0 +1,982 @@
+# 🏃 **Runtime Performance**
+
+> **Complete guide to optimizing TypeScript runtime performance, JavaScript execution, and application speed**
+
+<link rel="stylesheet" href="../../common-styles.css">
+
+---
+
+## 📚 **Table of Contents**
+
+- [Runtime Performance Overview](#runtime-performance-overview)
+- [JavaScript Performance](#javascript-performance)
+- [Memory Management](#memory-management)
+- [Code Optimization](#code-optimization)
+- [Performance Monitoring](#performance-monitoring)
+- [Best Practices](#best-practices)
+- [Common Interview Questions](#common-interview-questions)
+
+---
+
+## 🎯 **Runtime Performance Overview**
+
+TypeScript compiles to JavaScript, so runtime performance depends on the generated JavaScript code and how it's executed.
+
+### **Performance Factors**
+
+{% raw %}
+```typescript
+// Factors affecting TypeScript runtime performance
+const performanceFactors = {
+  generatedCode: "Quality of generated JavaScript code",
+  typeErasure: "TypeScript types are erased at runtime",
+  polyfills: "Polyfills for older JavaScript features",
+  bundling: "How code is bundled and minified",
+  execution: "JavaScript engine optimization"
+};
+
+// Performance metrics
+const performanceMetrics = {
+  executionTime: "Time to execute code",
+  memoryUsage: "Memory consumption during execution",
+  throughput: "Operations per second",
+  latency: "Response time for operations",
+  garbageCollection: "Garbage collection frequency"
+};
+
+// Performance goals
+const performanceGoals = {
+  fastExecution: "Fast code execution",
+  lowMemory: "Low memory usage",
+  highThroughput: "High operations per second",
+  lowLatency: "Low response times",
+  efficientGC: "Efficient garbage collection"
+};
+```
+{% endraw %}
+
+### **TypeScript to JavaScript**
+
+{% raw %}
+```typescript
+// TypeScript code
+interface User {
+  id: number;
+  name: string;
+  email: string;
+}
+
+function getUser(id: number): User {
+  return {
+    id,
+    name: 'John Doe',
+    email: 'john@example.com'
+  };
+}
+
+// Generated JavaScript (simplified)
+function getUser(id) {
+  return {
+    id: id,
+    name: 'John Doe',
+    email: 'john@example.com'
+  };
+}
+
+// Performance considerations
+const performanceConsiderations = {
+  typeErasure: "Types are removed at runtime",
+  interfaces: "Interfaces don't exist at runtime",
+  enums: "Enums become objects or numbers",
+  generics: "Generics are erased",
+  decorators: "Decorators may add runtime overhead"
+};
+```
+{% endraw %}
+
+---
+
+## ⚡ **JavaScript Performance**
+
+### **V8 Engine Optimization**
+
+{% raw %}
+```typescript
+// V8 engine optimization patterns
+const v8Optimization = {
+  hiddenClasses: "Consistent object shapes",
+  inlineCaching: "Optimize property access",
+  optimization: "JIT compilation optimization",
+  deoptimization: "Avoid deoptimization triggers"
+};
+
+// Hidden classes optimization
+// ✅ Good: Consistent object shapes
+function createUser(id: number, name: string) {
+  return {
+    id,
+    name,
+    email: ''
+  };
+}
+
+// ❌ Avoid: Inconsistent object shapes
+function createUserBad(id: number, name: string, hasEmail: boolean) {
+  const user = { id, name };
+  if (hasEmail) {
+    user.email = '';
+  }
+  return user;
+}
+
+// Inline caching optimization
+// ✅ Good: Consistent property access
+function processUsers(users: User[]) {
+  return users.map(user => user.name);
+}
+
+// ❌ Avoid: Inconsistent property access
+function processUsersBad(users: any[]) {
+  return users.map(user => user.name || user.fullName || 'Unknown');
+}
+```
+{% endraw %}
+
+### **Function Optimization**
+
+{% raw %}
+```typescript
+// Function optimization patterns
+const functionOptimization = {
+  monomorphic: "Functions with consistent parameter types",
+  polymorphic: "Functions with varying parameter types",
+  megamorphic: "Functions with many different parameter types",
+  optimization: "V8 optimization strategies"
+};
+
+// Monomorphic functions (fastest)
+function add(a: number, b: number): number {
+  return a + b;
+}
+
+// Polymorphic functions (slower)
+function process(value: string | number): string {
+  return value.toString();
+}
+
+// Megamorphic functions (slowest)
+function handle(value: any): any {
+  if (typeof value === 'string') return value.toUpperCase();
+  if (typeof value === 'number') return value * 2;
+  if (typeof value === 'boolean') return !value;
+  return value;
+}
+
+// Function optimization techniques
+const optimizationTechniques = {
+  consistentTypes: "Use consistent parameter types",
+  avoidAny: "Avoid 'any' type",
+  specificTypes: "Use specific types instead of unions",
+  inlineFunctions: "Inline small functions",
+  avoidClosures: "Avoid unnecessary closures"
+};
+```
+{% endraw %}
+
+### **Object and Array Performance**
+
+{% raw %}
+```typescript
+// Object and array performance
+const objectArrayPerformance = {
+  objectShapes: "Consistent object shapes",
+  arrayMethods: "Efficient array operations",
+  memoryLayout: "Memory layout optimization",
+  accessPatterns: "Optimize access patterns"
+};
+
+// Object shape optimization
+// ✅ Good: Consistent object shapes
+interface User {
+  id: number;
+  name: string;
+  email: string;
+}
+
+function createUser(id: number, name: string, email: string): User {
+  return { id, name, email };
+}
+
+// ❌ Avoid: Inconsistent object shapes
+function createUserBad(id: number, name: string, email?: string) {
+  const user: any = { id, name };
+  if (email) user.email = email;
+  return user;
+}
+
+// Array method optimization
+// ✅ Good: Efficient array operations
+function processNumbers(numbers: number[]): number[] {
+  return numbers
+    .filter(n => n > 0)
+    .map(n => n * 2)
+    .sort((a, b) => a - b);
+}
+
+// ❌ Avoid: Inefficient array operations
+function processNumbersBad(numbers: number[]): number[] {
+  const result: number[] = [];
+  for (let i = 0; i < numbers.length; i++) {
+    if (numbers[i] > 0) {
+      result.push(numbers[i] * 2);
+    }
+  }
+  return result.sort((a, b) => a - b);
+}
+```
+{% endraw %}
+
+---
+
+## 🧠 **Memory Management**
+
+### **Memory Optimization**
+
+{% raw %}
+```typescript
+// Memory optimization techniques
+const memoryOptimization = {
+  objectReuse: "Reuse objects when possible",
+  arrayReuse: "Reuse arrays when possible",
+  stringOptimization: "Optimize string operations",
+  closureManagement: "Manage closures carefully",
+  garbageCollection: "Optimize garbage collection"
+};
+
+// Object reuse
+// ✅ Good: Reuse objects
+class ObjectPool<T> {
+  private pool: T[] = [];
+  
+  constructor(private createFn: () => T) {}
+  
+  get(): T {
+    return this.pool.pop() || this.createFn();
+  }
+  
+  release(obj: T): void {
+    this.pool.push(obj);
+  }
+}
+
+// ❌ Avoid: Creating new objects frequently
+function processData(data: any[]) {
+  return data.map(item => ({
+    id: item.id,
+    name: item.name,
+    processed: true
+  }));
+}
+
+// Array reuse
+// ✅ Good: Reuse arrays
+class ArrayPool {
+  private pools: Map<number, any[][]> = new Map();
+  
+  getArray(size: number): any[] {
+    const pool = this.pools.get(size) || [];
+    return pool.pop() || new Array(size);
+  }
+  
+  releaseArray(arr: any[]): void {
+    const size = arr.length;
+    const pool = this.pools.get(size) || [];
+    arr.length = 0; // Clear array
+    pool.push(arr);
+    this.pools.set(size, pool);
+  }
+}
+```
+{% endraw %}
+
+### **Garbage Collection Optimization**
+
+{% raw %}
+```typescript
+// Garbage collection optimization
+const gcOptimization = {
+  objectLifetime: "Minimize object lifetime",
+  memoryLeaks: "Avoid memory leaks",
+  weakReferences: "Use weak references when appropriate",
+  objectPools: "Use object pools for frequent allocations",
+  stringOptimization: "Optimize string operations"
+};
+
+// Object lifetime optimization
+// ✅ Good: Short object lifetime
+function processData(data: any[]) {
+  const result: any[] = [];
+  
+  for (const item of data) {
+    const processed = {
+      id: item.id,
+      name: item.name,
+      processed: true
+    };
+    result.push(processed);
+  }
+  
+  return result;
+}
+
+// ❌ Avoid: Long object lifetime
+class DataProcessor {
+  private cache = new Map();
+  
+  processData(data: any[]) {
+    // Objects stay in cache longer than needed
+    return data.map(item => {
+      const processed = { ...item, processed: true };
+      this.cache.set(item.id, processed);
+      return processed;
+    });
+  }
+}
+
+// Weak references
+// ✅ Good: Use weak references
+class WeakReferenceExample {
+  private weakMap = new WeakMap();
+  
+  setReference(key: object, value: any): void {
+    this.weakMap.set(key, value);
+  }
+  
+  getReference(key: object): any {
+    return this.weakMap.get(key);
+  }
+}
+```
+{% endraw %}
+
+### **Memory Leak Prevention**
+
+{% raw %}
+```typescript
+// Memory leak prevention
+const memoryLeakPrevention = {
+  eventListeners: "Remove event listeners",
+  timers: "Clear timers and intervals",
+  closures: "Avoid circular references",
+  domReferences: "Clear DOM references",
+  caches: "Limit cache size"
+};
+
+// Event listener cleanup
+class EventManager {
+  private listeners = new Map<string, EventListener[]>();
+  
+  addEventListener(element: HTMLElement, event: string, listener: EventListener): void {
+    element.addEventListener(event, listener);
+    
+    if (!this.listeners.has(event)) {
+      this.listeners.set(event, []);
+    }
+    this.listeners.get(event)!.push(listener);
+  }
+  
+  removeAllListeners(element: HTMLElement): void {
+    for (const [event, listeners] of this.listeners) {
+      for (const listener of listeners) {
+        element.removeEventListener(event, listener);
+      }
+    }
+    this.listeners.clear();
+  }
+}
+
+// Timer cleanup
+class TimerManager {
+  private timers = new Set<number>();
+  
+  setTimeout(callback: () => void, delay: number): number {
+    const id = setTimeout(callback, delay);
+    this.timers.add(id);
+    return id;
+  }
+  
+  setInterval(callback: () => void, delay: number): number {
+    const id = setInterval(callback, delay);
+    this.timers.add(id);
+    return id;
+  }
+  
+  clearTimer(id: number): void {
+    clearTimeout(id);
+    clearInterval(id);
+    this.timers.delete(id);
+  }
+  
+  clearAllTimers(): void {
+    for (const id of this.timers) {
+      clearTimeout(id);
+      clearInterval(id);
+    }
+    this.timers.clear();
+  }
+}
+```
+{% endraw %}
+
+---
+
+## 🔧 **Code Optimization**
+
+### **Algorithm Optimization**
+
+{% raw %}
+```typescript
+// Algorithm optimization
+const algorithmOptimization = {
+  timeComplexity: "Optimize time complexity",
+  spaceComplexity: "Optimize space complexity",
+  dataStructures: "Choose appropriate data structures",
+  caching: "Implement caching strategies",
+  memoization: "Use memoization for expensive operations"
+};
+
+// Time complexity optimization
+// ✅ Good: O(n) time complexity
+function findDuplicates(arr: number[]): number[] {
+  const seen = new Set<number>();
+  const duplicates = new Set<number>();
+  
+  for (const num of arr) {
+    if (seen.has(num)) {
+      duplicates.add(num);
+    } else {
+      seen.add(num);
+    }
+  }
+  
+  return Array.from(duplicates);
+}
+
+// ❌ Avoid: O(n²) time complexity
+function findDuplicatesBad(arr: number[]): number[] {
+  const duplicates: number[] = [];
+  
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = i + 1; j < arr.length; j++) {
+      if (arr[i] === arr[j] && !duplicates.includes(arr[i])) {
+        duplicates.push(arr[i]);
+      }
+    }
+  }
+  
+  return duplicates;
+}
+
+// Memoization
+function memoize<T extends (...args: any[]) => any>(fn: T): T {
+  const cache = new Map();
+  
+  return ((...args: any[]) => {
+    const key = JSON.stringify(args);
+    
+    if (cache.has(key)) {
+      return cache.get(key);
+    }
+    
+    const result = fn(...args);
+    cache.set(key, result);
+    return result;
+  }) as T;
+}
+
+// Usage
+const expensiveCalculation = memoize((n: number): number => {
+  console.log(`Calculating for ${n}`);
+  return n * n * n;
+});
+```
+{% endraw %}
+
+### **Data Structure Optimization**
+
+{% raw %}
+```typescript
+// Data structure optimization
+const dataStructureOptimization = {
+  arrays: "Use arrays for indexed access",
+  objects: "Use objects for key-value access",
+  sets: "Use sets for unique values",
+  maps: "Use maps for complex keys",
+  weakMaps: "Use weak maps for object keys"
+};
+
+// Set optimization
+// ✅ Good: Use Set for unique values
+function getUniqueValues(arr: any[]): any[] {
+  return Array.from(new Set(arr));
+}
+
+// ❌ Avoid: Use array for unique values
+function getUniqueValuesBad(arr: any[]): any[] {
+  const unique: any[] = [];
+  for (const item of arr) {
+    if (!unique.includes(item)) {
+      unique.push(item);
+    }
+  }
+  return unique;
+}
+
+// Map optimization
+// ✅ Good: Use Map for complex keys
+function processData(data: Array<{id: string, value: number}>) {
+  const map = new Map<string, number>();
+  
+  for (const item of data) {
+    map.set(item.id, item.value);
+  }
+  
+  return map;
+}
+
+// ❌ Avoid: Use object for complex keys
+function processDataBad(data: Array<{id: string, value: number}>) {
+  const obj: any = {};
+  
+  for (const item of data) {
+    obj[item.id] = item.value;
+  }
+  
+  return obj;
+}
+```
+{% endraw %}
+
+### **String and Number Optimization**
+
+{% raw %}
+```typescript
+// String and number optimization
+const stringNumberOptimization = {
+  stringConcatenation: "Optimize string concatenation",
+  numberOperations: "Optimize number operations",
+  parsing: "Optimize parsing operations",
+  formatting: "Optimize formatting operations"
+};
+
+// String concatenation optimization
+// ✅ Good: Use template literals
+function createMessage(name: string, age: number): string {
+  return `Hello ${name}, you are ${age} years old`;
+}
+
+// ❌ Avoid: String concatenation
+function createMessageBad(name: string, age: number): string {
+  return 'Hello ' + name + ', you are ' + age + ' years old';
+}
+
+// Number operations optimization
+// ✅ Good: Use bitwise operations for integers
+function isEven(n: number): boolean {
+  return (n & 1) === 0;
+}
+
+// ❌ Avoid: Modulo for simple operations
+function isEvenBad(n: number): boolean {
+  return n % 2 === 0;
+}
+
+// Parsing optimization
+// ✅ Good: Use parseInt with radix
+function parseNumber(str: string): number {
+  return parseInt(str, 10);
+}
+
+// ❌ Avoid: parseInt without radix
+function parseNumberBad(str: string): number {
+  return parseInt(str);
+}
+```
+{% endraw %}
+
+---
+
+## 📊 **Performance Monitoring**
+
+### **Performance Measurement**
+
+{% raw %}
+```typescript
+// Performance measurement utilities
+class PerformanceMonitor {
+  private measurements = new Map<string, number[]>();
+  
+  start(label: string): void {
+    performance.mark(`${label}-start`);
+  }
+  
+  end(label: string): number {
+    performance.mark(`${label}-end`);
+    performance.measure(label, `${label}-start`, `${label}-end`);
+    
+    const measure = performance.getEntriesByName(label)[0];
+    const duration = measure.duration;
+    
+    if (!this.measurements.has(label)) {
+      this.measurements.set(label, []);
+    }
+    this.measurements.get(label)!.push(duration);
+    
+    return duration;
+  }
+  
+  getAverage(label: string): number {
+    const measurements = this.measurements.get(label) || [];
+    return measurements.reduce((sum, val) => sum + val, 0) / measurements.length;
+  }
+  
+  getStats(label: string): { min: number; max: number; avg: number; count: number } {
+    const measurements = this.measurements.get(label) || [];
+    return {
+      min: Math.min(...measurements),
+      max: Math.max(...measurements),
+      avg: this.getAverage(label),
+      count: measurements.length
+    };
+  }
+}
+
+// Usage
+const monitor = new PerformanceMonitor();
+
+function expensiveOperation() {
+  monitor.start('expensive-operation');
+  
+  // Simulate expensive operation
+  let result = 0;
+  for (let i = 0; i < 1000000; i++) {
+    result += Math.random();
+  }
+  
+  const duration = monitor.end('expensive-operation');
+  console.log(`Operation took ${duration}ms`);
+  
+  return result;
+}
+```
+{% endraw %}
+
+### **Memory Monitoring**
+
+{% raw %}
+```typescript
+// Memory monitoring utilities
+class MemoryMonitor {
+  private measurements: Array<{ timestamp: number; memory: any }> = [];
+  
+  measure(): void {
+    if ('memory' in performance) {
+      const memory = (performance as any).memory;
+      this.measurements.push({
+        timestamp: Date.now(),
+        memory: {
+          used: memory.usedJSHeapSize,
+          total: memory.totalJSHeapSize,
+          limit: memory.jsHeapSizeLimit
+        }
+      });
+    }
+  }
+  
+  getMemoryUsage(): any {
+    if ('memory' in performance) {
+      return (performance as any).memory;
+    }
+    return null;
+  }
+  
+  getMemoryStats(): { min: number; max: number; avg: number } {
+    const usedMemory = this.measurements.map(m => m.memory.used);
+    return {
+      min: Math.min(...usedMemory),
+      max: Math.max(...usedMemory),
+      avg: usedMemory.reduce((sum, val) => sum + val, 0) / usedMemory.length
+    };
+  }
+  
+  detectMemoryLeaks(): boolean {
+    const stats = this.getMemoryStats();
+    const recent = this.measurements.slice(-10);
+    const recentAvg = recent.reduce((sum, m) => sum + m.memory.used, 0) / recent.length;
+    
+    return recentAvg > stats.avg * 1.5;
+  }
+}
+
+// Usage
+const memoryMonitor = new MemoryMonitor();
+
+// Monitor memory every 5 seconds
+setInterval(() => {
+  memoryMonitor.measure();
+  
+  if (memoryMonitor.detectMemoryLeaks()) {
+    console.warn('Potential memory leak detected');
+  }
+}, 5000);
+```
+{% endraw %}
+
+### **Performance Profiling**
+
+{% raw %}
+```typescript
+// Performance profiling utilities
+class PerformanceProfiler {
+  private profiles = new Map<string, any>();
+  
+  profile<T>(name: string, fn: () => T): T {
+    const start = performance.now();
+    const startMemory = this.getMemoryUsage();
+    
+    const result = fn();
+    
+    const end = performance.now();
+    const endMemory = this.getMemoryUsage();
+    
+    const profile = {
+      name,
+      duration: end - start,
+      memoryDelta: endMemory - startMemory,
+      timestamp: Date.now()
+    };
+    
+    this.profiles.set(name, profile);
+    return result;
+  }
+  
+  async profileAsync<T>(name: string, fn: () => Promise<T>): Promise<T> {
+    const start = performance.now();
+    const startMemory = this.getMemoryUsage();
+    
+    const result = await fn();
+    
+    const end = performance.now();
+    const endMemory = this.getMemoryUsage();
+    
+    const profile = {
+      name,
+      duration: end - start,
+      memoryDelta: endMemory - startMemory,
+      timestamp: Date.now()
+    };
+    
+    this.profiles.set(name, profile);
+    return result;
+  }
+  
+  getProfile(name: string): any {
+    return this.profiles.get(name);
+  }
+  
+  getAllProfiles(): any[] {
+    return Array.from(this.profiles.values());
+  }
+  
+  private getMemoryUsage(): number {
+    if ('memory' in performance) {
+      return (performance as any).memory.usedJSHeapSize;
+    }
+    return 0;
+  }
+}
+
+// Usage
+const profiler = new PerformanceProfiler();
+
+const result = profiler.profile('data-processing', () => {
+  // Expensive operation
+  return processLargeDataset();
+});
+
+const asyncResult = await profiler.profileAsync('async-operation', async () => {
+  // Async operation
+  return await fetchData();
+});
+```
+{% endraw %}
+
+---
+
+## ✅ **Best Practices**
+
+### **1. Optimize Object Shapes**
+
+{% raw %}
+```typescript
+// ✅ Good: Consistent object shapes
+interface User {
+  id: number;
+  name: string;
+  email: string;
+}
+
+function createUser(id: number, name: string, email: string): User {
+  return { id, name, email };
+}
+
+// ❌ Avoid: Inconsistent object shapes
+function createUserBad(id: number, name: string, email?: string) {
+  const user: any = { id, name };
+  if (email) user.email = email;
+  return user;
+}
+```
+{% endraw %}
+
+### **2. Use Appropriate Data Structures**
+
+{% raw %}
+```typescript
+// ✅ Good: Use Set for unique values
+function getUniqueValues(arr: any[]): any[] {
+  return Array.from(new Set(arr));
+}
+
+// ❌ Avoid: Use array for unique values
+function getUniqueValuesBad(arr: any[]): any[] {
+  const unique: any[] = [];
+  for (const item of arr) {
+    if (!unique.includes(item)) {
+      unique.push(item);
+    }
+  }
+  return unique;
+}
+```
+{% endraw %}
+
+### **3. Optimize Algorithms**
+
+{% raw %}
+```typescript
+// ✅ Good: O(n) time complexity
+function findDuplicates(arr: number[]): number[] {
+  const seen = new Set<number>();
+  const duplicates = new Set<number>();
+  
+  for (const num of arr) {
+    if (seen.has(num)) {
+      duplicates.add(num);
+    } else {
+      seen.add(num);
+    }
+  }
+  
+  return Array.from(duplicates);
+}
+
+// ❌ Avoid: O(n²) time complexity
+function findDuplicatesBad(arr: number[]): number[] {
+  const duplicates: number[] = [];
+  
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = i + 1; j < arr.length; j++) {
+      if (arr[i] === arr[j] && !duplicates.includes(arr[i])) {
+        duplicates.push(arr[i]);
+      }
+    }
+  }
+  
+  return duplicates;
+}
+```
+{% endraw %}
+
+### **4. Monitor Performance**
+
+{% raw %}
+```typescript
+// ✅ Good: Monitor performance
+const monitor = new PerformanceMonitor();
+
+function expensiveOperation() {
+  monitor.start('expensive-operation');
+  
+  // Operation code
+  
+  const duration = monitor.end('expensive-operation');
+  console.log(`Operation took ${duration}ms`);
+}
+
+// ❌ Avoid: No performance monitoring
+function expensiveOperation() {
+  // Operation code without monitoring
+}
+```
+{% endraw %}
+
+---
+
+## ❓ **Common Interview Questions**
+
+### **1. How do you optimize TypeScript runtime performance?**
+
+**Answer:**
+- **Object Shapes**: Use consistent object shapes for V8 optimization
+- **Data Structures**: Choose appropriate data structures (Set, Map, Array)
+- **Algorithms**: Optimize time and space complexity
+- **Memory Management**: Avoid memory leaks and optimize garbage collection
+- **Monitoring**: Use performance monitoring tools
+
+### **2. What are the performance implications of TypeScript types?**
+
+**Answer:**
+- **Type Erasure**: Types are removed at runtime, no performance impact
+- **Interfaces**: Don't exist at runtime, no performance impact
+- **Enums**: Become objects or numbers at runtime
+- **Generics**: Are erased at runtime
+- **Decorators**: May add runtime overhead
+
+### **3. How do you prevent memory leaks in TypeScript?**
+
+**Answer:**
+- **Event Listeners**: Remove event listeners when no longer needed
+- **Timers**: Clear timers and intervals
+- **Closures**: Avoid circular references
+- **DOM References**: Clear DOM references
+- **Caches**: Limit cache size and implement cleanup
+
+### **4. What data structures should you use for performance?**
+
+**Answer:**
+- **Arrays**: For indexed access and iteration
+- **Objects**: For key-value access with string keys
+- **Sets**: For unique values and fast lookups
+- **Maps**: For complex keys and better performance
+- **WeakMaps**: For object keys with automatic cleanup
+
+### **5. How do you monitor performance in TypeScript applications?**
+
+**Answer:**
+- **Performance API**: Use performance.mark() and performance.measure()
+- **Memory API**: Use performance.memory for memory monitoring
+- **Profiling**: Implement custom profiling utilities
+- **Monitoring**: Use tools like Chrome DevTools
+- **Metrics**: Track execution time, memory usage, and throughput
+
+---
+
+## 🧭 Navigation
+
+<div class="navigation">
+  <a href="01-Compilation-Performance.md" class="nav-button">← Previous: Compilation Performance</a>
+  <a href="03-Bundle-Size-Optimization.md" class="nav-button">Next: Bundle Size Optimization →</a>
+</div>
+
+*Last updated: December 2025*

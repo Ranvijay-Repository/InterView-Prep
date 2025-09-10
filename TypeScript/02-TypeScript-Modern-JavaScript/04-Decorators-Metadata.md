@@ -26,6 +26,7 @@ Decorators are a special kind of declaration that can be attached to classes, me
 
 ### **Enabling Decorators**
 
+
 ```json
 // tsconfig.json
 {
@@ -37,7 +38,9 @@ Decorators are a special kind of declaration that can be attached to classes, me
 }
 ```
 
+
 ### **Basic Decorator Syntax**
+
 
 ```typescript
 // Simple decorator function
@@ -64,6 +67,7 @@ class MyClass {
 }
 ```
 
+
 ---
 
 ## 🏗️ **Class Decorators**
@@ -71,6 +75,7 @@ class MyClass {
 Class decorators are applied to class constructors and can modify or replace the class definition.
 
 ### **Basic Class Decorator**
+
 
 ```typescript
 // Class decorator that adds a property
@@ -94,7 +99,9 @@ const user = new User("John");
 console.log(user.createdAt); // Current timestamp
 ```
 
+
 ### **Class Decorator with Parameters**
+
 
 ```typescript
 // Class decorator factory
@@ -122,7 +129,9 @@ console.log(instance.version); // "1.0.0"
 console.log(instance.author);  // "John Doe"
 ```
 
+
 ### **Class Decorator for Validation**
+
 
 ```typescript
 // Validation decorator
@@ -165,6 +174,7 @@ class User {
 }
 ```
 
+
 ---
 
 ## 🔧 **Method Decorators**
@@ -172,6 +182,7 @@ class User {
 Method decorators are applied to method definitions and can modify method behavior.
 
 ### **Basic Method Decorator**
+
 
 ```typescript
 // Method decorator that logs method calls
@@ -205,7 +216,9 @@ const calc = new Calculator();
 calc.add(2, 3); // Logs method call and result
 ```
 
+
 ### **Method Decorator with Parameters**
+
 
 ```typescript
 // Method decorator factory
@@ -245,7 +258,9 @@ class ApiService {
 }
 ```
 
+
 ### **Method Decorator for Caching**
+
 
 ```typescript
 // Caching decorator
@@ -290,6 +305,7 @@ class DataService {
 }
 ```
 
+
 ---
 
 ## 📊 **Property Decorators**
@@ -297,6 +313,7 @@ class DataService {
 Property decorators are applied to property declarations and can modify property behavior.
 
 ### **Basic Property Decorator**
+
 
 ```typescript
 // Property decorator that adds validation
@@ -330,7 +347,9 @@ class User {
 }
 ```
 
+
 ### **Property Decorator with Getter/Setter**
+
 
 ```typescript
 // Property decorator that adds getter/setter
@@ -369,6 +388,7 @@ person.name = "John"; // Logs: Setting name: John
 console.log(person.name); // Logs: Getting name: John
 ```
 
+
 ---
 
 ## 📝 **Parameter Decorators**
@@ -376,6 +396,7 @@ console.log(person.name); // Logs: Getting name: John
 Parameter decorators are applied to parameter declarations and can modify parameter behavior.
 
 ### **Basic Parameter Decorator**
+
 
 ```typescript
 // Parameter decorator that logs parameter values
@@ -409,6 +430,7 @@ class Service {
 }
 ```
 
+
 ---
 
 ## 🔍 **Metadata Reflection**
@@ -416,6 +438,7 @@ class Service {
 TypeScript's metadata reflection API allows you to access and modify metadata at runtime.
 
 ### **Basic Metadata Operations**
+
 
 ```typescript
 import "reflect-metadata";
@@ -437,7 +460,9 @@ const keys = Reflect.getMetadataKeys(target);
 const keys = Reflect.getMetadataKeys(target, propertyKey);
 ```
 
+
 ### **Metadata with Decorators**
+
 
 ```typescript
 // Custom metadata decorator
@@ -469,7 +494,9 @@ const nameRequired = Reflect.getMetadata("required", MyClass.prototype, "name");
 const statusDefault = Reflect.getMetadata("default", MyClass.prototype, "status");
 ```
 
+
 ### **Metadata for Dependency Injection**
+
 
 ```typescript
 // Injectable decorator
@@ -511,11 +538,13 @@ class Container {
 }
 ```
 
+
 ---
 
 ## 🚀 **Advanced Decorator Patterns**
 
 ### **Decorator Composition**
+
 
 ```typescript
 // Compose multiple decorators
@@ -546,7 +575,9 @@ class MyClass {
 }
 ```
 
+
 ### **Conditional Decorators**
+
 
 ```typescript
 // Conditional decorator
@@ -576,11 +607,13 @@ class MyClass {
 }
 ```
 
+
 ---
 
 ## ✅ **Best Practices**
 
 ### **1. Use Decorators for Cross-Cutting Concerns**
+
 
 ```typescript
 // ✅ Good: Use decorators for logging, caching, validation
@@ -598,7 +631,9 @@ async processOrder(order: Order): Promise<void> {
 }
 ```
 
+
 ### **2. Keep Decorators Simple and Focused**
+
 
 ```typescript
 // ✅ Good: Simple, focused decorator
@@ -616,7 +651,9 @@ function complexDecorator(target: any, propertyKey: string, descriptor: Property
 }
 ```
 
+
 ### **3. Use Metadata for Configuration**
+
 
 ```typescript
 // ✅ Good: Use metadata for configuration
@@ -636,6 +673,7 @@ class MyClass {
 }
 ```
 
+
 ---
 
 ## ❓ **Common Interview Questions**
@@ -650,6 +688,7 @@ Decorators are special declarations that can be attached to classes, methods, pr
 **Answer:**
 Enable in `tsconfig.json`:
 
+
 ```json
 {
   "compilerOptions": {
@@ -658,6 +697,7 @@ Enable in `tsconfig.json`:
   }
 }
 ```
+
 
 ### **3. What are the different types of decorators?**
 
@@ -672,6 +712,7 @@ Enable in `tsconfig.json`:
 **Answer:**
 Use the `reflect-metadata` library and `Reflect.defineMetadata()` and `Reflect.getMetadata()`:
 
+
 ```typescript
 import "reflect-metadata";
 
@@ -681,6 +722,7 @@ function metadata(key: string, value: any) {
   };
 }
 ```
+
 
 ### **5. What are some common use cases for decorators?**
 

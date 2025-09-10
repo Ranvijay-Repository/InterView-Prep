@@ -25,6 +25,7 @@ Codegen and TurboModules work together to provide type-safe, high-performance na
 
 ### **Codegen & TurboModules Overview**
 
+
 ```
 ┌─────────────────────────────────────┐
 │        Codegen & TurboModules       │
@@ -52,6 +53,7 @@ Codegen and TurboModules work together to provide type-safe, high-performance na
 └─────────────────────────────────────┘
 ```
 
+
 ---
 
 ## 🔧 **Codegen Overview**
@@ -59,6 +61,7 @@ Codegen and TurboModules work together to provide type-safe, high-performance na
 ### **TurboModule Specification Example**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // TurboModule Specification (TypeScript)
 // This file defines the interface for the native module
@@ -165,9 +168,11 @@ export enum Status {
 export default TurboModuleRegistry.get<Spec>('MyTurboModule');
 ```
 
+
 ### **Generated Code Usage**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Generated TurboModule Usage
 import MyTurboModule from './MyTurboModule';
@@ -379,6 +384,7 @@ class TurboModuleExample {
 
 export default TurboModuleExample;
 ```
+
 
 ---
 

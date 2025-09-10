@@ -25,6 +25,7 @@ Setting up TypeScript with Vue.js requires proper configuration and understandin
 
 ### **Basic Setup**
 
+
 ```bash
 # Create Vue app with TypeScript
 npm create vue@latest my-app
@@ -35,7 +36,9 @@ npm install --save-dev typescript @vue/tsconfig
 npm install --save-dev @types/node
 ```
 
+
 ### **TypeScript Configuration**
+
 
 ```json
 // tsconfig.json
@@ -59,7 +62,9 @@ npm install --save-dev @types/node
 }
 ```
 
+
 ### **Vite Configuration**
+
 
 ```typescript
 // vite.config.ts
@@ -77,18 +82,20 @@ export default defineConfig({
 })
 ```
 
+
 ---
 
 ## 🧩 **Component Typing**
 
 ### **Options API with TypeScript**
 
+
 ```vue
 <!-- UserCard.vue -->
 <template>
   <div class="user-card">
-    <h3>{{ user.name }}</h3>
-    <p>{{ user.email }}</p>
+    <h3>{{#123;{{#123; user.name }}#125;}}#125;</h3>
+    <p>{{#123;{{#123; user.email }}#125;}}#125;</p>
     <button @click="handleEdit">Edit</button>
   </div>
 </template>
@@ -120,7 +127,9 @@ export default defineComponent({
 </script>
 ```
 
+
 ### **Composition API with TypeScript**
+
 
 ```vue
 <!-- UserList.vue -->
@@ -171,17 +180,19 @@ onMounted(() => {
 </script>
 ```
 
+
 ### **Generic Components**
+
 
 ```vue
 <!-- GenericList.vue -->
 <template>
   <div class="generic-list">
-    <h3>{{ title }}</h3>
+    <h3>{{#123;{{#123; title }}#125;}}#125;</h3>
     <ul>
       <li v-for="item in items" :key="keyExtractor(item)">
         <slot :item="item" :index="items.indexOf(item)">
-          {{ item }}
+          {{#123;{{#123; item }}#125;}}#125;
         </slot>
       </li>
     </ul>
@@ -201,11 +212,13 @@ defineProps<Props<T>>()
 </script>
 ```
 
+
 ---
 
 ## 🎣 **Composition API**
 
 ### **Reactive and Ref**
+
 
 ```typescript
 // Composition API with TypeScript
@@ -254,7 +267,9 @@ watch(
 )
 ```
 
+
 ### **Custom Composables**
+
 
 ```typescript
 // useApi.ts
@@ -308,7 +323,9 @@ onMounted(() => {
 </script>
 ```
 
+
 ### **Lifecycle Hooks**
+
 
 ```typescript
 // Lifecycle hooks with TypeScript
@@ -355,11 +372,13 @@ export default defineComponent({
 })
 ```
 
+
 ---
 
 ## 📝 **Props and Emits**
 
 ### **Props Typing**
+
 
 ```vue
 <!-- UserForm.vue -->
@@ -404,14 +423,16 @@ const handleSubmit = () => {
 </script>
 ```
 
+
 ### **Emits Typing**
+
 
 ```vue
 <!-- UserCard.vue -->
 <template>
   <div class="user-card">
-    <h3>{{ user.name }}</h3>
-    <p>{{ user.email }}</p>
+    <h3>{{#123;{{#123; user.name }}#125;}}#125;</h3>
+    <p>{{#123;{{#123; user.email }}#125;}}#125;</p>
     <button @click="handleEdit">Edit</button>
     <button @click="handleDelete">Delete</button>
   </div>
@@ -451,7 +472,9 @@ const handleUpdate = (updatedUser: User) => {
 </script>
 ```
 
+
 ### **Complex Props**
+
 
 ```vue
 <!-- DataTable.vue -->
@@ -460,7 +483,7 @@ const handleUpdate = (updatedUser: User) => {
     <thead>
       <tr>
         <th v-for="column in columns" :key="column.key">
-          {{ column.title }}
+          {{#123;{{#123; column.title }}#125;}}#125;
         </th>
       </tr>
     </thead>
@@ -472,7 +495,7 @@ const handleUpdate = (updatedUser: User) => {
             :item="item" 
             :value="item[column.key]"
           >
-            {{ item[column.key] }}
+            {{#123;{{#123; item[column.key] }}#125;}}#125;
           </slot>
         </td>
       </tr>
@@ -498,11 +521,13 @@ defineProps<Props<T>>()
 </script>
 ```
 
+
 ---
 
 ## 🔄 **Reactive Data**
 
 ### **Reactive Objects**
+
 
 ```typescript
 // Reactive objects with TypeScript
@@ -541,7 +566,9 @@ const fetchUsers = async () => {
 }
 ```
 
+
 ### **Computed Properties**
+
 
 ```typescript
 // Computed properties with TypeScript
@@ -586,7 +613,9 @@ const isAllSelected = computed({
 })
 ```
 
+
 ### **Watchers**
+
 
 ```typescript
 // Watchers with TypeScript
@@ -623,11 +652,13 @@ watchEffect(() => {
 })
 ```
 
+
 ---
 
 ## 🚀 **Advanced Patterns**
 
 ### **Provide/Inject**
+
 
 ```typescript
 // Provide/Inject with TypeScript
@@ -673,7 +704,9 @@ const users = await userService.getUsers()
 </script>
 ```
 
+
 ### **Custom Directives**
+
 
 ```typescript
 // Custom directive with TypeScript
@@ -707,7 +740,9 @@ const vFocus: Directive<HTMLElement, VFocusBinding> = {
 </template>
 ```
 
+
 ### **Plugin Development**
+
 
 ```types
 // Plugin with TypeScript
@@ -767,11 +802,13 @@ export const apiPlugin: Plugin = {
 }
 ```
 
+
 ---
 
 ## ✅ **Best Practices**
 
 ### **1. Use Strict Typing**
+
 
 ```typescript
 // ✅ Good: Strict typing
@@ -787,7 +824,9 @@ const users = ref<User[]>([])
 const users = ref<any[]>([])
 ```
 
+
 ### **2. Use Composition API**
+
 
 ```typescript
 // ✅ Good: Composition API
@@ -813,7 +852,9 @@ export default defineComponent({
 </script>
 ```
 
+
 ### **3. Use Custom Composables**
+
 
 ```typescript
 // ✅ Good: Custom composable
@@ -831,7 +872,9 @@ const count2 = ref(0)
 const increment2 = () => count2.value++
 ```
 
+
 ### **4. Use Proper Event Types**
+
 
 ```typescript
 // ✅ Good: Proper event types
@@ -846,6 +889,7 @@ const handleClick = (event: any) => {
   // Handle click
 }
 ```
+
 
 ---
 
@@ -868,6 +912,7 @@ const handleClick = (event: any) => {
 ### **3. How do you type props in Vue 3 with TypeScript?**
 
 **Answer:**
+
 ```typescript
 interface Props {
   title: string
@@ -877,9 +922,11 @@ interface Props {
 defineProps<Props>()
 ```
 
+
 ### **4. How do you create custom composables with TypeScript?**
 
 **Answer:**
+
 ```typescript
 const useApi = <T>(url: string) => {
   const data = ref<T | null>(null)
@@ -889,9 +936,11 @@ const useApi = <T>(url: string) => {
 }
 ```
 
+
 ### **5. How do you handle emits in Vue 3 with TypeScript?**
 
 **Answer:**
+
 ```typescript
 interface Emits {
   update: [value: string]
@@ -900,6 +949,7 @@ interface Emits {
 
 const emit = defineEmits<Emits>()
 ```
+
 
 ---
 

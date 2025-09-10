@@ -26,6 +26,7 @@ Modern state management libraries offer simpler alternatives to Redux, focusing 
 
 ### **Modern State Solutions Overview**
 
+
 ```
 ┌─────────────────────────────────────┐
 │        Modern State Solutions       │
@@ -50,6 +51,7 @@ Modern state management libraries offer simpler alternatives to Redux, focusing 
 └─────────────────────────────────────┘
 ```
 
+
 ---
 
 ## 🐻 **Zustand**
@@ -57,6 +59,7 @@ Modern state management libraries offer simpler alternatives to Redux, focusing 
 ### **Basic Zustand Setup**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // store/useCounterStore.js
 import { create } from 'zustand';
@@ -91,9 +94,11 @@ export const useCounterStore = create<CounterState>()(
 );
 ```
 
+
 ### **Zustand with Async Actions**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // store/useUserStore.js
 import { create } from 'zustand';
@@ -191,9 +196,11 @@ export const useUserStore = create<UserState>()(
 );
 ```
 
+
 ### **Zustand Component Usage**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 import React, { useEffect } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, FlatList, ActivityIndicator } from 'react-native';
@@ -393,6 +400,7 @@ const styles = StyleSheet.create({
 
 export default ZustandExample;
 ```
+
 
 ---
 

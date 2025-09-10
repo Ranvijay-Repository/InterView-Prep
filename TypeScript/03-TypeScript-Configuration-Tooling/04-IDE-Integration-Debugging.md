@@ -25,6 +25,7 @@ Modern IDEs provide excellent TypeScript support with IntelliSense, debugging, a
 
 ### **Popular IDEs with TypeScript Support**
 
+
 ```typescript
 // IDE comparison for TypeScript
 const ideSupport = {
@@ -46,7 +47,9 @@ const ideSupport = {
 };
 ```
 
+
 ### **Essential TypeScript IDE Features**
+
 
 ```typescript
 // Key features for TypeScript development
@@ -59,6 +62,7 @@ const essentialFeatures = {
 };
 ```
 
+
 ---
 
 ## 💻 **VS Code Setup**
@@ -66,6 +70,7 @@ const essentialFeatures = {
 VS Code provides excellent TypeScript support out of the box.
 
 ### **Basic VS Code Configuration**
+
 
 ```json
 // .vscode/settings.json
@@ -80,7 +85,9 @@ VS Code provides excellent TypeScript support out of the box.
 }
 ```
 
+
 ### **Advanced VS Code Configuration**
+
 
 ```json
 // .vscode/settings.json
@@ -105,7 +112,9 @@ VS Code provides excellent TypeScript support out of the box.
 }
 ```
 
+
 ### **VS Code Extensions**
+
 
 ```json
 // .vscode/extensions.json
@@ -124,6 +133,7 @@ VS Code provides excellent TypeScript support out of the box.
 }
 ```
 
+
 ---
 
 ## 🧠 **IntelliSense & Autocomplete**
@@ -131,6 +141,7 @@ VS Code provides excellent TypeScript support out of the box.
 IntelliSense provides intelligent code completion and suggestions.
 
 ### **Basic IntelliSense Features**
+
 
 ```typescript
 // IntelliSense provides:
@@ -159,7 +170,9 @@ function createUser(name: string, email: string, age?: number): User {
 createUser( // <- Shows: (name: string, email: string, age?: number) => User
 ```
 
+
 ### **Advanced IntelliSense Configuration**
+
 
 ```json
 // .vscode/settings.json
@@ -181,7 +194,9 @@ createUser( // <- Shows: (name: string, email: string, age?: number) => User
 }
 ```
 
+
 ### **IntelliSense with Generics**
+
 
 ```typescript
 // IntelliSense works with generics
@@ -203,6 +218,7 @@ const productResponse = await fetchData<Product[]>("/api/products");
 // productResponse.data. <- IntelliSense shows Product[] methods
 ```
 
+
 ---
 
 ## 🐛 **Debugging Configuration**
@@ -210,6 +226,7 @@ const productResponse = await fetchData<Product[]>("/api/products");
 Proper debugging setup is essential for TypeScript development.
 
 ### **VS Code Debug Configuration**
+
 
 ```json
 // .vscode/launch.json
@@ -249,7 +266,9 @@ Proper debugging setup is essential for TypeScript development.
 }
 ```
 
+
 ### **Node.js Debugging**
+
 
 ```typescript
 // Debugging with Node.js
@@ -273,7 +292,9 @@ server.listen(PORT, () => {
 });
 ```
 
+
 ### **Browser Debugging**
+
 
 ```typescript
 // Browser debugging with source maps
@@ -303,6 +324,7 @@ const userService = new UserService();
 userService.fetchUser(1); // Debug this call
 ```
 
+
 ---
 
 ## 🔍 **Linting & Formatting**
@@ -310,6 +332,7 @@ userService.fetchUser(1); // Debug this call
 Linting and formatting ensure code quality and consistency.
 
 ### **ESLint Configuration**
+
 
 ```json
 // .eslintrc.json
@@ -336,7 +359,9 @@ Linting and formatting ensure code quality and consistency.
 }
 ```
 
+
 ### **Prettier Configuration**
+
 
 ```json
 // .prettierrc
@@ -352,7 +377,9 @@ Linting and formatting ensure code quality and consistency.
 }
 ```
 
+
 ### **VS Code Formatting Settings**
+
 
 ```json
 // .vscode/settings.json
@@ -370,11 +397,13 @@ Linting and formatting ensure code quality and consistency.
 }
 ```
 
+
 ---
 
 ## 🚀 **Advanced IDE Features**
 
 ### **Code Navigation**
+
 
 ```typescript
 // Advanced navigation features
@@ -402,7 +431,9 @@ const userService = new UserService();
 userService.fetchUser(1);
 ```
 
+
 ### **Refactoring Tools**
+
 
 ```typescript
 // Refactoring examples
@@ -433,7 +464,9 @@ class DataProcessor {
 }
 ```
 
+
 ### **Code Snippets**
+
 
 ```json
 // .vscode/typescript.json
@@ -462,11 +495,13 @@ class DataProcessor {
 }
 ```
 
+
 ---
 
 ## ✅ **Best Practices**
 
 ### **1. Configure IntelliSense Properly**
+
 
 ```json
 // ✅ Good: Enable all IntelliSense features
@@ -483,7 +518,9 @@ class DataProcessor {
 }
 ```
 
+
 ### **2. Use Source Maps for Debugging**
+
 
 ```json
 // ✅ Good: Enable source maps
@@ -502,7 +539,9 @@ class DataProcessor {
 }
 ```
 
+
 ### **3. Configure Linting and Formatting**
+
 
 ```json
 // ✅ Good: Enable linting and formatting
@@ -521,7 +560,9 @@ class DataProcessor {
 }
 ```
 
+
 ### **4. Use Debug Configurations**
+
 
 ```json
 // ✅ Good: Proper debug configuration
@@ -543,6 +584,7 @@ class DataProcessor {
 }
 ```
 
+
 ---
 
 ## ❓ **Common Interview Questions**
@@ -551,6 +593,7 @@ class DataProcessor {
 
 **Answer:**
 Create a `.vscode/launch.json` file with proper configuration:
+
 
 ```json
 {
@@ -562,6 +605,7 @@ Create a `.vscode/launch.json` file with proper configuration:
   "sourceMaps": true
 }
 ```
+
 
 ### **2. What are the benefits of using IntelliSense with TypeScript?**
 
@@ -576,6 +620,7 @@ Create a `.vscode/launch.json` file with proper configuration:
 **Answer:**
 Use `@typescript-eslint/parser` and `@typescript-eslint/recommended`:
 
+
 ```json
 {
   "extends": ["@typescript-eslint/recommended"],
@@ -583,6 +628,7 @@ Use `@typescript-eslint/parser` and `@typescript-eslint/recommended`:
   "plugins": ["@typescript-eslint"]
 }
 ```
+
 
 ### **4. What's the difference between source maps and inline source maps?**
 
@@ -595,12 +641,14 @@ Use `@typescript-eslint/parser` and `@typescript-eslint/recommended`:
 **Answer:**
 Configure in settings:
 
+
 ```json
 {
   "typescript.suggest.autoImports": true,
   "typescript.preferences.includePackageJsonAutoImports": "auto"
 }
 ```
+
 
 ---
 

@@ -24,6 +24,7 @@ TypeScript compiles to JavaScript, so runtime performance depends on the generat
 
 ### **Performance Factors**
 
+
 ```typescript
 // Factors affecting TypeScript runtime performance
 const performanceFactors = {
@@ -53,7 +54,9 @@ const performanceGoals = {
 };
 ```
 
+
 ### **TypeScript to JavaScript**
+
 
 ```typescript
 // TypeScript code
@@ -90,11 +93,13 @@ const performanceConsiderations = {
 };
 ```
 
+
 ---
 
 ## ⚡ **JavaScript Performance**
 
 ### **V8 Engine Optimization**
+
 
 ```typescript
 // V8 engine optimization patterns
@@ -136,7 +141,9 @@ function processUsersBad(users: any[]) {
 }
 ```
 
+
 ### **Function Optimization**
+
 
 ```typescript
 // Function optimization patterns
@@ -175,7 +182,9 @@ const optimizationTechniques = {
 };
 ```
 
+
 ### **Object and Array Performance**
+
 
 ```typescript
 // Object and array performance
@@ -226,11 +235,13 @@ function processNumbersBad(numbers: number[]): number[] {
 }
 ```
 
+
 ---
 
 ## 🧠 **Memory Management**
 
 ### **Memory Optimization**
+
 
 ```typescript
 // Memory optimization techniques
@@ -287,7 +298,9 @@ class ArrayPool {
 }
 ```
 
+
 ### **Garbage Collection Optimization**
+
 
 ```typescript
 // Garbage collection optimization
@@ -345,7 +358,9 @@ class WeakReferenceExample {
 }
 ```
 
+
 ### **Memory Leak Prevention**
+
 
 ```typescript
 // Memory leak prevention
@@ -412,11 +427,13 @@ class TimerManager {
 }
 ```
 
+
 ---
 
 ## 🔧 **Code Optimization**
 
 ### **Algorithm Optimization**
+
 
 ```typescript
 // Algorithm optimization
@@ -484,7 +501,9 @@ const expensiveCalculation = memoize((n: number): number => {
 });
 ```
 
+
 ### **Data Structure Optimization**
+
 
 ```typescript
 // Data structure optimization
@@ -537,7 +556,9 @@ function processDataBad(data: Array<{id: string, value: number}>) {
 }
 ```
 
+
 ### **String and Number Optimization**
+
 
 ```typescript
 // String and number optimization
@@ -582,11 +603,13 @@ function parseNumberBad(str: string): number {
 }
 ```
 
+
 ---
 
 ## 📊 **Performance Monitoring**
 
 ### **Performance Measurement**
+
 
 ```typescript
 // Performance measurement utilities
@@ -647,7 +670,9 @@ function expensiveOperation() {
 }
 ```
 
+
 ### **Memory Monitoring**
+
 
 ```typescript
 // Memory monitoring utilities
@@ -706,7 +731,9 @@ setInterval(() => {
 }, 5000);
 ```
 
+
 ### **Performance Profiling**
+
 
 ```typescript
 // Performance profiling utilities
@@ -783,11 +810,13 @@ const asyncResult = await profiler.profileAsync('async-operation', async () => {
 });
 ```
 
+
 ---
 
 ## ✅ **Best Practices**
 
 ### **1. Optimize Object Shapes**
+
 
 ```typescript
 // ✅ Good: Consistent object shapes
@@ -809,7 +838,9 @@ function createUserBad(id: number, name: string, email?: string) {
 }
 ```
 
+
 ### **2. Use Appropriate Data Structures**
+
 
 ```typescript
 // ✅ Good: Use Set for unique values
@@ -829,7 +860,9 @@ function getUniqueValuesBad(arr: any[]): any[] {
 }
 ```
 
+
 ### **3. Optimize Algorithms**
+
 
 ```typescript
 // ✅ Good: O(n) time complexity
@@ -864,7 +897,9 @@ function findDuplicatesBad(arr: number[]): number[] {
 }
 ```
 
+
 ### **4. Monitor Performance**
+
 
 ```typescript
 // ✅ Good: Monitor performance
@@ -884,6 +919,7 @@ function expensiveOperation() {
   // Operation code without monitoring
 }
 ```
+
 
 ---
 

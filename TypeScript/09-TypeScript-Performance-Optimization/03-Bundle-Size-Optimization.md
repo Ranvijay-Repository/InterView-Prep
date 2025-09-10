@@ -24,6 +24,7 @@ Bundle size optimization is crucial for web performance, affecting load times, u
 
 ### **Bundle Size Factors**
 
+
 ```typescript
 // Factors affecting bundle size
 const bundleSizeFactors = {
@@ -54,7 +55,9 @@ const bundleSizeGoals = {
 };
 ```
 
+
 ### **Bundle Analysis**
+
 
 ```typescript
 // Bundle analysis tools
@@ -105,11 +108,13 @@ function monitorBundleSize() {
 }
 ```
 
+
 ---
 
 ## 🌳 **Tree Shaking**
 
 ### **Tree Shaking Configuration**
+
 
 ```typescript
 // Tree shaking configuration
@@ -155,7 +160,9 @@ import { debounce, throttle } from 'lodash-es';
 import _ from 'lodash';
 ```
 
+
 ### **Tree Shaking Best Practices**
+
 
 ```typescript
 // Tree shaking best practices
@@ -198,7 +205,9 @@ function testTreeShaking() {
 }
 ```
 
+
 ### **Tree Shaking with Lodash**
+
 
 ```typescript
 // Tree shaking with Lodash
@@ -238,11 +247,13 @@ const webpackConfig = {
 };
 ```
 
+
 ---
 
 ## 🔀 **Code Splitting**
 
 ### **Dynamic Imports**
+
 
 ```typescript
 // Dynamic imports for code splitting
@@ -303,7 +314,9 @@ const vendorSplitting = {
 };
 ```
 
+
 ### **Webpack Code Splitting**
+
 
 ```typescript
 // Webpack code splitting configuration
@@ -359,7 +372,9 @@ const splitChunksConfig = {
 };
 ```
 
+
 ### **Rollup Code Splitting**
+
 
 ```typescript
 // Rollup code splitting configuration
@@ -396,11 +411,13 @@ const dynamicImportsRollup = {
 };
 ```
 
+
 ---
 
 ## 📥 **Import Optimization**
 
 ### **Import Strategies**
+
 
 ```typescript
 // Import optimization strategies
@@ -436,7 +453,9 @@ export { default as math } from './math';
 export { default as _ } from 'lodash';
 ```
 
+
 ### **Barrel Export Optimization**
+
 
 ```typescript
 // Barrel export optimization
@@ -472,7 +491,9 @@ const conditionalExports = {
 };
 ```
 
+
 ### **Import Analysis**
+
 
 ```typescript
 // Import analysis tools
@@ -526,11 +547,13 @@ function monitorImports() {
 }
 ```
 
+
 ---
 
 ## 🛠️ **Build Tool Configuration**
 
 ### **Webpack Configuration**
+
 
 ```typescript
 // Webpack bundle optimization
@@ -580,7 +603,9 @@ const webpackTreeShaking = {
 };
 ```
 
+
 ### **Rollup Configuration**
+
 
 ```typescript
 // Rollup bundle optimization
@@ -622,7 +647,9 @@ const rollupTreeShaking = {
 };
 ```
 
+
 ### **esbuild Configuration**
+
 
 ```typescript
 // esbuild bundle optimization
@@ -649,11 +676,13 @@ const esbuildCodeSplitting = {
 };
 ```
 
+
 ---
 
 ## ✅ **Best Practices**
 
 ### **1. Use Tree Shaking**
+
 
 ```typescript
 // ✅ Good: Tree-shakeable imports
@@ -663,7 +692,9 @@ import { debounce, throttle } from 'lodash-es';
 import _ from 'lodash';
 ```
 
+
 ### **2. Implement Code Splitting**
+
 
 ```typescript
 // ✅ Good: Code splitting
@@ -673,7 +704,9 @@ const LazyComponent = lazy(() => import('./LazyComponent'));
 import LazyComponent from './LazyComponent';
 ```
 
+
 ### **3. Optimize Imports**
+
 
 ```typescript
 // ✅ Good: Specific imports
@@ -683,7 +716,9 @@ import { useState, useEffect } from 'react';
 import * as React from 'react';
 ```
 
+
 ### **4. Configure Build Tools**
+
 
 ```typescript
 // ✅ Good: Optimized build configuration
@@ -701,6 +736,7 @@ const config = {
   optimization: {}
 };
 ```
+
 
 ---
 

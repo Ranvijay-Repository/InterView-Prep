@@ -55,6 +55,7 @@ The issue where workflows were running on pushes to the `master` branch has been
 
 ## 🚀 **Workflow Flow Diagram**
 
+
 ```
 ┌─────────────────┐
 │   Push to       │
@@ -98,6 +99,7 @@ The issue where workflows were running on pushes to the `master` branch has been
     🚀 GITHUB PAGES UPDATED
 ```
 
+
 ## 📋 **Proper Workflow Process**
 
 ### **For Contributors:**
@@ -116,6 +118,7 @@ The issue where workflows were running on pushes to the `master` branch has been
 ## 🔍 **How to Verify the Fix**
 
 ### **1. Test Direct Push to Production**
+
 ```bash
 # This should now FAIL with clear error message
 git checkout production
@@ -126,7 +129,9 @@ git push origin production
 # ❌ Should fail with blocking workflow
 ```
 
+
 ### **2. Test PR Merge to Production**
+
 ```bash
 # This should work and deploy
 git checkout -b feature/test-deployment
@@ -138,7 +143,9 @@ git push origin feature/test-deployment
 # ✅ Should deploy successfully
 ```
 
+
 ### **3. Test Push to Master**
+
 ```bash
 # This should do nothing (no workflows)
 git checkout master
@@ -148,6 +155,7 @@ git commit -m "Test master push"
 git push origin master
 # ✅ No workflows should run
 ```
+
 
 ## 🎉 **Result**
 

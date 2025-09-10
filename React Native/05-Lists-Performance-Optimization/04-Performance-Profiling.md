@@ -25,6 +25,7 @@ Performance profiling is essential for identifying bottlenecks and optimizing Re
 
 ### **Performance Profiling Overview**
 
+
 ```
 ┌─────────────────────────────────────┐
 │        Performance Profiling        │
@@ -52,6 +53,7 @@ Performance profiling is essential for identifying bottlenecks and optimizing Re
 └─────────────────────────────────────┘
 ```
 
+
 ---
 
 ## 📊 **Performance Monitoring**
@@ -59,6 +61,7 @@ Performance profiling is essential for identifying bottlenecks and optimizing Re
 ### **Performance Monitoring Component**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, FlatList, Alert } from 'react-native';
@@ -469,6 +472,7 @@ const styles = StyleSheet.create({
 
 export default PerformanceMonitor;
 ```
+
 
 ---
 

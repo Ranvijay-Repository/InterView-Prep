@@ -44,6 +44,7 @@
 - **Team Collaboration**: How you work with other developers
 
 ### ASCII Diagram: JavaScript Behavioral Question Flow
+
 ```
 JAVASCRIPT BEHAVIORAL QUESTION FLOW
 ┌─────────────────────────────────┐
@@ -115,6 +116,7 @@ JAVASCRIPT BEHAVIORAL QUESTION FLOW
         └───────────────┘
 ```
 
+
 ### Question Categories:
 - **Technical Challenges**: Complex problems you've solved
 - **Performance Optimization**: Code optimization experiences
@@ -136,6 +138,7 @@ JAVASCRIPT BEHAVIORAL QUESTION FLOW
 - **Stakeholder Communication**: Explaining technical concepts to non-technical people
 
 ### ASCII Diagram: Technical Leadership Process
+
 ```
 TECHNICAL LEADERSHIP PROCESS
 ┌─────────────────────────────────┐
@@ -211,6 +214,7 @@ TECHNICAL LEADERSHIP PROCESS
         └───────────────┘
 ```
 
+
 ### Leadership Areas:
 - **Team Building**: Creating cohesive development teams
 - **Technical Decision Making**: Architecture and technology choices
@@ -232,6 +236,7 @@ TECHNICAL LEADERSHIP PROCESS
 - **User Experience**: How code quality impacts end users
 
 ### ASCII Diagram: Code Quality Management
+
 ```
 CODE QUALITY MANAGEMENT
 ┌─────────────────────────────────┐
@@ -309,6 +314,7 @@ CODE QUALITY MANAGEMENT
         │  Actions      │
         └───────────────┘
 ```
+
 
 ### Quality Areas:
 - **Code Standards**: Consistent coding conventions

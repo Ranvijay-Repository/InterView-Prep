@@ -26,6 +26,7 @@ State management is crucial for React Native applications. Understanding local s
 
 ### **State Management Overview**
 
+
 ```
 ┌─────────────────────────────────────┐
 │        State Management             │
@@ -50,6 +51,7 @@ State management is crucial for React Native applications. Understanding local s
 └─────────────────────────────────────┘
 ```
 
+
 ---
 
 ## 🏠 **Local State Management**
@@ -57,6 +59,7 @@ State management is crucial for React Native applications. Understanding local s
 ### **useState Hook Examples**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, TextInput, Alert } from 'react-native';
@@ -367,6 +370,7 @@ const styles = StyleSheet.create({
 
 export default LocalStateExample;
 ```
+
 
 ---
 

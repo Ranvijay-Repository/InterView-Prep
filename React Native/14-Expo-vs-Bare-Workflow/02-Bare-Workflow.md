@@ -22,6 +22,7 @@
 
 ### **Bare Workflow Architecture**
 
+
 ```mermaid
 graph TD
     A[Bare React Native] --> B[Android Project]
@@ -34,6 +35,7 @@ graph TD
     C --> H[Native iOS Code]
     D --> I[Metro Bundler]
 ```
+
 
 ### **Key Benefits**
 - **Full Control**: Complete access to native code
@@ -48,6 +50,7 @@ graph TD
 ### **Bare React Native Project Structure**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Project structure for bare React Native
 const BareProjectStructure = {
@@ -149,9 +152,11 @@ const BarePackageJson = {
 export { BareProjectStructure, BarePackageJson };
 ```
 
+
 ### **Metro Configuration**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // metro.config.js for bare React Native
 const { getDefaultConfig, mergeConfig } = require('@react-native/metro-config');
@@ -213,6 +218,7 @@ const config = {
 module.exports = mergeConfig(defaultConfig, config);
 ```
 
+
 ---
 
 ## 📱 **Native Development**
@@ -220,6 +226,7 @@ module.exports = mergeConfig(defaultConfig, config);
 ### **Android Native Module**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```java
 // android/app/src/main/java/com/bareapp/CustomModule.java
 package com.bareapp;
@@ -317,9 +324,11 @@ public class CustomModule extends ReactContextBaseJavaModule {
 }
 ```
 
+
 ### **iOS Native Module**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```objc
 // ios/BareApp/CustomModule.h
 #import <React/RCTBridgeModule.h>
@@ -329,6 +338,8 @@ public class CustomModule extends ReactContextBaseJavaModule {
 
 @end
 ```
+
+
 
 ```objc
 // ios/BareApp/CustomModule.m
@@ -437,6 +448,7 @@ RCT_EXPORT_METHOD(performAsyncTask:(NSDictionary *)params
 @end
 ```
 
+
 ---
 
 ## 🔧 **Custom Native Modules**
@@ -444,6 +456,7 @@ RCT_EXPORT_METHOD(performAsyncTask:(NSDictionary *)params
 ### **JavaScript Bridge**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 import { NativeModules, NativeEventEmitter } from 'react-native';
 
@@ -513,9 +526,11 @@ const unsubscribeFromEvents = (subscription) => {
 export { CustomModuleWrapper, subscribeToEvents, unsubscribeFromEvents };
 ```
 
+
 ### **React Native Component Using Custom Module**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native';
@@ -689,6 +704,7 @@ const styles = StyleSheet.create({
 
 export default BareWorkflowDemo;
 ```
+
 
 ---
 

@@ -21,6 +21,7 @@
 
 ### **Migration Types**
 
+
 ```mermaid
 graph TD
     A[Migration Types] --> B[Expo to Bare]
@@ -35,6 +36,7 @@ graph TD
     D --> J[Bare Production]
 ```
 
+
 ### **Migration Considerations**
 - **Project Complexity**: Size and complexity of existing code
 - **Team Expertise**: Native development capabilities
@@ -48,6 +50,7 @@ graph TD
 ### **Eject Process**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Expo to Bare migration process
 const ExpoToBareMigration = {
@@ -234,6 +237,7 @@ const MigrationHelpers = {
 export { ExpoToBareMigration, MigrationHelpers };
 ```
 
+
 ---
 
 ## 🔄 **Bare to Expo Migration**
@@ -241,6 +245,7 @@ export { ExpoToBareMigration, MigrationHelpers };
 ### **Expo Adoption Process**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Bare to Expo migration process
 const BareToExpoMigration = {
@@ -416,6 +421,7 @@ const ExpoCompatibilityChecker = {
 export { BareToExpoMigration, ExpoCompatibilityChecker };
 ```
 
+
 ---
 
 ## 🛠️ **Migration Tools**
@@ -423,6 +429,7 @@ export { BareToExpoMigration, ExpoCompatibilityChecker };
 ### **Automated Migration Tools**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Migration automation tools
 const MigrationTools = {
@@ -616,6 +623,7 @@ const MigrationProgressTracker = {
 
 export { MigrationTools, MigrationProgressTracker };
 ```
+
 
 ---
 

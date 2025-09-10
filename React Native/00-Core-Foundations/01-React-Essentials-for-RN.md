@@ -41,6 +41,7 @@ React Native is built on top of React, making React knowledge fundamental to Rea
 
 ### **Core Hooks Overview**
 
+
 ```
 ┌─────────────────────────────────────┐
 │           React Hooks               │
@@ -63,9 +64,11 @@ React Native is built on top of React, making React knowledge fundamental to Rea
 └─────────────────────────────────────┘
 ```
 
+
 ### **useState Hook**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // ✅ Basic useState usage
 const Counter = () => {
@@ -94,9 +97,11 @@ const Counter = () => {
 };
 ```
 
+
 ### **useEffect Hook**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // ✅ useEffect for API calls
 const UserProfile = ({ userId }) => {
@@ -142,7 +147,9 @@ const UserProfile = ({ userId }) => {
 };
 ```
 
+
 ### **useReducer Hook**
+
 
 ```javascript
 // ✅ useReducer for complex state
@@ -223,11 +230,13 @@ const ItemsList = () => {
 };
 ```
 
+
 ---
 
 ## 🌐 **Context API**
 
 ### **Creating Context**
+
 
 ```javascript
 // ✅ Theme Context
@@ -302,7 +311,9 @@ const UserProvider = ({ children }) => {
 };
 ```
 
+
 ### **Using Context**
+
 
 ```javascript
 // ✅ Custom hooks for context
@@ -354,11 +365,13 @@ const UserProfile = () => {
 };
 ```
 
+
 ---
 
 ## 🔄 **Component Lifecycle**
 
 ### **Lifecycle in Functional Components**
+
 
 ```javascript
 // ✅ Component lifecycle with hooks
@@ -409,7 +422,9 @@ const LifecycleExample = ({ userId }) => {
 };
 ```
 
+
 ### **Lifecycle Diagram**
+
 
 ```
 ┌─────────────────────────────────────┐
@@ -433,11 +448,13 @@ const LifecycleExample = ({ userId }) => {
 └─────────────────────────────────────┘
 ```
 
+
 ---
 
 ## 🚀 **Memoization & Performance**
 
 ### **useMemo Hook**
+
 
 ```javascript
 // ✅ useMemo for expensive calculations
@@ -468,7 +485,9 @@ const ExpensiveComponent = ({ items, filter }) => {
 };
 ```
 
+
 ### **useCallback Hook**
+
 
 ```javascript
 // ✅ useCallback for function memoization
@@ -517,7 +536,9 @@ const ChildComponent = React.memo(({ items, onAddItem }) => {
 });
 ```
 
+
 ### **React.memo**
+
 
 ```javascript
 // ✅ React.memo for component memoization
@@ -556,11 +577,13 @@ const ParentComponent = () => {
 };
 ```
 
+
 ---
 
 ## 🎯 **State Management Patterns**
 
 ### **Lifting State Up**
+
 
 ```javascript
 // ✅ Lifting state up pattern
@@ -628,11 +651,13 @@ const SearchScreen = () => {
 };
 ```
 
+
 ---
 
 ## 🚨 **Error Handling**
 
 ### **Error Boundaries**
+
 
 ```javascript
 // ✅ Error boundary for React Native with functional components
@@ -699,17 +724,19 @@ const App = () => (
   <ErrorBoundary onError={(error, errorInfo) => {
     // Log to crash reporting service
     console.error('App error:', error, errorInfo);
-  }}>
+  }}#125;}}#125;>
     <MainApp />
   </ErrorBoundary>
 );
 ```
+
 
 ---
 
 ## 🪝 **Custom Hooks**
 
 ### **API Hook**
+
 
 ```javascript
 // ✅ Custom hook for API calls
@@ -766,7 +793,9 @@ const UserProfile = ({ userId }) => {
 };
 ```
 
+
 ### **Local Storage Hook**
+
 
 ```javascript
 // ✅ Custom hook for local storage
@@ -829,6 +858,7 @@ const SettingsScreen = () => {
 };
 ```
 
+
 ---
 
 ## 🎯 **Interview Questions**
@@ -857,6 +887,7 @@ const SettingsScreen = () => {
 
 ### **1. Use Functional Updates**
 
+
 ```javascript
 // ✅ Always use functional updates
 const [count, setCount] = useState(0);
@@ -865,7 +896,9 @@ const [count, setCount] = useState(0);
 setCount(prev => prev + 1);
 ```
 
+
 ### **2. Proper Dependency Arrays**
+
 
 ```javascript
 // ✅ Be explicit about dependencies
@@ -874,7 +907,9 @@ useEffect(() => {
 }, [userId]); // Only re-run when userId changes
 ```
 
+
 ### **3. Memoization Strategy**
+
 
 ```javascript
 // ✅ Memoize expensive calculations
@@ -888,7 +923,9 @@ const handlePress = useCallback(() => {
 }, [item, onItemPress]);
 ```
 
+
 ### **4. Error Boundaries**
+
 
 ```javascript
 // ✅ Always wrap components in error boundaries
@@ -896,6 +933,7 @@ const handlePress = useCallback(() => {
   <MyComponent />
 </ErrorBoundary>
 ```
+
 
 ---
 

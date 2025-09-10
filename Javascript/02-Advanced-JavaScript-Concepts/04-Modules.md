@@ -9,6 +9,7 @@
 ### Basic CommonJS Syntax:
 
 #### 1. **Exporting Modules**
+
 ```javascript
 // math.js - CommonJS exports
 const PI = 3.14159;
@@ -62,7 +63,9 @@ exports.subtract = subtract;
 exports.Calculator = Calculator;
 ```
 
+
 #### 2. **Importing Modules**
+
 ```javascript
 // main.js - CommonJS imports
 const math = require('./math.js');
@@ -82,7 +85,9 @@ const mathUtils = require('./math.js');
 const { add: addNumbers } = require('./math.js');
 ```
 
+
 ### ASCII Diagram: CommonJS vs ES6 Modules
+
 ```
 COMMONJS vs ES6 MODULES
 ┌─────────────────────────────────┐    ┌─────────────────────────────────┐
@@ -100,6 +105,7 @@ COMMONJS vs ES6 MODULES
 └─────────────────────────────────┘    └─────────────────────────────────┘
 ```
 
+
 ---
 
 ## 🔄 Dynamic Imports
@@ -107,6 +113,7 @@ COMMONJS vs ES6 MODULES
 **Dynamic imports** allow you to load modules conditionally at runtime using the `import()` function, which returns a promise.
 
 ### Basic Dynamic Import:
+
 ```javascript
 // Dynamic import example
 async function loadModule(moduleName) {
@@ -136,7 +143,9 @@ async function main() {
 main();
 ```
 
+
 ### Conditional Module Loading:
+
 ```javascript
 // Load different modules based on conditions
 async function loadFeature(featureName) {
@@ -163,6 +172,7 @@ async function loadUserInterface(theme) {
 }
 ```
 
+
 ---
 
 ## 📦 Module Bundlers
@@ -172,6 +182,7 @@ async function loadUserInterface(theme) {
 ### Popular Bundlers:
 
 #### 1. **Webpack**
+
 ```javascript
 // webpack.config.js
 const path = require('path');
@@ -202,7 +213,9 @@ module.exports = {
 };
 ```
 
+
 #### 2. **Vite**
+
 ```javascript
 // vite.config.js
 import { defineConfig } from 'vite';
@@ -220,6 +233,7 @@ export default defineConfig({
 });
 ```
 
+
 ---
 
 ## 🌳 Tree Shaking
@@ -227,6 +241,7 @@ export default defineConfig({
 **Tree shaking** is a technique to eliminate dead code by removing unused exports during the build process.
 
 ### Tree Shaking Example:
+
 ```javascript
 // utils.js - Multiple exports
 export function add(a, b) {
@@ -254,6 +269,7 @@ console.log(multiply(4, 2)); // 8
 // subtract and divide functions will be removed from the bundle
 ```
 
+
 ---
 
 ## 💻 Detailed Examples
@@ -261,6 +277,7 @@ console.log(multiply(4, 2)); // 8
 ### Example 1: Building a Modular Application
 <div style="position: relative;">
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
+
 
 ```javascript
 console.log("=== BUILDING A MODULAR APPLICATION ===");
@@ -464,11 +481,13 @@ if (import.meta.url === `file://${process.argv[1]}`) {
 export { main, UserService, APIClient, Logger };
 ```
 
+
 ---
 
 ## ⚠️ Common Pitfalls
 
 ### Pitfall 1: Circular Dependencies
+
 ```javascript
 // ❌ WRONG: Circular dependency
 // a.js
@@ -482,7 +501,9 @@ export const b = 'b';
 // This creates a circular dependency error
 ```
 
+
 ### Pitfall 2: Missing File Extensions
+
 ```javascript
 // ❌ WRONG: Missing .js extension (in some environments)
 import { add } from './math'; // May not work
@@ -491,7 +512,9 @@ import { add } from './math'; // May not work
 import { add } from './math.js';
 ```
 
+
 ### Pitfall 3: Mixing Module Systems
+
 ```javascript
 // ❌ WRONG: Mixing CommonJS and ES6 modules
 const math = require('./math.js'); // CommonJS
@@ -499,6 +522,7 @@ import { add } from './math.js';   // ES6
 
 // Stick to one module system per project
 ```
+
 
 ---
 

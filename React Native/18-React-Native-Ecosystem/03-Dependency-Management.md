@@ -26,6 +26,7 @@ Dependency management is crucial for maintaining healthy, secure, and performant
 
 ### **Dependency Management Framework**
 
+
 ```
 ┌─────────────────────────────────────┐
 │        Dependency Management       │
@@ -53,6 +54,7 @@ Dependency management is crucial for maintaining healthy, secure, and performant
 └─────────────────────────────────────┘
 ```
 
+
 ### **Key Management Areas**
 - **Package Installation**: Choosing and installing dependencies
 - **Version Control**: Managing dependency versions
@@ -67,6 +69,7 @@ Dependency management is crucial for maintaining healthy, secure, and performant
 ### **npm (Node Package Manager)**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```bash
 # npm commands
 npm install                    # Install all dependencies
@@ -79,7 +82,9 @@ npm audit                      # Security audit
 npm audit fix                  # Fix security issues
 ```
 
+
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```json
 // package.json configuration
 {
@@ -108,9 +113,11 @@ npm audit fix                  # Fix security issues
 }
 ```
 
+
 ### **Yarn (Alternative Package Manager)**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```bash
 # Yarn commands
 yarn install                   # Install all dependencies
@@ -123,7 +130,9 @@ yarn audit fix                 # Fix security issues
 yarn why package-name          # Show why package is installed
 ```
 
+
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```yaml
 # .yarnrc.yml configuration
 nodeLinker: node-modules
@@ -132,9 +141,11 @@ enableGlobalCache: false
 compressionLevel: mixed
 ```
 
+
 ### **pnpm (Fast, Disk Space Efficient)**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```bash
 # pnpm commands
 pnpm install                   # Install dependencies
@@ -146,12 +157,15 @@ pnpm audit                     # Security audit
 pnpm why package-name          # Show dependency tree
 ```
 
+
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```yaml
 # .npmrc configuration for pnpm
 shamefully-hoist=true
 strict-peer-dependencies=false
 ```
+
 
 ### **Package Manager Comparison**
 
@@ -170,6 +184,7 @@ strict-peer-dependencies=false
 ### **Semantic Versioning**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Semantic versioning examples
 const versionExamples = {
@@ -193,9 +208,11 @@ const versionExamples = {
 };
 ```
 
+
 ### **Version Range Strategies**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```json
 // package.json with different version strategies
 {
@@ -221,9 +238,11 @@ const versionExamples = {
 }
 ```
 
+
 ### **Lock File Management**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```bash
 # Lock file commands
 npm ci                         # Install from lock file
@@ -236,7 +255,9 @@ yarn upgrade                   # Update yarn.lock
 pnpm update                    # Update pnpm-lock.yaml
 ```
 
+
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Lock file validation
 const LockFileValidator = {
@@ -271,6 +292,7 @@ const LockFileValidator = {
 };
 ```
 
+
 ---
 
 ## 🔍 **Dependency Resolution**
@@ -278,6 +300,7 @@ const LockFileValidator = {
 ### **Dependency Tree Analysis**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```bash
 # Analyze dependency tree
 npm ls                         # List dependency tree
@@ -288,7 +311,9 @@ yarn list --depth=0           # List only direct dependencies
 pnpm list                      # List dependencies
 ```
 
+
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Dependency tree analysis
 const DependencyAnalyzer = {
@@ -347,9 +372,11 @@ const DependencyAnalyzer = {
 };
 ```
 
+
 ### **Peer Dependencies**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```json
 // package.json with peer dependencies
 {
@@ -370,7 +397,9 @@ const DependencyAnalyzer = {
 }
 ```
 
+
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Peer dependency validation
 const PeerDependencyValidator = {
@@ -413,6 +442,7 @@ const PeerDependencyValidator = {
 };
 ```
 
+
 ---
 
 ## 🔒 **Security Management**
@@ -420,6 +450,7 @@ const PeerDependencyValidator = {
 ### **Vulnerability Scanning**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```bash
 # Security audit commands
 npm audit                     # Run security audit
@@ -433,7 +464,9 @@ npx snyk test                 # Snyk security testing
 npx retire                    # Retire.js vulnerability scanner
 ```
 
+
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Security audit automation
 const SecurityAuditor = {
@@ -485,9 +518,11 @@ const SecurityAuditor = {
 };
 ```
 
+
 ### **License Compliance**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```bash
 # License checking tools
 npm install -g license-checker
@@ -500,7 +535,9 @@ npx license-report            # Generate license report
 npx npm-license-crawler       # Crawl npm licenses
 ```
 
+
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // License compliance checker
 const LicenseChecker = {
@@ -548,6 +585,7 @@ const LicenseChecker = {
 };
 ```
 
+
 ---
 
 ## ⚡ **Performance Optimization**
@@ -555,6 +593,7 @@ const LicenseChecker = {
 ### **Bundle Size Optimization**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```bash
 # Bundle analysis tools
 npm install -g react-native-bundle-visualizer
@@ -565,7 +604,9 @@ npx webpack-bundle-analyzer
 npx source-map-explorer
 ```
 
+
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Bundle size optimization
 const BundleOptimizer = {
@@ -611,9 +652,11 @@ const BundleOptimizer = {
 };
 ```
 
+
 ### **Dependency Optimization**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Dependency optimization strategies
 const DependencyOptimizer = {
@@ -669,6 +712,7 @@ const DependencyOptimizer = {
 };
 ```
 
+
 ---
 
 ## 🔍 **Dependency Auditing**
@@ -676,6 +720,7 @@ const DependencyOptimizer = {
 ### **Automated Auditing**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Automated dependency auditing
 const DependencyAuditor = {
@@ -764,9 +809,11 @@ const DependencyAuditor = {
 };
 ```
 
+
 ### **Audit Reporting**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Audit reporting
 const AuditReporter = {
@@ -838,6 +885,7 @@ const AuditReporter = {
 };
 ```
 
+
 ---
 
 ## ✅ **Best Practices**
@@ -845,6 +893,7 @@ const AuditReporter = {
 ### **1. Dependency Management Best Practices**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Dependency management best practices
 const DependencyBestPractices = {
@@ -892,9 +941,11 @@ const DependencyBestPractices = {
 };
 ```
 
+
 ### **2. CI/CD Integration**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```yaml
 # .github/workflows/dependency-audit.yml
 name: Dependency Audit
@@ -929,6 +980,7 @@ jobs:
       - name: Check licenses
         run: npx license-checker --summary
 ```
+
 
 ---
 

@@ -25,6 +25,7 @@ TypeScript performance optimization involves multiple aspects: compilation speed
 
 ### **Performance Areas**
 
+
 ```typescript
 // Performance optimization areas
 const performanceAreas = {
@@ -43,7 +44,9 @@ const metrics = {
 };
 ```
 
+
 ### **Performance Optimization Strategies**
+
 
 ```typescript
 // Optimization strategies
@@ -56,6 +59,7 @@ const strategies = {
 };
 ```
 
+
 ---
 
 ## 🏗️ **Compilation Performance**
@@ -63,6 +67,7 @@ const strategies = {
 Optimizing TypeScript compilation speed is crucial for developer productivity.
 
 ### **Incremental Compilation**
+
 
 ```json
 // tsconfig.json - Enable incremental compilation
@@ -74,6 +79,8 @@ Optimizing TypeScript compilation speed is crucial for developer productivity.
 }
 ```
 
+
+
 ```typescript
 // Benefits of incremental compilation
 const incrementalBenefits = {
@@ -83,7 +90,9 @@ const incrementalBenefits = {
 };
 ```
 
+
 ### **Project References**
+
 
 ```json
 // tsconfig.json - Root configuration
@@ -107,6 +116,8 @@ const incrementalBenefits = {
 }
 ```
 
+
+
 ```bash
 # Build with project references
 tsc --build
@@ -114,7 +125,9 @@ tsc --build --force
 tsc --build --clean
 ```
 
+
 ### **Compiler Options for Performance**
+
 
 ```json
 // tsconfig.json - Performance-focused options
@@ -130,6 +143,8 @@ tsc --build --clean
 }
 ```
 
+
+
 ```typescript
 // Performance-focused compiler options
 const performanceOptions = {
@@ -140,6 +155,7 @@ const performanceOptions = {
 };
 ```
 
+
 ---
 
 ## 🚀 **Runtime Performance**
@@ -147,6 +163,7 @@ const performanceOptions = {
 Optimizing runtime performance involves efficient code generation and execution.
 
 ### **Efficient Type Definitions**
+
 
 ```typescript
 // ✅ Good: Efficient type definitions
@@ -176,7 +193,9 @@ interface ComplexUser {
 }
 ```
 
+
 ### **Optimized Function Definitions**
+
 
 ```typescript
 // ✅ Good: Optimized function definitions
@@ -199,7 +218,9 @@ const processUsersInefficient = (users: User[]): User[] => {
 };
 ```
 
+
 ### **Memory-Efficient Data Structures**
+
 
 ```typescript
 // ✅ Good: Memory-efficient data structures
@@ -221,7 +242,9 @@ const createUserObject = (users: User[]): Record<number, User> => {
 };
 ```
 
+
 ### **Lazy Loading and Code Splitting**
+
 
 ```typescript
 // Lazy loading with dynamic imports
@@ -242,6 +265,7 @@ const App = () => (
 );
 ```
 
+
 ---
 
 ## 📦 **Bundle Optimization**
@@ -249,6 +273,7 @@ const App = () => (
 Optimizing bundle size improves loading performance and user experience.
 
 ### **Tree Shaking**
+
 
 ```typescript
 // ✅ Good: Tree-shakable exports
@@ -264,7 +289,9 @@ export default {
 };
 ```
 
+
 ### **Bundle Analysis**
+
 
 ```typescript
 // Bundle analysis with webpack-bundle-analyzer
@@ -281,7 +308,9 @@ module.exports = {
 };
 ```
 
+
 ### **Code Splitting Strategies**
+
 
 ```typescript
 // Route-based code splitting
@@ -309,7 +338,9 @@ const loadFeature = (featureName: string) => {
 };
 ```
 
+
 ### **Dead Code Elimination**
+
 
 ```typescript
 // ✅ Good: Dead code elimination
@@ -326,6 +357,7 @@ if (debug) {
 }
 ```
 
+
 ---
 
 ## 🧠 **Memory Management**
@@ -333,6 +365,7 @@ if (debug) {
 Efficient memory management prevents memory leaks and improves performance.
 
 ### **Memory Leak Prevention**
+
 
 ```typescript
 // ✅ Good: Proper cleanup
@@ -373,7 +406,9 @@ class EventManagerBad {
 }
 ```
 
+
 ### **Efficient Object Creation**
+
 
 ```typescript
 // ✅ Good: Efficient object creation
@@ -393,7 +428,9 @@ const createUserInefficient = (id: number, name: string, email: string): User =>
 };
 ```
 
+
 ### **Weak References**
+
 
 ```typescript
 // Use WeakMap for memory-efficient caching
@@ -422,11 +459,13 @@ const processObject = (obj: object): void => {
 };
 ```
 
+
 ---
 
 ## 🚀 **Advanced Optimization Techniques**
 
 ### **Web Workers**
+
 
 ```typescript
 // Web worker for CPU-intensive tasks
@@ -457,7 +496,9 @@ self.onmessage = (event) => {
 };
 ```
 
+
 ### **Virtual Scrolling**
+
 
 ```typescript
 // Virtual scrolling for large lists
@@ -484,13 +525,13 @@ const VirtualScroll: React.FC<VirtualScrollProps> = ({
   
   return (
     <div
-      style={{ height: containerHeight, overflow: "auto" }}
+      style={{#123;{{#123; height: containerHeight, overflow: "auto" }}#125;}}#125;
       onScroll={(e) => setScrollTop(e.currentTarget.scrollTop)}
     >
-      <div style={{ height: items.length * itemHeight }}>
-        <div style={{ transform: `translateY(${visibleStart * itemHeight}px)` }}>
+      <div style={{#123;{{#123; height: items.length * itemHeight }}#125;}}#125;>
+        <div style={{#123;{{#123; transform: `translateY(${visibleStart * itemHeight}px)` }}#125;}}#125;>
           {visibleItems.map((item, index) => (
-            <div key={visibleStart + index} style={{ height: itemHeight }}>
+            <div key={visibleStart + index} style={{#123;{{#123; height: itemHeight }}#125;}}#125;>
               {item}
             </div>
           ))}
@@ -501,7 +542,9 @@ const VirtualScroll: React.FC<VirtualScrollProps> = ({
 };
 ```
 
+
 ### **Memoization**
+
 
 ```typescript
 // Memoization for expensive calculations
@@ -538,11 +581,13 @@ console.log(expensiveCalculation(1000000));
 console.log(expensiveCalculation(1000000));
 ```
 
+
 ---
 
 ## ✅ **Best Practices**
 
 ### **1. Use Incremental Compilation**
+
 
 ```json
 // ✅ Good: Enable incremental compilation
@@ -561,7 +606,9 @@ console.log(expensiveCalculation(1000000));
 }
 ```
 
+
 ### **2. Optimize Bundle Size**
+
 
 ```typescript
 // ✅ Good: Tree-shakable exports
@@ -575,7 +622,9 @@ export default {
 };
 ```
 
+
 ### **3. Use Efficient Data Structures**
+
 
 ```typescript
 // ✅ Good: Use Map for key-value pairs
@@ -585,7 +634,9 @@ const userMap = new Map<number, User>();
 const userObject: Record<number, User> = {};
 ```
 
+
 ### **4. Implement Proper Cleanup**
+
 
 ```typescript
 // ✅ Good: Proper cleanup
@@ -613,6 +664,7 @@ class ResourceManagerBad {
   // No cleanup method - memory leak!
 }
 ```
+
 
 ---
 

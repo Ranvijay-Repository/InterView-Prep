@@ -1,0 +1,769 @@
+# 🔹 ES2020+ Features
+
+> **Comprehensive coverage of ES2020+ JavaScript features: Optional Chaining, Nullish Coalescing, BigInt, Top-level await, and Array.prototype.at()**
+
+<link rel="stylesheet" href="../common-styles.css">
+
+---
+
+## 📚 Table of Contents
+
+- [ES2020 Overview](#es2020-overview)
+- [Optional Chaining (?.)](#optional-chaining--)
+- [Nullish Coalescing (??)](#nullish-coalescing--)
+- [BigInt](#bigint)
+- [Top-level await](#top-level-await)
+- [Array.prototype.at()](#arrayprototypeat)
+- [Detailed Examples](#detailed-examples)
+- [Common Interview Questions](#common-interview-questions)
+- [Practice Exercises](#practice-exercises)
+- [Additional Resources](#additional-resources)
+
+---
+
+## 🎯 ES2020 Overview
+
+**ES2020** (ECMAScript 2020) introduced several powerful features that make JavaScript more robust, readable, and performant. These features address common pain points in JavaScript development.
+
+### Why ES2020+ Features Matter:
+- **Safer Code**: Prevent runtime errors with optional chaining
+- **Better Defaults**: Handle null/undefined more elegantly
+- **Big Number Support**: Work with numbers beyond Number.MAX_SAFE_INTEGER
+- **Cleaner Async Code**: Top-level await for module initialization
+- **Array Convenience**: Negative indexing with .at() method
+
+---
+
+## 🔗 Optional Chaining (?.)
+
+**Optional Chaining** allows you to safely access nested object properties without throwing an error if an intermediate property is null or undefined.
+
+### Why Optional Chaining Matters:
+- **Error Prevention**: Avoid "Cannot read property of null" errors
+- **Cleaner Code**: Eliminate verbose null checks
+- **Safer Property Access**: Chain properties without fear of crashes
+- **Better Developer Experience**: Write more confident code
+
+### ASCII Diagram: Optional Chaining Flow
+{% raw %}
+```
+OPTIONAL CHAINING FLOW
+┌─────────────────────────────────┐
+│        OBJECT ACCESS            │
+│  ┌─────────────────────────────┐ │
+│  │ user?.profile?.name         │ │
+│  │                             │ │
+│  │ user = { profile: null }    │ │
+│  └─────────────────────────────┘ │
+└─────────────────────────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  SAFE ACCESS  │
+        │  user exists  │
+        │  profile?     │
+        └───────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  SHORT CIRCUIT│
+        │  Returns      │
+        │  undefined    │
+        └───────────────┘
+```
+{% endraw %}
+
+### Use Cases:
+- **API Responses**: Safely access nested data
+- **DOM Manipulation**: Access element properties safely
+- **Configuration Objects**: Navigate complex config structures
+- **User Input**: Handle incomplete user data
+
+---
+
+## 🎭 Nullish Coalescing (??)
+
+**Nullish Coalescing** provides a way to handle null and undefined values with fallbacks, distinguishing between falsy values and nullish values.
+
+### Why Nullish Coalescing Matters:
+- **Precise Fallbacks**: Only fallback on null/undefined, not all falsy values
+- **Better Defaults**: Handle 0 and empty strings correctly
+- **Cleaner Logic**: Eliminate complex conditional checks
+- **Safer Defaults**: Provide meaningful fallback values
+
+### ASCII Diagram: Nullish Coalescing Logic
+{% raw %}
+```
+NULLISH COALESCING LOGIC
+┌─────────────────────────────────┐
+│        VALUE CHECKING            │
+│  ┌─────────────────────────────┐ │
+│  │ value ?? defaultValue       │ │
+│  │                             │ │
+│  │ null → defaultValue         │ │
+│  │ undefined → defaultValue    │ │
+│  │ 0 → 0 (keeps value)        │ │
+│  │ "" → "" (keeps value)      │ │
+│  │ false → false (keeps value) │ │
+│  └─────────────────────────────┘ │
+└─────────────────────────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  NULLISH      │
+        │  CHECK        │
+        │  Only null    │
+        │  undefined    │
+        └───────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  FALLBACK     │
+        │  Logic        │
+        │  Preserves    │
+        │  Falsy Values │
+        └───────────────┘
+```
+{% endraw %}
+
+### Comparison with Logical OR (||):
+{% raw %}
+```javascript
+// Logical OR (||) - falls back on all falsy values
+0 || 42        // 42 (0 is falsy)
+"" || "hello"  // "hello" ("" is falsy)
+false || true  // true (false is falsy)
+
+// Nullish Coalescing (??) - only falls back on null/undefined
+0 ?? 42        // 0 (0 is not nullish)
+"" ?? "hello"  // "" ("" is not nullish)
+false ?? true  // false (false is not nullish)
+null ?? 42     // 42 (null is nullish)
+undefined ?? 42 // 42 (undefined is nullish)
+```
+{% endraw %}
+
+---
+
+## 🔢 BigInt
+
+**BigInt** is a built-in object that provides a way to represent whole numbers larger than 2^53 - 1, which is the largest number JavaScript can reliably represent with the Number primitive.
+
+### Why BigInt Matters:
+- **Large Numbers**: Handle numbers beyond Number.MAX_SAFE_INTEGER
+- **Precision**: Work with exact integer values
+- **Financial Calculations**: Precise monetary calculations
+- **Scientific Computing**: Handle large scientific values
+- **Cryptography**: Work with large cryptographic numbers
+
+### ASCII Diagram: BigInt vs Number Range
+{% raw %}
+```
+BIGINT VS NUMBER RANGE
+┌─────────────────────────────────┐
+│        NUMBER RANGE             │
+│  ┌─────────────────────────────┐ │
+│  │ Number.MAX_SAFE_INTEGER     │ │
+│  │ 9,007,199,254,740,991      │ │
+│  │                             │ │
+│  │ BigInt: Unlimited           │ │
+│  │ 123456789012345678901234567890n │
+│  └─────────────────────────────┘ │
+└─────────────────────────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  PRECISION    │
+        │  Number:      │
+        │  Floating     │
+        │  Point        │
+        └───────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  BIGINT       │
+        │  Exact        │
+        │  Integer      │
+        │  Values       │
+        └───────────────┘
+```
+{% endraw %}
+
+### BigInt Operations:
+{% raw %}
+```javascript
+// Creation
+const bigInt = 123n;
+const bigIntFromString = BigInt("12345678901234567890");
+const bigIntFromNumber = BigInt(Number.MAX_SAFE_INTEGER);
+
+// Operations
+const sum = 123n + 456n;        // 579n
+const product = 123n * 456n;    // 56088n
+const power = 2n ** 100n;       // 1267650600228229401496703205376n
+
+// Comparison
+123n === 123n;                  // true
+123n == 123;                    // true (loose equality)
+123n === 123;                   // false (strict equality)
+```
+{% endraw %}
+
+---
+
+## ⚡ Top-level await
+
+**Top-level await** allows you to use the `await` keyword at the top level of modules, making it easier to initialize applications and handle async setup.
+
+### Why Top-level await Matters:
+- **Module Initialization**: Async setup when modules load
+- **Configuration Loading**: Load config files asynchronously
+- **Database Connections**: Establish connections during startup
+- **API Initialization**: Set up API clients with async operations
+- **Cleaner Code**: Eliminate wrapper functions for async initialization
+
+### ASCII Diagram: Top-level await Execution
+{% raw %}
+```
+TOP-LEVEL AWAIT EXECUTION
+┌─────────────────────────────────┐
+│        MODULE LOADING           │
+│  ┌─────────────────────────────┐ │
+│  │ import './config.js'        │ │
+│  │                             │ │
+│  │ const config = await        │ │
+│  │   loadConfig();             │ │
+│  │                             │ │
+│  │ export { config };          │ │
+│  └─────────────────────────────┘ │
+└─────────────────────────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  AWAIT        │
+        │  Execution    │
+        │  Pauses       │
+        │  Module       │
+        └───────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  RESOLUTION   │
+        │  Module       │
+        │  Continues    │
+        │  Loading      │
+        └───────────────┘
+```
+{% endraw %}
+
+### Use Cases:
+- **Environment Configuration**: Load environment-specific settings
+- **Feature Flags**: Load feature configuration asynchronously
+- **Service Initialization**: Initialize services before module export
+- **Database Setup**: Establish database connections
+- **API Client Setup**: Initialize API clients with configuration
+
+---
+
+## 📍 Array.prototype.at()
+
+**Array.prototype.at()** provides a way to access array elements using negative indices, making it easier to work with arrays from the end.
+
+### Why Array.prototype.at() Matters:
+- **Negative Indexing**: Access elements from the end of arrays
+- **Cleaner Code**: Eliminate array.length calculations
+- **Better Readability**: More intuitive array access
+- **Safer Access**: Handle edge cases more elegantly
+
+### ASCII Diagram: Array.at() Indexing
+{% raw %}
+```
+ARRAY.AT() INDEXING
+┌─────────────────────────────────┐
+│        ARRAY INDICES            │
+│  ┌─────────────────────────────┐ │
+│  │ const arr = ['a', 'b', 'c'] │ │
+│  │                             │ │
+│  │ arr.at(0)  → 'a'           │ │
+│  │ arr.at(1)  → 'b'           │ │
+│  │ arr.at(2)  → 'c'           │ │
+│  │ arr.at(-1) → 'c'           │ │
+│  │ arr.at(-2) → 'b'           │ │
+│  │ arr.at(-3) → 'a'           │ │
+│  └─────────────────────────────┘ │
+└─────────────────────────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  POSITIVE     │
+        │  INDICES      │
+        │  Start from   │
+        │  beginning    │
+        └───────────────┘
+                │
+                ▼
+        ┌───────────────┐
+        │  NEGATIVE     │
+        │  INDICES      │
+        │  Start from   │
+        │  end          │
+        └───────────────┘
+```
+{% endraw %}
+
+### Comparison with Traditional Methods:
+{% raw %}
+```javascript
+const arr = ['a', 'b', 'c', 'd', 'e'];
+
+// Traditional way (before .at())
+arr[arr.length - 1];     // 'e' (last element)
+arr[arr.length - 2];     // 'd' (second to last)
+
+// With .at() method
+arr.at(-1);              // 'e' (last element)
+arr.at(-2);              // 'd' (second to last)
+arr.at(-3);              // 'c' (third to last)
+
+// Edge cases
+arr.at(10);              // undefined (out of bounds)
+arr.at(-10);             // undefined (out of bounds)
+```
+{% endraw %}
+
+---
+
+## 💻 Detailed Examples
+
+### Example 1: Optional Chaining in Real Applications
+<div style="position: relative;">
+<button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+<pre><code>// API Response Handling
+const apiResponse = {
+    user: {
+        profile: {
+            name: "John Doe",
+            email: "john@example.com",
+            preferences: {
+                theme: "dark",
+                language: "en"
+            }
+        }
+    }
+};
+
+// Safe property access with optional chaining
+const userName = apiResponse?.user?.profile?.name ?? "Unknown User";
+const userTheme = apiResponse?.user?.profile?.preferences?.theme ?? "light";
+const userAge = apiResponse?.user?.profile?.age ?? 25;
+
+console.log(userName);  // "John Doe"
+console.log(userTheme); // "dark"
+console.log(userAge);   // 25 (default value)
+
+// DOM Manipulation
+const element = document.querySelector('.user-profile');
+const userName = element?.querySelector('.name')?.textContent ?? "Anonymous";
+const userAvatar = element?.querySelector('.avatar')?.src ?? "/default-avatar.png";
+
+// Function calls with optional chaining
+const result = apiResponse?.user?.profile?.getFullName?.() ?? "Unknown";
+</code></pre>
+</div>
+
+### Example 2: Nullish Coalescing for Configuration
+<div style="position:relative;">
+<button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+<pre><code>// Configuration object with nullish coalescing
+const config = {
+    port: 0,           // Valid port number
+    host: "",          // Valid empty string
+    debug: false,      // Valid boolean
+    timeout: null,     // Will use default
+    retries: undefined // Will use default
+};
+
+const serverConfig = {
+    port: config.port ?? 3000,           // 0 (keeps value)
+    host: config.host ?? "localhost",    // "" (keeps value)
+    debug: config.debug ?? true,         // false (keeps value)
+    timeout: config.timeout ?? 5000,     // 5000 (default)
+    retries: config.retries ?? 3         // 3 (default)
+};
+
+console.log(serverConfig);
+// {
+//   port: 0,
+//   host: "",
+//   debug: false,
+//   timeout: 5000,
+//   retries: 3
+// }
+
+// User preferences with fallbacks
+const userPreferences = {
+    theme: null,
+    language: undefined,
+    notifications: false,
+    autoSave: ""
+};
+
+const defaultPreferences = {
+    theme: "light",
+    language: "en",
+    notifications: true,
+    autoSave: "5min"
+};
+
+const finalPreferences = {
+    theme: userPreferences.theme ?? defaultPreferences.theme,
+    language: userPreferences.language ?? defaultPreferences.language,
+    notifications: userPreferences.notifications ?? defaultPreferences.notifications,
+    autoSave: userPreferences.autoSave ?? defaultPreferences.autoSave
+};
+
+console.log(finalPreferences);
+// {
+//   theme: "light",
+//   language: "en",
+//   notifications: false,
+//   autoSave: ""
+// }
+</code></pre>
+</div>
+
+### Example 3: BigInt for Financial Calculations
+<div style="position: relative;">
+<button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+<pre><code>// Financial calculations with BigInt
+class FinancialCalculator {
+    constructor() {
+        // Use BigInt for precise calculations (amounts in cents)
+        this.rates = {
+            savings: 25n,      // 0.25% in basis points
+            checking: 5n,      // 0.05% in basis points
+            investment: 750n   // 7.50% in basis points
+        };
+    }
+    
+    // Calculate interest with BigInt precision
+    calculateInterest(principal, rate, days) {
+        const principalCents = BigInt(principal * 100);
+        const rateBasisPoints = BigInt(rate);
+        const daysInYear = 365n;
+        
+        // Interest = Principal × Rate × Days / (365 × 10000)
+        const interest = (principalCents * rateBasisPoints * BigInt(days)) / (daysInYear * 10000n);
+        
+        return Number(interest) / 100; // Convert back to dollars
+    }
+    
+    // Calculate compound interest
+    calculateCompoundInterest(principal, rate, years, compoundsPerYear = 1) {
+        const principalCents = BigInt(principal * 100);
+        const rateDecimal = BigInt(rate * 10000);
+        const compounds = BigInt(compoundsPerYear);
+        const totalCompounds = BigInt(years * compoundsPerYear);
+        
+        // Compound Interest = P(1 + r/n)^(nt)
+        const ratePerCompound = rateDecimal / (compounds * 10000n);
+        const base = 10000n + ratePerCompound;
+        const exponent = totalCompounds;
+        
+        // Calculate (1 + r/n)^(nt) using BigInt
+        let result = 10000n;
+        for (let i = 0; i < Number(exponent); i++) {
+            result = (result * base) / 10000n;
+        }
+        
+        const finalAmount = (principalCents * result) / 10000n;
+        return Number(finalAmount) / 100;
+    }
+    
+    // Handle large numbers safely
+    safeAdd(a, b) {
+        try {
+            const bigA = BigInt(a);
+            const bigB = BigInt(b);
+            return bigA + bigB;
+        } catch (error) {
+            throw new Error(`Invalid number: ${error.message}`);
+        }
+    }
+}
+
+// Usage
+const calculator = new FinancialCalculator();
+
+// Calculate interest on large amounts
+const largePrincipal = 1000000; // $1 million
+const interest = calculator.calculateInterest(largePrincipal, 0.075, 365);
+console.log(`Interest: $${interest.toFixed(2)}`);
+
+// Compound interest calculation
+const compoundInterest = calculator.calculateCompoundInterest(10000, 0.05, 10, 12);
+console.log(`Compound Interest: $${compoundInterest.toFixed(2)}`);
+
+// Safe addition with BigInt
+const largeSum = calculator.safeAdd("12345678901234567890", "98765432109876543210");
+console.log(`Large Sum: ${largeSum}n`);
+</code></pre>
+</div>
+
+### Example 4: Top-level await in Module Configuration
+<div style="position: relative;">
+<button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+<pre><code>// config.js - Module with top-level await
+const config = await loadConfiguration();
+
+async function loadConfiguration() {
+    try {
+        // Load environment-specific config
+        const env = process.env.NODE_ENV || 'development';
+        
+        // Simulate async config loading
+        const configs = {
+            development: {
+                port: 3000,
+                database: 'localhost',
+                debug: true,
+                logLevel: 'debug'
+            },
+            production: {
+                port: 80,
+                database: 'production-db',
+                debug: false,
+                logLevel: 'error'
+            },
+            test: {
+                port: 3001,
+                database: 'test-db',
+                debug: true,
+                logLevel: 'warn'
+            }
+        };
+        
+        // Simulate async operation
+        await new Promise(resolve => setTimeout(resolve, 100));
+        
+        return configs[env] || configs.development;
+    } catch (error) {
+        console.warn('Using default config:', error.message);
+        return {
+            port: 3000,
+            database: 'localhost',
+            debug: true,
+            logLevel: 'info'
+        };
+    }
+}
+
+export { config };
+
+// database.js - Database connection with top-level await
+const connection = await establishConnection();
+
+async function establishConnection() {
+    try {
+        // Simulate database connection
+        await new Promise(resolve => setTimeout(resolve, 200));
+        
+        return {
+            host: 'localhost',
+            port: 5432,
+            database: 'myapp',
+            status: 'connected'
+        };
+    } catch (error) {
+        throw new Error(`Database connection failed: ${error.message}`);
+    }
+}
+
+export { connection };
+
+// app.js - Main application using top-level await modules
+import { config } from './config.js';
+import { connection } from './database.js';
+
+console.log('App starting with config:', config);
+console.log('Database connection:', connection);
+
+// The app won't start until all top-level awaits resolve
+const app = {
+    port: config.port,
+    database: connection,
+    start() {
+        console.log(`Server starting on port ${this.port}`);
+        console.log(`Database: ${this.database.status}`);
+    }
+};
+
+export default app;
+</code></pre>
+</div>
+
+### Example 5: Array.prototype.at() in Real Applications
+<div style="position: relative;">
+<button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+<pre><code>// Array utility functions using .at()
+class ArrayUtils {
+    // Get last element safely
+    static getLast(array) {
+        return array.at(-1);
+    }
+    
+    // Get second to last element
+    static getSecondLast(array) {
+        return array.at(-2);
+    }
+    
+    // Get element from end with offset
+    static getFromEnd(array, offset) {
+        return array.at(-offset);
+    }
+    
+    // Get last N elements
+    static getLastN(array, n) {
+        const result = [];
+        for (let i = 1; i <= n; i++) {
+            const element = array.at(-i);
+            if (element !== undefined) {
+                result.unshift(element);
+            }
+        }
+        return result;
+    }
+    
+    // Circular array access
+    static getCircular(array, index) {
+        const length = array.length;
+        if (length === 0) return undefined;
+        
+        // Handle negative indices
+        if (index < 0) {
+            index = length + (index % length);
+        }
+        
+        return array.at(index % length);
+    }
+}
+
+// Usage examples
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+console.log(ArrayUtils.getLast(numbers));           // 10
+console.log(ArrayUtils.getSecondLast(numbers));    // 9
+console.log(ArrayUtils.getFromEnd(numbers, 3));    // 8
+console.log(ArrayUtils.getLastN(numbers, 3));      // [8, 9, 10]
+
+// Circular access
+console.log(ArrayUtils.getCircular(numbers, 15));  // 6
+console.log(ArrayUtils.getCircular(numbers, -3));  // 8
+
+// Real-world use case: Message history
+class MessageHistory {
+    constructor(maxMessages = 100) {
+        this.messages = [];
+        this.maxMessages = maxMessages;
+    }
+    
+    addMessage(message) {
+        this.messages.push(message);
+        
+        // Keep only last N messages
+        if (this.messages.length > this.maxMessages) {
+            this.messages = this.messages.slice(-this.maxMessages);
+        }
+    }
+    
+    getLastMessage() {
+        return this.messages.at(-1);
+    }
+    
+    getLastNMessages(n) {
+        return ArrayUtils.getLastN(this.messages, n);
+    }
+    
+    getPreviousMessage() {
+        return this.messages.at(-2);
+    }
+    
+    getMessageFromEnd(offset) {
+        return this.messages.at(-offset);
+    }
+}
+
+// Usage
+const chat = new MessageHistory(50);
+
+// Add some messages
+for (let i = 1; i <= 10; i++) {
+    chat.addMessage(`Message ${i}`);
+}
+
+console.log(chat.getLastMessage());        // "Message 10"
+console.log(chat.getPreviousMessage());    // "Message 9"
+console.log(chat.getLastNMessages(3));    // ["Message 8", "Message 9", "Message 10"]
+console.log(chat.getMessageFromEnd(5));    // "Message 6"
+</code></pre>
+</div>
+
+---
+
+## ❓ Common Interview Questions
+
+### Q1: What is the difference between optional chaining (?.) and nullish coalescing (??)?
+**A:** Optional chaining (?.) safely accesses nested object properties and returns `undefined` if any intermediate property is null or undefined. Nullish coalescing (??) provides fallback values only when the left operand is null or undefined, preserving other falsy values like 0, false, and empty strings.
+
+### Q2: When would you use BigInt instead of Number?
+**A:** Use BigInt when you need to work with integers larger than Number.MAX_SAFE_INTEGER (2^53 - 1), when you need exact integer precision (no floating-point errors), or when working with financial calculations, cryptography, or scientific computing that requires large numbers.
+
+### Q3: What are the limitations of top-level await?
+**A:** Top-level await is only available in ES modules, can delay module loading since the module isn't considered "ready" until all awaits resolve, and can impact application startup time. It's great for configuration loading and initialization but should be used judiciously.
+
+### Q4: How does Array.prototype.at() improve array access?
+**A:** Array.prototype.at() provides negative indexing, making it easier to access elements from the end of arrays without calculating array.length. It's more readable than arr[arr.length - 1] and handles out-of-bounds access gracefully by returning undefined.
+
+### Q5: What's the difference between logical OR (||) and nullish coalescing (??)?
+**A:** Logical OR (||) falls back on all falsy values (false, 0, "", null, undefined), while nullish coalescing (??) only falls back on null and undefined. This makes ?? more precise when you want to preserve valid falsy values like 0 or empty strings.
+
+---
+
+## 🏋️ Practice Exercises
+
+### Exercise 1: Build a Safe Object Navigator
+Create a utility function that safely navigates deeply nested objects using optional chaining and provides meaningful default values using nullish coalescing.
+
+### Exercise 2: Implement a BigInt Calculator
+Build a calculator class that handles large numbers using BigInt, including operations like factorial, power, and greatest common divisor.
+
+### Exercise 3: Create a Module Initialization System
+Implement a system using top-level await that loads configuration, establishes database connections, and initializes services in the correct order with proper error handling.
+
+---
+
+## 📚 Additional Resources
+
+- **ES2020 Specification**: [ECMAScript 2020](https://tc39.es/ecma262/2020/)
+- **Optional Chaining**: [MDN Optional Chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining)
+- **Nullish Coalescing**: [MDN Nullish Coalescing](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing)
+- **BigInt**: [MDN BigInt](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt)
+- **Top-level await**: [V8 Blog - Top-level await](https://v8.dev/features/top-level-await)
+- **Array.prototype.at()**: [MDN Array.prototype.at()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/at)
+
+---
+
+## 📋 Copy Code Functionality
+
+<script src="../common-scripts.js"></script>
+
+---
+
+## 🧭 Navigation
+
+<div class="navigation">
+    <a href="04a-Advanced-Modules.md" class="nav-link prev">← Previous: Advanced Modules</a>
+    <a href="06-ES2021-Features.md" class="nav-link next">Next: ES2021+ Features →</a>
+</div>
+
+*Last updated: December 2024*

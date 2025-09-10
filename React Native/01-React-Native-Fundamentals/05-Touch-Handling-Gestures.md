@@ -29,6 +29,7 @@ Touch handling is fundamental to mobile applications. React Native provides seve
 
 ### **Touch Handling Overview**
 
+
 ```
 ┌─────────────────────────────────────┐
 │        Touch Handling System        │
@@ -55,6 +56,7 @@ Touch handling is fundamental to mobile applications. React Native provides seve
 └─────────────────────────────────────┘
 ```
 
+
 ---
 
 ## 👆 **Basic Touch Handling**
@@ -64,6 +66,7 @@ Understanding the fundamentals of touch handling is essential for creating respo
 ### **TouchableOpacity Example**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native';
@@ -193,6 +196,7 @@ const styles = StyleSheet.create({
 export default TouchableOpacityExample;
 ```
 
+
 ---
 
 ## 🎯 **TouchableHighlight**
@@ -202,6 +206,7 @@ TouchableHighlight provides visual feedback by changing the background color whe
 ### **TouchableHighlight Example**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 import React, { useState } from 'react';
 import { View, Text, TouchableHighlight, StyleSheet } from 'react-native';
@@ -308,6 +313,7 @@ const styles = StyleSheet.create({
 
 export default TouchableHighlightExample;
 ```
+
 
 ---
 

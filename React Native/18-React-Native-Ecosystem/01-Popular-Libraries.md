@@ -27,6 +27,7 @@ The React Native ecosystem offers a rich collection of libraries for various fun
 
 ### **Library Categories**
 
+
 ```
 ┌─────────────────────────────────────┐
 │        React Native Libraries      │
@@ -54,6 +55,7 @@ The React Native ecosystem offers a rich collection of libraries for various fun
 └─────────────────────────────────────┘
 ```
 
+
 ### **Library Selection Criteria**
 - **Maintenance**: Active development and updates
 - **Community**: Size and engagement
@@ -68,6 +70,7 @@ The React Native ecosystem offers a rich collection of libraries for various fun
 ### **React Navigation (Most Popular)**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```bash
 # Installation
 npm install @react-navigation/native @react-navigation/stack @react-navigation/bottom-tabs
@@ -76,7 +79,9 @@ npm install @react-navigation/native @react-navigation/stack @react-navigation/b
 npm install react-native-screens react-native-safe-area-context
 ```
 
+
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Basic navigation setup
 import { NavigationContainer } from '@react-navigation/native';
@@ -98,9 +103,11 @@ const App = () => {
 };
 ```
 
+
 ### **React Native Navigation (Wix)**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```bash
 # Installation
 npm install react-native-navigation
@@ -109,7 +116,9 @@ npm install react-native-navigation
 cd ios && pod install && cd ..
 ```
 
+
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // React Native Navigation setup
 import { Navigation } from 'react-native-navigation';
@@ -134,6 +143,7 @@ Navigation.events().registerAppLaunchedListener(() => {
 });
 ```
 
+
 ### **Navigation Library Comparison**
 
 | Feature | React Navigation | React Native Navigation |
@@ -151,12 +161,15 @@ Navigation.events().registerAppLaunchedListener(() => {
 ### **Redux Toolkit (Recommended)**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```bash
 # Installation
 npm install @reduxjs/toolkit react-redux
 ```
 
+
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Redux store setup
 import { configureStore, createSlice } from '@reduxjs/toolkit';
@@ -190,15 +203,19 @@ const App = () => {
 };
 ```
 
+
 ### **Zustand (Lightweight Alternative)**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```bash
 # Installation
 npm install zustand
 ```
 
+
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Zustand store
 import { create } from 'zustand';
@@ -222,15 +239,19 @@ const Counter = () => {
 };
 ```
 
+
 ### **Jotai (Atomic State Management)**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```bash
 # Installation
 npm install jotai
 ```
 
+
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Jotai atoms
 import { atom, useAtom } from 'jotai';
@@ -250,6 +271,7 @@ const Counter = () => {
 };
 ```
 
+
 ---
 
 ## 🎨 **UI Component Libraries**
@@ -257,12 +279,15 @@ const Counter = () => {
 ### **NativeBase (Popular Choice)**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```bash
 # Installation
 npm install native-base react-native-svg
 ```
 
+
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // NativeBase components
 import { Box, Button, Text, VStack } from 'native-base';
@@ -281,15 +306,19 @@ const MyComponent = () => {
 };
 ```
 
+
 ### **React Native Elements**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```bash
 # Installation
 npm install react-native-elements react-native-vector-icons
 ```
 
+
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // React Native Elements
 import { Button, Card, Text } from 'react-native-elements';
@@ -305,15 +334,19 @@ const MyComponent = () => {
 };
 ```
 
+
 ### **Tamagui (Modern Alternative)**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```bash
 # Installation
 npm install @tamagui/core @tamagui/config
 ```
 
+
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Tamagui components
 import { Button, Text, YStack } from '@tamagui/core';
@@ -330,6 +363,7 @@ const MyComponent = () => {
 };
 ```
 
+
 ---
 
 ## 🌐 **Networking Libraries**
@@ -337,12 +371,15 @@ const MyComponent = () => {
 ### **Axios (Most Popular)**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```bash
 # Installation
 npm install axios
 ```
 
+
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Axios setup
 import axios from 'axios';
@@ -380,15 +417,19 @@ api.interceptors.response.use(
 );
 ```
 
+
 ### **React Query (Data Fetching)**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```bash
 # Installation
 npm install @tanstack/react-query
 ```
 
+
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // React Query setup
 import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
@@ -418,15 +459,19 @@ const UserProfile = ({ userId }) => {
 };
 ```
 
+
 ### **SWR (Alternative to React Query)**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```bash
 # Installation
 npm install swr
 ```
 
+
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // SWR usage
 import useSWR from 'swr';
@@ -450,6 +495,7 @@ const UserProfile = ({ userId }) => {
 };
 ```
 
+
 ---
 
 ## 💾 **Storage Libraries**
@@ -457,12 +503,15 @@ const UserProfile = ({ userId }) => {
 ### **AsyncStorage (Built-in)**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```bash
 # Installation
 npm install @react-native-async-storage/async-storage
 ```
 
+
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // AsyncStorage usage
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -496,15 +545,19 @@ const StorageService = {
 };
 ```
 
+
 ### **React Native Keychain (Secure Storage)**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```bash
 # Installation
 npm install react-native-keychain
 ```
 
+
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Keychain usage
 import * as Keychain from 'react-native-keychain';
@@ -539,15 +592,19 @@ const SecureStorage = {
 };
 ```
 
+
 ### **WatermelonDB (Local Database)**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```bash
 # Installation
 npm install @nozbe/watermelondb
 ```
 
+
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // WatermelonDB setup
 import { Database } from '@nozbe/watermelondb';
@@ -579,6 +636,7 @@ const database = new Database({
 });
 ```
 
+
 ---
 
 ## 🎭 **Animation Libraries**
@@ -586,12 +644,15 @@ const database = new Database({
 ### **React Native Reanimated (Most Popular)**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```bash
 # Installation
 npm install react-native-reanimated
 ```
 
+
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Reanimated usage
 import Animated, {
@@ -625,15 +686,19 @@ const AnimatedComponent = () => {
 };
 ```
 
+
 ### **Lottie React Native (Vector Animations)**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```bash
 # Installation
 npm install lottie-react-native
 ```
 
+
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Lottie usage
 import LottieView from 'lottie-react-native';
@@ -650,15 +715,19 @@ const LottieAnimation = () => {
 };
 ```
 
+
 ### **React Native Animatable**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```bash
 # Installation
 npm install react-native-animatable
 ```
 
+
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Animatable usage
 import * as Animatable from 'react-native-animatable';
@@ -676,6 +745,7 @@ const AnimatableComponent = () => {
 };
 ```
 
+
 ---
 
 ## 🛠️ **Utility Libraries**
@@ -683,12 +753,15 @@ const AnimatableComponent = () => {
 ### **React Native Vector Icons**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```bash
 # Installation
 npm install react-native-vector-icons
 ```
 
+
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Vector Icons usage
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -703,15 +776,19 @@ const IconExample = () => {
 };
 ```
 
+
 ### **React Native Device Info**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```bash
 # Installation
 npm install react-native-device-info
 ```
 
+
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Device Info usage
 import DeviceInfo from 'react-native-device-info';
@@ -743,15 +820,19 @@ const DeviceInfoExample = () => {
 };
 ```
 
+
 ### **React Native Permissions**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```bash
 # Installation
 npm install react-native-permissions
 ```
 
+
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Permissions usage
 import { request, PERMISSIONS, RESULTS } from 'react-native-permissions';
@@ -789,6 +870,7 @@ const PermissionExample = () => {
 };
 ```
 
+
 ---
 
 ## ✅ **Best Practices**
@@ -796,6 +878,7 @@ const PermissionExample = () => {
 ### **1. Library Selection**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Library evaluation checklist
 const LibraryEvaluation = {
@@ -819,9 +902,11 @@ const LibraryEvaluation = {
 };
 ```
 
+
 ### **2. Library Integration**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Proper library integration
 const LibraryIntegration = {
@@ -844,9 +929,11 @@ const LibraryIntegration = {
 };
 ```
 
+
 ### **3. Performance Optimization**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Library performance optimization
 const LibraryOptimization = {
@@ -866,6 +953,7 @@ const LibraryOptimization = {
   }
 };
 ```
+
 
 ---
 

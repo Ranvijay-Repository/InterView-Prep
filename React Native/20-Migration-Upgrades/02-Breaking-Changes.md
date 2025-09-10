@@ -39,6 +39,7 @@ Breaking changes are modifications that:
 ### **1. API Removals**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // ❌ Old API (removed in 0.70+)
 import { AsyncStorage } from 'react-native';
@@ -47,9 +48,11 @@ import { AsyncStorage } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 ```
 
+
 ### **2. API Modifications**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // ❌ Old API (changed in 0.69+)
 import { Dimensions } from 'react-native';
@@ -60,9 +63,11 @@ import { useWindowDimensions } from 'react-native';
 const { width, height } = useWindowDimensions();
 ```
 
+
 ### **3. Default Behavior Changes**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // ❌ Old behavior (changed in 0.68+)
 // FlatList had different default props
@@ -74,7 +79,9 @@ const { width, height } = useWindowDimensions();
 />
 ```
 
+
 ### **4. Dependency Updates**
+
 ```json
 // ❌ Old dependencies
 {
@@ -89,6 +96,7 @@ const { width, height } = useWindowDimensions();
 }
 ```
 
+
 ---
 
 ## 📋 **Common Breaking Changes**
@@ -98,6 +106,7 @@ const { width, height } = useWindowDimensions();
 #### **Before (Deprecated)**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 import { AsyncStorage } from 'react-native';
 
@@ -106,15 +115,19 @@ AsyncStorage.setItem('key', 'value');
 AsyncStorage.getItem('key');
 ```
 
+
 #### **After (New Package)**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```bash
 # Install new package
 npm install @react-native-async-storage/async-storage
 ```
 
+
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -123,9 +136,11 @@ AsyncStorage.setItem('key', 'value');
 AsyncStorage.getItem('key');
 ```
 
+
 ### **2. NetInfo Migration (0.60+)**
 
 #### **Before (Deprecated)**
+
 ```javascript
 import NetInfo from '@react-native-community/netinfo';
 
@@ -135,7 +150,9 @@ NetInfo.getConnectionInfo().then(connectionInfo => {
 });
 ```
 
+
 #### **After (New API)**
+
 ```javascript
 import NetInfo from '@react-native-community/netinfo';
 
@@ -151,9 +168,11 @@ const netInfo = useNetInfo();
 console.log(netInfo);
 ```
 
+
 ### **3. Dimensions API Changes (0.69+)**
 
 #### **Before (Deprecated)**
+
 ```javascript
 import { Dimensions } from 'react-native';
 
@@ -162,7 +181,9 @@ const { width, height } = Dimensions.get('window');
 // Static values, doesn't update on orientation change
 ```
 
+
 #### **After (New Hook)**
+
 ```javascript
 import { useWindowDimensions } from 'react-native';
 
@@ -171,9 +192,11 @@ const { width, height } = useWindowDimensions();
 // Dynamic values, updates on orientation change
 ```
 
+
 ### **4. FlatList Performance Changes (0.68+)**
 
 #### **Before (Old Defaults)**
+
 ```javascript
 <FlatList
   data={data}
@@ -182,7 +205,9 @@ const { width, height } = useWindowDimensions();
 />
 ```
 
+
 #### **After (New Defaults)**
+
 ```javascript
 <FlatList
   data={data}
@@ -193,16 +218,20 @@ const { width, height } = useWindowDimensions();
 />
 ```
 
+
 ### **5. New Architecture Changes (0.68+)**
 
 #### **Before (Old Architecture)**
+
 ```javascript
 // Bridge-based communication
 // Slower performance
 // Limited type safety
 ```
 
+
 #### **After (New Architecture)**
+
 ```javascript
 // JSI-based communication
 // Better performance
@@ -210,11 +239,13 @@ const { width, height } = useWindowDimensions();
 // TurboModules and Fabric
 ```
 
+
 ---
 
 ## 🚀 **Migration Strategies**
 
 ### **1. Gradual Migration**
+
 ```javascript
 // Create compatibility layer
 const CompatibleAsyncStorage = {
@@ -228,7 +259,9 @@ const CompatibleAsyncStorage = {
 };
 ```
 
+
 ### **2. Feature Detection**
+
 ```javascript
 // Check for API availability
 const useDimensions = () => {
@@ -241,7 +274,9 @@ const useDimensions = () => {
 };
 ```
 
+
 ### **3. Conditional Imports**
+
 ```javascript
 // Import based on version
 let AsyncStorage;
@@ -252,7 +287,9 @@ try {
 }
 ```
 
+
 ### **4. Wrapper Components**
+
 ```javascript
 // Create wrapper for breaking changes
 const CompatibleFlatList = ({ children, ...props }) => {
@@ -266,11 +303,13 @@ const CompatibleFlatList = ({ children, ...props }) => {
 };
 ```
 
+
 ---
 
 ## 📅 **Version-Specific Changes**
 
 ### **React Native 0.71 Breaking Changes**
+
 ```javascript
 // 1. New Architecture enabled by default
 // 2. Updated Metro configuration
@@ -284,7 +323,9 @@ const CompatibleFlatList = ({ children, ...props }) => {
 // 4. Test New Architecture
 ```
 
+
 ### **React Native 0.70 Breaking Changes**
+
 ```javascript
 // 1. New Architecture support
 // 2. Updated React 18 support
@@ -298,7 +339,9 @@ const CompatibleFlatList = ({ children, ...props }) => {
 // 4. Test compatibility
 ```
 
+
 ### **React Native 0.69 Breaking Changes**
+
 ```javascript
 // 1. Dimensions API changes
 // 2. FlatList performance updates
@@ -312,7 +355,9 @@ const CompatibleFlatList = ({ children, ...props }) => {
 // 4. Test performance
 ```
 
+
 ### **React Native 0.68 Breaking Changes**
+
 ```javascript
 // 1. New Architecture introduction
 // 2. FlatList default changes
@@ -326,11 +371,13 @@ const CompatibleFlatList = ({ children, ...props }) => {
 // 4. Update Metro config
 ```
 
+
 ---
 
 ## ✅ **Best Practices**
 
 ### **1. Stay Updated**
+
 ```bash
 # Regular updates prevent major breaking changes
 npm update react-native
@@ -339,7 +386,9 @@ npm update react-native
 npx react-native start --verbose
 ```
 
+
 ### **2. Use TypeScript**
+
 ```typescript
 // TypeScript helps catch breaking changes
 interface FlatListProps {
@@ -349,7 +398,9 @@ interface FlatListProps {
 }
 ```
 
+
 ### **3. Automated Testing**
+
 ```javascript
 // Test for breaking changes
 describe('Breaking Changes', () => {
@@ -367,20 +418,25 @@ describe('Breaking Changes', () => {
 });
 ```
 
+
 ### **4. Documentation**
+
 ```markdown
 # Keep track of breaking changes
 # Document migration steps
 # Maintain compatibility matrix
 ```
 
+
 ### **5. Gradual Rollout**
+
 ```javascript
 // Use feature flags for gradual migration
 const useNewAsyncStorage = useFeatureFlag('new-async-storage');
 
 const storage = useNewAsyncStorage ? newAsyncStorage : oldAsyncStorage;
 ```
+
 
 ---
 

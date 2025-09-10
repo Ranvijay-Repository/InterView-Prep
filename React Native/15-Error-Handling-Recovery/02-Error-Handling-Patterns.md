@@ -25,6 +25,7 @@ Error handling in React Native requires a multi-layered approach to ensure robus
 
 ### **Error Types in React Native**
 
+
 ```javascript
 // 1. JavaScript Errors
 const handleJSError = () => {
@@ -69,7 +70,9 @@ const handleNativeError = async () => {
 };
 ```
 
+
 ### **Error Classification System**
+
 
 ```javascript
 class ErrorClassifier {
@@ -109,11 +112,13 @@ const handleError = (error) => {
 };
 ```
 
+
 ---
 
 ## ⚡ **Async Error Handling**
 
 ### **Promise-Based Error Handling**
+
 
 ```javascript
 import { useState, useEffect, useCallback } from 'react';
@@ -178,7 +183,9 @@ const DataComponent = () => {
 };
 ```
 
+
 ### **Async Error Boundary Pattern**
+
 
 ```javascript
 import React, { useState, useEffect, useCallback } from 'react';
@@ -283,11 +290,13 @@ const styles = StyleSheet.create({
 export default AsyncErrorBoundary;
 ```
 
+
 ---
 
 ## 🌐 **Network Error Patterns**
 
 ### **HTTP Client with Error Handling**
+
 
 ```javascript
 class HttpClient {
@@ -382,7 +391,9 @@ class HttpError extends Error {
 export { HttpClient, HttpError };
 ```
 
+
 ### **Network Status Monitoring**
+
 
 ```javascript
 import NetInfo from '@react-native-netinfo/netinfo';
@@ -460,11 +471,13 @@ const NetworkAwareComponent = () => {
 };
 ```
 
+
 ---
 
 ## 🔄 **State Management Error Handling**
 
 ### **Redux Error Handling**
+
 
 ```javascript
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
@@ -530,7 +543,9 @@ export const { clearError, resetUser } = userSlice.actions;
 export default userSlice.reducer;
 ```
 
+
 ### **Context API Error Handling**
+
 
 ```javascript
 import React, { createContext, useContext, useReducer, useCallback } from 'react';
@@ -608,11 +623,13 @@ const useError = () => {
 export { ErrorProvider, useError };
 ```
 
+
 ---
 
 ## 🔄 **Error Recovery Patterns**
 
 ### **Retry with Exponential Backoff**
+
 
 ```javascript
 const useRetry = (maxRetries = 3, baseDelay = 1000) => {
@@ -655,7 +672,9 @@ const useRetry = (maxRetries = 3, baseDelay = 1000) => {
 };
 ```
 
+
 ### **Circuit Breaker Pattern**
+
 
 ```javascript
 class CircuitBreaker {
@@ -728,11 +747,13 @@ const fetchData = async () => {
 };
 ```
 
+
 ---
 
 ## 📊 **Error Monitoring and Analytics**
 
 ### **Error Analytics Service**
+
 
 ```javascript
 class ErrorAnalytics {
@@ -829,7 +850,9 @@ class ErrorAnalytics {
 export const errorAnalytics = new ErrorAnalytics();
 ```
 
+
 ### **Error Monitoring Hook**
+
 
 ```javascript
 import { useEffect, useCallback } from 'react';
@@ -867,11 +890,13 @@ const useErrorMonitoring = (componentName) => {
 export default useErrorMonitoring;
 ```
 
+
 ---
 
 ## ✅ **Best Practices**
 
 ### **1. Error Handling Strategy**
+
 
 ```javascript
 // ✅ Good: Comprehensive error handling
@@ -912,7 +937,9 @@ const handleApiCall = async () => {
 };
 ```
 
+
 ### **2. Error Recovery**
+
 
 ```javascript
 // ✅ Good: Provide recovery options
@@ -977,7 +1004,9 @@ const DataComponent = () => {
 };
 ```
 
+
 ### **3. Error Logging**
+
 
 ```javascript
 // ✅ Good: Structured error logging
@@ -1006,6 +1035,7 @@ const logError = (error) => {
 };
 ```
 
+
 ---
 
 ## ❓ **Common Interview Questions**
@@ -1024,6 +1054,7 @@ I would implement a multi-layered error handling strategy:
 ### **2. How do you handle network errors in React Native?**
 
 **Answer:**
+
 ```javascript
 const handleNetworkError = async (operation) => {
   try {
@@ -1043,9 +1074,11 @@ const handleNetworkError = async (operation) => {
 };
 ```
 
+
 ### **3. How would you implement retry logic for failed API calls?**
 
 **Answer:**
+
 ```javascript
 const retryWithBackoff = async (operation, maxRetries = 3) => {
   for (let attempt = 0; attempt < maxRetries; attempt++) {
@@ -1063,9 +1096,11 @@ const retryWithBackoff = async (operation, maxRetries = 3) => {
 };
 ```
 
+
 ### **4. How do you handle errors in Redux?**
 
 **Answer:**
+
 ```javascript
 const userSlice = createSlice({
   name: 'user',
@@ -1097,9 +1132,11 @@ const userSlice = createSlice({
 });
 ```
 
+
 ### **5. How would you implement error monitoring in a production app?**
 
 **Answer:**
+
 ```javascript
 class ErrorMonitor {
   constructor() {
@@ -1139,6 +1176,7 @@ class ErrorMonitor {
   }
 }
 ```
+
 
 ---
 

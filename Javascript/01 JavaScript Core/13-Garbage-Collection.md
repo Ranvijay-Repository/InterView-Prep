@@ -43,6 +43,7 @@
 Memory in JavaScript follows a predictable lifecycle from allocation to garbage collection.
 
 ### ASCII Diagram: Memory Lifecycle
+
 ```
 MEMORY LIFECYCLE
 ┌─────────────────────────────────┐
@@ -63,6 +64,7 @@ MEMORY LIFECYCLE
 │    unreachable memory          │
 └─────────────────────────────────┘
 ```
+
 
 ---
 
@@ -99,6 +101,7 @@ JavaScript engines use different algorithms to identify and collect garbage memo
 3. **Free** memory when count reaches zero
 
 ### ASCII Diagram: Reference Counting
+
 ```
 REFERENCE COUNTING EXAMPLE
 ┌─────────────────────────────────┐
@@ -123,6 +126,7 @@ REFERENCE COUNTING EXAMPLE
 └─────────────────────────────────┘
 ```
 
+
 ---
 
 ## 🎯 Mark and Sweep
@@ -135,6 +139,7 @@ REFERENCE COUNTING EXAMPLE
 3. **Compact Phase**: (Optional) Move objects to reduce fragmentation
 
 ### ASCII Diagram: Mark and Sweep
+
 ```
 MARK AND SWEEP PROCESS
 ┌─────────────────────────────────┐
@@ -171,6 +176,7 @@ MARK AND SWEEP PROCESS
 └─────────────────────────────────┘
 ```
 
+
 ---
 
 ## 🏗️ Generational Garbage Collection
@@ -183,6 +189,7 @@ MARK AND SWEEP PROCESS
 - **Large Object Space**: Very large objects
 
 ### ASCII Diagram: Generational Collection
+
 ```
 GENERATIONAL GARBAGE COLLECTION
 ┌─────────────────────────────────┐
@@ -213,6 +220,7 @@ GENERATIONAL GARBAGE COLLECTION
 └─────────────────────────────────┘
 ```
 
+
 ---
 
 ## 🚨 Memory Leaks
@@ -233,6 +241,7 @@ GENERATIONAL GARBAGE COLLECTION
 ### Example 1: Basic Memory Management
 <div style="position: relative;">
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
+
 
 ```javascript
 console.log("=== BASIC MEMORY MANAGEMENT ===");
@@ -282,11 +291,13 @@ console.log("Setting variables to null removes references");
 console.log("Unreferenced objects become eligible for GC");
 console.log("Memory is freed automatically by the engine");
 ```
+
 </div>
 
 ### Example 2: Circular References and Garbage Collection
 <div style="position: relative;">
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
+
 
 ```javascript
 console.log("=== CIRCULAR REFERENCES AND GC ===");
@@ -347,11 +358,13 @@ console.log("Circular references don't prevent garbage collection");
 console.log("Mark and Sweep algorithm handles circular references");
 console.log("Objects become unreachable when no external references exist");
 ```
+
 </div>
 
 ### Example 3: Memory Leaks in Event Listeners
 <div style="position: relative;">
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
+
 
 ```javascript
 console.log("=== MEMORY LEAKS IN EVENT LISTENERS ===");
@@ -438,6 +451,7 @@ console.log("Event listeners can cause memory leaks");
 console.log("Always remove listeners before destroying elements");
 console.log("Use removeEventListener() to prevent memory leaks");
 ```
+
 </div>
 
 ---
@@ -445,6 +459,7 @@ console.log("Use removeEventListener() to prevent memory leaks");
 ## ⚠️ Common Pitfalls
 
 ### Pitfall 1: Global Variables
+
 ```javascript
 // ❌ WRONG: Accidental global variable
 function processData() {
@@ -457,7 +472,9 @@ function processData() {
 }
 ```
 
+
 ### Pitfall 2: Forgotten Event Listeners
+
 ```javascript
 // ❌ WRONG: Event listener not removed
 element.addEventListener("click", handler);
@@ -467,6 +484,7 @@ element.addEventListener("click", handler);
 element.addEventListener("click", handler);
 element.removeEventListener("click", handler);
 ```
+
 
 ---
 

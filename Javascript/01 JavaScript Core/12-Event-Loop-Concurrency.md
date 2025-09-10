@@ -44,6 +44,7 @@
 JavaScript runtime consists of several components that work together to execute code.
 
 ### ASCII Diagram: JavaScript Runtime
+
 ```
 JAVASCRIPT RUNTIME ARCHITECTURE
 ┌─────────────────────────────────────────────────────────┐
@@ -76,6 +77,7 @@ JAVASCRIPT RUNTIME ARCHITECTURE
 └─────────────────────────────────────────────────────────┘
 ```
 
+
 ---
 
 ## 📚 Call Stack
@@ -88,6 +90,7 @@ The **Call Stack** is a data structure that tracks function calls during executi
 - **Blocking**: Long-running functions block the entire stack
 
 ### ASCII Diagram: Call Stack
+
 ```
 CALL STACK OPERATION
 ┌─────────────────────────────────┐
@@ -112,6 +115,7 @@ EXECUTION FLOW:
 7. main() continues
 ```
 
+
 ---
 
 ## 🌐 Web APIs
@@ -126,6 +130,7 @@ EXECUTION FLOW:
 - **Media**: Audio, Video APIs
 
 ### ASCII Diagram: Web API Operation
+
 ```
 WEB API OPERATION FLOW
 ┌─────────────────────────────────┐
@@ -145,6 +150,7 @@ WEB API OPERATION FLOW
 └─────────────────────────────────┘
 ```
 
+
 ---
 
 ## 📋 Callback Queue
@@ -157,6 +163,7 @@ The **Callback Queue** (also called Task Queue or Macrotask Queue) holds callbac
 - **Lower Priority**: Executes after microtasks
 
 ### ASCII Diagram: Callback Queue
+
 ```
 CALLBACK QUEUE OPERATION
 ┌─────────────────────────────────┐
@@ -178,6 +185,7 @@ EXECUTION ORDER:
 4. setTimeout callback 2 executes last
 ```
 
+
 ---
 
 ## ⚡ Microtask Queue
@@ -190,6 +198,7 @@ The **Microtask Queue** holds higher-priority callbacks that execute before the 
 - **Examples**: Promise callbacks, `queueMicrotask()`, `process.nextTick()` (Node.js)
 
 ### ASCII Diagram: Microtask Queue
+
 ```
 MICROTASK QUEUE OPERATION
 ┌─────────────────────────────────┐
@@ -211,6 +220,7 @@ EXECUTION PRIORITY:
 4. Repeat...
 ```
 
+
 ---
 
 ## 🏃 Execution Order
@@ -218,6 +228,7 @@ EXECUTION PRIORITY:
 The Event Loop follows a specific order when processing tasks.
 
 ### ASCII Diagram: Execution Order Priority
+
 ```
 EXECUTION ORDER PRIORITY
 ┌─────────────────────────────────┐
@@ -242,6 +253,7 @@ KEY RULES:
 • Render happens after microtasks complete
 ```
 
+
 ---
 
 ## 🖥️ Node.js Event Loop
@@ -263,6 +275,7 @@ Node.js has additional phases in its event loop beyond the browser's simpler mod
 ### Example 1: Basic Event Loop Demonstration
 <div style="position: relative;">
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
+
 
 ```javascript
 console.log("=== BASIC EVENT LOOP DEMONSTRATION ===");
@@ -296,11 +309,13 @@ console.log("2. Microtasks (Promises) execute next");
 console.log("3. Macrotasks (setTimeout) execute last");
 console.log("4. Even 0ms setTimeout is a macrotask");
 ```
+
 </div>
 
 ### Example 2: Microtask vs Macrotask Priority
 <div style="position: relative;">
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
+
 
 ```javascript
 console.log("=== MICROTASK VS MACROTASK PRIORITY ===");
@@ -354,11 +369,13 @@ console.log("• Nested microtasks execute immediately");
 console.log("• Macrotasks execute one at a time");
 console.log("• Each macrotask can spawn new microtasks");
 ```
+
 </div>
 
 ### Example 3: Complex Async Operations
 <div style="position: relative;">
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
+
 
 ```javascript
 console.log("=== COMPLEX ASYNC OPERATIONS ===");
@@ -417,11 +434,13 @@ console.log("• await pauses execution until Promise resolves");
 console.log("• The function after await becomes a microtask");
 console.log("• setTimeout callbacks are always macrotasks");
 ```
+
 </div>
 
 ### Example 4: Event Loop Blocking
 <div style="position: relative;">
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
+
 
 ```javascript
 console.log("=== EVENT LOOP BLOCKING ===");
@@ -466,11 +485,13 @@ console.log("• Break large operations into smaller chunks");
 console.log("• Use requestIdleCallback for non-critical work");
 console.log("• Avoid blocking the main thread");
 ```
+
 </div>
 
 ### Example 5: Real-World Event Loop Scenarios
 <div style="position: relative;">
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
+
 
 ```javascript
 console.log("=== REAL-WORLD EVENT LOOP SCENARIOS ===");
@@ -555,6 +576,7 @@ console.log("• Promise.all waits for all operations");
 console.log("• Error handling follows the same event loop rules");
 console.log("• requestAnimationFrame is a special macrotask");
 ```
+
 </div>
 
 ---
@@ -562,6 +584,7 @@ console.log("• requestAnimationFrame is a special macrotask");
 ## ⚠️ Common Pitfalls
 
 ### Pitfall 1: Blocking the Event Loop
+
 ```javascript
 // ❌ WRONG: Blocking operation
 function heavyComputation() {
@@ -582,7 +605,9 @@ function heavyComputation() {
 }
 ```
 
+
 ### Pitfall 2: Ignoring Microtask Priority
+
 ```javascript
 // ❌ WRONG: Assuming setTimeout executes before Promise
 setTimeout(() => console.log("Timeout"), 0);
@@ -591,7 +616,9 @@ Promise.resolve().then(() => console.log("Promise"));
 // Output: Promise, then Timeout (not the other way around!)
 ```
 
+
 ### Pitfall 3: Infinite Microtask Loops
+
 ```javascript
 // ❌ WRONG: Infinite microtask loop
 function infiniteMicrotasks() {
@@ -600,6 +627,7 @@ function infiniteMicrotasks() {
 
 // This will block the event loop forever!
 ```
+
 
 ---
 

@@ -8,6 +8,7 @@ Device capabilities detection is crucial for creating adaptive React Native appl
 
 ### 1. Basic Device Information
 
+
 ```javascript
 import { Platform, Dimensions, PixelRatio } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
@@ -56,7 +57,9 @@ const useDeviceInfo = () => {
 };
 ```
 
+
 ### 2. Advanced Device Classification
+
 
 ```javascript
 import { Dimensions, PixelRatio } from 'react-native';
@@ -117,9 +120,11 @@ const useDeviceClassification = () => {
 };
 ```
 
+
 ## Camera and Media Capabilities
 
 ### 1. Camera Detection
+
 
 ```javascript
 import { Platform } from 'react-native';
@@ -176,7 +181,9 @@ const useCameraCapabilities = () => {
 };
 ```
 
+
 ### 2. Media Library Detection
+
 
 ```javascript
 import { Platform } from 'react-native';
@@ -235,9 +242,11 @@ const useMediaLibraryCapabilities = () => {
 };
 ```
 
+
 ## Network and Connectivity
 
 ### 1. Network Capabilities
+
 
 ```javascript
 import NetInfo from '@react-native-netinfo/netinfo';
@@ -292,7 +301,9 @@ const useNetworkCapabilities = () => {
 };
 ```
 
+
 ### 2. Network Speed Detection
+
 
 ```javascript
 import NetInfo from '@react-native-netinfo/netinfo';
@@ -348,9 +359,11 @@ const useNetworkSpeed = () => {
 };
 ```
 
+
 ## Sensor Capabilities
 
 ### 1. Motion Sensors
+
 
 ```javascript
 import { Accelerometer, Gyroscope, Magnetometer } from 'react-native-sensors';
@@ -397,7 +410,9 @@ const useMotionSensors = () => {
 };
 ```
 
+
 ### 2. Biometric Sensors
+
 
 ```javascript
 import TouchID from 'react-native-touch-id';
@@ -449,9 +464,11 @@ const useBiometricCapabilities = () => {
 };
 ```
 
+
 ## Storage Capabilities
 
 ### 1. Storage Detection
+
 
 ```javascript
 import { Platform } from 'react-native';
@@ -503,7 +520,9 @@ const useStorageCapabilities = () => {
 };
 ```
 
+
 ### 2. Database Capabilities
+
 
 ```javascript
 import SQLite from 'react-native-sqlite-storage';
@@ -566,9 +585,11 @@ const useDatabaseCapabilities = () => {
 };
 ```
 
+
 ## Performance Capabilities
 
 ### 1. Performance Detection
+
 
 ```javascript
 import { Platform } from 'react-native';
@@ -642,7 +663,9 @@ const usePerformanceCapabilities = () => {
 };
 ```
 
+
 ### 2. Memory Capabilities
+
 
 ```javascript
 import { Platform } from 'react-native';
@@ -708,9 +731,11 @@ const useMemoryCapabilities = () => {
 };
 ```
 
+
 ## Capability-Based Feature Toggles
 
 ### 1. Feature Toggle System
+
 
 ```javascript
 import { useMemo } from 'react';
@@ -762,7 +787,9 @@ const useFeatureToggles = () => {
 };
 ```
 
+
 ### 2. Adaptive Component Rendering
+
 
 ```javascript
 import { useFeatureToggles } from './useFeatureToggles';
@@ -793,6 +820,7 @@ const AdaptiveComponent = ({ children }) => {
   );
 };
 ```
+
 
 ## Summary
 

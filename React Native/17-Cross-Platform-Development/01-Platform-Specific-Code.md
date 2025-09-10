@@ -8,6 +8,7 @@ React Native provides powerful tools for writing platform-specific code while ma
 
 ### 1. Basic Platform Detection
 
+
 ```javascript
 import { Platform, StyleSheet, View, Text } from 'react-native';
 
@@ -50,7 +51,9 @@ const styles = StyleSheet.create({
 });
 ```
 
+
 ### 2. Advanced Platform Detection
+
 
 ```javascript
 import { Platform, Dimensions } from 'react-native';
@@ -96,9 +99,11 @@ const usePlatformInfo = () => {
 };
 ```
 
+
 ## Platform-Specific Styling
 
 ### 1. Platform-Specific Styles
+
 
 ```javascript
 import { Platform, StyleSheet } from 'react-native';
@@ -137,7 +142,9 @@ const styles = StyleSheet.create({
 });
 ```
 
+
 ### 2. Dynamic Style Generation
+
 
 ```javascript
 import { Platform, StyleSheet, Dimensions } from 'react-native';
@@ -206,9 +213,11 @@ const baseStyles = {
 const styles = createPlatformStyles(baseStyles);
 ```
 
+
 ## Platform-Specific Components
 
 ### 1. Conditional Component Rendering
+
 
 ```javascript
 import { Platform, View, Text, TouchableOpacity, TouchableNativeFeedback } from 'react-native';
@@ -271,7 +280,9 @@ const PlatformAlert = ({ title, message, buttons }) => {
 };
 ```
 
+
 ### 2. Platform-Specific Hooks
+
 
 ```javascript
 import { Platform, useCallback } from 'react';
@@ -330,9 +341,11 @@ const usePlatformActions = () => {
 };
 ```
 
+
 ## Platform-Specific File Structure
 
 ### 1. File Extension Approach
+
 
 ```javascript
 // Button.ios.js
@@ -367,6 +380,8 @@ const styles = StyleSheet.create({
 export default Button;
 ```
 
+
+
 ```javascript
 // Button.android.js
 import { TouchableNativeFeedback, Text, View, StyleSheet } from 'react-native';
@@ -399,7 +414,9 @@ const styles = StyleSheet.create({
 export default Button;
 ```
 
+
 ### 2. Platform-Specific Directories
+
 
 ```javascript
 // components/Button/index.js
@@ -411,6 +428,8 @@ const Button = Platform.OS === 'ios'
 
 export default Button;
 ```
+
+
 
 ```javascript
 // components/Button/Button.ios.js
@@ -445,6 +464,8 @@ const styles = StyleSheet.create({
 export default Button;
 ```
 
+
+
 ```javascript
 // components/Button/Button.android.js
 import { TouchableNativeFeedback, Text, View, StyleSheet } from 'react-native';
@@ -477,9 +498,11 @@ const styles = StyleSheet.create({
 export default Button;
 ```
 
+
 ## Platform-Specific APIs
 
 ### 1. Native Module Integration
+
 
 ```javascript
 import { Platform, NativeModules } from 'react-native';
@@ -511,7 +534,9 @@ const usePlatformAPI = () => {
 };
 ```
 
+
 ### 2. Platform-Specific Permissions
+
 
 ```javascript
 import { Platform, PermissionsAndroid, Alert } from 'react-native';
@@ -574,9 +599,11 @@ const usePlatformPermissions = () => {
 };
 ```
 
+
 ## Platform-Specific Navigation
 
 ### 1. Platform-Specific Navigation Styles
+
 
 ```javascript
 import { Platform, StyleSheet } from 'react-native';
@@ -615,7 +642,9 @@ const usePlatformNavigation = () => {
 };
 ```
 
+
 ### 2. Platform-Specific Tab Navigation
+
 
 ```javascript
 import { Platform, StyleSheet } from 'react-native';
@@ -626,7 +655,7 @@ const Tab = createBottomTabNavigator();
 const PlatformTabNavigator = () => {
   return (
     <Tab.Navigator
-      screenOptions={{
+      screenOptions={{#123;{{#123;
         tabBarStyle: {
           backgroundColor: Platform.OS === 'ios' ? '#F2F2F7' : '#FFFFFF',
           borderTopWidth: Platform.OS === 'ios' ? 0.5 : 0,
@@ -641,7 +670,7 @@ const PlatformTabNavigator = () => {
         },
         tabBarActiveTintColor: Platform.OS === 'ios' ? '#007AFF' : '#2196F3',
         tabBarInactiveTintColor: Platform.OS === 'ios' ? '#8E8E93' : '#757575',
-      }}
+      }}#125;}}#125;
     >
       <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="Profile" component={ProfileScreen} />
@@ -650,9 +679,11 @@ const PlatformTabNavigator = () => {
 };
 ```
 
+
 ## Platform-Specific Testing
 
 ### 1. Platform-Specific Test Setup
+
 
 ```javascript
 // __tests__/PlatformSpecific.test.js
@@ -680,7 +711,9 @@ describe('Platform Specific Component', () => {
 });
 ```
 
+
 ### 2. Platform-Specific Test Utilities
+
 
 ```javascript
 // test-utils/platformUtils.js
@@ -716,9 +749,11 @@ export const testOnBothPlatforms = (testFn) => {
 };
 ```
 
+
 ## Best Practices
 
 ### 1. Platform-Specific Code Organization
+
 
 ```javascript
 // utils/platform.js
@@ -751,7 +786,9 @@ export const platformSelect = (ios, android, web = null) => {
 };
 ```
 
+
 ### 2. Platform-Specific Constants
+
 
 ```javascript
 // constants/platform.js
@@ -771,6 +808,7 @@ export const PLATFORM_CONSTANTS = {
   },
 };
 ```
+
 
 ## Summary
 

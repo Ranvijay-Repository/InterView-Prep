@@ -42,6 +42,7 @@
 - **Team Autonomy**: Allow teams to work independently
 
 ### ASCII Diagram: Module Federation Architecture
+
 ```
 MODULE FEDERATION ARCHITECTURE
 ┌─────────────────────────────────┐
@@ -75,11 +76,13 @@ MODULE FEDERATION ARCHITECTURE
         └───────────────┘
 ```
 
+
 ---
 
 ## 🚀 Advanced Module Patterns
 
 ### 1. **Conditional Module Loading**
+
 ```javascript
 // Load different modules based on conditions
 const loadModule = async (condition) => {
@@ -93,7 +96,9 @@ const loadModule = async (condition) => {
 };
 ```
 
+
 ### 2. **Module Preloading**
+
 ```javascript
 // Preload modules for better performance
 const preloadModule = (modulePath) => {
@@ -103,6 +108,7 @@ const preloadModule = (modulePath) => {
     document.head.appendChild(link);
 };
 ```
+
 
 ---
 

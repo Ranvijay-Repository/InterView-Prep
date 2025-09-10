@@ -25,6 +25,7 @@ The `tsconfig.json` file is the configuration file for TypeScript projects, defi
 
 ### **Basic Structure**
 
+
 ```json
 {
   "compilerOptions": {
@@ -43,7 +44,9 @@ The `tsconfig.json` file is the configuration file for TypeScript projects, defi
 }
 ```
 
+
 ### **Configuration Inheritance**
+
 
 ```json
 // base-config.json
@@ -67,11 +70,13 @@ The `tsconfig.json` file is the configuration file for TypeScript projects, defi
 }
 ```
 
+
 ---
 
 ## 🔧 **Compiler Options**
 
 ### **Basic Options**
+
 
 ```json
 {
@@ -98,7 +103,9 @@ The `tsconfig.json` file is the configuration file for TypeScript projects, defi
 }
 ```
 
+
 ### **Strict Type Checking**
+
 
 ```json
 {
@@ -119,7 +126,9 @@ The `tsconfig.json` file is the configuration file for TypeScript projects, defi
 }
 ```
 
+
 ### **Module Resolution**
+
 
 ```json
 {
@@ -148,7 +157,9 @@ The `tsconfig.json` file is the configuration file for TypeScript projects, defi
 }
 ```
 
+
 ### **Advanced Options**
+
 
 ```json
 {
@@ -178,6 +189,7 @@ The `tsconfig.json` file is the configuration file for TypeScript projects, defi
 }
 ```
 
+
 ---
 
 ## 📁 **Project References**
@@ -185,6 +197,7 @@ The `tsconfig.json` file is the configuration file for TypeScript projects, defi
 Project references allow you to structure TypeScript projects into smaller, manageable pieces.
 
 ### **Basic Project References**
+
 
 ```json
 // tsconfig.json (root)
@@ -222,7 +235,9 @@ Project references allow you to structure TypeScript projects into smaller, mana
 }
 ```
 
+
 ### **Build with Project References**
+
 
 ```bash
 # Build all projects
@@ -238,11 +253,13 @@ tsc --build --clean
 tsc --build --force
 ```
 
+
 ---
 
 ## 📂 **File Inclusion/Exclusion**
 
 ### **Include Patterns**
+
 
 ```json
 {
@@ -254,7 +271,9 @@ tsc --build --force
 }
 ```
 
+
 ### **Exclude Patterns**
+
 
 ```json
 {
@@ -268,7 +287,9 @@ tsc --build --force
 }
 ```
 
+
 ### **Files Array**
+
 
 ```json
 {
@@ -280,11 +301,13 @@ tsc --build --force
 }
 ```
 
+
 ---
 
 ## 🚀 **Advanced Configuration**
 
 ### **Environment-Specific Configs**
+
 
 ```json
 // tsconfig.base.json
@@ -323,7 +346,9 @@ tsc --build --force
 }
 ```
 
+
 ### **Library Configuration**
+
 
 ```json
 // tsconfig.lib.json
@@ -346,7 +371,9 @@ tsc --build --force
 }
 ```
 
+
 ### **Node.js Configuration**
+
 
 ```json
 // tsconfig.node.json
@@ -369,11 +396,13 @@ tsc --build --force
 }
 ```
 
+
 ---
 
 ## 🌍 **Environment-Specific Configs**
 
 ### **Development Configuration**
+
 
 ```json
 // tsconfig.dev.json
@@ -390,7 +419,9 @@ tsc --build --force
 }
 ```
 
+
 ### **Production Configuration**
+
 
 ```json
 // tsconfig.prod.json
@@ -407,7 +438,9 @@ tsc --build --force
 }
 ```
 
+
 ### **Testing Configuration**
+
 
 ```json
 // tsconfig.test.json
@@ -422,11 +455,13 @@ tsc --build --force
 }
 ```
 
+
 ---
 
 ## ✅ **Best Practices**
 
 ### **1. Use Strict Mode**
+
 
 ```json
 // ✅ Good: Enable strict mode
@@ -444,7 +479,9 @@ tsc --build --force
 }
 ```
 
+
 ### **2. Use Path Mapping for Clean Imports**
+
 
 ```json
 // ✅ Good: Path mapping
@@ -462,7 +499,9 @@ tsc --build --force
 import { User } from "../../../types/user";
 ```
 
+
 ### **3. Use Project References for Large Projects**
+
 
 ```json
 // ✅ Good: Project references
@@ -480,7 +519,9 @@ import { User } from "../../../types/user";
 }
 ```
 
+
 ### **4. Use Environment-Specific Configs**
+
 
 ```json
 // ✅ Good: Environment-specific configs
@@ -500,6 +541,7 @@ import { User } from "../../../types/user";
   }
 }
 ```
+
 
 ---
 
@@ -530,6 +572,7 @@ Key options include:
 **Answer:**
 Use `moduleResolution` and `baseUrl` with `paths`:
 
+
 ```json
 {
   "compilerOptions": {
@@ -541,6 +584,7 @@ Use `moduleResolution` and `baseUrl` with `paths`:
   }
 }
 ```
+
 
 ### **4. What are project references and when should you use them?**
 
@@ -555,6 +599,7 @@ Project references allow you to structure large projects into smaller, manageabl
 
 **Answer:**
 Create environment-specific configs:
+
 
 ```json
 // tsconfig.dev.json
@@ -574,6 +619,7 @@ Create environment-specific configs:
   }
 }
 ```
+
 
 ---
 

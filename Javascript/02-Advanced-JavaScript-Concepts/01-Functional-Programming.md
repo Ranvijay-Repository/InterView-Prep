@@ -76,6 +76,7 @@ Functions are treated as values that can be:
 - ✅ **Easily Testable**: No external dependencies
 
 ### ASCII Diagram: Pure vs Impure Functions
+
 ```
 PURE FUNCTION                    IMPURE FUNCTION
 ┌─────────────────────────┐     ┌─────────────────────────┐
@@ -90,7 +91,9 @@ PURE FUNCTION                    IMPURE FUNCTION
 └─────────────────────────┘     └─────────────────────────┘
 ```
 
+
 ### Examples:
+
 
 ```javascript
 // ✅ PURE FUNCTION
@@ -106,6 +109,7 @@ function addToTotal(value) {
 }
 ```
 
+
 ---
 
 ## 🔒 Immutability
@@ -119,6 +123,7 @@ function addToTotal(value) {
 - **Concurrency**: No shared mutable state
 
 ### ASCII Diagram: Mutable vs Immutable Operations
+
 ```
 MUTABLE APPROACH              IMMUTABLE APPROACH
 ┌─────────────────────────┐   ┌─────────────────────────┐
@@ -132,7 +137,9 @@ MUTABLE APPROACH              IMMUTABLE APPROACH
 └─────────────────────────┘   └─────────────────────────┘
 ```
 
+
 ### Immutability Techniques:
+
 
 ```javascript
 // Arrays
@@ -157,6 +164,7 @@ const newObj = { ...originalObj, age: 31 };  // Creates new object
 const newObj2 = Object.assign({}, originalObj, { age: 31 });  // Alternative
 ```
 
+
 ---
 
 ## 🔝 Higher Order Functions
@@ -168,6 +176,7 @@ const newObj2 = Object.assign({}, originalObj, { age: 31 });  // Alternative
 ### Common Higher Order Functions:
 
 #### 1. **Array Methods**
+
 ```javascript
 // map, filter, reduce, forEach, find, some, every
 const numbers = [1, 2, 3, 4, 5];
@@ -177,7 +186,9 @@ const evens = numbers.filter(x => x % 2 === 0); // [2, 4]
 const sum = numbers.reduce((acc, x) => acc + x, 0); // 15
 ```
 
+
 #### 2. **Custom Higher Order Functions**
+
 ```javascript
 // Function that takes a function and returns a function
 function withLogging(fn) {
@@ -193,7 +204,9 @@ const addWithLogging = withLogging((a, b) => a + b);
 addWithLogging(2, 3); // Logs the call and result
 ```
 
+
 ### ASCII Diagram: Higher Order Function Flow
+
 ```
 HIGHER ORDER FUNCTION PATTERN
 ┌─────────────────────────────────┐
@@ -211,6 +224,7 @@ HIGHER ORDER FUNCTION PATTERN
 └─────────────────────────────────┘
 ```
 
+
 ---
 
 ## 🔗 Function Composition
@@ -218,6 +232,7 @@ HIGHER ORDER FUNCTION PATTERN
 **Function Composition** is the process of combining multiple functions to create a new function. The output of one function becomes the input of the next.
 
 ### Basic Composition:
+
 ```javascript
 // Simple composition
 const addOne = x => x + 1;
@@ -238,7 +253,9 @@ const composed = compose(square, double, addOne);
 const result2 = composed(5); // 144
 ```
 
+
 ### ASCII Diagram: Function Composition
+
 ```
 FUNCTION COMPOSITION FLOW
 ┌─────────────────────────────────┐
@@ -257,7 +274,9 @@ COMPOSITION PATTERN:
 f(g(h(x))) = compose(f, g, h)(x)
 ```
 
+
 ### Pipe Function (Left to Right):
+
 ```javascript
 // Pipe function (left to right execution)
 function pipe(...fns) {
@@ -272,6 +291,7 @@ const result3 = piped(5); // 144
 // Same as: square(double(addOne(5)))
 ```
 
+
 ---
 
 ## 🎯 Currying & Partial Application
@@ -279,6 +299,7 @@ const result3 = piped(5); // 144
 **Currying** is the technique of converting a function that takes multiple arguments into a sequence of functions that each take a single argument.
 
 ### Basic Currying:
+
 ```javascript
 // Regular function
 function add(a, b, c) {
@@ -301,7 +322,9 @@ const result = curriedAdd(1)(2)(3); // 6
 const modernCurriedAdd = a => b => c => a + b + c;
 ```
 
+
 ### ASCII Diagram: Currying Process
+
 ```
 CURRYING TRANSFORMATION
 ┌─────────────────────────────────┐
@@ -318,7 +341,9 @@ CURRYING TRANSFORMATION
 └─────────────────────────────────┘
 ```
 
+
 ### Partial Application:
+
 ```javascript
 // Partial application - fixing some arguments
 function partial(fn, ...fixedArgs) {
@@ -335,11 +360,13 @@ const addFive = add.bind(null, 5);
 const result2 = addFive(3, 2); // 10 (5 + 3 + 2)
 ```
 
+
 ---
 
 ## 🚀 Advanced FP Concepts
 
 ### 1. **Point-Free Style (Tacit Programming)**
+
 ```javascript
 // With explicit parameters
 const numbers = [1, 2, 3, 4, 5];
@@ -349,7 +376,9 @@ const doubled = numbers.map(x => double(x));
 const doubled = numbers.map(double);
 ```
 
+
 ### 2. **Function Memoization**
+
 ```javascript
 function memoize(fn) {
     const cache = new Map();
@@ -375,7 +404,9 @@ expensiveOperation(5); // Computing... → 10
 expensiveOperation(5); // 10 (from cache)
 ```
 
+
 ### 3. **Lazy Evaluation**
+
 ```javascript
 // Lazy array operations
 function* lazyMap(array, fn) {
@@ -393,6 +424,7 @@ for (const value of lazyDoubled) {
 }
 ```
 
+
 ---
 
 ## 💻 Detailed Examples
@@ -400,6 +432,7 @@ for (const value of lazyDoubled) {
 ### Example 1: Building a Functional Utility Library
 <div style="position: relative;">
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
+
 
 ```javascript
 console.log("=== BUILDING A FUNCTIONAL UTILITY LIBRARY ===");
@@ -480,11 +513,13 @@ console.log("calculateTax(50000):", calculateTax(50000));     // 10000
 console.log("calculateTax(25000):", calculateTax(25000));     // 5000
 console.log("calculateTax(0):", calculateTax(0));             // 0
 ```
+
 </div>
 
 ### Example 2: Immutable Data Structures
 <div style="position: relative;">
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
+
 
 ```javascript
 console.log("=== IMMUTABLE DATA STRUCTURES ===");
@@ -590,11 +625,13 @@ console.log("Updated index 1:", updatedNumbers);
 
 console.log("Original array unchanged:", numbers);
 ```
+
 </div>
 
 ### Example 3: Advanced Function Composition
 <div style="position: relative;">
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
+
 
 ```javascript
 console.log("=== ADVANCED FUNCTION COMPOSITION ===");
@@ -695,9 +732,11 @@ const processWithLogging = pipe(
 const result3 = processWithLogging(5);
 ```
 
+
 ### Example 4: Currying and Partial Application
 <div style="position: relative;">
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
+
 
 ```javascript
 console.log("=== CURRYING AND PARTIAL APPLICATION ===");
@@ -807,9 +846,11 @@ const calculate = pipe(
 console.log("calculate(2):", calculate(2));                 // (2 + 5) * 3 - 10 = 11
 ```
 
+
 ### Example 5: Real-World Functional Programming
 <div style="position: relative;">
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
+
 
 ```javascript
 console.log("=== REAL-WORLD FUNCTIONAL PROGRAMMING ===");
@@ -955,11 +996,13 @@ console.log("\n=== Processed Order ===");
 console.log("Processed order:", processedOrder);
 ```
 
+
 ---
 
 ## ⚠️ Common Pitfalls
 
 ### Pitfall 1: Over-Engineering Simple Problems
+
 ```javascript
 // ❌ WRONG: Over-engineered solution
 const add = curry((a, b) => a + b);
@@ -970,7 +1013,9 @@ const add = (a, b) => a + b;
 const result = add(5, 3);
 ```
 
+
 ### Pitfall 2: Ignoring Performance
+
 ```javascript
 // ❌ WRONG: Creating new arrays in loops
 const processArray = (arr) => {
@@ -985,7 +1030,9 @@ const processArray = (arr) => {
 const processArray = (arr) => arr.map(x => x * 2);
 ```
 
+
 ### Pitfall 3: Forgetting Error Handling
+
 ```javascript
 // ❌ WRONG: No error handling
 const divide = (a, b) => a / b;
@@ -996,6 +1043,7 @@ const divide = (a, b) => {
     return a / b;
 };
 ```
+
 
 ---
 

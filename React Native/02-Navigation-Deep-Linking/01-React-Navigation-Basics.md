@@ -27,6 +27,7 @@ React Navigation is the most popular navigation library for React Native. It pro
 
 ### **Navigation Types Overview**
 
+
 ```
 ┌─────────────────────────────────────┐
 │        React Navigation Types       │
@@ -51,6 +52,7 @@ React Navigation is the most popular navigation library for React Native. It pro
 └─────────────────────────────────────┘
 ```
 
+
 ---
 
 ## 📦 **Installation & Setup**
@@ -58,6 +60,7 @@ React Navigation is the most popular navigation library for React Native. It pro
 ### **Basic Installation**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```bash
 # Install React Navigation
 npm install @react-navigation/native
@@ -75,9 +78,11 @@ npm install @react-navigation/bottom-tabs
 npm install @react-navigation/drawer
 ```
 
+
 ### **Basic App Setup**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // App.js
 import React from 'react';
@@ -95,12 +100,12 @@ const App = () => {
         <Stack.Screen 
           name="Home" 
           component={HomeScreen}
-          options={{ title: 'Home' }}
+          options={{#123;{{#123; title: 'Home' }}#125;}}#125;
         />
         <Stack.Screen 
           name="Details" 
           component={DetailsScreen}
-          options={{ title: 'Details' }}
+          options={{#123;{{#123; title: 'Details' }}#125;}}#125;
         />
       </Stack.Navigator>
     </NavigationContainer>
@@ -109,6 +114,7 @@ const App = () => {
 
 export default App;
 ```
+
 
 ---
 
@@ -119,6 +125,7 @@ Stack Navigator provides a way for your app to transition between screens where 
 ### **Basic Stack Navigator**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
@@ -161,7 +168,7 @@ const StackNavigator = () => {
   return (
     <Stack.Navigator
       initialRouteName="Home"
-      screenOptions={{
+      screenOptions={{#123;{{#123;
         headerStyle: {
           backgroundColor: '#007AFF',
         },
@@ -169,17 +176,17 @@ const StackNavigator = () => {
         headerTitleStyle: {
           fontWeight: 'bold',
         },
-      }}
+      }}#125;}}#125;
     >
       <Stack.Screen 
         name="Home" 
         component={HomeScreen}
-        options={{ title: 'Home' }}
+        options={{#123;{{#123; title: 'Home' }}#125;}}#125;
       />
       <Stack.Screen 
         name="Details" 
         component={DetailsScreen}
-        options={{ title: 'Details' }}
+        options={{#123;{{#123; title: 'Details' }}#125;}}#125;
       />
     </Stack.Navigator>
   );
@@ -216,9 +223,11 @@ const styles = StyleSheet.create({
 export default StackNavigator;
 ```
 
+
 ### **Stack Navigator with Parameters**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, TextInput, useState } from 'react-native';
@@ -282,7 +291,7 @@ const StackNavigatorWithParams = () => {
   return (
     <Stack.Navigator
       initialRouteName="Home"
-      screenOptions={{
+      screenOptions={{#123;{{#123;
         headerStyle: {
           backgroundColor: '#007AFF',
         },
@@ -290,17 +299,17 @@ const StackNavigatorWithParams = () => {
         headerTitleStyle: {
           fontWeight: 'bold',
         },
-      }}
+      }}#125;}}#125;
     >
       <Stack.Screen 
         name="Home" 
         component={HomeScreen}
-        options={{ title: 'Home' }}
+        options={{#123;{{#123; title: 'Home' }}#125;}}#125;
       />
       <Stack.Screen 
         name="Profile" 
         component={ProfileScreen}
-        options={{ title: 'Profile' }}
+        options={{#123;{{#123; title: 'Profile' }}#125;}}#125;
       />
     </Stack.Navigator>
   );
@@ -354,6 +363,7 @@ const styles = StyleSheet.create({
 
 export default StackNavigatorWithParams;
 ```
+
 
 ---
 

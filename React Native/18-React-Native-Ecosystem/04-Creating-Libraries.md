@@ -27,6 +27,7 @@ Creating React Native libraries involves building reusable components, modules, 
 
 ### **Library Development Framework**
 
+
 ```
 ┌─────────────────────────────────────┐
 │        Library Development         │
@@ -54,6 +55,7 @@ Creating React Native libraries involves building reusable components, modules, 
 └─────────────────────────────────────┘
 ```
 
+
 ### **Library Types**
 - **JavaScript Libraries**: Pure JavaScript utilities
 - **React Components**: Reusable UI components
@@ -67,6 +69,7 @@ Creating React Native libraries involves building reusable components, modules, 
 ### **Initial Project Structure**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```bash
 # Create library project
 mkdir my-react-native-library
@@ -82,7 +85,9 @@ npm install --save-dev eslint prettier
 npm install --save-dev rollup @rollup/plugin-typescript
 ```
 
+
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```
 my-react-native-library/
 ├── src/
@@ -106,9 +111,11 @@ my-react-native-library/
 └── README.md
 ```
 
+
 ### **Package.json Configuration**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```json
 {
   "name": "my-react-native-library",
@@ -160,9 +167,11 @@ my-react-native-library/
 }
 ```
 
+
 ### **TypeScript Configuration**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```json
 // tsconfig.json
 {
@@ -194,6 +203,7 @@ my-react-native-library/
 }
 ```
 
+
 ---
 
 ## 📝 **TypeScript Support**
@@ -201,6 +211,7 @@ my-react-native-library/
 ### **Type Definitions**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```typescript
 // src/types/index.ts
 export interface LibraryConfig {
@@ -225,9 +236,11 @@ export interface LibraryResponse<T = any> {
 export type LibraryCallback<T = any> = (response: LibraryResponse<T>) => void;
 ```
 
+
 ### **Main Library Implementation**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```typescript
 // src/index.ts
 import { NativeModules, Platform } from 'react-native';
@@ -306,9 +319,11 @@ export default MyLibrary;
 export { LibraryConfig, LibraryOptions, LibraryResponse, LibraryCallback };
 ```
 
+
 ### **Component Library**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```typescript
 // src/components/MyComponent.tsx
 import React, { useState, useEffect } from 'react';
@@ -380,6 +395,7 @@ const styles = StyleSheet.create({
 });
 ```
 
+
 ---
 
 ## 📱 **Native Module Development**
@@ -387,6 +403,7 @@ const styles = StyleSheet.create({
 ### **Android Native Module**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```java
 // android/src/main/java/com/mylibrary/MyLibraryModule.java
 package com.mylibrary;
@@ -450,9 +467,11 @@ public class MyLibraryModule extends ReactContextBaseJavaModule {
 }
 ```
 
+
 ### **iOS Native Module**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```objc
 // ios/MyLibraryModule.h
 #import <React/RCTBridgeModule.h>
@@ -463,7 +482,9 @@ public class MyLibraryModule extends ReactContextBaseJavaModule {
 @end
 ```
 
+
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```objc
 // ios/MyLibraryModule.m
 #import "MyLibraryModule.h"
@@ -519,9 +540,11 @@ RCT_EXPORT_METHOD(performAction:(NSString *)action
 @end
 ```
 
+
 ### **Podspec Configuration**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```ruby
 # ios/MyLibrary.podspec
 require "json"
@@ -545,6 +568,7 @@ Pod::Spec.new do |s|
 end
 ```
 
+
 ---
 
 ## 🧪 **Testing Strategy**
@@ -552,6 +576,7 @@ end
 ### **Unit Testing Setup**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```json
 // jest.config.js
 module.exports = {
@@ -574,7 +599,9 @@ module.exports = {
 };
 ```
 
+
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // jest.setup.js
 import 'react-native-gesture-handler/jestSetup';
@@ -598,9 +625,11 @@ jest.mock('react-native', () => {
 });
 ```
 
+
 ### **Unit Tests**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```typescript
 // __tests__/MyLibrary.test.ts
 import MyLibrary from '../src/index';
@@ -659,9 +688,11 @@ describe('MyLibrary', () => {
 });
 ```
 
+
 ### **Component Tests**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```typescript
 // __tests__/MyComponent.test.tsx
 import React from 'react';
@@ -699,6 +730,7 @@ describe('MyComponent', () => {
 });
 ```
 
+
 ---
 
 ## 📚 **Documentation**
@@ -706,6 +738,7 @@ describe('MyComponent', () => {
 ### **README.md**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```markdown
 # My React Native Library
 
@@ -714,7 +747,9 @@ A powerful React Native library for awesome functionality.
 ## Installation
 
 ```bash
+
 npm install my-react-native-library
+
 ```
 
 ### iOS Setup
@@ -722,13 +757,17 @@ npm install my-react-native-library
 Add the following to your `ios/Podfile`:
 
 ```ruby
+
 pod 'MyLibrary', :path => '../node_modules/my-react-native-library/ios'
+
 ```
 
 Then run:
 
 ```bash
+
 cd ios && pod install
+
 ```
 
 ### Android Setup
@@ -740,6 +779,7 @@ No additional setup required for Android.
 ### Basic Usage
 
 ```typescript
+
 import MyLibrary from 'my-react-native-library';
 
 const library = new MyLibrary({
@@ -756,11 +796,13 @@ if (result.success) {
 
 // Perform an action
 const actionResult = await library.performAction('test', { data: 'value' });
+
 ```
 
 ### Component Usage
 
 ```typescript
+
 import { MyComponent } from 'my-react-native-library';
 
 const App = () => {
@@ -771,6 +813,7 @@ const App = () => {
     />
   );
 };
+
 ```
 
 ## API Reference
@@ -780,7 +823,9 @@ const App = () => {
 #### Constructor
 
 ```typescript
+
 new MyLibrary(config: LibraryConfig, options?: LibraryOptions)
+
 ```
 
 #### Methods
@@ -812,9 +857,11 @@ new MyLibrary(config: LibraryConfig, options?: LibraryOptions)
 MIT
 ```
 
+
 ### **API Documentation**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```typescript
 // src/index.ts with JSDoc comments
 /**
@@ -872,6 +919,7 @@ class MyLibrary {
 }
 ```
 
+
 ---
 
 ## 📦 **Publishing**
@@ -879,6 +927,7 @@ class MyLibrary {
 ### **Build Configuration**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // rollup.config.js
 import typescript from '@rollup/plugin-typescript';
@@ -912,9 +961,11 @@ export default {
 };
 ```
 
+
 ### **Publishing Process**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```bash
 # Build the library
 npm run build
@@ -935,9 +986,11 @@ npm publish --tag beta
 npm publish --access public
 ```
 
+
 ### **Version Management**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```bash
 # Version bumping
 npm version patch    # 1.0.0 -> 1.0.1
@@ -949,6 +1002,7 @@ npm version prerelease --preid=beta    # 1.0.0 -> 1.0.1-beta.0
 npm version prerelease --preid=alpha   # 1.0.0 -> 1.0.1-alpha.0
 ```
 
+
 ---
 
 ## 🔧 **Maintenance**
@@ -956,6 +1010,7 @@ npm version prerelease --preid=alpha   # 1.0.0 -> 1.0.1-alpha.0
 ### **Automated Testing**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```yaml
 # .github/workflows/test.yml
 name: Test
@@ -977,10 +1032,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Use Node.js ${{#123;{{#123; matrix.node-version }}#125;}}#125;
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: ${{#123;{{#123; matrix.node-version }}#125;}}#125;
           cache: 'npm'
           
       - name: Install dependencies
@@ -996,9 +1051,11 @@ jobs:
         run: npm run build
 ```
 
+
 ### **Release Automation**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```yaml
 # .github/workflows/release.yml
 name: Release
@@ -1033,8 +1090,9 @@ jobs:
       - name: Publish to npm
         run: npm publish
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{#123;{{#123; secrets.NPM_TOKEN }}#125;}}#125;
 ```
+
 
 ---
 
@@ -1043,6 +1101,7 @@ jobs:
 ### **1. Library Development Best Practices**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Library development best practices
 const LibraryBestPractices = {
@@ -1072,9 +1131,11 @@ const LibraryBestPractices = {
 };
 ```
 
+
 ### **2. Testing Best Practices**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Testing best practices
 const TestingBestPractices = {
@@ -1095,6 +1156,7 @@ const TestingBestPractices = {
   }
 };
 ```
+
 
 ---
 

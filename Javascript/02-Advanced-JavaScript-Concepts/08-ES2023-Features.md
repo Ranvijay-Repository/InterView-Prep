@@ -43,6 +43,7 @@
 - **Standardization**: Consistent grouping behavior across applications
 
 ### ASCII Diagram: Array Grouping Flow
+
 ```
 ARRAY GROUPING FLOW
 ┌─────────────────────────────────┐
@@ -72,6 +73,7 @@ ARRAY GROUPING FLOW
         └───────────────┘
 ```
 
+
 ### Available Methods:
 1. **Array.prototype.groupBy()**: Groups elements by a key function
 2. **Array.prototype.groupByToMap()**: Groups elements into a Map
@@ -92,6 +94,7 @@ ARRAY GROUPING FLOW
 - **Automation**: Better integration with build tools and scripts
 
 ### ASCII Diagram: Hashbang Execution Flow
+
 ```
 HASHBANG EXECUTION FLOW
 ┌─────────────────────────────────┐
@@ -121,6 +124,7 @@ HASHBANG EXECUTION FLOW
         └───────────────┘
 ```
 
+
 ### Use Cases:
 - **CLI Tools**: Create executable JavaScript command-line tools
 - **Build Scripts**: Run build processes directly
@@ -140,6 +144,7 @@ HASHBANG EXECUTION FLOW
 - **Better Performance**: More efficient than string keys in some scenarios
 
 ### ASCII Diagram: Symbol WeakMap Structure
+
 ```
 SYMBOL WEAKMAP STRUCTURE
 ┌─────────────────────────────────┐
@@ -169,6 +174,7 @@ SYMBOL WEAKMAP STRUCTURE
         │  Collection   │
         └───────────────┘
 ```
+
 
 ### Benefits:
 - **Memory Safety**: Keys don't prevent garbage collection

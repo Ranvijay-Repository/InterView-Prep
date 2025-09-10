@@ -22,6 +22,7 @@
 
 ### **Monorepo Structure**
 
+
 ```mermaid
 graph TD
     A[monorepo/] --> B[apps/]
@@ -41,6 +42,7 @@ graph TD
     D --> M[config/]
 ```
 
+
 ### **Benefits**
 - **Code Sharing**: Shared components and utilities
 - **Consistent Tooling**: Unified build and test processes
@@ -54,6 +56,7 @@ graph TD
 ### **Yarn Workspaces Configuration**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```json
 {
   "name": "react-native-monorepo",
@@ -83,9 +86,11 @@ graph TD
 }
 ```
 
+
 ### **Turbo Configuration**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```json
 {
   "$schema": "https://turbo.build/schema.json",
@@ -117,9 +122,11 @@ graph TD
 }
 ```
 
+
 ### **Package Structure**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // packages/shared/package.json
 {
@@ -168,6 +175,7 @@ graph TD
 }
 ```
 
+
 ---
 
 ## ⚡ **Build Optimization**
@@ -175,6 +183,7 @@ graph TD
 ### **Build Pipeline**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // tools/build/build-pipeline.js
 const { execSync } = require('child_process');
@@ -298,9 +307,11 @@ const BuildPipeline = {
 export default BuildPipeline;
 ```
 
+
 ### **Bundle Analysis**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // tools/analyze/bundle-analyzer.js
 const { execSync } = require('child_process');
@@ -436,6 +447,7 @@ const BundleAnalyzer = {
 export default BundleAnalyzer;
 ```
 
+
 ---
 
 ## 🔧 **Dependency Management**
@@ -443,6 +455,7 @@ export default BundleAnalyzer;
 ### **Dependency Management System**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // tools/deps/dependency-manager.js
 const { execSync } = require('child_process');
@@ -587,6 +600,7 @@ const DependencyManager = {
 
 export default DependencyManager;
 ```
+
 
 ---
 

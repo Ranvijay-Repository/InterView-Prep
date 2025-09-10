@@ -45,6 +45,7 @@
 - **Infinite Scrolling**: Efficiently handle large lists
 
 ### ASCII Diagram: Intersection Observer Flow
+
 ```
 INTERSECTION OBSERVER FLOW
 ┌─────────────────────────────────┐
@@ -83,6 +84,7 @@ INTERSECTION OBSERVER FLOW
         └───────────────┘
 ```
 
+
 ### Use Cases:
 - **Lazy Loading Images**: Load images when they're about to enter viewport
 - **Infinite Scrolling**: Load more content when user reaches bottom
@@ -104,6 +106,7 @@ INTERSECTION OBSERVER FLOW
 - **Component Adaptation**: Make components size-aware
 
 ### ASCII Diagram: Resize Observer Flow
+
 ```
 RESIZE OBSERVER FLOW
 ┌─────────────────────────────────┐
@@ -143,6 +146,7 @@ RESIZE OBSERVER FLOW
         └───────────────┘
 ```
 
+
 ### Use Cases:
 - **Responsive Layouts**: Adjust layouts based on container size
 - **Dynamic Grids**: Resize grid items based on available space
@@ -164,6 +168,7 @@ RESIZE OBSERVER FLOW
 - **Debugging**: Diagnose performance issues in production
 
 ### ASCII Diagram: Performance Measurement Flow
+
 ```
 PERFORMANCE MEASUREMENT FLOW
 ┌─────────────────────────────────┐
@@ -199,6 +204,7 @@ PERFORMANCE MEASUREMENT FLOW
         └───────────────┘
 ```
 
+
 ### Available APIs:
 - **Performance.now()**: High-resolution timestamp
 - **Performance.mark()**: Create custom performance marks
@@ -220,6 +226,7 @@ PERFORMANCE MEASUREMENT FLOW
 - **Composability**: Build complex animation sequences
 
 ### ASCII Diagram: Web Animations Flow
+
 ```
 WEB ANIMATIONS FLOW
 ┌─────────────────────────────────┐
@@ -254,6 +261,7 @@ WEB ANIMATIONS FLOW
         │  Cancel       │
         └───────────────┘
 ```
+
 
 ### Animation Features:
 - **Keyframe Animation**: Define animation states

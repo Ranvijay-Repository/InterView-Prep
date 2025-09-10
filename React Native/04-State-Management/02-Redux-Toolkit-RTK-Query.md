@@ -26,6 +26,7 @@ Redux Toolkit (RTK) is the modern way to write Redux logic. It provides utilitie
 
 ### **Redux Toolkit Overview**
 
+
 ```
 ┌─────────────────────────────────────┐
 │        Redux Toolkit System         │
@@ -52,6 +53,7 @@ Redux Toolkit (RTK) is the modern way to write Redux logic. It provides utilitie
 └─────────────────────────────────────┘
 ```
 
+
 ---
 
 ## 🏪 **Redux Toolkit Setup**
@@ -59,6 +61,7 @@ Redux Toolkit (RTK) is the modern way to write Redux logic. It provides utilitie
 ### **Basic Store Configuration**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // store/index.js
 import { configureStore } from '@reduxjs/toolkit';
@@ -88,9 +91,11 @@ export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 ```
 
+
 ### **App Setup with Provider**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // App.js
 import React from 'react';
@@ -112,6 +117,7 @@ const App = () => {
 export default App;
 ```
 
+
 ---
 
 ## 🔄 **Slices and Reducers**
@@ -119,6 +125,7 @@ export default App;
 ### **Counter Slice Example**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // store/slices/counterSlice.js
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
@@ -173,9 +180,11 @@ export const {
 export default counterSlice.reducer;
 ```
 
+
 ### **User Slice with Async Thunk**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // store/slices/userSlice.js
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
@@ -297,6 +306,7 @@ const userSlice = createSlice({
 export const { setCurrentUser, clearError, updateUser } = userSlice.actions;
 export default userSlice.reducer;
 ```
+
 
 ---
 

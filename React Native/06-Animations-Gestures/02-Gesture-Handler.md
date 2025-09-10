@@ -25,6 +25,7 @@ react-native-gesture-handler provides a comprehensive set of gesture recognition
 
 ### **Gesture Handler Overview**
 
+
 ```
 ┌─────────────────────────────────────┐
 │        Gesture Handler System       │
@@ -52,6 +53,7 @@ react-native-gesture-handler provides a comprehensive set of gesture recognition
 └─────────────────────────────────────┘
 ```
 
+
 ---
 
 ## 👆 **Basic Gestures**
@@ -59,6 +61,7 @@ react-native-gesture-handler provides a comprehensive set of gesture recognition
 ### **Basic Gesture Handler Example**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Dimensions } from 'react-native';
@@ -342,6 +345,7 @@ const styles = StyleSheet.create({
 
 export default BasicGestureExample;
 ```
+
 
 ---
 

@@ -48,6 +48,7 @@ Imagine you're cooking in a kitchen:
 
 ## ⚙️ Execution Context Phases
 
+
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │                    EXECUTION CONTEXT                        │
@@ -65,6 +66,7 @@ Imagine you're cooking in a kitchen:
 └─────────────────────────────────────────────────────────────┘
 ```
 
+
 ### 🔄 Phase Details
 
 #### Creation Phase (Compile Time)
@@ -81,6 +83,7 @@ Imagine you're cooking in a kitchen:
 ---
 
 ## 🗂️ Call Stack Visualization
+
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -113,6 +116,7 @@ Imagine you're cooking in a kitchen:
 └─────────────────────────────────────────────────────────────┘
 ```
 
+
 ### 📊 Call Stack Rules
 - **LIFO Principle**: Last In, First Out (like a stack of plates)
 - **Function Calls**: Push new context onto stack
@@ -126,6 +130,7 @@ Imagine you're cooking in a kitchen:
 ### Example 1: Basic Execution Context Flow
 <div style="position: relative;">
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
+
 
 ```javascript
 console.log("=== EXECUTION CONTEXT FLOW ===");
@@ -166,9 +171,11 @@ console.log("globalVar:", globalVar);                 // ✅ Own scope
 outerFunction("passed parameter"); // outerFunction context ends
 // Global context continues
 ```
+
 </div>
 
 **Output:**
+
 ```
 === Global Context ===
 globalVar: I'm global
@@ -182,9 +189,11 @@ globalVar: I'm global
 param: passed parameter
 ```
 
+
 ### Example 2: Execution Context with Variables and Hoisting
 <div style="position: relative;">
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
+
 
 ```javascript
 console.log("=== EXECUTION CONTEXT WITH HOISTING ===");
@@ -225,11 +234,13 @@ console.log("8. Back to global context");
 console.log("   globalVar:", globalVar);
 console.log("   globalLet:", globalLet);
 ```
+
 </div>
 
 ### Example 3: Nested Function Calls and Call Stack
 <div style="position: relative;">
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
+
 
 ```javascript
 console.log("=== NESTED FUNCTION CALLS AND CALL STACK ===");
@@ -269,9 +280,11 @@ console.log("🔵 Global starts");
 first();
 console.log("🔵 Global ends");
 ```
+
 </div>
 
 **Call Stack Flow:**
+
 ```
 1. 🔵 Global Context
 2. 🔵 Global Context + 🟢 first()
@@ -282,9 +295,11 @@ console.log("🔵 Global ends");
 7. 🔵 Global Context
 ```
 
+
 ### Example 4: Execution Context with this Binding
 <div style="position: relative;">
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
+
 
 ```javascript
 console.log("=== EXECUTION CONTEXT WITH THIS BINDING ===");
@@ -331,11 +346,13 @@ function Person(name) {
 const person = new Person("Jane");
 console.log("Created person:", person);
 ```
+
 </div>
 
 ### Example 5: Execution Context and Scope Chain
 <div style="position: relative;">
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
+
 
 ```javascript
 console.log("=== EXECUTION CONTEXT AND SCOPE CHAIN ===");
@@ -382,6 +399,7 @@ function levelOne() {
 
 levelOne();
 ```
+
 </div>
 
 ---
@@ -445,12 +463,14 @@ levelOne();
 - If the stack gets too deep, you get a "Stack Overflow" error
 
 **Example:**
+
 ```javascript
 function a() { b(); }
 function b() { c(); }
 function c() { console.log("Stack depth:", new Error().stack.split('\n').length); }
 a(); // Shows call stack depth
 ```
+
 
 ### Q: What's the difference between Global and Function Execution Context?
 **A:** 
@@ -477,6 +497,7 @@ a(); // Shows call stack depth
 4. If not found anywhere, throws ReferenceError
 
 **Example:**
+
 ```javascript
 let globalVar = "global";
 
@@ -497,11 +518,13 @@ function outer() {
 outer();
 ```
 
+
 ---
 
 ## 🧪 Practice Exercises
 
 ### Exercise 1: Trace Execution Context
+
 ```javascript
 let x = 1;
 
@@ -521,7 +544,9 @@ a();
 console.log(x); // What will this print?
 ```
 
+
 ### Exercise 2: Call Stack Analysis
+
 ```javascript
 function first() {
     console.log("First");
@@ -541,7 +566,9 @@ function third() {
 first();
 ```
 
+
 ### Exercise 3: This Binding in Different Contexts
+
 ```javascript
 const obj = {
     name: "Object",
@@ -563,6 +590,7 @@ const obj = {
 
 obj.method();
 ```
+
 
 ---
 

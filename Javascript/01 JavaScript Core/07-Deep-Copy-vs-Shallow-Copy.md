@@ -40,6 +40,7 @@
 **Shallow Copy** creates a new object/array but only copies references to nested objects/arrays. The nested structures are still shared between the original and the copy.
 
 ### ASCII Diagram: Shallow Copy
+
 ```
 ORIGINAL OBJECT          SHALLOW COPY
 ┌─────────────────┐     ┌─────────────────┐
@@ -57,6 +58,7 @@ ORIGINAL OBJECT          SHALLOW COPY
                                         (SHARED REFERENCE)
 ```
 
+
 ### Shallow Copy Methods:
 1. **Spread Operator** (`...`)
 2. **Object.assign()**
@@ -70,6 +72,7 @@ ORIGINAL OBJECT          SHALLOW COPY
 **Deep Copy** creates a completely independent copy of an object/array, including all nested structures. No references are shared between the original and the copy.
 
 ### ASCII Diagram: Deep Copy
+
 ```
 ORIGINAL OBJECT          DEEP COPY
 ┌─────────────────┐     ┌─────────────────┐
@@ -86,6 +89,7 @@ ORIGINAL OBJECT          DEEP COPY
                                         └─────────────┘
                                         (INDEPENDENT COPY)
 ```
+
 
 ### Deep Copy Methods:
 1. **JSON.parse(JSON.stringify())**
@@ -110,28 +114,36 @@ ORIGINAL OBJECT          DEEP COPY
 ## 🔧 Copy Methods Comparison
 
 ### Method 1: Spread Operator (Shallow)
+
 ```javascript
 const original = { a: 1, b: { c: 2 } };
 const copy = { ...original };
 ```
 
+
 ### Method 2: Object.assign (Shallow)
+
 ```javascript
 const original = { a: 1, b: { c: 2 } };
 const copy = Object.assign({}, original);
 ```
 
+
 ### Method 3: JSON Methods (Deep)
+
 ```javascript
 const original = { a: 1, b: { c: 2 } };
 const copy = JSON.parse(JSON.stringify(original));
 ```
 
+
 ### Method 4: structuredClone (Deep)
+
 ```javascript
 const original = { a: 1, b: { c: 2 } };
 const copy = structuredClone(original);
 ```
+
 
 ---
 
@@ -140,6 +152,7 @@ const copy = structuredClone(original);
 ### Example 1: Shallow Copy Limitations
 <div style="position: relative;">
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
+
 
 ```javascript
 console.log("=== SHALLOW COPY LIMITATIONS ===");
@@ -175,11 +188,13 @@ console.log("=== Array Modification ===");
 console.log("Original hobbies:", originalPerson.hobbies); // ["reading", "gaming", "swimming"] 😱
 console.log("Copy hobbies:", shallowCopy.hobbies);        // ["reading", "gaming", "swimming"]
 ```
+
 </div>
 
 ### Example 2: Deep Copy with JSON Methods
 <div style="position: relative;">
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
+
 
 ```javascript
 console.log("=== DEEP COPY WITH JSON METHODS ===");
@@ -220,11 +235,13 @@ console.log("=== Array Modification ===");
 console.log("Original tags:", originalData.tags); // ["javascript", "react", "node"] ✅
 console.log("Copy tags:", deepCopy.tags);         // ["javascript", "react", "node", "typescript"]
 ```
+
 </div>
 
 ### Example 3: structuredClone (Modern Deep Copy)
 <div style="position: relative;">
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
+
 
 ```javascript
 console.log("=== STRUCTURED CLONE (MODERN) ===");
@@ -268,11 +285,13 @@ if (typeof structuredClone === 'function') {
     console.log("structuredClone not available in this environment");
 }
 ```
+
 </div>
 
 ### Example 4: Custom Deep Copy Function
 <div style="position: relative;">
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
+
 
 ```javascript
 console.log("=== CUSTOM DEEP COPY FUNCTION ===");
@@ -340,11 +359,13 @@ console.log("Copy nested value:", customDeepCopy.nested.value);       // 100
 console.log("Original array:", testObject.nested.array);              // [1, 2, 3] ✅
 console.log("Copy array:", customDeepCopy.nested.array);              // [1, 2, 3, 4]
 ```
+
 </div>
 
 ### Example 5: Performance Comparison
 <div style="position: relative;">
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
+
 
 ```javascript
 console.log("=== PERFORMANCE COMPARISON ===");
@@ -388,6 +409,7 @@ console.log("=== Memory Usage Note ===");
 console.log("Shallow copy: Lower memory, shared references");
 console.log("Deep copy: Higher memory, independent copies");
 ```
+
 </div>
 
 ---
@@ -395,6 +417,7 @@ console.log("Deep copy: Higher memory, independent copies");
 ## ⚠️ Common Pitfalls
 
 ### Pitfall 1: JSON Methods Limitations
+
 ```javascript
 // ❌ JSON methods can't handle:
 const problematicObject = {
@@ -418,7 +441,9 @@ try {
 }
 ```
 
+
 ### Pitfall 2: Shallow Copy Misunderstanding
+
 ```javascript
 // ❌ Common mistake: thinking spread operator creates deep copy
 const original = {
@@ -432,6 +457,7 @@ const copy = { ...original };
 copy.user.name = "Jane";
 console.log(original.user.name); // "Jane" 😱
 ```
+
 
 ---
 

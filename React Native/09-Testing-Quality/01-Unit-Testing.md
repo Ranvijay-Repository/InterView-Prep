@@ -26,6 +26,7 @@ Unit testing is essential for ensuring code quality and reliability in React Nat
 
 ### **Unit Testing Overview**
 
+
 ```
 ┌─────────────────────────────────────┐
 │        Unit Testing System          │
@@ -53,6 +54,7 @@ Unit testing is essential for ensuring code quality and reliability in React Nat
 └─────────────────────────────────────┘
 ```
 
+
 ---
 
 ## 🧪 **Jest Configuration**
@@ -60,6 +62,7 @@ Unit testing is essential for ensuring code quality and reliability in React Nat
 ### **Jest Setup Example**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // jest.config.js
 module.exports = {
@@ -98,9 +101,11 @@ module.exports = {
 };
 ```
 
+
 ### **Test Setup File**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // src/setupTests.js
 import '@testing-library/jest-native/extend-expect';
@@ -205,6 +210,7 @@ global.console = {
 };
 ```
 
+
 ---
 
 ## 🧪 **React Testing Library**
@@ -212,6 +218,7 @@ global.console = {
 ### **Component Testing Example**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // __tests__/components/Button.test.js
 import React from 'react';
@@ -282,9 +289,11 @@ describe('Button Component', () => {
 });
 ```
 
+
 ### **Hook Testing Example**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // __tests__/hooks/useCounter.test.js
 import { renderHook, act } from '@testing-library/react-hooks';
@@ -364,6 +373,7 @@ describe('useCounter Hook', () => {
   });
 });
 ```
+
 
 ---
 

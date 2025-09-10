@@ -24,6 +24,7 @@ Recursive types allow TypeScript to define types that reference themselves, enab
 
 ### **What are Recursive Types?**
 
+
 ```typescript
 // Recursive types reference themselves
 const recursiveTypes = {
@@ -54,7 +55,9 @@ interface ConstrainedTreeNode<T extends string | number> {
 }
 ```
 
+
 ### **Benefits of Recursive Types**
+
 
 ```typescript
 // Benefits of recursive types
@@ -81,11 +84,13 @@ interface GoodTreeNode {
 }
 ```
 
+
 ---
 
 ## 🔧 **Basic Recursive Types**
 
 ### **Tree Structures**
+
 
 ```typescript
 // Tree structures with recursive types
@@ -141,7 +146,9 @@ traverseTree(tree, value => console.log(value));
 const found = findInTree(tree, value => value > 7);
 ```
 
+
 ### **Linked Lists**
+
 
 ```typescript
 // Linked lists with recursive types
@@ -209,7 +216,9 @@ const found = findInList(list, value => value > 2);
 const reversed = reverseList(list);
 ```
 
+
 ### **Nested Objects**
+
 
 ```typescript
 // Nested objects with recursive types
@@ -263,11 +272,13 @@ const name = getNestedValue(nested, ['user', 'profile', 'name']);
 setNestedValue(nested, ['user', 'profile', 'email'], 'john@example.com');
 ```
 
+
 ---
 
 ## 🚀 **Advanced Recursive Patterns**
 
 ### **Recursive Type Utilities**
+
 
 ```typescript
 // Recursive type utilities
@@ -306,7 +317,9 @@ type RequiredUser = DeepRequired<User>;
 type MutableUser = DeepMutable<User>;
 ```
 
+
 ### **Recursive Conditional Types**
+
 
 ```typescript
 // Recursive conditional types
@@ -328,7 +341,9 @@ type MixedArray = (string | number)[][];
 type Extracted = ExtractArrayTypes<MixedArray>; // string | number
 ```
 
+
 ### **Recursive Mapped Types**
+
 
 ```typescript
 // Recursive mapped types
@@ -346,11 +361,13 @@ type NestedArray = RecursiveArray<number>;
 type NestedObject = RecursiveObject<string>;
 ```
 
+
 ---
 
 ## 🎭 **Complex Type Patterns**
 
 ### **Recursive Type Guards**
+
 
 ```typescript
 // Recursive type guards
@@ -390,7 +407,9 @@ function isNestedObject(value: unknown): value is NestedObject {
 }
 ```
 
+
 ### **Recursive Type Validation**
+
 
 ```typescript
 // Recursive type validation
@@ -436,7 +455,9 @@ function validateTreeNode(node: unknown): ValidationResult<TreeNode> {
 }
 ```
 
+
 ### **Recursive Type Transformations**
+
 
 ```typescript
 // Recursive type transformations
@@ -479,11 +500,13 @@ function filterTree<T>(
 }
 ```
 
+
 ---
 
 ## 🌍 **Real-World Examples**
 
 ### **File System Tree**
+
 
 ```typescript
 // File system tree with recursive types
@@ -566,7 +589,9 @@ const totalSize = calculateTotalSize(fileSystem);
 const allFiles = listAllFiles(fileSystem);
 ```
 
+
 ### **JSON Schema Validation**
+
 
 ```typescript
 // JSON schema validation with recursive types
@@ -664,7 +689,9 @@ const userData = {
 const isValid = validateAgainstSchema(userData, userSchema);
 ```
 
+
 ### **Component Tree**
+
 
 ```typescript
 // Component tree with recursive types
@@ -753,11 +780,13 @@ const componentPath = getComponentPath(componentTree, 'nav');
 const renderedHTML = renderComponent(componentTree);
 ```
 
+
 ---
 
 ## ✅ **Best Practices**
 
 ### **1. Use Recursive Types for Tree-like Structures**
+
 
 ```typescript
 // ✅ Good: Recursive types for trees
@@ -773,7 +802,9 @@ interface BadTreeNode<T> {
 }
 ```
 
+
 ### **2. Provide Type Guards for Recursive Types**
+
 
 ```typescript
 // ✅ Good: Type guards for recursive types
@@ -793,7 +824,9 @@ function processTreeNode(node: any) {
 }
 ```
 
+
 ### **3. Use Recursive Utilities for Deep Operations**
+
 
 ```typescript
 // ✅ Good: Recursive utilities
@@ -807,7 +840,9 @@ function makeReadonly(obj: any): any {
 }
 ```
 
+
 ### **4. Handle Recursive Type Limits**
+
 
 ```typescript
 // ✅ Good: Handle recursion limits
@@ -822,6 +857,7 @@ type UnsafeRecursive<T> = {
 };
 ```
 
+
 ---
 
 ## ❓ **Common Interview Questions**
@@ -834,6 +870,7 @@ Recursive types are types that reference themselves, allowing you to define comp
 ### **2. How do you create recursive types?**
 
 **Answer:**
+
 ```typescript
 interface TreeNode {
   value: number;
@@ -841,6 +878,7 @@ interface TreeNode {
   right?: TreeNode;
 }
 ```
+
 The type references itself in the `left` and `right` properties.
 
 ### **3. What are the benefits of recursive types?**

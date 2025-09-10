@@ -54,6 +54,7 @@
 ### Object Creation Methods:
 
 #### 1. **Object Literals**
+
 ```javascript
 // Simple object literal
 const person = {
@@ -68,7 +69,9 @@ console.log(person.name);        // "John Doe"
 console.log(person.greet());     // "Hello, I'm John Doe"
 ```
 
+
 #### 2. **Object Constructor**
+
 ```javascript
 // Using Object constructor
 const car = new Object();
@@ -80,7 +83,9 @@ car.start = function() {
 };
 ```
 
+
 #### 3. **Object.create()**
+
 ```javascript
 // Create object with specific prototype
 const animal = {
@@ -96,7 +101,9 @@ dog.makeSound = function() {
 };
 ```
 
+
 ### ASCII Diagram: Object Structure
+
 ```
 JAVASCRIPT OBJECT STRUCTURE
 ┌─────────────────────────────────┐
@@ -117,7 +124,9 @@ JAVASCRIPT OBJECT STRUCTURE
 └─────────────────────────────────┘
 ```
 
+
 ### Object Property Descriptors:
+
 ```javascript
 const user = {};
 
@@ -134,6 +143,7 @@ console.log(descriptor);
 // { value: 'John', writable: false, enumerable: true, configurable: false }
 ```
 
+
 ---
 
 ## 🏗️ Constructor Functions
@@ -141,6 +151,7 @@ console.log(descriptor);
 **Constructor Functions** are special functions used to create objects. They follow a naming convention of starting with a capital letter and use the `new` keyword.
 
 ### Basic Constructor Function:
+
 ```javascript
 function Person(name, age, email) {
     this.name = name;
@@ -165,7 +176,9 @@ console.log(person1.greet());        // "Hello, I'm Alice"
 console.log(person2.haveBirthday()); // "Bob is now 31 years old!"
 ```
 
+
 ### ASCII Diagram: Constructor Function Flow
+
 ```
 CONSTRUCTOR FUNCTION EXECUTION
 ┌─────────────────────────────────┐
@@ -192,7 +205,9 @@ RESULT:
 └─────────────────────────────────┘
 ```
 
+
 ### Constructor Function Best Practices:
+
 ```javascript
 function Car(brand, model, year) {
     // Validate parameters
@@ -241,6 +256,7 @@ try {
 }
 ```
 
+
 ---
 
 ## 🔗 Prototypes & Prototypal Inheritance
@@ -250,6 +266,7 @@ try {
 ### Understanding Prototypes:
 
 #### 1. **Prototype Chain**
+
 ```javascript
 function Animal(name) {
     this.name = name;
@@ -289,7 +306,9 @@ console.log(myDog.eat());          // "Buddy is eating"
 console.log(myDog.fetch());        // "Buddy is fetching the ball"
 ```
 
+
 ### ASCII Diagram: Prototype Chain
+
 ```
 PROTOTYPE CHAIN STRUCTURE
 ┌─────────────────────────────────┐
@@ -314,7 +333,9 @@ myDog.eat() → Animal.prototype.eat() ✅
 myDog.toString() → Object.prototype.toString() ✅
 ```
 
+
 #### 2. **Prototype Methods vs Instance Methods**
+
 ```javascript
 function Calculator() {
     // Instance method - each instance gets its own copy
@@ -341,7 +362,9 @@ console.log(calc1.multiply === calc2.multiply); // true (same function)
 console.log(Calculator.divide(10, 2));          // 5 (static method)
 ```
 
+
 #### 3. **Object.create() for Prototype Inheritance**
+
 ```javascript
 // Base object
 const vehicle = {
@@ -394,7 +417,9 @@ console.log(car.stop());       // "Car is stopping..."
 console.log(motorcycle.start()); // "Motorcycle is starting..."
 ```
 
+
 ### Checking Prototype Relationships:
+
 ```javascript
 // Check if object is prototype of another
 console.log(vehicle.isPrototypeOf(car));        // true
@@ -412,6 +437,7 @@ console.log(Object.getOwnPropertyNames(car));   // ['type', 'brand']
 console.log(Object.getOwnPropertyNames(Object.getPrototypeOf(car))); // ['start', 'stop']
 ```
 
+
 ---
 
 ## 🎓 ES6 Classes
@@ -419,6 +445,7 @@ console.log(Object.getOwnPropertyNames(Object.getPrototypeOf(car))); // ['start'
 **ES6 Classes** are syntactic sugar over JavaScript's existing prototype-based inheritance. They provide a cleaner, more familiar syntax for creating objects and implementing inheritance.
 
 ### Basic Class Syntax:
+
 ```javascript
 class Person {
     // Constructor method
@@ -478,7 +505,9 @@ console.log(person1.isAdult);       // true
 console.log(person2.age);           // 18
 ```
 
+
 ### Class Inheritance with `extends`:
+
 ```javascript
 class Animal {
     constructor(name) {
@@ -527,6 +556,7 @@ console.log(myDog.fetch());        // "Buddy is fetching the ball"
 console.log(myDog.sleep());        // "Buddy is sleeping and dreaming of treats"
 ```
 
+
 ---
 
 ## 🔒 Encapsulation
@@ -536,6 +566,7 @@ console.log(myDog.sleep());        // "Buddy is sleeping and dreaming of treats"
 ### Implementing Encapsulation:
 
 #### 1. **Closure-based Encapsulation**
+
 ```javascript
 function createCounter() {
     // Private variable
@@ -593,7 +624,9 @@ try {
 }
 ```
 
+
 #### 2. **Class-based Encapsulation with Private Fields**
+
 ```javascript
 class BankAccount {
     // Private fields
@@ -712,6 +745,7 @@ try {
 }
 ```
 
+
 ---
 
 ## 🔄 Inheritance
@@ -721,6 +755,7 @@ try {
 ### Types of Inheritance:
 
 #### 1. **Single Inheritance**
+
 ```javascript
 class Animal {
     constructor(name, species) {
@@ -784,7 +819,9 @@ console.log(myCat.makeSound());  // "Meow!"
 console.log(myCat.purr());       // "Whiskers is purring"
 ```
 
+
 #### 2. **Multi-level Inheritance**
+
 ```javascript
 class Vehicle {
     constructor(make, model, year) {
@@ -852,7 +889,9 @@ console.log(tesla.getBatteryStatus());  // "Battery level: 100%"
 console.log(tesla.charge());            // "Tesla Model 3 is fully charged"
 ```
 
+
 #### 3. **Composition over Inheritance**
+
 ```javascript
 // Instead of deep inheritance, use composition
 class Engine {
@@ -941,6 +980,7 @@ console.log(myCar.accelerate()); // "Toyota Camry accelerating: Shifted to gear 
 console.log(myCar.getStatus());  // Object with car, engine, and transmission status
 ```
 
+
 ---
 
 ## 🎭 Polymorphism
@@ -950,6 +990,7 @@ console.log(myCar.getStatus());  // Object with car, engine, and transmission st
 ### Types of Polymorphism:
 
 #### 1. **Method Overriding**
+
 ```javascript
 class Animal {
     makeSound() {
@@ -1010,7 +1051,9 @@ console.log(animalSounds(animals));     // ["Woof!", "Chirp!", "Blub blub"]
 console.log(animalMovements(animals));  // ["Running on four legs", "Flying", "Swimming"]
 ```
 
+
 #### 2. **Method Overloading (Simulated)**
+
 ```javascript
 class Calculator {
     add(a, b, c) {
@@ -1050,7 +1093,9 @@ console.log(calc.addThree(2, 3, 4)); // 9
 console.log(calc.addMany(1, 2, 3, 4, 5)); // 15
 ```
 
+
 #### 3. **Interface-like Polymorphism**
+
 ```javascript
 // Define "interfaces" through common method names
 class Database {
@@ -1133,6 +1178,7 @@ executeDatabaseOperation(postgres, "SELECT * FROM customers");
 executeDatabaseOperation(mongo, { collection: "products", find: { category: "electronics" } });
 ```
 
+
 ---
 
 ## 🎨 Abstraction
@@ -1142,6 +1188,7 @@ executeDatabaseOperation(mongo, { collection: "products", find: { category: "ele
 ### Implementing Abstraction:
 
 #### 1. **Abstract Base Classes**
+
 ```javascript
 class Shape {
     constructor(color) {
@@ -1216,7 +1263,9 @@ try {
 }
 ```
 
+
 #### 2. **Complex System Abstraction**
+
 ```javascript
 class PaymentProcessor {
     constructor() {
@@ -1347,6 +1396,7 @@ try {
 }
 ```
 
+
 ---
 
 ## 🎨 Design Patterns
@@ -1356,6 +1406,7 @@ try {
 ### Common Design Patterns in JavaScript:
 
 #### 1. **Singleton Pattern**
+
 ```javascript
 class DatabaseConnection {
     constructor() {
@@ -1402,7 +1453,9 @@ console.log(db2.connect());         // "Already connected to database with ID: 1
 console.log(db1.query("SELECT * FROM users")); // "Executing query: SELECT * FROM users"
 ```
 
+
 #### 2. **Factory Pattern**
+
 ```javascript
 class User {
     constructor(name, email, role) {
@@ -1462,7 +1515,9 @@ try {
 }
 ```
 
+
 #### 3. **Observer Pattern**
+
 ```javascript
 class EventEmitter {
     constructor() {
@@ -1566,7 +1621,9 @@ newsletter.sendNewsletter("Welcome to our newsletter!");
 newsletter.unsubscribe("user2@example.com");
 ```
 
+
 #### 4. **Module Pattern**
+
 ```javascript
 const ShoppingCart = (function() {
     // Private variables
@@ -1670,7 +1727,9 @@ try {
 }
 ```
 
+
 #### 5. **Strategy Pattern**
+
 ```javascript
 // Strategy interfaces
 class PaymentStrategy {
@@ -1791,6 +1850,7 @@ paymentProcessor.setStrategy(crypto);
 console.log("Crypto payment:", paymentProcessor.processPayment(amount));
 ```
 
+
 ---
 
 ## 💻 Detailed Examples
@@ -1798,6 +1858,7 @@ console.log("Crypto payment:", paymentProcessor.processPayment(amount));
 ### Example 1: Building a Complete OOP System
 <div style="position: relative;">
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
+
 
 ```javascript
 console.log("=== BUILDING A COMPLETE OOP SYSTEM ===");
@@ -2081,9 +2142,11 @@ console.log("\n=== TOTAL COMPANY PAYROLL ===");
 console.log(`Total: $${company.calculateTotalPayroll()}`);
 ```
 
+
 ### Example 2: Advanced OOP with Mixins and Composition
 <div style="position: relative;">
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
+
 
 ```javascript
 console.log("=== ADVANCED OOP WITH MIXINS AND COMPOSITION ===");
@@ -2350,11 +2413,13 @@ const userJSON = regularUser.toJSON();
 console.log("User as JSON:", userJSON);
 ```
 
+
 ---
 
 ## ⚠️ Common Pitfalls
 
 ### Pitfall 1: Forgetting `new` Keyword
+
 ```javascript
 // ❌ WRONG: Missing 'new' keyword
 function Person(name) {
@@ -2367,7 +2432,9 @@ const person = Person("John"); // TypeError: Cannot set property 'name' of undef
 const person = new Person("John");
 ```
 
+
 ### Pitfall 2: Not Calling `super()` in Child Classes
+
 ```javascript
 // ❌ WRONG: Missing super() call
 class Dog extends Animal {
@@ -2386,7 +2453,9 @@ class Dog extends Animal {
 }
 ```
 
+
 ### Pitfall 3: Modifying Prototypes After Creating Instances
+
 ```javascript
 // ❌ WRONG: Modifying prototype after instances exist
 const person1 = new Person("John");
@@ -2397,7 +2466,9 @@ console.log(person1.greet()); // "Hello!" (unexpected behavior)
 console.log(person2.greet()); // "Hello!"
 ```
 
+
 ### Pitfall 4: Not Handling `this` Context
+
 ```javascript
 // ❌ WRONG: Losing 'this' context
 class Button {
@@ -2426,6 +2497,7 @@ class Button {
     }
 }
 ```
+
 
 ---
 

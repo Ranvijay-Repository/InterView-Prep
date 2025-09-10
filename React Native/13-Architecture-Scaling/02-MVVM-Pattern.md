@@ -22,6 +22,7 @@
 
 ### **MVVM Architecture**
 
+
 ```mermaid
 graph TD
     A[View] --> B[ViewModel]
@@ -33,6 +34,7 @@ graph TD
     A --> G[UI Updates]
     B --> H[Business Logic]
 ```
+
 
 ### **Key Components**
 - **View**: UI components and user interactions
@@ -47,6 +49,7 @@ graph TD
 ### **View Implementation**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
@@ -213,6 +216,7 @@ const styles = StyleSheet.create({
 export default UserProfileView;
 ```
 
+
 ---
 
 ## 🧠 **ViewModel Layer**
@@ -220,6 +224,7 @@ export default UserProfileView;
 ### **ViewModel Implementation**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 import { useState, useCallback } from 'react';
 
@@ -353,6 +358,7 @@ const isValidEmail = (email) => {
 export { createUserProfileViewModel };
 ```
 
+
 ---
 
 ## 📊 **Model Layer**
@@ -360,6 +366,7 @@ export { createUserProfileViewModel };
 ### **Model Implementation**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // User model
 const UserModel = {
@@ -516,6 +523,7 @@ const isValidEmail = (email) => {
 export { UserModel, UserListModel };
 ```
 
+
 ---
 
 ## 🔗 **Data Binding**
@@ -523,6 +531,7 @@ export { UserModel, UserListModel };
 ### **Data Binding Implementation**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 import { useState, useEffect, useCallback } from 'react';
 
@@ -671,6 +680,7 @@ const useListBinding = (initialItems, itemKey = 'id') => {
 
 export { useDataBinding, useTwoWayBinding, useFormBinding, useListBinding };
 ```
+
 
 ---
 

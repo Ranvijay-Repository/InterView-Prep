@@ -27,6 +27,7 @@ GraphQL provides a more efficient and flexible alternative to REST APIs. React N
 
 ### **GraphQL Overview**
 
+
 ```
 ┌─────────────────────────────────────┐
 │        GraphQL System               │
@@ -52,6 +53,7 @@ GraphQL provides a more efficient and flexible alternative to REST APIs. React N
 └─────────────────────────────────────┘
 ```
 
+
 ---
 
 ## 🚀 **Apollo Client Setup**
@@ -59,6 +61,7 @@ GraphQL provides a more efficient and flexible alternative to REST APIs. React N
 ### **Basic Apollo Client Configuration**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // apollo-client.js
 import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
@@ -127,9 +130,11 @@ const client = new ApolloClient({
 export default client;
 ```
 
+
 ### **App Setup with Apollo Provider**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // App.js
 import React from 'react';
@@ -151,6 +156,7 @@ const App = () => {
 export default App;
 ```
 
+
 ---
 
 ## 🔍 **Queries**
@@ -158,6 +164,7 @@ export default App;
 ### **Basic Query Usage**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 import React from 'react';
 import { View, Text, StyleSheet, FlatList, ActivityIndicator } from 'react-native';
@@ -340,6 +347,7 @@ const styles = StyleSheet.create({
 
 export default PostsScreen;
 ```
+
 
 ---
 

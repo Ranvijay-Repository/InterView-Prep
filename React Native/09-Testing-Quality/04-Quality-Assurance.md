@@ -25,6 +25,7 @@ Quality assurance ensures that React Native applications meet high standards for
 
 ### **Quality Assurance Overview**
 
+
 ```
 ┌─────────────────────────────────────┐
 │        Quality Assurance            │
@@ -52,6 +53,7 @@ Quality assurance ensures that React Native applications meet high standards for
 └─────────────────────────────────────┘
 ```
 
+
 ---
 
 ## ✅ **Code Quality Tools**
@@ -59,6 +61,7 @@ Quality assurance ensures that React Native applications meet high standards for
 ### **ESLint Configuration**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // .eslintrc.js
 module.exports = {
@@ -177,9 +180,11 @@ module.exports = {
 };
 ```
 
+
 ### **Prettier Configuration**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // .prettierrc.js
 module.exports = {
@@ -213,9 +218,11 @@ module.exports = {
 };
 ```
 
+
 ### **TypeScript Configuration**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // tsconfig.json
 {
@@ -271,6 +278,7 @@ module.exports = {
 }
 ```
 
+
 ---
 
 ## ✅ **Quality Assurance Scripts**
@@ -278,6 +286,7 @@ module.exports = {
 ### **Package.json Scripts**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```json
 {
   "scripts": {
@@ -304,9 +313,11 @@ module.exports = {
 }
 ```
 
+
 ### **Husky Configuration**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // .husky/pre-commit
 #!/usr/bin/env sh
@@ -314,6 +325,8 @@ module.exports = {
 
 npm run pre-commit
 ```
+
+
 
 ```javascript
 // .husky/pre-push
@@ -323,9 +336,11 @@ npm run pre-commit
 npm run pre-push
 ```
 
+
 ### **Lint-staged Configuration**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // .lintstagedrc.js
 module.exports = {
@@ -343,6 +358,7 @@ module.exports = {
   ],
 };
 ```
+
 
 ---
 

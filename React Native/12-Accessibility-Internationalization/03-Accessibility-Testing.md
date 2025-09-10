@@ -21,6 +21,7 @@
 
 ### **Testing Strategy**
 
+
 ```mermaid
 graph TD
     A[Accessibility Testing] --> B[Automated Testing]
@@ -34,6 +35,7 @@ graph TD
     D --> I[Real User Feedback]
 ```
 
+
 ### **Testing Levels**
 - **Automated**: Lint rules, unit tests, integration tests
 - **Manual**: Screen reader testing, keyboard navigation
@@ -46,6 +48,7 @@ graph TD
 ### **Accessibility Testing Utilities**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
@@ -126,6 +129,7 @@ const AccessibilityTestSuite = () => {
 export default AccessibilityTestSuite;
 ```
 
+
 ---
 
 ## 🤖 **Automated Testing**
@@ -133,6 +137,7 @@ export default AccessibilityTestSuite;
 ### **Accessibility Lint Rules**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // ESLint accessibility rules
 const accessibilityLintConfig = {
@@ -185,6 +190,7 @@ const accessibilityMatchers = {
 export { accessibilityLintConfig, accessibilityMatchers };
 ```
 
+
 ---
 
 ## 👥 **Manual Testing**
@@ -192,6 +198,7 @@ export { accessibilityLintConfig, accessibilityMatchers };
 ### **Screen Reader Testing Guide**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
@@ -274,6 +281,7 @@ const styles = StyleSheet.create({
 
 export default ScreenReaderTestingGuide;
 ```
+
 
 ---
 

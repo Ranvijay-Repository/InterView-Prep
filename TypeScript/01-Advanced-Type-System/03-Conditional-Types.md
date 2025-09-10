@@ -25,6 +25,7 @@ Conditional types allow you to create types that depend on other types, enabling
 
 ### **Basic Syntax**
 
+
 ```typescript
 // Basic conditional type syntax
 type IsString<T> = T extends string ? true : false;
@@ -35,7 +36,9 @@ type Test2 = IsString<number>;  // false
 type Test3 = IsString<"hello">; // true (string literal extends string)
 ```
 
+
 ### **Why Use Conditional Types?**
+
 
 ```typescript
 // Without conditional types - limited flexibility
@@ -54,11 +57,13 @@ type StringResponse = ApiResponse<string>; // { message: string; error: null }
 type DataResponse = ApiResponse<User[]>;   // { data: User[]; error: string | null }
 ```
 
+
 ---
 
 ## 🔧 **Basic Conditional Types**
 
 ### **Simple Conditional Types**
+
 
 ```typescript
 // Check if type is an array
@@ -76,7 +81,9 @@ type Test5 = IsFunction<string>;         // false
 type Test6 = IsFunction<(x: number) => string>; // true
 ```
 
+
 ### **Conditional Types with Multiple Conditions**
+
 
 ```typescript
 // Multiple condition checks
@@ -96,7 +103,9 @@ type Test4 = TypeName<() => void>; // "function"
 type Test5 = TypeName<{}>;        // "object"
 ```
 
+
 ### **Conditional Types with Generics**
+
 
 ```typescript
 // Generic conditional type
@@ -115,6 +124,7 @@ type Test6 = ExtractArrayType<number[]>;  // number
 type Test7 = ExtractArrayType<string>;    // never
 ```
 
+
 ---
 
 ## 🔍 **Conditional Type Inference**
@@ -122,6 +132,7 @@ type Test7 = ExtractArrayType<string>;    // never
 The `infer` keyword allows you to extract types from other types within conditional types.
 
 ### **Basic Type Inference**
+
 
 ```typescript
 // Extract return type from function
@@ -139,7 +150,9 @@ type Test5 = Parameters<() => void>;                     // []
 type Test6 = Parameters<string>;                         // never
 ```
 
+
 ### **Advanced Type Inference**
+
 
 ```typescript
 // Extract first parameter type
@@ -162,6 +175,7 @@ type Test6 = Awaited<Promise<string>>; // string
 type Test7 = Awaited<string>;          // string
 ```
 
+
 ---
 
 ## 🔄 **Distributive Conditional Types**
@@ -169,6 +183,7 @@ type Test7 = Awaited<string>;          // string
 Conditional types distribute over union types, applying the condition to each member.
 
 ### **Understanding Distribution**
+
 
 ```typescript
 // Distributive conditional type
@@ -185,7 +200,9 @@ type ToArrayNonDist<T> = [T] extends [any] ? T[] : never;
 type Test2 = ToArrayNonDist<string | number>; // (string | number)[]
 ```
 
+
 ### **Controlling Distribution**
+
 
 ```typescript
 // Prevent distribution by wrapping in tuple
@@ -205,11 +222,13 @@ type Test3 = ExtractString<string | number | boolean>; // string
 type Test4 = ExtractString<number | boolean>;          // never
 ```
 
+
 ---
 
 ## 🚀 **Advanced Conditional Patterns**
 
 ### **Recursive Conditional Types**
+
 
 ```typescript
 // Deep readonly type
@@ -242,7 +261,9 @@ type Test2 = Flatten<number[][][]>;   // number
 type Test3 = Flatten<string>;         // string
 ```
 
+
 ### **Conditional Types with Mapped Types**
+
 
 ```typescript
 // Conditional mapped type
@@ -267,7 +288,9 @@ type StringProps = PickByType<Example, string>; // { name: string; email: string
 type NumberProps = PickByType<Example, number>; // { age: number }
 ```
 
+
 ### **Complex Conditional Logic**
+
 
 ```typescript
 // API response type based on method
@@ -287,11 +310,13 @@ type PostResponse = ApiResponse<User, "POST">;     // { data: User; error: null;
 type DeleteResponse = ApiResponse<never, "DELETE">; // { success: true; error: null }
 ```
 
+
 ---
 
 ## 🛠️ **Utility Types with Conditionals**
 
 ### **Built-in Utility Types Using Conditionals**
+
 
 ```typescript
 // Extract utility type
@@ -315,7 +340,9 @@ type ReturnType<T extends (...args: any) => any> = T extends (...args: any) => i
 type Test4 = ReturnType<() => string>; // string
 ```
 
+
 ### **Custom Utility Types**
+
 
 ```typescript
 // Deep partial type
@@ -351,11 +378,13 @@ type OptionalEmail = OptionalByKeys<User, "email">;
 type RequiredEmail = RequiredByKeys<User, "email">;
 ```
 
+
 ---
 
 ## ✅ **Best Practices**
 
 ### **1. Use Conditional Types for Type-Level Logic**
+
 
 ```typescript
 // ✅ Good: Type-level conditional logic
@@ -370,7 +399,9 @@ type BadApiResponse<T> = {
 };
 ```
 
+
 ### **2. Leverage Type Inference with `infer`**
+
 
 ```typescript
 // ✅ Good: Extract types using infer
@@ -380,7 +411,9 @@ type ExtractReturnType<T> = T extends (...args: any[]) => infer R ? R : never;
 type ManualReturnType<T> = T extends () => string ? string : never;
 ```
 
+
 ### **3. Use Distribution Carefully**
+
 
 ```typescript
 // ✅ Good: Understand when distribution happens
@@ -392,7 +425,9 @@ type ToArrayNonDist<T> = [T] extends [any] ? T[] : never;
 type UnionArray = ToArrayNonDist<string | number>; // (string | number)[]
 ```
 
+
 ### **4. Create Reusable Conditional Types**
+
 
 ```typescript
 // ✅ Good: Reusable conditional utility
@@ -400,6 +435,7 @@ type IsAssignable<T, U> = T extends U ? true : false;
 type IsString<T> = IsAssignable<T, string>;
 type IsNumber<T> = IsAssignable<T, number>;
 ```
+
 
 ---
 
@@ -415,40 +451,48 @@ Conditional types allow you to create types that depend on other types using the
 **Answer:**
 The `infer` keyword allows you to extract types from other types within conditional types:
 
+
 ```typescript
 type ReturnType<T> = T extends (...args: any[]) => infer R ? R : never;
 ```
+
 
 ### **3. What is distributive conditional types?**
 
 **Answer:**
 Conditional types distribute over union types, applying the condition to each member:
 
+
 ```typescript
 type ToArray<T> = T extends any ? T[] : never;
 type Test = ToArray<string | number>; // string[] | number[]
 ```
+
 
 ### **4. How do you prevent distribution in conditional types?**
 
 **Answer:**
 Wrap the type in a tuple to prevent distribution:
 
+
 ```typescript
 type NonDistributive<T> = [T] extends [any] ? T[] : never;
 type Test = NonDistributive<string | number>; // (string | number)[]
 ```
+
 
 ### **5. Can you create recursive conditional types?**
 
 **Answer:**
 Yes, conditional types can be recursive:
 
+
 ```typescript
 type DeepReadonly<T> = {
   readonly [P in keyof T]: T[P] extends object ? DeepReadonly<T[P]> : T[P];
 };
 ```
+
 
 ---
 

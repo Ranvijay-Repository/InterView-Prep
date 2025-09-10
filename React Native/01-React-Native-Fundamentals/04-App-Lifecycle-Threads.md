@@ -27,6 +27,7 @@ React Native has a unique threading model and app lifecycle that differs from tr
 
 ### **React Native Threading Model**
 
+
 ```
 ┌─────────────────────────────────────┐
 │        React Native Threads         │
@@ -51,6 +52,7 @@ React Native has a unique threading model and app lifecycle that differs from tr
 └─────────────────────────────────────┘
 ```
 
+
 ---
 
 ## 📱 **App Lifecycle**
@@ -60,6 +62,7 @@ React Native applications go through different states during their lifecycle. Un
 ### **App Lifecycle States**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, AppState } from 'react-native';
@@ -234,6 +237,7 @@ const styles = StyleSheet.create({
 export default AppLifecycleExample;
 ```
 
+
 ---
 
 ## 🧵 **Threading Model**
@@ -243,6 +247,7 @@ React Native uses a multi-threaded architecture to ensure smooth performance and
 ### **Thread Communication**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
@@ -432,6 +437,7 @@ const styles = StyleSheet.create({
 
 export default ThreadingExample;
 ```
+
 
 ---
 

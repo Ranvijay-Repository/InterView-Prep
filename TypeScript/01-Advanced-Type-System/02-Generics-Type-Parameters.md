@@ -25,6 +25,7 @@ Generics allow you to create reusable components that work with multiple types w
 
 ### **Why Use Generics?**
 
+
 ```typescript
 // Without generics - not type-safe
 function getFirstItem(items: any[]): any {
@@ -43,7 +44,9 @@ const firstNumber = getFirstItem([1, 2, 3]); // Returns number
 const firstString = getFirstItem(["a", "b", "c"]); // Returns string
 ```
 
+
 ### **Basic Generic Syntax**
+
 
 ```typescript
 // Generic function
@@ -60,6 +63,7 @@ const result3 = identity("hello"); // TypeScript infers T as string
 const result4 = identity(42);      // TypeScript infers T as number
 ```
 
+
 ---
 
 ## 🔧 **Generic Functions**
@@ -67,6 +71,7 @@ const result4 = identity(42);      // TypeScript infers T as number
 Generic functions can work with different types while maintaining type safety.
 
 ### **Basic Generic Functions**
+
 
 ```typescript
 // Generic function with single type parameter
@@ -86,7 +91,9 @@ const numberValue = logAndReturn(42);      // T inferred as number
 const pairResult = pair("hello", 42);      // [string, number]
 ```
 
+
 ### **Generic Array Functions**
+
 
 ```typescript
 // Generic function for array operations
@@ -104,7 +111,9 @@ const lastNumber = getLastItem(numbers); // number | undefined
 const evenNumbers = filterArray(numbers, n => n % 2 === 0); // number[]
 ```
 
+
 ### **Generic Function with Constraints**
+
 
 ```typescript
 // Generic function with length property constraint
@@ -118,6 +127,7 @@ getLength([1, 2, 3]);      // 3
 getLength({ length: 10 }); // 10
 ```
 
+
 ---
 
 ## 🏗️ **Generic Classes**
@@ -125,6 +135,7 @@ getLength({ length: 10 }); // 10
 Generic classes allow you to create classes that work with different types.
 
 ### **Basic Generic Class**
+
 
 ```typescript
 // Generic container class
@@ -158,7 +169,9 @@ numberContainer.add(1);
 numberContainer.add(2);
 ```
 
+
 ### **Generic Class with Multiple Type Parameters**
+
 
 ```typescript
 // Generic key-value storage
@@ -188,7 +201,9 @@ userStore.set("user1", { name: "John", age: 30 });
 userStore.set("user2", { name: "Jane", age: 25 });
 ```
 
+
 ### **Generic Class with Constraints**
+
 
 ```typescript
 // Generic class with comparable constraint
@@ -227,6 +242,7 @@ sortedPeople.add(new Person("Alice", 30));
 sortedPeople.add(new Person("Bob", 25));
 ```
 
+
 ---
 
 ## 📋 **Generic Interfaces**
@@ -234,6 +250,7 @@ sortedPeople.add(new Person("Bob", 25));
 Generic interfaces define contracts that can work with different types.
 
 ### **Basic Generic Interface**
+
 
 ```typescript
 // Generic repository interface
@@ -277,7 +294,9 @@ class UserRepository implements Repository<User> {
 }
 ```
 
+
 ### **Generic Interface with Multiple Type Parameters**
+
 
 ```typescript
 // Generic API response interface
@@ -294,7 +313,9 @@ type UserListApiResponse = ApiResponse<User[]>;
 type CustomErrorResponse = ApiResponse<User, { code: number; message: string }>;
 ```
 
+
 ### **Generic Interface with Constraints**
+
 
 ```typescript
 // Generic interface with serializable constraint
@@ -326,6 +347,7 @@ class MemoryCache<T extends Serializable> implements Cache<T> {
 }
 ```
 
+
 ---
 
 ## 🔒 **Generic Constraints**
@@ -333,6 +355,7 @@ class MemoryCache<T extends Serializable> implements Cache<T> {
 Constraints limit the types that can be used with generics, providing more specific type information.
 
 ### **Basic Constraints**
+
 
 ```typescript
 // Constraint to ensure type has length property
@@ -347,7 +370,9 @@ getLength({ length: 10 }); // 10
 // getLength(42);          // ❌ Error: number doesn't have length property
 ```
 
+
 ### **Keyof Constraint**
+
 
 ```typescript
 // Constraint using keyof
@@ -362,7 +387,9 @@ const age = getProperty(person, "age");   // number
 // const invalid = getProperty(person, "invalid"); // ❌ Error
 ```
 
+
 ### **Multiple Constraints**
+
 
 ```typescript
 // Multiple constraints
@@ -383,11 +410,13 @@ const user = { id: "1", name: "John", email: "john@example.com" };
 const result = processEntity(user); // "John (ID: 1)"
 ```
 
+
 ---
 
 ## 🚀 **Advanced Generic Patterns**
 
 ### **Conditional Types with Generics**
+
 
 ```typescript
 // Conditional type based on generic parameter
@@ -407,7 +436,9 @@ const stringResponse = createResponse("Hello"); // { message: string }
 const numberResponse = createResponse(42);      // { data: number }
 ```
 
+
 ### **Mapped Types with Generics**
+
 
 ```typescript
 // Generic mapped type
@@ -430,7 +461,9 @@ type PartialUser = Partial<User>; // All properties optional
 type RequiredUser = Required<User>; // All properties required
 ```
 
+
 ### **Generic Utility Types**
+
 
 ```typescript
 // Generic utility type for API responses
@@ -458,11 +491,13 @@ if (result.success) {
 }
 ```
 
+
 ---
 
 ## ✅ **Best Practices**
 
 ### **1. Use Descriptive Generic Names**
+
 
 ```typescript
 // ✅ Good: Descriptive generic names
@@ -478,7 +513,9 @@ function processUserData<T, U, V>(user: T): U {
 }
 ```
 
+
 ### **2. Use Constraints to Provide Better Type Safety**
+
 
 ```typescript
 // ✅ Good: Constraint provides type safety
@@ -492,7 +529,9 @@ function getProperty(obj: any, key: string): any {
 }
 ```
 
+
 ### **3. Prefer Type Inference When Possible**
+
 
 ```typescript
 // ✅ Good: Let TypeScript infer the type
@@ -502,7 +541,9 @@ const result = getFirstItem([1, 2, 3]); // T inferred as number
 const result = getFirstItem<number>([1, 2, 3]);
 ```
 
+
 ### **4. Use Generic Constraints for Better APIs**
+
 
 ```typescript
 // ✅ Good: Constraint ensures required properties
@@ -512,6 +553,7 @@ function createEntity<T extends { id: string; name: string }>(
   return { ...data, createdAt: new Date() };
 }
 ```
+
 
 ---
 
@@ -531,6 +573,7 @@ Generics allow you to create reusable components that work with multiple types w
 **Answer:**
 Use angle brackets to define type parameters:
 
+
 ```typescript
 function identity<T>(arg: T): T {
   return arg;
@@ -541,10 +584,12 @@ const result = identity<string>("hello");
 const inferred = identity("hello"); // Type inferred
 ```
 
+
 ### **3. What are generic constraints and how do you use them?**
 
 **Answer:**
 Constraints limit the types that can be used with generics:
+
 
 ```typescript
 function getLength<T extends { length: number }>(item: T): number {
@@ -552,10 +597,12 @@ function getLength<T extends { length: number }>(item: T): number {
 }
 ```
 
+
 ### **4. How do you create a generic class?**
 
 **Answer:**
 Define type parameters after the class name:
+
 
 ```typescript
 class Container<T> {
@@ -571,11 +618,13 @@ class Container<T> {
 }
 ```
 
+
 ### **5. What's the difference between generic functions and generic classes?**
 
 **Answer:**
 - **Generic functions**: Work with different types for a single operation
 - **Generic classes**: Maintain type consistency across multiple methods and properties
+
 
 ```typescript
 // Generic function
@@ -587,6 +636,7 @@ class Processor<T> {
   store(item: T): void { /* store */ }
 }
 ```
+
 
 ---
 

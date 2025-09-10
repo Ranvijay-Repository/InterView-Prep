@@ -44,6 +44,7 @@
 - **Fault Isolation**: Failures in one part don't affect others
 
 ### ASCII Diagram: Micro-frontends Architecture
+
 ```
 MICRO-FRONTENDS ARCHITECTURE
 ┌─────────────────────────────────┐
@@ -88,6 +89,7 @@ MICRO-FRONTENDS ARCHITECTURE
         └───────────────┘
 ```
 
+
 ### Integration Methods:
 - **Build-time Integration**: Compile all micro-frontends together
 - **Runtime Integration**: Load micro-frontends dynamically
@@ -108,6 +110,7 @@ MICRO-FRONTENDS ARCHITECTURE
 - **Scalability**: Handle high write volumes efficiently
 
 ### ASCII Diagram: Event Sourcing Flow
+
 ```
 EVENT SOURCING FLOW
 ┌─────────────────────────────────┐
@@ -159,6 +162,7 @@ EVENT SOURCING FLOW
         └───────────────┘
 ```
 
+
 ### Event Types:
 - **Domain Events**: Business state changes
 - **Integration Events**: Cross-service communication
@@ -179,6 +183,7 @@ EVENT SOURCING FLOW
 - **Maintenance**: Easier to maintain and evolve
 
 ### ASCII Diagram: CQRS Architecture
+
 ```
 CQRS ARCHITECTURE
 ┌─────────────────────────────────┐
@@ -223,6 +228,7 @@ CQRS ARCHITECTURE
         │  - Normalized │  │  - Optimized  │
         └───────────────┘  └───────────────┘
 ```
+
 
 ### CQRS Benefits:
 - **Read Optimization**: Denormalized data for fast queries

@@ -26,6 +26,7 @@ JSI, Fabric, and TurboModules are the three pillars of React Native's new archit
 
 ### **New Architecture Components**
 
+
 ```
 ┌─────────────────────────────────────┐
 │        New Architecture             │
@@ -53,6 +54,7 @@ JSI, Fabric, and TurboModules are the three pillars of React Native's new archit
 └─────────────────────────────────────┘
 ```
 
+
 ---
 
 ## ⚡ **JSI (JavaScript Interface)**
@@ -60,6 +62,7 @@ JSI, Fabric, and TurboModules are the three pillars of React Native's new archit
 ### **JSI Implementation Example**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // JSI Implementation Example
 import { TurboModuleRegistry } from 'react-native';
@@ -184,6 +187,7 @@ class JSIDemonstration {
 export default JSIDemonstration;
 ```
 
+
 ---
 
 ## 🎨 **Fabric (New Renderer)**
@@ -191,6 +195,7 @@ export default JSIDemonstration;
 ### **Fabric Implementation Example**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Fabric Implementation Example
 import React, { useState, useCallback } from 'react';
@@ -373,6 +378,7 @@ const styles = StyleSheet.create({
 
 export default FabricExample;
 ```
+
 
 ---
 

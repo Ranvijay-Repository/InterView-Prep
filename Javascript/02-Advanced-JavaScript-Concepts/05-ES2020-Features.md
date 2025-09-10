@@ -45,6 +45,7 @@
 - **Better Developer Experience**: Write more confident code
 
 ### ASCII Diagram: Optional Chaining Flow
+
 ```
 OPTIONAL CHAINING FLOW
 ┌─────────────────────────────────┐
@@ -71,6 +72,7 @@ OPTIONAL CHAINING FLOW
         └───────────────┘
 ```
 
+
 ### Use Cases:
 - **API Responses**: Safely access nested data
 - **DOM Manipulation**: Access element properties safely
@@ -90,6 +92,7 @@ OPTIONAL CHAINING FLOW
 - **Safer Defaults**: Provide meaningful fallback values
 
 ### ASCII Diagram: Nullish Coalescing Logic
+
 ```
 NULLISH COALESCING LOGIC
 ┌─────────────────────────────────┐
@@ -122,7 +125,9 @@ NULLISH COALESCING LOGIC
         └───────────────┘
 ```
 
+
 ### Comparison with Logical OR (||):
+
 ```javascript
 // Logical OR (||) - falls back on all falsy values
 0 || 42        // 42 (0 is falsy)
@@ -136,6 +141,7 @@ false ?? true  // false (false is not nullish)
 null ?? 42     // 42 (null is nullish)
 undefined ?? 42 // 42 (undefined is nullish)
 ```
+
 
 ---
 
@@ -151,6 +157,7 @@ undefined ?? 42 // 42 (undefined is nullish)
 - **Cryptography**: Work with large cryptographic numbers
 
 ### ASCII Diagram: BigInt vs Number Range
+
 ```
 BIGINT VS NUMBER RANGE
 ┌─────────────────────────────────┐
@@ -181,7 +188,9 @@ BIGINT VS NUMBER RANGE
         └───────────────┘
 ```
 
+
 ### BigInt Operations:
+
 ```javascript
 // Creation
 const bigInt = 123n;
@@ -199,6 +208,7 @@ const power = 2n ** 100n;       // 1267650600228229401496703205376n
 123n === 123;                   // false (strict equality)
 ```
 
+
 ---
 
 ## ⚡ Top-level await
@@ -213,6 +223,7 @@ const power = 2n ** 100n;       // 1267650600228229401496703205376n
 - **Cleaner Code**: Eliminate wrapper functions for async initialization
 
 ### ASCII Diagram: Top-level await Execution
+
 ```
 TOP-LEVEL AWAIT EXECUTION
 ┌─────────────────────────────────┐
@@ -244,6 +255,7 @@ TOP-LEVEL AWAIT EXECUTION
         └───────────────┘
 ```
 
+
 ### Use Cases:
 - **Environment Configuration**: Load environment-specific settings
 - **Feature Flags**: Load feature configuration asynchronously
@@ -264,6 +276,7 @@ TOP-LEVEL AWAIT EXECUTION
 - **Safer Access**: Handle edge cases more elegantly
 
 ### ASCII Diagram: Array.at() Indexing
+
 ```
 ARRAY.AT() INDEXING
 ┌─────────────────────────────────┐
@@ -297,7 +310,9 @@ ARRAY.AT() INDEXING
         └───────────────┘
 ```
 
+
 ### Comparison with Traditional Methods:
+
 ```javascript
 const arr = ['a', 'b', 'c', 'd', 'e'];
 
@@ -314,6 +329,7 @@ arr.at(-3);              // 'c' (third to last)
 arr.at(10);              // undefined (out of bounds)
 arr.at(-10);             // undefined (out of bounds)
 ```
+
 
 ---
 

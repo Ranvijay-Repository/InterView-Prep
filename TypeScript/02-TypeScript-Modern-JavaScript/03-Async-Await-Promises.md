@@ -25,6 +25,7 @@ Promises provide a way to handle asynchronous operations with better error handl
 
 ### **Basic Promise Syntax**
 
+
 ```typescript
 // Creating a Promise
 const fetchUser = (id: number): Promise<User> => {
@@ -52,7 +53,9 @@ const processData = (data: string): Promise<ProcessedData> => {
 };
 ```
 
+
 ### **Promise States and Methods**
+
 
 ```typescript
 // Promise states: pending, fulfilled, rejected
@@ -75,7 +78,9 @@ promise
   });
 ```
 
+
 ### **Promise with TypeScript Generics**
+
 
 ```typescript
 // Generic Promise type
@@ -91,6 +96,7 @@ const numberPromise = createPromise<number>(42, 1000);
 const userPromise = createPromise<User>({ id: 1, name: "John", email: "john@example.com" });
 ```
 
+
 ---
 
 ## 🔄 **Async/Await Syntax**
@@ -98,6 +104,7 @@ const userPromise = createPromise<User>({ id: 1, name: "John", email: "john@exam
 Async/await provides a more readable way to work with Promises.
 
 ### **Basic Async/Await**
+
 
 ```typescript
 // Async function
@@ -124,7 +131,9 @@ const processUserData = async (id: number): Promise<ProcessedUser> => {
 };
 ```
 
+
 ### **Async Function Types**
+
 
 ```typescript
 // Async function type
@@ -141,7 +150,9 @@ const userData = await fetchData<User>("/api/users/1");
 const productData = await fetchData<Product[]>("/api/products");
 ```
 
+
 ### **Async Arrow Functions**
+
 
 ```typescript
 // Async arrow function
@@ -164,6 +175,7 @@ const processUsers = async (userIds: number[]): Promise<User[]> => {
 };
 ```
 
+
 ---
 
 ## 🛡️ **Error Handling**
@@ -171,6 +183,7 @@ const processUsers = async (userIds: number[]): Promise<User[]> => {
 Proper error handling is crucial for robust asynchronous code.
 
 ### **Try/Catch with Async/Await**
+
 
 ```typescript
 // Basic error handling
@@ -208,7 +221,9 @@ const fetchUserWithCustomError = async (id: number): Promise<User> => {
 };
 ```
 
+
 ### **Promise Error Handling**
+
 
 ```typescript
 // Promise with error handling
@@ -240,6 +255,7 @@ const complexAsyncOperation = (): Promise<string> => {
 };
 ```
 
+
 ---
 
 ## 🔗 **Promise Combinators**
@@ -247,6 +263,7 @@ const complexAsyncOperation = (): Promise<string> => {
 Promise combinators allow you to work with multiple Promises efficiently.
 
 ### **Promise.all**
+
 
 ```typescript
 // Promise.all - wait for all promises to resolve
@@ -268,7 +285,9 @@ const users = await fetchAllUsers([1, 2, 3, 4, 5]);
 const safeUsers = await fetchAllUsersSafely([1, 2, 3, 4, 5]);
 ```
 
+
 ### **Promise.allSettled**
+
 
 ```typescript
 // Promise.allSettled - wait for all promises to settle
@@ -288,7 +307,9 @@ results.forEach((result, index) => {
 });
 ```
 
+
 ### **Promise.race**
+
 
 ```typescript
 // Promise.race - first promise to settle wins
@@ -311,7 +332,9 @@ try {
 }
 ```
 
+
 ### **Promise.any**
+
 
 ```typescript
 // Promise.any - first promise to fulfill wins
@@ -334,11 +357,13 @@ try {
 }
 ```
 
+
 ---
 
 ## 🚀 **Advanced Async Patterns**
 
 ### **Retry Logic**
+
 
 ```typescript
 // Retry with exponential backoff
@@ -369,7 +394,9 @@ const fetchUserWithRetry = async (
 };
 ```
 
+
 ### **Circuit Breaker Pattern**
+
 
 ```typescript
 // Circuit breaker implementation
@@ -422,7 +449,9 @@ const circuitBreaker = new CircuitBreaker();
 const user = await circuitBreaker.execute(() => fetchUser(1));
 ```
 
+
 ### **Async Queue**
+
 
 ```typescript
 // Async queue implementation
@@ -459,11 +488,13 @@ class AsyncQueue<T> {
 }
 ```
 
+
 ---
 
 ## 🎭 **TypeScript Specific Features**
 
 ### **Async Function Return Types**
+
 
 ```typescript
 // Explicit return types for async functions
@@ -488,7 +519,9 @@ const fetchUserOrNull = async (id: number): Promise<User | null> => {
 };
 ```
 
+
 ### **Generic Async Functions**
+
 
 ```typescript
 // Generic async function
@@ -511,7 +544,9 @@ const user = await fetchEntity<User>("/api/users");
 const product = await fetchEntity<Product>("/api/products");
 ```
 
+
 ### **Async Iterators**
+
 
 ```typescript
 // Async iterator for processing data in chunks
@@ -534,11 +569,13 @@ for await (const user of processUsersInBatches([1, 2, 3, 4, 5])) {
 }
 ```
 
+
 ---
 
 ## ✅ **Best Practices**
 
 ### **1. Use Async/Await for Better Readability**
+
 
 ```typescript
 // ✅ Good: Async/await
@@ -561,7 +598,9 @@ const processUser = (id: number): Promise<void> => {
 };
 ```
 
+
 ### **2. Handle Errors Appropriately**
+
 
 ```typescript
 // ✅ Good: Specific error handling
@@ -586,7 +625,9 @@ const fetchUserSafely = async (id: number): Promise<User | null> => {
 };
 ```
 
+
 ### **3. Use Promise Combinators for Multiple Operations**
+
 
 ```typescript
 // ✅ Good: Promise.all for parallel operations
@@ -610,6 +651,7 @@ const fetchUserData = async (id: number): Promise<UserData> => {
 };
 ```
 
+
 ---
 
 ## ❓ **Common Interview Questions**
@@ -619,6 +661,7 @@ const fetchUserData = async (id: number): Promise<UserData> => {
 **Answer:**
 - **Promises**: Use `.then()` and `.catch()` methods, can be chained
 - **Async/await**: Syntactic sugar over Promises, more readable, uses try/catch
+
 
 ```typescript
 // Promise
@@ -633,10 +676,12 @@ try {
 }
 ```
 
+
 ### **2. How do you handle errors in async/await?**
 
 **Answer:**
 Use try/catch blocks:
+
 
 ```typescript
 const fetchUser = async (id: number): Promise<User> => {
@@ -649,6 +694,7 @@ const fetchUser = async (id: number): Promise<User> => {
   }
 };
 ```
+
 
 ### **3. What are Promise combinators and when do you use them?**
 
@@ -663,6 +709,7 @@ const fetchUser = async (id: number): Promise<User> => {
 **Answer:**
 Use a loop with exponential backoff:
 
+
 ```typescript
 const fetchWithRetry = async (url: string, maxRetries: number = 3): Promise<Response> => {
   for (let i = 0; i < maxRetries; i++) {
@@ -675,6 +722,7 @@ const fetchWithRetry = async (url: string, maxRetries: number = 3): Promise<Resp
   }
 };
 ```
+
 
 ### **5. What's the difference between Promise.all and Promise.allSettled?**
 

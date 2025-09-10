@@ -39,6 +39,7 @@ React Native version upgrades are essential for:
 ### **1. Backup and Version Control**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```bash
 # Create a backup branch
 git checkout -b backup-before-upgrade
@@ -49,9 +50,11 @@ git status
 git stash  # if needed
 ```
 
+
 ### **2. Audit Current Dependencies**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```bash
 # Check current React Native version
 npx react-native --version
@@ -66,9 +69,11 @@ npm outdated
 npm audit
 ```
 
+
 ### **3. Review Release Notes**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```bash
 # Check React Native releases
 # Visit: https://github.com/facebook/react-native/releases
@@ -77,9 +82,11 @@ npm audit
 # Visit: https://react-native-community.github.io/upgrade-helper/
 ```
 
+
 ### **4. Test Current App**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```bash
 # Run tests
 npm test
@@ -92,6 +99,7 @@ npx react-native run-android
 npx react-native start --verbose
 ```
 
+
 ---
 
 ## 🚀 **Upgrade Process**
@@ -101,15 +109,18 @@ npx react-native start --verbose
 #### **Step 1: Use Upgrade Helper**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```bash
 # Visit: https://react-native-community.github.io/upgrade-helper/
 # Select your current version and target version
 # Follow the generated diff
 ```
 
+
 #### **Step 2: Apply Changes**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```bash
 # Copy package.json changes
 # Update dependencies in package.json
@@ -121,18 +132,22 @@ npm install
 cd ios && pod install && cd ..
 ```
 
+
 #### **Step 3: Update Native Code**
+
 ```bash
 # iOS: Update Xcode project files
 # Android: Update build.gradle files
 # Follow the specific changes shown in upgrade helper
 ```
 
+
 ### **Method 2: Manual Upgrade**
 
 #### **Step 1: Update React Native**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```bash
 # Update React Native
 npm install react-native@latest
@@ -141,7 +156,9 @@ npm install react-native@latest
 npm install react@latest
 ```
 
+
 #### **Step 2: Update Platform Dependencies**
+
 ```bash
 # iOS
 cd ios
@@ -155,7 +172,9 @@ cd ..
 # - targetSdkVersion
 ```
 
+
 #### **Step 3: Update Metro Configuration**
+
 ```javascript
 // metro.config.js
 const {getDefaultConfig, mergeConfig} = require('@react-native/metro-config');
@@ -167,11 +186,13 @@ const config = {
 module.exports = mergeConfig(getDefaultConfig(__dirname), config);
 ```
 
+
 ---
 
 ## 📋 **Common Upgrade Scenarios**
 
 ### **Scenario 1: Minor Version Upgrade (0.70 → 0.71)**
+
 
 ```bash
 # Usually straightforward
@@ -186,7 +207,9 @@ npx react-native run-ios
 npx react-native run-android
 ```
 
+
 ### **Scenario 2: Major Version Upgrade (0.68 → 0.70)**
+
 
 ```bash
 # Use React Native Upgrade Helper
@@ -200,7 +223,9 @@ npx react-native run-android
 # 5. Handle breaking changes
 ```
 
+
 ### **Scenario 3: New Architecture Migration (0.68 → 0.70+)**
+
 
 ```bash
 # Enable New Architecture
@@ -216,7 +241,9 @@ npm install react-native@latest
 cd ios && pod install && cd ..
 ```
 
+
 ### **Scenario 4: Expo Managed to Bare Workflow**
+
 
 ```bash
 # Eject from Expo
@@ -229,6 +256,7 @@ npx expo prebuild
 npm install react-native@latest
 ```
 
+
 ---
 
 ## 🛠️ **Troubleshooting**
@@ -236,6 +264,7 @@ npm install react-native@latest
 ### **Common Issues and Solutions**
 
 #### **1. Metro Bundler Issues**
+
 ```bash
 # Clear Metro cache
 npx react-native start --reset-cache
@@ -247,7 +276,9 @@ npm start -- --reset-cache
 watchman watch-del-all
 ```
 
+
 #### **2. iOS Build Issues**
+
 ```bash
 # Clean iOS build
 cd ios
@@ -261,7 +292,9 @@ cd ..
 # Check ios/YourApp.xcodeproj for deployment target
 ```
 
+
 #### **3. Android Build Issues**
+
 ```bash
 # Clean Android build
 cd android
@@ -272,7 +305,9 @@ cd ..
 # Check android/build.gradle for versions
 ```
 
+
 #### **4. Dependency Conflicts**
+
 ```bash
 # Check for peer dependency warnings
 npm install --legacy-peer-deps
@@ -285,7 +320,9 @@ npm ls react-native
 npm ls react
 ```
 
+
 #### **5. Native Module Issues**
+
 ```bash
 # Rebuild native modules
 npx react-native unlink
@@ -298,11 +335,13 @@ cd ios && pod install && cd ..
 npm audit
 ```
 
+
 ---
 
 ## ✅ **Best Practices**
 
 ### **1. Gradual Upgrades**
+
 ```bash
 # Don't skip major versions
 # Upgrade incrementally:
@@ -311,7 +350,9 @@ npm audit
 # Test each version before proceeding
 ```
 
+
 ### **2. Automated Testing**
+
 ```javascript
 // Add upgrade tests
 describe('App after upgrade', () => {
@@ -326,21 +367,27 @@ describe('App after upgrade', () => {
 });
 ```
 
+
 ### **3. Staged Rollout**
+
 ```bash
 # Use feature flags for gradual rollout
 # Test on staging environment first
 # Monitor crash reports and performance
 ```
 
+
 ### **4. Documentation**
+
 ```markdown
 # Keep upgrade notes
 # Document breaking changes
 # Maintain compatibility matrix
 ```
 
+
 ### **5. Dependency Management**
+
 ```json
 // package.json
 {
@@ -353,6 +400,7 @@ describe('App after upgrade', () => {
   }
 }
 ```
+
 
 ---
 

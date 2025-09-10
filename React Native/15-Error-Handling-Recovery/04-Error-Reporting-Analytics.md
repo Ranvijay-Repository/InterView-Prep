@@ -22,6 +22,7 @@
 
 ### **Error Reporting Architecture**
 
+
 ```mermaid
 graph TD
     A[Error Occurs] --> B[Error Capture]
@@ -33,6 +34,7 @@ graph TD
     F --> H[Dashboard]
     F --> I[Analytics]
 ```
+
 
 ### **Key Components**
 - **Error Capture**: Collect errors from various sources
@@ -47,6 +49,7 @@ graph TD
 ### **Error Analytics System**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 import React, { useState, useCallback } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native';
@@ -479,6 +482,7 @@ const styles = StyleSheet.create({
 export { ErrorAnalytics, ErrorAnalyticsDemo };
 ```
 
+
 ---
 
 ## ⚡ **Performance Monitoring**
@@ -486,6 +490,7 @@ export { ErrorAnalytics, ErrorAnalyticsDemo };
 ### **Performance Monitoring System**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 import React, { useState, useCallback } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native';
@@ -869,6 +874,7 @@ const styles = StyleSheet.create({
 
 export { PerformanceMonitoring, PerformanceMonitoringDemo };
 ```
+
 
 ---
 

@@ -8,6 +8,7 @@ Responsive design in React Native ensures your app looks and functions well acro
 
 ### 1. Basic Screen Size Detection
 
+
 ```javascript
 import { Dimensions, PixelRatio, Platform } from 'react-native';
 
@@ -56,7 +57,9 @@ const useScreenInfo = () => {
 };
 ```
 
+
 ### 2. Advanced Screen Classification
+
 
 ```javascript
 import { Dimensions, PixelRatio } from 'react-native';
@@ -111,9 +114,11 @@ const useDeviceClassification = () => {
 };
 ```
 
+
 ## Responsive Layout Patterns
 
 ### 1. Flexible Grid System
+
 
 ```javascript
 import { View, StyleSheet, Dimensions } from 'react-native';
@@ -172,7 +177,9 @@ const ProductGrid = ({ products }) => {
 };
 ```
 
+
 ### 2. Adaptive Container Sizes
+
 
 ```javascript
 import { StyleSheet, Dimensions } from 'react-native';
@@ -225,7 +232,9 @@ const ResponsiveContainer = ({ children }) => {
 };
 ```
 
+
 ### 3. Breakpoint-Based Layouts
+
 
 ```javascript
 import { useState, useEffect } from 'react';
@@ -293,9 +302,11 @@ const ResponsiveLayout = ({ children }) => {
 };
 ```
 
+
 ## Typography and Spacing
 
 ### 1. Responsive Typography
+
 
 ```javascript
 import { StyleSheet, Dimensions, PixelRatio } from 'react-native';
@@ -350,7 +361,9 @@ const ResponsiveText = ({ style, children, ...props }) => {
 };
 ```
 
+
 ### 2. Responsive Spacing System
+
 
 ```javascript
 import { StyleSheet, Dimensions } from 'react-native';
@@ -408,9 +421,11 @@ const ResponsiveSpacing = ({ children, padding, margin }) => {
 };
 ```
 
+
 ## Image and Media Responsiveness
 
 ### 1. Responsive Images
+
 
 ```javascript
 import { Image, Dimensions, StyleSheet } from 'react-native';
@@ -466,7 +481,9 @@ const styles = StyleSheet.create({
 });
 ```
 
+
 ### 2. Responsive Video Player
+
 
 ```javascript
 import { View, Dimensions, StyleSheet } from 'react-native';
@@ -512,9 +529,11 @@ const styles = StyleSheet.create({
 });
 ```
 
+
 ## Navigation Responsiveness
 
 ### 1. Responsive Navigation
+
 
 ```javascript
 import { useBreakpoint } from './useBreakpoint';
@@ -530,12 +549,12 @@ const ResponsiveNavigator = () => {
   if (isMobile) {
     return (
       <Tab.Navigator
-        screenOptions={{
+        screenOptions={{#123;{{#123;
           tabBarStyle: {
             height: 60,
             paddingBottom: 8,
           },
-        }}
+        }}#125;}}#125;
       >
         <Tab.Screen name="Home" component={HomeScreen} />
         <Tab.Screen name="Profile" component={ProfileScreen} />
@@ -546,11 +565,11 @@ const ResponsiveNavigator = () => {
   if (isTablet) {
     return (
       <Drawer.Navigator
-        screenOptions={{
+        screenOptions={{#123;{{#123;
           drawerStyle: {
             width: 280,
           },
-        }}
+        }}#125;}}#125;
       >
         <Drawer.Screen name="Home" component={HomeScreen} />
         <Drawer.Screen name="Profile" component={ProfileScreen} />
@@ -572,7 +591,9 @@ const ResponsiveNavigator = () => {
 };
 ```
 
+
 ### 2. Responsive Modal
+
 
 ```javascript
 import { Modal, Dimensions, StyleSheet } from 'react-native';
@@ -633,9 +654,11 @@ const styles = StyleSheet.create({
 });
 ```
 
+
 ## Performance Optimization
 
 ### 1. Responsive Performance Hooks
+
 
 ```javascript
 import { useMemo, useCallback } from 'react';
@@ -687,7 +710,9 @@ const ResponsiveFlatList = ({ data, renderItem, ...props }) => {
 };
 ```
 
+
 ### 2. Responsive Image Caching
+
 
 ```javascript
 import { useMemo } from 'react';
@@ -722,9 +747,11 @@ const useResponsiveImageCache = () => {
 };
 ```
 
+
 ## Testing Responsive Design
 
 ### 1. Responsive Testing Utilities
+
 
 ```javascript
 // test-utils/responsiveTestUtils.js
@@ -785,6 +812,7 @@ describe('ResponsiveComponent', () => {
   );
 });
 ```
+
 
 ## Summary
 

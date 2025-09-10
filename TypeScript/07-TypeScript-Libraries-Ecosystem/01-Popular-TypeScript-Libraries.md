@@ -25,6 +25,7 @@ TypeScript libraries can be categorized based on their functionality and use cas
 
 ### **Library Categories**
 
+
 ```typescript
 // TypeScript library categories
 const libraryCategories = {
@@ -47,7 +48,9 @@ const popularLibraries = {
 };
 ```
 
+
 ### **Library Selection Criteria**
+
 
 ```typescript
 // Criteria for selecting TypeScript libraries
@@ -61,11 +64,13 @@ const selectionCriteria = {
 };
 ```
 
+
 ---
 
 ## 🛠️ **Utility Libraries**
 
 ### **Lodash**
+
 
 ```typescript
 // Lodash with TypeScript
@@ -112,7 +117,9 @@ const throttledScroll = _.throttle(() => {
 }, 100);
 ```
 
+
 ### **date-fns**
+
 
 ```typescript
 // date-fns with TypeScript
@@ -161,7 +168,9 @@ console.log(formatUserDate(userDate)); // "Jan 15, 2023"
 console.log(isDateInRange(userDate, startOfToday, endOfToday));
 ```
 
+
 ### **Ramda**
+
 
 ```typescript
 // Ramda with TypeScript
@@ -213,11 +222,13 @@ const evenNumbers = R.filter(isEven, numbers);
 const oddNumbers = R.filter(isOdd, numbers);
 ```
 
+
 ---
 
 ## ✅ **Validation Libraries**
 
 ### **Zod**
+
 
 ```typescript
 // Zod with TypeScript
@@ -292,7 +303,9 @@ const UserWithValidationSchema = z.object({
 }).refine(data => data.name.length > 0, 'Name cannot be empty');
 ```
 
+
 ### **io-ts**
+
 
 ```typescript
 // io-ts with TypeScript
@@ -369,11 +382,13 @@ const UserWithEmailCodec = t.type({
 });
 ```
 
+
 ---
 
 ## 🔄 **State Management**
 
 ### **Redux Toolkit**
+
 
 ```typescript
 // Redux Toolkit with TypeScript
@@ -477,7 +492,9 @@ const UserList = () => {
 };
 ```
 
+
 ### **Zustand**
+
 
 ```typescript
 // Zustand with TypeScript
@@ -575,11 +592,13 @@ const UserList = () => {
 };
 ```
 
+
 ---
 
 ## 🧪 **Testing Libraries**
 
 ### **Jest**
+
 
 ```typescript
 // Jest with TypeScript
@@ -653,7 +672,9 @@ jest.mock('../utils/dateUtils', () => ({
 }));
 ```
 
+
 ### **Vitest**
+
 
 ```typescript
 // Vitest with TypeScript
@@ -704,11 +725,13 @@ vi.mock('../utils/dateUtils', () => ({
 }));
 ```
 
+
 ---
 
 ## 🔧 **Build Tools**
 
 ### **Webpack**
+
 
 ```typescript
 // webpack.config.ts
@@ -741,7 +764,9 @@ const config: Configuration = {
 export default config;
 ```
 
+
 ### **Vite**
+
 
 ```typescript
 // vite.config.ts
@@ -765,11 +790,13 @@ export default defineConfig({
 });
 ```
 
+
 ---
 
 ## ✅ **Best Practices**
 
 ### **1. Choose Libraries with Full TypeScript Support**
+
 
 ```typescript
 // ✅ Good: Full TypeScript support
@@ -784,7 +811,9 @@ import _ from 'lodash';
 // May not have full type definitions
 ```
 
+
 ### **2. Use Type-Safe Validation**
+
 
 ```typescript
 // ✅ Good: Type-safe validation
@@ -798,7 +827,9 @@ const validateUser = (data: any): User => {
 };
 ```
 
+
 ### **3. Prefer Functional Libraries**
+
 
 ```typescript
 // ✅ Good: Functional approach
@@ -816,7 +847,9 @@ for (const user of users) {
 }
 ```
 
+
 ### **4. Use Modern Libraries**
+
 
 ```typescript
 // ✅ Good: Modern libraries
@@ -827,6 +860,7 @@ import { z } from 'zod';
 import { createStore } from 'redux';
 import * as Joi from 'joi';
 ```
+
 
 ---
 
@@ -859,12 +893,14 @@ import * as Joi from 'joi';
 ### **4. How do you use Lodash with TypeScript?**
 
 **Answer:**
+
 ```typescript
 import _ from 'lodash';
 
 const users = _.filter(users, user => user.active);
 const userNames = _.map(users, user => user.name);
 ```
+
 
 ### **5. What are the benefits of using TypeScript libraries?**
 

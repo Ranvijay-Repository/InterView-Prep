@@ -26,6 +26,7 @@ React Native has evolved from a bridge-based architecture to a more modern JSI-b
 
 ### **Architecture Evolution Overview**
 
+
 ```
 ┌─────────────────────────────────────┐
 │        Architecture Evolution       │
@@ -53,6 +54,7 @@ React Native has evolved from a bridge-based architecture to a more modern JSI-b
 └─────────────────────────────────────┘
 ```
 
+
 ---
 
 ## 🏗️ **Old Architecture (Bridge-based)**
@@ -60,6 +62,7 @@ React Native has evolved from a bridge-based architecture to a more modern JSI-b
 ### **Bridge Communication Flow**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Old Architecture Example - Bridge-based communication
 import { NativeModules, NativeEventEmitter } from 'react-native';
@@ -110,9 +113,11 @@ oldArchExample.callNativeMethod({
 });
 ```
 
+
 ### **Old Architecture Limitations**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Old Architecture Limitations Example
 import { NativeModules } from 'react-native';
@@ -180,6 +185,7 @@ class OldArchitectureLimitations {
 export default OldArchitectureLimitations;
 ```
 
+
 ---
 
 ## 🚀 **New Architecture (JSI-based)**
@@ -187,6 +193,7 @@ export default OldArchitectureLimitations;
 ### **JSI Communication Flow**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // New Architecture Example - JSI-based communication
 import { TurboModuleRegistry } from 'react-native';
@@ -259,9 +266,11 @@ const result = newArchExample.callNativeMethodSynchronously({
 console.log('Result:', result);
 ```
 
+
 ### **New Architecture Benefits**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // New Architecture Benefits Example
 import { TurboModuleRegistry } from 'react-native';
@@ -343,6 +352,7 @@ class NewArchitectureBenefits {
 
 export default NewArchitectureBenefits;
 ```
+
 
 ---
 

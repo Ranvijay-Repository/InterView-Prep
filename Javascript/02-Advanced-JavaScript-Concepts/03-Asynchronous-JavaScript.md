@@ -36,6 +36,7 @@
 - **Real-world Operations**: Most real operations (API calls, file I/O) are asynchronous
 
 ### Synchronous vs Asynchronous:
+
 ```javascript
 // ❌ SYNCHRONOUS (Blocking)
 function syncOperation() {
@@ -69,7 +70,9 @@ asyncOperation().then(result => {
 console.log("This runs immediately!");
 ```
 
+
 ### ASCII Diagram: Sync vs Async Execution
+
 ```
 SYNCHRONOUS EXECUTION
 ┌─────────────────────────────────┐
@@ -101,6 +104,7 @@ ASYNCHRONOUS EXECUTION
                                    └┘
 ```
 
+
 ---
 
 ## 🔄 Callbacks & Callback Hell
@@ -108,6 +112,7 @@ ASYNCHRONOUS EXECUTION
 **Callbacks** are functions passed as arguments to other functions, which are executed once the asynchronous operation completes. While callbacks are fundamental to async JavaScript, they can lead to "callback hell" when nested deeply.
 
 ### Basic Callback Pattern:
+
 ```javascript
 // Simple callback example
 function fetchUserData(userId, callback) {
@@ -132,6 +137,7 @@ fetchUserData(123, (error, user) => {
 });
 ```
 
+
 ---
 
 ## 🤝 Promises
@@ -144,6 +150,7 @@ fetchUserData(123, (error, user) => {
 - **Rejected**: Operation failed
 
 ### Basic Promise Usage:
+
 ```javascript
 // Creating a promise
 const myPromise = new Promise((resolve, reject) => {
@@ -172,6 +179,7 @@ myPromise
     });
 ```
 
+
 ---
 
 ## ⏳ Async/Await
@@ -179,6 +187,7 @@ myPromise
 **Async/Await** is syntactic sugar over promises that makes asynchronous code look and behave more like synchronous code. It's built on top of promises and provides a cleaner, more readable way to handle asynchronous operations.
 
 ### Basic Async/Await Syntax:
+
 ```javascript
 // Basic async function
 async function fetchUserData(userId) {
@@ -220,7 +229,9 @@ async function main() {
 main();
 ```
 
+
 ### ASCII Diagram: Async/Await vs Promises
+
 ```
 PROMISE CHAINING                    ASYNC/AWAIT
 ┌─────────────────────────────┐    ┌─────────────────────────────┐
@@ -246,9 +257,11 @@ ADVANTAGES:
 • Sequential execution is clearer
 ```
 
+
 ### Sequential vs Parallel Execution:
 
 #### 1. **Sequential Execution (Default)**
+
 ```javascript
 async function fetchUserProfile(userId) {
     console.time('Sequential');
@@ -278,7 +291,9 @@ async function fetchUserProfile(userId) {
 }
 ```
 
+
 #### 2. **Parallel Execution**
+
 ```javascript
 async function fetchUserProfileParallel(userId) {
     console.time('Parallel');
@@ -304,7 +319,9 @@ async function fetchUserProfileParallel(userId) {
 }
 ```
 
+
 #### 3. **Mixed Approach**
+
 ```javascript
 async function fetchUserProfileMixed(userId) {
     console.time('Mixed');
@@ -333,7 +350,9 @@ async function fetchUserProfileMixed(userId) {
 }
 ```
 
+
 ### Error Handling with Async/Await:
+
 ```javascript
 // Multiple ways to handle errors
 async function robustErrorHandling() {
@@ -371,9 +390,11 @@ async function robustErrorHandling() {
 }
 ```
 
+
 ### Advanced Async/Await Patterns:
 
 #### 1. **Async Iterators**
+
 ```javascript
 async function* asyncGenerator() {
     const items = ['apple', 'banana', 'cherry'];
@@ -395,7 +416,9 @@ async function consumeAsyncGenerator() {
 consumeAsyncGenerator();
 ```
 
+
 #### 2. **Async Functions in Loops**
+
 ```javascript
 // ❌ WRONG: Sequential execution in loop
 async function processItemsSequential(items) {
@@ -431,7 +454,9 @@ async function processItemsWithConcurrency(items, concurrency = 3) {
 }
 ```
 
+
 #### 3. **Async Class Methods**
+
 ```javascript
 class UserService {
     constructor() {
@@ -505,7 +530,9 @@ async function main() {
 main();
 ```
 
+
 #### 4. **Async Function Composition**
+
 ```javascript
 // Compose async functions
 const composeAsync = (...fns) => async (x) => {
@@ -556,6 +583,7 @@ getUserProfile(123)
     .catch(error => console.error('Error:', error.message));
 ```
 
+
 ---
 
 ## 🔄 Event Loop & Concurrency
@@ -563,6 +591,7 @@ getUserProfile(123)
 **The Event Loop** is the mechanism that allows JavaScript to perform non-blocking operations despite being single-threaded. It continuously checks the call stack and processes tasks from the callback queue.
 
 ### How the Event Loop Works:
+
 ```javascript
 // Event Loop demonstration
 console.log('1. Start');
@@ -584,7 +613,9 @@ console.log('4. End');
 // 2. Timeout callback
 ```
 
+
 ### ASCII Diagram: Event Loop Architecture
+
 ```
 EVENT LOOP ARCHITECTURE
 ┌─────────────────────────────────┐
@@ -629,7 +660,9 @@ EVENT LOOP ARCHITECTURE
 └─────────────────────────────────┘
 ```
 
+
 ### Task Types and Priority:
+
 ```javascript
 // Microtasks (highest priority)
 Promise.resolve().then(() => console.log('Microtask 1'));
@@ -650,6 +683,7 @@ console.log('Synchronous');
 // Macrotask 2
 ```
 
+
 ---
 
 ## ⚠️ Error Handling
@@ -659,6 +693,7 @@ console.log('Synchronous');
 ### Error Handling Patterns:
 
 #### 1. **Try-Catch with Async/Await**
+
 ```javascript
 async function fetchUserData(userId) {
     try {
@@ -689,7 +724,9 @@ async function main() {
 }
 ```
 
+
 #### 2. **Promise Error Handling**
+
 ```javascript
 function fetchUserData(userId) {
     return fetch(`/api/users/${userId}`)
@@ -715,7 +752,9 @@ fetchUserData(123)
     });
 ```
 
+
 #### 3. **Global Error Handling**
+
 ```javascript
 // Global unhandled promise rejection handler
 window.addEventListener('unhandledrejection', event => {
@@ -739,11 +778,13 @@ process.on('uncaughtException', (error) => {
 });
 ```
 
+
 ---
 
 ## 🚀 Advanced Async Patterns
 
 ### 1. **Async Retry with Exponential Backoff**
+
 ```javascript
 async function retryWithBackoff(fn, maxAttempts = 3, baseDelay = 1000) {
     for (let attempt = 1; attempt <= maxAttempts; attempt++) {
@@ -776,7 +817,9 @@ retryWithBackoff(unreliableOperation, 5, 1000)
     .catch(error => console.error("All attempts failed:", error.message));
 ```
 
+
 ### 2. **Async Pool (Concurrency Control)**
+
 ```javascript
 class AsyncPool {
     constructor(concurrency = 3) {
@@ -838,6 +881,7 @@ const results = await Promise.all(promises);
 console.log("All tasks completed:", results);
 ```
 
+
 ---
 
 ## 💻 Detailed Examples
@@ -845,6 +889,7 @@ console.log("All tasks completed:", results);
 ### Example 1: Building a Complete Async API Client
 <div style="position: relative;">
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
+
 
 ```javascript
 console.log("=== BUILDING A COMPLETE ASYNC API CLIENT ===");
@@ -1080,11 +1125,13 @@ async function main() {
 main();
 ```
 
+
 ---
 
 ## ⚠️ Common Pitfalls
 
 ### Pitfall 1: Forgetting `await` Keyword
+
 ```javascript
 // ❌ WRONG: Missing await
 async function fetchData() {
@@ -1099,7 +1146,9 @@ async function fetchData() {
 }
 ```
 
+
 ### Pitfall 2: Not Handling Promise Rejections
+
 ```javascript
 // ❌ WRONG: Unhandled promise rejection
 async function riskyOperation() {
@@ -1119,7 +1168,9 @@ async function riskyOperation() {
 }
 ```
 
+
 ### Pitfall 3: Blocking the Event Loop
+
 ```javascript
 // ❌ WRONG: Blocking operation
 async function blockingOperation() {
@@ -1136,6 +1187,7 @@ async function nonBlockingOperation() {
     return "Done";
 }
 ```
+
 
 ---
 

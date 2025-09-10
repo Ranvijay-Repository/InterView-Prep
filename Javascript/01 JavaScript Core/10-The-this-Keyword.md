@@ -56,18 +56,22 @@ JavaScript has **4 main binding rules** that determine what `this` refers to:
 In the global scope, `this` refers to the global object:
 
 ### Browser Environment:
+
 ```javascript
 console.log(this === window);  // true
 this.globalVar = "I'm global";
 console.log(window.globalVar); // "I'm global"
 ```
 
+
 ### Node.js Environment:
+
 ```javascript
 console.log(this === global);  // true
 this.nodeVar = "I'm global";
 console.log(global.nodeVar);   // "I'm global"
 ```
+
 
 ---
 
@@ -77,6 +81,7 @@ console.log(global.nodeVar);   // "I'm global"
 When a function is called without any context, `this` defaults to the global object (or undefined in strict mode).
 
 ### ASCII Diagram: Default Binding
+
 ```
 GLOBAL SCOPE
 ┌─────────────────────────────────┐
@@ -92,6 +97,7 @@ GLOBAL SCOPE
 └─────────────────────────────────┘
 ```
 
+
 ---
 
 ## 🏢 Method Context
@@ -100,6 +106,7 @@ GLOBAL SCOPE
 When a function is called as a method of an object, `this` refers to that object.
 
 ### ASCII Diagram: Implicit Binding
+
 ```
 OBJECT METHOD CALL
 ┌─────────────────────────────────┐
@@ -117,6 +124,7 @@ OBJECT METHOD CALL
 └─────────────────────────────────┘
 ```
 
+
 ---
 
 ## 🔨 Constructor Context
@@ -125,6 +133,7 @@ OBJECT METHOD CALL
 When a function is called with the `new` keyword, `this` refers to the newly created instance.
 
 ### ASCII Diagram: Constructor Binding
+
 ```
 CONSTRUCTOR CALL
 ┌─────────────────────────────────┐
@@ -142,6 +151,7 @@ CONSTRUCTOR CALL
 └─────────────────────────────────┘
 ```
 
+
 ---
 
 ## 🏹 Arrow Functions
@@ -150,6 +160,7 @@ CONSTRUCTOR CALL
 Arrow functions don't have their own `this` binding. They inherit `this` from the enclosing scope.
 
 ### ASCII Diagram: Arrow Function Binding
+
 ```
 ARROW FUNCTION BINDING
 ┌─────────────────────────────────┐
@@ -172,6 +183,7 @@ ARROW FUNCTION BINDING
 └─────────────────────────────────┘
 ```
 
+
 ---
 
 ## 🎭 Explicit Binding
@@ -180,6 +192,7 @@ ARROW FUNCTION BINDING
 You can explicitly set what `this` should refer to using `call()`, `apply()`, or `bind()`.
 
 ### ASCII Diagram: Explicit Binding
+
 ```
 EXPLICIT BINDING
 ┌─────────────────────────────────┐
@@ -200,6 +213,7 @@ EXPLICIT BINDING
 └─────────────────────────────────┘
 ```
 
+
 ---
 
 ## 🏆 Binding Priority
@@ -211,6 +225,7 @@ EXPLICIT BINDING
 4. **Default Binding** - `function()`
 
 ### ASCII Diagram: Binding Priority
+
 ```
 BINDING PRIORITY CHART
 ┌─────────────────────────────────┐
@@ -236,6 +251,7 @@ BINDING PRIORITY CHART
 └─────────────────────────────────┘
 ```
 
+
 ---
 
 ## 💻 Detailed Examples
@@ -243,6 +259,7 @@ BINDING PRIORITY CHART
 ### Example 1: Default Binding
 <div style="position: relative;">
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
+
 
 ```javascript
 console.log("=== DEFAULT BINDING EXAMPLES ===");
@@ -290,11 +307,13 @@ console.log("Standalone functions get default binding");
 console.log("In non-strict mode: this = global object");
 console.log("In strict mode: this = undefined");
 ```
+
 </div>
 
 ### Example 2: Implicit Binding
 <div style="position: relative;">
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
+
 
 ```javascript
 console.log("=== IMPLICIT BINDING EXAMPLES ===");
@@ -348,11 +367,13 @@ person.greet();        // this = person ✅
 person.greetArrow();   // this = global (not person!) ❌
 person.introduce();    // Shows nested function behavior
 ```
+
 </div>
 
 ### Example 3: Constructor Binding
 <div style="position: relative;">
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
+
 
 ```javascript
 console.log("=== CONSTRUCTOR BINDING EXAMPLES ===");
@@ -405,11 +426,13 @@ console.log("Constructor functions must be called with 'new'");
 console.log("Without 'new', 'this' refers to global object");
 console.log("This can cause serious bugs and security issues");
 ```
+
 </div>
 
 ### Example 4: Explicit Binding
 <div style="position: relative;">
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
+
 
 ```javascript
 console.log("=== EXPLICIT BINDING EXAMPLES ===");
@@ -455,11 +478,13 @@ console.log("call() and apply() execute immediately");
 console.log("bind() returns a new function with bound this");
 console.log("bind() allows partial application of parameters");
 ```
+
 </div>
 
 ### Example 5: Arrow Functions and This
 <div style="position: relative;">
 <button onclick="copyCode(this)" style="position: absolute; top: 10px; right: 10px; background: #007acc; color: white; border: none; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 12px;">📋 Copy</button>
+
 
 ```javascript
 console.log("=== ARROW FUNCTIONS AND THIS ===");
@@ -542,6 +567,7 @@ console.log("Arrow functions inherit 'this' from enclosing scope");
 console.log("Regular functions have their own 'this' binding");
 console.log("Use arrow functions when you need to preserve 'this'");
 ```
+
 </div>
 
 ---
@@ -549,6 +575,7 @@ console.log("Use arrow functions when you need to preserve 'this'");
 ## ⚠️ Common Pitfalls
 
 ### Pitfall 1: Losing `this` in Callbacks
+
 ```javascript
 // ❌ WRONG: Losing 'this' in callback
 const user = {
@@ -571,7 +598,9 @@ const user = {
 };
 ```
 
+
 ### Pitfall 2: Method Assignment
+
 ```javascript
 // ❌ WRONG: Method loses 'this' when assigned
 const user = {
@@ -589,7 +618,9 @@ const boundGreet = user.greet.bind(user);
 boundGreet();  // "Hello, John" ✅
 ```
 
+
 ### Pitfall 3: Constructor without `new`
+
 ```javascript
 // ❌ WRONG: Forgetting 'new' keyword
 function Person(name) {
@@ -604,6 +635,7 @@ console.log(globalThis.name);   // "John" 😱
 const person = new Person("John");  // this = new instance
 console.log(person.name);           // "John" ✅
 ```
+
 
 ---
 

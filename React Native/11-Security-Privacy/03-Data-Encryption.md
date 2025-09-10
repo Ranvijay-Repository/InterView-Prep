@@ -22,6 +22,7 @@
 
 ### **Encryption Layers**
 
+
 ```mermaid
 graph TD
     A[Application Data] --> B[Application Layer Encryption]
@@ -34,6 +35,7 @@ graph TD
     F --> D
     F --> E
 ```
+
 
 ### **Encryption Types**
 - **Symmetric**: Same key for encryption/decryption
@@ -48,6 +50,7 @@ graph TD
 ### **AES Encryption Implementation**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 import CryptoJS from 'crypto-js';
 
@@ -130,9 +133,11 @@ export {
 };
 ```
 
+
 ### **RSA Encryption Implementation**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 import CryptoJS from 'crypto-js';
 
@@ -199,6 +204,7 @@ export {
 };
 ```
 
+
 ---
 
 ## 🔐 **Key Management**
@@ -206,6 +212,7 @@ export {
 ### **Secure Key Storage**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 import * as Keychain from 'react-native-keychain';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -335,9 +342,11 @@ export {
 };
 ```
 
+
 ### **Key Rotation Strategy**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 import { generateMasterKey, storeMasterKey, getMasterKey } from './KeyManagement';
 
@@ -434,6 +443,7 @@ export {
 };
 ```
 
+
 ---
 
 ## 🛡️ **Data Protection Strategies**
@@ -441,6 +451,7 @@ export {
 ### **Data Classification Service**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Data classification levels
 const DATA_CLASSIFICATION = {
@@ -565,6 +576,7 @@ export {
 };
 ```
 
+
 ---
 
 ## 🔒 **Secure Communication**
@@ -572,6 +584,7 @@ export {
 ### **End-to-End Encryption**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 import { generateRSAKeyPair, encryptWithRSA, decryptWithRSA } from './RSAEncryption';
 import { encryptData, decryptData } from './AESEncryption';
@@ -657,6 +670,7 @@ const createE2EEncryptionService = () => {
 // Export E2E encryption service
 export { createE2EEncryptionService };
 ```
+
 
 ---
 

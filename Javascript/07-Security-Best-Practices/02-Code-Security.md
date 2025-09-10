@@ -44,6 +44,7 @@
 - **Incident Prevention**: Stop attacks before they happen
 
 ### ASCII Diagram: Dependency Scanning Process
+
 ```
 DEPENDENCY SCANNING PROCESS
 ┌─────────────────────────────────┐
@@ -115,6 +116,7 @@ DEPENDENCY SCANNING PROCESS
         └───────────────┘
 ```
 
+
 ### Scanning Tools:
 - **npm audit**: Built-in npm vulnerability scanner
 - **Snyk**: Comprehensive security platform
@@ -136,6 +138,7 @@ DEPENDENCY SCANNING PROCESS
 - **Compliance**: Meet security standards and requirements
 
 ### ASCII Diagram: Secure Coding Workflow
+
 ```
 SECURE CODING WORKFLOW
 ┌─────────────────────────────────┐
@@ -195,6 +198,7 @@ SECURE CODING WORKFLOW
         └───────────────┘
 ```
 
+
 ### Security Practices:
 - **Input Validation**: Validate and sanitize all user inputs
 - **Output Encoding**: Encode output to prevent XSS
@@ -216,6 +220,7 @@ SECURE CODING WORKFLOW
 - **Education**: Learn from real-world security incidents
 
 ### ASCII Diagram: OWASP Top 10 Categories
+
 ```
 OWASP TOP 10 CATEGORIES
 ┌─────────────────────────────────┐
@@ -282,6 +287,7 @@ OWASP TOP 10 CATEGORIES
         │  Response     │
         └───────────────┘
 ```
+
 
 ### Top 10 Categories:
 - **Injection**: SQL, NoSQL, LDAP injection attacks

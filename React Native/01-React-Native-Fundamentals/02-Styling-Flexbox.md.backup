@@ -1,0 +1,576 @@
+# 🎨 **Styling & Flexbox**
+
+> **Master the styling system and Flexbox layout in React Native for creating beautiful and responsive mobile interfaces**
+
+<link rel="stylesheet" href="../../common-styles.css">
+
+---
+
+## 📚 **Table of Contents**
+
+- [Introduction](#introduction)
+- [StyleSheet API](#stylesheet-api)
+- [Flexbox Fundamentals](#flexbox-fundamentals)
+- [Layout Properties](#layout-properties)
+- [Common Layout Patterns](#common-layout-patterns)
+- [Responsive Design](#responsive-design)
+- [Platform-Specific Styling](#platform-specific-styling)
+- [Performance Optimization](#performance-optimization)
+- [Interview Questions](#interview-questions)
+- [Best Practices](#best-practices)
+
+---
+
+## 🎯 **Introduction**
+
+React Native uses a subset of CSS properties and implements Flexbox for layout. Understanding the styling system is crucial for creating beautiful and responsive mobile applications.
+
+### **Styling System Overview**
+
+{% raw %}
+```
+┌─────────────────────────────────────┐
+│        React Native Styling         │
+│  ┌─────────────────────────────────┐│
+│  │        StyleSheet API           ││
+│  │  - StyleSheet.create()          ││
+│  │  - Style validation             ││
+│  │  - Performance optimization     ││
+│  └─────────────────────────────────┘│
+│  ┌─────────────────────────────────┐│
+│  │        Flexbox Layout           ││
+│  │  - Flex direction               ││
+│  │  - Justify content              ││
+│  │  - Align items                  ││
+│  └─────────────────────────────────┘│
+│  ┌─────────────────────────────────┐│
+│  │        Layout Properties        ││
+│  │  - Dimensions                   ││
+│  │  - Positioning                  ││
+│  │  - Margins & Padding            ││
+│  └─────────────────────────────────┘│
+└─────────────────────────────────────┘
+```
+{% endraw %}
+
+---
+
+## 📋 **StyleSheet API**
+
+The `StyleSheet` API provides a way to create and manage styles in React Native.
+
+### **Basic StyleSheet Usage**
+
+<button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+{% raw %}
+```javascript
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+
+const BasicStyling = () => {
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>Welcome to React Native</Text>
+      <Text style={styles.subtitle}>Styling with StyleSheet</Text>
+      <View style={styles.card}>
+        <Text style={styles.cardText}>This is a card component</Text>
+      </View>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#f5f5f5',
+    padding: 20,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#333',
+    marginBottom: 10,
+    textAlign: 'center',
+  },
+  subtitle: {
+    fontSize: 16,
+    color: '#666',
+    marginBottom: 20,
+    textAlign: 'center',
+  },
+  card: {
+    backgroundColor: 'white',
+    padding: 20,
+    borderRadius: 10,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  cardText: {
+    fontSize: 16,
+    color: '#444',
+    lineHeight: 24,
+  },
+});
+
+export default BasicStyling;
+```
+{% endraw %}
+
+### **StyleSheet with Dynamic Styles**
+
+<button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+{% raw %}
+```javascript
+import React, { useState } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+
+const DynamicStyling = () => {
+  const [isActive, setIsActive] = useState(false);
+  const [theme, setTheme] = useState('light');
+  
+  const toggleActive = () => setIsActive(!isActive);
+  const toggleTheme = () => setTheme(theme === 'light' ? 'dark' : 'light');
+  
+  const dynamicStyles = {
+    container: {
+      ...styles.container,
+      backgroundColor: theme === 'light' ? '#f5f5f5' : '#333',
+    },
+    text: {
+      ...styles.text,
+      color: theme === 'light' ? '#333' : '#fff',
+    },
+    button: {
+      ...styles.button,
+      backgroundColor: isActive ? '#007AFF' : '#ccc',
+    },
+  };
+  
+  return (
+    <View style={dynamicStyles.container}>
+      <Text style={dynamicStyles.text}>Dynamic Styling Example</Text>
+      
+      <TouchableOpacity 
+        style={dynamicStyles.button}
+        onPress={toggleActive}
+      >
+        <Text style={styles.buttonText}>
+          {isActive ? 'Active' : 'Inactive'}
+        </Text>
+      </TouchableOpacity>
+      
+      <TouchableOpacity 
+        style={styles.themeButton}
+        onPress={toggleTheme}
+      >
+        <Text style={styles.buttonText}>
+          Switch to {theme === 'light' ? 'Dark' : 'Light'} Theme
+        </Text>
+      </TouchableOpacity>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  text: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 30,
+  },
+  button: {
+    padding: 15,
+    borderRadius: 8,
+    marginBottom: 20,
+    minWidth: 150,
+    alignItems: 'center',
+  },
+  themeButton: {
+    padding: 15,
+    borderRadius: 8,
+    backgroundColor: '#FF6B6B',
+    minWidth: 150,
+    alignItems: 'center',
+  },
+  buttonText: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+});
+
+export default DynamicStyling;
+```
+{% endraw %}
+
+---
+
+## 🔄 **Flexbox Fundamentals**
+
+Flexbox is the primary layout system in React Native. Understanding its properties is essential for creating responsive layouts.
+
+### **Flex Direction**
+
+<button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+{% raw %}
+```javascript
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+
+const FlexDirection = () => {
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>Flex Direction Examples</Text>
+      
+      {/* Row (default) */}
+      <View style={styles.example}>
+        <Text style={styles.label}>flexDirection: 'row'</Text>
+        <View style={[styles.flexContainer, styles.row]}>
+          <View style={[styles.box, styles.box1]} />
+          <View style={[styles.box, styles.box2]} />
+          <View style={[styles.box, styles.box3]} />
+        </View>
+      </View>
+      
+      {/* Column */}
+      <View style={styles.example}>
+        <Text style={styles.label}>flexDirection: 'column'</Text>
+        <View style={[styles.flexContainer, styles.column]}>
+          <View style={[styles.box, styles.box1]} />
+          <View style={[styles.box, styles.box2]} />
+          <View style={[styles.box, styles.box3]} />
+        </View>
+      </View>
+      
+      {/* Row Reverse */}
+      <View style={styles.example}>
+        <Text style={styles.label}>flexDirection: 'row-reverse'</Text>
+        <View style={[styles.flexContainer, styles.rowReverse]}>
+          <View style={[styles.box, styles.box1]} />
+          <View style={[styles.box, styles.box2]} />
+          <View style={[styles.box, styles.box3]} />
+        </View>
+      </View>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+    backgroundColor: '#f5f5f5',
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 20,
+    textAlign: 'center',
+  },
+  example: {
+    marginBottom: 30,
+  },
+  label: {
+    fontSize: 16,
+    fontWeight: '600',
+    marginBottom: 10,
+    color: '#333',
+  },
+  flexContainer: {
+    height: 80,
+    borderWidth: 2,
+    borderColor: '#ddd',
+    padding: 5,
+  },
+  row: {
+    flexDirection: 'row',
+  },
+  column: {
+    flexDirection: 'column',
+  },
+  rowReverse: {
+    flexDirection: 'row-reverse',
+  },
+  box: {
+    width: 50,
+    height: 50,
+    margin: 5,
+  },
+  box1: { backgroundColor: '#FF6B6B' },
+  box2: { backgroundColor: '#4ECDC4' },
+  box3: { backgroundColor: '#45B7D1' },
+});
+
+export default FlexDirection;
+```
+{% endraw %}
+
+### **Justify Content**
+
+<button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+{% raw %}
+```javascript
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+
+const JustifyContent = () => {
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>Justify Content Examples</Text>
+      
+      {/* Flex Start */}
+      <View style={styles.example}>
+        <Text style={styles.label}>justifyContent: 'flex-start'</Text>
+        <View style={[styles.flexContainer, styles.flexStart]}>
+          <View style={[styles.box, styles.box1]} />
+          <View style={[styles.box, styles.box2]} />
+        </View>
+      </View>
+      
+      {/* Center */}
+      <View style={styles.example}>
+        <Text style={styles.label}>justifyContent: 'center'</Text>
+        <View style={[styles.flexContainer, styles.center]}>
+          <View style={[styles.box, styles.box1]} />
+          <View style={[styles.box, styles.box2]} />
+        </View>
+      </View>
+      
+      {/* Flex End */}
+      <View style={styles.example}>
+        <Text style={styles.label}>justifyContent: 'flex-end'</Text>
+        <View style={[styles.flexContainer, styles.flexEnd]}>
+          <View style={[styles.box, styles.box1]} />
+          <View style={[styles.box, styles.box2]} />
+        </View>
+      </View>
+      
+      {/* Space Between */}
+      <View style={styles.example}>
+        <Text style={styles.label}>justifyContent: 'space-between'</Text>
+        <View style={[styles.flexContainer, styles.spaceBetween]}>
+          <View style={[styles.box, styles.box1]} />
+          <View style={[styles.box, styles.box2]} />
+        </View>
+      </View>
+      
+      {/* Space Around */}
+      <View style={styles.example}>
+        <Text style={styles.label}>justifyContent: 'space-around'</Text>
+        <View style={[styles.flexContainer, styles.spaceAround]}>
+          <View style={[styles.box, styles.box1]} />
+          <View style={[styles.box, styles.box2]} />
+        </View>
+      </View>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+    backgroundColor: '#f5f5f5',
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 20,
+    textAlign: 'center',
+  },
+  example: {
+    marginBottom: 20,
+  },
+  label: {
+    fontSize: 16,
+    fontWeight: '600',
+    marginBottom: 10,
+    color: '#333',
+  },
+  flexContainer: {
+    height: 60,
+    flexDirection: 'row',
+    borderWidth: 2,
+    borderColor: '#ddd',
+    padding: 5,
+  },
+  flexStart: { justifyContent: 'flex-start' },
+  center: { justifyContent: 'center' },
+  flexEnd: { justifyContent: 'flex-end' },
+  spaceBetween: { justifyContent: 'space-between' },
+  spaceAround: { justifyContent: 'space-around' },
+  box: {
+    width: 40,
+    height: 40,
+  },
+  box1: { backgroundColor: '#FF6B6B' },
+  box2: { backgroundColor: '#4ECDC4' },
+});
+
+export default JustifyContent;
+```
+{% endraw %}
+
+---
+
+## 📐 **Layout Properties**
+
+Understanding layout properties is essential for creating precise and responsive designs.
+
+### **Dimensions and Positioning**
+
+<button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+{% raw %}
+```javascript
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+
+const LayoutProperties = () => {
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>Layout Properties</Text>
+      
+      {/* Fixed Dimensions */}
+      <View style={styles.example}>
+        <Text style={styles.label}>Fixed Dimensions</Text>
+        <View style={styles.fixedBox}>
+          <Text style={styles.boxText}>200x100</Text>
+        </View>
+      </View>
+      
+      {/* Flexible Dimensions */}
+      <View style={styles.example}>
+        <Text style={styles.label}>Flexible Dimensions</Text>
+        <View style={styles.flexibleContainer}>
+          <View style={[styles.flexibleBox, styles.flex1]}>
+            <Text style={styles.boxText}>Flex: 1</Text>
+          </View>
+          <View style={[styles.flexibleBox, styles.flex2]}>
+            <Text style={styles.boxText}>Flex: 2</Text>
+          </View>
+        </View>
+      </View>
+      
+      {/* Positioning */}
+      <View style={styles.example}>
+        <Text style={styles.label}>Positioning</Text>
+        <View style={styles.positioningContainer}>
+          <View style={[styles.positionedBox, styles.absolute]}>
+            <Text style={styles.boxText}>Absolute</Text>
+          </View>
+          <View style={[styles.positionedBox, styles.relative]}>
+            <Text style={styles.boxText}>Relative</Text>
+          </View>
+        </View>
+      </View>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+    backgroundColor: '#f5f5f5',
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 20,
+    textAlign: 'center',
+  },
+  example: {
+    marginBottom: 30,
+  },
+  label: {
+    fontSize: 16,
+    fontWeight: '600',
+    marginBottom: 10,
+    color: '#333',
+  },
+  fixedBox: {
+    width: 200,
+    height: 100,
+    backgroundColor: '#FF6B6B',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 8,
+  },
+  flexibleContainer: {
+    height: 100,
+    flexDirection: 'row',
+  },
+  flexibleBox: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 8,
+    marginHorizontal: 5,
+  },
+  flex1: {
+    flex: 1,
+    backgroundColor: '#4ECDC4',
+  },
+  flex2: {
+    flex: 2,
+    backgroundColor: '#45B7D1',
+  },
+  positioningContainer: {
+    height: 150,
+    backgroundColor: '#f0f0f0',
+    position: 'relative',
+    borderRadius: 8,
+  },
+  positionedBox: {
+    width: 80,
+    height: 60,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 8,
+  },
+  absolute: {
+    position: 'absolute',
+    top: 20,
+    right: 20,
+    backgroundColor: '#FF6B6B',
+  },
+  relative: {
+    position: 'relative',
+    top: 20,
+    left: 20,
+    backgroundColor: '#4ECDC4',
+  },
+  boxText: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 12,
+  },
+});
+
+export default LayoutProperties;
+```
+{% endraw %}
+
+---
+
+## 🧭 Navigation
+
+<div class="navigation">
+    <a href="./01-Core-Components.md" class="nav-link prev">⬅️ Previous: Core Components</a>
+    <a href="./03-Platform-APIs.md" class="nav-link next">Next: Platform APIs ➡️</a>
+</div>
+
+---
+
+
+*Last updated: December 2024*

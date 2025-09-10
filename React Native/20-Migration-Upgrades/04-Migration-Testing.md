@@ -25,6 +25,7 @@ Migration testing ensures that React Native upgrades, architecture changes, and 
 
 ### **Testing Pyramid for Migrations**
 
+
 ```
 ┌─────────────────────────────────────┐
 │        Migration Testing            │
@@ -49,6 +50,7 @@ Migration testing ensures that React Native upgrades, architecture changes, and 
 └─────────────────────────────────────┘
 ```
 
+
 ### **Key Testing Areas**
 - **Functionality**: Core features work as expected
 - **Performance**: No performance regressions
@@ -62,6 +64,7 @@ Migration testing ensures that React Native upgrades, architecture changes, and 
 ### **1. Baseline Testing**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Establish performance baselines
 describe('Pre-Migration Baselines', () => {
@@ -83,9 +86,11 @@ describe('Pre-Migration Baselines', () => {
 });
 ```
 
+
 ### **2. Feature Inventory**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```javascript
 // Document all features to test
 const featuresToTest = [
@@ -100,9 +105,11 @@ const featuresToTest = [
 ];
 ```
 
+
 ### **3. Third-Party Dependencies**
 
 <button onclick="copyCode(this)" class="copy-btn">📋 Copy</button>
+
 ```bash
 # Check library compatibility
 npm list --depth=0
@@ -111,6 +118,7 @@ npm list --depth=0
 npm test -- --testNamePattern="Library compatibility"
 ```
 
+
 ---
 
 ## 🚀 **Migration Testing Strategies**
@@ -118,6 +126,7 @@ npm test -- --testNamePattern="Library compatibility"
 ### **1. Version Upgrade Testing**
 
 #### **React Native Version Upgrade**
+
 ```javascript
 // Test version-specific changes
 describe('React Native 0.70+ Upgrade', () => {
@@ -141,7 +150,9 @@ describe('React Native 0.70+ Upgrade', () => {
 });
 ```
 
+
 #### **Dependency Upgrade Testing**
+
 ```javascript
 // Test updated dependencies
 describe('Dependency Upgrades', () => {
@@ -158,9 +169,11 @@ describe('Dependency Upgrades', () => {
 });
 ```
 
+
 ### **2. Architecture Migration Testing**
 
 #### **New Architecture Testing**
+
 ```javascript
 // Test New Architecture features
 describe('New Architecture Migration', () => {
@@ -180,7 +193,9 @@ describe('New Architecture Migration', () => {
 });
 ```
 
+
 #### **Fabric Renderer Testing**
+
 ```javascript
 // Test Fabric renderer
 describe('Fabric Renderer', () => {
@@ -196,7 +211,7 @@ describe('Fabric Renderer', () => {
 
   it('should handle layout changes', () => {
     const { getByTestId } = render(
-      <View testID="container" style={{ width: 100, height: 100 }}>
+      <View testID="container" style={{#123;{{#123; width: 100, height: 100 }}#125;}}#125;>
         <Text>Content</Text>
       </View>
     );
@@ -207,11 +222,13 @@ describe('Fabric Renderer', () => {
 });
 ```
 
+
 ---
 
 ## 🤖 **Automated Testing**
 
 ### **1. CI/CD Integration**
+
 ```yaml
 # .github/workflows/migration-test.yml
 name: Migration Testing
@@ -244,7 +261,9 @@ jobs:
         run: npm run test:e2e
 ```
 
+
 ### **2. Automated Test Suites**
+
 ```javascript
 // migration-test-suite.js
 const migrationTests = {
@@ -262,7 +281,9 @@ const runMigrationTests = async (testType) => {
 };
 ```
 
+
 ### **3. Test Automation Scripts**
+
 ```bash
 #!/bin/bash
 # migration-test.sh
@@ -284,11 +305,13 @@ npm run test:report
 echo "Migration testing completed!"
 ```
 
+
 ---
 
 ## 📊 **Performance Testing**
 
 ### **1. Performance Benchmarks**
+
 ```javascript
 // performance.test.js
 describe('Performance Testing', () => {
@@ -317,7 +340,9 @@ describe('Performance Testing', () => {
 });
 ```
 
+
 ### **2. Bundle Size Testing**
+
 ```javascript
 // bundle-size.test.js
 describe('Bundle Size Testing', () => {
@@ -330,7 +355,9 @@ describe('Bundle Size Testing', () => {
 });
 ```
 
+
 ### **3. Render Performance**
+
 ```javascript
 // render-performance.test.js
 describe('Render Performance', () => {
@@ -353,11 +380,13 @@ describe('Render Performance', () => {
 });
 ```
 
+
 ---
 
 ## 🔄 **Regression Testing**
 
 ### **1. Feature Regression Testing**
+
 ```javascript
 // regression.test.js
 describe('Feature Regression Testing', () => {
@@ -385,7 +414,9 @@ describe('Feature Regression Testing', () => {
 });
 ```
 
+
 ### **2. API Regression Testing**
+
 ```javascript
 // api-regression.test.js
 describe('API Regression Testing', () => {
@@ -399,7 +430,9 @@ describe('API Regression Testing', () => {
 });
 ```
 
+
 ### **3. UI Regression Testing**
+
 ```javascript
 // ui-regression.test.js
 describe('UI Regression Testing', () => {
@@ -415,11 +448,13 @@ describe('UI Regression Testing', () => {
 });
 ```
 
+
 ---
 
 ## ✅ **Best Practices**
 
 ### **1. Test Coverage**
+
 ```javascript
 // Ensure comprehensive test coverage
 const testCoverage = {
@@ -430,7 +465,9 @@ const testCoverage = {
 };
 ```
 
+
 ### **2. Test Isolation**
+
 ```javascript
 // Isolate tests from each other
 beforeEach(() => {
@@ -440,7 +477,9 @@ beforeEach(() => {
 });
 ```
 
+
 ### **3. Test Data Management**
+
 ```javascript
 // Use consistent test data
 const testData = {
@@ -454,7 +493,9 @@ const testData = {
 };
 ```
 
+
 ### **4. Error Handling Testing**
+
 ```javascript
 // Test error scenarios
 describe('Error Handling', () => {
@@ -469,6 +510,7 @@ describe('Error Handling', () => {
   });
 });
 ```
+
 
 ---
 
