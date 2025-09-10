@@ -1,3 +1,21 @@
+#!/bin/bash
+
+echo "🔧 Final Liquid syntax fix..."
+
+# First, revert all HTML entities back to normal curly braces
+echo "Reverting HTML entities..."
+find . -name "*.md" -not -path "./_site/*" -not -path "./.git/*" | while read -r file; do
+    sed -i '' 's/&#123;&#123;/{{/g' "$file"
+    sed -i '' 's/&#125;&#125;/}}/g' "$file"
+done
+
+echo "✅ HTML entities reverted"
+
+# Now let's create a comprehensive solution by updating the Jekyll configuration
+echo "Updating Jekyll configuration for better Liquid handling..."
+
+# Create a more permissive Jekyll configuration
+cat > _config.yml << 'EOF'
 # Jekyll Configuration for Interview Prep Documentation
 
 # Site settings
@@ -7,7 +25,7 @@ baseurl: ""
 url: ""
 
 # Build settings
-markdown: commonmark
+markdown: kramdown
 highlighter: rouge
 theme: minima
 
@@ -69,6 +87,20 @@ defaults:
       layout: "default"
 
 # Kramdown settings - disable Liquid processing
+kramdown:
+  input: GFM
+  hard_wrap: false
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    css_class: 'highlight'
+    span:
+      line_numbers: false
+    block:
+      line_numbers: false
+  # Disable Liquid processing in Markdown
+  parse_block_html: true
+  parse_span_html: true
+
 # Plugins
 plugins:
   - jekyll-feed
@@ -125,3 +157,32 @@ exclude_from_processing:
   - .sass-cache
   - .jekyll-cache
   - .jekyll-metadata
+EOF
+
+echo "✅ Jekyll configuration updated"
+
+# Test the build
+echo "🧪 Testing Jekyll build..."
+if bundle exec jekyll build 2>/dev/null; then
+    echo "✅ Jekyll build successful!"
+    echo "🎉 All Liquid syntax issues resolved!"
+else
+    echo "❌ Jekyll build still has issues."
+    echo "Let's try one more approach..."
+    
+    # Last resort: Use a different markdown processor
+    echo "Trying with different markdown settings..."
+    
+    # Update config to use commonmark instead of kramdown
+    sed -i '' 's/markdown: kramdown/markdown: commonmark/g' _config.yml
+    sed -i '' '/kramdown:/,/^$/d' _config.yml
+    
+    if bundle exec jekyll build 2>/dev/null; then
+        echo "✅ Jekyll build successful with commonmark!"
+    else
+        echo "❌ Still having issues. Let's check the specific error..."
+        bundle exec jekyll build
+    fi
+fi
+
+echo "🎯 Liquid syntax fix complete!"

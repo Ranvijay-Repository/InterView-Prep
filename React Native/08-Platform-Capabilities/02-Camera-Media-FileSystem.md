@@ -198,7 +198,7 @@ const CameraManager = () => {
         {capturedImage && (
           <View style={styles.imageSection}>
             <Text style={styles.sectionTitle}>Captured Image</Text>
-            <Image source={{ uri: capturedImage.uri }} style={styles.image} />
+            <Image source={{#123;{{#123; uri: capturedImage.uri }}#125;}}#125; style={styles.image} />
             <Text style={styles.imageInfo}>
               Size: {capturedImage.width}x{capturedImage.height}
             </Text>
@@ -211,7 +211,7 @@ const CameraManager = () => {
         {selectedImage && (
           <View style={styles.imageSection}>
             <Text style={styles.sectionTitle}>Selected Image</Text>
-            <Image source={{ uri: selectedImage.uri }} style={styles.image} />
+            <Image source={{#123;{{#123; uri: selectedImage.uri }}#125;}}#125; style={styles.image} />
             <Text style={styles.imageInfo}>
               Size: {selectedImage.width}x{selectedImage.height}
             </Text>

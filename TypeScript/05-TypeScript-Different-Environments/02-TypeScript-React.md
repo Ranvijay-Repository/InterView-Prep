@@ -495,7 +495,7 @@ const EventHandling: React.FC = () => {
       
       <div
         onMouseMove={handleMouseMove}
-        style={{ width: '100%', height: '200px', border: '1px solid #ccc' }}
+        style={{#123;{{#123; width: '100%', height: '200px', border: '1px solid #ccc' }}#125;}}#125;
       >
         Mouse position: {mousePosition.x}, {mousePosition.y}
       </div>
@@ -685,7 +685,7 @@ const UserProfile: React.FC<{ userId: number }> = ({ userId }) => (
           <button onClick={refetch}>Refresh</button>
         </div>
       );
-    }}
+    }}#125;}}#125;
   </DataProvider>
 );
 ```
@@ -734,7 +734,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
   };
 
   return (
-    <UserContext.Provider value={{ user, login, logout }}>
+    <UserContext.Provider value={{#123;{{#123; user, login, logout }}#125;}}#125;>
       {children}
     </UserContext.Provider>
   );

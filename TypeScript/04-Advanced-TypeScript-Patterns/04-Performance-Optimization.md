@@ -484,13 +484,13 @@ const VirtualScroll: React.FC<VirtualScrollProps> = ({
   
   return (
     <div
-      style={{ height: containerHeight, overflow: "auto" }}
+      style={{#123;{{#123; height: containerHeight, overflow: "auto" }}#125;}}#125;
       onScroll={(e) => setScrollTop(e.currentTarget.scrollTop)}
     >
-      <div style={{ height: items.length * itemHeight }}>
-        <div style={{ transform: `translateY(${visibleStart * itemHeight}px)` }}>
+      <div style={{#123;{{#123; height: items.length * itemHeight }}#125;}}#125;>
+        <div style={{#123;{{#123; transform: `translateY(${visibleStart * itemHeight}px)` }}#125;}}#125;>
           {visibleItems.map((item, index) => (
-            <div key={visibleStart + index} style={{ height: itemHeight }}>
+            <div key={visibleStart + index} style={{#123;{{#123; height: itemHeight }}#125;}}#125;>
               {item}
             </div>
           ))}

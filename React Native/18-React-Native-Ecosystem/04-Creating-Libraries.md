@@ -977,10 +977,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Use Node.js ${{#123;{{#123; matrix.node-version }}#125;}}#125;
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: ${{#123;{{#123; matrix.node-version }}#125;}}#125;
           cache: 'npm'
           
       - name: Install dependencies
@@ -1033,7 +1033,7 @@ jobs:
       - name: Publish to npm
         run: npm publish
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{#123;{{#123; secrets.NPM_TOKEN }}#125;}}#125;
 ```
 
 ---
